@@ -1,4 +1,4 @@
-CREATE DATABASE Personl;
+CREATE DATABASE PersonalExpenseCreditTracker;
 GO
 
 USE PersonalExpenseCreditTracker;
