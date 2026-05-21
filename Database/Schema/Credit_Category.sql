@@ -1,0 +1,5 @@
+CREATE TABLE Credit_Category(
+  Category_ID INT	PRIMARY KEY IDENTITY(1,1),
+  Category_Name	VARCHAR(100) UNIQUE NOT NULL
+);
+Go
