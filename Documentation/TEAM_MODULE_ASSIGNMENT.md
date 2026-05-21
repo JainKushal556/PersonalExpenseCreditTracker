@@ -4,7 +4,24 @@
 
 ---
 
+# 🔴 PROJECT MANAGER
+
+| Role            | Name         |
+|-----------------|--------------|
+| Project Manager | Kushal Jain  |
+
+---
+
 # 🟣 TEAM A — USER & TASK MODULE
+
+## 👨‍💻 Team Members
+
+| Name      | Role       |
+|-----------|------------|
+| Sujit     | Team Lead  |
+| Sampriti  | Member     |
+
+---
 
 ## 📌 Assigned Tables
 
@@ -32,6 +49,16 @@
 
 # 🟢 TEAM B — EXPENSE & CREDIT MODULE
 
+## 👨‍💻 Team Members
+
+| Name     | Role       |
+|----------|------------|
+| Arpita   | Team Lead  |
+| Aniket   | Member     |
+| Bidisha  | Member     |
+
+---
+
 ## 📌 Assigned Tables
 
 1. Expense
@@ -56,6 +83,15 @@
 
 # 🟠 TEAM C — LENT & BORROW MODULE
 
+## 👨‍💻 Team Members
+
+| Name   | Role       |
+|--------|------------|
+| Debo   | Team Lead  |
+| Akhmal | Member     |
+
+---
+
 ## 📌 Assigned Tables
 
 1. Lent
@@ -76,7 +112,7 @@
 
 ---
 
-# 🔵 PROJECT LEADER RESPONSIBILITIES
+# 🔵 PROJECT MANAGER RESPONSIBILITIES
 
 - Database Integration
 - master_schema.sql Management
@@ -93,6 +129,7 @@
 
 - Do not modify another team's tables without permission
 - Push code regularly to GitHub
+- Pull latest changes before starting work
 - Test SQL scripts before pushing
 - Maintain same naming conventions
 - Do not create duplicate tables
