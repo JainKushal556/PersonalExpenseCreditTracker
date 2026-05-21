@@ -1,0 +1,6 @@
+CREATE TABLE Users
+(
+   User_ID INT PRIMARY KEY IDENTITY(1,1),
+   User_Name VARCHAR(MAX) NOT NULL,
+   Created_At DATETIME NOT NULL
+);
