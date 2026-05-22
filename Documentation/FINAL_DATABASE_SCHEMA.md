@@ -237,7 +237,7 @@ Stores money borrowing records.
 
 ---
 
-## 🟠 TABLE: Borrow_Person
+## 🟠 TABLE: Borrow_Persons
 
 ### Purpose
 Stores information about persons involved in borrowing.
