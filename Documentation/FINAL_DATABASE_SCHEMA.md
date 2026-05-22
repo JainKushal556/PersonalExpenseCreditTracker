@@ -215,7 +215,7 @@ Stores information about persons involved in lending.
 | PersonID    | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each person record           |
 | PersonName  | VARCHAR(100) | No           | —                          | Stores the full name of the person involved in lent or borrow transactions |
 | PhoneNumber | VARCHAR(15)  | No           | —                          | Stores the contact phone number of the person for communication purposes   |
-| Address     | VARCHAR(255) | Yes          | —                          | Stores the residential or contact address information of the person        |
+| Address     | VARCHAR(MAX) | Yes          | —                          | Stores the residential or contact address information of the person        |
 
 ---
 
@@ -263,7 +263,7 @@ Stores information about persons involved in borrowing.
 | PersonID    | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each person record         |
 | PersonName  | VARCHAR(100) | No           | —                          | Stores the full name of the person involved in borrow transactions       |
 | PhoneNumber | VARCHAR(15)  | No           | —                          | Stores the contact phone number of the person for communication purposes |
-| Address     | VARCHAR(255) | Yes          | —                          | Stores the residential or contact address information of the person      |
+| Address     | VARCHAR(MAX) | Yes          | —                          | Stores the residential or contact address information of the person      |
 
 ---
 
@@ -277,14 +277,14 @@ Stores information about persons involved in borrowing.
 
 Stores user task information.
 
-| Column Name | Data Type    | Null Allowed | Constraints                | Description                                                                   |
-| ----------- | ------------ | ------------ | -------------------------- | ----------------------------------------------------------------------------- |
-| TaskID      | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each task record                |
-| UserID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user from the Users table assigned to the task |
-| PriorityID  | INT          | No           | FOREIGN KEY                | Stores the reference ID of the task priority from the Task Priorities table   |
-| StatusID    | INT          | No           | FOREIGN KEY                | Stores the reference ID of the task status from the Task Status table         |
-| TaskTitle   | VARCHAR(150) | No           | —                          | Stores the title or short name of the task created by the user                |
-| Deadline    | DATE         | No           | —                          | Stores the final deadline date for completing the assigned task               |
+| Column Name  | Data Type    | Null Allowed | Constraints                | Description                                                                   |
+| ------------ | ------------ | ------------ | -------------------------- | ----------------------------------------------------------------------------- |
+| TaskID       | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each task record                |
+| UserID       | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user from the Users table assigned to the task |
+| PriorityID   | INT          | No           | FOREIGN KEY                | Stores the reference ID of the task priority from the Task Priorities table   |
+| TaskStatusID | INT          | No           | FOREIGN KEY                | Stores the reference ID of the task status from the Task Status table         |
+| TaskTitle    | VARCHAR(150) | No           | —                          | Stores the title or short name of the task created by the user                |
+| Deadline     | DATE         | No           | —                          | Stores the final deadline date for completing the assigned task               |
 
 ---
 

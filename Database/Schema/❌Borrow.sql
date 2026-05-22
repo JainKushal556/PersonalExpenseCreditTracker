@@ -6,7 +6,7 @@ CREATE TABLE Borrow (
     StatusID INT NOT NULL,
     Amount DECIMAL(10,2) NOT NULL,
     BorrowAt DATETIME NOT NULL,
-    ReturnAt DATETIME NOT NULL,
+    ReturnAt DATETIME NOT NULL, ❌
     Description VARCHAR(MAX) NOT NULL,
 
 	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
