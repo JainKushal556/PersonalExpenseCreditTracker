@@ -1,4 +1,0 @@
-CREATE TABLE Task_Status (
-    Status_ID INT PRIMARY KEY IDENTITY(1,1),
-    Status_Name VARCHAR(50) UNIQUE NOT NULL
-);

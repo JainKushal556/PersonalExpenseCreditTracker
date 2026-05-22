@@ -1,0 +1,4 @@
+CREATE TABLE tblTaskStatus (
+    TaskStatusID INT PRIMARY KEY IDENTITY(1,1),
+    TaskStatusName VARCHAR(50) NOT NULL UNIQUE
+);
