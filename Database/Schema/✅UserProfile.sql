@@ -1,0 +1,8 @@
+CREATE TABLE tblUserProfile (
+    ProfileID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    Name VARCHAR(MAX) NOT NULL,
+    ProfilePhoto VARBINARY(MAX) NULL,
+
+    FOREIGN KEY (UserID) REFERENCES tblUsers(UserID)
+);

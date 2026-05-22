@@ -1,8 +1,0 @@
-CREATE TABLE User_Profile (
-    Profile_ID INT PRIMARY KEY IDENTITY(1,1),
-    User_ID INT NOT NULL,
-    Name VARCHAR(100) NOT NULL,
-    Profile_Photo VARBINARY(MAX) NULL,
-
-    FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-);
