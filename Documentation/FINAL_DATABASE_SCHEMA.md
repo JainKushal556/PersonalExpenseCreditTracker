@@ -84,7 +84,7 @@ Stores all expense transactions of users.
 | CategoryID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the main expense category for this expense    |
 | SubCategoryID | INT           | No           | FOREIGN KEY                | Stores the reference ID of the sub-category related to this expense      |
 | Amount        | DECIMAL(10,2) | No           | —                          | Stores the total amount spent in this expense transaction                |
-| Description   | VARCHAR(255)  | No           | —                          | Stores additional details or notes related to the expense transaction    |
+| Description   | VARCHAR(MAX)  | No           | —                          | Stores additional details or notes related to the expense transaction    |
 | PaymentID     | INT           | No           | FOREIGN KEY                | Stores the reference ID of the payment method used for this expense      |
 | ExpenseAt     | DATETIME      | No           | —                          | Stores the exact date and time when the expense transaction was recorded |
 
@@ -147,7 +147,7 @@ Stores all credit transactions.
 | CategoryID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the main credit category for this transaction       |
 | SubCategoryID | INT           | No           | FOREIGN KEY                | Stores the reference ID of the sub-category related to this credit transaction |
 | Amount        | DECIMAL(10,2) | No           | —                          | Stores the total monetary amount received in this credit transaction           |
-| Description   | VARCHAR(255)  | No           | —                          | Stores additional details or notes related to the credit transaction           |
+| Description   | VARCHAR(MAX)  | No           | —                          | Stores additional details or notes related to the credit transaction           |
 | PaymentID     | INT           | No           | FOREIGN KEY                | Stores the reference ID of the payment method used for this credit transaction |
 | CreditAt      | DATETIME      | No           | —                          | Stores the exact date and time when the credit transaction was recorded        |
 
@@ -200,7 +200,7 @@ Stores money lent records.
 | Amount      | DECIMAL(10,2) | No           | —                          | Stores the total amount involved in the lent transaction                                           |
 | LentAt      | DATETIME      | No           | —                          | Stores the exact date and time when the money or item was lent                                     |
 | DeadlineAt  | DATETIME      | Yes          | —                          | Stores the expected deadline date and time for returning the lent amount or item                   |
-| Description | VARCHAR(255)  | No           | —                          | Stores additional details or notes related to the lent transaction                                 |
+| Description | VARCHAR(MAX)  | No           | —                          | Stores additional details or notes related to the lent transaction                                 |
 
 ---
 
@@ -248,7 +248,7 @@ Stores money borrowing records.
 | Amount      | DECIMAL(10,2) | No           | —                          | Stores the total amount involved in the borrow transaction                                                |
 | BorrowAt    | DATETIME      | No           | —                          | Stores the exact date and time when the money or item was borrowed                                        |
 | DeadlineAt  | DATETIME      | Yes          | —                          | Stores the expected deadline date and time for returning the borrowed amount or item                      |
-| Description | VARCHAR(255)  | No           | —                          | Stores additional details or notes related to the borrow transaction                                      |
+| Description | VARCHAR(MAX)  | No           | —                          | Stores additional details or notes related to the borrow transaction                                      |
 
 ---
 
@@ -330,7 +330,7 @@ Stores user notes information.
 | UserID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user from the Users table who created the note |
 | StatusID    | INT          | No           | FOREIGN KEY                | Stores the reference ID of the note status from the Note_Status table         |
 | NoteTitle   | VARCHAR(150) | No           | —                          | Stores the title or short heading of the note                                 |
-| Description | VARCHAR(500) | No           | —                          | Stores the detailed content or information written inside the note            |
+| Description | VARCHAR(MAX) | No           | —                          | Stores the detailed content or information written inside the note            |
 | CreatedAt   | DATETIME     | No           | —                          | Stores the exact date and time when the note was created                      |
 
 ---
