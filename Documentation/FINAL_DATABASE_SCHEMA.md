@@ -8,56 +8,60 @@
 
 ---
 
-## 🟣 TABLE: Users
+## 🟣 TABLE: tblUsers
 
 ### Purpose
+
 Stores registration information of users.
 
-| Column Name | Data Type    | Constraints                |
-|-------------|--------------|----------------------------|
-| User_ID     | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| User_Name   | VARCHAR(MAX) | NOT NULL                   |
-| Created_At  | DATETIME     | NOT NULL                   |
+| Column Name | Data Type    | Null Allowed | Constraints                | Description                                                         |
+| ----------- | ------------ | ------------ | -------------------------- | ------------------------------------------------------------------- |
+| UserID      | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for every registered user |
+| UserName    | VARCHAR(MAX) | No           | —                          | Stores the full name or display name of the user in the system      |
+| CreatedAt   | DATETIME     | No           | —                          | Stores the exact date and time when the user account was created    |
 
 ---
 
-## 🟣 TABLE: User_Profile
+## 🟣 TABLE: tblUserProfile
 
 ### Purpose
+
 Stores user profile details.
 
-| Column Name   | Data Type       | Constraints                |
-|---------------|-----------------|----------------------------|
-| Profile_ID    | INT             | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID       | INT             | FOREIGN KEY, NOT NULL      |
-| Name          | VARCHAR(100)    | NOT NULL                   |
-| Profile_Photo | VARBINARY(MAX)  | NULL                       |
+| Column Name  | Data Type      | Constraints                |
+| ------------ | -------------- | -------------------------- |
+| ProfileID    | INT            | PRIMARY KEY, IDENTITY(1,1) |
+| UserID       | INT            | FOREIGN KEY, NOT NULL      |
+| Name         | VARCHAR(100)   | NOT NULL                   |
+| ProfilePhoto | VARBINARY(MAX) | NULL                       |
 
 ---
 
-## 🟣 TABLE: User_Contact
+## 🟣 TABLE: tblUserContact
 
 ### Purpose
+
 Stores contact information of users.
 
-| Column Name  | Data Type    | Constraints                |
-|--------------|--------------|----------------------------|
-| Contact_ID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID      | INT          | FOREIGN KEY, NOT NULL      |
-| Email        | VARCHAR(100) | UNIQUE, NOT NULL           |
-| Phone_Number | VARCHAR(15)  | UNIQUE, NOT NULL           |
+| Column Name | Data Type    | Constraints                |
+| ----------- | ------------ | -------------------------- |
+| ContactID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| UserID      | INT          | FOREIGN KEY, NOT NULL      |
+| Email       | VARCHAR(100) | UNIQUE, NOT NULL           |
+| PhoneNumber | VARCHAR(15)  | UNIQUE, NOT NULL           |
 
 ---
 
-## 🟣 TABLE: User_Authentication
+## 🟣 TABLE: tblUserAuthentication
 
 ### Purpose
+
 Stores authentication details of users.
 
 | Column Name | Data Type    | Constraints                |
-|-------------|--------------|----------------------------|
-| Auth_ID     | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID     | INT          | FOREIGN KEY, NOT NULL      |
+| ----------- | ------------ | -------------------------- |
+| AuthID      | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| UserID      | INT          | FOREIGN KEY, NOT NULL      |
 | Password    | VARCHAR(255) | NOT NULL                   |
 | Active      | BOOLEAN      | NOT NULL                   |
 
@@ -67,58 +71,62 @@ Stores authentication details of users.
 
 ---
 
-## 🟢 TABLE: Expense
+## 🟢 TABLE: tblExpense
 
 ### Purpose
+
 Stores all expense transactions of users.
 
-| Column Name     | Data Type      | Constraints                |
-|-----------------|----------------|----------------------------|
-| Expense_ID      | INT            | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID         | INT            | FOREIGN KEY, NOT NULL      |
-| Category_ID     | INT            | FOREIGN KEY, NOT NULL      |
-| Sub_Category_ID | INT            | FOREIGN KEY, NOT NULL      |
-| Amount          | DECIMAL(10,2)  | NOT NULL                   |
-| Description     | VARCHAR(255)   | NOT NULL                   |
-| Payment_ID      | INT            | FOREIGN KEY, NOT NULL      |
-| Expense_At      | DATETIME       | NOT NULL                   |
+| Column Name   | Data Type     | Constraints                |
+| ------------- | ------------- | -------------------------- |
+| ExpenseID     | INT           | PRIMARY KEY, IDENTITY(1,1) |
+| UserID        | INT           | FOREIGN KEY, NOT NULL      |
+| CategoryID    | INT           | FOREIGN KEY, NOT NULL      |
+| SubCategoryID | INT           | FOREIGN KEY, NOT NULL      |
+| Amount        | DECIMAL(10,2) | NOT NULL                   |
+| Description   | VARCHAR(255)  | NOT NULL                   |
+| PaymentID     | INT           | FOREIGN KEY, NOT NULL      |
+| ExpenseAt     | DATETIME      | NOT NULL                   |
 
 ---
 
-## 🟢 TABLE: Expense_Category
+## 🟢 TABLE: tblExpenseCategory
 
 ### Purpose
+
 Stores expense categories.
 
 | Column Name  | Data Type    | Constraints                |
-|--------------|--------------|----------------------------|
-| Category_ID  | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| Category_Name| VARCHAR(100) | UNIQUE, NOT NULL           |
+| ------------ | ------------ | -------------------------- |
+| CategoryID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| CategoryName | VARCHAR(100) | UNIQUE, NOT NULL           |
 
 ---
 
-## 🟢 TABLE: Expense_Sub_Category
+## 🟢 TABLE: tblExpenseSubCategory
 
 ### Purpose
+
 Stores expense sub-categories.
 
-| Column Name       | Data Type    | Constraints                |
-|-------------------|--------------|----------------------------|
-| Sub_Category_ID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| Category_ID       | INT          | FOREIGN KEY, NOT NULL      |
-| Sub_Category_Name | VARCHAR(100) | UNIQUE, NOT NULL           |
+| Column Name     | Data Type    | Constraints                |
+| --------------- | ------------ | -------------------------- |
+| SubCategoryID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| CategoryID      | INT          | FOREIGN KEY, NOT NULL      |
+| SubCategoryName | VARCHAR(100) | UNIQUE, NOT NULL           |
 
 ---
 
-## 🟢 TABLE: Payment_Type
+## 🟢 TABLE: tblPaymentType
 
 ### Purpose
+
 Stores different payment methods.
 
 | Column Name | Data Type   | Constraints                |
-|-------------|-------------|----------------------------|
-| Payment_ID  | INT         | PRIMARY KEY, IDENTITY(1,1) |
-| Payment_Name| VARCHAR(50) | UNIQUE, NOT NULL           |
+| ----------- | ----------- | -------------------------- |
+| PaymentID   | INT         | PRIMARY KEY, IDENTITY(1,1) |
+| PaymentName | VARCHAR(50) | UNIQUE, NOT NULL           |
 
 ---
 
@@ -126,46 +134,49 @@ Stores different payment methods.
 
 ---
 
-## 🔵 TABLE: Credit
+## 🔵 TABLE: tblCredit
 
 ### Purpose
+
 Stores all credit transactions.
 
-| Column Name     | Data Type      | Constraints                |
-|-----------------|----------------|----------------------------|
-| Credit_ID       | INT            | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID         | INT            | FOREIGN KEY, NOT NULL      |
-| Category_ID     | INT            | FOREIGN KEY, NOT NULL      |
-| Sub_Category_ID | INT            | FOREIGN KEY, NOT NULL      |
-| Amount          | DECIMAL(10,2)  | NOT NULL                   |
-| Description     | VARCHAR(255)   | NOT NULL                   |
-| Payment_ID      | INT            | FOREIGN KEY, NOT NULL      |
-| Credit_at       | DATETIME       | NOT NULL                   |
+| Column Name   | Data Type     | Constraints                |
+| ------------- | ------------- | -------------------------- |
+| CreditID      | INT           | PRIMARY KEY, IDENTITY(1,1) |
+| UserID        | INT           | FOREIGN KEY, NOT NULL      |
+| CategoryID    | INT           | FOREIGN KEY, NOT NULL      |
+| SubCategoryID | INT           | FOREIGN KEY, NOT NULL      |
+| Amount        | DECIMAL(10,2) | NOT NULL                   |
+| Description   | VARCHAR(255)  | NOT NULL                   |
+| PaymentID     | INT           | FOREIGN KEY, NOT NULL      |
+| Creditat      | DATETIME      | NOT NULL                   |
 
 ---
 
-## 🔵 TABLE: Credit_Category
+## 🔵 TABLE: tblCreditCategory
 
 ### Purpose
+
 Stores credit categories.
 
 | Column Name  | Data Type    | Constraints                |
-|--------------|--------------|----------------------------|
-| Category_ID  | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| Category_Name| VARCHAR(100) | UNIQUE, NOT NULL           |
+| ------------ | ------------ | -------------------------- |
+| CategoryID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| CategoryName | VARCHAR(100) | UNIQUE, NOT NULL           |
 
 ---
 
-## 🔵 TABLE: Credit_Sub_Category
+## 🔵 TABLE: tblCreditSubCategory
 
 ### Purpose
+
 Stores credit sub-categories.
 
-| Column Name       | Data Type    | Constraints                |
-|-------------------|--------------|----------------------------|
-| Sub_Category_ID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| Category_ID       | INT          | FOREIGN KEY, NOT NULL      |
-| Sub_Category_Name | VARCHAR(100) | UNIQUE, NOT NULL           |
+| Column Name     | Data Type    | Constraints                |
+| --------------- | ------------ | -------------------------- |
+| SubCategoryID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| CategoryID      | INT          | FOREIGN KEY, NOT NULL      |
+| SubCategoryName | VARCHAR(100) | UNIQUE, NOT NULL           |
 
 ---
 
@@ -173,80 +184,85 @@ Stores credit sub-categories.
 
 ---
 
-## 🟠 TABLE: Lent
+## 🟠 TABLE: tblLent
 
 ### Purpose
+
 Stores money lent records.
 
-| Column Name | Data Type      | Constraints                |
-|-------------|----------------|----------------------------|
-| Lent_ID     | INT            | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID     | INT            | FOREIGN KEY, NOT NULL      |
-| Person_ID   | INT            | FOREIGN KEY, NOT NULL      |
-| Payment_ID  | INT            | FOREIGN KEY, NOT NULL      |
-| Status_ID   | INT            | FOREIGN KEY, NOT NULL      |
-| Amount      | DECIMAL(10,2)  | NOT NULL                   |
-| Lent_at     | DATETIME       | NOT NULL                   |
-| Return_at   | DATETIME       | NOT NULL                   |
-| Description | VARCHAR(255)   | NOT NULL                   |
+| Column Name | Data Type     | Constraints                |
+| ----------- | ------------- | -------------------------- |
+| LentID      | INT           | PRIMARY KEY, IDENTITY(1,1) |
+| UserID      | INT           | FOREIGN KEY, NOT NULL      |
+| PersonID    | INT           | FOREIGN KEY, NOT NULL      |
+| PaymentID   | INT           | FOREIGN KEY, NOT NULL      |
+| StatusID    | INT           | FOREIGN KEY, NOT NULL      |
+| Amount      | DECIMAL(10,2) | NOT NULL                   |
+| Lentat      | DATETIME      | NOT NULL                   |
+| Returnat    | DATETIME      | NOT NULL                   |
+| Description | VARCHAR(255)  | NOT NULL                   |
 
 ---
 
-## 🟠 TABLE: Lent_Persons
+## 🟠 TABLE: tblLentPersons
 
 ### Purpose
+
 Stores information about persons involved in lending.
 
 | Column Name | Data Type    | Constraints                |
-|-------------|--------------|----------------------------|
-| Person_ID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| Person_Name | VARCHAR(100) | NOT NULL                   |
-| Phone_Number| VARCHAR(15)  | NOT NULL                   |
+| ----------- | ------------ | -------------------------- |
+| PersonID    | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| PersonName  | VARCHAR(100) | NOT NULL                   |
+| PhoneNumber | VARCHAR(15)  | NOT NULL                   |
 | Address     | VARCHAR(255) | NULL                       |
 
 ---
 
-## 🟠 TABLE: Lent_Borrow_Status
+## 🟠 TABLE: tblLentBorrowStatus
 
 ### Purpose
+
 Stores lending and borrowing status information.
 
 | Column Name | Data Type   | Constraints                |
-|-------------|-------------|----------------------------|
-| Status_ID   | INT         | PRIMARY KEY, IDENTITY(1,1) |
-| Status_Name | VARCHAR(50) | NOT NULL                   |
+| ----------- | ----------- | -------------------------- |
+| StatusID    | INT         | PRIMARY KEY, IDENTITY(1,1) |
+| StatusName  | VARCHAR(50) | NOT NULL                   |
 
 ---
 
-## 🟠 TABLE: Borrow
+## 🟠 TABLE: tblBorrow
 
 ### Purpose
+
 Stores money borrowing records.
 
-| Column Name | Data Type      | Constraints                |
-|-------------|----------------|----------------------------|
-| Borrow_ID   | INT            | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID     | INT            | FOREIGN KEY, NOT NULL      |
-| Person_ID   | INT            | FOREIGN KEY, NOT NULL      |
-| Payment_ID  | INT            | FOREIGN KEY, NOT NULL      |
-| Status_ID   | INT            | FOREIGN KEY, NOT NULL      |
-| Amount      | DECIMAL(10,2)  | NOT NULL                   |
-| Borrow_at   | DATETIME       | NOT NULL                   |
-| Return_at   | DATETIME       | NOT NULL                   |
-| Description | VARCHAR(255)   | NOT NULL                   |
+| Column Name | Data Type     | Constraints                |
+| ----------- | ------------- | -------------------------- |
+| BorrowID    | INT           | PRIMARY KEY, IDENTITY(1,1) |
+| UserID      | INT           | FOREIGN KEY, NOT NULL      |
+| PersonID    | INT           | FOREIGN KEY, NOT NULL      |
+| PaymentID   | INT           | FOREIGN KEY, NOT NULL      |
+| StatusID    | INT           | FOREIGN KEY, NOT NULL      |
+| Amount      | DECIMAL(10,2) | NOT NULL                   |
+| Borrowat    | DATETIME      | NOT NULL                   |
+| Returnat    | DATETIME      | NOT NULL                   |
+| Description | VARCHAR(255)  | NOT NULL                   |
 
 ---
 
-## 🟠 TABLE: Borrow_Persons
+## 🟠 TABLE: tblBorrowPersons
 
 ### Purpose
+
 Stores information about persons involved in borrowing.
 
 | Column Name | Data Type    | Constraints                |
-|-------------|--------------|----------------------------|
-| Person_ID   | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| Person_Name | VARCHAR(100) | NOT NULL                   |
-| Phone_Number| VARCHAR(15)  | NOT NULL                   |
+| ----------- | ------------ | -------------------------- |
+| PersonID    | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| PersonName  | VARCHAR(100) | NOT NULL                   |
+| PhoneNumber | VARCHAR(15)  | NOT NULL                   |
 | Address     | VARCHAR(255) | NULL                       |
 
 ---
@@ -255,43 +271,46 @@ Stores information about persons involved in borrowing.
 
 ---
 
-## 🟡 TABLE: Task
+## 🟡 TABLE: tblTask
 
 ### Purpose
+
 Stores user task information.
 
 | Column Name | Data Type    | Constraints                |
-|-------------|--------------|----------------------------|
-| Task_ID     | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID     | INT          | FOREIGN KEY, NOT NULL      |
-| Priority_ID | INT          | FOREIGN KEY, NOT NULL      |
-| Status_ID   | INT          | FOREIGN KEY, NOT NULL      |
-| Task_Title  | VARCHAR(150) | NOT NULL                   |
+| ----------- | ------------ | -------------------------- |
+| TaskID      | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| UserID      | INT          | FOREIGN KEY, NOT NULL      |
+| PriorityID  | INT          | FOREIGN KEY, NOT NULL      |
+| StatusID    | INT          | FOREIGN KEY, NOT NULL      |
+| TaskTitle   | VARCHAR(150) | NOT NULL                   |
 | Deadline    | DATE         | NOT NULL                   |
 
 ---
 
-## 🟡 TABLE: Task_Priorities
+## 🟡 TABLE: tblTaskPriorities
 
 ### Purpose
+
 Stores task priority levels.
 
-| Column Name | Data Type   | Constraints                |
-|-------------|-------------|----------------------------|
-| Priority_ID | INT         | PRIMARY KEY, IDENTITY(1,1) |
-| Priority_Name| VARCHAR(50)| UNIQUE, NOT NULL           |
+| Column Name  | Data Type   | Constraints                |
+| ------------ | ----------- | -------------------------- |
+| PriorityID   | INT         | PRIMARY KEY, IDENTITY(1,1) |
+| PriorityName | VARCHAR(50) | UNIQUE, NOT NULL           |
 
 ---
 
-## 🟡 TABLE: Task_Status
+## 🟡 TABLE: tblTaskStatus
 
 ### Purpose
+
 Stores task completion status.
 
-| Column Name | Data Type   | Constraints                |
-|-------------|-------------|----------------------------|
-| Status_ID   | INT         | PRIMARY KEY, IDENTITY(1,1) |
-| Status_Name | VARCHAR(50) | UNIQUE, NOT NULL           |
+| Column Name    | Data Type   | Constraints                |
+| -------------- | ----------- | -------------------------- |
+| TaskStatusID   | INT         | PRIMARY KEY, IDENTITY(1,1) |
+| TaskStatusName | VARCHAR(50) | UNIQUE, NOT NULL           |
 
 ---
 
@@ -299,31 +318,33 @@ Stores task completion status.
 
 ---
 
-## 🟡 TABLE: Note
+## 🟡 TABLE: tblNote
 
 ### Purpose
+
 Stores user notes information.
 
 | Column Name | Data Type    | Constraints                |
-|-------------|--------------|----------------------------|
-| Note_ID     | INT          | PRIMARY KEY, IDENTITY(1,1) |
-| User_ID     | INT          | FOREIGN KEY, NOT NULL      |
-| Status_ID   | INT          | FOREIGN KEY, NOT NULL      |
-| Note_Title  | VARCHAR(150) | NOT NULL                   |
+| ----------- | ------------ | -------------------------- |
+| NoteID      | INT          | PRIMARY KEY, IDENTITY(1,1) |
+| UserID      | INT          | FOREIGN KEY, NOT NULL      |
+| StatusID    | INT          | FOREIGN KEY, NOT NULL      |
+| NoteTitle   | VARCHAR(150) | NOT NULL                   |
 | Description | VARCHAR(500) | NOT NULL                   |
-| Created_at  | DATETIME     | NOT NULL                   |
+| Createdat   | DATETIME     | NOT NULL                   |
 
 ---
 
-## 🟡 TABLE: Note_Status
+## 🟡 TABLE: tblNoteStatus
 
 ### Purpose
+
 Stores note priority or status information.
 
 | Column Name | Data Type   | Constraints                |
-|-------------|-------------|----------------------------|
-| Status_ID   | INT         | PRIMARY KEY, IDENTITY(1,1) |
-| Status_Name | VARCHAR(50) | UNIQUE, NOT NULL           |
+| ----------- | ----------- | -------------------------- |
+| StatusID    | INT         | PRIMARY KEY, IDENTITY(1,1) |
+| StatusName  | VARCHAR(50) | UNIQUE, NOT NULL           |
 
 ---
 
