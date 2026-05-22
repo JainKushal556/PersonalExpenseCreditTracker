@@ -1,0 +1,16 @@
+CREATE TABLE Borrow (
+    BorrowID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    PersonID INT NOT NULL,
+    PaymentID INT NOT NULL,
+    StatusID INT NOT NULL,
+    Amount DECIMAL(10,2) NOT NULL,
+    BorrowAt DATETIME NOT NULL,
+    ReturnAt DATETIME NOT NULL,
+    Description VARCHAR(MAX) NOT NULL,
+
+	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
+	FOREIGN KEY (PersonID) REFERENCES tblBorrowPersons(PersonID),
+	FOREIGN KEY (PaymentID) REFERENCES tblPaymentType(PaymentID),
+	FOREIGN KEY (StatusID) REFERENCES tblLentBorrowStatus(StatusID)
+);

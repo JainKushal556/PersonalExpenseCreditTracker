@@ -1,4 +1,0 @@
-CREATE TABLE Lent_Borrow_Status(
-	Status_ID INT PRIMARY KEY IDENTITY(1,1),
-	Status_Name VARCHAR(50) NOT NULL
-);
