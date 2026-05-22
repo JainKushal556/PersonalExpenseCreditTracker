@@ -1,6 +1,4 @@
 
-select *from Users;
-
 INSERT INTO Users (User_Name, Created_At)
 VALUES
 ('Sujit Kar', GETDATE()),
