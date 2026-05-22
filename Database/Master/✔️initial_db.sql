@@ -1,5 +1,5 @@
-CREATE DATABASE PersonalExpenseCreditTracker;
+CREATE DATABASE dbPersonalExpenseCreditTracker;
 GO
 
-USE PersonalExpenseCreditTracker;
+USE dbPersonalExpenseCreditTracker;
 GO
