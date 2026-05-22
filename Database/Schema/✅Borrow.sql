@@ -1,5 +1,5 @@
 
-CREATE TABLE Borrow_Details (
+CREATE TABLE Borrow (
     Borrow_ID INT PRIMARY KEY IDENTITY(1,1),
 
     User_ID INT NOT NULL,
@@ -14,8 +14,8 @@ CREATE TABLE Borrow_Details (
 
     Description VARCHAR(255) NOT NULL,
 
-    FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
-
-    FOREIGN KEY (Person_ID) REFERENCES Person(Person_ID),
-
+	 FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
+	 FOREIGN KEY (Person_ID) REFERENCES Borrow_Persons(Person_ID),
+	 FOREIGN KEY (Payment_ID) REFERENCES Payment_Type(Payment_ID),
+	 FOREIGN KEY (Status_ID) REFERENCES Lent_Borrow_Status(Status_ID)
 );

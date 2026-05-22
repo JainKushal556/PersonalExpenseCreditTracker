@@ -1,4 +1,4 @@
-CREATE TABLE Person (
+CREATE TABLE Borrow_Persons (
     Person_ID INT PRIMARY KEY IDENTITY(1,1),
 
     Person_Name VARCHAR(100) NOT NULL,

@@ -8,4 +8,10 @@ CREATE TABLE Lent(
 	Lent_at DATETIME NOT NULL,
 	Return_at DATETIME NOT NULL,
 	Description VARCHAR(255) NOT NULL
+
+
+	 FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
+	 FOREIGN KEY (Person_ID) REFERENCES Lent_Persons(Person_ID),
+	 FOREIGN KEY (Payment_ID) REFERENCES Payment_Type(Payment_ID),
+	 FOREIGN KEY (Status_ID) REFERENCES Lent_Borrow_Status(Status_ID)
 	);
