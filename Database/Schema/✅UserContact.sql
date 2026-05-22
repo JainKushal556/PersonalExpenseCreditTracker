@@ -1,0 +1,8 @@
+CREATE TABLE tblUserContact (
+    ContactID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    Email VARCHAR(100) NOT NULL UNIQUE,
+    PhoneNumber VARCHAR(15) NOT NULL UNIQUE,
+
+    FOREIGN KEY (UserID) REFERENCES tblUsers(UserID)
+);

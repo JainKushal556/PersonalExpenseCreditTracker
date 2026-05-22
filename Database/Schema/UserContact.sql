@@ -1,8 +1,0 @@
-CREATE TABLE User_Contact (
-    Contact_ID INT PRIMARY KEY IDENTITY(1,1),
-    User_ID INT NOT NULL,
-    Email VARCHAR(100) UNIQUE NOT NULL,
-    Phone_Number VARCHAR(15) UNIQUE NOT NULL,
-
-    FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-);
