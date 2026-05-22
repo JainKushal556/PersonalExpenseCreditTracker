@@ -20,4 +20,4 @@ CREATE TABLE Credit(
   FOREIGN KEY (Payment_ID)
   REFERENCES Payment_Type(Payment_ID)
 
-)
+);
