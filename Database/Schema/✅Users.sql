@@ -1,0 +1,5 @@
+CREATE TABLE tblUsers (
+    UserID INT PRIMARY KEY IDENTITY(1,1),
+    UserName VARCHAR(MAX) NOT NULL,
+    CreatedAt DATETIME NOT NULL
+);
