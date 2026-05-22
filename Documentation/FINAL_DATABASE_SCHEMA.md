@@ -324,14 +324,14 @@ Stores task completion status.
 
 Stores user notes information.
 
-| Column Name | Data Type    | Null Allowed | Constraints                | Description                                                                   |
-| ----------- | ------------ | ------------ | -------------------------- | ----------------------------------------------------------------------------- |
-| NoteID      | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each note record                |
-| UserID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user from the Users table who created the note |
-| StatusID    | INT          | No           | FOREIGN KEY                | Stores the reference ID of the note status from the Note_Status table         |
-| NoteTitle   | VARCHAR(150) | No           | —                          | Stores the title or short heading of the note                                 |
-| Description | VARCHAR(MAX) | No           | —                          | Stores the detailed content or information written inside the note            |
-| CreatedAt   | DATETIME     | No           | —                          | Stores the exact date and time when the note was created                      |
+| Column Name  | Data Type    | Null Allowed | Constraints                | Description                                                                   |
+| ------------ | ------------ | ------------ | -------------------------- | ----------------------------------------------------------------------------- |
+| NoteID       | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each note record                |
+| UserID       | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user from the Users table who created the note |
+| NoteStatusID | INT          | No           | FOREIGN KEY                | Stores the reference ID of the note status from the Note_Status table         |
+| NoteTitle    | VARCHAR(150) | No           | —                          | Stores the title or short heading of the note                                 |
+| Description  | VARCHAR(MAX) | No           | —                          | Stores the detailed content or information written inside the note            |
+| CreatedAt    | DATETIME     | No           | —                          | Stores the exact date and time when the note was created                      |
 
 ---
 
@@ -341,10 +341,10 @@ Stores user notes information.
 
 Stores note priority or status information.
 
-| Column Name | Data Type   | Null Allowed | Constraints                | Description                                                                 |
-| ----------- | ----------- | ------------ | -------------------------- | --------------------------------------------------------------------------- |
-| StatusID    | INT         | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each note status record       |
-| StatusName  | VARCHAR(50) | No           | UNIQUE                     | Stores the unique status name used to represent the current state of a note |
+| Column Name  | Data Type   | Null Allowed | Constraints                | Description                                                                 |
+| ------------ | ----------- | ------------ | -------------------------- | --------------------------------------------------------------------------- |
+| NoteStatusID | INT         | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each note status record       |
+| StatusName   | VARCHAR(50) | No           | UNIQUE                     | Stores the unique status name used to represent the current state of a note |
 
 ---
 
