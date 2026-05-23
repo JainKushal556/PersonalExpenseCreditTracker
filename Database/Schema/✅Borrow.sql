@@ -1,4 +1,4 @@
-CREATE TABLE Borrow (
+CREATE TABLE tblBorrow (
     BorrowID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL,
     PersonID INT NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE Borrow (
     StatusID INT NOT NULL,
     Amount DECIMAL(10,2) NOT NULL,
     BorrowAt DATETIME NOT NULL,
-    ReturnAt DATETIME NOT NULL, ❌
+    DeadlineAt DATETIME NOT NULL,
     Description VARCHAR(MAX) NOT NULL,
 
 	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
