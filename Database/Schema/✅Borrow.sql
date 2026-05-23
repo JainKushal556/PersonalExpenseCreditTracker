@@ -5,8 +5,8 @@ CREATE TABLE tblBorrow (
     PaymentID INT NOT NULL,
     StatusID INT NOT NULL,
     Amount DECIMAL(10,2) NOT NULL,
-    BorrowAt DATETIME NOT NULL,
-    DeadlineAt DATETIME NOT NULL,
+    BorrowAt DATETIME NOT NULL DEFAULT GETDATE(),
+    DeadlineAt DATETIME,
     Description VARCHAR(MAX) NOT NULL,
 
 	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
