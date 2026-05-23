@@ -8,7 +8,7 @@ CREATE TABLE tblExpense (
     PaymentID INT NOT NULL,
     ExpenseAt DATETIME DEFAULT GETDATE(),
 
-    FOREIGN KEY (UserID)
+    FOREIGN KEY(UserID)
     REFERENCES tblUsers(UserID),
 
     FOREIGN KEY (CategoryID)
