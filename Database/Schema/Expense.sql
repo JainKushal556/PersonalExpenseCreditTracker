@@ -1,25 +1,25 @@
-CREATE TABLE Expense (
-    Expense_Id INT PRIMARY KEY IDENTITY(1,1),
-    User_Id INT NOT NULL,
-    Category_Id INT NOT NULL,
-    Sub_Category_Id INT NOT NULL,
+CREATE TABLE tblExpense (
+    ExpenseID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    CategoryID INT NOT NULL,
+    SubCategoryID INT NOT NULL,
     Amount DECIMAL(10,2) NOT NULL,
-    Description VARCHAR(255) NOT NULL,
-    Payment_Id INT NOT NULL,
-    Expense_At DATETIME DEFAULT GETDATE(),
+    Description VARCHAR(MAX) NOT NULL,
+    PaymentID INT NOT NULL,
+    ExpenseAt DATETIME DEFAULT GETDATE(),
 
-    FOREIGN KEY (User_Id)
-    REFERENCES Users(User_Id),
+    FOREIGN KEY(UserID)
+    REFERENCES tblUsers(UserID),
 
-    FOREIGN KEY (Category_Id)
-    REFERENCES Expense_Category(Category_Id),
+    FOREIGN KEY (CategoryID)
+    REFERENCES tblExpenseCategory(CategoryID),
     
 
-    FOREIGN KEY (Sub_Category_Id)
-    REFERENCES Expense_Sub_Category(Sub_Category_Id),
+    FOREIGN KEY (SubCategoryID)
+    REFERENCES tblExpenseSubCategory(SubCategoryID),
     
 
-    FOREIGN KEY (Payment_Id)
-    REFERENCES Payment_Type(Payment_Id)
+    FOREIGN KEY (PaymentID)
+    REFERENCES tblPaymentType(PaymentID)
     
 );

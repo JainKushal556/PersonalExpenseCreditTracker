@@ -1,23 +1,22 @@
-CREATE TABLE Credit(
-  Credit_ID	INT	PRIMARY KEY IDENTITY(1,1),
-  User_ID INT NOT NULL,
-  Category_ID INT NOT NULL,
-  Sub_Category_ID INT NOT NULL,
+Create Table tblCredit(
+  CreditID INT PRIMARY KEY IDENTITY(1,1),
+  UserID  INT NOT NULL,
+  CategoryID INT NOT NULL,
+  SubCategoryID INT NOT NULL,
   Amount DECIMAL(10,2) NOT NULL,
-  Description VARCHAR(255) NOT NULL,
-  Payment_ID INT NOT NULL,
-  Credit_at DATETIME DEFAULT GETDATE(),
+  Description VARCHAR(MAX) NOT NULL,
+  PaymentID	INT NOT NULL,
+  CreditAt DATETIME DEFAULT GETDATE(),
 
-  FOREIGN KEY (Category_ID)
-  REFERENCES Credit_Category(Category_ID),
+  FOREIGN KEY(CategoryID)
+  REFERENCES tblCreditCategory(CategoryID),
 
-  FOREIGN KEY (Sub_Category_ID)
-  REFERENCES Credit_Sub_Category(Sub_Category_ID),
+  FOREIGN KEY(SubCategoryID)
+  REFERENCES tblCreditSubCategory(SubCategoryID),
 
-  FOREIGN KEY (User_ID)
-  REFERENCES Users(User_ID),
-  
-  FOREIGN KEY (Payment_ID)
-  REFERENCES Payment_Type(Payment_ID)
+  FOREIGN KEY(UserID)
+  REFERENCES tblUsers(UserID),
 
+  FOREIGN KEY(PaymentID)
+  REFERENCES tblPaymentType(PaymentID)
 );
