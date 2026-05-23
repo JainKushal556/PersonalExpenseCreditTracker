@@ -1,13 +1,13 @@
-INSERT INTO tblUsers (UserName, CreatedAt)
-VALUES
-('Sujit Kar', GETDATE()),
-('Kushal Jain', GETDATE()),
-('Debojyoti Jana', GETDATE()),
-('Arindam Sahoo', GETDATE()),
-('Deepjyoti Das', GETDATE()),
-('Arpita Jana', GETDATE()),
-('Sampriti Maity', GETDATE()),
-('Rahul Das', GETDATE()),
-('Priya Sharma', GETDATE()),
-('Anik Paul', GETDATE());
+INSERT INTO tblUsers (UserName)
+VALUES 
+('Sujit Kar'),
+('Kushal Jain'),
+('Debojyoti Jana'),
+('Arindam Sahoo'),
+('Deepjyoti Das'),
+('Arpita Jana'),
+('Sampriti Maity'),
+('Rahul Das'),
+('Priya Sharma'),
+('Anik Paul');
 
