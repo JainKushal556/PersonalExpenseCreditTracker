@@ -58,6 +58,13 @@ StatusName VARCHAR(50) UNIQUE NOT NULL
 );
 GO
 
+CREATE TABLE tblBorrowPersons (
+    PersonID INT PRIMARY KEY IDENTITY(1,1),
+    PersonName VARCHAR(100) NOT NULL,
+    PhoneNumber VARCHAR(15) NOT NULL,
+    Address VARCHAR(MAX) NULL
+);
+GO
 
 --Dependent Tables
 
@@ -91,6 +98,27 @@ CREATE TABLE tblUserAuthentication (
 );
 GO
 
+Create Table tblCreditSubCategory(
+  SubCategoryID INT PRIMARY KEY IDENTITY(1,1),
+  CategoryID INT NOT NULL,
+  SubCategoryName VARCHAR(100) UNIQUE Not Null,
+
+  FOREIGN KEY(CategoryID)
+  REFERENCES tblCreditCategory(CategoryID)
+
+);
+GO
+
+CREATE TABLE tblExpenseSubCategory (
+    SubCategoryID INT PRIMARY KEY IDENTITY(1,1),
+    CategoryID INT NOT NULL,
+    SubCategoryName VARCHAR(100) UNIQUE NOT NULL,
+
+    FOREIGN KEY (CategoryID)
+    REFERENCES tblExpenseCategory(CategoryID)
+);
+GO
+
 CREATE TABLE tblExpense (
     ExpenseID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL,
@@ -118,16 +146,6 @@ CREATE TABLE tblExpense (
 );
 GO
 
-CREATE TABLE tblExpenseSubCategory (
-    SubCategoryID INT PRIMARY KEY IDENTITY(1,1),
-    CategoryID INT NOT NULL,
-    SubCategoryName VARCHAR(100) UNIQUE NOT NULL,
-
-    FOREIGN KEY (CategoryID)
-    REFERENCES tblExpenseCategory(CategoryID)
-);
-GO
-
 Create Table tblCredit(
   CreditID INT PRIMARY KEY IDENTITY(1,1),
   UserID  INT NOT NULL,
@@ -149,17 +167,6 @@ Create Table tblCredit(
 
   FOREIGN KEY(PaymentID)
   REFERENCES tblPaymentType(PaymentID)
-);
-GO
-
-Create Table tblCreditSubCategory(
-  SubCategoryID INT PRIMARY KEY IDENTITY(1,1),
-  CategoryID INT NOT NULL,
-  SubCategoryName VARCHAR(100) UNIQUE Not Null,
-
-  FOREIGN KEY(CategoryID)
-  REFERENCES tblCreditCategory(CategoryID)
-
 );
 GO
 
@@ -199,14 +206,6 @@ CREATE TABLE tblBorrow (
 );
 GO
 
-CREATE TABLE tblBorrowPersons (
-    PersonID INT PRIMARY KEY IDENTITY(1,1),
-    PersonName VARCHAR(100) NOT NULL,
-    PhoneNumber VARCHAR(15) NOT NULL,
-    Address VARCHAR(MAX) NULL
-);
-GO
-
 CREATE TABLE tblTask (
     TaskID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL,
@@ -225,19 +224,19 @@ CREATE TABLE tblNote
 (
     NoteID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 
-    UserID INT NOT NULL ,
+    UserID INT NOT NULL,
     NoteStatusID INT NOT NULL,
 
-    NoteTitle VARCHAR(150) NOT NULL,
+    NoteTitle VARCHAR(MAX) NOT NULL,
     Description VARCHAR(MAX) NOT NULL,
-    CreatedAt DATETIME NOT NULL,
 
-    
-        FOREIGN KEY (UserID)
-        REFERENCES tblUsers(UserID),
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 
-        FOREIGN KEY (NoteStatusID)
-        REFERENCES tblNoteStatus(NoteStatusID)
+    FOREIGN KEY (UserID)
+    REFERENCES tblUsers(UserID),
+
+    FOREIGN KEY (NoteStatusID)
+    REFERENCES tblNoteStatus(NoteStatusID)
 );
 GO
 
