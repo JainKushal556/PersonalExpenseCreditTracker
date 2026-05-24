@@ -1,968 +1,1821 @@
-# =========================================
-# FINAL STORED PROCEDURE REQUIREMENTS
-# Personal Expense Credit Tracker
-# =========================================
+# Final Stored Procedure Requirements
 
-Based On:
+
+## Personal Expense Credit Tracker
+
+## Based On
+
 - Final Database Schema
 - Final SRS
 - Actual WinForms Requirements
 
-SRS Reference:
+## SRS Reference
 :contentReference[oaicite:0]{index=0}
 
-=========================================
-🔐 AUTHENTICATION & USER MANAGEMENT
-=========================================
-
-1. sp_RegisterUser
-Purpose:
-- Register new user account
-
-Parameters:
-@UserName
-@Email
-@PhoneNumber
-@Password
-
-Tables Used:
-Users
-User_Profile
-User_Contact
-User_Authentication
-
------------------------------------------
-
-2. sp_LoginUser
-Purpose:
-- Verify user login credentials
-
-Parameters:
-@Email
-@Password
-
-Tables Used:
-User_Contact
-User_Authentication
-
------------------------------------------
-
-3. sp_ChangePassword
-Purpose:
-- Change existing password
+## 🔐 AUTHENTICATION & USER MANAGEMENT
 
-Parameters:
-@UserID
-@OldPassword
-@NewPassword
 
-Tables Used:
-User_Authentication
+### 1. spRegisterUser
 
------------------------------------------
+**Purpose:**
 
-4. sp_UpdateUserProfile
-Purpose:
-- Update profile information
+- Register a new user account into the system.
 
-Parameters:
-@UserID
-@Name
-@Email
-@PhoneNumber
-@ProfilePhoto
+**Parameters:**
+- `@UserName`
+- `@Email`
+- `@PhoneNumber`
+- `@Password`
 
-Tables Used:
-User_Profile
-User_Contact
+**Expected Output:**
 
------------------------------------------
+- New user account successfully created.
 
-5. sp_GetUserDashboard
-Purpose:
-- Load dashboard data for logged user
+**When Used:**
 
-Parameters:
-@UserID
+- Register button click.
 
-Tables Used:
-Expense
-Credit
-Lent
-Borrow
-Task
+**Tables Used:**
+- `Users`
+- `User_Profile`
+- `User_Contact`
+- `User_Authentication`
 
-=========================================
-💸 EXPENSE MODULE
-=========================================
+### 2. spLoginUser
 
-6. sp_InsertExpense
-Purpose:
-- Add new expense transaction
+**Purpose:**
 
-Parameters:
-@UserID
-@CategoryID
-@SubCategoryID
-@Amount
-@Description
-@PaymentID
-@ExpenseAt
+- Verify user login credentials.
 
-Tables Used:
-Expense
+**Parameters:**
+- `@Email`
+- `@Password`
 
------------------------------------------
+**Expected Output:**
 
-7. sp_UpdateExpense
-Purpose:
-- Update expense information
+- User authentication result.
 
-Parameters:
-@ExpenseID
-@CategoryID
-@SubCategoryID
-@Amount
-@Description
-@PaymentID
+**When Used:**
 
-Tables Used:
-Expense
+- Login button click.
 
------------------------------------------
+**Tables Used:**
+- `User_Contact`
+- `User_Authentication`
 
-8. sp_DeleteExpense
-Purpose:
-- Delete expense transaction
+### 3. spChangePassword
 
-Parameters:
-@ExpenseID
+**Purpose:**
 
-Tables Used:
-Expense
+- Change existing user password.
 
------------------------------------------
+**Parameters:**
+- `@UserID`
+- `@OldPassword`
+- `@NewPassword`
 
-9. sp_GetExpenseByID
-Purpose:
-- Get single expense details
+**Expected Output:**
 
-Parameters:
-@ExpenseID
+- Password updated successfully.
 
-Tables Used:
-Expense
+**When Used:**
 
------------------------------------------
+- Change password option.
 
-10. sp_GetAllExpenses
-Purpose:
-- Get all user expenses
+**Tables Used:**
+- `User_Authentication`
 
-Parameters:
-@UserID
+### 4. spUpdateUserProfile
 
-Tables Used:
-Expense
+**Purpose:**
 
------------------------------------------
+- Update all profile information together.
 
-11. sp_FilterExpense
-Purpose:
-- Filter expense records
+**Parameters:**
+- `@UserID`
+- `@Name`
+- `@Email`
+- `@PhoneNumber`
+- `@ProfilePhoto`
 
-Parameters:
-@UserID
-@FromDate
-@ToDate
-@CategoryID
-@SubCategoryID
+**Expected Output:**
 
-Tables Used:
-Expense
+- Complete profile updated successfully.
 
------------------------------------------
+**When Used:**
 
-12. sp_SearchExpense
-Purpose:
-- Search expenses using text
+- Save profile changes button.
 
-Parameters:
-@UserID
-@SearchText
+**Tables Used:**
+- `User_Profile`
+- `User_Contact`
 
-Tables Used:
-Expense
+### 5. spUpdateUserName
 
------------------------------------------
+**Purpose:**
 
-13. sp_GetMonthlyExpenseSummary
-Purpose:
-- Monthly expense report
+- Update only user name.
 
-Parameters:
-@UserID
-@Month
-@Year
+**Parameters:**
+- `@UserID`
+- `@Name`
 
-Tables Used:
-Expense
+**Expected Output:**
 
------------------------------------------
+- User name updated successfully.
 
-14. sp_GetCategoryWiseExpenseReport
-Purpose:
-- Expense category graph report
+**When Used:**
 
-Parameters:
-@UserID
-@FromDate
-@ToDate
+- Edit name option.
 
-Tables Used:
-Expense
-Expense_Category
+**Tables Used:**
+- `User_Profile`
 
-=========================================
-💰 CREDIT MODULE
-=========================================
+### 6. spUpdateUserEmail
 
-15. sp_InsertCredit
-Purpose:
-- Add new credit transaction
+**Purpose:**
 
-Parameters:
-@UserID
-@CategoryID
-@SubCategoryID
-@Amount
-@Description
-@PaymentID
-@CreditAt
+- Update only user email address.
 
-Tables Used:
-Credit
+**Parameters:**
+- `@UserID`
+- `@Email`
 
------------------------------------------
+**Expected Output:**
 
-16. sp_UpdateCredit
-Purpose:
-- Update credit information
+- Email updated successfully.
 
-Parameters:
-@CreditID
-@CategoryID
-@SubCategoryID
-@Amount
-@Description
-@PaymentID
+**When Used:**
 
-Tables Used:
-Credit
+- Edit email option.
 
------------------------------------------
+**Tables Used:**
+- `User_Contact`
 
-17. sp_DeleteCredit
-Purpose:
-- Delete credit transaction
+### 7. spUpdateUserPhoneNumber
 
-Parameters:
-@CreditID
+**Purpose:**
 
-Tables Used:
-Credit
+- Update only user phone number.
 
------------------------------------------
+**Parameters:**
+- `@UserID`
+- `@PhoneNumber`
 
-18. sp_GetCreditByID
-Purpose:
-- Get single credit details
+**Expected Output:**
 
-Parameters:
-@CreditID
+- Phone number updated successfully.
 
-Tables Used:
-Credit
+**When Used:**
 
------------------------------------------
+- Edit phone number option.
 
-19. sp_GetAllCredits
-Purpose:
-- Get all credit records
+**Tables Used:**
+- `User_Contact`
 
-Parameters:
-@UserID
+### 8. spUpdateUserProfilePhoto
 
-Tables Used:
-Credit
+**Purpose:**
 
------------------------------------------
+- Update only profile photo.
 
-20. sp_FilterCredit
-Purpose:
-- Filter credit records
+**Parameters:**
+- `@UserID`
+- `@ProfilePhoto`
 
-Parameters:
-@UserID
-@FromDate
-@ToDate
-@CategoryID
+**Expected Output:**
 
-Tables Used:
-Credit
+- Profile photo updated successfully.
 
------------------------------------------
+**When Used:**
 
-21. sp_SearchCredit
-Purpose:
-- Search credit records
+- Change profile photo option.
 
-Parameters:
-@UserID
-@SearchText
+**Tables Used:**
+- `User_Profile`
 
-Tables Used:
-Credit
+### 9. spGetUserDashboard
 
------------------------------------------
+**Purpose:**
 
-22. sp_GetMonthlyCreditSummary
-Purpose:
-- Monthly credit report
+- Load dashboard summary data for logged user.
 
-Parameters:
-@UserID
-@Month
-@Year
+**Parameters:**
+- `@UserID`
 
-Tables Used:
-Credit
+**Expected Output:**
 
------------------------------------------
+- Total expenses
+- Total credits
+- Total lent amount
+- Total borrow amount
+- Net balance
+- Pending task summary
 
-23. sp_GetCategoryWiseCreditReport
-Purpose:
-- Credit category graph report
+**When Used:**
 
-Parameters:
-@UserID
-@FromDate
-@ToDate
+- Dashboard page load.
 
-Tables Used:
-Credit
-Credit_Category
+**Tables Used:**
+- `Expense`
+- `Credit`
+- `Lent`
+- `Borrow`
+- `Task`
 
-=========================================
-🤝 LENT MODULE
-=========================================
+### 10. spForgotPassword
 
-24. sp_InsertLent
-Purpose:
-- Add new lent transaction
+**Purpose:**
 
-Parameters:
-@UserID
-@PersonID
-@PaymentID
-@StatusID
-@Amount
-@DeadlineAt
-@Description
+- Reset user password when the user is not logged in by verifying registered email and phone number.
 
-Tables Used:
-Lent
+**Parameters:**
+- `@Email`
+- `@PhoneNumber`
+- `@NewPassword`
 
------------------------------------------
+**Expected Output:**
 
-25. sp_UpdateLent
-Purpose:
-- Update lent information
+- Password reset successfully after verification.
 
-Parameters:
-@LentID
-@Amount
-@DeadlineAt
-@Description
-@StatusID
+**When Used:**
 
-Tables Used:
-Lent
+- Forgot password option on login page.
 
------------------------------------------
+**Tables Used:**
+- `User_Contact`
+- `User_Authentication`
 
-26. sp_DeleteLent
-Purpose:
-- Delete lent transaction
+### 11. spCheckUserActiveStatus
 
-Parameters:
-@LentID
+**Purpose:**
 
-Tables Used:
-Lent
+- Check whether the user account is active or inactive during login authentication.
 
------------------------------------------
+**Parameters:**
+- `@Email`
+- `@Password`
 
-27. sp_GetAllLent
-Purpose:
-- Get all lent records
+**Expected Output:**
 
-Parameters:
-@UserID
+- Returns Active status of the user.
+- If Active = 1 → Allow login.
+- If Active = 0 → Block login.
 
-Tables Used:
-Lent
+**When Used:**
 
------------------------------------------
+- During user login verification process.
 
-28. sp_GetPendingLent
-Purpose:
-- Get pending lent payments
+**Tables Used:**
+- `tblUserAuthentication`
+- `tblUserContact`
 
-Parameters:
-@UserID
+**Logic:**
 
-Tables Used:
-Lent
+- Verify email and password.
+- Check Active column value.
+- Return authentication result with account status.
 
------------------------------------------
+## 💸 EXPENSE MODULE
 
-29. sp_GetCompletedLent
-Purpose:
-- Get completed lent records
+### 12. spInsertExpense
 
-Parameters:
-@UserID
+**Purpose:**
 
-Tables Used:
-Lent
+- Add new expense transaction.
 
------------------------------------------
+**Parameters:**
+- `@UserID`
+- `@CategoryID`
+- `@SubCategoryID`
+- `@Amount`
+- `@Description`
+- `@PaymentID`
+- `@ExpenseAt`
 
-30. sp_ReturnLent
-Purpose:
-- Mark lent as returned
-- Automatically insert transaction into Credit table
+**Expected Output:**
 
-Parameters:
-@LentID
-@Amount
-@PaymentID
+- Expense inserted successfully.
 
-Tables Used:
-Lent
-Credit
+**When Used:**
 
------------------------------------------
+- Add expense form submit button.
 
-31. sp_GetLentPersonHistory
-Purpose:
-- Show all lent history of a person
+**Tables Used:**
+- `Expense`
 
-Parameters:
-@PersonID
+### 13. spGetAllExpenses
 
-Tables Used:
-Lent
-Person
+**Purpose:**
 
-=========================================
-📥 BORROW MODULE
-=========================================
+- Get all expense records of user.
 
-32. sp_InsertBorrow
-Purpose:
-- Add new borrow transaction
+**Parameters:**
+- `@UserID`
 
-Parameters:
-@UserID
-@PersonID
-@PaymentID
-@StatusID
-@Amount
-@DeadlineAt
-@Description
+**Expected Output:**
 
-Tables Used:
-Borrow
+- Complete expense list.
 
------------------------------------------
+**When Used:**
 
-33. sp_UpdateBorrow
-Purpose:
-- Update borrow information
+- Expense page load.
 
-Parameters:
-@BorrowID
-@Amount
-@DeadlineAt
-@Description
-@StatusID
+**Tables Used:**
+- `Expense`
 
-Tables Used:
-Borrow
+### 14. spFilterExpenseByCategory
 
------------------------------------------
+**Purpose:**
 
-34. sp_DeleteBorrow
-Purpose:
-- Delete borrow transaction
+- Filter expense records using category.
 
-Parameters:
-@BorrowID
+**Parameters:**
+- `@UserID`
+- `@CategoryID`
 
-Tables Used:
-Borrow
+**Expected Output:**
 
------------------------------------------
+- Expense records of selected category.
 
-35. sp_GetAllBorrow
-Purpose:
-- Get all borrow records
+**When Used:**
 
-Parameters:
-@UserID
+- Expense category filter option.
 
-Tables Used:
-Borrow
+**Tables Used:**
+- `Expense`
+- `Expense_Category`
 
------------------------------------------
+### 15. spFilterExpenseByCategoryAndSubCategory
 
-36. sp_GetPendingBorrow
-Purpose:
-- Get pending borrow payments
+**Purpose:**
 
-Parameters:
-@UserID
+- Filter expense records using category and sub-category.
 
-Tables Used:
-Borrow
+**Parameters:**
+- `@UserID`
+- `@CategoryID`
+- `@SubCategoryID`
 
------------------------------------------
+**Expected Output:**
 
-37. sp_GetCompletedBorrow
-Purpose:
-- Get completed borrow records
+- Expense records of selected category and sub-category.
 
-Parameters:
-@UserID
+**When Used:**
 
-Tables Used:
-Borrow
+- Expense category and sub-category filter option.
 
------------------------------------------
+**Tables Used:**
+- `Expense`
+- `Expense_Category`
+- `Expense_Sub_Category`
 
-38. sp_PayBorrow
-Purpose:
-- Mark borrow as paid
-- Automatically insert transaction into Expense table
+### 16. spFilterExpenseByDateRange
 
-Parameters:
-@BorrowID
-@Amount
-@PaymentID
+**Purpose:**
 
-Tables Used:
-Borrow
-Expense
+- Filter expense records between selected dates.
 
------------------------------------------
+**Parameters:**
+- `@UserID`
+- `@FromDate`
+- `@ToDate`
 
-39. sp_GetBorrowPersonHistory
-Purpose:
-- Show all borrow history of a person
+**Expected Output:**
 
-Parameters:
-@PersonID
+- Expense records between selected dates.
 
-Tables Used:
-Borrow
-Person
+**When Used:**
 
-=========================================
-✅ TASK MODULE
-=========================================
+- Expense date filter option.
 
-40. sp_InsertTask
-Purpose:
-- Add new task
+**Tables Used:**
+- `Expense`
 
-Parameters:
-@UserID
-@PriorityID
-@StatusID
-@TaskTitle
-@Deadline
+### 17. spGetMonthlyExpenseSummary (UI)
 
-Tables Used:
-Task
+**Purpose:**
 
------------------------------------------
+- Generate monthly expense summary report.
 
-41. sp_UpdateTask
-Purpose:
-- Update task information
+**Parameters:**
+- `@UserID`
+- `@Month`
+- `@Year`
 
-Parameters:
-@TaskID
-@PriorityID
-@StatusID
-@TaskTitle
-@Deadline
+**Expected Output:**
 
-Tables Used:
-Task
+- Total monthly expenses.
 
------------------------------------------
+**When Used:**
 
-42. sp_DeleteTask
-Purpose:
-- Delete task
+- Dashboard monthly summary section.
 
-Parameters:
-@TaskID
+**Tables Used:**
+- `Expense`
 
-Tables Used:
-Task
+### 18. spGetCategoryWiseExpenseReport (UI)
 
------------------------------------------
+**Purpose:**
 
-43. sp_GetAllTasks
-Purpose:
-- Get all user tasks
+- Generate category wise expense report for graphs and charts.
 
-Parameters:
-@UserID
+**Parameters:**
+- `@UserID`
+- `@FromDate`
+- `@ToDate`
 
-Tables Used:
-Task
+**Expected Output:**
 
------------------------------------------
+- Expense totals grouped by category.
 
-44. sp_GetPendingTasks
-Purpose:
-- Get pending tasks
+**When Used:**
 
-Parameters:
-@UserID
+- Dashboard pie chart and reports.
 
-Tables Used:
-Task
+**Tables Used:**
+- `Expense`
+- `Expense_Category`
 
------------------------------------------
+### 19. spGetTodayExpense
 
-45. sp_GetCompletedTasks
-Purpose:
-- Get completed tasks
+**Purpose:**
 
-Parameters:
-@UserID
+- Get today's expense records.
 
-Tables Used:
-Task
+**Parameters:**
+- `@UserID`
 
------------------------------------------
+**Expected Output:**
 
-46. sp_GetUpcomingTasks
-Purpose:
-- Get upcoming tasks by deadline
+- Today's expense list.
 
-Parameters:
-@UserID
+**When Used:**
 
-Tables Used:
-Task
+- Dashboard daily summary section.
 
------------------------------------------
+**Tables Used:**
+- `Expense`
 
-47. sp_SearchTasks
-Purpose:
-- Search tasks
+## 💰 CREDIT MODULE
 
-Parameters:
-@UserID
-@SearchText
+### 20. spInsertCredit
 
-Tables Used:
-Task
+**Purpose:**
 
-=========================================
-📝 NOTE MODULE
-=========================================
+- Add new credit transaction.
 
-48. sp_InsertNote
-Purpose:
-- Add new note
+**Parameters:**
+- `@UserID`
+- `@CategoryID`
+- `@SubCategoryID`
+- `@Amount`
+- `@Description`
+- `@PaymentID`
+- `@CreditAt`
 
-Parameters:
-@UserID
-@StatusID
-@NoteTitle
-@Description
+**Expected Output:**
 
-Tables Used:
-Note
+- Credit inserted successfully.
 
------------------------------------------
+**When Used:**
 
-49. sp_UpdateNote
-Purpose:
-- Update note information
+- Add credit form submit button.
 
-Parameters:
-@NoteID
-@StatusID
-@NoteTitle
-@Description
+**Tables Used:**
+- `Credit`
 
-Tables Used:
-Note
+### 21. spGetAllCredits
 
------------------------------------------
+**Purpose:**
 
-50. sp_DeleteNote
-Purpose:
-- Delete note
+- Get all credit records of user.
 
-Parameters:
-@NoteID
+**Parameters:**
+- `@UserID`
 
-Tables Used:
-Note
+**Expected Output:**
 
------------------------------------------
+- Complete credit records list.
 
-51. sp_GetAllNotes
-Purpose:
-- Get all notes
+**When Used:**
 
-Parameters:
-@UserID
+- Credit page load.
 
-Tables Used:
-Note
+**Tables Used:**
+- `Credit`
 
------------------------------------------
+### 22. spFilterCreditByCategory
 
-52. sp_SearchNotes
-Purpose:
-- Search notes
+**Purpose:**
 
-Parameters:
-@UserID
-@SearchText
+- Filter credit records using category.
 
-Tables Used:
-Note
+**Parameters:**
+- `@UserID`
+- `@CategoryID`
 
-=========================================
-⚙️ CATEGORY & SETTINGS MODULE
-=========================================
+**Expected Output:**
 
-53. sp_InsertExpenseCategory
-Purpose:
-- Add expense category
+- Credit records of selected category.
 
-Parameters:
-@CategoryName
+**When Used:**
 
-Tables Used:
-Expense_Category
+- Credit category filter option.
 
------------------------------------------
+**Tables Used:**
+- `Credit`
+- `Credit_Category`
 
-54. sp_DeleteExpenseCategory
-Purpose:
-- Delete expense category
+### 23. spFilterCreditByCategoryAndSubCategory
 
-Parameters:
-@CategoryID
+**Purpose:**
 
-Tables Used:
-Expense_Category
+- Filter credit records using category and sub-category.
 
------------------------------------------
+**Parameters:**
+- `@UserID`
+- `@CategoryID`
+- `@SubCategoryID`
 
-55. sp_InsertExpenseSubCategory
-Purpose:
-- Add expense sub-category
+**Expected Output:**
 
-Parameters:
-@CategoryID
-@SubCategoryName
+- Credit records of selected category and sub-category.
 
-Tables Used:
-Expense_Sub_Category
+**When Used:**
 
------------------------------------------
+- Credit category and sub-category filter option.
 
-56. sp_DeleteExpenseSubCategory
-Purpose:
-- Delete expense sub-category
+**Tables Used:**
+- `Credit`
+- `Credit_Category`
+- `Credit_Sub_Category`
 
-Parameters:
-@SubCategoryID
+### 24. spFilterCreditByDateRange
 
-Tables Used:
-Expense_Sub_Category
+**Purpose:**
 
------------------------------------------
+- Filter credit records between selected dates.
 
-57. sp_InsertCreditCategory
-Purpose:
-- Add credit category
+**Parameters:**
+- `@UserID`
+- `@FromDate`
+- `@ToDate`
 
-Parameters:
-@CategoryName
+**Expected Output:**
 
-Tables Used:
-Credit_Category
+- Credit records between selected dates.
 
------------------------------------------
+**When Used:**
 
-58. sp_DeleteCreditCategory
-Purpose:
-- Delete credit category
+- Credit date filter option.
 
-Parameters:
-@CategoryID
+**Tables Used:**
+- `Credit`
 
-Tables Used:
-Credit_Category
+### 25. spGetMonthlyCreditSummary
 
------------------------------------------
+**Purpose:**
 
-59. sp_InsertCreditSubCategory
-Purpose:
-- Add credit sub-category
+- Generate monthly credit summary report.
 
-Parameters:
-@CategoryID
-@SubCategoryName
+**Parameters:**
+- `@UserID`
+- `@Month`
+- `@Year`
 
-Tables Used:
-Credit_Sub_Category
+**Expected Output:**
 
------------------------------------------
+- Total monthly credits.
 
-60. sp_DeleteCreditSubCategory
-Purpose:
-- Delete credit sub-category
+**When Used:**
 
-Parameters:
-@SubCategoryID
+- Dashboard monthly summary section.
 
-Tables Used:
-Credit_Sub_Category
+**Tables Used:**
+- `Credit`
 
------------------------------------------
+### 26. spGetCategoryWiseCreditReport
 
-61. sp_GetAllPaymentTypes
-Purpose:
-- Get all payment methods
+**Purpose:**
 
-Parameters:
-None
+- Generate category wise credit report for graphs and charts.
 
-Tables Used:
-Payment_Type
+**Parameters:**
+- `@UserID`
+- `@FromDate`
+- `@ToDate`
 
-=========================================
-📊 DASHBOARD & REPORTS
-=========================================
+**Expected Output:**
 
-62. sp_GetDashboardSummary
-Purpose:
-- Get dashboard overview summary
+- Credit totals grouped by category.
 
-Parameters:
-@UserID
+**When Used:**
 
-Tables Used:
-Expense
-Credit
-Lent
-Borrow
-Task
+- Dashboard pie chart and reports.
 
------------------------------------------
+**Tables Used:**
+- `Credit`
+- `Credit_Category`
 
-63. sp_GetIncomeVsExpense
-Purpose:
-- Compare income and expenses
+### 27. spGetTodayCredit
 
-Parameters:
-@UserID
-@FromDate
-@ToDate
+**Purpose:**
 
-Tables Used:
-Expense
-Credit
+- Get today's credit records.
 
------------------------------------------
+**Parameters:**
+- `@UserID`
 
-64. sp_GetFinancialSummary
-Purpose:
-- Generate complete financial report
+**Expected Output:**
 
-Parameters:
-@UserID
-@FromDate
-@ToDate
+- Today's credit list.
 
-Tables Used:
-Expense
-Credit
-Lent
-Borrow
+**When Used:**
 
-=========================================
-🔔 REMINDER & NOTIFICATION QUERIES
-=========================================
+- Dashboard daily summary section.
 
-65. sp_GetUpcomingBorrowReminders
-Purpose:
+**Tables Used:**
+- `Credit`
+
+## 🤝 LENT MODULE
+
+### 28. spInsertLent
+
+**Purpose:**
+
+- Add new lent transaction.
+
+**Parameters:**
+- `@UserID`
+- `@PersonID`
+- `@PaymentID`
+- `@StatusID`
+- `@Amount`
+- `@DeadlineAt`
+- `@Description`
+
+**Expected Output:**
+
+- New lent record inserted successfully.
+
+**When Used:**
+
+- Add lent form submit button.
+
+**Tables Used:**
+- `Lent`
+
+### 29. spGetAllLent
+
+**Purpose:**
+
+- Get all lent records of user.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Complete lent records list.
+
+**When Used:**
+
+- Lent page load.
+
+**Tables Used:**
+- `Lent`
+
+### 30. spGetPendingLent
+
+**Purpose:**
+
+- Get all pending lent transactions.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Pending lent records list.
+
+**When Used:**
+
+- Pending lent section.
+- Dashboard reminder section.
+
+**Tables Used:**
+- `Lent`
+
+### 31. spGetCompletedLent
+
+**Purpose:**
+
+- Get all completed lent transactions.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Completed lent records list.
+
+**When Used:**
+
+- Lent history section.
+
+**Tables Used:**
+- `Lent`
+
+### 32. spReturnLent
+
+**Purpose:**
+
+- Return full or partial lent amount.
+- Automatically insert returned amount into Credit table.
+- Automatically update lent remaining amount.
+- Automatically update lent status.
+
+**Parameters:**
+- `@LentID`
+- `@ReturnAmount`
+- `@PaymentID`
+
+**Expected Output:**
+
+**Scenario 1:**
+- If full amount returned:
+    - Lent status updated to Completed.
+    - Remaining amount becomes 0.
+    - Credit transaction inserted.
+
+**Scenario 2:**
+- If partial amount returned:
+    - Remaining amount updated in Lent table.
+    - Lent status remains Pending.
+    - Partial amount inserted into Credit table.
+
+**When Used:**
+
+- Return money button.
+- Receive payment option.
+
+**Tables Used:**
+- `Lent`
+- `Credit`
+
+### 33. spGetLentPersonHistory
+
+**Purpose:**
+
+- Get complete lent history of a specific person.
+
+**Parameters:**
+- `@PersonID`
+
+**Expected Output:**
+
+- All lent transactions of selected person.
+
+**When Used:**
+
+- Person details/history page.
+
+**Tables Used:**
+- `Lent`
+- `Person`
+
+### 34. spGetAllLentPersons
+
+**Purpose:**
+
+- Get all persons involved in lent transactions.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Complete lent persons list.
+
+**When Used:**
+
+- Lent person dropdown.
+- Lent person management page.
+- Person selection section.
+
+**Tables Used:**
+- `Lent`
+- `Person`
+
+## 📥 BORROW MODULE
+
+### 35. spInsertBorrow
+
+**Purpose:**
+
+- Add new borrow transaction.
+- Automatically insert borrowed amount into Credit table.
+
+**Parameters:**
+- `@UserID`
+- `@PersonID`
+- `@PaymentID`
+- `@StatusID`
+- `@Amount`
+- `@DeadlineAt`
+- `@Description`
+
+**Expected Output:**
+
+- Borrow transaction inserted successfully.
+- Credit transaction inserted successfully.
+- Remaining amount initialized.
+
+**When Used:**
+
+- Add borrow form submit button.
+
+**Tables Used:**
+- `Borrow`
+- `Credit`
+
+### 36. spGetAllBorrow
+
+**Purpose:**
+
+- Get all borrow records of user.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Complete borrow records list.
+
+**When Used:**
+
+- Borrow page load.
+
+**Tables Used:**
+- `Borrow`
+
+### 37. spGetPendingBorrow
+
+**Purpose:**
+
+- Get all pending borrow transactions.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Pending borrow records list.
+
+**When Used:**
+
+- Pending borrow section.
+- Dashboard reminder section.
+
+**Tables Used:**
+- `Borrow`
+
+### 38. spGetCompletedBorrow
+
+**Purpose:**
+
+- Get all completed borrow transactions.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Completed borrow records list.
+
+**When Used:**
+
+- Borrow history section.
+
+**Tables Used:**
+- `Borrow`
+
+### 39. spPayBorrow
+
+**Purpose:**
+
+- Pay full or partial borrow amount.
+- Automatically insert paid amount into Expense table.
+- Automatically update borrow remaining amount.
+- Automatically update borrow status.
+
+**Parameters:**
+- `@BorrowID`
+- `@PaidAmount`
+- `@PaymentID`
+
+**Expected Output:**
+
+**Scenario 1:**
+- If full amount paid:
+    - Borrow status updated to Completed.
+    - Remaining amount becomes 0.
+    - Expense transaction inserted.
+
+**Scenario 2:**
+- If partial amount paid:
+    - Remaining amount updated in Borrow table.
+    - Borrow status remains Pending.
+    - Partial amount inserted into Expense table.
+
+**When Used:**
+
+- Pay money button.
+- Borrow repayment option.
+
+**Tables Used:**
+- `Borrow`
+- `Expense`
+
+### 40. spGetBorrowPersonHistory
+
+**Purpose:**
+
+- Get complete borrow history of a specific person.
+
+**Parameters:**
+- `@PersonID`
+
+**Expected Output:**
+
+- All borrow transactions of selected person.
+
+**When Used:**
+
+- Person details/history page.
+
+**Tables Used:**
+- `Borrow`
+- `Person`
+
+### 41. spGetAllBorrowPersons
+
+**Purpose:**
+
+- Get all persons involved in borrow transactions.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Complete borrow persons list.
+
+**When Used:**
+
+- Borrow person dropdown.
+- Borrow person management page.
+- Person selection section.
+
+**Tables Used:**
+- `Borrow`
+- `Person`
+
+### 42. spGetTotalBorrowByPerson
+
+**Purpose:**
+
+- Calculate total borrow amount of a specific person.
+
+**Parameters:**
+- `@PersonID`
+
+**Expected Output:**
+
+- Total borrow amount of selected person.
+- Total paid amount.
+- Remaining pending amount.
+
+**When Used:**
+
+- Person financial summary section.
+
+**Tables Used:**
+- `Borrow`
+- `Person`
+
+## ✅ TASK MODULE
+
+### 43. spInsertTask
+
+**Purpose:**
+
+- Add new task.
+
+**Parameters:**
+- `@UserID`
+- `@PriorityID`
+- `@TaskStatusID`
+- `@TaskTitle`
+- `@Deadline`
+- `@CreatedAt`
+
+**Expected Output:**
+
+- New task inserted successfully.
+
+**When Used:**
+
+- Add task form submit button.
+
+**Tables Used:**
+- `Task`
+
+### 44. spUpdateTask
+
+**Purpose:**
+
+- Update task information.
+
+**Parameters:**
+- `@TaskID`
+- `@PriorityID`
+- `@TaskStatusID`
+- `@TaskTitle`
+- `@Deadline`
+
+**Expected Output:**
+
+- Task updated successfully.
+
+**When Used:**
+
+- Edit task option.
+
+**Tables Used:**
+- `Task`
+
+### 45. spUpdateTaskStatus
+
+**Purpose:**
+
+- Update only task status.
+
+**Parameters:**
+- `@TaskID`
+- `@TaskStatusID`
+
+**Expected Output:**
+
+- Task status updated successfully.
+
+**When Used:**
+
+- Mark as completed button.
+- Change task status option.
+
+**Tables Used:**
+- `Task`
+
+### 46. spDeleteTask
+
+**Purpose:**
+
+- Delete task.
+
+**Parameters:**
+- `@TaskID`
+
+**Expected Output:**
+
+- Task deleted successfully.
+
+**When Used:**
+
+- Delete task button.
+
+**Tables Used:**
+- `Task`
+
+### 47. spGetAllTasks
+
+**Purpose:**
+
+- Get all user tasks.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Complete task list.
+
+**When Used:**
+
+- Task page load.
+
+**Business Logic Note:**
+
+- Total task count will be calculated in Business Logic Layer.
+
+**Tables Used:**
+- `Task`
+
+### 48. spGetPendingTasks
+
+**Purpose:**
+
+- Get pending tasks.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Pending task records.
+
+**When Used:**
+
+- Pending task section.
+- Dashboard summary.
+
+**Tables Used:**
+- `Task`
+
+### 49. spGetCompletedTasks
+
+**Purpose:**
+
+- Get completed tasks.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Completed task records.
+
+**When Used:**
+
+- Completed task section.
+
+**Tables Used:**
+- `Task`
+
+### 50. spGetTasksByDate
+
+**Purpose:**
+
+- Get tasks of a specific date.
+
+**Parameters:**
+- `@UserID`
+- `@TaskDate`
+
+**Expected Output:**
+
+- Tasks of selected date.
+
+**When Used:**
+
+- Calendar/date wise task section.
+
+**Tables Used:**
+- `Task`
+
+### 51. spGetTasksBetweenDates
+
+**Purpose:**
+
+- Get tasks between selected date range.
+
+**Parameters:**
+- `@UserID`
+- `@FromDate`
+- `@ToDate`
+
+**Expected Output:**
+
+- Tasks between selected dates.
+
+**When Used:**
+
+- Task date filter option.
+- Task report section.
+
+**Tables Used:**
+- `Task`
+
+### 52. spFilterTasksByStatus
+
+**Purpose:**
+
+- Filter tasks based on task status.
+
+**Parameters:**
+- `@UserID`
+- `@TaskStatusID`
+
+**Expected Output:**
+
+- Tasks of selected status.
+
+**Example:**
+- Pending tasks
+- Completed tasks
+- In Progress tasks
+
+**When Used:**
+
+- Task status filter dropdown.
+- Completed task section.
+- Pending task section.
+
+**Tables Used:**
+- `Task`
+- `Task_Status`
+
+## 📝 NOTE MODULE
+
+### 53. spInsertNote
+
+**Purpose:**
+
+- Add new note.
+
+**Parameters:**
+- `@UserID`
+- `@PriorityID`
+- `@NoteTitle`
+- `@Description`
+- `@CreatedAt`
+
+**Expected Output:**
+
+- New note inserted successfully.
+
+**When Used:**
+
+- Add note form submit button.
+
+**Tables Used:**
+- `Note`
+
+### 54. spUpdateNote
+
+**Purpose:**
+
+- Update note information.
+
+**Parameters:**
+- `@NoteID`
+- `@PriorityID`
+- `@NoteTitle`
+- `@Description`
+
+**Expected Output:**
+
+- Note updated successfully.
+
+**When Used:**
+
+- Edit note option.
+
+**Tables Used:**
+- `Note`
+
+### 55. spUpdateNotePriority
+
+**Purpose:**
+
+- Update only note priority.
+
+**Parameters:**
+- `@NoteID`
+- `@PriorityID`
+
+**Expected Output:**
+
+- Note priority updated successfully.
+
+**When Used:**
+
+- Change note priority option.
+
+**Tables Used:**
+- `Note`
+
+### 56. spDeleteNote
+
+**Purpose:**
+
+- Delete note.
+
+**Parameters:**
+- `@NoteID`
+
+**Expected Output:**
+
+- Note deleted successfully.
+
+**When Used:**
+
+- Delete note option.
+
+**Tables Used:**
+- `Note`
+
+### 57. spGetAllNotes
+
+**Purpose:**
+
+- Get all notes of user.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Complete notes list.
+
+**When Used:**
+
+- Notes page load.
+
+**Tables Used:**
+- `Note`
+
+### 58. spFilterNotesByPriority
+
+**Purpose:**
+
+- Filter notes based on priority.
+
+**Parameters:**
+- `@UserID`
+- `@PriorityID`
+
+**Expected Output:**
+
+- Notes of selected priority.
+
+**Example:**
+- High priority notes
+- Medium priority notes
+- Low priority notes
+
+**When Used:**
+
+- Note priority filter dropdown.
+
+**Tables Used:**
+- `Note`
+- `Note_Priority`
+
+### 59. spGetNotesByDate
+
+**Purpose:**
+
+- Get notes of a specific date.
+
+**Parameters:**
+- `@UserID`
+- `@NoteDate`
+
+**Expected Output:**
+
+- Notes of selected date.
+
+**When Used:**
+
+- Calendar/date wise note section.
+
+**Tables Used:**
+- `Note`
+
+### 60. spGetNotesBetweenDates
+
+**Purpose:**
+
+- Get notes between selected dates.
+
+**Parameters:**
+- `@UserID`
+- `@FromDate`
+- `@ToDate`
+
+**Expected Output:**
+
+- Notes between selected dates.
+
+**When Used:**
+
+- Notes date filter option.
+- Notes report section.
+
+**Tables Used:**
+- `Note`
+
+## ⚙️ CATEGORY & SETTINGS MODULE (WE WILL Re-Search Later)
+
+### 61. spInsertExpenseCategory
+
+**Purpose:**
+
+- Add new expense category.
+
+**Parameters:**
+- `@CategoryName`
+
+**Expected Output:**
+
+- Expense category inserted successfully.
+
+**When Used:**
+
+- Add expense category option.
+
+**Tables Used:**
+- `Expense_Category`
+
+### 62. spUpdateExpenseCategory
+
+**Purpose:**
+
+- Update expense category name.
+
+**Parameters:**
+- `@CategoryID`
+- `@CategoryName`
+
+**Expected Output:**
+
+- Expense category updated successfully.
+
+**When Used:**
+
+- Edit expense category option.
+
+**Tables Used:**
+- `Expense_Category`
+
+### 63. spDeleteExpenseCategory
+
+**Purpose:**
+
+- Delete expense category.
+
+**Parameters:**
+- `@CategoryID`
+
+**Expected Output:**
+
+- Expense category deleted successfully.
+
+**When Used:**
+
+- Delete expense category option.
+
+**Tables Used:**
+- `Expense_Category`
+
+### 64. spInsertExpenseSubCategory
+
+**Purpose:**
+
+- Add new expense sub-category.
+
+**Parameters:**
+- `@CategoryID`
+- `@SubCategoryName`
+
+**Expected Output:**
+
+- Expense sub-category inserted successfully.
+
+**When Used:**
+
+- Add expense sub-category option.
+
+**Tables Used:**
+- `Expense_Sub_Category`
+
+### 65. spUpdateExpenseSubCategory
+
+**Purpose:**
+
+- Update expense sub-category name.
+
+**Parameters:**
+- `@SubCategoryID`
+- `@SubCategoryName`
+
+**Expected Output:**
+
+- Expense sub-category updated successfully.
+
+**When Used:**
+
+- Edit expense sub-category option.
+
+**Tables Used:**
+- `Expense_Sub_Category`
+
+### 66. spDeleteExpenseSubCategory
+
+**Purpose:**
+
+- Delete expense sub-category.
+
+**Parameters:**
+- `@SubCategoryID`
+
+**Expected Output:**
+
+- Expense sub-category deleted successfully.
+
+**When Used:**
+
+- Delete expense sub-category option.
+
+**Tables Used:**
+- `Expense_Sub_Category`
+
+### 67. spInsertCreditCategory
+
+**Purpose:**
+
+- Add new credit category.
+
+**Parameters:**
+- `@CategoryName`
+
+**Expected Output:**
+
+- Credit category inserted successfully.
+
+**When Used:**
+
+- Add credit category option.
+
+**Tables Used:**
+- `Credit_Category`
+
+### 68. spUpdateCreditCategory
+
+**Purpose:**
+
+- Update credit category name.
+
+**Parameters:**
+- `@CategoryID`
+- `@CategoryName`
+
+**Expected Output:**
+
+- Credit category updated successfully.
+
+**When Used:**
+
+- Edit credit category option.
+
+**Tables Used:**
+- `Credit_Category`
+
+### 69. spDeleteCreditCategory
+
+**Purpose:**
+
+- Delete credit category.
+
+**Parameters:**
+- `@CategoryID`
+
+**Expected Output:**
+
+- Credit category deleted successfully.
+
+**When Used:**
+
+- Delete credit category option.
+
+**Tables Used:**
+- `Credit_Category`
+
+### 70. spInsertCreditSubCategory
+
+**Purpose:**
+
+- Add new credit sub-category.
+
+**Parameters:**
+- `@CategoryID`
+- `@SubCategoryName`
+
+**Expected Output:**
+
+- Credit sub-category inserted successfully.
+
+**When Used:**
+
+- Add credit sub-category option.
+
+**Tables Used:**
+- `Credit_Sub_Category`
+
+### 71. spUpdateCreditSubCategory
+
+**Purpose:**
+
+- Update credit sub-category name.
+
+**Parameters:**
+- `@SubCategoryID`
+- `@SubCategoryName`
+
+**Expected Output:**
+
+- Credit sub-category updated successfully.
+
+**When Used:**
+
+- Edit credit sub-category option.
+
+**Tables Used:**
+- `Credit_Sub_Category`
+
+### 72. spDeleteCreditSubCategory
+
+**Purpose:**
+
+- Delete credit sub-category.
+
+**Parameters:**
+- `@SubCategoryID`
+
+**Expected Output:**
+
+- Credit sub-category deleted successfully.
+
+**When Used:**
+
+- Delete credit sub-category option.
+
+**Tables Used:**
+- `Credit_Sub_Category`
+
+### 73. spGetAllPaymentTypes
+
+**Purpose:**
+
+- Get all payment methods.
+
+**Parameters:**
+- None
+
+**Expected Output:**
+
+- Complete payment methods list.
+
+**When Used:**
+
+- Expense, Credit, Lent and Borrow forms.
+
+**Tables Used:**
+- `Payment_Type`
+
+### 74. spInsertPerson
+
+**Purpose:**
+
+- Add new person for lent and borrow transactions.
+
+**Parameters:**
+- `@PersonName`
+- `@PhoneNumber`
+- `@Address`
+
+**Expected Output:**
+
+- Person inserted successfully.
+
+**When Used:**
+
+- Add person option in settings.
+
+**Tables Used:**
+- `Person`
+
+### 75. spUpdatePerson
+
+**Purpose:**
+
+- Update person details.
+
+**Parameters:**
+- `@PersonID`
+- `@PersonName`
+- `@PhoneNumber`
+- `@Address`
+
+**Expected Output:**
+
+- Person details updated successfully.
+
+**When Used:**
+
+- Edit person option in settings.
+
+**Tables Used:**
+- `Person`
+
+### 76. spDeletePerson
+
+**Purpose:**
+
+- Delete person details.
+
+**Parameters:**
+- `@PersonID`
+
+**Expected Output:**
+
+- Person deleted successfully.
+
+**When Used:**
+
+- Delete person option in settings.
+
+**Tables Used:**
+- `Person`
+
+### 77. spGetAllPersons
+
+**Purpose:**
+
+- Get all saved persons with phone numbers and address details.
+
+**Parameters:**
+- `@UserID`
+
+**Expected Output:**
+
+- Complete persons list.
+
+**When Used:**
+
+- Lent/Borrow person management section.
+- Person dropdown selection.
+
+**Tables Used:**
+- `Person`
+
+## 🔔 REMINDER & NOTIFICATION QUERIES (WE WILL Re-Search Later)
+
+### 78. spGetUpcomingBorrowReminders
+
+**Purpose:**
+
 - Get borrow deadline reminders
 
-Parameters:
-@UserID
+**Parameters:**
+- `@UserID`
 
-Tables Used:
-Borrow
+**Tables Used:**
+- `Borrow`
 
------------------------------------------
+### 79. spGetUpcomingLentReminders
 
-66. sp_GetUpcomingLentReminders
-Purpose:
+**Purpose:**
+
 - Get lent deadline reminders
 
-Parameters:
-@UserID
+**Parameters:**
+- `@UserID`
 
-Tables Used:
-Lent
+**Tables Used:**
+- `Lent`
 
------------------------------------------
+### 80. spGetUpcomingTaskReminders
 
-67. sp_GetUpcomingTaskReminders
-Purpose:
+**Purpose:**
+
 - Get task deadline reminders
 
-Parameters:
-@UserID
+**Parameters:**
+- `@UserID`
 
-Tables Used:
-Task
+**Tables Used:**
+- `Task`
 
-=========================================
-📌 FINAL TOTAL PROCEDURES
-=========================================
+## 📌 FINAL TOTAL PROCEDURES
 
-Total Procedures:
-67
+**Total Procedures:**
+- 80
 
-Project Scope:
+**Project Scope:**
+
 - Fully Covers SRS
 - Fully Covers All Tables
 - Covers CRUD
