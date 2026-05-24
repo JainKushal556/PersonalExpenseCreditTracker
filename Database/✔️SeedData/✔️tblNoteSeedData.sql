@@ -1,4 +1,4 @@
-INSERT INTO tblNote (UserID, NoteStatusID, NoteTitle, Description)
+INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description)
 VALUES
 (1, 1, 'Project Meeting Notes', 'Discussed project requirements and deadlines.'),
 (2, 2, 'Shopping List', 'Buy groceries, vegetables, and snacks for the week.'),
@@ -11,3 +11,6 @@ VALUES
 (9, 1, 'Daily Goals', 'Finish coding assignment and practice SQL queries.'),
 (10, 2, 'Movie Watchlist', 'Add new action and sci-fi movies to watch later.');
 
+
+
+select *from tblNote 
