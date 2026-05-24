@@ -51,10 +51,9 @@ CREATE TABLE tblTaskStatus (
 );
 GO
 
-CREATE TABLE tblNoteStatus
-(
-NoteStatusID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-StatusName VARCHAR(50) UNIQUE NOT NULL
+CREATE TABLE tblNotePriorities (
+    NotePriorityID INT PRIMARY KEY IDENTITY(1,1),
+    NotePriorityName VARCHAR(50) NOT NULL UNIQUE
 );
 GO
 
@@ -177,6 +176,8 @@ CREATE TABLE tblLent(
 	PaymentID INT NOT NULL,
 	StatusID INT NOT NULL,
 	Amount DECIMAL(10,2) NOT NULL,
+	ReturnedAmount DECIMAL(10,2),
+	RemainingAmount DECIMAL(10,2),
 	LentAt DATETIME NOT NULL DEFAULT GETDATE(),
 	DeadlineAt DATETIME,
 	Description VARCHAR(MAX) NOT NULL,
@@ -195,6 +196,8 @@ CREATE TABLE tblBorrow (
     PaymentID INT NOT NULL,
     StatusID INT NOT NULL,
     Amount DECIMAL(10,2) NOT NULL,
+    PaidAmount DECIMAL(10,2),
+    RemainingAmount DECIMAL(10,2),
     BorrowAt DATETIME NOT NULL DEFAULT GETDATE(),
     DeadlineAt DATETIME,
     Description VARCHAR(MAX) NOT NULL,
@@ -213,6 +216,7 @@ CREATE TABLE tblTask (
     TaskStatusID INT NOT NULL,
     TaskTitle VARCHAR(150) NOT NULL,
     Deadline DATE NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 
     FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
     FOREIGN KEY (PriorityID) REFERENCES tblTaskPriorities(PriorityID),
@@ -225,7 +229,7 @@ CREATE TABLE tblNote
     NoteID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 
     UserID INT NOT NULL,
-    NoteStatusID INT NOT NULL,
+    NotePriorityID INT NOT NULL,
 
     NoteTitle VARCHAR(MAX) NOT NULL,
     Description VARCHAR(MAX) NOT NULL,
@@ -235,8 +239,8 @@ CREATE TABLE tblNote
     FOREIGN KEY (UserID)
     REFERENCES tblUsers(UserID),
 
-    FOREIGN KEY (NoteStatusID)
-    REFERENCES tblNoteStatus(NoteStatusID)
+    FOREIGN KEY (NotePriorityID)
+    REFERENCES tblNotePriorities(NotePriorityID)
 );
 GO
 

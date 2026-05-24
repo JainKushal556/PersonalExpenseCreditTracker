@@ -5,6 +5,8 @@ CREATE TABLE tblLent(
 	PaymentID INT NOT NULL,
 	StatusID INT NOT NULL,
 	Amount DECIMAL(10,2) NOT NULL,
+	ReturnedAmount DECIMAL(10,2),
+	RemainingAmount DECIMAL(10,2),
 	LentAt DATETIME NOT NULL DEFAULT GETDATE(),
 	DeadlineAt DATETIME,
 	Description VARCHAR(MAX) NOT NULL,

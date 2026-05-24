@@ -89,10 +89,10 @@ VALUES
 ('Complete');
 GO
 
-INSERT INTO tblNoteStatus (StatusName)
+INSERT INTO tblNotePriorities (NotePriorityName)
 VALUES
-('Pending'),
-('Complete');
+('Normal'),
+('Important');
 GO
 
 INSERT INTO tblBorrowPersons (PersonName, PhoneNumber, Address)
@@ -208,50 +208,50 @@ VALUES
 GO
 
 INSERT INTO tblLent
-(UserID, PersonID, PaymentID, StatusID, Amount, DeadlineAt, Description)
+(UserID, PersonID, PaymentID, StatusID, Amount, ReturnedAmount, RemainingAmount, DeadlineAt, Description)
 VALUES
-(1, 1, 1, 1, 5000.00, '2026-06-12', 'Lent money for hospital expense'),
-(2, 2, 2, 1, 3000.00, '2026-06-20', 'Short-term personal loan'),
-(3, 3, 1, 1, 12000.00, '2026-07-01', 'Business support'),
-(4, 4, 9, 2, 2500.00, '2026-06-18', 'Emergency financial help'),
-(5, 5, 2, 2, 7000.00, '2026-07-05', 'Education fees'),
-(6, 6, 1, 1, 4500.00, '2026-06-25', 'House maintenance'),
-(7, 7, 8, 1, 6000.00, '2026-06-30', 'Travel assistance'),
-(8, 8, 2, 2, 8500.00, '2026-07-10', 'Family requirement'),
-(9, 9, 1, 1, 4000.00, '2026-06-28', 'Festival expenses'),
-(10, 10, 10, 1, 9500.00, '2026-07-15', 'Laptop purchase support');
+(1, 1, 1, 1, 5000.00, 0.00, 5000.00, '2026-06-12', 'Lent money for hospital expense'),
+(2, 2, 2, 1, 3000.00, 0.00, 3000.00, '2026-06-20', 'Short-term personal loan'),
+(3, 3, 1, 1, 12000.00, 0.00, 12000.00, '2026-07-01', 'Business support'),
+(4, 4, 9, 2, 2500.00, 2500.00, 0.00, '2026-06-18', 'Emergency financial help'),
+(5, 5, 2, 2, 7000.00, 7000.00, 0.00, '2026-07-05', 'Education fees'),
+(6, 6, 1, 1, 4500.00, 0.00, 4500.00, '2026-06-25', 'House maintenance'),
+(7, 7, 8, 1, 6000.00, 0.00, 6000.00, '2026-06-30', 'Travel assistance'),
+(8, 8, 2, 2, 8500.00, 8500.00, 0.00, '2026-07-10', 'Family requirement'),
+(9, 9, 1, 1, 4000.00, 0.00, 4000.00, '2026-06-28', 'Festival expenses'),
+(10, 10, 10, 1, 9500.00, 0.00, 9500.00, '2026-07-15', 'Laptop purchase support');
 GO
 
 INSERT INTO tblBorrow
-(UserID, PersonID, PaymentID, StatusID, Amount, DeadlineAt, Description)
+(UserID, PersonID, PaymentID, StatusID, Amount, PaidAmount, RemainingAmount, DeadlineAt, Description)
 VALUES
-(1, 1, 1, 1, 5000.00, '2026-06-10', 'Borrowed for medical expense'),
-(2, 2, 2, 1, 2500.00, '2026-06-15', 'Personal loan'),
-(3, 3, 1, 1, 10000.00, '2026-07-01', 'Business investment'),
-(4, 4, 7, 1, 1500.00, '2026-06-20', 'Emergency cash'),
-(5, 5, 2, 1, 7000.00, '2026-07-05', 'Education purpose'),
-(6, 6, 8, 1, 3200.00, '2026-06-18', 'House rent'),
-(7, 7, 9, 2, 4500.00, '2026-06-25', 'Travel expense'),
-(8, 8, 2, 1, 8000.00, '2026-07-10', 'Family support'),
-(9, 9, 1, 1, 6000.00, '2026-06-30', 'Festival shopping'),
-(10,10,10, 2, 9000.00, '2026-07-15', 'Laptop purchase');
+(1, 1, 1, 1, 5000.00, 0.00, 5000.00, '2026-06-10', 'Borrowed for medical expense'),
+(2, 2, 2, 1, 2500.00, 0.00, 2500.00, '2026-06-15', 'Personal loan'),
+(3, 3, 1, 1, 10000.00, 0.00, 10000.00, '2026-07-01', 'Business investment'),
+(4, 4, 7, 1, 1500.00, 0.00, 1500.00, '2026-06-20', 'Emergency cash'),
+(5, 5, 2, 1, 7000.00, 0.00, 7000.00, '2026-07-05', 'Education purpose'),
+(6, 6, 8, 1, 3200.00, 0.00, 3200.00, '2026-06-18', 'House rent'),
+(7, 7, 9, 2, 4500.00, 4500.00, 0.00, '2026-06-25', 'Travel expense'),
+(8, 8, 2, 1, 8000.00, 0.00, 8000.00, '2026-07-10', 'Family support'),
+(9, 9, 1, 1, 6000.00, 0.00, 6000.00, '2026-06-30', 'Festival shopping'),
+(10,10,10, 2, 9000.00, 9000.00, 0.00, '2026-07-15', 'Laptop purchase');
 GO
 
-INSERT INTO tblTask (UserID, PriorityID, TaskStatusID, TaskTitle, Deadline)
+INSERT INTO tblTask (UserID, PriorityID, TaskStatusID, TaskTitle, Deadline, CreatedAt)
 VALUES
-(1, 1, 1, 'Database table create', '2026-06-01'),
-(2, 2, 1, 'Pay Electricity Bill', '2026-06-03'),
-(3, 3, 2, 'Buy Grocery Items', '2026-06-05'),
-(4, 1, 1, 'Design ER Diagram', '2026-06-06'),
-(5, 2, 2, 'Update GitHub Repository', '2026-06-07'),
-(6, 3, 1, 'Practice Js Programs', '2026-06-08'),
-(7, 1, 2, 'Complete Compiler note', '2026-06-10'),
-(8, 2, 1, 'Write Documentation', '2026-06-12'),
-(9, 3, 2, 'Clean Study Room', '2026-06-14'),
-(10, 1, 1, 'Prepare Exam Notes', '2026-06-15');
+(1, 1, 1, 'Database table create', '2026-06-01', '2026-05-20 09:00:00'),
+(2, 2, 1, 'Pay Electricity Bill', '2026-06-03', '2026-05-20 10:00:00'),
+(3, 3, 2, 'Buy Grocery Items', '2026-06-05', '2026-05-21 09:30:00'),
+(4, 1, 1, 'Design ER Diagram', '2026-06-06', '2026-05-21 11:00:00'),
+(5, 2, 2, 'Update GitHub Repository', '2026-06-07', '2026-05-22 09:15:00'),
+(6, 3, 1, 'Practice Js Programs', '2026-06-08', '2026-05-22 12:00:00'),
+(7, 1, 2, 'Complete Compiler note', '2026-06-10', '2026-05-23 08:45:00'),
+(8, 2, 1, 'Write Documentation', '2026-06-12', '2026-05-23 14:20:00'),
+(9, 3, 2, 'Clean Study Room', '2026-06-14', '2026-05-24 10:10:00'),
+(10, 1, 1, 'Prepare Exam Notes', '2026-06-15', '2026-05-24 16:30:00');
 GO
 
-INSERT INTO tblNote (UserID, NoteStatusID, NoteTitle, Description)
+INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description)
 VALUES
 (1, 1, 'Project Meeting Notes', 'Discussed project requirements and deadlines.'),
 (2, 2, 'Shopping List', 'Buy groceries, vegetables, and snacks for the week.'),
