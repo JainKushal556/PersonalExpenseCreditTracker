@@ -13,4 +13,3 @@ VALUES
 
 
 
-select *from tblNote 
