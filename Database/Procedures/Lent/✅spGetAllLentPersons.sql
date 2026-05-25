@@ -4,6 +4,6 @@ AS
 BEGIN
 	SELECT Prsn.PersonName AS LentPersonName
 	FROM tblLent L
-	INNER JOIN tblLentPersons Prsn ON L.PersonID = Prsn.PersonID
+	JOIN tblLentPersons Prsn ON L.PersonID = Prsn.PersonID
 	WHERE UserID = @UserID;
 END
