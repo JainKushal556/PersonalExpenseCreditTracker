@@ -1,5 +1,5 @@
 CREATE PROC spGetLentPersonHistory
-@PersonID INT
+@PersonID INT, @UserID INT
 AS
 BEGIN
 	SELECT Prsn.PersonName, L.Amount, Pay.PaymentName, S.StatusName, L.LentAt, L.DeadlineAt, L.Description
@@ -7,5 +7,6 @@ BEGIN
 	JOIN tblLentPersons Prsn ON L.PersonID = Prsn.PersonID
 	JOIN tblPaymentType Pay ON L.PaymentID = Pay.PaymentID
 	JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
-	WHERE Prsn.PersonID = @PersonID;
+	JOIN tblUsers U ON L.UserID = U.UserID
+	WHERE Prsn.PersonID = @PersonID AND U.UserID = @UserID;
 END
