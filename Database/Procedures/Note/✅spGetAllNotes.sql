@@ -1,0 +1,6 @@
+CREATE PROCEDURE spGetAllNotes
+
+AS
+BEGIN
+SELECT * FROM tblNote
+END

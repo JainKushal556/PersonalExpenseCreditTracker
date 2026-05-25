@@ -1,0 +1,8 @@
+CREATE PROCEDURE  spDeleteNote
+@NoteID INT
+
+AS 
+BEGIN 
+DELETE FROM tblNote
+WHERE NoteID=@NoteID
+END
