@@ -198,6 +198,8 @@ Stores money lent records.
 | PaymentID   | INT           | No           | FOREIGN KEY                | Stores the reference ID of the payment method used in the lent transaction                         |
 | StatusID    | INT           | No           | FOREIGN KEY                | Stores the current status of the lent transaction                                                  |
 | Amount      | DECIMAL(10,2) | No           | —                          | Stores the total amount involved in the lent transaction                                           |
+| ReturnedAmount | DECIMAL(10,2) | Yes          | -                          | Stores the amount returned by the borrower for this lent transaction                               |
+| RemainingAmount | DECIMAL(10,2) | Yes          | -                          | Stores the remaining amount still pending for this lent transaction                                |
 | LentAt      | DATETIME      | No           | —                          | Stores the exact date and time when the money or item was lent                                     |
 | DeadlineAt  | DATETIME      | Yes          | —                          | Stores the expected deadline date and time for returning the lent amount or item                   |
 | Description | VARCHAR(MAX)  | No           | —                          | Stores additional details or notes related to the lent transaction                                 |
@@ -246,6 +248,8 @@ Stores money borrowing records.
 | PaymentID   | INT           | No           | FOREIGN KEY                | Stores the reference ID of the payment method from the Payment_Type table used in this borrow transaction |
 | StatusID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the current status from the Lent_Borrow_Status table                           |
 | Amount      | DECIMAL(10,2) | No           | —                          | Stores the total amount involved in the borrow transaction                                                |
+| PaidAmount  | DECIMAL(10,2) | Yes          | -                          | Stores the amount already paid back for this borrow transaction                                           |
+| RemainingAmount | DECIMAL(10,2) | Yes          | -                          | Stores the remaining amount still pending for this borrow transaction                                     |
 | BorrowAt    | DATETIME      | No           | —                          | Stores the exact date and time when the money or item was borrowed                                        |
 | DeadlineAt  | DATETIME      | Yes          | —                          | Stores the expected deadline date and time for returning the borrowed amount or item                      |
 | Description | VARCHAR(MAX)  | No           | —                          | Stores additional details or notes related to the borrow transaction                                      |
@@ -285,6 +289,7 @@ Stores user task information.
 | TaskStatusID | INT          | No           | FOREIGN KEY                | Stores the reference ID of the task status from the Task Status table         |
 | TaskTitle    | VARCHAR(150) | No           | —                          | Stores the title or short name of the task created by the user                |
 | Deadline     | DATE         | No           | —                          | Stores the final deadline date for completing the assigned task               |
+| CreatedAt    | DATETIME     | No           | -                          | Stores the exact date and time when the task was created                      |
 
 ---
 
@@ -328,23 +333,23 @@ Stores user notes information.
 | ------------ | ------------ | ------------ | -------------------------- | ----------------------------------------------------------------------------- |
 | NoteID       | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each note record                |
 | UserID       | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user from the Users table who created the note |
-| NoteStatusID | INT          | No           | FOREIGN KEY                | Stores the reference ID of the note status from the Note_Status table         |
+| NotePriorityID | INT          | No           | FOREIGN KEY                | Stores the reference ID of the note priority from the Note Priorities table   |
 | NoteTitle    | VARCHAR(150) | No           | —                          | Stores the title or short heading of the note                                 |
 | Description  | VARCHAR(MAX) | No           | —                          | Stores the detailed content or information written inside the note            |
 | CreatedAt    | DATETIME     | No           | —                          | Stores the exact date and time when the note was created                      |
 
 ---
 
-## 🟡 TABLE: tblNoteStatus
+## TABLE: tblNotePriorities
 
 ### Purpose
 
-Stores note priority or status information.
+Stores note priority information.
 
 | Column Name  | Data Type   | Null Allowed | Constraints                | Description                                                                 |
 | ------------ | ----------- | ------------ | -------------------------- | --------------------------------------------------------------------------- |
-| NoteStatusID | INT         | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each note status record       |
-| StatusName   | VARCHAR(50) | No           | UNIQUE                     | Stores the unique status name used to represent the current state of a note |
+| NotePriorityID | INT         | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each note priority record      |
+| NotePriorityName | VARCHAR(50) | No           | UNIQUE                     | Stores the unique priority name used to classify a note                      |
 
 ---
 

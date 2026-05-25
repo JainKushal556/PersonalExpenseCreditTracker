@@ -5,6 +5,7 @@ CREATE TABLE tblTask (
     TaskStatusID INT NOT NULL,
     TaskTitle VARCHAR(150) NOT NULL,
     Deadline DATE NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 
     FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
     FOREIGN KEY (PriorityID) REFERENCES tblTaskPriorities(PriorityID),
