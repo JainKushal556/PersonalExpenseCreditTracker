@@ -1,0 +1,6 @@
+CREATE PROC spGetAllLent
+	@UserID INT
+AS
+BEGIN
+	SELECT * FROM tblLent WHERE UserID = @UserID;
+END
