@@ -1,5 +1,4 @@
---Register a new user account into the system.
-Create PROCEDURE spRegisterUser  
+CREATE PROCEDURE spRegisterUser  
   
     @UserName VARCHAR(MAX),  
     @Email VARCHAR(100),  
@@ -9,30 +8,66 @@ Create PROCEDURE spRegisterUser
 AS  
 BEGIN  
       
-  
     DECLARE @UserID INT;  
-  
 
-    INSERT INTO tblUsers (UserName)  
-    VALUES (@UserName);  
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+
+      
+        IF EXISTS (
+            SELECT 1
+            FROM tblUserContact
+            WHERE Email = @Email
+        )
+        BEGIN
+            PRINT 'Email Already Exists';
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
+      
+        IF EXISTS (
+            SELECT 1
+            FROM tblUserContact
+            WHERE PhoneNumber = @PhoneNumber
+        )
+        BEGIN
+            PRINT 'Phone Number Already Exists';
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
+       
+        INSERT INTO tblUsers (UserName)  
+        VALUES (@UserName);  
   
+        SET @UserID = SCOPE_IDENTITY();  
   
-    SET @UserID = SCOPE_IDENTITY();  
+        INSERT INTO tblUserProfile (UserID, Name)  
+        VALUES (@UserID, @UserName);  
   
-   
-    INSERT INTO tblUserProfile (UserID, Name)  
-    VALUES (@UserID, @UserName);  
+     
+        INSERT INTO tblUserContact (UserID, Email, PhoneNumber)  
+        VALUES (@UserID, @Email, @PhoneNumber);  
   
+       
+        INSERT INTO tblUserAuthentication (UserID, Password, Active)  
+        VALUES (@UserID, @Password, 0);  
   
-    INSERT INTO tblUserContact (UserID, Email, PhoneNumber)  
-    VALUES (@UserID, @Email, @PhoneNumber);  
-  
-  
-    INSERT INTO tblUserAuthentication (UserID, Password, Active)  
-    VALUES (@UserID, @Password, 1);  
-  
-    PRINT 'User Inserted Successfully';  
+        COMMIT TRANSACTION;
+
+        PRINT 'User Inserted Successfully';
+
+    END TRY
+
+    BEGIN CATCH
+
+        ROLLBACK TRANSACTION;
+
+        PRINT 'Error Occurred';
+
+    END CATCH
+
 END;
-
-
 
