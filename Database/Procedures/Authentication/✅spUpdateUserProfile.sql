@@ -61,6 +61,7 @@ IF EXISTS
     SELECT 1
     FROM tblUsers
     WHERE UserName = @Name
+	AND UserID = @UserID
 )
 BEGIN
     SELECT 'User Name Already Exists' AS Message;
@@ -130,3 +131,5 @@ END
     END CATCH
 
 END;
+
+
