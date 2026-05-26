@@ -15,9 +15,8 @@ BEGIN
     )  
     BEGIN  
   
-        PRINT 'User Is Active';  
-  
         SELECT   
+            'User Is Active' AS Message,
             U.UserID,  
             U.UserName,  
             P.Name,  
@@ -41,7 +40,7 @@ BEGIN
   
     ELSE  
     BEGIN  
-        PRINT 'User Is Not Active';  
+        SELECT 'User Is Not Active' AS Message;
     END  
   
 END;
