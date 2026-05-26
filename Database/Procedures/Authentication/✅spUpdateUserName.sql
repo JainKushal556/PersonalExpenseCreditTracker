@@ -1,93 +1,90 @@
-CREATE PROCEDURE spUpdateUserName
-    @UserID INT,
-    @Name VARCHAR(100)
-AS
-BEGIN
 
+ALTER PROCEDURE spUpdateUserName  
+    @UserID INT,  
+    @Name VARCHAR(100)  
+AS  
+BEGIN  
   
 
-    SET @Name = LTRIM(RTRIM(@Name));
-
-
-    IF @Name IS NULL OR @Name = ''
-    BEGIN
-        SELECT 'Name Cannot Be Empty' AS Message;
-        RETURN;
-    END
-
-
-   
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblUsers
-        WHERE UserID = @UserID
-    )
-    BEGIN
-        SELECT 'Invalid UserID' AS Message;
-        RETURN;
-    END
-
-
-   
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblUserAuthentication
-        WHERE UserID = @UserID
-        AND Active = 1
-    )
-    BEGIN
-        SELECT 'User Account Is Not Active' AS Message;
-        RETURN;
-    END
-
-
+    SET @Name = LTRIM(RTRIM(@Name));  
   
-    IF EXISTS
-    (
-        SELECT 1
-        FROM tblUsers
-        WHERE UserName = @Name
-    )
-    BEGIN
-        SELECT 'User Name Already Exists' AS Message;
-        RETURN;
-    END
 
+    IF @Name IS NULL OR @Name = ''  
+    BEGIN  
+        SELECT 'Name Cannot Be Empty' AS Message;  
+        RETURN;  
+    END  
+  
 
-    BEGIN TRY
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUsers  
+        WHERE UserID = @UserID  
+    )  
+    BEGIN  
+        SELECT 'Invalid UserID' AS Message;  
+        RETURN;  
+    END  
+  
 
-      
-        BEGIN TRANSACTION;
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUserAuthentication  
+        WHERE UserID = @UserID  
+        AND Active = 1  
+    )  
+    BEGIN  
+        SELECT 'User Account Is Not Active' AS Message;  
+        RETURN;  
+    END  
+  
 
+	  IF EXISTS
+	(
+		SELECT 1
+		FROM tblUsers
+		WHERE UserName = @Name
+		AND UserID = @UserID 
+	)
+	BEGIN
+		SELECT 'User Name Already Exists' AS Message;
+		RETURN;
+	END
+  
+    BEGIN TRY  
 
-        
-        UPDATE tblUsers
-        SET UserName = @Name
-        WHERE UserID = @UserID;
+        BEGIN TRANSACTION;  
+  
+  
 
+        UPDATE tblUsers  
+        SET UserName = @Name  
+        WHERE UserID = @UserID;  
+  
+  
 
-        UPDATE tblUserProfile
-        SET Name = @Name
-        WHERE UserID = @UserID;
+        UPDATE tblUserProfile  
+        SET Name = @Name  
+        WHERE UserID = @UserID;  
+  
 
+        COMMIT TRANSACTION;  
+  
+        SELECT 'User Name Updated Successfully' AS Message;  
+  
+    END TRY  
+  
+    BEGIN CATCH  
+  
 
-        COMMIT TRANSACTION;
-
-        SELECT 'User Name Updated Successfully' AS Message;
-
-    END TRY
-
-    BEGIN CATCH
-
-
-        IF @@TRANCOUNT > 0
-            ROLLBACK TRANSACTION;
-
-        SELECT ERROR_MESSAGE() AS Message;
-
-    END CATCH
-
+        IF @@TRANCOUNT > 0  
+            ROLLBACK TRANSACTION;  
+  
+  
+        SELECT ERROR_MESSAGE() AS Message;  
+  
+    END CATCH  
+  
 END;
-
