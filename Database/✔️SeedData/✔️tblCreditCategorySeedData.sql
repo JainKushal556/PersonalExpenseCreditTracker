@@ -9,4 +9,5 @@ VALUES
 ('Cashback'),
 ('Scholarship'),
 ('Bonus'),
-('Refund');
+('Refund'),
+('Lent Money Receive'); --- IGNORE ---

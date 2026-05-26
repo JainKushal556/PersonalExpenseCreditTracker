@@ -1,6 +1,9 @@
 CREATE TABLE tblLentPersons(
 	PersonID INT PRIMARY KEY IDENTITY(1,1),
+	UserID INT NOT NULL,
 	PersonName VARCHAR(100) NOT NULL,
 	PhoneNumber VARCHAR(15) NOT NULL,
-	Address VARCHAR(MAX)
+	Address VARCHAR(MAX),
+
+	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID)
 )

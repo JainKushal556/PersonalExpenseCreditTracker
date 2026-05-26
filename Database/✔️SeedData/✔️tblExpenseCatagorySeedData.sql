@@ -8,4 +8,5 @@ VALUES
 ('Health'),
 ('Education'),
 ('Transportation'),
-('Personal Care');
+('Personal Care'),
+('Borrow Money Paid');

@@ -53,18 +53,18 @@ VALUES
 ('Refund');
 GO
 
-INSERT INTO tblLentPersons (PersonName, PhoneNumber, Address)
+INSERT INTO tblLentPersons (UserID, PersonName, PhoneNumber, Address)
 VALUES
-('Sourav Das', '9876543201', 'Kolkata'),
-('Onoya Roy', '9123456701', 'Howrah'),
-('Rakesh Sharma', '9988776601', 'Durgapur'),
-('Madhuri Sen', '9090909001', 'Siliguri'),
-('Vivek Gupta', '9871234501', 'Asansol'),
-('Priyanka Paul', '9012345601', 'Midnapore'),
-('Abhishek Kumar', '8899776601', 'Malda'),
-('Nisha Verma', '9765432109', 'Kharagpur'),
-('Karan Singh', '9345678910', 'Barrackpore'),
-('Simran Mishra', '9876501200', 'Haldia');
+(1, 'Sourav Das', '9876543201', 'Kolkata'),
+(2, 'Onoya Roy', '9123456701', 'Howrah'),
+(3, 'Rakesh Sharma', '9988776601', 'Durgapur'),
+(4, 'Madhuri Sen', '9090909001', 'Siliguri'),
+(5, 'Vivek Gupta', '9871234501', 'Asansol'),
+(6, 'Priyanka Paul', '9012345601', 'Midnapore'),
+(7, 'Abhishek Kumar', '8899776601', 'Malda'),
+(8, 'Nisha Verma', '9765432109', 'Kharagpur'),
+(9, 'Karan Singh', '9345678910', 'Barrackpore'),
+(10, 'Simran Mishra', '9876501200', 'Haldia');
 GO
 
 INSERT INTO tblLentBorrowStatus (StatusName)
@@ -95,18 +95,18 @@ VALUES
 ('Important');
 GO
 
-INSERT INTO tblBorrowPersons (PersonName, PhoneNumber, Address)
+INSERT INTO tblBorrowPersons (UserID, PersonName, PhoneNumber, Address)
 VALUES
-('Rahul Sharma', '9876543210', 'Kolkata'),
-('Priya Das', '9123456780', 'Howrah'),
-('Amit Roy', '9988776655', 'Durgapur'),
-('Sneha Paul', '9090909090', 'Siliguri'),
-('Rohan Gupta', '9871234567', 'Asansol'),
-('Anjali Singh', '9012345678', 'Midnapore'),
-('Vikash Kumar', '8899776655', 'Malda'),
-('Neha Verma', '9765432101', 'Kharagpur'),
-('Arjun Sen', '9345678901', 'Barrackpore'),
-('Pooja Mishra', '9876501234', 'Haldia');
+(1, 'Rahul Sharma', '9876543210', 'Kolkata'),
+(2, 'Priya Das', '9123456780', 'Howrah'),
+(3, 'Amit Roy', '9988776655', 'Durgapur'),
+(4, 'Sneha Paul', '9090909090', 'Siliguri'),
+(5, 'Rohan Gupta', '9871234567', 'Asansol'),
+(6, 'Anjali Singh', '9012345678', 'Midnapore'),
+(7, 'Vikash Kumar', '8899776655', 'Malda'),
+(8, 'Neha Verma', '9765432101', 'Kharagpur'),
+(9, 'Arjun Sen', '9345678901', 'Barrackpore'),
+(10, 'Pooja Mishra', '9876501234', 'Haldia');
 GO
 
 INSERT INTO tblUserProfile (UserID, Name, ProfilePhoto)
