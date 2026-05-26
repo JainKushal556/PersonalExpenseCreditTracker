@@ -11,3 +11,9 @@ BEGIN
 
 	WHERE U.UserID = @UserID;
 END
+
+
+-- complete l;emnt ee asbe na bcz where ee only used id check hoche status noy . er status id diye check hbew or remaning amount dekhe 
+-- usser tabl;e ee join korar proyojon ee nae 
+-- order by use korbi date wise dekhabe latest record top e asbe.
+-- same left join use korle valo hbe research korbi 

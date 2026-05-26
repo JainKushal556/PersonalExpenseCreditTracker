@@ -10,3 +10,10 @@ BEGIN
 	JOIN tblUsers U ON L.UserID = U.UserID
 	WHERE Prsn.PersonID = @PersonID AND U.UserID = @UserID;
 END
+
+-- user table er sathe join korar to proyojon ee nae direct to l.userid ke jae id ta ascxhe check kore dfilter korbi .
+-- person er sathe tar total ReturnedAmount and RemainingAmount ae 2to oo dekhabe 
+-- etay order by hbe latest record mean date wise.
+-- er ektu dekhbi research kore inner join korle data nao aste pare jodi if payment/status/person delete kora hoy.
+
+
