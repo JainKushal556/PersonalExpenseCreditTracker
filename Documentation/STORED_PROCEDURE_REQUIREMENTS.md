@@ -765,7 +765,7 @@
 
 - `Lent`
 
-### 31. spGetPendingLent
+### 31. spGetPendingLentByStatusName
 
 **Purpose:**
 
@@ -788,7 +788,7 @@
 
 - `Lent`
 
-### 32. spGetCompletedLent
+### 32. spGetCompletedLentByStatusName
 
 **Purpose:**
 
