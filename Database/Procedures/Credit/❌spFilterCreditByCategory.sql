@@ -6,51 +6,76 @@ CREATE PROCEDURE spFilterCreditByCategoryAndSubCategory
 )
 AS
 BEGIN
+
     SET NOCOUNT ON
 
-      IF NOT EXISTS 
-	  (
-	    SELECT 1 
-		FROM tblUsers 
-		WHERE UserID = @UserID
-	  )
-      BEGIN
-        PRINT 'Invalid UserID'
-      RETURN
-      END
-
-      IF NOT EXISTS 
-	   (
-	     SELECT 1 
-		 FROM tblCreditCategory 
-		 WHERE CategoryID = @CategoryID
-	   )
-      BEGIN
-        PRINT 'Invalid CategoryID'
-      RETURN
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
     END
 
-      IF NOT EXISTS
-      (
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
         SELECT 1
         FROM tblCreditSubCategory
         WHERE SubCategoryID = @SubCategoryID
         AND CategoryID = @CategoryID
-     )
-     BEGIN
-      PRINT 'Invalid SubCategoryID'
-     RETURN
+    )
+    BEGIN
+        SELECT 'SubCategory does not belong to selected Category' AS Message
+        RETURN
     END
 
-    SELECT *FROM tblCredit
-    WHERE UserID = @UserID
-   	AND CategoryID = @CategoryID
-    AND SubCategoryID = @SubCategoryID
-    ORDER BY CreditAt DESC
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+        AND CategoryID = @CategoryID
+        AND SubCategoryID = @SubCategoryID
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message
+        RETURN
+    END
+
+    SELECT
+        Credit.CreditID,
+        CreditCategory.CategoryName,
+        CreditSubCategory.SubCategoryName,
+        Credit.Amount,
+        Credit.Description,
+        PaymentType.PaymentName,
+        Credit.CreditAt
+    FROM tblCredit Credit
+    INNER JOIN tblCreditCategory CreditCategory
+        ON Credit.CategoryID = CreditCategory.CategoryID
+    INNER JOIN tblCreditSubCategory CreditSubCategory
+        ON Credit.SubCategoryID = CreditSubCategory.SubCategoryID
+    INNER JOIN tblPaymentType PaymentType
+        ON Credit.PaymentID = PaymentType.PaymentID
+    WHERE Credit.UserID = @UserID
+    AND Credit.CategoryID = @CategoryID
+    AND Credit.SubCategoryID = @SubCategoryID
+    ORDER BY Credit.CreditAt DESC
+
 END
 GO
-
---print er jaygay select use korte hbe 
---select * kora jbe na required field gulo select korte hbe
---active check kora nae user active thkle ee hbe inactive user er khetre hbe na eta 
---no record found ae ta nae 
