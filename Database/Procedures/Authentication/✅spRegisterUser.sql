@@ -1,73 +1,72 @@
-CREATE PROCEDURE spRegisterUser  
+CREATE PROCEDURE spRegisterUser    
+    
+    @UserName VARCHAR(MAX),    
+    @Email VARCHAR(100),    
+    @PhoneNumber VARCHAR(15),    
+    @Password VARCHAR(MAX)    
+    
+AS    
+BEGIN    
+        
+    DECLARE @UserID INT;    
   
-    @UserName VARCHAR(MAX),  
-    @Email VARCHAR(100),  
-    @PhoneNumber VARCHAR(15),  
-    @Password VARCHAR(MAX)  
+    BEGIN TRANSACTION;  
   
-AS  
-BEGIN  
-      
-    DECLARE @UserID INT;  
-
-    BEGIN TRANSACTION;
-
-    BEGIN TRY
-
-      
-        IF EXISTS (
-            SELECT 1
-            FROM tblUserContact
-            WHERE Email = @Email
-        )
-        BEGIN
-            PRINT 'Email Already Exists';
-            ROLLBACK TRANSACTION;
-            RETURN;
-        END
-
-      
-        IF EXISTS (
-            SELECT 1
-            FROM tblUserContact
-            WHERE PhoneNumber = @PhoneNumber
-        )
-        BEGIN
-            PRINT 'Phone Number Already Exists';
-            ROLLBACK TRANSACTION;
-            RETURN;
-        END
-
-       
-        INSERT INTO tblUsers (UserName)  
-        VALUES (@UserName);  
+    BEGIN TRY  
   
-        SET @UserID = SCOPE_IDENTITY();  
+
+        IF EXISTS (  
+            SELECT 1  
+            FROM tblUserContact  
+            WHERE Email = @Email  
+        )  
+        BEGIN  
+            SELECT 'Email Already Exists' AS Message;
+            ROLLBACK TRANSACTION;  
+            RETURN;  
+        END  
   
-        INSERT INTO tblUserProfile (UserID, Name)  
-        VALUES (@UserID, @UserName);  
+
+        IF EXISTS (  
+            SELECT 1  
+            FROM tblUserContact  
+            WHERE PhoneNumber = @PhoneNumber  
+        )  
+        BEGIN  
+            SELECT 'Phone Number Already Exists' AS Message;
+            ROLLBACK TRANSACTION;  
+            RETURN;  
+        END  
   
-     
-        INSERT INTO tblUserContact (UserID, Email, PhoneNumber)  
-        VALUES (@UserID, @Email, @PhoneNumber);  
+
+        INSERT INTO tblUsers (UserName)    
+        VALUES (@UserName);    
+    
+        SET @UserID = SCOPE_IDENTITY();    
+    
   
-       
-        INSERT INTO tblUserAuthentication (UserID, Password, Active)  
-        VALUES (@UserID, @Password, 0);  
+        INSERT INTO tblUserProfile (UserID, Name)    
+        VALUES (@UserID, @UserName);    
+    
+    
+        INSERT INTO tblUserContact (UserID, Email, PhoneNumber)    
+        VALUES (@UserID, @Email, @PhoneNumber);    
+
+        INSERT INTO tblUserAuthentication (UserID, Password, Active)    
+        VALUES (@UserID, @Password, 0);    
+    
+        COMMIT TRANSACTION;  
   
-        COMMIT TRANSACTION;
-
-        PRINT 'User Inserted Successfully';
-
-    END TRY
-
-    BEGIN CATCH
-
-        ROLLBACK TRANSACTION;
-
-        PRINT 'Error Occurred';
-
-    END CATCH
-
+        SELECT 'User Inserted Successfully' AS Message;
+  
+    END TRY  
+  
+    BEGIN CATCH  
+  
+        ROLLBACK TRANSACTION;  
+  
+        SELECT 'Error Occurred' AS Message;
+  
+    END CATCH  
+  
 END;
-
