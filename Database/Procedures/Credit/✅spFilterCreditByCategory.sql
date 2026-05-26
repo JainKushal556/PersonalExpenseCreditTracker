@@ -1,8 +1,7 @@
-CREATE PROCEDURE spFilterCreditByCategoryAndSubCategory
+CREATE PROCEDURE spFilterCreditByCategory
 (
     @UserID INT,
-    @CategoryID INT,
-    @SubCategoryID INT
+    @CategoryID INT
 )
 AS
 BEGIN
@@ -35,46 +34,37 @@ BEGIN
     IF NOT EXISTS
     (
         SELECT 1
-        FROM tblCreditSubCategory
-        WHERE SubCategoryID = @SubCategoryID
-        AND CategoryID = @CategoryID
-    )
-    BEGIN
-        SELECT 'SubCategory does not belong to selected Category' AS Message
-        RETURN
-    END
-
-    IF NOT EXISTS
-    (
-        SELECT 1
         FROM tblCredit
         WHERE UserID = @UserID
         AND CategoryID = @CategoryID
-        AND SubCategoryID = @SubCategoryID
     )
     BEGIN
         SELECT 'No Record Found' AS Message
         RETURN
     END
-
     SELECT
         Credit.CreditID,
         CreditCategory.CategoryName,
         CreditSubCategory.SubCategoryName,
         Credit.Amount,
-        Credit.Description,
+        LTRIM(RTRIM(Credit.Description)) AS Description,
         PaymentType.PaymentName,
         Credit.CreditAt
+
     FROM tblCredit Credit
-    INNER JOIN tblCreditCategory CreditCategory
+
+    LEFT JOIN tblCreditCategory CreditCategory
         ON Credit.CategoryID = CreditCategory.CategoryID
-    INNER JOIN tblCreditSubCategory CreditSubCategory
+
+    LEFT JOIN tblCreditSubCategory CreditSubCategory
         ON Credit.SubCategoryID = CreditSubCategory.SubCategoryID
-    INNER JOIN tblPaymentType PaymentType
+
+    LEFT JOIN tblPaymentType PaymentType
         ON Credit.PaymentID = PaymentType.PaymentID
+
     WHERE Credit.UserID = @UserID
     AND Credit.CategoryID = @CategoryID
-    AND Credit.SubCategoryID = @SubCategoryID
+
     ORDER BY Credit.CreditAt DESC
 
 END
