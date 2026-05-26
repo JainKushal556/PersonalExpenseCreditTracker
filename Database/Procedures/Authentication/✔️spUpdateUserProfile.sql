@@ -132,4 +132,6 @@ END
 
 END;
 
-
+-- remove profile photo akta store procedure bana jeta null assign korbi image ee ami requirments ee likhe dichi ota 
+-- baki jaygay dekhbi ami thik korechi kotay . = er jaygay <> eta diye 
+-- actually ki hbe ami amar same name ee update ee dite pari no issue but onno user er jeno sae name ta na thke tar jonno <> use korte hbe . ( name , email , phone number er khetre ogulote UserID <> @UserID ae ta sathe thkbe )

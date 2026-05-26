@@ -70,3 +70,8 @@ BEGIN
     END CATCH  
   
 END;
+
+
+--usewr id return korte hbe to je create holo jkron then tar data gulo niye ui te kaj hbe . 
+--email er phone number duplicate check korar time ee roll back kore labh nae to data to akhon oo insert hoy ni data insert hole sekhan theke roll back kor . 
+--null check nae to jodio buissnes logic layer ee hbe but tao kore dewwa jaye ekhaneo

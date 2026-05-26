@@ -111,3 +111,12 @@ BEGIN
 		RAISERROR('Returned amount exceeds remaining amount.',16,1);
 	END
 END
+
+
+--lent ee insert holo but credit ee holo na tokhon ki koere hbe transaction commit roll back use korte hbe 
+--total tai got r code ami bolechilam ami just requirment bolechi toke otay research korte hbe . 
+--parameter ee payment name niwar proyojon ee ki direct to id nite pari amra .
+returned amount check kora nae 0 ba negative thakle . 
+-- lent id check koris ne oi lent id ta na thkle ? 
+-- IF @NewRemainingAmount = 0 ae checking ta return amount calculate korar pore ae part tay new remaining amount direct 0 check hbe na 
+-- IF @NewRemainingAmount <= 0 eta hbe .  

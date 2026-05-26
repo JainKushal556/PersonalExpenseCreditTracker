@@ -1,4 +1,4 @@
-CREATE PROCEDURE spCheckActiveUserWithDetails  
+CREATE PROCEDURE spCheckActiveUserDetails  
 (  
     @UserID INT  
 )  
@@ -44,3 +44,7 @@ BEGIN
     END  
   
 END;
+
+--inner join er jaygay left join korar dekhbi inner join ee jodi user profile e ba contact er data soriye day to asbe na data bcz se all data pbe na 
+--a.active pathate hbe na . 
+--user name o dekhachis + name o dekhachis double hoye jche na 

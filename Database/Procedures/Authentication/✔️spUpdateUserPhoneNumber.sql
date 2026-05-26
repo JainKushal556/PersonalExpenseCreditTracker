@@ -43,6 +43,7 @@ BEGIN
         SELECT 1
         FROM tblUserContact
         WHERE PhoneNumber = @PhoneNumber
+        AND UserID <> @UserID
     )
     BEGIN
         SELECT 'Phone Number Already Exists' AS Message;

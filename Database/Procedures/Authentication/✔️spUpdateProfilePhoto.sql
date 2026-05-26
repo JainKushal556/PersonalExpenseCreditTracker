@@ -6,7 +6,6 @@ CREATE PROCEDURE spUpdateProfilePhoto
 AS    
 BEGIN    
 
-   
     IF NOT EXISTS
     (
         SELECT 1
@@ -19,7 +18,6 @@ BEGIN
         SELECT 'User Account Is Not Active' AS Message;
         RETURN;
     END
-
 
     IF EXISTS    
     (    
@@ -43,3 +41,4 @@ BEGIN
     END    
 
 END;
+
