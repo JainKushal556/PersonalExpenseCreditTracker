@@ -14,23 +14,43 @@ BEGIN
             AND PhoneNumber = @PhoneNumber  
     )  
     BEGIN  
+
+        IF EXISTS
+        (
+            SELECT 1
+            FROM tblUserAuthentication A
+            INNER JOIN tblUserContact C
+                ON A.UserID = C.UserID
+            WHERE
+                C.Email = @Email
+                AND C.PhoneNumber = @PhoneNumber
+                AND A.Password = @NewPassword
+        )
+        BEGIN
+            SELECT 'New Password Cannot Be Same As Old Password' AS Message;
+        END
+
+        ELSE
+        BEGIN
   
-        UPDATE A  
-        SET A.Password = @NewPassword  
-        FROM tblUserAuthentication A  
-        INNER JOIN tblUserContact C  
-            ON A.UserID = C.UserID  
-        WHERE   
-            C.Email = @Email  
-            AND C.PhoneNumber = @PhoneNumber;  
+            UPDATE A  
+            SET A.Password = @NewPassword  
+            FROM tblUserAuthentication A  
+            INNER JOIN tblUserContact C  
+                ON A.UserID = C.UserID  
+            WHERE   
+                C.Email = @Email  
+                AND C.PhoneNumber = @PhoneNumber;  
   
-        PRINT 'Password Reset Successfully';  
+            SELECT 'Password Reset Successfully' AS Message;
+
+        END
   
     END  
   
     ELSE  
     BEGIN  
-        PRINT 'Invalid Email Or Phone Number';  
+        SELECT 'Invalid Email Or Phone Number' AS Message;
     END  
   
 END;
