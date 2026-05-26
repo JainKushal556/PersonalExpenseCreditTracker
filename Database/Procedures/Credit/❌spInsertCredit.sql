@@ -70,3 +70,8 @@ BEGIN
                PRINT 'Credit inserted successfully'
 END
 GO
+
+--print er jaygay select use korte hbe
+--active user validation lgbe 
+-- catagory id r sathe subcatagory relation check hoche na 
+--description ke trim kore insert korbi 

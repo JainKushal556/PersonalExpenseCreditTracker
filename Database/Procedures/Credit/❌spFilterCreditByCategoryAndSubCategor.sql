@@ -34,3 +34,10 @@ CREATE PROCEDURE spFilterCreditByCategory
      ORDER BY CreditAt DESC
 END
 GO
+
+--print use hbe na select use korte hbe
+--select * kora jbe na required field gulo select korte hbe
+--active check kora nae user active thkle ee hbe inactive user er khetre hbe na 
+--invalid user id r pore return nae 
+--no record found ae situation handle nae 
+--foreign key link nae so catagory id asbe name asbe na 

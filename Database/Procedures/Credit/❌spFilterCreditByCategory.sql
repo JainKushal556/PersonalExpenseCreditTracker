@@ -44,8 +44,13 @@ BEGIN
 
     SELECT *FROM tblCredit
     WHERE UserID = @UserID
-	AND CategoryID = @CategoryID
+   	AND CategoryID = @CategoryID
     AND SubCategoryID = @SubCategoryID
     ORDER BY CreditAt DESC
 END
 GO
+
+--print er jaygay select use korte hbe 
+--select * kora jbe na required field gulo select korte hbe
+--active check kora nae user active thkle ee hbe inactive user er khetre hbe na eta 
+--no record found ae ta nae 

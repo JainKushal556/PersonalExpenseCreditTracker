@@ -36,3 +36,9 @@ CREATE PROCEDURE spGetAllCredits
 
  END
  GO
+
+ -- join er jonno payment id r sateh name compare hoche wrong
+ -- invalid user id check korar pore return statement nae 
+ -- print er jaygay select use korte hbe
+ -- left join korte hbe inner join ee jodi payment/catagory or sub catagory delet kora hoy so then oi record asbe ee na 
+ 
