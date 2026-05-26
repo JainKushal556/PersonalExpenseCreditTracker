@@ -209,7 +209,29 @@
 
 - `User_Profile`
 
-### 9. spGetUserDashboard
+### 9. spRemoveProfilePhoto
+
+**Purpose:**
+
+- Remove existing profile photo of a user.
+
+**Parameters:**
+
+- `@UserID`
+
+**Expected Output:**
+
+- Profile photo removed successfully.
+
+**When Used:**
+
+- Remove profile photo option.
+
+**Tables Used:**
+
+- `User_Profile`
+
+### 10. spGetUserDashboard
 
 **Purpose:**
 
@@ -240,7 +262,7 @@
 - `Borrow`
 - `Task`
 
-### 10. spForgotPassword
+### 11. spForgotPassword
 
 **Purpose:**
 
@@ -265,7 +287,7 @@
 - `User_Contact`
 - `User_Authentication`
 
-### 11. spCheckUserActiveStatus
+### 12. spCheckUserActiveStatus
 
 **Purpose:**
 
@@ -299,7 +321,7 @@
 
 ## 💸 EXPENSE MODULE
 
-### 12. spInsertExpense
+### 13. spInsertExpense
 
 **Purpose:**
 
@@ -327,7 +349,7 @@
 
 - `Expense`
 
-### 13. spGetAllExpenses
+### 14. spGetAllExpenses
 
 **Purpose:**
 
@@ -349,7 +371,7 @@
 
 - `Expense`
 
-### 14. spFilterExpenseByCategory
+### 15. spFilterExpenseByCategory
 
 **Purpose:**
 
@@ -373,7 +395,7 @@
 - `Expense`
 - `Expense_Category`
 
-### 15. spFilterExpenseByCategoryAndSubCategory
+### 16. spFilterExpenseByCategoryAndSubCategory
 
 **Purpose:**
 
@@ -399,7 +421,7 @@
 - `Expense_Category`
 - `Expense_Sub_Category`
 
-### 16. spFilterExpenseByDateRange
+### 17. spFilterExpenseByDateRange
 
 **Purpose:**
 
@@ -423,7 +445,7 @@
 
 - `Expense`
 
-### 17. spGetMonthlyExpenseSummary (UI)
+### 18. spGetMonthlyExpenseSummary (UI)
 
 **Purpose:**
 
@@ -447,7 +469,7 @@
 
 - `Expense`
 
-### 18. spGetCategoryWiseExpenseReport (UI)
+### 19. spGetCategoryWiseExpenseReport (UI)
 
 **Purpose:**
 
@@ -472,7 +494,7 @@
 - `Expense`
 - `Expense_Category`
 
-### 19. spGetTodayExpense
+### 20. spGetTodayExpense
 
 **Purpose:**
 
@@ -496,7 +518,7 @@
 
 ## 💰 CREDIT MODULE
 
-### 20. spInsertCredit
+### 21. spInsertCredit
 
 **Purpose:**
 
@@ -524,7 +546,7 @@
 
 - `Credit`
 
-### 21. spGetAllCredits
+### 22. spGetAllCredits
 
 **Purpose:**
 
@@ -546,7 +568,7 @@
 
 - `Credit`
 
-### 22. spFilterCreditByCategory
+### 23. spFilterCreditByCategory
 
 **Purpose:**
 
@@ -570,7 +592,7 @@
 - `Credit`
 - `Credit_Category`
 
-### 23. spFilterCreditByCategoryAndSubCategory
+### 24. spFilterCreditByCategoryAndSubCategory
 
 **Purpose:**
 
@@ -596,7 +618,7 @@
 - `Credit_Category`
 - `Credit_Sub_Category`
 
-### 24. spFilterCreditByDateRange
+### 25. spFilterCreditByDateRange
 
 **Purpose:**
 
@@ -620,7 +642,7 @@
 
 - `Credit`
 
-### 25. spGetMonthlyCreditSummary
+### 26. spGetMonthlyCreditSummary
 
 **Purpose:**
 
@@ -644,7 +666,7 @@
 
 - `Credit`
 
-### 26. spGetCategoryWiseCreditReport
+### 27. spGetCategoryWiseCreditReport
 
 **Purpose:**
 
@@ -669,7 +691,7 @@
 - `Credit`
 - `Credit_Category`
 
-### 27. spGetTodayCredit
+### 28. spGetTodayCredit
 
 **Purpose:**
 
@@ -693,7 +715,7 @@
 
 ## 🤝 LENT MODULE
 
-### 28. spInsertLent
+### 29. spInsertLent
 
 **Purpose:**
 
@@ -721,7 +743,7 @@
 
 - `Lent`
 
-### 29. spGetAllLent
+### 30. spGetAllLent
 
 **Purpose:**
 
@@ -743,7 +765,7 @@
 
 - `Lent`
 
-### 30. spGetPendingLent
+### 31. spGetPendingLent
 
 **Purpose:**
 
@@ -766,7 +788,7 @@
 
 - `Lent`
 
-### 31. spGetCompletedLent
+### 32. spGetCompletedLent
 
 **Purpose:**
 
@@ -788,7 +810,7 @@
 
 - `Lent`
 
-### 32. spReturnLentByReturnAmount
+### 33. spReturnLentByReturnAmount
 
 **Purpose:**
 
@@ -829,7 +851,7 @@
 - `Lent`
 - `Credit`
 
-### 33. spGetLentPersonHistory
+### 34. spGetLentPersonHistory
 
 **Purpose:**
 
@@ -852,7 +874,7 @@
 - `Lent`
 - `Person`
 
-### 34. spGetAllLentPersons
+### 35. spGetAllLentPersons
 
 **Purpose:**
 
@@ -879,7 +901,7 @@
 
 ## 📥 BORROW MODULE
 
-### 35. spInsertBorrow
+### 36. spInsertBorrow
 
 **Purpose:**
 
@@ -911,7 +933,7 @@
 - `Borrow`
 - `Credit`
 
-### 36. spGetAllBorrow
+### 37. spGetAllBorrow
 
 **Purpose:**
 
@@ -933,7 +955,7 @@
 
 - `Borrow`
 
-### 37. spGetPendingBorrow
+### 38. spGetPendingBorrow
 
 **Purpose:**
 
@@ -956,7 +978,7 @@
 
 - `Borrow`
 
-### 38. spGetCompletedBorrow
+### 39. spGetCompletedBorrow
 
 **Purpose:**
 
@@ -978,7 +1000,7 @@
 
 - `Borrow`
 
-### 39. spPayBorrow
+### 40. spPayBorrow
 
 **Purpose:**
 
@@ -1019,7 +1041,7 @@
 - `Borrow`
 - `Expense`
 
-### 40. spGetBorrowPersonHistory
+### 41. spGetBorrowPersonHistory
 
 **Purpose:**
 
@@ -1042,7 +1064,7 @@
 - `Borrow`
 - `Person`
 
-### 41. spGetAllBorrowPersons
+### 42. spGetAllBorrowPersons
 
 **Purpose:**
 
@@ -1067,7 +1089,7 @@
 - `Borrow`
 - `Person`
 
-### 42. spGetTotalBorrowByPerson
+### 43. spGetTotalBorrowByPerson
 
 **Purpose:**
 
@@ -1094,7 +1116,7 @@
 
 ## ✅ TASK MODULE
 
-### 43. spInsertTask
+### 44. spInsertTask
 
 **Purpose:**
 
@@ -1121,7 +1143,7 @@
 
 - `Task`
 
-### 44. spUpdateTask
+### 45. spUpdateTask
 
 **Purpose:**
 
@@ -1147,7 +1169,7 @@
 
 - `Task`
 
-### 45. spUpdateTaskStatus
+### 46. spUpdateTaskStatus
 
 **Purpose:**
 
@@ -1171,7 +1193,7 @@
 
 - `Task`
 
-### 46. spDeleteTask
+### 47. spDeleteTask
 
 **Purpose:**
 
@@ -1193,7 +1215,7 @@
 
 - `Task`
 
-### 47. spGetAllTasks
+### 48. spGetAllTasks
 
 **Purpose:**
 
@@ -1219,7 +1241,7 @@
 
 - `Task`
 
-### 48. spGetPendingTasks
+### 49. spGetPendingTasks
 
 **Purpose:**
 
@@ -1242,7 +1264,7 @@
 
 - `Task`
 
-### 49. spGetCompletedTasks
+### 50. spGetCompletedTasks
 
 **Purpose:**
 
@@ -1264,7 +1286,7 @@
 
 - `Task`
 
-### 50. spGetTasksByDate
+### 51. spGetTasksByDate
 
 **Purpose:**
 
@@ -1287,7 +1309,7 @@
 
 - `Task`
 
-### 51. spGetTasksBetweenDates
+### 52. spGetTasksBetweenDates
 
 **Purpose:**
 
@@ -1312,7 +1334,7 @@
 
 - `Task`
 
-### 52. spFilterTasksByStatus
+### 53. spFilterTasksByStatus
 
 **Purpose:**
 
@@ -1346,7 +1368,7 @@
 
 ## 📝 NOTE MODULE
 
-### 53. spInsertNote
+### 54. spInsertNote
 
 **Purpose:**
 
@@ -1372,7 +1394,7 @@
 
 - `Note`
 
-### 54. spUpdateNote
+### 55. spUpdateNote
 
 **Purpose:**
 
@@ -1397,7 +1419,7 @@
 
 - `Note`
 
-### 55. spUpdateNotePriority
+### 56. spUpdateNotePriority
 
 **Purpose:**
 
@@ -1420,7 +1442,7 @@
 
 - `Note`
 
-### 56. spDeleteNote
+### 57. spDeleteNote
 
 **Purpose:**
 
@@ -1442,7 +1464,7 @@
 
 - `Note`
 
-### 57. spGetAllNotes
+### 58. spGetAllNotes
 
 **Purpose:**
 
@@ -1464,7 +1486,7 @@
 
 - `Note`
 
-### 58. spFilterNotesByPriority
+### 59. spFilterNotesByPriority
 
 **Purpose:**
 
@@ -1494,7 +1516,7 @@
 - `Note`
 - `Note_Priority`
 
-### 59. spGetNotesByDate
+### 60. spGetNotesByDate
 
 **Purpose:**
 
@@ -1517,7 +1539,7 @@
 
 - `Note`
 
-### 60. spGetNotesBetweenDates
+### 61. spGetNotesBetweenDates
 
 **Purpose:**
 
@@ -1544,7 +1566,7 @@
 
 ## ⚙️ CATEGORY & SETTINGS MODULE (WE WILL Re-Search Later)
 
-### 61. spInsertExpenseCategory
+### 62. spInsertExpenseCategory
 
 **Purpose:**
 
@@ -1566,7 +1588,7 @@
 
 - `Expense_Category`
 
-### 62. spUpdateExpenseCategory
+### 63. spUpdateExpenseCategory
 
 **Purpose:**
 
@@ -1589,7 +1611,7 @@
 
 - `Expense_Category`
 
-### 63. spDeleteExpenseCategory
+### 64. spDeleteExpenseCategory
 
 **Purpose:**
 
@@ -1611,7 +1633,7 @@
 
 - `Expense_Category`
 
-### 64. spInsertExpenseSubCategory
+### 65. spInsertExpenseSubCategory
 
 **Purpose:**
 
@@ -1634,7 +1656,7 @@
 
 - `Expense_Sub_Category`
 
-### 65. spUpdateExpenseSubCategory
+### 66. spUpdateExpenseSubCategory
 
 **Purpose:**
 
@@ -1657,7 +1679,7 @@
 
 - `Expense_Sub_Category`
 
-### 66. spDeleteExpenseSubCategory
+### 67. spDeleteExpenseSubCategory
 
 **Purpose:**
 
@@ -1679,7 +1701,7 @@
 
 - `Expense_Sub_Category`
 
-### 67. spInsertCreditCategory
+### 68. spInsertCreditCategory
 
 **Purpose:**
 
@@ -1701,7 +1723,7 @@
 
 - `Credit_Category`
 
-### 68. spUpdateCreditCategory
+### 69. spUpdateCreditCategory
 
 **Purpose:**
 
@@ -1724,7 +1746,7 @@
 
 - `Credit_Category`
 
-### 69. spDeleteCreditCategory
+### 70. spDeleteCreditCategory
 
 **Purpose:**
 
@@ -1746,7 +1768,7 @@
 
 - `Credit_Category`
 
-### 70. spInsertCreditSubCategory
+### 71. spInsertCreditSubCategory
 
 **Purpose:**
 
@@ -1769,7 +1791,7 @@
 
 - `Credit_Sub_Category`
 
-### 71. spUpdateCreditSubCategory
+### 72. spUpdateCreditSubCategory
 
 **Purpose:**
 
@@ -1792,7 +1814,7 @@
 
 - `Credit_Sub_Category`
 
-### 72. spDeleteCreditSubCategory
+### 73. spDeleteCreditSubCategory
 
 **Purpose:**
 
@@ -1814,7 +1836,7 @@
 
 - `Credit_Sub_Category`
 
-### 73. spGetAllPaymentTypes
+### 74. spGetAllPaymentTypes
 
 **Purpose:**
 
@@ -1836,7 +1858,7 @@
 
 - `Payment_Type`
 
-### 74. spInsertPerson
+### 75. spInsertPerson
 
 **Purpose:**
 
@@ -1861,7 +1883,7 @@
 
 - `Person`
 
-### 75. spUpdatePerson
+### 76. spUpdatePerson
 
 **Purpose:**
 
@@ -1887,7 +1909,7 @@
 
 - `Person`
 
-### 76. spDeletePerson
+### 77. spDeletePerson
 
 **Purpose:**
 
@@ -1910,7 +1932,7 @@
 
 - `Person`
 
-### 77. spGetAllPersons
+### 78. spGetAllPersons
 
 **Purpose:**
 
@@ -1935,7 +1957,7 @@
 
 ## 🔔 REMINDER & NOTIFICATION QUERIES (WE WILL Re-Search Later)
 
-### 78. spGetUpcomingBorrowReminders
+### 79. spGetUpcomingBorrowReminders
 
 **Purpose:**
 
@@ -1949,7 +1971,7 @@
 
 - `Borrow`
 
-### 79. spGetUpcomingLentReminders
+### 80. spGetUpcomingLentReminders
 
 **Purpose:**
 
@@ -1963,7 +1985,7 @@
 
 - `Lent`
 
-### 80. spGetUpcomingTaskReminders
+### 81. spGetUpcomingTaskReminders
 
 **Purpose:**
 
