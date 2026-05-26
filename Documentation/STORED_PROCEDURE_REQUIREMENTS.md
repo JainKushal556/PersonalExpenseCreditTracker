@@ -1,6 +1,5 @@
 # Final Stored Procedure Requirements
 
-
 ## Personal Expense Credit Tracker
 
 ## Based On
@@ -10,10 +9,10 @@
 - Actual WinForms Requirements
 
 ## SRS Reference
+
 :contentReference[oaicite:0]{index=0}
 
 ## 🔐 AUTHENTICATION & USER MANAGEMENT
-
 
 ### 1. spRegisterUser
 
@@ -22,6 +21,7 @@
 - Register a new user account into the system.
 
 **Parameters:**
+
 - `@UserName`
 - `@Email`
 - `@PhoneNumber`
@@ -36,6 +36,7 @@
 - Register button click.
 
 **Tables Used:**
+
 - `Users`
 - `User_Profile`
 - `User_Contact`
@@ -48,6 +49,7 @@
 - Verify user login credentials.
 
 **Parameters:**
+
 - `@Email`
 - `@Password`
 
@@ -60,6 +62,7 @@
 - Login button click.
 
 **Tables Used:**
+
 - `User_Contact`
 - `User_Authentication`
 
@@ -70,6 +73,7 @@
 - Change existing user password.
 
 **Parameters:**
+
 - `@UserID`
 - `@OldPassword`
 - `@NewPassword`
@@ -83,6 +87,7 @@
 - Change password option.
 
 **Tables Used:**
+
 - `User_Authentication`
 
 ### 4. spUpdateUserProfile
@@ -92,6 +97,7 @@
 - Update all profile information together.
 
 **Parameters:**
+
 - `@UserID`
 - `@Name`
 - `@Email`
@@ -107,6 +113,7 @@
 - Save profile changes button.
 
 **Tables Used:**
+
 - `User_Profile`
 - `User_Contact`
 
@@ -117,6 +124,7 @@
 - Update only user name.
 
 **Parameters:**
+
 - `@UserID`
 - `@Name`
 
@@ -129,6 +137,7 @@
 - Edit name option.
 
 **Tables Used:**
+
 - `User_Profile`
 
 ### 6. spUpdateUserEmail
@@ -138,6 +147,7 @@
 - Update only user email address.
 
 **Parameters:**
+
 - `@UserID`
 - `@Email`
 
@@ -150,6 +160,7 @@
 - Edit email option.
 
 **Tables Used:**
+
 - `User_Contact`
 
 ### 7. spUpdateUserPhoneNumber
@@ -159,6 +170,7 @@
 - Update only user phone number.
 
 **Parameters:**
+
 - `@UserID`
 - `@PhoneNumber`
 
@@ -171,6 +183,7 @@
 - Edit phone number option.
 
 **Tables Used:**
+
 - `User_Contact`
 
 ### 8. spUpdateUserProfilePhoto
@@ -180,6 +193,7 @@
 - Update only profile photo.
 
 **Parameters:**
+
 - `@UserID`
 - `@ProfilePhoto`
 
@@ -192,6 +206,7 @@
 - Change profile photo option.
 
 **Tables Used:**
+
 - `User_Profile`
 
 ### 9. spGetUserDashboard
@@ -201,6 +216,7 @@
 - Load dashboard summary data for logged user.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -217,6 +233,7 @@
 - Dashboard page load.
 
 **Tables Used:**
+
 - `Expense`
 - `Credit`
 - `Lent`
@@ -230,6 +247,7 @@
 - Reset user password when the user is not logged in by verifying registered email and phone number.
 
 **Parameters:**
+
 - `@Email`
 - `@PhoneNumber`
 - `@NewPassword`
@@ -243,6 +261,7 @@
 - Forgot password option on login page.
 
 **Tables Used:**
+
 - `User_Contact`
 - `User_Authentication`
 
@@ -253,6 +272,7 @@
 - Check whether the user account is active or inactive during login authentication.
 
 **Parameters:**
+
 - `@Email`
 - `@Password`
 
@@ -267,6 +287,7 @@
 - During user login verification process.
 
 **Tables Used:**
+
 - `tblUserAuthentication`
 - `tblUserContact`
 
@@ -285,6 +306,7 @@
 - Add new expense transaction.
 
 **Parameters:**
+
 - `@UserID`
 - `@CategoryID`
 - `@SubCategoryID`
@@ -302,6 +324,7 @@
 - Add expense form submit button.
 
 **Tables Used:**
+
 - `Expense`
 
 ### 13. spGetAllExpenses
@@ -311,6 +334,7 @@
 - Get all expense records of user.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -322,6 +346,7 @@
 - Expense page load.
 
 **Tables Used:**
+
 - `Expense`
 
 ### 14. spFilterExpenseByCategory
@@ -331,6 +356,7 @@
 - Filter expense records using category.
 
 **Parameters:**
+
 - `@UserID`
 - `@CategoryID`
 
@@ -343,6 +369,7 @@
 - Expense category filter option.
 
 **Tables Used:**
+
 - `Expense`
 - `Expense_Category`
 
@@ -353,6 +380,7 @@
 - Filter expense records using category and sub-category.
 
 **Parameters:**
+
 - `@UserID`
 - `@CategoryID`
 - `@SubCategoryID`
@@ -366,6 +394,7 @@
 - Expense category and sub-category filter option.
 
 **Tables Used:**
+
 - `Expense`
 - `Expense_Category`
 - `Expense_Sub_Category`
@@ -377,6 +406,7 @@
 - Filter expense records between selected dates.
 
 **Parameters:**
+
 - `@UserID`
 - `@FromDate`
 - `@ToDate`
@@ -390,6 +420,7 @@
 - Expense date filter option.
 
 **Tables Used:**
+
 - `Expense`
 
 ### 17. spGetMonthlyExpenseSummary (UI)
@@ -399,6 +430,7 @@
 - Generate monthly expense summary report.
 
 **Parameters:**
+
 - `@UserID`
 - `@Month`
 - `@Year`
@@ -412,6 +444,7 @@
 - Dashboard monthly summary section.
 
 **Tables Used:**
+
 - `Expense`
 
 ### 18. spGetCategoryWiseExpenseReport (UI)
@@ -421,6 +454,7 @@
 - Generate category wise expense report for graphs and charts.
 
 **Parameters:**
+
 - `@UserID`
 - `@FromDate`
 - `@ToDate`
@@ -434,6 +468,7 @@
 - Dashboard pie chart and reports.
 
 **Tables Used:**
+
 - `Expense`
 - `Expense_Category`
 
@@ -444,6 +479,7 @@
 - Get today's expense records.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -455,6 +491,7 @@
 - Dashboard daily summary section.
 
 **Tables Used:**
+
 - `Expense`
 
 ## 💰 CREDIT MODULE
@@ -466,6 +503,7 @@
 - Add new credit transaction.
 
 **Parameters:**
+
 - `@UserID`
 - `@CategoryID`
 - `@SubCategoryID`
@@ -483,6 +521,7 @@
 - Add credit form submit button.
 
 **Tables Used:**
+
 - `Credit`
 
 ### 21. spGetAllCredits
@@ -492,6 +531,7 @@
 - Get all credit records of user.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -503,6 +543,7 @@
 - Credit page load.
 
 **Tables Used:**
+
 - `Credit`
 
 ### 22. spFilterCreditByCategory
@@ -512,6 +553,7 @@
 - Filter credit records using category.
 
 **Parameters:**
+
 - `@UserID`
 - `@CategoryID`
 
@@ -524,6 +566,7 @@
 - Credit category filter option.
 
 **Tables Used:**
+
 - `Credit`
 - `Credit_Category`
 
@@ -534,6 +577,7 @@
 - Filter credit records using category and sub-category.
 
 **Parameters:**
+
 - `@UserID`
 - `@CategoryID`
 - `@SubCategoryID`
@@ -547,6 +591,7 @@
 - Credit category and sub-category filter option.
 
 **Tables Used:**
+
 - `Credit`
 - `Credit_Category`
 - `Credit_Sub_Category`
@@ -558,6 +603,7 @@
 - Filter credit records between selected dates.
 
 **Parameters:**
+
 - `@UserID`
 - `@FromDate`
 - `@ToDate`
@@ -571,6 +617,7 @@
 - Credit date filter option.
 
 **Tables Used:**
+
 - `Credit`
 
 ### 25. spGetMonthlyCreditSummary
@@ -580,6 +627,7 @@
 - Generate monthly credit summary report.
 
 **Parameters:**
+
 - `@UserID`
 - `@Month`
 - `@Year`
@@ -593,6 +641,7 @@
 - Dashboard monthly summary section.
 
 **Tables Used:**
+
 - `Credit`
 
 ### 26. spGetCategoryWiseCreditReport
@@ -602,6 +651,7 @@
 - Generate category wise credit report for graphs and charts.
 
 **Parameters:**
+
 - `@UserID`
 - `@FromDate`
 - `@ToDate`
@@ -615,6 +665,7 @@
 - Dashboard pie chart and reports.
 
 **Tables Used:**
+
 - `Credit`
 - `Credit_Category`
 
@@ -625,6 +676,7 @@
 - Get today's credit records.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -636,6 +688,7 @@
 - Dashboard daily summary section.
 
 **Tables Used:**
+
 - `Credit`
 
 ## 🤝 LENT MODULE
@@ -647,6 +700,7 @@
 - Add new lent transaction.
 
 **Parameters:**
+
 - `@UserID`
 - `@PersonID`
 - `@PaymentID`
@@ -664,6 +718,7 @@
 - Add lent form submit button.
 
 **Tables Used:**
+
 - `Lent`
 
 ### 29. spGetAllLent
@@ -673,6 +728,7 @@
 - Get all lent records of user.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -684,6 +740,7 @@
 - Lent page load.
 
 **Tables Used:**
+
 - `Lent`
 
 ### 30. spGetPendingLent
@@ -693,6 +750,7 @@
 - Get all pending lent transactions.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -705,6 +763,7 @@
 - Dashboard reminder section.
 
 **Tables Used:**
+
 - `Lent`
 
 ### 31. spGetCompletedLent
@@ -714,6 +773,7 @@
 - Get all completed lent transactions.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -725,9 +785,10 @@
 - Lent history section.
 
 **Tables Used:**
+
 - `Lent`
 
-### 32. spReturnLent
+### 32. spReturnLentByReturnAmount
 
 **Purpose:**
 
@@ -737,6 +798,7 @@
 - Automatically update lent status.
 
 **Parameters:**
+
 - `@LentID`
 - `@ReturnAmount`
 - `@PaymentID`
@@ -744,16 +806,18 @@
 **Expected Output:**
 
 **Scenario 1:**
+
 - If full amount returned:
-    - Lent status updated to Completed.
-    - Remaining amount becomes 0.
-    - Credit transaction inserted.
+  - Lent status updated to Completed.
+  - Remaining amount becomes 0.
+  - Credit transaction inserted.
 
 **Scenario 2:**
+
 - If partial amount returned:
-    - Remaining amount updated in Lent table.
-    - Lent status remains Pending.
-    - Partial amount inserted into Credit table.
+  - Remaining amount updated in Lent table.
+  - Lent status remains Pending.
+  - Partial amount inserted into Credit table.
 
 **When Used:**
 
@@ -761,6 +825,7 @@
 - Receive payment option.
 
 **Tables Used:**
+
 - `Lent`
 - `Credit`
 
@@ -771,6 +836,7 @@
 - Get complete lent history of a specific person.
 
 **Parameters:**
+
 - `@PersonID`
 
 **Expected Output:**
@@ -782,6 +848,7 @@
 - Person details/history page.
 
 **Tables Used:**
+
 - `Lent`
 - `Person`
 
@@ -792,6 +859,7 @@
 - Get all persons involved in lent transactions.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -805,6 +873,7 @@
 - Person selection section.
 
 **Tables Used:**
+
 - `Lent`
 - `Person`
 
@@ -818,6 +887,7 @@
 - Automatically insert borrowed amount into Credit table.
 
 **Parameters:**
+
 - `@UserID`
 - `@PersonID`
 - `@PaymentID`
@@ -837,6 +907,7 @@
 - Add borrow form submit button.
 
 **Tables Used:**
+
 - `Borrow`
 - `Credit`
 
@@ -847,6 +918,7 @@
 - Get all borrow records of user.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -858,6 +930,7 @@
 - Borrow page load.
 
 **Tables Used:**
+
 - `Borrow`
 
 ### 37. spGetPendingBorrow
@@ -867,6 +940,7 @@
 - Get all pending borrow transactions.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -879,6 +953,7 @@
 - Dashboard reminder section.
 
 **Tables Used:**
+
 - `Borrow`
 
 ### 38. spGetCompletedBorrow
@@ -888,6 +963,7 @@
 - Get all completed borrow transactions.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -899,6 +975,7 @@
 - Borrow history section.
 
 **Tables Used:**
+
 - `Borrow`
 
 ### 39. spPayBorrow
@@ -911,6 +988,7 @@
 - Automatically update borrow status.
 
 **Parameters:**
+
 - `@BorrowID`
 - `@PaidAmount`
 - `@PaymentID`
@@ -918,16 +996,18 @@
 **Expected Output:**
 
 **Scenario 1:**
+
 - If full amount paid:
-    - Borrow status updated to Completed.
-    - Remaining amount becomes 0.
-    - Expense transaction inserted.
+  - Borrow status updated to Completed.
+  - Remaining amount becomes 0.
+  - Expense transaction inserted.
 
 **Scenario 2:**
+
 - If partial amount paid:
-    - Remaining amount updated in Borrow table.
-    - Borrow status remains Pending.
-    - Partial amount inserted into Expense table.
+  - Remaining amount updated in Borrow table.
+  - Borrow status remains Pending.
+  - Partial amount inserted into Expense table.
 
 **When Used:**
 
@@ -935,6 +1015,7 @@
 - Borrow repayment option.
 
 **Tables Used:**
+
 - `Borrow`
 - `Expense`
 
@@ -945,6 +1026,7 @@
 - Get complete borrow history of a specific person.
 
 **Parameters:**
+
 - `@PersonID`
 
 **Expected Output:**
@@ -956,6 +1038,7 @@
 - Person details/history page.
 
 **Tables Used:**
+
 - `Borrow`
 - `Person`
 
@@ -966,6 +1049,7 @@
 - Get all persons involved in borrow transactions.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -979,6 +1063,7 @@
 - Person selection section.
 
 **Tables Used:**
+
 - `Borrow`
 - `Person`
 
@@ -989,6 +1074,7 @@
 - Calculate total borrow amount of a specific person.
 
 **Parameters:**
+
 - `@PersonID`
 
 **Expected Output:**
@@ -1002,6 +1088,7 @@
 - Person financial summary section.
 
 **Tables Used:**
+
 - `Borrow`
 - `Person`
 
@@ -1014,6 +1101,7 @@
 - Add new task.
 
 **Parameters:**
+
 - `@UserID`
 - `@PriorityID`
 - `@TaskStatusID`
@@ -1030,6 +1118,7 @@
 - Add task form submit button.
 
 **Tables Used:**
+
 - `Task`
 
 ### 44. spUpdateTask
@@ -1039,6 +1128,7 @@
 - Update task information.
 
 **Parameters:**
+
 - `@TaskID`
 - `@PriorityID`
 - `@TaskStatusID`
@@ -1054,6 +1144,7 @@
 - Edit task option.
 
 **Tables Used:**
+
 - `Task`
 
 ### 45. spUpdateTaskStatus
@@ -1063,6 +1154,7 @@
 - Update only task status.
 
 **Parameters:**
+
 - `@TaskID`
 - `@TaskStatusID`
 
@@ -1076,6 +1168,7 @@
 - Change task status option.
 
 **Tables Used:**
+
 - `Task`
 
 ### 46. spDeleteTask
@@ -1085,6 +1178,7 @@
 - Delete task.
 
 **Parameters:**
+
 - `@TaskID`
 
 **Expected Output:**
@@ -1096,6 +1190,7 @@
 - Delete task button.
 
 **Tables Used:**
+
 - `Task`
 
 ### 47. spGetAllTasks
@@ -1105,6 +1200,7 @@
 - Get all user tasks.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -1120,6 +1216,7 @@
 - Total task count will be calculated in Business Logic Layer.
 
 **Tables Used:**
+
 - `Task`
 
 ### 48. spGetPendingTasks
@@ -1129,6 +1226,7 @@
 - Get pending tasks.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -1141,6 +1239,7 @@
 - Dashboard summary.
 
 **Tables Used:**
+
 - `Task`
 
 ### 49. spGetCompletedTasks
@@ -1150,6 +1249,7 @@
 - Get completed tasks.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -1161,6 +1261,7 @@
 - Completed task section.
 
 **Tables Used:**
+
 - `Task`
 
 ### 50. spGetTasksByDate
@@ -1170,6 +1271,7 @@
 - Get tasks of a specific date.
 
 **Parameters:**
+
 - `@UserID`
 - `@TaskDate`
 
@@ -1182,6 +1284,7 @@
 - Calendar/date wise task section.
 
 **Tables Used:**
+
 - `Task`
 
 ### 51. spGetTasksBetweenDates
@@ -1191,6 +1294,7 @@
 - Get tasks between selected date range.
 
 **Parameters:**
+
 - `@UserID`
 - `@FromDate`
 - `@ToDate`
@@ -1205,6 +1309,7 @@
 - Task report section.
 
 **Tables Used:**
+
 - `Task`
 
 ### 52. spFilterTasksByStatus
@@ -1214,6 +1319,7 @@
 - Filter tasks based on task status.
 
 **Parameters:**
+
 - `@UserID`
 - `@TaskStatusID`
 
@@ -1222,6 +1328,7 @@
 - Tasks of selected status.
 
 **Example:**
+
 - Pending tasks
 - Completed tasks
 - In Progress tasks
@@ -1233,6 +1340,7 @@
 - Pending task section.
 
 **Tables Used:**
+
 - `Task`
 - `Task_Status`
 
@@ -1245,6 +1353,7 @@
 - Add new note.
 
 **Parameters:**
+
 - `@UserID`
 - `@PriorityID`
 - `@NoteTitle`
@@ -1260,6 +1369,7 @@
 - Add note form submit button.
 
 **Tables Used:**
+
 - `Note`
 
 ### 54. spUpdateNote
@@ -1269,6 +1379,7 @@
 - Update note information.
 
 **Parameters:**
+
 - `@NoteID`
 - `@PriorityID`
 - `@NoteTitle`
@@ -1283,6 +1394,7 @@
 - Edit note option.
 
 **Tables Used:**
+
 - `Note`
 
 ### 55. spUpdateNotePriority
@@ -1292,6 +1404,7 @@
 - Update only note priority.
 
 **Parameters:**
+
 - `@NoteID`
 - `@PriorityID`
 
@@ -1304,6 +1417,7 @@
 - Change note priority option.
 
 **Tables Used:**
+
 - `Note`
 
 ### 56. spDeleteNote
@@ -1313,6 +1427,7 @@
 - Delete note.
 
 **Parameters:**
+
 - `@NoteID`
 
 **Expected Output:**
@@ -1324,6 +1439,7 @@
 - Delete note option.
 
 **Tables Used:**
+
 - `Note`
 
 ### 57. spGetAllNotes
@@ -1333,6 +1449,7 @@
 - Get all notes of user.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -1344,6 +1461,7 @@
 - Notes page load.
 
 **Tables Used:**
+
 - `Note`
 
 ### 58. spFilterNotesByPriority
@@ -1353,6 +1471,7 @@
 - Filter notes based on priority.
 
 **Parameters:**
+
 - `@UserID`
 - `@PriorityID`
 
@@ -1361,6 +1480,7 @@
 - Notes of selected priority.
 
 **Example:**
+
 - High priority notes
 - Medium priority notes
 - Low priority notes
@@ -1370,6 +1490,7 @@
 - Note priority filter dropdown.
 
 **Tables Used:**
+
 - `Note`
 - `Note_Priority`
 
@@ -1380,6 +1501,7 @@
 - Get notes of a specific date.
 
 **Parameters:**
+
 - `@UserID`
 - `@NoteDate`
 
@@ -1392,6 +1514,7 @@
 - Calendar/date wise note section.
 
 **Tables Used:**
+
 - `Note`
 
 ### 60. spGetNotesBetweenDates
@@ -1401,6 +1524,7 @@
 - Get notes between selected dates.
 
 **Parameters:**
+
 - `@UserID`
 - `@FromDate`
 - `@ToDate`
@@ -1415,6 +1539,7 @@
 - Notes report section.
 
 **Tables Used:**
+
 - `Note`
 
 ## ⚙️ CATEGORY & SETTINGS MODULE (WE WILL Re-Search Later)
@@ -1426,6 +1551,7 @@
 - Add new expense category.
 
 **Parameters:**
+
 - `@CategoryName`
 
 **Expected Output:**
@@ -1437,6 +1563,7 @@
 - Add expense category option.
 
 **Tables Used:**
+
 - `Expense_Category`
 
 ### 62. spUpdateExpenseCategory
@@ -1446,6 +1573,7 @@
 - Update expense category name.
 
 **Parameters:**
+
 - `@CategoryID`
 - `@CategoryName`
 
@@ -1458,6 +1586,7 @@
 - Edit expense category option.
 
 **Tables Used:**
+
 - `Expense_Category`
 
 ### 63. spDeleteExpenseCategory
@@ -1467,6 +1596,7 @@
 - Delete expense category.
 
 **Parameters:**
+
 - `@CategoryID`
 
 **Expected Output:**
@@ -1478,6 +1608,7 @@
 - Delete expense category option.
 
 **Tables Used:**
+
 - `Expense_Category`
 
 ### 64. spInsertExpenseSubCategory
@@ -1487,6 +1618,7 @@
 - Add new expense sub-category.
 
 **Parameters:**
+
 - `@CategoryID`
 - `@SubCategoryName`
 
@@ -1499,6 +1631,7 @@
 - Add expense sub-category option.
 
 **Tables Used:**
+
 - `Expense_Sub_Category`
 
 ### 65. spUpdateExpenseSubCategory
@@ -1508,6 +1641,7 @@
 - Update expense sub-category name.
 
 **Parameters:**
+
 - `@SubCategoryID`
 - `@SubCategoryName`
 
@@ -1520,6 +1654,7 @@
 - Edit expense sub-category option.
 
 **Tables Used:**
+
 - `Expense_Sub_Category`
 
 ### 66. spDeleteExpenseSubCategory
@@ -1529,6 +1664,7 @@
 - Delete expense sub-category.
 
 **Parameters:**
+
 - `@SubCategoryID`
 
 **Expected Output:**
@@ -1540,6 +1676,7 @@
 - Delete expense sub-category option.
 
 **Tables Used:**
+
 - `Expense_Sub_Category`
 
 ### 67. spInsertCreditCategory
@@ -1549,6 +1686,7 @@
 - Add new credit category.
 
 **Parameters:**
+
 - `@CategoryName`
 
 **Expected Output:**
@@ -1560,6 +1698,7 @@
 - Add credit category option.
 
 **Tables Used:**
+
 - `Credit_Category`
 
 ### 68. spUpdateCreditCategory
@@ -1569,6 +1708,7 @@
 - Update credit category name.
 
 **Parameters:**
+
 - `@CategoryID`
 - `@CategoryName`
 
@@ -1581,6 +1721,7 @@
 - Edit credit category option.
 
 **Tables Used:**
+
 - `Credit_Category`
 
 ### 69. spDeleteCreditCategory
@@ -1590,6 +1731,7 @@
 - Delete credit category.
 
 **Parameters:**
+
 - `@CategoryID`
 
 **Expected Output:**
@@ -1601,6 +1743,7 @@
 - Delete credit category option.
 
 **Tables Used:**
+
 - `Credit_Category`
 
 ### 70. spInsertCreditSubCategory
@@ -1610,6 +1753,7 @@
 - Add new credit sub-category.
 
 **Parameters:**
+
 - `@CategoryID`
 - `@SubCategoryName`
 
@@ -1622,6 +1766,7 @@
 - Add credit sub-category option.
 
 **Tables Used:**
+
 - `Credit_Sub_Category`
 
 ### 71. spUpdateCreditSubCategory
@@ -1631,6 +1776,7 @@
 - Update credit sub-category name.
 
 **Parameters:**
+
 - `@SubCategoryID`
 - `@SubCategoryName`
 
@@ -1643,6 +1789,7 @@
 - Edit credit sub-category option.
 
 **Tables Used:**
+
 - `Credit_Sub_Category`
 
 ### 72. spDeleteCreditSubCategory
@@ -1652,6 +1799,7 @@
 - Delete credit sub-category.
 
 **Parameters:**
+
 - `@SubCategoryID`
 
 **Expected Output:**
@@ -1663,6 +1811,7 @@
 - Delete credit sub-category option.
 
 **Tables Used:**
+
 - `Credit_Sub_Category`
 
 ### 73. spGetAllPaymentTypes
@@ -1672,6 +1821,7 @@
 - Get all payment methods.
 
 **Parameters:**
+
 - None
 
 **Expected Output:**
@@ -1683,6 +1833,7 @@
 - Expense, Credit, Lent and Borrow forms.
 
 **Tables Used:**
+
 - `Payment_Type`
 
 ### 74. spInsertPerson
@@ -1692,6 +1843,8 @@
 - Add new person for lent and borrow transactions.
 
 **Parameters:**
+
+- `@UserID`
 - `@PersonName`
 - `@PhoneNumber`
 - `@Address`
@@ -1705,6 +1858,7 @@
 - Add person option in settings.
 
 **Tables Used:**
+
 - `Person`
 
 ### 75. spUpdatePerson
@@ -1714,7 +1868,9 @@
 - Update person details.
 
 **Parameters:**
+
 - `@PersonID`
+- `@UserID`
 - `@PersonName`
 - `@PhoneNumber`
 - `@Address`
@@ -1728,6 +1884,7 @@
 - Edit person option in settings.
 
 **Tables Used:**
+
 - `Person`
 
 ### 76. spDeletePerson
@@ -1737,7 +1894,9 @@
 - Delete person details.
 
 **Parameters:**
+
 - `@PersonID`
+- `@UserID`
 
 **Expected Output:**
 
@@ -1748,6 +1907,7 @@
 - Delete person option in settings.
 
 **Tables Used:**
+
 - `Person`
 
 ### 77. spGetAllPersons
@@ -1757,6 +1917,7 @@
 - Get all saved persons with phone numbers and address details.
 
 **Parameters:**
+
 - `@UserID`
 
 **Expected Output:**
@@ -1769,6 +1930,7 @@
 - Person dropdown selection.
 
 **Tables Used:**
+
 - `Person`
 
 ## 🔔 REMINDER & NOTIFICATION QUERIES (WE WILL Re-Search Later)
@@ -1780,9 +1942,11 @@
 - Get borrow deadline reminders
 
 **Parameters:**
+
 - `@UserID`
 
 **Tables Used:**
+
 - `Borrow`
 
 ### 79. spGetUpcomingLentReminders
@@ -1792,9 +1956,11 @@
 - Get lent deadline reminders
 
 **Parameters:**
+
 - `@UserID`
 
 **Tables Used:**
+
 - `Lent`
 
 ### 80. spGetUpcomingTaskReminders
@@ -1804,14 +1970,17 @@
 - Get task deadline reminders
 
 **Parameters:**
+
 - `@UserID`
 
 **Tables Used:**
+
 - `Task`
 
 ## 📌 FINAL TOTAL PROCEDURES
 
 **Total Procedures:**
+
 - 80
 
 **Project Scope:**

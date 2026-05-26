@@ -198,8 +198,8 @@ Stores money lent records.
 | PaymentID   | INT           | No           | FOREIGN KEY                | Stores the reference ID of the payment method used in the lent transaction                         |
 | StatusID    | INT           | No           | FOREIGN KEY                | Stores the current status of the lent transaction                                                  |
 | Amount      | DECIMAL(10,2) | No           | —                          | Stores the total amount involved in the lent transaction                                           |
-| ReturnedAmount | DECIMAL(10,2) | Yes          | -                          | Stores the amount returned by the borrower for this lent transaction                               |
-| RemainingAmount | DECIMAL(10,2) | Yes          | -                          | Stores the remaining amount still pending for this lent transaction                                |
+| ReturnedAmount | DECIMAL(10,2) | No           | -                          | Stores the amount returned by the borrower for this lent transaction                               |
+| RemainingAmount | DECIMAL(10,2) | No           | -                          | Stores the remaining amount still pending for this lent transaction                                |
 | LentAt      | DATETIME      | No           | —                          | Stores the exact date and time when the money or item was lent                                     |
 | DeadlineAt  | DATETIME      | Yes          | —                          | Stores the expected deadline date and time for returning the lent amount or item                   |
 | Description | VARCHAR(MAX)  | No           | —                          | Stores additional details or notes related to the lent transaction                                 |
@@ -215,6 +215,7 @@ Stores information about persons involved in lending.
 | Column Name | Data Type    | Null Allowed | Constraints                | Description                                                                |
 | ----------- | ------------ | ------------ | -------------------------- | -------------------------------------------------------------------------- |
 | PersonID    | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each person record           |
+| UserID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user who owns this lent person record       |
 | PersonName  | VARCHAR(100) | No           | —                          | Stores the full name of the person involved in lent or borrow transactions |
 | PhoneNumber | VARCHAR(15)  | No           | —                          | Stores the contact phone number of the person for communication purposes   |
 | Address     | VARCHAR(MAX) | Yes          | —                          | Stores the residential or contact address information of the person        |
@@ -248,8 +249,8 @@ Stores money borrowing records.
 | PaymentID   | INT           | No           | FOREIGN KEY                | Stores the reference ID of the payment method from the Payment_Type table used in this borrow transaction |
 | StatusID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the current status from the Lent_Borrow_Status table                           |
 | Amount      | DECIMAL(10,2) | No           | —                          | Stores the total amount involved in the borrow transaction                                                |
-| PaidAmount  | DECIMAL(10,2) | Yes          | -                          | Stores the amount already paid back for this borrow transaction                                           |
-| RemainingAmount | DECIMAL(10,2) | Yes          | -                          | Stores the remaining amount still pending for this borrow transaction                                     |
+| PaidAmount  | DECIMAL(10,2) | No           | -                          | Stores the amount already paid back for this borrow transaction                                           |
+| RemainingAmount | DECIMAL(10,2) | No           | -                          | Stores the remaining amount still pending for this borrow transaction                                     |
 | BorrowAt    | DATETIME      | No           | —                          | Stores the exact date and time when the money or item was borrowed                                        |
 | DeadlineAt  | DATETIME      | Yes          | —                          | Stores the expected deadline date and time for returning the borrowed amount or item                      |
 | Description | VARCHAR(MAX)  | No           | —                          | Stores additional details or notes related to the borrow transaction                                      |
@@ -265,6 +266,7 @@ Stores information about persons involved in borrowing.
 | Column Name | Data Type    | Null Allowed | Constraints                | Description                                                              |
 | ----------- | ------------ | ------------ | -------------------------- | ------------------------------------------------------------------------ |
 | PersonID    | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each person record         |
+| UserID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user who owns this borrow person record   |
 | PersonName  | VARCHAR(100) | No           | —                          | Stores the full name of the person involved in borrow transactions       |
 | PhoneNumber | VARCHAR(15)  | No           | —                          | Stores the contact phone number of the person for communication purposes |
 | Address     | VARCHAR(MAX) | Yes          | —                          | Stores the residential or contact address information of the person      |
