@@ -17,9 +17,9 @@
 
 | Status | Count |
 | ------ | ----: |
-| Total Procedures Found | 66 |
+| Total Procedures Found | 69 |
 | `✔️` (All Okay) | 46 |
-| `✅` (Pending Review) | 18 |
+| `✅` (Pending Review) | 21 |
 | `❌` (Fix Needed) | 2 |
 
 *(Note: There is also 1 unmarked file `spTest.sql` in the new `Dashboard` folder)*
@@ -95,8 +95,8 @@
 - `spInsertExpenseByUserID`
 
 ### `❌` FIX NEEDED (2)
-- `spGetCategoryWiseCreditReport` *(Marked ❌ by PM! Fix needed)*
-- `spGetMonthlyCreditSummary` *(Marked ❌ by PM! Fix needed)*
+- `spGetCategoryWiseCreditReport`
+- `spGetMonthlyCreditSummary`
 
 ### `[MISSING]` (3)
 - `spGetMonthlyExpenseSummary`
@@ -111,7 +111,7 @@
 ### `✔️` ALL OKAY (1)
 - `spGetAllBorrowPersons`
 
-### `✅` PENDING REVIEW (7)
+### `✅` PENDING REVIEW (10)
 - `SpGetAllLentPersons`
 - `SpGetCompletedLentByStatusName`
 - `spReturnLentByReturnAmount`
@@ -119,11 +119,14 @@
 - `spGetLentPersonHistory`
 - `spGetPendingLentByStatusName`
 - `spInsertLent`
+- `spInsertPerson`
+- `spUpdatePerson`
+- `spDeletePerson`
 
 ### `❌` FIX NEEDED (0)
 - None
 
-### `[MISSING]` (13)
+### `[MISSING]` (10)
 - `spInsertBorrow`
 - `spGetAllBorrow`
 - `spGetPendingBorrow`
@@ -131,9 +134,6 @@
 - `spPayBorrow`
 - `spGetBorrowPersonHistory`
 - `spGetTotalBorrowByPerson`
-- `spInsertPerson`
-- `spUpdatePerson`
-- `spDeletePerson`
 - `spGetAllPersons`
 - `spGetUpcomingBorrowReminders`
 - `spGetUpcomingLentReminders`
