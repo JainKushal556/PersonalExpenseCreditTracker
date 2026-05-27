@@ -186,7 +186,7 @@
 
 - `User_Contact`
 
-### 8. spUpdateUserProfilePhoto
+### 8. spUpdateProfilePhoto
 
 **Purpose:**
 
@@ -262,7 +262,7 @@
 - `Borrow`
 - `Task`
 
-### 11. spForgotPassword
+### 11. spForgetPassword
 
 **Purpose:**
 
@@ -287,7 +287,7 @@
 - `User_Contact`
 - `User_Authentication`
 
-### 12. spCheckUserActiveStatus
+### 12. spGetActiveUserDetails
 
 **Purpose:**
 
@@ -518,7 +518,7 @@
 
 ## 💰 CREDIT MODULE
 
-### 21. spInsertCredit
+### 21. spInsertCreditByUserID
 
 **Purpose:**
 
@@ -546,7 +546,7 @@
 
 - `Credit`
 
-### 22. spGetAllCredits
+### 22. spGetAllCreditsByID
 
 **Purpose:**
 
@@ -1566,7 +1566,7 @@
 
 ## ⚙️ CATEGORY & SETTINGS MODULE (WE WILL Re-Search Later)
 
-### 62. spInsertExpenseCategory
+### 62. spInsertNewExpenseCategoryByUserID
 
 **Purpose:**
 
@@ -2003,7 +2003,7 @@
 
 **Total Procedures:**
 
-- 80
+- 81
 
 **Project Scope:**
 
