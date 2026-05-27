@@ -1,4 +1,4 @@
-CREATE PROC spGetCompletedLentByStatusName
+CREATE PROC spGetPendingLentByStatusName
 @UserID INT
 AS
 BEGIN
@@ -18,7 +18,7 @@ BEGIN
 		LEFT JOIN tblLentPersons Prsn ON L.PersonID = Prsn.PersonID
 		LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
 
-		WHERE L.UserID = @UserID AND S.StatusName = 'Paid' ORDER BY L.LentAt DESC;
+		WHERE L.UserID = @UserID AND S.StatusName = 'Pending' ORDER BY L.LentAt DESC;
 	END
 	ELSE
 	BEGIN

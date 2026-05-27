@@ -1,5 +1,5 @@
-CREATE PROC spGetCompletedLentByStatusName
-@UserID INT
+CREATE PROC spGetLentPersonHistory
+@PersonID INT, @UserID INT
 AS
 BEGIN
 	IF EXISTS (SELECT 1 UserID FROM tblUserAuthentication WHERE UserID = @UserID AND Active = 1)
@@ -14,11 +14,11 @@ BEGIN
 			   L.DeadlineAt,
 			   L.Description
 		FROM tblLent L
-		LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
 		LEFT JOIN tblLentPersons Prsn ON L.PersonID = Prsn.PersonID
-		LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
-
-		WHERE L.UserID = @UserID AND S.StatusName = 'Paid' ORDER BY L.LentAt DESC;
+		LEFT JOIN tblPaymentType Pay ON L.PaymentID = Pay.PaymentID
+		LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
+		WHERE Prsn.PersonID = @PersonID AND L.UserID = @UserID
+		ORDER BY L.LentAt DESC;
 	END
 	ELSE
 	BEGIN
