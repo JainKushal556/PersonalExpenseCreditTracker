@@ -118,3 +118,5 @@ BEGIN
     END CATCH  
   
 END;
+
+--status id insert korar somoy kno asbe. always pending hbe.

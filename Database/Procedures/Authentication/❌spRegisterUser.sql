@@ -74,7 +74,6 @@ BEGIN
         BEGIN TRANSACTION;
 
 
-        -- Insert one by one
         INSERT INTO tblUsers (UserName)
         VALUES (@UserName);
 
@@ -128,8 +127,7 @@ BEGIN
 
     END TRY  
 
-    BEGIN CATCH  
-	--error handaling
+    BEGIN CATCH 
         IF @@TRANCOUNT > 0
             ROLLBACK TRANSACTION;
 
@@ -139,3 +137,7 @@ BEGIN
     END CATCH  
 
 END;
+
+
+
+--name check kor like email phnone no

@@ -56,6 +56,6 @@ BEGIN
     WHERE Task.UserID = @UserID
     AND Task.TaskStatusID = 2
 
-    ORDER BY Task.Deadline ASC;
+    ORDER BY Task.Deadline DESC;
 
 END;
