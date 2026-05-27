@@ -18,3 +18,5 @@ BEGIN
 
 	WHERE L.UserID = @UserID AND S.StatusName = 'Paid' ORDER BY L.LentAt DESC;
 END
+
+
