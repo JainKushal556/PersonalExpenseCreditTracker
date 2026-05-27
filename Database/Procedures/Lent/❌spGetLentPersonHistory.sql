@@ -11,9 +11,8 @@ BEGIN
 	ORDER BY L.LentAt ASC;
 END
 
--- user table er sathe join korar to proyojon ee nae direct to l.userid ke jae id ta ascxhe check kore dfilter korbi .
--- person er sathe tar total ReturnedAmount and RemainingAmount ae 2to oo dekhabe 
--- etay order by hbe latest record mean date wise.
--- er ektu dekhbi research kore inner join korle data nao aste pare jodi if payment/status/person delete kora hoy.
+--left join use korte hbe 
+--orderby desc hbe 
 
--- All Problem are solved. After check the code please remove these lines.
+
+

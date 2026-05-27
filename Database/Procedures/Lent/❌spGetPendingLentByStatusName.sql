@@ -13,4 +13,7 @@ END
 -- user table er sathe join korar to proyojon ee nae direct to l.userid ke jae id ta ascxhe check kore dfilter korbi . 
 -- status check id diye hbe naki status name diye or remaning amount 0 thakleo pending hbe to ota 
 -- er only person name amount status select korle ki kore hbe ui te jokhon filter korbi all data ee to jbe . ae 3 te + deadline er jodi kichu thke 
-
+--left join korte hbe
+--orderby nae
+-- RemainingAmount missing
+--PaymentName missing
