@@ -1,4 +1,4 @@
-CREATE PROCEDURE spGetPendingTasks
+CREATE PROCEDURE spGetCompletedTasks
     @UserID INT
 AS
 BEGIN
@@ -31,12 +31,13 @@ BEGIN
         SELECT 1
         FROM tblTask
         WHERE UserID = @UserID
-        AND TaskStatusID = 1
+        AND TaskStatusID = 2
     )
     BEGIN
-        SELECT 'No Pending Tasks Found' AS Message;
+        SELECT 'No Completed Tasks Found' AS Message;
         RETURN;
     END
+
 
     SELECT
         Task.TaskID,
@@ -53,9 +54,8 @@ BEGIN
         ON Task.TaskStatusID = TaskStatus.TaskStatusID
 
     WHERE Task.UserID = @UserID
-    AND Task.TaskStatusID = 1
+    AND Task.TaskStatusID = 2
 
-    ORDER BY Task.Deadline ASC;
+    ORDER BY Task.Deadline DESC;
 
 END;
-

@@ -1,4 +1,4 @@
-ALTER PROCEDURE spCheckActiveUserDetails
+ALTER PROCEDURE spGetActiveUserDetails
 (
     @UserID INT
 )
@@ -51,3 +51,4 @@ BEGIN
     WHERE U.UserID = @UserID;
 
 END;
+
