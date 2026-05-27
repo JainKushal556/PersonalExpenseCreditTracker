@@ -6,158 +6,134 @@
 
 ## Status Legend
 
-| Mark           | Meaning                                              |
-| -------------- | ---------------------------------------------------- |
-| `[OK]`         | Procedure file exists and is marked completed        |
-| `[FIX NEEDED]` | Procedure file exists but is marked with cross       |
-| `[MISSING]`    | Requirement exists but procedure file is not created |
+| Mark | Meaning |
+| ---- | ------- |
+| `✅` | **PUSH KORLE:** Developer pushed the code, pending review by Project Manager. |
+| `❌` | **FIX NEEDED:** Project Manager checked, changes/fixes are required. |
+| `✔️` | **ALL OKAY:** Everything is perfect for the project, fully approved. |
+| `[MISSING]` | Requirement exists but procedure file is not created yet. |
 
 ## Overall Summary
 
-| Status                    | Count |
-| ------------------------- | ----: |
-| Total Required Procedures |    81 |
-| `[OK]`                    |    26 |
-| `[FIX NEEDED]`            |    11 |
-| `[MISSING]`               |    44 |
+| Status | Count |
+| ------ | ----: |
+| Total Procedures Found | 66 |
+| `✔️` (All Okay) | 46 |
+| `✅` (Pending Review) | 18 |
+| `❌` (Fix Needed) | 2 |
 
-## Team A - User, Task, Note
+*(Note: There is also 1 unmarked file `spTest.sql` in the new `Dashboard` folder)*
 
+---
+
+## 🟣 Team A — User, Task, Note
 **Assigned Area:** Authentication, User Management, Task, Note, Task Reminder
 
-| Status         | Count |
-| -------------- | ----: |
-| Total          |    31 |
-| `[OK]`         |    17 |
-| `[FIX NEEDED]` |     7 |
-| `[MISSING]`    |     7 |
+### `✔️` ALL OKAY (21)
+- `spChangePassword`
+- `spDeleteUserProfilePhotoByUserId` *(Approved!)*
+- `spForgetPassword`
+- `spGetActiveUserDetails`
+- `spLoginUser`
+- `spLogoutUser` *(Approved!)*
+- `spRegisterUser` *(Approved!)*
+- `spUpdateProfilePhoto`
+- `spUpdateUserEmail`
+- `spUpdateUserName`
+- `spUpdateUserPhoneNumber`
+- `spUpdateUserProfile`
+- `spDeleteTask`
+- `spFilterTasksByStatus`
+- `spGetAllTasks`
+- `spGetCompletedTasks`
+- `spGetPendingTasks`
+- `spGetTasksBetweenDates`
+- `spInsertTask` *(Approved!)*
+- `spUpdateTask`
+- `spUpdateTaskStatus`
 
-### `[FIX NEEDED]`
+### `✅` PENDING REVIEW (5)
+- `spDeleteNote`
+- `spGetAllNotes`
+- `spInsertNote`
+- `spUpdateNote`
+- `spUpdateNotePriority`
 
-| No. | Procedure              |
-| --: | ---------------------- |
-|   1 | `spRegisterUser`       |
-|   2 | `spInsertTask`         |
-|   3 | `spInsertNote`         |
-|   4 | `spUpdateNote`         |
-|   5 | `spUpdateNotePriority` |
-|   6 | `spDeleteNote`         |
-|   7 | `spGetAllNotes`        |
+### `❌` FIX NEEDED (0)
+- None
 
-### `[MISSING]`
+### `[MISSING]` (6)
+- `spGetUserDashboard`
+- `spGetTasksByDate`
+- `spFilterNotesByPriority`
+- `spGetNotesByDate`
+- `spGetNotesBetweenDates`
+- `spGetUpcomingTaskReminders`
 
-| No. | Procedure                    |
-| --: | ---------------------------- |
-|   1 | `spRemoveProfilePhoto`       |
-|   2 | `spGetUserDashboard`         |
-|   3 | `spGetTasksByDate`           |
-|   4 | `spFilterNotesByPriority`    |
-|   5 | `spGetNotesByDate`           |
-|   6 | `spGetNotesBetweenDates`     |
-|   7 | `spGetUpcomingTaskReminders` |
+---
 
-## Team B - Expense, Credit, Settings
-
+## 🟢 Team B — Expense, Credit, Settings
 **Assigned Area:** Expense, Credit, Categories, Subcategories, Payment Type
 
-| Status         | Count |
-| -------------- | ----: |
-| Total          |    29 |
-| `[OK]`         |     5 |
-| `[FIX NEEDED]` |     0 |
-| `[MISSING]`    |    24 |
+### `✔️` ALL OKAY (24)
+- *All 16 Settings Procedures*
+- `spFilterCreditByAmountRange`
+- `spFilterCreditByCategory`
+- `spFilterCreditByCategoryAndSubCategory`
+- `spFilterCreditByDateRange` *(Approved!)*
+- `spGetAllCreditsByID`
+- `spGetTodayCredit` *(Approved!)*
+- `spInsertCreditByUserID`
+- `spFilterExpenseByAmountRange`
 
-### `[OK]`
+### `✅` PENDING REVIEW (6)
+- `spFilterExpenseByCategory`
+- `spFilterExpenseByCategoryAndSubCategory`
+- `spFilterExpenseByDateRange`
+- `spGetAllExpensesByID`
+- `spGetTodayExpense`
+- `spInsertExpenseByUserID`
 
-| No. | Procedure                                |
-| --: | ---------------------------------------- |
-|   1 | `spInsertCreditByUserID`                 |
-|   2 | `spGetAllCreditsByID`                    |
-|   3 | `spFilterCreditByCategory`               |
-|   4 | `spFilterCreditByCategoryAndSubCategory` |
-|   5 | `spInsertNewExpenseCategoryByUserID`     |
+### `❌` FIX NEEDED (2)
+- `spGetCategoryWiseCreditReport` *(Marked ❌ by PM! Fix needed)*
+- `spGetMonthlyCreditSummary` *(Marked ❌ by PM! Fix needed)*
 
-### `[MISSING]`
+### `[MISSING]` (3)
+- `spGetMonthlyExpenseSummary`
+- `spGetCategoryWiseExpenseReport`
+- `spGetAllPaymentTypes`
 
-| No. | Procedure                                 |
-| --: | ----------------------------------------- |
-|   1 | `spInsertExpense`                         |
-|   2 | `spGetAllExpenses`                        |
-|   3 | `spFilterExpenseByCategory`               |
-|   4 | `spFilterExpenseByCategoryAndSubCategory` |
-|   5 | `spFilterExpenseByDateRange`              |
-|   6 | `spGetMonthlyExpenseSummary`              |
-|   7 | `spGetCategoryWiseExpenseReport`          |
-|   8 | `spGetTodayExpense`                       |
-|   9 | `spFilterCreditByDateRange`               |
-|  10 | `spGetMonthlyCreditSummary`               |
-|  11 | `spGetCategoryWiseCreditReport`           |
-|  12 | `spGetTodayCredit`                        |
-|  13 | `spUpdateExpenseCategory`                 |
-|  14 | `spDeleteExpenseCategory`                 |
-|  15 | `spInsertExpenseSubCategory`              |
-|  16 | `spUpdateExpenseSubCategory`              |
-|  17 | `spDeleteExpenseSubCategory`              |
-|  18 | `spInsertCreditCategory`                  |
-|  19 | `spUpdateCreditCategory`                  |
-|  20 | `spDeleteCreditCategory`                  |
-|  21 | `spInsertCreditSubCategory`               |
-|  22 | `spUpdateCreditSubCategory`               |
-|  23 | `spDeleteCreditSubCategory`               |
-|  24 | `spGetAllPaymentTypes`                    |
+---
 
-## Team C - Lent, Borrow
+## 🟠 Team C — Lent, Borrow
+**Assigned Area:** Lent, Borrow, Persons, Status, Reminders
 
-**Assigned Area:** Lent, Borrow, Lent Persons, Borrow Persons, Lent/Borrow Status, Person Management, Lent/Borrow Reminders
+### `✔️` ALL OKAY (1)
+- `spGetAllBorrowPersons`
 
-| Status         | Count |
-| -------------- | ----: |
-| Total          |    21 |
-| `[OK]`         |     4 |
-| `[FIX NEEDED]` |     4 |
-| `[MISSING]`    |    13 |
+### `✅` PENDING REVIEW (7)
+- `SpGetAllLentPersons`
+- `SpGetCompletedLentByStatusName`
+- `spReturnLentByReturnAmount`
+- `spGetAllLent`
+- `spGetLentPersonHistory`
+- `spGetPendingLentByStatusName`
+- `spInsertLent`
 
-### `[OK]`
+### `❌` FIX NEEDED (0)
+- None
 
-| No. | Procedure                        |
-| --: | -------------------------------- |
-|   1 | `spGetCompletedLentByStatusName` |
-|   2 | `spReturnLentByReturnAmount`     |
-|   3 | `spGetAllLentPersons`            |
-|   4 | `spGetAllBorrowPersons`          |
-
-### `[FIX NEEDED]`
-
-| No. | Procedure                      |
-| --: | ------------------------------ |
-|   1 | `spInsertLent`                 |
-|   2 | `spGetAllLent`                 |
-|   3 | `spGetPendingLentByStatusName` |
-|   4 | `spGetLentPersonHistory`       |
-
-### `[MISSING]`
-
-| No. | Procedure                      |
-| --: | ------------------------------ |
-|   1 | `spInsertBorrow`               |
-|   2 | `spGetAllBorrow`               |
-|   3 | `spGetPendingBorrow`           |
-|   4 | `spGetCompletedBorrow`         |
-|   5 | `spPayBorrow`                  |
-|   6 | `spGetBorrowPersonHistory`     |
-|   7 | `spGetTotalBorrowByPerson`     |
-|   8 | `spInsertPerson`               |
-|   9 | `spUpdatePerson`               |
-|  10 | `spDeletePerson`               |
-|  11 | `spGetAllPersons`              |
-|  12 | `spGetUpcomingBorrowReminders` |
-|  13 | `spGetUpcomingLentReminders`   |
-
-## Final Notes
-
-| Topic               | Result                            |
-| ------------------- | --------------------------------- |
-| Most completed area | Team A                            |
-| Most pending area   | Team B                            |
-| First priority      | Fix all `[FIX NEEDED]` procedures |
-| Second priority     | Create all `[MISSING]` procedures |
+### `[MISSING]` (13)
+- `spInsertBorrow`
+- `spGetAllBorrow`
+- `spGetPendingBorrow`
+- `spGetCompletedBorrow`
+- `spPayBorrow`
+- `spGetBorrowPersonHistory`
+- `spGetTotalBorrowByPerson`
+- `spInsertPerson`
+- `spUpdatePerson`
+- `spDeletePerson`
+- `spGetAllPersons`
+- `spGetUpcomingBorrowReminders`
+- `spGetUpcomingLentReminders`
