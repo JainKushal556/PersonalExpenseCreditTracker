@@ -11,7 +11,7 @@ BEGIN
               AND Active = 1
     )
     BEGIN
-        SELECT 'User Already Logout Or Invalid UserID' AS Message;
+        SELECT 'User Already Logged Out Or Invalid UserID' AS Message;
         RETURN;
     END
 

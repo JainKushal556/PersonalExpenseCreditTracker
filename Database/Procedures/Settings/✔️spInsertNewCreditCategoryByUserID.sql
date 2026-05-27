@@ -1,4 +1,4 @@
-CREATE PROCEDURE spInsertNewExpenseCategoryByUserID
+CREATE PROCEDURE spInsertNewCreditCategoryByUserID
 (
    @UserID INT,
    @CategoryName VARCHAR(MAX)
@@ -34,7 +34,7 @@ BEGIN
     IF EXISTS
     (
         SELECT 1
-        FROM tblExpenseCategory
+        FROM tblCreditCategory
         WHERE CategoryName = @CategoryName
         AND UserID = @UserID
         AND IsActive = 1
@@ -45,10 +45,10 @@ BEGIN
     END
     
     
-    INSERT INTO tblExpenseCategory(UserID, CategoryName, IsDefault, IsActive)
+    INSERT INTO tblCreditCategory(UserID, CategoryName, IsDefault, IsActive)
     VALUES(@UserID, @CategoryName, 0, 1)
     
-    SELECT 'Expense Category Inserted Successfully' AS Message
+    SELECT 'Credit Category Inserted Successfully' AS Message
 
 END
 GO

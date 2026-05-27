@@ -1,4 +1,4 @@
-REATE PROCEDURE spFilterCreditByDateRange
+CREATE PROCEDURE spFilterCreditByDateRange
 (
   @UserID INT,
   @FromDate DATETIME,

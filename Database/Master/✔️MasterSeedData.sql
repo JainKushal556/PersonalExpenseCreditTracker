@@ -12,17 +12,17 @@ VALUES
 ('Anik Paul');
 GO
 
-INSERT INTO tblExpenseCategory (CategoryName)
+INSERT INTO tblExpenseCategory (UserID, CategoryName, IsDefault, IsActive)
 VALUES
-('Food'),
-('Travel'),
-('Shopping'),
-('Bills'),
-('Entertainment'),
-('Health'),
-('Education'),
-('Transportation'),
-('Personal Care');
+(NULL, 'Food', 1, 1),
+(NULL, 'Travel', 1, 1),
+(NULL, 'Shopping', 1, 1),
+(NULL, 'Bills', 1, 1),
+(NULL, 'Entertainment', 1, 1),
+(NULL, 'Health', 1, 1),
+(NULL, 'Education', 1, 1),
+(NULL, 'Transportation', 1, 1),
+(NULL, 'Personal Care', 1, 1);
 GO
 
 INSERT INTO tblPaymentType (PaymentName)
@@ -39,18 +39,18 @@ VALUES
 ('Cheque');
 GO
 
- INSERT INTO tblCreditCategory (CategoryName)
+ INSERT INTO tblCreditCategory (UserID, CategoryName, IsDefault, IsActive)
 VALUES
-('Salary'),
-('Business'),
-('Investment'),
-('Gift'),
-('Freelancing'),
-('Rental'),
-('Cashback'),
-('Scholarship'),
-('Bonus'),
-('Refund');
+(NULL, 'Salary', 1, 1),
+(NULL, 'Business', 1, 1),
+(NULL, 'Investment', 1, 1),
+(NULL, 'Gift', 1, 1),
+(NULL, 'Freelancing', 1, 1),
+(NULL, 'Rental', 1, 1),
+(NULL, 'Cashback', 1, 1),
+(NULL, 'Scholarship', 1, 1),
+(NULL, 'Bonus', 1, 1),
+(NULL, 'Refund', 1, 1);
 GO
 
 INSERT INTO tblLentPersons (UserID, PersonName, PhoneNumber, Address)
@@ -151,31 +151,31 @@ VALUES
 (10, 'Anik@111', 0);
 GO
 
-INSERT INTO tblCreditSubCategory (CategoryID, SubCategoryName)
+INSERT INTO tblCreditSubCategory (CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
 VALUES
-(1, 'Monthly Salary'),
-(2, 'Shop Income'),
-(3, 'Stock Profit'),
-(4, 'Birthday Gift'),
-(5, 'Web Development'),
-(6, 'House Rent'),
-(7, 'Card Cashback'),
-(8, 'College Scholarship'),
-(9, 'Festival Bonus'),
-(10, 'Product Refund');
+(1, NULL, 'Monthly Salary', 1, 1),
+(2, NULL, 'Shop Income', 1, 1),
+(3, NULL, 'Stock Profit', 1, 1),
+(4, NULL, 'Birthday Gift', 1, 1),
+(5, NULL, 'Web Development', 1, 1),
+(6, NULL, 'House Rent', 1, 1),
+(7, NULL, 'Card Cashback', 1, 1),
+(8, NULL, 'College Scholarship', 1, 1),
+(9, NULL, 'Festival Bonus', 1, 1),
+(10, NULL, 'Product Refund', 1, 1);
 GO
 
-INSERT INTO tblExpenseSubCategory (CategoryID, SubCategoryName)
+INSERT INTO tblExpenseSubCategory (CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
 VALUES
-(1, 'Restaurant'),
-(2, 'Bus Fare'),
-(3, 'Clothes'),
-(4, 'Electricity Bill'),
-(5, 'Movie'),
-(6, 'Medicine'),
-(7, 'Books'),
-(8, 'Fuel'),
-(9, 'Salon');
+(1, NULL, 'Restaurant', 1, 1),
+(2, NULL, 'Bus Fare', 1, 1),
+(3, NULL, 'Clothes', 1, 1),
+(4, NULL, 'Electricity Bill', 1, 1),
+(5, NULL, 'Movie', 1, 1),
+(6, NULL, 'Medicine', 1, 1),
+(7, NULL, 'Books', 1, 1),
+(8, NULL, 'Fuel', 1, 1),
+(9, NULL, 'Salon', 1, 1);
 GO
 
 INSERT INTO tblExpense
