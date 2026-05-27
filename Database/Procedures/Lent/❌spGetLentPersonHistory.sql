@@ -25,3 +25,6 @@ BEGIN
 		PRINT 'User Not Active'
 	END
 END
+
+--print er jaygay select use kor 
+--lent id return korbi 

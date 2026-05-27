@@ -41,3 +41,6 @@ BEGIN
 		PRINT ERROR_MESSAGE()
 	END CATCH
 END
+
+--transaction use korte hbe . commit rollback AE command gulo 
+--print er jaygay select use kor
