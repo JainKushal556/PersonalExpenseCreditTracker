@@ -1,4 +1,4 @@
-CREATE PROCEDURE spGetCategoryWiseCreditReport
+CREATE PROCEDURE spGetCategoryWiseExpenseReport
 (
     @UserID INT
 )
@@ -24,23 +24,24 @@ BEGIN
     IF NOT EXISTS
     (
         SELECT 1
-        FROM tblCredit
+        FROM tblExpense
         WHERE UserID = @UserID
     )
     BEGIN
-        SELECT 'No Credit Record Found' AS Message
+        SELECT 'No Expense Record Found' AS Message
         RETURN
     END
 
     SELECT 
-        ISNULL(CreditCategory.CategoryName, 'Category Deleted') AS CategoryName,
-        SUM(Credit.Amount) AS TotalCredit
-    FROM tblCredit Credit
-    LEFT JOIN tblCreditCategory CreditCategory
-        ON Credit.CategoryID = CreditCategory.CategoryID
-    WHERE Credit.UserID = @UserID
-    GROUP BY CreditCategory.CategoryName
-    ORDER BY TotalCredit DESC;
+        ISNULL(ExpenseCategory.CategoryName, 'Category Deleted') AS CategoryName,
+        SUM(Expense.Amount) AS TotalExpense
+    FROM tblExpense Expense
+    LEFT JOIN tblExpenseCategory ExpenseCategory
+        ON Expense.CategoryID = ExpenseCategory.CategoryID
+    WHERE Expense.UserID = @UserID
+    GROUP BY 
+        ISNULL(ExpenseCategory.CategoryName, 'Category Deleted')
+    ORDER BY TotalExpense DESC;
 
 END
 GO
