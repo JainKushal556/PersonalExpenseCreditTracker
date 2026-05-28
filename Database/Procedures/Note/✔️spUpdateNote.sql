@@ -1,5 +1,6 @@
 CREATE PROCEDURE spUpdateNote
 (
+@UserID INT,
 @NoteID INT,
 @PriorityID INT,
 @NoteTitle VARCHAR(MAX),
@@ -14,10 +15,11 @@ SET @Description=LTRIM(RTRIM(@Description))
 IF NOT EXISTS
 (
 SELECT 1 FROM tblNote
-WHERE NoteID=@NoteID
+WHERE UserID=@UserID
+AND NoteID=@NoteID
 )
 BEGIN
-SELECT 'NoteID Does Not Exist' AS Message
+SELECT 'Invalid UserID Or NoteID' AS Message
 RETURN 
 END
 
@@ -51,7 +53,8 @@ SET
     NotePriorityID=@PriorityID,
     NoteTitle=@NoteTitle,
     Description=@Description
-WHERE NoteID=@NoteID
+WHERE UserID=@UserID 
+AND NoteID=@NoteID
 SELECT 'Note Updated Successfully' AS Message
 
 
@@ -60,4 +63,3 @@ BEGIN CATCH
 SELECT ERROR_MESSAGE() AS Message
 END CATCH
 END
---userid validatyon ee . jekono user er update kora jbe 

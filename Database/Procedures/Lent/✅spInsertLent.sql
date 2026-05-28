@@ -29,7 +29,7 @@ BEGIN
         
 			-- Check PersonID
 			IF NOT EXISTS(SELECT 1
-						  FROM tblLentPersons
+						  FROM tblPersons
 						  WHERE PersonID = @PersonID)
 			BEGIN
 				SELECT 'Invalid PersonID!!' AS Message
@@ -126,6 +126,3 @@ BEGIN
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
-
-
---TABLE CHANGE HOYECHE SO ETA UPDATE KORTE HBE
