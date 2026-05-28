@@ -12,6 +12,17 @@
 
 :contentReference[oaicite:0]{index=0}
 
+## 📄 SRS Addendums (Updated)
+
+### Category Management
+The system will provide default categories and subcategories for all users. Users may create their own custom categories and subcategories. Default categories cannot be edited or deleted by normal users. A user can edit or deactivate only their own custom categories and subcategories. Deleting a category or subcategory will not remove historical transaction records; it will only hide the item from future selection.
+
+### Optional Edit Features
+Editing expense, credit, lent, and borrow records is optional for the first version. The first version will focus on adding records, filtering records, viewing reports, and completing lent/borrow payments through return/payment procedures.
+
+### Notifications
+The first version will include borrow return reminders, lent return reminders, and task deadline reminders. Monthly expense alerts, low balance alerts, and daily summary notifications are future enhancements.
+
 ## 🔐 AUTHENTICATION & USER MANAGEMENT
 
 ### 1. spRegisterUser
@@ -516,6 +527,33 @@
 
 - `Expense`
 
+### 20A. spFilterExpenseByAmountRange
+
+**Purpose:**
+
+- Filter expense records by amount range (min to max).
+
+**Parameters:**
+
+- `@UserID`
+- `@MinAmount`
+- `@MaxAmount`
+
+**Expected Output:**
+
+- Expense records within specified amount range.
+
+**When Used:**
+
+- Expense amount filter option.
+
+**Tables Used:**
+
+- `Expense`
+- `ExpenseCategory`
+- `ExpenseSubCategory`
+- `PaymentType`
+
 ## 💰 CREDIT MODULE
 
 ### 21. spInsertCreditByUserID
@@ -712,6 +750,33 @@
 **Tables Used:**
 
 - `Credit`
+
+### 28A. spFilterCreditByAmountRange
+
+**Purpose:**
+
+- Filter credit records by amount range (min to max).
+
+**Parameters:**
+
+- `@UserID`
+- `@MinAmount`
+- `@MaxAmount`
+
+**Expected Output:**
+
+- Credit records within specified amount range.
+
+**When Used:**
+
+- Credit amount filter option.
+
+**Tables Used:**
+
+- `Credit`
+- `CreditCategory`
+- `CreditSubCategory`
+- `PaymentType`
 
 ## 🤝 LENT MODULE
 
@@ -1564,21 +1629,22 @@
 
 - `Note`
 
-## ⚙️ CATEGORY & SETTINGS MODULE (WE WILL Re-Search Later)
+## ⚙️ CATEGORY & SETTINGS MODULE
 
 ### 62. spInsertNewExpenseCategoryByUserID
 
 **Purpose:**
 
-- Add new expense category.
+- Add new expense category for user (user-specific custom categories).
 
 **Parameters:**
 
+- `@UserID`
 - `@CategoryName`
 
 **Expected Output:**
 
-- Expense category inserted successfully.
+- Expense category inserted successfully with UserID, IsDefault=0, IsActive=1.
 
 **When Used:**
 
@@ -1586,16 +1652,23 @@
 
 **Tables Used:**
 
-- `Expense_Category`
+- `tblExpenseCategory`
 
-### 63. spUpdateExpenseCategory
+**Business Logic:**
+
+- Validate user active status
+- Check duplicate category name within same user only
+- Insert with UserID=@UserID, IsDefault=0, IsActive=1
+
+### 63. spUpdateExpenseCategoryByUserID
 
 **Purpose:**
 
-- Update expense category name.
+- Update expense category name (only for user's custom categories, not default).
 
 **Parameters:**
 
+- `@UserID`
 - `@CategoryID`
 - `@CategoryName`
 
@@ -1609,21 +1682,28 @@
 
 **Tables Used:**
 
-- `Expense_Category`
+- `tblExpenseCategory`
 
-### 64. spDeleteExpenseCategory
+**Business Logic:**
+
+- Validate category belongs to user and IsDefault=0
+- Prevent update of default categories
+- Check duplicate names within user
+
+### 64. spDeleteExpenseCategoryByUserID
 
 **Purpose:**
 
-- Delete expense category.
+- Soft delete expense category (set IsActive=0 to preserve transaction history).
 
 **Parameters:**
 
+- `@UserID`
 - `@CategoryID`
 
 **Expected Output:**
 
-- Expense category deleted successfully.
+- Expense category deleted successfully (soft delete).
 
 **When Used:**
 
@@ -1631,22 +1711,56 @@
 
 **Tables Used:**
 
-- `Expense_Category`
+- `tblExpenseCategory`
 
-### 65. spInsertExpenseSubCategory
+**Business Logic:**
+
+- Validate category belongs to user and IsDefault=0
+- Soft delete: SET IsActive=0 (not physical delete)
+- Preserves linked transaction history
+
+### 65. spGetExpenseCategoriesByUserID
 
 **Purpose:**
 
-- Add new expense sub-category.
+- Get all active expense categories for dropdown (default + user's custom categories).
 
 **Parameters:**
 
+- `@UserID`
+
+**Expected Output:**
+
+- List of active categories where UserID IS NULL (default) or UserID=@UserID.
+
+**When Used:**
+
+- Category dropdown on expense form.
+
+**Tables Used:**
+
+- `tblExpenseCategory`
+
+**Business Logic:**
+
+- Return WHERE IsActive=1 AND (UserID IS NULL OR UserID=@UserID)
+- Order by IsDefault DESC, CategoryName ASC
+
+### 66. spInsertNewExpenseSubCategoryByUserID
+
+**Purpose:**
+
+- Add new expense sub-category for user.
+
+**Parameters:**
+
+- `@UserID`
 - `@CategoryID`
 - `@SubCategoryName`
 
 **Expected Output:**
 
-- Expense sub-category inserted successfully.
+- Expense sub-category inserted successfully with UserID, IsDefault=0, IsActive=1.
 
 **When Used:**
 
@@ -1654,16 +1768,23 @@
 
 **Tables Used:**
 
-- `Expense_Sub_Category`
+- `tblExpenseSubCategory`
 
-### 66. spUpdateExpenseSubCategory
+**Business Logic:**
+
+- Validate category exists and is active
+- Check duplicate subcategory name within user and category
+- Insert with UserID=@UserID, IsDefault=0, IsActive=1
+
+### 67. spUpdateExpenseSubCategoryByUserID
 
 **Purpose:**
 
-- Update expense sub-category name.
+- Update expense sub-category name (only for user's custom subcategories).
 
 **Parameters:**
 
+- `@UserID`
 - `@SubCategoryID`
 - `@SubCategoryName`
 
@@ -1677,21 +1798,22 @@
 
 **Tables Used:**
 
-- `Expense_Sub_Category`
+- `tblExpenseSubCategory`
 
-### 67. spDeleteExpenseSubCategory
+### 68. spDeleteExpenseSubCategoryByUserID
 
 **Purpose:**
 
-- Delete expense sub-category.
+- Soft delete expense sub-category (set IsActive=0).
 
 **Parameters:**
 
+- `@UserID`
 - `@SubCategoryID`
 
 **Expected Output:**
 
-- Expense sub-category deleted successfully.
+- Expense sub-category deleted successfully (soft delete).
 
 **When Used:**
 
@@ -1699,21 +1821,44 @@
 
 **Tables Used:**
 
-- `Expense_Sub_Category`
+- `tblExpenseSubCategory`
 
-### 68. spInsertCreditCategory
+### 69. spGetExpenseSubCategoriesByUserID
 
 **Purpose:**
 
-- Add new credit category.
+- Get all active expense sub-categories for dropdown (default + user's custom).
 
 **Parameters:**
 
+- `@UserID`
+
+**Expected Output:**
+
+- List of active subcategories where UserID IS NULL or UserID=@UserID.
+
+**When Used:**
+
+- Sub-category dropdown on expense form.
+
+**Tables Used:**
+
+- `tblExpenseSubCategory`
+
+### 70. spInsertNewCreditCategoryByUserID
+
+**Purpose:**
+
+- Add new credit category for user (user-specific custom categories).
+
+**Parameters:**
+
+- `@UserID`
 - `@CategoryName`
 
 **Expected Output:**
 
-- Credit category inserted successfully.
+- Credit category inserted successfully with UserID, IsDefault=0, IsActive=1.
 
 **When Used:**
 
@@ -1721,16 +1866,17 @@
 
 **Tables Used:**
 
-- `Credit_Category`
+- `tblCreditCategory`
 
-### 69. spUpdateCreditCategory
+### 71. spUpdateCreditCategoryByUserID
 
 **Purpose:**
 
-- Update credit category name.
+- Update credit category name (only for user's custom categories).
 
 **Parameters:**
 
+- `@UserID`
 - `@CategoryID`
 - `@CategoryName`
 
@@ -1744,21 +1890,22 @@
 
 **Tables Used:**
 
-- `Credit_Category`
+- `tblCreditCategory`
 
-### 70. spDeleteCreditCategory
+### 72. spDeleteCreditCategoryByUserID
 
 **Purpose:**
 
-- Delete credit category.
+- Soft delete credit category (set IsActive=0).
 
 **Parameters:**
 
+- `@UserID`
 - `@CategoryID`
 
 **Expected Output:**
 
-- Credit category deleted successfully.
+- Credit category deleted successfully (soft delete).
 
 **When Used:**
 
@@ -1766,22 +1913,45 @@
 
 **Tables Used:**
 
-- `Credit_Category`
+- `tblCreditCategory`
 
-### 71. spInsertCreditSubCategory
+### 73. spGetCreditCategoriesByUserID
 
 **Purpose:**
 
-- Add new credit sub-category.
+- Get all active credit categories for dropdown (default + user's custom categories).
 
 **Parameters:**
 
+- `@UserID`
+
+**Expected Output:**
+
+- List of active categories where UserID IS NULL or UserID=@UserID.
+
+**When Used:**
+
+- Category dropdown on credit form.
+
+**Tables Used:**
+
+- `tblCreditCategory`
+
+### 74. spInsertNewCreditSubCategoryByUserID
+
+**Purpose:**
+
+- Add new credit sub-category for user.
+
+**Parameters:**
+
+- `@UserID`
 - `@CategoryID`
 - `@SubCategoryName`
 
 **Expected Output:**
 
-- Credit sub-category inserted successfully.
+- Credit sub-category inserted successfully with UserID, IsDefault=0, IsActive=1.
 
 **When Used:**
 
@@ -1789,16 +1959,17 @@
 
 **Tables Used:**
 
-- `Credit_Sub_Category`
+- `tblCreditSubCategory`
 
-### 72. spUpdateCreditSubCategory
+### 75. spUpdateCreditSubCategoryByUserID
 
 **Purpose:**
 
-- Update credit sub-category name.
+- Update credit sub-category name (only for user's custom subcategories).
 
 **Parameters:**
 
+- `@UserID`
 - `@SubCategoryID`
 - `@SubCategoryName`
 
@@ -1812,21 +1983,22 @@
 
 **Tables Used:**
 
-- `Credit_Sub_Category`
+- `tblCreditSubCategory`
 
-### 73. spDeleteCreditSubCategory
+### 76. spDeleteCreditSubCategoryByUserID
 
 **Purpose:**
 
-- Delete credit sub-category.
+- Soft delete credit sub-category (set IsActive=0).
 
 **Parameters:**
 
+- `@UserID`
 - `@SubCategoryID`
 
 **Expected Output:**
 
-- Credit sub-category deleted successfully.
+- Credit sub-category deleted successfully (soft delete).
 
 **When Used:**
 
@@ -1834,9 +2006,31 @@
 
 **Tables Used:**
 
-- `Credit_Sub_Category`
+- `tblCreditSubCategory`
 
-### 74. spGetAllPaymentTypes
+### 77. spGetCreditSubCategoriesByUserID
+
+**Purpose:**
+
+- Get all active credit sub-categories for dropdown (default + user's custom).
+
+**Parameters:**
+
+- `@UserID`
+
+**Expected Output:**
+
+- List of active subcategories where UserID IS NULL or UserID=@UserID.
+
+**When Used:**
+
+- Sub-category dropdown on credit form.
+
+**Tables Used:**
+
+- `tblCreditSubCategory`
+
+### 78. spGetAllPaymentTypes
 
 **Purpose:**
 
@@ -1856,9 +2050,9 @@
 
 **Tables Used:**
 
-- `Payment_Type`
+- `tblPaymentType`
 
-### 75. spInsertPerson
+### 79. spInsertPerson
 
 **Purpose:**
 
@@ -1881,9 +2075,9 @@
 
 **Tables Used:**
 
-- `Person`
+- `tblLentPersons`, `tblBorrowPersons`
 
-### 76. spUpdatePerson
+### 80. spUpdatePerson
 
 **Purpose:**
 
@@ -1907,9 +2101,9 @@
 
 **Tables Used:**
 
-- `Person`
+- `tblLentPersons`, `tblBorrowPersons`
 
-### 77. spDeletePerson
+### 81. spDeletePerson
 
 **Purpose:**
 
@@ -1930,9 +2124,9 @@
 
 **Tables Used:**
 
-- `Person`
+- `tblLentPersons`, `tblBorrowPersons`
 
-### 78. spGetAllPersons
+### 82. spGetAllPersons
 
 **Purpose:**
 
@@ -1953,11 +2147,11 @@
 
 **Tables Used:**
 
-- `Person`
+- `tblLentPersons`, `tblBorrowPersons`
 
-## 🔔 REMINDER & NOTIFICATION QUERIES (WE WILL Re-Search Later)
+## 🔔 REMINDER & NOTIFICATION QUERIES
 
-### 79. spGetUpcomingBorrowReminders
+### 83. spGetUpcomingBorrowReminders
 
 **Purpose:**
 
@@ -1969,9 +2163,9 @@
 
 **Tables Used:**
 
-- `Borrow`
+- `tblBorrow`
 
-### 80. spGetUpcomingLentReminders
+### 84. spGetUpcomingLentReminders
 
 **Purpose:**
 
@@ -1983,9 +2177,9 @@
 
 **Tables Used:**
 
-- `Lent`
+- `tblLent`
 
-### 81. spGetUpcomingTaskReminders
+### 85. spGetUpcomingTaskReminders
 
 **Purpose:**
 
@@ -1997,13 +2191,25 @@
 
 **Tables Used:**
 
-- `Task`
+- `tblTask`
 
 ## 📌 FINAL TOTAL PROCEDURES
 
 **Total Procedures:**
 
-- 81
+- 87
+
+**Recent Additions (10 new procedures):**
+
+- 20A. spFilterExpenseByAmountRange
+- 28A. spFilterCreditByAmountRange
+- 62-77: Updated Category Management (16 procedures with UserID, soft delete, multi-user support)
+  - 62-65: Expense Category (Insert, Update, Delete, Get)
+  - 66-69: Expense SubCategory (Insert, Update, Delete, Get)
+  - 70-73: Credit Category (Insert, Update, Delete, Get)
+  - 74-77: Credit SubCategory (Insert, Update, Delete, Get)
+- 78-82: Settings & Persons (5 procedures)
+- 83-85: Reminders (3 procedures)
 
 **Project Scope:**
 
@@ -2011,8 +2217,9 @@
 - Fully Covers All Tables
 - Covers CRUD
 - Covers Reports
-- Covers Filters
+- Covers Filters (including new Amount Range filters)
 - Covers Dashboard
 - Covers Notifications
 - Covers Lent/Borrow Business Logic
+- Covers Multi-User Category Ownership & Soft Delete
 - Suitable For WinForms + SQL Server Project

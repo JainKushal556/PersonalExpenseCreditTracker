@@ -99,7 +99,10 @@ Stores expense categories.
 | Column Name  | Data Type    | Null Allowed | Constraints                | Description                                                                   |
 | ------------ | ------------ | ------------ | -------------------------- | ----------------------------------------------------------------------------- |
 | CategoryID   | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each expense or credit category |
-| CategoryName | VARCHAR(100) | No           | UNIQUE                     | Stores the unique name of the category used to classify transactions          |
+| UserID       | INT          | Yes          | FOREIGN KEY                | Stores the owner user ID for custom categories; NULL means system default     |
+| CategoryName | VARCHAR(100) | No           | —                          | Stores the category name used to classify transactions                        |
+| IsDefault    | BIT          | No           | DEFAULT 0                  | Identifies whether the category is a system default category                  |
+| IsActive     | BIT          | No           | DEFAULT 1                  | Identifies whether the category is active or hidden                           |
 
 ---
 
@@ -113,7 +116,10 @@ Stores expense sub-categories.
 | --------------- | ------------ | ------------ | -------------------------- | -------------------------------------------------------------------------------------- |
 | SubCategoryID   | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each sub-category record                 |
 | CategoryID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the main category to which this sub-category belongs        |
-| SubCategoryName | VARCHAR(100) | No           | UNIQUE                     | Stores the unique name of the sub-category used for more detailed transaction grouping |
+| UserID          | INT          | Yes          | FOREIGN KEY                | Stores the owner user ID for custom sub-categories; NULL means system default          |
+| SubCategoryName | VARCHAR(100) | No           | —                          | Stores the sub-category name used for more detailed transaction grouping               |
+| IsDefault       | BIT          | No           | DEFAULT 0                  | Identifies whether the sub-category is a system default sub-category                   |
+| IsActive        | BIT          | No           | DEFAULT 1                  | Identifies whether the sub-category is active or hidden                                |
 
 ---
 
@@ -162,7 +168,10 @@ Stores credit categories.
 | Column Name  | Data Type    | Null Allowed | Constraints                | Description                                                                  |
 | ------------ | ------------ | ------------ | -------------------------- | ---------------------------------------------------------------------------- |
 | CategoryID   | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each expense category record   |
-| CategoryName | VARCHAR(100) | No           | UNIQUE                     | Stores the unique name of the category used to organize expense transactions |
+| UserID       | INT          | Yes          | FOREIGN KEY                | Stores the owner user ID for custom categories; NULL means system default    |
+| CategoryName | VARCHAR(100) | No           | —                          | Stores the category name used to organize credit transactions                |
+| IsDefault    | BIT          | No           | DEFAULT 0                  | Identifies whether the category is a system default category                 |
+| IsActive     | BIT          | No           | DEFAULT 1                  | Identifies whether the category is active or hidden                          |
 
 ---
 
@@ -176,7 +185,10 @@ Stores credit sub-categories.
 | --------------- | ------------ | ------------ | -------------------------- | ----------------------------------------------------------------------------------- |
 | SubCategoryID   | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each expense sub-category record      |
 | CategoryID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the main expense category linked to this sub-category    |
-| SubCategoryName | VARCHAR(100) | No           | UNIQUE                     | Stores the unique name of the sub-category used for detailed expense classification |
+| UserID          | INT          | Yes          | FOREIGN KEY                | Stores the owner user ID for custom sub-categories; NULL means system default       |
+| SubCategoryName | VARCHAR(100) | No           | —                          | Stores the sub-category name used for detailed credit classification                |
+| IsDefault       | BIT          | No           | DEFAULT 0                  | Identifies whether the sub-category is a system default sub-category                |
+| IsActive        | BIT          | No           | DEFAULT 1                  | Identifies whether the sub-category is active or hidden                             |
 
 ---
 

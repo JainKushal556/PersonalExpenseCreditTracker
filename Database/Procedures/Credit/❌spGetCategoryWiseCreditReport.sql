@@ -13,3 +13,8 @@ BEGIN
     ORDER BY TotalCredit DESC;
 END;
 GO
+
+
+--etay user_id depend kore report asbe . akhon all user er amount total kore diye diche 
+--active user validation ta nae
+--left join korte hbe jodi catagory nao thke so data jeno daye

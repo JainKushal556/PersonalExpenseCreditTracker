@@ -9,7 +9,12 @@ GO
 
 CREATE TABLE tblExpenseCategory (
     CategoryID INT PRIMARY KEY IDENTITY(1,1),
-    CategoryName VARCHAR(100) UNIQUE NOT NULL
+    UserID INT NULL,
+    CategoryName VARCHAR(100) NOT NULL,
+    IsDefault BIT NOT NULL DEFAULT 0,
+    IsActive BIT NOT NULL DEFAULT 1,
+
+    FOREIGN KEY (UserID) REFERENCES tblUsers(UserID)
 );
 GO
 
@@ -21,7 +26,12 @@ GO
 
 Create Table tblCreditCategory(
     CategoryID  INT PRIMARY KEY IDENTITY(1,1),
-	CategoryName VARCHAR(100) UNIQUE Not Null
+	UserID INT NULL,
+	CategoryName VARCHAR(100) Not Null,
+	IsDefault BIT NOT NULL DEFAULT 0,
+	IsActive BIT NOT NULL DEFAULT 1,
+
+	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID)
 );
 GO
 
@@ -106,10 +116,16 @@ GO
 Create Table tblCreditSubCategory(
   SubCategoryID INT PRIMARY KEY IDENTITY(1,1),
   CategoryID INT NOT NULL,
-  SubCategoryName VARCHAR(100) UNIQUE Not Null,
+  UserID INT NULL,
+  SubCategoryName VARCHAR(100) Not Null,
+  IsDefault BIT NOT NULL DEFAULT 0,
+  IsActive BIT NOT NULL DEFAULT 1,
 
   FOREIGN KEY(CategoryID)
-  REFERENCES tblCreditCategory(CategoryID)
+  REFERENCES tblCreditCategory(CategoryID),
+
+  FOREIGN KEY(UserID)
+  REFERENCES tblUsers(UserID)
 
 );
 GO
@@ -117,10 +133,16 @@ GO
 CREATE TABLE tblExpenseSubCategory (
     SubCategoryID INT PRIMARY KEY IDENTITY(1,1),
     CategoryID INT NOT NULL,
-    SubCategoryName VARCHAR(100) UNIQUE NOT NULL,
+    UserID INT NULL,
+    SubCategoryName VARCHAR(100) NOT NULL,
+    IsDefault BIT NOT NULL DEFAULT 0,
+    IsActive BIT NOT NULL DEFAULT 1,
 
     FOREIGN KEY (CategoryID)
-    REFERENCES tblExpenseCategory(CategoryID)
+    REFERENCES tblExpenseCategory(CategoryID),
+
+    FOREIGN KEY (UserID)
+    REFERENCES tblUsers(UserID)
 );
 GO
 

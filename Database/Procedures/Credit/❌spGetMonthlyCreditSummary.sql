@@ -16,3 +16,6 @@ BEGIN
         [Month] DESC;
 END;
 GO
+
+--etay user_id depend kore report asbe . akhon all user er amount total kore diye diche 
+--active user validation ta nae
