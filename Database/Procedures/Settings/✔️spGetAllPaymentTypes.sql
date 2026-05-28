@@ -21,4 +21,3 @@ BEGIN
     ORDER BY PaymentName ASC;
 
 END
-GO

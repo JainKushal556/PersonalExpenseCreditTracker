@@ -12,7 +12,7 @@ CREATE TABLE tblBorrow (
     Description VARCHAR(MAX) NOT NULL,
 
 	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
-	FOREIGN KEY (PersonID) REFERENCES tblBorrowPersons(PersonID),
+	FOREIGN KEY (PersonID) REFERENCES tblPersons(PersonID),
 	FOREIGN KEY (PaymentID) REFERENCES tblPaymentType(PaymentID),
 	FOREIGN KEY (StatusID) REFERENCES tblLentBorrowStatus(StatusID)
 );

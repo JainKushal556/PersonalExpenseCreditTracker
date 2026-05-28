@@ -939,11 +939,11 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Lent`
 - `Person`
 
-### 35. spGetAllLentPersons
+### 35. spGetAllPersons
 
 **Purpose:**
 
-- Get all persons involved in lent transactions.
+- Get all persons for lent and borrow transactions.
 
 **Parameters:**
 
@@ -951,18 +951,17 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Expected Output:**
 
-- Complete lent persons list.
+- Complete persons list.
 
 **When Used:**
 
-- Lent person dropdown.
-- Lent person management page.
+- Person dropdown.
+- Person management page.
 - Person selection section.
 
 **Tables Used:**
 
-- `Lent`
-- `Person`
+- `tblPersons`
 
 ## 📥 BORROW MODULE
 
@@ -1129,30 +1128,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Borrow`
 - `Person`
 
-### 42. spGetAllBorrowPersons
 
-**Purpose:**
-
-- Get all persons involved in borrow transactions.
-
-**Parameters:**
-
-- `@UserID`
-
-**Expected Output:**
-
-- Complete borrow persons list.
-
-**When Used:**
-
-- Borrow person dropdown.
-- Borrow person management page.
-- Person selection section.
-
-**Tables Used:**
-
-- `Borrow`
-- `Person`
 
 ### 43. spGetTotalBorrowByPerson
 
@@ -2075,7 +2051,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Tables Used:**
 
-- `tblLentPersons`, `tblBorrowPersons`
+- `tblPersons`
 
 ### 80. spUpdatePerson
 
@@ -2101,7 +2077,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Tables Used:**
 
-- `tblLentPersons`, `tblBorrowPersons`
+- `tblPersons`
 
 ### 81. spDeletePerson
 
@@ -2124,7 +2100,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Tables Used:**
 
-- `tblLentPersons`, `tblBorrowPersons`
+- `tblPersons`
 
 ### 82. spGetAllPersons
 
@@ -2147,7 +2123,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Tables Used:**
 
-- `tblLentPersons`, `tblBorrowPersons`
+- `tblPersons`
 
 ## 🔔 REMINDER & NOTIFICATION QUERIES
 

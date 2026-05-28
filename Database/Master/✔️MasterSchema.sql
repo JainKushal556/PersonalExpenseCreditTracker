@@ -35,7 +35,7 @@ Create Table tblCreditCategory(
 );
 GO
 
-CREATE TABLE tblLentPersons(
+CREATE TABLE tblPersons(
 	PersonID INT PRIMARY KEY IDENTITY(1,1),
 	UserID INT NOT NULL,
 	PersonName VARCHAR(100) NOT NULL,
@@ -70,16 +70,7 @@ CREATE TABLE tblNotePriorities (
 );
 GO
 
-CREATE TABLE tblBorrowPersons (
-    PersonID INT PRIMARY KEY IDENTITY(1,1),
-    UserID INT NOT NULL,
-    PersonName VARCHAR(100) NOT NULL,
-    PhoneNumber VARCHAR(15) NOT NULL,
-    Address VARCHAR(MAX) NULL,
 
-	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID)
-);
-GO
 
 --Dependent Tables
 
@@ -211,7 +202,7 @@ CREATE TABLE tblLent(
 	Description VARCHAR(MAX) NOT NULL,
 
 	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
-	FOREIGN KEY (PersonID) REFERENCES tblLentPersons(PersonID),
+	FOREIGN KEY (PersonID) REFERENCES tblPersons(PersonID),
 	FOREIGN KEY (PaymentID) REFERENCES tblPaymentType(PaymentID),
 	FOREIGN KEY (StatusID) REFERENCES tblLentBorrowStatus(StatusID)
 );
@@ -231,7 +222,7 @@ CREATE TABLE tblBorrow (
     Description VARCHAR(MAX) NOT NULL,
 
 	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
-	FOREIGN KEY (PersonID) REFERENCES tblBorrowPersons(PersonID),
+	FOREIGN KEY (PersonID) REFERENCES tblPersons(PersonID),
 	FOREIGN KEY (PaymentID) REFERENCES tblPaymentType(PaymentID),
 	FOREIGN KEY (StatusID) REFERENCES tblLentBorrowStatus(StatusID)
 );

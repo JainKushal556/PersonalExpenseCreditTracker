@@ -1,4 +1,4 @@
-CREATE TABLE tblBorrowPersons (
+CREATE TABLE tblPersons (
     PersonID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL,
     PersonName VARCHAR(100) NOT NULL,

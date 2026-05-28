@@ -53,18 +53,18 @@ VALUES
 (NULL, 'Refund', 1, 1);
 GO
 
-INSERT INTO tblLentPersons (UserID, PersonName, PhoneNumber, Address)
+INSERT INTO tblPersons (UserID, PersonName, PhoneNumber, Address)
 VALUES
-(1, 'Sourav Das', '9876543201', 'Kolkata'),
-(2, 'Onoya Roy', '9123456701', 'Howrah'),
-(3, 'Rakesh Sharma', '9988776601', 'Durgapur'),
-(4, 'Madhuri Sen', '9090909001', 'Siliguri'),
-(5, 'Vivek Gupta', '9871234501', 'Asansol'),
-(6, 'Priyanka Paul', '9012345601', 'Midnapore'),
-(7, 'Abhishek Kumar', '8899776601', 'Malda'),
-(8, 'Nisha Verma', '9765432109', 'Kharagpur'),
-(9, 'Karan Singh', '9345678910', 'Barrackpore'),
-(10, 'Simran Mishra', '9876501200', 'Haldia');
+(1, 'Rahul Sharma', '9876543210', 'Kolkata'),
+(2, 'Priya Das', '9123456780', 'Howrah'),
+(3, 'Amit Roy', '9988776655', 'Durgapur'),
+(4, 'Sneha Paul', '9090909090', 'Siliguri'),
+(5, 'Rohan Gupta', '9871234567', 'Asansol'),
+(6, 'Anjali Singh', '9012345678', 'Midnapore'),
+(7, 'Vikash Kumar', '8899776655', 'Malda'),
+(8, 'Neha Verma', '9765432101', 'Kharagpur'),
+(9, 'Arjun Sen', '9345678901', 'Barrackpore'),
+(10, 'Pooja Mishra', '9876501234', 'Haldia');
 GO
 
 INSERT INTO tblLentBorrowStatus (StatusName)
@@ -95,19 +95,7 @@ VALUES
 ('Important');
 GO
 
-INSERT INTO tblBorrowPersons (UserID, PersonName, PhoneNumber, Address)
-VALUES
-(1, 'Rahul Sharma', '9876543210', 'Kolkata'),
-(2, 'Priya Das', '9123456780', 'Howrah'),
-(3, 'Amit Roy', '9988776655', 'Durgapur'),
-(4, 'Sneha Paul', '9090909090', 'Siliguri'),
-(5, 'Rohan Gupta', '9871234567', 'Asansol'),
-(6, 'Anjali Singh', '9012345678', 'Midnapore'),
-(7, 'Vikash Kumar', '8899776655', 'Malda'),
-(8, 'Neha Verma', '9765432101', 'Kharagpur'),
-(9, 'Arjun Sen', '9345678901', 'Barrackpore'),
-(10, 'Pooja Mishra', '9876501234', 'Haldia');
-GO
+
 
 INSERT INTO tblUserProfile (UserID, Name, ProfilePhoto)
 VALUES
@@ -303,16 +291,7 @@ VALUES
 (15, 'Subham@116', 1);
 GO
 
-INSERT INTO tblLentPersons (UserID, PersonName, PhoneNumber, Address)
-VALUES
-(11, 'Anirban Pal', '9111111111', 'Kolkata'),
-(12, 'Riya Saha', '9111111112', 'Howrah'),
-(13, 'Souvik Das', '9111111113', 'Durgapur'),
-(14, 'Payel Roy', '9111111114', 'Siliguri'),
-(15, 'Mainak Sen', '9111111115', 'Asansol');
-GO
-
-INSERT INTO tblBorrowPersons (UserID, PersonName, PhoneNumber, Address)
+INSERT INTO tblPersons (UserID, PersonName, PhoneNumber, Address)
 VALUES
 (11, 'Debjit Roy', '9222222211', 'Kolkata'),
 (12, 'Trisha Paul', '9222222212', 'Howrah'),
@@ -320,6 +299,8 @@ VALUES
 (14, 'Sohini Ghosh', '9222222214', 'Siliguri'),
 (15, 'Niloy Dutta', '9222222215', 'Asansol');
 GO
+
+
 
 INSERT INTO tblExpense
 (UserID, CategoryID, SubCategoryID, PaymentID, Amount, Description, ExpenseAt)

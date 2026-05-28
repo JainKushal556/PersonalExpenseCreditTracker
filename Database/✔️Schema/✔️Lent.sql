@@ -12,7 +12,7 @@ CREATE TABLE tblLent(
 	Description VARCHAR(MAX) NOT NULL,
 
 	FOREIGN KEY (UserID) REFERENCES tblUsers(UserID),
-	FOREIGN KEY (PersonID) REFERENCES tblLentPersons(PersonID),
+	FOREIGN KEY (PersonID) REFERENCES tblPersons(PersonID),
 	FOREIGN KEY (PaymentID) REFERENCES tblPaymentType(PaymentID),
 	FOREIGN KEY (StatusID) REFERENCES tblLentBorrowStatus(StatusID)
 );
