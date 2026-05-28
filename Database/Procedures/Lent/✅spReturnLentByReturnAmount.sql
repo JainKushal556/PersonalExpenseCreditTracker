@@ -9,7 +9,6 @@ BEGIN
 	DECLARE @NewReturnedAmount DECIMAL(10,2);
 	DECLARE @OldReturnedAmount DECIMAL(10,2);
 	DECLARE @StatusID INT;
-	DECLARE @PaymentName VARCHAR(50);
 	DECLARE @UserID INT;
 
 	BEGIN TRY
@@ -60,12 +59,6 @@ BEGIN
 			@UserID = UserID
 			FROM tblLent
 			WHERE LentID = @LentID;
-
-
-			--Get PaymentName Using PaymentID
-			SELECT @PaymentName = PaymentName FROM tblPaymentType
-			WHERE PaymentID = @PaymentID;
-
 
 			--IF RemainingAmount is NULL THEN @RemainingAmount = @TotalAmount
 			IF @RemainingAmount is NULL
@@ -142,6 +135,3 @@ BEGIN
 				ERROR_LINE() AS ErrorLine
 		END CATCH
 END
-
-
--- are lent return mean ami taka pelam orthat ui te money received ee clck korbo oi lentr er pase then amount payment type descrition er lent id pathalam db ke but catagory er subcat keno pathabo procedure ee ota to lent ee hbe catagory er subcatagory keno asbe lent return er so eta ke thiik korbi er payment name lagbe keno payment id assign korlae to hbe just check kore je seta ache k na .. 
