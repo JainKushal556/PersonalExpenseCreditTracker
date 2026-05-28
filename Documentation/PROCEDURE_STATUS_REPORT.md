@@ -19,9 +19,9 @@
 | ------ | ----: |
 | Total Allotted Procedures | 84 |
 | Total Procedures Found | 74 |
-| `✔️` (All Okay) | 64 |
+| `✔️` (All Okay) | 68 |
 | `✅` (Pending Review) | 0 |
-| `❌` (Fix Needed) | 10 |
+| `❌` (Fix Needed) | 6 |
 
 *(Note: There is also 1 unmarked file `spTest.sql` in the new `Dashboard` folder)*
 
@@ -31,7 +31,7 @@
 **Assigned Area:** Authentication, User Management, Task, Note, Task Reminder  
 **Total Allotted Procedures:** 30
 
-### `✔️` ALL OKAY (26)
+### `✔️` ALL OKAY (30)
 - `spChangePassword`
 - `spDeleteUserProfilePhotoByUserId`
 - `spForgetPassword`
@@ -58,15 +58,16 @@
 - `spFilterNotesByPriority`
 - `spGetNotesBetweenDates`
 - `spInsertNote`
-
-### `✅` PENDING REVIEW (0)
-- None
-
-### `❌` FIX NEEDED (4)
 - `spDeleteNote`
 - `spGetAllNotes`
 - `spUpdateNote`
 - `spUpdateNotePriority`
+
+### `✅` PENDING REVIEW (0)
+- None
+
+### `❌` FIX NEEDED (0)
+- None
 
 ### `[MISSING]` (0)
 - None
