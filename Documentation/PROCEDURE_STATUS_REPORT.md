@@ -19,9 +19,9 @@
 | ------ | ----: |
 | Total Allotted Procedures | 84 |
 | Total Procedures Found | 74 |
-| `✔️` (All Okay) | 61 |
-| `✅` (Pending Review) | 6 |
-| `❌` (Fix Needed) | 7 |
+| `✔️` (All Okay) | 64 |
+| `✅` (Pending Review) | 0 |
+| `❌` (Fix Needed) | 10 |
 
 *(Note: There is also 1 unmarked file `spTest.sql` in the new `Dashboard` folder)*
 
@@ -129,18 +129,18 @@
 **Assigned Area:** Lent, Borrow, Persons, Status, Reminders  
 **Total Allotted Procedures:** 19
 
-### `✔️` ALL OKAY (0)
-- None
-
-### `✅` PENDING REVIEW (6)
+### `✔️` ALL OKAY (3)
 - `spGetAllLent`
 - `SpGetCompletedLentByStatusName`
-- `spGetLentPersonHistory`
 - `spGetPendingLentByStatusName`
+
+### `✅` PENDING REVIEW (0)
+- None
+
+### `❌` FIX NEEDED (6)
+- `spGetLentPersonHistory`
 - `spInsertLent`
 - `spReturnLentByReturnAmount`
-
-### `❌` FIX NEEDED (3)
 - `spDeletePerson`
 - `spInsertPerson`
 - `spUpdatePerson`
