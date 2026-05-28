@@ -1,0 +1,33 @@
+CREATE PROCEDURE  spDeleteNote
+(
+@UserID INT,
+@NoteID INT
+)
+AS
+BEGIN
+
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteID=@NoteID
+)
+BEGIN
+SELECT 'Invalid UserID Or NoteID' AS Message
+RETURN 
+END
+
+BEGIN TRY
+
+DELETE FROM tblNote
+WHERE UserID=@UserID
+AND NoteID=@NoteID
+
+SELECT 'Note Deleted Successfully' AS Message
+END TRY
+
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
