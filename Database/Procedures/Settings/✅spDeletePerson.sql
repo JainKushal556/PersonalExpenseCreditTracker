@@ -13,8 +13,17 @@ BEGIN
 				RETURN
 			END
 
+			IF EXISTS (SELECT 1 
+							FROM tblBorrow
+							WHERE PersonID = @PersonID)
+			BEGIN
+				SELECT 'You Still Have a Borrow Amount Left!! First Clear It.' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
 			IF NOT EXISTS (SELECT 1 
-							FROM tblLentPersons
+							FROM tblPersons
 							WHERE PersonID = @PersonID)
 			BEGIN
 				SELECT 'Invalid PersonID!!' AS Message
@@ -27,7 +36,7 @@ BEGIN
 			WHERE PersonID = @PersonID;
 
 			--Delete Person on Person Table
-			DELETE FROM tblLentPersons
+			DELETE FROM tblPersons
 			WHERE PersonID = @PersonID;
 
 		COMMIT TRANSACTION

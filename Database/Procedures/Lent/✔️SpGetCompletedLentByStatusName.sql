@@ -21,7 +21,7 @@ BEGIN
 			L.Description
 	FROM tblLent L
 	LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
-	LEFT JOIN tblLentPersons Prsn ON L.PersonID = Prsn.PersonID
+	LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
 	LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
 
 	WHERE L.UserID = @UserID AND S.StatusName = 'Paid'

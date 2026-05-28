@@ -12,15 +12,27 @@ BEGIN
 		END
 
 		IF NOT EXISTS (SELECT 1 
-						FROM tblLentPersons
+						FROM tblPersons
 						WHERE PersonID = @PersonID)
 		BEGIN
 			SELECT 'Invalid PersonID!!' AS Message
 			RETURN
 		END
-	
-		--Update Person on LentPerson Table
-		UPDATE tblLentPersons
+		
+		IF TRIM(@PersonName) = ''
+		BEGIN
+			SELECT 'Person Name is Null' AS Message
+			RETURN
+		END
+
+		IF TRIM(@PhoneNumber) = ''
+		BEGIN
+			SELECT 'Phone Number is Null' AS Message
+			RETURN
+		END
+
+		--Update Person on Person Table
+		UPDATE tblPersons
 			SET PersonName = @PersonName,
 			PhoneNumber = @PhoneNumber,
 			Address = @Address

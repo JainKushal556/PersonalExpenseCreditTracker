@@ -10,16 +10,36 @@ BEGIN
 			SELECT 'Invalid OR Inactive UserID!!' AS Message
 			RETURN
 		END
-	
-		--Insert Person on Lent Table
-		INSERT INTO tblLentPersons
+
+		IF @UserID IS NULL
+		BEGIN
+			SELECT 'User ID is Null' AS Message
+			RETURN
+		END
+
+		IF TRIM(@PersonName) = ''
+		BEGIN
+			SELECT 'Person Name is Null' AS Message
+			RETURN
+		END
+
+		IF TRIM(@PhoneNumber) = ''
+		BEGIN
+			SELECT 'Phone Number is Null' AS Message
+			RETURN
+		END
+
+		--Insert Person on Person Table
+		INSERT INTO tblPersons
 		(
+			UserID,
 			PersonName,
 			PhoneNumber,
 			Address
 		)
 		VALUES
 		(
+			@UserID,
 			@PersonName,
 			@PhoneNumber,
 			@Address
