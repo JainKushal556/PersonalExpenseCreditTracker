@@ -27,3 +27,6 @@ BEGIN
 	WHERE L.UserID = @UserID AND S.StatusName = 'Pending'
 	ORDER BY L.LentAt DESC;
 END
+
+
+--sudhu pendiong check korle thori na hbe over due ache partialy paid ache 

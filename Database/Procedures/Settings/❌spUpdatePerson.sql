@@ -43,3 +43,12 @@ BEGIN
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
+
+
+
+-- PersonID validation e ownership check nei, onno user er PersonID update korte parbe.
+-- TRIM(@PersonName) = '' → NULL handle korbe na.
+-- TRIM(@PhoneNumber) = '' → NULL handle korbe na.
+-- Input trim kore update korche na, extra spaces DB te store hobe.
+-- Success message nei.
+-- SET NOCOUNT ON missing.

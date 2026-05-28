@@ -26,7 +26,7 @@ BEGIN
             AND StatusID = 1
         )
         BEGIN
-            SELECT 'No Pending Upcoming Tasks Found' AS Message;
+            SELECT 'No Pending Upcoming Lent Found' AS Message;
             RETURN;
         END
 
@@ -47,7 +47,7 @@ BEGIN
 		WHERE L.UserID = @UserID
 		AND L.DeadlineAt >= @Today
 		AND L.StatusID = 1
-		ORDER BY L.DeadlineAt DESC
+		ORDER BY L.DeadlineAt ASC
 
     END TRY
 
@@ -56,3 +56,6 @@ BEGIN
     END CATCH
 
 END
+
+--status id direct na diye name diye bar kor then de
+--select ee deadline ee select koris ne 

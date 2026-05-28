@@ -45,3 +45,8 @@ BEGIN
     RETURN 1;
 
 END;
+
+--return 0 1 esob hbe na message print korbi select use kore "SELECT 'Message' AS Message"
+--ekhane user id nuull ki na check to korechis but same exist and active ae duto check nae 
+--er person id er payment id keno select korchis oder name select hbe to join kore 
+--left join hbe jodi kichu delte hoye tao jeno data show kore 

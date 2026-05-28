@@ -126,3 +126,7 @@ BEGIN
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
+
+
+--user jeno tar add kora person ee use korte pare so user id check korye hbe person idr sathe person tbl ee user id ache 
+--

@@ -123,3 +123,12 @@ BEGIN
 
     END CATCH
 END;
+
+
+
+
+--transaction use korte hbe commit rollback jatye 2to table ae insert hoy properly
+--user active and exist both validate korte hbe
+--user tar add kora person ee use korbe tai ote user id ache table ee so seta dekh 
+--directly id na pass koriye name diye id search kor then ota de 
+--print er jaygay select use korte hbe 

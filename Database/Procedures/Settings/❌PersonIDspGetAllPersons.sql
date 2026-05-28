@@ -12,7 +12,7 @@ BEGIN
 		END
 
 		--Print Persons of Person Table
-		SELECT  PersonName, PhoneNumber, Address
+		SELECT  PersonID,PersonName, PhoneNumber, Address
 		FROM tblPersons
 		WHERE UserID = @UserID;
 

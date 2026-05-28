@@ -39,3 +39,8 @@ BEGIN
     ORDER BY b.BorrowAt DESC;
 
 END;
+
+--user id validation nae 
+--user id diye check korte hbe je oi user ta ki tar ee mean user id ki same oi person er record ee.
+--return 0 korte hbe na message print korbi select use kore print noy 
+--inner join hbe na jodi person delete hoye jaye pawa ee jbe na data 

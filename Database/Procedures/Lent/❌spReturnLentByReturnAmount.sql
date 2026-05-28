@@ -135,3 +135,5 @@ BEGIN
 				ERROR_LINE() AS ErrorLine
 		END CATCH
 END
+
+--are sae same jinish user jodi lent back pelo se to add korar time ee AMOUNT DEBE payment type dilo desc dilo but se catagory id er subcat keno debe cat to lent ee hbe er subcat bollam to je not aPPLICABLE KORTE

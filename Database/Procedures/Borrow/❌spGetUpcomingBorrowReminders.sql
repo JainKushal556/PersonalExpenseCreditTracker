@@ -43,3 +43,10 @@ BEGIN
 
 END;
 
+
+--return 0 1 hbe na select use kore print korbi 
+--user id exist and active validation debe 
+--sob jaygay idr jaygay name show korbi join kore 
+--DATEDIF korar age date ke cast korb jate ota theke time chole jai 
+
+

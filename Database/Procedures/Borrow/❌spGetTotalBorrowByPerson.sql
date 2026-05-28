@@ -41,3 +41,6 @@ BEGIN
 END;
 
 
+--retuurn 0 hbe sob jaygay select use kore print korbi
+--person id exiist kore ki na dekh only value dekhchis 
+--user id ee nae kon user er pending lent bar korchis jnbi ki kore ?? user id dibi + exist and active check korbi

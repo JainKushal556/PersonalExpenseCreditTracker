@@ -24,3 +24,8 @@ BEGIN
     ORDER BY b.DeadlineAt ASC;
 
 END;
+
+
+--uuser id and active validation nae
+--left join hbe 
+--payment name o select korbi

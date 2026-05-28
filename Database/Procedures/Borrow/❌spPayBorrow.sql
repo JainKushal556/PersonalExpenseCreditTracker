@@ -112,3 +112,10 @@ BEGIN
 END;
 
 
+--transaction add kore hbe jate inset properly hoy sobkotay 
+--return na kore okhne select use kore print kora
+--payment id exist korche ni check ee nae 
+--status id direct na diye name use kore ota khuj then seta de jodi id palte jaye tokhon to er ae code ta kaj korbe na 
+--expense table ee cat id ache subcat id ache 
+
+
