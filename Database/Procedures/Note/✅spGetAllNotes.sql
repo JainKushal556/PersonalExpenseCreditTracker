@@ -1,21 +1,33 @@
 CREATE PROCEDURE spGetAllNotes
+(
+@UserID INT
+)
 AS
 BEGIN
 
 IF NOT EXISTS
 (
-SELECT 1 FROM tblNote
+SELECT 1 FROM tblUsers
+WHERE UserID=@UserID
 )
 BEGIN
-SELECT 'Notes Not Found' AS Message
+SELECT 'UserID Does Not Exists' AS Message
 RETURN
 END
 
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'No Notes Found For This User' AS Message
+RETURN
+END
 BEGIN TRY
 
 SELECT
 tblNote.NoteID,
-tblNote.UserID,
 tblNote.NotePriorityID,
 tblNote.NoteTitle,
 tblNote.Description,
@@ -24,7 +36,7 @@ tblNote.CreatedAt
 
 FROM tblNote
 LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
-
+WHERE tblNote.UserID=@UserID
 ORDER BY tblNote.CreatedAt DESC
 
 END TRY
@@ -33,9 +45,3 @@ BEGIN CATCH
 SELECT ERROR_MESSAGE() AS Message
 END CATCH
 END
-
-
-
---userid diye checking ewe nae 
--- oi user er note ache ki na ?
---akhon all user er note return korbe 
