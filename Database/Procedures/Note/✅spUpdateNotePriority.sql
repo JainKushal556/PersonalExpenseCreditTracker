@@ -1,5 +1,6 @@
 CREATE PROCEDURE  spUpdateNotePriority
 (
+@UserID INT,
 @NoteID INT,
 @PriorityID INT
 )
@@ -9,14 +10,13 @@ BEGIN
 IF NOT EXISTS
 (
 SELECT 1 FROM tblNote
-WHERE NoteID=@NoteID
+WHERE UserID=@UserID
+AND NoteID=@NoteID
 )
 BEGIN
-SELECT 'NoteID Does Not Exist' AS Message
+SELECT 'Invalid UserID Or NoteID' AS Message
 RETURN 
 END
-
-
 
 IF NOT EXISTS
 (
@@ -33,7 +33,8 @@ BEGIN TRY
 UPDATE tblNote 
 SET
     NotePriorityID=@PriorityID
-WHERE NoteID=@NoteID
+WHERE UserID=@UserID 
+AND NoteID=@NoteID
 
 SELECT 'Note Priority Updated Successfully' AS Message
 END TRY
@@ -42,5 +43,3 @@ BEGIN CATCH
 SELECT ERROR_MESSAGE() AS Message
 END CATCH
 END
-
---user id validation ee nae jekono user er note uupdate kora jbe 
