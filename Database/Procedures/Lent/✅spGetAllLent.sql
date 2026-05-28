@@ -34,3 +34,5 @@ BEGIN
 	WHERE L.UserID = @UserID ORDER BY L.LentAt DESC
 	RETURN @LentID
 END
+
+
