@@ -1,4 +1,4 @@
-# Final Stored Procedure Requirements
+﻿# Final Stored Procedure Requirements
 
 ## Personal Expense Credit Tracker
 
@@ -12,7 +12,7 @@
 
 :contentReference[oaicite:0]{index=0}
 
-## 📄 SRS Addendums (Updated)
+## ðŸ“„ SRS Addendums (Updated)
 
 ### Category Management
 The system will provide default categories and subcategories for all users. Users may create their own custom categories and subcategories. Default categories cannot be edited or deleted by normal users. A user can edit or deactivate only their own custom categories and subcategories. Deleting a category or subcategory will not remove historical transaction records; it will only hide the item from future selection.
@@ -23,7 +23,7 @@ Editing expense, credit, lent, and borrow records is optional for the first vers
 ### Notifications
 The first version will include borrow return reminders, lent return reminders, and task deadline reminders. Monthly expense alerts, low balance alerts, and daily summary notifications are future enhancements.
 
-## 🔐 AUTHENTICATION & USER MANAGEMENT
+## ðŸ” AUTHENTICATION & USER MANAGEMENT
 
 ### 1. spRegisterUser
 
@@ -312,8 +312,8 @@ The first version will include borrow return reminders, lent return reminders, a
 **Expected Output:**
 
 - Returns Active status of the user.
-- If Active = 1 → Allow login.
-- If Active = 0 → Block login.
+- If Active = 1 â†’ Allow login.
+- If Active = 0 â†’ Block login.
 
 **When Used:**
 
@@ -330,7 +330,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - Check Active column value.
 - Return authentication result with account status.
 
-## 💸 EXPENSE MODULE
+## ðŸ’¸ EXPENSE MODULE
 
 ### 13. spInsertExpense
 
@@ -456,7 +456,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Expense`
 
-### 18. spGetMonthlyExpenseSummary (UI)
+### 18. spGetMonthlyExpenseSummary
 
 **Purpose:**
 
@@ -480,7 +480,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Expense`
 
-### 19. spGetCategoryWiseExpenseReport (UI)
+### 19. spGetCategoryWiseExpenseReport
 
 **Purpose:**
 
@@ -554,7 +554,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - `ExpenseSubCategory`
 - `PaymentType`
 
-## 💰 CREDIT MODULE
+## ðŸ’° CREDIT MODULE
 
 ### 21. spInsertCreditByUserID
 
@@ -778,7 +778,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - `CreditSubCategory`
 - `PaymentType`
 
-## 🤝 LENT MODULE
+## ðŸ¤ LENT MODULE
 
 ### 29. spInsertLent
 
@@ -963,7 +963,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblPersons`
 
-## 📥 BORROW MODULE
+## ðŸ“¥ BORROW MODULE
 
 ### 36. spInsertBorrow
 
@@ -1130,7 +1130,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 
 
-### 43. spGetTotalBorrowByPerson
+### 42. spGetTotalBorrowByPerson
 
 **Purpose:**
 
@@ -1155,9 +1155,9 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Borrow`
 - `Person`
 
-## ✅ TASK MODULE
+## âœ… TASK MODULE
 
-### 44. spInsertTask
+### 43. spInsertTask
 
 **Purpose:**
 
@@ -1184,7 +1184,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Task`
 
-### 45. spUpdateTask
+### 44. spUpdateTask
 
 **Purpose:**
 
@@ -1210,7 +1210,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Task`
 
-### 46. spUpdateTaskStatus
+### 45. spUpdateTaskStatus
 
 **Purpose:**
 
@@ -1234,7 +1234,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Task`
 
-### 47. spDeleteTask
+### 46. spDeleteTask
 
 **Purpose:**
 
@@ -1256,7 +1256,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Task`
 
-### 48. spGetAllTasks
+### 47. spGetAllTasks
 
 **Purpose:**
 
@@ -1282,7 +1282,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Task`
 
-### 49. spGetPendingTasks
+### 48. spGetPendingTasks
 
 **Purpose:**
 
@@ -1305,7 +1305,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Task`
 
-### 50. spGetCompletedTasks
+### 49. spGetCompletedTasks
 
 **Purpose:**
 
@@ -1327,30 +1327,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Task`
 
-### 51. spGetTasksByDate
-
-**Purpose:**
-
-- Get tasks of a specific date.
-
-**Parameters:**
-
-- `@UserID`
-- `@TaskDate`
-
-**Expected Output:**
-
-- Tasks of selected date.
-
-**When Used:**
-
-- Calendar/date wise task section.
-
-**Tables Used:**
-
-- `Task`
-
-### 52. spGetTasksBetweenDates
+### 50. spGetTasksBetweenDates
 
 **Purpose:**
 
@@ -1375,7 +1352,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Task`
 
-### 53. spFilterTasksByStatus
+### 51. spFilterTasksByStatus
 
 **Purpose:**
 
@@ -1407,9 +1384,9 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Task`
 - `Task_Status`
 
-## 📝 NOTE MODULE
+## ðŸ“ NOTE MODULE
 
-### 54. spInsertNote
+### 52. spInsertNote
 
 **Purpose:**
 
@@ -1435,7 +1412,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Note`
 
-### 55. spUpdateNote
+### 53. spUpdateNote
 
 **Purpose:**
 
@@ -1460,7 +1437,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Note`
 
-### 56. spUpdateNotePriority
+### 54. spUpdateNotePriority
 
 **Purpose:**
 
@@ -1483,7 +1460,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Note`
 
-### 57. spDeleteNote
+### 55. spDeleteNote
 
 **Purpose:**
 
@@ -1505,7 +1482,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Note`
 
-### 58. spGetAllNotes
+### 56. spGetAllNotes
 
 **Purpose:**
 
@@ -1527,7 +1504,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Note`
 
-### 59. spFilterNotesByPriority
+### 57. spFilterNotesByPriority
 
 **Purpose:**
 
@@ -1557,30 +1534,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Note`
 - `Note_Priority`
 
-### 60. spGetNotesByDate
-
-**Purpose:**
-
-- Get notes of a specific date.
-
-**Parameters:**
-
-- `@UserID`
-- `@NoteDate`
-
-**Expected Output:**
-
-- Notes of selected date.
-
-**When Used:**
-
-- Calendar/date wise note section.
-
-**Tables Used:**
-
-- `Note`
-
-### 61. spGetNotesBetweenDates
+### 58. spGetNotesBetweenDates
 
 **Purpose:**
 
@@ -1605,9 +1559,9 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Note`
 
-## ⚙️ CATEGORY & SETTINGS MODULE
+## âš™ï¸ CATEGORY & SETTINGS MODULE
 
-### 62. spInsertNewExpenseCategoryByUserID
+### 59. spInsertNewExpenseCategoryByUserID
 
 **Purpose:**
 
@@ -1636,7 +1590,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - Check duplicate category name within same user only
 - Insert with UserID=@UserID, IsDefault=0, IsActive=1
 
-### 63. spUpdateExpenseCategoryByUserID
+### 60. spUpdateExpenseCategoryByUserID
 
 **Purpose:**
 
@@ -1666,7 +1620,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - Prevent update of default categories
 - Check duplicate names within user
 
-### 64. spDeleteExpenseCategoryByUserID
+### 61. spDeleteExpenseCategoryByUserID
 
 **Purpose:**
 
@@ -1695,7 +1649,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - Soft delete: SET IsActive=0 (not physical delete)
 - Preserves linked transaction history
 
-### 65. spGetExpenseCategoriesByUserID
+### 62. spGetExpenseCategoriesByUserID
 
 **Purpose:**
 
@@ -1722,7 +1676,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - Return WHERE IsActive=1 AND (UserID IS NULL OR UserID=@UserID)
 - Order by IsDefault DESC, CategoryName ASC
 
-### 66. spInsertNewExpenseSubCategoryByUserID
+### 63. spInsertNewExpenseSubCategoryByUserID
 
 **Purpose:**
 
@@ -1752,7 +1706,7 @@ The first version will include borrow return reminders, lent return reminders, a
 - Check duplicate subcategory name within user and category
 - Insert with UserID=@UserID, IsDefault=0, IsActive=1
 
-### 67. spUpdateExpenseSubCategoryByUserID
+### 64. spUpdateExpenseSubCategoryByUserID
 
 **Purpose:**
 
@@ -1776,7 +1730,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblExpenseSubCategory`
 
-### 68. spDeleteExpenseSubCategoryByUserID
+### 65. spDeleteExpenseSubCategoryByUserID
 
 **Purpose:**
 
@@ -1799,7 +1753,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblExpenseSubCategory`
 
-### 69. spGetExpenseSubCategoriesByUserID
+### 66. spGetExpenseSubCategoriesByUserID
 
 **Purpose:**
 
@@ -1821,7 +1775,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblExpenseSubCategory`
 
-### 70. spInsertNewCreditCategoryByUserID
+### 67. spInsertNewCreditCategoryByUserID
 
 **Purpose:**
 
@@ -1844,7 +1798,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblCreditCategory`
 
-### 71. spUpdateCreditCategoryByUserID
+### 68. spUpdateCreditCategoryByUserID
 
 **Purpose:**
 
@@ -1868,7 +1822,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblCreditCategory`
 
-### 72. spDeleteCreditCategoryByUserID
+### 69. spDeleteCreditCategoryByUserID
 
 **Purpose:**
 
@@ -1891,7 +1845,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblCreditCategory`
 
-### 73. spGetCreditCategoriesByUserID
+### 70. spGetCreditCategoriesByUserID
 
 **Purpose:**
 
@@ -1913,7 +1867,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblCreditCategory`
 
-### 74. spInsertNewCreditSubCategoryByUserID
+### 71. spInsertNewCreditSubCategoryByUserID
 
 **Purpose:**
 
@@ -1937,7 +1891,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblCreditSubCategory`
 
-### 75. spUpdateCreditSubCategoryByUserID
+### 72. spUpdateCreditSubCategoryByUserID
 
 **Purpose:**
 
@@ -1961,7 +1915,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblCreditSubCategory`
 
-### 76. spDeleteCreditSubCategoryByUserID
+### 73. spDeleteCreditSubCategoryByUserID
 
 **Purpose:**
 
@@ -1984,7 +1938,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblCreditSubCategory`
 
-### 77. spGetCreditSubCategoriesByUserID
+### 74. spGetCreditSubCategoriesByUserID
 
 **Purpose:**
 
@@ -2006,7 +1960,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblCreditSubCategory`
 
-### 78. spGetAllPaymentTypes
+### 75. spGetAllPaymentTypes
 
 **Purpose:**
 
@@ -2028,7 +1982,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblPaymentType`
 
-### 79. spInsertPerson
+### 76. spInsertPerson
 
 **Purpose:**
 
@@ -2053,7 +2007,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblPersons`
 
-### 80. spUpdatePerson
+### 77. spUpdatePerson
 
 **Purpose:**
 
@@ -2079,7 +2033,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblPersons`
 
-### 81. spDeletePerson
+### 78. spDeletePerson
 
 **Purpose:**
 
@@ -2102,7 +2056,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblPersons`
 
-### 82. spGetAllPersons
+### 79. spGetAllPersons
 
 **Purpose:**
 
@@ -2125,9 +2079,9 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblPersons`
 
-## 🔔 REMINDER & NOTIFICATION QUERIES
+## ðŸ”” REMINDER & NOTIFICATION QUERIES
 
-### 83. spGetUpcomingBorrowReminders
+### 80. spGetUpcomingBorrowReminders
 
 **Purpose:**
 
@@ -2141,7 +2095,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblBorrow`
 
-### 84. spGetUpcomingLentReminders
+### 81. spGetUpcomingLentReminders
 
 **Purpose:**
 
@@ -2155,7 +2109,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblLent`
 
-### 85. spGetUpcomingTaskReminders
+### 82. spGetUpcomingTaskReminders
 
 **Purpose:**
 
@@ -2169,11 +2123,11 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblTask`
 
-## 📌 FINAL TOTAL PROCEDURES
+## ðŸ“Œ FINAL TOTAL PROCEDURES
 
 **Total Procedures:**
 
-- 87
+- 82
 
 **Recent Additions (10 new procedures):**
 
