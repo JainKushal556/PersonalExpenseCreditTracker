@@ -1,4 +1,4 @@
-# Stored Procedure Status Report
+﻿# Stored Procedure Status Report
 
 **Project:** Personal Expense Credit Tracker  
 **Requirement File:** `Documentation/STORED_PROCEDURE_REQUIREMENTS.md`  
@@ -8,30 +8,30 @@
 
 | Mark | Meaning |
 | ---- | ------- |
-| `✅` | **PUSH KORLE:** Developer pushed the code, pending review by Project Manager. |
-| `❌` | **FIX NEEDED:** Project Manager checked, changes/fixes are required. |
-| `✔️` | **ALL OKAY:** Everything is perfect for the project, fully approved. |
+| `âœ…` | **PUSH KORLE:** Developer pushed the code, pending review by Project Manager. |
+| `âŒ` | **FIX NEEDED:** Project Manager checked, changes/fixes are required. |
+| `âœ”ï¸` | **ALL OKAY:** Everything is perfect for the project, fully approved. |
 | `[MISSING]` | Requirement exists but procedure file is not created yet. |
 
 ## Overall Summary
 
 | Status | Count |
 | ------ | ----: |
-| Total Allotted Procedures | 84 |
-| Total Procedures Found | 74 |
-| `✔️` (All Okay) | 68 |
-| `✅` (Pending Review) | 0 |
-| `❌` (Fix Needed) | 6 |
+| Total Allotted Procedures | 85 |
+| Total Procedures Found | 85 |
+| `âœ”ï¸` (All Okay) | 68 |
+| `âœ…` (Pending Review) | 0 |
+| `âŒ` (Fix Needed) | 17 |
 
 *(Note: There is also 1 unmarked file `spTest.sql` in the new `Dashboard` folder)*
 
 ---
 
-## 🟣 Team A — User, Task, Note
+## ðŸŸ£ Team A â€” User, Task, Note
 **Assigned Area:** Authentication, User Management, Task, Note, Task Reminder  
 **Total Allotted Procedures:** 30
 
-### `✔️` ALL OKAY (30)
+### `âœ”ï¸` ALL OKAY (30)
 - `spChangePassword`
 - `spDeleteUserProfilePhotoByUserId`
 - `spForgetPassword`
@@ -63,10 +63,10 @@
 - `spUpdateNote`
 - `spUpdateNotePriority`
 
-### `✅` PENDING REVIEW (0)
+### `âœ…` PENDING REVIEW (0)
 - None
 
-### `❌` FIX NEEDED (0)
+### `âŒ` FIX NEEDED (0)
 - None
 
 ### `[MISSING]` (0)
@@ -74,11 +74,11 @@
 
 ---
 
-## 🟢 Team B — Expense, Credit, Settings
+## ðŸŸ¢ Team B â€” Expense, Credit, Settings
 **Assigned Area:** Expense, Credit, Categories, Subcategories, Payment Type  
 **Total Allotted Procedures:** 35
 
-### `✔️` ALL OKAY (35)
+### `âœ”ï¸` ALL OKAY (35)
 - `spDeleteCreditCategoryByUserID`
 - `spDeleteCreditSubCategoryByUserID`
 - `spDeleteExpenseCategoryByUserID`
@@ -115,10 +115,10 @@
 - `spGetTodayExpense`
 - `spInsertExpenseByUserID`
 
-### `✅` PENDING REVIEW (0)
+### `âœ…` PENDING REVIEW (0)
 - None
 
-### `❌` FIX NEEDED (0)
+### `âŒ` FIX NEEDED (0)
 - None
 
 ### `[MISSING]` (0)
@@ -126,34 +126,37 @@
 
 ---
 
-## 🟠 Team C — Lent, Borrow
+## ðŸŸ  Team C â€” Lent, Borrow
 **Assigned Area:** Lent, Borrow, Persons, Status, Reminders  
-**Total Allotted Procedures:** 19
+**Total Allotted Procedures:** 20
 
-### `✔️` ALL OKAY (3)
+### `âœ”ï¸` ALL OKAY (3)
 - `spGetAllLent`
 - `SpGetCompletedLentByStatusName`
 - `spGetPendingLentByStatusName`
 
-### `✅` PENDING REVIEW (0)
+### `âœ…` PENDING REVIEW (0)
 - None
 
-### `❌` FIX NEEDED (6)
-- `spGetLentPersonHistory`
+### `âŒ` FIX NEEDED (17)
+- `spGetAllBorrow`
+- `spGetBorrowPersonHistory`
+- `spGetCompletedBorrow`
+- `spGetOverduedBorrow`
+- `spGetPendingBorrow`
+- `spGetTotalBorrowByPerson`
+- `spGetUpcomingBorrowReminders`
+- `spInsertBorrow`
+- `spPayBorrow`
+- `spGetPendingLentByStatusName`
 - `spInsertLent`
 - `spReturnLentByReturnAmount`
+- `PersonIDspGetAllPersons`
 - `spDeletePerson`
+- `spGetUpcomingLentReminders`
 - `spInsertPerson`
 - `spUpdatePerson`
 
-### `[MISSING]` (10)
-- `spInsertBorrow`
-- `spGetAllBorrow`
-- `spGetPendingBorrow`
-- `spGetCompletedBorrow`
-- `spPayBorrow`
-- `spGetBorrowPersonHistory`
-- `spGetTotalBorrowByPerson`
-- `spGetAllPersons`
-- `spGetUpcomingBorrowReminders`
-- `spGetUpcomingLentReminders`
+### `[MISSING]` (0)
+- None
+
