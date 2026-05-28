@@ -42,3 +42,5 @@ BEGIN CATCH
 SELECT ERROR_MESSAGE() AS Message
 END CATCH
 END
+
+--noteid er user id validation aksathe korte hbe akhon userid er noteid thakle ee delete hoye jbe but oi user er jeno note id ta hoy ota to nae ono user er note id thkle seo delete hoye jbe .

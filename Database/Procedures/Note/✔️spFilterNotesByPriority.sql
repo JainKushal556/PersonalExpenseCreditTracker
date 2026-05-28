@@ -40,7 +40,6 @@ END
 BEGIN TRY
 SELECT
 tblNote.NoteID,
-tblNote.UserID,
 tblNote.NotePriorityID,
 tblNote.NoteTitle,
 tblNote.Description,

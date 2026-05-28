@@ -33,3 +33,9 @@ BEGIN CATCH
 SELECT ERROR_MESSAGE() AS Message
 END CATCH
 END
+
+
+
+--userid diye checking ewe nae 
+-- oi user er note ache ki na ?
+--akhon all user er note return korbe 
