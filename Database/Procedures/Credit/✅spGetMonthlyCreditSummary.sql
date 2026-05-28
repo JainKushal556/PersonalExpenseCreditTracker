@@ -11,9 +11,9 @@ BEGIN
     (
         SELECT 1
         FROM tblUserAuthentication UserAuthentication
-        INNER JOIN tblUsers User
-            ON UserAuthentication.UserID = User.UserID
-        WHERE User.UserID = @UserID
+        INNER JOIN tblUsers Users
+            ON UserAuthentication.UserID = Users.UserID
+        WHERE Users.UserID = @UserID
         AND UserAuthentication.Active = 1
     )
     BEGIN
