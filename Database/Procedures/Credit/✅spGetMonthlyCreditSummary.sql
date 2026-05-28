@@ -10,11 +10,11 @@ BEGIN
     IF NOT EXISTS
     (
         SELECT 1
-        FROM tblUserAuthentication ua
-        INNER JOIN tblUsers u
-            ON ua.UserID = u.UserID
-        WHERE u.UserID = @UserID
-        AND ua.Active = 1
+        FROM tblUserAuthentication UserAuthentication
+        INNER JOIN tblUsers User
+            ON UserAuthentication.UserID = User.UserID
+        WHERE User.UserID = @UserID
+        AND UserAuthentication.Active = 1
     )
     BEGIN
         SELECT 'Invalid or Inactive User' AS Message
