@@ -7,6 +7,7 @@ BEGIN
 					WHERE UserID = @UserID AND Active = 1)
 	BEGIN
 		SELECT 'Invalid OR Inactive UserID!!' AS Message
+		RETURN
 	END
 
 	SELECT Prsn.PersonName,

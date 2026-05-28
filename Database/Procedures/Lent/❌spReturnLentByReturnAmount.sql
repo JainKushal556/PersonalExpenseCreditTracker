@@ -142,3 +142,6 @@ BEGIN
 				ERROR_LINE() AS ErrorLine
 		END CATCH
 END
+
+
+-- are lent return mean ami taka pelam orthat ui te money received ee clck korbo oi lentr er pase then amount payment type descrition er lent id pathalam db ke but catagory er subcat keno pathabo procedure ee ota to lent ee hbe catagory er subcatagory keno asbe lent return er so eta ke thiik korbi er payment name lagbe keno payment id assign korlae to hbe just check kore je seta ache k na .. 

@@ -30,7 +30,7 @@ BEGIN
         RETURN
     END
     
-    
+
     IF EXISTS
     (
         SELECT 1
