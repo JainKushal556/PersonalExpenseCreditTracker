@@ -1,0 +1,5020 @@
+﻿-- =========================================================================
+-- MASTER STORED PROCEDURES SCRIPT
+-- =========================================================================
+
+-- =========================================================================
+-- SPs that NEED FIXES or are MISSING (Not included in this script):
+-- =========================================================================
+-- ❌spGetAllBorrow.sql
+-- ❌spGetBorrowPersonHistory.sql
+-- ❌spGetCompletedBorrow.sql
+-- ❌spGetOverduedBorrow(EXTRA PROCEDURE).sql
+-- ❌spGetPendingBorrow.sql
+-- ❌spGetTotalBorrowByPerson.sql
+-- ❌spGetUpcomingBorrowReminders.sql
+-- ❌spInsertBorrow.sql
+-- ❌spPayBorrow.sql
+-- ❌spGetPendingLentByStatusName.sql
+-- ❌spInsertLent.sql
+-- ❌spReturnLentByReturnAmount.sql
+-- ❌PersonIDspGetAllPersons.sql
+-- ❌spDeletePerson.sql
+-- ❌spGetUpcomingLentReminders.sql
+-- ❌spInsertPerson.sql
+-- ❌spUpdatePerson.sql
+
+
+-- =========================================================================
+-- ALL OKAY SPs (Included below):
+-- =========================================================================
+
+
+-- ==========================================================
+
+-- SP: ✔️spChangePassword.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spChangePassword  
+  
+    @UserID INT,  
+    @OldPassword VARCHAR(MAX),  
+    @NewPassword VARCHAR(MAX)  
+
+AS  
+BEGIN  
+  
+
+    IF @NewPassword IS NULL OR LTRIM(RTRIM(@NewPassword)) = ''
+    BEGIN
+        SELECT 'New Password Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE
+            UserID = @UserID
+            AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+ 
+    IF EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUserAuthentication  
+        WHERE  
+            UserID = @UserID  
+            AND Password = @OldPassword  
+    )  
+    BEGIN  
+
+     
+        IF @OldPassword = @NewPassword
+        BEGIN
+            SELECT 'New Password Cannot Be Same As Old Password' AS Message;
+        END
+
+        ELSE
+        BEGIN
+  
+            UPDATE tblUserAuthentication  
+            SET Password = @NewPassword  
+            WHERE UserID = @UserID;  
+  
+            SELECT 'Password Changed Successfully' AS Message;
+
+        END
+  
+    END  
+  
+    ELSE  
+    BEGIN  
+        SELECT 'Invalid Old Password' AS Message;
+    END  
+  
+END;
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spDeleteUserProfilePhotoByUserId.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spDeleteUserProfilePhotoByUserId
+    @UserID INT
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserProfile
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Profile Not Found' AS Message;
+        RETURN;
+    END
+
+    BEGIN TRY
+
+        UPDATE tblUserProfile
+        SET ProfilePhoto = NULL
+        WHERE UserID = @UserID;
+
+        SELECT 'Profile Photo Deleted Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+
+END;
+
+
+
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spForgetPassword.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spForgetPassword  
+    @Email VARCHAR(100),  
+    @PhoneNumber VARCHAR(15),  
+    @NewPassword VARCHAR(MAX)  
+AS  
+BEGIN  
+  
+    IF EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUserContact  
+        WHERE   
+            Email = @Email  
+            AND PhoneNumber = @PhoneNumber  
+    )  
+    BEGIN  
+
+        IF EXISTS
+        (
+            SELECT 1
+            FROM tblUserAuthentication A
+            INNER JOIN tblUserContact C
+                ON A.UserID = C.UserID
+            WHERE
+                C.Email = @Email
+                AND C.PhoneNumber = @PhoneNumber
+                AND A.Password = @NewPassword
+        )
+        BEGIN
+            SELECT 'New Password Cannot Be Same As Old Password' AS Message;
+        END
+
+        ELSE
+        BEGIN
+  
+            UPDATE A  
+            SET A.Password = @NewPassword  
+            FROM tblUserAuthentication A  
+            INNER JOIN tblUserContact C  
+                ON A.UserID = C.UserID  
+            WHERE   
+                C.Email = @Email  
+                AND C.PhoneNumber = @PhoneNumber;  
+  
+            SELECT 'Password Reset Successfully' AS Message;
+
+        END
+  
+    END  
+  
+    ELSE  
+    BEGIN  
+        SELECT 'Invalid Email Or Phone Number' AS Message;
+    END  
+  
+END;
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetActiveUserDetails.sql
+
+-- ==========================================================
+
+ALTER PROCEDURE spGetActiveUserDetails
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    -- User Exists Check
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+
+    -- Active User Check
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Is Not Active' AS Message;
+        RETURN;
+    END
+
+
+    -- Active User Details
+    SELECT
+        U.UserID,
+        U.UserName,
+        P.ProfilePhoto,
+        C.Email,
+        C.PhoneNumber,
+        U.CreatedAt
+    FROM tblUsers U
+
+    LEFT JOIN tblUserProfile P
+        ON U.UserID = P.UserID
+
+    LEFT JOIN tblUserContact C
+        ON U.UserID = C.UserID
+
+    WHERE U.UserID = @UserID;
+
+END;
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spLoginUser.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spLoginUser    
+ 
+    @Email VARCHAR(100),    
+    @Password VARCHAR(MAX)    
+
+AS    
+BEGIN    
+      
+    DECLARE @UserID INT;  
+  
+    IF EXISTS    
+    (    
+        SELECT 1    
+        FROM tblUserContact C    
+        INNER JOIN tblUserAuthentication A    
+            ON C.UserID = A.UserID    
+        WHERE     
+            C.Email = @Email    
+            AND A.Password = @Password    
+    )    
+    BEGIN    
+    
+        SELECT @UserID = C.UserID  
+        FROM tblUserContact C  
+        INNER JOIN tblUserAuthentication A    
+            ON C.UserID = A.UserID  
+        WHERE     
+            C.Email = @Email    
+            AND A.Password = @Password;  
+  
+      
+        UPDATE tblUserAuthentication  
+        SET Active = 1  
+        WHERE UserID = @UserID;  
+  
+        SELECT 
+            'Login Successful' AS Message,
+            @UserID AS UserID;  
+  
+    END    
+      
+    ELSE    
+    BEGIN    
+        SELECT 'Invalid Email Or Password' AS Message;    
+    END    
+  
+END;
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spLogoutUser.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spLogoutUser
+    @UserID INT
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+              AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Already Logged Out Or Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    UPDATE tblUserAuthentication
+    SET Active = 0
+    WHERE UserID = @UserID;
+
+    SELECT 'Logout Successful' AS Message;
+
+END;
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spRegisterUser.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spRegisterUser    
+
+    @UserName VARCHAR(100),    
+    @Email VARCHAR(100),    
+    @PhoneNumber VARCHAR(15),    
+    @Password VARCHAR(100)    
+
+AS    
+BEGIN    
+
+    SET XACT_ABORT ON;
+
+    DECLARE @UserID INT;    
+
+
+    SET @UserName = LTRIM(RTRIM(@UserName));
+    SET @Email = LTRIM(RTRIM(@Email));
+    SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+    SET @Password = LTRIM(RTRIM(@Password));
+
+	--empty and null checked
+    IF @UserName IS NULL OR @UserName = ''
+    BEGIN
+        SELECT 'User Name Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF @Email IS NULL OR @Email = ''
+    BEGIN
+        SELECT 'Email Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF @PhoneNumber IS NULL OR @PhoneNumber = ''
+    BEGIN
+        SELECT 'Phone Number Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF @Password IS NULL OR @Password = ''
+    BEGIN
+        SELECT 'Password Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+
+    -- Duplicate check
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE Email = @Email
+    )
+    BEGIN
+        SELECT 'Email Already Exists' AS Message;
+        RETURN;
+    END
+
+
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE PhoneNumber = @PhoneNumber
+    )
+    BEGIN
+        SELECT 'Phone Number Already Exists' AS Message;
+        RETURN;
+    END
+
+
+    BEGIN TRY
+
+        BEGIN TRANSACTION;
+
+
+        INSERT INTO tblUsers (UserName)
+        VALUES (@UserName);
+
+        SET @UserID = SCOPE_IDENTITY();
+
+        INSERT INTO tblUserProfile
+        (
+            UserID,
+            Name
+        )
+        VALUES
+        (
+            @UserID,
+            @UserName
+        );
+
+
+        INSERT INTO tblUserContact
+        (
+            UserID,
+            Email,
+            PhoneNumber
+        )
+        VALUES
+        (
+            @UserID,
+            @Email,
+            @PhoneNumber
+        );
+
+        INSERT INTO tblUserAuthentication
+        (
+            UserID,
+            Password,
+            Active
+        )
+        VALUES
+        (
+            @UserID,
+            @Password,
+            0
+        );
+
+
+        COMMIT TRANSACTION;
+
+
+        SELECT 
+            @UserID AS UserID,
+            'User Inserted Successfully' AS Message;
+
+    END TRY  
+
+    BEGIN CATCH 
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH  
+
+END;
+
+
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateProfilePhoto.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateProfilePhoto    
+    
+    @UserID INT,    
+    @ProfilePhoto VARBINARY(MAX)    
+    
+AS    
+BEGIN    
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE
+            UserID = @UserID
+            AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+    IF EXISTS    
+    (    
+        SELECT 1    
+        FROM tblUserProfile    
+        WHERE UserID = @UserID    
+    )    
+    BEGIN    
+
+        UPDATE tblUserProfile    
+        SET ProfilePhoto = @ProfilePhoto    
+        WHERE UserID = @UserID;    
+    
+        SELECT 'Profile Photo Updated Successfully' AS Message;
+
+    END    
+
+    ELSE    
+    BEGIN    
+        SELECT 'User Not Found' AS Message;
+    END    
+
+END;
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateUserEmail.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateUserEmail  
+    @UserID INT,  
+    @Email VARCHAR(150)  
+AS
+BEGIN      
+
+  
+    IF @Email IS NULL OR LTRIM(RTRIM(@Email)) = ''
+    BEGIN
+        SELECT 'Email Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+   
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE Email = @Email
+        AND UserID <> @UserID
+    )
+    BEGIN
+        SELECT 'Email Already Exists' AS Message;
+        RETURN;
+    END
+
+
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE UserID = @UserID
+    )    
+    BEGIN               
+
+        UPDATE tblUserContact        
+        SET Email = @Email         
+        WHERE UserID = @UserID;         
+
+        SELECT 'User Email Updated Successfully' AS Message;
+
+    END    
+
+    ELSE     
+    BEGIN         
+        SELECT 'Invalid UserID' AS Message;
+    END 
+
+END;
+
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateUserName.sql
+
+-- ==========================================================
+
+
+ALTER PROCEDURE spUpdateUserName  
+    @UserID INT,  
+    @Name VARCHAR(100)  
+AS  
+BEGIN  
+  
+
+    SET @Name = LTRIM(RTRIM(@Name));  
+  
+
+    IF @Name IS NULL OR @Name = ''  
+    BEGIN  
+        SELECT 'Name Cannot Be Empty' AS Message;  
+        RETURN;  
+    END  
+  
+
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUsers  
+        WHERE UserID = @UserID  
+    )  
+    BEGIN  
+        SELECT 'Invalid UserID' AS Message;  
+        RETURN;  
+    END  
+  
+
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUserAuthentication  
+        WHERE UserID = @UserID  
+        AND Active = 1  
+    )  
+    BEGIN  
+        SELECT 'User Account Is Not Active' AS Message;  
+        RETURN;  
+    END  
+  
+
+	  IF EXISTS
+	(
+		SELECT 1
+		FROM tblUsers
+		WHERE UserName = @Name
+		AND UserID <> @UserID 
+	)
+	BEGIN
+		SELECT 'User Name Already Exists' AS Message;
+		RETURN;
+	END
+  
+    BEGIN TRY  
+
+        BEGIN TRANSACTION;  
+  
+  
+
+        UPDATE tblUsers  
+        SET UserName = @Name  
+        WHERE UserID = @UserID;  
+  
+  
+
+        UPDATE tblUserProfile  
+        SET Name = @Name  
+        WHERE UserID = @UserID;  
+  
+
+        COMMIT TRANSACTION;  
+  
+        SELECT 'User Name Updated Successfully' AS Message;  
+  
+    END TRY  
+  
+    BEGIN CATCH  
+  
+
+        IF @@TRANCOUNT > 0  
+            ROLLBACK TRANSACTION;  
+  
+  
+        SELECT ERROR_MESSAGE() AS Message;  
+  
+    END CATCH  
+  
+END;
+
+
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateUserPhoneNumber.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateUserPhoneNumber
+    @UserID INT,
+    @PhoneNumber VARCHAR(15)
+AS
+BEGIN
+
+    SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+
+
+    IF @PhoneNumber IS NULL OR @PhoneNumber = ''
+    BEGIN
+        SELECT 'Phone Number Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE PhoneNumber = @PhoneNumber
+        AND UserID <> @UserID
+    )
+    BEGIN
+        SELECT 'Phone Number Already Exists' AS Message;
+        RETURN;
+    END
+
+
+    BEGIN TRY
+
+        UPDATE tblUserContact
+        SET PhoneNumber = @PhoneNumber
+        WHERE UserID = @UserID;
+
+        SELECT 'User Phone Number Updated Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+
+END;
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateUserProfile.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateUserProfile
+    @UserID INT,
+    @Name VARCHAR(100),
+    @Email VARCHAR(150),
+    @PhoneNumber VARCHAR(15),
+    @ProfilePhoto VARBINARY(MAX)
+AS
+BEGIN
+
+    SET @Name = LTRIM(RTRIM(@Name));
+    SET @Email = LTRIM(RTRIM(@Email));
+    SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+
+
+    IF @Name IS NULL OR @Name = ''
+    BEGIN
+        SELECT 'Name Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF @Email IS NULL OR @Email = ''
+    BEGIN
+        SELECT 'Email Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF @PhoneNumber IS NULL OR @PhoneNumber = ''
+    BEGIN
+        SELECT 'Phone Number Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+
+IF EXISTS
+(
+    SELECT 1
+    FROM tblUsers
+    WHERE UserName = @Name
+	AND UserID = @UserID
+)
+BEGIN
+    SELECT 'User Name Already Exists' AS Message;
+    RETURN;
+END
+
+
+IF EXISTS
+(
+    SELECT 1
+    FROM tblUserContact
+    WHERE Email = @Email
+)
+BEGIN
+    SELECT 'Email Already Exists' AS Message;
+    RETURN;
+END
+
+
+IF EXISTS
+(
+    SELECT 1
+    FROM tblUserContact
+    WHERE PhoneNumber = @PhoneNumber
+)
+BEGIN
+    SELECT 'Phone Number Already Exists' AS Message;
+    RETURN;
+END
+
+
+    BEGIN TRY
+
+
+        BEGIN TRANSACTION;
+
+
+        UPDATE tblUsers
+        SET UserName = @Name
+        WHERE UserID = @UserID;
+
+        UPDATE tblUserProfile
+        SET Name = @Name,
+            ProfilePhoto = @ProfilePhoto
+        WHERE UserID = @UserID;
+
+        UPDATE tblUserContact
+        SET Email = @Email,
+            PhoneNumber = @PhoneNumber
+        WHERE UserID = @UserID;
+
+        COMMIT TRANSACTION;
+
+
+        SELECT 'User Profile Updated Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+
+END;
+
+-- remove profile photo akta store procedure bana jeta null assign korbi image ee ami requirments ee likhe dichi ota 
+-- baki jaygay dekhbi ami thik korechi kotay . = er jaygay <> eta diye 
+-- actually ki hbe ami amar same name ee update ee dite pari no issue but onno user er jeno sae name ta na thke tar jonno <> use korte hbe . ( name , email , phone number er khetre ogulote UserID <> @UserID ae ta sathe thkbe )
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterCreditByAmountRange.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterCreditByAmountRange
+(
+    @UserID INT,
+    @MinAmount DECIMAL(10,2),
+    @MaxAmount DECIMAL(10,2)
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+    
+    IF @MinAmount < 0 OR @MaxAmount < 0
+    BEGIN
+        SELECT 'Amount cannot be negative' AS MESSAGE
+        RETURN
+    END
+    
+    IF @MinAmount > @MaxAmount
+    BEGIN
+        SELECT 'MinAmount cannot be greater than MaxAmount' AS MESSAGE
+        RETURN
+    END
+    
+    SELECT 
+        CR.CreditID,
+        CR.UserID,
+        CR.CategoryID,
+        C.CategoryName,
+        CR.SubCategoryID,
+        SC.SubCategoryName,
+        CR.PaymentID,
+        P.PaymentName,
+        CR.Amount,
+        CR.CreditNotes,
+        CR.CreditAt
+    FROM tblCredit CR
+    INNER JOIN tblCreditCategory C ON CR.CategoryID = C.CategoryID
+    INNER JOIN tblCreditSubCategory SC ON CR.SubCategoryID = SC.SubCategoryID
+    INNER JOIN tblPaymentType P ON CR.PaymentID = P.PaymentID
+    WHERE CR.UserID = @UserID
+    AND CR.Amount >= @MinAmount
+    AND CR.Amount <= @MaxAmount
+    ORDER BY CR.Amount DESC, CR.CreditAt DESC
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterCreditByCategory.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterCreditByCategory
+(
+    @UserID INT,
+    @CategoryID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+        AND CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message
+        RETURN
+    END
+    SELECT
+        Credit.CreditID,
+        CreditCategory.CategoryName,
+        CreditSubCategory.SubCategoryName,
+        Credit.Amount,
+        LTRIM(RTRIM(Credit.Description)) AS Description,
+        PaymentType.PaymentName,
+        Credit.CreditAt
+
+    FROM tblCredit Credit
+
+    LEFT JOIN tblCreditCategory CreditCategory
+        ON Credit.CategoryID = CreditCategory.CategoryID
+
+    LEFT JOIN tblCreditSubCategory CreditSubCategory
+        ON Credit.SubCategoryID = CreditSubCategory.SubCategoryID
+
+    LEFT JOIN tblPaymentType PaymentType
+        ON Credit.PaymentID = PaymentType.PaymentID
+
+    WHERE Credit.UserID = @UserID
+    AND Credit.CategoryID = @CategoryID
+
+    ORDER BY Credit.CreditAt DESC
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterCreditByCategoryAndSubCategory.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterCreditByCategoryAndSubCategory
+(
+    @UserID INT,
+    @CategoryID INT,
+    @SubCategoryID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS Message
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+        AND CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'SubCategory does not belong to selected Category' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+        AND CategoryID = @CategoryID
+        AND SubCategoryID = @SubCategoryID
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message
+        RETURN
+    END
+
+    SELECT
+        Credit.CreditID,
+        CreditCategory.CategoryName,
+        CreditSubCategory.SubCategoryName,
+        Credit.Amount,
+        LTRIM(RTRIM(Credit.Description)) AS Description,
+        PaymentType.PaymentName,
+        Credit.CreditAt
+
+    FROM tblCredit Credit
+
+    LEFT JOIN tblCreditCategory CreditCategory
+        ON Credit.CategoryID = CreditCategory.CategoryID
+
+    LEFT JOIN tblCreditSubCategory CreditSubCategory
+        ON Credit.SubCategoryID = CreditSubCategory.SubCategoryID
+
+    LEFT JOIN tblPaymentType PaymentType
+        ON Credit.PaymentID = PaymentType.PaymentID
+
+    WHERE Credit.UserID = @UserID
+    AND Credit.CategoryID = @CategoryID
+    AND Credit.SubCategoryID = @SubCategoryID
+
+    ORDER BY Credit.CreditAt DESC
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterCreditByDateRange.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterCreditByDateRange
+(
+  @UserID INT,
+  @FromDate DATETIME,
+  @ToDate DATETIME
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+	    IF NOT EXISTS
+		  (
+		     SELECT 1
+			  FROM tblUserAuthentication UserAuthentication
+			  WHERE UserAuthentication.UserID = @UserID
+			  AND UserAuthentication.Active = 1
+		  )
+		  BEGIN
+		    SELECT 'Invalid Or Inactive User' AS MESSAGE
+			RETURN
+		  END
+
+		  IF @FromDate > @ToDate
+		   BEGIN
+		     SELECT 'FromDate Cannot Be Greater Than ToDate' AS MESSAGE
+			 RETURN
+			END
+
+          IF NOT EXISTS
+		    (
+			   SELECT 1
+			   FROM tblCredit
+			    WHERE UserID = @UserID
+				AND CAST(CreditAt AS DATE)
+				BETWEEN @FromDate AND @ToDate
+			)
+			BEGIN
+			  SELECT 'NO RECORD FOUND' AS MESSAGE
+			  RETURN
+			END
+
+			SELECT
+			   Credit.CreditID,
+			   CreditCategory.CategoryName,
+			   CreditSubCategory.SubCategoryName,
+			   Credit.Amount,
+			   LTRIM(RTRIM(Credit.Description)) AS Description,
+			   PaymentType.PaymentName,
+			   Credit.CreditAt
+              
+			  FROM tblCredit Credit
+
+			  LEFT JOIN tblCreditCategory CreditCategory
+			    ON Credit.CategoryID =CreditCategory.CategoryID
+
+				LEFT JOIN tblCreditSubCategory CreditSubCategory
+				 ON Credit.SubCategoryID = CreditSubCategory.SubCategoryID
+
+				 LEFT JOIN tblPaymentType  PaymentType
+				  ON Credit.PaymentID = PaymentType.PaymentID
+
+				  WHERE Credit.UserID =@UserID
+				  AND CAST(Credit.CreditAt AS DATE)
+				  BETWEEN @FromDate AND @ToDate
+
+                ORDER BY Credit.CreditAt DESC
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllCreditsByID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllCreditsByID
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Credit Record Found' AS Message
+        RETURN
+    END
+
+    SELECT
+        Credit.CreditID,
+        CreditCategory.CategoryName,
+        CreditSubCategory.SubCategoryName,
+        Credit.Amount,
+        LTRIM(RTRIM(Credit.Description)) AS Description,
+        PaymentType.PaymentName,
+        Credit.CreditAt
+    FROM tblCredit Credit
+
+    LEFT JOIN tblCreditCategory CreditCategory
+        ON Credit.CategoryID = CreditCategory.CategoryID
+
+    LEFT JOIN tblCreditSubCategory CreditSubCategory
+        ON Credit.SubCategoryID = CreditSubCategory.SubCategoryID
+
+    LEFT JOIN tblPaymentType PaymentType
+        ON Credit.PaymentID = PaymentType.PaymentID
+
+    WHERE Credit.UserID = @UserID
+
+    ORDER BY Credit.CreditAt DESC
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetCategoryWiseCreditReport.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetCategoryWiseCreditReport
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        INNER JOIN tblUsers Users
+            ON UserAuthentication.UserID = Users.UserID
+        WHERE Users.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Credit Record Found' AS Message
+        RETURN
+    END
+
+    SELECT 
+        ISNULL(CreditCategory.CategoryName, 'Category Deleted') AS CategoryName,
+        SUM(Credit.Amount) AS TotalCredit
+    FROM tblCredit Credit
+    LEFT JOIN tblCreditCategory CreditCategory
+        ON Credit.CategoryID = CreditCategory.CategoryID
+    WHERE Credit.UserID = @UserID
+    GROUP BY CreditCategory.CategoryName
+    ORDER BY TotalCredit DESC;
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetMonthlyCreditSummary.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetMonthlyCreditSummary
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        INNER JOIN tblUsers Users
+            ON UserAuthentication.UserID = Users.UserID
+        WHERE Users.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Credit Record Found' AS Message
+        RETURN
+    END
+
+    SELECT 
+        YEAR(CreditAt) AS [Year],
+        MONTH(CreditAt) AS [Month],
+        SUM(Amount) AS TotalCredit
+    FROM tblCredit
+    WHERE UserID = @UserID
+    GROUP BY 
+        YEAR(CreditAt),
+        MONTH(CreditAt)
+    ORDER BY 
+        [Year] DESC,
+        [Month] DESC;
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetTodayCredit.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetTodayCredit
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+        AND CAST(CreditAt AS DATE) = CAST(GETDATE() AS DATE)
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message
+        RETURN
+    END
+
+    SELECT
+        Credit.CreditID,
+        CreditCategory.CategoryName,
+        CreditSubCategory.SubCategoryName,
+        Credit.Amount,
+        LTRIM(RTRIM(Credit.Description)) AS Description,
+        PaymentType.PaymentName,
+        Credit.CreditAt
+
+         FROM tblCredit Credit
+
+          LEFT JOIN tblCreditCategory CreditCategory
+               ON Credit.CategoryID = CreditCategory.CategoryID
+
+          LEFT JOIN tblCreditSubCategory CreditSubCategory
+                ON Credit.SubCategoryID = CreditSubCategory.SubCategoryID
+
+             LEFT JOIN tblPaymentType PaymentType
+               ON Credit.PaymentID = PaymentType.PaymentID
+
+             WHERE Credit.UserID = @UserID
+                 AND CAST(Credit.CreditAt AS DATE) = CAST(GETDATE() AS DATE)
+
+              ORDER BY Credit.CreditAt DESC
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spInsertCreditByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spInsertCreditByUserID
+(
+    @UserID INT,
+    @CategoryID INT,
+    @SubCategoryID INT,
+    @Amount DECIMAL(10,2),
+    @Description VARCHAR(MAX),
+    @PaymentID INT,
+    @CreditAt DATETIME
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+      IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        INNER JOIN tblUsers Users
+            ON UserAuthentication.UserID = Users.UserID
+        WHERE Users.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+        AND CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'SubCategory does not belong to selected Category' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblPaymentType
+        WHERE PaymentID = @PaymentID
+    )
+    BEGIN
+        SELECT 'Invalid PaymentID' AS Message
+        RETURN
+    END
+
+    IF @Amount <= 0
+    BEGIN
+        SELECT 'Amount must be greater than zero' AS Message
+        RETURN
+    END
+
+    SET @Description = LTRIM(RTRIM(@Description))
+
+    IF @Description IS NULL
+       OR @Description = ''
+    BEGIN
+        SELECT 'Description cannot be empty' AS Message
+        RETURN
+    END
+
+    IF @CreditAt > GETDATE()
+    BEGIN
+        SELECT 'Future date is not allowed' AS Message
+        RETURN
+    END
+
+    INSERT INTO tblCredit
+    (
+        UserID,
+        CategoryID,
+        SubCategoryID,
+        Amount,
+        Description,
+        PaymentID,
+        CreditAt
+    )
+    VALUES
+    (
+        @UserID,
+        @CategoryID,
+        @SubCategoryID,
+        @Amount,
+        @Description,
+        @PaymentID,
+        @CreditAt
+    )
+
+    SELECT 'Credit inserted successfully' AS Message
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetUserDashboard.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetUserDashboard
+
+    @UserID INT
+
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+              AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS Message;
+        RETURN;
+    END;
+
+    DECLARE @TotalExpense DECIMAL(18,2);
+    DECLARE @TotalCredit DECIMAL(18,2);
+    DECLARE @TotalLent DECIMAL(18,2);
+    DECLARE @TotalBorrow DECIMAL(18,2);
+    DECLARE @PendingTasks INT;
+    DECLARE @NetBalance DECIMAL(18,2);
+
+
+    SELECT @TotalExpense = ISNULL(SUM(Amount),0)
+    FROM tblExpense
+    WHERE UserID = @UserID;
+
+
+    SELECT @TotalCredit = ISNULL(SUM(Amount),0)
+    FROM tblCredit
+    WHERE UserID = @UserID;
+
+
+    SELECT @TotalLent = ISNULL(SUM(Amount),0)
+    FROM tblLent
+    WHERE UserID = @UserID;
+
+
+    SELECT @TotalBorrow = ISNULL(SUM(Amount),0)
+    FROM tblBorrow
+    WHERE UserID = @UserID;
+
+
+    SELECT @PendingTasks = COUNT(*)
+    FROM tblTask T
+    INNER JOIN tblTaskStatus TS
+        ON T.TaskStatusID = TS.TaskStatusID
+    WHERE T.UserID = @UserID
+          AND TS.TaskStatusName = 'Pending';
+
+
+    SET @NetBalance =
+    (
+        (@TotalCredit + @TotalBorrow)
+        -
+        (@TotalExpense + @TotalLent)
+    );
+
+    SELECT
+        @TotalExpense AS TotalExpense,
+        @TotalCredit AS TotalCredit,
+        @TotalLent AS TotalLentAmount,
+        @TotalBorrow AS TotalBorrowAmount,
+        @NetBalance AS NetBalance,
+        @PendingTasks AS PendingTaskCount;
+
+END;
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterExpenseByAmountRange.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterExpenseByAmountRange
+(
+    @UserID INT,
+    @MinAmount DECIMAL(10,2),
+    @MaxAmount DECIMAL(10,2)
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+    
+    IF @MinAmount < 0 OR @MaxAmount < 0
+    BEGIN
+        SELECT 'Amount cannot be negative' AS MESSAGE
+        RETURN
+    END
+    
+    IF @MinAmount > @MaxAmount
+    BEGIN
+        SELECT 'MinAmount cannot be greater than MaxAmount' AS MESSAGE
+        RETURN
+    END
+    
+    SELECT 
+        E.ExpenseID,
+        E.UserID,
+        E.CategoryID,
+        C.CategoryName,
+        E.SubCategoryID,
+        SC.SubCategoryName,
+        E.PaymentID,
+        P.PaymentName,
+        E.Amount,
+        E.ExpenseNotes,
+        E.ExpenseAt
+    FROM tblExpense E
+    INNER JOIN tblExpenseCategory C ON E.CategoryID = C.CategoryID
+    INNER JOIN tblExpenseSubCategory SC ON E.SubCategoryID = SC.SubCategoryID
+    INNER JOIN tblPaymentType P ON E.PaymentID = P.PaymentID
+    WHERE E.UserID = @UserID
+    AND E.Amount >= @MinAmount
+    AND E.Amount <= @MaxAmount
+    ORDER BY E.Amount DESC, E.ExpenseAt DESC
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterExpenseByCategory.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterExpenseByCategory
+(
+    @UserID INT,
+    @CategoryID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpense
+        WHERE UserID = @UserID
+        AND CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message
+        RETURN
+    END
+    SELECT
+        Expense.ExpenseID,
+        ExpenseCategory.CategoryName,
+        ExpenseSubCategory.SubCategoryName,
+        Expense.Amount,
+        LTRIM(RTRIM(Expense.Description)) AS Description,
+        PaymentType.PaymentName,
+        Expense.ExpenseAt
+
+    FROM tblExpense Expense
+
+    LEFT JOIN tblExpenseCategory ExpenseCategory
+        ON Expense.CategoryID = ExpenseCategory.CategoryID
+
+    LEFT JOIN tblExpenseSubCategory ExpenseSubCategory
+        ON Expense.SubCategoryID = ExpenseSubCategory.SubCategoryID
+
+    LEFT JOIN tblPaymentType PaymentType
+        ON Expense.PaymentID = PaymentType.PaymentID
+
+    WHERE Expense.UserID = @UserID
+    AND Expense.CategoryID = @CategoryID
+
+    ORDER BY Expense.ExpenseAt DESC
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterExpenseByCategoryAndSubCategory.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterExpenseByCategoryAndSubCategory
+(
+    @UserID INT,
+    @CategoryID INT,
+    @SubCategoryID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS Message
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+        AND CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'SubCategory does not belong to selected Category' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpense
+        WHERE UserID = @UserID
+        AND CategoryID = @CategoryID
+        AND SubCategoryID = @SubCategoryID
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message
+        RETURN
+    END
+
+    SELECT
+        Expense.ExpenseID,
+        ExpenseCategory.CategoryName,
+        ExpenseSubCategory.SubCategoryName,
+        Expense.Amount,
+        LTRIM(RTRIM(Expense.Description)) AS Description,
+        PaymentType.PaymentName,
+        Expense.ExpenseAt
+
+    FROM tblExpense Expense
+
+    LEFT JOIN tblExpenseCategory ExpenseCategory
+        ON Expense.CategoryID = ExpenseCategory.CategoryID
+
+    LEFT JOIN tblExpenseSubCategory ExpenseSubCategory
+        ON Expense.SubCategoryID = ExpenseSubCategory.SubCategoryID
+
+    LEFT JOIN tblPaymentType PaymentType
+        ON Expense.PaymentID = PaymentType.PaymentID
+
+    WHERE Expense.UserID = @UserID
+    AND Expense.CategoryID = @CategoryID
+    AND Expense.SubCategoryID = @SubCategoryID
+
+    ORDER BY Expense.ExpenseAt DESC
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterExpenseByDateRange.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterExpenseByDateRange
+(
+  @UserID INT,
+  @FromDate DATETIME,
+  @ToDate DATETIME
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+	    IF NOT EXISTS
+		  (
+		     SELECT 1
+			  FROM tblUserAuthentication UserAuthentication
+			  WHERE UserAuthentication.UserID = @UserID
+			  AND UserAuthentication.Active = 1
+		  )
+		  BEGIN
+		    SELECT 'Invalid Or Inactive User' AS MESSAGE
+			RETURN
+		  END
+
+		  IF @FromDate > @ToDate
+		   BEGIN
+		     SELECT 'FromDate Cannot Be Greater Than ToDate' AS MESSAGE
+			 RETURN
+			END
+
+          IF NOT EXISTS
+		    (
+			   SELECT 1
+			   FROM tblExpense
+			    WHERE UserID = @UserID
+				AND CAST(ExpenseAt AS DATE)
+				BETWEEN @FromDate AND @ToDate
+			)
+			BEGIN
+			  SELECT 'NO RECORD FOUND' AS MESSAGE
+			  RETURN
+			END
+
+			SELECT
+			   Expense.ExpenseID,
+			   ExpenseCategory.CategoryName,
+               ExpenseSubCategory.SubCategoryName,
+			   Expense.Amount,
+			   LTRIM(RTRIM(Expense.Description)) AS Description,
+			   PaymentType.PaymentName,
+			   Expense.ExpenseAt
+
+			  FROM tblExpense Expense
+
+			  LEFT JOIN tblExpenseCategory ExpenseCategory
+			    ON Expense.CategoryID =ExpenseCategory.CategoryID
+
+				LEFT JOIN tblExpenseSubCategory ExpenseSubCategory
+				 ON Expense.SubCategoryID = ExpenseSubCategory.SubCategoryID
+
+				 LEFT JOIN tblPaymentType  PaymentType
+				  ON Expense.PaymentID = PaymentType.PaymentID
+
+				  WHERE Expense.UserID =@UserID
+				  AND CAST(Expense.ExpenseAt AS DATE)
+				  BETWEEN @FromDate AND @ToDate
+
+                ORDER BY Expense.ExpenseAt DESC
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllExpensesByID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllExpensesByID
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpense
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Expense Record Found' AS Message
+        RETURN
+    END
+
+    SELECT
+        Expense.ExpenseID,
+        ExpenseCategory.CategoryName,
+        ExpenseSubCategory.SubCategoryName,
+        Expense.Amount,
+        LTRIM(RTRIM(Expense.Description)) AS Description,
+        PaymentType.PaymentName,
+        Expense.ExpenseAt
+    FROM tblExpense Expense
+
+    LEFT JOIN tblExpenseCategory ExpenseCategory
+        ON Expense.CategoryID = ExpenseCategory.CategoryID
+
+    LEFT JOIN tblExpenseSubCategory ExpenseSubCategory
+        ON Expense.SubCategoryID = ExpenseSubCategory.SubCategoryID
+
+    LEFT JOIN tblPaymentType PaymentType
+        ON Expense.PaymentID = PaymentType.PaymentID
+
+    WHERE Expense.UserID = @UserID
+
+    ORDER BY Expense.ExpenseAt DESC
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetCategoryWiseExpenseReport.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetCategoryWiseExpenseReport
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        INNER JOIN tblUsers Users
+            ON UserAuthentication.UserID = Users.UserID
+        WHERE Users.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpense
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Expense Record Found' AS Message
+        RETURN
+    END
+
+    SELECT 
+        ISNULL(ExpenseCategory.CategoryName, 'Category Deleted') AS CategoryName,
+        SUM(Expense.Amount) AS TotalExpense
+    FROM tblExpense Expense
+    LEFT JOIN tblExpenseCategory ExpenseCategory
+        ON Expense.CategoryID = ExpenseCategory.CategoryID
+    WHERE Expense.UserID = @UserID
+    GROUP BY 
+        ISNULL(ExpenseCategory.CategoryName, 'Category Deleted')
+    ORDER BY TotalExpense DESC;
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetMonthlyExpenseSummary.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetMonthlyExpenseSummary
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        INNER JOIN tblUsers Users
+            ON UserAuthentication.UserID = Users.UserID
+        WHERE Users.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpense
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Expense Record Found' AS Message
+        RETURN
+    END
+
+    SELECT 
+        YEAR(ExpenseAt) AS [Year],
+        MONTH(ExpenseAt) AS [Month],
+        SUM(Amount) AS TotalExpense
+    FROM tblExpense
+    WHERE UserID = @UserID
+    GROUP BY 
+        YEAR(ExpenseAt),
+        MONTH(ExpenseAt)
+    ORDER BY 
+        [Year] DESC,
+        [Month] DESC;
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetTodayExpense.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetTodayExpense
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpense
+        WHERE UserID = @UserID
+        AND CAST(ExpenseAt AS DATE) = CAST(GETDATE() AS DATE)
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message
+        RETURN
+    END
+
+         SELECT
+			   Expense.ExpenseID,
+			   ExpenseCategory.CategoryName,
+               ExpenseSubCategory.SubCategoryName,
+			   Expense.Amount,
+			   LTRIM(RTRIM(Expense.Description)) AS Description,
+			   PaymentType.PaymentName,
+			   Expense.ExpenseAt
+
+			  FROM tblExpense Expense
+
+			  LEFT JOIN tblExpenseCategory ExpenseCategory
+			    ON Expense.CategoryID =ExpenseCategory.CategoryID
+
+				LEFT JOIN tblExpenseSubCategory ExpenseSubCategory
+				 ON Expense.SubCategoryID = ExpenseSubCategory.SubCategoryID
+
+				 LEFT JOIN tblPaymentType  PaymentType
+				  ON Expense.PaymentID = PaymentType.PaymentID
+
+				  WHERE Expense.UserID =@UserID
+                 AND CAST(Expense.ExpenseAt AS DATE) = CAST(GETDATE() AS DATE)
+
+              ORDER BY Expense.ExpenseAt  DESC
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spInsertExpenseByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spInsertExpenseByUserID
+(
+    @UserID INT,
+    @CategoryID INT,
+    @SubCategoryID INT,
+    @Amount DECIMAL(10,2),
+    @Description VARCHAR(MAX),
+    @PaymentID INT,
+    @ExpenseAt DATETIME
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON
+
+      IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        INNER JOIN tblUsers Users
+            ON UserAuthentication.UserID = Users.UserID
+        WHERE Users.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+        AND CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'SubCategory does not belong to selected Category' AS Message
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblPaymentType
+        WHERE PaymentID = @PaymentID
+    )
+    BEGIN
+        SELECT 'Invalid PaymentID' AS Message
+        RETURN
+    END
+
+    IF @Amount <= 0
+    BEGIN
+        SELECT 'Amount must be greater than zero' AS Message
+        RETURN
+    END
+
+    SET @Description = LTRIM(RTRIM(@Description))
+
+    IF @Description IS NULL
+       OR @Description = ''
+    BEGIN
+        SELECT 'Description cannot be empty' AS Message
+        RETURN
+    END
+
+    IF @ExpenseAt > GETDATE()
+    BEGIN
+        SELECT 'Future date is not allowed' AS Message
+        RETURN
+    END
+
+    INSERT INTO tblExpense
+    (
+        UserID,
+        CategoryID,
+        SubCategoryID,
+        Amount,
+        Description,
+        PaymentID,
+        ExpenseAt
+    )
+    VALUES
+    (
+        @UserID,
+        @CategoryID,
+        @SubCategoryID,
+        @Amount,
+        @Description,
+        @PaymentID,
+        @ExpenseAt
+    )
+
+    SELECT 'Expense inserted successfully' AS Message
+
+END
+GO
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllLent.sql
+
+-- ==========================================================
+
+CREATE PROC spGetAllLent
+	@UserID INT
+AS
+BEGIN
+	
+	IF NOT EXISTS (SELECT 1 
+					FROM tblUserAuthentication
+					WHERE UserID = @UserID AND Active = 1)
+	BEGIN
+		SELECT 'Invalid OR Inactive UserID!!' AS Message
+		RETURN
+	END
+
+	SELECT L.LentID,
+			Prsn.PersonName,
+			L.Amount,
+			L.ReturnedAmount,
+			L.RemainingAmount,
+			Pay.PaymentName,
+			S.StatusName,
+			L.LentAt,
+			L.DeadlineAt,
+			L.Description
+	FROM tblLent L
+	LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
+	LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
+	LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
+	WHERE L.UserID = @UserID ORDER BY L.LentAt DESC
+
+END
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️SpGetCompletedLentByStatusName.sql
+
+-- ==========================================================
+
+CREATE PROC spGetCompletedLentByStatusName
+@UserID INT
+AS
+BEGIN
+	IF NOT EXISTS (SELECT 1 
+					FROM tblUserAuthentication
+					WHERE UserID = @UserID AND Active = 1)
+	BEGIN
+		SELECT 'Invalid OR Inactive UserID!!' AS Message
+		RETURN
+	END
+
+	SELECT Prsn.PersonName,
+			L.Amount,
+			L.ReturnedAmount,
+			L.RemainingAmount,
+			Pay.PaymentName,
+			S.StatusName,
+			L.LentAt,
+			L.DeadlineAt,
+			L.Description
+	FROM tblLent L
+	LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
+	LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
+	LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
+
+	WHERE L.UserID = @UserID AND S.StatusName = 'Paid'
+	ORDER BY L.LentAt DESC;
+END
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetLentPersonHistory.sql
+
+-- ==========================================================
+
+CREATE PROC spGetLentPersonHistory
+@PersonID INT, @UserID INT
+AS
+BEGIN
+
+	IF NOT EXISTS (SELECT 1 
+				   FROM tblLent L
+					JOIN tblPersons LP 
+						ON L.PersonID = LP.PersonID
+					WHERE L.UserID = @UserID
+					AND L.PersonID = @PersonID)
+	BEGIN
+		SELECT 'Invalid PersonID OR No Lent History Found!' AS Message
+		RETURN
+	END
+
+	SELECT L.LentID,
+			Prsn.PersonName,
+			L.Amount,
+			L.ReturnedAmount,
+			L.RemainingAmount,
+			Pay.PaymentName,
+			S.StatusName,
+			L.LentAt,
+			L.DeadlineAt,
+			L.Description
+	FROM tblLent L
+	LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
+	LEFT JOIN tblPaymentType Pay ON L.PaymentID = Pay.PaymentID
+	LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
+	WHERE L.PersonID = @PersonID AND L.UserID = @UserID
+	ORDER BY L.LentAt DESC;
+
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spDeleteNote.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE  spDeleteNote
+(
+@UserID INT,
+@NoteID INT
+)
+AS
+BEGIN
+
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteID=@NoteID
+)
+BEGIN
+SELECT 'Invalid UserID Or NoteID' AS Message
+RETURN 
+END
+
+BEGIN TRY
+
+DELETE FROM tblNote
+WHERE UserID=@UserID
+AND NoteID=@NoteID
+
+SELECT 'Note Deleted Successfully' AS Message
+END TRY
+
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterNotesByPriority.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE  spFilterNotesByPriority
+
+@UserID INT,
+@PriorityID INT
+
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblUsers
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'UserID Does Not Exist' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNotePriorities
+WHERE NotePriorityID=@PriorityID
+)
+BEGIN 
+SELECT 'Invalid Note PriorityID' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NotePriorityID=@PriorityID
+)
+BEGIN
+SELECT 'No Notes Found' AS Message
+RETURN
+END
+
+BEGIN TRY
+SELECT
+tblNote.NoteID,
+tblNote.NotePriorityID,
+tblNote.NoteTitle,
+tblNote.Description,
+tblNotePriorities.NotePriorityName,
+tblNote.CreatedAt
+FROM tblNote
+LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+WHERE tblNote.UserID=@UserID
+AND tblNote.NotePriorityID=@PriorityID
+
+ORDER BY tblNote.CreatedAt DESC
+
+END TRY
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllNotes.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllNotes
+(
+@UserID INT
+)
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblUsers
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'UserID Does Not Exists' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'No Notes Found For This User' AS Message
+RETURN
+END
+BEGIN TRY
+
+SELECT
+tblNote.NoteID,
+tblNote.NotePriorityID,
+tblNote.NoteTitle,
+tblNote.Description,
+tblNotePriorities.NotePriorityName,
+tblNote.CreatedAt 
+
+FROM tblNote
+LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+WHERE tblNote.UserID=@UserID
+ORDER BY tblNote.CreatedAt DESC
+
+END TRY
+
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetNotesBetweenDates.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE  spGetNotesBetweenDates
+
+@UserID INT,
+@FromDate DATE,
+@ToDate DATE
+
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblUsers
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'UserID Does Not Exist' AS Message
+RETURN
+END
+
+IF @FromDate>@ToDate
+BEGIN
+SELECT 'Start Date Cannot Be Greater Than End Date' AS Message
+RETURN
+END
+
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND CAST(tblNote.CreatedAt AS DATE)
+BETWEEN @FromDate AND @ToDate
+)
+BEGIN
+SELECT 'No Notes Found Between These Dates' AS Message
+RETURN
+END
+
+BEGIN TRY
+
+SELECT
+tblNote.NoteID,
+tblNote.NoteTitle,
+tblNote.Description,
+tblNotePriorities.NotePriorityName,
+tblNote.CreatedAt
+FROM tblNote
+LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+WHERE tblNote.UserID=@UserID
+AND CAST(tblNote.CreatedAt AS DATE)
+BETWEEN @FromDate AND @ToDate
+ORDER BY tblNote.CreatedAt DESC
+
+END TRY
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spInsertNote.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spInsertNote
+
+@UserID INT,
+@PriorityID INT,
+@NoteTitle VARCHAR(MAX),
+@Description VARCHAR(MAX)
+
+AS
+BEGIN
+
+SET @NoteTitle=LTRIM(RTRIM(@NoteTitle))
+SET @Description=LTRIM(RTRIM(@Description))
+
+IF @NoteTitle IS NULL OR @NoteTitle= ''
+BEGIN
+SELECT 'Note Title Cannot be Empty' AS Message
+RETURN
+END
+
+IF @Description IS NULL OR @Description= ''
+BEGIN
+SELECT 'Description Cannot be Empty' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblUsers
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'UserID Does Not Exist' AS Message 
+RETURN 
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblUserAuthentication
+WHERE UserID=@UserID
+AND Active=1
+)
+BEGIN
+SELECT 'Inactive User Cannot Add Notes' AS Message 
+RETURN 
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNotePriorities
+WHERE NotePriorityID=@PriorityID
+)
+BEGIN
+SELECT 'Invalid Note PriorityID' AS Message 
+RETURN 
+END
+
+BEGIN TRY
+
+INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description)
+VALUES
+(@UserID,@PriorityID,@NoteTitle,@Description)
+
+SELECT 'Note Inserted Successfully' AS Message
+
+END TRY
+
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateNote.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateNote
+(
+@UserID INT,
+@NoteID INT,
+@PriorityID INT,
+@NoteTitle VARCHAR(MAX),
+@Description VARCHAR(MAX)
+)
+AS
+BEGIN
+
+SET @NoteTitle=LTRIM(RTRIM(@NoteTitle))
+SET @Description=LTRIM(RTRIM(@Description))
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteID=@NoteID
+)
+BEGIN
+SELECT 'Invalid UserID Or NoteID' AS Message
+RETURN 
+END
+
+IF @NoteTitle IS NULL OR @NoteTitle= ''
+BEGIN
+SELECT 'Note Title Cannot be Empty' AS Message
+RETURN
+END
+
+IF @Description IS NULL OR @Description= ''
+BEGIN
+SELECT 'Description Cannot be Empty' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNotePriorities
+WHERE NotePriorityID=@PriorityID
+)
+BEGIN
+SELECT 'Invalid Note PriorityID' AS Message
+RETURN 
+END
+
+
+BEGIN TRY
+
+UPDATE tblNote 
+SET
+    NotePriorityID=@PriorityID,
+    NoteTitle=@NoteTitle,
+    Description=@Description
+WHERE UserID=@UserID 
+AND NoteID=@NoteID
+SELECT 'Note Updated Successfully' AS Message
+
+
+END TRY
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateNotePriority.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE  spUpdateNotePriority
+(
+@UserID INT,
+@NoteID INT,
+@PriorityID INT
+)
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteID=@NoteID
+)
+BEGIN
+SELECT 'Invalid UserID Or NoteID' AS Message
+RETURN 
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNotePriorities
+WHERE NotePriorityID=@PriorityID
+)
+BEGIN
+SELECT 'Invalid Note PriorityID' AS Message
+RETURN 
+END
+
+BEGIN TRY
+
+UPDATE tblNote 
+SET
+    NotePriorityID=@PriorityID
+WHERE UserID=@UserID 
+AND NoteID=@NoteID
+
+SELECT 'Note Priority Updated Successfully' AS Message
+END TRY
+
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spDeleteCreditCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spDeleteCreditCategoryByUserID
+(
+ @UserID INT,
+ @CategoryID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    IF NOT EXISTS 
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS MESSAGE
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryID = @CategoryID
+        AND UserID = @UserID
+        AND IsDefault = 0
+    )
+    BEGIN
+        SELECT 'Cannot delete default categories or categories owned by other users' AS MESSAGE
+        RETURN
+    END
+
+    UPDATE tblCreditCategory
+    SET IsActive = 0
+    WHERE CategoryID = @CategoryID
+    AND UserID = @UserID
+    AND IsDefault = 0
+
+    SELECT 'Credit Category Deleted Successfully' AS Message
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spDeleteCreditSubCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spDeleteCreditSubCategoryByUserID
+(
+ @UserID INT,
+ @SubCategoryID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS 
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+    )
+    BEGIN
+        SELECT 'Invalid SubCategoryID' AS MESSAGE
+        RETURN
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+        AND UserID = @UserID
+        AND IsDefault = 0
+    )
+    BEGIN
+        SELECT 'Cannot delete default subcategories or subcategories owned by other users' AS MESSAGE
+        RETURN
+    END
+
+    
+    
+    UPDATE tblCreditSubCategory
+    SET IsActive = 0
+    WHERE SubCategoryID = @SubCategoryID
+    AND UserID = @UserID
+    AND IsDefault = 0
+
+    SELECT 'Credit SubCategory Deleted Successfully' AS Message
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spDeleteExpenseCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spDeleteExpenseCategoryByUserID
+(
+ @UserID INT,
+ @CategoryID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS 
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS MESSAGE
+        RETURN
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryID = @CategoryID
+        AND UserID = @UserID
+        AND IsDefault = 0
+    )
+    BEGIN
+        SELECT 'Cannot delete default categories or categories owned by other users' AS MESSAGE
+        RETURN
+    END
+
+    
+    
+    UPDATE tblExpenseCategory
+    SET IsActive = 0
+    WHERE CategoryID = @CategoryID
+    AND UserID = @UserID
+    AND IsDefault = 0
+
+    SELECT 'Expense Category Deleted Successfully' AS Message
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spDeleteExpenseSubCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spDeleteExpenseSubCategoryByUserID
+(
+ @UserID INT,
+ @SubCategoryID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS 
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+    )
+    BEGIN
+        SELECT 'Invalid SubCategoryID' AS MESSAGE
+        RETURN
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+        AND UserID = @UserID
+        AND IsDefault = 0
+    )
+    BEGIN
+        SELECT 'Cannot delete default subcategories or subcategories owned by other users' AS MESSAGE
+        RETURN
+    END
+
+    
+    
+    UPDATE tblExpenseSubCategory
+    SET IsActive = 0
+    WHERE SubCategoryID = @SubCategoryID
+    AND UserID = @UserID
+    AND IsDefault = 0
+
+    SELECT 'Expense SubCategory Deleted Successfully' AS Message
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllPaymentTypes.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllPaymentTypes
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblPaymentType
+    )
+    BEGIN
+        SELECT 'No Payment Type Found' AS Message
+        RETURN
+    END
+
+    SELECT
+        PaymentID,
+        PaymentName
+    FROM tblPaymentType
+    ORDER BY PaymentName ASC;
+
+END
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetCreditCategoriesByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetCreditCategoriesByUserID
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+    
+    
+    SELECT 
+        CategoryID,
+        UserID,
+        CategoryName,
+        IsDefault,
+        IsActive
+    FROM tblCreditCategory
+    WHERE IsActive = 1
+    AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, CategoryName ASC
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetCreditSubCategoriesByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetCreditSubCategoriesByUserID
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+    
+    
+    SELECT 
+        SubCategoryID,
+        CategoryID,
+        UserID,
+        SubCategoryName,
+        IsDefault,
+        IsActive
+    FROM tblCreditSubCategory
+    WHERE IsActive = 1
+    AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, SubCategoryName ASC
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetExpenseCategoriesByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetExpenseCategoriesByUserID
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+    
+    
+    SELECT 
+        CategoryID,
+        UserID,
+        CategoryName,
+        IsDefault,
+        IsActive
+    FROM tblExpenseCategory
+    WHERE IsActive = 1
+    AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, CategoryName ASC
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetExpenseSubCategoriesByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetExpenseSubCategoriesByUserID
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+    
+    
+    SELECT 
+        SubCategoryID,
+        CategoryID,
+        UserID,
+        SubCategoryName,
+        IsDefault,
+        IsActive
+    FROM tblExpenseSubCategory
+    WHERE IsActive = 1
+    AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, SubCategoryName ASC
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spInsertNewCreditCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spInsertNewCreditCategoryByUserID
+(
+   @UserID INT,
+   @CategoryName VARCHAR(MAX)
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+    
+    
+    SET @CategoryName = LTRIM(RTRIM(@CategoryName))
+    
+    IF @CategoryName IS NULL
+    OR @CategoryName = ''
+    BEGIN
+        SELECT 'Category Name cannot be empty' AS Message
+        RETURN
+    END
+    
+
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryName = @CategoryName
+        AND UserID = @UserID
+        AND IsActive = 1
+    )
+    BEGIN
+        SELECT 'Category Already Exists for this user' AS Message
+        RETURN
+    END
+    
+    
+    INSERT INTO tblCreditCategory(UserID, CategoryName, IsDefault, IsActive)
+    VALUES(@UserID, @CategoryName, 0, 1)
+    
+    SELECT 'Credit Category Inserted Successfully' AS Message
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spInsertNewCreditSubCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spInsertNewCreditSubCategoryByUserID
+(
+   @UserID INT,
+   @CategoryID INT,
+   @SubCategoryName VARCHAR(MAX)
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryID = @CategoryID
+        AND IsActive = 1
+        AND (UserID IS NULL OR UserID = @UserID)
+    )
+    BEGIN
+        SELECT 'Invalid or inactive category' AS Message
+        RETURN
+    END
+    
+    
+    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))
+    
+    IF @SubCategoryName IS NULL
+    OR @SubCategoryName = ''
+    BEGIN
+        SELECT 'SubCategory Name cannot be empty' AS Message
+        RETURN
+    END
+    
+    
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblCreditSubCategory
+        WHERE SubCategoryName = @SubCategoryName
+        AND CategoryID = @CategoryID
+        AND UserID = @UserID
+        AND IsActive = 1
+    )
+    BEGIN
+        SELECT 'SubCategory Already Exists for this user in this category' AS Message
+        RETURN
+    END
+    
+    
+    INSERT INTO tblCreditSubCategory(CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
+    VALUES(@CategoryID, @UserID, @SubCategoryName, 0, 1)
+    
+    SELECT 'Credit SubCategory Inserted Successfully' AS Message
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spInsertNewExpenseCategoryByUserID.SQL
+
+-- ==========================================================
+
+CREATE PROCEDURE spInsertNewExpenseCategoryByUserID
+(
+   @UserID INT,
+   @CategoryName VARCHAR(MAX)
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+    
+    
+    SET @CategoryName = LTRIM(RTRIM(@CategoryName))
+    
+    IF @CategoryName IS NULL
+    OR @CategoryName = ''
+    BEGIN
+        SELECT 'Category Name cannot be empty' AS Message
+        RETURN
+    END
+    
+    
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryName = @CategoryName
+        AND UserID = @UserID
+        AND IsActive = 1
+    )
+    BEGIN
+        SELECT 'Category Already Exists for this user' AS Message
+        RETURN
+    END
+    
+    
+    INSERT INTO tblExpenseCategory(UserID, CategoryName, IsDefault, IsActive)
+    VALUES(@UserID, @CategoryName, 0, 1)
+    
+    SELECT 'Expense Category Inserted Successfully' AS Message
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spInsertNewExpenseSubCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spInsertNewExpenseSubCategoryByUserID
+(
+   @UserID INT,
+   @CategoryID INT,
+   @SubCategoryName VARCHAR(MAX)
+)
+AS
+BEGIN
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message
+        RETURN
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryID = @CategoryID
+        AND IsActive = 1
+        AND (UserID IS NULL OR UserID = @UserID)
+    )
+    BEGIN
+        SELECT 'Invalid or inactive category' AS Message
+        RETURN
+    END
+    
+    
+    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))
+    
+    IF @SubCategoryName IS NULL
+    OR @SubCategoryName = ''
+    BEGIN
+        SELECT 'SubCategory Name cannot be empty' AS Message
+        RETURN
+    END
+    
+    
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryName = @SubCategoryName
+        AND CategoryID = @CategoryID
+        AND UserID = @UserID
+        AND IsActive = 1
+    )
+    BEGIN
+        SELECT 'SubCategory Already Exists for this user in this category' AS Message
+        RETURN
+    END
+    
+    
+    INSERT INTO tblExpenseSubCategory(CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
+    VALUES(@CategoryID, @UserID, @SubCategoryName, 0, 1)
+    
+    SELECT 'Expense SubCategory Inserted Successfully' AS Message
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateCreditCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateCreditCategoryByUserID
+(
+  @UserID INT,
+  @CategoryID INT,
+  @CategoryName VARCHAR(MAX)
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory 
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS MESSAGE
+        RETURN 
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryID = @CategoryID
+        AND UserID = @UserID
+        AND IsDefault = 0
+    )
+    BEGIN
+        SELECT 'Cannot update default categories or categories owned by other users' AS MESSAGE
+        RETURN
+    END
+
+    
+    SET @CategoryName = LTRIM(RTRIM(@CategoryName))
+
+    IF @CategoryName IS NULL
+    OR @CategoryName = ''
+    BEGIN
+        SELECT 'Category Name Cannot Be Empty' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblCreditCategory
+        WHERE CategoryName = @CategoryName
+        AND CategoryID != @CategoryID
+        AND UserID = @UserID
+        AND IsActive = 1
+    )
+    BEGIN
+        SELECT 'Category Name Already Exists for this user' AS MESSAGE
+        RETURN
+    END
+
+    
+    UPDATE tblCreditCategory
+    SET CategoryName = @CategoryName
+    WHERE CategoryID = @CategoryID
+    AND UserID = @UserID
+    AND IsDefault = 0
+
+    SELECT 'Credit Category Updated Successfully' AS MESSAGE
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateCreditSubCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateCreditSubCategoryByUserID
+(
+  @UserID INT,
+  @SubCategoryID INT,
+  @SubCategoryName VARCHAR(MAX)
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditSubCategory 
+        WHERE SubCategoryID = @SubCategoryID
+    )
+    BEGIN
+        SELECT 'Invalid SubCategoryID' AS MESSAGE
+        RETURN 
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCreditSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+        AND UserID = @UserID
+        AND IsDefault = 0
+    )
+    BEGIN
+        SELECT 'Cannot update default subcategories or subcategories owned by other users' AS MESSAGE
+        RETURN
+    END
+
+    
+    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))
+
+    IF @SubCategoryName IS NULL
+    OR @SubCategoryName = ''
+    BEGIN
+        SELECT 'SubCategory Name Cannot Be Empty' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblCreditSubCategory
+        WHERE SubCategoryName = @SubCategoryName
+        AND SubCategoryID != @SubCategoryID
+        AND UserID = @UserID
+        AND IsActive = 1
+    )
+    BEGIN
+        SELECT 'SubCategory Name Already Exists for this user' AS MESSAGE
+        RETURN
+    END
+
+    
+    UPDATE tblCreditSubCategory
+    SET SubCategoryName = @SubCategoryName
+    WHERE SubCategoryID = @SubCategoryID
+    AND UserID = @UserID
+    AND IsDefault = 0
+
+    SELECT 'Credit SubCategory Updated Successfully' AS MESSAGE
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateExpenseCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateExpenseCategoryByUserID
+(
+  @UserID INT,
+  @CategoryID INT,
+  @CategoryName VARCHAR(MAX)
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory 
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS MESSAGE
+        RETURN 
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryID = @CategoryID
+        AND UserID = @UserID
+        AND IsDefault = 0
+    )
+    BEGIN
+        SELECT 'Cannot update default categories or categories owned by other users' AS MESSAGE
+        RETURN
+    END
+
+    
+    SET @CategoryName = LTRIM(RTRIM(@CategoryName))
+
+    IF @CategoryName IS NULL
+    OR @CategoryName = ''
+    BEGIN
+        SELECT 'Category Name Cannot Be Empty' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryName = @CategoryName
+        AND CategoryID != @CategoryID
+        AND UserID = @UserID
+        AND IsActive = 1
+    )
+    BEGIN
+        SELECT 'Category Name Already Exists for this user' AS MESSAGE
+        RETURN
+    END
+
+    
+    UPDATE tblExpenseCategory
+    SET CategoryName = @CategoryName
+    WHERE CategoryID = @CategoryID
+    AND UserID = @UserID
+    AND IsDefault = 0
+
+    SELECT 'Expense Category Updated Successfully' AS MESSAGE
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateExpenseSubCategoryByUserID.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateExpenseSubCategoryByUserID
+(
+  @UserID INT,
+  @SubCategoryID INT,
+  @SubCategoryName VARCHAR(MAX)
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory 
+        WHERE SubCategoryID = @SubCategoryID
+    )
+    BEGIN
+        SELECT 'Invalid SubCategoryID' AS MESSAGE
+        RETURN 
+    END
+    
+    
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+        AND UserID = @UserID
+        AND IsDefault = 0
+    )
+    BEGIN
+        SELECT 'Cannot update default subcategories or subcategories owned by other users' AS MESSAGE
+        RETURN
+    END
+
+    
+    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))
+
+    IF @SubCategoryName IS NULL
+    OR @SubCategoryName = ''
+    BEGIN
+        SELECT 'SubCategory Name Cannot Be Empty' AS MESSAGE
+        RETURN
+    END
+
+    
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryName = @SubCategoryName
+        AND SubCategoryID != @SubCategoryID
+        AND UserID = @UserID
+        AND IsActive = 1
+    )
+    BEGIN
+        SELECT 'SubCategory Name Already Exists for this user' AS MESSAGE
+        RETURN
+    END
+
+    
+    UPDATE tblExpenseSubCategory
+    SET SubCategoryName = @SubCategoryName
+    WHERE SubCategoryID = @SubCategoryID
+    AND UserID = @UserID
+    AND IsDefault = 0
+
+    SELECT 'Expense SubCategory Updated Successfully' AS MESSAGE
+
+END
+GO
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spDeleteTask.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spDeleteTask
+    @TaskID INT
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTask
+        WHERE TaskID = @TaskID
+    )
+    BEGIN
+        SELECT 'Invalid TaskID' AS Message;
+        RETURN;
+    END
+
+
+    BEGIN TRY
+
+        DELETE FROM tblTask
+        WHERE TaskID = @TaskID;
+
+        SELECT 'Task Deleted Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+
+END;
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterTasksByStatus.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterTasksByStatus
+    @UserID INT,
+    @TaskStatusID INT
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTaskStatus
+        WHERE TaskStatusID = @TaskStatusID
+    )
+    BEGIN
+        SELECT 'Invalid TaskStatusID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTask
+        WHERE UserID = @UserID
+        AND TaskStatusID = @TaskStatusID
+    )
+    BEGIN
+        SELECT 'No Tasks Found' AS Message;
+        RETURN;
+    END
+
+
+    SELECT
+        Task.TaskID,
+        Task.TaskTitle,
+        TaskPriorities.PriorityName,
+        TaskStatus.TaskStatusName,
+        Task.Deadline
+    FROM tblTask Task
+
+    INNER JOIN tblTaskPriorities TaskPriorities
+        ON Task.PriorityID = TaskPriorities.PriorityID
+
+    INNER JOIN tblTaskStatus TaskStatus
+        ON Task.TaskStatusID = TaskStatus.TaskStatusID
+
+    WHERE Task.UserID = @UserID
+    AND Task.TaskStatusID = @TaskStatusID
+
+    ORDER BY Task.Deadline ASC;
+
+END;
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllTasks.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllTasks
+    @UserID INT
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTask
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Tasks Found' AS Message;
+        RETURN;
+    END
+
+
+    SELECT
+        Task.TaskID,
+        Task.TaskTitle,
+        TaskPriorities.PriorityName,
+        TaskStatus.TaskStatusName,
+        Task.Deadline
+    FROM tblTask Task
+
+    INNER JOIN tblTaskPriorities TaskPriorities
+        ON Task.PriorityID = TaskPriorities.PriorityID
+
+    INNER JOIN tblTaskStatus TaskStatus
+        ON Task.TaskStatusID = TaskStatus.TaskStatusID
+
+    WHERE Task.UserID = @UserID
+
+END;
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetCompletedTasks.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetCompletedTasks
+    @UserID INT
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTask
+        WHERE UserID = @UserID
+        AND TaskStatusID = 2
+    )
+    BEGIN
+        SELECT 'No Completed Tasks Found' AS Message;
+        RETURN;
+    END
+
+
+    SELECT
+        Task.TaskID,
+        Task.TaskTitle,
+        TaskPriorities.PriorityName,
+        TaskStatus.TaskStatusName,
+        Task.Deadline
+    FROM tblTask Task
+
+    INNER JOIN tblTaskPriorities TaskPriorities
+        ON Task.PriorityID = TaskPriorities.PriorityID
+
+    INNER JOIN tblTaskStatus TaskStatus
+        ON Task.TaskStatusID = TaskStatus.TaskStatusID
+
+    WHERE Task.UserID = @UserID
+    AND Task.TaskStatusID = 2
+
+    ORDER BY Task.Deadline DESC;
+
+END;
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetPendingTasks.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetPendingTasks
+    @UserID INT
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTask
+        WHERE UserID = @UserID
+        AND TaskStatusID = 1
+    )
+    BEGIN
+        SELECT 'No Pending Tasks Found' AS Message;
+        RETURN;
+    END
+
+    SELECT
+        Task.TaskID,
+        Task.TaskTitle,
+        TaskPriorities.PriorityName,
+        TaskStatus.TaskStatusName,
+        Task.Deadline
+    FROM tblTask Task
+
+    INNER JOIN tblTaskPriorities TaskPriorities
+        ON Task.PriorityID = TaskPriorities.PriorityID
+
+    INNER JOIN tblTaskStatus TaskStatus
+        ON Task.TaskStatusID = TaskStatus.TaskStatusID
+
+    WHERE Task.UserID = @UserID
+    AND Task.TaskStatusID = 1
+
+    ORDER BY Task.Deadline ASC;
+
+END;
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetTasksBetweenDates.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetTasksBetweenDates
+(
+    @UserID INT,
+    @FromDate DATE,
+    @ToDate DATE
+)
+AS
+BEGIN
+
+
+    BEGIN TRY
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUsers
+            WHERE UserID = @UserID
+        )
+        BEGIN
+            SELECT 'Invalid UserID' AS Message
+            RETURN
+        END
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUserAuthentication
+            WHERE UserID = @UserID
+            AND Active = 1
+        )
+        BEGIN
+            SELECT 'Inactive User Cannot View Tasks' AS Message
+            RETURN
+        END
+
+        IF @FromDate IS NULL OR @ToDate IS NULL
+        BEGIN
+            SELECT 'Date Cannot Be NULL' AS Message
+            RETURN
+        END
+
+        IF @FromDate > @ToDate
+        BEGIN
+            SELECT 'FromDate Cannot Be Greater Than ToDate' AS Message
+            RETURN
+        END
+
+        SELECT
+            T.TaskID,
+            T.TaskTitle,
+            P.PriorityName,
+            S.TaskStatusName,
+            T.Deadline,
+            T.CreatedAt
+        FROM tblTask T
+        INNER JOIN tblTaskPriorities P
+            ON T.PriorityID = P.PriorityID
+        INNER JOIN tblTaskStatus S
+            ON T.TaskStatusID = S.TaskStatusID
+        WHERE
+            T.UserID = @UserID
+            AND T.Deadline BETWEEN @FromDate AND @ToDate
+        ORDER BY T.Deadline
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message
+
+    END CATCH
+
+END
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetUpcomingTaskReminders.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetUpcomingTaskReminders
+
+    @UserID INT
+
+AS
+BEGIN
+
+
+    DECLARE @Today DATE = CAST(GETDATE() AS DATE);
+
+    BEGIN TRY
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUsers
+            WHERE UserID = @UserID
+        )
+        BEGIN
+            SELECT 'UserID Does Not Exist' AS Message;
+            RETURN;
+        END
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblTask
+            WHERE UserID = @UserID
+            AND Deadline >= @Today
+            AND TaskStatusID = 1
+        )
+        BEGIN
+            SELECT 'No Pending Upcoming Tasks Found' AS Message;
+            RETURN;
+        END
+
+        SELECT
+            tblTask.TaskID,
+            tblTask.TaskTitle,
+            tblTask.Deadline,
+            tblTaskStatus.TaskStatusName,
+            tblTaskPriorities.PriorityName,
+            DATEDIFF(DAY, @Today, tblTask.Deadline) AS RemainingDays,
+            tblTask.CreatedAt
+
+        FROM tblTask
+
+        INNER JOIN tblTaskStatus
+            ON tblTask.TaskStatusID = tblTaskStatus.TaskStatusID
+
+        INNER JOIN tblTaskPriorities
+            ON tblTask.PriorityID = tblTaskPriorities.PriorityID
+
+        WHERE tblTask.UserID = @UserID
+        AND tblTask.Deadline >= @Today
+        AND tblTask.TaskStatusID = 1
+
+        ORDER BY tblTask.Deadline ASC;
+
+    END TRY
+
+    BEGIN CATCH
+        SELECT ERROR_MESSAGE() AS Message;
+    END CATCH
+
+END
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spInsertTask.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spInsertTask  
+    @UserID INT,  
+    @PriorityID INT,  
+    @TaskTitle VARCHAR(150),  
+    @Deadline DATE  
+AS  
+BEGIN  
+  
+    SET @TaskTitle = LTRIM(RTRIM(@TaskTitle));  
+  
+
+    IF @TaskTitle IS NULL OR @TaskTitle = ''  
+    BEGIN  
+        SELECT 'Task Title Cannot Be Empty' AS Message;  
+        RETURN;  
+    END  
+  
+
+    IF @Deadline IS NULL  
+    BEGIN  
+        SELECT 'Deadline Cannot Be Empty' AS Message;  
+        RETURN;  
+    END  
+
+    IF @Deadline < CAST(GETDATE() AS DATE)  
+    BEGIN  
+        SELECT 'Invalid Deadline Date' AS Message;  
+        RETURN;  
+    END  
+  
+
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUsers  
+        WHERE UserID = @UserID  
+    )  
+    BEGIN  
+        SELECT 'Invalid UserID' AS Message;  
+        RETURN;  
+    END  
+
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUserAuthentication  
+        WHERE UserID = @UserID  
+              AND Active = 1  
+    )  
+    BEGIN  
+        SELECT 'User Account Is Not Active' AS Message;  
+        RETURN;  
+    END  
+
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblTaskPriorities  
+        WHERE PriorityID = @PriorityID  
+    )  
+    BEGIN  
+        SELECT 'Invalid PriorityID' AS Message;  
+        RETURN;  
+    END  
+  
+  
+    BEGIN TRY  
+  
+        INSERT INTO tblTask  
+        (  
+            UserID,  
+            PriorityID,  
+            TaskStatusID,  
+            TaskTitle,  
+            Deadline  
+        )  
+        VALUES  
+        (  
+            @UserID,  
+            @PriorityID,  
+            1,  
+            @TaskTitle,  
+            @Deadline  
+        );  
+  
+        SELECT 'Task Inserted Successfully' AS Message;  
+  
+    END TRY  
+  
+    BEGIN CATCH  
+  
+        SELECT ERROR_MESSAGE() AS Message;  
+  
+    END CATCH  
+  
+END;
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateTask.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateTask
+    @UserID INT,
+    @TaskID INT,
+    @PriorityID INT,
+    @TaskStatusID INT,
+    @TaskTitle VARCHAR(150),
+    @Deadline DATE
+AS
+BEGIN
+  
+  
+    SET @TaskTitle = LTRIM(RTRIM(@TaskTitle));
+
+    IF @TaskTitle IS NULL OR @TaskTitle = ''
+    BEGIN
+        SELECT 'Task Title Cannot Be Empty' AS Message;
+        RETURN;
+    END
+  
+    IF @Deadline IS NULL
+    BEGIN
+        SELECT 'Deadline Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF @Deadline < CAST(GETDATE() AS DATE)
+    BEGIN
+        SELECT 'Invalid Deadline Date' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTask
+        WHERE TaskID = @TaskID
+        AND UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid TaskID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTaskPriorities
+        WHERE PriorityID = @PriorityID
+    )
+    BEGIN
+        SELECT 'Invalid PriorityID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTaskStatus
+        WHERE TaskStatusID = @TaskStatusID
+    )
+    BEGIN
+        SELECT 'Invalid TaskStatusID' AS Message;
+        RETURN;
+    END
+  
+  
+    BEGIN TRY
+  
+        UPDATE tblTask
+        SET
+            PriorityID = @PriorityID,
+            TaskStatusID = @TaskStatusID,
+            TaskTitle = @TaskTitle,
+            Deadline = @Deadline
+        WHERE TaskID = @TaskID
+        AND UserID = @UserID;
+  
+        SELECT 'Task Updated Successfully' AS Message;
+  
+    END TRY
+  
+    BEGIN CATCH
+  
+        SELECT ERROR_MESSAGE() AS Message;
+  
+    END CATCH
+  
+END;
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateTaskStatus.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateTaskStatus
+    @TaskID INT,
+    @TaskStatusID INT
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTask
+        WHERE TaskID = @TaskID
+    )
+    BEGIN
+        SELECT 'Invalid TaskID' AS Message;
+        RETURN;
+    END
+
+			IF NOT EXISTS
+			(
+				SELECT 1
+				FROM tblTaskStatus
+				WHERE TaskStatusID = @TaskStatusID
+			)
+			BEGIN
+				SELECT 'Invalid TaskStatusID' AS Message;
+				RETURN;
+			END
+
+			IF EXISTS
+			(
+				SELECT 1
+				FROM tblTask
+				WHERE TaskID = @TaskID
+				AND TaskStatusID = @TaskStatusID
+			)
+		BEGIN
+			SELECT 'Task Already Has This Status' AS Message;
+			RETURN;
+		END
+
+    BEGIN TRY
+
+        UPDATE tblTask
+        SET TaskStatusID = @TaskStatusID
+        WHERE TaskID = @TaskID;
+
+        SELECT 'Task Status Updated Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+
+END;
+
+
+
+GO
+
+
