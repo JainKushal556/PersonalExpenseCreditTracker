@@ -2,7 +2,7 @@ CREATE PROC spGetLentPersonHistory
 @PersonID INT, @UserID INT
 AS
 BEGIN
-	DECLARE @LentID INT;
+
 	IF NOT EXISTS (SELECT 1 
 				   FROM tblLent L JOIN tblLentPersons LP ON  L.PersonID = LP.PersonID
 				   WHERE UserID = @UserID AND L.PersonID = @PersonID)
@@ -11,14 +11,8 @@ BEGIN
 		RETURN
 	END
 
-	SELECT TOP 1 @LentID = L.LentID
-    FROM tblLent L
-    LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
-    WHERE L.UserID = @UserID
-    AND S.StatusName = 'Pending'
-    ORDER BY L.LentAt DESC
-
-	SELECT Prsn.PersonName,
+	SELECT L.LentID,
+			Prsn.PersonName,
 			L.Amount,
 			L.ReturnedAmount,
 			L.RemainingAmount,
@@ -34,5 +28,4 @@ BEGIN
 	WHERE Prsn.PersonID = @PersonID AND L.UserID = @UserID
 	ORDER BY L.LentAt DESC;
 
-	RETURN @LentID;
 END

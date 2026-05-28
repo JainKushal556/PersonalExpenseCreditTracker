@@ -2,7 +2,7 @@ CREATE PROC spGetAllLent
 	@UserID INT
 AS
 BEGIN
-	DECLARE @LentID INT;
+	
 	IF NOT EXISTS (SELECT 1 
 					FROM tblUserAuthentication
 					WHERE UserID = @UserID AND Active = 1)
@@ -11,14 +11,8 @@ BEGIN
 		RETURN
 	END
 
-	SELECT TOP 1 @LentID = L.LentID
-    FROM tblLent L
-    LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
-    WHERE L.UserID = @UserID
-    AND S.StatusName = 'Pending'
-    ORDER BY L.LentAt DESC
-
-	SELECT Prsn.PersonName,
+	SELECT L.LentID,
+			Prsn.PersonName,
 			L.Amount,
 			L.ReturnedAmount,
 			L.RemainingAmount,
@@ -32,5 +26,5 @@ BEGIN
 	LEFT JOIN tblLentPersons Prsn ON L.PersonID = Prsn.PersonID
 	LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
 	WHERE L.UserID = @UserID ORDER BY L.LentAt DESC
-	RETURN @LentID
+
 END
