@@ -22,7 +22,9 @@ VALUES
 (NULL, 'Health', 1, 1),
 (NULL, 'Education', 1, 1),
 (NULL, 'Transportation', 1, 1),
-(NULL, 'Personal Care', 1, 1);
+(NULL, 'Personal Care', 1, 1),
+(NULL, 'Borrow', 1, 1),
+(NULL, 'Tution', 1, 1);
 GO
 
 INSERT INTO tblPaymentType (PaymentName)
@@ -50,7 +52,8 @@ VALUES
 (NULL, 'Cashback', 1, 1),
 (NULL, 'Scholarship', 1, 1),
 (NULL, 'Bonus', 1, 1),
-(NULL, 'Refund', 1, 1);
+(NULL, 'Refund', 1, 1),
+(NULL, 'Lent', 1, 1);
 GO
 
 INSERT INTO tblPersons (UserID, PersonName, PhoneNumber, Address)
@@ -150,7 +153,8 @@ VALUES
 (7, NULL, 'Card Cashback', 1, 1),
 (8, NULL, 'College Scholarship', 1, 1),
 (9, NULL, 'Festival Bonus', 1, 1),
-(10, NULL, 'Product Refund', 1, 1);
+(10, NULL, 'Product Refund', 1, 1),
+(11, NULL, 'NOT APPLICABLE', 1, 1);
 GO
 
 INSERT INTO tblExpenseSubCategory (CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
@@ -163,7 +167,14 @@ VALUES
 (6, NULL, 'Medicine', 1, 1),
 (7, NULL, 'Books', 1, 1),
 (8, NULL, 'Fuel', 1, 1),
-(9, NULL, 'Salon', 1, 1);
+(9, NULL, 'Salon', 1, 1),
+(10, NULL, 'NOT APPLICABLE', 1, 1),
+(11, NULL, 'Pradeep Sir', 1, 1),
+(11, NULL, 'Adity Mam', 1, 1),
+(11, NULL, 'Sanjay Sir', 1, 1),
+(11, NULL, 'PS Sir', 1, 1),
+(11, NULL, 'Surja Sir', 1, 1),
+(11, NULL, 'Partha Sir', 1, 1);
 GO
 
 INSERT INTO tblExpense
@@ -206,7 +217,7 @@ VALUES
 (6, 6, 1, 1, 4500.00, 0.00, 4500.00, '2026-06-25', 'House maintenance'),
 (7, 7, 8, 1, 6000.00, 0.00, 6000.00, '2026-06-30', 'Travel assistance'),
 (8, 8, 2, 2, 8500.00, 8500.00, 0.00, '2026-07-10', 'Family requirement'),
-(9, 9, 1, 1, 4000.00, 0.00, 4000.00, '2026-06-28', 'Festival expenses'),
+(9, 9, 1, 4, 4000.00, 0.00, 4000.00, '2026-06-28', 'Cancelled lent case'),
 (10, 10, 10, 1, 9500.00, 0.00, 9500.00, '2026-07-15', 'Laptop purchase support');
 GO
 
@@ -221,7 +232,7 @@ VALUES
 (6, 6, 8, 1, 3200.00, 0.00, 3200.00, '2026-06-18', 'House rent'),
 (7, 7, 9, 2, 4500.00, 4500.00, 0.00, '2026-06-25', 'Travel expense'),
 (8, 8, 2, 1, 8000.00, 0.00, 8000.00, '2026-07-10', 'Family support'),
-(9, 9, 1, 1, 6000.00, 0.00, 6000.00, '2026-06-30', 'Festival shopping'),
+(9, 9, 1, 4, 6000.00, 0.00, 6000.00, '2026-06-30', 'Cancelled borrow case'),
 (10,10,10, 2, 9000.00, 9000.00, 0.00, '2026-07-15', 'Laptop purchase');
 GO
 
@@ -550,4 +561,113 @@ VALUES
 (7, 2, 'January 2026 family note', 'Family support is overdue.', '2026-01-29 09:45:00'),
 (8, 1, 'March 2026 course note', 'Course fee support is partially settled.', '2026-03-17 10:55:00'),
 (9, 2, 'May 2026 summer note', 'Summer expense support is pending.', '2026-05-23 12:05:00');
+GO
+
+-- =========================================================================
+-- LARGE SEED DATA GENERATION FOR LOAD TESTING AND EDGE CASES
+-- =========================================================================
+DECLARE @i INT = 1;
+WHILE @i <= 500
+BEGIN
+    -- Expense
+    INSERT INTO tblExpense (UserID, CategoryID, SubCategoryID, PaymentID, Amount, Description, ExpenseAt)
+    VALUES (
+        (@i % 15) + 1, 
+        (@i % 10) + 1, 
+        (@i % 10) + 1, 
+        (@i % 10) + 1, 
+        100.00 + (@i % 500) * 2.50, 
+        'Bulk Expense Entry ' + CAST(@i AS VARCHAR), 
+        DATEADD(day, -(@i % 730), GETDATE())
+    );
+
+    -- Credit
+    INSERT INTO tblCredit (UserID, CategoryID, SubCategoryID, PaymentID, Amount, Description, CreditAt)
+    VALUES (
+        (@i % 15) + 1, 
+        (@i % 11) + 1, 
+        (@i % 11) + 1, 
+        (@i % 10) + 1, 
+        500.00 + (@i % 500) * 5.00, 
+        'Bulk Credit Entry ' + CAST(@i AS VARCHAR), 
+        DATEADD(day, -(@i % 730), GETDATE())
+    );
+
+    -- Lent
+    DECLARE @lentAmount DECIMAL(10,2) = 1000.00 + (@i % 100) * 10;
+    DECLARE @lentReturned DECIMAL(10,2) = CASE 
+        WHEN (@i % 5) + 1 = 1 THEN 0.00 -- Pending
+        WHEN (@i % 5) + 1 = 2 THEN @lentAmount -- Paid
+        WHEN (@i % 5) + 1 = 3 THEN 0.00 -- Overdue
+        WHEN (@i % 5) + 1 = 4 THEN 0.00 -- Cancelled
+        ELSE @lentAmount / 2 -- Partially Paid
+    END;
+
+    INSERT INTO tblLent (UserID, PersonID, PaymentID, StatusID, Amount, ReturnedAmount, RemainingAmount, LentAt, DeadlineAt, Description)
+    VALUES (
+        (@i % 15) + 1, 
+        (@i % 15) + 1, 
+        (@i % 10) + 1, 
+        (@i % 5) + 1, 
+        @lentAmount, 
+        @lentReturned, 
+        @lentAmount - @lentReturned, 
+        DATEADD(day, -((@i % 300) + 30), GETDATE()), 
+        CASE 
+            WHEN (@i % 5) + 1 = 3 THEN DATEADD(day, -(@i % 30) - 1, GETDATE()) -- Overdue: deadline in past
+            ELSE DATEADD(day, (@i % 30) + 1, GETDATE()) -- Future deadline
+        END, 
+        'Bulk Lent Entry ' + CAST(@i AS VARCHAR)
+    );
+
+    -- Borrow
+    DECLARE @borrowAmount DECIMAL(10,2) = 500.00 + (@i % 100) * 10;
+    DECLARE @borrowPaid DECIMAL(10,2) = CASE 
+        WHEN (@i % 5) + 1 = 1 THEN 0.00 
+        WHEN (@i % 5) + 1 = 2 THEN @borrowAmount 
+        WHEN (@i % 5) + 1 = 3 THEN 0.00 
+        WHEN (@i % 5) + 1 = 4 THEN 0.00 
+        ELSE @borrowAmount / 2 
+    END;
+
+    INSERT INTO tblBorrow (UserID, PersonID, PaymentID, StatusID, Amount, PaidAmount, RemainingAmount, BorrowAt, DeadlineAt, Description)
+    VALUES (
+        (@i % 15) + 1, 
+        (@i % 15) + 1, 
+        (@i % 10) + 1, 
+        (@i % 5) + 1, 
+        @borrowAmount, 
+        @borrowPaid, 
+        @borrowAmount - @borrowPaid, 
+        DATEADD(day, -((@i % 300) + 30), GETDATE()), 
+        CASE 
+            WHEN (@i % 5) + 1 = 3 THEN DATEADD(day, -(@i % 30) - 1, GETDATE()) 
+            ELSE DATEADD(day, (@i % 30) + 1, GETDATE()) 
+        END, 
+        'Bulk Borrow Entry ' + CAST(@i AS VARCHAR)
+    );
+
+    -- Tasks
+    INSERT INTO tblTask (UserID, PriorityID, TaskStatusID, TaskTitle, Deadline, CreatedAt)
+    VALUES (
+        (@i % 15) + 1, 
+        (@i % 3) + 1, 
+        (@i % 2) + 1, 
+        'Bulk Task ' + CAST(@i AS VARCHAR), 
+        DATEADD(day, (@i % 60) - 10, GETDATE()), 
+        DATEADD(day, -(@i % 30), GETDATE())
+    );
+
+    -- Notes
+    INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description, CreatedAt)
+    VALUES (
+        (@i % 15) + 1, 
+        (@i % 2) + 1, 
+        'Bulk Note ' + CAST(@i AS VARCHAR), 
+        'Detailed description for bulk note entry number ' + CAST(@i AS VARCHAR), 
+        DATEADD(day, -(@i % 100), GETDATE())
+    );
+
+    SET @i = @i + 1;
+END;
 GO
