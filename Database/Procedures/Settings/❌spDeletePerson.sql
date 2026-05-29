@@ -15,7 +15,7 @@ BEGIN
 
 			IF EXISTS (SELECT 1 
 							FROM tblBorrow
-							WHERE PersonID = @PersonID)
+							WHERE PersonID = @PersonID AND RemainingAmount > 0)
 			BEGIN
 				SELECT 'You Still Have a Borrow Amount Left!! First Clear It.' AS Message
 				ROLLBACK TRANSACTION

@@ -17,17 +17,21 @@ BEGIN
 			RETURN
 		END
 
-		IF TRIM(@PersonName) = ''
+		IF TRIM(@PersonName) = '' OR @PersonName = 'NULL'
 		BEGIN
 			SELECT 'Person Name is Null' AS Message
 			RETURN
 		END
 
-		IF TRIM(@PhoneNumber) = ''
+		IF TRIM(@PhoneNumber) = '' OR @PersonName = 'NULL'
 		BEGIN
 			SELECT 'Phone Number is Null' AS Message
 			RETURN
 		END
+
+		--PhoneNumber and PersonName Space Check
+		SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+		SET @PersonName = LTRIM(RTRIM(@PersonName));
 
 		--Insert Person on Person Table
 		INSERT INTO tblPersons
@@ -44,14 +48,10 @@ BEGIN
 			@PhoneNumber,
 			@Address
 		);
+
+		SELECT 'Person Detailes Inserted' AS Message
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
-
-
--- TRIM(@PersonName) = '' → NULL handle korbe na, tai NULL value bypass korte pare.
---  TRIM(@PhoneNumber) = '' → same NULL problem ache.
--- Insert success hole kono success message nei.
--- Input trim kore insert korcho na, tai extra spaces DB te store hote pare.
