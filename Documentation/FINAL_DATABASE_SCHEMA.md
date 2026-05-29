@@ -206,7 +206,7 @@ Stores money lent records.
 | ----------- | ------------- | ------------ | -------------------------- | -------------------------------------------------------------------------------------------------- |
 | LentID      | INT           | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each lent transaction                                |
 | UserID      | INT           | No           | FOREIGN KEY                | Stores the ID of the user who provided the money or item on loan                                   |
-| PersonID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the person from the Lent Person table involved in this lent transaction |
+| PersonID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the person from the Persons table involved in this lent transaction |
 | PaymentID   | INT           | No           | FOREIGN KEY                | Stores the reference ID of the payment method used in the lent transaction                         |
 | StatusID    | INT           | No           | FOREIGN KEY                | Stores the current status of the lent transaction                                                  |
 | Amount      | DECIMAL(10,2) | No           | —                          | Stores the total amount involved in the lent transaction                                           |
@@ -218,16 +218,16 @@ Stores money lent records.
 
 ---
 
-## 🟠 TABLE: tblLentPersons
+## 🟠 TABLE: tblPersons
 
 ### Purpose
 
-Stores information about persons involved in lending.
+Stores information about persons involved in lending or borrowing.
 
 | Column Name | Data Type    | Null Allowed | Constraints                | Description                                                                |
 | ----------- | ------------ | ------------ | -------------------------- | -------------------------------------------------------------------------- |
 | PersonID    | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each person record           |
-| UserID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user who owns this lent person record       |
+| UserID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user who owns this person record            |
 | PersonName  | VARCHAR(100) | No           | —                          | Stores the full name of the person involved in lent or borrow transactions |
 | PhoneNumber | VARCHAR(15)  | No           | —                          | Stores the contact phone number of the person for communication purposes   |
 | Address     | VARCHAR(MAX) | Yes          | —                          | Stores the residential or contact address information of the person        |
@@ -257,7 +257,7 @@ Stores money borrowing records.
 | ----------- | ------------- | ------------ | -------------------------- | --------------------------------------------------------------------------------------------------------- |
 | BorrowID    | INT           | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each borrow transaction                                     |
 | UserID      | INT           | No           | FOREIGN KEY                | Stores the reference ID of the user from the Users table involved in this borrow transaction              |
-| PersonID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the person from the Borrow Person table involved in this borrow transaction    |
+| PersonID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the person from the Persons table involved in this borrow transaction    |
 | PaymentID   | INT           | No           | FOREIGN KEY                | Stores the reference ID of the payment method from the Payment_Type table used in this borrow transaction |
 | StatusID    | INT           | No           | FOREIGN KEY                | Stores the reference ID of the current status from the Lent_Borrow_Status table                           |
 | Amount      | DECIMAL(10,2) | No           | —                          | Stores the total amount involved in the borrow transaction                                                |
@@ -269,21 +269,6 @@ Stores money borrowing records.
 
 ---
 
-## 🟠 TABLE: tblBorrowPersons
-
-### Purpose
-
-Stores information about persons involved in borrowing.
-
-| Column Name | Data Type    | Null Allowed | Constraints                | Description                                                              |
-| ----------- | ------------ | ------------ | -------------------------- | ------------------------------------------------------------------------ |
-| PersonID    | INT          | No           | PRIMARY KEY, IDENTITY(1,1) | Stores a unique auto-generated identifier for each person record         |
-| UserID      | INT          | No           | FOREIGN KEY                | Stores the reference ID of the user who owns this borrow person record   |
-| PersonName  | VARCHAR(100) | No           | —                          | Stores the full name of the person involved in borrow transactions       |
-| PhoneNumber | VARCHAR(15)  | No           | —                          | Stores the contact phone number of the person for communication purposes |
-| Address     | VARCHAR(MAX) | Yes          | —                          | Stores the residential or contact address information of the person      |
-
----
 
 # 📝 TASK MODULE
 
