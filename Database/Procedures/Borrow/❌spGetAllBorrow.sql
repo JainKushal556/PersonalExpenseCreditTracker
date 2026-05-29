@@ -1,4 +1,4 @@
-CREATE PROCEDURE spGetAllBorrow
+alter PROCEDURE spGetAllBorrow
 (
     @UserID INT
 )
@@ -6,7 +6,23 @@ AS
 BEGIN
 
     -------------------------------------------------
-    -- Get All Borrow Details of Logged In User
+    -- Validate User
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid OR Inactive UserID!!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Get All Borrow Details
     -------------------------------------------------
 
     SELECT
@@ -21,16 +37,21 @@ BEGIN
         b.DeadlineAt,
         b.Description
     FROM tblBorrow b
-    INNER JOIN tblPersons p
+
+    LEFT JOIN tblPersons p
         ON b.PersonID = p.PersonID
-    INNER JOIN tblPaymentType pt
+
+    LEFT JOIN tblPaymentType pt
         ON b.PaymentID = pt.PaymentID
-    INNER JOIN tblLentBorrowStatus s
+
+    LEFT JOIN tblLentBorrowStatus s
         ON b.StatusID = s.StatusID
+
     WHERE b.UserID = @UserID
+
     ORDER BY b.BorrowAt DESC;
 
 END;
 
--- user ache na nae active ki na 
---inner jon hbe na left join hbe jodi payment id person name kichu delte thke to data asbe na so left join korte hbe
+
+--jodi kono record na thke then no record found ota print korate hbe 
