@@ -5,6 +5,8 @@ CREATE PROCEDURE spGetCompletedBorrow
 AS
 BEGIN
 
+    DECLARE @PaidStatusID INT;
+
     -------------------------------------------------
     -- User Validation (Exist + Active)
     -------------------------------------------------
@@ -30,6 +32,20 @@ BEGIN
     END
 
     -------------------------------------------------
+    -- Get StatusID from StatusName (NO typo risk in logic)
+    -------------------------------------------------
+
+    SELECT @PaidStatusID = StatusID
+    FROM tblLentBorrowStatus
+    WHERE LTRIM(RTRIM(StatusName)) = 'Paid';
+
+    IF @PaidStatusID IS NULL
+    BEGIN
+        SELECT 'Paid status not found in system!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
     -- No Record Check
     -------------------------------------------------
 
@@ -37,10 +53,8 @@ BEGIN
     (
         SELECT 1
         FROM tblBorrow b
-        LEFT JOIN tblLentBorrowStatus s
-            ON b.StatusID = s.StatusID
         WHERE b.UserID = @UserID
-        AND ISNULL(s.StatusName,'') = 'Paid'
+        AND b.StatusID = @PaidStatusID
         AND b.RemainingAmount = 0
     )
     BEGIN
@@ -71,9 +85,10 @@ BEGIN
         ON b.StatusID = s.StatusID
 
     WHERE b.UserID = @UserID
-      AND ISNULL(s.StatusName,'') = 'Paid'
+      AND b.StatusID = @PaidStatusID
       AND b.RemainingAmount = 0
 
     ORDER BY b.BorrowAt DESC;
 
-END; 
+END;
+
