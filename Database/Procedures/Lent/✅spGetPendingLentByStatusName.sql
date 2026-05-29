@@ -24,6 +24,6 @@ BEGIN
 	LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
 	LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
 
-	WHERE L.UserID = @UserID AND S.StatusName = 'Pending' OR S.StatusName = 'Overdue' OR S.StatusName = 'Partialy Paid'
+	WHERE L.UserID = @UserID AND S.StatusName IN ('Pending', 'Overdue', 'Partialy Paid')
 	ORDER BY L.LentAt DESC;
 END
