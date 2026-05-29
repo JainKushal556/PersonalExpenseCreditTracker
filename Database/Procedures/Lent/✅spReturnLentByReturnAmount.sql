@@ -1,6 +1,5 @@
 CREATE PROC spReturnLentByReturnAmount
-@LentID INT, @PaymentID INT, @ReturnedAmount DECIMAL(10,2), @Description VARCHAR(MAX),
-@SubCategoryID INT, @CategoryID INT
+@LentID INT, @PaymentID INT, @ReturnedAmount DECIMAL(10,2), @Description VARCHAR(MAX)
 AS
 BEGIN
 	DECLARE @TotalAmount DECIMAL(10,2);
@@ -10,6 +9,8 @@ BEGIN
 	DECLARE @OldReturnedAmount DECIMAL(10,2);
 	DECLARE @StatusID INT;
 	DECLARE @UserID INT;
+	DECLARE @CategoryID INT;
+	DECLARE @SubCategoryID INT;
 
 	BEGIN TRY
 		BEGIN TRANSACTION
@@ -73,6 +74,10 @@ BEGIN
 			--Calculate Total Returned Amount
 			SET @NewReturnedAmount = @ReturnedAmount + @OldReturnedAmount;
 
+			SELECT @SubCategoryID = SubCategoryID,
+			@CategoryID = CategoryID
+			FROM tblCreditSubCategory
+			WHERE SubCategoryName = 'Not Applicable';
 
 			IF @NewRemainingAmount = 0
 			BEGIN
@@ -135,5 +140,3 @@ BEGIN
 				ERROR_LINE() AS ErrorLine
 		END CATCH
 END
-
---are sae same jinish user jodi lent back pelo se to add korar time ee AMOUNT DEBE payment type dilo desc dilo but se catagory id er subcat keno debe cat to lent ee hbe er subcat bollam to je not aPPLICABLE KORTE

@@ -3,7 +3,7 @@ CREATE PROC spGetUpcomingLentReminders
 AS
 BEGIN
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
-	
+	DECLARE @StatusID INT;
     BEGIN TRY
 
         IF NOT EXISTS
@@ -30,6 +30,9 @@ BEGIN
             RETURN;
         END
 
+		SELECT @StatusID = StatusID FROM tblLentBorrowStatus
+				WHERE StatusName = 'Pending';
+
         SELECT L.LentID,
 			Prsn.PersonName,
 			L.Amount,
@@ -38,6 +41,7 @@ BEGIN
 			Pay.PaymentName,
 			S.StatusName,
 			L.LentAt,
+			L.DeadlineAt,
 			DATEDIFF(DAY, @Today, L.DeadlineAt) AS RemainingDays,
 			L.Description
 		FROM tblLent L
@@ -46,7 +50,7 @@ BEGIN
 		LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
 		WHERE L.UserID = @UserID
 		AND L.DeadlineAt >= @Today
-		AND L.StatusID = 1
+		AND L.StatusID = @StatusID
 		ORDER BY L.DeadlineAt ASC
 
     END TRY
@@ -56,6 +60,3 @@ BEGIN
     END CATCH
 
 END
-
---status id direct na diye name diye bar kor then de
---select ee deadline ee select koris ne 
