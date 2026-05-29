@@ -1,4 +1,4 @@
-ALTER PROCEDURE spGetAllBorrow
+CREATE PROCEDURE spGetAllBorrow
 (
     @UserID INT
 )
