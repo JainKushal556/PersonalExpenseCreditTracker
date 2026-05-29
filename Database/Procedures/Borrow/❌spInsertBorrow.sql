@@ -2,8 +2,8 @@ CREATE PROCEDURE spInsertBorrow
 (
     @UserID INT,
     @PersonID INT,
-    @PaymentID INT,
-    @StatusID INT,
+    @PaymentName VARCHAR(100),
+    @StatusName VARCHAR(100),
     @Amount DECIMAL(10,2),
     @DeadlineAt DATETIME,
     @Description VARCHAR(MAX)
@@ -11,53 +11,113 @@ CREATE PROCEDURE spInsertBorrow
 AS
 BEGIN
 
+    DECLARE @PaymentID INT;
+    DECLARE @StatusID INT;
+
     BEGIN TRY
 
+        -------------------------------------------------
         -- Validation
+        -------------------------------------------------
+
         IF @UserID IS NULL OR @UserID <= 0
         BEGIN
-            RAISERROR('Invalid UserID.',16,1);
-            RETURN;
-        END
-
-        IF NOT EXISTS (SELECT 1 FROM tblUsers WHERE UserID = @UserID)
-        BEGIN
-            RAISERROR('User does not exist.',16,1);
-            RETURN;
-        END
-
-        IF NOT EXISTS (SELECT 1 FROM tblPersons WHERE PersonID = @PersonID)
-        BEGIN
-            RAISERROR('Person does not exist.',16,1);
-            RETURN;
-        END
-
-        IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID = @PaymentID)
-        BEGIN
-            RAISERROR('Payment type does not exist.',16,1);
-            RETURN;
-        END
-
-        IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusID = @StatusID)
-        BEGIN
-            RAISERROR('Status does not exist.',16,1);
-            RETURN;
-        END
-
-        IF @Amount IS NULL OR @Amount <= 0
-        BEGIN
-            RAISERROR('Amount must be greater than zero.',16,1);
-            RETURN;
-        END
-
-        IF @DeadlineAt IS NULL
-        BEGIN
-            RAISERROR('Deadline date is required.',16,1);
+            SELECT 'Invalid UserID.' AS Message;
             RETURN;
         END
 
         -------------------------------------------------
-        -- Insert into Borrow Table
+        -- User Exists + Active Check
+        -------------------------------------------------
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUsers U
+            INNER JOIN tblUserAuthentication UA
+                ON U.UserID = UA.UserID
+            WHERE U.UserID = @UserID
+            AND UA.Active = 1
+        )
+        BEGIN
+            SELECT 'User does not exist or inactive.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- User Added Person Validation
+        -------------------------------------------------
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblPersons
+            WHERE PersonID = @PersonID
+            AND UserID = @UserID
+        )
+        BEGIN
+            SELECT 'Person does not belong to this user.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Payment Name Validation
+        -------------------------------------------------
+
+        SELECT
+            @PaymentID = PaymentID
+        FROM tblPaymentType
+        WHERE PaymentName = @PaymentName;
+
+        IF @PaymentID IS NULL
+        BEGIN
+            SELECT 'Invalid Payment Type.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Status Name Validation
+        -------------------------------------------------
+
+        SELECT
+            @StatusID = StatusID
+        FROM tblLentBorrowStatus
+        WHERE StatusName = @StatusName;
+
+        IF @StatusID IS NULL
+        BEGIN
+            SELECT 'Invalid Status.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Amount Validation
+        -------------------------------------------------
+
+        IF @Amount IS NULL OR @Amount <= 0
+        BEGIN
+            SELECT 'Amount must be greater than zero.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Deadline Validation
+        -------------------------------------------------
+
+        IF @DeadlineAt IS NULL
+        BEGIN
+            SELECT 'Deadline date is required.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Transaction Start
+        -------------------------------------------------
+
+        BEGIN TRANSACTION;
+
+        -------------------------------------------------
+        -- Insert Into Borrow
         -------------------------------------------------
 
         INSERT INTO tblBorrow
@@ -88,7 +148,7 @@ BEGIN
         );
 
         -------------------------------------------------
-        -- Insert into Credit Table Automatically
+        -- Insert Into Credit Automatically
         -------------------------------------------------
 
         INSERT INTO tblCredit
@@ -108,27 +168,26 @@ BEGIN
             4,
             @PaymentID,
             @Amount,
-            'Borrow Amount Credited : ' + ISNULL(@Description,''),
+            'Borrow Repayment Credit : ' + ISNULL(@Description,''),
             GETDATE()
         );
 
-        PRINT 'Borrow transaction inserted successfully.';
-        PRINT 'Credit transaction inserted successfully.';
+        -------------------------------------------------
+        -- Commit Transaction
+        -------------------------------------------------
+
+        COMMIT TRANSACTION;
+
+        SELECT 'Borrow transaction inserted successfully.' AS Message;
 
     END TRY
 
     BEGIN CATCH
 
-        PRINT ERROR_MESSAGE();
+        ROLLBACK TRANSACTION;
+
+        SELECT ERROR_MESSAGE() AS Message;
 
     END CATCH
-END;
 
-
-
-
---transaction use korte hbe commit rollback jatye 2to table ae insert hoy properly
---user active and exist both validate korte hbe
---user tar add kora person ee use korbe tai ote user id ache table ee so seta dekh 
---directly id na pass koriye name diye id search kor then ota de 
---print er jaygay select use korte hbe 
+END; 
