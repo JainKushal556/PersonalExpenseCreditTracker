@@ -8,9 +8,9 @@
 
 | Mark | Meaning |
 | ---- | ------- |
-| `âœ…` | **PUSH KORLE:** Developer pushed the code, pending review by Project Manager. |
-| `âŒ` | **FIX NEEDED:** Project Manager checked, changes/fixes are required. |
-| `âœ”ï¸` | **ALL OKAY:** Everything is perfect for the project, fully approved. |
+| `✅` | **PUSH KORLE:** Developer pushed the code, pending review by Project Manager. |
+| `❌` | **FIX NEEDED:** Project Manager checked, changes/fixes are required. |
+| `✔️` | **ALL OKAY:** Everything is perfect for the project, fully approved. |
 | `[MISSING]` | Requirement exists but procedure file is not created yet. |
 
 ## Overall Summary
@@ -19,19 +19,19 @@
 | ------ | ----: |
 | Total Allotted Procedures | 85 |
 | Total Procedures Found | 85 |
-| `âœ”ï¸` (All Okay) | 68 |
-| `âœ…` (Pending Review) | 0 |
-| `âŒ` (Fix Needed) | 17 |
+| `✔️` (All Okay) | 68 |
+| `✅` (Pending Review) | 0 |
+| `❌` (Fix Needed) | 17 |
 
 *(Note: There is also 1 unmarked file `spTest.sql` in the new `Dashboard` folder)*
 
 ---
 
-## ðŸŸ£ Team A â€” User, Task, Note
+## 🟣 Team A â€” User, Task, Note
 **Assigned Area:** Authentication, User Management, Task, Note, Task Reminder  
 **Total Allotted Procedures:** 30
 
-### `âœ”ï¸` ALL OKAY (30)
+### `✔️` ALL OKAY (30)
 - `spChangePassword`
 - `spDeleteUserProfilePhotoByUserId`
 - `spForgetPassword`
@@ -63,10 +63,10 @@
 - `spUpdateNote`
 - `spUpdateNotePriority`
 
-### `âœ…` PENDING REVIEW (0)
+### `✅` PENDING REVIEW (0)
 - None
 
-### `âŒ` FIX NEEDED (0)
+### `❌` FIX NEEDED (0)
 - None
 
 ### `[MISSING]` (0)
@@ -74,11 +74,11 @@
 
 ---
 
-## ðŸŸ¢ Team B â€” Expense, Credit, Settings
+## 🟢 Team B â€” Expense, Credit, Settings
 **Assigned Area:** Expense, Credit, Categories, Subcategories, Payment Type  
 **Total Allotted Procedures:** 35
 
-### `âœ”ï¸` ALL OKAY (35)
+### `✔️` ALL OKAY (35)
 - `spDeleteCreditCategoryByUserID`
 - `spDeleteCreditSubCategoryByUserID`
 - `spDeleteExpenseCategoryByUserID`
@@ -115,10 +115,10 @@
 - `spGetTodayExpense`
 - `spInsertExpenseByUserID`
 
-### `âœ…` PENDING REVIEW (0)
+### `✅` PENDING REVIEW (0)
 - None
 
-### `âŒ` FIX NEEDED (0)
+### `❌` FIX NEEDED (0)
 - None
 
 ### `[MISSING]` (0)
@@ -126,19 +126,19 @@
 
 ---
 
-## ðŸŸ  Team C â€” Lent, Borrow
+## 🟠 Team C â€” Lent, Borrow
 **Assigned Area:** Lent, Borrow, Persons, Status, Reminders  
 **Total Allotted Procedures:** 20
 
-### `âœ”ï¸` ALL OKAY (3)
+### `✔️` ALL OKAY (3)
 - `spGetAllLent`
 - `SpGetCompletedLentByStatusName`
 - `spGetPendingLentByStatusName`
 
-### `âœ…` PENDING REVIEW (0)
+### `✅` PENDING REVIEW (0)
 - None
 
-### `âŒ` FIX NEEDED (17)
+### `❌` FIX NEEDED (17)
 - `spGetAllBorrow`
 - `spGetBorrowPersonHistory`
 - `spGetCompletedBorrow`
