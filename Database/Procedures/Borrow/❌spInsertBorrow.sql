@@ -14,6 +14,16 @@ BEGIN
     DECLARE @PaymentID INT;
     DECLARE @StatusID INT;
 
+    DECLARE @CategoryID INT;
+    DECLARE @SubCategoryID INT;
+
+    -------------------------------------------------
+    -- Trim Inputs
+    -------------------------------------------------
+
+    SET @PaymentName = LTRIM(RTRIM(@PaymentName));
+    SET @StatusName = LTRIM(RTRIM(@StatusName));
+
     BEGIN TRY
 
         -------------------------------------------------
@@ -67,7 +77,7 @@ BEGIN
         SELECT
             @PaymentID = PaymentID
         FROM tblPaymentType
-        WHERE PaymentName = @PaymentName;
+        WHERE LTRIM(RTRIM(PaymentName)) = @PaymentName;
 
         IF @PaymentID IS NULL
         BEGIN
@@ -82,11 +92,41 @@ BEGIN
         SELECT
             @StatusID = StatusID
         FROM tblLentBorrowStatus
-        WHERE StatusName = @StatusName;
+        WHERE LTRIM(RTRIM(StatusName)) = @StatusName;
 
         IF @StatusID IS NULL
         BEGIN
             SELECT 'Invalid Status.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Credit Category Validation
+        -------------------------------------------------
+
+        SELECT
+            @CategoryID = CategoryID
+        FROM tblCategory
+        WHERE CategoryName = 'Credit';
+
+        IF @CategoryID IS NULL
+        BEGIN
+            SELECT 'Credit Category Not Found.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Credit SubCategory Validation
+        -------------------------------------------------
+
+        SELECT
+            @SubCategoryID = SubCategoryID
+        FROM tblSubCategory
+        WHERE SubCategoryName = 'Borrow Credit';
+
+        IF @SubCategoryID IS NULL
+        BEGIN
+            SELECT 'Borrow Credit SubCategory Not Found.' AS Message;
             RETURN;
         END
 
@@ -164,11 +204,11 @@ BEGIN
         VALUES
         (
             @UserID,
-            4,
-            4,
+            @CategoryID,
+            @SubCategoryID,
             @PaymentID,
             @Amount,
-            'Borrow Repayment Credit : ' + ISNULL(@Description,''),
+            'Borrow Credit : ' + ISNULL(@Description,''),
             GETDATE()
         );
 
@@ -190,8 +230,10 @@ BEGIN
 
     END CATCH
 
-END; 
+END
 
 
---paymentname er status name ke trim kore check korbi
---credit ee inser ee credit catagory er subcatagory te je id pass hoche ota direct na diye forst ee sae name ta search kore tar id ta store kor then otake assign kor
+
+--description ke trim kore insert korte hbeb
+--deadline ta jeno ager date na diye day se mean 5 tarik ee diye ager maser 5 trik deadline dile to hbe na tai setaq check kor 
+
