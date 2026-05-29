@@ -236,7 +236,7 @@ GO
 
 -- ==========================================================
 
-ALTER PROCEDURE spGetActiveUserDetails
+CREATE PROCEDURE spGetActiveUserDetails
 (
     @UserID INT
 )
@@ -676,7 +676,7 @@ GO
 -- ==========================================================
 
 
-ALTER PROCEDURE spUpdateUserName  
+CREATE PROCEDURE spUpdateUserName  
     @UserID INT,  
     @Name VARCHAR(100)  
 AS  
