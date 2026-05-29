@@ -1,4 +1,4 @@
-alter PROCEDURE spGetAllBorrow
+CREATE PROCEDURE spGetAllBorrow
 (
     @UserID INT
 )
@@ -18,6 +18,21 @@ BEGIN
     )
     BEGIN
         SELECT 'Invalid OR Inactive UserID!!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Check Borrow Records Exist Or Not
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Borrow Records Found!!' AS Message;
         RETURN;
     END
 
@@ -51,7 +66,4 @@ BEGIN
 
     ORDER BY b.BorrowAt DESC;
 
-END;
-
-
---jodi kono record na thke then no record found ota print korate hbe 
+END

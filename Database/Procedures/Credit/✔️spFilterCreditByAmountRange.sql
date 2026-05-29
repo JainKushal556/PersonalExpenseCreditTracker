@@ -42,7 +42,7 @@ BEGIN
         CR.PaymentID,
         P.PaymentName,
         CR.Amount,
-        CR.CreditNotes,
+        CR.Description,
         CR.CreditAt
     FROM tblCredit CR
     INNER JOIN tblCreditCategory C ON CR.CategoryID = C.CategoryID

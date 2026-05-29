@@ -30,9 +30,9 @@ BEGIN
 			-- Check PersonID
 			IF NOT EXISTS(SELECT 1
 						  FROM tblPersons
-						  WHERE PersonID = @PersonID)
+						  WHERE PersonID = @PersonID AND UserID = @UserID)
 			BEGIN
-				SELECT 'Invalid PersonID!!' AS Message
+				SELECT 'Person Not Exist' AS Message
 				ROLLBACK TRANSACTION
 				RETURN
 			END
@@ -126,7 +126,3 @@ BEGIN
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
-
-
---user jeno tar add kora person ee use korte pare so user id check korye hbe person idr sathe person tbl ee user id ache 
---

@@ -42,7 +42,7 @@ BEGIN
         E.PaymentID,
         P.PaymentName,
         E.Amount,
-        E.ExpenseNotes,
+        E.Description,
         E.ExpenseAt
     FROM tblExpense E
     INNER JOIN tblExpenseCategory C ON E.CategoryID = C.CategoryID

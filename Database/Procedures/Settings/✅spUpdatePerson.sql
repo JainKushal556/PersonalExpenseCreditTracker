@@ -13,23 +13,27 @@ BEGIN
 
 		IF NOT EXISTS (SELECT 1 
 						FROM tblPersons
-						WHERE PersonID = @PersonID)
+						WHERE PersonID = @PersonID AND UserID = @UserID)
 		BEGIN
 			SELECT 'Invalid PersonID!!' AS Message
 			RETURN
 		END
 		
-		IF TRIM(@PersonName) = ''
+		IF TRIM(@PersonName) = '' OR @PersonName = 'NULL'
 		BEGIN
 			SELECT 'Person Name is Null' AS Message
 			RETURN
 		END
 
-		IF TRIM(@PhoneNumber) = ''
+		IF TRIM(@PhoneNumber) = '' OR @PersonName = 'NULL'
 		BEGIN
 			SELECT 'Phone Number is Null' AS Message
 			RETURN
 		END
+
+		--PhoneNumber and PersonName Space Check
+		SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+		SET @PersonName = LTRIM(RTRIM(@PersonName));
 
 		--Update Person on Person Table
 		UPDATE tblPersons
@@ -37,18 +41,9 @@ BEGIN
 			PhoneNumber = @PhoneNumber,
 			Address = @Address
 			WHERE PersonID = @PersonID;
-
+		SELECT 'Person Detailes Updated' AS Message
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
-
-
-
--- PersonID validation e ownership check nei, onno user er PersonID update korte parbe.
--- TRIM(@PersonName) = '' → NULL handle korbe na.
--- TRIM(@PhoneNumber) = '' → NULL handle korbe na.
--- Input trim kore update korche na, extra spaces DB te store hobe.
--- Success message nei.
--- SET NOCOUNT ON missing.
