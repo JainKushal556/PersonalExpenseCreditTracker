@@ -191,3 +191,7 @@ BEGIN
     END CATCH
 
 END; 
+
+
+--paymentname er status name ke trim kore check korbi
+--credit ee inser ee credit catagory er subcatagory te je id pass hoche ota direct na diye forst ee sae name ta search kore tar id ta store kor then otake assign kor
