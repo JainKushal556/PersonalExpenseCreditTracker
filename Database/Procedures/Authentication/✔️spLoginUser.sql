@@ -1,4 +1,4 @@
-CREATE PROCEDURE spLoginUser
+alter PROCEDURE spLoginUser
 (
     @Email VARCHAR(100),
     @Password VARCHAR(MAX)
