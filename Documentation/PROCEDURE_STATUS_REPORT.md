@@ -1,4 +1,4 @@
-﻿# Stored Procedure Status Report
+# Stored Procedure Status Report
 
 **Project:** Personal Expense Credit Tracker  
 **Requirement File:** `Documentation/STORED_PROCEDURE_REQUIREMENTS.md`  
@@ -18,10 +18,10 @@
 | Status | Count |
 | ------ | ----: |
 | Total Allotted Procedures | 85 |
-| Total Procedures Found | 85 |
-| `✔️` (All Okay) | 68 |
+| Total Procedures Found | 86 |
+| `✔️` (All Okay) | 73 |
 | `✅` (Pending Review) | 0 |
-| `❌` (Fix Needed) | 17 |
+| `❌` (Fix Needed) | 12 |
 
 *(Note: There is also 1 unmarked file `spTest.sql` in the new `Dashboard` folder)*
 
@@ -31,43 +31,42 @@
 **Assigned Area:** Authentication, User Management, Task, Note, Task Reminder  
 **Total Allotted Procedures:** 30
 
-### `✔️` ALL OKAY (30)
+### `✔️` ALL OKAY (29)
 - `spChangePassword`
+- `spDeleteNote`
+- `spDeleteTask`
 - `spDeleteUserProfilePhotoByUserId`
+- `spFilterNotesByPriority`
+- `spFilterTasksByStatus`
 - `spForgetPassword`
 - `spGetActiveUserDetails`
-- `spLoginUser`
+- `spGetAllNotes`
+- `spGetAllTasks`
+- `spGetCompletedTasks`
+- `spGetNotesBetweenDates`
+- `spGetPendingTasks`
+- `spGetTasksBetweenDates`
+- `spGetUpcomingTaskReminders`
+- `spGetUserDashboard`
+- `spInsertNote`
+- `spInsertTask`
 - `spLogoutUser`
 - `spRegisterUser`
+- `spUpdateNote`
+- `spUpdateNotePriority`
 - `spUpdateProfilePhoto`
+- `spUpdateTask`
+- `spUpdateTaskStatus`
 - `spUpdateUserEmail`
 - `spUpdateUserName`
 - `spUpdateUserPhoneNumber`
 - `spUpdateUserProfile`
-- `spGetUserDashboard`
-- `spDeleteTask`
-- `spFilterTasksByStatus`
-- `spGetAllTasks`
-- `spGetCompletedTasks`
-- `spGetPendingTasks`
-- `spGetTasksBetweenDates`
-- `spGetUpcomingTaskReminders`
-- `spInsertTask`
-- `spUpdateTask`
-- `spUpdateTaskStatus`
-- `spFilterNotesByPriority`
-- `spGetNotesBetweenDates`
-- `spInsertNote`
-- `spDeleteNote`
-- `spGetAllNotes`
-- `spUpdateNote`
-- `spUpdateNotePriority`
 
 ### `✅` PENDING REVIEW (0)
 - None
 
-### `❌` FIX NEEDED (0)
-- None
+### `❌` FIX NEEDED (1)
+- `spLoginUser`
 
 ### `[MISSING]` (0)
 - None
@@ -83,11 +82,29 @@
 - `spDeleteCreditSubCategoryByUserID`
 - `spDeleteExpenseCategoryByUserID`
 - `spDeleteExpenseSubCategoryByUserID`
+- `spFilterCreditByAmountRange`
+- `spFilterCreditByCategory`
+- `spFilterCreditByCategoryAndSubCategory`
+- `spFilterCreditByDateRange`
+- `spFilterExpenseByAmountRange`
+- `spFilterExpenseByCategory`
+- `spFilterExpenseByCategoryAndSubCategory`
+- `spFilterExpenseByDateRange`
+- `spGetAllCreditsByID`
+- `spGetAllExpensesByID`
 - `spGetAllPaymentTypes`
+- `spGetCategoryWiseCreditReport`
+- `spGetCategoryWiseExpenseReport`
 - `spGetCreditCategoriesByUserID`
 - `spGetCreditSubCategoriesByUserID`
 - `spGetExpenseCategoriesByUserID`
 - `spGetExpenseSubCategoriesByUserID`
+- `spGetMonthlyCreditSummary`
+- `spGetMonthlyExpenseSummary`
+- `spGetTodayCredit`
+- `spGetTodayExpense`
+- `spInsertCreditByUserID`
+- `spInsertExpenseByUserID`
 - `spInsertNewCreditCategoryByUserID`
 - `spInsertNewCreditSubCategoryByUserID`
 - `spInsertNewExpenseCategoryByUserID`
@@ -96,24 +113,6 @@
 - `spUpdateCreditSubCategoryByUserID`
 - `spUpdateExpenseCategoryByUserID`
 - `spUpdateExpenseSubCategoryByUserID`
-- `spFilterCreditByAmountRange`
-- `spFilterCreditByCategory`
-- `spFilterCreditByCategoryAndSubCategory`
-- `spFilterCreditByDateRange`
-- `spGetAllCreditsByID`
-- `spGetCategoryWiseCreditReport`
-- `spGetMonthlyCreditSummary`
-- `spGetTodayCredit`
-- `spInsertCreditByUserID`
-- `spFilterExpenseByAmountRange`
-- `spFilterExpenseByCategory`
-- `spFilterExpenseByCategoryAndSubCategory`
-- `spFilterExpenseByDateRange`
-- `spGetAllExpensesByID`
-- `spGetCategoryWiseExpenseReport`
-- `spGetMonthlyExpenseSummary`
-- `spGetTodayExpense`
-- `spInsertExpenseByUserID`
 
 ### `✅` PENDING REVIEW (0)
 - None
@@ -130,33 +129,31 @@
 **Assigned Area:** Lent, Borrow, Persons, Status, Reminders  
 **Total Allotted Procedures:** 20
 
-### `✔️` ALL OKAY (3)
+### `✔️` ALL OKAY (8)
+- `spGetAllBorrow`
 - `spGetAllLent`
+- `spGetBorrowPersonHistory`
+- `spGetCompletedBorrow`
 - `SpGetCompletedLentByStatusName`
-- `spGetPendingLentByStatusName`
+- `spGetLentPersonHistory`
+- `spGetTotalBorrowByPerson`
+- `spPayBorrow`
 
 ### `✅` PENDING REVIEW (0)
 - None
 
-### `❌` FIX NEEDED (17)
-- `spGetAllBorrow`
-- `spGetBorrowPersonHistory`
-- `spGetCompletedBorrow`
+### `❌` FIX NEEDED (11)
+- `spDeletePerson`
+- `spGetAllPersons`
 - `spGetOverduedBorrow`
 - `spGetPendingBorrow`
-- `spGetTotalBorrowByPerson`
-- `spGetUpcomingBorrowReminders`
-- `spInsertBorrow`
-- `spPayBorrow`
 - `spGetPendingLentByStatusName`
+- `spGetUpcomingBorrowReminders`
+- `spGetUpcomingLentReminders`
+- `spInsertBorrow`
 - `spInsertLent`
 - `spReturnLentByReturnAmount`
-- `PersonIDspGetAllPersons`
-- `spDeletePerson`
-- `spGetUpcomingLentReminders`
-- `spInsertPerson`
 - `spUpdatePerson`
 
-### `[MISSING]` (0)
-- None
-
+### `[MISSING]` (1)
+- `spInsertPerson`

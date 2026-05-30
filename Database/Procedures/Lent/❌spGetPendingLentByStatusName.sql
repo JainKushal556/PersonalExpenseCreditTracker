@@ -24,6 +24,8 @@ BEGIN
 	LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
 	LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
 
-	WHERE L.UserID = @UserID AND S.StatusName IN ('Pending', 'Overdue', 'Partialy Paid')
+	WHERE L.UserID = @UserID AND S.StatusName IN ('Pending', 'Overdue', 'Partially Paid')
 	ORDER BY L.LentAt DESC;
 END
+
+--no pending record found eta nae 

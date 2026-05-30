@@ -110,12 +110,12 @@ BEGIN
         -------------------------------------------------
 
         SELECT @CategoryID = CategoryID
-        FROM tblCategory
-        WHERE CategoryName = 'Expense';
+        FROM tblExpenseCategory
+        WHERE CategoryName = 'Borrow';
 
         SELECT @SubCategoryID = SubCategoryID
-        FROM tblSubCategory
-        WHERE SubCategoryName = 'Borrow Repayment'
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryName = 'Borrow Returned'
           AND CategoryID = @CategoryID;
 
         -------------------------------------------------

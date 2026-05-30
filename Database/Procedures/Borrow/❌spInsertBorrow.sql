@@ -13,9 +13,8 @@ BEGIN
 
     DECLARE @PaymentID INT;
     DECLARE @StatusID INT;
-
-    DECLARE @CategoryID INT;
-    DECLARE @SubCategoryID INT;
+    DECLARE @CreditCategoryID INT;
+    DECLARE @CreditSubCategoryID INT;
 
     -------------------------------------------------
     -- Trim Inputs
@@ -23,16 +22,27 @@ BEGIN
 
     SET @PaymentName = LTRIM(RTRIM(@PaymentName));
     SET @StatusName = LTRIM(RTRIM(@StatusName));
+    SET @Description = LTRIM(RTRIM(@Description));
 
     BEGIN TRY
 
         -------------------------------------------------
-        -- Validation
+        -- UserID Validation
         -------------------------------------------------
 
         IF @UserID IS NULL OR @UserID <= 0
         BEGIN
             SELECT 'Invalid UserID.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- PersonID Validation
+        -------------------------------------------------
+
+        IF @PersonID IS NULL OR @PersonID <= 0
+        BEGIN
+            SELECT 'Invalid PersonID.' AS Message;
             RETURN;
         END
 
@@ -55,7 +65,7 @@ BEGIN
         END
 
         -------------------------------------------------
-        -- User Added Person Validation
+        -- Person Belongs To User Validation
         -------------------------------------------------
 
         IF NOT EXISTS
@@ -101,32 +111,12 @@ BEGIN
         END
 
         -------------------------------------------------
-        -- Credit Category Validation
+        -- New Borrow Must Be Pending
         -------------------------------------------------
 
-        SELECT
-            @CategoryID = CategoryID
-        FROM tblCategory
-        WHERE CategoryName = 'Credit';
-
-        IF @CategoryID IS NULL
+        IF @StatusName <> 'Pending'
         BEGIN
-            SELECT 'Credit Category Not Found.' AS Message;
-            RETURN;
-        END
-
-        -------------------------------------------------
-        -- Credit SubCategory Validation
-        -------------------------------------------------
-
-        SELECT
-            @SubCategoryID = SubCategoryID
-        FROM tblSubCategory
-        WHERE SubCategoryName = 'Borrow Credit';
-
-        IF @SubCategoryID IS NULL
-        BEGIN
-            SELECT 'Borrow Credit SubCategory Not Found.' AS Message;
+            SELECT 'New borrow must have Pending status.' AS Message;
             RETURN;
         END
 
@@ -140,6 +130,22 @@ BEGIN
             RETURN;
         END
 
+        IF @Amount > 10000000
+        BEGIN
+            SELECT 'Amount exceeds maximum limit.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Description Validation
+        -------------------------------------------------
+
+        IF @Description IS NULL OR @Description = ''
+        BEGIN
+            SELECT 'Description is required.' AS Message;
+            RETURN;
+        END
+
         -------------------------------------------------
         -- Deadline Validation
         -------------------------------------------------
@@ -150,8 +156,63 @@ BEGIN
             RETURN;
         END
 
+        IF CAST(@DeadlineAt AS DATE) < CAST(GETDATE() AS DATE)
+        BEGIN
+            SELECT 'Deadline cannot be in the past!' AS Message;
+            RETURN;
+        END
+
         -------------------------------------------------
-        -- Transaction Start
+        -- Duplicate Borrow Prevention
+        -------------------------------------------------
+
+        IF EXISTS
+        (
+            SELECT 1
+            FROM tblBorrow
+            WHERE UserID = @UserID
+            AND PersonID = @PersonID
+            AND Amount = @Amount
+            AND CAST(BorrowAt AS DATE) = CAST(GETDATE() AS DATE)
+        )
+        BEGIN
+            SELECT 'Similar borrow entry already exists today.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Get Credit Category ID
+        -------------------------------------------------
+
+        SELECT
+            @CreditCategoryID = CategoryID
+        FROM tblCreditCategory
+        WHERE CategoryName = 'Borrow';
+
+        IF @CreditCategoryID IS NULL
+        BEGIN
+            SELECT 'Credit Category Not Found.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Get Credit SubCategory ID
+        -------------------------------------------------
+
+        SELECT
+            @CreditSubCategoryID = SubCategoryID
+        FROM tblCreditSubCategory
+        WHERE SubCategoryName = 'Borrow Received'
+        AND CategoryID = @CreditCategoryID;
+
+        IF @CreditSubCategoryID IS NULL
+        BEGIN
+            SELECT 'Borrow Credit SubCategory Not Found.' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Start Transaction
         -------------------------------------------------
 
         BEGIN TRANSACTION;
@@ -188,7 +249,7 @@ BEGIN
         );
 
         -------------------------------------------------
-        -- Insert Into Credit Automatically
+        -- Insert Into Credit
         -------------------------------------------------
 
         INSERT INTO tblCredit
@@ -204,11 +265,11 @@ BEGIN
         VALUES
         (
             @UserID,
-            @CategoryID,
-            @SubCategoryID,
+            @CreditCategoryID,
+            @CreditSubCategoryID,
             @PaymentID,
             @Amount,
-            'Borrow Credit : ' + ISNULL(@Description,''),
+            'Borrow Amount Credited : ' + @Description,
             GETDATE()
         );
 
@@ -224,7 +285,8 @@ BEGIN
 
     BEGIN CATCH
 
-        ROLLBACK TRANSACTION;
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
 
         SELECT ERROR_MESSAGE() AS Message;
 
@@ -233,7 +295,8 @@ BEGIN
 END
 
 
-
---description ke trim kore insert korte hbeb
---deadline ta jeno ager date na diye day se mean 5 tarik ee diye ager maser 5 trik deadline dile to hbe na tai setaq check kor 
-
+--insert er time ee status name keno nibi input ota to unpaid ee hbe . 
+--borrow amount er limit lagachis keno check kore je amount 10 million er beshi na hoy.
+--borrow same dine se dubar nite ee pare same loker kache so borrow duplicate validation ta sorbe
+--catagory er subcatagory khujchis tblCategory te jeta amader scgema taae nae amader tblCreditCategory te ache so seta use kor 
+--

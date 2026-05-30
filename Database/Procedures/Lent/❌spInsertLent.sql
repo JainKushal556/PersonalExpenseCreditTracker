@@ -72,7 +72,7 @@ BEGIN
 			SELECT @CategoryId = CategoryId,
 			@SubCategoryId = SubCategoryId
 			FROM tblExpenseSubCategory
-			WHERE SubCategoryName = 'Lent';
+			WHERE SubCategoryName = 'Lent Given';
 
 			--Insert Lent on Lent Table
 			INSERT INTO tblLent
@@ -126,3 +126,9 @@ BEGIN
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
+
+--negative value hbe na returned amoune ee check korte hbe 
+--remaning amount negative hbe na check korte hbe
+--date validation nae old date oo dewa jbe 
+--insert e time ee returned amount er remaning amount asbe ee keno ota to 0 ee hbe lent just niyechi . 
+--insert hole message nae 

@@ -43,3 +43,7 @@ BEGIN
 
 END;
 GO
+
+
+check korar age email ke trim korte hbe to 
+password keo trim korte hbe 
