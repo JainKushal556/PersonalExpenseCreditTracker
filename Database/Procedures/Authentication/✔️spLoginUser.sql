@@ -46,10 +46,4 @@ BEGIN
 
 END;
 GO
-<<<<<<< HEAD:Database/Procedures/Authentication/✅spLoginUser.sql
-=======
 
-
-check korar age email ke trim korte hbe to 
-password keo trim korte hbe 
->>>>>>> 8935d0cd89380e1e95e88b00e06cfbd8530287ff:Database/Procedures/Authentication/❌spLoginUser.sql
