@@ -55,3 +55,7 @@ BEGIN
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
+
+-- all validationn er logic bhul ache chck kore thik kor 
+--address trim korbi
+--same person name er number jeno add na hoye same user er data te 

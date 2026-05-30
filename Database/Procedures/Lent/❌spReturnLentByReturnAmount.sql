@@ -77,7 +77,7 @@ BEGIN
 			SELECT @SubCategoryID = SubCategoryID,
 			@CategoryID = CategoryID
 			FROM tblCreditSubCategory
-			WHERE SubCategoryName = 'Not Applicable';
+			WHERE SubCategoryName = 'Lent Returned';
 
 			IF @NewRemainingAmount = 0
 			BEGIN
@@ -140,3 +140,7 @@ BEGIN
 				ERROR_LINE() AS ErrorLine
 		END CATCH
 END
+
+
+--cat er subcat ee value assign na kore eee validation check korchis 
+--parameter ee cat er subcat asbe keno ota to same all khetre to keno asbe parameter eee 

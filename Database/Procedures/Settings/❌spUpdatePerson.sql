@@ -47,3 +47,9 @@ BEGIN
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
+
+
+--all validationn er logic bhul ache chck kore thik kor
+--person idr sathe user id diyeo to dekhbi eta sae user er ki na 
+--address trim korbi
+--duplicate phno check nae.

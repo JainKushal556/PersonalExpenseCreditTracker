@@ -5,48 +5,84 @@ CREATE PROCEDURE spGetUpcomingBorrowReminders
 AS
 BEGIN
 
+    DECLARE @Today DATE = CAST(GETDATE() AS DATE);
+
     -------------------------------------------------
-    -- Validation
+    -- Validation: User ID
     -------------------------------------------------
 
     IF @UserID IS NULL OR @UserID <= 0
-        RETURN 0;
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User does not exist or inactive' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Check Data Exists
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow
+        WHERE UserID = @UserID
+          AND RemainingAmount > 0
+    )
+    BEGIN
+        SELECT 'No upcoming borrow reminders found' AS Message;
+        RETURN;
+    END
 
     -------------------------------------------------
     -- Get Reminder Records
     -------------------------------------------------
 
     SELECT
-        BorrowID,
-        UserID,
-        PersonID,
-        PaymentID,
-        StatusID,
-        Amount,
-        PaidAmount,
-        RemainingAmount,
-        BorrowAt,
-        DeadlineAt,
-        Description,
+        b.BorrowID,
+        p.PersonName,
+        pt.PaymentName,
+        s.StatusName,
+        b.Amount,
+        b.PaidAmount,
+        b.RemainingAmount,
+        b.BorrowAt,
+        b.DeadlineAt,
+        b.Description,
 
-        DATEDIFF(DAY, GETDATE(), DeadlineAt) AS DaysRemaining
+        DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) AS DaysRemaining
 
-    FROM tblBorrow
+    FROM tblBorrow b
 
-    WHERE UserID = @UserID
-        AND RemainingAmount > 0
-        AND DATEDIFF(DAY, GETDATE(), DeadlineAt) IN (7,3,1)
+    LEFT JOIN tblPersons p
+        ON b.PersonID = p.PersonID
 
-    ORDER BY DeadlineAt ASC;
+    LEFT JOIN tblPaymentType pt
+        ON b.PaymentID = pt.PaymentID
 
-    RETURN 1;
+    LEFT JOIN tblLentBorrowStatus s
+        ON b.StatusID = s.StatusID
+
+    WHERE b.UserID = @UserID
+      AND b.RemainingAmount > 0
+      AND DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) IN (7, 3, 1)
+
+    ORDER BY b.DeadlineAt ASC;
 
 END;
 
 
---return 0 1 hbe na select use kore print korbi 
---user id exist and active validation debe 
---sob jaygay idr jaygay name show korbi join kore 
---DATEDIF korar age date ke cast korb jate ota theke time chole jai 
-
-
+--upcoming borrow reminder er jonno 7, 3, 1 din age reminder dekhabe mean akhon jodi 0 r besi hoy tokhon ee sob er reminder ase jbe kinntu reminder to 7diner modhe kono ta deadline ele setar asbe .
+--dekhte hbe overdue tao seta holeo asbe 
+--ektu research korbi ki ki hte pre ero 

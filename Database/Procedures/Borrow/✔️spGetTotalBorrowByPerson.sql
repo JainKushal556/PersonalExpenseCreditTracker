@@ -63,7 +63,7 @@ BEGIN
           AND Amount IS NOT NULL
     )
     BEGIN
-        SELECT 'No valid borrow transactions found' AS Message;
+        SELECT 'No borrow transactions found for this person' AS Message;
         RETURN;
     END
 

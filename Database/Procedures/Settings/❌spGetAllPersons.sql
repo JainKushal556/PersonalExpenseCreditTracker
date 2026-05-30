@@ -21,3 +21,6 @@ BEGIN
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
+
+
+-- no person found validation nae messsage shoe korbe 

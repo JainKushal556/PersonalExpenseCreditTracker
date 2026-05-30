@@ -6,47 +6,83 @@ AS
 BEGIN
 
     -------------------------------------------------
-    -- Validation
+    -- User Validation
     -------------------------------------------------
 
     IF @UserID IS NULL OR @UserID <= 0
-        RETURN 0;
+    BEGIN
+        SELECT 'Invalid UserID!' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User does not exist or inactive!' AS Message;
+        RETURN;
+    END
 
     -------------------------------------------------
-    -- Get Only Overdue Borrow Records
+    -- Overdue existence check
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow
+        WHERE UserID = @UserID
+        AND RemainingAmount > 0
+        AND CAST(DeadlineAt AS DATE) < CAST(GETDATE() AS DATE)
+    )
+    BEGIN
+        SELECT 'No overdue borrow records found!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Get Overdue Borrow Records (Name-based output)
     -------------------------------------------------
 
     SELECT
         b.BorrowID,
-        b.UserID,
-        b.PersonID,
-        b.PaymentID,
 
-        s.StatusName,
+        ISNULL(p.PersonName, 'Unknown') AS PersonName,
+        ISNULL(pt.PaymentName, 'Unknown') AS PaymentName,
+        ISNULL(s.StatusName, 'Unknown') AS StatusName,
 
         b.Amount,
         b.PaidAmount,
         b.RemainingAmount,
         b.BorrowAt,
         b.DeadlineAt,
-        b.Description
+        b.Description,
+
+        DATEDIFF(DAY, b.DeadlineAt, GETDATE()) AS OverdueDays
 
     FROM tblBorrow b
 
-    INNER JOIN tblLentBorrowStatus s
+    LEFT JOIN tblPersons p
+        ON b.PersonID = p.PersonID
+
+    LEFT JOIN tblPaymentType pt
+        ON b.PaymentID = pt.PaymentID
+
+    LEFT JOIN tblLentBorrowStatus s
         ON b.StatusID = s.StatusID
 
     WHERE b.UserID = @UserID
-        AND b.RemainingAmount > 0
-        AND b.DeadlineAt < GETDATE()
+      AND b.RemainingAmount > 0
+      AND CAST(b.DeadlineAt AS DATE) < CAST(GETDATE() AS DATE)
 
     ORDER BY b.DeadlineAt ASC;
 
-    RETURN 1;
-
 END;
 
---return 0 1 esob hbe na message print korbi select use kore "SELECT 'Message' AS Message"
---ekhane user id nuull ki na check to korechis but same exist and active ae duto check nae 
---er person id er payment id keno select korchis oder name select hbe to join kore 
---left join hbe jodi kichu delte hoye tao jeno data show kore 
+
+--datediff e deadline er gatedate ke cast kore use kor better answer asbe 
+--WHERE CAST(DeadlineAt AS DATE) < CAST(GETDATE() AS DATE) ae take update korte hbe er fole answer onel late ee asbe 
