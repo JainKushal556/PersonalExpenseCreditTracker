@@ -1,4 +1,4 @@
-ALTER PROCEDURE spGetActiveUserDetails
+CREATE PROCEDURE spGetActiveUserDetails
 (
     @UserID INT
 )
