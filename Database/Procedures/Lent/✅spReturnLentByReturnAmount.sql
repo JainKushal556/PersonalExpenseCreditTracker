@@ -29,20 +29,6 @@ BEGIN
 				RETURN
 			END
 
-			IF NOT EXISTS (SELECT 1 FROM tblCreditCategory WHERE CategoryID = @CategoryID)
-			BEGIN
-				SELECT 'Invalid CreditCategory!!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
-
-			IF NOT EXISTS (SELECT 1 FROM tblCreditSubCategory WHERE SubCategoryID = @SubCategoryID)
-			BEGIN
-				SELECT 'Invalid CreditSubCategory!!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
-
 			IF @ReturnedAmount <= 0
 			BEGIN
 				SELECT 'Returned Amount Must Be Greater Than 0!' AS MESSAGE
@@ -136,8 +122,7 @@ BEGIN
 		BEGIN CATCH
 			ROLLBACK TRANSACTION
 			SELECT
-				ERROR_MESSAGE() AS ErrorMessage,
-				ERROR_LINE() AS ErrorLine
+				ERROR_MESSAGE() AS ErrorMessage
 		END CATCH
 END
 

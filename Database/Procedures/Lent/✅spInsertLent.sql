@@ -2,10 +2,7 @@ CREATE PROC spInsertLent
 	@UserID INT,
 	@PersonID INT,
 	@PaymentID INT,
-	@StatusID INT,
 	@Amount DECIMAL(10,2),
-	@ReturnedAmount DECIMAL(10,2),
-	@RemainingAmount DECIMAL(10,2),
 	@DeadlineAT DATETIME,
 	@Description VARCHAR(MAX)
 AS
@@ -14,6 +11,9 @@ BEGIN
 	-- Variable Declaration
 	DECLARE @SubCategoryId INT;
 	DECLARE @CategoryId INT;
+	DECLARE @ReturnedAmount DECIMAL(10,2);
+	DECLARE @RemainingAmount DECIMAL(10,2);
+	DECLARE @StatusID INT;
 
 	BEGIN TRY
 		BEGIN TRANSACTION
@@ -49,18 +49,19 @@ BEGIN
 			END
 
 
-			-- Check StatusID
-			IF NOT EXISTS(SELECT 1
-						  FROM tblLentBorrowStatus
-						  WHERE StatusID = @StatusID)
+			SELECT @StatusID = StatusID
+			FROM tblLentBorrowStatus
+			WHERE StatusName = 'Pending'
+
+			IF CAST(@DeadlineAT AS DATE) < CAST(GETDATE() AS DATE)
 			BEGIN
-				SELECT 'Invalid StatusID!!' AS Message
+				SELECT 'Input Date Cannot Be Greater Than Today Date' AS Message
 				ROLLBACK TRANSACTION
 				RETURN
 			END
 
 			-- Check Amount
-			IF @Amount <= 0
+			IF @Amount < 0
 			BEGIN
 				SELECT 'Amount Must Be Greater Than 0!!' AS Message
 				ROLLBACK TRANSACTION
@@ -68,11 +69,28 @@ BEGIN
 
 			END
 
+			SET @ReturnedAmount = 0;
+			SET @RemainingAmount = @Amount;
+
 			-- Get CategoryId & SubCategoryId From tblExpenseSubCategory
 			SELECT @CategoryId = CategoryId,
 			@SubCategoryId = SubCategoryId
 			FROM tblExpenseSubCategory
 			WHERE SubCategoryName = 'Lent Given';
+
+			IF @SubCategoryId IS NULL
+			BEGIN
+				SELECT 'Lent Given SubCategory Not Found' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+			IF @StatusID IS NULL
+			BEGIN
+				SELECT 'Pending Status Not Found' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
 
 			--Insert Lent on Lent Table
 			INSERT INTO tblLent
@@ -120,15 +138,11 @@ BEGIN
 			);
 
 		COMMIT TRANSACTION
+
+		SELECT 'Lent Insert Successfully' AS Message
 	END TRY
 	BEGIN CATCH
 		ROLLBACK TRANSACTION
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
-
---negative value hbe na returned amoune ee check korte hbe 
---remaning amount negative hbe na check korte hbe
---date validation nae old date oo dewa jbe 
---insert e time ee returned amount er remaning amount asbe ee keno ota to 0 ee hbe lent just niyechi . 
---insert hole message nae 
