@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE spInsertBorrow
+CREATE PROCEDURE spInsertBorrow
 (
     @UserID INT,
     @PersonID INT,
