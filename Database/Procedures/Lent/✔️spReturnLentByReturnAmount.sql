@@ -64,6 +64,13 @@ BEGIN
 			@CategoryID = CategoryID
 			FROM tblCreditSubCategory
 			WHERE SubCategoryName = 'Lent Returned';
+             
+            IF @CategoryID IS NULL OR @SubCategoryID IS NULL
+            BEGIN
+            SELECT 'Lent Returned Credit Category/SubCategory Not Found' AS Message
+            ROLLBACK TRANSACTION
+            RETURN
+            END
 
 			IF @NewRemainingAmount = 0
 			BEGIN
@@ -127,5 +134,4 @@ BEGIN
 END
 
 
---cat er subcat ee value assign na kore eee validation check korchis 
---parameter ee cat er subcat asbe keno ota to same all khetre to keno asbe parameter eee 
+-- eta ektu check korbi mne thik oo ache but problem oo ache null validatiopn nae kichu jaygay total ta dekhbi . partialy paid dekhache na kono khetre setao dekhbi 

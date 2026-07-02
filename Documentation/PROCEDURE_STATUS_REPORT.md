@@ -17,21 +17,19 @@
 
 | Status | Count |
 | ------ | ----: |
-| Total Allotted Procedures | 85 |
+| Total Allotted Procedures | 86 |
 | Total Procedures Found | 86 |
-| `✔️` (All Okay) | 73 |
+| `✔️` (All Okay) | 81 |
 | `✅` (Pending Review) | 0 |
-| `❌` (Fix Needed) | 12 |
-
-*(Note: There is also 1 unmarked file `spTest.sql` in the new `Dashboard` folder)*
+| `❌` (Fix Needed) | 5 |
 
 ---
 
 ## 🟣 Team A â€” User, Task, Note
-**Assigned Area:** Authentication, User Management, Task, Note, Task Reminder  
+**Assigned Area:** Authentication, User Management, Task, Note, Task Reminder
 **Total Allotted Procedures:** 30
 
-### `✔️` ALL OKAY (29)
+### `✔️` ALL OKAY (30)
 - `spChangePassword`
 - `spDeleteNote`
 - `spDeleteTask`
@@ -50,6 +48,7 @@
 - `spGetUserDashboard`
 - `spInsertNote`
 - `spInsertTask`
+- `spLoginUser`
 - `spLogoutUser`
 - `spRegisterUser`
 - `spUpdateNote`
@@ -65,8 +64,8 @@
 ### `✅` PENDING REVIEW (0)
 - None
 
-### `❌` FIX NEEDED (1)
-- `spLoginUser`
+### `❌` FIX NEEDED (0)
+- None
 
 ### `[MISSING]` (0)
 - None
@@ -74,7 +73,7 @@
 ---
 
 ## 🟢 Team B â€” Expense, Credit, Settings
-**Assigned Area:** Expense, Credit, Categories, Subcategories, Payment Type  
+**Assigned Area:** Expense, Credit, Categories, Subcategories, Payment Type
 **Total Allotted Procedures:** 35
 
 ### `✔️` ALL OKAY (35)
@@ -126,34 +125,36 @@
 ---
 
 ## 🟠 Team C â€” Lent, Borrow
-**Assigned Area:** Lent, Borrow, Persons, Status, Reminders  
-**Total Allotted Procedures:** 20
+**Assigned Area:** Lent, Borrow, Persons, Status, Reminders
+**Total Allotted Procedures:** 21
 
-### `✔️` ALL OKAY (8)
+### `✔️` ALL OKAY (16)
 - `spGetAllBorrow`
 - `spGetAllLent`
+- `spGetAllPersons`
 - `spGetBorrowPersonHistory`
 - `spGetCompletedBorrow`
 - `SpGetCompletedLentByStatusName`
 - `spGetLentPersonHistory`
+- `spGetPendingLentByStatusName`
 - `spGetTotalBorrowByPerson`
+- `spGetUpcomingBorrowReminders`
+- `spGetUpcomingLentReminders`
+- `spInsertLent`
+- `spInsertPerson`
 - `spPayBorrow`
+- `spReturnLentByReturnAmount`
+- `spUpdatePerson`
 
 ### `✅` PENDING REVIEW (0)
 - None
 
-### `❌` FIX NEEDED (11)
+### `❌` FIX NEEDED (5)
 - `spDeletePerson`
-- `spGetAllPersons`
 - `spGetOverduedBorrow`
 - `spGetPendingBorrow`
-- `spGetPendingLentByStatusName`
-- `spGetUpcomingBorrowReminders`
-- `spGetUpcomingLentReminders`
 - `spInsertBorrow`
-- `spInsertLent`
-- `spReturnLentByReturnAmount`
-- `spUpdatePerson`
+- `spUpdateOverdueStatus`
 
-### `[MISSING]` (1)
-- `spInsertPerson`
+### `[MISSING]` (0)
+- None

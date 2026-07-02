@@ -1,4 +1,4 @@
-CREATE PROC spGetPendingLentByStatusName 1
+CREATE PROC spGetPendingLentByStatusName
 @UserID INT
 AS
 BEGIN
@@ -14,7 +14,8 @@ BEGIN
 	LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
 	WHERE L.UserID = @UserID AND S.StatusName IN ('Pending', 'Overdue', 'Partially Paid'))
 	BEGIN
-		SELECT 'Not Pending Record Found' AS Message
+		SELECT 'No Pending Record Found' AS Message
+		RETURN
 	END
 
 	SELECT Prsn.PersonName,

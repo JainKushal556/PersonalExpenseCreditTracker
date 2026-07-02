@@ -11,6 +11,7 @@ BEGIN
             SELECT 1
             FROM tblUsers
             WHERE UserID = @UserID
+			AND Active = 1
         )
         BEGIN
             SELECT 'UserID Does Not Exist' AS Message;

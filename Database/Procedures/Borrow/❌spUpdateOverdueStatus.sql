@@ -1,3 +1,4 @@
+
 CREATE PROCEDURE spUpdateOverdueStatus
 AS
 BEGIN
@@ -26,3 +27,5 @@ BEGIN
       AND StatusID <> @OverdueStatusID;
 
 END
+
+-- OverdueStatusID null ki na check korbi , DeadlineAt eta DATETIME ache so etake CAST kre check krte hbe 

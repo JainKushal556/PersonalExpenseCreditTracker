@@ -15,14 +15,14 @@ BEGIN
 		IF NOT EXISTS (SELECT 1 FROM tblPersons
 		WHERE UserID = @UserID)
 		BEGIN
-			SELECT 'No Person Found' AS Message
+			SELECT 'No Persons Found' AS Message
 			RETURN
 		END
 
 		--Print Persons of Person Table
 		SELECT  PersonID,PersonName, PhoneNumber, Address
 		FROM tblPersons
-		WHERE UserID = @UserID;
+		WHERE UserID = @UserID  ORDER BY PersonName ASC;
 
 	END TRY
 	BEGIN CATCH

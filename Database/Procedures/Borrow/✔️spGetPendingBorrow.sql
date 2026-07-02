@@ -1,13 +1,14 @@
 ﻿CREATE PROCEDURE spGetPendingBorrow
 (
     @UserID INT,
-    @PersonName VARCHAR(100) = NULL,
+    @PersonID INT = NULL,
     @PaymentName VARCHAR(100) = NULL
 )
 AS
 BEGIN
 
-    DECLARE @PersonID INT;
+    SET NOCOUNT ON;
+
     DECLARE @PaymentID INT;
 
     -------------------------------------------------
@@ -25,7 +26,7 @@ BEGIN
         SELECT 1
         FROM tblUserAuthentication
         WHERE UserID = @UserID
-        AND Active = 1
+          AND Active = 1
     )
     BEGIN
         SELECT 'User does not exist or inactive!' AS Message;
@@ -33,25 +34,26 @@ BEGIN
     END
 
     -------------------------------------------------
-    -- Resolve PersonName → PersonID (optional filter)
+    -- Validate PersonID (if provided)
     -------------------------------------------------
 
-    IF @PersonName IS NOT NULL AND LTRIM(RTRIM(@PersonName)) <> ''
+    IF @PersonID IS NOT NULL AND @PersonID > 0
     BEGIN
-        SELECT @PersonID = PersonID
-        FROM tblPersons
-        WHERE UserID = @UserID
-          AND LTRIM(RTRIM(PersonName)) = LTRIM(RTRIM(@PersonName));
-
-        IF @PersonID IS NULL
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblPersons
+            WHERE PersonID = @PersonID
+              AND UserID = @UserID
+        )
         BEGIN
-            SELECT 'Person not found for this user!' AS Message;
+            SELECT 'Person does not belong to this user!' AS Message;
             RETURN;
         END
     END
 
     -------------------------------------------------
-    -- Resolve PaymentName → PaymentID (optional filter)
+    -- Resolve PaymentName → PaymentID (optional)
     -------------------------------------------------
 
     IF @PaymentName IS NOT NULL AND LTRIM(RTRIM(@PaymentName)) <> ''
@@ -74,9 +76,11 @@ BEGIN
     IF NOT EXISTS
     (
         SELECT 1
-        FROM tblBorrow b
-        WHERE b.UserID = @UserID
-          AND b.RemainingAmount > 0
+        FROM tblBorrow
+        WHERE UserID = @UserID
+        AND RemainingAmount > 0 
+        AND (@PersonID IS NULL OR PersonID = @PersonID)
+        AND (@PaymentID IS NULL OR PaymentID = @PaymentID)
     )
     BEGIN
         SELECT 'No pending borrow records found!' AS Message;
@@ -111,16 +115,15 @@ BEGIN
 
     WHERE b.UserID = @UserID
       AND b.RemainingAmount > 0
-      AND s.StatusName IN ('Pending', 'Partially Paid', 'Overdue')
 
-      -- optional filters
-      AND (@PersonName IS NULL OR b.PersonID = @PersonID)
+      -- filter by PersonID if provided
+      AND (@PersonID IS NULL OR b.PersonID = @PersonID)
+
+      -- filter by PaymentID if provided
       AND (@PaymentName IS NULL OR b.PaymentID = @PaymentID)
+
+      AND s.StatusName IN ('Pending', 'Partially Paid', 'Overdue')
 
     ORDER BY b.DeadlineAt ASC;
 
 END;
-
-
---sob validation e id use kor name er jaygay 
---er input ee person id asbe so id use kor ae khetre mean ui theke ee person id asbe so direct id niye kaj kor 

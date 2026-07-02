@@ -40,7 +40,12 @@ BEGIN
         SELECT 1
         FROM tblBorrow
         WHERE UserID = @UserID
-          AND RemainingAmount > 0
+        AND RemainingAmount > 0
+        AND
+        (
+           DeadlineAt < @Today
+           OR DATEDIFF(DAY,@Today,CAST(DeadlineAt AS DATE)) IN (0,1,3,7)
+        )
     )
     BEGIN
         SELECT 'No borrow records found' AS Message;

@@ -1,9 +1,37 @@
+---------------------------------------------------------
+/* An index is a database object that helps SQL Server find rows faster without scanning the entire table.
+
+The index is sorted like:
+
+UserID	DeadlineAt
+1	2025-01-01
+1	2025-02-01
+1	2025-03-01
+2	2025-01-10
+2	2025-02-15
+
+So SQL Server can:
+
+Jump directly to UserID = @UserID
+Find matching DeadlineAt values
+Return results
+
+instead of checking every row.*/
+---------------------------------------------------------
+
+CREATE NONCLUSTERED INDEX IX_tblBorrow_UserID_DeadlineAt
+ON tblBorrow(UserID, DeadlineAt)
+INCLUDE (RemainingAmount, PersonID, PaymentID, StatusID);
+
+
 CREATE PROCEDURE spGetOverduedBorrow
 (
     @UserID INT
 )
 AS
 BEGIN
+
+    SET NOCOUNT ON;
 
     -------------------------------------------------
     -- User Validation
@@ -20,7 +48,7 @@ BEGIN
         SELECT 1
         FROM tblUserAuthentication
         WHERE UserID = @UserID
-        AND Active = 1
+          AND Active = 1
     )
     BEGIN
         SELECT 'User does not exist or inactive!' AS Message;
@@ -28,7 +56,13 @@ BEGIN
     END
 
     -------------------------------------------------
-    -- Overdue existence check
+    -- Store Today's Date Once
+    -------------------------------------------------
+
+    DECLARE @Today DATE = GETDATE();
+
+    -------------------------------------------------
+    -- Overdue Existence Check
     -------------------------------------------------
 
     IF NOT EXISTS
@@ -36,8 +70,8 @@ BEGIN
         SELECT 1
         FROM tblBorrow
         WHERE UserID = @UserID
-        AND RemainingAmount > 0
-        AND CAST(DeadlineAt AS DATE) < CAST(GETDATE() AS DATE)
+          AND RemainingAmount > 0
+          AND DeadlineAt < @Today
     )
     BEGIN
         SELECT 'No overdue borrow records found!' AS Message;
@@ -45,16 +79,14 @@ BEGIN
     END
 
     -------------------------------------------------
-    -- Get Overdue Borrow Records (Name-based output)
+    -- Get Overdue Borrow Records
     -------------------------------------------------
 
     SELECT
         b.BorrowID,
-
         ISNULL(p.PersonName, 'Unknown') AS PersonName,
         ISNULL(pt.PaymentName, 'Unknown') AS PaymentName,
         ISNULL(s.StatusName, 'Unknown') AS StatusName,
-
         b.Amount,
         b.PaidAmount,
         b.RemainingAmount,
@@ -62,7 +94,12 @@ BEGIN
         b.DeadlineAt,
         b.Description,
 
-        DATEDIFF(DAY, b.DeadlineAt, GETDATE()) AS OverdueDays
+        DATEDIFF
+        (
+            DAY,
+            CAST(b.DeadlineAt AS DATE),
+            @Today
+        ) AS OverdueDays
 
     FROM tblBorrow b
 
@@ -77,12 +114,11 @@ BEGIN
 
     WHERE b.UserID = @UserID
       AND b.RemainingAmount > 0
-      AND CAST(b.DeadlineAt AS DATE) < CAST(GETDATE() AS DATE)
+      AND b.DeadlineAt < @Today
 
     ORDER BY b.DeadlineAt ASC;
 
-END;
+END
 
 
---datediff e deadline er gatedate ke cast kore use kor better answer asbe 
---WHERE CAST(DeadlineAt AS DATE) < CAST(GETDATE() AS DATE) ae take update korte hbe er fole answer onel late ee asbe 
+-- indexing kotha theke elo amra to indexing jni ee na so why ? 

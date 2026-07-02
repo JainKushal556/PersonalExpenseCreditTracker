@@ -1,4 +1,4 @@
-﻿# Final Stored Procedure Requirements
+# Final Stored Procedure Requirements
 
 ## Personal Expense Credit Tracker
 
@@ -220,7 +220,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `User_Profile`
 
-### 9. spRemoveProfilePhoto
+### 9. spDeleteUserProfilePhotoByUserId
 
 **Purpose:**
 
@@ -242,36 +242,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `User_Profile`
 
-### 10. spGetUserDashboard
 
-**Purpose:**
-
-- Load dashboard summary data for logged user.
-
-**Parameters:**
-
-- `@UserID`
-
-**Expected Output:**
-
-- Total expenses
-- Total credits
-- Total lent amount
-- Total borrow amount
-- Net balance
-- Pending task summary
-
-**When Used:**
-
-- Dashboard page load.
-
-**Tables Used:**
-
-- `Expense`
-- `Credit`
-- `Lent`
-- `Borrow`
-- `Task`
 
 ### 11. spForgetPassword
 
@@ -330,9 +301,31 @@ The first version will include borrow return reminders, lent return reminders, a
 - Check Active column value.
 - Return authentication result with account status.
 
+### 12A. spLogoutUser
+
+**Purpose:**
+
+- Terminate the user session and clear active state if applicable.
+
+**Parameters:**
+
+- `@UserID` (or none if handled via local session)
+
+**Expected Output:**
+
+- User logged out successfully.
+
+**When Used:**
+
+- User clicks the Logout button.
+
+**Tables Used:**
+
+- `tblUserAuthentication`
+
 ## ðŸ’¸ EXPENSE MODULE
 
-### 13. spInsertExpense
+### 13. spInsertExpenseByUserID
 
 **Purpose:**
 
@@ -360,7 +353,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Expense`
 
-### 14. spGetAllExpenses
+### 14. spGetAllExpensesByID
 
 **Purpose:**
 
@@ -853,7 +846,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `Lent`
 
-### 32. spGetCompletedLentByStatusName
+### 32. SpGetCompletedLentByStatusName
 
 **Purpose:**
 
@@ -1155,7 +1148,55 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Borrow`
 - `Person`
 
-## âœ… TASK MODULE
+### 42A. spUpdateOverdueStatus
+
+**Purpose:**
+
+- Automatically update borrow records that have passed their deadline to 'Overdue' status.
+
+**Parameters:**
+
+- None
+
+**Expected Output:**
+
+- Overdue borrow statuses updated successfully.
+
+**When Used:**
+
+- Application load or dashboard to ensure overdue statuses are correctly reflected.
+
+**Tables Used:**
+
+- `tblBorrow`
+- `tblLentBorrowStatus`
+
+### 42B. spGetOverduedBorrow
+
+**Purpose:**
+
+- Retrieve all overdue borrow records for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+
+**Expected Output:**
+
+- List of overdue borrow records.
+
+**When Used:**
+
+- Overdue section or notification panel load.
+
+**Tables Used:**
+
+- `tblBorrow`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+## ✅ TASK MODULE
 
 ### 43. spInsertTask
 
@@ -2079,7 +2120,38 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblPersons`
 
-## ðŸ”” REMINDER & NOTIFICATION QUERIES
+## 📊 DASHBOARD & NOTIFICATION MODULE
+
+### 10. spGetUserDashboard
+
+**Purpose:**
+
+- Load dashboard summary data for logged user.
+
+**Parameters:**
+
+- `@UserID`
+
+**Expected Output:**
+
+- Total expenses
+- Total credits
+- Total lent amount
+- Total borrow amount
+- Net balance
+- Pending task summary
+
+**When Used:**
+
+- Dashboard page load.
+
+**Tables Used:**
+
+- `Expense`
+- `Credit`
+- `Lent`
+- `Borrow`
+- `Task`
 
 ### 80. spGetUpcomingBorrowReminders
 

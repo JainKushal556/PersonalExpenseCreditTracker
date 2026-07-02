@@ -1,7 +1,6 @@
-CREATE PROC spUpdatePerson
+CREATE PROC spInsertPerson
 (
     @UserID INT,
-    @PersonID INT,
     @PersonName VARCHAR(100),
     @PhoneNumber VARCHAR(20),
     @Address VARCHAR(MAX)
@@ -10,11 +9,12 @@ AS
 BEGIN
     BEGIN TRY
 
-        IF @UserID IS NULL
+	 IF @UserID IS NULL OR @UserID <= 0
         BEGIN
             SELECT 'User ID is Null' AS Message;
             RETURN;
         END
+
 
         IF NOT EXISTS
         (
@@ -28,34 +28,17 @@ BEGIN
             RETURN;
         END
 
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblPersons
-            WHERE PersonID = @PersonID
-            AND UserID = @UserID
-        )
-        BEGIN
-            SELECT 'Invalid PersonID!!' AS Message;
-            RETURN;
-        END
-
         SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
         SET @PersonName = LTRIM(RTRIM(@PersonName));
         SET @Address = LTRIM(RTRIM(@Address));
 
-
-        IF @PersonName IS NULL
-           OR @PersonName = ''
-           OR UPPER(@PersonName) = 'NULL'
+        IF @PersonName = '' OR @PersonName = NULL
         BEGIN
             SELECT 'Person Name is Null' AS Message;
             RETURN;
         END
 
-        IF @PhoneNumber IS NULL
-           OR @PhoneNumber = ''
-           OR UPPER(@PhoneNumber) = 'NULL'
+        IF @PhoneNumber = '' OR @PhoneNumber = NULL
         BEGIN
             SELECT 'Phone Number is Null' AS Message;
             RETURN;
@@ -67,21 +50,29 @@ BEGIN
             FROM tblPersons
             WHERE UserID = @UserID
             AND PhoneNumber = @PhoneNumber
-            AND PersonID <> @PersonID
         )
         BEGIN
-            SELECT 'Phone Number Already Exists' AS Message;
+            SELECT 'Phone Number Already Taken' AS Message;
             RETURN;
         END
 
-        UPDATE tblPersons
-        SET
-            PersonName = @PersonName,
-            PhoneNumber = @PhoneNumber,
-            Address = @Address
-        WHERE PersonID = @PersonID;
 
-        SELECT 'Person Details Updated Successfully' AS Message;
+        INSERT INTO tblPersons
+        (
+            UserID,
+            PersonName,
+            PhoneNumber,
+            Address
+        )
+        VALUES
+        (
+            @UserID,
+            @PersonName,
+            @PhoneNumber,
+            @Address
+        );
+
+     SELECT 'Person Details Inserted Successfully' AS Message;
 
     END TRY
 
@@ -89,4 +80,3 @@ BEGIN
         SELECT ERROR_MESSAGE() AS Message;
     END CATCH
 END
-GO

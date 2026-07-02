@@ -55,13 +55,13 @@ BEGIN
 
 			IF CAST(@DeadlineAT AS DATE) < CAST(GETDATE() AS DATE)
 			BEGIN
-				SELECT 'Input Date Cannot Be Greater Than Today Date' AS Message
+				SELECT 'Deadline Date Cannot Be Earlier Than Today' AS Message
 				ROLLBACK TRANSACTION
 				RETURN
 			END
-
+              
 			-- Check Amount
-			IF @Amount < 0
+			IF @Amount <= 0
 			BEGIN
 				SELECT 'Amount Must Be Greater Than 0!!' AS Message
 				ROLLBACK TRANSACTION
@@ -77,7 +77,7 @@ BEGIN
 			@SubCategoryId = SubCategoryId
 			FROM tblExpenseSubCategory
 			WHERE SubCategoryName = 'Lent Given';
-
+            
 			IF @SubCategoryId IS NULL
 			BEGIN
 				SELECT 'Lent Given SubCategory Not Found' AS Message
@@ -142,7 +142,8 @@ BEGIN
 		SELECT 'Lent Insert Successfully' AS Message
 	END TRY
 	BEGIN CATCH
-		ROLLBACK TRANSACTION
+		IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION
 		SELECT ERROR_MESSAGE() AS Message
 	END CATCH
 END
