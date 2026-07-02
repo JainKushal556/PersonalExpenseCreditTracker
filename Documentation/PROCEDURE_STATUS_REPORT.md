@@ -25,7 +25,7 @@
 
 ---
 
-## 🟣 Team A â€” User, Task, Note
+## 🟣 Team A — User, Task, Note
 **Assigned Area:** Authentication, User Management, Task, Note, Task Reminder
 **Total Allotted Procedures:** 30
 
@@ -72,7 +72,7 @@
 
 ---
 
-## 🟢 Team B â€” Expense, Credit, Settings
+## 🟢 Team B — Expense, Credit, Settings
 **Assigned Area:** Expense, Credit, Categories, Subcategories, Payment Type
 **Total Allotted Procedures:** 35
 
@@ -124,7 +124,7 @@
 
 ---
 
-## 🟠 Team C â€” Lent, Borrow
+## 🟠 Team C — Lent, Borrow
 **Assigned Area:** Lent, Borrow, Persons, Status, Reminders
 **Total Allotted Procedures:** 21
 
@@ -158,3 +158,4 @@
 
 ### `[MISSING]` (0)
 - None
+

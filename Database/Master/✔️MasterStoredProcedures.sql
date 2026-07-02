@@ -1,27 +1,15 @@
--- =========================================================================
+﻿-- =========================================================================
 -- MASTER STORED PROCEDURES SCRIPT
 -- =========================================================================
 
 -- =========================================================================
 -- SPs that NEED FIXES or are MISSING (Not included in this script):
 -- =========================================================================
--- ❌spGetAllBorrow.sql
--- ❌spGetBorrowPersonHistory.sql
--- ❌spGetCompletedBorrow.sql
+-- ❌spDeletePerson.sql
 -- ❌spGetOverduedBorrow(EXTRA PROCEDURE).sql
 -- ❌spGetPendingBorrow.sql
--- ❌spGetTotalBorrowByPerson.sql
--- ❌spGetUpcomingBorrowReminders.sql
 -- ❌spInsertBorrow.sql
--- ❌spPayBorrow.sql
--- ❌spGetPendingLentByStatusName.sql
--- ❌spInsertLent.sql
--- ❌spReturnLentByReturnAmount.sql
--- ❌PersonIDspGetAllPersons.sql
--- ❌spDeletePerson.sql
--- ❌spGetUpcomingLentReminders.sql
--- ❌spInsertPerson.sql
--- ❌spUpdatePerson.sql
+-- ❌spUpdateOverdueStatus(EXTRA).sql
 
 
 -- =========================================================================
@@ -5010,6 +4998,807 @@ BEGIN
 
 END;
 
+
+
+GO
+
+
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllPersons.sql
+
+-- ==========================================================
+
+CREATE PROC spGetAllPersons
+@UserID INT
+AS
+BEGIN
+	BEGIN TRY
+		IF NOT EXISTS (SELECT 1 
+						FROM tblUserAuthentication
+						WHERE UserID = @UserID AND Active = 1)
+		BEGIN
+			SELECT 'Invalid OR Inactive UserID!!' AS Message
+			RETURN
+		END
+
+		--Check Person Exist
+		IF NOT EXISTS (SELECT 1 FROM tblPersons
+		WHERE UserID = @UserID)
+		BEGIN
+			SELECT 'No Persons Found' AS Message
+			RETURN
+		END
+
+		--Print Persons of Person Table
+		SELECT  PersonID,PersonName, PhoneNumber, Address
+		FROM tblPersons
+		WHERE UserID = @UserID  ORDER BY PersonName ASC;
+
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_MESSAGE() AS Message
+	END CATCH
+END
+GO
+-- ==========================================================
+
+-- SP: ✔️spGetPendingLentByStatusName.sql
+
+-- ==========================================================
+
+CREATE PROC spGetPendingLentByStatusName
+@UserID INT
+AS
+BEGIN
+	IF NOT EXISTS (SELECT 1 
+					FROM tblUserAuthentication
+					WHERE UserID = @UserID AND Active = 1)
+	BEGIN
+		SELECT 'Invalid OR Inactive UserID!!' AS Message
+		RETURN
+	END
+
+	IF NOT EXISTS (SELECT 1 FROM tblLent L
+	LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
+	WHERE L.UserID = @UserID AND S.StatusName IN ('Pending', 'Overdue', 'Partially Paid'))
+	BEGIN
+		SELECT 'No Pending Record Found' AS Message
+		RETURN
+	END
+
+	SELECT Prsn.PersonName,
+			L.Amount,
+			L.ReturnedAmount,
+			L.RemainingAmount,
+			Pay.PaymentName,
+			S.StatusName,
+			L.LentAt,
+			L.DeadlineAt,
+			L.Description
+	FROM tblLent L
+	LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
+	LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
+	LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
+
+	WHERE L.UserID = @UserID AND S.StatusName IN ('Pending', 'Overdue', 'Partially Paid')
+	ORDER BY L.LentAt DESC;
+END
+GO
+-- ==========================================================
+
+-- SP: ✔️spGetUpcomingLentReminders.sql
+
+-- ==========================================================
+
+CREATE PROC spGetUpcomingLentReminders
+    @UserID INT
+AS
+BEGIN
+    DECLARE @Today DATE = CAST(GETDATE() AS DATE);
+	DECLARE @StatusID INT;
+    BEGIN TRY
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUsers
+            WHERE UserID = @UserID
+			AND Active = 1
+        )
+        BEGIN
+            SELECT 'UserID Does Not Exist' AS Message;
+            RETURN;
+        END
+
+
+		SELECT TOP 1 @StatusID = StatusID FROM tblLentBorrowStatus
+				WHERE StatusName = 'Pending';
+
+		IF @StatusID IS NULL
+		BEGIN
+			SELECT 'Pending Status Not Found' AS Message;
+			RETURN;
+		END
+
+        IF NOT EXISTS
+		(
+			SELECT 1
+			FROM tblLent
+			WHERE UserID = @UserID
+			AND StatusID = @StatusID
+			AND DATEDIFF
+			(
+				DAY,
+				@Today,
+				CAST(DeadlineAt AS DATE)
+			) IN (7,3,1)
+		)
+		BEGIN
+			SELECT 'No Upcoming Pending Lent Found' AS Message;
+			RETURN;
+		END
+
+        SELECT L.LentID,
+			Prsn.PersonName,
+			L.Amount,
+			L.ReturnedAmount,
+			L.RemainingAmount,
+			Pay.PaymentName,
+			S.StatusName,
+			L.LentAt,
+			L.DeadlineAt,
+			DATEDIFF(
+					 DAY, 
+					 @Today, 
+					 CAST(L.DeadlineAt AS DATE)
+					) AS RemainingDays,
+			L.Description
+		FROM tblLent L
+		LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
+		LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
+		LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
+		WHERE L.UserID = @UserID
+		AND L.DeadlineAt >= @Today
+		AND L.StatusID = @StatusID
+		AND DATEDIFF
+		(
+			DAY,
+			@Today,
+			CAST(L.DeadlineAt AS DATE)
+		) IN (7,3,1)
+		ORDER BY L.DeadlineAt ASC
+
+    END TRY
+
+    BEGIN CATCH
+        SELECT ERROR_MESSAGE() AS Message;
+    END CATCH
+
+END
+GO
+-- ==========================================================
+
+-- SP: ✔️spInsertLent.sql
+
+-- ==========================================================
+
+CREATE PROC spInsertLent
+	@UserID INT,
+	@PersonID INT,
+	@PaymentID INT,
+	@Amount DECIMAL(10,2),
+	@DeadlineAT DATETIME,
+	@Description VARCHAR(MAX)
+AS
+BEGIN
+	
+	-- Variable Declaration
+	DECLARE @SubCategoryId INT;
+	DECLARE @CategoryId INT;
+	DECLARE @ReturnedAmount DECIMAL(10,2);
+	DECLARE @RemainingAmount DECIMAL(10,2);
+	DECLARE @StatusID INT;
+
+	BEGIN TRY
+		BEGIN TRANSACTION
+			IF NOT EXISTS (SELECT 1 
+							FROM tblUserAuthentication
+							WHERE UserID = @UserID AND Active = 1)
+			BEGIN
+				SELECT 'Invalid OR Inactive UserID!!' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+        
+			-- Check PersonID
+			IF NOT EXISTS(SELECT 1
+						  FROM tblPersons
+						  WHERE PersonID = @PersonID AND UserID = @UserID)
+			BEGIN
+				SELECT 'Person Not Exist' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+        
+			-- Check PaymentID
+			IF NOT EXISTS(SELECT 1
+						  FROM tblPaymentType
+						  WHERE PaymentID = @PaymentID)
+			BEGIN
+				SELECT 'Invalid PaymentID!!' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+
+			SELECT @StatusID = StatusID
+			FROM tblLentBorrowStatus
+			WHERE StatusName = 'Pending'
+
+			IF CAST(@DeadlineAT AS DATE) < CAST(GETDATE() AS DATE)
+			BEGIN
+				SELECT 'Deadline Date Cannot Be Earlier Than Today' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+              
+			-- Check Amount
+			IF @Amount <= 0
+			BEGIN
+				SELECT 'Amount Must Be Greater Than 0!!' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+
+			END
+
+			SET @ReturnedAmount = 0;
+			SET @RemainingAmount = @Amount;
+
+			-- Get CategoryId & SubCategoryId From tblExpenseSubCategory
+			SELECT @CategoryId = CategoryId,
+			@SubCategoryId = SubCategoryId
+			FROM tblExpenseSubCategory
+			WHERE SubCategoryName = 'Lent Given';
+            
+			IF @SubCategoryId IS NULL
+			BEGIN
+				SELECT 'Lent Given SubCategory Not Found' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+			IF @StatusID IS NULL
+			BEGIN
+				SELECT 'Pending Status Not Found' AS Message
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+			--Insert Lent on Lent Table
+			INSERT INTO tblLent
+			(
+				UserID,
+				PersonID,
+				PaymentID,
+				StatusID,
+				Amount,
+				ReturnedAmount,
+				RemainingAmount,
+				DeadlineAt,
+				Description
+			)
+			VALUES
+			(
+				@UserID,
+				@PersonID,
+				@PaymentID,
+				@StatusID,
+				@Amount,
+				@ReturnedAmount,
+				@RemainingAmount,
+				@DeadlineAT,
+				@Description
+			);
+			--Insert Lent on Expense Table
+			INSERT INTO tblExpense
+			(
+				UserID,
+				CategoryId,
+				SubCategoryId,
+				Amount,
+				Description,
+				PaymentID
+			)
+			VALUES
+			(
+				@UserID,
+				@CategoryId,
+				@SubCategoryId,
+				@Amount,
+				@Description,
+				@PaymentID
+			);
+
+		COMMIT TRANSACTION
+
+		SELECT 'Lent Insert Successfully' AS Message
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION
+		SELECT ERROR_MESSAGE() AS Message
+	END CATCH
+END
+GO
+-- ==========================================================
+
+-- SP: ✔️spInsertPerson.sql
+
+-- ==========================================================
+
+CREATE PROC spInsertPerson
+(
+    @UserID INT,
+    @PersonName VARCHAR(100),
+    @PhoneNumber VARCHAR(20),
+    @Address VARCHAR(MAX)
+)
+AS
+BEGIN
+    BEGIN TRY
+
+	 IF @UserID IS NULL OR @UserID <= 0
+        BEGIN
+            SELECT 'User ID is Null' AS Message;
+            RETURN;
+        END
+
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUserAuthentication
+            WHERE UserID = @UserID
+            AND Active = 1
+        )
+        BEGIN
+            SELECT 'Invalid OR Inactive UserID!!' AS Message;
+            RETURN;
+        END
+
+        SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+        SET @PersonName = LTRIM(RTRIM(@PersonName));
+        SET @Address = LTRIM(RTRIM(@Address));
+
+        IF @PersonName = '' OR @PersonName = NULL
+        BEGIN
+            SELECT 'Person Name is Null' AS Message;
+            RETURN;
+        END
+
+        IF @PhoneNumber = '' OR @PhoneNumber = NULL
+        BEGIN
+            SELECT 'Phone Number is Null' AS Message;
+            RETURN;
+        END
+
+        IF EXISTS
+        (
+            SELECT 1
+            FROM tblPersons
+            WHERE UserID = @UserID
+            AND PhoneNumber = @PhoneNumber
+        )
+        BEGIN
+            SELECT 'Phone Number Already Taken' AS Message;
+            RETURN;
+        END
+
+
+        INSERT INTO tblPersons
+        (
+            UserID,
+            PersonName,
+            PhoneNumber,
+            Address
+        )
+        VALUES
+        (
+            @UserID,
+            @PersonName,
+            @PhoneNumber,
+            @Address
+        );
+
+     SELECT 'Person Details Inserted Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+        SELECT ERROR_MESSAGE() AS Message;
+    END CATCH
+END
+GO
+-- ==========================================================
+
+-- SP: ✔️spReturnLentByReturnAmount.sql
+
+-- ==========================================================
+
+CREATE PROC spReturnLentByReturnAmount
+@LentID INT, @PaymentID INT, @ReturnedAmount DECIMAL(10,2), @Description VARCHAR(MAX)
+AS
+BEGIN
+	DECLARE @TotalAmount DECIMAL(10,2);
+	DECLARE @RemainingAmount DECIMAL(10,2);
+	DECLARE @NewRemainingAmount DECIMAL(10,2);
+	DECLARE @NewReturnedAmount DECIMAL(10,2);
+	DECLARE @OldReturnedAmount DECIMAL(10,2);
+	DECLARE @StatusID INT;
+	DECLARE @UserID INT;
+	DECLARE @CategoryID INT;
+	DECLARE @SubCategoryID INT;
+
+	BEGIN TRY
+		BEGIN TRANSACTION
+			----------------------------All Validation-----------------------------------------
+			IF NOT EXISTS (SELECT 1 FROM tblLent WHERE LentID = @LentID)
+			BEGIN
+				SELECT 'Invalid LentID!!' AS MESSAGE
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+			IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID = @PaymentID)
+			BEGIN
+				SELECT 'Invalid PaymentID!!' AS MESSAGE
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+			IF @ReturnedAmount <= 0
+			BEGIN
+				SELECT 'Returned Amount Must Be Greater Than 0!' AS MESSAGE
+				ROLLBACK TRANSACTION
+				RETURN
+			END
+
+			----------------------------All Validation-----------------------------------------
+			
+
+			--Get Amount & RemainingAmount
+			SELECT @TotalAmount = Amount,
+			@RemainingAmount = RemainingAmount,
+			@OldReturnedAmount = ReturnedAmount,
+			@UserID = UserID
+			FROM tblLent
+			WHERE LentID = @LentID;
+
+			--IF RemainingAmount is NULL THEN @RemainingAmount = @TotalAmount
+			IF @RemainingAmount is NULL
+			BEGIN
+				SET @RemainingAmount = @TotalAmount;
+			END
+
+
+			--Calculating  New RemainingAmount
+			SET @NewRemainingAmount = @RemainingAmount - @ReturnedAmount;
+
+			--Calculate Total Returned Amount
+			SET @NewReturnedAmount = @ReturnedAmount + @OldReturnedAmount;
+
+			SELECT @SubCategoryID = SubCategoryID,
+			@CategoryID = CategoryID
+			FROM tblCreditSubCategory
+			WHERE SubCategoryName = 'Lent Returned';
+             
+            IF @CategoryID IS NULL OR @SubCategoryID IS NULL
+            BEGIN
+            SELECT 'Lent Returned Credit Category/SubCategory Not Found' AS Message
+            ROLLBACK TRANSACTION
+            RETURN
+            END
+
+			IF @NewRemainingAmount = 0
+			BEGIN
+				--Get 'Complete' StatusName ID
+				SELECT @StatusID = StatusID FROM tblLentBorrowStatus
+				WHERE StatusName = 'Paid';
+
+				--Update Lent Table Data
+				UPDATE tblLent
+				SET RemainingAmount = 0,
+				ReturnedAmount = @NewReturnedAmount,
+				StatusID = @StatusID
+				WHERE LentID = @LentID;
+
+			END
+			ELSE IF @NewRemainingAmount > 0
+			BEGIN
+				--Get 'Pending' StatusName ID
+				SELECT @StatusID = StatusID FROM tblLentBorrowStatus
+				WHERE StatusName = 'Pending';
+
+				--Update Lent Table Data
+				UPDATE tblLent
+				SET RemainingAmount = @NewRemainingAmount,
+				ReturnedAmount = @NewReturnedAmount,
+				StatusID = @StatusID
+				WHERE LentID = @LentID;
+
+			END
+			ELSE
+			BEGIN
+				RAISERROR('Returned amount exceeds remaining amount.',16,1);
+			END
+
+			--Data Insert On Credit Table
+				INSERT INTO tblCredit(
+					UserID,
+					CategoryID,
+					SubCategoryID,
+					PaymentID,
+					Amount,
+					Description
+					)
+				VALUES(
+					@UserID, 
+					@CategoryID,
+					@SubCategoryID,
+					@PaymentID,
+					@ReturnedAmount,
+					@Description
+					);
+
+			COMMIT TRANSACTION
+			SELECT 'Lent Returned Successfully' AS MESSAGE
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRANSACTION
+			SELECT
+				ERROR_MESSAGE() AS ErrorMessage
+		END CATCH
+END
+
+
+-- eta ektu check korbi mne thik oo ache but problem oo ache null validatiopn nae kichu jaygay total ta dekhbi . partialy paid dekhache na kono khetre setao dekhbi 
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdatePerson.sql
+
+-- ==========================================================
+
+CREATE PROC spUpdatePerson
+(
+    @UserID INT,
+    @PersonID INT,
+    @PersonName VARCHAR(100),
+    @PhoneNumber VARCHAR(20),
+    @Address VARCHAR(MAX)
+)
+AS
+BEGIN
+    BEGIN TRY
+
+        IF @UserID IS NULL OR @UserID <= 0
+        BEGIN
+            SELECT 'User ID is Null' AS Message;
+            RETURN;
+        END
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUserAuthentication
+            WHERE UserID = @UserID
+            AND Active = 1
+        )
+        BEGIN
+            SELECT 'Invalid OR Inactive UserID!!' AS Message;
+            RETURN;
+        END
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblPersons
+            WHERE PersonID = @PersonID
+            AND UserID = @UserID
+        )
+        BEGIN
+            SELECT 'Invalid PersonID!!' AS Message;
+            RETURN;
+        END
+
+        SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+        SET @PersonName = LTRIM(RTRIM(@PersonName));
+        SET @Address = LTRIM(RTRIM(@Address));
+
+
+        IF @PersonName IS NULL
+           OR @PersonName = ''
+           OR UPPER(@PersonName) = 'NULL'
+        BEGIN
+            SELECT 'Person Name is Null' AS Message;
+            RETURN;
+        END
+
+        IF @PhoneNumber IS NULL
+           OR @PhoneNumber = ''
+           OR UPPER(@PhoneNumber) = 'NULL'
+        BEGIN
+            SELECT 'Phone Number is Null' AS Message;
+            RETURN;
+        END
+
+        IF EXISTS
+        (
+            SELECT 1
+            FROM tblPersons
+            WHERE UserID = @UserID
+            AND PhoneNumber = @PhoneNumber
+            AND PersonID <> @PersonID
+        )
+        BEGIN
+            SELECT 'Phone Number Already Exists' AS Message;
+            RETURN;
+        END
+
+        UPDATE tblPersons
+        SET
+            PersonName = @PersonName,
+            PhoneNumber = @PhoneNumber,
+            Address = @Address
+        WHERE PersonID = @PersonID AND UserID = @UserID;
+
+        SELECT 'Person Details Updated Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+        SELECT ERROR_MESSAGE() AS Message;
+    END CATCH
+END
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetUpcomingBorrowReminders.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetUpcomingBorrowReminders
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    DECLARE @Today DATE = CAST(GETDATE() AS DATE);
+
+    -------------------------------------------------
+    -- User Validation
+    -------------------------------------------------
+
+    IF @UserID IS NULL OR @UserID <= 0
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'User does not exist or inactive' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Data Check
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow
+        WHERE UserID = @UserID
+        AND RemainingAmount > 0
+        AND
+        (
+           DeadlineAt < @Today
+           OR DATEDIFF(DAY,@Today,CAST(DeadlineAt AS DATE)) IN (0,1,3,7)
+        )
+    )
+    BEGIN
+        SELECT 'No borrow records found' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Reminder Query
+    -------------------------------------------------
+
+    SELECT
+        b.BorrowID,
+        p.PersonName,
+        pt.PaymentName,
+        s.StatusName,
+        b.Amount,
+        b.PaidAmount,
+        b.RemainingAmount,
+        b.BorrowAt,
+        b.DeadlineAt,
+        b.Description,
+
+        DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) AS DaysRemaining,
+
+        CASE
+
+            -------------------------------------------------
+            -- OVERDUE
+            -------------------------------------------------
+            WHEN b.DeadlineAt < @Today THEN
+                'Overdue payment. Please clear it as soon as possible.'
+
+            -------------------------------------------------
+            -- DUE TODAY
+            -------------------------------------------------
+            WHEN DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) = 0 THEN
+                'This payment is due today.'
+
+            -------------------------------------------------
+            -- BEFORE DEADLINE REMINDERS
+            -------------------------------------------------
+            WHEN DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) = 1 THEN
+                'Reminder: payment is due tomorrow.'
+
+            WHEN DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) = 3 THEN
+                'Reminder: payment is due in 3 days.'
+
+            WHEN DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) = 7 THEN
+                'Reminder: payment is due in 7 days.'
+
+            ELSE
+                'Upcoming payment.'
+
+        END AS ReminderMessage
+
+    FROM tblBorrow b
+
+    LEFT JOIN tblPersons p
+        ON b.PersonID = p.PersonID
+
+    LEFT JOIN tblPaymentType pt
+        ON b.PaymentID = pt.PaymentID
+
+    LEFT JOIN tblLentBorrowStatus s
+        ON b.StatusID = s.StatusID
+
+    WHERE b.UserID = @UserID
+      AND b.RemainingAmount > 0
+      AND (
+            b.DeadlineAt < @Today
+            OR DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) IN (7, 3, 1, 0)
+          )
+
+    ORDER BY b.DeadlineAt ASC;
+
+END
 
 
 GO
