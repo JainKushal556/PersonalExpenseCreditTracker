@@ -1,37 +1,9 @@
----------------------------------------------------------
-/* An index is a database object that helps SQL Server find rows faster without scanning the entire table.
-
-The index is sorted like:
-
-UserID	DeadlineAt
-1	2025-01-01
-1	2025-02-01
-1	2025-03-01
-2	2025-01-10
-2	2025-02-15
-
-So SQL Server can:
-
-Jump directly to UserID = @UserID
-Find matching DeadlineAt values
-Return results
-
-instead of checking every row.*/
----------------------------------------------------------
-
-CREATE NONCLUSTERED INDEX IX_tblBorrow_UserID_DeadlineAt
-ON tblBorrow(UserID, DeadlineAt)
-INCLUDE (RemainingAmount, PersonID, PaymentID, StatusID);
-
-
 CREATE PROCEDURE spGetOverduedBorrow
 (
     @UserID INT
 )
 AS
 BEGIN
-
-    SET NOCOUNT ON;
 
     -------------------------------------------------
     -- User Validation
@@ -122,3 +94,5 @@ END
 
 
 -- indexing kotha theke elo amra to indexing jni ee na so why ? 
+
+-- Removed Indexing

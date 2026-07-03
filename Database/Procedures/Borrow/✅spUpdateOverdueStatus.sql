@@ -1,4 +1,3 @@
-
 CREATE PROCEDURE spUpdateOverdueStatus
 AS
 BEGIN
@@ -16,6 +15,15 @@ BEGIN
     FROM tblLentBorrowStatus
     WHERE StatusName = 'Overdue';
 
+	-------------------------------------------------
+    -- Check OverdueStatusID is NULL
+    -------------------------------------------------
+
+	IF @OverdueStatusID IS NULL
+	BEGIN
+		SELECT 'No Overdue Borrow Found!'
+		RETURN
+	END
     -------------------------------------------------
     -- Update Overdue Records
     -------------------------------------------------
@@ -23,7 +31,7 @@ BEGIN
     UPDATE tblBorrow
     SET StatusID = @OverdueStatusID
     WHERE RemainingAmount > 0
-      AND DeadlineAt < @Today
+      AND CAST(DeadlineAt AS DATE) < @Today
       AND StatusID <> @OverdueStatusID;
 
 END
