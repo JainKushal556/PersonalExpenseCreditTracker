@@ -19,9 +19,9 @@
 | ------ | ----: |
 | Total Allotted Procedures | 86 |
 | Total Procedures Found | 86 |
-| `✔️` (All Okay) | 81 |
+| `✔️` (All Okay) | 83 |
 | `✅` (Pending Review) | 0 |
-| `❌` (Fix Needed) | 5 |
+| `❌` (Fix Needed) | 3 |
 
 ---
 
@@ -128,7 +128,7 @@
 **Assigned Area:** Lent, Borrow, Persons, Status, Reminders
 **Total Allotted Procedures:** 21
 
-### `✔️` ALL OKAY (16)
+### `✔️` ALL OKAY (18)
 - `spGetAllBorrow`
 - `spGetAllLent`
 - `spGetAllPersons`
@@ -136,10 +136,12 @@
 - `spGetCompletedBorrow`
 - `SpGetCompletedLentByStatusName`
 - `spGetLentPersonHistory`
+- `spGetPendingBorrow`
 - `spGetPendingLentByStatusName`
 - `spGetTotalBorrowByPerson`
 - `spGetUpcomingBorrowReminders`
 - `spGetUpcomingLentReminders`
+- `spInsertBorrow`
 - `spInsertLent`
 - `spInsertPerson`
 - `spPayBorrow`
@@ -149,11 +151,9 @@
 ### `✅` PENDING REVIEW (0)
 - None
 
-### `❌` FIX NEEDED (5)
+### `❌` FIX NEEDED (3)
 - `spDeletePerson`
 - `spGetOverduedBorrow`
-- `spGetPendingBorrow`
-- `spInsertBorrow`
 - `spUpdateOverdueStatus`
 
 ### `[MISSING]` (0)
