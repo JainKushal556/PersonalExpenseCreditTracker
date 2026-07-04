@@ -93,6 +93,3 @@ BEGIN
 END
 
 
--- indexing kotha theke elo amra to indexing jni ee na so why ? 
-
--- Removed Indexing

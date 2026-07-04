@@ -1,4 +1,4 @@
-﻿# Final Stored Procedure Requirements
+# Final Stored Procedure Requirements
 
 ## Personal Expense Credit Tracker
 
@@ -2069,29 +2069,6 @@ The first version will include borrow return reminders, lent return reminders, a
 **When Used:**
 
 - Edit person option in settings.
-
-**Tables Used:**
-
-- `tblPersons`
-
-### 78. spDeletePerson
-
-**Purpose:**
-
-- Delete person details.
-
-**Parameters:**
-
-- `@PersonID`
-- `@UserID`
-
-**Expected Output:**
-
-- Person deleted successfully.
-
-**When Used:**
-
-- Delete person option in settings.
 
 **Tables Used:**
 

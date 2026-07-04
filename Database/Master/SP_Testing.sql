@@ -316,7 +316,7 @@ GO
 
 -- ==========================================================
 -- SP: spGetCompletedLentByStatusName
--- From File: ✔️SpGetCompletedLentByStatusName.sql
+-- From File: ✔️SpGetCompletedLentByStatusName.sql
 -- ==========================================================
 EXEC spGetCompletedLentByStatusName
     @UserID = ''
@@ -684,188 +684,159 @@ GO
 
 
 -- ==========================================================
--- ❌ SPs THAT NEED FIXES (MOVED TO END FOR CONVENIENCE)
--- ==========================================================
-
--- ==========================================================
 -- SP: spGetAllBorrow
--- From File: ❌spGetAllBorrow.sql
+-- From File: ✔️spGetAllBorrow.sql
 -- ==========================================================
--- EXEC spGetAllBorrow
---     @UserID = ''
+EXEC spGetAllBorrow
+    @UserID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spGetBorrowPersonHistory
--- From File: ❌spGetBorrowPersonHistory.sql
+-- From File: ✔️spGetBorrowPersonHistory.sql
 -- ==========================================================
--- EXEC spGetBorrowPersonHistory
---     @PersonID = ''
+EXEC spGetBorrowPersonHistory
+    @PersonID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spGetCompletedBorrow
--- From File: ❌spGetCompletedBorrow.sql
+-- From File: ✔️spGetCompletedBorrow.sql
 -- ==========================================================
--- EXEC spGetCompletedBorrow
---     @UserID = ''
+EXEC spGetCompletedBorrow
+    @UserID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spGetOverduedBorrow
--- From File: ❌spGetOverduedBorrow(EXTRA PROCEDURE).sql
+-- From File: ✔️spGetOverduedBorrow.sql
 -- ==========================================================
--- EXEC spGetOverduedBorrow
---     @UserID = ''
+EXEC spGetOverduedBorrow
+    @UserID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spGetPendingBorrow
--- From File: ❌spGetPendingBorrow.sql
+-- From File: ✔️spGetPendingBorrow.sql
 -- ==========================================================
--- EXEC spGetPendingBorrow
---     @UserID = ''
+EXEC spGetPendingBorrow
+    @UserID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spGetTotalBorrowByPerson
--- From File: ❌spGetTotalBorrowByPerson.sql
+-- From File: ✔️spGetTotalBorrowByPerson.sql
 -- ==========================================================
--- EXEC spGetTotalBorrowByPerson
---     @PersonID = ''
+EXEC spGetTotalBorrowByPerson
+    @PersonID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spGetUpcomingBorrowReminders
--- From File: ❌spGetUpcomingBorrowReminders.sql
+-- From File: ✔️spGetUpcomingBorrowReminders.sql
 -- ==========================================================
--- EXEC spGetUpcomingBorrowReminders
---     @UserID = ''
+EXEC spGetUpcomingBorrowReminders
+    @UserID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spInsertBorrow
--- From File: ❌spInsertBorrow.sql
+-- From File: ✔️spInsertBorrow.sql
 -- ==========================================================
--- EXEC spInsertBorrow
---     @UserID = '',
---     @PersonID = '',
---     @PaymentID = '',
---     @StatusID = '',
---     @Amount = '',
---     @DeadlineAt = '',
---     @Description = ''
+EXEC spInsertBorrow
+    @UserID = '',
+    @PersonID = '',
+    @PaymentID = '',
+    @StatusID = '',
+    @Amount = '',
+    @DeadlineAt = '',
+    @Description = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spPayBorrow
--- From File: ❌spPayBorrow.sql
+-- From File: ✔️spPayBorrow.sql
 -- ==========================================================
--- EXEC spPayBorrow
---     @BorrowID = '',
---     @PaidAmount = '',
---     @PaymentID = ''
+EXEC spPayBorrow
+    @BorrowID = '',
+    @PaidAmount = '',
+    @PaymentID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spGetPendingLentByStatusName
--- From File: ❌spGetPendingLentByStatusName.sql
+-- From File: ✔️spGetPendingLentByStatusName.sql
 -- ==========================================================
--- EXEC spGetPendingLentByStatusName
---     @UserID = ''
+EXEC spGetPendingLentByStatusName
+    @UserID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spInsertLent
--- From File: ❌spInsertLent.sql
+-- From File: ✔️spInsertLent.sql
 -- ==========================================================
--- EXEC spInsertLent
---     @UserID = '',
---     @PersonID = '',
---     @PaymentID = '',
---     @StatusID = '',
---     @Amount = '',
---     @ReturnedAmount = '',
---     @RemainingAmount = '',
---     @DeadlineAT = '',
---     @Description = ''
+EXEC spInsertLent
+    @UserID = '',
+    @PersonID = '',
+    @PaymentID = '',
+    @StatusID = '',
+    @Amount = '',
+    @ReturnedAmount = '',
+    @RemainingAmount = '',
+    @DeadlineAT = '',
+    @Description = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spReturnLentByReturnAmount
--- From File: ❌spReturnLentByReturnAmount.sql
+-- From File: ✔️spReturnLentByReturnAmount.sql
 -- ==========================================================
--- EXEC spReturnLentByReturnAmount
---     @LentID = '',
---     @PaymentID = '',
---     @ReturnedAmount = '',
---     @Description = '',
---     @SubCategoryID = '',
---     @CategoryID = ''
+EXEC spReturnLentByReturnAmount
+    @LentID = '',
+    @PaymentID = '',
+    @ReturnedAmount = '',
+    @Description = '',
+    @SubCategoryID = '',
+    @CategoryID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spGetAllPersons
--- From File: ❌PersonIDspGetAllPersons.sql
+-- From File: ✔️spGetAllPersons.sql
 -- ==========================================================
--- EXEC spGetAllPersons
---     @UserID = ''
+EXEC spGetAllPersons
+    @UserID = ''
 
--- GO
-
--- ==========================================================
--- SP: spDeletePerson
--- From File: ❌spDeletePerson.sql
--- ==========================================================
--- EXEC spDeletePerson
---     @UserID = '',
---     @PersonID = ''
-
--- GO
-
+GO
+GO
 -- ==========================================================
 -- SP: spGetUpcomingLentReminders
--- From File: ❌spGetUpcomingLentReminders.sql
+-- From File: ✔️spGetUpcomingLentReminders.sql
 -- ==========================================================
--- EXEC spGetUpcomingLentReminders
---     @UserID = ''
+EXEC spGetUpcomingLentReminders
+    @UserID = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spInsertPerson
--- From File: ❌spInsertPerson.sql
+-- From File: ✔️spInsertPerson.sql
 -- ==========================================================
--- EXEC spInsertPerson
---     @UserID = '',
---     @PersonName = '',
---     @PhoneNumber = '',
---     @Address = ''
+EXEC spInsertPerson
+    @UserID = '',
+    @PersonName = '',
+    @PhoneNumber = '',
+    @Address = ''
 
--- GO
-
+GO
 -- ==========================================================
 -- SP: spUpdatePerson
--- From File: ❌spUpdatePerson.sql
+-- From File: ✔️spUpdatePerson.sql
 -- ==========================================================
--- EXEC spUpdatePerson
---     @UserID = '',
---     @PersonID = '',
---     @PersonName = '',
---     @PhoneNumber = '',
---     @Address = ''
+EXEC spUpdatePerson
+    @UserID = '',
+    @PersonID = '',
+    @PersonName = '',
+    @PhoneNumber = '',
+    @Address = ''
 
--- GO
-
+GO

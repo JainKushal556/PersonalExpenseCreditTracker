@@ -21,7 +21,7 @@ BEGIN
 
 	IF @OverdueStatusID IS NULL
 	BEGIN
-		SELECT 'No Overdue Borrow Found!'
+		SELECT 'Overdue Status Not Found!' AS Message;
 		RETURN
 	END
     -------------------------------------------------
@@ -35,5 +35,4 @@ BEGIN
       AND StatusID <> @OverdueStatusID;
 
 END
-
--- OverdueStatusID null ki na check korbi , DeadlineAt eta DATETIME ache so etake CAST kre check krte hbe 
+ 
