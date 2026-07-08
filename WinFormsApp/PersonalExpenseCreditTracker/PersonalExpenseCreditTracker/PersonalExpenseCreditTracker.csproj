@@ -111,6 +111,7 @@
     <Folder Include="Session\" />
   </ItemGroup>
   <ItemGroup>
+
     <None Include="Resources\spending.png" />
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +151,49 @@
     <None Include="Resources\up-and-down-arrows.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\wallet .png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house-regular %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet-filled-money-tool.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet-filled-money-tool1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\credit-card.png" />
   </ItemGroup>
   <ItemGroup>
+
     <None Include="Resources\market.png" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +207,72 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\calendar %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credit-card-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\handshake.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\payment_3948571.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\payment-lent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\payment-lent1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\payment-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borrowing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borrowing-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\task.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\task -white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cogwheel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cogwheel %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrowhead-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\moon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\night-mode.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
