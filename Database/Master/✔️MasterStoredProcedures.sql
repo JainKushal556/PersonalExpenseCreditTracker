@@ -5099,7 +5099,7 @@ BEGIN
         IF NOT EXISTS
         (
             SELECT 1
-            FROM tblUsers
+            FROM tblUserAuthentication
             WHERE UserID = @UserID
 			AND Active = 1
         )
@@ -5559,6 +5559,7 @@ BEGIN
 				ERROR_MESSAGE() AS ErrorMessage
 		END CATCH
 END
+GO
 
 
 -- eta ektu check korbi mne thik oo ache but problem oo ache null validatiopn nae kichu jaygay total ta dekhbi . partialy paid dekhache na kono khetre setao dekhbi 
