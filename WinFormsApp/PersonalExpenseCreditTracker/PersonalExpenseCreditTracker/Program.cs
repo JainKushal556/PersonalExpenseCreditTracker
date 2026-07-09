@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
-namespace PersonalExpenseCreditTracker.Modules.Lent
+namespace PersonalExpenseCreditTracker
 {
     static class Program
     {
@@ -15,7 +13,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AddLentControls());
+
+            Application.Run(new MainForm());
         }
     }
 }
