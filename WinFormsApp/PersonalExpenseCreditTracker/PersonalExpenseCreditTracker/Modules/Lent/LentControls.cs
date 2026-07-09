@@ -69,7 +69,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 dataAdapter.Fill(dataset);
                 return dataset;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return dataset;
             }

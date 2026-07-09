@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -15,7 +14,6 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
@@ -26,7 +24,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -36,7 +33,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -50,126 +46,85 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-
   <ItemGroup>
-
     <!-- Main Form -->
-
     <Compile Include="Forms\Main\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-
     <Compile Include="Forms\Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-
-
     <!-- Lent Module -->
-
     <Compile Include="Modules\Lent\AddLentControls.cs">
       <SubType>Form</SubType>
     </Compile>
-
     <Compile Include="Modules\Lent\AddLentControls.Designer.cs">
       <DependentUpon>AddLentControls.cs</DependentUpon>
     </Compile>
-
     <Compile Include="Modules\Lent\LentControls.cs">
       <SubType>Form</SubType>
     </Compile>
-
     <Compile Include="Modules\Lent\LentControls.Designer.cs">
       <DependentUpon>LentControls.cs</DependentUpon>
     </Compile>
-
-
     <!-- Expense Module -->
-
     <Compile Include="Modules\Expense\ExpenseControl.cs">
       <SubType>Form</SubType>
     </Compile>
-
     <Compile Include="Modules\Expense\ExpenseControl.Designer.cs">
       <DependentUpon>ExpenseControl.cs</DependentUpon>
     </Compile>
-
     <Compile Include="Modules\Expense\ExpenseDetailsControl.cs">
       <SubType>Form</SubType>
     </Compile>
-
     <Compile Include="Modules\Expense\ExpenseDetailsControl.Designer.cs">
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </Compile>
-
-
     <!-- Program -->
-
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-
-
     <!-- Form Resources -->
-
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-
-
     <!-- Lent Resources -->
-
     <EmbeddedResource Include="Modules\Lent\AddLentControls.resx">
       <DependentUpon>AddLentControls.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Modules\Lent\LentControls.resx">
       <DependentUpon>LentControls.cs</DependentUpon>
     </EmbeddedResource>
-
-
     <!-- Expense Resources -->
-
     <EmbeddedResource Include="Modules\Expense\ExpenseControl.resx">
       <DependentUpon>ExpenseControl.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Modules\Expense\ExpenseDetailsControl.resx">
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
-
-
     <!-- Application Resources -->
-
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-
-
     <!-- Settings -->
-
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-
   </ItemGroup>
-
-
   <!-- Project Folders -->
-
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Forms\Authentication\" />
@@ -177,8 +132,6 @@
     <Folder Include="Modules\Borrow\" />
     <Folder Include="Modules\Credit\" />
     <Folder Include="Modules\Dashboard\" />
-    <Folder Include="Modules\Expense\" />
-    <Folder Include="Modules\Lent\" />
     <Folder Include="Modules\Note\" />
     <Folder Include="Modules\Profile\" />
     <Folder Include="Modules\Settings\Category\" />
@@ -186,10 +139,7 @@
     <Folder Include="Modules\Task\" />
     <Folder Include="Session\" />
   </ItemGroup>
-
-
   <!-- Expense Resources -->
-
   <ItemGroup>
     <None Include="Resources\spending.png" />
     <None Include="Resources\transaction.png" />
@@ -210,10 +160,7 @@
     <None Include="Resources\description.png" />
     <None Include="Resources\calendar %281%29.png" />
   </ItemGroup>
-
-
   <!-- Common Shell Resources -->
-
   <ItemGroup>
     <None Include="Resources\wallet .png" />
     <None Include="Resources\home.png" />
@@ -252,10 +199,7 @@
     <None Include="Resources\moon.png" />
     <None Include="Resources\night-mode.png" />
   </ItemGroup>
-
-
   <!-- Lent Resources -->
-
   <ItemGroup>
     <None Include="Resources\Total Lent.png" />
     <None Include="Resources\man.png" />
@@ -280,10 +224,7 @@
     <None Include="Resources\rupee %281%29.png" />
     <None Include="Resources\menu.png" />
   </ItemGroup>
-
-
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-
   <!--
   To modify your build process, add your task inside one of the targets below.
 
@@ -293,5 +234,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
 </Project>
