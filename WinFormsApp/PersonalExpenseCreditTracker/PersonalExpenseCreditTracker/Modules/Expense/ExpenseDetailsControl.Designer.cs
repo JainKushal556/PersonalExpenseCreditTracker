@@ -51,11 +51,11 @@
             this.pnlAddExpenseDetailsHeader = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlAddExpenseFooter = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
             this.pnlAddExpenseControll = new System.Windows.Forms.Panel();
             this.btnSaveExpense = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlExpenseDetailsContent.SuspendLayout();
             this.tlpAddExpense.SuspendLayout();
             this.pnlAddExpenseCard.SuspendLayout();
@@ -68,8 +68,8 @@
             this.pnlAddExpenseHeader.SuspendLayout();
             this.pnlAddExpenseDetailsHeader.SuspendLayout();
             this.pnlAddExpenseFooter.SuspendLayout();
-            this.pnlAddExpenseControll.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.pnlAddExpenseControll.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlExpenseDetailsContent
@@ -111,7 +111,7 @@
             this.pnlAddExpenseCard.Location = new System.Drawing.Point(3, 73);
             this.pnlAddExpenseCard.Name = "pnlAddExpenseCard";
             this.pnlAddExpenseCard.Padding = new System.Windows.Forms.Padding(40);
-            this.pnlAddExpenseCard.Size = new System.Drawing.Size(829, 351);
+            this.pnlAddExpenseCard.Size = new System.Drawing.Size(829, 341);
             this.pnlAddExpenseCard.TabIndex = 0;
             // 
             // tlpAddExpenseForm
@@ -131,7 +131,7 @@
             this.tlpAddExpenseForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tlpAddExpenseForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpAddExpenseForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tlpAddExpenseForm.Size = new System.Drawing.Size(747, 269);
+            this.tlpAddExpenseForm.Size = new System.Drawing.Size(747, 259);
             this.tlpAddExpenseForm.TabIndex = 0;
             // 
             // pnlAddExpenseCategory
@@ -207,7 +207,7 @@
             this.pnlAddExpenseAmount.Location = new System.Drawing.Point(3, 93);
             this.pnlAddExpenseAmount.Name = "pnlAddExpenseAmount";
             this.pnlAddExpenseAmount.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.pnlAddExpenseAmount.Size = new System.Drawing.Size(367, 93);
+            this.pnlAddExpenseAmount.Size = new System.Drawing.Size(367, 83);
             this.pnlAddExpenseAmount.TabIndex = 2;
             // 
             // txtAddExpenseAmount
@@ -240,7 +240,7 @@
             this.pnlAddExpenseDescription.Name = "pnlAddExpenseDescription";
             this.pnlAddExpenseDescription.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
             this.tlpAddExpenseForm.SetRowSpan(this.pnlAddExpenseDescription, 2);
-            this.pnlAddExpenseDescription.Size = new System.Drawing.Size(368, 173);
+            this.pnlAddExpenseDescription.Size = new System.Drawing.Size(368, 163);
             this.pnlAddExpenseDescription.TabIndex = 3;
             this.pnlAddExpenseDescription.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDescription_Paint);
             // 
@@ -255,7 +255,7 @@
             this.txtAddExpenseDescription.Multiline = true;
             this.txtAddExpenseDescription.Name = "txtAddExpenseDescription";
             this.txtAddExpenseDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtAddExpenseDescription.Size = new System.Drawing.Size(348, 140);
+            this.txtAddExpenseDescription.Size = new System.Drawing.Size(348, 130);
             this.txtAddExpenseDescription.TabIndex = 1;
             this.txtAddExpenseDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             // 
@@ -276,7 +276,7 @@
             this.pnlAddExpensePaymentType.Controls.Add(this.cmbAddExpensePaymentType);
             this.pnlAddExpensePaymentType.Controls.Add(this.lblAddExpensePaymentType);
             this.pnlAddExpensePaymentType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAddExpensePaymentType.Location = new System.Drawing.Point(3, 192);
+            this.pnlAddExpensePaymentType.Location = new System.Drawing.Point(3, 182);
             this.pnlAddExpensePaymentType.Name = "pnlAddExpensePaymentType";
             this.pnlAddExpensePaymentType.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
             this.pnlAddExpensePaymentType.Size = new System.Drawing.Size(367, 74);
@@ -340,32 +340,19 @@
             this.pnlAddExpenseFooter.Controls.Add(this.panel1);
             this.pnlAddExpenseFooter.Controls.Add(this.pnlAddExpenseControll);
             this.pnlAddExpenseFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAddExpenseFooter.Location = new System.Drawing.Point(3, 430);
+            this.pnlAddExpenseFooter.Location = new System.Drawing.Point(3, 420);
             this.pnlAddExpenseFooter.Name = "pnlAddExpenseFooter";
-            this.pnlAddExpenseFooter.Size = new System.Drawing.Size(829, 84);
+            this.pnlAddExpenseFooter.Size = new System.Drawing.Size(829, 94);
             this.pnlAddExpenseFooter.TabIndex = 2;
             // 
-            // pnlAddExpenseControll
+            // panel1
             // 
-            this.pnlAddExpenseControll.Controls.Add(this.btnSaveExpense);
-            this.pnlAddExpenseControll.Controls.Add(this.btnCancel);
-            this.pnlAddExpenseControll.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlAddExpenseControll.Location = new System.Drawing.Point(305, 0);
-            this.pnlAddExpenseControll.Name = "pnlAddExpenseControll";
-            this.pnlAddExpenseControll.Size = new System.Drawing.Size(524, 84);
-            this.pnlAddExpenseControll.TabIndex = 0;
-            // 
-            // btnSaveExpense
-            // 
-            this.btnSaveExpense.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.diskette;
-            this.btnSaveExpense.Location = new System.Drawing.Point(335, 24);
-            this.btnSaveExpense.Name = "btnSaveExpense";
-            this.btnSaveExpense.Size = new System.Drawing.Size(177, 46);
-            this.btnSaveExpense.TabIndex = 2;
-            this.btnSaveExpense.Text = "  Save Expense";
-            this.btnSaveExpense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSaveExpense.UseVisualStyleBackColor = true;
+            this.panel1.Controls.Add(this.btnClear);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 94);
+            this.panel1.TabIndex = 1;
             // 
             // btnClear
             // 
@@ -381,6 +368,28 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // pnlAddExpenseControll
+            // 
+            this.pnlAddExpenseControll.Controls.Add(this.btnSaveExpense);
+            this.pnlAddExpenseControll.Controls.Add(this.btnCancel);
+            this.pnlAddExpenseControll.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlAddExpenseControll.Location = new System.Drawing.Point(305, 0);
+            this.pnlAddExpenseControll.Name = "pnlAddExpenseControll";
+            this.pnlAddExpenseControll.Size = new System.Drawing.Size(524, 94);
+            this.pnlAddExpenseControll.TabIndex = 0;
+            // 
+            // btnSaveExpense
+            // 
+            this.btnSaveExpense.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.diskette;
+            this.btnSaveExpense.Location = new System.Drawing.Point(335, 24);
+            this.btnSaveExpense.Name = "btnSaveExpense";
+            this.btnSaveExpense.Size = new System.Drawing.Size(177, 46);
+            this.btnSaveExpense.TabIndex = 2;
+            this.btnSaveExpense.Text = "  Save Expense";
+            this.btnSaveExpense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSaveExpense.UseVisualStyleBackColor = true;
+            // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -392,15 +401,6 @@
             this.btnCancel.Text = "  Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnClear);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 84);
-            this.panel1.TabIndex = 1;
             // 
             // ExpenseDetailsControl
             // 
@@ -429,9 +429,9 @@
             this.pnlAddExpenseDetailsHeader.ResumeLayout(false);
             this.pnlAddExpenseDetailsHeader.PerformLayout();
             this.pnlAddExpenseFooter.ResumeLayout(false);
-            this.pnlAddExpenseControll.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnlAddExpenseControll.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

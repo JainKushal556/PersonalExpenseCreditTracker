@@ -88,26 +88,26 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblAddExpense = new System.Windows.Forms.Label();
             this.pnlContainer = new System.Windows.Forms.Panel();
-            this.pnlTop = new System.Windows.Forms.Panel();
-            this.pnlRight = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblSubtitle = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.pnlSettingPage = new System.Windows.Forms.Panel();
-            this.pnlNotesPage = new System.Windows.Forms.Panel();
-            this.pnlTaskPage = new System.Windows.Forms.Panel();
-            this.pnlBorrowPage = new System.Windows.Forms.Panel();
-            this.pnlLentPage = new System.Windows.Forms.Panel();
-            this.pnlCreditPage = new System.Windows.Forms.Panel();
             this.pnlOverview = new System.Windows.Forms.Panel();
             this.pnlExpensePage = new System.Windows.Forms.Panel();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.picCalendar = new System.Windows.Forms.PictureBox();
-            this.pnlProfilePage = new System.Windows.Forms.Panel();
+            this.pnlCreditPage = new System.Windows.Forms.Panel();
+            this.pnlLentPage = new System.Windows.Forms.Panel();
+            this.pnlBorrowPage = new System.Windows.Forms.Panel();
+            this.pnlTaskPage = new System.Windows.Forms.Panel();
+            this.pnlNotesPage = new System.Windows.Forms.Panel();
+            this.pnlSettingPage = new System.Windows.Forms.Panel();
+            this.pnlTop = new System.Windows.Forms.Panel();
+            this.lblSubtitle = new System.Windows.Forms.Label();
+            this.pnlRight = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pnlDate = new System.Windows.Forms.Panel();
+            this.picCalendar = new System.Windows.Forms.PictureBox();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
             this.pnlSideBar.SuspendLayout();
             this.pnlUserProfile.SuspendLayout();
@@ -148,10 +148,10 @@
             this.pnlContainer.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.pnlRight.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).BeginInit();
             this.panel5.SuspendLayout();
             this.pnlDate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlSideBar
@@ -902,20 +902,91 @@
             // 
             // pnlContainer
             // 
-            this.pnlContainer.Controls.Add(this.pnlTop);
-            this.pnlContainer.Controls.Add(this.pnlSettingPage);
-            this.pnlContainer.Controls.Add(this.pnlNotesPage);
-            this.pnlContainer.Controls.Add(this.pnlTaskPage);
-            this.pnlContainer.Controls.Add(this.pnlBorrowPage);
-            this.pnlContainer.Controls.Add(this.pnlLentPage);
-            this.pnlContainer.Controls.Add(this.pnlCreditPage);
             this.pnlContainer.Controls.Add(this.pnlOverview);
             this.pnlContainer.Controls.Add(this.pnlExpensePage);
+            this.pnlContainer.Controls.Add(this.pnlCreditPage);
+            this.pnlContainer.Controls.Add(this.pnlLentPage);
+            this.pnlContainer.Controls.Add(this.pnlBorrowPage);
+            this.pnlContainer.Controls.Add(this.pnlTaskPage);
+            this.pnlContainer.Controls.Add(this.pnlNotesPage);
+            this.pnlContainer.Controls.Add(this.pnlSettingPage);
+            this.pnlContainer.Controls.Add(this.pnlTop);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer.Location = new System.Drawing.Point(400, 0);
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(876, 1055);
             this.pnlContainer.TabIndex = 1;
+            // 
+            // pnlOverview
+            // 
+            this.pnlOverview.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.pnlOverview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlOverview.Location = new System.Drawing.Point(0, 78);
+            this.pnlOverview.Name = "pnlOverview";
+            this.pnlOverview.Size = new System.Drawing.Size(876, 977);
+            this.pnlOverview.TabIndex = 0;
+            this.pnlOverview.Visible = false;
+            // 
+            // pnlExpensePage
+            // 
+            this.pnlExpensePage.BackColor = System.Drawing.Color.DimGray;
+            this.pnlExpensePage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlExpensePage.Location = new System.Drawing.Point(0, 78);
+            this.pnlExpensePage.Name = "pnlExpensePage";
+            this.pnlExpensePage.Size = new System.Drawing.Size(876, 977);
+            this.pnlExpensePage.TabIndex = 1;
+            // 
+            // pnlCreditPage
+            // 
+            this.pnlCreditPage.BackColor = System.Drawing.Color.LightGreen;
+            this.pnlCreditPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCreditPage.Location = new System.Drawing.Point(0, 78);
+            this.pnlCreditPage.Name = "pnlCreditPage";
+            this.pnlCreditPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlCreditPage.TabIndex = 0;
+            // 
+            // pnlLentPage
+            // 
+            this.pnlLentPage.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlLentPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLentPage.Location = new System.Drawing.Point(0, 78);
+            this.pnlLentPage.Name = "pnlLentPage";
+            this.pnlLentPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlLentPage.TabIndex = 0;
+            // 
+            // pnlBorrowPage
+            // 
+            this.pnlBorrowPage.BackColor = System.Drawing.SystemColors.Highlight;
+            this.pnlBorrowPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBorrowPage.Location = new System.Drawing.Point(0, 78);
+            this.pnlBorrowPage.Name = "pnlBorrowPage";
+            this.pnlBorrowPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlBorrowPage.TabIndex = 0;
+            // 
+            // pnlTaskPage
+            // 
+            this.pnlTaskPage.BackColor = System.Drawing.Color.Coral;
+            this.pnlTaskPage.Location = new System.Drawing.Point(0, 375);
+            this.pnlTaskPage.Name = "pnlTaskPage";
+            this.pnlTaskPage.Size = new System.Drawing.Size(876, 680);
+            this.pnlTaskPage.TabIndex = 0;
+            // 
+            // pnlNotesPage
+            // 
+            this.pnlNotesPage.BackColor = System.Drawing.Color.SeaGreen;
+            this.pnlNotesPage.Location = new System.Drawing.Point(0, 399);
+            this.pnlNotesPage.Name = "pnlNotesPage";
+            this.pnlNotesPage.Size = new System.Drawing.Size(876, 656);
+            this.pnlNotesPage.TabIndex = 0;
+            // 
+            // pnlSettingPage
+            // 
+            this.pnlSettingPage.AutoSize = true;
+            this.pnlSettingPage.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.pnlSettingPage.Location = new System.Drawing.Point(0, 432);
+            this.pnlSettingPage.Name = "pnlSettingPage";
+            this.pnlSettingPage.Size = new System.Drawing.Size(876, 623);
+            this.pnlSettingPage.TabIndex = 0;
             // 
             // pnlTop
             // 
@@ -931,26 +1002,6 @@
             this.pnlTop.Size = new System.Drawing.Size(876, 78);
             this.pnlTop.TabIndex = 2;
             // 
-            // pnlRight
-            // 
-            this.pnlRight.Controls.Add(this.panel5);
-            this.pnlRight.Controls.Add(this.pnlDate);
-            this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(511, 15);
-            this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(345, 48);
-            this.pnlRight.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.lblTitle);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(20, 15);
-            this.panel3.Margin = new System.Windows.Forms.Padding(0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(382, 48);
-            this.panel3.TabIndex = 0;
-            // 
             // lblSubtitle
             // 
             this.lblSubtitle.AutoSize = true;
@@ -963,129 +1014,15 @@
             this.lblSubtitle.TabIndex = 1;
             this.lblSubtitle.Text = "   Welcome back! Here\'s your financial overview.";
             // 
-            // lblTitle
+            // pnlRight
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.lblTitle.Location = new System.Drawing.Point(0, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(167, 38);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = " Dashboard";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // pnlSettingPage
-            // 
-            this.pnlSettingPage.AutoSize = true;
-            this.pnlSettingPage.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.pnlSettingPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSettingPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlSettingPage.Name = "pnlSettingPage";
-            this.pnlSettingPage.Size = new System.Drawing.Size(876, 1055);
-            this.pnlSettingPage.TabIndex = 0;
-            // 
-            // pnlNotesPage
-            // 
-            this.pnlNotesPage.BackColor = System.Drawing.Color.SeaGreen;
-            this.pnlNotesPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlNotesPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlNotesPage.Name = "pnlNotesPage";
-            this.pnlNotesPage.Size = new System.Drawing.Size(876, 1055);
-            this.pnlNotesPage.TabIndex = 0;
-            // 
-            // pnlTaskPage
-            // 
-            this.pnlTaskPage.BackColor = System.Drawing.Color.Coral;
-            this.pnlTaskPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlTaskPage.Name = "pnlTaskPage";
-            this.pnlTaskPage.Size = new System.Drawing.Size(876, 1055);
-            this.pnlTaskPage.TabIndex = 0;
-            // 
-            // pnlBorrowPage
-            // 
-            this.pnlBorrowPage.BackColor = System.Drawing.SystemColors.Highlight;
-            this.pnlBorrowPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBorrowPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlBorrowPage.Name = "pnlBorrowPage";
-            this.pnlBorrowPage.Size = new System.Drawing.Size(876, 1055);
-            this.pnlBorrowPage.TabIndex = 0;
-            // 
-            // pnlLentPage
-            // 
-            this.pnlLentPage.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlLentPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLentPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlLentPage.Name = "pnlLentPage";
-            this.pnlLentPage.Size = new System.Drawing.Size(876, 1055);
-            this.pnlLentPage.TabIndex = 0;
-            // 
-            // pnlCreditPage
-            // 
-            this.pnlCreditPage.BackColor = System.Drawing.Color.LightGreen;
-            this.pnlCreditPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCreditPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlCreditPage.Name = "pnlCreditPage";
-            this.pnlCreditPage.Size = new System.Drawing.Size(876, 1055);
-            this.pnlCreditPage.TabIndex = 0;
-            // 
-            // pnlOverview
-            // 
-            this.pnlOverview.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.pnlOverview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlOverview.Location = new System.Drawing.Point(0, 0);
-            this.pnlOverview.Name = "pnlOverview";
-            this.pnlOverview.Size = new System.Drawing.Size(876, 1055);
-            this.pnlOverview.TabIndex = 0;
-            this.pnlOverview.Visible = false;
-            // 
-            // pnlExpensePage
-            // 
-            this.pnlExpensePage.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pnlExpensePage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlExpensePage.Location = new System.Drawing.Point(0, 0);
-            this.pnlExpensePage.Name = "pnlExpensePage";
-            this.pnlExpensePage.Size = new System.Drawing.Size(876, 1055);
-            this.pnlExpensePage.TabIndex = 1;
-            // 
-            // lblDate
-            // 
-            this.lblDate.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
-            this.lblDate.Location = new System.Drawing.Point(43, 0);
-            this.lblDate.Margin = new System.Windows.Forms.Padding(0);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.lblDate.Size = new System.Drawing.Size(205, 46);
-            this.lblDate.TabIndex = 1;
-            this.lblDate.Text = "May 1, 2023 – May 31, 2024";
-            this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // picCalendar
-            // 
-            this.picCalendar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
-            this.picCalendar.Location = new System.Drawing.Point(0, 0);
-            this.picCalendar.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.picCalendar.Name = "picCalendar";
-            this.picCalendar.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-            this.picCalendar.Size = new System.Drawing.Size(38, 46);
-            this.picCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picCalendar.TabIndex = 0;
-            this.picCalendar.TabStop = false;
-            // 
-            // pnlProfilePage
-            // 
-            this.pnlProfilePage.BackColor = System.Drawing.Color.Pink;
-            this.pnlProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProfilePage.Location = new System.Drawing.Point(400, 0);
-            this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(0, 20, 10, 20);
-            this.pnlProfilePage.Name = "pnlProfilePage";
-            this.pnlProfilePage.Size = new System.Drawing.Size(876, 1055);
-            this.pnlProfilePage.TabIndex = 0;
+            this.pnlRight.Controls.Add(this.panel5);
+            this.pnlRight.Controls.Add(this.pnlDate);
+            this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlRight.Location = new System.Drawing.Point(511, 15);
+            this.pnlRight.Name = "pnlRight";
+            this.pnlRight.Size = new System.Drawing.Size(345, 48);
+            this.pnlRight.TabIndex = 1;
             // 
             // panel5
             // 
@@ -1132,6 +1069,66 @@
             this.pnlDate.Name = "pnlDate";
             this.pnlDate.Size = new System.Drawing.Size(250, 48);
             this.pnlDate.TabIndex = 0;
+            // 
+            // picCalendar
+            // 
+            this.picCalendar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
+            this.picCalendar.Location = new System.Drawing.Point(0, 0);
+            this.picCalendar.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.picCalendar.Name = "picCalendar";
+            this.picCalendar.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
+            this.picCalendar.Size = new System.Drawing.Size(38, 46);
+            this.picCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picCalendar.TabIndex = 0;
+            this.picCalendar.TabStop = false;
+            // 
+            // lblDate
+            // 
+            this.lblDate.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+            this.lblDate.Location = new System.Drawing.Point(43, 0);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(0);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.lblDate.Size = new System.Drawing.Size(205, 46);
+            this.lblDate.TabIndex = 1;
+            this.lblDate.Text = "May 1, 2023 – May 31, 2024";
+            this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblTitle);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(20, 15);
+            this.panel3.Margin = new System.Windows.Forms.Padding(0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(382, 48);
+            this.panel3.TabIndex = 0;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.lblTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(167, 38);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = " Dashboard";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // pnlProfilePage
+            // 
+            this.pnlProfilePage.BackColor = System.Drawing.Color.Pink;
+            this.pnlProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProfilePage.Location = new System.Drawing.Point(400, 0);
+            this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(0, 20, 10, 20);
+            this.pnlProfilePage.Name = "pnlProfilePage";
+            this.pnlProfilePage.Size = new System.Drawing.Size(876, 1055);
+            this.pnlProfilePage.TabIndex = 0;
             // 
             // tmSidebar
             // 
@@ -1207,11 +1204,11 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlRight.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).EndInit();
             this.panel5.ResumeLayout(false);
             this.pnlDate.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
