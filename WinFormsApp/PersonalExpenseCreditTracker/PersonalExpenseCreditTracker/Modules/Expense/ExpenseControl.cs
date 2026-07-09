@@ -16,7 +16,16 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             InitializeComponent();
             StyleExpenseGrid();
-            dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
+            //dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
+
+            typeof(DataGridView).InvokeMember(
+                 "DoubleBuffered",
+                 System.Reflection.BindingFlags.NonPublic |
+                 System.Reflection.BindingFlags.Instance |
+                 System.Reflection.BindingFlags.SetProperty,
+                 null,
+                 dgvExpenseDataTable,
+                 new object[] { true });
             
         }
 
