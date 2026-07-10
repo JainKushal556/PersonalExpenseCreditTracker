@@ -8,15 +8,83 @@ using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
-
+using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public partial class LentControls : Form
     {
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse);
+
+
         public LentControls()
         {
             InitializeComponent();
+
+            dataGridViewAllLent.AutoGenerateColumns = false;
+
+            ApplyRoundCorners();
+
+            this.Resize += LentControls_Resize;
+        }
+        private void LentControls_Resize(object sender, EventArgs e)
+        {
+            ApplyRoundCorners();
+        }
+        private void ApplyRoundCorners()
+        {
+            panelTotalLent.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelTotalLent.Width,
+                    panelTotalLent.Height,
+                    10,
+                    10));
+
+            panelTotalRepaid.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelTotalRepaid.Width,
+                    panelTotalRepaid.Height,
+                    10,
+                    10));
+
+            panelTotalDue.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelTotalDue.Width,
+                    panelTotalDue.Height,
+                    10,
+                    10));
+
+            panelTotalTransaction.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelTotalTransaction.Width,
+                    panelTotalTransaction.Height,
+                    10,
+                    10));
+
+            panelExportReport.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelExportReport.Width,
+                    panelExportReport.Height,
+                    10,
+                    10));
         }
 
         private void btnExportReport_Click(object sender, EventArgs e)
@@ -36,6 +104,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void LentControls_Load(object sender, EventArgs e)
         {
+            ApplyRoundCorners();
+           
             DataSet dataset = GetDataSet();
             if (dataset != null)
             {
@@ -50,7 +120,15 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
 
             AddActionImages();
-            dataGridViewAllLent.Columns["colAction"].DisplayIndex = 10;
+            //dataGridViewAllLent.Columns["colAction"].DisplayIndex = 9;
+
+            dataGridViewAllLent.Columns["colAction"].DisplayIndex =
+    dataGridViewAllLent.Columns.Count - 1;
+
+            //foreach (DataGridViewColumn col in dataGridViewAllLent.Columns)
+            //{
+            //    MessageBox.Show(col.Name + " = " + col.DisplayIndex);
+            //}
         }
 
 
@@ -88,6 +166,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     row.Cells["colAction"].Value = Properties.Resources.menu;
                 }
             }
+
+            dataGridViewAllLent.Invalidate();
         }
 
         private void dataGridViewAllLent_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)

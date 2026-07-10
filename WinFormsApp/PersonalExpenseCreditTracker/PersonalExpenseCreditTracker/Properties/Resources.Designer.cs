@@ -153,6 +153,26 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap colourcard {
+            get {
+                object obj = ResourceManager.GetObject("colourcard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap credit_card {
+            get {
+                object obj = ResourceManager.GetObject("credit_card", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap credit_card_white {
             get {
                 object obj = ResourceManager.GetObject("credit-card-white", resourceCulture);
@@ -163,9 +183,9 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap credit_card {
+        internal static System.Drawing.Bitmap creditcard {
             get {
-                object obj = ResourceManager.GetObject("credit-card", resourceCulture);
+                object obj = ResourceManager.GetObject("creditcard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

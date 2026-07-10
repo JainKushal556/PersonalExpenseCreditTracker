@@ -32,60 +32,43 @@
             this.pnlSideBar = new System.Windows.Forms.Panel();
             this.pnlUserProfile = new System.Windows.Forms.Panel();
             this.lblEmail = new System.Windows.Forms.Label();
-            this.picUserProfile = new System.Windows.Forms.PictureBox();
             this.lblUserName = new System.Windows.Forms.Label();
             this.flowSidebar = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblDashboard = new System.Windows.Forms.Label();
-            this.picDashboard = new System.Windows.Forms.PictureBox();
             this.pnlExpense = new System.Windows.Forms.Panel();
-            this.picExpenseArrow = new System.Windows.Forms.PictureBox();
             this.lblExpense = new System.Windows.Forms.Label();
-            this.picExpense = new System.Windows.Forms.PictureBox();
             this.pnlExpenseDropDown = new System.Windows.Forms.Panel();
             this.lblAddEx = new System.Windows.Forms.Label();
             this.pnlCredit = new System.Windows.Forms.Panel();
-            this.picCreditArrow = new System.Windows.Forms.PictureBox();
             this.lblCredit = new System.Windows.Forms.Label();
-            this.picCredit = new System.Windows.Forms.PictureBox();
             this.pnlCreditDropDown = new System.Windows.Forms.Panel();
             this.lblAddCredit = new System.Windows.Forms.Label();
             this.pnlLent = new System.Windows.Forms.Panel();
-            this.picLentArrow = new System.Windows.Forms.PictureBox();
             this.lblLent = new System.Windows.Forms.Label();
-            this.picLent = new System.Windows.Forms.PictureBox();
             this.pnlLentDropDown = new System.Windows.Forms.Panel();
             this.lblAddLent = new System.Windows.Forms.Label();
             this.pnlBorrow = new System.Windows.Forms.Panel();
-            this.picBorrowArrow = new System.Windows.Forms.PictureBox();
             this.lblBorrow = new System.Windows.Forms.Label();
-            this.picBorrow = new System.Windows.Forms.PictureBox();
             this.pnlBorrowDropDown = new System.Windows.Forms.Panel();
             this.lblAddBorrow = new System.Windows.Forms.Label();
             this.pnlTasks = new System.Windows.Forms.Panel();
-            this.picTasksArrow = new System.Windows.Forms.PictureBox();
             this.lblTasks = new System.Windows.Forms.Label();
-            this.picTasks = new System.Windows.Forms.PictureBox();
             this.pnlTaskDropDown = new System.Windows.Forms.Panel();
             this.lblAddTask = new System.Windows.Forms.Label();
             this.pnlNotes = new System.Windows.Forms.Panel();
-            this.picNotesArrow = new System.Windows.Forms.PictureBox();
             this.lblNotes = new System.Windows.Forms.Label();
-            this.picNotes = new System.Windows.Forms.PictureBox();
             this.pnlNotesDropDown = new System.Windows.Forms.Panel();
             this.lblAddNotes = new System.Windows.Forms.Label();
             this.pnlSettings = new System.Windows.Forms.Panel();
-            this.picSettingsArrow = new System.Windows.Forms.PictureBox();
             this.lblSettings = new System.Windows.Forms.Label();
-            this.picSettings = new System.Windows.Forms.PictureBox();
             this.pnlSettingsDropDown = new System.Windows.Forms.Panel();
             this.lblSetting = new System.Windows.Forms.Label();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblManager = new System.Windows.Forms.Label();
             this.lblPersonalExpense = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblAddExpense = new System.Windows.Forms.Label();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.pnlOverview = new System.Windows.Forms.Panel();
@@ -100,58 +83,75 @@
             this.lblSubtitle = new System.Windows.Forms.Label();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.pnlDate = new System.Windows.Forms.Panel();
-            this.picCalendar = new System.Windows.Forms.PictureBox();
             this.lblDate = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.picCalendar = new System.Windows.Forms.PictureBox();
+            this.picUserProfile = new System.Windows.Forms.PictureBox();
+            this.picDashboard = new System.Windows.Forms.PictureBox();
+            this.picExpenseArrow = new System.Windows.Forms.PictureBox();
+            this.picExpense = new System.Windows.Forms.PictureBox();
+            this.picCreditArrow = new System.Windows.Forms.PictureBox();
+            this.picCredit = new System.Windows.Forms.PictureBox();
+            this.picLentArrow = new System.Windows.Forms.PictureBox();
+            this.picLent = new System.Windows.Forms.PictureBox();
+            this.picBorrowArrow = new System.Windows.Forms.PictureBox();
+            this.picBorrow = new System.Windows.Forms.PictureBox();
+            this.picTasksArrow = new System.Windows.Forms.PictureBox();
+            this.picTasks = new System.Windows.Forms.PictureBox();
+            this.picNotesArrow = new System.Windows.Forms.PictureBox();
+            this.picNotes = new System.Windows.Forms.PictureBox();
+            this.picSettingsArrow = new System.Windows.Forms.PictureBox();
+            this.picSettings = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlSideBar.SuspendLayout();
             this.pnlUserProfile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picUserProfile)).BeginInit();
             this.flowSidebar.SuspendLayout();
             this.pnlDashboard.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picDashboard)).BeginInit();
             this.pnlExpense.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picExpenseArrow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picExpense)).BeginInit();
             this.pnlExpenseDropDown.SuspendLayout();
             this.pnlCredit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCreditArrow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCredit)).BeginInit();
             this.pnlCreditDropDown.SuspendLayout();
             this.pnlLent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLentArrow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLent)).BeginInit();
             this.pnlLentDropDown.SuspendLayout();
             this.pnlBorrow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBorrowArrow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBorrow)).BeginInit();
             this.pnlBorrowDropDown.SuspendLayout();
             this.pnlTasks.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picTasksArrow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTasks)).BeginInit();
             this.pnlTaskDropDown.SuspendLayout();
             this.pnlNotes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picNotesArrow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picNotes)).BeginInit();
             this.pnlNotesDropDown.SuspendLayout();
             this.pnlSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSettingsArrow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSettings)).BeginInit();
             this.pnlSettingsDropDown.SuspendLayout();
             this.panelLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlContainer.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.pnlRight.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlDate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picUserProfile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDashboard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExpenseArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExpense)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCreditArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCredit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLentArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBorrowArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBorrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTasksArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTasks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picNotesArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picNotes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSettingsArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSettings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSideBar
@@ -196,20 +196,6 @@
             this.lblEmail.Click += new System.EventHandler(this.pnlUserProfile_Click);
             this.lblEmail.MouseEnter += new System.EventHandler(this.pnlUserProfile_MouseEnter);
             this.lblEmail.MouseLeave += new System.EventHandler(this.pnlUserProfile_MouseLeave);
-            // 
-            // picUserProfile
-            // 
-            this.picUserProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user;
-            this.picUserProfile.Location = new System.Drawing.Point(29, 19);
-            this.picUserProfile.Margin = new System.Windows.Forms.Padding(30, 16, 10, 10);
-            this.picUserProfile.Name = "picUserProfile";
-            this.picUserProfile.Size = new System.Drawing.Size(35, 36);
-            this.picUserProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picUserProfile.TabIndex = 0;
-            this.picUserProfile.TabStop = false;
-            this.picUserProfile.Click += new System.EventHandler(this.pnlUserProfile_Click);
-            this.picUserProfile.MouseEnter += new System.EventHandler(this.pnlUserProfile_MouseEnter);
-            this.picUserProfile.MouseLeave += new System.EventHandler(this.pnlUserProfile_MouseLeave);
             // 
             // lblUserName
             // 
@@ -289,19 +275,6 @@
             this.lblDashboard.MouseEnter += new System.EventHandler(this.pnlDashboard_MouseEnter);
             this.lblDashboard.MouseLeave += new System.EventHandler(this.pnlDashboard_MouseLeave);
             // 
-            // picDashboard
-            // 
-            this.picDashboard.Image = global::PersonalExpenseCreditTracker.Properties.Resources.home7;
-            this.picDashboard.Location = new System.Drawing.Point(29, 19);
-            this.picDashboard.Name = "picDashboard";
-            this.picDashboard.Size = new System.Drawing.Size(28, 28);
-            this.picDashboard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picDashboard.TabIndex = 0;
-            this.picDashboard.TabStop = false;
-            this.picDashboard.Click += new System.EventHandler(this.pnlDashboard_Click);
-            this.picDashboard.MouseEnter += new System.EventHandler(this.pnlDashboard_MouseEnter);
-            this.picDashboard.MouseLeave += new System.EventHandler(this.pnlDashboard_MouseLeave);
-            // 
             // pnlExpense
             // 
             this.pnlExpense.Controls.Add(this.picExpenseArrow);
@@ -315,19 +288,6 @@
             this.pnlExpense.Click += new System.EventHandler(this.pnlExpense_Click);
             this.pnlExpense.MouseEnter += new System.EventHandler(this.pnlExpense_MouseEnter);
             this.pnlExpense.MouseLeave += new System.EventHandler(this.pnlExpense_MouseLeave);
-            // 
-            // picExpenseArrow
-            // 
-            this.picExpenseArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
-            this.picExpenseArrow.Location = new System.Drawing.Point(300, 23);
-            this.picExpenseArrow.Name = "picExpenseArrow";
-            this.picExpenseArrow.Size = new System.Drawing.Size(18, 18);
-            this.picExpenseArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picExpenseArrow.TabIndex = 2;
-            this.picExpenseArrow.TabStop = false;
-            this.picExpenseArrow.Click += new System.EventHandler(this.pnlExpense_Click);
-            this.picExpenseArrow.MouseEnter += new System.EventHandler(this.pnlExpense_MouseEnter);
-            this.picExpenseArrow.MouseLeave += new System.EventHandler(this.pnlExpense_MouseLeave);
             // 
             // lblExpense
             // 
@@ -343,18 +303,6 @@
             this.lblExpense.Click += new System.EventHandler(this.pnlExpense_Click);
             this.lblExpense.MouseEnter += new System.EventHandler(this.pnlExpense_MouseEnter);
             this.lblExpense.MouseLeave += new System.EventHandler(this.pnlExpense_MouseLeave);
-            // 
-            // picExpense
-            // 
-            this.picExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.wallet_filled_money_tool1;
-            this.picExpense.Location = new System.Drawing.Point(29, 19);
-            this.picExpense.Name = "picExpense";
-            this.picExpense.Size = new System.Drawing.Size(28, 28);
-            this.picExpense.TabIndex = 0;
-            this.picExpense.TabStop = false;
-            this.picExpense.Click += new System.EventHandler(this.pnlExpense_Click);
-            this.picExpense.MouseEnter += new System.EventHandler(this.pnlExpense_MouseEnter);
-            this.picExpense.MouseLeave += new System.EventHandler(this.pnlExpense_MouseLeave);
             // 
             // pnlExpenseDropDown
             // 
@@ -393,19 +341,6 @@
             this.pnlCredit.MouseEnter += new System.EventHandler(this.pnlCredit_MouseEnter);
             this.pnlCredit.MouseLeave += new System.EventHandler(this.pnlCredit_MouseLeave);
             // 
-            // picCreditArrow
-            // 
-            this.picCreditArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
-            this.picCreditArrow.Location = new System.Drawing.Point(300, 23);
-            this.picCreditArrow.Name = "picCreditArrow";
-            this.picCreditArrow.Size = new System.Drawing.Size(18, 18);
-            this.picCreditArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picCreditArrow.TabIndex = 2;
-            this.picCreditArrow.TabStop = false;
-            this.picCreditArrow.Click += new System.EventHandler(this.pnlCredit_Click);
-            this.picCreditArrow.MouseEnter += new System.EventHandler(this.pnlCredit_MouseEnter);
-            this.picCreditArrow.MouseLeave += new System.EventHandler(this.pnlCredit_MouseLeave);
-            // 
             // lblCredit
             // 
             this.lblCredit.AutoSize = true;
@@ -419,19 +354,6 @@
             this.lblCredit.Click += new System.EventHandler(this.pnlCredit_Click);
             this.lblCredit.MouseEnter += new System.EventHandler(this.pnlCredit_MouseEnter);
             this.lblCredit.MouseLeave += new System.EventHandler(this.pnlCredit_MouseLeave);
-            // 
-            // picCredit
-            // 
-            this.picCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.credit_card;
-            this.picCredit.Location = new System.Drawing.Point(29, 19);
-            this.picCredit.Name = "picCredit";
-            this.picCredit.Size = new System.Drawing.Size(28, 28);
-            this.picCredit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picCredit.TabIndex = 0;
-            this.picCredit.TabStop = false;
-            this.picCredit.Click += new System.EventHandler(this.pnlCredit_Click);
-            this.picCredit.MouseEnter += new System.EventHandler(this.pnlCredit_MouseEnter);
-            this.picCredit.MouseLeave += new System.EventHandler(this.pnlCredit_MouseLeave);
             // 
             // pnlCreditDropDown
             // 
@@ -471,19 +393,6 @@
             this.pnlLent.MouseEnter += new System.EventHandler(this.pnlLent_MouseEnter);
             this.pnlLent.MouseLeave += new System.EventHandler(this.pnlLent_MouseLeave);
             // 
-            // picLentArrow
-            // 
-            this.picLentArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
-            this.picLentArrow.Location = new System.Drawing.Point(300, 23);
-            this.picLentArrow.Name = "picLentArrow";
-            this.picLentArrow.Size = new System.Drawing.Size(18, 18);
-            this.picLentArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLentArrow.TabIndex = 2;
-            this.picLentArrow.TabStop = false;
-            this.picLentArrow.Click += new System.EventHandler(this.pnlLent_Click);
-            this.picLentArrow.MouseEnter += new System.EventHandler(this.pnlLent_MouseEnter);
-            this.picLentArrow.MouseLeave += new System.EventHandler(this.pnlLent_MouseLeave);
-            // 
             // lblLent
             // 
             this.lblLent.AutoSize = true;
@@ -497,19 +406,6 @@
             this.lblLent.Click += new System.EventHandler(this.pnlLent_Click);
             this.lblLent.MouseEnter += new System.EventHandler(this.pnlLent_MouseEnter);
             this.lblLent.MouseLeave += new System.EventHandler(this.pnlLent_MouseLeave);
-            // 
-            // picLent
-            // 
-            this.picLent.Image = global::PersonalExpenseCreditTracker.Properties.Resources.payment_lent1;
-            this.picLent.Location = new System.Drawing.Point(29, 19);
-            this.picLent.Name = "picLent";
-            this.picLent.Size = new System.Drawing.Size(28, 28);
-            this.picLent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLent.TabIndex = 0;
-            this.picLent.TabStop = false;
-            this.picLent.Click += new System.EventHandler(this.pnlLent_Click);
-            this.picLent.MouseEnter += new System.EventHandler(this.pnlLent_MouseEnter);
-            this.picLent.MouseLeave += new System.EventHandler(this.pnlLent_MouseLeave);
             // 
             // pnlLentDropDown
             // 
@@ -548,19 +444,6 @@
             this.pnlBorrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
             this.pnlBorrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
             // 
-            // picBorrowArrow
-            // 
-            this.picBorrowArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
-            this.picBorrowArrow.Location = new System.Drawing.Point(300, 23);
-            this.picBorrowArrow.Name = "picBorrowArrow";
-            this.picBorrowArrow.Size = new System.Drawing.Size(18, 18);
-            this.picBorrowArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBorrowArrow.TabIndex = 2;
-            this.picBorrowArrow.TabStop = false;
-            this.picBorrowArrow.Click += new System.EventHandler(this.pnlBorrow_Click);
-            this.picBorrowArrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
-            this.picBorrowArrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
-            // 
             // lblBorrow
             // 
             this.lblBorrow.AutoSize = true;
@@ -574,18 +457,6 @@
             this.lblBorrow.Click += new System.EventHandler(this.pnlBorrow_Click);
             this.lblBorrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
             this.lblBorrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
-            // 
-            // picBorrow
-            // 
-            this.picBorrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.borrowing;
-            this.picBorrow.Location = new System.Drawing.Point(29, 19);
-            this.picBorrow.Name = "picBorrow";
-            this.picBorrow.Size = new System.Drawing.Size(28, 28);
-            this.picBorrow.TabIndex = 0;
-            this.picBorrow.TabStop = false;
-            this.picBorrow.Click += new System.EventHandler(this.pnlBorrow_Click);
-            this.picBorrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
-            this.picBorrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
             // 
             // pnlBorrowDropDown
             // 
@@ -624,19 +495,6 @@
             this.pnlTasks.MouseEnter += new System.EventHandler(this.pnlTasks_MouseEnter);
             this.pnlTasks.MouseLeave += new System.EventHandler(this.pnlTasks_MouseLeave);
             // 
-            // picTasksArrow
-            // 
-            this.picTasksArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
-            this.picTasksArrow.Location = new System.Drawing.Point(300, 23);
-            this.picTasksArrow.Name = "picTasksArrow";
-            this.picTasksArrow.Size = new System.Drawing.Size(18, 18);
-            this.picTasksArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picTasksArrow.TabIndex = 2;
-            this.picTasksArrow.TabStop = false;
-            this.picTasksArrow.Click += new System.EventHandler(this.pnlTasks_Click);
-            this.picTasksArrow.MouseEnter += new System.EventHandler(this.pnlTasks_MouseEnter);
-            this.picTasksArrow.MouseLeave += new System.EventHandler(this.pnlTasks_MouseLeave);
-            // 
             // lblTasks
             // 
             this.lblTasks.AutoSize = true;
@@ -650,19 +508,6 @@
             this.lblTasks.Click += new System.EventHandler(this.pnlTasks_Click);
             this.lblTasks.MouseEnter += new System.EventHandler(this.pnlTasks_MouseEnter);
             this.lblTasks.MouseLeave += new System.EventHandler(this.pnlTasks_MouseLeave);
-            // 
-            // picTasks
-            // 
-            this.picTasks.Image = global::PersonalExpenseCreditTracker.Properties.Resources.task;
-            this.picTasks.Location = new System.Drawing.Point(29, 19);
-            this.picTasks.Name = "picTasks";
-            this.picTasks.Size = new System.Drawing.Size(28, 28);
-            this.picTasks.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picTasks.TabIndex = 0;
-            this.picTasks.TabStop = false;
-            this.picTasks.Click += new System.EventHandler(this.pnlTasks_Click);
-            this.picTasks.MouseEnter += new System.EventHandler(this.pnlTasks_MouseEnter);
-            this.picTasks.MouseLeave += new System.EventHandler(this.pnlTasks_MouseLeave);
             // 
             // pnlTaskDropDown
             // 
@@ -700,19 +545,6 @@
             this.pnlNotes.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
             this.pnlNotes.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
             // 
-            // picNotesArrow
-            // 
-            this.picNotesArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
-            this.picNotesArrow.Location = new System.Drawing.Point(300, 23);
-            this.picNotesArrow.Name = "picNotesArrow";
-            this.picNotesArrow.Size = new System.Drawing.Size(18, 18);
-            this.picNotesArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picNotesArrow.TabIndex = 2;
-            this.picNotesArrow.TabStop = false;
-            this.picNotesArrow.Click += new System.EventHandler(this.pnlNotes_Click);
-            this.picNotesArrow.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
-            this.picNotesArrow.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
-            // 
             // lblNotes
             // 
             this.lblNotes.AutoSize = true;
@@ -726,19 +558,6 @@
             this.lblNotes.Click += new System.EventHandler(this.pnlNotes_Click);
             this.lblNotes.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
             this.lblNotes.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
-            // 
-            // picNotes
-            // 
-            this.picNotes.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pencil;
-            this.picNotes.Location = new System.Drawing.Point(29, 19);
-            this.picNotes.Name = "picNotes";
-            this.picNotes.Size = new System.Drawing.Size(28, 28);
-            this.picNotes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picNotes.TabIndex = 0;
-            this.picNotes.TabStop = false;
-            this.picNotes.Click += new System.EventHandler(this.pnlNotes_Click);
-            this.picNotes.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
-            this.picNotes.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
             // 
             // pnlNotesDropDown
             // 
@@ -776,19 +595,6 @@
             this.pnlSettings.MouseEnter += new System.EventHandler(this.pnlSettings_MouseEnter);
             this.pnlSettings.MouseLeave += new System.EventHandler(this.pnlSettings_MouseLeave);
             // 
-            // picSettingsArrow
-            // 
-            this.picSettingsArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
-            this.picSettingsArrow.Location = new System.Drawing.Point(300, 23);
-            this.picSettingsArrow.Name = "picSettingsArrow";
-            this.picSettingsArrow.Size = new System.Drawing.Size(18, 18);
-            this.picSettingsArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picSettingsArrow.TabIndex = 2;
-            this.picSettingsArrow.TabStop = false;
-            this.picSettingsArrow.Click += new System.EventHandler(this.pnlSettings_Click);
-            this.picSettingsArrow.MouseEnter += new System.EventHandler(this.pnlSettings_MouseEnter);
-            this.picSettingsArrow.MouseLeave += new System.EventHandler(this.pnlSettings_MouseLeave);
-            // 
             // lblSettings
             // 
             this.lblSettings.AutoSize = true;
@@ -802,19 +608,6 @@
             this.lblSettings.Click += new System.EventHandler(this.pnlSettings_Click);
             this.lblSettings.MouseEnter += new System.EventHandler(this.pnlSettings_MouseEnter);
             this.lblSettings.MouseLeave += new System.EventHandler(this.pnlSettings_MouseLeave);
-            // 
-            // picSettings
-            // 
-            this.picSettings.Image = global::PersonalExpenseCreditTracker.Properties.Resources.cogwheel;
-            this.picSettings.Location = new System.Drawing.Point(28, 19);
-            this.picSettings.Name = "picSettings";
-            this.picSettings.Size = new System.Drawing.Size(28, 28);
-            this.picSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picSettings.TabIndex = 0;
-            this.picSettings.TabStop = false;
-            this.picSettings.Click += new System.EventHandler(this.pnlSettings_Click);
-            this.picSettings.MouseEnter += new System.EventHandler(this.pnlSettings_MouseEnter);
-            this.picSettings.MouseLeave += new System.EventHandler(this.pnlSettings_MouseLeave);
             // 
             // pnlSettingsDropDown
             // 
@@ -881,17 +674,6 @@
             this.lblPersonalExpense.TabIndex = 1;
             this.lblPersonalExpense.Text = "Personal Expense";
             this.lblPersonalExpense.Click += new System.EventHandler(this.lblPersonalExpense_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.wallet_;
-            this.pictureBox1.Location = new System.Drawing.Point(20, 30);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // lblAddExpense
             // 
@@ -966,26 +748,29 @@
             // pnlTaskPage
             // 
             this.pnlTaskPage.BackColor = System.Drawing.Color.Coral;
-            this.pnlTaskPage.Location = new System.Drawing.Point(0, 375);
+            this.pnlTaskPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTaskPage.Location = new System.Drawing.Point(0, 78);
             this.pnlTaskPage.Name = "pnlTaskPage";
-            this.pnlTaskPage.Size = new System.Drawing.Size(876, 680);
+            this.pnlTaskPage.Size = new System.Drawing.Size(876, 977);
             this.pnlTaskPage.TabIndex = 0;
             // 
             // pnlNotesPage
             // 
             this.pnlNotesPage.BackColor = System.Drawing.Color.SeaGreen;
-            this.pnlNotesPage.Location = new System.Drawing.Point(0, 399);
+            this.pnlNotesPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlNotesPage.Location = new System.Drawing.Point(0, 78);
             this.pnlNotesPage.Name = "pnlNotesPage";
-            this.pnlNotesPage.Size = new System.Drawing.Size(876, 656);
+            this.pnlNotesPage.Size = new System.Drawing.Size(876, 977);
             this.pnlNotesPage.TabIndex = 0;
             // 
             // pnlSettingPage
             // 
             this.pnlSettingPage.AutoSize = true;
             this.pnlSettingPage.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.pnlSettingPage.Location = new System.Drawing.Point(0, 432);
+            this.pnlSettingPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSettingPage.Location = new System.Drawing.Point(0, 78);
             this.pnlSettingPage.Name = "pnlSettingPage";
-            this.pnlSettingPage.Size = new System.Drawing.Size(876, 623);
+            this.pnlSettingPage.Size = new System.Drawing.Size(876, 977);
             this.pnlSettingPage.TabIndex = 0;
             // 
             // pnlTop
@@ -1007,7 +792,7 @@
             this.lblSubtitle.AutoSize = true;
             this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(15, 48);
+            this.lblSubtitle.Location = new System.Drawing.Point(12, 48);
             this.lblSubtitle.Margin = new System.Windows.Forms.Padding(50, 20, 0, 0);
             this.lblSubtitle.Name = "lblSubtitle";
             this.lblSubtitle.Size = new System.Drawing.Size(380, 23);
@@ -1034,31 +819,6 @@
             this.panel5.Size = new System.Drawing.Size(86, 48);
             this.panel5.TabIndex = 1;
             // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.night_mode;
-            this.button2.Location = new System.Drawing.Point(45, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(41, 48);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.bell;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(42, 48);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // pnlDate
             // 
             this.pnlDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1069,19 +829,6 @@
             this.pnlDate.Name = "pnlDate";
             this.pnlDate.Size = new System.Drawing.Size(250, 48);
             this.pnlDate.TabIndex = 0;
-            // 
-            // picCalendar
-            // 
-            this.picCalendar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
-            this.picCalendar.Location = new System.Drawing.Point(0, 0);
-            this.picCalendar.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.picCalendar.Name = "picCalendar";
-            this.picCalendar.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-            this.picCalendar.Size = new System.Drawing.Size(38, 46);
-            this.picCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picCalendar.TabIndex = 0;
-            this.picCalendar.TabStop = false;
             // 
             // lblDate
             // 
@@ -1134,6 +881,262 @@
             // 
             this.tmSidebar.Interval = 10;
             // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.night_mode;
+            this.button2.Location = new System.Drawing.Point(45, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(41, 48);
+            this.button2.TabIndex = 1;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.bell;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(42, 48);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // picCalendar
+            // 
+            this.picCalendar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
+            this.picCalendar.Location = new System.Drawing.Point(0, 0);
+            this.picCalendar.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.picCalendar.Name = "picCalendar";
+            this.picCalendar.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
+            this.picCalendar.Size = new System.Drawing.Size(38, 46);
+            this.picCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picCalendar.TabIndex = 0;
+            this.picCalendar.TabStop = false;
+            // 
+            // picUserProfile
+            // 
+            this.picUserProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user;
+            this.picUserProfile.Location = new System.Drawing.Point(29, 19);
+            this.picUserProfile.Margin = new System.Windows.Forms.Padding(30, 16, 10, 10);
+            this.picUserProfile.Name = "picUserProfile";
+            this.picUserProfile.Size = new System.Drawing.Size(35, 36);
+            this.picUserProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picUserProfile.TabIndex = 0;
+            this.picUserProfile.TabStop = false;
+            this.picUserProfile.Click += new System.EventHandler(this.pnlUserProfile_Click);
+            this.picUserProfile.MouseEnter += new System.EventHandler(this.pnlUserProfile_MouseEnter);
+            this.picUserProfile.MouseLeave += new System.EventHandler(this.pnlUserProfile_MouseLeave);
+            // 
+            // picDashboard
+            // 
+            this.picDashboard.Image = global::PersonalExpenseCreditTracker.Properties.Resources.home7;
+            this.picDashboard.Location = new System.Drawing.Point(29, 19);
+            this.picDashboard.Name = "picDashboard";
+            this.picDashboard.Size = new System.Drawing.Size(28, 28);
+            this.picDashboard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picDashboard.TabIndex = 0;
+            this.picDashboard.TabStop = false;
+            this.picDashboard.Click += new System.EventHandler(this.pnlDashboard_Click);
+            this.picDashboard.MouseEnter += new System.EventHandler(this.pnlDashboard_MouseEnter);
+            this.picDashboard.MouseLeave += new System.EventHandler(this.pnlDashboard_MouseLeave);
+            // 
+            // picExpenseArrow
+            // 
+            this.picExpenseArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
+            this.picExpenseArrow.Location = new System.Drawing.Point(300, 23);
+            this.picExpenseArrow.Name = "picExpenseArrow";
+            this.picExpenseArrow.Size = new System.Drawing.Size(18, 18);
+            this.picExpenseArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picExpenseArrow.TabIndex = 2;
+            this.picExpenseArrow.TabStop = false;
+            this.picExpenseArrow.Click += new System.EventHandler(this.pnlExpense_Click);
+            this.picExpenseArrow.MouseEnter += new System.EventHandler(this.pnlExpense_MouseEnter);
+            this.picExpenseArrow.MouseLeave += new System.EventHandler(this.pnlExpense_MouseLeave);
+            // 
+            // picExpense
+            // 
+            this.picExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.wallet_filled_money_tool1;
+            this.picExpense.Location = new System.Drawing.Point(29, 19);
+            this.picExpense.Name = "picExpense";
+            this.picExpense.Size = new System.Drawing.Size(28, 28);
+            this.picExpense.TabIndex = 0;
+            this.picExpense.TabStop = false;
+            this.picExpense.Click += new System.EventHandler(this.pnlExpense_Click);
+            this.picExpense.MouseEnter += new System.EventHandler(this.pnlExpense_MouseEnter);
+            this.picExpense.MouseLeave += new System.EventHandler(this.pnlExpense_MouseLeave);
+            // 
+            // picCreditArrow
+            // 
+            this.picCreditArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
+            this.picCreditArrow.Location = new System.Drawing.Point(300, 23);
+            this.picCreditArrow.Name = "picCreditArrow";
+            this.picCreditArrow.Size = new System.Drawing.Size(18, 18);
+            this.picCreditArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCreditArrow.TabIndex = 2;
+            this.picCreditArrow.TabStop = false;
+            this.picCreditArrow.Click += new System.EventHandler(this.pnlCredit_Click);
+            this.picCreditArrow.MouseEnter += new System.EventHandler(this.pnlCredit_MouseEnter);
+            this.picCreditArrow.MouseLeave += new System.EventHandler(this.pnlCredit_MouseLeave);
+            // 
+            // picCredit
+            // 
+            this.picCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.credit_card;
+            this.picCredit.Location = new System.Drawing.Point(29, 19);
+            this.picCredit.Name = "picCredit";
+            this.picCredit.Size = new System.Drawing.Size(28, 28);
+            this.picCredit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCredit.TabIndex = 0;
+            this.picCredit.TabStop = false;
+            this.picCredit.Click += new System.EventHandler(this.pnlCredit_Click);
+            this.picCredit.MouseEnter += new System.EventHandler(this.pnlCredit_MouseEnter);
+            this.picCredit.MouseLeave += new System.EventHandler(this.pnlCredit_MouseLeave);
+            // 
+            // picLentArrow
+            // 
+            this.picLentArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
+            this.picLentArrow.Location = new System.Drawing.Point(300, 23);
+            this.picLentArrow.Name = "picLentArrow";
+            this.picLentArrow.Size = new System.Drawing.Size(18, 18);
+            this.picLentArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLentArrow.TabIndex = 2;
+            this.picLentArrow.TabStop = false;
+            this.picLentArrow.Click += new System.EventHandler(this.pnlLent_Click);
+            this.picLentArrow.MouseEnter += new System.EventHandler(this.pnlLent_MouseEnter);
+            this.picLentArrow.MouseLeave += new System.EventHandler(this.pnlLent_MouseLeave);
+            // 
+            // picLent
+            // 
+            this.picLent.Image = global::PersonalExpenseCreditTracker.Properties.Resources.payment_lent1;
+            this.picLent.Location = new System.Drawing.Point(29, 19);
+            this.picLent.Name = "picLent";
+            this.picLent.Size = new System.Drawing.Size(28, 28);
+            this.picLent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLent.TabIndex = 0;
+            this.picLent.TabStop = false;
+            this.picLent.Click += new System.EventHandler(this.pnlLent_Click);
+            this.picLent.MouseEnter += new System.EventHandler(this.pnlLent_MouseEnter);
+            this.picLent.MouseLeave += new System.EventHandler(this.pnlLent_MouseLeave);
+            // 
+            // picBorrowArrow
+            // 
+            this.picBorrowArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
+            this.picBorrowArrow.Location = new System.Drawing.Point(300, 23);
+            this.picBorrowArrow.Name = "picBorrowArrow";
+            this.picBorrowArrow.Size = new System.Drawing.Size(18, 18);
+            this.picBorrowArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBorrowArrow.TabIndex = 2;
+            this.picBorrowArrow.TabStop = false;
+            this.picBorrowArrow.Click += new System.EventHandler(this.pnlBorrow_Click);
+            this.picBorrowArrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
+            this.picBorrowArrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
+            // 
+            // picBorrow
+            // 
+            this.picBorrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.borrowing;
+            this.picBorrow.Location = new System.Drawing.Point(29, 19);
+            this.picBorrow.Name = "picBorrow";
+            this.picBorrow.Size = new System.Drawing.Size(28, 28);
+            this.picBorrow.TabIndex = 0;
+            this.picBorrow.TabStop = false;
+            this.picBorrow.Click += new System.EventHandler(this.pnlBorrow_Click);
+            this.picBorrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
+            this.picBorrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
+            // 
+            // picTasksArrow
+            // 
+            this.picTasksArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
+            this.picTasksArrow.Location = new System.Drawing.Point(300, 23);
+            this.picTasksArrow.Name = "picTasksArrow";
+            this.picTasksArrow.Size = new System.Drawing.Size(18, 18);
+            this.picTasksArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTasksArrow.TabIndex = 2;
+            this.picTasksArrow.TabStop = false;
+            this.picTasksArrow.Click += new System.EventHandler(this.pnlTasks_Click);
+            this.picTasksArrow.MouseEnter += new System.EventHandler(this.pnlTasks_MouseEnter);
+            this.picTasksArrow.MouseLeave += new System.EventHandler(this.pnlTasks_MouseLeave);
+            // 
+            // picTasks
+            // 
+            this.picTasks.Image = global::PersonalExpenseCreditTracker.Properties.Resources.task;
+            this.picTasks.Location = new System.Drawing.Point(29, 19);
+            this.picTasks.Name = "picTasks";
+            this.picTasks.Size = new System.Drawing.Size(28, 28);
+            this.picTasks.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTasks.TabIndex = 0;
+            this.picTasks.TabStop = false;
+            this.picTasks.Click += new System.EventHandler(this.pnlTasks_Click);
+            this.picTasks.MouseEnter += new System.EventHandler(this.pnlTasks_MouseEnter);
+            this.picTasks.MouseLeave += new System.EventHandler(this.pnlTasks_MouseLeave);
+            // 
+            // picNotesArrow
+            // 
+            this.picNotesArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
+            this.picNotesArrow.Location = new System.Drawing.Point(300, 23);
+            this.picNotesArrow.Name = "picNotesArrow";
+            this.picNotesArrow.Size = new System.Drawing.Size(18, 18);
+            this.picNotesArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picNotesArrow.TabIndex = 2;
+            this.picNotesArrow.TabStop = false;
+            this.picNotesArrow.Click += new System.EventHandler(this.pnlNotes_Click);
+            this.picNotesArrow.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
+            this.picNotesArrow.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
+            // 
+            // picNotes
+            // 
+            this.picNotes.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pencil;
+            this.picNotes.Location = new System.Drawing.Point(29, 19);
+            this.picNotes.Name = "picNotes";
+            this.picNotes.Size = new System.Drawing.Size(28, 28);
+            this.picNotes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picNotes.TabIndex = 0;
+            this.picNotes.TabStop = false;
+            this.picNotes.Click += new System.EventHandler(this.pnlNotes_Click);
+            this.picNotes.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
+            this.picNotes.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
+            // 
+            // picSettingsArrow
+            // 
+            this.picSettingsArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
+            this.picSettingsArrow.Location = new System.Drawing.Point(300, 23);
+            this.picSettingsArrow.Name = "picSettingsArrow";
+            this.picSettingsArrow.Size = new System.Drawing.Size(18, 18);
+            this.picSettingsArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picSettingsArrow.TabIndex = 2;
+            this.picSettingsArrow.TabStop = false;
+            this.picSettingsArrow.Click += new System.EventHandler(this.pnlSettings_Click);
+            this.picSettingsArrow.MouseEnter += new System.EventHandler(this.pnlSettings_MouseEnter);
+            this.picSettingsArrow.MouseLeave += new System.EventHandler(this.pnlSettings_MouseLeave);
+            // 
+            // picSettings
+            // 
+            this.picSettings.Image = global::PersonalExpenseCreditTracker.Properties.Resources.cogwheel;
+            this.picSettings.Location = new System.Drawing.Point(28, 19);
+            this.picSettings.Name = "picSettings";
+            this.picSettings.Size = new System.Drawing.Size(28, 28);
+            this.picSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picSettings.TabIndex = 0;
+            this.picSettings.TabStop = false;
+            this.picSettings.Click += new System.EventHandler(this.pnlSettings_Click);
+            this.picSettings.MouseEnter += new System.EventHandler(this.pnlSettings_MouseEnter);
+            this.picSettings.MouseLeave += new System.EventHandler(this.pnlSettings_MouseLeave);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.wallet_;
+            this.pictureBox1.Location = new System.Drawing.Point(20, 30);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1149,56 +1152,39 @@
             this.pnlSideBar.ResumeLayout(false);
             this.pnlUserProfile.ResumeLayout(false);
             this.pnlUserProfile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picUserProfile)).EndInit();
             this.flowSidebar.ResumeLayout(false);
             this.pnlDashboard.ResumeLayout(false);
             this.pnlDashboard.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picDashboard)).EndInit();
             this.pnlExpense.ResumeLayout(false);
             this.pnlExpense.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picExpenseArrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picExpense)).EndInit();
             this.pnlExpenseDropDown.ResumeLayout(false);
             this.pnlExpenseDropDown.PerformLayout();
             this.pnlCredit.ResumeLayout(false);
             this.pnlCredit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCreditArrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCredit)).EndInit();
             this.pnlCreditDropDown.ResumeLayout(false);
             this.pnlCreditDropDown.PerformLayout();
             this.pnlLent.ResumeLayout(false);
             this.pnlLent.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLentArrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLent)).EndInit();
             this.pnlLentDropDown.ResumeLayout(false);
             this.pnlLentDropDown.PerformLayout();
             this.pnlBorrow.ResumeLayout(false);
             this.pnlBorrow.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBorrowArrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBorrow)).EndInit();
             this.pnlBorrowDropDown.ResumeLayout(false);
             this.pnlBorrowDropDown.PerformLayout();
             this.pnlTasks.ResumeLayout(false);
             this.pnlTasks.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picTasksArrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTasks)).EndInit();
             this.pnlTaskDropDown.ResumeLayout(false);
             this.pnlTaskDropDown.PerformLayout();
             this.pnlNotes.ResumeLayout(false);
             this.pnlNotes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picNotesArrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picNotes)).EndInit();
             this.pnlNotesDropDown.ResumeLayout(false);
             this.pnlNotesDropDown.PerformLayout();
             this.pnlSettings.ResumeLayout(false);
             this.pnlSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSettingsArrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSettings)).EndInit();
             this.pnlSettingsDropDown.ResumeLayout(false);
             this.pnlSettingsDropDown.PerformLayout();
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlContainer.ResumeLayout(false);
             this.pnlContainer.PerformLayout();
             this.pnlTop.ResumeLayout(false);
@@ -1206,9 +1192,26 @@
             this.pnlRight.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.pnlDate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picUserProfile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDashboard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExpenseArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picExpense)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCreditArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCredit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLentArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBorrowArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBorrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTasksArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTasks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picNotesArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picNotes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSettingsArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSettings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

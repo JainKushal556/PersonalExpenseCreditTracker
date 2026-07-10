@@ -224,6 +224,12 @@
     <None Include="Resources\rupee %281%29.png" />
     <None Include="Resources\menu.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\creditcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\colourcard.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
   To modify your build process, add your task inside one of the targets below.

@@ -8,12 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Modules.Expense;
+using PersonalExpenseCreditTracker.Modules.Lent;
 
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
     {
         private ExpenseControl expenseControl;
+        private LentControls lentControl;
 
         private bool expenseOpen = false;
         private bool creditOpen = false;
@@ -56,7 +58,8 @@ namespace PersonalExpenseCreditTracker
             pnlProfilePage.Visible = false;
 
             SetActiveMenu(pnlDashboard);
-          
+            this.MinimumSize = new Size(1200, 700);
+        
         }
 
         private void CloseAllDropDown()
@@ -140,6 +143,9 @@ namespace PersonalExpenseCreditTracker
      //pnlDashboard Function
         private void pnlDashboard_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Dashboard";
+            lblSubtitle.Text = "Welcome back! Here's your financial overview.";
+
             SetActiveMenu(pnlDashboard);
             CloseAllDropDown();
 
@@ -240,6 +246,8 @@ namespace PersonalExpenseCreditTracker
         private void pnlExpense_Click(object sender, EventArgs e)
         {
             lblTitle.Text = "Expense";
+            lblSubtitle.Text = "Track and manage your expenses";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
             if (expenseControl == null || expenseControl.IsDisposed)
             {
                 expenseControl = new ExpenseControl();
@@ -309,6 +317,10 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlCredit_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Credit";
+            lblSubtitle.Text = "Track and manage your credit transactions";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = true;
@@ -358,6 +370,26 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlLent_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Lent";
+            lblSubtitle.Text = "Track and manage money you have lent to others";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+            if (lentControl == null || lentControl.IsDisposed)
+            {
+                lentControl = new LentControls();
+
+                lentControl.TopLevel = false;
+                lentControl.FormBorderStyle = FormBorderStyle.None;
+                lentControl.Dock = DockStyle.Fill;
+                pnlLentPage.Controls.Clear();
+                pnlLentPage.Controls.Add(lentControl);
+                pnlLentPage.Controls.Add(lentControl);
+
+                lentControl.Show();
+
+            }
+
+
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -408,6 +440,10 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlBorrow_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Borrow";
+            lblSubtitle.Text = "Track and manage money you have borrowed from others";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -458,6 +494,11 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlTasks_Click(object sender, EventArgs e)
         {
+
+            lblTitle.Text = "Tasks";
+            lblSubtitle.Text = "Organize and track your tasks efficiently";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -509,6 +550,10 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlNotes_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Notes";
+            lblSubtitle.Text = "Capture your thoughts and keep everything organized";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
