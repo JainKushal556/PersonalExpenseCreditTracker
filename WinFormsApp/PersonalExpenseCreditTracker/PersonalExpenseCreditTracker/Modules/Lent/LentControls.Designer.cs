@@ -137,7 +137,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalTransaction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(252)))), ((int)(((byte)(232)))));
-            this.panelTotalTransaction.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelTotalTransaction.Controls.Add(this.labelTotalTransactionNumber);
             this.panelTotalTransaction.Controls.Add(this.lblTotalTransaction);
             this.panelTotalTransaction.Controls.Add(this.pictureBoxTotalTransaction);
@@ -151,7 +150,7 @@
             // 
             this.labelTotalTransactionNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelTotalTransactionNumber.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalTransactionNumber.Location = new System.Drawing.Point(100, 54);
+            this.labelTotalTransactionNumber.Location = new System.Drawing.Point(100, 56);
             this.labelTotalTransactionNumber.Margin = new System.Windows.Forms.Padding(0);
             this.labelTotalTransactionNumber.Name = "labelTotalTransactionNumber";
             this.labelTotalTransactionNumber.Size = new System.Drawing.Size(208, 45);
@@ -174,7 +173,7 @@
             // 
             this.pictureBoxTotalTransaction.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBoxTotalTransaction.Image = global::PersonalExpenseCreditTracker.Properties.Resources.money_transfer__1_;
-            this.pictureBoxTotalTransaction.Location = new System.Drawing.Point(7, 22);
+            this.pictureBoxTotalTransaction.Location = new System.Drawing.Point(7, 23);
             this.pictureBoxTotalTransaction.MaximumSize = new System.Drawing.Size(93, 80);
             this.pictureBoxTotalTransaction.MinimumSize = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalTransaction.Name = "pictureBoxTotalTransaction";
@@ -189,7 +188,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalDue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.panelTotalDue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelTotalDue.Controls.Add(this.lblTotalDue);
             this.panelTotalDue.Controls.Add(this.panel4);
             this.panelTotalDue.Controls.Add(this.pictureBoxTotalDue);
@@ -215,7 +213,7 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.lblTotalDueAmount);
-            this.panel4.Location = new System.Drawing.Point(99, 50);
+            this.panel4.Location = new System.Drawing.Point(99, 52);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(231, 50);
             this.panel4.TabIndex = 2;
@@ -247,7 +245,7 @@
             // 
             this.pictureBoxTotalDue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBoxTotalDue.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Total_Due;
-            this.pictureBoxTotalDue.Location = new System.Drawing.Point(7, 22);
+            this.pictureBoxTotalDue.Location = new System.Drawing.Point(7, 23);
             this.pictureBoxTotalDue.MaximumSize = new System.Drawing.Size(93, 80);
             this.pictureBoxTotalDue.MinimumSize = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalDue.Name = "pictureBoxTotalDue";
@@ -262,7 +260,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalRepaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(255)))), ((int)(((byte)(231)))));
-            this.panelTotalRepaid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaid);
             this.panelTotalRepaid.Controls.Add(this.panel3);
             this.panelTotalRepaid.Controls.Add(this.pictureBoxTotalRepaid);
@@ -289,7 +286,7 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.lblTotalRepaidAmount);
-            this.panel3.Location = new System.Drawing.Point(99, 50);
+            this.panel3.Location = new System.Drawing.Point(99, 52);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(231, 50);
             this.panel3.TabIndex = 2;
@@ -321,7 +318,7 @@
             // 
             this.pictureBoxTotalRepaid.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBoxTotalRepaid.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gave_Money;
-            this.pictureBoxTotalRepaid.Location = new System.Drawing.Point(7, 25);
+            this.pictureBoxTotalRepaid.Location = new System.Drawing.Point(7, 26);
             this.pictureBoxTotalRepaid.MaximumSize = new System.Drawing.Size(93, 80);
             this.pictureBoxTotalRepaid.MinimumSize = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalRepaid.Name = "pictureBoxTotalRepaid";
@@ -336,7 +333,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalLent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(246)))), ((int)(((byte)(255)))));
-            this.panelTotalLent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelTotalLent.Controls.Add(this.lblTotalLent);
             this.panelTotalLent.Controls.Add(this.panel1);
             this.panelTotalLent.Controls.Add(this.pictureBoxTotalLent);
@@ -362,7 +358,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.Controls.Add(this.lblRupeeSymbol);
             this.panel1.Controls.Add(this.lblTotalLentAmount);
-            this.panel1.Location = new System.Drawing.Point(99, 50);
+            this.panel1.Location = new System.Drawing.Point(99, 52);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(231, 50);
             this.panel1.TabIndex = 2;
@@ -394,7 +390,7 @@
             // 
             this.pictureBoxTotalLent.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBoxTotalLent.Image = global::PersonalExpenseCreditTracker.Properties.Resources.man;
-            this.pictureBoxTotalLent.Location = new System.Drawing.Point(7, 22);
+            this.pictureBoxTotalLent.Location = new System.Drawing.Point(7, 23);
             this.pictureBoxTotalLent.MaximumSize = new System.Drawing.Size(93, 80);
             this.pictureBoxTotalLent.MinimumSize = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalLent.Name = "pictureBoxTotalLent";
@@ -785,6 +781,8 @@
             // 
             this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colAction.HeaderText = "⋮";
+            this.colAction.Image = global::PersonalExpenseCreditTracker.Properties.Resources.menu;
+            this.colAction.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.colAction.Name = "colAction";
             this.colAction.ReadOnly = true;
             this.colAction.Width = 20;

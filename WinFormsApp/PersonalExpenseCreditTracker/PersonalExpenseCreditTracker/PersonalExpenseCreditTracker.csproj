@@ -108,7 +108,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <!-- Settings -->
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -223,6 +225,18 @@
     <None Include="Resources\rupee.png" />
     <None Include="Resources\rupee %281%29.png" />
     <None Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\creditcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\colourcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLLayer\BLLayer.csproj">
+      <Project>{168EF053-5F30-4148-9301-BB47AFDE9801}</Project>
+      <Name>BLLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
