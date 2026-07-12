@@ -55,6 +55,18 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <!-- Lent Module -->
+    <Compile Include="Modules\Credit\CreditControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Credit\CreditControl.Designer.cs">
+      <DependentUpon>CreditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Credit\CreditDetailsControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Credit\CreditDetailsControl.Designer.cs">
+      <DependentUpon>CreditDetailsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Lent\AddLentControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +100,12 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Lent Resources -->
+    <EmbeddedResource Include="Modules\Credit\CreditControl.resx">
+      <DependentUpon>CreditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Credit\CreditDetailsControl.resx">
+      <DependentUpon>CreditDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Lent\AddLentControls.resx">
       <DependentUpon>AddLentControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,7 +150,6 @@
     <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
     <Folder Include="Modules\Borrow\" />
-    <Folder Include="Modules\Credit\" />
     <Folder Include="Modules\Dashboard\" />
     <Folder Include="Modules\Note\" />
     <Folder Include="Modules\Profile\" />
