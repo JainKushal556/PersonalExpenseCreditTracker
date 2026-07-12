@@ -136,6 +136,9 @@
   <data name="menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="payment-lent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\payment-lent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Home5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Home5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -150,6 +153,9 @@
   </data>
   <data name="cogwheel (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cogwheel (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colourcard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colourcard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,8 +184,8 @@
   <data name="credit-card" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\credit-card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="payment-lent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\payment-lent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Total Lent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Total Lent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wallet-filled-money-tool1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wallet-filled-money-tool1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -265,9 +271,6 @@
   <data name="file-export (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\file-export (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Total Lent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Total Lent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="credit-card-white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\credit-card-white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -309,6 +312,9 @@
   </data>
   <data name="preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\left (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="credit_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\credit-card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -355,7 +361,7 @@
   <data name="fast-forward-double-right-arrows-symbol (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fast-forward-double-right-arrows-symbol (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="colourcard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\colourcard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="menu1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

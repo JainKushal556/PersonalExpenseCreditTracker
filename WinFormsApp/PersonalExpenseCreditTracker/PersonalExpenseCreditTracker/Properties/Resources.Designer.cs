@@ -163,16 +163,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap credit_card {
-            get {
-                object obj = ResourceManager.GetObject("credit_card", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap credit_card_white {
             get {
                 object obj = ResourceManager.GetObject("credit-card-white", resourceCulture);
@@ -403,6 +393,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap list {
+            get {
+                object obj = ResourceManager.GetObject("list", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap man {
             get {
                 object obj = ResourceManager.GetObject("man", resourceCulture);
@@ -416,6 +416,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap menu {
             get {
                 object obj = ResourceManager.GetObject("menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu1 {
+            get {
+                object obj = ResourceManager.GetObject("menu1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
