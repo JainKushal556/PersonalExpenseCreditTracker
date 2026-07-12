@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Modules.Expense;
 using PersonalExpenseCreditTracker.Modules.Lent;
+using PersonalExpenseCreditTracker.Modules.Credit;
 
 namespace PersonalExpenseCreditTracker
 {
@@ -16,6 +17,7 @@ namespace PersonalExpenseCreditTracker
     {
         private ExpenseControl expenseControl;
         private LentControls lentControl;
+        private CreditControl creditControl;
 
         private bool expenseOpen = false;
         private bool creditOpen = false;
@@ -320,6 +322,21 @@ namespace PersonalExpenseCreditTracker
             lblTitle.Text = "Credit";
             lblSubtitle.Text = "Track and manage your credit transactions";
             lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
+            if (creditControl == null || creditControl.IsDisposed)
+            {
+                creditControl = new CreditControl();
+
+                creditControl.TopLevel = false;
+                creditControl.FormBorderStyle = FormBorderStyle.None;
+                creditControl.Dock = DockStyle.Fill;
+
+                pnlCreditPage.Controls.Clear();
+                pnlCreditPage.Controls.Add(creditControl);
+
+                creditControl.Show();
+
+            }
 
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
@@ -813,6 +830,11 @@ namespace PersonalExpenseCreditTracker
         private void CenterIcon(PictureBox pic)
         {
             pic.Left = (pnlSideBar.Width - pic.Width) / 2;
+        }
+
+        private void pnlProfilePage_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
 
