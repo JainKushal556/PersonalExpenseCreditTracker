@@ -63,6 +63,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _49001bca_2af4_4908_b1f5_551d2534db661 {
+            get {
+                object obj = ResourceManager.GetObject("49001bca-2af4-4908-b1f5-551d2534db661", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap arrowhead_up {
             get {
                 object obj = ResourceManager.GetObject("arrowhead-up", resourceCulture);
@@ -123,6 +133,26 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ChatGPT_Image_Jul_12__2026__01_07_09_AM {
+            get {
+                object obj = ResourceManager.GetObject("ChatGPT Image Jul 12, 2026, 01_07_09 AM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ChatGPT_Image_Jul_12__2026__01_40_51_AM {
+            get {
+                object obj = ResourceManager.GetObject("ChatGPT Image Jul 12, 2026, 01_40_51 AM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap close {
             get {
                 object obj = ResourceManager.GetObject("close", resourceCulture);
@@ -165,7 +195,7 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap credit_card {
             get {
-                object obj = ResourceManager.GetObject("credit_card", resourceCulture);
+                object obj = ResourceManager.GetObject("credit-card", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,16 +206,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap credit_card_white {
             get {
                 object obj = ResourceManager.GetObject("credit-card-white", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap creditcard {
-            get {
-                object obj = ResourceManager.GetObject("creditcard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -646,6 +666,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap refresh__1_ {
             get {
                 object obj = ResourceManager.GetObject("refresh (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap repaid {
+            get {
+                object obj = ResourceManager.GetObject("repaid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Modules.Expense;
 using PersonalExpenseCreditTracker.Modules.Lent;
 using PersonalExpenseCreditTracker.Modules.Credit;
+using PersonalExpenseCreditTracker.Modules.Borrow;
 
 namespace PersonalExpenseCreditTracker
 {
@@ -18,6 +19,7 @@ namespace PersonalExpenseCreditTracker
         private ExpenseControl expenseControl;
         private LentControls lentControl;
         private CreditControl creditControl;
+        private BorrowControls borrowControls;
 
         private bool expenseOpen = false;
         private bool creditOpen = false;
@@ -460,6 +462,20 @@ namespace PersonalExpenseCreditTracker
             lblTitle.Text = "Borrow";
             lblSubtitle.Text = "Track and manage money you have borrowed from others";
             lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+            if (borrowControls == null || borrowControls.IsDisposed)
+            {
+                borrowControls = new BorrowControls();
+
+                borrowControls.TopLevel = false;
+                borrowControls.FormBorderStyle = FormBorderStyle.None;
+                borrowControls.Dock = DockStyle.Fill;
+
+                pnlBorrowPage.Controls.Clear();
+                pnlBorrowPage.Controls.Add(borrowControls);
+
+                borrowControls.Show();
+
+            }
 
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
