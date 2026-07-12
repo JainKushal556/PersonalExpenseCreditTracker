@@ -128,7 +128,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnBorrowAddSave_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Lent Details Saved");
+            MessageBox.Show("Borrow Details Saved");
         }
 
 

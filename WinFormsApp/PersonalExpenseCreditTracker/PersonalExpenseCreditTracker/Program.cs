@@ -14,7 +14,7 @@ namespace PersonalExpenseCreditTracker
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new PersonalExpenseCreditTracker.Modules.Borrow.BorrowControls());
+            Application.Run(new MainForm());
         }
     }
 }
