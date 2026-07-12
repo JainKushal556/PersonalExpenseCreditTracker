@@ -33,6 +33,13 @@
             this.pnlTableHeader = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.dgvCreditDataTable = new System.Windows.Forms.DataGridView();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.pnlCreditFooter = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -58,13 +65,6 @@
             this.lblTransactionAmount = new System.Windows.Forms.Label();
             this.lblTransction = new System.Windows.Forms.Label();
             this.picTransaction = new System.Windows.Forms.PictureBox();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlCreditContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
@@ -162,6 +162,62 @@
             this.dgvCreditDataTable.Size = new System.Drawing.Size(1212, 503);
             this.dgvCreditDataTable.TabIndex = 1;
             this.dgvCreditDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCreditDataTable_CellContentClick);
+            // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.FillWeight = 10F;
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // ColFrom
+            // 
+            this.ColFrom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColFrom.FillWeight = 15F;
+            this.ColFrom.HeaderText = "From";
+            this.ColFrom.Name = "ColFrom";
+            this.ColFrom.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.FillWeight = 15F;
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCategory.FillWeight = 15F;
+            this.colCategory.HeaderText = "Category";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            // 
+            // colSubCategory
+            // 
+            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSubCategory.FillWeight = 15F;
+            this.colSubCategory.HeaderText = "SubCategory";
+            this.colSubCategory.Name = "colSubCategory";
+            this.colSubCategory.ReadOnly = true;
+            // 
+            // colAmount
+            // 
+            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.FillWeight = 10F;
+            this.colAmount.HeaderText = "Amount";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            // 
+            // colPaymentMethod
+            // 
+            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.FillWeight = 15F;
+            this.colPaymentMethod.HeaderText = "Payment Method";
+            this.colPaymentMethod.Name = "colPaymentMethod";
+            this.colPaymentMethod.ReadOnly = true;
             // 
             // pnlFooter
             // 
@@ -328,6 +384,7 @@
             // tblCreditSummary
             // 
             this.tblCreditSummary.BackColor = System.Drawing.Color.Transparent;
+            this.tblCreditSummary.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tblCreditSummary.ColumnCount = 2;
             this.tblCreditSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblCreditSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -350,11 +407,11 @@
             this.pnlTotalCredit.Controls.Add(this.picCredit);
             this.pnlTotalCredit.Controls.Add(this.lblTotalCredit);
             this.pnlTotalCredit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalCredit.Location = new System.Drawing.Point(15, 15);
+            this.pnlTotalCredit.Location = new System.Drawing.Point(16, 16);
             this.pnlTotalCredit.Margin = new System.Windows.Forms.Padding(15);
             this.pnlTotalCredit.Name = "pnlTotalCredit";
             this.pnlTotalCredit.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlTotalCredit.Size = new System.Drawing.Size(580, 80);
+            this.pnlTotalCredit.Size = new System.Drawing.Size(578, 78);
             this.pnlTotalCredit.TabIndex = 0;
             // 
             // lblCreditAmount
@@ -396,11 +453,11 @@
             this.pnlTransactionCard.Controls.Add(this.lblTransction);
             this.pnlTransactionCard.Controls.Add(this.picTransaction);
             this.pnlTransactionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTransactionCard.Location = new System.Drawing.Point(625, 15);
+            this.pnlTransactionCard.Location = new System.Drawing.Point(625, 16);
             this.pnlTransactionCard.Margin = new System.Windows.Forms.Padding(15);
             this.pnlTransactionCard.Name = "pnlTransactionCard";
             this.pnlTransactionCard.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlTransactionCard.Size = new System.Drawing.Size(580, 80);
+            this.pnlTransactionCard.Size = new System.Drawing.Size(579, 78);
             this.pnlTransactionCard.TabIndex = 1;
             // 
             // btnRefresh
@@ -412,7 +469,7 @@
             this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(485, 6);
+            this.btnRefresh.Location = new System.Drawing.Point(484, 6);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(94, 35);
             this.btnRefresh.TabIndex = 3;
@@ -449,62 +506,6 @@
             this.picTransaction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picTransaction.TabIndex = 0;
             this.picTransaction.TabStop = false;
-            // 
-            // colDate
-            // 
-            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDate.FillWeight = 10F;
-            this.colDate.HeaderText = "Date";
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            // 
-            // ColFrom
-            // 
-            this.ColFrom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColFrom.FillWeight = 15F;
-            this.ColFrom.HeaderText = "From";
-            this.ColFrom.Name = "ColFrom";
-            this.ColFrom.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.FillWeight = 15F;
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCategory.FillWeight = 15F;
-            this.colCategory.HeaderText = "Category";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colSubCategory
-            // 
-            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSubCategory.FillWeight = 15F;
-            this.colSubCategory.HeaderText = "SubCategory";
-            this.colSubCategory.Name = "colSubCategory";
-            this.colSubCategory.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAmount.FillWeight = 10F;
-            this.colAmount.HeaderText = "Amount";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            // 
-            // colPaymentMethod
-            // 
-            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPaymentMethod.FillWeight = 15F;
-            this.colPaymentMethod.HeaderText = "Payment Method";
-            this.colPaymentMethod.Name = "colPaymentMethod";
-            this.colPaymentMethod.ReadOnly = true;
             // 
             // CreditControl
             // 
