@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,13 @@
     <Compile Include="Forms\Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Dashboard\DashboardControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Dashboard\DashboardControl.Designer.cs">
+      <DependentUpon>DashboardControl.cs</DependentUpon>
+    </Compile>
+
     <!-- Lent Module -->
 
     <Compile Include="Modules\Borrow\AddBorrowControls.cs">
@@ -111,6 +119,10 @@
     <!-- Form Resources -->
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <EmbeddedResource Include="Modules\Dashboard\DashboardControl.resx">
+      <DependentUpon>DashboardControl.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Lent Resources -->
 
@@ -172,9 +184,13 @@
 
     <Folder Include="Modules\Credit\" />
 
+    <Folder Include="Modules\Lent\" />
+
+
     <Folder Include="Modules\Borrow\" />
 
     <Folder Include="Modules\Dashboard\" />
+
     <Folder Include="Modules\Note\" />
     <Folder Include="Modules\Profile\" />
     <Folder Include="Modules\Settings\Category\" />
@@ -197,6 +213,52 @@
     <None Include="Resources\diskette.png" />
     <None Include="Resources\tag.png" />
     <None Include="Resources\up-and-down-arrows.png" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet .png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house-regular %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet-filled-money-tool.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet-filled-money-tool1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credit-card.png" />
+  </ItemGroup>
+  <ItemGroup>
+
     <None Include="Resources\market.png" />
     <None Include="Resources\bullets.png" />
     <None Include="Resources\shop.png" />
@@ -242,7 +304,29 @@
     <None Include="Resources\moon.png" />
     <None Include="Resources\night-mode.png" />
   </ItemGroup>
-  <!-- Lent Resources -->
+
+  <ItemGroup>
+    <None Include="Resources\spending-money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\expenses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credit-card %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-bag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inspiration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary.png" />
+  </ItemGroup>
+    <!-- Lent Resources -->
   <ItemGroup>
     <None Include="Resources\Total Lent.png" />
     <None Include="Resources\man.png" />
@@ -293,6 +377,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\repaid.png" />
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
