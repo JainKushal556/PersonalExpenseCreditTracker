@@ -83,6 +83,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap borrow {
+            get {
+                object obj = ResourceManager.GetObject("borrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap borrowing {
             get {
                 object obj = ResourceManager.GetObject("borrowing", resourceCulture);
@@ -153,6 +163,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap credit_card__2_ {
+            get {
+                object obj = ResourceManager.GetObject("credit-card (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap credit_card_white {
             get {
                 object obj = ResourceManager.GetObject("credit-card-white", resourceCulture);
@@ -186,6 +206,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap down {
             get {
                 object obj = ResourceManager.GetObject("down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap expenses {
+            get {
+                object obj = ResourceManager.GetObject("expenses", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,6 +333,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap inspiration {
+            get {
+                object obj = ResourceManager.GetObject("inspiration", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap left {
             get {
                 object obj = ResourceManager.GetObject("left", resourceCulture);
@@ -316,6 +356,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap money {
             get {
                 object obj = ResourceManager.GetObject("money", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_bag {
+            get {
+                object obj = ResourceManager.GetObject("money-bag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -473,6 +523,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap salary {
+            get {
+                object obj = ResourceManager.GetObject("salary", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap settings {
             get {
                 object obj = ResourceManager.GetObject("settings", resourceCulture);
@@ -506,6 +566,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap spending {
             get {
                 object obj = ResourceManager.GetObject("spending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap spending_money {
+            get {
+                object obj = ResourceManager.GetObject("spending-money", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

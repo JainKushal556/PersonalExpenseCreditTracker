@@ -8,12 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Modules.Expense;
+using PersonalExpenseCreditTracker.Modules.Dashboard;
 
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
     {
         private ExpenseControl expenseControl;
+        private DashboardControl dashboardControl;
 
         private bool expenseOpen = false;
         private bool creditOpen = false;
@@ -56,6 +58,21 @@ namespace PersonalExpenseCreditTracker
             pnlProfilePage.Visible = false;
 
             SetActiveMenu(pnlDashboard);
+
+
+            if (dashboardControl == null || dashboardControl.IsDisposed)
+            {
+                dashboardControl = new DashboardControl();
+
+                dashboardControl.TopLevel = false;
+                dashboardControl.FormBorderStyle = FormBorderStyle.None;
+                dashboardControl.Dock = DockStyle.Fill;
+
+                pnlOverview.Controls.Clear();
+                pnlOverview.Controls.Add(dashboardControl);
+
+                dashboardControl.Show();
+            }
           
         }
 
@@ -142,6 +159,20 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveMenu(pnlDashboard);
             CloseAllDropDown();
+
+            if (dashboardControl == null || dashboardControl.IsDisposed)
+            {
+                dashboardControl = new DashboardControl();
+
+                dashboardControl.TopLevel = false;
+                dashboardControl.FormBorderStyle = FormBorderStyle.None;
+                dashboardControl.Dock = DockStyle.Fill;
+
+                pnlOverview.Controls.Clear();
+                pnlOverview.Controls.Add(dashboardControl);
+
+                dashboardControl.Show();
+            }
 
             pnlOverview.Visible = true;
             pnlExpensePage.Visible = false;
@@ -240,20 +271,21 @@ namespace PersonalExpenseCreditTracker
         private void pnlExpense_Click(object sender, EventArgs e)
         {
             lblTitle.Text = "Expense";
-            if (expenseControl == null || expenseControl.IsDisposed)
-            {
-                expenseControl = new ExpenseControl();
+                    if (expenseControl == null || expenseControl.IsDisposed)
+                    {
+                        expenseControl = new ExpenseControl();
 
-                expenseControl.TopLevel = false;
-                expenseControl.FormBorderStyle = FormBorderStyle.None;
-                expenseControl.Dock = DockStyle.Fill;
+                        expenseControl.TopLevel = false;
+                        expenseControl.FormBorderStyle = FormBorderStyle.None;
+                        expenseControl.Dock = DockStyle.Fill;
 
-                pnlExpensePage.Controls.Clear();
-                pnlExpensePage.Controls.Add(expenseControl);
+                        pnlExpensePage.Controls.Clear();
+                     
+                        pnlExpensePage.Controls.Add(expenseControl);
 
-                expenseControl.Show();
+                        expenseControl.Show();
 
-            }
+                    }
 
             //expenseControl.BringToFront();
 

@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,12 @@
     </Compile>
     <Compile Include="Forms\Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Dashboard\DashboardControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Dashboard\DashboardControl.Designer.cs">
+      <DependentUpon>DashboardControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Expense\ExpenseControl.cs">
       <SubType>Form</SubType>
@@ -68,6 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Dashboard\DashboardControl.resx">
+      <DependentUpon>DashboardControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Expense\ExpenseControl.resx">
       <DependentUpon>ExpenseControl.cs</DependentUpon>
@@ -101,7 +111,6 @@
     <Folder Include="Helpers\" />
     <Folder Include="Modules\Borrow\" />
     <Folder Include="Modules\Credit\" />
-    <Folder Include="Modules\Dashboard\" />
     <Folder Include="Modules\Lent\" />
     <Folder Include="Modules\Note\" />
     <Folder Include="Modules\Profile\" />
@@ -111,7 +120,6 @@
     <Folder Include="Session\" />
   </ItemGroup>
   <ItemGroup>
-
     <None Include="Resources\spending.png" />
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +201,6 @@
     <None Include="Resources\credit-card.png" />
   </ItemGroup>
   <ItemGroup>
-
     <None Include="Resources\market.png" />
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +280,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\night-mode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spending-money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\expenses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credit-card %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-bag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inspiration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
