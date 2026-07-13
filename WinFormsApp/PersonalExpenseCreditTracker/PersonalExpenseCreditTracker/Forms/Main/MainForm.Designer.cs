@@ -422,7 +422,6 @@
             // 
             // picCredit
             // 
-            this.picCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.credit_card;
             this.picCredit.Location = new System.Drawing.Point(29, 19);
             this.picCredit.Name = "picCredit";
             this.picCredit.Size = new System.Drawing.Size(28, 28);
@@ -966,26 +965,29 @@
             // pnlTaskPage
             // 
             this.pnlTaskPage.BackColor = System.Drawing.Color.Coral;
-            this.pnlTaskPage.Location = new System.Drawing.Point(0, 375);
+            this.pnlTaskPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTaskPage.Location = new System.Drawing.Point(0, 78);
             this.pnlTaskPage.Name = "pnlTaskPage";
-            this.pnlTaskPage.Size = new System.Drawing.Size(876, 680);
+            this.pnlTaskPage.Size = new System.Drawing.Size(876, 977);
             this.pnlTaskPage.TabIndex = 0;
             // 
             // pnlNotesPage
             // 
             this.pnlNotesPage.BackColor = System.Drawing.Color.SeaGreen;
-            this.pnlNotesPage.Location = new System.Drawing.Point(0, 399);
+            this.pnlNotesPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlNotesPage.Location = new System.Drawing.Point(0, 78);
             this.pnlNotesPage.Name = "pnlNotesPage";
-            this.pnlNotesPage.Size = new System.Drawing.Size(876, 656);
+            this.pnlNotesPage.Size = new System.Drawing.Size(876, 977);
             this.pnlNotesPage.TabIndex = 0;
             // 
             // pnlSettingPage
             // 
             this.pnlSettingPage.AutoSize = true;
             this.pnlSettingPage.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.pnlSettingPage.Location = new System.Drawing.Point(0, 432);
+            this.pnlSettingPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSettingPage.Location = new System.Drawing.Point(0, 78);
             this.pnlSettingPage.Name = "pnlSettingPage";
-            this.pnlSettingPage.Size = new System.Drawing.Size(876, 623);
+            this.pnlSettingPage.Size = new System.Drawing.Size(876, 977);
             this.pnlSettingPage.TabIndex = 0;
             // 
             // pnlTop
@@ -1007,7 +1009,7 @@
             this.lblSubtitle.AutoSize = true;
             this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(15, 48);
+            this.lblSubtitle.Location = new System.Drawing.Point(12, 48);
             this.lblSubtitle.Margin = new System.Windows.Forms.Padding(50, 20, 0, 0);
             this.lblSubtitle.Name = "lblSubtitle";
             this.lblSubtitle.Size = new System.Drawing.Size(380, 23);
@@ -1129,6 +1131,7 @@
             this.pnlProfilePage.Name = "pnlProfilePage";
             this.pnlProfilePage.Size = new System.Drawing.Size(876, 1055);
             this.pnlProfilePage.TabIndex = 0;
+            this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
             // 
             // tmSidebar
             // 

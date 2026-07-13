@@ -9,14 +9,18 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Modules.Expense;
 using PersonalExpenseCreditTracker.Modules.Dashboard;
-
+using PersonalExpenseCreditTracker.Modules.Lent;
+using PersonalExpenseCreditTracker.Modules.Credit;
+using PersonalExpenseCreditTracker.Modules.Borrow;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
     {
         private ExpenseControl expenseControl;
         private DashboardControl dashboardControl;
-
+        private LentControls lentControl;
+        private CreditControl creditControl;
+        private BorrowControls borrowControls;
         private bool expenseOpen = false;
         private bool creditOpen = false;
         private bool lentOpen = false;
@@ -24,7 +28,6 @@ namespace PersonalExpenseCreditTracker
         private bool taskOpen = false;
         private bool notesOpen = false;
          private bool settingOpen = false;
-
          private Panel activePanel = null;
          private bool isSidebarExpanded = true;
          private const int SidebarExpandedWidth = 300;
@@ -42,8 +45,6 @@ namespace PersonalExpenseCreditTracker
         {
 
         }
-
-
         private void MainForm_Load(object sender, EventArgs e)
         {
           
@@ -59,7 +60,6 @@ namespace PersonalExpenseCreditTracker
 
             SetActiveMenu(pnlDashboard);
 
-
             if (dashboardControl == null || dashboardControl.IsDisposed)
             {
                 dashboardControl = new DashboardControl();
@@ -74,6 +74,8 @@ namespace PersonalExpenseCreditTracker
                 dashboardControl.Show();
             }
           
+            this.MinimumSize = new Size(1200, 700);
+        
         }
 
         private void CloseAllDropDown()
@@ -86,7 +88,6 @@ namespace PersonalExpenseCreditTracker
             pnlNotesDropDown.Visible = false;
             pnlSettingsDropDown.Visible = false;
            
-
             expenseOpen = false;
             creditOpen = false;
             lentOpen = false;
@@ -157,6 +158,9 @@ namespace PersonalExpenseCreditTracker
      //pnlDashboard Function
         private void pnlDashboard_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Dashboard";
+            lblSubtitle.Text = "Welcome back! Here's your financial overview.";
+
             SetActiveMenu(pnlDashboard);
             CloseAllDropDown();
 
@@ -268,59 +272,58 @@ namespace PersonalExpenseCreditTracker
         //    ExpandSidebar();
         //}
 
-        private void pnlExpense_Click(object sender, EventArgs e)
-        {
-            lblTitle.Text = "Expense";
-                    if (expenseControl == null || expenseControl.IsDisposed)
-                    {
-                        expenseControl = new ExpenseControl();
+       private void pnlExpense_Click(object sender, EventArgs e)
+    {
+    lblTitle.Text = "Expense";
+    lblSubtitle.Text = "Track and manage your expenses";
+    lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
 
-                        expenseControl.TopLevel = false;
-                        expenseControl.FormBorderStyle = FormBorderStyle.None;
-                        expenseControl.Dock = DockStyle.Fill;
+    if (expenseControl == null || expenseControl.IsDisposed)
+    {
+        expenseControl = new ExpenseControl();
 
-                        pnlExpensePage.Controls.Clear();
-                     
-                        pnlExpensePage.Controls.Add(expenseControl);
+        expenseControl.TopLevel = false;
+        expenseControl.FormBorderStyle = FormBorderStyle.None;
+        expenseControl.Dock = DockStyle.Fill;
 
-                        expenseControl.Show();
+        pnlExpensePage.Controls.Clear();
+        pnlExpensePage.Controls.Add(expenseControl);
 
-                    }
+        expenseControl.Show();
+    }
 
-            //expenseControl.BringToFront();
+    pnlOverview.Visible = false;
+    pnlExpensePage.Visible = true;
+    pnlCreditPage.Visible = false;
+    pnlLentPage.Visible = false;
+    pnlBorrowPage.Visible = false;
+    pnlTaskPage.Visible = false;
+    pnlNotesPage.Visible = false;
+    pnlSettingPage.Visible = false;
+    pnlProfilePage.Visible = false;
 
-            pnlOverview.Visible = false;
-            pnlExpensePage.Visible = true;
-            pnlCreditPage.Visible = false;
-            pnlLentPage.Visible = false;
-            pnlBorrowPage.Visible = false;
-            pnlTaskPage.Visible = false;
-            pnlNotesPage.Visible = false;
-            pnlSettingPage.Visible = false;
-            pnlProfilePage.Visible = false;
+    SetActiveMenu(pnlExpense);
 
-            SetActiveMenu(pnlExpense);
+    bool wasOpen = expenseOpen;
 
-            bool wasOpen = expenseOpen;
+    CloseAllDropDown();
 
-            CloseAllDropDown();
+    if (!wasOpen)
+    {
+        pnlExpenseDropDown.Visible = true;
+        picExpenseArrow.Image = Properties.Resources.arrowhead_up;
+        pnlTop.Visible = true;
+        expenseOpen = true;
+    }
+    else
+    {
+        pnlExpenseDropDown.Visible = false;
+        picExpenseArrow.Image = Properties.Resources.down;
+        expenseOpen = false;
+    }
 
-            if (!wasOpen)
-            {
-                pnlExpenseDropDown.Visible = true;
-                picExpenseArrow.Image = Properties.Resources.arrowhead_up;
-                pnlTop.Visible = true;
-                expenseOpen = true;
-            }
-            else
-            {
-                pnlExpenseDropDown.Visible = false;
-                picExpenseArrow.Image = Properties.Resources.down;
-                expenseOpen = false;
-            }
-
-            ExpandSidebar();
-        }
+    ExpandSidebar();
+}
 
 
    //pnlCredit Function
@@ -341,6 +344,25 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlCredit_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Credit";
+            lblSubtitle.Text = "Track and manage your credit transactions";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
+            if (creditControl == null || creditControl.IsDisposed)
+            {
+                creditControl = new CreditControl();
+
+                creditControl.TopLevel = false;
+                creditControl.FormBorderStyle = FormBorderStyle.None;
+                creditControl.Dock = DockStyle.Fill;
+
+                pnlCreditPage.Controls.Clear();
+                pnlCreditPage.Controls.Add(creditControl);
+
+                creditControl.Show();
+
+            }
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = true;
@@ -390,6 +412,24 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlLent_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Lent";
+            lblSubtitle.Text = "Track and manage money you have lent to others";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+            if (lentControl == null || lentControl.IsDisposed)
+            {
+                lentControl = new LentControls();
+
+                lentControl.TopLevel = false;
+                lentControl.FormBorderStyle = FormBorderStyle.None;
+                lentControl.Dock = DockStyle.Fill;
+                pnlLentPage.Controls.Clear();
+                pnlLentPage.Controls.Add(lentControl);
+                lentControl.Show();
+
+            }
+
+
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -440,6 +480,24 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlBorrow_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Borrow";
+            lblSubtitle.Text = "Track and manage money you have borrowed from others";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+            if (borrowControls == null || borrowControls.IsDisposed)
+            {
+                borrowControls = new BorrowControls();
+
+                borrowControls.TopLevel = false;
+                borrowControls.FormBorderStyle = FormBorderStyle.None;
+                borrowControls.Dock = DockStyle.Fill;
+
+                pnlBorrowPage.Controls.Clear();
+                pnlBorrowPage.Controls.Add(borrowControls);
+
+                borrowControls.Show();
+
+            }
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -490,6 +548,11 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlTasks_Click(object sender, EventArgs e)
         {
+
+            lblTitle.Text = "Tasks";
+            lblSubtitle.Text = "Organize and track your tasks efficiently";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -541,6 +604,10 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlNotes_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "Notes";
+            lblSubtitle.Text = "Capture your thoughts and keep everything organized";
+            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -773,7 +840,6 @@ namespace PersonalExpenseCreditTracker
             }
             else
             {
-                
                 picDashboard.Left = 20;
                 picExpense.Left = 20;
                 picCredit.Left = 20;
@@ -802,6 +868,11 @@ namespace PersonalExpenseCreditTracker
             pic.Left = (pnlSideBar.Width - pic.Width) / 2;
         }
 
+        private void pnlProfilePage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
 
 
      
@@ -809,3 +880,4 @@ namespace PersonalExpenseCreditTracker
        
     }
 }
+
