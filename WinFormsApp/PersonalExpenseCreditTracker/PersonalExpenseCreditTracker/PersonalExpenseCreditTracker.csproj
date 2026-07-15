@@ -55,7 +55,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <!-- Lent Module -->
-
     <Compile Include="Modules\Borrow\AddBorrowControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,11 +105,29 @@
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </Compile>
     <!-- Program -->
+    <Compile Include="Modules\Note\NoteAddDetailsControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Note\NoteAddDetailsControl.Designer.cs">
+      <DependentUpon>NoteAddDetailsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Note\NoteControl.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Note\NoteControl.Designer.cs">
       <DependentUpon>NoteControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Note\NoteEditDetailsControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Note\NoteEditDetailsControl.Designer.cs">
+      <DependentUpon>NoteEditDetailsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Note\NoteViewDetailsControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Note\NoteViewDetailsControl.Designer.cs">
+      <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,7 +136,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Lent Resources -->
-
     <EmbeddedResource Include="Modules\Borrow\AddBorrowControls.resx">
       <DependentUpon>AddBorrowControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,8 +162,17 @@
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Application Resources -->
+    <EmbeddedResource Include="Modules\Note\NoteAddDetailsControl.resx">
+      <DependentUpon>NoteAddDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Note\NoteControl.resx">
       <DependentUpon>NoteControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Note\NoteEditDetailsControl.resx">
+      <DependentUpon>NoteEditDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Note\NoteViewDetailsControl.resx">
+      <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -178,11 +203,6 @@
     <Folder Include="Data\" />
     <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
-
-    <Folder Include="Modules\Credit\" />
-
-    <Folder Include="Modules\Borrow\" />
-
     <Folder Include="Modules\Dashboard\" />
     <Folder Include="Modules\Profile\" />
     <Folder Include="Modules\Settings\Category\" />
@@ -288,12 +308,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-
     <None Include="Resources\list.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\menu1.png" />
-
     <None Include="Resources\49001bca-2af4-4908-b1f5-551d2534db66.png" />
   </ItemGroup>
   <ItemGroup>
@@ -307,7 +325,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\repaid.png" />
-
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoteCalender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\more.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
