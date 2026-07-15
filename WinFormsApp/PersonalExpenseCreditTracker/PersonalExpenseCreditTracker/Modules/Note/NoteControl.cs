@@ -1,0 +1,125 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Drawing.Drawing2D;
+
+namespace PersonalExpenseCreditTracker.Modules.Note
+{
+    public partial class NoteControl : Form
+    {
+        public NoteControl()
+        {
+            InitializeComponent();
+            Resize += NoteControl_Resize;
+        }
+
+        private void NoteControl_Load(object sender, EventArgs e)
+        {
+            btnNoteMore.ContextMenuStrip = cmsNote;
+            ResizeNoteCards();
+            SetRoundedPanel(pnlTotalNotes, 15);
+            SetRoundedPanel(pnlImportant, 15);
+            SetRoundedPanel(pnlThisMonth, 15);
+        }
+
+        private void lblNoteSubtitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PicNoteMenu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlTotalNotes_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picNoteImportant_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flpNotes_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnMore_Click(object sender, EventArgs e)
+        {
+            cmsNote.Show(btnNoteMore, 0, btnNoteMore.Height);
+
+        }
+        private void NoteControl_Resize(object sender, EventArgs e)
+        {
+            ResizeNoteCards();
+            SetRoundedPanel(pnlTotalNotes, 15);
+            SetRoundedPanel(pnlImportant, 15);
+            SetRoundedPanel(pnlThisMonth, 15);
+        }
+        private void ResizeNoteCards()
+        {
+            int margin = 10;
+            int availableWidth = flpNotes.ClientSize.Width
+                               - flpNotes.Padding.Left
+                               - flpNotes.Padding.Right;
+
+            int columns;
+
+            if (availableWidth < 500)
+                columns = 1;
+            else if (availableWidth < 850)
+                columns = 2;
+            else if (availableWidth < 1150)
+                columns = 3;
+            else
+                columns = 4;
+
+            int cardWidth = (availableWidth - (columns * margin * 2)) / columns;
+
+            foreach (Control c in flpNotes.Controls)
+            {
+                if (c is Panel)
+                {
+                    c.Width = cardWidth;
+                    c.Height = 120;
+                    c.Margin = new Padding(margin);
+                }
+            }
+        }
+
+        private void pnlNoteHeader_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        
+
+        private void SetRoundedPanel(Panel panel, int radius)
+         {
+            GraphicsPath path = new GraphicsPath();
+                path.AddArc(0, 0, radius, radius, 180, 90);
+                path.AddArc(panel.Width - radius, 0, radius, radius, 270, 90);
+                path.AddArc(panel.Width - radius, panel.Height - radius, radius, radius, 0, 90);
+                path.AddArc(0, panel.Height - radius, radius, radius, 90, 90);
+                path.CloseFigure();
+                panel.Region = new Region(path);
+           }
+    }
+}

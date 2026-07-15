@@ -12,6 +12,7 @@ using PersonalExpenseCreditTracker.Modules.Dashboard;
 using PersonalExpenseCreditTracker.Modules.Lent;
 using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
+using PersonalExpenseCreditTracker.Modules.Note;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -21,6 +22,7 @@ namespace PersonalExpenseCreditTracker
         private LentControls lentControl;
         private CreditControl creditControl;
         private BorrowControls borrowControls;
+        private NoteControl noteControl;
         private bool expenseOpen = false;
         private bool creditOpen = false;
         private bool lentOpen = false;
@@ -607,6 +609,21 @@ namespace PersonalExpenseCreditTracker
             lblTitle.Text = "Notes";
             lblSubtitle.Text = "Capture your thoughts and keep everything organized";
             lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
+            if (noteControl == null || noteControl.IsDisposed)
+            {
+                noteControl = new NoteControl();
+
+                noteControl.TopLevel = false;
+                noteControl.FormBorderStyle = FormBorderStyle.None;
+                noteControl.Dock = DockStyle.Fill;
+
+                pnlNotesPage.Controls.Clear();
+                pnlNotesPage.Controls.Add(noteControl);
+
+                noteControl.Show();
+
+            }
 
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
