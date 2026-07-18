@@ -8,22 +8,23 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Modules.Expense;
+using PersonalExpenseCreditTracker.Modules.Dashboard;
 using PersonalExpenseCreditTracker.Modules.Lent;
 using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Profile;
-
-
+using PersonalExpenseCreditTracker.Modules.Note;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
     {
         private ExpenseControl expenseControl;
+        private DashboardControl dashboardControl;
         private LentControls lentControl;
         private CreditControl creditControl;
         private BorrowControls borrowControls;
         private ProfileControls profileControls;
-
+        private NoteControl noteControl;
         private bool expenseOpen = false;
         private bool creditOpen = false;
         private bool lentOpen = false;
@@ -31,7 +32,6 @@ namespace PersonalExpenseCreditTracker
         private bool taskOpen = false;
         private bool notesOpen = false;
          private bool settingOpen = false;
-
          private Panel activePanel = null;
          private bool isSidebarExpanded = true;
          private const int SidebarExpandedWidth = 300;
@@ -49,8 +49,6 @@ namespace PersonalExpenseCreditTracker
         {
 
         }
-
-
         private void MainForm_Load(object sender, EventArgs e)
         {
           
@@ -65,6 +63,21 @@ namespace PersonalExpenseCreditTracker
             pnlProfilePage.Visible = false;
 
             SetActiveMenu(pnlDashboard);
+
+            if (dashboardControl == null || dashboardControl.IsDisposed)
+            {
+                dashboardControl = new DashboardControl();
+
+                dashboardControl.TopLevel = false;
+                dashboardControl.FormBorderStyle = FormBorderStyle.None;
+                dashboardControl.Dock = DockStyle.Fill;
+
+                pnlOverview.Controls.Clear();
+                pnlOverview.Controls.Add(dashboardControl);
+
+                dashboardControl.Show();
+            }
+          
             this.MinimumSize = new Size(1200, 700);
         
         }
@@ -79,7 +92,6 @@ namespace PersonalExpenseCreditTracker
             pnlNotesDropDown.Visible = false;
             pnlSettingsDropDown.Visible = false;
            
-
             expenseOpen = false;
             creditOpen = false;
             lentOpen = false;
@@ -155,6 +167,20 @@ namespace PersonalExpenseCreditTracker
 
             SetActiveMenu(pnlDashboard);
             CloseAllDropDown();
+
+            if (dashboardControl == null || dashboardControl.IsDisposed)
+            {
+                dashboardControl = new DashboardControl();
+
+                dashboardControl.TopLevel = false;
+                dashboardControl.FormBorderStyle = FormBorderStyle.None;
+                dashboardControl.Dock = DockStyle.Fill;
+
+                pnlOverview.Controls.Clear();
+                pnlOverview.Controls.Add(dashboardControl);
+
+                dashboardControl.Show();
+            }
 
             pnlOverview.Visible = true;
             pnlExpensePage.Visible = false;
@@ -250,60 +276,58 @@ namespace PersonalExpenseCreditTracker
         //    ExpandSidebar();
         //}
 
-        private void pnlExpense_Click(object sender, EventArgs e)
-        {
-            lblTitle.Text = "Expense";
-            lblSubtitle.Text = "Track and manage your expenses";
-            lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
-            if (expenseControl == null || expenseControl.IsDisposed)
-            {
-                expenseControl = new ExpenseControl();
+       private void pnlExpense_Click(object sender, EventArgs e)
+    {
+    lblTitle.Text = "Expense";
+    lblSubtitle.Text = "Track and manage your expenses";
+    lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
 
-                expenseControl.TopLevel = false;
-                expenseControl.FormBorderStyle = FormBorderStyle.None;
-                expenseControl.Dock = DockStyle.Fill;
+    if (expenseControl == null || expenseControl.IsDisposed)
+    {
+        expenseControl = new ExpenseControl();
 
-                pnlExpensePage.Controls.Clear();
-                pnlExpensePage.Controls.Add(expenseControl);
+        expenseControl.TopLevel = false;
+        expenseControl.FormBorderStyle = FormBorderStyle.None;
+        expenseControl.Dock = DockStyle.Fill;
 
-                expenseControl.Show();
+        pnlExpensePage.Controls.Clear();
+        pnlExpensePage.Controls.Add(expenseControl);
 
-            }
+        expenseControl.Show();
+    }
 
-            //expenseControl.BringToFront();
+    pnlOverview.Visible = false;
+    pnlExpensePage.Visible = true;
+    pnlCreditPage.Visible = false;
+    pnlLentPage.Visible = false;
+    pnlBorrowPage.Visible = false;
+    pnlTaskPage.Visible = false;
+    pnlNotesPage.Visible = false;
+    pnlSettingPage.Visible = false;
+    pnlProfilePage.Visible = false;
 
-            pnlOverview.Visible = false;
-            pnlExpensePage.Visible = true;
-            pnlCreditPage.Visible = false;
-            pnlLentPage.Visible = false;
-            pnlBorrowPage.Visible = false;
-            pnlTaskPage.Visible = false;
-            pnlNotesPage.Visible = false;
-            pnlSettingPage.Visible = false;
-            pnlProfilePage.Visible = false;
+    SetActiveMenu(pnlExpense);
 
-            SetActiveMenu(pnlExpense);
+    bool wasOpen = expenseOpen;
 
-            bool wasOpen = expenseOpen;
+    CloseAllDropDown();
 
-            CloseAllDropDown();
+    if (!wasOpen)
+    {
+        pnlExpenseDropDown.Visible = true;
+        picExpenseArrow.Image = Properties.Resources.arrowhead_up;
+        pnlTop.Visible = true;
+        expenseOpen = true;
+    }
+    else
+    {
+        pnlExpenseDropDown.Visible = false;
+        picExpenseArrow.Image = Properties.Resources.down;
+        expenseOpen = false;
+    }
 
-            if (!wasOpen)
-            {
-                pnlExpenseDropDown.Visible = true;
-                picExpenseArrow.Image = Properties.Resources.arrowhead_up;
-                pnlTop.Visible = true;
-                expenseOpen = true;
-            }
-            else
-            {
-                pnlExpenseDropDown.Visible = false;
-                picExpenseArrow.Image = Properties.Resources.down;
-                expenseOpen = false;
-            }
-
-            ExpandSidebar();
-        }
+    ExpandSidebar();
+}
 
 
    //pnlCredit Function
@@ -404,8 +428,6 @@ namespace PersonalExpenseCreditTracker
                 lentControl.Dock = DockStyle.Fill;
                 pnlLentPage.Controls.Clear();
                 pnlLentPage.Controls.Add(lentControl);
-                pnlLentPage.Controls.Add(lentControl);
-
                 lentControl.Show();
 
             }
@@ -589,6 +611,21 @@ namespace PersonalExpenseCreditTracker
             lblTitle.Text = "Notes";
             lblSubtitle.Text = "Capture your thoughts and keep everything organized";
             lblSubtitle.Location = new Point(17, lblSubtitle.Location.Y);
+
+            if (noteControl == null || noteControl.IsDisposed)
+            {
+                noteControl = new NoteControl();
+
+                noteControl.TopLevel = false;
+                noteControl.FormBorderStyle = FormBorderStyle.None;
+                noteControl.Dock = DockStyle.Fill;
+
+                pnlNotesPage.Controls.Clear();
+                pnlNotesPage.Controls.Add(noteControl);
+
+                noteControl.Show();
+
+            }
 
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
@@ -837,7 +874,6 @@ namespace PersonalExpenseCreditTracker
             }
             else
             {
-                
                 picDashboard.Left = 20;
                 picExpense.Left = 20;
                 picCredit.Left = 20;
@@ -878,3 +914,4 @@ namespace PersonalExpenseCreditTracker
        
     }
 }
+
