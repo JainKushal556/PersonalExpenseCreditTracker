@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cyotek.Windows.Forms.ImageBox">
+      <HintPath>..\..\..\..\..\Program Files\Cyotek.Windows.Forms.ImageBox\bin\Debug\Cyotek.Windows.Forms.ImageBox.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -55,7 +58,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <!-- Lent Module -->
-
     <Compile Include="Modules\Borrow\AddBorrowControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +108,24 @@
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </Compile>
     <!-- Program -->
+    <Compile Include="Modules\Profile\EditProfileControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Profile\EditProfileControls.Designer.cs">
+      <DependentUpon>EditProfileControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Profile\ImageCropControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Profile\ImageCropControls.Designer.cs">
+      <DependentUpon>ImageCropControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Profile\ProfileControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Profile\ProfileControls.Designer.cs">
+      <DependentUpon>ProfileControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <!-- Form Resources -->
@@ -113,7 +133,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Lent Resources -->
-
     <EmbeddedResource Include="Modules\Borrow\AddBorrowControls.resx">
       <DependentUpon>AddBorrowControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +159,15 @@
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Application Resources -->
+    <EmbeddedResource Include="Modules\Profile\EditProfileControls.resx">
+      <DependentUpon>EditProfileControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Profile\ImageCropControls.resx">
+      <DependentUpon>ImageCropControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Profile\ProfileControls.resx">
+      <DependentUpon>ProfileControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -169,14 +197,8 @@
     <Folder Include="Data\" />
     <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
-
-    <Folder Include="Modules\Credit\" />
-
-    <Folder Include="Modules\Borrow\" />
-
     <Folder Include="Modules\Dashboard\" />
     <Folder Include="Modules\Note\" />
-    <Folder Include="Modules\Profile\" />
     <Folder Include="Modules\Settings\Category\" />
     <Folder Include="Modules\Settings\Person\" />
     <Folder Include="Modules\Task\" />
@@ -293,6 +315,135 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\repaid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Total Lent1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\message %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user %285%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people %282%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\time-and-date.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\telephone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\telephone %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit %282%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\time-and-date %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calling1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\verified.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\telephone %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\time-and-date %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\telephone %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\verified %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people %283%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\time-and-date1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\telephone1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close %282%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--

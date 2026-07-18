@@ -1148,6 +1148,7 @@
             this.Controls.Add(this.pnlSideBar);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.pnlSideBar.ResumeLayout(false);
             this.pnlUserProfile.ResumeLayout(false);

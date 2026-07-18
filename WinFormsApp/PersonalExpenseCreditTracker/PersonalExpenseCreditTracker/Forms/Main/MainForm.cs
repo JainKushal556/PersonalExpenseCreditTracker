@@ -11,6 +11,8 @@ using PersonalExpenseCreditTracker.Modules.Expense;
 using PersonalExpenseCreditTracker.Modules.Lent;
 using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
+using PersonalExpenseCreditTracker.Modules.Profile;
+
 
 namespace PersonalExpenseCreditTracker
 {
@@ -20,6 +22,7 @@ namespace PersonalExpenseCreditTracker
         private LentControls lentControl;
         private CreditControl creditControl;
         private BorrowControls borrowControls;
+        private ProfileControls profileControls;
 
         private bool expenseOpen = false;
         private bool creditOpen = false;
@@ -688,6 +691,21 @@ namespace PersonalExpenseCreditTracker
             SetActiveMenu(pnlUserProfile);
 
             CloseAllDropDown();
+
+            if (profileControls == null || profileControls.IsDisposed)
+            {
+                profileControls = new ProfileControls();
+
+                profileControls.TopLevel = false;
+                profileControls.FormBorderStyle = FormBorderStyle.None;
+                profileControls.Dock = DockStyle.Fill;
+
+                pnlProfilePage.Controls.Clear();
+                pnlProfilePage.Controls.Add(profileControls);
+
+                profileControls.Show();
+
+            }
 
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
