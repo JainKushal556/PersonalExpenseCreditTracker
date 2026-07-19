@@ -217,6 +217,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <!-- Settings -->
     <None Include="App.config">
@@ -226,6 +227,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -244,6 +250,7 @@
   </ItemGroup>
   <!-- Expense Resources -->
   <ItemGroup>
+    <None Include="Resources\edit %282%291.png" />
     <None Include="Resources\spending.png" />
     <None Include="Resources\transaction.png" />
     <None Include="Resources\refresh.png" />
@@ -400,7 +407,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\menu1.png" />
-    <None Include="Resources\49001bca-2af4-4908-b1f5-551d2534db66.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\49001bca-2af4-4908-b1f5-551d2534db661.png" />
@@ -430,46 +436,13 @@
     <None Include="Resources\more.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Total Lent1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\user %282%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\message %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people %282%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\user %283%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\user %284%29.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\user %285%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pen %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people %281%291.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people %282%291.png" />
+    <None Include="Resources\user %282%29.png" />
+    <None Include="Resources\close %282%291.png" />
+    <None Include="Resources\credit-card1.png" />
+    <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\people %283%29.png" />
@@ -488,39 +461,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\telephone %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\calling.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\edit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\edit %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\edit %282%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\edit %282%291.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\time-and-date %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\calling1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\mail %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\verified.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\telephone %281%291.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\time-and-date %282%29.png" />
@@ -548,15 +488,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Gender.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\close1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\close %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\close %282%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--

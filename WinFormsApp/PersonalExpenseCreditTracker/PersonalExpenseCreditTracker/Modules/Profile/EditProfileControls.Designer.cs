@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pnlEditProfileMainBody = new System.Windows.Forms.Panel();
-            this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.btnCancelEditProfile = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -38,25 +37,21 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.panel40 = new System.Windows.Forms.Panel();
             this.lblProfileAddress = new System.Windows.Forms.Label();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel35 = new System.Windows.Forms.Panel();
             this.lblProfileGender = new System.Windows.Forms.Label();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.pnlEditProfilePhoneNumber = new System.Windows.Forms.Panel();
             this.txtEditProfilePhoneNumber = new System.Windows.Forms.TextBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel30 = new System.Windows.Forms.Panel();
             this.lblProfilePhoneNumber = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.pnlEditProfileEmailAddress = new System.Windows.Forms.Panel();
             this.txtEditProfileEmailAddress = new System.Windows.Forms.TextBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel38 = new System.Windows.Forms.Panel();
             this.lblProfileEmailAddress = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlEditProfileDathOfBirth = new System.Windows.Forms.Panel();
             this.txtEditProfileDathOfBirth = new System.Windows.Forms.TextBox();
@@ -64,42 +59,43 @@
             this.pnlEditProfileFullName = new System.Windows.Forms.Panel();
             this.txtEditProfileFullName = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnCloseEditProfile = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.lblEditProfile = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.lblProfileFullName = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel17 = new System.Windows.Forms.Panel();
             this.lblProfileDathOfBirth = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel13 = new System.Windows.Forms.Panel();
             this.pnlEditProfileGender = new System.Windows.Forms.Panel();
             this.cmbEditProfileGender = new System.Windows.Forms.ComboBox();
             this.txtEditProfileGender = new System.Windows.Forms.TextBox();
+            this.btnUpdateProfile = new System.Windows.Forms.Button();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.btnCloseEditProfile = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pnlEditProfileMainBody.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel15.SuspendLayout();
             this.pnlEditProfileAddress.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel40.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.panel11.SuspendLayout();
             this.panel35.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panel10.SuspendLayout();
             this.pnlEditProfilePhoneNumber.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel30.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel8.SuspendLayout();
             this.pnlEditProfileEmailAddress.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel38.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel6.SuspendLayout();
             this.pnlEditProfileDathOfBirth.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -109,12 +105,16 @@
             this.panel16.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel17.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel13.SuspendLayout();
             this.pnlEditProfileGender.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlEditProfileMainBody
@@ -129,24 +129,6 @@
             this.pnlEditProfileMainBody.Padding = new System.Windows.Forms.Padding(10);
             this.pnlEditProfileMainBody.Size = new System.Drawing.Size(638, 736);
             this.pnlEditProfileMainBody.TabIndex = 0;
-            // 
-            // btnUpdateProfile
-            // 
-            this.btnUpdateProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(101)))), ((int)(((byte)(247)))));
-            this.btnUpdateProfile.FlatAppearance.BorderSize = 0;
-            this.btnUpdateProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateProfile.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
-            this.btnUpdateProfile.Location = new System.Drawing.Point(312, 663);
-            this.btnUpdateProfile.Name = "btnUpdateProfile";
-            this.btnUpdateProfile.Size = new System.Drawing.Size(299, 59);
-            this.btnUpdateProfile.TabIndex = 1;
-            this.btnUpdateProfile.Text = "Update Profile";
-            this.btnUpdateProfile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUpdateProfile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUpdateProfile.UseVisualStyleBackColor = false;
-            this.btnUpdateProfile.Click += new System.EventHandler(this.btnUpdateProfile_Click);
             // 
             // btnCancelEditProfile
             // 
@@ -259,18 +241,6 @@
             this.lblProfileAddress.TabIndex = 1;
             this.lblProfileAddress.Text = "Address";
             // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pin;
-            this.pictureBox7.Location = new System.Drawing.Point(11, 18);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(42, 40);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 7;
-            this.pictureBox7.TabStop = false;
-            // 
             // panel11
             // 
             this.panel11.Controls.Add(this.panel35);
@@ -301,18 +271,6 @@
             this.lblProfileGender.Size = new System.Drawing.Size(79, 28);
             this.lblProfileGender.TabIndex = 1;
             this.lblProfileGender.Text = "Gender";
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gender;
-            this.pictureBox6.Location = new System.Drawing.Point(11, 17);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(42, 40);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 7;
-            this.pictureBox6.TabStop = false;
             // 
             // panel10
             // 
@@ -377,18 +335,6 @@
             this.lblProfilePhoneNumber.TabIndex = 1;
             this.lblProfilePhoneNumber.Text = "Phone Number";
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox5.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone1;
-            this.pictureBox5.Location = new System.Drawing.Point(11, 17);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(42, 40);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 7;
-            this.pictureBox5.TabStop = false;
-            // 
             // panel8
             // 
             this.panel8.Controls.Add(this.pnlEditProfileEmailAddress);
@@ -451,18 +397,6 @@
             this.lblProfileEmailAddress.Size = new System.Drawing.Size(139, 28);
             this.lblProfileEmailAddress.TabIndex = 1;
             this.lblProfileEmailAddress.Text = "Email Address";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox4.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail1;
-            this.pictureBox4.Location = new System.Drawing.Point(11, 17);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(42, 40);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 7;
-            this.pictureBox4.TabStop = false;
             // 
             // panel6
             // 
@@ -537,19 +471,6 @@
             this.panel4.Size = new System.Drawing.Size(360, 74);
             this.panel4.TabIndex = 3;
             // 
-            // btnCloseEditProfile
-            // 
-            this.btnCloseEditProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCloseEditProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close__2_;
-            this.btnCloseEditProfile.Location = new System.Drawing.Point(311, 16);
-            this.btnCloseEditProfile.Name = "btnCloseEditProfile";
-            this.btnCloseEditProfile.Size = new System.Drawing.Size(38, 33);
-            this.btnCloseEditProfile.TabIndex = 0;
-            this.btnCloseEditProfile.TabStop = false;
-            this.btnCloseEditProfile.UseVisualStyleBackColor = true;
-            this.btnCloseEditProfile.Click += new System.EventHandler(this.btnCloseEditProfile_Click);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.panel16);
@@ -611,18 +532,6 @@
             this.lblProfileFullName.TabIndex = 1;
             this.lblProfileFullName.Text = "Full Name";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__3_1;
-            this.pictureBox2.Location = new System.Drawing.Point(11, 17);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(42, 40);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 7;
-            this.pictureBox2.TabStop = false;
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.panel17);
@@ -653,18 +562,6 @@
             this.lblProfileDathOfBirth.Size = new System.Drawing.Size(133, 28);
             this.lblProfileDathOfBirth.TabIndex = 1;
             this.lblProfileDathOfBirth.Text = "Dath Of Birth";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Image = global::PersonalExpenseCreditTracker.Properties.Resources.time_and_date1;
-            this.pictureBox3.Location = new System.Drawing.Point(11, 17);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(42, 40);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 7;
-            this.pictureBox3.TabStop = false;
             // 
             // panel13
             // 
@@ -714,6 +611,109 @@
             this.txtEditProfileGender.Size = new System.Drawing.Size(348, 27);
             this.txtEditProfileGender.TabIndex = 0;
             // 
+            // btnUpdateProfile
+            // 
+            this.btnUpdateProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(101)))), ((int)(((byte)(247)))));
+            this.btnUpdateProfile.FlatAppearance.BorderSize = 0;
+            this.btnUpdateProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateProfile.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnUpdateProfile.Location = new System.Drawing.Point(312, 663);
+            this.btnUpdateProfile.Name = "btnUpdateProfile";
+            this.btnUpdateProfile.Size = new System.Drawing.Size(299, 59);
+            this.btnUpdateProfile.TabIndex = 1;
+            this.btnUpdateProfile.Text = "Update Profile";
+            this.btnUpdateProfile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUpdateProfile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUpdateProfile.UseVisualStyleBackColor = false;
+            this.btnUpdateProfile.Click += new System.EventHandler(this.btnUpdateProfile_Click);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pin;
+            this.pictureBox7.Location = new System.Drawing.Point(11, 18);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(42, 40);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 7;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gender;
+            this.pictureBox6.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(42, 40);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 7;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox5.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone1;
+            this.pictureBox5.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(42, 40);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 7;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox4.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail1;
+            this.pictureBox4.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(42, 40);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 7;
+            this.pictureBox4.TabStop = false;
+            // 
+            // btnCloseEditProfile
+            // 
+            this.btnCloseEditProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCloseEditProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close__2_;
+            this.btnCloseEditProfile.Location = new System.Drawing.Point(311, 16);
+            this.btnCloseEditProfile.Name = "btnCloseEditProfile";
+            this.btnCloseEditProfile.Size = new System.Drawing.Size(38, 33);
+            this.btnCloseEditProfile.TabIndex = 0;
+            this.btnCloseEditProfile.TabStop = false;
+            this.btnCloseEditProfile.UseVisualStyleBackColor = true;
+            this.btnCloseEditProfile.Click += new System.EventHandler(this.btnCloseEditProfile_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__3_;
+            this.pictureBox2.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(42, 40);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox3.Image = global::PersonalExpenseCreditTracker.Properties.Resources.time_and_date1;
+            this.pictureBox3.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(42, 40);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 7;
+            this.pictureBox3.TabStop = false;
+            // 
             // EditProfileControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -735,25 +735,21 @@
             this.panel14.ResumeLayout(false);
             this.panel40.ResumeLayout(false);
             this.panel40.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.panel11.ResumeLayout(false);
             this.panel35.ResumeLayout(false);
             this.panel35.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panel10.ResumeLayout(false);
             this.pnlEditProfilePhoneNumber.ResumeLayout(false);
             this.pnlEditProfilePhoneNumber.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel30.ResumeLayout(false);
             this.panel30.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel8.ResumeLayout(false);
             this.pnlEditProfileEmailAddress.ResumeLayout(false);
             this.pnlEditProfileEmailAddress.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel38.ResumeLayout(false);
             this.panel38.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel6.ResumeLayout(false);
             this.pnlEditProfileDathOfBirth.ResumeLayout(false);
             this.pnlEditProfileDathOfBirth.PerformLayout();
@@ -767,14 +763,18 @@
             this.panel2.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel13.ResumeLayout(false);
             this.pnlEditProfileGender.ResumeLayout(false);
             this.pnlEditProfileGender.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }

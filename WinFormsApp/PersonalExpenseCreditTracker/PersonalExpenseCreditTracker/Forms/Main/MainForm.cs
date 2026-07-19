@@ -140,7 +140,7 @@ namespace PersonalExpenseCreditTracker
             }
 
             else if (panel == pnlCredit)
-                picCredit.Image = active ? Properties.Resources.credit_card_white : Properties.Resources.credit_card;
+                picCredit.Image = active ? Properties.Resources.credit_card_white : Properties.Resources.credit_card1;
 
             else if (panel == pnlLent)
                 picLent.Image = active ? Properties.Resources.payment_white : Properties.Resources.payment_lent1;
@@ -342,7 +342,7 @@ namespace PersonalExpenseCreditTracker
             if (activePanel != pnlCredit)
             {
                 pnlCredit.BackColor = Color.FromArgb(15, 23, 42);
-                picCredit.Image = Properties.Resources.credit_card;
+                picCredit.Image = Properties.Resources.credit_card1;
             }
         }
 
