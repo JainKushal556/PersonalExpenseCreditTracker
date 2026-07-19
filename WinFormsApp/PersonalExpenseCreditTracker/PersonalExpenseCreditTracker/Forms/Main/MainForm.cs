@@ -12,7 +12,6 @@ using PersonalExpenseCreditTracker.Modules.Dashboard;
 using PersonalExpenseCreditTracker.Modules.Lent;
 using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
-using PersonalExpenseCreditTracker.Modules.Profile;
 using PersonalExpenseCreditTracker.Modules.Note;
 namespace PersonalExpenseCreditTracker
 {
@@ -23,7 +22,6 @@ namespace PersonalExpenseCreditTracker
         private LentControls lentControl;
         private CreditControl creditControl;
         private BorrowControls borrowControls;
-        private ProfileControls profileControls;
         private NoteControl noteControl;
         private bool expenseOpen = false;
         private bool creditOpen = false;
@@ -140,7 +138,7 @@ namespace PersonalExpenseCreditTracker
             }
 
             else if (panel == pnlCredit)
-                picCredit.Image = active ? Properties.Resources.credit_card_white : Properties.Resources.credit_card1;
+                picCredit.Image = active ? Properties.Resources.credit_card_white : Properties.Resources.credit_card;
 
             else if (panel == pnlLent)
                 picLent.Image = active ? Properties.Resources.payment_white : Properties.Resources.payment_lent1;
@@ -342,7 +340,7 @@ namespace PersonalExpenseCreditTracker
             if (activePanel != pnlCredit)
             {
                 pnlCredit.BackColor = Color.FromArgb(15, 23, 42);
-                picCredit.Image = Properties.Resources.credit_card1;
+                picCredit.Image = Properties.Resources.credit_card;
             }
         }
 
@@ -728,21 +726,6 @@ namespace PersonalExpenseCreditTracker
             SetActiveMenu(pnlUserProfile);
 
             CloseAllDropDown();
-
-            if (profileControls == null || profileControls.IsDisposed)
-            {
-                profileControls = new ProfileControls();
-
-                profileControls.TopLevel = false;
-                profileControls.FormBorderStyle = FormBorderStyle.None;
-                profileControls.Dock = DockStyle.Fill;
-
-                pnlProfilePage.Controls.Clear();
-                pnlProfilePage.Controls.Add(profileControls);
-
-                profileControls.Show();
-
-            }
 
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
