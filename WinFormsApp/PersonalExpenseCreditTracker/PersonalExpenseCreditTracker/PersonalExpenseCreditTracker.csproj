@@ -34,8 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cyotek.Windows.Forms.ImageBox">
-      <HintPath>..\..\..\..\..\Program Files\Cyotek.Windows.Forms.ImageBox\bin\Debug\Cyotek.Windows.Forms.ImageBox.dll</HintPath>
+    <Reference Include="Cyotek.Windows.Forms.ImageBox, Version=1.1.4.2, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Cyotek.Windows.Forms.ImageBox.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -442,6 +443,7 @@
     <None Include="Resources\user %282%29.png" />
     <None Include="Resources\close %282%291.png" />
     <None Include="Resources\credit-card1.png" />
+    <Content Include="Libraries\Cyotek.Windows.Forms.ImageBox.dll" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>
