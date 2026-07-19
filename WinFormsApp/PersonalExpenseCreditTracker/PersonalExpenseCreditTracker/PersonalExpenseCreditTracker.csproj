@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,7 +55,37 @@
     <Compile Include="Forms\Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Dashboard\DashboardControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Dashboard\DashboardControl.Designer.cs">
+      <DependentUpon>DashboardControl.cs</DependentUpon>
+    </Compile>
     <!-- Lent Module -->
+    <Compile Include="Modules\Borrow\AddBorrowControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Borrow\AddBorrowControls.Designer.cs">
+      <DependentUpon>AddBorrowControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Borrow\BorrowControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Borrow\BorrowControls.Designer.cs">
+      <DependentUpon>BorrowControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Credit\CreditControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Credit\CreditControl.Designer.cs">
+      <DependentUpon>CreditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Credit\CreditDetailsControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Credit\CreditDetailsControl.Designer.cs">
+      <DependentUpon>CreditDetailsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Lent\AddLentControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,7 +118,22 @@
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Dashboard\DashboardControl.resx">
+      <DependentUpon>DashboardControl.cs</DependentUpon>
+    </EmbeddedResource>
     <!-- Lent Resources -->
+    <EmbeddedResource Include="Modules\Borrow\AddBorrowControls.resx">
+      <DependentUpon>AddBorrowControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Borrow\BorrowControls.resx">
+      <DependentUpon>BorrowControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Credit\CreditControl.resx">
+      <DependentUpon>CreditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Credit\CreditDetailsControl.resx">
+      <DependentUpon>CreditDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Lent\AddLentControls.resx">
       <DependentUpon>AddLentControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,7 +154,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <!-- Settings -->
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -129,9 +177,6 @@
     <Folder Include="Data\" />
     <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Modules\Borrow\" />
-    <Folder Include="Modules\Credit\" />
-    <Folder Include="Modules\Dashboard\" />
     <Folder Include="Modules\Note\" />
     <Folder Include="Modules\Profile\" />
     <Folder Include="Modules\Settings\Category\" />
@@ -154,6 +199,50 @@
     <None Include="Resources\diskette.png" />
     <None Include="Resources\tag.png" />
     <None Include="Resources\up-and-down-arrows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet .png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house-regular %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet-filled-money-tool.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet-filled-money-tool1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credit-card.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\market.png" />
     <None Include="Resources\bullets.png" />
     <None Include="Resources\shop.png" />
@@ -199,6 +288,27 @@
     <None Include="Resources\moon.png" />
     <None Include="Resources\night-mode.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spending-money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\expenses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credit-card %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-bag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inspiration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary.png" />
+  </ItemGroup>
   <!-- Lent Resources -->
   <ItemGroup>
     <None Include="Resources\Total Lent.png" />
@@ -229,6 +339,72 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\colourcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLLayer\BLLayer.csproj">
+      <Project>{168EF053-5F30-4148-9301-BB47AFDE9801}</Project>
+      <Name>BLLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\49001bca-2af4-4908-b1f5-551d2534db66.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\49001bca-2af4-4908-b1f5-551d2534db661.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChatGPT Image Jul 12, 2026, 01_40_51 AM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChatGPT Image Jul 12, 2026, 01_07_09 AM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\repaid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pricing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clipboard %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar-design.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pending.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\secure-payment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
