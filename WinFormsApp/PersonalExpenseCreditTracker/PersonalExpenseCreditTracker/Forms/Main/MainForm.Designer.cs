@@ -369,6 +369,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblAddExpense = new System.Windows.Forms.Label();
             this.pnlContainer = new System.Windows.Forms.Panel();
+            this.pnlExpenseCategory = new System.Windows.Forms.Panel();
             this.pnlOverview = new System.Windows.Forms.Panel();
             this.pnlExpensePage = new System.Windows.Forms.Panel();
             this.pnlCreditPage = new System.Windows.Forms.Panel();
@@ -390,6 +391,16 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
+            this.pnlCreditCategoryPage = new System.Windows.Forms.Panel();
+            this.pnlChnagePasswordPage = new System.Windows.Forms.Panel();
+            this.pnlLogoutPage = new System.Windows.Forms.Panel();
+            this.pnlSettingChangesPassword = new System.Windows.Forms.Panel();
+            this.lblSetingChangesPassword = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.picSettingChangePassword = new System.Windows.Forms.PictureBox();
+            this.pnlSettingPersonAdd = new System.Windows.Forms.Panel();
+            this.lblSettingPersonAdd = new System.Windows.Forms.Label();
+            this.pnlPersonAddPage = new System.Windows.Forms.Panel();
             this.pnlMainSideBarSection.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             this.pnlScrollBar.SuspendLayout();
@@ -583,6 +594,11 @@
             this.pnlDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).BeginInit();
             this.panel3.SuspendLayout();
+            this.pnlChnagePasswordPage.SuspendLayout();
+            this.pnlSettingChangesPassword.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSettingChangePassword)).BeginInit();
+            this.pnlSettingPersonAdd.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMainSideBarSection
@@ -650,7 +666,7 @@
             this.flowSidebar.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowSidebar.Location = new System.Drawing.Point(0, 0);
             this.flowSidebar.Name = "flowSidebar";
-            this.flowSidebar.Size = new System.Drawing.Size(400, 5199);
+            this.flowSidebar.Size = new System.Drawing.Size(400, 5277);
             this.flowSidebar.TabIndex = 4;
             this.flowSidebar.WrapContents = false;
             // 
@@ -4691,6 +4707,8 @@
             // 
             this.pnlSettingsDropDown.AutoSize = true;
             this.pnlSettingsDropDown.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlSettingsDropDown.Controls.Add(this.pnlSettingChangesPassword);
+            this.pnlSettingsDropDown.Controls.Add(this.pnlSettingPersonAdd);
             this.pnlSettingsDropDown.Controls.Add(this.pnlLogout);
             this.pnlSettingsDropDown.Controls.Add(this.pnlSettingCreditCategories);
             this.pnlSettingsDropDown.Controls.Add(this.pnlSettingExpenseCategories);
@@ -4698,7 +4716,7 @@
             this.pnlSettingsDropDown.Location = new System.Drawing.Point(0, 5052);
             this.pnlSettingsDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.pnlSettingsDropDown.Name = "pnlSettingsDropDown";
-            this.pnlSettingsDropDown.Size = new System.Drawing.Size(400, 135);
+            this.pnlSettingsDropDown.Size = new System.Drawing.Size(400, 225);
             this.pnlSettingsDropDown.TabIndex = 16;
             this.pnlSettingsDropDown.Visible = false;
             // 
@@ -4706,8 +4724,8 @@
             // 
             this.pnlLogout.Controls.Add(this.lblLogout);
             this.pnlLogout.Controls.Add(this.picLogout);
-            this.pnlLogout.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLogout.Location = new System.Drawing.Point(0, 90);
+            this.pnlLogout.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlLogout.Location = new System.Drawing.Point(0, 180);
             this.pnlLogout.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLogout.Name = "pnlLogout";
             this.pnlLogout.Size = new System.Drawing.Size(400, 45);
@@ -4950,6 +4968,10 @@
             // 
             // pnlContainer
             // 
+            this.pnlContainer.Controls.Add(this.pnlPersonAddPage);
+            this.pnlContainer.Controls.Add(this.pnlChnagePasswordPage);
+            this.pnlContainer.Controls.Add(this.pnlCreditCategoryPage);
+            this.pnlContainer.Controls.Add(this.pnlExpenseCategory);
             this.pnlContainer.Controls.Add(this.pnlOverview);
             this.pnlContainer.Controls.Add(this.pnlExpensePage);
             this.pnlContainer.Controls.Add(this.pnlCreditPage);
@@ -4964,6 +4986,15 @@
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(876, 1055);
             this.pnlContainer.TabIndex = 1;
+            // 
+            // pnlExpenseCategory
+            // 
+            this.pnlExpenseCategory.BackColor = System.Drawing.Color.Teal;
+            this.pnlExpenseCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlExpenseCategory.Location = new System.Drawing.Point(0, 78);
+            this.pnlExpenseCategory.Name = "pnlExpenseCategory";
+            this.pnlExpenseCategory.Size = new System.Drawing.Size(876, 977);
+            this.pnlExpenseCategory.TabIndex = 0;
             // 
             // pnlOverview
             // 
@@ -5175,15 +5206,135 @@
             this.pnlProfilePage.AutoSize = true;
             this.pnlProfilePage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlProfilePage.BackColor = System.Drawing.Color.Pink;
+            this.pnlProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProfilePage.Location = new System.Drawing.Point(400, 0);
             this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(0, 20, 10, 20);
             this.pnlProfilePage.Name = "pnlProfilePage";
-            this.pnlProfilePage.Size = new System.Drawing.Size(0, 0);
+            this.pnlProfilePage.Size = new System.Drawing.Size(876, 1055);
             this.pnlProfilePage.TabIndex = 0;
             // 
             // tmSidebar
             // 
             this.tmSidebar.Interval = 10;
+            // 
+            // pnlCreditCategoryPage
+            // 
+            this.pnlCreditCategoryPage.BackColor = System.Drawing.Color.Olive;
+            this.pnlCreditCategoryPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCreditCategoryPage.Location = new System.Drawing.Point(0, 78);
+            this.pnlCreditCategoryPage.Name = "pnlCreditCategoryPage";
+            this.pnlCreditCategoryPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlCreditCategoryPage.TabIndex = 0;
+            // 
+            // pnlChnagePasswordPage
+            // 
+            this.pnlChnagePasswordPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.pnlChnagePasswordPage.Controls.Add(this.pnlLogoutPage);
+            this.pnlChnagePasswordPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChnagePasswordPage.Location = new System.Drawing.Point(0, 78);
+            this.pnlChnagePasswordPage.Name = "pnlChnagePasswordPage";
+            this.pnlChnagePasswordPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlChnagePasswordPage.TabIndex = 0;
+            // 
+            // pnlLogoutPage
+            // 
+            this.pnlLogoutPage.BackColor = System.Drawing.Color.Silver;
+            this.pnlLogoutPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLogoutPage.Location = new System.Drawing.Point(0, 0);
+            this.pnlLogoutPage.Name = "pnlLogoutPage";
+            this.pnlLogoutPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlLogoutPage.TabIndex = 0;
+            // 
+            // pnlSettingChangesPassword
+            // 
+            this.pnlSettingChangesPassword.Controls.Add(this.lblSetingChangesPassword);
+            this.pnlSettingChangesPassword.Controls.Add(this.pictureBox4);
+            this.pnlSettingChangesPassword.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSettingChangesPassword.Location = new System.Drawing.Point(0, 135);
+            this.pnlSettingChangesPassword.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlSettingChangesPassword.Name = "pnlSettingChangesPassword";
+            this.pnlSettingChangesPassword.Size = new System.Drawing.Size(400, 45);
+            this.pnlSettingChangesPassword.TabIndex = 4;
+            this.pnlSettingChangesPassword.Click += new System.EventHandler(this.pnlSettingChangesPassword_Click);
+            this.pnlSettingChangesPassword.MouseEnter += new System.EventHandler(this.pnlSettingChangesPassword_MouseEnter);
+            this.pnlSettingChangesPassword.MouseLeave += new System.EventHandler(this.pnlSettingChangesPassword_MouseLeave);
+            // 
+            // lblSetingChangesPassword
+            // 
+            this.lblSetingChangesPassword.AutoSize = true;
+            this.lblSetingChangesPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSetingChangesPassword.ForeColor = System.Drawing.Color.White;
+            this.lblSetingChangesPassword.Location = new System.Drawing.Point(93, 10);
+            this.lblSetingChangesPassword.Name = "lblSetingChangesPassword";
+            this.lblSetingChangesPassword.Size = new System.Drawing.Size(146, 23);
+            this.lblSetingChangesPassword.TabIndex = 1;
+            this.lblSetingChangesPassword.Text = "Change Password";
+            this.lblSetingChangesPassword.Click += new System.EventHandler(this.pnlSettingChangesPassword_Click);
+            this.lblSetingChangesPassword.MouseEnter += new System.EventHandler(this.pnlSettingChangesPassword_MouseEnter);
+            this.lblSetingChangesPassword.MouseLeave += new System.EventHandler(this.pnlSettingChangesPassword_MouseLeave);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::PersonalExpenseCreditTracker.Properties.Resources.reset_password;
+            this.pictureBox4.Location = new System.Drawing.Point(55, 10);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pnlSettingChangesPassword_Click);
+            this.pictureBox4.MouseEnter += new System.EventHandler(this.pnlSettingChangesPassword_MouseEnter);
+            this.pictureBox4.MouseLeave += new System.EventHandler(this.pnlSettingChangesPassword_MouseLeave);
+            // 
+            // picSettingChangePassword
+            // 
+            this.picSettingChangePassword.Image = global::PersonalExpenseCreditTracker.Properties.Resources.man;
+            this.picSettingChangePassword.Location = new System.Drawing.Point(55, 10);
+            this.picSettingChangePassword.Name = "picSettingChangePassword";
+            this.picSettingChangePassword.Size = new System.Drawing.Size(24, 24);
+            this.picSettingChangePassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picSettingChangePassword.TabIndex = 0;
+            this.picSettingChangePassword.TabStop = false;
+            this.picSettingChangePassword.Click += new System.EventHandler(this.pnlSettingPersonAdd_Click);
+            this.picSettingChangePassword.MouseEnter += new System.EventHandler(this.pnlSettingPersonAdd_MouseEnter);
+            this.picSettingChangePassword.MouseLeave += new System.EventHandler(this.pnlSettingPersonAdd_MouseLeave);
+            // 
+            // pnlSettingPersonAdd
+            // 
+            this.pnlSettingPersonAdd.Controls.Add(this.lblSettingPersonAdd);
+            this.pnlSettingPersonAdd.Controls.Add(this.picSettingChangePassword);
+            this.pnlSettingPersonAdd.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSettingPersonAdd.Location = new System.Drawing.Point(0, 90);
+            this.pnlSettingPersonAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlSettingPersonAdd.Name = "pnlSettingPersonAdd";
+            this.pnlSettingPersonAdd.Size = new System.Drawing.Size(400, 45);
+            this.pnlSettingPersonAdd.TabIndex = 3;
+            this.pnlSettingPersonAdd.Click += new System.EventHandler(this.pnlSettingPersonAdd_Click);
+            this.pnlSettingPersonAdd.MouseEnter += new System.EventHandler(this.pnlSettingPersonAdd_MouseEnter);
+            this.pnlSettingPersonAdd.MouseLeave += new System.EventHandler(this.pnlSettingPersonAdd_MouseLeave);
+            // 
+            // lblSettingPersonAdd
+            // 
+            this.lblSettingPersonAdd.AutoSize = true;
+            this.lblSettingPersonAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingPersonAdd.ForeColor = System.Drawing.Color.White;
+            this.lblSettingPersonAdd.Location = new System.Drawing.Point(93, 10);
+            this.lblSettingPersonAdd.Name = "lblSettingPersonAdd";
+            this.lblSettingPersonAdd.Size = new System.Drawing.Size(169, 23);
+            this.lblSettingPersonAdd.TabIndex = 1;
+            this.lblSettingPersonAdd.Text = "Person Management";
+            this.lblSettingPersonAdd.Click += new System.EventHandler(this.pnlSettingPersonAdd_Click);
+            this.lblSettingPersonAdd.MouseEnter += new System.EventHandler(this.pnlSettingPersonAdd_MouseEnter);
+            this.lblSettingPersonAdd.MouseLeave += new System.EventHandler(this.pnlSettingPersonAdd_MouseLeave);
+            // 
+            // pnlPersonAddPage
+            // 
+            this.pnlPersonAddPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.pnlPersonAddPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPersonAddPage.Location = new System.Drawing.Point(0, 78);
+            this.pnlPersonAddPage.Name = "pnlPersonAddPage";
+            this.pnlPersonAddPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlPersonAddPage.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -5478,6 +5629,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.pnlChnagePasswordPage.ResumeLayout(false);
+            this.pnlSettingChangesPassword.ResumeLayout(false);
+            this.pnlSettingChangesPassword.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSettingChangePassword)).EndInit();
+            this.pnlSettingPersonAdd.ResumeLayout(false);
+            this.pnlSettingPersonAdd.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5846,6 +6004,17 @@
         private System.Windows.Forms.PictureBox picSettingExpenseCategories;
         private System.Windows.Forms.Panel pnlScrollBar;
         private System.Windows.Forms.Panel pnlThumb;
+        private System.Windows.Forms.Panel pnlExpenseCategory;
+        private System.Windows.Forms.Panel pnlCreditCategoryPage;
+        private System.Windows.Forms.Panel pnlChnagePasswordPage;
+        private System.Windows.Forms.Panel pnlLogoutPage;
+        private System.Windows.Forms.Panel pnlSettingChangesPassword;
+        private System.Windows.Forms.Label lblSetingChangesPassword;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Panel pnlSettingPersonAdd;
+        private System.Windows.Forms.Label lblSettingPersonAdd;
+        private System.Windows.Forms.PictureBox picSettingChangePassword;
+        private System.Windows.Forms.Panel pnlPersonAddPage;
     }
 }
 
