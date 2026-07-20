@@ -13,6 +13,7 @@ using PersonalExpenseCreditTracker.Modules.Lent;
 using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Note;
+using PersonalExpenseCreditTracker.Modules.Profile;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -33,7 +34,7 @@ namespace PersonalExpenseCreditTracker
         private LentControls lentControl;
         private CreditControl creditControl;
         private BorrowControls borrowControls;
-        private UserControl userControl;
+        private ProfileControls profileControl;
         private NoteControl noteControl;
 
        // Dropdown Open/Close Status
@@ -1085,19 +1086,19 @@ namespace PersonalExpenseCreditTracker
 
             CloseAllDropDown();
 
-            if (userControl == null || userControl.IsDisposed)
+            if (profileControl == null || profileControl.IsDisposed)
             {
-                userControl = new UserControl();
+                profileControl = new ProfileControls();
 
-                //userControl.TopLevel = false;
-                //userControl.FormBorderStyle = FormBorderStyle.None;
-                //userControl.Dock = DockStyle.Fill;
+                profileControl.TopLevel = false;
+                profileControl.FormBorderStyle = FormBorderStyle.None;
+                profileControl.Dock = DockStyle.Fill;
 
                 pnlProfilePage.Controls.Clear();
 
-                pnlProfilePage.Controls.Add(userControl);
+                pnlProfilePage.Controls.Add(profileControl);
 
-                userControl.Show();
+                profileControl.Show();
             }
 
             ShowPage(pnlProfilePage);
@@ -3202,6 +3203,8 @@ namespace PersonalExpenseCreditTracker
                 pnlSettingPersonAdd.BackColor = Color.Transparent;
             }
         }
+
+      
 
        
 
