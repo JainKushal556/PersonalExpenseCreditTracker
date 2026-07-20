@@ -12,6 +12,7 @@ using PersonalExpenseCreditTracker.Modules.Dashboard;
 using PersonalExpenseCreditTracker.Modules.Lent;
 using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
+using PersonalExpenseCreditTracker.Modules.Note;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -33,6 +34,7 @@ namespace PersonalExpenseCreditTracker
         private CreditControl creditControl;
         private BorrowControls borrowControls;
         private UserControl userControl;
+        private NoteControl noteControl;
 
        // Dropdown Open/Close Status
         //Kon Menu present open ache ta Track korer jano
@@ -934,7 +936,29 @@ namespace PersonalExpenseCreditTracker
      "Notes",
      "Capture your thoughts and keep everything organized");
 
-         
+            if (noteControl == null || noteControl.IsDisposed)
+            {
+                noteControl = new NoteControl();
+
+                noteControl.TopLevel = false;
+                noteControl.FormBorderStyle = FormBorderStyle.None;
+                noteControl.Dock = DockStyle.Fill;
+
+                pnlNotesPage.Controls.Clear();
+                pnlNotesPage.Controls.Add(noteControl);
+
+                noteControl.Show();
+            }
+
+            pnlOverview.Visible = false;
+            pnlExpensePage.Visible = false;
+            pnlCreditPage.Visible = false;
+            pnlLentPage.Visible = false;
+            pnlBorrowPage.Visible = false;
+            pnlTaskPage.Visible = false;
+            pnlNotesPage.Visible = true;
+            pnlSettingPage.Visible = false;
+            pnlProfilePage.Visible = false;
 
             SetActiveMenu(pnlNotes, false);
             bool wasOpen = notesOpen;
