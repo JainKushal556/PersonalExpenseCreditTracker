@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -48,6 +49,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Resources.Extensions">
+      <HintPath>C:\Program Files\dotnet\sdk\10.0.204\System.Resources.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -244,6 +248,8 @@
     <Folder Include="Data\" />
     <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Modules\Note" />
+    <Folder Include="Modules\Profile" />
     <Folder Include="Modules\Settings\Category\" />
     <Folder Include="Modules\Settings\Person\" />
     <Folder Include="Modules\Task\" />
@@ -422,74 +428,47 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\filter.png" />
+    <None Include="Resources\filter %281%29.png" />
+    <None Include="Resources\filter %282%29.png" />
+    <None Include="Resources\list.png" />
+    <None Include="Resources\pricing.png" />
+    <None Include="Resources\project.png" />
+    <None Include="Resources\clipboard %281%29.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\plus %281%29.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\avatar-design.png" />
+    <None Include="Resources\pending.png" />
+    <None Include="Resources\secure-payment.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\reset-password1.png" />
     <None Include="Resources\note.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\note1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\star.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\NoteCalender.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\more.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\user %285%29.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\user %282%29.png" />
     <None Include="Resources\close %282%291.png" />
     <None Include="Resources\credit-card1.png" />
+    <None Include="Resources\people %283%29.png" />
+    <None Include="Resources\time-and-date.png" />
+    <None Include="Resources\mail.png" />
+    <None Include="Resources\telephone.png" />
+    <None Include="Resources\people %284%29.png" />
+    <None Include="Resources\pin.png" />
+    <None Include="Resources\time-and-date %282%29.png" />
+    <None Include="Resources\telephone %282%29.png" />
+    <None Include="Resources\mail %282%29.png" />
+    <None Include="Resources\verified %281%29.png" />
+    <None Include="Resources\mail1.png" />
+    <None Include="Resources\people %283%291.png" />
+    <None Include="Resources\time-and-date1.png" />
+    <None Include="Resources\telephone1.png" />
+    <None Include="Resources\Gender.png" />
     <Content Include="Libraries\Cyotek.Windows.Forms.ImageBox.dll" />
     <Content Include="Resources\pen %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people %283%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\time-and-date.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\mail.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\telephone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people %284%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\time-and-date %282%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\telephone %282%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\mail %282%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\verified %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\mail1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\people %283%291.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\time-and-date1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\telephone1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Gender.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
