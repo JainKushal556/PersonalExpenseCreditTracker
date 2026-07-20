@@ -56,6 +56,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Authentication\LoginControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Authentication\LoginControls.Designer.cs">
+      <DependentUpon>LoginControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Authentication\RegistrationControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Authentication\RegistrationControls.Designer.cs">
+      <DependentUpon>RegistrationControls.cs</DependentUpon>
+    </Compile>
     <!-- Main Form -->
     <Compile Include="Forms\Main\MainForm.cs">
       <SubType>Form</SubType>
@@ -164,6 +176,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Authentication\LoginControls.resx">
+      <DependentUpon>LoginControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Authentication\RegistrationControls.resx">
+      <DependentUpon>RegistrationControls.cs</DependentUpon>
+    </EmbeddedResource>
+
     <!-- Form Resources -->
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -246,7 +265,6 @@
   <!-- Project Folders -->
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
     <Folder Include="Modules\Note" />
     <Folder Include="Modules\Profile" />
