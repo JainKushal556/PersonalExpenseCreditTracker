@@ -14,6 +14,8 @@ using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Note;
 using PersonalExpenseCreditTracker.Modules.Profile;
+using PersonalExpenseCreditTracker.Modules.Settings.Person;
+
 using PersonalExpenseCreditTracker.Modules.Settings.Category;
 namespace PersonalExpenseCreditTracker
 {
@@ -37,6 +39,7 @@ namespace PersonalExpenseCreditTracker
         private BorrowControls borrowControls;
         private ProfileControls profileControl;
         private NoteControl noteControl;
+        private AddPersonControls addPersonSControls;
         private ExpenseCategoryControls expenseCategoryControls;
         private CreditCategoryControls creditCategoryControls;
        // Dropdown Open/Close Status
@@ -3214,6 +3217,20 @@ namespace PersonalExpenseCreditTracker
      "Save a person's details for use in Lent and Borrow modules");
 
             ShowPage(pnlPersonAddPage);
+
+            if (addPersonSControls == null || addPersonSControls.IsDisposed)
+            {
+                addPersonSControls = new AddPersonControls();
+
+                addPersonSControls.TopLevel = false;
+                addPersonSControls.FormBorderStyle = FormBorderStyle.None;
+                addPersonSControls.Dock = DockStyle.Fill;
+
+                pnlPersonAddPage.Controls.Clear();
+                pnlPersonAddPage.Controls.Add(addPersonSControls);
+
+                addPersonSControls.Show();
+            }
 
             RefreshSidebarScroll();
             ExpandSidebar();

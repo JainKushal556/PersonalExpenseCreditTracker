@@ -371,6 +371,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.btnAddCategory.TabIndex = 2;
             this.btnAddCategory.Text = "+ Add Category";
             this.btnAddCategory.UseVisualStyleBackColor = false;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
             // 
             // lblTitle
             // 
