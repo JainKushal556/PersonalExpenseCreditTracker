@@ -162,6 +162,36 @@
     <Compile Include="Modules\Note\NoteViewDetailsControl.Designer.cs">
       <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Task\AddTaskControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\AddTaskControl.Designer.cs">
+      <DependentUpon>AddTaskControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Task\DeleteTaskControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\DeleteTaskControl.Designer.cs">
+      <DependentUpon>DeleteTaskControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Task\EditTaskControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\EditTaskControl.Designer.cs">
+      <DependentUpon>EditTaskControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Task\TaskControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\TaskControls.Designer.cs">
+      <DependentUpon>TaskControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Task\UpdateTaskStatusControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\UpdateTaskStatusControl.Designer.cs">
+      <DependentUpon>UpdateTaskStatusControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <!-- Form Resources -->
@@ -219,6 +249,21 @@
     <EmbeddedResource Include="Modules\Note\NoteViewDetailsControl.resx">
       <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\AddTaskControl.resx">
+      <DependentUpon>AddTaskControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\DeleteTaskControl.resx">
+      <DependentUpon>DeleteTaskControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\EditTaskControl.resx">
+      <DependentUpon>EditTaskControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\TaskControls.resx">
+      <DependentUpon>TaskControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\UpdateTaskStatusControl.resx">
+      <DependentUpon>UpdateTaskStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -248,11 +293,8 @@
     <Folder Include="Data\" />
     <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Modules\Note" />
-    <Folder Include="Modules\Profile" />
     <Folder Include="Modules\Settings\Category\" />
     <Folder Include="Modules\Settings\Person\" />
-    <Folder Include="Modules\Task\" />
     <Folder Include="Session\" />
   </ItemGroup>
   <!-- Expense Resources -->
@@ -428,6 +470,10 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\successful.png" />
+    <None Include="Resources\trash.png" />
+    <None Include="Resources\refresh1.png" />
+    <None Include="Resources\pen.png" />
     <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />
     <None Include="Resources\filter %282%29.png" />
@@ -468,6 +514,12 @@
     <None Include="Resources\telephone1.png" />
     <None Include="Resources\Gender.png" />
     <Content Include="Libraries\Cyotek.Windows.Forms.ImageBox.dll" />
+    <None Include="Resources\clipboardModern.png" />
+    <None Include="Resources\approved.png" />
+    <None Include="Resources\hourglass.png" />
+    <None Include="Resources\due-diligence.png" />
+    <None Include="Resources\delete %281%29.png" />
+    <None Include="Resources\bin.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

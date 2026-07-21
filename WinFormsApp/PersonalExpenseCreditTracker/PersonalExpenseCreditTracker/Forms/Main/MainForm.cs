@@ -14,6 +14,7 @@ using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Note;
 using PersonalExpenseCreditTracker.Modules.Profile;
+using PersonalExpenseCreditTracker.Modules.Task;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -36,6 +37,7 @@ namespace PersonalExpenseCreditTracker
         private BorrowControls borrowControls;
         private ProfileControls profileControl;
         private NoteControl noteControl;
+        private TaskControls taskControl;
 
        // Dropdown Open/Close Status
         //Kon Menu present open ache ta Track korer jano
@@ -867,12 +869,26 @@ namespace PersonalExpenseCreditTracker
         {
 
             UpdateHeader(
-     "Tasks",
-     "Organize and track your tasks efficiently");
-
-           
+                 "Tasks",
+                 "Organize and track your tasks efficiently");
 
             SetActiveMenu(pnlTasks, false);
+
+            if (taskControl == null || taskControl.IsDisposed)
+            {
+                taskControl = new TaskControls();
+
+                taskControl.TopLevel = false;
+                taskControl.FormBorderStyle = FormBorderStyle.None;
+                taskControl.Dock = DockStyle.Fill;
+
+                pnlTaskPage.Controls.Clear();
+
+                pnlTaskPage.Controls.Add(taskControl);
+
+                taskControl.Show();
+            }
+
             bool wasOpen = taskOpen;
 
             CloseAllDropDown();
@@ -897,6 +913,7 @@ namespace PersonalExpenseCreditTracker
             RefreshSidebarScroll();
             ExpandSidebar();
 
+           
 
             taskDateOpen = false;
             taskStatusOpen = false;
@@ -2753,6 +2770,9 @@ namespace PersonalExpenseCreditTracker
         private void pnlAddTask_Click(object sender, EventArgs e)
         {
             SetActiveTaskSubMenu(pnlAddTask);
+
+            AddTaskControl addTAskControl = new AddTaskControl();
+            addTAskControl.ShowDialog();
         }
 
         private void pnlAddTask_MouseEnter(object sender, EventArgs e)
