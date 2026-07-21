@@ -163,7 +163,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     break;
 
                 case "colPaymentMethod":
-                    DrawHeader(e, Properties.Resources.credit_card, "Payment");
+                    DrawHeader(e, Properties.Resources.credit_card1, "Payment");
                     break;
             }
         }

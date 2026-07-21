@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -34,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cyotek.Windows.Forms.ImageBox, Version=1.1.4.2, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Cyotek.Windows.Forms.ImageBox.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -44,10 +49,25 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Resources.Extensions">
+      <HintPath>C:\Program Files\dotnet\sdk\10.0.204\System.Resources.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Authentication\LoginControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Authentication\LoginControls.Designer.cs">
+      <DependentUpon>LoginControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Authentication\RegistrationControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Authentication\RegistrationControls.Designer.cs">
+      <DependentUpon>RegistrationControls.cs</DependentUpon>
+    </Compile>
     <!-- Main Form -->
     <Compile Include="Forms\Main\MainForm.cs">
       <SubType>Form</SubType>
@@ -112,6 +132,24 @@
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </Compile>
     <!-- Program -->
+    <Compile Include="Modules\Profile\EditProfileControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Profile\EditProfileControls.Designer.cs">
+      <DependentUpon>EditProfileControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Profile\ImageCropControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Profile\ImageCropControls.Designer.cs">
+      <DependentUpon>ImageCropControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Profile\ProfileControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Profile\ProfileControls.Designer.cs">
+      <DependentUpon>ProfileControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Note\NoteAddDetailsControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +218,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Authentication\LoginControls.resx">
+      <DependentUpon>LoginControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Authentication\RegistrationControls.resx">
+      <DependentUpon>RegistrationControls.cs</DependentUpon>
+    </EmbeddedResource>
+
     <!-- Form Resources -->
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -214,6 +259,15 @@
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Application Resources -->
+    <EmbeddedResource Include="Modules\Profile\EditProfileControls.resx">
+      <DependentUpon>EditProfileControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Profile\ImageCropControls.resx">
+      <DependentUpon>ImageCropControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Profile\ProfileControls.resx">
+      <DependentUpon>ProfileControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Note\NoteAddDetailsControl.resx">
       <DependentUpon>NoteAddDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -274,14 +328,17 @@
   <!-- Project Folders -->
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Modules\Profile\" />
+    <Folder Include="Modules\Note" />
+    <Folder Include="Modules\Profile" />
+    <Folder Include="Modules\Settings\Category\" />
+    <Folder Include="Modules\Settings\Person\" />
     <Folder Include="Modules\Task\" />
     <Folder Include="Session\" />
   </ItemGroup>
   <!-- Expense Resources -->
   <ItemGroup>
+    <None Include="Resources\edit %282%291.png" />
     <None Include="Resources\spending.png" />
     <None Include="Resources\transaction.png" />
     <None Include="Resources\refresh.png" />
@@ -347,20 +404,11 @@
   </ItemGroup>
   <!-- Common Shell Resources -->
   <ItemGroup>
-    <None Include="Resources\wallet .png" />
-    <None Include="Resources\home.png" />
     <None Include="Resources\house-regular %281%29.png" />
-    <None Include="Resources\home2.png" />
-    <None Include="Resources\home3.png" />
     <None Include="Resources\Home4.png" />
-    <None Include="Resources\Home5.png" />
     <None Include="Resources\Home6.png" />
-    <None Include="Resources\home7.png" />
     <None Include="Resources\home_white.png" />
-    <None Include="Resources\wallet-filled-money-tool.png" />
-    <None Include="Resources\wallet-filled-money-tool1.png" />
     <None Include="Resources\down.png" />
-    <None Include="Resources\credit-card.png" />
     <None Include="Resources\credit-card-white.png" />
     <None Include="Resources\handshake.png" />
     <None Include="Resources\payment_3948571.png" />
@@ -447,7 +495,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\menu1.png" />
-    <None Include="Resources\49001bca-2af4-4908-b1f5-551d2534db66.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\49001bca-2af4-4908-b1f5-551d2534db661.png" />
@@ -462,19 +509,47 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\filter.png" />
+    <None Include="Resources\filter %281%29.png" />
+    <None Include="Resources\filter %282%29.png" />
+    <None Include="Resources\list.png" />
+    <None Include="Resources\pricing.png" />
+    <None Include="Resources\project.png" />
+    <None Include="Resources\clipboard %281%29.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\plus %281%29.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\avatar-design.png" />
+    <None Include="Resources\pending.png" />
+    <None Include="Resources\secure-payment.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\reset-password1.png" />
     <None Include="Resources\note.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\note1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\star.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\NoteCalender.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\more.png" />
+    <None Include="Resources\user %285%29.png" />
+    <None Include="Resources\user %282%29.png" />
+    <None Include="Resources\close %282%291.png" />
+    <None Include="Resources\credit-card1.png" />
+    <None Include="Resources\people %283%29.png" />
+    <None Include="Resources\time-and-date.png" />
+    <None Include="Resources\mail.png" />
+    <None Include="Resources\telephone.png" />
+    <None Include="Resources\people %284%29.png" />
+    <None Include="Resources\pin.png" />
+    <None Include="Resources\time-and-date %282%29.png" />
+    <None Include="Resources\telephone %282%29.png" />
+    <None Include="Resources\mail %282%29.png" />
+    <None Include="Resources\verified %281%29.png" />
+    <None Include="Resources\mail1.png" />
+    <None Include="Resources\people %283%291.png" />
+    <None Include="Resources\time-and-date1.png" />
+    <None Include="Resources\telephone1.png" />
+    <None Include="Resources\Gender.png" />
+    <Content Include="Libraries\Cyotek.Windows.Forms.ImageBox.dll" />
+    <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\info.png" />
