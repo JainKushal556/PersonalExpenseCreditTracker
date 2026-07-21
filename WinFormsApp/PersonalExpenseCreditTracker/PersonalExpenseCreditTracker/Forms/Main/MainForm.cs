@@ -14,6 +14,7 @@ using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Note;
 using PersonalExpenseCreditTracker.Modules.Profile;
+using PersonalExpenseCreditTracker.Modules.Settings.Category;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -36,7 +37,8 @@ namespace PersonalExpenseCreditTracker
         private BorrowControls borrowControls;
         private ProfileControls profileControl;
         private NoteControl noteControl;
-
+        private ExpenseCategoryControls expenseCategoryControls;
+        private CreditCategoryControls creditCategoryControls;
        // Dropdown Open/Close Status
         //Kon Menu present open ache ta Track korer jano
 
@@ -3052,7 +3054,21 @@ namespace PersonalExpenseCreditTracker
 
             RefreshSidebarScroll();
             ExpandSidebar();
-            
+            if (expenseCategoryControls == null || expenseCategoryControls.IsDisposed)
+            {
+                expenseCategoryControls = new ExpenseCategoryControls();
+
+                expenseCategoryControls.TopLevel = false;
+                expenseCategoryControls.FormBorderStyle = FormBorderStyle.None;
+                expenseCategoryControls.Dock = DockStyle.Fill;
+
+                pnlExpenseCategory.Controls.Clear();
+
+                pnlExpenseCategory.Controls.Add(expenseCategoryControls);
+
+                expenseCategoryControls.Show();
+            }
+
         }
 
         private void pnlSettingExpenseCategories_MouseEnter(object sender, EventArgs e)
@@ -3087,6 +3103,21 @@ namespace PersonalExpenseCreditTracker
 
             RefreshSidebarScroll();
             ExpandSidebar();
+
+            if (creditCategoryControls == null || creditCategoryControls.IsDisposed)
+            {
+                creditCategoryControls = new CreditCategoryControls();
+
+                creditCategoryControls.TopLevel = false;
+                creditCategoryControls.FormBorderStyle = FormBorderStyle.None;
+                creditCategoryControls.Dock = DockStyle.Fill;
+
+                pnlCreditCategoryPage.Controls.Clear();
+
+                pnlCreditCategoryPage.Controls.Add(creditCategoryControls);
+
+                creditCategoryControls.Show();
+            }
         }
 
         private void pnlSettingCreditCategories_MouseEnter(object sender, EventArgs e)
