@@ -72,7 +72,6 @@
             this.pnlAddCreditCategory.Padding = new System.Windows.Forms.Padding(15);
             this.pnlAddCreditCategory.Size = new System.Drawing.Size(440, 514);
             this.pnlAddCreditCategory.TabIndex = 0;
-            this.pnlAddCreditCategory.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddCreditCategory_Paint);
             // 
             // label1
             // 

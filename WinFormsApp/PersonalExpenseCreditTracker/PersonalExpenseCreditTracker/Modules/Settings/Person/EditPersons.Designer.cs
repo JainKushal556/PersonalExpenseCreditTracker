@@ -167,7 +167,6 @@
             this.pnlEditPersonDetailsAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlEditPersonDetailsAddress.BackColor = System.Drawing.Color.White;
             this.pnlEditPersonDetailsAddress.Controls.Add(this.txtEditPersonDetailsAddress);
-            this.pnlEditPersonDetailsAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pnlEditPersonDetailsAddress.Location = new System.Drawing.Point(1, 18);
             this.pnlEditPersonDetailsAddress.Name = "pnlEditPersonDetailsAddress";
             this.pnlEditPersonDetailsAddress.Size = new System.Drawing.Size(410, 119);
@@ -243,7 +242,6 @@
             this.pnlEditPersonDetailsFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlEditPersonDetailsFullName.BackColor = System.Drawing.Color.White;
             this.pnlEditPersonDetailsFullName.Controls.Add(this.txtEditPersonDetailsFullName);
-            this.pnlEditPersonDetailsFullName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pnlEditPersonDetailsFullName.Location = new System.Drawing.Point(1, 15);
             this.pnlEditPersonDetailsFullName.Name = "pnlEditPersonDetailsFullName";
             this.pnlEditPersonDetailsFullName.Size = new System.Drawing.Size(410, 45);
@@ -275,6 +273,7 @@
             this.btnCloseEditPersonDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCloseEditPersonDetails.BackColor = System.Drawing.Color.White;
+            this.btnCloseEditPersonDetails.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCloseEditPersonDetails.FlatAppearance.BorderSize = 0;
             this.btnCloseEditPersonDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCloseEditPersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close__2_;
@@ -418,7 +417,6 @@
             this.pnlEditPersonDetailsPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlEditPersonDetailsPhoneNumber.BackColor = System.Drawing.Color.White;
             this.pnlEditPersonDetailsPhoneNumber.Controls.Add(this.txtEditPersonDetailsPhoneNumber);
-            this.pnlEditPersonDetailsPhoneNumber.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pnlEditPersonDetailsPhoneNumber.Location = new System.Drawing.Point(1, 14);
             this.pnlEditPersonDetailsPhoneNumber.Name = "pnlEditPersonDetailsPhoneNumber";
             this.pnlEditPersonDetailsPhoneNumber.Size = new System.Drawing.Size(410, 45);

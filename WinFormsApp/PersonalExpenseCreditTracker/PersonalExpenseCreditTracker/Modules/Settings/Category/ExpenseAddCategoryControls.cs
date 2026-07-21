@@ -11,6 +11,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 {
     public partial class ExpenseAddCategoryControls : Form
     {
+        ExpenseCategoryControls expenseCategoryControls;
         public ExpenseAddCategoryControls()
         {
             InitializeComponent();
@@ -18,6 +19,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             CenterPanel();
             this.txtCategory.Enter += new System.EventHandler(this.txtCategory_Enter);
             this.txtCategory.Leave += new System.EventHandler(this.txtCategory_Leave);
+        }
+
+        public ExpenseAddCategoryControls(ExpenseCategoryControls Obj)
+        {
+            InitializeComponent();
+            expenseCategoryControls = Obj;
         }
 
         private void pnlAddExpenseCategory_Paint(object sender, PaintEventArgs e)
