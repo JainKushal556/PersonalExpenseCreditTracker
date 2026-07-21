@@ -163,6 +163,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap categorization {
+            get {
+                object obj = ResourceManager.GetObject("categorization", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ChatGPT_Image_Jul_12__2026__01_07_09_AM {
             get {
                 object obj = ResourceManager.GetObject("ChatGPT Image Jul 12, 2026, 01_07_09 AM", resourceCulture);
@@ -443,6 +453,13 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+
+        internal static System.Drawing.Bitmap grid {
+            get {
+                object obj = ResourceManager.GetObject("grid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
         internal static System.Drawing.Bitmap Gender {
             get {
                 object obj = ResourceManager.GetObject("Gender", resourceCulture);
@@ -579,6 +596,12 @@ namespace PersonalExpenseCreditTracker.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        internal static System.Drawing.Bitmap info {
+            get {
+                object obj = ResourceManager.GetObject("info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -613,6 +636,18 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+
+        internal static System.Drawing.Bitmap log_out {
+            get {
+                object obj = ResourceManager.GetObject("log-out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+
         internal static System.Drawing.Bitmap logout {
             get {
                 object obj = ResourceManager.GetObject("logout", resourceCulture);
@@ -643,9 +678,18 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+
+        internal static System.Drawing.Bitmap logout_white_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("logout_white_24x24", resourceCulture);
+                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         internal static System.Drawing.Bitmap mail {
             get {
                 object obj = ResourceManager.GetObject("mail", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -653,6 +697,14 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+
+        internal static System.Drawing.Bitmap logout_white_36x36 {
+            get {
+                object obj = ResourceManager.GetObject("logout_white_36x36", resourceCulture);
+                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         internal static System.Drawing.Bitmap mail__2_ {
             get {
                 object obj = ResourceManager.GetObject("mail (2)", resourceCulture);
@@ -666,6 +718,7 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap mail1 {
             get {
                 object obj = ResourceManager.GetObject("mail1", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1500,4 +1553,5 @@ namespace PersonalExpenseCreditTracker.Properties {
             }
         }
     }
-}
+    }
+

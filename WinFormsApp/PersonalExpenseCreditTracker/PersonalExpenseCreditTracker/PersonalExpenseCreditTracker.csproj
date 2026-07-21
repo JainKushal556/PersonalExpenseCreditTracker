@@ -186,6 +186,48 @@
     <Compile Include="Modules\Settings\Person\EditPersons.Designer.cs">
       <DependentUpon>EditPersons.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Settings\Category\CreditAddCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditAddCategoryControls.Designer.cs">
+      <DependentUpon>CreditAddCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditAddSubCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditAddSubCategoryControls.Designer.cs">
+      <DependentUpon>CreditAddSubCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditCategoryControls.Designer.cs">
+      <DependentUpon>CreditCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseAddCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseAddCategoryControls.Designer.cs">
+      <DependentUpon>ExpenseAddCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseAddSubCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseAddSubCategoryControls.Designer.cs">
+      <DependentUpon>ExpenseAddSubCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseCategoryControls.Designer.cs">
+      <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Person\PersonLogOutControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Person\PersonLogOutControls.Designer.cs">
+      <DependentUpon>PersonLogOutControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Authentication\LoginControls.resx">
@@ -254,6 +296,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Settings\Person\EditPersons.resx">
       <DependentUpon>EditPersons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\CreditAddCategoryControls.resx">
+      <DependentUpon>CreditAddCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\CreditAddSubCategoryControls.resx">
+      <DependentUpon>CreditAddSubCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\CreditCategoryControls.resx">
+      <DependentUpon>CreditCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\ExpenseAddCategoryControls.resx">
+      <DependentUpon>ExpenseAddCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\ExpenseAddSubCategoryControls.resx">
+      <DependentUpon>ExpenseAddSubCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\ExpenseCategoryControls.resx">
+      <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Person\PersonLogOutControls.resx">
+      <DependentUpon>PersonLogOutControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -513,6 +576,29 @@
     <None Include="Resources\loupe.png" />
     <None Include="Resources\loupe %281%29.png" />
     <Content Include="Resources\pen %281%29.png" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\log-out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\categorization.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout_white_36x36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout_white_24x24.png" />
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
