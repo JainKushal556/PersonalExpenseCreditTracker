@@ -61,7 +61,6 @@
     <Compile Include="Modules\Dashboard\DashboardControl.Designer.cs">
       <DependentUpon>DashboardControl.cs</DependentUpon>
     </Compile>
-
     <!-- Lent Module -->
     <Compile Include="Modules\Borrow\AddBorrowControls.cs">
       <SubType>Form</SubType>
@@ -137,13 +136,54 @@
     <Compile Include="Modules\Note\NoteViewDetailsControl.Designer.cs">
       <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Settings\Category\CreditAddCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditAddCategoryControls.Designer.cs">
+      <DependentUpon>CreditAddCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditAddSubCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditAddSubCategoryControls.Designer.cs">
+      <DependentUpon>CreditAddSubCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditCategoryControls.Designer.cs">
+      <DependentUpon>CreditCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseAddCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseAddCategoryControls.Designer.cs">
+      <DependentUpon>ExpenseAddCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseAddSubCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseAddSubCategoryControls.Designer.cs">
+      <DependentUpon>ExpenseAddSubCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseCategoryControls.Designer.cs">
+      <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Person\PersonLogOutControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Person\PersonLogOutControls.Designer.cs">
+      <DependentUpon>PersonLogOutControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <!-- Form Resources -->
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Modules\Dashboard\DashboardControl.resx">
       <DependentUpon>DashboardControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,6 +226,27 @@
     <EmbeddedResource Include="Modules\Note\NoteViewDetailsControl.resx">
       <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\CreditAddCategoryControls.resx">
+      <DependentUpon>CreditAddCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\CreditAddSubCategoryControls.resx">
+      <DependentUpon>CreditAddSubCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\CreditCategoryControls.resx">
+      <DependentUpon>CreditCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\ExpenseAddCategoryControls.resx">
+      <DependentUpon>ExpenseAddCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\ExpenseAddSubCategoryControls.resx">
+      <DependentUpon>ExpenseAddSubCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\ExpenseCategoryControls.resx">
+      <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Person\PersonLogOutControls.resx">
+      <DependentUpon>PersonLogOutControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -215,23 +276,7 @@
     <Folder Include="Data\" />
     <Folder Include="Forms\Authentication\" />
     <Folder Include="Helpers\" />
-
-    <Folder Include="Modules\Dashboard\" />
-
-    <Folder Include="Modules\Credit\" />
-
-    <Folder Include="Modules\Lent\" />
-
-
-    <Folder Include="Modules\Borrow\" />
-
-    <Folder Include="Modules\Dashboard\" />
-
-    <Folder Include="Modules\Note\" />
-
     <Folder Include="Modules\Profile\" />
-    <Folder Include="Modules\Settings\Category\" />
-    <Folder Include="Modules\Settings\Person\" />
     <Folder Include="Modules\Task\" />
     <Folder Include="Session\" />
   </ItemGroup>
@@ -250,7 +295,6 @@
     <None Include="Resources\diskette.png" />
     <None Include="Resources\tag.png" />
     <None Include="Resources\up-and-down-arrows.png" />
-
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\wallet .png" />
@@ -295,7 +339,6 @@
     <None Include="Resources\credit-card.png" />
   </ItemGroup>
   <ItemGroup>
-
     <None Include="Resources\market.png" />
     <None Include="Resources\bullets.png" />
     <None Include="Resources\shop.png" />
@@ -341,7 +384,6 @@
     <None Include="Resources\moon.png" />
     <None Include="Resources\night-mode.png" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="Resources\spending-money.png" />
   </ItemGroup>
@@ -363,7 +405,7 @@
   <ItemGroup>
     <None Include="Resources\salary.png" />
   </ItemGroup>
-    <!-- Lent Resources -->
+  <!-- Lent Resources -->
   <ItemGroup>
     <None Include="Resources\Total Lent.png" />
     <None Include="Resources\man.png" />
@@ -418,7 +460,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\repaid.png" />
-
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\note.png" />
@@ -434,6 +475,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\more.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\log-out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\categorization.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout_white_36x36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout_white_24x24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
