@@ -264,10 +264,10 @@
     <Compile Include="Modules\Settings\Category\ExpenseCategoryControls.Designer.cs">
       <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Settings\Person\PersonLogOutControls.cs">
+    <Compile Include="Modules\Settings\Logout\PersonLogOutControls.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Settings\Person\PersonLogOutControls.Designer.cs">
+    <Compile Include="Modules\Settings\Logout\PersonLogOutControls.Designer.cs">
       <DependentUpon>PersonLogOutControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -372,7 +372,7 @@
     <EmbeddedResource Include="Modules\Settings\Category\ExpenseCategoryControls.resx">
       <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Settings\Person\PersonLogOutControls.resx">
+    <EmbeddedResource Include="Modules\Settings\Logout\PersonLogOutControls.resx">
       <DependentUpon>PersonLogOutControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

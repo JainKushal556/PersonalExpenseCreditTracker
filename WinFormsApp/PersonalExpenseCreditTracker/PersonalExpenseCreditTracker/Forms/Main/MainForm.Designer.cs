@@ -376,8 +376,6 @@
             this.lblAddExpense = new System.Windows.Forms.Label();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.pnlPersonAddPage = new System.Windows.Forms.Panel();
-            this.pnlChnagePasswordPage = new System.Windows.Forms.Panel();
-            this.pnlLogoutPage = new System.Windows.Forms.Panel();
             this.pnlCreditCategoryPage = new System.Windows.Forms.Panel();
             this.pnlExpenseCategory = new System.Windows.Forms.Panel();
             this.pnlOverview = new System.Windows.Forms.Panel();
@@ -592,7 +590,6 @@
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlContainer.SuspendLayout();
-            this.pnlChnagePasswordPage.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.pnlRight.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -5211,7 +5208,6 @@
             // pnlContainer
             // 
             this.pnlContainer.Controls.Add(this.pnlPersonAddPage);
-            this.pnlContainer.Controls.Add(this.pnlChnagePasswordPage);
             this.pnlContainer.Controls.Add(this.pnlCreditCategoryPage);
             this.pnlContainer.Controls.Add(this.pnlExpenseCategory);
             this.pnlContainer.Controls.Add(this.pnlOverview);
@@ -5239,27 +5235,6 @@
             this.pnlPersonAddPage.Name = "pnlPersonAddPage";
             this.pnlPersonAddPage.Size = new System.Drawing.Size(876, 977);
             this.pnlPersonAddPage.TabIndex = 0;
-            // 
-            // pnlChnagePasswordPage
-            // 
-            this.pnlChnagePasswordPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.pnlChnagePasswordPage.Controls.Add(this.pnlLogoutPage);
-            this.pnlChnagePasswordPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlChnagePasswordPage.Location = new System.Drawing.Point(0, 78);
-            this.pnlChnagePasswordPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlChnagePasswordPage.Name = "pnlChnagePasswordPage";
-            this.pnlChnagePasswordPage.Size = new System.Drawing.Size(876, 977);
-            this.pnlChnagePasswordPage.TabIndex = 0;
-            // 
-            // pnlLogoutPage
-            // 
-            this.pnlLogoutPage.BackColor = System.Drawing.Color.Silver;
-            this.pnlLogoutPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLogoutPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlLogoutPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlLogoutPage.Name = "pnlLogoutPage";
-            this.pnlLogoutPage.Size = new System.Drawing.Size(876, 977);
-            this.pnlLogoutPage.TabIndex = 0;
             // 
             // pnlCreditCategoryPage
             // 
@@ -5807,7 +5782,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlContainer.ResumeLayout(false);
             this.pnlContainer.PerformLayout();
-            this.pnlChnagePasswordPage.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlRight.ResumeLayout(false);
@@ -6186,8 +6160,6 @@
         private System.Windows.Forms.Panel pnlThumb;
         private System.Windows.Forms.Panel pnlExpenseCategory;
         private System.Windows.Forms.Panel pnlCreditCategoryPage;
-        private System.Windows.Forms.Panel pnlChnagePasswordPage;
-        private System.Windows.Forms.Panel pnlLogoutPage;
         private System.Windows.Forms.Panel pnlSettingChangesPassword;
         private System.Windows.Forms.Label lblSetingChangesPassword;
         private System.Windows.Forms.PictureBox pictureBox4;

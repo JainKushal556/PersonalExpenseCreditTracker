@@ -279,6 +279,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             expenseAddCategoryControls.Show();
         }
 
+        private void tsmiAddSubCategory_Click(object sender, EventArgs e)
+        {
+            ExpenseAddSubCategoryControls expenseAddSubCategoryControls = new ExpenseAddSubCategoryControls();
+            expenseAddSubCategoryControls.Show();
+        }
+
 
         //private void tsmiEdit_Click(object sender, EventArgs e)
         //{
