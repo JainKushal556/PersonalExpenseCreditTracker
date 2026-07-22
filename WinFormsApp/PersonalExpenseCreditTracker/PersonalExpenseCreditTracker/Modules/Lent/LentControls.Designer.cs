@@ -67,23 +67,23 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblEntries = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblTotalPageNumber = new System.Windows.Forms.Label();
             this.lblof = new System.Windows.Forms.Label();
-            this.label3EndDataGridNumber = new System.Windows.Forms.Label();
+            this.lblEndingPageNumber = new System.Windows.Forms.Label();
             this.lblTo = new System.Windows.Forms.Label();
-            this.lblCurrentDataGridNumber = new System.Windows.Forms.Label();
+            this.lblStartingPageNumber = new System.Windows.Forms.Label();
             this.lblShowing = new System.Windows.Forms.Label();
-            this.btnCurrentDataGridViewNumber = new System.Windows.Forms.Button();
-            this.btnFirstDataGridView = new System.Windows.Forms.Button();
-            this.btnPreviousDataGridView = new System.Windows.Forms.Button();
-            this.btnNextDataGridView = new System.Windows.Forms.Button();
-            this.btnLastDataGridView = new System.Windows.Forms.Button();
+            this.btnCurrentPage = new System.Windows.Forms.Button();
+            this.btnFirstPage = new System.Windows.Forms.Button();
+            this.btnPreviousPage = new System.Windows.Forms.Button();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.btnLastPage = new System.Windows.Forms.Button();
             this.panelExportReport = new System.Windows.Forms.Panel();
             this.btnExportReport = new System.Windows.Forms.Button();
-            this.dataGridViewAllLent = new System.Windows.Forms.DataGridView();
+            this.dgvLentDataTable = new System.Windows.Forms.DataGridView();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPersonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,7 +91,6 @@
             this.colRemainingAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAction = new System.Windows.Forms.DataGridViewImageColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelTotalTransaction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalTransaction)).BeginInit();
@@ -108,7 +107,7 @@
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panelExportReport.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllLent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLentDataTable)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -133,9 +132,9 @@
             // 
             // panelTotalTransaction
             // 
-            this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalTransaction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(252)))), ((int)(((byte)(232)))));
             this.panelTotalTransaction.Controls.Add(this.labelTotalTransactionNumber);
             this.panelTotalTransaction.Controls.Add(this.lblTotalTransaction);
@@ -184,9 +183,9 @@
             // 
             // panelTotalDue
             // 
-            this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalDue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panelTotalDue.Controls.Add(this.lblTotalDue);
             this.panelTotalDue.Controls.Add(this.panel4);
@@ -256,9 +255,9 @@
             // 
             // panelTotalRepaid
             // 
-            this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalRepaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(255)))), ((int)(((byte)(231)))));
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaid);
             this.panelTotalRepaid.Controls.Add(this.panel3);
@@ -329,9 +328,9 @@
             // 
             // panelTotalLent
             // 
-            this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalLent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(246)))), ((int)(((byte)(255)))));
             this.panelTotalLent.Controls.Add(this.lblTotalLent);
             this.panelTotalLent.Controls.Add(this.panel1);
@@ -401,187 +400,186 @@
             // 
             // tableLayoutPanelMainData
             // 
-            this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanelMainData.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanelMainData.ColumnCount = 1;
             this.tableLayoutPanelMainData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMainData.Controls.Add(this.panel2, 0, 2);
             this.tableLayoutPanelMainData.Controls.Add(this.panelExportReport, 0, 0);
-            this.tableLayoutPanelMainData.Controls.Add(this.dataGridViewAllLent, 0, 1);
+            this.tableLayoutPanelMainData.Controls.Add(this.dgvLentDataTable, 0, 1);
             this.tableLayoutPanelMainData.Location = new System.Drawing.Point(10, 145);
             this.tableLayoutPanelMainData.Name = "tableLayoutPanelMainData";
             this.tableLayoutPanelMainData.RowCount = 3;
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this.tableLayoutPanelMainData.Size = new System.Drawing.Size(1133, 552);
             this.tableLayoutPanelMainData.TabIndex = 1;
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.btnCurrentDataGridViewNumber);
-            this.panel2.Controls.Add(this.btnFirstDataGridView);
-            this.panel2.Controls.Add(this.btnPreviousDataGridView);
-            this.panel2.Controls.Add(this.btnNextDataGridView);
-            this.panel2.Controls.Add(this.btnLastDataGridView);
+            this.panel2.Controls.Add(this.btnCurrentPage);
+            this.panel2.Controls.Add(this.btnFirstPage);
+            this.panel2.Controls.Add(this.btnPreviousPage);
+            this.panel2.Controls.Add(this.btnNextPage);
+            this.panel2.Controls.Add(this.btnLastPage);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(1, 510);
+            this.panel2.Location = new System.Drawing.Point(1, 500);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1131, 41);
+            this.panel2.Size = new System.Drawing.Size(1131, 51);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // panel5
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.panel5.Controls.Add(this.lblEntries);
-            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.lblTotalPageNumber);
             this.panel5.Controls.Add(this.lblof);
-            this.panel5.Controls.Add(this.label3EndDataGridNumber);
+            this.panel5.Controls.Add(this.lblEndingPageNumber);
             this.panel5.Controls.Add(this.lblTo);
-            this.panel5.Controls.Add(this.lblCurrentDataGridNumber);
+            this.panel5.Controls.Add(this.lblStartingPageNumber);
             this.panel5.Controls.Add(this.lblShowing);
             this.panel5.Location = new System.Drawing.Point(0, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(289, 35);
+            this.panel5.Size = new System.Drawing.Size(348, 45);
             this.panel5.TabIndex = 12;
             // 
             // lblEntries
             // 
-            this.lblEntries.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEntries.Location = new System.Drawing.Point(175, 8);
+            this.lblEntries.AutoSize = true;
+            this.lblEntries.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEntries.Location = new System.Drawing.Point(225, 12);
             this.lblEntries.Name = "lblEntries";
-            this.lblEntries.Size = new System.Drawing.Size(76, 25);
+            this.lblEntries.Size = new System.Drawing.Size(61, 23);
             this.lblEntries.TabIndex = 6;
             this.lblEntries.Text = "Entries";
             // 
-            // label3
+            // lblTotalPageNumber
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(152, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 20);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "10";
+            this.lblTotalPageNumber.AutoSize = true;
+            this.lblTotalPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalPageNumber.Location = new System.Drawing.Point(195, 12);
+            this.lblTotalPageNumber.Name = "lblTotalPageNumber";
+            this.lblTotalPageNumber.Size = new System.Drawing.Size(28, 23);
+            this.lblTotalPageNumber.TabIndex = 5;
+            this.lblTotalPageNumber.Text = "10";
             // 
             // lblof
             // 
-            this.lblof.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblof.Location = new System.Drawing.Point(131, 8);
+            this.lblof.AutoSize = true;
+            this.lblof.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblof.Location = new System.Drawing.Point(169, 12);
             this.lblof.Name = "lblof";
-            this.lblof.Size = new System.Drawing.Size(27, 25);
+            this.lblof.Size = new System.Drawing.Size(25, 23);
             this.lblof.TabIndex = 4;
             this.lblof.Text = "of";
             // 
-            // label3EndDataGridNumber
+            // lblEndingPageNumber
             // 
-            this.label3EndDataGridNumber.AutoSize = true;
-            this.label3EndDataGridNumber.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3EndDataGridNumber.Location = new System.Drawing.Point(108, 8);
-            this.label3EndDataGridNumber.Name = "label3EndDataGridNumber";
-            this.label3EndDataGridNumber.Size = new System.Drawing.Size(25, 20);
-            this.label3EndDataGridNumber.TabIndex = 3;
-            this.label3EndDataGridNumber.Text = "10";
+            this.lblEndingPageNumber.AutoSize = true;
+            this.lblEndingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEndingPageNumber.Location = new System.Drawing.Point(138, 12);
+            this.lblEndingPageNumber.Name = "lblEndingPageNumber";
+            this.lblEndingPageNumber.Size = new System.Drawing.Size(28, 23);
+            this.lblEndingPageNumber.TabIndex = 3;
+            this.lblEndingPageNumber.Text = "10";
             // 
             // lblTo
             // 
-            this.lblTo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTo.Location = new System.Drawing.Point(89, 8);
+            this.lblTo.AutoSize = true;
+            this.lblTo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTo.Location = new System.Drawing.Point(113, 12);
             this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(27, 25);
+            this.lblTo.Size = new System.Drawing.Size(26, 23);
             this.lblTo.TabIndex = 2;
             this.lblTo.Text = "to";
             // 
-            // lblCurrentDataGridNumber
+            // lblStartingPageNumber
             // 
-            this.lblCurrentDataGridNumber.AutoSize = true;
-            this.lblCurrentDataGridNumber.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentDataGridNumber.Location = new System.Drawing.Point(73, 8);
-            this.lblCurrentDataGridNumber.Name = "lblCurrentDataGridNumber";
-            this.lblCurrentDataGridNumber.Size = new System.Drawing.Size(17, 20);
-            this.lblCurrentDataGridNumber.TabIndex = 1;
-            this.lblCurrentDataGridNumber.Text = "1";
+            this.lblStartingPageNumber.AutoSize = true;
+            this.lblStartingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStartingPageNumber.Location = new System.Drawing.Point(83, 12);
+            this.lblStartingPageNumber.Name = "lblStartingPageNumber";
+            this.lblStartingPageNumber.Size = new System.Drawing.Size(19, 23);
+            this.lblStartingPageNumber.TabIndex = 1;
+            this.lblStartingPageNumber.Text = "1";
             // 
             // lblShowing
             // 
-            this.lblShowing.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowing.Location = new System.Drawing.Point(7, 8);
+            this.lblShowing.AutoSize = true;
+            this.lblShowing.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowing.Location = new System.Drawing.Point(7, 12);
             this.lblShowing.Name = "lblShowing";
-            this.lblShowing.Size = new System.Drawing.Size(76, 25);
+            this.lblShowing.Size = new System.Drawing.Size(75, 23);
             this.lblShowing.TabIndex = 0;
             this.lblShowing.Text = "Showing";
             // 
-            // btnCurrentDataGridViewNumber
+            // btnCurrentPage
             // 
-            this.btnCurrentDataGridViewNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCurrentDataGridViewNumber.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCurrentDataGridViewNumber.Location = new System.Drawing.Point(984, 3);
-            this.btnCurrentDataGridViewNumber.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCurrentDataGridViewNumber.Name = "btnCurrentDataGridViewNumber";
-            this.btnCurrentDataGridViewNumber.Size = new System.Drawing.Size(44, 35);
-            this.btnCurrentDataGridViewNumber.TabIndex = 11;
-            this.btnCurrentDataGridViewNumber.Text = "1";
-            this.btnCurrentDataGridViewNumber.UseVisualStyleBackColor = true;
+            this.btnCurrentPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCurrentPage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCurrentPage.Location = new System.Drawing.Point(991, 6);
+            this.btnCurrentPage.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCurrentPage.Name = "btnCurrentPage";
+            this.btnCurrentPage.Size = new System.Drawing.Size(40, 40);
+            this.btnCurrentPage.TabIndex = 11;
+            this.btnCurrentPage.Text = "1";
+            this.btnCurrentPage.UseVisualStyleBackColor = true;
             // 
-            // btnFirstDataGridView
+            // btnFirstPage
             // 
-            this.btnFirstDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFirstDataGridView.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next_page__1_;
-            this.btnFirstDataGridView.Location = new System.Drawing.Point(884, 3);
-            this.btnFirstDataGridView.Margin = new System.Windows.Forms.Padding(0);
-            this.btnFirstDataGridView.Name = "btnFirstDataGridView";
-            this.btnFirstDataGridView.Size = new System.Drawing.Size(44, 35);
-            this.btnFirstDataGridView.TabIndex = 10;
-            this.btnFirstDataGridView.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFirstPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.left;
+            this.btnFirstPage.Location = new System.Drawing.Point(899, 6);
+            this.btnFirstPage.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFirstPage.Name = "btnFirstPage";
+            this.btnFirstPage.Size = new System.Drawing.Size(40, 40);
+            this.btnFirstPage.TabIndex = 10;
+            this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click_1);
             // 
-            // btnPreviousDataGridView
+            // btnPreviousPage
             // 
-            this.btnPreviousDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPreviousDataGridView.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next__1_1;
-            this.btnPreviousDataGridView.Location = new System.Drawing.Point(934, 3);
-            this.btnPreviousDataGridView.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPreviousDataGridView.Name = "btnPreviousDataGridView";
-            this.btnPreviousDataGridView.Size = new System.Drawing.Size(44, 35);
-            this.btnPreviousDataGridView.TabIndex = 9;
-            this.btnPreviousDataGridView.UseVisualStyleBackColor = true;
+            this.btnPreviousPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPreviousPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.preview;
+            this.btnPreviousPage.Location = new System.Drawing.Point(944, 6);
+            this.btnPreviousPage.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPreviousPage.Name = "btnPreviousPage";
+            this.btnPreviousPage.Size = new System.Drawing.Size(40, 40);
+            this.btnPreviousPage.TabIndex = 9;
+            this.btnPreviousPage.UseVisualStyleBackColor = true;
+            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click_1);
             // 
-            // btnNextDataGridView
+            // btnNextPage
             // 
-            this.btnNextDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNextDataGridView.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next__1_;
-            this.btnNextDataGridView.Location = new System.Drawing.Point(1034, 3);
-            this.btnNextDataGridView.Margin = new System.Windows.Forms.Padding(0);
-            this.btnNextDataGridView.Name = "btnNextDataGridView";
-            this.btnNextDataGridView.Size = new System.Drawing.Size(44, 35);
-            this.btnNextDataGridView.TabIndex = 8;
-            this.btnNextDataGridView.UseVisualStyleBackColor = true;
+            this.btnNextPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNextPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next__1_;
+            this.btnNextPage.Location = new System.Drawing.Point(1038, 6);
+            this.btnNextPage.Margin = new System.Windows.Forms.Padding(0);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(40, 40);
+            this.btnNextPage.TabIndex = 8;
+            this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click_1);
             // 
-            // btnLastDataGridView
+            // btnLastPage
             // 
-            this.btnLastDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLastDataGridView.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next_page;
-            this.btnLastDataGridView.Location = new System.Drawing.Point(1084, 3);
-            this.btnLastDataGridView.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLastDataGridView.Name = "btnLastDataGridView";
-            this.btnLastDataGridView.Size = new System.Drawing.Size(44, 35);
-            this.btnLastDataGridView.TabIndex = 7;
-            this.btnLastDataGridView.UseVisualStyleBackColor = true;
+            this.btnLastPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLastPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.right;
+            this.btnLastPage.Location = new System.Drawing.Point(1084, 6);
+            this.btnLastPage.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLastPage.Name = "btnLastPage";
+            this.btnLastPage.Size = new System.Drawing.Size(40, 40);
+            this.btnLastPage.TabIndex = 7;
+            this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click_1);
             // 
             // panelExportReport
             // 
@@ -600,27 +598,26 @@
             this.btnExportReport.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExportReport.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnExportReport.FlatAppearance.BorderSize = 0;
-            this.btnExportReport.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportReport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(217)))));
-            this.btnExportReport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
+            this.btnExportReport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
             this.btnExportReport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportReport.Location = new System.Drawing.Point(947, 0);
+            this.btnExportReport.Location = new System.Drawing.Point(1022, 0);
             this.btnExportReport.Name = "btnExportReport";
-            this.btnExportReport.Size = new System.Drawing.Size(184, 50);
+            this.btnExportReport.Size = new System.Drawing.Size(109, 50);
             this.btnExportReport.TabIndex = 0;
-            this.btnExportReport.Text = "Export Report";
+            this.btnExportReport.Text = "Export ";
             this.btnExportReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExportReport.UseVisualStyleBackColor = true;
-            this.btnExportReport.Click += new System.EventHandler(this.btnExportReport_Click);
             // 
-            // dataGridViewAllLent
+            // dgvLentDataTable
             // 
-            this.dataGridViewAllLent.AllowUserToAddRows = false;
-            this.dataGridViewAllLent.AllowUserToDeleteRows = false;
-            this.dataGridViewAllLent.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewAllLent.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridViewAllLent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dataGridViewAllLent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvLentDataTable.AllowUserToAddRows = false;
+            this.dgvLentDataTable.AllowUserToDeleteRows = false;
+            this.dgvLentDataTable.BackgroundColor = System.Drawing.Color.White;
+            this.dgvLentDataTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvLentDataTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvLentDataTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -628,21 +625,19 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewAllLent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewAllLent.ColumnHeadersHeight = 35;
-            this.dataGridViewAllLent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridViewAllLent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvLentDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvLentDataTable.ColumnHeadersHeight = 35;
+            this.dgvLentDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvLentDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDate,
             this.colPersonName,
-            this.colLentID,
             this.colAmount,
             this.colPaymentType,
             this.colStatus,
             this.colReturnedAmount,
             this.colRemainingAmount,
             this.colDeadline,
-            this.colDescription,
-            this.colAction});
+            this.colDescription});
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -650,14 +645,14 @@
             dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewAllLent.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dataGridViewAllLent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewAllLent.EnableHeadersVisualStyles = false;
-            this.dataGridViewAllLent.GridColor = System.Drawing.Color.White;
-            this.dataGridViewAllLent.Location = new System.Drawing.Point(4, 55);
-            this.dataGridViewAllLent.Name = "dataGridViewAllLent";
-            this.dataGridViewAllLent.ReadOnly = true;
-            this.dataGridViewAllLent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvLentDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLentDataTable.EnableHeadersVisualStyles = false;
+            this.dgvLentDataTable.GridColor = System.Drawing.Color.White;
+            this.dgvLentDataTable.Location = new System.Drawing.Point(4, 55);
+            this.dgvLentDataTable.Name = "dgvLentDataTable";
+            this.dgvLentDataTable.ReadOnly = true;
+            this.dgvLentDataTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -665,15 +660,24 @@
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAllLent.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.dataGridViewAllLent.RowHeadersVisible = false;
-            this.dataGridViewAllLent.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            this.dataGridViewAllLent.RowTemplate.Height = 30;
-            this.dataGridViewAllLent.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewAllLent.Size = new System.Drawing.Size(1125, 451);
-            this.dataGridViewAllLent.TabIndex = 3;
-            this.dataGridViewAllLent.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAllLent_CellContentClick);
-            this.dataGridViewAllLent.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewAllLent_CellPainting);
+            this.dgvLentDataTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvLentDataTable.RowHeadersVisible = false;
+            this.dgvLentDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
+            this.dgvLentDataTable.RowTemplate.Height = 30;
+            this.dgvLentDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.Size = new System.Drawing.Size(1125, 441);
+            this.dgvLentDataTable.TabIndex = 3;
+            this.dgvLentDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLentDataTable_CellContentClick);
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewImageColumn1.HeaderText = "⋮";
+            this.dataGridViewImageColumn1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.menu;
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 20;
             // 
             // colDate
             // 
@@ -681,6 +685,7 @@
             this.colDate.DataPropertyName = "LentAt";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.colDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDate.FillWeight = 80F;
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
             this.colDate.ReadOnly = true;
@@ -691,19 +696,9 @@
             this.colPersonName.DataPropertyName = "PersonName";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.colPersonName.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPersonName.FillWeight = 120F;
             this.colPersonName.HeaderText = "Person Name";
             this.colPersonName.Name = "colPersonName";
             this.colPersonName.ReadOnly = true;
-            // 
-            // colLentID
-            // 
-            this.colLentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colLentID.DataPropertyName = "LentID";
-            this.colLentID.HeaderText = "Lent ID";
-            this.colLentID.Name = "colLentID";
-            this.colLentID.ReadOnly = true;
-            this.colLentID.Visible = false;
             // 
             // colAmount
             // 
@@ -713,6 +708,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.colAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colAmount.FillWeight = 70F;
             this.colAmount.HeaderText = "Amount";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -733,6 +729,7 @@
             this.colStatus.DataPropertyName = "StatusName";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.colStatus.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colStatus.FillWeight = 70F;
             this.colStatus.HeaderText = "Status";
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
@@ -777,16 +774,6 @@
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             // 
-            // colAction
-            // 
-            this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colAction.HeaderText = "⋮";
-            this.colAction.Image = global::PersonalExpenseCreditTracker.Properties.Resources.menu;
-            this.colAction.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.colAction.Name = "colAction";
-            this.colAction.ReadOnly = true;
-            this.colAction.Width = 20;
-            // 
             // LentControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -816,7 +803,7 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panelExportReport.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllLent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLentDataTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -851,22 +838,22 @@
         private System.Windows.Forms.Button btnExportReport;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblShowing;
-        private System.Windows.Forms.Label lblCurrentDataGridNumber;
+        private System.Windows.Forms.Label lblStartingPageNumber;
         private System.Windows.Forms.Label lblTo;
-        private System.Windows.Forms.Label label3EndDataGridNumber;
+        private System.Windows.Forms.Label lblEndingPageNumber;
         private System.Windows.Forms.Label lblof;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTotalPageNumber;
         private System.Windows.Forms.Label lblEntries;
-        private System.Windows.Forms.Button btnLastDataGridView;
-        private System.Windows.Forms.Button btnNextDataGridView;
-        private System.Windows.Forms.Button btnCurrentDataGridViewNumber;
-        private System.Windows.Forms.Button btnFirstDataGridView;
-        private System.Windows.Forms.Button btnPreviousDataGridView;
-        private System.Windows.Forms.DataGridView dataGridViewAllLent;
+        private System.Windows.Forms.Button btnLastPage;
+        private System.Windows.Forms.Button btnNextPage;
+        private System.Windows.Forms.Button btnCurrentPage;
+        private System.Windows.Forms.Button btnFirstPage;
+        private System.Windows.Forms.Button btnPreviousPage;
+        private System.Windows.Forms.DataGridView dgvLentDataTable;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPersonName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLentID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
@@ -874,6 +861,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemainingAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeadline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
-        private System.Windows.Forms.DataGridViewImageColumn colAction;
     }
 }

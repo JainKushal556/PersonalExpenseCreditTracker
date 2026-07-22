@@ -224,7 +224,6 @@
     <EmbeddedResource Include="Forms\Authentication\RegistrationControls.resx">
       <DependentUpon>RegistrationControls.cs</DependentUpon>
     </EmbeddedResource>
-
     <!-- Form Resources -->
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -329,10 +328,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Modules\Note" />
-    <Folder Include="Modules\Profile" />
-    <Folder Include="Modules\Settings\Category\" />
-    <Folder Include="Modules\Settings\Person\" />
     <Folder Include="Modules\Task\" />
     <Folder Include="Session\" />
   </ItemGroup>
@@ -509,6 +504,7 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\PersonIcon.png" />
     <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />
     <None Include="Resources\filter %282%29.png" />
@@ -549,8 +545,9 @@
     <None Include="Resources\telephone1.png" />
     <None Include="Resources\Gender.png" />
     <Content Include="Libraries\Cyotek.Windows.Forms.ImageBox.dll" />
+    <None Include="Resources\deadline.png" />
+    <None Include="Resources\loading.png" />
     <Content Include="Resources\pen %281%29.png" />
-
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\info.png" />
@@ -572,7 +569,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout_white_24x24.png" />
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
