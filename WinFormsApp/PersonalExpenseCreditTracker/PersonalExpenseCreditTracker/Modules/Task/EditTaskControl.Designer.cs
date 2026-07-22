@@ -82,7 +82,6 @@
             this.pnlEditTask.Name = "pnlEditTask";
             this.pnlEditTask.Size = new System.Drawing.Size(513, 580);
             this.pnlEditTask.TabIndex = 0;
-           
             // 
             // label4
             // 
