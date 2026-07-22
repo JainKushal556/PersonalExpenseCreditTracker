@@ -5,78 +5,57 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-
+using System.Configuration;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PersonalExpenseCreditTracker.Modules.Credit
 {
     public partial class CreditControl : Form
     {
-        public CreditControl()
+        private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        private DataTable AllCreditData = new DataTable();
+        private int currentPage = 1;
+        private int pageSize = 0;
+        public CreditControl() 
         {
             InitializeComponent();
             StyleCreditGrid();
-            dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
+            //dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
+            this.Resize += CreditControl_Resize;
 
-        }
-
-        private void tblSummary_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pnlContent_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblTotalCredit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void picCredit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPervious_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlTableHeader_Paint(object sender, PaintEventArgs e)
-        {
+            typeof(DataGridView).InvokeMember(
+                "DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null,
+                dgvCreditDataTable,
+                new object[] { true });
 
         }
 
         private void CreditControl_Load(object sender, EventArgs e)
         {
-
+            dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
+            pageSize = GetRowsPerPage();
+            int userID = 11; 
+            LoadCreditData(userID);
         }
 
-        private void dgvCreditDataTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void StyleCreditGrid()
         {
+            colDate.DataPropertyName = "CreditAt";
+            colCategory.DataPropertyName = "CategoryName";
+            colSubCategory.DataPropertyName = "SubCategoryName";
+            colAmount.DataPropertyName = "Amount";
+            colDescription.DataPropertyName = "Description";
+            colPaymentMethod.DataPropertyName = "PaymentName";
+            
+
             //Column Style
             dgvCreditDataTable.AllowUserToOrderColumns = false;
             dgvCreditDataTable.AutoGenerateColumns = false;
@@ -94,7 +73,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
             //Column Background Color
             colDate.DefaultCellStyle.BackColor = Color.White;
-            ColFrom.DefaultCellStyle.BackColor = Color.White;
+            
             colDescription.DefaultCellStyle.BackColor = Color.White;
             colCategory.DefaultCellStyle.BackColor = Color.White;
             colSubCategory.DefaultCellStyle.BackColor = Color.White;
@@ -103,20 +82,20 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
 
             //Column FontStyle
-            colDate.DefaultCellStyle.Font = new Font("Segoe UI", 8, FontStyle.Bold);
-            ColFrom.DefaultCellStyle.Font = new Font("Segoe UI", 8, FontStyle.Bold);
-            colDescription.DefaultCellStyle.Font = new Font("Segoe UI", 8, FontStyle.Bold);
-            colCategory.DefaultCellStyle.Font = new Font("Segoe UI", 8, FontStyle.Bold);
-            colSubCategory.DefaultCellStyle.Font = new Font("Segoe UI", 8, FontStyle.Bold);
-            colAmount.DefaultCellStyle.Font = new Font("Segoe UI", 8, FontStyle.Bold);
-            colPaymentMethod.DefaultCellStyle.Font = new Font("Segoe UI", 8, FontStyle.Bold);
+            colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+
+            colDescription.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colCategory.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colSubCategory.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colAmount.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colPaymentMethod.DefaultCellStyle.Font = new Font("Segoe UI", 10);
 
             //Row Style
-            dgvCreditDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            dgvCreditDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
             dgvCreditDataTable.DefaultCellStyle.BackColor = Color.White;
             dgvCreditDataTable.DefaultCellStyle.ForeColor = Color.Black;
-            dgvCreditDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            dgvCreditDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
+            //dgvCreditDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
+            //dgvCreditDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
             dgvCreditDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvCreditDataTable.RowTemplate.Height = 40;
             dgvCreditDataTable.RowHeadersVisible = false;
@@ -128,6 +107,57 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             dgvCreditDataTable.BorderStyle = BorderStyle.None;
             dgvCreditDataTable.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvCreditDataTable.GridColor = Color.FromArgb(230, 230, 230);
+
+            colAmount.DefaultCellStyle.ForeColor = Color.Red;
+            colCategory.DefaultCellStyle.ForeColor = Color.Green;
+            colPaymentMethod.DefaultCellStyle.ForeColor = Color.Blue;
+            colSubCategory.DefaultCellStyle.ForeColor = Color.Purple;
+
+            // Cell Alignment
+            colDate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colDescription.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colCategory.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colSubCategory.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colAmount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colPaymentMethod.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        private void LoadCreditData(int userID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("spGetAllCreditsByID", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@UserID", userID);
+
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+
+                        da.Fill(dt);
+
+                        if (dt.Columns.Contains("Message"))
+                        {
+                            MessageBox.Show(dt.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                            dgvCreditDataTable.DataSource = null;
+                            return;
+                        }
+
+                        AllCreditData = dt;
+                        dgvCreditDataTable.DataSource = AllCreditData;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void dgvCreditDataTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -139,9 +169,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 case "colDate":
                     DrawHeader(e, Properties.Resources.date, "Date");
                     break;
-                case "ColFrom":
-                    DrawHeader(e, Properties.Resources.up_and_down_arrows, "From");
-                    break;
+                
                 case "colDescription":
                     DrawHeader(e, Properties.Resources.note, "Description");
                     break;
@@ -194,20 +222,97 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             e.Handled = true;
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void ShowCurrentPage()
+        {
+            DataTable pageTable = AllCreditData.Clone();
+            btnCurrentPage.Text = currentPage.ToString();
+            int startIndex = (currentPage - 1) * pageSize;
+            int endIndex = Math.Min(startIndex + pageSize, AllCreditData.Rows.Count);
+
+            for (int i = startIndex; i < endIndex; i++)
+            {
+                pageTable.ImportRow(AllCreditData.Rows[i]);
+            }
+
+            dgvCreditDataTable.DataSource = pageTable;
+            int start = startIndex + 1;
+            int end = endIndex;
+            int total = AllCreditData.Rows.Count;
+
+            lblCreditStartingPageNumber.Text = total == 0 ? "0" : start.ToString();
+            lblCreditEndingPageNumber.Text = end.ToString();
+            lblCreditTotalPageNumber.Text = total.ToString();
+        }
+
+        private int GetRowsPerPage()
+        {
+            Rectangle display = dgvCreditDataTable.DisplayRectangle;
+
+            int rowHeight = dgvCreditDataTable.RowTemplate.Height;
+
+            return Math.Max(1, display.Height / rowHeight) - 1;
+        }
+
+       
+        private void CreditControl_Resize(object sender, EventArgs e)
+        {
+            if (AllCreditData == null || AllCreditData.Rows.Count == 0)
+                return;
+
+            int newPageSize = GetRowsPerPage();
+
+            if (newPageSize != pageSize)
+            {
+                pageSize = newPageSize;
+                ShowCurrentPage();
+            }
+        }
+
+        private void btnFirstpage_Click(object sender, EventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                currentPage = 1;
+                ShowCurrentPage();
+            }
+        }
+
+        private void btnPreviousPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                ShowCurrentPage();
+            }
+        }
+
+        private void btnNextpage_Click(object sender, EventArgs e)
+        {
+            int totalPages = (int)Math.Ceiling((double)AllCreditData.Rows.Count / pageSize);
+
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                ShowCurrentPage();
+            }
+        }
+
+        private void btnLastPage_Click(object sender, EventArgs e)
+        {
+            int totalPages = (int)Math.Ceiling((double)AllCreditData.Rows.Count / pageSize);
+            if (currentPage != totalPages)
+            {
+                currentPage = totalPages;
+                ShowCurrentPage();
+            }
+        }
+
+        private void dgvCreditDataTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
     }
 }
