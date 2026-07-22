@@ -52,7 +52,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.cmsCategoryAction = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddSubCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain.SuspendLayout();
             this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
@@ -171,7 +170,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblTotalCategoryNumber.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalCategoryNumber.Location = new System.Drawing.Point(178, 10);
             this.lblTotalCategoryNumber.Name = "lblTotalCategoryNumber";
-            this.lblTotalCategoryNumber.Size = new System.Drawing.Size(20, 23);
+            this.lblTotalCategoryNumber.Size = new System.Drawing.Size(17, 19);
             this.lblTotalCategoryNumber.TabIndex = 2;
             this.lblTotalCategoryNumber.Text = "5";
             // 
@@ -181,7 +180,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblTotalCategory.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalCategory.Location = new System.Drawing.Point(51, 9);
             this.lblTotalCategory.Name = "lblTotalCategory";
-            this.lblTotalCategory.Size = new System.Drawing.Size(149, 23);
+            this.lblTotalCategory.Size = new System.Drawing.Size(126, 19);
             this.lblTotalCategory.TabIndex = 1;
             this.lblTotalCategory.Text = "Total Categories :";
             // 
@@ -214,7 +213,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblActiveNumber.ForeColor = System.Drawing.Color.LimeGreen;
             this.lblActiveNumber.Location = new System.Drawing.Point(68, 10);
             this.lblActiveNumber.Name = "lblActiveNumber";
-            this.lblActiveNumber.Size = new System.Drawing.Size(30, 23);
+            this.lblActiveNumber.Size = new System.Drawing.Size(25, 19);
             this.lblActiveNumber.TabIndex = 2;
             this.lblActiveNumber.Text = "10";
             // 
@@ -225,7 +224,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblActive.ForeColor = System.Drawing.Color.LimeGreen;
             this.lblActive.Location = new System.Drawing.Point(13, 9);
             this.lblActive.Name = "lblActive";
-            this.lblActive.Size = new System.Drawing.Size(70, 23);
+            this.lblActive.Size = new System.Drawing.Size(59, 19);
             this.lblActive.TabIndex = 1;
             this.lblActive.Text = "Active :";
             // 
@@ -248,7 +247,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblInactiveNumber.ForeColor = System.Drawing.Color.Red;
             this.lblInactiveNumber.Location = new System.Drawing.Point(80, 10);
             this.lblInactiveNumber.Name = "lblInactiveNumber";
-            this.lblInactiveNumber.Size = new System.Drawing.Size(20, 23);
+            this.lblInactiveNumber.Size = new System.Drawing.Size(17, 19);
             this.lblInactiveNumber.TabIndex = 1;
             this.lblInactiveNumber.Text = "5";
             // 
@@ -259,7 +258,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblInactive.ForeColor = System.Drawing.Color.Red;
             this.lblInactive.Location = new System.Drawing.Point(14, 9);
             this.lblInactive.Name = "lblInactive";
-            this.lblInactive.Size = new System.Drawing.Size(82, 23);
+            this.lblInactive.Size = new System.Drawing.Size(69, 19);
             this.lblInactive.TabIndex = 0;
             this.lblInactive.Text = "Inactive :";
             // 
@@ -283,7 +282,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblTotalSubCategoryNumber.ForeColor = System.Drawing.Color.DarkViolet;
             this.lblTotalSubCategoryNumber.Location = new System.Drawing.Point(204, 10);
             this.lblTotalSubCategoryNumber.Name = "lblTotalSubCategoryNumber";
-            this.lblTotalSubCategoryNumber.Size = new System.Drawing.Size(30, 23);
+            this.lblTotalSubCategoryNumber.Size = new System.Drawing.Size(25, 19);
             this.lblTotalSubCategoryNumber.TabIndex = 2;
             this.lblTotalSubCategoryNumber.Text = "25";
             // 
@@ -293,7 +292,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblTotalSubCategory.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalSubCategory.Location = new System.Drawing.Point(49, 9);
             this.lblTotalSubCategory.Name = "lblTotalSubCategory";
-            this.lblTotalSubCategory.Size = new System.Drawing.Size(180, 23);
+            this.lblTotalSubCategory.Size = new System.Drawing.Size(151, 19);
             this.lblTotalSubCategory.TabIndex = 1;
             this.lblTotalSubCategory.Text = "Total SubCategories :";
             // 
@@ -332,7 +331,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblSectionHeader.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSectionHeader.Location = new System.Drawing.Point(12, 6);
             this.lblSectionHeader.Name = "lblSectionHeader";
-            this.lblSectionHeader.Size = new System.Drawing.Size(122, 23);
+            this.lblSectionHeader.Size = new System.Drawing.Size(103, 19);
             this.lblSectionHeader.TabIndex = 0;
             this.lblSectionHeader.Text = "All Categories";
             // 
@@ -381,7 +380,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.lblTitle.Location = new System.Drawing.Point(15, 6);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(236, 32);
+            this.lblTitle.Size = new System.Drawing.Size(184, 25);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Expense Categories";
             // 
@@ -392,7 +391,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblSubTitle.ForeColor = System.Drawing.Color.Gray;
             this.lblSubTitle.Location = new System.Drawing.Point(17, 34);
             this.lblSubTitle.Name = "lblSubTitle";
-            this.lblSubTitle.Size = new System.Drawing.Size(382, 20);
+            this.lblSubTitle.Size = new System.Drawing.Size(302, 15);
             this.lblSubTitle.TabIndex = 1;
             this.lblSubTitle.Text = "Create, manage and deactivate your expense categories.";
             // 
@@ -400,28 +399,21 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             // 
             this.cmsCategoryAction.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiEdit,
-            this.tsmiAddSubCategory,
-            this.tsmiDelete});
+            this.tsmiAddSubCategory});
             this.cmsCategoryAction.Name = "cmsCategoryAction";
-            this.cmsCategoryAction.Size = new System.Drawing.Size(196, 76);
+            this.cmsCategoryAction.Size = new System.Drawing.Size(168, 48);
             // 
             // tsmiEdit
             // 
             this.tsmiEdit.Name = "tsmiEdit";
-            this.tsmiEdit.Size = new System.Drawing.Size(195, 24);
+            this.tsmiEdit.Size = new System.Drawing.Size(167, 22);
             this.tsmiEdit.Text = "Edit";
             // 
             // tsmiAddSubCategory
             // 
             this.tsmiAddSubCategory.Name = "tsmiAddSubCategory";
-            this.tsmiAddSubCategory.Size = new System.Drawing.Size(195, 24);
+            this.tsmiAddSubCategory.Size = new System.Drawing.Size(167, 22);
             this.tsmiAddSubCategory.Text = "Add SubCategory";
-            // 
-            // tsmiDelete
-            // 
-            this.tsmiDelete.Name = "tsmiDelete";
-            this.tsmiDelete.Size = new System.Drawing.Size(195, 24);
-            this.tsmiDelete.Text = "Delete";
             // 
             // ExpenseCategoryControls
             // 
@@ -474,8 +466,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         private DataGridView dgvCategory;
         private ContextMenuStrip cmsCategoryAction;
         private ToolStripMenuItem tsmiEdit;
-        private ToolStripMenuItem tsmiAddSubCategory;
-        private ToolStripMenuItem tsmiDelete;
         private Panel pnlHeaderRight;
         private TableLayoutPanel tblFooter;
         private Panel pnlTotalCategory;
@@ -492,6 +482,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         private PictureBox picTotalSubCategory;
         private Label lblTotalSubCategoryNumber;
         private Label lblTotalSubCategory;
+        private ToolStripMenuItem tsmiAddSubCategory;
 
 
 
