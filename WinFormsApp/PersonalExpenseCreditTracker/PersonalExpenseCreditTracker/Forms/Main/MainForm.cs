@@ -14,6 +14,7 @@ using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Note;
 using PersonalExpenseCreditTracker.Modules.Profile;
+using PersonalExpenseCreditTracker.Modules.Settings;
 using PersonalExpenseCreditTracker.Modules.Task;
 using PersonalExpenseCreditTracker.Modules.Settings.Person;
 using PersonalExpenseCreditTracker.Modules.Settings.Category;
@@ -3285,6 +3286,8 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveSettingSubMenu(pnlSettingChangesPassword);
 
+            ChangePasswordControls changePasswordControls = new ChangePasswordControls();
+            changePasswordControls.Show();
             RefreshSidebarScroll();
             ExpandSidebar();
         }
@@ -3350,9 +3353,7 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-     
 
-      
 
       
 
