@@ -41,20 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AuthDAL.cs" />
+    <Compile Include="Borrow\BorrowDAL.cs" />
+    <Compile Include="Credit\CreditDAL.cs" />
+    <Compile Include="Dashboard\DashboardDAL.cs" />
+    <Compile Include="Expense\ExpenseDAL.cs" />
+    <Compile Include="Lent\LentDAL.cs" />
+    <Compile Include="Mainform\MainformDAL.cs" />
+    <Compile Include="Note\NoteDAL.cs" />
+    <Compile Include="Profile\ProfileDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\Category\CategoryDAL.cs" />
+    <Compile Include="Settings\Person\PersonDAL.cs" />
+    <Compile Include="Settings\SettingsDAL.cs" />
+    <Compile Include="Task\TaskDAL.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Borrow\" />
-    <Folder Include="Credit\" />
-    <Folder Include="Dashboard\" />
-    <Folder Include="Expense\" />
-    <Folder Include="Lent\" />
-    <Folder Include="Note\" />
-    <Folder Include="Profile\" />
-    <Folder Include="Settings\Category\" />
-    <Folder Include="Settings\Person\" />
-    <Folder Include="Task\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

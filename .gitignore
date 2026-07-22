@@ -399,3 +399,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/App.config
+WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Program.cs

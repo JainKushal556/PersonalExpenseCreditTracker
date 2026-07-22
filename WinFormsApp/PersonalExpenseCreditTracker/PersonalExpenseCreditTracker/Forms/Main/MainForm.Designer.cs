@@ -609,7 +609,7 @@
             this.pnlMainSideBarSection.Controls.Add(this.panelLogo);
             this.pnlMainSideBarSection.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMainSideBarSection.Location = new System.Drawing.Point(0, 0);
-            this.pnlMainSideBarSection.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlMainSideBarSection.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMainSideBarSection.Name = "pnlMainSideBarSection";
             this.pnlMainSideBarSection.Size = new System.Drawing.Size(300, 857);
             this.pnlMainSideBarSection.TabIndex = 0;
@@ -621,7 +621,7 @@
             this.pnlSideBar.Controls.Add(this.flowSidebar);
             this.pnlSideBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSideBar.Location = new System.Drawing.Point(0, 98);
-            this.pnlSideBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlSideBar.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSideBar.Name = "pnlSideBar";
             this.pnlSideBar.Size = new System.Drawing.Size(300, 694);
             this.pnlSideBar.TabIndex = 17;
@@ -633,7 +633,7 @@
             this.pnlScrollBar.Controls.Add(this.pnlThumb);
             this.pnlScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlScrollBar.Location = new System.Drawing.Point(285, 0);
-            this.pnlScrollBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlScrollBar.Margin = new System.Windows.Forms.Padding(2);
             this.pnlScrollBar.Name = "pnlScrollBar";
             this.pnlScrollBar.Size = new System.Drawing.Size(15, 694);
             this.pnlScrollBar.TabIndex = 5;
@@ -643,7 +643,7 @@
             // 
             this.pnlThumb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.pnlThumb.Location = new System.Drawing.Point(0, 132);
-            this.pnlThumb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlThumb.Margin = new System.Windows.Forms.Padding(2);
             this.pnlThumb.Name = "pnlThumb";
             this.pnlThumb.Size = new System.Drawing.Size(11, 65);
             this.pnlThumb.TabIndex = 0;
@@ -669,9 +669,9 @@
             this.flowSidebar.Controls.Add(this.pnlSettingsDropDown);
             this.flowSidebar.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowSidebar.Location = new System.Drawing.Point(0, 0);
-            this.flowSidebar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowSidebar.Margin = new System.Windows.Forms.Padding(2);
             this.flowSidebar.Name = "flowSidebar";
-            this.flowSidebar.Size = new System.Drawing.Size(300, 4301);
+            this.flowSidebar.Size = new System.Drawing.Size(300, 4357);
             this.flowSidebar.TabIndex = 4;
             this.flowSidebar.WrapContents = false;
             // 
@@ -692,7 +692,7 @@
             // panel4
             // 
             this.panel4.Location = new System.Drawing.Point(32, -46);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(21, 23);
             this.panel4.TabIndex = 2;
@@ -716,7 +716,7 @@
             // 
             this.picDashboard.Image = global::PersonalExpenseCreditTracker.Properties.Resources.home7;
             this.picDashboard.Location = new System.Drawing.Point(22, 15);
-            this.picDashboard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picDashboard.Margin = new System.Windows.Forms.Padding(2);
             this.picDashboard.Name = "picDashboard";
             this.picDashboard.Size = new System.Drawing.Size(21, 23);
             this.picDashboard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -744,7 +744,7 @@
             // 
             this.picExpenseArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picExpenseArrow.Location = new System.Drawing.Point(225, 19);
-            this.picExpenseArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picExpenseArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picExpenseArrow.Name = "picExpenseArrow";
             this.picExpenseArrow.Size = new System.Drawing.Size(14, 15);
             this.picExpenseArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -774,7 +774,7 @@
             // 
             this.picExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.wallet_filled_money_tool1;
             this.picExpense.Location = new System.Drawing.Point(22, 15);
-            this.picExpense.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picExpense.Margin = new System.Windows.Forms.Padding(2);
             this.picExpense.Name = "picExpense";
             this.picExpense.Size = new System.Drawing.Size(21, 23);
             this.picExpense.TabIndex = 0;
@@ -811,7 +811,7 @@
             this.pnlFilterContent.Controls.Add(this.pnlDateHeader);
             this.pnlFilterContent.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilterContent.Location = new System.Drawing.Point(0, 110);
-            this.pnlFilterContent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlFilterContent.Margin = new System.Windows.Forms.Padding(2);
             this.pnlFilterContent.Name = "pnlFilterContent";
             this.pnlFilterContent.Size = new System.Drawing.Size(300, 544);
             this.pnlFilterContent.TabIndex = 2;
@@ -829,7 +829,7 @@
             this.pnlCategoryBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCategoryBody.ForeColor = System.Drawing.Color.White;
             this.pnlCategoryBody.Location = new System.Drawing.Point(0, 441);
-            this.pnlCategoryBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCategoryBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCategoryBody.Name = "pnlCategoryBody";
             this.pnlCategoryBody.Size = new System.Drawing.Size(300, 103);
             this.pnlCategoryBody.TabIndex = 7;
@@ -843,7 +843,7 @@
             "sadf",
             "dsfdf"});
             this.cmbSubCategory.Location = new System.Drawing.Point(78, 80);
-            this.cmbSubCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbSubCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSubCategory.Name = "cmbSubCategory";
             this.cmbSubCategory.Size = new System.Drawing.Size(121, 21);
             this.cmbSubCategory.TabIndex = 3;
@@ -868,7 +868,7 @@
             "Food",
             "Travel"});
             this.ComboBoxCategory.Location = new System.Drawing.Point(78, 30);
-            this.ComboBoxCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxCategory.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxCategory.Name = "ComboBoxCategory";
             this.ComboBoxCategory.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxCategory.TabIndex = 1;
@@ -904,7 +904,7 @@
             // 
             this.picFilterByCategoryArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterByCategoryArrow.Location = new System.Drawing.Point(143, 12);
-            this.picFilterByCategoryArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterByCategoryArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterByCategoryArrow.Name = "picFilterByCategoryArrow";
             this.picFilterByCategoryArrow.Size = new System.Drawing.Size(14, 15);
             this.picFilterByCategoryArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -947,7 +947,7 @@
             this.pnlAmountBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlAmountBody.ForeColor = System.Drawing.Color.White;
             this.pnlAmountBody.Location = new System.Drawing.Point(0, 315);
-            this.pnlAmountBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlAmountBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlAmountBody.Name = "pnlAmountBody";
             this.pnlAmountBody.Size = new System.Drawing.Size(300, 94);
             this.pnlAmountBody.TabIndex = 5;
@@ -956,7 +956,7 @@
             // txtMaxAmount
             // 
             this.txtMaxAmount.Location = new System.Drawing.Point(68, 72);
-            this.txtMaxAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMaxAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtMaxAmount.Name = "txtMaxAmount";
             this.txtMaxAmount.Size = new System.Drawing.Size(114, 20);
             this.txtMaxAmount.TabIndex = 4;
@@ -976,7 +976,7 @@
             // txtMixAmount
             // 
             this.txtMixAmount.Location = new System.Drawing.Point(68, 24);
-            this.txtMixAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMixAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtMixAmount.Name = "txtMixAmount";
             this.txtMixAmount.Size = new System.Drawing.Size(114, 20);
             this.txtMixAmount.TabIndex = 1;
@@ -1012,7 +1012,7 @@
             // 
             this.picFilterByAmountArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterByAmountArrow.Location = new System.Drawing.Point(133, 12);
-            this.picFilterByAmountArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterByAmountArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterByAmountArrow.Name = "picFilterByAmountArrow";
             this.picFilterByAmountArrow.Size = new System.Drawing.Size(14, 15);
             this.picFilterByAmountArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1024,7 +1024,7 @@
             // 
             this.pictureBox2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.project;
             this.pictureBox2.Location = new System.Drawing.Point(41, 8);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(15, 16);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1071,7 +1071,7 @@
             this.pnlCustomDate.Controls.Add(this.dtpFromDate);
             this.pnlCustomDate.Controls.Add(this.lblFromDate);
             this.pnlCustomDate.Location = new System.Drawing.Point(56, 98);
-            this.pnlCustomDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCustomDate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCustomDate.Name = "pnlCustomDate";
             this.pnlCustomDate.Size = new System.Drawing.Size(188, 145);
             this.pnlCustomDate.TabIndex = 4;
@@ -1083,7 +1083,7 @@
             this.btnApplyDateFilter.FlatAppearance.BorderSize = 0;
             this.btnApplyDateFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnApplyDateFilter.Location = new System.Drawing.Point(38, 114);
-            this.btnApplyDateFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnApplyDateFilter.Margin = new System.Windows.Forms.Padding(2);
             this.btnApplyDateFilter.Name = "btnApplyDateFilter";
             this.btnApplyDateFilter.Size = new System.Drawing.Size(68, 24);
             this.btnApplyDateFilter.TabIndex = 4;
@@ -1095,7 +1095,7 @@
             this.dtpToDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpToDate.Location = new System.Drawing.Point(8, 81);
-            this.dtpToDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpToDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(128, 23);
             this.dtpToDate.TabIndex = 3;
@@ -1116,7 +1116,7 @@
             this.dtpFromDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFromDate.Location = new System.Drawing.Point(8, 28);
-            this.dtpFromDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(128, 23);
             this.dtpFromDate.TabIndex = 1;
@@ -1179,7 +1179,7 @@
             this.rbThisMonth.AutoSize = true;
             this.rbThisMonth.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbThisMonth.Location = new System.Drawing.Point(68, 10);
-            this.rbThisMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbThisMonth.Margin = new System.Windows.Forms.Padding(2);
             this.rbThisMonth.Name = "rbThisMonth";
             this.rbThisMonth.Size = new System.Drawing.Size(81, 17);
             this.rbThisMonth.TabIndex = 0;
@@ -1207,7 +1207,7 @@
             // 
             this.picFilterByDateArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterByDateArrow.Location = new System.Drawing.Point(118, 12);
-            this.picFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterByDateArrow.Name = "picFilterByDateArrow";
             this.picFilterByDateArrow.Size = new System.Drawing.Size(14, 15);
             this.picFilterByDateArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1219,7 +1219,7 @@
             // 
             this.picFilterByDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
             this.picFilterByDate.Location = new System.Drawing.Point(41, 8);
-            this.picFilterByDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterByDate.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterByDate.Name = "picFilterByDate";
             this.picFilterByDate.Size = new System.Drawing.Size(15, 16);
             this.picFilterByDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1250,7 +1250,7 @@
             this.pnlFilterHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilterHeader.ForeColor = System.Drawing.Color.White;
             this.pnlFilterHeader.Location = new System.Drawing.Point(0, 71);
-            this.pnlFilterHeader.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.pnlFilterHeader.Margin = new System.Windows.Forms.Padding(8);
             this.pnlFilterHeader.Name = "pnlFilterHeader";
             this.pnlFilterHeader.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.pnlFilterHeader.Size = new System.Drawing.Size(300, 39);
@@ -1266,7 +1266,7 @@
             this.btnClearAll.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearAll.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btnClearAll.Location = new System.Drawing.Point(163, 9);
-            this.btnClearAll.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnClearAll.Margin = new System.Windows.Forms.Padding(8);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(93, 24);
             this.btnClearAll.TabIndex = 5;
@@ -1279,7 +1279,7 @@
             // 
             this.picFilterHeader.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterHeader.Location = new System.Drawing.Point(118, 12);
-            this.picFilterHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterHeader.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterHeader.Name = "picFilterHeader";
             this.picFilterHeader.Size = new System.Drawing.Size(14, 15);
             this.picFilterHeader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1291,7 +1291,7 @@
             // 
             this.picFilter.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter__2_;
             this.picFilter.Location = new System.Drawing.Point(41, 12);
-            this.picFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilter.Margin = new System.Windows.Forms.Padding(2);
             this.picFilter.Name = "picFilter";
             this.picFilter.Size = new System.Drawing.Size(15, 16);
             this.picFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1344,7 +1344,7 @@
             // 
             this.picAddExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.plus__1_;
             this.picAddExpense.Location = new System.Drawing.Point(68, 10);
-            this.picAddExpense.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAddExpense.Margin = new System.Windows.Forms.Padding(2);
             this.picAddExpense.Name = "picAddExpense";
             this.picAddExpense.Size = new System.Drawing.Size(15, 16);
             this.picAddExpense.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1388,7 +1388,7 @@
             // 
             this.picAllExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.clipboard__1_;
             this.picAllExpense.Location = new System.Drawing.Point(68, 10);
-            this.picAllExpense.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAllExpense.Margin = new System.Windows.Forms.Padding(2);
             this.picAllExpense.Name = "picAllExpense";
             this.picAllExpense.Size = new System.Drawing.Size(15, 16);
             this.picAllExpense.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1417,7 +1417,7 @@
             // 
             this.picCreditArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picCreditArrow.Location = new System.Drawing.Point(225, 19);
-            this.picCreditArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCreditArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picCreditArrow.Name = "picCreditArrow";
             this.picCreditArrow.Size = new System.Drawing.Size(14, 15);
             this.picCreditArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1446,7 +1446,7 @@
             // 
             this.picCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.credit_card__2_;
             this.picCredit.Location = new System.Drawing.Point(22, 15);
-            this.picCredit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCredit.Margin = new System.Windows.Forms.Padding(2);
             this.picCredit.Name = "picCredit";
             this.picCredit.Size = new System.Drawing.Size(21, 23);
             this.picCredit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1483,7 +1483,7 @@
             this.pnlCreditFilterContant.Controls.Add(this.pnlCreditDateHeader);
             this.pnlCreditFilterContant.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCreditFilterContant.Location = new System.Drawing.Point(0, 110);
-            this.pnlCreditFilterContant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCreditFilterContant.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCreditFilterContant.Name = "pnlCreditFilterContant";
             this.pnlCreditFilterContant.Size = new System.Drawing.Size(300, 544);
             this.pnlCreditFilterContant.TabIndex = 6;
@@ -1500,7 +1500,7 @@
             this.pnlCreditCategoryBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCreditCategoryBody.ForeColor = System.Drawing.Color.White;
             this.pnlCreditCategoryBody.Location = new System.Drawing.Point(0, 441);
-            this.pnlCreditCategoryBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCreditCategoryBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCreditCategoryBody.Name = "pnlCreditCategoryBody";
             this.pnlCreditCategoryBody.Size = new System.Drawing.Size(300, 103);
             this.pnlCreditCategoryBody.TabIndex = 8;
@@ -1514,7 +1514,7 @@
             "sadf",
             "dsfdf"});
             this.ComboBoxCreditSubCategory.Location = new System.Drawing.Point(78, 80);
-            this.ComboBoxCreditSubCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxCreditSubCategory.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxCreditSubCategory.Name = "ComboBoxCreditSubCategory";
             this.ComboBoxCreditSubCategory.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxCreditSubCategory.TabIndex = 3;
@@ -1539,7 +1539,7 @@
             "Food",
             "Travel"});
             this.ComboBoxCreditCategory.Location = new System.Drawing.Point(78, 30);
-            this.ComboBoxCreditCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxCreditCategory.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxCreditCategory.Name = "ComboBoxCreditCategory";
             this.ComboBoxCreditCategory.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxCreditCategory.TabIndex = 1;
@@ -1575,7 +1575,7 @@
             // 
             this.picCreditFilterByCategoryArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picCreditFilterByCategoryArrow.Location = new System.Drawing.Point(139, 12);
-            this.picCreditFilterByCategoryArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCreditFilterByCategoryArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picCreditFilterByCategoryArrow.Name = "picCreditFilterByCategoryArrow";
             this.picCreditFilterByCategoryArrow.Size = new System.Drawing.Size(14, 15);
             this.picCreditFilterByCategoryArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1618,7 +1618,7 @@
             this.pnlCreditAmountBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCreditAmountBody.ForeColor = System.Drawing.Color.White;
             this.pnlCreditAmountBody.Location = new System.Drawing.Point(0, 315);
-            this.pnlCreditAmountBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCreditAmountBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCreditAmountBody.Name = "pnlCreditAmountBody";
             this.pnlCreditAmountBody.Size = new System.Drawing.Size(300, 94);
             this.pnlCreditAmountBody.TabIndex = 6;
@@ -1627,7 +1627,7 @@
             // txtCreditMinAmount
             // 
             this.txtCreditMinAmount.Location = new System.Drawing.Point(68, 72);
-            this.txtCreditMinAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCreditMinAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtCreditMinAmount.Name = "txtCreditMinAmount";
             this.txtCreditMinAmount.Size = new System.Drawing.Size(114, 20);
             this.txtCreditMinAmount.TabIndex = 4;
@@ -1647,7 +1647,7 @@
             // txtCreditMixAmount
             // 
             this.txtCreditMixAmount.Location = new System.Drawing.Point(68, 24);
-            this.txtCreditMixAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCreditMixAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtCreditMixAmount.Name = "txtCreditMixAmount";
             this.txtCreditMixAmount.Size = new System.Drawing.Size(114, 20);
             this.txtCreditMixAmount.TabIndex = 1;
@@ -1683,7 +1683,7 @@
             // 
             this.picCreditFilterByAmountArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picCreditFilterByAmountArrow.Location = new System.Drawing.Point(133, 12);
-            this.picCreditFilterByAmountArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCreditFilterByAmountArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picCreditFilterByAmountArrow.Name = "picCreditFilterByAmountArrow";
             this.picCreditFilterByAmountArrow.Size = new System.Drawing.Size(14, 15);
             this.picCreditFilterByAmountArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1695,7 +1695,7 @@
             // 
             this.picCreditFilterByAmount.Image = global::PersonalExpenseCreditTracker.Properties.Resources.project;
             this.picCreditFilterByAmount.Location = new System.Drawing.Point(41, 8);
-            this.picCreditFilterByAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCreditFilterByAmount.Margin = new System.Windows.Forms.Padding(2);
             this.picCreditFilterByAmount.Name = "picCreditFilterByAmount";
             this.picCreditFilterByAmount.Size = new System.Drawing.Size(15, 16);
             this.picCreditFilterByAmount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1742,7 +1742,7 @@
             this.pnlCreditCustomDate.Controls.Add(this.dtpCreditFromDate);
             this.pnlCreditCustomDate.Controls.Add(this.label2);
             this.pnlCreditCustomDate.Location = new System.Drawing.Point(56, 98);
-            this.pnlCreditCustomDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCreditCustomDate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCreditCustomDate.Name = "pnlCreditCustomDate";
             this.pnlCreditCustomDate.Size = new System.Drawing.Size(188, 145);
             this.pnlCreditCustomDate.TabIndex = 4;
@@ -1754,7 +1754,7 @@
             this.btnCreditApplyDateFilter.FlatAppearance.BorderSize = 0;
             this.btnCreditApplyDateFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreditApplyDateFilter.Location = new System.Drawing.Point(38, 114);
-            this.btnCreditApplyDateFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCreditApplyDateFilter.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreditApplyDateFilter.Name = "btnCreditApplyDateFilter";
             this.btnCreditApplyDateFilter.Size = new System.Drawing.Size(68, 24);
             this.btnCreditApplyDateFilter.TabIndex = 4;
@@ -1766,7 +1766,7 @@
             this.dtpCreditToDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpCreditToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpCreditToDate.Location = new System.Drawing.Point(8, 81);
-            this.dtpCreditToDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpCreditToDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpCreditToDate.Name = "dtpCreditToDate";
             this.dtpCreditToDate.Size = new System.Drawing.Size(128, 23);
             this.dtpCreditToDate.TabIndex = 3;
@@ -1787,7 +1787,7 @@
             this.dtpCreditFromDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpCreditFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpCreditFromDate.Location = new System.Drawing.Point(8, 28);
-            this.dtpCreditFromDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpCreditFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpCreditFromDate.Name = "dtpCreditFromDate";
             this.dtpCreditFromDate.Size = new System.Drawing.Size(128, 23);
             this.dtpCreditFromDate.TabIndex = 1;
@@ -1850,7 +1850,7 @@
             this.rbCreditThisMonth.AutoSize = true;
             this.rbCreditThisMonth.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbCreditThisMonth.Location = new System.Drawing.Point(68, 10);
-            this.rbCreditThisMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbCreditThisMonth.Margin = new System.Windows.Forms.Padding(2);
             this.rbCreditThisMonth.Name = "rbCreditThisMonth";
             this.rbCreditThisMonth.Size = new System.Drawing.Size(81, 17);
             this.rbCreditThisMonth.TabIndex = 0;
@@ -1878,7 +1878,7 @@
             // 
             this.picCreditFilterByDateArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picCreditFilterByDateArrow.Location = new System.Drawing.Point(118, 12);
-            this.picCreditFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCreditFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picCreditFilterByDateArrow.Name = "picCreditFilterByDateArrow";
             this.picCreditFilterByDateArrow.Size = new System.Drawing.Size(14, 15);
             this.picCreditFilterByDateArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1890,7 +1890,7 @@
             // 
             this.picCreditFilterByDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
             this.picCreditFilterByDate.Location = new System.Drawing.Point(41, 8);
-            this.picCreditFilterByDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCreditFilterByDate.Margin = new System.Windows.Forms.Padding(2);
             this.picCreditFilterByDate.Name = "picCreditFilterByDate";
             this.picCreditFilterByDate.Size = new System.Drawing.Size(15, 16);
             this.picCreditFilterByDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1921,7 +1921,7 @@
             this.pnlFilterCreditHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilterCreditHeader.ForeColor = System.Drawing.Color.White;
             this.pnlFilterCreditHeader.Location = new System.Drawing.Point(0, 71);
-            this.pnlFilterCreditHeader.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.pnlFilterCreditHeader.Margin = new System.Windows.Forms.Padding(8);
             this.pnlFilterCreditHeader.Name = "pnlFilterCreditHeader";
             this.pnlFilterCreditHeader.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.pnlFilterCreditHeader.Size = new System.Drawing.Size(300, 39);
@@ -1937,7 +1937,7 @@
             this.btnCreditClearAll.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreditClearAll.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btnCreditClearAll.Location = new System.Drawing.Point(163, 9);
-            this.btnCreditClearAll.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnCreditClearAll.Margin = new System.Windows.Forms.Padding(8);
             this.btnCreditClearAll.Name = "btnCreditClearAll";
             this.btnCreditClearAll.Size = new System.Drawing.Size(93, 24);
             this.btnCreditClearAll.TabIndex = 5;
@@ -1950,7 +1950,7 @@
             // 
             this.picFilterCreditHeaderArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterCreditHeaderArrow.Location = new System.Drawing.Point(118, 12);
-            this.picFilterCreditHeaderArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterCreditHeaderArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterCreditHeaderArrow.Name = "picFilterCreditHeaderArrow";
             this.picFilterCreditHeaderArrow.Size = new System.Drawing.Size(14, 15);
             this.picFilterCreditHeaderArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1962,7 +1962,7 @@
             // 
             this.picFilterCreditIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter__2_;
             this.picFilterCreditIcone.Location = new System.Drawing.Point(41, 12);
-            this.picFilterCreditIcone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterCreditIcone.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterCreditIcone.Name = "picFilterCreditIcone";
             this.picFilterCreditIcone.Size = new System.Drawing.Size(15, 16);
             this.picFilterCreditIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2015,7 +2015,7 @@
             // 
             this.picAddCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.plus__1_;
             this.picAddCredit.Location = new System.Drawing.Point(68, 10);
-            this.picAddCredit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAddCredit.Margin = new System.Windows.Forms.Padding(2);
             this.picAddCredit.Name = "picAddCredit";
             this.picAddCredit.Size = new System.Drawing.Size(15, 16);
             this.picAddCredit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2059,7 +2059,7 @@
             // 
             this.picAllCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.clipboard__1_;
             this.picAllCredit.Location = new System.Drawing.Point(68, 10);
-            this.picAllCredit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAllCredit.Margin = new System.Windows.Forms.Padding(2);
             this.picAllCredit.Name = "picAllCredit";
             this.picAllCredit.Size = new System.Drawing.Size(15, 16);
             this.picAllCredit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2088,7 +2088,7 @@
             // 
             this.picLentArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picLentArrow.Location = new System.Drawing.Point(225, 19);
-            this.picLentArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLentArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picLentArrow.Name = "picLentArrow";
             this.picLentArrow.Size = new System.Drawing.Size(14, 15);
             this.picLentArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2117,7 +2117,7 @@
             // 
             this.picLent.Image = global::PersonalExpenseCreditTracker.Properties.Resources.payment_lent1;
             this.picLent.Location = new System.Drawing.Point(22, 15);
-            this.picLent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLent.Margin = new System.Windows.Forms.Padding(2);
             this.picLent.Name = "picLent";
             this.picLent.Size = new System.Drawing.Size(21, 23);
             this.picLent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2158,7 +2158,7 @@
             this.pnlLentFilterContant.Controls.Add(this.pnlLentDateHeader);
             this.pnlLentFilterContant.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLentFilterContant.Location = new System.Drawing.Point(0, 110);
-            this.pnlLentFilterContant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLentFilterContant.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLentFilterContant.Name = "pnlLentFilterContant";
             this.pnlLentFilterContant.Size = new System.Drawing.Size(300, 586);
             this.pnlLentFilterContant.TabIndex = 7;
@@ -2169,7 +2169,7 @@
             this.pnlLentPaymentBody.Controls.Add(this.ComboBoxLentPayment);
             this.pnlLentPaymentBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLentPaymentBody.Location = new System.Drawing.Point(0, 559);
-            this.pnlLentPaymentBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLentPaymentBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLentPaymentBody.Name = "pnlLentPaymentBody";
             this.pnlLentPaymentBody.Size = new System.Drawing.Size(300, 27);
             this.pnlLentPaymentBody.TabIndex = 14;
@@ -2185,7 +2185,7 @@
             "Cash",
             "Card"});
             this.ComboBoxLentPayment.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxLentPayment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxLentPayment.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxLentPayment.Name = "ComboBoxLentPayment";
             this.ComboBoxLentPayment.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxLentPayment.TabIndex = 9;
@@ -2209,7 +2209,7 @@
             // 
             this.picLentFilterByPaymentArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picLentFilterByPaymentArrow.Location = new System.Drawing.Point(190, 10);
-            this.picLentFilterByPaymentArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLentFilterByPaymentArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picLentFilterByPaymentArrow.Name = "picLentFilterByPaymentArrow";
             this.picLentFilterByPaymentArrow.Size = new System.Drawing.Size(14, 15);
             this.picLentFilterByPaymentArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2247,7 +2247,7 @@
             this.pnlLentStatusBody.Controls.Add(this.ComboBoxLentStatus);
             this.pnlLentStatusBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLentStatusBody.Location = new System.Drawing.Point(0, 500);
-            this.pnlLentStatusBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLentStatusBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLentStatusBody.Name = "pnlLentStatusBody";
             this.pnlLentStatusBody.Size = new System.Drawing.Size(300, 27);
             this.pnlLentStatusBody.TabIndex = 12;
@@ -2262,7 +2262,7 @@
             "Complete",
             "Pandding"});
             this.ComboBoxLentStatus.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxLentStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxLentStatus.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxLentStatus.Name = "ComboBoxLentStatus";
             this.ComboBoxLentStatus.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxLentStatus.TabIndex = 9;
@@ -2287,7 +2287,7 @@
             // 
             this.picLentFilterByStatusArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picLentFilterByStatusArrow.Location = new System.Drawing.Point(133, 12);
-            this.picLentFilterByStatusArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLentFilterByStatusArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picLentFilterByStatusArrow.Name = "picLentFilterByStatusArrow";
             this.picLentFilterByStatusArrow.Size = new System.Drawing.Size(14, 15);
             this.picLentFilterByStatusArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2325,7 +2325,7 @@
             this.pnlLentPersonBody.Controls.Add(this.ComboBoxLentPerson);
             this.pnlLentPersonBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLentPersonBody.Location = new System.Drawing.Point(0, 441);
-            this.pnlLentPersonBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLentPersonBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLentPersonBody.Name = "pnlLentPersonBody";
             this.pnlLentPersonBody.Size = new System.Drawing.Size(300, 27);
             this.pnlLentPersonBody.TabIndex = 10;
@@ -2342,7 +2342,7 @@
             "Kushal",
             "Arpita"});
             this.ComboBoxLentPerson.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxLentPerson.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxLentPerson.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxLentPerson.Name = "ComboBoxLentPerson";
             this.ComboBoxLentPerson.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxLentPerson.TabIndex = 9;
@@ -2367,7 +2367,7 @@
             // 
             this.picLentFilterByPersonArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picLentFilterByPersonArrow.Location = new System.Drawing.Point(133, 12);
-            this.picLentFilterByPersonArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLentFilterByPersonArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picLentFilterByPersonArrow.Name = "picLentFilterByPersonArrow";
             this.picLentFilterByPersonArrow.Size = new System.Drawing.Size(14, 15);
             this.picLentFilterByPersonArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2411,7 +2411,7 @@
             this.pnlLentAmountBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLentAmountBody.ForeColor = System.Drawing.Color.White;
             this.pnlLentAmountBody.Location = new System.Drawing.Point(0, 315);
-            this.pnlLentAmountBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLentAmountBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLentAmountBody.Name = "pnlLentAmountBody";
             this.pnlLentAmountBody.Size = new System.Drawing.Size(300, 94);
             this.pnlLentAmountBody.TabIndex = 7;
@@ -2420,7 +2420,7 @@
             // txtLentMaxAmount
             // 
             this.txtLentMaxAmount.Location = new System.Drawing.Point(68, 72);
-            this.txtLentMaxAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLentMaxAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtLentMaxAmount.Name = "txtLentMaxAmount";
             this.txtLentMaxAmount.Size = new System.Drawing.Size(114, 20);
             this.txtLentMaxAmount.TabIndex = 4;
@@ -2440,7 +2440,7 @@
             // txtLentMinAmount
             // 
             this.txtLentMinAmount.Location = new System.Drawing.Point(66, 27);
-            this.txtLentMinAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLentMinAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtLentMinAmount.Name = "txtLentMinAmount";
             this.txtLentMinAmount.Size = new System.Drawing.Size(114, 20);
             this.txtLentMinAmount.TabIndex = 1;
@@ -2476,7 +2476,7 @@
             // 
             this.picLentFilterByAmountArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picLentFilterByAmountArrow.Location = new System.Drawing.Point(133, 12);
-            this.picLentFilterByAmountArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLentFilterByAmountArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picLentFilterByAmountArrow.Name = "picLentFilterByAmountArrow";
             this.picLentFilterByAmountArrow.Size = new System.Drawing.Size(14, 15);
             this.picLentFilterByAmountArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2488,7 +2488,7 @@
             // 
             this.picLentFilterByAmount.Image = global::PersonalExpenseCreditTracker.Properties.Resources.project;
             this.picLentFilterByAmount.Location = new System.Drawing.Point(41, 8);
-            this.picLentFilterByAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLentFilterByAmount.Margin = new System.Windows.Forms.Padding(2);
             this.picLentFilterByAmount.Name = "picLentFilterByAmount";
             this.picLentFilterByAmount.Size = new System.Drawing.Size(15, 16);
             this.picLentFilterByAmount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2534,7 +2534,7 @@
             this.pnlLentCustomDate.Controls.Add(this.dtpLentFromDate);
             this.pnlLentCustomDate.Controls.Add(this.label4);
             this.pnlLentCustomDate.Location = new System.Drawing.Point(56, 98);
-            this.pnlLentCustomDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLentCustomDate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLentCustomDate.Name = "pnlLentCustomDate";
             this.pnlLentCustomDate.Size = new System.Drawing.Size(188, 145);
             this.pnlLentCustomDate.TabIndex = 4;
@@ -2546,7 +2546,7 @@
             this.btnLentApplyDateFilter.FlatAppearance.BorderSize = 0;
             this.btnLentApplyDateFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentApplyDateFilter.Location = new System.Drawing.Point(38, 114);
-            this.btnLentApplyDateFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLentApplyDateFilter.Margin = new System.Windows.Forms.Padding(2);
             this.btnLentApplyDateFilter.Name = "btnLentApplyDateFilter";
             this.btnLentApplyDateFilter.Size = new System.Drawing.Size(68, 24);
             this.btnLentApplyDateFilter.TabIndex = 4;
@@ -2558,7 +2558,7 @@
             this.dtpLentToDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpLentToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpLentToDate.Location = new System.Drawing.Point(8, 81);
-            this.dtpLentToDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpLentToDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpLentToDate.Name = "dtpLentToDate";
             this.dtpLentToDate.Size = new System.Drawing.Size(128, 23);
             this.dtpLentToDate.TabIndex = 3;
@@ -2579,7 +2579,7 @@
             this.dtpLentFromDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpLentFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpLentFromDate.Location = new System.Drawing.Point(8, 28);
-            this.dtpLentFromDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpLentFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpLentFromDate.Name = "dtpLentFromDate";
             this.dtpLentFromDate.Size = new System.Drawing.Size(128, 23);
             this.dtpLentFromDate.TabIndex = 1;
@@ -2642,7 +2642,7 @@
             this.rbLentThisMonth.AutoSize = true;
             this.rbLentThisMonth.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbLentThisMonth.Location = new System.Drawing.Point(68, 10);
-            this.rbLentThisMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbLentThisMonth.Margin = new System.Windows.Forms.Padding(2);
             this.rbLentThisMonth.Name = "rbLentThisMonth";
             this.rbLentThisMonth.Size = new System.Drawing.Size(81, 17);
             this.rbLentThisMonth.TabIndex = 0;
@@ -2670,7 +2670,7 @@
             // 
             this.picLentFilterByDateArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picLentFilterByDateArrow.Location = new System.Drawing.Point(118, 12);
-            this.picLentFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLentFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picLentFilterByDateArrow.Name = "picLentFilterByDateArrow";
             this.picLentFilterByDateArrow.Size = new System.Drawing.Size(14, 15);
             this.picLentFilterByDateArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2682,7 +2682,7 @@
             // 
             this.picLentFilterByDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
             this.picLentFilterByDate.Location = new System.Drawing.Point(41, 8);
-            this.picLentFilterByDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLentFilterByDate.Margin = new System.Windows.Forms.Padding(2);
             this.picLentFilterByDate.Name = "picLentFilterByDate";
             this.picLentFilterByDate.Size = new System.Drawing.Size(15, 16);
             this.picLentFilterByDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2713,7 +2713,7 @@
             this.pnlFilterLentHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilterLentHeader.ForeColor = System.Drawing.Color.White;
             this.pnlFilterLentHeader.Location = new System.Drawing.Point(0, 71);
-            this.pnlFilterLentHeader.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.pnlFilterLentHeader.Margin = new System.Windows.Forms.Padding(8);
             this.pnlFilterLentHeader.Name = "pnlFilterLentHeader";
             this.pnlFilterLentHeader.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.pnlFilterLentHeader.Size = new System.Drawing.Size(300, 39);
@@ -2729,7 +2729,7 @@
             this.btnLentClearAll.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLentClearAll.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btnLentClearAll.Location = new System.Drawing.Point(163, 9);
-            this.btnLentClearAll.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnLentClearAll.Margin = new System.Windows.Forms.Padding(8);
             this.btnLentClearAll.Name = "btnLentClearAll";
             this.btnLentClearAll.Size = new System.Drawing.Size(93, 24);
             this.btnLentClearAll.TabIndex = 5;
@@ -2742,7 +2742,7 @@
             // 
             this.picFilterLentHeaderArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterLentHeaderArrow.Location = new System.Drawing.Point(118, 12);
-            this.picFilterLentHeaderArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterLentHeaderArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterLentHeaderArrow.Name = "picFilterLentHeaderArrow";
             this.picFilterLentHeaderArrow.Size = new System.Drawing.Size(14, 15);
             this.picFilterLentHeaderArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2754,7 +2754,7 @@
             // 
             this.picFilterLentIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter__2_;
             this.picFilterLentIcone.Location = new System.Drawing.Point(41, 12);
-            this.picFilterLentIcone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterLentIcone.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterLentIcone.Name = "picFilterLentIcone";
             this.picFilterLentIcone.Size = new System.Drawing.Size(15, 16);
             this.picFilterLentIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2807,7 +2807,7 @@
             // 
             this.picAddLent.Image = global::PersonalExpenseCreditTracker.Properties.Resources.plus__1_;
             this.picAddLent.Location = new System.Drawing.Point(68, 10);
-            this.picAddLent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAddLent.Margin = new System.Windows.Forms.Padding(2);
             this.picAddLent.Name = "picAddLent";
             this.picAddLent.Size = new System.Drawing.Size(15, 16);
             this.picAddLent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2851,7 +2851,7 @@
             // 
             this.picAllLent.Image = global::PersonalExpenseCreditTracker.Properties.Resources.clipboard__1_;
             this.picAllLent.Location = new System.Drawing.Point(68, 10);
-            this.picAllLent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAllLent.Margin = new System.Windows.Forms.Padding(2);
             this.picAllLent.Name = "picAllLent";
             this.picAllLent.Size = new System.Drawing.Size(15, 16);
             this.picAllLent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2880,7 +2880,7 @@
             // 
             this.picBorrowArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picBorrowArrow.Location = new System.Drawing.Point(225, 19);
-            this.picBorrowArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowArrow.Name = "picBorrowArrow";
             this.picBorrowArrow.Size = new System.Drawing.Size(14, 15);
             this.picBorrowArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2909,7 +2909,7 @@
             // 
             this.picBorrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.borrowing;
             this.picBorrow.Location = new System.Drawing.Point(22, 15);
-            this.picBorrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrow.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrow.Name = "picBorrow";
             this.picBorrow.Size = new System.Drawing.Size(21, 23);
             this.picBorrow.TabIndex = 0;
@@ -2949,7 +2949,7 @@
             this.pnlBorrowFilterContant.Controls.Add(this.pnlBorrowDateHeader);
             this.pnlBorrowFilterContant.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBorrowFilterContant.Location = new System.Drawing.Point(0, 110);
-            this.pnlBorrowFilterContant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBorrowFilterContant.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBorrowFilterContant.Name = "pnlBorrowFilterContant";
             this.pnlBorrowFilterContant.Size = new System.Drawing.Size(300, 586);
             this.pnlBorrowFilterContant.TabIndex = 8;
@@ -2960,7 +2960,7 @@
             this.pnlBorrowPaymentBody.Controls.Add(this.ComboBoxBorrowPayment);
             this.pnlBorrowPaymentBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBorrowPaymentBody.Location = new System.Drawing.Point(0, 559);
-            this.pnlBorrowPaymentBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBorrowPaymentBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBorrowPaymentBody.Name = "pnlBorrowPaymentBody";
             this.pnlBorrowPaymentBody.Size = new System.Drawing.Size(300, 27);
             this.pnlBorrowPaymentBody.TabIndex = 15;
@@ -2976,7 +2976,7 @@
             "Cash",
             "Card"});
             this.ComboBoxBorrowPayment.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxBorrowPayment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxBorrowPayment.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxBorrowPayment.Name = "ComboBoxBorrowPayment";
             this.ComboBoxBorrowPayment.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxBorrowPayment.TabIndex = 9;
@@ -3001,7 +3001,7 @@
             // 
             this.picBorrowFilterBySPaymentArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picBorrowFilterBySPaymentArrow.Location = new System.Drawing.Point(190, 10);
-            this.picBorrowFilterBySPaymentArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowFilterBySPaymentArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowFilterBySPaymentArrow.Name = "picBorrowFilterBySPaymentArrow";
             this.picBorrowFilterBySPaymentArrow.Size = new System.Drawing.Size(14, 15);
             this.picBorrowFilterBySPaymentArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3039,7 +3039,7 @@
             this.pnlBorrowStatusBody.Controls.Add(this.ComboBoxBorrowStatus);
             this.pnlBorrowStatusBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBorrowStatusBody.Location = new System.Drawing.Point(0, 500);
-            this.pnlBorrowStatusBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBorrowStatusBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBorrowStatusBody.Name = "pnlBorrowStatusBody";
             this.pnlBorrowStatusBody.Size = new System.Drawing.Size(300, 27);
             this.pnlBorrowStatusBody.TabIndex = 13;
@@ -3054,7 +3054,7 @@
             "Complete",
             "Pandding"});
             this.ComboBoxBorrowStatus.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxBorrowStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxBorrowStatus.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxBorrowStatus.Name = "ComboBoxBorrowStatus";
             this.ComboBoxBorrowStatus.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxBorrowStatus.TabIndex = 9;
@@ -3079,7 +3079,7 @@
             // 
             this.picBorrowFilterByStatusArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picBorrowFilterByStatusArrow.Location = new System.Drawing.Point(133, 12);
-            this.picBorrowFilterByStatusArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowFilterByStatusArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowFilterByStatusArrow.Name = "picBorrowFilterByStatusArrow";
             this.picBorrowFilterByStatusArrow.Size = new System.Drawing.Size(14, 15);
             this.picBorrowFilterByStatusArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3117,7 +3117,7 @@
             this.pnlBorrowPersonBody.Controls.Add(this.ComboBoxBorrowPerson);
             this.pnlBorrowPersonBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBorrowPersonBody.Location = new System.Drawing.Point(0, 441);
-            this.pnlBorrowPersonBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBorrowPersonBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBorrowPersonBody.Name = "pnlBorrowPersonBody";
             this.pnlBorrowPersonBody.Size = new System.Drawing.Size(300, 27);
             this.pnlBorrowPersonBody.TabIndex = 11;
@@ -3134,7 +3134,7 @@
             "Kushal",
             "Arpita"});
             this.ComboBoxBorrowPerson.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxBorrowPerson.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxBorrowPerson.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxBorrowPerson.Name = "ComboBoxBorrowPerson";
             this.ComboBoxBorrowPerson.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxBorrowPerson.TabIndex = 9;
@@ -3159,7 +3159,7 @@
             // 
             this.picBorrowFilterByPersonArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picBorrowFilterByPersonArrow.Location = new System.Drawing.Point(133, 12);
-            this.picBorrowFilterByPersonArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowFilterByPersonArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowFilterByPersonArrow.Name = "picBorrowFilterByPersonArrow";
             this.picBorrowFilterByPersonArrow.Size = new System.Drawing.Size(14, 15);
             this.picBorrowFilterByPersonArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3203,7 +3203,7 @@
             this.pnlBorrowAmountBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBorrowAmountBody.ForeColor = System.Drawing.Color.White;
             this.pnlBorrowAmountBody.Location = new System.Drawing.Point(0, 315);
-            this.pnlBorrowAmountBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBorrowAmountBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBorrowAmountBody.Name = "pnlBorrowAmountBody";
             this.pnlBorrowAmountBody.Size = new System.Drawing.Size(300, 94);
             this.pnlBorrowAmountBody.TabIndex = 8;
@@ -3212,7 +3212,7 @@
             // txtBorrowMaxAmount
             // 
             this.txtBorrowMaxAmount.Location = new System.Drawing.Point(68, 72);
-            this.txtBorrowMaxAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBorrowMaxAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtBorrowMaxAmount.Name = "txtBorrowMaxAmount";
             this.txtBorrowMaxAmount.Size = new System.Drawing.Size(114, 20);
             this.txtBorrowMaxAmount.TabIndex = 4;
@@ -3232,7 +3232,7 @@
             // txtBorrowMinAmount
             // 
             this.txtBorrowMinAmount.Location = new System.Drawing.Point(66, 27);
-            this.txtBorrowMinAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBorrowMinAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtBorrowMinAmount.Name = "txtBorrowMinAmount";
             this.txtBorrowMinAmount.Size = new System.Drawing.Size(114, 20);
             this.txtBorrowMinAmount.TabIndex = 1;
@@ -3268,7 +3268,7 @@
             // 
             this.picBorrowFilterByAmountArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picBorrowFilterByAmountArrow.Location = new System.Drawing.Point(133, 12);
-            this.picBorrowFilterByAmountArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowFilterByAmountArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowFilterByAmountArrow.Name = "picBorrowFilterByAmountArrow";
             this.picBorrowFilterByAmountArrow.Size = new System.Drawing.Size(14, 15);
             this.picBorrowFilterByAmountArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3280,7 +3280,7 @@
             // 
             this.picBorrowFilterByAmount.Image = global::PersonalExpenseCreditTracker.Properties.Resources.project;
             this.picBorrowFilterByAmount.Location = new System.Drawing.Point(41, 8);
-            this.picBorrowFilterByAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowFilterByAmount.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowFilterByAmount.Name = "picBorrowFilterByAmount";
             this.picBorrowFilterByAmount.Size = new System.Drawing.Size(15, 16);
             this.picBorrowFilterByAmount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3327,7 +3327,7 @@
             this.pnlBorrowCustomDate.Controls.Add(this.dtpBorrowFromDate);
             this.pnlBorrowCustomDate.Controls.Add(this.label6);
             this.pnlBorrowCustomDate.Location = new System.Drawing.Point(56, 98);
-            this.pnlBorrowCustomDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBorrowCustomDate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBorrowCustomDate.Name = "pnlBorrowCustomDate";
             this.pnlBorrowCustomDate.Size = new System.Drawing.Size(188, 145);
             this.pnlBorrowCustomDate.TabIndex = 4;
@@ -3339,7 +3339,7 @@
             this.btnBorrowApplyDateFilter.FlatAppearance.BorderSize = 0;
             this.btnBorrowApplyDateFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorrowApplyDateFilter.Location = new System.Drawing.Point(38, 114);
-            this.btnBorrowApplyDateFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBorrowApplyDateFilter.Margin = new System.Windows.Forms.Padding(2);
             this.btnBorrowApplyDateFilter.Name = "btnBorrowApplyDateFilter";
             this.btnBorrowApplyDateFilter.Size = new System.Drawing.Size(68, 24);
             this.btnBorrowApplyDateFilter.TabIndex = 4;
@@ -3351,7 +3351,7 @@
             this.dtpBorrowToDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpBorrowToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpBorrowToDate.Location = new System.Drawing.Point(8, 81);
-            this.dtpBorrowToDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpBorrowToDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpBorrowToDate.Name = "dtpBorrowToDate";
             this.dtpBorrowToDate.Size = new System.Drawing.Size(128, 23);
             this.dtpBorrowToDate.TabIndex = 3;
@@ -3372,7 +3372,7 @@
             this.dtpBorrowFromDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpBorrowFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpBorrowFromDate.Location = new System.Drawing.Point(8, 28);
-            this.dtpBorrowFromDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpBorrowFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpBorrowFromDate.Name = "dtpBorrowFromDate";
             this.dtpBorrowFromDate.Size = new System.Drawing.Size(128, 23);
             this.dtpBorrowFromDate.TabIndex = 1;
@@ -3435,7 +3435,7 @@
             this.rbBorrowThisMonth.AutoSize = true;
             this.rbBorrowThisMonth.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbBorrowThisMonth.Location = new System.Drawing.Point(68, 10);
-            this.rbBorrowThisMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbBorrowThisMonth.Margin = new System.Windows.Forms.Padding(2);
             this.rbBorrowThisMonth.Name = "rbBorrowThisMonth";
             this.rbBorrowThisMonth.Size = new System.Drawing.Size(81, 17);
             this.rbBorrowThisMonth.TabIndex = 0;
@@ -3463,7 +3463,7 @@
             // 
             this.picBorrowFilterByDateArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picBorrowFilterByDateArrow.Location = new System.Drawing.Point(118, 12);
-            this.picBorrowFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowFilterByDateArrow.Name = "picBorrowFilterByDateArrow";
             this.picBorrowFilterByDateArrow.Size = new System.Drawing.Size(14, 15);
             this.picBorrowFilterByDateArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3475,7 +3475,7 @@
             // 
             this.picBorrowFilterByDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
             this.picBorrowFilterByDate.Location = new System.Drawing.Point(41, 8);
-            this.picBorrowFilterByDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowFilterByDate.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowFilterByDate.Name = "picBorrowFilterByDate";
             this.picBorrowFilterByDate.Size = new System.Drawing.Size(15, 16);
             this.picBorrowFilterByDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3506,7 +3506,7 @@
             this.pnlFilterBorrowHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilterBorrowHeader.ForeColor = System.Drawing.Color.White;
             this.pnlFilterBorrowHeader.Location = new System.Drawing.Point(0, 71);
-            this.pnlFilterBorrowHeader.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.pnlFilterBorrowHeader.Margin = new System.Windows.Forms.Padding(8);
             this.pnlFilterBorrowHeader.Name = "pnlFilterBorrowHeader";
             this.pnlFilterBorrowHeader.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.pnlFilterBorrowHeader.Size = new System.Drawing.Size(300, 39);
@@ -3522,7 +3522,7 @@
             this.btnBorrowClearAll.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBorrowClearAll.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btnBorrowClearAll.Location = new System.Drawing.Point(163, 9);
-            this.btnBorrowClearAll.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnBorrowClearAll.Margin = new System.Windows.Forms.Padding(8);
             this.btnBorrowClearAll.Name = "btnBorrowClearAll";
             this.btnBorrowClearAll.Size = new System.Drawing.Size(93, 24);
             this.btnBorrowClearAll.TabIndex = 5;
@@ -3535,7 +3535,7 @@
             // 
             this.picFilterBorrowHeaderArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterBorrowHeaderArrow.Location = new System.Drawing.Point(118, 12);
-            this.picFilterBorrowHeaderArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterBorrowHeaderArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterBorrowHeaderArrow.Name = "picFilterBorrowHeaderArrow";
             this.picFilterBorrowHeaderArrow.Size = new System.Drawing.Size(14, 15);
             this.picFilterBorrowHeaderArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3547,7 +3547,7 @@
             // 
             this.picFilterBorrowIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter__2_;
             this.picFilterBorrowIcone.Location = new System.Drawing.Point(41, 12);
-            this.picFilterBorrowIcone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterBorrowIcone.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterBorrowIcone.Name = "picFilterBorrowIcone";
             this.picFilterBorrowIcone.Size = new System.Drawing.Size(15, 16);
             this.picFilterBorrowIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3600,7 +3600,7 @@
             // 
             this.picAddBorrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.plus__1_;
             this.picAddBorrow.Location = new System.Drawing.Point(68, 10);
-            this.picAddBorrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAddBorrow.Margin = new System.Windows.Forms.Padding(2);
             this.picAddBorrow.Name = "picAddBorrow";
             this.picAddBorrow.Size = new System.Drawing.Size(15, 16);
             this.picAddBorrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3644,7 +3644,7 @@
             // 
             this.picAllBorrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.clipboard__1_;
             this.picAllBorrow.Location = new System.Drawing.Point(68, 10);
-            this.picAllBorrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAllBorrow.Margin = new System.Windows.Forms.Padding(2);
             this.picAllBorrow.Name = "picAllBorrow";
             this.picAllBorrow.Size = new System.Drawing.Size(15, 16);
             this.picAllBorrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3673,7 +3673,7 @@
             // 
             this.picTasksArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picTasksArrow.Location = new System.Drawing.Point(225, 19);
-            this.picTasksArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTasksArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picTasksArrow.Name = "picTasksArrow";
             this.picTasksArrow.Size = new System.Drawing.Size(14, 15);
             this.picTasksArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3702,7 +3702,7 @@
             // 
             this.picTasks.Image = global::PersonalExpenseCreditTracker.Properties.Resources.task;
             this.picTasks.Location = new System.Drawing.Point(22, 15);
-            this.picTasks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTasks.Margin = new System.Windows.Forms.Padding(2);
             this.picTasks.Name = "picTasks";
             this.picTasks.Size = new System.Drawing.Size(21, 23);
             this.picTasks.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3739,7 +3739,7 @@
             this.pnlTaskFilterContant.Controls.Add(this.pnlTaskDateHeader);
             this.pnlTaskFilterContant.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTaskFilterContant.Location = new System.Drawing.Point(0, 110);
-            this.pnlTaskFilterContant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTaskFilterContant.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTaskFilterContant.Name = "pnlTaskFilterContant";
             this.pnlTaskFilterContant.Size = new System.Drawing.Size(300, 402);
             this.pnlTaskFilterContant.TabIndex = 9;
@@ -3750,7 +3750,7 @@
             this.pnlTaskPriorityBody.Controls.Add(this.ComboBoxTaskPriority);
             this.pnlTaskPriorityBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTaskPriorityBody.Location = new System.Drawing.Point(0, 375);
-            this.pnlTaskPriorityBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTaskPriorityBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTaskPriorityBody.Name = "pnlTaskPriorityBody";
             this.pnlTaskPriorityBody.Size = new System.Drawing.Size(300, 27);
             this.pnlTaskPriorityBody.TabIndex = 16;
@@ -3769,7 +3769,7 @@
             "",
             "High"});
             this.ComboBoxTaskPriority.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxTaskPriority.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxTaskPriority.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxTaskPriority.Name = "ComboBoxTaskPriority";
             this.ComboBoxTaskPriority.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxTaskPriority.TabIndex = 9;
@@ -3794,7 +3794,7 @@
             // 
             this.picTaskFilterByPriorityArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picTaskFilterByPriorityArrow.Location = new System.Drawing.Point(128, 12);
-            this.picTaskFilterByPriorityArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTaskFilterByPriorityArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picTaskFilterByPriorityArrow.Name = "picTaskFilterByPriorityArrow";
             this.picTaskFilterByPriorityArrow.Size = new System.Drawing.Size(14, 15);
             this.picTaskFilterByPriorityArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3832,7 +3832,7 @@
             this.pnlTaskStatusBody.Controls.Add(this.ComboBoxTaskStatus);
             this.pnlTaskStatusBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTaskStatusBody.Location = new System.Drawing.Point(0, 316);
-            this.pnlTaskStatusBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTaskStatusBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTaskStatusBody.Name = "pnlTaskStatusBody";
             this.pnlTaskStatusBody.Size = new System.Drawing.Size(300, 27);
             this.pnlTaskStatusBody.TabIndex = 14;
@@ -3847,7 +3847,7 @@
             "Complete",
             "Pandding"});
             this.ComboBoxTaskStatus.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxTaskStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxTaskStatus.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxTaskStatus.Name = "ComboBoxTaskStatus";
             this.ComboBoxTaskStatus.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxTaskStatus.TabIndex = 9;
@@ -3872,7 +3872,7 @@
             // 
             this.picTaskFilterByStatusArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picTaskFilterByStatusArrow.Location = new System.Drawing.Point(124, 12);
-            this.picTaskFilterByStatusArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTaskFilterByStatusArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picTaskFilterByStatusArrow.Name = "picTaskFilterByStatusArrow";
             this.picTaskFilterByStatusArrow.Size = new System.Drawing.Size(14, 15);
             this.picTaskFilterByStatusArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3931,7 +3931,7 @@
             this.pnlTaskCustomDate.Controls.Add(this.dtpTaskFromDate);
             this.pnlTaskCustomDate.Controls.Add(this.label9);
             this.pnlTaskCustomDate.Location = new System.Drawing.Point(56, 99);
-            this.pnlTaskCustomDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTaskCustomDate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTaskCustomDate.Name = "pnlTaskCustomDate";
             this.pnlTaskCustomDate.Size = new System.Drawing.Size(188, 145);
             this.pnlTaskCustomDate.TabIndex = 4;
@@ -3943,7 +3943,7 @@
             this.btnTaskApplyDateFilter.FlatAppearance.BorderSize = 0;
             this.btnTaskApplyDateFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTaskApplyDateFilter.Location = new System.Drawing.Point(38, 114);
-            this.btnTaskApplyDateFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTaskApplyDateFilter.Margin = new System.Windows.Forms.Padding(2);
             this.btnTaskApplyDateFilter.Name = "btnTaskApplyDateFilter";
             this.btnTaskApplyDateFilter.Size = new System.Drawing.Size(68, 24);
             this.btnTaskApplyDateFilter.TabIndex = 4;
@@ -3955,7 +3955,7 @@
             this.dtpTaskToDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpTaskToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpTaskToDate.Location = new System.Drawing.Point(8, 81);
-            this.dtpTaskToDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpTaskToDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpTaskToDate.Name = "dtpTaskToDate";
             this.dtpTaskToDate.Size = new System.Drawing.Size(128, 23);
             this.dtpTaskToDate.TabIndex = 3;
@@ -3976,7 +3976,7 @@
             this.dtpTaskFromDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpTaskFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpTaskFromDate.Location = new System.Drawing.Point(8, 28);
-            this.dtpTaskFromDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpTaskFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpTaskFromDate.Name = "dtpTaskFromDate";
             this.dtpTaskFromDate.Size = new System.Drawing.Size(128, 23);
             this.dtpTaskFromDate.TabIndex = 1;
@@ -4042,7 +4042,7 @@
             this.rbTaskThisMonth.AutoSize = true;
             this.rbTaskThisMonth.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbTaskThisMonth.Location = new System.Drawing.Point(68, 10);
-            this.rbTaskThisMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbTaskThisMonth.Margin = new System.Windows.Forms.Padding(2);
             this.rbTaskThisMonth.Name = "rbTaskThisMonth";
             this.rbTaskThisMonth.Size = new System.Drawing.Size(81, 17);
             this.rbTaskThisMonth.TabIndex = 0;
@@ -4070,7 +4070,7 @@
             // 
             this.picTaskFilterByDateArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picTaskFilterByDateArrow.Location = new System.Drawing.Point(118, 12);
-            this.picTaskFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTaskFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picTaskFilterByDateArrow.Name = "picTaskFilterByDateArrow";
             this.picTaskFilterByDateArrow.Size = new System.Drawing.Size(14, 15);
             this.picTaskFilterByDateArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4082,7 +4082,7 @@
             // 
             this.picTaskFilterByDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
             this.picTaskFilterByDate.Location = new System.Drawing.Point(41, 8);
-            this.picTaskFilterByDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTaskFilterByDate.Margin = new System.Windows.Forms.Padding(2);
             this.picTaskFilterByDate.Name = "picTaskFilterByDate";
             this.picTaskFilterByDate.Size = new System.Drawing.Size(15, 16);
             this.picTaskFilterByDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4113,7 +4113,7 @@
             this.pnlFilterTaskHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilterTaskHeader.ForeColor = System.Drawing.Color.White;
             this.pnlFilterTaskHeader.Location = new System.Drawing.Point(0, 71);
-            this.pnlFilterTaskHeader.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.pnlFilterTaskHeader.Margin = new System.Windows.Forms.Padding(8);
             this.pnlFilterTaskHeader.Name = "pnlFilterTaskHeader";
             this.pnlFilterTaskHeader.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.pnlFilterTaskHeader.Size = new System.Drawing.Size(300, 39);
@@ -4129,7 +4129,7 @@
             this.btnTaskClearAll.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTaskClearAll.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btnTaskClearAll.Location = new System.Drawing.Point(163, 9);
-            this.btnTaskClearAll.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnTaskClearAll.Margin = new System.Windows.Forms.Padding(8);
             this.btnTaskClearAll.Name = "btnTaskClearAll";
             this.btnTaskClearAll.Size = new System.Drawing.Size(93, 24);
             this.btnTaskClearAll.TabIndex = 5;
@@ -4142,7 +4142,7 @@
             // 
             this.picFilterTaskHeaderArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterTaskHeaderArrow.Location = new System.Drawing.Point(118, 12);
-            this.picFilterTaskHeaderArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterTaskHeaderArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterTaskHeaderArrow.Name = "picFilterTaskHeaderArrow";
             this.picFilterTaskHeaderArrow.Size = new System.Drawing.Size(14, 15);
             this.picFilterTaskHeaderArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4154,7 +4154,7 @@
             // 
             this.picFilterTaskIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter__2_;
             this.picFilterTaskIcone.Location = new System.Drawing.Point(41, 12);
-            this.picFilterTaskIcone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterTaskIcone.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterTaskIcone.Name = "picFilterTaskIcone";
             this.picFilterTaskIcone.Size = new System.Drawing.Size(15, 16);
             this.picFilterTaskIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4207,7 +4207,7 @@
             // 
             this.picAddTask.Image = global::PersonalExpenseCreditTracker.Properties.Resources.plus__1_;
             this.picAddTask.Location = new System.Drawing.Point(68, 10);
-            this.picAddTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAddTask.Margin = new System.Windows.Forms.Padding(2);
             this.picAddTask.Name = "picAddTask";
             this.picAddTask.Size = new System.Drawing.Size(15, 16);
             this.picAddTask.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4251,7 +4251,7 @@
             // 
             this.picAllTask.Image = global::PersonalExpenseCreditTracker.Properties.Resources.clipboard__1_;
             this.picAllTask.Location = new System.Drawing.Point(68, 10);
-            this.picAllTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAllTask.Margin = new System.Windows.Forms.Padding(2);
             this.picAllTask.Name = "picAllTask";
             this.picAllTask.Size = new System.Drawing.Size(15, 16);
             this.picAllTask.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4280,7 +4280,7 @@
             // 
             this.picNotesArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picNotesArrow.Location = new System.Drawing.Point(225, 19);
-            this.picNotesArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picNotesArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picNotesArrow.Name = "picNotesArrow";
             this.picNotesArrow.Size = new System.Drawing.Size(14, 15);
             this.picNotesArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4305,7 +4305,7 @@
             // 
             this.picNotes.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pencil;
             this.picNotes.Location = new System.Drawing.Point(22, 15);
-            this.picNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picNotes.Margin = new System.Windows.Forms.Padding(2);
             this.picNotes.Name = "picNotes";
             this.picNotes.Size = new System.Drawing.Size(21, 23);
             this.picNotes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4340,7 +4340,7 @@
             this.pnlNoteFilterContant.Controls.Add(this.pnlNoteDateHeader);
             this.pnlNoteFilterContant.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNoteFilterContant.Location = new System.Drawing.Point(0, 110);
-            this.pnlNoteFilterContant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlNoteFilterContant.Margin = new System.Windows.Forms.Padding(2);
             this.pnlNoteFilterContant.Name = "pnlNoteFilterContant";
             this.pnlNoteFilterContant.Size = new System.Drawing.Size(300, 402);
             this.pnlNoteFilterContant.TabIndex = 10;
@@ -4351,7 +4351,7 @@
             this.pnlNotePriorityBody.Controls.Add(this.ComboBoxNotePriority);
             this.pnlNotePriorityBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNotePriorityBody.Location = new System.Drawing.Point(0, 375);
-            this.pnlNotePriorityBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlNotePriorityBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlNotePriorityBody.Name = "pnlNotePriorityBody";
             this.pnlNotePriorityBody.Size = new System.Drawing.Size(300, 27);
             this.pnlNotePriorityBody.TabIndex = 17;
@@ -4363,14 +4363,11 @@
             this.ComboBoxNotePriority.FormattingEnabled = true;
             this.ComboBoxNotePriority.Items.AddRange(new object[] {
             "Select Priority",
-            "",
             "Low",
-            "",
             "Medium",
-            "",
             "High"});
             this.ComboBoxNotePriority.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxNotePriority.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxNotePriority.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxNotePriority.Name = "ComboBoxNotePriority";
             this.ComboBoxNotePriority.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxNotePriority.TabIndex = 9;
@@ -4395,7 +4392,7 @@
             // 
             this.picNotePriorityArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picNotePriorityArrow.Location = new System.Drawing.Point(126, 12);
-            this.picNotePriorityArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picNotePriorityArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picNotePriorityArrow.Name = "picNotePriorityArrow";
             this.picNotePriorityArrow.Size = new System.Drawing.Size(14, 15);
             this.picNotePriorityArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4433,7 +4430,7 @@
             this.pnlNoteStatusBody.Controls.Add(this.ComboBoxNoteStatus);
             this.pnlNoteStatusBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNoteStatusBody.Location = new System.Drawing.Point(0, 316);
-            this.pnlNoteStatusBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlNoteStatusBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlNoteStatusBody.Name = "pnlNoteStatusBody";
             this.pnlNoteStatusBody.Size = new System.Drawing.Size(300, 27);
             this.pnlNoteStatusBody.TabIndex = 15;
@@ -4448,7 +4445,7 @@
             "Complete",
             "Pandding"});
             this.ComboBoxNoteStatus.Location = new System.Drawing.Point(74, 4);
-            this.ComboBoxNoteStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxNoteStatus.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxNoteStatus.Name = "ComboBoxNoteStatus";
             this.ComboBoxNoteStatus.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxNoteStatus.TabIndex = 9;
@@ -4473,7 +4470,7 @@
             // 
             this.picTaskFilterByNoteArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picTaskFilterByNoteArrow.Location = new System.Drawing.Point(123, 12);
-            this.picTaskFilterByNoteArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picTaskFilterByNoteArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picTaskFilterByNoteArrow.Name = "picTaskFilterByNoteArrow";
             this.picTaskFilterByNoteArrow.Size = new System.Drawing.Size(14, 15);
             this.picTaskFilterByNoteArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4532,7 +4529,7 @@
             this.pnlNoteCustomDate.Controls.Add(this.dtpNoteFromDate);
             this.pnlNoteCustomDate.Controls.Add(this.label11);
             this.pnlNoteCustomDate.Location = new System.Drawing.Point(56, 99);
-            this.pnlNoteCustomDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlNoteCustomDate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlNoteCustomDate.Name = "pnlNoteCustomDate";
             this.pnlNoteCustomDate.Size = new System.Drawing.Size(188, 145);
             this.pnlNoteCustomDate.TabIndex = 4;
@@ -4544,7 +4541,7 @@
             this.btnNoteApplyDateFilter.FlatAppearance.BorderSize = 0;
             this.btnNoteApplyDateFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNoteApplyDateFilter.Location = new System.Drawing.Point(38, 114);
-            this.btnNoteApplyDateFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNoteApplyDateFilter.Margin = new System.Windows.Forms.Padding(2);
             this.btnNoteApplyDateFilter.Name = "btnNoteApplyDateFilter";
             this.btnNoteApplyDateFilter.Size = new System.Drawing.Size(68, 24);
             this.btnNoteApplyDateFilter.TabIndex = 4;
@@ -4556,7 +4553,7 @@
             this.dtpNoteToDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNoteToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpNoteToDate.Location = new System.Drawing.Point(8, 81);
-            this.dtpNoteToDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpNoteToDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpNoteToDate.Name = "dtpNoteToDate";
             this.dtpNoteToDate.Size = new System.Drawing.Size(128, 23);
             this.dtpNoteToDate.TabIndex = 3;
@@ -4577,7 +4574,7 @@
             this.dtpNoteFromDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNoteFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpNoteFromDate.Location = new System.Drawing.Point(8, 28);
-            this.dtpNoteFromDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpNoteFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpNoteFromDate.Name = "dtpNoteFromDate";
             this.dtpNoteFromDate.Size = new System.Drawing.Size(128, 23);
             this.dtpNoteFromDate.TabIndex = 1;
@@ -4643,7 +4640,7 @@
             this.rbNoteThisMonth.AutoSize = true;
             this.rbNoteThisMonth.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbNoteThisMonth.Location = new System.Drawing.Point(68, 10);
-            this.rbNoteThisMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbNoteThisMonth.Margin = new System.Windows.Forms.Padding(2);
             this.rbNoteThisMonth.Name = "rbNoteThisMonth";
             this.rbNoteThisMonth.Size = new System.Drawing.Size(81, 17);
             this.rbNoteThisMonth.TabIndex = 0;
@@ -4671,7 +4668,7 @@
             // 
             this.picNoteFilterByDateArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picNoteFilterByDateArrow.Location = new System.Drawing.Point(118, 12);
-            this.picNoteFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picNoteFilterByDateArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picNoteFilterByDateArrow.Name = "picNoteFilterByDateArrow";
             this.picNoteFilterByDateArrow.Size = new System.Drawing.Size(14, 15);
             this.picNoteFilterByDateArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4683,7 +4680,7 @@
             // 
             this.picNoteFilterByDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
             this.picNoteFilterByDate.Location = new System.Drawing.Point(41, 8);
-            this.picNoteFilterByDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picNoteFilterByDate.Margin = new System.Windows.Forms.Padding(2);
             this.picNoteFilterByDate.Name = "picNoteFilterByDate";
             this.picNoteFilterByDate.Size = new System.Drawing.Size(15, 16);
             this.picNoteFilterByDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4714,7 +4711,7 @@
             this.pnlFilterNoteHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilterNoteHeader.ForeColor = System.Drawing.Color.White;
             this.pnlFilterNoteHeader.Location = new System.Drawing.Point(0, 71);
-            this.pnlFilterNoteHeader.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.pnlFilterNoteHeader.Margin = new System.Windows.Forms.Padding(8);
             this.pnlFilterNoteHeader.Name = "pnlFilterNoteHeader";
             this.pnlFilterNoteHeader.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.pnlFilterNoteHeader.Size = new System.Drawing.Size(300, 39);
@@ -4730,7 +4727,7 @@
             this.btnNoteClearAll.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNoteClearAll.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btnNoteClearAll.Location = new System.Drawing.Point(163, 9);
-            this.btnNoteClearAll.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnNoteClearAll.Margin = new System.Windows.Forms.Padding(8);
             this.btnNoteClearAll.Name = "btnNoteClearAll";
             this.btnNoteClearAll.Size = new System.Drawing.Size(93, 24);
             this.btnNoteClearAll.TabIndex = 5;
@@ -4743,7 +4740,7 @@
             // 
             this.picFilterNoteHeaderArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picFilterNoteHeaderArrow.Location = new System.Drawing.Point(118, 12);
-            this.picFilterNoteHeaderArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterNoteHeaderArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterNoteHeaderArrow.Name = "picFilterNoteHeaderArrow";
             this.picFilterNoteHeaderArrow.Size = new System.Drawing.Size(14, 15);
             this.picFilterNoteHeaderArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4755,7 +4752,7 @@
             // 
             this.picFilterNoteIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter__2_;
             this.picFilterNoteIcone.Location = new System.Drawing.Point(41, 12);
-            this.picFilterNoteIcone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picFilterNoteIcone.Margin = new System.Windows.Forms.Padding(2);
             this.picFilterNoteIcone.Name = "picFilterNoteIcone";
             this.picFilterNoteIcone.Size = new System.Drawing.Size(15, 16);
             this.picFilterNoteIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4808,7 +4805,7 @@
             // 
             this.picAddNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.plus__1_;
             this.picAddNote.Location = new System.Drawing.Point(68, 10);
-            this.picAddNote.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAddNote.Margin = new System.Windows.Forms.Padding(2);
             this.picAddNote.Name = "picAddNote";
             this.picAddNote.Size = new System.Drawing.Size(15, 16);
             this.picAddNote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4852,7 +4849,7 @@
             // 
             this.picAllNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.clipboard__1_;
             this.picAllNote.Location = new System.Drawing.Point(68, 10);
-            this.picAllNote.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAllNote.Margin = new System.Windows.Forms.Padding(2);
             this.picAllNote.Name = "picAllNote";
             this.picAllNote.Size = new System.Drawing.Size(15, 16);
             this.picAllNote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4881,7 +4878,7 @@
             // 
             this.picSettingsArrow.Image = global::PersonalExpenseCreditTracker.Properties.Resources.down;
             this.picSettingsArrow.Location = new System.Drawing.Point(225, 19);
-            this.picSettingsArrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picSettingsArrow.Margin = new System.Windows.Forms.Padding(2);
             this.picSettingsArrow.Name = "picSettingsArrow";
             this.picSettingsArrow.Size = new System.Drawing.Size(14, 15);
             this.picSettingsArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4910,7 +4907,7 @@
             // 
             this.picSettings.Image = global::PersonalExpenseCreditTracker.Properties.Resources.cogwheel;
             this.picSettings.Location = new System.Drawing.Point(21, 15);
-            this.picSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picSettings.Margin = new System.Windows.Forms.Padding(2);
             this.picSettings.Name = "picSettings";
             this.picSettings.Size = new System.Drawing.Size(21, 23);
             this.picSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -4970,7 +4967,7 @@
             // 
             this.pictureBox4.Image = global::PersonalExpenseCreditTracker.Properties.Resources.reset_password;
             this.pictureBox4.Location = new System.Drawing.Point(41, 8);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(18, 20);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -5013,7 +5010,7 @@
             // 
             this.picSettingChangePassword.Image = global::PersonalExpenseCreditTracker.Properties.Resources.man;
             this.picSettingChangePassword.Location = new System.Drawing.Point(41, 8);
-            this.picSettingChangePassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picSettingChangePassword.Margin = new System.Windows.Forms.Padding(2);
             this.picSettingChangePassword.Name = "picSettingChangePassword";
             this.picSettingChangePassword.Size = new System.Drawing.Size(18, 20);
             this.picSettingChangePassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -5056,7 +5053,7 @@
             // 
             this.picLogout.Image = global::PersonalExpenseCreditTracker.Properties.Resources.logout;
             this.picLogout.Location = new System.Drawing.Point(41, 8);
-            this.picLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picLogout.Margin = new System.Windows.Forms.Padding(2);
             this.picLogout.Name = "picLogout";
             this.picLogout.Size = new System.Drawing.Size(18, 20);
             this.picLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -5099,7 +5096,7 @@
             // 
             this.picSettingCreditCategories.Image = global::PersonalExpenseCreditTracker.Properties.Resources.colourcard;
             this.picSettingCreditCategories.Location = new System.Drawing.Point(41, 8);
-            this.picSettingCreditCategories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picSettingCreditCategories.Margin = new System.Windows.Forms.Padding(2);
             this.picSettingCreditCategories.Name = "picSettingCreditCategories";
             this.picSettingCreditCategories.Size = new System.Drawing.Size(18, 20);
             this.picSettingCreditCategories.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -5142,7 +5139,7 @@
             // 
             this.picSettingExpenseCategories.Image = global::PersonalExpenseCreditTracker.Properties.Resources.expenses;
             this.picSettingExpenseCategories.Location = new System.Drawing.Point(41, 8);
-            this.picSettingExpenseCategories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picSettingExpenseCategories.Margin = new System.Windows.Forms.Padding(2);
             this.picSettingExpenseCategories.Name = "picSettingExpenseCategories";
             this.picSettingExpenseCategories.Size = new System.Drawing.Size(18, 20);
             this.picSettingExpenseCategories.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -5222,7 +5219,7 @@
             this.panelLogo.Controls.Add(this.pictureBox1);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelLogo.Margin = new System.Windows.Forms.Padding(2);
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(300, 98);
             this.panelLogo.TabIndex = 0;
@@ -5232,7 +5229,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 97);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(300, 1);
             this.panel1.TabIndex = 1;
@@ -5265,7 +5262,7 @@
             // 
             this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.wallet_;
             this.pictureBox1.Location = new System.Drawing.Point(15, 24);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(36, 39);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -5297,7 +5294,7 @@
             this.pnlContainer.Controls.Add(this.pnlTop);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer.Location = new System.Drawing.Point(300, 0);
-            this.pnlContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlContainer.Margin = new System.Windows.Forms.Padding(2);
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(657, 857);
             this.pnlContainer.TabIndex = 1;
@@ -5307,7 +5304,7 @@
             this.pnlPersonAddPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.pnlPersonAddPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPersonAddPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlPersonAddPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlPersonAddPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPersonAddPage.Name = "pnlPersonAddPage";
             this.pnlPersonAddPage.Size = new System.Drawing.Size(657, 794);
             this.pnlPersonAddPage.TabIndex = 0;
@@ -5318,7 +5315,7 @@
             this.pnlChnagePasswordPage.Controls.Add(this.pnlLogoutPage);
             this.pnlChnagePasswordPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlChnagePasswordPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlChnagePasswordPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlChnagePasswordPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlChnagePasswordPage.Name = "pnlChnagePasswordPage";
             this.pnlChnagePasswordPage.Size = new System.Drawing.Size(657, 794);
             this.pnlChnagePasswordPage.TabIndex = 0;
@@ -5328,7 +5325,7 @@
             this.pnlLogoutPage.BackColor = System.Drawing.Color.Silver;
             this.pnlLogoutPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLogoutPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlLogoutPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLogoutPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLogoutPage.Name = "pnlLogoutPage";
             this.pnlLogoutPage.Size = new System.Drawing.Size(657, 794);
             this.pnlLogoutPage.TabIndex = 0;
@@ -5338,7 +5335,7 @@
             this.pnlCreditCategoryPage.BackColor = System.Drawing.Color.Olive;
             this.pnlCreditCategoryPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCreditCategoryPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlCreditCategoryPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCreditCategoryPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCreditCategoryPage.Name = "pnlCreditCategoryPage";
             this.pnlCreditCategoryPage.Size = new System.Drawing.Size(657, 794);
             this.pnlCreditCategoryPage.TabIndex = 0;
@@ -5348,7 +5345,7 @@
             this.pnlExpenseCategory.BackColor = System.Drawing.Color.Teal;
             this.pnlExpenseCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlExpenseCategory.Location = new System.Drawing.Point(0, 63);
-            this.pnlExpenseCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlExpenseCategory.Margin = new System.Windows.Forms.Padding(2);
             this.pnlExpenseCategory.Name = "pnlExpenseCategory";
             this.pnlExpenseCategory.Size = new System.Drawing.Size(657, 794);
             this.pnlExpenseCategory.TabIndex = 0;
@@ -5358,7 +5355,7 @@
             this.pnlOverview.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.pnlOverview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOverview.Location = new System.Drawing.Point(0, 63);
-            this.pnlOverview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlOverview.Margin = new System.Windows.Forms.Padding(2);
             this.pnlOverview.Name = "pnlOverview";
             this.pnlOverview.Size = new System.Drawing.Size(657, 794);
             this.pnlOverview.TabIndex = 0;
@@ -5368,7 +5365,7 @@
             this.pnlExpensePage.BackColor = System.Drawing.Color.DimGray;
             this.pnlExpensePage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlExpensePage.Location = new System.Drawing.Point(0, 63);
-            this.pnlExpensePage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlExpensePage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlExpensePage.Name = "pnlExpensePage";
             this.pnlExpensePage.Size = new System.Drawing.Size(657, 794);
             this.pnlExpensePage.TabIndex = 1;
@@ -5378,7 +5375,7 @@
             this.pnlCreditPage.BackColor = System.Drawing.Color.LightGreen;
             this.pnlCreditPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCreditPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlCreditPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCreditPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCreditPage.Name = "pnlCreditPage";
             this.pnlCreditPage.Size = new System.Drawing.Size(657, 794);
             this.pnlCreditPage.TabIndex = 0;
@@ -5388,7 +5385,7 @@
             this.pnlLentPage.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlLentPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLentPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlLentPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlLentPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLentPage.Name = "pnlLentPage";
             this.pnlLentPage.Size = new System.Drawing.Size(657, 794);
             this.pnlLentPage.TabIndex = 0;
@@ -5398,7 +5395,7 @@
             this.pnlBorrowPage.BackColor = System.Drawing.SystemColors.Highlight;
             this.pnlBorrowPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBorrowPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlBorrowPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBorrowPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBorrowPage.Name = "pnlBorrowPage";
             this.pnlBorrowPage.Size = new System.Drawing.Size(657, 794);
             this.pnlBorrowPage.TabIndex = 0;
@@ -5408,7 +5405,7 @@
             this.pnlTaskPage.BackColor = System.Drawing.Color.Coral;
             this.pnlTaskPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTaskPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlTaskPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTaskPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTaskPage.Name = "pnlTaskPage";
             this.pnlTaskPage.Size = new System.Drawing.Size(657, 794);
             this.pnlTaskPage.TabIndex = 0;
@@ -5418,7 +5415,7 @@
             this.pnlNotesPage.BackColor = System.Drawing.Color.SeaGreen;
             this.pnlNotesPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlNotesPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlNotesPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlNotesPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlNotesPage.Name = "pnlNotesPage";
             this.pnlNotesPage.Size = new System.Drawing.Size(657, 794);
             this.pnlNotesPage.TabIndex = 0;
@@ -5429,7 +5426,7 @@
             this.pnlSettingPage.BackColor = System.Drawing.Color.DarkSlateGray;
             this.pnlSettingPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSettingPage.Location = new System.Drawing.Point(0, 63);
-            this.pnlSettingPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlSettingPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSettingPage.Name = "pnlSettingPage";
             this.pnlSettingPage.Size = new System.Drawing.Size(657, 794);
             this.pnlSettingPage.TabIndex = 0;
@@ -5443,7 +5440,7 @@
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
-            this.pnlTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTop.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Padding = new System.Windows.Forms.Padding(15, 12, 15, 12);
             this.pnlTop.Size = new System.Drawing.Size(657, 63);
@@ -5467,7 +5464,7 @@
             this.pnlRight.Controls.Add(this.pnlDate);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlRight.Location = new System.Drawing.Point(383, 12);
-            this.pnlRight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlRight.Margin = new System.Windows.Forms.Padding(2);
             this.pnlRight.Name = "pnlRight";
             this.pnlRight.Size = new System.Drawing.Size(259, 39);
             this.pnlRight.TabIndex = 1;
@@ -5478,7 +5475,7 @@
             this.panel5.Controls.Add(this.button1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel5.Location = new System.Drawing.Point(195, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(64, 39);
             this.panel5.TabIndex = 1;
@@ -5489,7 +5486,7 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.night_mode;
             this.button2.Location = new System.Drawing.Point(33, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(31, 39);
             this.button2.TabIndex = 1;
@@ -5504,7 +5501,7 @@
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.bell;
             this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(32, 39);
             this.button1.TabIndex = 0;
@@ -5517,7 +5514,7 @@
             this.pnlDate.Controls.Add(this.lblDate);
             this.pnlDate.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlDate.Location = new System.Drawing.Point(0, 0);
-            this.pnlDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlDate.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDate.Name = "pnlDate";
             this.pnlDate.Size = new System.Drawing.Size(188, 39);
             this.pnlDate.TabIndex = 0;

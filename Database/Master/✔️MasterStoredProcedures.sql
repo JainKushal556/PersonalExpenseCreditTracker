@@ -1,4 +1,4 @@
--- =========================================================================
+﻿-- =========================================================================
 -- MASTER STORED PROCEDURES SCRIPT
 -- =========================================================================
 
@@ -6341,5 +6341,565 @@ BEGIN
 
 END
  
+
+GO
+
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllBorrow.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllBorrow
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    -------------------------------------------------
+    -- Validate User
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid OR Inactive UserID!!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Check Borrow Records Exist Or Not
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'No Borrow Records Found!!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Get All Borrow Details
+    -------------------------------------------------
+
+    SELECT
+        b.BorrowID,
+        p.PersonName,
+        pt.PaymentName,
+        s.StatusName,
+        b.Amount,
+        b.PaidAmount,
+        b.RemainingAmount,
+        b.BorrowAt,
+        b.DeadlineAt,
+        b.Description
+    FROM tblBorrow b
+
+    LEFT JOIN tblPersons p
+        ON b.PersonID = p.PersonID
+
+    LEFT JOIN tblPaymentType pt
+        ON b.PaymentID = pt.PaymentID
+
+    LEFT JOIN tblLentBorrowStatus s
+        ON b.StatusID = s.StatusID
+
+    WHERE b.UserID = @UserID
+
+    ORDER BY b.BorrowAt DESC;
+
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetBorrowPersonHistory.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetBorrowPersonHistory
+(
+    @PersonID INT,
+    @UserID INT
+)
+AS
+BEGIN
+
+    -------------------------------------------------
+    -- Check Person Belongs To User + Borrow History Exists
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow B
+        JOIN tblPersons P
+            ON B.PersonID = P.PersonID
+        WHERE B.UserID = @UserID
+        AND B.PersonID = @PersonID
+    )
+    BEGIN
+        SELECT 'Invalid PersonID OR No Borrow History Found!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Get Borrow History Of Person
+    -------------------------------------------------
+
+    SELECT
+        B.BorrowID,
+        P.PersonName,
+        P.PhoneNumber,
+        P.Address,
+        Pay.PaymentName,
+        S.StatusName,
+        B.Amount,
+        B.PaidAmount,
+        B.RemainingAmount,
+        B.BorrowAt,
+        B.DeadlineAt,
+        B.Description
+
+    FROM tblBorrow B
+
+    LEFT JOIN tblPersons P
+        ON B.PersonID = P.PersonID
+
+    LEFT JOIN tblPaymentType Pay
+        ON B.PaymentID = Pay.PaymentID
+
+    LEFT JOIN tblLentBorrowStatus S
+        ON B.StatusID = S.StatusID
+
+    WHERE B.PersonID = @PersonID
+    AND B.UserID = @UserID
+
+    ORDER BY B.BorrowAt DESC;
+
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetCompletedBorrow.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetCompletedBorrow
+(
+    @UserID INT
+)
+AS
+BEGIN
+
+    DECLARE @PaidStatusID INT;
+
+    -------------------------------------------------
+    -- User Validation (Exist + Active)
+    -------------------------------------------------
+
+    IF @UserID IS NULL OR @UserID <= 0
+    BEGIN
+        SELECT 'Invalid UserID!' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers U
+        INNER JOIN tblUserAuthentication UA
+            ON U.UserID = UA.UserID
+        WHERE U.UserID = @UserID
+        AND UA.Active = 1
+    )
+    BEGIN
+        SELECT 'User does not exist or inactive!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Get StatusID from StatusName (NO typo risk in logic)
+    -------------------------------------------------
+
+    SELECT @PaidStatusID = StatusID
+    FROM tblLentBorrowStatus
+    WHERE LTRIM(RTRIM(StatusName)) = 'Paid';
+
+    IF @PaidStatusID IS NULL
+    BEGIN
+        SELECT 'Paid status not found in system!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- No Record Check
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow b
+        WHERE b.UserID = @UserID
+        AND b.StatusID = @PaidStatusID
+        AND b.RemainingAmount = 0
+    )
+    BEGIN
+        SELECT 'No completed borrow records found!' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Get Completed Borrow Records
+    -------------------------------------------------
+
+    SELECT
+        b.BorrowID,
+        ISNULL(p.PersonName,'Unknown') AS PersonName,
+        b.Amount,
+        b.PaidAmount,
+        b.RemainingAmount,
+        b.BorrowAt,
+        b.DeadlineAt,
+        ISNULL(s.StatusName,'Unknown') AS StatusName,
+        b.Description
+    FROM tblBorrow b
+
+    LEFT JOIN tblPersons p
+        ON b.PersonID = p.PersonID
+
+    LEFT JOIN tblLentBorrowStatus s
+        ON b.StatusID = s.StatusID
+
+    WHERE b.UserID = @UserID
+      AND b.StatusID = @PaidStatusID
+      AND b.RemainingAmount = 0
+
+    ORDER BY b.BorrowAt DESC;
+
+END;
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetTotalBorrowByPerson.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetTotalBorrowByPerson
+(
+    @UserID INT,
+    @PersonID INT
+)
+AS
+BEGIN
+
+    -------------------------------------------------
+    -- User Validation
+    -------------------------------------------------
+
+    IF @UserID IS NULL OR @UserID <= 0
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User not found or inactive' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Person Validation
+    -------------------------------------------------
+
+    IF @PersonID IS NULL OR @PersonID <= 0
+    BEGIN
+        SELECT 'Invalid PersonID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblPersons
+        WHERE PersonID = @PersonID
+        AND UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Person does not belong to this user' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Data Integrity Check (UPDATED AS REQUESTED)
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow
+        WHERE PersonID = @PersonID
+          AND UserID = @UserID
+          AND Amount IS NOT NULL
+    )
+    BEGIN
+        SELECT 'No borrow transactions found for this person' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Final Summary
+    -------------------------------------------------
+
+    SELECT
+        p.PersonID,
+        ISNULL(p.PersonName, 'Unknown Person') AS PersonName,
+
+        ROUND(ISNULL(SUM(b.Amount), 0), 2) AS TotalBorrowAmount,
+        ROUND(ISNULL(SUM(b.PaidAmount), 0), 2) AS TotalPaidAmount,
+        ROUND(ISNULL(SUM(b.RemainingAmount), 0), 2) AS TotalRemainingAmount
+
+    FROM tblPersons p
+
+    LEFT JOIN tblBorrow b
+        ON p.PersonID = b.PersonID
+        AND b.UserID = @UserID
+        AND b.Amount IS NOT NULL
+
+    WHERE p.PersonID = @PersonID
+
+    GROUP BY
+        p.PersonID,
+        p.PersonName;
+
+END;
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spPayBorrow.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spPayBorrow
+(
+    @BorrowID INT,
+    @PaidAmount DECIMAL(10,2),
+    @PaymentName VARCHAR(100)
+)
+AS
+BEGIN
+
+    BEGIN TRY
+
+        DECLARE @UserID INT;
+        DECLARE @RemainingAmount DECIMAL(10,2);
+        DECLARE @NewRemainingAmount DECIMAL(10,2);
+
+        DECLARE @PaymentID INT;
+        DECLARE @StatusID INT;
+        DECLARE @CategoryID INT;
+        DECLARE @SubCategoryID INT;
+
+        -------------------------------------------------
+        -- Validation
+        -------------------------------------------------
+
+        IF @BorrowID IS NULL OR @BorrowID <= 0
+        BEGIN
+            SELECT 'Invalid BorrowID' AS Message;
+            RETURN;
+        END
+
+        IF @PaidAmount IS NULL OR @PaidAmount <= 0
+        BEGIN
+            SELECT 'Invalid Paid Amount' AS Message;
+            RETURN;
+        END
+
+        IF @PaymentName IS NULL OR LTRIM(RTRIM(@PaymentName)) = ''
+        BEGIN
+            SELECT 'Payment Name required' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Borrow Exists Check
+        -------------------------------------------------
+
+        IF NOT EXISTS
+        (
+            SELECT 1 FROM tblBorrow WHERE BorrowID = @BorrowID
+        )
+        BEGIN
+            SELECT 'Borrow record not found' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Get Borrow Details
+        -------------------------------------------------
+
+        SELECT
+            @UserID = UserID,
+            @RemainingAmount = RemainingAmount
+        FROM tblBorrow
+        WHERE BorrowID = @BorrowID;
+
+        -------------------------------------------------
+        -- Over Payment Check
+        -------------------------------------------------
+
+        IF @PaidAmount > @RemainingAmount
+        BEGIN
+            SELECT 'Paid amount exceeds remaining balance' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Payment Lookup
+        -------------------------------------------------
+
+        SELECT @PaymentID = PaymentID
+        FROM tblPaymentType
+        WHERE LTRIM(RTRIM(PaymentName)) = LTRIM(RTRIM(@PaymentName));
+
+        IF @PaymentID IS NULL
+        BEGIN
+            SELECT 'Invalid Payment Name' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Status Lookup
+        -------------------------------------------------
+
+        SELECT @StatusID = StatusID
+        FROM tblLentBorrowStatus
+        WHERE StatusName =
+            CASE 
+                WHEN (@RemainingAmount - @PaidAmount) = 0 THEN 'Paid'
+                ELSE 'Partially Paid'
+            END;
+
+        IF @StatusID IS NULL
+        BEGIN
+            SELECT 'Status not found' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Expense Category Lookup
+        -------------------------------------------------
+
+        SELECT @CategoryID = CategoryID
+        FROM tblExpenseCategory
+        WHERE CategoryName = 'Borrow';
+
+        SELECT @SubCategoryID = SubCategoryID
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryName = 'Borrow Returned'
+          AND CategoryID = @CategoryID;
+
+        -------------------------------------------------
+        -- Transaction Start
+        -------------------------------------------------
+
+        BEGIN TRANSACTION;
+
+        -------------------------------------------------
+        -- Update Borrow
+        -------------------------------------------------
+
+        SET @NewRemainingAmount = @RemainingAmount - @PaidAmount;
+
+        UPDATE tblBorrow
+        SET
+            PaidAmount = PaidAmount + @PaidAmount,
+            RemainingAmount = @NewRemainingAmount,
+            StatusID = @StatusID
+        WHERE BorrowID = @BorrowID;
+
+        -------------------------------------------------
+        -- Insert Expense
+        -------------------------------------------------
+
+        INSERT INTO tblExpense
+        (
+            UserID,
+            CategoryID,
+            SubCategoryID,
+            PaymentID,
+            Amount,
+            Description,
+            ExpenseAt
+        )
+        VALUES
+        (
+            @UserID,
+            @CategoryID,
+            @SubCategoryID,
+            @PaymentID,
+            @PaidAmount,
+            'Borrow repayment payment',
+            GETDATE()
+        );
+
+        -------------------------------------------------
+        -- Commit
+        -------------------------------------------------
+
+        COMMIT TRANSACTION;
+
+        -------------------------------------------------
+        -- Result Output (no RETURN)
+        -------------------------------------------------
+
+        IF @NewRemainingAmount = 0
+            SELECT 'Fully Paid' AS Message, 1 AS Result;
+        ELSE
+            SELECT 'Partially Paid' AS Message, 2 AS Result;
+
+    END TRY
+
+    BEGIN CATCH
+
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+
+        SELECT ERROR_MESSAGE() AS Message, 0 AS Result;
+
+    END CATCH
+
+END;
 
 GO
