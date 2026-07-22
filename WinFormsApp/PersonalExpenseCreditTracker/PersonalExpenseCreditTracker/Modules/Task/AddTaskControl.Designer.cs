@@ -83,7 +83,6 @@
             this.pnlAddTask.Name = "pnlAddTask";
             this.pnlAddTask.Size = new System.Drawing.Size(513, 580);
             this.pnlAddTask.TabIndex = 0;
-          
             // 
             // label3
             // 
@@ -346,7 +345,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddTaskControl";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add New Task";
             this.Load += new System.EventHandler(this.AddTaskControl_Load);
             this.pnlAddTask.ResumeLayout(false);

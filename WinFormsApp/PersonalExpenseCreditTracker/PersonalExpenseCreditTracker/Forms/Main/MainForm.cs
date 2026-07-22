@@ -421,9 +421,9 @@ namespace PersonalExpenseCreditTracker
             pnlProfilePage.Visible = false;
             pnlExpenseCategory.Visible = false;
             pnlCreditCategoryPage.Visible = false;
-            pnlChnagePasswordPage.Visible = false;
+           
             pnlPersonAddPage.Visible = false;
-            pnlLogoutPage.Visible = false;
+           
             //pnlExpenseCategory.Visible = false;
 
             if (page != null)
@@ -3166,7 +3166,7 @@ namespace PersonalExpenseCreditTracker
                 expenseCategoryControls.TopLevel = false;
                 expenseCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 expenseCategoryControls.Dock = DockStyle.Fill;
-
+                pnlTop.Visible = false;
                 pnlExpenseCategory.Controls.Clear();
 
                 pnlExpenseCategory.Controls.Add(expenseCategoryControls);
@@ -3216,7 +3216,7 @@ namespace PersonalExpenseCreditTracker
                 creditCategoryControls.TopLevel = false;
                 creditCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 creditCategoryControls.Dock = DockStyle.Fill;
-
+                pnlTop.Visible = false;
                 pnlCreditCategoryPage.Controls.Clear();
 
                 pnlCreditCategoryPage.Controls.Add(creditCategoryControls);
@@ -3245,10 +3245,12 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlLogout_Click(object sender, EventArgs e)
         {
-            SetActiveSettingSubMenu(pnlSettingChangesPassword);
+            SetActiveSettingSubMenu(pnlLogout);
             pnlTop.Visible = false;
 
-            ShowPage(pnlLogoutPage);
+            
+            PersonLogOutControls personLogOutControls = new PersonLogOutControls();
+            personLogOutControls.Show();
 
             RefreshSidebarScroll();
             ExpandSidebar();
@@ -3282,12 +3284,6 @@ namespace PersonalExpenseCreditTracker
         private void pnlSettingChangesPassword_Click(object sender, EventArgs e)
         {
             SetActiveSettingSubMenu(pnlSettingChangesPassword);
-
-                    UpdateHeader(
-            "Change Password",
-            "Update your password to keep your account secure");
-
-            ShowPage(pnlChnagePasswordPage);
 
             RefreshSidebarScroll();
             ExpandSidebar();
@@ -3353,6 +3349,8 @@ namespace PersonalExpenseCreditTracker
                 pnlSettingPersonAdd.BackColor = Color.Transparent;
             }
         }
+
+     
 
       
 
