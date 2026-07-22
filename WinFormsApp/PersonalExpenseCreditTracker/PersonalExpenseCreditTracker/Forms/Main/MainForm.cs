@@ -14,6 +14,8 @@ using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Note;
 using PersonalExpenseCreditTracker.Modules.Profile;
+using PersonalExpenseCreditTracker.Modules.Settings;
+
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -3147,11 +3149,30 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveSettingSubMenu(pnlSettingChangesPassword);
 
-                    UpdateHeader(
-            "Change Password",
-            "Update your password to keep your account secure");
+            //        UpdateHeader(
+            //"Change Password",
+            //"Update your password to keep your account secure");
+            //ShowPage(pnlChnagePasswordPage);
 
-            ShowPage(pnlChnagePasswordPage);
+            //if (changePasswordControls == null || changePasswordControls.IsDisposed)
+            //{
+            //   angePasswordControls = new ChangePasswordControls();
+
+            //    changePasswordControls.TopLevel = false;
+            //    changePasswordControls.FormBorderStyle = FormBorderStyle.None;
+            //    changePasswordControls.Dock = DockStyle.Fill;
+
+            //    pnlChnagePasswordPage.Controls.Clear();
+            //    pnlChnagePasswordPage.Controls.Add(borrowControls);
+
+            //    changePasswordControls.Show();
+
+            //}
+
+            ChangePasswordControls changePasswordControls = new ChangePasswordControls();
+            changePasswordControls.Show();
+
+            
 
             RefreshSidebarScroll();
             ExpandSidebar();
@@ -3203,6 +3224,8 @@ namespace PersonalExpenseCreditTracker
                 pnlSettingPersonAdd.BackColor = Color.Transparent;
             }
         }
+
+
 
       
 

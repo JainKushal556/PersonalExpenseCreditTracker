@@ -210,6 +210,12 @@
     <Compile Include="Modules\Settings\Category\ExpenseCategoryControls.Designer.cs">
       <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Settings\ChangePasswordControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\ChangePasswordControls.Designer.cs">
+      <DependentUpon>ChangePasswordControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Settings\Person\PersonLogOutControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,7 +230,6 @@
     <EmbeddedResource Include="Forms\Authentication\RegistrationControls.resx">
       <DependentUpon>RegistrationControls.cs</DependentUpon>
     </EmbeddedResource>
-
     <!-- Form Resources -->
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -298,6 +303,9 @@
     <EmbeddedResource Include="Modules\Settings\Category\ExpenseCategoryControls.resx">
       <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\ChangePasswordControls.resx">
+      <DependentUpon>ChangePasswordControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Settings\Person\PersonLogOutControls.resx">
       <DependentUpon>PersonLogOutControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -329,10 +337,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Modules\Note" />
-    <Folder Include="Modules\Profile" />
-    <Folder Include="Modules\Settings\Category\" />
-    <Folder Include="Modules\Settings\Person\" />
     <Folder Include="Modules\Task\" />
     <Folder Include="Session\" />
   </ItemGroup>
@@ -549,8 +553,20 @@
     <None Include="Resources\telephone1.png" />
     <None Include="Resources\Gender.png" />
     <Content Include="Libraries\Cyotek.Windows.Forms.ImageBox.dll" />
+    <None Include="Resources\padlock.png" />
+    <None Include="Resources\padlock %282%29.png" />
+    <None Include="Resources\padlock %283%29.png" />
+    <None Include="Resources\padlock %281%29.png" />
+    <None Include="Resources\lock.png" />
+    <None Include="Resources\lock %281%29.png" />
+    <None Include="Resources\padlock %284%29.png" />
+    <None Include="Resources\open-eye.png" />
+    <None Include="Resources\open-eye %281%29.png" />
+    <None Include="Resources\open-eye %282%29.png" />
+    <None Include="Resources\eye.png" />
+    <None Include="Resources\info %281%29.png" />
+    <None Include="Resources\info %283%29.png" />
     <Content Include="Resources\pen %281%29.png" />
-
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\info.png" />
@@ -572,7 +588,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout_white_24x24.png" />
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
