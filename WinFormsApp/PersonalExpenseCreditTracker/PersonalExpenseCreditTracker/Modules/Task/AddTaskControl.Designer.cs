@@ -83,7 +83,7 @@
             this.pnlAddTask.Name = "pnlAddTask";
             this.pnlAddTask.Size = new System.Drawing.Size(513, 580);
             this.pnlAddTask.TabIndex = 0;
-        
+          
             // 
             // label3
             // 
