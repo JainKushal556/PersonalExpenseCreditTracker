@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +15,9 @@ using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Note;
 using PersonalExpenseCreditTracker.Modules.Profile;
 using PersonalExpenseCreditTracker.Modules.Settings;
-
+using PersonalExpenseCreditTracker.Modules.Task;
+using PersonalExpenseCreditTracker.Modules.Settings.Person;
+using PersonalExpenseCreditTracker.Modules.Settings.Category;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -38,7 +40,10 @@ namespace PersonalExpenseCreditTracker
         private BorrowControls borrowControls;
         private ProfileControls profileControl;
         private NoteControl noteControl;
-
+        private TaskControls taskControl;
+        private AddPersonControls addPersonSControls;
+        private ExpenseCategoryControls expenseCategoryControls;
+        private CreditCategoryControls creditCategoryControls;
        // Dropdown Open/Close Status
         //Kon Menu present open ache ta Track korer jano
 
@@ -142,7 +147,27 @@ namespace PersonalExpenseCreditTracker
         {
             flowSidebar.Location = new Point(0, 0);
             flowSidebar.Width = pnlSideBar.ClientSize.Width;
-            
+            ComboBoxCategory.SelectedIndex = 0;
+            cmbSubCategory.SelectedIndex = 0;
+
+            ComboBoxCreditCategory.SelectedIndex = 0;
+            ComboBoxCreditSubCategory.SelectedIndex = 0;
+
+            ComboBoxLentPerson.SelectedIndex = 0;
+            ComboBoxLentStatus.SelectedIndex = 0;
+            ComboBoxLentPayment.SelectedIndex = 0;
+
+            ComboBoxBorrowPerson.SelectedIndex = 0;
+            ComboBoxBorrowStatus.SelectedIndex = 0;
+            ComboBoxBorrowPayment.SelectedIndex = 0;
+
+            ComboBoxTaskStatus.SelectedIndex = 0;
+            ComboBoxTaskPriority.SelectedIndex = 0;
+
+            ComboBoxNoteStatus.SelectedIndex = 0;
+            ComboBoxNotePriority.SelectedIndex = 0;
+
+
             ShowPage(pnlOverview);
             btnClearAll.Visible = false;
             SetActiveMenu(pnlDashboard, true);
@@ -397,9 +422,9 @@ namespace PersonalExpenseCreditTracker
             pnlProfilePage.Visible = false;
             pnlExpenseCategory.Visible = false;
             pnlCreditCategoryPage.Visible = false;
-            pnlChnagePasswordPage.Visible = false;
+           
             pnlPersonAddPage.Visible = false;
-            pnlLogoutPage.Visible = false;
+           
             //pnlExpenseCategory.Visible = false;
 
             if (page != null)
@@ -869,12 +894,26 @@ namespace PersonalExpenseCreditTracker
         {
 
             UpdateHeader(
-     "Tasks",
-     "Organize and track your tasks efficiently");
-
-           
+                 "Tasks",
+                 "Organize and track your tasks efficiently");
 
             SetActiveMenu(pnlTasks, false);
+
+            if (taskControl == null || taskControl.IsDisposed)
+            {
+                taskControl = new TaskControls();
+
+                taskControl.TopLevel = false;
+                taskControl.FormBorderStyle = FormBorderStyle.None;
+                taskControl.Dock = DockStyle.Fill;
+
+                pnlTaskPage.Controls.Clear();
+
+                pnlTaskPage.Controls.Add(taskControl);
+
+                taskControl.Show();
+            }
+
             bool wasOpen = taskOpen;
 
             CloseAllDropDown();
@@ -899,6 +938,7 @@ namespace PersonalExpenseCreditTracker
             RefreshSidebarScroll();
             ExpandSidebar();
 
+           
 
             taskDateOpen = false;
             taskStatusOpen = false;
@@ -1436,6 +1476,14 @@ namespace PersonalExpenseCreditTracker
         private void pnlAddExpense_Click(object sender, EventArgs e)
         {
             SetActiveExpenseSubMenu(pnlAddExpense);
+
+            ExpenseDetailsControl expenseDetailsControl = new ExpenseDetailsControl();
+            expenseDetailsControl.FormClosed += Expense_FormClosed;
+            expenseDetailsControl.Show();
+        }
+        private void Expense_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetActiveExpenseSubMenu(pnlAllExpense);
         }
 
         private void pnlAddExpense_MouseEnter(object sender, EventArgs e)
@@ -1520,6 +1568,7 @@ namespace PersonalExpenseCreditTracker
 
         private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+
              UpdateClearAllButton();
 
         }
@@ -1760,6 +1809,18 @@ namespace PersonalExpenseCreditTracker
         private void pnlAddCredit_Click(object sender, EventArgs e)
         {
             SetActiveCreditSubMenu(pnlAddCredit);
+
+            CreditDetailsControl creditDetailsControl = new CreditDetailsControl();
+
+            creditDetailsControl.FormClosed += Credit_FormClosed;
+
+            creditDetailsControl.Show();
+        }
+        private void Credit_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetActiveCreditSubMenu(pnlAllCredit);
+
+      
         }
 
         private void pnlAddCredit_MouseEnter(object sender, EventArgs e)
@@ -2137,13 +2198,24 @@ namespace PersonalExpenseCreditTracker
 
             activeLentSubMenu = activePanel;
         }
-   
+
 
         private void pnlAddLent_Click(object sender, EventArgs e)
         {
             SetActiveLentSubMenu(pnlAddLent);
-        }
 
+            AddLentControls addLentControls = new AddLentControls();
+
+            addLentControls.FormClosed += Lent_FormClosed;
+
+            addLentControls.Show();
+        }
+        private void Lent_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetActiveLentSubMenu(pnlAllLent);
+
+            ShowPage(pnlLentPage);   // চাইলে রাখতে পারো
+        }
         private void pnlAddLent_MouseEnter(object sender, EventArgs e)
         {
             if (activeLentSubMenu != pnlAddLent)
@@ -2507,6 +2579,18 @@ namespace PersonalExpenseCreditTracker
         private void pnlAddBorrow_Click(object sender, EventArgs e)
         {
             SetActiveBorrowSubMenu(pnlAddBorrow);
+
+            AddBorrowControls addBorrowControls = new AddBorrowControls();
+
+            addBorrowControls.FormClosed += Borrow_FormClosed;
+
+            addBorrowControls.Show();
+        }
+        private void Borrow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetActiveBorrowSubMenu(pnlAllBorrow);
+
+            
         }
 
         private void pnlAddBorrow_MouseEnter(object sender, EventArgs e)
@@ -2755,6 +2839,17 @@ namespace PersonalExpenseCreditTracker
         private void pnlAddTask_Click(object sender, EventArgs e)
         {
             SetActiveTaskSubMenu(pnlAddTask);
+
+            AddTaskControl addTaskControl = new AddTaskControl();
+
+            addTaskControl.FormClosed += Task_FormClosed;
+
+            addTaskControl.Show();
+        }
+
+        private void Task_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetActiveTaskSubMenu(pnlAllTask);
         }
 
         private void pnlAddTask_MouseEnter(object sender, EventArgs e)
@@ -3006,6 +3101,17 @@ namespace PersonalExpenseCreditTracker
         private void pnlAddNote_Click(object sender, EventArgs e)
         {
             SetActiveNoteSubMenu(pnlAddNote);
+
+            NoteAddDetailsControl noteAddDetailsControl = new NoteAddDetailsControl();
+
+            noteAddDetailsControl.FormClosed += Note_FormClosed;
+
+            noteAddDetailsControl.Show();
+        }
+        private void Note_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetActiveNoteSubMenu(pnlAllNote);
+
         }
 
         private void pnlAddNote_MouseEnter(object sender, EventArgs e)
@@ -3054,7 +3160,21 @@ namespace PersonalExpenseCreditTracker
 
             RefreshSidebarScroll();
             ExpandSidebar();
-            
+            if (expenseCategoryControls == null || expenseCategoryControls.IsDisposed)
+            {
+                expenseCategoryControls = new ExpenseCategoryControls();
+
+                expenseCategoryControls.TopLevel = false;
+                expenseCategoryControls.FormBorderStyle = FormBorderStyle.None;
+                expenseCategoryControls.Dock = DockStyle.Fill;
+                pnlTop.Visible = false;
+                pnlExpenseCategory.Controls.Clear();
+
+                pnlExpenseCategory.Controls.Add(expenseCategoryControls);
+
+                expenseCategoryControls.Show();
+            }
+
         }
 
         private void pnlSettingExpenseCategories_MouseEnter(object sender, EventArgs e)
@@ -3089,6 +3209,21 @@ namespace PersonalExpenseCreditTracker
 
             RefreshSidebarScroll();
             ExpandSidebar();
+
+            if (creditCategoryControls == null || creditCategoryControls.IsDisposed)
+            {
+                creditCategoryControls = new CreditCategoryControls();
+
+                creditCategoryControls.TopLevel = false;
+                creditCategoryControls.FormBorderStyle = FormBorderStyle.None;
+                creditCategoryControls.Dock = DockStyle.Fill;
+                pnlTop.Visible = false;
+                pnlCreditCategoryPage.Controls.Clear();
+
+                pnlCreditCategoryPage.Controls.Add(creditCategoryControls);
+
+                creditCategoryControls.Show();
+            }
         }
 
         private void pnlSettingCreditCategories_MouseEnter(object sender, EventArgs e)
@@ -3111,10 +3246,12 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlLogout_Click(object sender, EventArgs e)
         {
-            SetActiveSettingSubMenu(pnlSettingChangesPassword);
+            SetActiveSettingSubMenu(pnlLogout);
             pnlTop.Visible = false;
 
-            ShowPage(pnlLogoutPage);
+            
+            PersonLogOutControls personLogOutControls = new PersonLogOutControls();
+            personLogOutControls.Show();
 
             RefreshSidebarScroll();
             ExpandSidebar();
@@ -3149,31 +3286,8 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveSettingSubMenu(pnlSettingChangesPassword);
 
-            //        UpdateHeader(
-            //"Change Password",
-            //"Update your password to keep your account secure");
-            //ShowPage(pnlChnagePasswordPage);
-
-            //if (changePasswordControls == null || changePasswordControls.IsDisposed)
-            //{
-            //   angePasswordControls = new ChangePasswordControls();
-
-            //    changePasswordControls.TopLevel = false;
-            //    changePasswordControls.FormBorderStyle = FormBorderStyle.None;
-            //    changePasswordControls.Dock = DockStyle.Fill;
-
-            //    pnlChnagePasswordPage.Controls.Clear();
-            //    pnlChnagePasswordPage.Controls.Add(borrowControls);
-
-            //    changePasswordControls.Show();
-
-            //}
-
             ChangePasswordControls changePasswordControls = new ChangePasswordControls();
             changePasswordControls.Show();
-
-            
-
             RefreshSidebarScroll();
             ExpandSidebar();
         }
@@ -3204,6 +3318,20 @@ namespace PersonalExpenseCreditTracker
      "Save a person's details for use in Lent and Borrow modules");
 
             ShowPage(pnlPersonAddPage);
+
+            if (addPersonSControls == null || addPersonSControls.IsDisposed)
+            {
+                addPersonSControls = new AddPersonControls();
+
+                addPersonSControls.TopLevel = false;
+                addPersonSControls.FormBorderStyle = FormBorderStyle.None;
+                addPersonSControls.Dock = DockStyle.Fill;
+
+                pnlPersonAddPage.Controls.Clear();
+                pnlPersonAddPage.Controls.Add(addPersonSControls);
+
+                addPersonSControls.Show();
+            }
 
             RefreshSidebarScroll();
             ExpandSidebar();

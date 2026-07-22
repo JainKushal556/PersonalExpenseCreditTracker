@@ -272,6 +272,20 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                 }
             }
         }
+
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            ExpenseAddCategoryControls expenseAddCategoryControls = new ExpenseAddCategoryControls(this);
+            expenseAddCategoryControls.Show();
+        }
+
+        private void tsmiAddSubCategory_Click(object sender, EventArgs e)
+        {
+            ExpenseAddSubCategoryControls expenseAddSubCategoryControls = new ExpenseAddSubCategoryControls();
+            expenseAddSubCategoryControls.Show();
+        }
+
+
         //private void tsmiEdit_Click(object sender, EventArgs e)
         //{
         //    DataGridViewRow row = (DataGridViewRow)cmsCategoryAction.Tag;

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <GenerateResourceUsePreserializedResources>false</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -21,6 +21,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
+    <IntermediateOutputPath>obj\d\</IntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,6 +31,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
+    <IntermediateOutputPath>obj\r\</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -49,13 +51,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Resources.Extensions">
-      <HintPath>C:\Program Files\dotnet\sdk\10.0.204\System.Resources.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Authentication\AuthUI.cs" />
     <Compile Include="Forms\Authentication\LoginControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +75,9 @@
     <Compile Include="Forms\Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Main\MainUI.cs" />
+    <Compile Include="Modules\Borrow\BorrowUI.cs" />
+    <Compile Include="Modules\Credit\CreditUI.cs" />
     <Compile Include="Modules\Dashboard\DashboardControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +109,8 @@
     <Compile Include="Modules\Credit\CreditDetailsControl.Designer.cs">
       <DependentUpon>CreditDetailsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Dashboard\DashboardUI.cs" />
+    <Compile Include="Modules\Expense\ExpenseUI.cs" />
     <Compile Include="Modules\Lent\AddLentControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +137,8 @@
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </Compile>
     <!-- Program -->
+    <Compile Include="Modules\Lent\LentUi.cs" />
+    <Compile Include="Modules\Note\NoteUI.cs" />
     <Compile Include="Modules\Profile\EditProfileControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +180,53 @@
     </Compile>
     <Compile Include="Modules\Note\NoteViewDetailsControl.Designer.cs">
       <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Profile\ProfileUI.cs" />
+    <Compile Include="Modules\Settings\Category\CategoryUI.cs" />
+    <Compile Include="Modules\Settings\Person\PersonUI.cs" />
+    <Compile Include="Modules\Settings\SettingsUi.cs" />
+    <Compile Include="Modules\Task\AddTaskControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\AddTaskControl.Designer.cs">
+      <DependentUpon>AddTaskControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Task\DeleteTaskControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\DeleteTaskControl.Designer.cs">
+      <DependentUpon>DeleteTaskControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Task\EditTaskControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\EditTaskControl.Designer.cs">
+      <DependentUpon>EditTaskControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Task\TaskControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\TaskControls.Designer.cs">
+      <DependentUpon>TaskControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Task\TaskUI.cs" />
+    <Compile Include="Modules\Task\UpdateTaskStatusControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Task\UpdateTaskStatusControl.Designer.cs">
+      <DependentUpon>UpdateTaskStatusControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Person\AddPersonControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Person\AddPersonControls.Designer.cs">
+      <DependentUpon>AddPersonControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Person\EditPersons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Person\EditPersons.Designer.cs">
+      <DependentUpon>EditPersons.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Settings\Category\CreditAddCategoryControls.cs">
       <SubType>Form</SubType>
@@ -216,10 +270,10 @@
     <Compile Include="Modules\Settings\ChangePasswordControls.Designer.cs">
       <DependentUpon>ChangePasswordControls.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Settings\Person\PersonLogOutControls.cs">
+    <Compile Include="Modules\Settings\Logout\PersonLogOutControls.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Settings\Person\PersonLogOutControls.Designer.cs">
+    <Compile Include="Modules\Settings\Logout\PersonLogOutControls.Designer.cs">
       <DependentUpon>PersonLogOutControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -285,6 +339,27 @@
     <EmbeddedResource Include="Modules\Note\NoteViewDetailsControl.resx">
       <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\AddTaskControl.resx">
+      <DependentUpon>AddTaskControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\DeleteTaskControl.resx">
+      <DependentUpon>DeleteTaskControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\EditTaskControl.resx">
+      <DependentUpon>EditTaskControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\TaskControls.resx">
+      <DependentUpon>TaskControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Task\UpdateTaskStatusControl.resx">
+      <DependentUpon>UpdateTaskStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Person\AddPersonControls.resx">
+      <DependentUpon>AddPersonControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Person\EditPersons.resx">
+      <DependentUpon>EditPersons.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Settings\Category\CreditAddCategoryControls.resx">
       <DependentUpon>CreditAddCategoryControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -306,7 +381,7 @@
     <EmbeddedResource Include="Modules\Settings\ChangePasswordControls.resx">
       <DependentUpon>ChangePasswordControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Settings\Person\PersonLogOutControls.resx">
+    <EmbeddedResource Include="Modules\Settings\Logout\PersonLogOutControls.resx">
       <DependentUpon>PersonLogOutControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -513,6 +588,20 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+
+    <None Include="Resources\PersonIcon.png" />
+
+    <None Include="Resources\successful.png" />
+    <None Include="Resources\trash.png" />
+    <None Include="Resources\refresh1.png" />
+    <None Include="Resources\pen.png" />
+    <None Include="Resources\refresh %285%29.png" />
+    <None Include="Resources\refresh %284%29.png" />
+    <None Include="Resources\refresh %283%29.png" />
+    <None Include="Resources\refresh %282%29.png" />
+    <None Include="Resources\sync.png" />
+    <None Include="Resources\user %287%29.png" />
+
     <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />
     <None Include="Resources\filter %282%29.png" />
@@ -564,8 +653,20 @@
     <None Include="Resources\open-eye %281%29.png" />
     <None Include="Resources\open-eye %282%29.png" />
     <None Include="Resources\eye.png" />
+    <None Include="Resources\deadline.png" />
+    <None Include="Resources\loading.png" />
+    <None Include="Resources\clipboardModern.png" />
+    <None Include="Resources\approved.png" />
+    <None Include="Resources\hourglass.png" />
+    <None Include="Resources\due-diligence.png" />
+    <None Include="Resources\delete %281%29.png" />
+    <None Include="Resources\bin.png" />
     <None Include="Resources\info %281%29.png" />
     <None Include="Resources\info %283%29.png" />
+    <None Include="Resources\idea.png" />
+    <None Include="Resources\add-contact.png" />
+    <None Include="Resources\loupe.png" />
+    <None Include="Resources\loupe %281%29.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>

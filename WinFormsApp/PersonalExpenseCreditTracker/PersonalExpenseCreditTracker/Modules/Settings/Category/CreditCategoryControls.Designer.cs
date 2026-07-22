@@ -52,7 +52,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.cmsCategoryAction = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddSubCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain.SuspendLayout();
             this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
@@ -73,7 +72,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.White;
-            this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMain.Controls.Add(this.pnlContent);
             this.pnlMain.Controls.Add(this.pnlHeader);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -92,7 +90,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlContent.Location = new System.Drawing.Point(10, 64);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlContent.Size = new System.Drawing.Size(1279, 604);
+            this.pnlContent.Size = new System.Drawing.Size(1281, 606);
             this.pnlContent.TabIndex = 2;
             // 
             // dgvCategory
@@ -115,16 +113,16 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.dgvCategory.RowHeadersVisible = false;
             this.dgvCategory.RowTemplate.Height = 42;
             this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategory.Size = new System.Drawing.Size(1259, 499);
+            this.dgvCategory.Size = new System.Drawing.Size(1261, 501);
             this.dgvCategory.TabIndex = 2;
             // 
             // pnlFooter
             // 
             this.pnlFooter.Controls.Add(this.tblFooter);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(10, 544);
+            this.pnlFooter.Location = new System.Drawing.Point(10, 546);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(1259, 50);
+            this.pnlFooter.Size = new System.Drawing.Size(1261, 50);
             this.pnlFooter.TabIndex = 1;
             // 
             // tblFooter
@@ -145,7 +143,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.tblFooter.Name = "tblFooter";
             this.tblFooter.RowCount = 1;
             this.tblFooter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblFooter.Size = new System.Drawing.Size(1259, 50);
+            this.tblFooter.Size = new System.Drawing.Size(1261, 50);
             this.tblFooter.TabIndex = 0;
             // 
             // pnlTotalCategory
@@ -203,7 +201,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlActive.Margin = new System.Windows.Forms.Padding(5);
             this.pnlActive.Name = "pnlActive";
             this.pnlActive.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlActive.Size = new System.Drawing.Size(238, 34);
+            this.pnlActive.Size = new System.Drawing.Size(239, 34);
             this.pnlActive.TabIndex = 1;
             // 
             // lblActiveNumber
@@ -233,11 +231,11 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlInactive.Controls.Add(this.lblInactiveNumber);
             this.pnlInactive.Controls.Add(this.lblInactive);
             this.pnlInactive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlInactive.Location = new System.Drawing.Point(1011, 8);
+            this.pnlInactive.Location = new System.Drawing.Point(1012, 8);
             this.pnlInactive.Margin = new System.Windows.Forms.Padding(5);
             this.pnlInactive.Name = "pnlInactive";
             this.pnlInactive.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlInactive.Size = new System.Drawing.Size(240, 34);
+            this.pnlInactive.Size = new System.Drawing.Size(241, 34);
             this.pnlInactive.TabIndex = 2;
             // 
             // lblInactiveNumber
@@ -313,7 +311,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlSectionHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSectionHeader.Location = new System.Drawing.Point(10, 10);
             this.pnlSectionHeader.Name = "pnlSectionHeader";
-            this.pnlSectionHeader.Size = new System.Drawing.Size(1259, 35);
+            this.pnlSectionHeader.Size = new System.Drawing.Size(1261, 35);
             this.pnlSectionHeader.TabIndex = 0;
             // 
             // pnlSectionBottom
@@ -322,7 +320,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlSectionBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlSectionBottom.Location = new System.Drawing.Point(0, 33);
             this.pnlSectionBottom.Name = "pnlSectionBottom";
-            this.pnlSectionBottom.Size = new System.Drawing.Size(1259, 2);
+            this.pnlSectionBottom.Size = new System.Drawing.Size(1261, 2);
             this.pnlSectionBottom.TabIndex = 1;
             // 
             // lblSectionHeader
@@ -345,14 +343,14 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlHeader.Location = new System.Drawing.Point(10, 10);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlHeader.Size = new System.Drawing.Size(1279, 54);
+            this.pnlHeader.Size = new System.Drawing.Size(1281, 54);
             this.pnlHeader.TabIndex = 1;
             // 
             // pnlHeaderRight
             // 
             this.pnlHeaderRight.Controls.Add(this.btnAddCategory);
             this.pnlHeaderRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlHeaderRight.Location = new System.Drawing.Point(1074, 5);
+            this.pnlHeaderRight.Location = new System.Drawing.Point(1076, 5);
             this.pnlHeaderRight.Name = "pnlHeaderRight";
             this.pnlHeaderRight.Size = new System.Drawing.Size(200, 44);
             this.pnlHeaderRight.TabIndex = 2;
@@ -371,6 +369,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.btnAddCategory.TabIndex = 2;
             this.btnAddCategory.Text = "+ Add Category";
             this.btnAddCategory.UseVisualStyleBackColor = false;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
             // 
             // lblTitle
             // 
@@ -398,10 +397,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             // 
             this.cmsCategoryAction.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiEdit,
-            this.tsmiAddSubCategory,
-            this.tsmiDelete});
+            this.tsmiAddSubCategory});
             this.cmsCategoryAction.Name = "cmsCategoryAction";
-            this.cmsCategoryAction.Size = new System.Drawing.Size(196, 76);
+            this.cmsCategoryAction.Size = new System.Drawing.Size(196, 52);
             // 
             // tsmiEdit
             // 
@@ -414,12 +412,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.tsmiAddSubCategory.Name = "tsmiAddSubCategory";
             this.tsmiAddSubCategory.Size = new System.Drawing.Size(195, 24);
             this.tsmiAddSubCategory.Text = "Add SubCategory";
-            // 
-            // tsmiDelete
-            // 
-            this.tsmiDelete.Name = "tsmiDelete";
-            this.tsmiDelete.Size = new System.Drawing.Size(195, 24);
-            this.tsmiDelete.Text = "Delete";
+            this.tsmiAddSubCategory.Click += new System.EventHandler(this.tsmiAddSubCategory_Click);
             // 
             // CreditCategoryControls
             // 
@@ -473,7 +466,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         private ContextMenuStrip cmsCategoryAction;
         private ToolStripMenuItem tsmiEdit;
         private ToolStripMenuItem tsmiAddSubCategory;
-        private ToolStripMenuItem tsmiDelete;
         private Panel pnlHeaderRight;
         private TableLayoutPanel tblFooter;
         private Panel pnlTotalCategory;

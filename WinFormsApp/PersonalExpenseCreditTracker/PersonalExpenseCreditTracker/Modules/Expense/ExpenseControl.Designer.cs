@@ -40,6 +40,14 @@
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFooter = new System.Windows.Forms.Panel();
+            this.pnlExpenseFooter = new System.Windows.Forms.Panel();
+            this.lblentries = new System.Windows.Forms.Label();
+            this.lblExpenseTotalPageNumber = new System.Windows.Forms.Label();
+            this.lblof = new System.Windows.Forms.Label();
+            this.lblExpenseEndingPageNumber = new System.Windows.Forms.Label();
+            this.lblto = new System.Windows.Forms.Label();
+            this.lblExpenseStartingPageNumber = new System.Windows.Forms.Label();
+            this.lblShowing = new System.Windows.Forms.Label();
             this.pnlControl = new System.Windows.Forms.Panel();
             this.btnLastPage = new System.Windows.Forms.Button();
             this.btnNextpage = new System.Windows.Forms.Button();
@@ -56,26 +64,18 @@
             this.lblTransactionAmount = new System.Windows.Forms.Label();
             this.lblTransction = new System.Windows.Forms.Label();
             this.picTransaction = new System.Windows.Forms.PictureBox();
-            this.pnlExpenseFooter = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblExpenseStartingPageNumber = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblExpenseEndingPageNumber = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblExpenseTotalPageNumber = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.pnlContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).BeginInit();
             this.pnlFooter.SuspendLayout();
+            this.pnlExpenseFooter.SuspendLayout();
             this.pnlControl.SuspendLayout();
             this.tblSummary.SuspendLayout();
             this.pnlTotalExpense.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picExpense)).BeginInit();
             this.pnlTransactionCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTransaction)).BeginInit();
-            this.pnlExpenseFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContent
@@ -90,7 +90,6 @@
             this.pnlContent.Padding = new System.Windows.Forms.Padding(15);
             this.pnlContent.Size = new System.Drawing.Size(1250, 753);
             this.pnlContent.TabIndex = 0;
-            this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
             // tblTable
             // 
@@ -110,24 +109,24 @@
             // 
             // pnlTableHeader
             // 
-            this.pnlTableHeader.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.pnlTableHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.pnlTableHeader.Controls.Add(this.btnExport);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTableHeader.Location = new System.Drawing.Point(4, 4);
             this.pnlTableHeader.Name = "pnlTableHeader";
             this.pnlTableHeader.Size = new System.Drawing.Size(1212, 44);
             this.pnlTableHeader.TabIndex = 0;
-            this.pnlTableHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTableHeader_Paint);
             // 
             // btnExport
             // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.BackColor = System.Drawing.Color.Honeydew;
-            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.BackColor = System.Drawing.Color.White;
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(217)))));
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
-            this.btnExport.Location = new System.Drawing.Point(1108, 4);
+            this.btnExport.Location = new System.Drawing.Point(1103, 0);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(92, 32);
+            this.btnExport.Size = new System.Drawing.Size(109, 44);
             this.btnExport.TabIndex = 0;
             this.btnExport.Text = "Export";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -219,6 +218,91 @@
             this.pnlFooter.Size = new System.Drawing.Size(1220, 51);
             this.pnlFooter.TabIndex = 2;
             // 
+            // pnlExpenseFooter
+            // 
+            this.pnlExpenseFooter.Controls.Add(this.lblentries);
+            this.pnlExpenseFooter.Controls.Add(this.lblExpenseTotalPageNumber);
+            this.pnlExpenseFooter.Controls.Add(this.lblof);
+            this.pnlExpenseFooter.Controls.Add(this.lblExpenseEndingPageNumber);
+            this.pnlExpenseFooter.Controls.Add(this.lblto);
+            this.pnlExpenseFooter.Controls.Add(this.lblExpenseStartingPageNumber);
+            this.pnlExpenseFooter.Controls.Add(this.lblShowing);
+            this.pnlExpenseFooter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlExpenseFooter.Location = new System.Drawing.Point(0, 0);
+            this.pnlExpenseFooter.Name = "pnlExpenseFooter";
+            this.pnlExpenseFooter.Size = new System.Drawing.Size(348, 51);
+            this.pnlExpenseFooter.TabIndex = 1;
+            // 
+            // lblentries
+            // 
+            this.lblentries.AutoSize = true;
+            this.lblentries.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblentries.Location = new System.Drawing.Point(225, 15);
+            this.lblentries.Name = "lblentries";
+            this.lblentries.Size = new System.Drawing.Size(61, 23);
+            this.lblentries.TabIndex = 6;
+            this.lblentries.Text = "entries";
+            // 
+            // lblExpenseTotalPageNumber
+            // 
+            this.lblExpenseTotalPageNumber.AutoSize = true;
+            this.lblExpenseTotalPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExpenseTotalPageNumber.Location = new System.Drawing.Point(191, 16);
+            this.lblExpenseTotalPageNumber.Name = "lblExpenseTotalPageNumber";
+            this.lblExpenseTotalPageNumber.Size = new System.Drawing.Size(28, 23);
+            this.lblExpenseTotalPageNumber.TabIndex = 5;
+            this.lblExpenseTotalPageNumber.Text = "10";
+            // 
+            // lblof
+            // 
+            this.lblof.AutoSize = true;
+            this.lblof.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblof.Location = new System.Drawing.Point(158, 15);
+            this.lblof.Name = "lblof";
+            this.lblof.Size = new System.Drawing.Size(25, 23);
+            this.lblof.TabIndex = 4;
+            this.lblof.Text = "of";
+            // 
+            // lblExpenseEndingPageNumber
+            // 
+            this.lblExpenseEndingPageNumber.AutoSize = true;
+            this.lblExpenseEndingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExpenseEndingPageNumber.Location = new System.Drawing.Point(128, 16);
+            this.lblExpenseEndingPageNumber.Name = "lblExpenseEndingPageNumber";
+            this.lblExpenseEndingPageNumber.Size = new System.Drawing.Size(28, 23);
+            this.lblExpenseEndingPageNumber.TabIndex = 3;
+            this.lblExpenseEndingPageNumber.Text = "10";
+            // 
+            // lblto
+            // 
+            this.lblto.AutoSize = true;
+            this.lblto.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblto.Location = new System.Drawing.Point(103, 15);
+            this.lblto.Name = "lblto";
+            this.lblto.Size = new System.Drawing.Size(26, 23);
+            this.lblto.TabIndex = 2;
+            this.lblto.Text = "to";
+            // 
+            // lblExpenseStartingPageNumber
+            // 
+            this.lblExpenseStartingPageNumber.AutoSize = true;
+            this.lblExpenseStartingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExpenseStartingPageNumber.Location = new System.Drawing.Point(76, 15);
+            this.lblExpenseStartingPageNumber.Name = "lblExpenseStartingPageNumber";
+            this.lblExpenseStartingPageNumber.Size = new System.Drawing.Size(19, 23);
+            this.lblExpenseStartingPageNumber.TabIndex = 1;
+            this.lblExpenseStartingPageNumber.Text = "1";
+            // 
+            // lblShowing
+            // 
+            this.lblShowing.AutoSize = true;
+            this.lblShowing.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowing.Location = new System.Drawing.Point(3, 13);
+            this.lblShowing.Name = "lblShowing";
+            this.lblShowing.Size = new System.Drawing.Size(75, 23);
+            this.lblShowing.TabIndex = 0;
+            this.lblShowing.Text = "Showing";
+            // 
             // pnlControl
             // 
             this.pnlControl.Controls.Add(this.btnLastPage);
@@ -240,7 +324,7 @@
             this.btnLastPage.Size = new System.Drawing.Size(40, 40);
             this.btnLastPage.TabIndex = 4;
             this.btnLastPage.UseVisualStyleBackColor = true;
-            this.btnLastPage.Click += new System.EventHandler(this.btnPervious_Click);
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
             // 
             // btnNextpage
             // 
@@ -250,7 +334,7 @@
             this.btnNextpage.Size = new System.Drawing.Size(40, 40);
             this.btnNextpage.TabIndex = 3;
             this.btnNextpage.UseVisualStyleBackColor = true;
-            this.btnNextpage.Click += new System.EventHandler(this.btn_Click);
+            this.btnNextpage.Click += new System.EventHandler(this.btnNextpage_Click);
             // 
             // btnCurrentPage
             // 
@@ -261,7 +345,6 @@
             this.btnCurrentPage.TabIndex = 2;
             this.btnCurrentPage.Text = "1";
             this.btnCurrentPage.UseVisualStyleBackColor = true;
-            this.btnCurrentPage.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnPreviousPage
             // 
@@ -271,7 +354,7 @@
             this.btnPreviousPage.Size = new System.Drawing.Size(40, 40);
             this.btnPreviousPage.TabIndex = 1;
             this.btnPreviousPage.UseVisualStyleBackColor = true;
-            this.btnPreviousPage.Click += new System.EventHandler(this.button2_Click);
+            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
             // 
             // btnFirstpage
             // 
@@ -282,6 +365,7 @@
             this.btnFirstpage.Size = new System.Drawing.Size(40, 40);
             this.btnFirstpage.TabIndex = 0;
             this.btnFirstpage.UseVisualStyleBackColor = true;
+            this.btnFirstpage.Click += new System.EventHandler(this.btnFirstpage_Click);
             // 
             // tblSummary
             // 
@@ -300,7 +384,6 @@
             this.tblSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblSummary.Size = new System.Drawing.Size(1220, 110);
             this.tblSummary.TabIndex = 0;
-            this.tblSummary.Paint += new System.Windows.Forms.PaintEventHandler(this.tblSummary_Paint);
             // 
             // pnlTotalExpense
             // 
@@ -378,6 +461,7 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // lblTransactionAmount
             // 
@@ -409,94 +493,6 @@
             this.picTransaction.TabIndex = 0;
             this.picTransaction.TabStop = false;
             // 
-            // pnlExpenseFooter
-            // 
-            this.pnlExpenseFooter.Controls.Add(this.label7);
-            this.pnlExpenseFooter.Controls.Add(this.lblExpenseTotalPageNumber);
-            this.pnlExpenseFooter.Controls.Add(this.label5);
-            this.pnlExpenseFooter.Controls.Add(this.lblExpenseEndingPageNumber);
-            this.pnlExpenseFooter.Controls.Add(this.label3);
-            this.pnlExpenseFooter.Controls.Add(this.lblExpenseStartingPageNumber);
-            this.pnlExpenseFooter.Controls.Add(this.label1);
-            this.pnlExpenseFooter.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlExpenseFooter.Location = new System.Drawing.Point(0, 0);
-            this.pnlExpenseFooter.Name = "pnlExpenseFooter";
-            this.pnlExpenseFooter.Size = new System.Drawing.Size(348, 51);
-            this.pnlExpenseFooter.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Showing";
-            // 
-            // lblExpenseStartingPageNumber
-            // 
-            this.lblExpenseStartingPageNumber.AutoSize = true;
-            this.lblExpenseStartingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpenseStartingPageNumber.Location = new System.Drawing.Point(76, 15);
-            this.lblExpenseStartingPageNumber.Name = "lblExpenseStartingPageNumber";
-            this.lblExpenseStartingPageNumber.Size = new System.Drawing.Size(19, 23);
-            this.lblExpenseStartingPageNumber.TabIndex = 1;
-            this.lblExpenseStartingPageNumber.Text = "1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(92, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 23);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "to";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // lblExpenseEndingPageNumber
-            // 
-            this.lblExpenseEndingPageNumber.AutoSize = true;
-            this.lblExpenseEndingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpenseEndingPageNumber.Location = new System.Drawing.Point(114, 16);
-            this.lblExpenseEndingPageNumber.Name = "lblExpenseEndingPageNumber";
-            this.lblExpenseEndingPageNumber.Size = new System.Drawing.Size(28, 23);
-            this.lblExpenseEndingPageNumber.TabIndex = 3;
-            this.lblExpenseEndingPageNumber.Text = "10";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(143, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 23);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "of";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // lblExpenseTotalPageNumber
-            // 
-            this.lblExpenseTotalPageNumber.AutoSize = true;
-            this.lblExpenseTotalPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpenseTotalPageNumber.Location = new System.Drawing.Point(167, 16);
-            this.lblExpenseTotalPageNumber.Name = "lblExpenseTotalPageNumber";
-            this.lblExpenseTotalPageNumber.Size = new System.Drawing.Size(28, 23);
-            this.lblExpenseTotalPageNumber.TabIndex = 5;
-            this.lblExpenseTotalPageNumber.Text = "10";
-            this.lblExpenseTotalPageNumber.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(199, 15);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 23);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "entries";
-            // 
             // ExpenseControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -511,6 +507,8 @@
             this.pnlTableHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).EndInit();
             this.pnlFooter.ResumeLayout(false);
+            this.pnlExpenseFooter.ResumeLayout(false);
+            this.pnlExpenseFooter.PerformLayout();
             this.pnlControl.ResumeLayout(false);
             this.tblSummary.ResumeLayout(false);
             this.pnlTotalExpense.ResumeLayout(false);
@@ -519,8 +517,6 @@
             this.pnlTransactionCard.ResumeLayout(false);
             this.pnlTransactionCard.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTransaction)).EndInit();
-            this.pnlExpenseFooter.ResumeLayout(false);
-            this.pnlExpenseFooter.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -556,13 +552,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMethod;
         private System.Windows.Forms.Panel pnlExpenseFooter;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblentries;
         private System.Windows.Forms.Label lblExpenseTotalPageNumber;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblof;
         private System.Windows.Forms.Label lblExpenseEndingPageNumber;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblto;
         private System.Windows.Forms.Label lblExpenseStartingPageNumber;
-        private System.Windows.Forms.Label label1;
-        
+        private System.Windows.Forms.Label lblShowing;
+
+
+     
     }
 }
