@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -115,7 +115,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCategory.Size = new System.Drawing.Size(1261, 501);
             this.dgvCategory.TabIndex = 2;
-            this.dgvCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellClick);
             // 
             // pnlFooter
             // 
