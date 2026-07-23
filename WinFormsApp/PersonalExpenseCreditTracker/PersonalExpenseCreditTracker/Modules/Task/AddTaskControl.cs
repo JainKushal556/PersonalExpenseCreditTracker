@@ -172,7 +172,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return;
             }
             MessageBox.Show("Task Add Successfully.");
+            this.Close();
         }
+
 
        
 

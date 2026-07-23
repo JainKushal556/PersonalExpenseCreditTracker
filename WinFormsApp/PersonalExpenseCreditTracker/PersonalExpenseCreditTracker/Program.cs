@@ -15,6 +15,10 @@ namespace PersonalExpenseCreditTracker
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new MainForm());
             Application.Run(new PersonalExpenseCreditTracker.Forms.Authentication.LoginControls());
+            Application.Run(new MainForm());
+            //Application.Run(new PersonalExpenseCreditTracker.Modules.Note.NoteControl());
+            //Application.Run(new PersonalExpenseCreditTracker.Modules.Expense.ExpenseDetailsControl());
+            //Application.Run(new PersonalExpenseCreditTracker.Modules.Credit.CreditDetailsControl());
         }
     }
 }

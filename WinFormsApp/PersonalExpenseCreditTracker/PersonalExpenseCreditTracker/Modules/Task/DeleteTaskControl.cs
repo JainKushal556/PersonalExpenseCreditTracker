@@ -69,6 +69,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.Close();
         }
 
+        private void btnUpdateTask_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
 
     }
 }

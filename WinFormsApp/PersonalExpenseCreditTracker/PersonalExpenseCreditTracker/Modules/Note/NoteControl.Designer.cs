@@ -56,13 +56,9 @@
             this.lblMonthNoteNumber = new System.Windows.Forms.Label();
             this.lblMothTitle = new System.Windows.Forms.Label();
             this.picNoteCalender = new System.Windows.Forms.PictureBox();
-            this.pnlNoteHeader = new System.Windows.Forms.Panel();
-            this.lblNoteSubtitle = new System.Windows.Forms.Label();
-            this.lblNoteTitle = new System.Windows.Forms.Label();
             this.cmsNote = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlNoteMain.SuspendLayout();
             this.flpNotes.SuspendLayout();
@@ -76,7 +72,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picNoteImportant)).BeginInit();
             this.pnlThisMonth.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picNoteCalender)).BeginInit();
-            this.pnlNoteHeader.SuspendLayout();
             this.cmsNote.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,7 +82,6 @@
             this.pnlNoteMain.Controls.Add(this.flpNotes);
             this.pnlNoteMain.Controls.Add(this.pnlAllNotes);
             this.pnlNoteMain.Controls.Add(this.tblNoteSummary);
-            this.pnlNoteMain.Controls.Add(this.pnlNoteHeader);
             this.pnlNoteMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlNoteMain.Location = new System.Drawing.Point(0, 0);
             this.pnlNoteMain.Name = "pnlNoteMain";
@@ -101,10 +95,10 @@
             this.flpNotes.AutoSize = true;
             this.flpNotes.Controls.Add(this.pnlNoteCard);
             this.flpNotes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpNotes.Location = new System.Drawing.Point(20, 276);
+            this.flpNotes.Location = new System.Drawing.Point(20, 206);
             this.flpNotes.Name = "flpNotes";
             this.flpNotes.Padding = new System.Windows.Forms.Padding(8);
-            this.flpNotes.Size = new System.Drawing.Size(1163, 334);
+            this.flpNotes.Size = new System.Drawing.Size(1163, 404);
             this.flpNotes.TabIndex = 3;
             this.flpNotes.Paint += new System.Windows.Forms.PaintEventHandler(this.flpNotes_Paint);
             // 
@@ -166,7 +160,7 @@
             this.lblNoteCardDescription.Size = new System.Drawing.Size(230, 70);
             this.lblNoteCardDescription.TabIndex = 1;
             this.lblNoteCardDescription.Text = "Finish the project proposal, review team updates and prepare for tomorrow\'s meeti" +
-                "ng.";
+    "ng.";
             // 
             // lblNoteCardTitle
             // 
@@ -183,7 +177,7 @@
             this.pnlAllNotes.Controls.Add(this.lblAllNoteHearderSubTitle);
             this.pnlAllNotes.Controls.Add(this.lblAllNoteHearderTitle);
             this.pnlAllNotes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlAllNotes.Location = new System.Drawing.Point(20, 210);
+            this.pnlAllNotes.Location = new System.Drawing.Point(20, 140);
             this.pnlAllNotes.Name = "pnlAllNotes";
             this.pnlAllNotes.Size = new System.Drawing.Size(1163, 66);
             this.pnlAllNotes.TabIndex = 2;
@@ -220,7 +214,7 @@
             this.tblNoteSummary.Controls.Add(this.pnlImportant, 1, 0);
             this.tblNoteSummary.Controls.Add(this.pnlThisMonth, 2, 0);
             this.tblNoteSummary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tblNoteSummary.Location = new System.Drawing.Point(20, 90);
+            this.tblNoteSummary.Location = new System.Drawing.Point(20, 20);
             this.tblNoteSummary.Margin = new System.Windows.Forms.Padding(0);
             this.tblNoteSummary.MinimumSize = new System.Drawing.Size(830, 120);
             this.tblNoteSummary.Name = "tblNoteSummary";
@@ -401,75 +395,35 @@
             this.picNoteCalender.TabIndex = 0;
             this.picNoteCalender.TabStop = false;
             // 
-            // pnlNoteHeader
-            // 
-            this.pnlNoteHeader.Controls.Add(this.lblNoteSubtitle);
-            this.pnlNoteHeader.Controls.Add(this.lblNoteTitle);
-            this.pnlNoteHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNoteHeader.Location = new System.Drawing.Point(20, 20);
-            this.pnlNoteHeader.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlNoteHeader.Name = "pnlNoteHeader";
-            this.pnlNoteHeader.Size = new System.Drawing.Size(1163, 70);
-            this.pnlNoteHeader.TabIndex = 0;
-            this.pnlNoteHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlNoteHeader_Paint);
-            // 
-            // lblNoteSubtitle
-            // 
-            this.lblNoteSubtitle.AutoSize = true;
-            this.lblNoteSubtitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteSubtitle.ForeColor = System.Drawing.Color.Blue;
-            this.lblNoteSubtitle.Location = new System.Drawing.Point(9, 40);
-            this.lblNoteSubtitle.Name = "lblNoteSubtitle";
-            this.lblNoteSubtitle.Size = new System.Drawing.Size(369, 20);
-            this.lblNoteSubtitle.TabIndex = 1;
-            this.lblNoteSubtitle.Text = " Capture your thoughts and keep everything organized";
-            this.lblNoteSubtitle.Click += new System.EventHandler(this.lblNoteSubtitle_Click);
-            // 
-            // lblNoteTitle
-            // 
-            this.lblNoteTitle.AutoSize = true;
-            this.lblNoteTitle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteTitle.ForeColor = System.Drawing.Color.Black;
-            this.lblNoteTitle.Location = new System.Drawing.Point(5, 2);
-            this.lblNoteTitle.Name = "lblNoteTitle";
-            this.lblNoteTitle.Padding = new System.Windows.Forms.Padding(5);
-            this.lblNoteTitle.Size = new System.Drawing.Size(92, 42);
-            this.lblNoteTitle.TabIndex = 0;
-            this.lblNoteTitle.Text = "Notes";
-            // 
             // cmsNote
             // 
             this.cmsNote.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.pinToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.cmsNote.Name = "cmsNote";
-            this.cmsNote.Size = new System.Drawing.Size(123, 100);
+            this.cmsNote.Size = new System.Drawing.Size(123, 76);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.viewToolStripMenuItem.Text = "View";
+            this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // pinToolStripMenuItem
-            // 
-            this.pinToolStripMenuItem.Name = "pinToolStripMenuItem";
-            this.pinToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
-            this.pinToolStripMenuItem.Text = "Pin";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // NoteControl
             // 
@@ -498,8 +452,6 @@
             this.pnlThisMonth.ResumeLayout(false);
             this.pnlThisMonth.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picNoteCalender)).EndInit();
-            this.pnlNoteHeader.ResumeLayout(false);
-            this.pnlNoteHeader.PerformLayout();
             this.cmsNote.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -508,9 +460,6 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlNoteMain;
-        private System.Windows.Forms.Panel pnlNoteHeader;
-        private System.Windows.Forms.Label lblNoteSubtitle;
-        private System.Windows.Forms.Label lblNoteTitle;
         private System.Windows.Forms.TableLayoutPanel tblNoteSummary;
         private System.Windows.Forms.Panel pnlTotalNotes;
         private System.Windows.Forms.Panel pnlImportant;
@@ -540,7 +489,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsNote;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         //private System.Windows.Forms.ContextMenuStrip cmsnote;
     }

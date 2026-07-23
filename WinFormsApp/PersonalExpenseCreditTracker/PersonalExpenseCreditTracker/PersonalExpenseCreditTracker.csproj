@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -270,10 +270,16 @@
     <Compile Include="Modules\Settings\Category\ExpenseCategoryControls.Designer.cs">
       <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Settings\Person\PersonLogOutControls.cs">
+    <Compile Include="Modules\Settings\ChangePasswordControls.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Settings\Person\PersonLogOutControls.Designer.cs">
+    <Compile Include="Modules\Settings\ChangePasswordControls.Designer.cs">
+      <DependentUpon>ChangePasswordControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Logout\PersonLogOutControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Logout\PersonLogOutControls.Designer.cs">
       <DependentUpon>PersonLogOutControls.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -381,7 +387,10 @@
     <EmbeddedResource Include="Modules\Settings\Category\ExpenseCategoryControls.resx">
       <DependentUpon>ExpenseCategoryControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Settings\Person\PersonLogOutControls.resx">
+    <EmbeddedResource Include="Modules\Settings\ChangePasswordControls.resx">
+      <DependentUpon>ChangePasswordControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Logout\PersonLogOutControls.resx">
       <DependentUpon>PersonLogOutControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -412,6 +421,7 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Modules\Task\" />
     <Folder Include="Session\" />
   </ItemGroup>
   <!-- Expense Resources -->
@@ -587,7 +597,11 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+
     <None Include="Resources\telephone %283%29.png" />
+
+    <None Include="Resources\PersonIcon.png" />
+
     <None Include="Resources\successful.png" />
     <None Include="Resources\trash.png" />
     <None Include="Resources\refresh1.png" />
@@ -598,6 +612,7 @@
     <None Include="Resources\refresh %282%29.png" />
     <None Include="Resources\sync.png" />
     <None Include="Resources\user %287%29.png" />
+
     <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />
     <None Include="Resources\filter %282%29.png" />
@@ -638,6 +653,19 @@
     <None Include="Resources\telephone1.png" />
     <None Include="Resources\Gender.png" />
     <Content Include="Libraries\Cyotek.Windows.Forms.ImageBox.dll" />
+    <None Include="Resources\padlock.png" />
+    <None Include="Resources\padlock %282%29.png" />
+    <None Include="Resources\padlock %283%29.png" />
+    <None Include="Resources\padlock %281%29.png" />
+    <None Include="Resources\lock.png" />
+    <None Include="Resources\lock %281%29.png" />
+    <None Include="Resources\padlock %284%29.png" />
+    <None Include="Resources\open-eye.png" />
+    <None Include="Resources\open-eye %281%29.png" />
+    <None Include="Resources\open-eye %282%29.png" />
+    <None Include="Resources\eye.png" />
+    <None Include="Resources\deadline.png" />
+    <None Include="Resources\loading.png" />
     <None Include="Resources\clipboardModern.png" />
     <None Include="Resources\approved.png" />
     <None Include="Resources\hourglass.png" />
