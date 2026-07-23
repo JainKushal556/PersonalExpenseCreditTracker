@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\Authentication\AuthUI.cs" />
+    <Compile Include="Forms\Authentication\ForgotPasswordControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Authentication\ForgotPasswordControls.Designer.cs">
+      <DependentUpon>ForgotPasswordControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Authentication\LoginControls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,6 +284,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Authentication\ForgotPasswordControls.resx">
+      <DependentUpon>ForgotPasswordControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Authentication\LoginControls.resx">
       <DependentUpon>LoginControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -589,6 +598,8 @@
   </ItemGroup>
   <ItemGroup>
 
+    <None Include="Resources\telephone %283%29.png" />
+
     <None Include="Resources\PersonIcon.png" />
 
     <None Include="Resources\successful.png" />
@@ -667,6 +678,12 @@
     <None Include="Resources\add-contact.png" />
     <None Include="Resources\loupe.png" />
     <None Include="Resources\loupe %281%29.png" />
+    <None Include="Resources\padlock.png" />
+    <None Include="Resources\mail %283%29.png" />
+    <None Include="Resources\padlock %283%29.png" />
+    <None Include="Resources\open-eye %282%29.png" />
+    <None Include="Resources\eye.png" />
+    <None Include="Resources\padlock %284%29.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>
