@@ -35,7 +35,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             //}
 
             CommonUiFunction.LoadInComboBox("spGetAllPersons", "PersonName",11,"Select Person",comboBoxLentSelectPerson);
-            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "PaymentName", 11, "Select Payment Type", comboBoxLentPaymentType);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "PaymentName","Select Payment Type", comboBoxLentPaymentType);
+            CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "StatusName", "Select Status", comboBoxLentStatus);
 
             
         }

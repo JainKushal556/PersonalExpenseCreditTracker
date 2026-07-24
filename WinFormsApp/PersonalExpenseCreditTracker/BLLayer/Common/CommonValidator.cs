@@ -95,7 +95,7 @@ namespace BLLayer.Common
                 }
             }
 
-            return ValidationResult.;
+            return ValidationResult.PaymentInvalid;
         }
 
         //ValidateMaximumAmount

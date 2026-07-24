@@ -71,7 +71,10 @@ namespace BLLayer.Lent
             return SqlHelper.retriveListForComboBoxAtDal(spName,colName, userId);
         }
 
-       
+        public static List<string> retriveListForComboBoxAtBal(string spName, string colName)
+        {
+            return SqlHelper.retriveListForComboBoxAtDal(spName, colName);
+        }
 
     }
 }

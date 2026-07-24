@@ -18,5 +18,15 @@ namespace PersonalExpenseCreditTracker.Common
                 comboBox.Items.Add(person);
             }
         }
+
+        public static void LoadInComboBox(string spName, string colName, string initialText, ComboBox comboBox)
+        {
+            List<string> dataList = LentUi.retriveListForComboBoxAtUi(spName, colName);
+            comboBox.Items.Add(initialText);
+            foreach (string person in dataList)
+            {
+                comboBox.Items.Add(person);
+            }
+        }
     }
 }

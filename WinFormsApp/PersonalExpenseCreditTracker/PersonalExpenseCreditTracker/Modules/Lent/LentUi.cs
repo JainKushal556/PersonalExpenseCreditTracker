@@ -38,5 +38,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             return LentBLL.retriveListForComboBoxAtBal(spName, colName, userId);
         }
+        public static List<string> retriveListForComboBoxAtUi(string spName, string colName)
+        {
+            return LentBLL.retriveListForComboBoxAtBal(spName, colName);
+        }
     }
 }

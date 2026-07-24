@@ -279,10 +279,6 @@
             this.comboBoxLentStatus.FormattingEnabled = true;
             this.comboBoxLentStatus.IntegralHeight = false;
             this.comboBoxLentStatus.ItemHeight = 23;
-            this.comboBoxLentStatus.Items.AddRange(new object[] {
-            "Paid",
-            "Panding",
-            "Over Due"});
             this.comboBoxLentStatus.Location = new System.Drawing.Point(23, 304);
             this.comboBoxLentStatus.Name = "comboBoxLentStatus";
             this.comboBoxLentStatus.Size = new System.Drawing.Size(354, 31);
@@ -313,11 +309,6 @@
             this.comboBoxLentPaymentType.FormattingEnabled = true;
             this.comboBoxLentPaymentType.IntegralHeight = false;
             this.comboBoxLentPaymentType.ItemHeight = 23;
-            this.comboBoxLentPaymentType.Items.AddRange(new object[] {
-            "Cash",
-            "UPI",
-            "Debit Card",
-            "Credit Card"});
             this.comboBoxLentPaymentType.Location = new System.Drawing.Point(20, 207);
             this.comboBoxLentPaymentType.Name = "comboBoxLentPaymentType";
             this.comboBoxLentPaymentType.Size = new System.Drawing.Size(357, 31);
