@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.panelLentAddCalenderShow = new System.Windows.Forms.Panel();
             this.monthCalendarAddLent = new System.Windows.Forms.MonthCalendar();
@@ -59,11 +60,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblLentDetails = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelMainBody.SuspendLayout();
             this.panelLentAddCalenderShow.SuspendLayout();
             this.panelLentAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMainBody
@@ -345,18 +348,11 @@
             this.comboBoxLentSelectPerson.FormattingEnabled = true;
             this.comboBoxLentSelectPerson.IntegralHeight = false;
             this.comboBoxLentSelectPerson.ItemHeight = 23;
-            this.comboBoxLentSelectPerson.Items.AddRange(new object[] {
-            "Akhmal",
-            "Sujit",
-            "Kushal",
-            "Anikat",
-            "Arpita",
-            "Debajyoti"});
             this.comboBoxLentSelectPerson.Location = new System.Drawing.Point(20, 106);
             this.comboBoxLentSelectPerson.Name = "comboBoxLentSelectPerson";
             this.comboBoxLentSelectPerson.Size = new System.Drawing.Size(357, 31);
             this.comboBoxLentSelectPerson.TabIndex = 14;
-            this.comboBoxLentSelectPerson.Text = "Select Person";
+            this.comboBoxLentSelectPerson.SelectedIndexChanged += new System.EventHandler(this.comboBoxLentSelectPerson_SelectedIndexChanged);
             // 
             // btnLentAddSave
             // 
@@ -434,6 +430,10 @@
             this.lblLentDetails.TabIndex = 0;
             this.lblLentDetails.Text = "Lent Details";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // AddLentControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -452,6 +452,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -489,5 +490,6 @@
         private System.Windows.Forms.TextBox txtLentAddDeadlineDatePicker;
         private System.Windows.Forms.Panel panelLentAddCalenderShow;
         private System.Windows.Forms.MonthCalendar monthCalendarAddLent;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

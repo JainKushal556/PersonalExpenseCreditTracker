@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public partial class AddLentControls : Form
@@ -19,15 +20,26 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void AddLentControls_Load(object sender, EventArgs e)
         {
+            comboBoxLentSelectPerson.Text = "Select Person";
             txtLentAddDeadlineDatePicker.Text = "DD-MM-YYYY";
             panelLentAddCalenderShow.Visible = false;
 
             textBoxLentAddDescription.Text ="Enter description";
             txtLentAddAmount.Text = "Select Amount";
 
+            //List<string> personList =LentUi.retriveListForComboBoxAtUi("spGetAllPersons", "PersonName", 11);
+            //comboBoxLentSelectPerson.Items.Add("Select Person");
+            //foreach (string person in personList)
+            //{
+            //    comboBoxLentSelectPerson.Items.Add(person);
+            //}
+
+            CommonUiFunction.LoadInComboBox("spGetAllPersons", "PersonName",11,"Select Person",comboBoxLentSelectPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "PaymentName", 11, "Select Payment Type", comboBoxLentPaymentType);
+
+            
         }
-
-
+        
         private void btnLentAddCalendar_Click(object sender, EventArgs e)
         {
             panelLentAddCalenderShow.Visible = !panelLentAddCalenderShow.Visible;
@@ -108,7 +120,44 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnLentAddSave_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Lent Details Saved");
+            //MessageBox.Show("Lent Details Saved");
+            errorProvider1.Clear();
+
+            LentUi lentUi = new LentUi();
+
+            lentUi.userId = 1;
+            lentUi.lentId = -1;
+            lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedIndex);
+            lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
+            lentUi.statusId = Convert.ToInt32(comboBoxLentStatus.SelectedValue);
+            lentUi.amount = txtLentAddAmount.Text;
+            lentUi.deadlineAt = monthCalendarAddLent.SelectionStart;
+            lentUi.description = textBoxLentAddDescription.Text;
+            CommonValidator.ValidationResult result =lentUi.InsertDataIntoLentUi();
+
+            if (result == CommonValidator.ValidationResult.Success)
+            {
+                MessageBox.Show("Lent added Sucessfully");
+            }
+            else
+            {
+                ErrorHelper.ShowValidationError(result, errorProvider1,comboBoxLentSelectPerson);
+            }
+
+           
+        }
+
+        
+
+        private void comboBoxLentSelectPerson_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            if (comboBoxLentSelectPerson.SelectedIndex > 0)
+            {
+                errorProvider1.Clear();
+            }
         }
     }
+
+
 }
