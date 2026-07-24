@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using BLLayer.Lent;
 using BLLayer.Common;
-
+using System.Data;
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public class LentUi
@@ -38,12 +38,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         }
 
         // Retrieve ComboBox data from the BLL (Stored Procedure with UserId)
-        public static List<string> retriveListForComboBoxAtUi(string spName, string colName, int userId)
+        public static DataTable retriveListForComboBoxAtUi(string spName, string colName, int userId)
         {
             return LentBLL.retriveListForComboBoxAtBal(spName, colName, userId);
         }
         // Retrieve ComboBox data from the BLL (Stored Procedure without UserId)
-        public static List<string> retriveListForComboBoxAtUi(string spName, string colName)
+        public static DataTable retriveListForComboBoxAtUi(string spName, string colName)
         {
             return LentBLL.retriveListForComboBoxAtBal(spName, colName);
         }

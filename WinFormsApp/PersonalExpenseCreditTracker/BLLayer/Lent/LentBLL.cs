@@ -90,13 +90,13 @@ namespace BLLayer.Lent
         }
 
         // Retrieves ComboBox data from the DAL using a stored procedure with UserId
-        public static List<string> retriveListForComboBoxAtBal(string spName, string colName, int userId)
+        public static DataTable retriveListForComboBoxAtBal(string spName, string colName, int userId)
         {
             return SqlHelper.retriveListForComboBoxAtDal(spName,colName, userId);
         }
 
         // Retrieves ComboBox data from the DAL using a stored procedure without UserId
-        public static List<string> retriveListForComboBoxAtBal(string spName, string colName)
+        public static DataTable retriveListForComboBoxAtBal(string spName, string colName)
         {
             return SqlHelper.retriveListForComboBoxAtDal(spName, colName);
         }
