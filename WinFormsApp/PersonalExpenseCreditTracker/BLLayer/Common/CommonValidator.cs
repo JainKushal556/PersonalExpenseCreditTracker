@@ -7,5 +7,6 @@ namespace BLLayer.Common
 {
     class CommonValidator
     {
+
     }
 }
