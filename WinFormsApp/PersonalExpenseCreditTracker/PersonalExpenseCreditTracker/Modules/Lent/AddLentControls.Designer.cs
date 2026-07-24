@@ -166,7 +166,7 @@
             this.txtLentAddDeadlineDatePicker.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtLentAddDeadlineDatePicker.Location = new System.Drawing.Point(5, 3);
             this.txtLentAddDeadlineDatePicker.Name = "txtLentAddDeadlineDatePicker";
-            this.txtLentAddDeadlineDatePicker.Size = new System.Drawing.Size(313, 23);
+            this.txtLentAddDeadlineDatePicker.Size = new System.Drawing.Size(267, 23);
             this.txtLentAddDeadlineDatePicker.TabIndex = 2;
             this.txtLentAddDeadlineDatePicker.TextChanged += new System.EventHandler(this.txtLentAddDeadlineDatePicker_TextChanged);
             // 
@@ -175,7 +175,7 @@
             this.btnLentAddCalendar.FlatAppearance.BorderSize = 0;
             this.btnLentAddCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentAddCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
-            this.btnLentAddCalendar.Location = new System.Drawing.Point(324, -1);
+            this.btnLentAddCalendar.Location = new System.Drawing.Point(325, -1);
             this.btnLentAddCalendar.Name = "btnLentAddCalendar";
             this.btnLentAddCalendar.Size = new System.Drawing.Size(37, 31);
             this.btnLentAddCalendar.TabIndex = 1;
@@ -207,7 +207,7 @@
             this.panel3.Controls.Add(this.pictureBoxLentRupee);
             this.panel3.Location = new System.Drawing.Point(21, 390);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(356, 32);
+            this.panel3.Size = new System.Drawing.Size(395, 32);
             this.panel3.TabIndex = 25;
             this.panel3.Enter += new System.EventHandler(this.txtLentAddAmount_Enter);
             this.panel3.Leave += new System.EventHandler(this.txtLentAddAmount_Leave);

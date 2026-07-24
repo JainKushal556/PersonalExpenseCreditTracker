@@ -7,7 +7,7 @@ namespace BLLayer.Common
 {
     public static class CommonValidator
     {
-
+        // Stores all possible validation results
         public enum ValidationResult
         {
             Success,
@@ -22,7 +22,14 @@ namespace BLLayer.Common
 
             DeadlineInvalid,
 
-            DescriptionInvalid
+            DescriptionInvalid,
+
+            EmailInvalid,
+            PhoneInvalid,
+
+            DateRangeInvalid,
+            MinimumAmountInvalid,
+            MaximumAmountInvalid
         }
 
         
@@ -95,11 +102,11 @@ namespace BLLayer.Common
                 }
             }
 
-            return ValidationResult.PaymentInvalid;
+            return ValidationResult.MinimumAmountInvalid;
         }
 
         //ValidateMaximumAmount
-        public static bool ValidateMaximumAmount(string maxAmount)
+        public static ValidationResult ValidateMaximumAmount(string maxAmount)
         {
             decimal value;
 
@@ -111,69 +118,71 @@ namespace BLLayer.Common
                     {
                         if (value <= 999999999)
                         {
-                            return true;
+                            return ValidationResult.Success;
                         }
                     }
                 }
             }
 
-            return false;
+            return ValidationResult.MaximumAmountInvalid;
         }
 
         //ValidateAmountRange
-        public static bool ValidateAmountRange(decimal minAmount, decimal maxAmount)
+        public static ValidationResult ValidateAmountRange(decimal minAmount, decimal maxAmount)
         {
             if (minAmount <= maxAmount)
             {
-                return true;
+                return ValidationResult.Success;
             }
 
-            return false;
+            return ValidationResult.AmountInvalid;
         }
 
         //Status Validation
-        public static bool ValidateStatus(int statusId)
+        public static ValidationResult ValidateStatus(int statusId)
         {
             if (statusId > 0)
             {
-                return true;
+                return ValidationResult.Success;
             }
 
-            return false;
+            return ValidationResult.StatusInvalid;
         }
 
         //Deadline Validation
 
-        public static bool ValidateDeadline(DateTime deadline)
+        public static ValidationResult ValidateDeadline(DateTime deadline)
         {
-            if (deadline.Date < DateTime.Today)
+            if (deadline.Date >= DateTime.Today)
             {
-                return false;
+                return ValidationResult.Success;
             }
 
-            return true;
+            return ValidationResult.DeadlineInvalid;
         }
 
         //Description Validation
 
-        public static bool ValidateDescription(string description)
+        public static ValidationResult ValidateDescription(string description)
         {
             if (!string.IsNullOrWhiteSpace(description))
             {
-                if (description.Trim().Length >= 5)
+                description = description.Trim();
+
+                if (description.Length >= 5)
                 {
                     if (description.Length <= 150)
                     {
-                        return true;
+                        return ValidationResult.Success;
                     }
                 }
             }
 
-            return false;
+            return ValidationResult.DescriptionInvalid;
         }
 
         //Email Validation
-        public static bool ValidateEmail(string email)
+        public static ValidationResult ValidateEmail(string email)
         {
             if (!string.IsNullOrWhiteSpace(email))
             {
@@ -185,15 +194,15 @@ namespace BLLayer.Common
 
                     if (Regex.IsMatch(email, pattern))
                     {
-                        return true;
+                        return ValidationResult.Success;
                     }
                 }
             }
 
-            return false;
+            return ValidationResult.EmailInvalid;
         }
         // Phone Number Validation
-        public static bool ValidatePhoneNumber(string phoneNumber)
+        public static ValidationResult ValidatePhoneNumber(string phoneNumber)
         {
             if (!string.IsNullOrWhiteSpace(phoneNumber))
             {
@@ -203,16 +212,16 @@ namespace BLLayer.Common
                 {
                     if (Regex.IsMatch(phoneNumber, @"^[6-9][0-9]{9}$"))
                     {
-                        return true;
+                        return ValidationResult.Success;
                     }
                 }
             }
 
-            return false;
+            return ValidationResult.PhoneInvalid;
         }
 
         // Date Range Validation
-        public static bool ValidateDateRange(DateTime fromDate, DateTime toDate)
+        public static ValidationResult ValidateDateRange(DateTime fromDate, DateTime toDate)
         {
             if (fromDate != DateTime.MinValue)
             {
@@ -220,12 +229,12 @@ namespace BLLayer.Common
                 {
                     if (fromDate.Date <= toDate.Date)
                     {
-                        return true;
+                        return ValidationResult.Success;
                     }
                 }
             }
 
-            return false;
+            return ValidationResult.DateRangeInvalid;
         }
 
 

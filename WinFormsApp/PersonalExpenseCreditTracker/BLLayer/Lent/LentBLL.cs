@@ -5,6 +5,7 @@ using System.Text;
 using BLLayer.Common;
 using System.Data;
 using DALayer.Common;
+using DALayer.Lent;
 namespace BLLayer.Lent
 {
     public class LentBLL
@@ -18,59 +19,75 @@ namespace BLLayer.Lent
         public DateTime deadlineAt { get; set; }
         public string description { get; set; }
 
+        // Stores the validation result
         CommonValidator.ValidationResult result;
 
-        public CommonValidator.ValidationResult InsertDataIntoLentBll()
+        // Validates all user input before saving the data
+        public CommonValidator.ValidationResult DataValidatorIntoLentBll()
         {
-            //Validation PersonID
+            //  Person Validation
             result = CommonValidator.ValidatePerson(personId);
-
             if (result != CommonValidator.ValidationResult.Success)
             {
                 return result;
             }
 
-
             //Payment Validation
             result = CommonValidator.ValidatePayment(paymentId);
-            if (result!=CommonValidator.ValidatePayment(paymentId))
+            if (result != CommonValidator.ValidationResult.Success)
             {
                 return result;
             }
 
-            ////Status Validation
-            //if (CommonValidator.ValidateStatus(statusId))
-            //{
-            //    return false;
-            //}
+            // Status Validation
+            result = CommonValidator.ValidateStatus(statusId);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
 
-            ////Amount Validation
-            //if (CommonValidator.ValidateAmount(amount.ToString()))
-            //{
-            //    return false;
-            //}
+            //Amount Validation
+            result = CommonValidator.ValidateAmount(amount);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
 
-            ////Deadline Validation
-            //if (CommonValidator.ValidateDeadline(deadlineAt))
-            //{
-            //    return false;
-            //}
+            //Deadline Validation
+            result = CommonValidator.ValidateDeadline(deadlineAt);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
 
-            ////Description Validation
-            //if (CommonValidator.ValidateDescription(description))
-            //{
-            //    return false;
-            //}
+            //Description Validation
+            result = CommonValidator.ValidateDescription(description);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
 
-           //DLRLayer function
+          
+            LentDAL lentDal = new LentDAL();
+            lentDal.userId = userId;
+            lentDal.lentId = lentId;
+            lentDal.personId = personId;
+            lentDal.paymentId = paymentId;
+            lentDal.statusId = statusId;
+            lentDal.amount = amount;
+            lentDal.deadlineAt = deadlineAt;
+            lentDal.description = description;
+
             return CommonValidator.ValidationResult.Success;
         }
 
+        // Retrieves ComboBox data from the DAL using a stored procedure with UserId
         public static List<string> retriveListForComboBoxAtBal(string spName, string colName, int userId)
         {
             return SqlHelper.retriveListForComboBoxAtDal(spName,colName, userId);
         }
 
+        // Retrieves ComboBox data from the DAL using a stored procedure without UserId
         public static List<string> retriveListForComboBoxAtBal(string spName, string colName)
         {
             return SqlHelper.retriveListForComboBoxAtDal(spName, colName);

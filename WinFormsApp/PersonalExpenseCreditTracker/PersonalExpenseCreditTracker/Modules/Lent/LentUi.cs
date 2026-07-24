@@ -18,8 +18,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public DateTime deadlineAt { get; set; }
         public string description { get; set; }
 
+        // Create an object of the Business Logic Layer
         private LentBLL lentBLL = new LentBLL();
 
+        // Pass the data from the UI layer to the Business Logic Layer
         public CommonValidator.ValidationResult  InsertDataIntoLentUi()
         {
             lentBLL.userId = userId;
@@ -31,13 +33,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             lentBLL.deadlineAt = deadlineAt;
             lentBLL.description = description;
 
-            return lentBLL.InsertDataIntoLentBll();
+            // Call the BLL method for validation
+            return lentBLL.DataValidatorIntoLentBll();
         }
 
+        // Retrieve ComboBox data from the BLL (Stored Procedure with UserId)
         public static List<string> retriveListForComboBoxAtUi(string spName, string colName, int userId)
         {
             return LentBLL.retriveListForComboBoxAtBal(spName, colName, userId);
         }
+        // Retrieve ComboBox data from the BLL (Stored Procedure without UserId)
         public static List<string> retriveListForComboBoxAtUi(string spName, string colName)
         {
             return LentBLL.retriveListForComboBoxAtBal(spName, colName);
