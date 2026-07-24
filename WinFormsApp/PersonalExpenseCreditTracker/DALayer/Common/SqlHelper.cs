@@ -15,7 +15,7 @@ namespace DALayer.Common
         // function that retrive any single list  (one column) of data for combo boxes .
         // spName - StroeProcedure Name
         // colName - Column Name
-        public static List<string> retriveListForComboBox(string spName, string colName , int userId)
+        public static List<string> retriveListForComboBoxAtDal(string spName, string colName , int userId)
         {
             SqlConnection sqlConnection = null;
             List<string> dataList = null;
