@@ -27,11 +27,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             textBoxLentAddDescription.Text ="Enter description";
             txtLentAddAmount.Text = "Select Amount";
 
-            CommonUiFunction.LoadInComboBox("spGetAllPersons", "PersonName",11,"Select Person",comboBoxLentSelectPerson);
-            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "PaymentName","Select Payment Type", comboBoxLentPaymentType);
-            CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "StatusName", "Select Status", comboBoxLentStatus);
-
-            
+            CommonUiFunction.LoadInComboBox("spGetAllPersons",11,"Select Person",comboBoxLentSelectPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes","Select Payment Type", comboBoxLentPaymentType);
+            CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", comboBoxLentStatus);
         }
         
         private void btnLentAddCalendar_Click(object sender, EventArgs e)
@@ -123,9 +121,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // Assign values from the form controls to the object
             lentUi.userId = 11;
             lentUi.lentId = -1;
-            lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedIndex);
-            lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedIndex);
-            lentUi.statusId = Convert.ToInt32(comboBoxLentStatus.SelectedIndex);
+            lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
+            lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
+            lentUi.statusId = Convert.ToInt32(comboBoxLentStatus.SelectedValue);
 
             // If the placeholder text is still present, pass an empty string
             lentUi.amount = (txtLentAddAmount.Text == "Select Amount") ? "" : txtLentAddAmount.Text;

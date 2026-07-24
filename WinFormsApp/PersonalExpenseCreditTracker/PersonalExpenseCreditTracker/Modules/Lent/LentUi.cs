@@ -38,14 +38,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         }
 
         // Retrieve ComboBox data from the BLL (Stored Procedure with UserId)
-        public static DataTable retriveListForComboBoxAtUi(string spName, string colName, int userId)
+        public static DataTable retriveListForComboBoxAtUi(string spName, int userId)
         {
-            return LentBLL.retriveListForComboBoxAtBal(spName, colName, userId);
+            DataTable dataTable = null;
+            dataTable = LentBLL.retriveListForComboBoxAtBal(spName, userId);
+            return dataTable;
         }
         // Retrieve ComboBox data from the BLL (Stored Procedure without UserId)
-        public static DataTable retriveListForComboBoxAtUi(string spName, string colName)
+        public static DataTable retriveListForComboBoxAtUi(string spName)
         {
-            return LentBLL.retriveListForComboBoxAtBal(spName, colName);
+            DataTable dataTable = null;
+            dataTable = LentBLL.retriveListForComboBoxAtBal(spName);
+            return dataTable;
         }
     }
 }
