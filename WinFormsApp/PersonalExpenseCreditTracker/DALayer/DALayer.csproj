@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Authentication\AuthDAL.cs" />
     <Compile Include="Borrow\BorrowDAL.cs" />
+    <Compile Include="Common\SqlHelper.cs" />
     <Compile Include="Credit\CreditDAL.cs" />
     <Compile Include="Dashboard\DashboardDAL.cs" />
     <Compile Include="Expense\ExpenseDAL.cs" />
