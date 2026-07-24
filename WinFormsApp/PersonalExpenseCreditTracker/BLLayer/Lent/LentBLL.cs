@@ -18,7 +18,7 @@ namespace BLLayer.Lent
         public string amount { get; set; }
         public DateTime deadlineAt { get; set; }
         public string description { get; set; }
-
+        private LentDAL lentDal = new LentDAL();
         // Stores the validation result
         CommonValidator.ValidationResult result;
 
@@ -68,7 +68,7 @@ namespace BLLayer.Lent
             }
 
           
-            LentDAL lentDal = new LentDAL();
+            
             lentDal.userId = userId;
             lentDal.lentId = lentId;
             lentDal.personId = personId;
@@ -78,7 +78,15 @@ namespace BLLayer.Lent
             lentDal.deadlineAt = deadlineAt;
             lentDal.description = description;
 
-            return CommonValidator.ValidationResult.Success;
+            if (lentDal.SaveLentToDb())
+            {
+                return CommonValidator.ValidationResult.Success;
+            }
+            else
+            {
+                return CommonValidator.ValidationResult.Success;
+            }
+            
         }
 
         // Retrieves ComboBox data from the DAL using a stored procedure with UserId

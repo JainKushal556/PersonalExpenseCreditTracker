@@ -21,26 +21,27 @@ namespace DALayer.Common
             List<string> dataList = null;
             try
             {
-                using (sqlConnection = new SqlConnection(connectionString))
-                {
+                sqlConnection = new SqlConnection(connectionString);
+                
                     // dataList stores the list of strings retrived from DB
                     dataList = new List<string>();
-                    SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@UserID", userId);
-                    // Opening Connection
-                    sqlConnection.Open();
-                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                    // reads the column data one by one append into dataList
-                    while (sqlDataReader.Read())
+                    using (SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection))
                     {
-                        dataList.Add(sqlDataReader[colName].ToString());
-                    }
-                    // return dataLIst after getting all strings or column data from DB
-                    return dataList;
-                }
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@UserID", userId);
+                        // Opening Connection
+                        sqlConnection.Open();
+                        SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                       // reads the column data one by one append into dataList
+                       while (sqlDataReader.Read())
+                       {
+                          dataList.Add(sqlDataReader[colName].ToString());
+                       }
+                       // return dataLIst after getting all strings or column data from DB
+                       return dataList;
+                     }   
             }
-            catch (Exception EX)
+            catch (Exception ex)
             {
                 // return null assigned dataList if any error occur 
                 return dataList;
@@ -63,25 +64,26 @@ namespace DALayer.Common
             List<string> dataList = null;
             try
             {
-                using (sqlConnection = new SqlConnection(connectionString))
-                {
+                sqlConnection = new SqlConnection(connectionString);
                     // dataList stores the list of strings retrived from DB
                     dataList = new List<string>();
-                    SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    // Opening Connection
-                    sqlConnection.Open();
-                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                    // reads the column data one by one append into dataList
-                    while (sqlDataReader.Read())
+
+                    using (SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection))
                     {
-                        dataList.Add(sqlDataReader[colName].ToString());
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        // Opening Connection
+                        sqlConnection.Open();
+                        SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                        // reads the column data one by one append into dataList
+                        while (sqlDataReader.Read())
+                        {
+                            dataList.Add(sqlDataReader[colName].ToString());
+                        }
+                        // return dataLIst after getting all strings or column data from DB
+                        return dataList;
                     }
-                    // return dataLIst after getting all strings or column data from DB
-                    return dataList;
-                }
             }
-            catch (Exception EX)
+            catch (Exception ex)
             {
                 // return null assigned dataList if any error occur 
                 return dataList;
