@@ -15,7 +15,7 @@ namespace DALayer.Common
         // function that retrive any single list  (one column) of data for combo boxes .
         // spName - StroeProcedure Name
         // colName - Column Name
-        public static List<string> retriveListForComboBox(string spName, string colName)
+        public static List<string> retriveListForComboBox(string spName, string colName , int userId)
         {
             SqlConnection sqlConnection = null;
             List<string> dataList = null;
@@ -27,6 +27,7 @@ namespace DALayer.Common
                     dataList = new List<string>();
                     SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection);
                     sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@UserID", userId);
                     // Opening Connection
                     sqlConnection.Open();
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
