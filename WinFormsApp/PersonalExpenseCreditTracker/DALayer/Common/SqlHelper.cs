@@ -15,36 +15,31 @@ namespace DALayer.Common
         // function that retrive any single list  (one column) of data for combo boxes .
         // spName - StroeProcedure Name
         // colName - Column Name
-        public static List<string> retriveListForComboBoxAtDal(string spName, string colName , int userId)
+        public static DataTable retriveListForComboBoxAtDal(string spName, string colName , int userId)
         {
             SqlConnection sqlConnection = null;
-            List<string> dataList = null;
+            DataTable dataTable = null;
             try
             {
                 sqlConnection = new SqlConnection(connectionString);
                 
-                    // dataList stores the list of strings retrived from DB
-                    dataList = new List<string>();
-                    using (SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection))
+                    // datatable stores retrived data from DB
+                    dataTable = new DataTable();
+
+                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
                     {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        sqlCommand.Parameters.AddWithValue("@UserID", userId);
-                        // Opening Connection
-                        sqlConnection.Open();
-                        SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                       // reads the column data one by one append into dataList
-                       while (sqlDataReader.Read())
-                       {
-                          dataList.Add(sqlDataReader[colName].ToString());
-                       }
-                       // return dataLIst after getting all strings or column data from DB
-                       return dataList;
-                     }   
+                        sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
+                        DataSet dataSet = new DataSet();
+                        sqlDataAdapter.Fill(dataSet);
+                        dataTable = dataSet.Tables[0];
+                        return dataTable;
+                    }
             }
             catch (Exception ex)
             {
                 // return null assigned dataList if any error occur 
-                return dataList;
+                return dataTable;
             }
             finally
             {
@@ -58,35 +53,29 @@ namespace DALayer.Common
         // function that retrive any single list  (one column) of data for combo boxes .
         // spName - StroeProcedure Name
         // colName - Column Name
-        public static List<string> retriveListForComboBoxAtDal(string spName, string colName)
+        public static DataTable retriveListForComboBoxAtDal(string spName, string colName)
         {
             SqlConnection sqlConnection = null;
-            List<string> dataList = null;
+            DataTable dataTable = null;
             try
             {
-                sqlConnection = new SqlConnection(connectionString);
-                    // dataList stores the list of strings retrived from DB
-                    dataList = new List<string>();
+                    sqlConnection = new SqlConnection(connectionString);
+                    // datatable stores retrived data from DB
+                    dataTable = new DataTable();
 
-                    using (SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection))
+                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
                     {
-                        sqlCommand.CommandType = CommandType.StoredProcedure;
-                        // Opening Connection
-                        sqlConnection.Open();
-                        SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                        // reads the column data one by one append into dataList
-                        while (sqlDataReader.Read())
-                        {
-                            dataList.Add(sqlDataReader[colName].ToString());
-                        }
-                        // return dataLIst after getting all strings or column data from DB
-                        return dataList;
+                        sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        DataSet dataSet = new DataSet();
+                        sqlDataAdapter.Fill(dataSet);
+                        dataTable = dataSet.Tables[0];
+                        return dataTable;
                     }
             }
             catch (Exception ex)
             {
                 // return null assigned dataList if any error occur 
-                return dataList;
+                return dataTable; 
             }
             finally
             {
