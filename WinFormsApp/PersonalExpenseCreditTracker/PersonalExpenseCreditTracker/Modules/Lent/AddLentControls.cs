@@ -121,7 +121,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             LentUi lentUi = new LentUi();
 
             // Assign values from the form controls to the object
-            lentUi.userId = 1;
+            lentUi.userId = 11;
             lentUi.lentId = -1;
             lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedIndex);
             lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedIndex);
@@ -168,6 +168,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
                 case CommonValidator.ValidationResult.DeadlineInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtLentAddDeadlineDatePicker);
+                    break;
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Lent added Unsuccessfully!");
                     break;
             }
 

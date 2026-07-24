@@ -30,15 +30,17 @@ namespace DALayer.Common
                     {
                         sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
                         sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
-                        DataSet dataSet = new DataSet();
-                        sqlDataAdapter.Fill(dataSet);
-                        dataTable = dataSet.Tables[0];
+                        //DataSet dataSet = new DataSet();
+                        //sqlDataAdapter.Fill(dataSet);
+                        //dataTable = dataSet.Tables[0];
+                        sqlDataAdapter.Fill(dataTable);
                         return dataTable;
                     }
             }
             catch (Exception ex)
             {
                 // return null assigned dataList if any error occur 
+                throw;
                 return dataTable;
             }
             finally

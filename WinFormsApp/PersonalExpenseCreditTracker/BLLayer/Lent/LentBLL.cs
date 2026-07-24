@@ -84,7 +84,7 @@ namespace BLLayer.Lent
             }
             else
             {
-                return CommonValidator.ValidationResult.Success;
+                return CommonValidator.ValidationResult.StoreProcedureError;
             }
             
         }

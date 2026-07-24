@@ -29,7 +29,9 @@ namespace BLLayer.Common
 
             DateRangeInvalid,
             MinimumAmountInvalid,
-            MaximumAmountInvalid
+            MaximumAmountInvalid,
+
+            StoreProcedureError
         }
 
         
