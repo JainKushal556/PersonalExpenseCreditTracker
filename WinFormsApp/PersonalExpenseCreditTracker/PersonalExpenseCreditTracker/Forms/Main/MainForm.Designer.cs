@@ -5234,6 +5234,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlPersonAddPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPersonAddPage.Name = "pnlPersonAddPage";
             this.pnlPersonAddPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlPersonAddPage.TabIndex = 0;
             // 
             // pnlCreditCategoryPage
             // 
