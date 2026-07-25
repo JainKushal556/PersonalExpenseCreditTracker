@@ -41,15 +41,31 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public static DataTable retriveListForComboBoxAtUi(string spName, int userId)
         {
             DataTable dataTable = null;
-            dataTable = LentBLL.retriveListForComboBoxAtBal(spName, userId);
+            dataTable = LentBLL.retriveListForComboBoxAtBll(spName, userId);
             return dataTable;
         }
         // Retrieve ComboBox data from the BLL (Stored Procedure without UserId)
         public static DataTable retriveListForComboBoxAtUi(string spName)
         {
             DataTable dataTable = null;
-            dataTable = LentBLL.retriveListForComboBoxAtBal(spName);
+            dataTable = LentBLL.retriveListForComboBoxAtBll(spName);
             return dataTable;
         }
+        // Retrieve GridView data from the BLL (Stored Procedure without UserId)
+        public static DataTable retriveDataForGridViewAtUi(string spName)
+        {
+            DataTable dataTable = null;
+            dataTable = LentBLL.retriveDataForGridViewAtBll(spName);
+            return dataTable;
+        }
+
+        // Retrieve GridView data from the BLL (Stored Procedure with UserId)
+        public static DataTable retriveDataForGridViewAtUi(string spName,int userId)
+        {
+            DataTable dataTable = null;
+            dataTable = LentBLL.retriveDataForGridViewAtBll(spName, userId);
+            return dataTable;
+        }
+
     }
 }

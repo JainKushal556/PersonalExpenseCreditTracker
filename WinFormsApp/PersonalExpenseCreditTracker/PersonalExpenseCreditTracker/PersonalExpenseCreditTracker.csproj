@@ -286,6 +286,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session\LogedInUser.cs" />
     <EmbeddedResource Include="Forms\Authentication\ForgotPasswordControls.resx">
       <DependentUpon>ForgotPasswordControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -423,7 +424,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Session\" />
   </ItemGroup>
   <!-- Expense Resources -->
   <ItemGroup>

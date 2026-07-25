@@ -2214,7 +2214,12 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveLentSubMenu(pnlAllLent);
 
-            ShowPage(pnlLentPage);   // চাইলে রাখতে পারো
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+            }
+
+            ShowPage(pnlLentPage);   
         }
         private void pnlAddLent_MouseEnter(object sender, EventArgs e)
         {

@@ -38,5 +38,8 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.ValueMember = dataTable.Columns[0].ColumnName;
             comboBox.SelectedIndex = 0;
         }
+
+       
+       
     }
 }

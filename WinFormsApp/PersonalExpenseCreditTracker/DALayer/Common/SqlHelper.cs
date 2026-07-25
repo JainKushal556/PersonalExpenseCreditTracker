@@ -11,49 +11,36 @@ namespace DALayer.Common
     {
         // Universal ConnectionString for All Store Procedures
         public static readonly string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-
+         
         // function that retrive any single list  (one column) of data for combo boxes .
         // spName - StroeProcedure Name
         // colName - Column Name
-        public static DataTable retriveListForComboBoxAtDal(string spName, int userId)
+        public static DataTable retrieveDataTableBySpNameAndUserId(string spName,int userId)
         {
-            SqlConnection sqlConnection = null;
-            DataTable dataTable = null;
+            DataTable dataTable = new DataTable();
+          
             try
             {
-                sqlConnection = new SqlConnection(connectionString);
-                
-                    // datatable stores retrived data from DB
-                    dataTable = new DataTable();
-                    
-                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
-                    {
-                        sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                        sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
-                        sqlDataAdapter.Fill(dataTable);
-                        return dataTable;
-                    }
-            }
-            catch (Exception ex)
-            {
-                // return null assigned dataList if any error occur 
-                return dataTable;
-                throw;
-                
-            }
-            finally
-            {
-                // close the connection string if error occur's or not 
-                if (sqlConnection != null)
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
                 {
-                    sqlConnection.Close();
+                    sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    return dataTable;
                 }
+            }
+            catch
+            {
+                throw;
             }
         }
         // function that retrive any single list  (one column) of data for combo boxes .
         // spName - StroeProcedure Name
         // colName - Column Name
-        public static DataTable retriveListForComboBoxAtDal(string spName)
+        public static DataTable retriveDataTableBySpName(string spName)
         {
             SqlConnection sqlConnection = null;
             DataTable dataTable = null;
