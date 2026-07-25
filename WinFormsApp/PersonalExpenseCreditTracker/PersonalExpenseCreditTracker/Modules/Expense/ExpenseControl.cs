@@ -8,13 +8,24 @@ using System.Text;
 using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 
 using System.Windows.Forms;
 
 namespace PersonalExpenseCreditTracker.Modules.Expense
 {
     public partial class ExpenseControl : Form
+
     {
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse
+        );
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllExpenseData = new DataTable();
         private int currentPage = 1;
@@ -23,6 +34,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             InitializeComponent();
             StyleExpenseGrid();
+            ApplyRoundCorners();
             //dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
             this.Resize += ExpenseControl_Resize;
 
@@ -34,15 +46,16 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                  null,
                  dgvExpenseDataTable,
                  new object[] { true });
-            
+
         }
 
-        
+
         private void ExpenseControl_Load(object sender, EventArgs e)
         {
             dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
+            ApplyRoundCorners();
             pageSize = GetRowsPerPage();
-            int userID = 11;   
+            int userID = 11;
             LoadExpenseData(userID);
         }
 
@@ -69,7 +82,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             dgvExpenseDataTable.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 255);
             dgvExpenseDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvExpenseDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            
+
             //Column Background Color
             colDate.DefaultCellStyle.BackColor = Color.White;
             colDescription.DefaultCellStyle.BackColor = Color.White;
@@ -200,7 +213,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
                         da.Fill(dt);
 
-                        
+
                         if (dt.Columns.Contains("Message"))
                         {
                             MessageBox.Show(dt.Rows[0]["Message"].ToString(),
@@ -239,7 +252,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
 
             dgvExpenseDataTable.DataSource = pageTable;
-            int start = startIndex +1;
+            int start = startIndex + 1;
             int end = endIndex;
             int total = AllExpenseData.Rows.Count;
 
@@ -260,6 +273,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void ExpenseControl_Resize(object sender, EventArgs e)
         {
+            ApplyRoundCorners();
             if (AllExpenseData == null || AllExpenseData.Rows.Count == 0)
                 return;
 
@@ -318,13 +332,46 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
-        private void dgvExpenseDataTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        
+        private void pnlTotalExpense_Paint(object sender, PaintEventArgs e)
         {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlTotalExpense.ClientRectangle,
+                Color.FromArgb(38, 50, 75),
+                ButtonBorderStyle.Solid);
+        }
 
+        private void pnlTransactionCard_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlTransactionCard.ClientRectangle,
+                Color.FromArgb(55, 90, 210),
+                ButtonBorderStyle.Solid);
+        }
+        private void ApplyRoundCorners()
+        {
+            pnlTotalExpense.Region = Region.FromHrgn(
+                CreateRoundRectRgn(0, 0, pnlTotalExpense.Width, pnlTotalExpense.Height, 10, 10));
+
+            pnlTransactionCard.Region = Region.FromHrgn(
+                CreateRoundRectRgn(0, 0, pnlTransactionCard.Width, pnlTransactionCard.Height, 10, 10));
+
+            
+        }
+        private void pnlTotalExpense_Resize(object sender, EventArgs e)
+        {
+            ApplyRoundCorners();
+        }
+
+        private void pnlTransactionCard_Resize(object sender, EventArgs e)
+        {
+            ApplyRoundCorners();
         }
     }
 }

@@ -63,5 +63,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             this.Close();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Saved Credit SubCategory");
+        }
     }
 }
