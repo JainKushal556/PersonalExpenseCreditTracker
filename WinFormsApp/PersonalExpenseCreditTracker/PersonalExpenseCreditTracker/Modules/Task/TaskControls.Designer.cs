@@ -29,10 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTaskContent = new System.Windows.Forms.Panel();
             this.pnlTaskList = new System.Windows.Forms.Panel();
             this.tableLayoutPanelTask = new System.Windows.Forms.TableLayoutPanel();
@@ -114,17 +111,17 @@
             this.pnlTaskContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTaskContent.Location = new System.Drawing.Point(0, 0);
             this.pnlTaskContent.Name = "pnlTaskContent";
-            this.pnlTaskContent.Size = new System.Drawing.Size(1198, 581);
+            this.pnlTaskContent.Size = new System.Drawing.Size(1048, 677);
             this.pnlTaskContent.TabIndex = 0;
             // 
             // pnlTaskList
             // 
             this.pnlTaskList.Controls.Add(this.tableLayoutPanelTask);
             this.pnlTaskList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskList.Location = new System.Drawing.Point(0, 120);
+            this.pnlTaskList.Location = new System.Drawing.Point(0, 110);
             this.pnlTaskList.Name = "pnlTaskList";
-            this.pnlTaskList.Padding = new System.Windows.Forms.Padding(15, 0, 15, 0);
-            this.pnlTaskList.Size = new System.Drawing.Size(1198, 461);
+            this.pnlTaskList.Padding = new System.Windows.Forms.Padding(9, 11, 9, 11);
+            this.pnlTaskList.Size = new System.Drawing.Size(1048, 567);
             this.pnlTaskList.TabIndex = 4;
             // 
             // tableLayoutPanelTask
@@ -135,13 +132,14 @@
             this.tableLayoutPanelTask.Controls.Add(this.pnlTaskTitle, 0, 0);
             this.tableLayoutPanelTask.Controls.Add(this.dataGridViewTask, 0, 1);
             this.tableLayoutPanelTask.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelTask.Location = new System.Drawing.Point(15, 0);
+            this.tableLayoutPanelTask.Location = new System.Drawing.Point(9, 11);
             this.tableLayoutPanelTask.Name = "tableLayoutPanelTask";
+            this.tableLayoutPanelTask.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanelTask.RowCount = 3;
-            this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanelTask.Size = new System.Drawing.Size(1168, 461);
+            this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
+            this.tableLayoutPanelTask.Size = new System.Drawing.Size(1030, 545);
             this.tableLayoutPanelTask.TabIndex = 1;
             // 
             // pnlTaskFooter
@@ -149,9 +147,9 @@
             this.pnlTaskFooter.Controls.Add(this.pnlFooterTask);
             this.pnlTaskFooter.Controls.Add(this.pnlControl);
             this.pnlTaskFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskFooter.Location = new System.Drawing.Point(3, 404);
+            this.pnlTaskFooter.Location = new System.Drawing.Point(6, 491);
             this.pnlTaskFooter.Name = "pnlTaskFooter";
-            this.pnlTaskFooter.Size = new System.Drawing.Size(1162, 54);
+            this.pnlTaskFooter.Size = new System.Drawing.Size(1018, 48);
             this.pnlTaskFooter.TabIndex = 4;
             // 
             // pnlFooterTask
@@ -166,14 +164,14 @@
             this.pnlFooterTask.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlFooterTask.Location = new System.Drawing.Point(0, 0);
             this.pnlFooterTask.Name = "pnlFooterTask";
-            this.pnlFooterTask.Size = new System.Drawing.Size(348, 54);
+            this.pnlFooterTask.Size = new System.Drawing.Size(304, 48);
             this.pnlFooterTask.TabIndex = 1;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(199, 15);
+            this.label7.Location = new System.Drawing.Point(174, 16);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 23);
             this.label7.TabIndex = 6;
@@ -183,7 +181,7 @@
             // 
             this.lblTaskTotalPageNumber.AutoSize = true;
             this.lblTaskTotalPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskTotalPageNumber.Location = new System.Drawing.Point(167, 16);
+            this.lblTaskTotalPageNumber.Location = new System.Drawing.Point(146, 17);
             this.lblTaskTotalPageNumber.Name = "lblTaskTotalPageNumber";
             this.lblTaskTotalPageNumber.Size = new System.Drawing.Size(28, 23);
             this.lblTaskTotalPageNumber.TabIndex = 5;
@@ -193,7 +191,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(143, 15);
+            this.label5.Location = new System.Drawing.Point(125, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(25, 23);
             this.label5.TabIndex = 4;
@@ -203,7 +201,7 @@
             // 
             this.lblTaskEndingPageNumber.AutoSize = true;
             this.lblTaskEndingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskEndingPageNumber.Location = new System.Drawing.Point(114, 16);
+            this.lblTaskEndingPageNumber.Location = new System.Drawing.Point(100, 17);
             this.lblTaskEndingPageNumber.Name = "lblTaskEndingPageNumber";
             this.lblTaskEndingPageNumber.Size = new System.Drawing.Size(28, 23);
             this.lblTaskEndingPageNumber.TabIndex = 3;
@@ -213,7 +211,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(92, 15);
+            this.label3.Location = new System.Drawing.Point(80, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(26, 23);
             this.label3.TabIndex = 2;
@@ -223,7 +221,7 @@
             // 
             this.lblTaskStartingPageNumber.AutoSize = true;
             this.lblTaskStartingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskStartingPageNumber.Location = new System.Drawing.Point(76, 15);
+            this.lblTaskStartingPageNumber.Location = new System.Drawing.Point(66, 16);
             this.lblTaskStartingPageNumber.Name = "lblTaskStartingPageNumber";
             this.lblTaskStartingPageNumber.Size = new System.Drawing.Size(19, 23);
             this.lblTaskStartingPageNumber.TabIndex = 1;
@@ -233,7 +231,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 13);
+            this.label1.Location = new System.Drawing.Point(3, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 23);
             this.label1.TabIndex = 0;
@@ -247,35 +245,35 @@
             this.pnlControl.Controls.Add(this.btnPreviousPage);
             this.pnlControl.Controls.Add(this.btnFirstpage);
             this.pnlControl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlControl.Location = new System.Drawing.Point(912, 0);
+            this.pnlControl.Location = new System.Drawing.Point(799, 0);
             this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(250, 54);
+            this.pnlControl.Size = new System.Drawing.Size(219, 48);
             this.pnlControl.TabIndex = 0;
             // 
             // btnLastPage
             // 
             this.btnLastPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.right;
-            this.btnLastPage.Location = new System.Drawing.Point(198, 6);
+            this.btnLastPage.Location = new System.Drawing.Point(173, 6);
             this.btnLastPage.Name = "btnLastPage";
-            this.btnLastPage.Size = new System.Drawing.Size(40, 40);
+            this.btnLastPage.Size = new System.Drawing.Size(35, 42);
             this.btnLastPage.TabIndex = 4;
             this.btnLastPage.UseVisualStyleBackColor = true;
             // 
             // btnNextpage
             // 
             this.btnNextpage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next;
-            this.btnNextpage.Location = new System.Drawing.Point(152, 6);
+            this.btnNextpage.Location = new System.Drawing.Point(133, 6);
             this.btnNextpage.Name = "btnNextpage";
-            this.btnNextpage.Size = new System.Drawing.Size(40, 40);
+            this.btnNextpage.Size = new System.Drawing.Size(35, 42);
             this.btnNextpage.TabIndex = 3;
             this.btnNextpage.UseVisualStyleBackColor = true;
             // 
             // btnCurrentPage
             // 
             this.btnCurrentPage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCurrentPage.Location = new System.Drawing.Point(106, 6);
+            this.btnCurrentPage.Location = new System.Drawing.Point(93, 6);
             this.btnCurrentPage.Name = "btnCurrentPage";
-            this.btnCurrentPage.Size = new System.Drawing.Size(40, 40);
+            this.btnCurrentPage.Size = new System.Drawing.Size(35, 42);
             this.btnCurrentPage.TabIndex = 2;
             this.btnCurrentPage.Text = "1";
             this.btnCurrentPage.UseVisualStyleBackColor = true;
@@ -283,9 +281,9 @@
             // btnPreviousPage
             // 
             this.btnPreviousPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.preview;
-            this.btnPreviousPage.Location = new System.Drawing.Point(59, 6);
+            this.btnPreviousPage.Location = new System.Drawing.Point(52, 6);
             this.btnPreviousPage.Name = "btnPreviousPage";
-            this.btnPreviousPage.Size = new System.Drawing.Size(40, 40);
+            this.btnPreviousPage.Size = new System.Drawing.Size(35, 42);
             this.btnPreviousPage.TabIndex = 1;
             this.btnPreviousPage.UseVisualStyleBackColor = true;
             // 
@@ -293,9 +291,9 @@
             // 
             this.btnFirstpage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFirstpage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.left;
-            this.btnFirstpage.Location = new System.Drawing.Point(13, 6);
+            this.btnFirstpage.Location = new System.Drawing.Point(11, 6);
             this.btnFirstpage.Name = "btnFirstpage";
-            this.btnFirstpage.Size = new System.Drawing.Size(40, 40);
+            this.btnFirstpage.Size = new System.Drawing.Size(35, 42);
             this.btnFirstpage.TabIndex = 0;
             this.btnFirstpage.UseVisualStyleBackColor = true;
             // 
@@ -303,29 +301,29 @@
             // 
             this.pnlTaskTitle.Controls.Add(this.pnlTableHeader);
             this.pnlTaskTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskTitle.Location = new System.Drawing.Point(3, 3);
+            this.pnlTaskTitle.Location = new System.Drawing.Point(6, 6);
             this.pnlTaskTitle.Name = "pnlTaskTitle";
-            this.pnlTaskTitle.Size = new System.Drawing.Size(1162, 64);
+            this.pnlTaskTitle.Size = new System.Drawing.Size(1018, 47);
             this.pnlTaskTitle.TabIndex = 3;
             // 
             // pnlTableHeader
             // 
-            this.pnlTableHeader.BackColor = System.Drawing.Color.LightSlateGray;
+            this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
             this.pnlTableHeader.Controls.Add(this.pnlSingleLine);
             this.pnlTableHeader.Controls.Add(this.lblTaskList);
             this.pnlTableHeader.Controls.Add(this.btnExport);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTableHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlTableHeader.Name = "pnlTableHeader";
-            this.pnlTableHeader.Size = new System.Drawing.Size(1162, 64);
+            this.pnlTableHeader.Size = new System.Drawing.Size(1018, 47);
             this.pnlTableHeader.TabIndex = 1;
             // 
             // pnlSingleLine
             // 
             this.pnlSingleLine.BackColor = System.Drawing.Color.Black;
-            this.pnlSingleLine.Location = new System.Drawing.Point(26, 43);
+            this.pnlSingleLine.Location = new System.Drawing.Point(4, 46);
             this.pnlSingleLine.Name = "pnlSingleLine";
-            this.pnlSingleLine.Size = new System.Drawing.Size(90, 3);
+            this.pnlSingleLine.Size = new System.Drawing.Size(114, 3);
             this.pnlSingleLine.TabIndex = 2;
             // 
             // lblTaskList
@@ -333,7 +331,7 @@
             this.lblTaskList.AutoSize = true;
             this.lblTaskList.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaskList.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.lblTaskList.Location = new System.Drawing.Point(21, 8);
+            this.lblTaskList.Location = new System.Drawing.Point(4, 5);
             this.lblTaskList.Name = "lblTaskList";
             this.lblTaskList.Size = new System.Drawing.Size(116, 32);
             this.lblTaskList.TabIndex = 1;
@@ -341,13 +339,19 @@
             // 
             // btnExport
             // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.BackColor = System.Drawing.Color.Honeydew;
-            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(165)))), ((int)(((byte)(233)))));
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
-            this.btnExport.Location = new System.Drawing.Point(1034, 13);
+            this.btnExport.Location = new System.Drawing.Point(921, 0);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(111, 40);
+            this.btnExport.Size = new System.Drawing.Size(97, 47);
             this.btnExport.TabIndex = 0;
             this.btnExport.Text = "Export";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -359,22 +363,8 @@
             this.dataGridViewTask.AllowUserToDeleteRows = false;
             this.dataGridViewTask.AllowUserToResizeColumns = false;
             this.dataGridViewTask.AllowUserToResizeRows = false;
-            this.dataGridViewTask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewTask.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewTask.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridViewTask.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTask.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewTask.ColumnHeadersHeight = 40;
+            this.dataGridViewTask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewTask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDate,
             this.colTask,
@@ -382,100 +372,73 @@
             this.colStatus,
             this.colDeadline,
             this.colAction});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTask.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTask.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewTask.EnableHeadersVisualStyles = false;
-            this.dataGridViewTask.GridColor = System.Drawing.Color.LightGray;
-            this.dataGridViewTask.Location = new System.Drawing.Point(3, 73);
+            this.dataGridViewTask.GridColor = System.Drawing.Color.Gainsboro;
+            this.dataGridViewTask.Location = new System.Drawing.Point(6, 59);
             this.dataGridViewTask.Name = "dataGridViewTask";
             this.dataGridViewTask.ReadOnly = true;
-            this.dataGridViewTask.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTask.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTask.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTask.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
-            this.dataGridViewTask.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTask.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTask.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewTask.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTask.RowTemplate.Height = 45;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewTask.RowTemplate.Height = 24;
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewTask.Size = new System.Drawing.Size(1162, 325);
-            this.dataGridViewTask.TabIndex = 0;
-            this.dataGridViewTask.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellClick);
-            this.dataGridViewTask.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewTask_CellFormatting);
+            this.dataGridViewTask.Size = new System.Drawing.Size(1018, 426);
+            this.dataGridViewTask.TabIndex = 1;
+            this.dataGridViewTask.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
             // 
             // colDate
             // 
-            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDate.HeaderText = "Date";
-            this.colDate.MinimumWidth = 100;
+            this.colDate.MinimumWidth = 80;
             this.colDate.Name = "colDate";
             this.colDate.ReadOnly = true;
-            this.colDate.Width = 120;
             // 
             // colTask
             // 
             this.colTask.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colTask.HeaderText = "Task Title";
-            this.colTask.MinimumWidth = 220;
+            this.colTask.MinimumWidth = 200;
             this.colTask.Name = "colTask";
             this.colTask.ReadOnly = true;
             // 
             // colPriority
             // 
-            this.colPriority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colPriority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colPriority.HeaderText = "Priority";
-            this.colPriority.MinimumWidth = 160;
+            this.colPriority.MinimumWidth = 100;
             this.colPriority.Name = "colPriority";
             this.colPriority.ReadOnly = true;
-            this.colPriority.Width = 160;
             // 
             // colStatus
             // 
-            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colStatus.HeaderText = "Status";
-            this.colStatus.MinimumWidth = 160;
+            this.colStatus.MinimumWidth = 100;
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 160;
             // 
             // colDeadline
             // 
-            this.colDeadline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colDeadline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDeadline.HeaderText = "Deadline";
-            this.colDeadline.MinimumWidth = 160;
+            this.colDeadline.MinimumWidth = 100;
             this.colDeadline.Name = "colDeadline";
             this.colDeadline.ReadOnly = true;
-            this.colDeadline.Width = 160;
             // 
             // colAction
             // 
-            this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colAction.HeaderText = "Action";
             this.colAction.MinimumWidth = 90;
             this.colAction.Name = "colAction";
             this.colAction.ReadOnly = true;
-            this.colAction.Width = 90;
             // 
             // tblCardContant
             // 
+            this.tblCardContant.BackColor = System.Drawing.Color.Transparent;
             this.tblCardContant.ColumnCount = 4;
             this.tblCardContant.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tblCardContant.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.04F));
@@ -487,194 +450,196 @@
             this.tblCardContant.Controls.Add(this.pnlDueToday, 3, 0);
             this.tblCardContant.Dock = System.Windows.Forms.DockStyle.Top;
             this.tblCardContant.Location = new System.Drawing.Point(0, 0);
-            this.tblCardContant.Margin = new System.Windows.Forms.Padding(3, 2, 3, 5);
+            this.tblCardContant.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tblCardContant.Name = "tblCardContant";
+            this.tblCardContant.Padding = new System.Windows.Forms.Padding(3);
             this.tblCardContant.RowCount = 1;
             this.tblCardContant.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblCardContant.Size = new System.Drawing.Size(1198, 120);
+            this.tblCardContant.Size = new System.Drawing.Size(1048, 110);
             this.tblCardContant.TabIndex = 2;
             // 
             // pnlTotalTask
             // 
-            this.pnlTotalTask.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.pnlTotalTask.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.pnlTotalTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pnlTotalTask.Controls.Add(this.lblTotalTaskCount);
             this.pnlTotalTask.Controls.Add(this.lblTotalTask);
             this.pnlTotalTask.Controls.Add(this.picTotaltaskIcone);
             this.pnlTotalTask.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalTask.Location = new System.Drawing.Point(15, 10);
-            this.pnlTotalTask.Margin = new System.Windows.Forms.Padding(15, 10, 0, 5);
+            this.pnlTotalTask.Location = new System.Drawing.Point(14, 13);
+            this.pnlTotalTask.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTotalTask.Name = "pnlTotalTask";
-            this.pnlTotalTask.Size = new System.Drawing.Size(284, 105);
+            this.pnlTotalTask.Size = new System.Drawing.Size(238, 84);
             this.pnlTotalTask.TabIndex = 0;
             // 
             // lblTotalTaskCount
             // 
             this.lblTotalTaskCount.AutoSize = true;
-            this.lblTotalTaskCount.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTaskCount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalTaskCount.ForeColor = System.Drawing.Color.White;
-            this.lblTotalTaskCount.Location = new System.Drawing.Point(71, 47);
+            this.lblTotalTaskCount.Location = new System.Drawing.Point(71, 38);
             this.lblTotalTaskCount.Name = "lblTotalTaskCount";
-            this.lblTotalTaskCount.Size = new System.Drawing.Size(52, 41);
+            this.lblTotalTaskCount.Size = new System.Drawing.Size(43, 32);
             this.lblTotalTaskCount.TabIndex = 2;
             this.lblTotalTaskCount.Text = "20";
             // 
             // lblTotalTask
             // 
             this.lblTotalTask.AutoSize = true;
-            this.lblTotalTask.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTask.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalTask.ForeColor = System.Drawing.Color.White;
-            this.lblTotalTask.Location = new System.Drawing.Point(69, 15);
+            this.lblTotalTask.Location = new System.Drawing.Point(71, 16);
             this.lblTotalTask.Name = "lblTotalTask";
-            this.lblTotalTask.Size = new System.Drawing.Size(100, 28);
+            this.lblTotalTask.Size = new System.Drawing.Size(89, 23);
             this.lblTotalTask.TabIndex = 1;
             this.lblTotalTask.Text = "Total Task";
             // 
             // picTotaltaskIcone
             // 
             this.picTotaltaskIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.clipboardModern;
-            this.picTotaltaskIcone.Location = new System.Drawing.Point(21, 19);
+            this.picTotaltaskIcone.Location = new System.Drawing.Point(18, 20);
             this.picTotaltaskIcone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picTotaltaskIcone.Name = "picTotaltaskIcone";
-            this.picTotaltaskIcone.Size = new System.Drawing.Size(40, 39);
+            this.picTotaltaskIcone.Size = new System.Drawing.Size(40, 40);
             this.picTotaltaskIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picTotaltaskIcone.TabIndex = 0;
             this.picTotaltaskIcone.TabStop = false;
             // 
             // pnlTaskComplete
             // 
-            this.pnlTaskComplete.BackColor = System.Drawing.Color.MediumPurple;
+            this.pnlTaskComplete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(101)))), ((int)(((byte)(52)))));
             this.pnlTaskComplete.Controls.Add(this.lblTaskCompleteCount);
             this.pnlTaskComplete.Controls.Add(this.lblTaskComplete);
             this.pnlTaskComplete.Controls.Add(this.picTaskCompleteIcone);
             this.pnlTaskComplete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskComplete.Location = new System.Drawing.Point(314, 10);
-            this.pnlTaskComplete.Margin = new System.Windows.Forms.Padding(15, 10, 0, 5);
+            this.pnlTaskComplete.Location = new System.Drawing.Point(274, 13);
+            this.pnlTaskComplete.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTaskComplete.Name = "pnlTaskComplete";
-            this.pnlTaskComplete.Size = new System.Drawing.Size(285, 105);
+            this.pnlTaskComplete.Size = new System.Drawing.Size(239, 84);
             this.pnlTaskComplete.TabIndex = 1;
             // 
             // lblTaskCompleteCount
             // 
             this.lblTaskCompleteCount.AutoSize = true;
-            this.lblTaskCompleteCount.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaskCompleteCount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaskCompleteCount.ForeColor = System.Drawing.Color.White;
-            this.lblTaskCompleteCount.Location = new System.Drawing.Point(71, 47);
+            this.lblTaskCompleteCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskCompleteCount.Name = "lblTaskCompleteCount";
-            this.lblTaskCompleteCount.Size = new System.Drawing.Size(52, 41);
+            this.lblTaskCompleteCount.Size = new System.Drawing.Size(43, 32);
             this.lblTaskCompleteCount.TabIndex = 2;
             this.lblTaskCompleteCount.Text = "10";
             // 
             // lblTaskComplete
             // 
             this.lblTaskComplete.AutoSize = true;
-            this.lblTaskComplete.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaskComplete.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaskComplete.ForeColor = System.Drawing.Color.White;
-            this.lblTaskComplete.Location = new System.Drawing.Point(69, 15);
+            this.lblTaskComplete.Location = new System.Drawing.Point(71, 16);
             this.lblTaskComplete.Name = "lblTaskComplete";
-            this.lblTaskComplete.Size = new System.Drawing.Size(100, 28);
+            this.lblTaskComplete.Size = new System.Drawing.Size(88, 23);
             this.lblTaskComplete.TabIndex = 1;
             this.lblTaskComplete.Text = "Complete";
             // 
             // picTaskCompleteIcone
             // 
             this.picTaskCompleteIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.successful;
-            this.picTaskCompleteIcone.Location = new System.Drawing.Point(21, 19);
+            this.picTaskCompleteIcone.Location = new System.Drawing.Point(18, 20);
             this.picTaskCompleteIcone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picTaskCompleteIcone.Name = "picTaskCompleteIcone";
-            this.picTaskCompleteIcone.Size = new System.Drawing.Size(40, 39);
+            this.picTaskCompleteIcone.Size = new System.Drawing.Size(40, 40);
             this.picTaskCompleteIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picTaskCompleteIcone.TabIndex = 0;
             this.picTaskCompleteIcone.TabStop = false;
             // 
             // pnlTaskPanding
             // 
-            this.pnlTaskPanding.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlTaskPanding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(83)))), ((int)(((byte)(9)))));
             this.pnlTaskPanding.Controls.Add(this.lblTaskPandingCount);
             this.pnlTaskPanding.Controls.Add(this.lblTaskPanding);
             this.pnlTaskPanding.Controls.Add(this.picPandingIcone);
             this.pnlTaskPanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskPanding.Location = new System.Drawing.Point(614, 10);
-            this.pnlTaskPanding.Margin = new System.Windows.Forms.Padding(15, 10, 0, 5);
+            this.pnlTaskPanding.Location = new System.Drawing.Point(535, 13);
+            this.pnlTaskPanding.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTaskPanding.Name = "pnlTaskPanding";
-            this.pnlTaskPanding.Size = new System.Drawing.Size(283, 105);
+            this.pnlTaskPanding.Size = new System.Drawing.Size(237, 84);
             this.pnlTaskPanding.TabIndex = 2;
             // 
             // lblTaskPandingCount
             // 
             this.lblTaskPandingCount.AutoSize = true;
-            this.lblTaskPandingCount.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaskPandingCount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaskPandingCount.ForeColor = System.Drawing.Color.White;
-            this.lblTaskPandingCount.Location = new System.Drawing.Point(71, 47);
+            this.lblTaskPandingCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskPandingCount.Name = "lblTaskPandingCount";
-            this.lblTaskPandingCount.Size = new System.Drawing.Size(47, 41);
+            this.lblTaskPandingCount.Size = new System.Drawing.Size(43, 32);
             this.lblTaskPandingCount.TabIndex = 2;
             this.lblTaskPandingCount.Text = "15";
             // 
             // lblTaskPanding
             // 
             this.lblTaskPanding.AutoSize = true;
-            this.lblTaskPanding.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaskPanding.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaskPanding.ForeColor = System.Drawing.Color.White;
-            this.lblTaskPanding.Location = new System.Drawing.Point(69, 15);
+            this.lblTaskPanding.Location = new System.Drawing.Point(71, 16);
             this.lblTaskPanding.Name = "lblTaskPanding";
-            this.lblTaskPanding.Size = new System.Drawing.Size(87, 28);
+            this.lblTaskPanding.Size = new System.Drawing.Size(75, 23);
             this.lblTaskPanding.TabIndex = 1;
             this.lblTaskPanding.Text = "Pending";
             // 
             // picPandingIcone
             // 
             this.picPandingIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.hourglass;
-            this.picPandingIcone.Location = new System.Drawing.Point(21, 19);
+            this.picPandingIcone.Location = new System.Drawing.Point(18, 20);
             this.picPandingIcone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picPandingIcone.Name = "picPandingIcone";
-            this.picPandingIcone.Size = new System.Drawing.Size(40, 39);
+            this.picPandingIcone.Size = new System.Drawing.Size(40, 40);
             this.picPandingIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picPandingIcone.TabIndex = 0;
             this.picPandingIcone.TabStop = false;
             // 
             // pnlDueToday
             // 
-            this.pnlDueToday.BackColor = System.Drawing.Color.Plum;
+            this.pnlDueToday.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.pnlDueToday.Controls.Add(this.lblLentAmount);
             this.pnlDueToday.Controls.Add(this.lblDue);
             this.pnlDueToday.Controls.Add(this.picTaskDueIcone);
             this.pnlDueToday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDueToday.ForeColor = System.Drawing.Color.White;
-            this.pnlDueToday.Location = new System.Drawing.Point(912, 10);
-            this.pnlDueToday.Margin = new System.Windows.Forms.Padding(15, 10, 13, 5);
+            this.pnlDueToday.Location = new System.Drawing.Point(794, 13);
+            this.pnlDueToday.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlDueToday.Name = "pnlDueToday";
-            this.pnlDueToday.Size = new System.Drawing.Size(273, 105);
+            this.pnlDueToday.Size = new System.Drawing.Size(240, 84);
             this.pnlDueToday.TabIndex = 3;
             // 
             // lblLentAmount
             // 
             this.lblLentAmount.AutoSize = true;
-            this.lblLentAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLentAmount.Location = new System.Drawing.Point(71, 47);
+            this.lblLentAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLentAmount.ForeColor = System.Drawing.Color.White;
+            this.lblLentAmount.Location = new System.Drawing.Point(71, 38);
             this.lblLentAmount.Name = "lblLentAmount";
-            this.lblLentAmount.Size = new System.Drawing.Size(47, 41);
+            this.lblLentAmount.Size = new System.Drawing.Size(43, 32);
             this.lblLentAmount.TabIndex = 2;
             this.lblLentAmount.Text = "10";
             // 
             // lblDue
             // 
             this.lblDue.AutoSize = true;
-            this.lblDue.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDue.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDue.ForeColor = System.Drawing.Color.White;
-            this.lblDue.Location = new System.Drawing.Point(69, 15);
+            this.lblDue.Location = new System.Drawing.Point(71, 16);
             this.lblDue.Name = "lblDue";
-            this.lblDue.Size = new System.Drawing.Size(108, 28);
+            this.lblDue.Size = new System.Drawing.Size(89, 23);
             this.lblDue.TabIndex = 1;
-            this.lblDue.Text = "Due Today";
+            this.lblDue.Text = "DueToday";
             // 
             // picTaskDueIcone
             // 
             this.picTaskDueIcone.Image = global::PersonalExpenseCreditTracker.Properties.Resources.due_diligence;
-            this.picTaskDueIcone.Location = new System.Drawing.Point(21, 19);
+            this.picTaskDueIcone.Location = new System.Drawing.Point(18, 20);
             this.picTaskDueIcone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picTaskDueIcone.Name = "picTaskDueIcone";
-            this.picTaskDueIcone.Size = new System.Drawing.Size(40, 39);
+            this.picTaskDueIcone.Size = new System.Drawing.Size(40, 40);
             this.picTaskDueIcone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picTaskDueIcone.TabIndex = 0;
             this.picTaskDueIcone.TabStop = false;
@@ -722,10 +687,13 @@
             // 
             // TaskControls
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1198, 581);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.ClientSize = new System.Drawing.Size(1048, 677);
             this.Controls.Add(this.pnlTaskContent);
+            this.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "TaskControls";
             this.Text = "TaskControls";
             this.Load += new System.EventHandler(this.TaskControls_Load);

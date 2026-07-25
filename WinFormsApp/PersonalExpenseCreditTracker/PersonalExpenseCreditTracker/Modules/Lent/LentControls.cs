@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
+using PersonalExpenseCreditTracker.Common;
 using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Lent
@@ -135,50 +136,69 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             ApplyRoundCorners();
             dgvLentDataTable.CellPainting += dgvLentDataTable_CellPainting;
             pageSize = GetRowsPerPage();
-            int userID = 11;
+            int userID = Session.LogedInUser.GetUserId();
             LoadLentData(userID);
            
         }
 
 
-        private void LoadLentData(int userID)
+        public  void LoadLentData(int userID)
         {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spGetAllLent", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserID", userID);
+            //try
+            //{
+            //    using (SqlConnection con = new SqlConnection(ConnectionString))
+            //    {
+            //        using (SqlCommand cmd = new SqlCommand("spGetAllLent", con))
+            //        {
+            //            cmd.CommandType = CommandType.StoredProcedure;
+            //            cmd.Parameters.AddWithValue("@UserID", userID);
 
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
+            //            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //            DataTable dt = new DataTable();
 
-                        da.Fill(dt);
+            //            da.Fill(dt);
 
 
-                        if (dt.Columns.Contains("Message"))
-                        {
-                            MessageBox.Show(dt.Rows[0]["Message"].ToString(),
-                                            "Information",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Information);
+            //            if (dt.Columns.Contains("Message"))
+            //            {
+            //                MessageBox.Show(dt.Rows[0]["Message"].ToString(),
+            //                                "Information",
+            //                                MessageBoxButtons.OK,
+            //                                MessageBoxIcon.Information);
 
-                            dgvLentDataTable.DataSource = null;
-                            return;
-                        }
+            //                dgvLentDataTable.DataSource = null;
+            //                return;
+            //            }
 
-                        AllLentData = dt;
-                        currentPage = 1;
-                        ShowCurrentPage();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //            AllLentData = dt;
+            //            currentPage = 1;
+            //            ShowCurrentPage();
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+
+            DataTable dataTable = LentUi.retriveDataForGridViewAtUi("spGetAllLent", userID);
+            if (dataTable.Columns.Contains("Message"))
+             {
+                 MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                 "Information",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+
+                 dgvLentDataTable.DataSource = null;
+                 return;
+             }
+            //if (dgvLentDataTable.DataSource != null)
+            //{
+            //    dgvLentDataTable.DataSource = null;
+            //}
+            AllLentData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
         }
 
 
@@ -287,8 +307,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             dgvLentDataTable.DataSource = pageTable;
 
-            
-
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllLentData.Rows.Count;
@@ -305,6 +323,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             int rowHeight = dgvLentDataTable.RowTemplate.Height;
 
             return Math.Max(1, display.Height / rowHeight) - 1;
+
+           
         }
 
 

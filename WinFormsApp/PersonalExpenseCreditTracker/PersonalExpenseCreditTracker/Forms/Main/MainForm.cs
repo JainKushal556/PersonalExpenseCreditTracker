@@ -2219,7 +2219,12 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveLentSubMenu(pnlAllLent);
 
-            ShowPage(pnlLentPage);   // চাইলে রাখতে পারো
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+            }
+
+            ShowPage(pnlLentPage);   
         }
         private void pnlAddLent_MouseEnter(object sender, EventArgs e)
         {
@@ -3172,7 +3177,7 @@ namespace PersonalExpenseCreditTracker
                 expenseCategoryControls.TopLevel = false;
                 expenseCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 expenseCategoryControls.Dock = DockStyle.Fill;
-                pnlTop.Visible = false;
+                pnlTop.Visible = true;
                 pnlExpenseCategory.Controls.Clear();
 
                 pnlExpenseCategory.Controls.Add(expenseCategoryControls);
@@ -3222,7 +3227,7 @@ namespace PersonalExpenseCreditTracker
                 creditCategoryControls.TopLevel = false;
                 creditCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 creditCategoryControls.Dock = DockStyle.Fill;
-                pnlTop.Visible = false;
+                pnlTop.Visible = true;
                 pnlCreditCategoryPage.Controls.Clear();
 
                 pnlCreditCategoryPage.Controls.Add(creditCategoryControls);
@@ -3358,6 +3363,15 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
+        private void panelLogo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlProfilePage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
 
       

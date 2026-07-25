@@ -675,6 +675,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlDashboard
             // 
+            this.pnlDashboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlDashboard.Controls.Add(this.panel4);
             this.pnlDashboard.Controls.Add(this.lblDashboard);
             this.pnlDashboard.Controls.Add(this.picDashboard);
@@ -5215,6 +5216,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // panelLogo
             // 
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.panelLogo.Controls.Add(this.panel1);
             this.panelLogo.Controls.Add(this.lblManager);
             this.panelLogo.Controls.Add(this.lblPersonalExpense);
@@ -5225,6 +5227,7 @@ namespace PersonalExpenseCreditTracker
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(300, 98);
             this.panelLogo.TabIndex = 0;
+            this.panelLogo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLogo_Paint);
             // 
             // panel1
             // 
@@ -5307,7 +5310,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlPersonAddPage.Location = new System.Drawing.Point(0, 63);
             this.pnlPersonAddPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPersonAddPage.Name = "pnlPersonAddPage";
-            this.pnlPersonAddPage.Size = new System.Drawing.Size(657, 794);
+            this.pnlPersonAddPage.Size = new System.Drawing.Size(876, 977);
             this.pnlPersonAddPage.TabIndex = 0;
             // 
             // pnlCreditCategoryPage
@@ -5561,6 +5564,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlProfilePage.Name = "pnlProfilePage";
             this.pnlProfilePage.Size = new System.Drawing.Size(657, 857);
             this.pnlProfilePage.TabIndex = 0;
+            this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
             // 
             // tmSidebar
             // 
@@ -5571,7 +5575,8 @@ namespace PersonalExpenseCreditTracker
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(957, 857);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.ClientSize = new System.Drawing.Size(1276, 1055);
             this.Controls.Add(this.pnlProfilePage);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.pnlMainSideBarSection);

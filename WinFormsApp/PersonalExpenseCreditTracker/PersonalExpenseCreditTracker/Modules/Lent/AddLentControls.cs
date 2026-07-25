@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using BLLayer.Common;
 using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Session;
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public partial class AddLentControls : Form
@@ -119,7 +120,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             LentUi lentUi = new LentUi();
 
             // Assign values from the form controls to the object
-            lentUi.userId = 11;
+            lentUi.userId = Session.LogedInUser.GetUserId();
             lentUi.lentId = -1;
             lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
             lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
@@ -141,6 +142,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 // Data is valid and inserted successfully
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Lent added successfully!");
+                    this.Close();
+
                     break;
                 case CommonValidator.ValidationResult.PersonInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentSelectPerson);

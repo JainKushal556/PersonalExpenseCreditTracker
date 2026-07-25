@@ -90,18 +90,32 @@ namespace BLLayer.Lent
         }
 
         // Retrieves ComboBox data from the DAL using a stored procedure with UserId
-        public static DataTable retriveListForComboBoxAtBal(string spName, int userId)
+        public static DataTable retriveListForComboBoxAtBll(string spName, int userId)
         {
             DataTable dataTable = null;
-            dataTable= SqlHelper.retriveListForComboBoxAtDal(spName,userId);
+            dataTable = SqlHelper.retrieveDataTableBySpNameAndUserId(spName, userId);
             return dataTable;
         }
 
         // Retrieves ComboBox data from the DAL using a stored procedure without UserId
-        public static DataTable retriveListForComboBoxAtBal(string spName)
+        public static DataTable retriveListForComboBoxAtBll(string spName)
         {
             DataTable dataTable = null;
-            dataTable = SqlHelper.retriveListForComboBoxAtDal(spName);
+            dataTable = SqlHelper.retriveDataTableBySpName(spName);
+            return dataTable;
+        }
+        // Retrieves GirdView data from the DAL using a stored procedure without UserId
+        public static DataTable retriveDataForGridViewAtBll(string spName)
+        {
+            DataTable dataTable = null;
+            dataTable = SqlHelper.retriveDataTableBySpName(spName);
+            return dataTable;
+        }
+        // Retrieves GirdView data from the DAL using a stored procedure with UserId
+        public static DataTable retriveDataForGridViewAtBll(string spName,int userId)
+        {
+            DataTable dataTable = null;
+            dataTable = SqlHelper.retrieveDataTableBySpNameAndUserId(spName, userId);
             return dataTable;
         }
 
