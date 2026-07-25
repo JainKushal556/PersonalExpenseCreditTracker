@@ -384,6 +384,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -403,7 +404,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Modules\Task\" />
     <Folder Include="Session\" />
   </ItemGroup>
   <!-- Expense Resources -->
@@ -579,9 +579,8 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
-
+    <None Include="Resources\priority.png" />
     <None Include="Resources\PersonIcon.png" />
-
     <None Include="Resources\successful.png" />
     <None Include="Resources\trash.png" />
     <None Include="Resources\refresh1.png" />
@@ -592,7 +591,6 @@
     <None Include="Resources\refresh %282%29.png" />
     <None Include="Resources\sync.png" />
     <None Include="Resources\user %287%29.png" />
-
     <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />
     <None Include="Resources\filter %282%29.png" />
@@ -633,10 +631,8 @@
     <None Include="Resources\telephone1.png" />
     <None Include="Resources\Gender.png" />
     <Content Include="Libraries\Cyotek.Windows.Forms.ImageBox.dll" />
-
     <None Include="Resources\deadline.png" />
     <None Include="Resources\loading.png" />
-
     <None Include="Resources\clipboardModern.png" />
     <None Include="Resources\approved.png" />
     <None Include="Resources\hourglass.png" />
@@ -649,7 +645,7 @@
     <None Include="Resources\add-contact.png" />
     <None Include="Resources\loupe.png" />
     <None Include="Resources\loupe %281%29.png" />
-
+    <None Include="Resources\Action.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>

@@ -28,11 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlCreditContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.dgvCreditDataTable = new System.Windows.Forms.DataGridView();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.pnlCreditFooter = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -54,19 +63,13 @@
             this.picCredit = new System.Windows.Forms.PictureBox();
             this.lblTotalCredit = new System.Windows.Forms.Label();
             this.pnlTransactionCard = new System.Windows.Forms.Panel();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.lblTransactionAmount = new System.Windows.Forms.Label();
             this.lblTransction = new System.Windows.Forms.Label();
             this.picTransaction = new System.Windows.Forms.PictureBox();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlCreditContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditDataTable)).BeginInit();
             this.pnlFooter.SuspendLayout();
             this.pnlCreditFooter.SuspendLayout();
@@ -86,45 +89,81 @@
             this.pnlCreditContent.Controls.Add(this.tblCreditSummary);
             this.pnlCreditContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCreditContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlCreditContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCreditContent.Name = "pnlCreditContent";
-            this.pnlCreditContent.Padding = new System.Windows.Forms.Padding(15);
             this.pnlCreditContent.Size = new System.Drawing.Size(1250, 753);
             this.pnlCreditContent.TabIndex = 0;
             // 
             // tblTable
             // 
-            this.tblTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tblTable.ColumnCount = 1;
             this.tblTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblTable.Controls.Add(this.pnlTableHeader, 0, 0);
             this.tblTable.Controls.Add(this.dgvCreditDataTable, 0, 1);
             this.tblTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblTable.Location = new System.Drawing.Point(15, 125);
+            this.tblTable.Location = new System.Drawing.Point(0, 110);
             this.tblTable.Name = "tblTable";
+            this.tblTable.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.tblTable.RowCount = 2;
             this.tblTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tblTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblTable.Size = new System.Drawing.Size(1220, 562);
+            this.tblTable.Size = new System.Drawing.Size(1250, 592);
             this.tblTable.TabIndex = 3;
             // 
             // pnlTableHeader
             // 
-            this.pnlTableHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.pnlTableHeader.Controls.Add(this.btnExport);
+            this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
+            this.pnlTableHeader.Controls.Add(this.panel1);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTableHeader.Location = new System.Drawing.Point(4, 4);
+            this.pnlTableHeader.Location = new System.Drawing.Point(11, 8);
             this.pnlTableHeader.Name = "pnlTableHeader";
-            this.pnlTableHeader.Size = new System.Drawing.Size(1212, 44);
+            this.pnlTableHeader.Size = new System.Drawing.Size(1228, 44);
             this.pnlTableHeader.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnRefresh);
+            this.panel1.Controls.Add(this.btnExport);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(989, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(239, 44);
+            this.panel1.TabIndex = 0;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(98)))), ((int)(((byte)(180)))));
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(0, 0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(109, 44);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = false;
             // 
             // btnExport
             // 
-            this.btnExport.BackColor = System.Drawing.Color.White;
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(98)))), ((int)(((byte)(180)))));
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(217)))));
+            this.btnExport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
-            this.btnExport.Location = new System.Drawing.Point(1103, 0);
+            this.btnExport.Location = new System.Drawing.Point(130, 0);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(109, 44);
             this.btnExport.TabIndex = 0;
@@ -150,24 +189,75 @@
             this.dgvCreditDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditDataTable.EnableHeadersVisualStyles = false;
             this.dgvCreditDataTable.GridColor = System.Drawing.Color.Gainsboro;
-            this.dgvCreditDataTable.Location = new System.Drawing.Point(4, 55);
+            this.dgvCreditDataTable.Location = new System.Drawing.Point(11, 58);
             this.dgvCreditDataTable.Name = "dgvCreditDataTable";
             this.dgvCreditDataTable.ReadOnly = true;
             this.dgvCreditDataTable.RowHeadersVisible = false;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dgvCreditDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCreditDataTable.RowTemplate.Height = 24;
             this.dgvCreditDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCreditDataTable.Size = new System.Drawing.Size(1212, 503);
+            this.dgvCreditDataTable.Size = new System.Drawing.Size(1228, 526);
             this.dgvCreditDataTable.TabIndex = 1;
             this.dgvCreditDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCreditDataTable_CellContentClick);
+            // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.FillWeight = 10F;
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.FillWeight = 15F;
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCategory.FillWeight = 15F;
+            this.colCategory.HeaderText = "Category";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            // 
+            // colSubCategory
+            // 
+            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSubCategory.FillWeight = 15F;
+            this.colSubCategory.HeaderText = "SubCategory";
+            this.colSubCategory.Name = "colSubCategory";
+            this.colSubCategory.ReadOnly = true;
+            // 
+            // colAmount
+            // 
+            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.FillWeight = 10F;
+            this.colAmount.HeaderText = "Amount";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            // 
+            // colPaymentMethod
+            // 
+            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.FillWeight = 15F;
+            this.colPaymentMethod.HeaderText = "Payment Method";
+            this.colPaymentMethod.Name = "colPaymentMethod";
+            this.colPaymentMethod.ReadOnly = true;
             // 
             // pnlFooter
             // 
             this.pnlFooter.Controls.Add(this.pnlCreditFooter);
             this.pnlFooter.Controls.Add(this.pnlControl);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(15, 687);
+            this.pnlFooter.Location = new System.Drawing.Point(0, 702);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(1220, 51);
+            this.pnlFooter.Size = new System.Drawing.Size(1250, 51);
             this.pnlFooter.TabIndex = 2;
             // 
             // pnlCreditFooter
@@ -263,7 +353,7 @@
             this.pnlControl.Controls.Add(this.btnPreviousPage);
             this.pnlControl.Controls.Add(this.btnFirstpage);
             this.pnlControl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlControl.Location = new System.Drawing.Point(970, 0);
+            this.pnlControl.Location = new System.Drawing.Point(1000, 0);
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(250, 51);
             this.pnlControl.TabIndex = 0;
@@ -322,40 +412,42 @@
             // tblCreditSummary
             // 
             this.tblCreditSummary.BackColor = System.Drawing.Color.Transparent;
-            this.tblCreditSummary.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tblCreditSummary.ColumnCount = 2;
             this.tblCreditSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblCreditSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblCreditSummary.Controls.Add(this.pnlTotalCredit, 0, 0);
             this.tblCreditSummary.Controls.Add(this.pnlTransactionCard, 1, 0);
             this.tblCreditSummary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tblCreditSummary.Location = new System.Drawing.Point(15, 15);
+            this.tblCreditSummary.Location = new System.Drawing.Point(0, 0);
+            this.tblCreditSummary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tblCreditSummary.Name = "tblCreditSummary";
             this.tblCreditSummary.RowCount = 1;
             this.tblCreditSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblCreditSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblCreditSummary.Size = new System.Drawing.Size(1220, 110);
+            this.tblCreditSummary.Size = new System.Drawing.Size(1250, 110);
             this.tblCreditSummary.TabIndex = 0;
             // 
             // pnlTotalCredit
             // 
-            this.pnlTotalCredit.BackColor = System.Drawing.Color.White;
+            this.pnlTotalCredit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(90)))), ((int)(((byte)(60)))));
             this.pnlTotalCredit.Controls.Add(this.lblCreditAmount);
             this.pnlTotalCredit.Controls.Add(this.picCredit);
             this.pnlTotalCredit.Controls.Add(this.lblTotalCredit);
             this.pnlTotalCredit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalCredit.Location = new System.Drawing.Point(16, 16);
-            this.pnlTotalCredit.Margin = new System.Windows.Forms.Padding(15);
+            this.pnlTotalCredit.Location = new System.Drawing.Point(11, 10);
+            this.pnlTotalCredit.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTotalCredit.Name = "pnlTotalCredit";
             this.pnlTotalCredit.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlTotalCredit.Size = new System.Drawing.Size(578, 78);
+            this.pnlTotalCredit.Size = new System.Drawing.Size(603, 90);
             this.pnlTotalCredit.TabIndex = 0;
+            this.pnlTotalCredit.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTotalCredit_Paint);
             // 
             // lblCreditAmount
             // 
             this.lblCreditAmount.AutoSize = true;
             this.lblCreditAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreditAmount.Location = new System.Drawing.Point(85, 37);
+            this.lblCreditAmount.ForeColor = System.Drawing.Color.White;
+            this.lblCreditAmount.Location = new System.Drawing.Point(85, 42);
             this.lblCreditAmount.Name = "lblCreditAmount";
             this.lblCreditAmount.Size = new System.Drawing.Size(99, 32);
             this.lblCreditAmount.TabIndex = 2;
@@ -364,9 +456,9 @@
             // picCredit
             // 
             this.picCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.spending;
-            this.picCredit.Location = new System.Drawing.Point(20, 16);
+            this.picCredit.Location = new System.Drawing.Point(20, 22);
             this.picCredit.Name = "picCredit";
-            this.picCredit.Size = new System.Drawing.Size(48, 48);
+            this.picCredit.Size = new System.Drawing.Size(45, 45);
             this.picCredit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCredit.TabIndex = 0;
             this.picCredit.TabStop = false;
@@ -374,51 +466,35 @@
             // lblTotalCredit
             // 
             this.lblTotalCredit.AutoSize = true;
-            this.lblTotalCredit.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalCredit.ForeColor = System.Drawing.Color.Black;
-            this.lblTotalCredit.Location = new System.Drawing.Point(85, 11);
+            this.lblTotalCredit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalCredit.ForeColor = System.Drawing.Color.White;
+            this.lblTotalCredit.Location = new System.Drawing.Point(85, 12);
             this.lblTotalCredit.Name = "lblTotalCredit";
-            this.lblTotalCredit.Size = new System.Drawing.Size(108, 25);
+            this.lblTotalCredit.Size = new System.Drawing.Size(104, 23);
             this.lblTotalCredit.TabIndex = 1;
             this.lblTotalCredit.Text = "Total Credit";
             // 
             // pnlTransactionCard
             // 
-            this.pnlTransactionCard.BackColor = System.Drawing.Color.White;
-            this.pnlTransactionCard.Controls.Add(this.btnRefresh);
+            this.pnlTransactionCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(78)))), ((int)(((byte)(156)))));
             this.pnlTransactionCard.Controls.Add(this.lblTransactionAmount);
             this.pnlTransactionCard.Controls.Add(this.lblTransction);
             this.pnlTransactionCard.Controls.Add(this.picTransaction);
             this.pnlTransactionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTransactionCard.Location = new System.Drawing.Point(625, 16);
-            this.pnlTransactionCard.Margin = new System.Windows.Forms.Padding(15);
+            this.pnlTransactionCard.Location = new System.Drawing.Point(636, 10);
+            this.pnlTransactionCard.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTransactionCard.Name = "pnlTransactionCard";
             this.pnlTransactionCard.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlTransactionCard.Size = new System.Drawing.Size(579, 78);
+            this.pnlTransactionCard.Size = new System.Drawing.Size(603, 90);
             this.pnlTransactionCard.TabIndex = 1;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.AutoSize = true;
-            this.btnRefresh.BackColor = System.Drawing.Color.Beige;
-            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(484, 6);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(94, 35);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.pnlTransactionCard.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTransactionCard_Paint);
             // 
             // lblTransactionAmount
             // 
             this.lblTransactionAmount.AutoSize = true;
             this.lblTransactionAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionAmount.Location = new System.Drawing.Point(85, 37);
+            this.lblTransactionAmount.ForeColor = System.Drawing.Color.White;
+            this.lblTransactionAmount.Location = new System.Drawing.Point(85, 42);
             this.lblTransactionAmount.Name = "lblTransactionAmount";
             this.lblTransactionAmount.Size = new System.Drawing.Size(57, 32);
             this.lblTransactionAmount.TabIndex = 2;
@@ -427,70 +503,23 @@
             // lblTransction
             // 
             this.lblTransction.AutoSize = true;
-            this.lblTransction.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransction.Location = new System.Drawing.Point(85, 11);
+            this.lblTransction.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransction.ForeColor = System.Drawing.Color.White;
+            this.lblTransction.Location = new System.Drawing.Point(85, 12);
             this.lblTransction.Name = "lblTransction";
-            this.lblTransction.Size = new System.Drawing.Size(161, 25);
+            this.lblTransction.Size = new System.Drawing.Size(152, 23);
             this.lblTransction.TabIndex = 1;
             this.lblTransction.Text = "Total Transactions";
             // 
             // picTransaction
             // 
             this.picTransaction.Image = global::PersonalExpenseCreditTracker.Properties.Resources.transaction;
-            this.picTransaction.Location = new System.Drawing.Point(20, 16);
+            this.picTransaction.Location = new System.Drawing.Point(20, 22);
             this.picTransaction.Name = "picTransaction";
-            this.picTransaction.Size = new System.Drawing.Size(48, 48);
+            this.picTransaction.Size = new System.Drawing.Size(45, 45);
             this.picTransaction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picTransaction.TabIndex = 0;
             this.picTransaction.TabStop = false;
-            // 
-            // colDate
-            // 
-            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDate.FillWeight = 10F;
-            this.colDate.HeaderText = "Date";
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.FillWeight = 15F;
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCategory.FillWeight = 15F;
-            this.colCategory.HeaderText = "Category";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colSubCategory
-            // 
-            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSubCategory.FillWeight = 15F;
-            this.colSubCategory.HeaderText = "SubCategory";
-            this.colSubCategory.Name = "colSubCategory";
-            this.colSubCategory.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAmount.FillWeight = 10F;
-            this.colAmount.HeaderText = "Amount";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            // 
-            // colPaymentMethod
-            // 
-            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPaymentMethod.FillWeight = 15F;
-            this.colPaymentMethod.HeaderText = "Payment Method";
-            this.colPaymentMethod.Name = "colPaymentMethod";
-            this.colPaymentMethod.ReadOnly = true;
             // 
             // CreditControl
             // 
@@ -504,6 +533,8 @@
             this.pnlCreditContent.ResumeLayout(false);
             this.tblTable.ResumeLayout(false);
             this.pnlTableHeader.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditDataTable)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlCreditFooter.ResumeLayout(false);
@@ -558,6 +589,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSubCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMethod;
+        private System.Windows.Forms.Panel panel1;
 
     }
 }

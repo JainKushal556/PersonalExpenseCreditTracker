@@ -74,5 +74,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             this.Close();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Saved Expense Category");
+        }
     }
 }
