@@ -15,35 +15,66 @@ namespace DALayer.Common
         // function that retrive any single list  (one column) of data for combo boxes .
         // spName - StroeProcedure Name
         // colName - Column Name
-        public static List<string> retriveListForComboBoxAtDal(string spName, string colName , int userId)
+        public static DataTable retriveListForComboBoxAtDal(string spName, int userId)
         {
             SqlConnection sqlConnection = null;
-            List<string> dataList = null;
+            DataTable dataTable = null;
             try
             {
-                using (sqlConnection = new SqlConnection(connectionString))
-                {
-                    // dataList stores the list of strings retrived from DB
-                    dataList = new List<string>();
-                    SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@UserID", userId);
-                    // Opening Connection
-                    sqlConnection.Open();
-                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                    // reads the column data one by one append into dataList
-                    while (sqlDataReader.Read())
+                sqlConnection = new SqlConnection(connectionString);
+                
+                    // datatable stores retrived data from DB
+                    dataTable = new DataTable();
+                    
+                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
                     {
-                        dataList.Add(sqlDataReader[colName].ToString());
+                        sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
+                        sqlDataAdapter.Fill(dataTable);
+                        return dataTable;
                     }
-                    // return dataLIst after getting all strings or column data from DB
-                    return dataList;
-                }
             }
-            catch (Exception EX)
+            catch (Exception ex)
             {
                 // return null assigned dataList if any error occur 
-                return dataList;
+                return dataTable;
+                throw;
+                
+            }
+            finally
+            {
+                // close the connection string if error occur's or not 
+                if (sqlConnection != null)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+        // function that retrive any single list  (one column) of data for combo boxes .
+        // spName - StroeProcedure Name
+        // colName - Column Name
+        public static DataTable retriveListForComboBoxAtDal(string spName)
+        {
+            SqlConnection sqlConnection = null;
+            DataTable dataTable = null;
+            try
+            {
+                    sqlConnection = new SqlConnection(connectionString);
+                    // datatable stores retrived data from DB
+                    dataTable = new DataTable();
+
+                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
+                    {
+                        sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        sqlDataAdapter.Fill(dataTable);
+                        return dataTable;
+                    }
+            }
+            catch (Exception ex)
+            {
+                // return null assigned dataList if any error occur 
+                return dataTable;
+                throw;
             }
             finally
             {
