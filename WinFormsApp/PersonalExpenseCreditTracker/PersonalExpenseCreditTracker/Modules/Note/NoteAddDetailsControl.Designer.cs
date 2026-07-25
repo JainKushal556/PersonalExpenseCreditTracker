@@ -100,7 +100,7 @@
             this.pnlAddNoteDetails.Padding = new System.Windows.Forms.Padding(10);
             this.pnlAddNoteDetails.Size = new System.Drawing.Size(500, 560);
             this.pnlAddNoteDetails.TabIndex = 0;
-            this.pnlAddNoteDetails.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+           
             // 
             // pnlButtons
             // 
@@ -552,7 +552,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "NoteAddDetailsControl";
-            this.Load += new System.EventHandler(this.NoteAddDetailsControl_Load);
+           
             this.pnlAddNoteDetails.ResumeLayout(false);
             this.pnlAddNoteDetails.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
