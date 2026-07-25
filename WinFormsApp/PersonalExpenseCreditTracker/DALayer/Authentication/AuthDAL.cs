@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DALayer.Authentication
 {
-    class AuthDAL
+    public class AuthDAL
     {
     }
 }

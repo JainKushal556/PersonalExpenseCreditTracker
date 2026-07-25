@@ -156,14 +156,73 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
         }
 
+        private void lblExpenseAmount_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void pnlExpenseCard_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlExpenseCard.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
 
-      
+        private void pnlCreditCard_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlCreditCard.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
 
+        private void pnlCardBorrowCard_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlCardBorrowCard.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
 
- 
-        
-        
+        private void pnlCardLentCard_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlCardLentCard.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlCardExpense_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlCardExpense.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlCardIncome_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlCardIncome.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlThird_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlThird.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
     }
 }

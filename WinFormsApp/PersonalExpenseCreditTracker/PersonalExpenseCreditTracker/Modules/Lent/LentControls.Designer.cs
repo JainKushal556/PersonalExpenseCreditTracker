@@ -29,17 +29,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTotalTransaction = new System.Windows.Forms.Panel();
             this.labelTotalTransactionNumber = new System.Windows.Forms.Label();
@@ -47,20 +41,14 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.pictureBoxTotalTransaction = new System.Windows.Forms.PictureBox();
             this.panelTotalDue = new System.Windows.Forms.Panel();
             this.lblTotalDue = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.lblTotalDueAmount = new System.Windows.Forms.Label();
             this.pictureBoxTotalDue = new System.Windows.Forms.PictureBox();
             this.panelTotalRepaid = new System.Windows.Forms.Panel();
             this.lblTotalRepaid = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblTotalRepaidAmount = new System.Windows.Forms.Label();
             this.pictureBoxTotalRepaid = new System.Windows.Forms.PictureBox();
             this.panelTotalLent = new System.Windows.Forms.Panel();
             this.lblTotalLent = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblRupeeSymbol = new System.Windows.Forms.Label();
             this.lblTotalLentAmount = new System.Windows.Forms.Label();
             this.pictureBoxTotalLent = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanelMainData = new System.Windows.Forms.TableLayoutPanel();
@@ -81,7 +69,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelExportReport = new System.Windows.Forms.Panel();
             this.btnExportReport = new System.Windows.Forms.Button();
             this.dgvLentDataTable = new System.Windows.Forms.DataGridView();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPersonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,17 +78,15 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.colRemainingAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelTotalTransaction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalTransaction)).BeginInit();
             this.panelTotalDue.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalDue)).BeginInit();
             this.panelTotalRepaid.SuspendLayout();
-            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalRepaid)).BeginInit();
             this.panelTotalLent.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalLent)).BeginInit();
             this.tableLayoutPanelMainData.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -122,12 +107,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.tableLayoutPanel1.Controls.Add(this.panelTotalRepaid, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panelTotalLent, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1133, 127);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1153, 120);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panelTotalTransaction
@@ -135,35 +121,39 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTotalTransaction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(252)))), ((int)(((byte)(232)))));
+            this.panelTotalTransaction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(72)))), ((int)(((byte)(18)))));
             this.panelTotalTransaction.Controls.Add(this.labelTotalTransactionNumber);
             this.panelTotalTransaction.Controls.Add(this.lblTotalTransaction);
             this.panelTotalTransaction.Controls.Add(this.pictureBoxTotalTransaction);
-            this.panelTotalTransaction.Location = new System.Drawing.Point(854, 0);
-            this.panelTotalTransaction.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.panelTotalTransaction.Location = new System.Drawing.Point(872, 13);
+            this.panelTotalTransaction.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.panelTotalTransaction.Name = "panelTotalTransaction";
-            this.panelTotalTransaction.Size = new System.Drawing.Size(279, 127);
+            this.panelTotalTransaction.Size = new System.Drawing.Size(267, 94);
             this.panelTotalTransaction.TabIndex = 3;
             // 
             // labelTotalTransactionNumber
             // 
             this.labelTotalTransactionNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelTotalTransactionNumber.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalTransactionNumber.Location = new System.Drawing.Point(100, 56);
+            this.labelTotalTransactionNumber.AutoSize = true;
+            this.labelTotalTransactionNumber.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalTransactionNumber.ForeColor = System.Drawing.Color.White;
+            this.labelTotalTransactionNumber.Location = new System.Drawing.Point(93, 44);
             this.labelTotalTransactionNumber.Margin = new System.Windows.Forms.Padding(0);
             this.labelTotalTransactionNumber.Name = "labelTotalTransactionNumber";
-            this.labelTotalTransactionNumber.Size = new System.Drawing.Size(208, 45);
+            this.labelTotalTransactionNumber.Size = new System.Drawing.Size(43, 32);
             this.labelTotalTransactionNumber.TabIndex = 4;
             this.labelTotalTransactionNumber.Text = "15";
             this.labelTotalTransactionNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTotalTransaction
             // 
-            this.lblTotalTransaction.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalTransaction.Location = new System.Drawing.Point(105, 26);
+            this.lblTotalTransaction.AutoSize = true;
+            this.lblTotalTransaction.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTransaction.ForeColor = System.Drawing.Color.White;
+            this.lblTotalTransaction.Location = new System.Drawing.Point(93, 12);
             this.lblTotalTransaction.Name = "lblTotalTransaction";
             this.lblTotalTransaction.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTotalTransaction.Size = new System.Drawing.Size(165, 23);
+            this.lblTotalTransaction.Size = new System.Drawing.Size(145, 23);
             this.lblTotalTransaction.TabIndex = 1;
             this.lblTotalTransaction.Text = "Total Transaction";
             this.lblTotalTransaction.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -172,11 +162,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.pictureBoxTotalTransaction.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBoxTotalTransaction.Image = global::PersonalExpenseCreditTracker.Properties.Resources.money_transfer__1_;
-            this.pictureBoxTotalTransaction.Location = new System.Drawing.Point(7, 23);
+            this.pictureBoxTotalTransaction.Location = new System.Drawing.Point(7, 11);
             this.pictureBoxTotalTransaction.MaximumSize = new System.Drawing.Size(93, 80);
             this.pictureBoxTotalTransaction.MinimumSize = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalTransaction.Name = "pictureBoxTotalTransaction";
-            this.pictureBoxTotalTransaction.Size = new System.Drawing.Size(93, 78);
+            this.pictureBoxTotalTransaction.Size = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalTransaction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxTotalTransaction.TabIndex = 0;
             this.pictureBoxTotalTransaction.TabStop = false;
@@ -186,69 +176,52 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTotalDue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panelTotalDue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(44)))), ((int)(((byte)(60)))));
+            this.panelTotalDue.Controls.Add(this.lblTotalDueAmount);
             this.panelTotalDue.Controls.Add(this.lblTotalDue);
-            this.panelTotalDue.Controls.Add(this.panel4);
             this.panelTotalDue.Controls.Add(this.pictureBoxTotalDue);
-            this.panelTotalDue.Location = new System.Drawing.Point(571, 0);
-            this.panelTotalDue.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.panelTotalDue.Location = new System.Drawing.Point(586, 13);
+            this.panelTotalDue.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.panelTotalDue.Name = "panelTotalDue";
-            this.panelTotalDue.Size = new System.Drawing.Size(273, 127);
+            this.panelTotalDue.Size = new System.Drawing.Size(264, 94);
             this.panelTotalDue.TabIndex = 2;
             // 
             // lblTotalDue
             // 
-            this.lblTotalDue.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDue.Location = new System.Drawing.Point(105, 24);
+            this.lblTotalDue.AutoSize = true;
+            this.lblTotalDue.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalDue.ForeColor = System.Drawing.Color.White;
+            this.lblTotalDue.Location = new System.Drawing.Point(93, 12);
             this.lblTotalDue.Name = "lblTotalDue";
             this.lblTotalDue.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTotalDue.Size = new System.Drawing.Size(165, 23);
+            this.lblTotalDue.Size = new System.Drawing.Size(86, 23);
             this.lblTotalDue.TabIndex = 1;
             this.lblTotalDue.Text = "Total Due";
             this.lblTotalDue.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.lblTotalDueAmount);
-            this.panel4.Location = new System.Drawing.Point(99, 52);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(231, 50);
-            this.panel4.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 38);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "₹";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // lblTotalDueAmount
             // 
             this.lblTotalDueAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTotalDueAmount.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDueAmount.Location = new System.Drawing.Point(25, 3);
+            this.lblTotalDueAmount.AutoSize = true;
+            this.lblTotalDueAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalDueAmount.ForeColor = System.Drawing.Color.White;
+            this.lblTotalDueAmount.Location = new System.Drawing.Point(93, 44);
             this.lblTotalDueAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblTotalDueAmount.Name = "lblTotalDueAmount";
-            this.lblTotalDueAmount.Size = new System.Drawing.Size(208, 45);
+            this.lblTotalDueAmount.Size = new System.Drawing.Size(92, 32);
             this.lblTotalDueAmount.TabIndex = 3;
-            this.lblTotalDueAmount.Text = "5,300";
+            this.lblTotalDueAmount.Text = "₹5,300";
             this.lblTotalDueAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pictureBoxTotalDue
             // 
             this.pictureBoxTotalDue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBoxTotalDue.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Total_Due;
-            this.pictureBoxTotalDue.Location = new System.Drawing.Point(7, 23);
+            this.pictureBoxTotalDue.Location = new System.Drawing.Point(7, 11);
             this.pictureBoxTotalDue.MaximumSize = new System.Drawing.Size(93, 80);
             this.pictureBoxTotalDue.MinimumSize = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalDue.Name = "pictureBoxTotalDue";
-            this.pictureBoxTotalDue.Size = new System.Drawing.Size(93, 78);
+            this.pictureBoxTotalDue.Size = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalDue.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxTotalDue.TabIndex = 0;
             this.pictureBoxTotalDue.TabStop = false;
@@ -258,70 +231,53 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTotalRepaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(255)))), ((int)(((byte)(231)))));
+            this.panelTotalRepaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(95)))), ((int)(((byte)(66)))));
+            this.panelTotalRepaid.Controls.Add(this.lblTotalRepaidAmount);
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaid);
-            this.panelTotalRepaid.Controls.Add(this.panel3);
             this.panelTotalRepaid.Controls.Add(this.pictureBoxTotalRepaid);
-            this.panelTotalRepaid.Location = new System.Drawing.Point(288, 0);
-            this.panelTotalRepaid.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.panelTotalRepaid.Location = new System.Drawing.Point(300, 13);
+            this.panelTotalRepaid.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.panelTotalRepaid.Name = "panelTotalRepaid";
             this.panelTotalRepaid.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panelTotalRepaid.Size = new System.Drawing.Size(273, 127);
+            this.panelTotalRepaid.Size = new System.Drawing.Size(264, 94);
             this.panelTotalRepaid.TabIndex = 1;
             // 
             // lblTotalRepaid
             // 
-            this.lblTotalRepaid.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRepaid.Location = new System.Drawing.Point(105, 24);
+            this.lblTotalRepaid.AutoSize = true;
+            this.lblTotalRepaid.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRepaid.ForeColor = System.Drawing.Color.White;
+            this.lblTotalRepaid.Location = new System.Drawing.Point(93, 12);
             this.lblTotalRepaid.Name = "lblTotalRepaid";
             this.lblTotalRepaid.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTotalRepaid.Size = new System.Drawing.Size(165, 23);
+            this.lblTotalRepaid.Size = new System.Drawing.Size(110, 23);
             this.lblTotalRepaid.TabIndex = 1;
             this.lblTotalRepaid.Text = "Total Repaid";
             this.lblTotalRepaid.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.lblTotalRepaidAmount);
-            this.panel3.Location = new System.Drawing.Point(99, 52);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(231, 50);
-            this.panel3.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 38);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "₹";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // lblTotalRepaidAmount
             // 
             this.lblTotalRepaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTotalRepaidAmount.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRepaidAmount.Location = new System.Drawing.Point(25, 3);
+            this.lblTotalRepaidAmount.AutoSize = true;
+            this.lblTotalRepaidAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRepaidAmount.ForeColor = System.Drawing.Color.White;
+            this.lblTotalRepaidAmount.Location = new System.Drawing.Point(93, 44);
             this.lblTotalRepaidAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblTotalRepaidAmount.Name = "lblTotalRepaidAmount";
-            this.lblTotalRepaidAmount.Size = new System.Drawing.Size(208, 45);
+            this.lblTotalRepaidAmount.Size = new System.Drawing.Size(92, 32);
             this.lblTotalRepaidAmount.TabIndex = 3;
-            this.lblTotalRepaidAmount.Text = "7,450";
+            this.lblTotalRepaidAmount.Text = "₹7,450";
             this.lblTotalRepaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pictureBoxTotalRepaid
             // 
             this.pictureBoxTotalRepaid.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBoxTotalRepaid.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gave_Money;
-            this.pictureBoxTotalRepaid.Location = new System.Drawing.Point(7, 26);
+            this.pictureBoxTotalRepaid.Location = new System.Drawing.Point(7, 11);
             this.pictureBoxTotalRepaid.MaximumSize = new System.Drawing.Size(93, 80);
             this.pictureBoxTotalRepaid.MinimumSize = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalRepaid.Name = "pictureBoxTotalRepaid";
-            this.pictureBoxTotalRepaid.Size = new System.Drawing.Size(93, 78);
+            this.pictureBoxTotalRepaid.Size = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalRepaid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxTotalRepaid.TabIndex = 0;
             this.pictureBoxTotalRepaid.TabStop = false;
@@ -331,69 +287,52 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTotalLent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(246)))), ((int)(((byte)(255)))));
+            this.panelTotalLent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(48)))), ((int)(((byte)(88)))));
+            this.panelTotalLent.Controls.Add(this.lblTotalLentAmount);
             this.panelTotalLent.Controls.Add(this.lblTotalLent);
-            this.panelTotalLent.Controls.Add(this.panel1);
             this.panelTotalLent.Controls.Add(this.pictureBoxTotalLent);
-            this.panelTotalLent.Location = new System.Drawing.Point(0, 0);
-            this.panelTotalLent.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.panelTotalLent.Location = new System.Drawing.Point(14, 13);
+            this.panelTotalLent.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.panelTotalLent.Name = "panelTotalLent";
-            this.panelTotalLent.Size = new System.Drawing.Size(278, 127);
+            this.panelTotalLent.Size = new System.Drawing.Size(264, 94);
             this.panelTotalLent.TabIndex = 0;
             // 
             // lblTotalLent
             // 
-            this.lblTotalLent.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalLent.Location = new System.Drawing.Point(105, 24);
+            this.lblTotalLent.AutoSize = true;
+            this.lblTotalLent.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalLent.ForeColor = System.Drawing.Color.White;
+            this.lblTotalLent.Location = new System.Drawing.Point(93, 12);
             this.lblTotalLent.Name = "lblTotalLent";
             this.lblTotalLent.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTotalLent.Size = new System.Drawing.Size(165, 23);
+            this.lblTotalLent.Size = new System.Drawing.Size(89, 23);
             this.lblTotalLent.TabIndex = 1;
             this.lblTotalLent.Text = "Total Lent";
             this.lblTotalLent.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel1.Controls.Add(this.lblRupeeSymbol);
-            this.panel1.Controls.Add(this.lblTotalLentAmount);
-            this.panel1.Location = new System.Drawing.Point(99, 52);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(231, 50);
-            this.panel1.TabIndex = 2;
-            // 
-            // lblRupeeSymbol
-            // 
-            this.lblRupeeSymbol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblRupeeSymbol.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRupeeSymbol.Location = new System.Drawing.Point(3, 6);
-            this.lblRupeeSymbol.Name = "lblRupeeSymbol";
-            this.lblRupeeSymbol.Size = new System.Drawing.Size(31, 38);
-            this.lblRupeeSymbol.TabIndex = 2;
-            this.lblRupeeSymbol.Text = "₹";
-            this.lblRupeeSymbol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // lblTotalLentAmount
             // 
             this.lblTotalLentAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTotalLentAmount.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalLentAmount.Location = new System.Drawing.Point(25, 3);
+            this.lblTotalLentAmount.AutoSize = true;
+            this.lblTotalLentAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalLentAmount.ForeColor = System.Drawing.Color.White;
+            this.lblTotalLentAmount.Location = new System.Drawing.Point(93, 44);
             this.lblTotalLentAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblTotalLentAmount.Name = "lblTotalLentAmount";
-            this.lblTotalLentAmount.Size = new System.Drawing.Size(208, 45);
+            this.lblTotalLentAmount.Size = new System.Drawing.Size(106, 32);
             this.lblTotalLentAmount.TabIndex = 3;
-            this.lblTotalLentAmount.Text = "12,750";
+            this.lblTotalLentAmount.Text = "₹12,750";
             this.lblTotalLentAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pictureBoxTotalLent
             // 
             this.pictureBoxTotalLent.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBoxTotalLent.Image = global::PersonalExpenseCreditTracker.Properties.Resources.man;
-            this.pictureBoxTotalLent.Location = new System.Drawing.Point(7, 23);
+            this.pictureBoxTotalLent.Location = new System.Drawing.Point(7, 11);
             this.pictureBoxTotalLent.MaximumSize = new System.Drawing.Size(93, 80);
             this.pictureBoxTotalLent.MinimumSize = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalLent.Name = "pictureBoxTotalLent";
-            this.pictureBoxTotalLent.Size = new System.Drawing.Size(93, 78);
+            this.pictureBoxTotalLent.Size = new System.Drawing.Size(80, 70);
             this.pictureBoxTotalLent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxTotalLent.TabIndex = 0;
             this.pictureBoxTotalLent.TabStop = false;
@@ -403,19 +342,19 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanelMainData.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanelMainData.ColumnCount = 1;
             this.tableLayoutPanelMainData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMainData.Controls.Add(this.panel2, 0, 2);
             this.tableLayoutPanelMainData.Controls.Add(this.panelExportReport, 0, 0);
             this.tableLayoutPanelMainData.Controls.Add(this.dgvLentDataTable, 0, 1);
-            this.tableLayoutPanelMainData.Location = new System.Drawing.Point(10, 145);
+            this.tableLayoutPanelMainData.Location = new System.Drawing.Point(0, 135);
             this.tableLayoutPanelMainData.Name = "tableLayoutPanelMainData";
+            this.tableLayoutPanelMainData.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.tableLayoutPanelMainData.RowCount = 3;
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanelMainData.Size = new System.Drawing.Size(1133, 552);
+            this.tableLayoutPanelMainData.Size = new System.Drawing.Size(1153, 572);
             this.tableLayoutPanelMainData.TabIndex = 1;
             // 
             // panel2
@@ -428,10 +367,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel2.Controls.Add(this.btnNextPage);
             this.panel2.Controls.Add(this.btnLastPage);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(1, 500);
+            this.panel2.Location = new System.Drawing.Point(8, 516);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1131, 51);
+            this.panel2.Size = new System.Drawing.Size(1137, 51);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -525,7 +464,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.btnCurrentPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCurrentPage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCurrentPage.Location = new System.Drawing.Point(991, 6);
+            this.btnCurrentPage.Location = new System.Drawing.Point(997, 6);
             this.btnCurrentPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnCurrentPage.Name = "btnCurrentPage";
             this.btnCurrentPage.Size = new System.Drawing.Size(40, 40);
@@ -537,7 +476,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.btnFirstPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFirstPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.left;
-            this.btnFirstPage.Location = new System.Drawing.Point(899, 6);
+            this.btnFirstPage.Location = new System.Drawing.Point(905, 6);
             this.btnFirstPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnFirstPage.Name = "btnFirstPage";
             this.btnFirstPage.Size = new System.Drawing.Size(40, 40);
@@ -549,7 +488,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.btnPreviousPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPreviousPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.preview;
-            this.btnPreviousPage.Location = new System.Drawing.Point(944, 6);
+            this.btnPreviousPage.Location = new System.Drawing.Point(950, 6);
             this.btnPreviousPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnPreviousPage.Name = "btnPreviousPage";
             this.btnPreviousPage.Size = new System.Drawing.Size(40, 40);
@@ -561,7 +500,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.btnNextPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNextPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next__1_;
-            this.btnNextPage.Location = new System.Drawing.Point(1038, 6);
+            this.btnNextPage.Location = new System.Drawing.Point(1044, 6);
             this.btnNextPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(40, 40);
@@ -573,7 +512,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.btnLastPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLastPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.right;
-            this.btnLastPage.Location = new System.Drawing.Point(1084, 6);
+            this.btnLastPage.Location = new System.Drawing.Point(1090, 6);
             this.btnLastPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.Size = new System.Drawing.Size(40, 40);
@@ -583,32 +522,35 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelExportReport
             // 
-            this.panelExportReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.panelExportReport.BackColor = System.Drawing.Color.Transparent;
             this.panelExportReport.Controls.Add(this.btnExportReport);
             this.panelExportReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelExportReport.Location = new System.Drawing.Point(1, 1);
+            this.panelExportReport.Location = new System.Drawing.Point(8, 5);
             this.panelExportReport.Margin = new System.Windows.Forms.Padding(0);
             this.panelExportReport.Name = "panelExportReport";
-            this.panelExportReport.Size = new System.Drawing.Size(1131, 50);
+            this.panelExportReport.Size = new System.Drawing.Size(1137, 50);
             this.panelExportReport.TabIndex = 0;
             // 
             // btnExportReport
             // 
-            this.btnExportReport.BackColor = System.Drawing.Color.White;
+            this.btnExportReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.btnExportReport.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExportReport.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnExportReport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
             this.btnExportReport.FlatAppearance.BorderSize = 0;
+            this.btnExportReport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
+            this.btnExportReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(98)))), ((int)(((byte)(180)))));
+            this.btnExportReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExportReport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(217)))));
+            this.btnExportReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.btnExportReport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
             this.btnExportReport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportReport.Location = new System.Drawing.Point(1022, 0);
+            this.btnExportReport.Location = new System.Drawing.Point(1028, 0);
             this.btnExportReport.Name = "btnExportReport";
             this.btnExportReport.Size = new System.Drawing.Size(109, 50);
             this.btnExportReport.TabIndex = 0;
             this.btnExportReport.Text = "Export ";
             this.btnExportReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExportReport.UseVisualStyleBackColor = true;
+            this.btnExportReport.UseVisualStyleBackColor = false;
             // 
             // dgvLentDataTable
             // 
@@ -638,18 +580,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.colRemainingAmount,
             this.colDeadline,
             this.colDescription});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvLentDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLentDataTable.EnableHeadersVisualStyles = false;
             this.dgvLentDataTable.GridColor = System.Drawing.Color.White;
-            this.dgvLentDataTable.Location = new System.Drawing.Point(4, 55);
+            this.dgvLentDataTable.Location = new System.Drawing.Point(11, 58);
             this.dgvLentDataTable.Name = "dgvLentDataTable";
             this.dgvLentDataTable.ReadOnly = true;
             this.dgvLentDataTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -657,19 +599,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dgvLentDataTable.RowTemplate.Height = 30;
             this.dgvLentDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLentDataTable.Size = new System.Drawing.Size(1125, 441);
+            this.dgvLentDataTable.Size = new System.Drawing.Size(1131, 455);
             this.dgvLentDataTable.TabIndex = 3;
             this.dgvLentDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLentDataTable_CellContentClick);
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewImageColumn1.HeaderText = "⋮";
-            this.dataGridViewImageColumn1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.menu;
-            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Width = 20;
             // 
             // colDate
             // 
@@ -718,8 +650,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colStatus.DataPropertyName = "StatusName";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colStatus.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colStatus.DefaultCellStyle = dataGridViewCellStyle5;
             this.colStatus.FillWeight = 70F;
             this.colStatus.HeaderText = "Status";
             this.colStatus.Name = "colStatus";
@@ -757,29 +689,39 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewImageColumn1.HeaderText = "⋮";
+            this.dataGridViewImageColumn1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.menu;
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 20;
+            // 
             // LentControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.ClientSize = new System.Drawing.Size(1153, 707);
             this.Controls.Add(this.tableLayoutPanelMainData);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "LentControls";
-            this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Lent";
             this.Load += new System.EventHandler(this.LentControls_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panelTotalTransaction.ResumeLayout(false);
+            this.panelTotalTransaction.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalTransaction)).EndInit();
             this.panelTotalDue.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
+            this.panelTotalDue.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalDue)).EndInit();
             this.panelTotalRepaid.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.panelTotalRepaid.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalRepaid)).EndInit();
             this.panelTotalLent.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.panelTotalLent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalLent)).EndInit();
             this.tableLayoutPanelMainData.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -797,18 +739,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Panel panelTotalLent;
         private System.Windows.Forms.PictureBox pictureBoxTotalLent;
         private System.Windows.Forms.Label lblTotalLent;
-        private System.Windows.Forms.Label lblRupeeSymbol;
         private System.Windows.Forms.Label lblTotalLentAmount;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelTotalRepaid;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTotalRepaidAmount;
         private System.Windows.Forms.Label lblTotalRepaid;
         private System.Windows.Forms.PictureBox pictureBoxTotalRepaid;
         private System.Windows.Forms.Panel panelTotalDue;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalDueAmount;
         private System.Windows.Forms.Label lblTotalDue;
         private System.Windows.Forms.PictureBox pictureBoxTotalDue;

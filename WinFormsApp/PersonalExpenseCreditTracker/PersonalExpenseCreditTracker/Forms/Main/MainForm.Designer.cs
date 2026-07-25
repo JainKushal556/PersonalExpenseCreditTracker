@@ -674,6 +674,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlDashboard
             // 
+            this.pnlDashboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlDashboard.Controls.Add(this.panel4);
             this.pnlDashboard.Controls.Add(this.lblDashboard);
             this.pnlDashboard.Controls.Add(this.picDashboard);
@@ -2859,6 +2860,7 @@ namespace PersonalExpenseCreditTracker
             this.lblBorrow.AutoSize = true;
             this.lblBorrow.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrow.ForeColor = System.Drawing.Color.White;
+            this.lblBorrow.Location = new System.Drawing.Point(81, 17);
             this.lblBorrow.Location = new System.Drawing.Point(80, 17);
             this.lblBorrow.Name = "lblBorrow";
             this.lblBorrow.Size = new System.Drawing.Size(77, 28);
@@ -5143,6 +5145,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // panelLogo
             // 
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.panelLogo.Controls.Add(this.panel1);
             this.panelLogo.Controls.Add(this.lblManager);
             this.panelLogo.Controls.Add(this.lblPersonalExpense);
@@ -5153,6 +5156,7 @@ namespace PersonalExpenseCreditTracker
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(400, 121);
             this.panelLogo.TabIndex = 0;
+            this.panelLogo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLogo_Paint);
             // 
             // panel1
             // 
@@ -5235,6 +5239,27 @@ namespace PersonalExpenseCreditTracker
             this.pnlPersonAddPage.Name = "pnlPersonAddPage";
             this.pnlPersonAddPage.Size = new System.Drawing.Size(876, 977);
             this.pnlPersonAddPage.TabIndex = 0;
+            // 
+            // pnlChnagePasswordPage
+            // 
+            this.pnlChnagePasswordPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.pnlChnagePasswordPage.Controls.Add(this.pnlLogoutPage);
+            this.pnlChnagePasswordPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChnagePasswordPage.Location = new System.Drawing.Point(0, 78);
+            this.pnlChnagePasswordPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlChnagePasswordPage.Name = "pnlChnagePasswordPage";
+            this.pnlChnagePasswordPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlChnagePasswordPage.TabIndex = 0;
+            // 
+            // pnlLogoutPage
+            // 
+            this.pnlLogoutPage.BackColor = System.Drawing.Color.Silver;
+            this.pnlLogoutPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLogoutPage.Location = new System.Drawing.Point(0, 0);
+            this.pnlLogoutPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlLogoutPage.Name = "pnlLogoutPage";
+            this.pnlLogoutPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlLogoutPage.TabIndex = 0;
             // 
             // pnlCreditCategoryPage
             // 
@@ -5486,6 +5511,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlProfilePage.Name = "pnlProfilePage";
             this.pnlProfilePage.Size = new System.Drawing.Size(876, 1055);
             this.pnlProfilePage.TabIndex = 0;
+            this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
             // 
             // tmSidebar
             // 
@@ -5496,6 +5522,7 @@ namespace PersonalExpenseCreditTracker
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.ClientSize = new System.Drawing.Size(1276, 1055);
             this.Controls.Add(this.pnlProfilePage);
             this.Controls.Add(this.pnlContainer);

@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public partial class AddLentControls : Form
@@ -48,6 +49,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             DeleteObject(hrgn);
         }
+
+        private void LoadFormData()
+        {
+            comboBoxLentSelectPerson.Text = "Select Person";
+            txtLentAddDeadlineDatePicker.Text = "DD-MM-YYYY";
+            panelLentAddCalenderShow.Visible = false;
+
+            CommonUiFunction.LoadInComboBox("spGetAllPersons", 11, "Select Person", comboBoxLentSelectPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", comboBoxLentPaymentType);
+            CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", comboBoxLentStatus);
+        }
+
 
         private void btnLentAddCalendar_Click(object sender, EventArgs e)
         {
@@ -244,18 +257,77 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnLentAddSave_Click(object sender, EventArgs e)
         {
-            if (txtLentAddDeadlineDatePicker.Text == "DD-MM-YYYY" ||
-                textBoxLentAddDescription.Text == "Enter description" ||
-                txtLentAddAmount.Text == "Select Amount" ||
-                comboBoxLentStatus.Text == "Select Status" ||
-                comboBoxLentPaymentType.Text == "Select Payment Type" ||
-                comboBoxLentSelectPerson.Text == "Select Person")
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            LentUi lentUi = new LentUi();
+
+            // Assign values from the form controls to the object
+            lentUi.userId = 11;
+            lentUi.lentId = -1;
+            lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
+            lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
+            lentUi.statusId = Convert.ToInt32(comboBoxLentStatus.SelectedValue);
+
+            // If the placeholder text is still present, pass an empty string
+            lentUi.amount = (txtLentAddAmount.Text == "Select Amount") ? "" : txtLentAddAmount.Text;
+            lentUi.description = (textBoxLentAddDescription.Text == "Enter description") ? "" : textBoxLentAddDescription.Text;
+
+            // If no deadline is selected, assign DateTime.MinValue
+            // Otherwise, assign the selected date from the calendar
+            lentUi.deadlineAt = (txtLentAddDeadlineDatePicker.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendarAddLent.SelectionStart;
+
+
+            CommonValidator.ValidationResult result = lentUi.InsertDataIntoLentUi();
+            // Perform action based on the validation result
+            switch (result)
             {
-                MessageBox.Show("Please fill all fields");
-                return;
+                // Data is valid and inserted successfully
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Lent added successfully!");
+                    break;
+                case CommonValidator.ValidationResult.PersonInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentSelectPerson);
+                    break;
+
+                case CommonValidator.ValidationResult.PaymentInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentPaymentType);
+                    break;
+
+                case CommonValidator.ValidationResult.StatusInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentStatus);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountEmpty:
+                case CommonValidator.ValidationResult.AmountInvalid:
+                case CommonValidator.ValidationResult.AmountTooLarge:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentAddAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.DescriptionInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, textBoxLentAddDescription);
+                    break;
+
+                case CommonValidator.ValidationResult.DeadlineInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentAddDeadlineDatePicker);
+                    break;
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Lent added Unsuccessfully!");
+                    break;
             }
 
-            MessageBox.Show("Lent Details Saved");
+        }
+
+
+
+        private void comboBoxLentSelectPerson_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            if (comboBoxLentSelectPerson.SelectedIndex > 0)
+            {
+                errorProvider1.Clear();
+            }
         }
 
         private void panelMainBody_Click(object sender, EventArgs e)
@@ -284,3 +356,4 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         }
     }
 }
+

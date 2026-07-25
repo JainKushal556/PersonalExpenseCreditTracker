@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommonUiFunction.cs" />
+    <Compile Include="Common\ErrorHelper.cs" />
     <Compile Include="Forms\Authentication\AuthUI.cs" />
     <Compile Include="Forms\Authentication\ForgotPasswordControls.cs">
       <SubType>Form</SubType>
@@ -402,6 +404,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -597,6 +600,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\update.png" />
+    <None Include="Resources\priority.png" />
     <None Include="Resources\telephone %283%29.png" />
     <None Include="Resources\PersonIcon.png" />
     <None Include="Resources\successful.png" />
@@ -674,6 +678,7 @@
     <None Include="Resources\add-contact.png" />
     <None Include="Resources\loupe.png" />
     <None Include="Resources\loupe %281%29.png" />
+    <None Include="Resources\Action.png" />
     <None Include="Resources\padlock.png" />
     <None Include="Resources\mail %283%29.png" />
     <None Include="Resources\padlock %283%29.png" />
