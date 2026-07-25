@@ -1,4 +1,4 @@
-﻿-- =========================================================================
+-- =========================================================================
 -- STORED PROCEDURES TESTING TEMPLATE
 -- Fill in the blanks with test data to execute the SPs.
 -- =========================================================================
@@ -798,6 +798,15 @@ EXEC spReturnLentByReturnAmount
     @Description = '',
     @SubCategoryID = '',
     @CategoryID = ''
+
+GO
+-- ==========================================================
+-- SP: spFilterLentByStatus
+-- From File: ✔️spFilterLentByStatus.sql
+-- ==========================================================
+EXEC spFilterLentByStatus
+    @UserID = '',
+    @StatusID = ''
 
 GO
 -- ==========================================================

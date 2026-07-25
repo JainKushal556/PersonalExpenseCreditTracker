@@ -932,6 +932,32 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Lent`
 - `Person`
 
+### 34A. spFilterLentByStatus
+
+**Purpose:**
+
+- Filter lent records by status for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@StatusID`
+
+**Expected Output:**
+
+- Lent records filtered by the selected status.
+
+**When Used:**
+
+- Filtering lent grid by status in the Lent module UI.
+
+**Tables Used:**
+
+- `tblLent`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
 ### 35. spGetAllPersons
 
 **Purpose:**
@@ -2198,10 +2224,11 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Total Procedures:**
 
-- 82
+- 83
 
-**Recent Additions (10 new procedures):**
+**Recent Additions (11 new procedures):**
 
+- 34A. spFilterLentByStatus
 - 20A. spFilterExpenseByAmountRange
 - 28A. spFilterCreditByAmountRange
 - 62-77: Updated Category Management (16 procedures with UserID, soft delete, multi-user support)

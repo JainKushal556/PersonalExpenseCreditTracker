@@ -126,9 +126,10 @@
 
 ## 🟠 Team C — Lent, Borrow
 **Assigned Area:** Lent, Borrow, Persons, Status, Reminders
-**Total Allotted Procedures:** 21
+**Total Allotted Procedures:** 22
 
-### `✔️` ALL OKAY (21)
+### `✔️` ALL OKAY (22)
+- `spFilterLentByStatus`
 - `spGetAllBorrow`
 - `spGetAllLent`
 - `spGetAllLentBorrowStatus`

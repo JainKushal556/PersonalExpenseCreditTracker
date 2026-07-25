@@ -51,5 +51,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dataTable = LentBLL.retriveListForComboBoxAtBal(spName);
             return dataTable;
         }
+        public static DataTable retriveFilteredDataByStatusAtUi(string spName, int userid, int statusId)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = LentBLL.retriveFilteredDataByStatusAtBll(spName, userid, statusId);
+            return dataTable;
+        }
     }
 }

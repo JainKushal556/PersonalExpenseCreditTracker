@@ -18,6 +18,7 @@ using PersonalExpenseCreditTracker.Modules.Settings;
 using PersonalExpenseCreditTracker.Modules.Task;
 using PersonalExpenseCreditTracker.Modules.Settings.Person;
 using PersonalExpenseCreditTracker.Modules.Settings.Category;
+using PersonalExpenseCreditTracker.Common;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -2014,8 +2015,10 @@ namespace PersonalExpenseCreditTracker
             picLentFilterByPaymentArrow.Image = Properties.Resources.down;
 
             UpdateLentClearAllButton();
-
             flowSidebar.Top = 0;
+            //load status from db on click to status drop down 
+            Common.CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", ComboBoxLentStatus);
+
         }
 
         private void pnlLentPaymentHeader_Click(object sender, EventArgs e)
@@ -2160,6 +2163,8 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxLentStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateLentClearAllButton();
+            MessageBox.Show(ComboBoxLentStatus.SelectedIndex.ToString());
+
         }
 
         private void ComboBoxLentPayment_SelectedIndexChanged(object sender, EventArgs e)

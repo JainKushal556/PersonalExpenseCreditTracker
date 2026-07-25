@@ -73,12 +73,42 @@ namespace DALayer.Common
             catch (Exception ex)
             {
                 // return null assigned dataList if any error occur 
-                return dataTable;
-                throw;
+                return dataTable;         
             }
             finally
             {
                 // close the connection string if error occur's or not 
+                if (sqlConnection != null)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
+        public static DataTable retriveFilteredDataByStatusAtDal(string spName, int userId, int statusID)
+        {
+            SqlConnection sqlConnection = null;
+            DataTable dataTable = null;
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                dataTable = new DataTable();
+
+                using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
+                {
+                    sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@StatusID", statusID);
+                    sqlDataAdapter.Fill(dataTable);
+                    return dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                return dataTable;
+            }
+            finally
+            {
                 if (sqlConnection != null)
                 {
                     sqlConnection.Close();
