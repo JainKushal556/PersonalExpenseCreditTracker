@@ -55,21 +55,21 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.LblForgotPassword = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -366,13 +366,13 @@
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.HighlightText;
             this.panel4.Controls.Add(this.checkBox1);
-            this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.LblForgotPassword);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.label13);
             this.panel4.Controls.Add(this.label14);
             this.panel4.Controls.Add(this.label15);
             this.panel4.Controls.Add(this.label16);
-            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.btnLogin);
             this.panel4.Controls.Add(this.panel6);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.panel5);
@@ -396,17 +396,17 @@
             this.checkBox1.TabIndex = 25;
             this.checkBox1.Text = "Remember Me";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // label17
+            // LblForgotPassword
             // 
-            this.label17.AutoSize = true;
-            this.label17.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label17.Location = new System.Drawing.Point(398, 366);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(122, 17);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "Forgot Password?";
+            this.LblForgotPassword.AutoSize = true;
+            this.LblForgotPassword.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.LblForgotPassword.Location = new System.Drawing.Point(398, 366);
+            this.LblForgotPassword.Name = "LblForgotPassword";
+            this.LblForgotPassword.Size = new System.Drawing.Size(122, 17);
+            this.LblForgotPassword.TabIndex = 24;
+            this.LblForgotPassword.Text = "Forgot Password?";
+            this.LblForgotPassword.Click += new System.EventHandler(this.LblForgotPassword_Click);
             // 
             // label12
             // 
@@ -416,7 +416,6 @@
             this.label12.Size = new System.Drawing.Size(209, 1);
             this.label12.TabIndex = 23;
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label13
             // 
@@ -449,7 +448,6 @@
             this.label15.Size = new System.Drawing.Size(113, 20);
             this.label15.TabIndex = 20;
             this.label15.Text = "Create Account";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // label16
             // 
@@ -461,23 +459,22 @@
             this.label16.Size = new System.Drawing.Size(169, 20);
             this.label16.TabIndex = 19;
             this.label16.Text = "Don\'t have an account?";
-            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
-            // button1
+            // btnLogin
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(71, 424);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(449, 52);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLogin.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnLogin.Location = new System.Drawing.Point(71, 424);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(449, 52);
+            this.btnLogin.TabIndex = 18;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // panel6
             // 
@@ -486,7 +483,7 @@
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.pictureBox4);
             this.panel6.Controls.Add(this.pictureBox3);
-            this.panel6.Controls.Add(this.textBox3);
+            this.panel6.Controls.Add(this.txtPassword);
             this.panel6.Location = new System.Drawing.Point(71, 298);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(449, 52);
@@ -512,18 +509,18 @@
             this.pictureBox3.TabIndex = 4;
             this.pictureBox3.TabStop = false;
             // 
-            // textBox3
+            // txtPassword
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(54, 14);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(341, 24);
-            this.textBox3.TabIndex = 3;
-            this.textBox3.Enter += new System.EventHandler(this.textBox3_Event);
-            this.textBox3.Leave += new System.EventHandler(this.textBox3_Leave);
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(54, 14);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(341, 24);
+            this.txtPassword.TabIndex = 3;
+            this.txtPassword.Enter += new System.EventHandler(this.textBox3_Event);
+            this.txtPassword.Leave += new System.EventHandler(this.textBox3_Leave);
             // 
             // label7
             // 
@@ -534,7 +531,6 @@
             this.label7.Size = new System.Drawing.Size(91, 25);
             this.label7.TabIndex = 5;
             this.label7.Text = "Password";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // panel5
             // 
@@ -542,7 +538,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.pictureBox2);
-            this.panel5.Controls.Add(this.textBox2);
+            this.panel5.Controls.Add(this.txtEmail);
             this.panel5.Location = new System.Drawing.Point(71, 179);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(449, 52);
@@ -558,18 +554,18 @@
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
-            // textBox2
+            // txtEmail
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(54, 14);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(379, 24);
-            this.textBox2.TabIndex = 3;
-            this.textBox2.Enter += new System.EventHandler(this.textBox2_Event);
-            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
+            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Location = new System.Drawing.Point(54, 14);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(379, 24);
+            this.txtEmail.TabIndex = 3;
+            this.txtEmail.Enter += new System.EventHandler(this.textBox2_Event);
+            this.txtEmail.Leave += new System.EventHandler(this.textBox2_Leave);
             // 
             // label4
             // 
@@ -735,21 +731,21 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label LblForgotPassword;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
