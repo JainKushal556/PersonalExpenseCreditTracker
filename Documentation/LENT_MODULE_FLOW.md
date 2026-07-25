@@ -1,96 +1,118 @@
-# 📘 Lent মডিউলের আর্কিটেকচার ও ডেটা ফ্লো গাইড (সহজ ভাষায়)
+# 🚀 Step-by-Step Developer Guide: Building Modules (Lent, Expense, Credit, Note, Borrow, Task)
 
-এই গাইডে আমাদের প্রজেক্টের **Add Lent** ফিচারটি কীভাবে কাজ করছে, কোন ফাইল কী দায়িত্ব পালন করছে এবং ডেটা কীভাবে এক লেয়ার থেকে অন্য লেয়ারে যাচ্ছে তা একদম সহজ ভাষায় ব্যাখ্যা করা হয়েছে। 
+This guide explains how the layered data validation and saving system works in our project, and how you can implement this same pattern for any new module. 
 
-অন্য কোনো ডেভেলপার যদি নতুন কোনো মডিউল (যেমন: **Add Expense**) বানাতে চান, তবে এই **Lent** মডিউলের ফ্লো দেখেই হুবহু একই নিয়মে তৈরি করে ফেলতে পারবেন।
-
----
-
-## 🏗️ Lent মডিউলে ব্যবহৃত ফাইলসমূহ (Files Involved)
-
-আমরা **৩-লেয়ার আর্কিটেকচার** ব্যবহার করেছি। Lent মডিউলের জন্য নিচের ফাইলগুলো কাজ করছে:
-
-1. **UI / Presentation Layer (ডিজাইন ও ইউজার ইন্টারফেস):**
-   * **[AddLentControls.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/AddLentControls.cs):** এটি আমাদের WinForm স্ক্রিন, যেখানে ইউজার ইনপুট দেয় এবং সেভ বাটনে ক্লিক করে।
-   * **[LentUi.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/LentUi.cs):** এটি একটি সাহায্যকারী ক্লাস (UI Model)। এটি ফর্মের ইনপুটগুলোকে এক জায়গায় জড়ো করে BLL-এ পাঠায়।
-
-2. **BLL / Business Logic Layer (ভ্যালিডেশন ও লজিক):**
-   * **[LentBLL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Lent/LentBLL.cs):** এখানে সমস্ত চেকিং বা ভ্যালিডেশন করা হয় (যেমন: অ্যামাউন্ট ঠিক আছে কিনা, তারিখ ঠিক আছে কিনা)।
-
-3. **DAL / Data Access Layer (ডাটাবেজ কানেকশন):**
-   * **[LentDAL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/DALayer/Lent/LentDAL.cs):** এটি সরাসরি SQL Server ডাটাবেজের সাথে যোগাযোগ করে ডেটা ইনসার্ট/সেভ করে।
-
-4. **Common Helpers (শেয়ার্ড কোড):**
-   * **[CommonValidator.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Common/CommonValidator.cs):** সব মডিউলের জন্য কমন চেকিং রুলস ও এনাম এরর লিস্ট।
-   * **[CommonUiFunction.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/CommonUiFunction.cs):** ড্রপডাউন লোড করার কমন মেথড।
-   * **[ErrorHelper.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/ErrorHelper.cs):** ভুল ইনপুটের পাশে লাল এরর আইকন দেখানোর কমন মেথড।
+Instead of showing raw code blocks in this documentation, this document focuses on **how the system works conceptually** and guides you to the exact source files in the codebase to read the implementation.
 
 ---
 
-## 🔄 ডেটা কীভাবে কাজ করছে? (Step-by-Step Flow)
+## 📌 Phase 1: How Data Flows (The Architecture Flow)
 
-কাজটিকে মূলত ২টি ভাগে ভাগ করা যায়:
+To save any data, it passes through 5 distinct stages in order:
 
-### প্রথম ভাগ: ড্রপডাউন-এ ডাটাবেজের ভ্যালু লোড করা (Form Load)
-ফর্মটি যখন স্ক্রিনে ওপেন হয়, তখন ড্রপডাউনগুলোতে (ComboBox) ডাটাবেজ থেকে ডেটা এসে লোড হয়।
+```mermaid
+sequenceDiagram
+    participant User as WinForms Form UI
+    participant UIModel as UI Model Class
+    participant BLL as Business Logic Layer (BLL)
+    participant Validator as Common Validator
+    participant DAL as Data Access Layer (DAL)
+    participant DB as SQL Server (Stored Procedure)
 
-1. **UI ফাইলে কল:** `AddLentControls_Load` মেথডে আমরা `CommonUiFunction.LoadInComboBox` কল করি।
-   ```csharp
-   CommonUiFunction.LoadInComboBox("spGetAllPersons", 11, "Select Person", comboBoxLentSelectPerson);
-   ```
-2. **ডাটাবেজ থেকে ডেটা আনা:** `SqlHelper` ডাটাবেজ থেকে Stored Procedure (যেমন: `spGetAllPersons`) রান করে একটি `DataTable` রিটার্ন করে।
-3. **প্লেসহোল্ডার যোগ করা:** `CommonUiFunction` ঐ টেবিলের শুরুতে একটি ফেইক রো (Row) ঢুকিয়ে দেয় যার আইডি `0` এবং লেখা থাকে `"Select Person"`। এর ফলে ড্রপডাউন ওপেন করলেই প্রথমে "Select Person" লেখাটি সিলেক্ট হয়ে থাকে।
+    User->>UIModel: Package Input & Clean Placeholders
+    UIModel->>BLL: Call Save & Validate Flow
+    BLL->>Validator: Run Sequential Input Checks
+    alt Validation Fails
+        Validator-->>BLL: Return Error Enum Value
+        BLL-->>UIModel: Forward Error Enum Value
+        UIModel-->>User: Show Red Error Icon on Input Control
+    else Validation Passes
+        BLL->>DAL: Map BLL values to DAL properties
+        DAL->>DB: Execute Stored Procedure
+        DB-->>DAL: Return Success/Fail Status
+        DAL-->>BLL: Return DB Save Success/Fail
+        BLL-->>UIModel: Forward Result Enum
+        UIModel-->>User: Show Success Msgbox / Database Error
+    end
+```
+
+### **Step 1: WinForms UI Form (User Input)**
+* The user interacts with the form, fills out TextBoxes, selects items in ComboBoxes, and clicks **Save**.
+* When the Save button is clicked, the UI clears any existing error marks (`errorProvider1.Clear()`).
+* The UI gathers the raw values and assigns them to properties of a **UI Model class**.
+
+### **Step 2: UI Model (The Cleaner & Bridge)**
+* The UI Model acts as a cleaner and a bridge. 
+* It cleans up any placeholder text (for example, if a text field says `"Select Amount"` or `"Enter description"`, it maps this to an empty string `""` before sending it to the Business Logic Layer).
+* It sets up the properties of the corresponding Business Logic Layer (BLL) class.
+* It triggers validation by calling the BLL's main validation method.
+
+### **Step 3: Business Logic Layer - BLL (The Gatekeeper)**
+* The BLL class contains properties representing the fields and holds an instance of the Data Access Layer (DAL) class.
+* It performs validation by passing its fields to methods inside `CommonValidator.cs` in a sequential order.
+* **If any check fails**: The BLL halts immediately and returns the specific validation error enum back to the UI Model, which forwards it to the Form.
+* **If all checks pass**: The BLL maps its property values to the DAL object properties and invokes the DAL's database-saving method.
+
+### **Step 4: Data Access Layer - DAL (The Database Execution)**
+* The DAL class is responsible for connecting to the database using the shared database connection helper.
+* It creates a connection, sets up a command pointing to a SQL Server **Stored Procedure**, maps its properties to command parameters to prevent SQL injection, and executes the query.
+* It returns a boolean (`true`/`false`) indicating whether rows were successfully affected in the database.
+
+### **Step 5: Error and Success Display (UI Handover)**
+* The UI Form receives the validation result enum.
+* In a `switch` block, the UI determines how to respond to the result:
+  * **On Success**: Display a confirmation message box and clear/refresh the form.
+  * **On Validation Errors**: Pass the specific validation result and target controls to `ErrorHelper.ShowValidationError()`. This highlights the exact input element on the form with a red error icon and sets the tooltip description.
+  * **On Database Failure**: Show a generic error message indicating database storage issues.
 
 ---
 
-### দ্বিতীয় ভাগ: সেভ বাটনে ক্লিক ও ডেটা সেভ হওয়া (Save & Validate)
-ইউজার যখন ডেটা ইনপুট দিয়ে **Save** বাটনে ক্লিক করে, তখন নিচের ধাপগুলো ঘটে:
+## 🛠️ Step-by-Step: How to Implement a New Module (e.g., Note, Expense, Borrow)
 
-#### ১. ইনপুট সংগ্রহ ও ক্লিনিং (UI Layer):
-* **[AddLentControls.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/AddLentControls.cs)**-এ `btnLentAddSave_Click` ইভেন্ট ফায়ার হয়।
-* প্রথমে `errorProvider1.Clear()` করে আগের এরর সাইনগুলো মুছে ফেলা হয়।
-* এরপর একটি `LentUi` অবজেক্ট তৈরি করে ফর্মের মানগুলো অ্যাসাইন করা হয়। এখানে প্লেসহোল্ডারগুলো ক্লিন করা হয়:
-  * যদি অ্যামাউন্ট ফিল্ডে `"Select Amount"` লেখা থাকে, তবে ডাটাবেজে পাঠানোর জন্য খালি স্ট্রিং `""` পাঠানো হয়।
-  * যদি কোনো ডেডলাইন সিলেক্ট না করা হয়, তবে `DateTime.MinValue` পাঠানো হয়।
-* সবশেষে ভ্যালিডেশনের জন্য কল করা হয়: `lentUi.InsertDataIntoLentUi();`
+When building a new module, you should follow this structural checklist and look at the existing **Lent** module files as your blueprint.
 
-#### ২. লজিক ও ভ্যালিডেশন চেক (BLL Layer):
-* **[LentUi.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/LentUi.cs)** মেথডটি সমস্ত ডেটা **[LentBLL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Lent/LentBLL.cs)**-এর অবজেক্টে কপি করে দেয় এবং `lentBll.DataValidatorIntoLentBll()` কল করে।
-* BLL ফাইলে এক এক করে ইনপুটগুলো চেক করা হয় **[CommonValidator.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Common/CommonValidator.cs)** এর সাহায্য নিয়ে:
-  ```csharp
-  result = CommonValidator.ValidatePerson(personId);
-  if (result != CommonValidator.ValidationResult.Success) return result;
-  
-  result = CommonValidator.ValidateAmount(amount);
-  if (result != CommonValidator.ValidationResult.Success) return result;
-  ```
-* **ভুল থাকলে:** কোনো একটি ভ্যালিডেশন চেক ফেইল করলেই BLL কোড ওখানেই থেমে যায় এবং একটি নির্দিষ্ট এরর এনাম (যেমন: `ValidationResult.AmountEmpty`) রিটার্ন করে UI-তে পাঠিয়ে দেয়।
-* **সব ঠিক থাকলে:** যদি সব চেক পাস করে (`Success` হয়), তবে BLL সমস্ত ডেটা নিয়ে **[LentDAL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/DALayer/Lent/LentDAL.cs)** ফাইলে পাঠায় ডাটাবেজে সেভ করার জন্য।
+### **Step 1: Database Setup**
+1. **Table Creation**: Create a table in SQL Server with the necessary fields and primary key/foreign key constraints.
+2. **Stored Procedures**:
+   * Create an Insert Stored Procedure (e.g. `spInsertNote`, `spInsertExpense`).
+   * Create Select/Read Stored Procedures (e.g. `spGetAllNotes` or `spGetAllNoteTags`).
 
-#### ৩. ডাটাবেজে ডেটা সেভ (DAL Layer):
-* **[LentDAL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/DALayer/Lent/LentDAL.cs)**-এর `SaveLentToDb()` মেথডটি রান হয়।
-* এটি ডাটাবেজের কানেকশন ওপেন করে Stored Procedure `"spInsertLent"` কল করে এবং SQL Parameter বাইন্ডিংয়ের মাধ্যমে ডেটা সেভ করে।
-* সেভ সফল হলে এটি BLL-কে `true` ফেরত দেয়, আর ফেইল করলে `false` ফেরত দেয়।
-* BLL ডাটাবেজ রেসপন্স অনুযায়ী UI-কে যথাক্রমে `ValidationResult.Success` অথবা `ValidationResult.StoreProcedureError` পাঠায়।
+### **Step 2: Create the DAL Class**
+* **Responsibility**: Houses properties matching the database fields, constructs `SqlConnection`/`SqlCommand`, maps parameters, opens the connection, executes `ExecuteNonQuery`, and handles database exceptions.
+* **Where to create**: Put it in `DALayer/NewModule/` directory.
+* **Code Reference**: Open and read [LentDAL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/DALayer/Lent/LentDAL.cs) to see how to implement this layer.
 
-#### ৪. স্ক্রিনে ফলাফল বা লাল এরর আইকন দেখানো (UI Layer Error Display):
-* UI ফর্মের `switch (result)` ব্লকে BLL থেকে ফেরত আসা এনামটি চেক করা হয়।
-* **সেভ সফল হলে:** `Success` কেস রান হয় এবং মেসেজ বক্স দেখায়: `"Lent added successfully!"`।
-* **ভুল থাকলে (Error):** ভুল এনাম অনুযায়ী `ErrorHelper.ShowValidationError` কল করা হয়।
-  ```csharp
-  case CommonValidator.ValidationResult.AmountEmpty:
-      ErrorHelper.ShowValidationError(result, errorProvider1, txtLentAddAmount);
-      break;
-  ```
-* এটি সরাসরি ইউজার ইন্টারফেসে সেই নির্দিষ্ট ইনপুট কন্ট্রোলটির (যেমন: `txtLentAddAmount`) পাশে একটি **লাল গোল সতর্ক সংকেত আইকন (Error Provider)** বসিয়ে দেয় এবং কার্সার সেখানে নিয়ে যায় যাতে ইউজার বুঝতে পারে ঠিক কোন জায়গায় ভুল হয়েছে।
+### **Step 3: Create the BLL Class & Add Validation Rules**
+* **Responsibility**: Declares properties matching the inputs, instantiates the DAL class, sequentially calls `CommonValidator` functions, maps properties to the DAL class, and runs the save command.
+* **Where to create**: Put it in `BLLayer/NewModule/` directory.
+* **Code Reference**: Open and read [LentBLL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Lent/LentBLL.cs) to see how validations are evaluated and how the BLL routes data to the DAL.
+
+### **Step 4: Create the UI Model Class**
+* **Responsibility**: Declares the properties, holds the BLL instance, sets BLL properties, and delegates execution to BLL validation.
+* **Where to create**: Put it in `PersonalExpenseCreditTracker/Modules/NewModule/` folder.
+* **Code Reference**: Open and read [LentUi.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/LentUi.cs) to see how properties are set up and mapped.
+
+### **Step 5: Setup the Form (Add/Edit UI Form)**
+* **Responsibility**: Declares the form controls, binds standard list data (ComboBoxes) on Load using common UI helper functions, clears the `ErrorProvider` on clicking Save, copies control text values into the UI Model (checking for placeholders), runs the save method, and switches on the result code to show errors using `ErrorHelper`.
+* **Where to create**: Put it in `PersonalExpenseCreditTracker/Modules/NewModule/` folder.
+* **Code Reference**: Open and read [AddLentControls.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/AddLentControls.cs) to see the Save button click event handler (`btnLentAddSave_Click`) and how UI validation cases are handled.
 
 ---
 
-## 💡 অন্য মডিউলে কাজ করার সময় যা মনে রাখতে হবে (Developer Key Takeaways)
+## ⚠️ How to Add a New Validation Check and Error Message
 
-আপনি যদি অন্য কোনো নতুন মডিউল (যেমন: **Add Expense**) তৈরি করতে চান, তবে লেন্টের এই সিস্টেমটি দেখে আপনাকে যা করতে হবে:
-1. ডাটাবেজে ডেটা লোড এবং সেভ করার Stored Procedures বানিয়ে নিন।
-2. নতুন মডিউলের জন্য একটি **DAL** ক্লাস বানান যা ডাটাবেজে ইনসার্ট কুয়েরি চালাবে।
-3. একটি **BLL** ক্লাস বানান যেখানে ইনপুট চেক করার জন্য `CommonValidator`-এর মেথডগুলো একে একে কল করবেন।
-4. ফর্মে `CommonUiFunction.LoadInComboBox` দিয়ে ড্রপডাউন লোড করুন।
-5. ফর্মে সেভ বাটনের ক্লিকে ইনপুট সংগ্রহ করে UI Model-এ দিয়ে BLL কল করুন এবং `switch (result)` দিয়ে এররগুলো `ErrorHelper` এর মাধ্যমে স্ক্রিনে লাল এরর আইকন দিয়ে প্রদর্শন করুন।
+When creating other modules (like Expense, Borrow, Note, etc.), you will need custom checks and UI tooltips. Here is the process:
+
+### **Part A: Add the Validation Result Enum**
+1. Open the file [CommonValidator.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Common/CommonValidator.cs).
+2. Inside the `public enum ValidationResult`, add your new validation error identifiers (e.g. `TitleEmpty`, `ContentEmpty`, `CategoryInvalid`).
+3. Inside the `CommonValidator` class, add any general-purpose static helper validation functions if needed (e.g., checks for length, null references, or numeric ranges).
+
+### **Part B: Map to UI Error Messages**
+1. Open the file [ErrorHelper.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/ErrorHelper.cs).
+2. Inside the `ShowValidationError` method overloads (one for `TextBox` and one for `ComboBox`), add your new `ValidationResult` case blocks.
+3. For each case:
+   * Call `errorProvider.SetError(control, "Your custom user-friendly error message here.")`.
+   * Call `control.Focus()` to focus on the input field with the invalid data.
+
+By referencing the files inside the repository and following this blueprint, you can develop robust validation and data routing for any new module.
