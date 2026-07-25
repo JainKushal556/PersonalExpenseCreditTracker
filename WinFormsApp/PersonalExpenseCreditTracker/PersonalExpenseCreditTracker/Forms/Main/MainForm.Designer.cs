@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker
+namespace PersonalExpenseCreditTracker
 {
     partial class MainForm
     {
@@ -376,8 +376,6 @@
             this.lblAddExpense = new System.Windows.Forms.Label();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.pnlPersonAddPage = new System.Windows.Forms.Panel();
-            this.pnlChnagePasswordPage = new System.Windows.Forms.Panel();
-            this.pnlLogoutPage = new System.Windows.Forms.Panel();
             this.pnlCreditCategoryPage = new System.Windows.Forms.Panel();
             this.pnlExpenseCategory = new System.Windows.Forms.Panel();
             this.pnlOverview = new System.Windows.Forms.Panel();
@@ -592,7 +590,6 @@
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlContainer.SuspendLayout();
-            this.pnlChnagePasswordPage.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.pnlRight.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -838,6 +835,7 @@
             this.cmbSubCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubCategory.FormattingEnabled = true;
             this.cmbSubCategory.Items.AddRange(new object[] {
+            "Select SubCategory",
             "sadf",
             "dsfdf"});
             this.cmbSubCategory.Location = new System.Drawing.Point(104, 98);
@@ -862,6 +860,7 @@
             this.ComboBoxCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxCategory.FormattingEnabled = true;
             this.ComboBoxCategory.Items.AddRange(new object[] {
+            "Select Category",
             "Food",
             "Travel"});
             this.ComboBoxCategory.Location = new System.Drawing.Point(104, 37);
@@ -1497,6 +1496,7 @@
             this.ComboBoxCreditSubCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxCreditSubCategory.FormattingEnabled = true;
             this.ComboBoxCreditSubCategory.Items.AddRange(new object[] {
+            "Select SubCategory",
             "sadf",
             "dsfdf"});
             this.ComboBoxCreditSubCategory.Location = new System.Drawing.Point(104, 98);
@@ -1521,6 +1521,7 @@
             this.ComboBoxCreditCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxCreditCategory.FormattingEnabled = true;
             this.ComboBoxCreditCategory.Items.AddRange(new object[] {
+            "Select Category",
             "Food",
             "Travel"});
             this.ComboBoxCreditCategory.Location = new System.Drawing.Point(104, 37);
@@ -2849,7 +2850,7 @@
             this.picBorrowArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBorrowArrow.TabIndex = 2;
             this.picBorrowArrow.TabStop = false;
-            this.picBorrowArrow.Click += new System.EventHandler(this.pnlLentPaymentHeader_Click);
+            this.picBorrowArrow.Click += new System.EventHandler(this.pnlBorrow_Click);
             this.picBorrowArrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
             this.picBorrowArrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
             // 
@@ -2859,11 +2860,12 @@
             this.lblBorrow.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrow.ForeColor = System.Drawing.Color.White;
             this.lblBorrow.Location = new System.Drawing.Point(81, 17);
+            this.lblBorrow.Location = new System.Drawing.Point(80, 17);
             this.lblBorrow.Name = "lblBorrow";
             this.lblBorrow.Size = new System.Drawing.Size(77, 28);
             this.lblBorrow.TabIndex = 1;
             this.lblBorrow.Text = "Borrow";
-            this.lblBorrow.Click += new System.EventHandler(this.pnlLentPaymentHeader_Click);
+            this.lblBorrow.Click += new System.EventHandler(this.pnlBorrow_Click);
             this.lblBorrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
             this.lblBorrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
             // 
@@ -2876,7 +2878,7 @@
             this.picBorrow.Size = new System.Drawing.Size(28, 28);
             this.picBorrow.TabIndex = 0;
             this.picBorrow.TabStop = false;
-            this.picBorrow.Click += new System.EventHandler(this.pnlLentPaymentHeader_Click);
+            this.picBorrow.Click += new System.EventHandler(this.pnlBorrow_Click);
             this.picBorrow.MouseEnter += new System.EventHandler(this.pnlBorrow_MouseEnter);
             this.picBorrow.MouseLeave += new System.EventHandler(this.pnlBorrow_MouseLeave);
             // 
@@ -5207,7 +5209,6 @@
             // pnlContainer
             // 
             this.pnlContainer.Controls.Add(this.pnlPersonAddPage);
-            this.pnlContainer.Controls.Add(this.pnlChnagePasswordPage);
             this.pnlContainer.Controls.Add(this.pnlCreditCategoryPage);
             this.pnlContainer.Controls.Add(this.pnlExpenseCategory);
             this.pnlContainer.Controls.Add(this.pnlOverview);
@@ -5523,6 +5524,7 @@
             this.Controls.Add(this.pnlMainSideBarSection);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.pnlMainSideBarSection.ResumeLayout(false);
             this.pnlSideBar.ResumeLayout(false);
@@ -5803,7 +5805,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlContainer.ResumeLayout(false);
             this.pnlContainer.PerformLayout();
-            this.pnlChnagePasswordPage.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlRight.ResumeLayout(false);
@@ -6182,8 +6183,6 @@
         private System.Windows.Forms.Panel pnlThumb;
         private System.Windows.Forms.Panel pnlExpenseCategory;
         private System.Windows.Forms.Panel pnlCreditCategoryPage;
-        private System.Windows.Forms.Panel pnlChnagePasswordPage;
-        private System.Windows.Forms.Panel pnlLogoutPage;
         private System.Windows.Forms.Panel pnlSettingChangesPassword;
         private System.Windows.Forms.Label lblSetingChangesPassword;
         private System.Windows.Forms.PictureBox pictureBox4;

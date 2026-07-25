@@ -99,6 +99,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
 
             MessageBox.Show("Task Updated Successfully.");
+            this.Close();
         }
 
         private void btnClose_MouseEnter(object sender, EventArgs e)
@@ -130,6 +131,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtTaskTitle.ForeColor = Color.Gray;
             }
         }
+
 
       
 

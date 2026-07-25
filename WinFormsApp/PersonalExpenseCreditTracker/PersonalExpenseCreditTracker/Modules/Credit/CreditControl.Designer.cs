@@ -33,13 +33,6 @@
             this.pnlTableHeader = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.dgvCreditDataTable = new System.Windows.Forms.DataGridView();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.pnlCreditFooter = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -65,6 +58,12 @@
             this.lblTransactionAmount = new System.Windows.Forms.Label();
             this.lblTransction = new System.Windows.Forms.Label();
             this.picTransaction = new System.Windows.Forms.PictureBox();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlCreditContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
@@ -91,7 +90,6 @@
             this.pnlCreditContent.Padding = new System.Windows.Forms.Padding(15);
             this.pnlCreditContent.Size = new System.Drawing.Size(1250, 753);
             this.pnlCreditContent.TabIndex = 0;
-            this.pnlCreditContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
             // tblTable
             // 
@@ -111,24 +109,24 @@
             // 
             // pnlTableHeader
             // 
-            this.pnlTableHeader.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.pnlTableHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.pnlTableHeader.Controls.Add(this.btnExport);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTableHeader.Location = new System.Drawing.Point(4, 4);
             this.pnlTableHeader.Name = "pnlTableHeader";
             this.pnlTableHeader.Size = new System.Drawing.Size(1212, 44);
             this.pnlTableHeader.TabIndex = 0;
-            this.pnlTableHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTableHeader_Paint);
             // 
             // btnExport
             // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.BackColor = System.Drawing.Color.Honeydew;
-            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.BackColor = System.Drawing.Color.White;
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(217)))));
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
-            this.btnExport.Location = new System.Drawing.Point(1108, 4);
+            this.btnExport.Location = new System.Drawing.Point(1103, 0);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(92, 32);
+            this.btnExport.Size = new System.Drawing.Size(109, 44);
             this.btnExport.TabIndex = 0;
             this.btnExport.Text = "Export";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -144,7 +142,6 @@
             this.dgvCreditDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCreditDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDate,
-            this.ColFrom,
             this.colDescription,
             this.colCategory,
             this.colSubCategory,
@@ -162,62 +159,6 @@
             this.dgvCreditDataTable.Size = new System.Drawing.Size(1212, 503);
             this.dgvCreditDataTable.TabIndex = 1;
             this.dgvCreditDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCreditDataTable_CellContentClick);
-            // 
-            // colDate
-            // 
-            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDate.FillWeight = 10F;
-            this.colDate.HeaderText = "Date";
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            // 
-            // ColFrom
-            // 
-            this.ColFrom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColFrom.FillWeight = 15F;
-            this.ColFrom.HeaderText = "From";
-            this.ColFrom.Name = "ColFrom";
-            this.ColFrom.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.FillWeight = 15F;
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCategory.FillWeight = 15F;
-            this.colCategory.HeaderText = "Category";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colSubCategory
-            // 
-            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSubCategory.FillWeight = 15F;
-            this.colSubCategory.HeaderText = "SubCategory";
-            this.colSubCategory.Name = "colSubCategory";
-            this.colSubCategory.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAmount.FillWeight = 10F;
-            this.colAmount.HeaderText = "Amount";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            // 
-            // colPaymentMethod
-            // 
-            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPaymentMethod.FillWeight = 15F;
-            this.colPaymentMethod.HeaderText = "Payment Method";
-            this.colPaymentMethod.Name = "colPaymentMethod";
-            this.colPaymentMethod.ReadOnly = true;
             // 
             // pnlFooter
             // 
@@ -248,7 +189,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(199, 15);
+            this.label7.Location = new System.Drawing.Point(215, 12);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 23);
             this.label7.TabIndex = 6;
@@ -258,29 +199,27 @@
             // 
             this.lblCreditTotalPageNumber.AutoSize = true;
             this.lblCreditTotalPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreditTotalPageNumber.Location = new System.Drawing.Point(167, 16);
+            this.lblCreditTotalPageNumber.Location = new System.Drawing.Point(186, 12);
             this.lblCreditTotalPageNumber.Name = "lblCreditTotalPageNumber";
             this.lblCreditTotalPageNumber.Size = new System.Drawing.Size(28, 23);
             this.lblCreditTotalPageNumber.TabIndex = 5;
             this.lblCreditTotalPageNumber.Text = "10";
-            this.lblCreditTotalPageNumber.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(143, 15);
+            this.label5.Location = new System.Drawing.Point(160, 12);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(25, 23);
             this.label5.TabIndex = 4;
             this.label5.Text = "of";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // lblCreditEndingPageNumber
             // 
             this.lblCreditEndingPageNumber.AutoSize = true;
             this.lblCreditEndingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreditEndingPageNumber.Location = new System.Drawing.Point(114, 16);
+            this.lblCreditEndingPageNumber.Location = new System.Drawing.Point(129, 12);
             this.lblCreditEndingPageNumber.Name = "lblCreditEndingPageNumber";
             this.lblCreditEndingPageNumber.Size = new System.Drawing.Size(28, 23);
             this.lblCreditEndingPageNumber.TabIndex = 3;
@@ -290,18 +229,17 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(92, 15);
+            this.label3.Location = new System.Drawing.Point(101, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(26, 23);
             this.label3.TabIndex = 2;
             this.label3.Text = "to";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblCreditStartingPageNumber
             // 
             this.lblCreditStartingPageNumber.AutoSize = true;
             this.lblCreditStartingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreditStartingPageNumber.Location = new System.Drawing.Point(76, 15);
+            this.lblCreditStartingPageNumber.Location = new System.Drawing.Point(76, 12);
             this.lblCreditStartingPageNumber.Name = "lblCreditStartingPageNumber";
             this.lblCreditStartingPageNumber.Size = new System.Drawing.Size(19, 23);
             this.lblCreditStartingPageNumber.TabIndex = 1;
@@ -311,7 +249,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 13);
+            this.label1.Location = new System.Drawing.Point(3, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 23);
             this.label1.TabIndex = 0;
@@ -338,7 +276,7 @@
             this.btnLastPage.Size = new System.Drawing.Size(40, 40);
             this.btnLastPage.TabIndex = 4;
             this.btnLastPage.UseVisualStyleBackColor = true;
-            this.btnLastPage.Click += new System.EventHandler(this.btnPervious_Click);
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
             // 
             // btnNextpage
             // 
@@ -348,7 +286,7 @@
             this.btnNextpage.Size = new System.Drawing.Size(40, 40);
             this.btnNextpage.TabIndex = 3;
             this.btnNextpage.UseVisualStyleBackColor = true;
-            this.btnNextpage.Click += new System.EventHandler(this.btn_Click);
+            this.btnNextpage.Click += new System.EventHandler(this.btnNextpage_Click);
             // 
             // btnCurrentPage
             // 
@@ -359,7 +297,6 @@
             this.btnCurrentPage.TabIndex = 2;
             this.btnCurrentPage.Text = "1";
             this.btnCurrentPage.UseVisualStyleBackColor = true;
-            this.btnCurrentPage.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnPreviousPage
             // 
@@ -369,7 +306,7 @@
             this.btnPreviousPage.Size = new System.Drawing.Size(40, 40);
             this.btnPreviousPage.TabIndex = 1;
             this.btnPreviousPage.UseVisualStyleBackColor = true;
-            this.btnPreviousPage.Click += new System.EventHandler(this.button2_Click);
+            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
             // 
             // btnFirstpage
             // 
@@ -380,6 +317,7 @@
             this.btnFirstpage.Size = new System.Drawing.Size(40, 40);
             this.btnFirstpage.TabIndex = 0;
             this.btnFirstpage.UseVisualStyleBackColor = true;
+            this.btnFirstpage.Click += new System.EventHandler(this.btnFirstpage_Click);
             // 
             // tblCreditSummary
             // 
@@ -398,7 +336,6 @@
             this.tblCreditSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblCreditSummary.Size = new System.Drawing.Size(1220, 110);
             this.tblCreditSummary.TabIndex = 0;
-            this.tblCreditSummary.Paint += new System.Windows.Forms.PaintEventHandler(this.tblSummary_Paint);
             // 
             // pnlTotalCredit
             // 
@@ -507,6 +444,54 @@
             this.picTransaction.TabIndex = 0;
             this.picTransaction.TabStop = false;
             // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.FillWeight = 10F;
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.FillWeight = 15F;
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCategory.FillWeight = 15F;
+            this.colCategory.HeaderText = "Category";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            // 
+            // colSubCategory
+            // 
+            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSubCategory.FillWeight = 15F;
+            this.colSubCategory.HeaderText = "SubCategory";
+            this.colSubCategory.Name = "colSubCategory";
+            this.colSubCategory.ReadOnly = true;
+            // 
+            // colAmount
+            // 
+            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.FillWeight = 10F;
+            this.colAmount.HeaderText = "Amount";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            // 
+            // colPaymentMethod
+            // 
+            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.FillWeight = 15F;
+            this.colPaymentMethod.HeaderText = "Payment Method";
+            this.colPaymentMethod.Name = "colPaymentMethod";
+            this.colPaymentMethod.ReadOnly = true;
+            // 
             // CreditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -568,7 +553,6 @@
         private System.Windows.Forms.Label lblCreditStartingPageNumber;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColFrom;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSubCategory;
