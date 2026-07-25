@@ -1,188 +1,118 @@
-# 🚀 Developer Guide: How to Build a New Module (e.g., Add Expense)
+# 🚀 Step-by-Step Developer Guide: Building Modules (Lent, Expense, Credit, Note, Borrow, Task)
 
-যখনই আমরা কোনো নতুন মডিউল বানাবো (যেমন: **Add Expense**, **Add Borrow** ইত্যাদি), তখন ডাটাবেজ থেকে ডেটা নিয়ে ড্রপডাউন-এ লোড করা, ইনপুট চেক করা এবং ডাটাবেজে সেভ করার কাজগুলো নিচের **৫টি সহজ ধাপে** করতে হবে।
+This guide explains how the layered data validation and saving system works in our project, and how you can implement this same pattern for any new module. 
 
----
-
-## 🛠️ Step-by-Step Implementation Guide (ধাপে ধাপে গাইড)
-
-### 1️⃣ STEP 1: Stored Procedures (ডাটাবেজ কাজ)
-ডাটাবেজে ২টি Stored Procedure বানাতে হবে:
-* **Dropdown-এর জন্য (List Fetching):** ড্রপডাউন-এ ডেটা দেখানোর জন্য। যেমন: `spGetAllExpenseCategories` (এটি Category_ID এবং Category_Name রিটার্ন করবে)।
-* **Save করার জন্য (Insertion):** টেবিলে ডেটা সেভ করার জন্য। যেমন: `spInsertExpense` (প্যারামিটার হিসেবে Expense-এর ফিল্ডগুলো নেবে)।
+Instead of showing raw code blocks in this documentation, this document focuses on **how the system works conceptually** and guides you to the exact source files in the codebase to read the implementation.
 
 ---
 
-### 2️⃣ STEP 2: Data Access Layer (DAL)
-ডাটাবেজের সাথে কানেকশন ও কোয়েরি রান করার জন্য `DALayer` ফোল্ডারে কাজ করতে হবে।
-* **কোথায় বানাবেন?** `DALayer/Expense/ExpenseDAL.cs` ফাইলে।
-* **কী করবেন?** 
-  1. ফর্মের প্রতিটি ইনপুট ফিল্ডের জন্য Properties (Variables) ডিক্লেয়ার করুন।
-  2. `SaveExpenseToDb()` নামের একটি মেথড লিখুন যা `spInsertExpense` কল করবে।
-* **কোড টেমপ্লেট (Code Template):**
-  ```csharp
-  public class ExpenseDAL
-  {
-      public int userId { get; set; }
-      public decimal amount { get; set; }
-      public int categoryId { get; set; }
-      public string description { get; set; }
+## 📌 Phase 1: How Data Flows (The Architecture Flow)
 
-      public bool SaveExpenseToDb()
-      {
-          using (SqlConnection conn = new SqlConnection(SqlHelper.connectionString))
-          {
-              using (SqlCommand cmd = new SqlCommand("spInsertExpense", conn))
-              {
-                  cmd.CommandType = CommandType.StoredProcedure;
-                  cmd.Parameters.AddWithValue("@UserID", this.userId);
-                  cmd.Parameters.AddWithValue("@Amount", this.amount);
-                  cmd.Parameters.AddWithValue("@CategoryID", this.categoryId);
-                  cmd.Parameters.AddWithValue("@Description", this.description);
+To save any data, it passes through 5 distinct stages in order:
 
-                  conn.Open();
-                  int rows = cmd.ExecuteNonQuery();
-                  return rows > 0; // ডেটা সেভ হলে true, না হলে false
-              }
-          }
-      }
-  }
-  ```
+```mermaid
+sequenceDiagram
+    participant User as WinForms Form UI
+    participant UIModel as UI Model Class
+    participant BLL as Business Logic Layer (BLL)
+    participant Validator as Common Validator
+    participant DAL as Data Access Layer (DAL)
+    participant DB as SQL Server (Stored Procedure)
 
----
+    User->>UIModel: Package Input & Clean Placeholders
+    UIModel->>BLL: Call Save & Validate Flow
+    BLL->>Validator: Run Sequential Input Checks
+    alt Validation Fails
+        Validator-->>BLL: Return Error Enum Value
+        BLL-->>UIModel: Forward Error Enum Value
+        UIModel-->>User: Show Red Error Icon on Input Control
+    else Validation Passes
+        BLL->>DAL: Map BLL values to DAL properties
+        DAL->>DB: Execute Stored Procedure
+        DB-->>DAL: Return Success/Fail Status
+        DAL-->>BLL: Return DB Save Success/Fail
+        BLL-->>UIModel: Forward Result Enum
+        UIModel-->>User: Show Success Msgbox / Database Error
+    end
+```
 
-### 3️⃣ STEP 3: Business Logic Layer (BLL)
-ইউজার ফর্মে কোনো ভুল বা ফাঁকা ইনপুট দিয়েছে কিনা তা ডাটাবেজে পাঠানোর আগেই চেক করা।
-* **কোথায় বানাবেন?** `BLLayer/Expense/ExpenseBLL.cs` ফাইলে।
-* **কী করবেন?** 
-  1. DAL-এর মতো একই Properties ডিক্লেয়ার করুন।
-  2. `CommonValidator` ব্যবহার করে প্রতিটি ফিল্ড ভ্যালিডেট করুন। ভুল থাকলে সেই এরর এনাম রিটার্ন করে দিন। সব ঠিক থাকলে DAL কল করে সেভ করুন।
-* **কোড টেমপ্লেট (Code Template):**
-  ```csharp
-  public class ExpenseBLL
-  {
-      public int userId { get; set; }
-      public string amount { get; set; }
-      public int categoryId { get; set; }
-      public string description { get; set; }
+### **Step 1: WinForms UI Form (User Input)**
+* The user interacts with the form, fills out TextBoxes, selects items in ComboBoxes, and clicks **Save**.
+* When the Save button is clicked, the UI clears any existing error marks (`errorProvider1.Clear()`).
+* The UI gathers the raw values and assigns them to properties of a **UI Model class**.
 
-      private ExpenseDAL expenseDal = new ExpenseDAL();
+### **Step 2: UI Model (The Cleaner & Bridge)**
+* The UI Model acts as a cleaner and a bridge. 
+* It cleans up any placeholder text (for example, if a text field says `"Select Amount"` or `"Enter description"`, it maps this to an empty string `""` before sending it to the Business Logic Layer).
+* It sets up the properties of the corresponding Business Logic Layer (BLL) class.
+* It triggers validation by calling the BLL's main validation method.
 
-      public CommonValidator.ValidationResult DataValidatorIntoExpenseBll()
-      {
-          // ১. ক্যাটাগরি ড্রপডাউন সিলেক্ট করা হয়েছে কিনা চেক
-          if (categoryId <= 0) return CommonValidator.ValidationResult.CategoryInvalid; 
+### **Step 3: Business Logic Layer - BLL (The Gatekeeper)**
+* The BLL class contains properties representing the fields and holds an instance of the Data Access Layer (DAL) class.
+* It performs validation by passing its fields to methods inside `CommonValidator.cs` in a sequential order.
+* **If any check fails**: The BLL halts immediately and returns the specific validation error enum back to the UI Model, which forwards it to the Form.
+* **If all checks pass**: The BLL maps its property values to the DAL object properties and invokes the DAL's database-saving method.
 
-          // ২. অ্যামাউন্ট ভ্যালিডেশন
-          var result = CommonValidator.ValidateAmount(amount);
-          if (result != CommonValidator.ValidationResult.Success) return result;
+### **Step 4: Data Access Layer - DAL (The Database Execution)**
+* The DAL class is responsible for connecting to the database using the shared database connection helper.
+* It creates a connection, sets up a command pointing to a SQL Server **Stored Procedure**, maps its properties to command parameters to prevent SQL injection, and executes the query.
+* It returns a boolean (`true`/`false`) indicating whether rows were successfully affected in the database.
 
-          // ৩. ডেসক্রিপশন ভ্যালিডেশন
-          result = CommonValidator.ValidateDescription(description);
-          if (result != CommonValidator.ValidationResult.Success) return result;
-
-          // সব ঠিক থাকলে DAL-এ ডেটা পাস করে সেভ করা
-          expenseDal.userId = this.userId;
-          expenseDal.amount = Convert.ToDecimal(this.amount);
-          expenseDal.categoryId = this.categoryId;
-          expenseDal.description = this.description;
-
-          if (expenseDal.SaveExpenseToDb())
-          {
-              return CommonValidator.ValidationResult.Success;
-          }
-          return CommonValidator.ValidationResult.StoreProcedureError;
-      }
-  }
-  ```
+### **Step 5: Error and Success Display (UI Handover)**
+* The UI Form receives the validation result enum.
+* In a `switch` block, the UI determines how to respond to the result:
+  * **On Success**: Display a confirmation message box and clear/refresh the form.
+  * **On Validation Errors**: Pass the specific validation result and target controls to `ErrorHelper.ShowValidationError()`. This highlights the exact input element on the form with a red error icon and sets the tooltip description.
+  * **On Database Failure**: Show a generic error message indicating database storage issues.
 
 ---
 
-### 4️⃣ STEP 4: UI Model (The Bridge)
-এটি UI ফর্মের সাথে BLL-এর সংযোগ ঘটিয়ে ফর্মের কোডকে পরিষ্কার রাখে।
-* **কোথায় বানাবেন?** `PersonalExpenseCreditTracker/Modules/Expense/ExpenseUi.cs` ফাইলে।
-* **কোড টেমপ্লেট (Code Template):**
-  ```csharp
-  public class ExpenseUi
-  {
-      public int userId { get; set; }
-      public string amount { get; set; }
-      public int categoryId { get; set; }
-      public string description { get; set; }
+## 🛠️ Step-by-Step: How to Implement a New Module (e.g., Note, Expense, Borrow)
 
-      private ExpenseBLL expenseBll = new ExpenseBLL();
+When building a new module, you should follow this structural checklist and look at the existing **Lent** module files as your blueprint.
 
-      public CommonValidator.ValidationResult InsertDataIntoExpenseUi()
-      {
-          expenseBll.userId = userId;
-          expenseBll.amount = amount;
-          expenseBll.categoryId = categoryId;
-          expenseBll.description = description;
+### **Step 1: Database Setup**
+1. **Table Creation**: Create a table in SQL Server with the necessary fields and primary key/foreign key constraints.
+2. **Stored Procedures**:
+   * Create an Insert Stored Procedure (e.g. `spInsertNote`, `spInsertExpense`).
+   * Create Select/Read Stored Procedures (e.g. `spGetAllNotes` or `spGetAllNoteTags`).
 
-          return expenseBll.DataValidatorIntoExpenseBll();
-      }
-  }
-  ```
+### **Step 2: Create the DAL Class**
+* **Responsibility**: Houses properties matching the database fields, constructs `SqlConnection`/`SqlCommand`, maps parameters, opens the connection, executes `ExecuteNonQuery`, and handles database exceptions.
+* **Where to create**: Put it in `DALayer/NewModule/` directory.
+* **Code Reference**: Open and read [LentDAL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/DALayer/Lent/LentDAL.cs) to see how to implement this layer.
 
----
+### **Step 3: Create the BLL Class & Add Validation Rules**
+* **Responsibility**: Declares properties matching the inputs, instantiates the DAL class, sequentially calls `CommonValidator` functions, maps properties to the DAL class, and runs the save command.
+* **Where to create**: Put it in `BLLayer/NewModule/` directory.
+* **Code Reference**: Open and read [LentBLL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Lent/LentBLL.cs) to see how validations are evaluated and how the BLL routes data to the DAL.
 
-### 5️⃣ STEP 5: UI Form & Helpers (ডিজাইন ও ইভেন্ট কোড)
-সবশেষে ইউজার ইন্টারফেসে ডাটাবেজ থেকে ড্রপডাউন ডেটা নিয়ে আসা ও ভুল ইনপুটের জন্য লাল এরর আইকন দেখানো।
+### **Step 4: Create the UI Model Class**
+* **Responsibility**: Declares the properties, holds the BLL instance, sets BLL properties, and delegates execution to BLL validation.
+* **Where to create**: Put it in `PersonalExpenseCreditTracker/Modules/NewModule/` folder.
+* **Code Reference**: Open and read [LentUi.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/LentUi.cs) to see how properties are set up and mapped.
 
-1. **ফর্ম লোড-এ ড্রপডাউন ডেটা বাইন্ডিং (Load Dropdowns):**
-   `CommonUiFunction.LoadInComboBox` দিয়ে ডাটাবেজ থেকে ড্রপডাউনে ডেটা লোড করুন। এটি নিজে নিজেই প্রথম অপশন হিসেবে placeholders (যেমন "Select Category") অ্যাড করে দেবে।
-   ```csharp
-   CommonUiFunction.LoadInComboBox("spGetAllExpenseCategories", "Select Category", comboBoxCategory);
-   ```
-
-2. **ভ্যালিডেশন এরর মেসেজ সেটআপ করা (Error Messages Setup):**
-   * [CommonValidator.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Common/CommonValidator.cs) ফাইলের `ValidationResult` এনামে নতুন কোনো এরর টাইপ লাগলে যোগ করুন (যেমন `CategoryInvalid`).
-   * [ErrorHelper.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/ErrorHelper.cs) ফাইলে যান এবং নতুন এনামের জন্য মেসেজটি ডিফাইন করে দিন:
-     ```csharp
-     case CommonValidator.ValidationResult.CategoryInvalid:
-         errorProvider.SetError(comboBox, "Please select an expense category.");
-         comboBox.Focus();
-         break;
-     ```
-
-3. **সেভ বাটনের ক্লিক কোড (Save Button Click Event):**
-   ```csharp
-   private void btnExpenseSave_Click(object sender, EventArgs e)
-   {
-       errorProvider1.Clear(); // আগের সব এরর সাইন মুছে ফেলা
-
-       ExpenseUi expenseUi = new ExpenseUi();
-       expenseUi.userId = 11; // কারেন্ট ইউজার আইডি
-       expenseUi.categoryId = Convert.ToInt32(comboBoxCategory.SelectedValue);
-       expenseUi.amount = (txtAmount.Text == "Select Amount") ? "" : txtAmount.Text; // প্লেসহোল্ডার হ্যান্ডেল করা
-       expenseUi.description = (txtDescription.Text == "Enter description") ? "" : txtDescription.Text;
-
-       // BLL কল করা ভ্যালিডেশনের জন্য
-       CommonValidator.ValidationResult result = expenseUi.InsertDataIntoExpenseUi();
-
-       // রেজাল্ট অনুযায়ী অ্যাকশন নেওয়া
-       switch (result)
-       {
-           case CommonValidator.ValidationResult.Success:
-               MessageBox.Show("Expense added successfully!");
-               break;
-           case CommonValidator.ValidationResult.CategoryInvalid:
-               ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxCategory);
-               break;
-           case CommonValidator.ValidationResult.AmountEmpty:
-           case CommonValidator.ValidationResult.AmountInvalid:
-               ErrorHelper.ShowValidationError(result, errorProvider1, txtAmount);
-               break;
-           case CommonValidator.ValidationResult.StoreProcedureError:
-               MessageBox.Show("Failed to save expense!");
-               break;
-       }
-   }
-   ```
+### **Step 5: Setup the Form (Add/Edit UI Form)**
+* **Responsibility**: Declares the form controls, binds standard list data (ComboBoxes) on Load using common UI helper functions, clears the `ErrorProvider` on clicking Save, copies control text values into the UI Model (checking for placeholders), runs the save method, and switches on the result code to show errors using `ErrorHelper`.
+* **Where to create**: Put it in `PersonalExpenseCreditTracker/Modules/NewModule/` folder.
+* **Code Reference**: Open and read [AddLentControls.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/AddLentControls.cs) to see the Save button click event handler (`btnLentAddSave_Click`) and how UI validation cases are handled.
 
 ---
 
-## 🎯 এই নিয়মের মূল সুবিধা (কেন করা হচ্ছে?)
-1. **ভুল ইনপুট প্রতিরোধ:** ডেটা ভুল থাকলে BLL-ই তা আটকে দেবে। UI-তে ভুল ইনপুটের ঠিক পাশে লাল সতর্ক সংকেত দেখানো হবে।
-2. **একই কোড বারবার না লেখা (Reusability):** `CommonUiFunction` ও `ErrorHelper`-এ কোড রেডি থাকায় নতুন কোনো ফর্মে কানেকশন ওপেন/ক্লোজ বা এরর মেসেজ লেখার পেছনে সময় নষ্ট হয় না।
-3. **পরিষ্কার ও ক্লিন কোড:** ডিজাইন এবং লজিক আলাদা থাকায় কোড মেনটেইন করা সহজ।
+## ⚠️ How to Add a New Validation Check and Error Message
+
+When creating other modules (like Expense, Borrow, Note, etc.), you will need custom checks and UI tooltips. Here is the process:
+
+### **Part A: Add the Validation Result Enum**
+1. Open the file [CommonValidator.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Common/CommonValidator.cs).
+2. Inside the `public enum ValidationResult`, add your new validation error identifiers (e.g. `TitleEmpty`, `ContentEmpty`, `CategoryInvalid`).
+3. Inside the `CommonValidator` class, add any general-purpose static helper validation functions if needed (e.g., checks for length, null references, or numeric ranges).
+
+### **Part B: Map to UI Error Messages**
+1. Open the file [ErrorHelper.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/ErrorHelper.cs).
+2. Inside the `ShowValidationError` method overloads (one for `TextBox` and one for `ComboBox`), add your new `ValidationResult` case blocks.
+3. For each case:
+   * Call `errorProvider.SetError(control, "Your custom user-friendly error message here.")`.
+   * Call `control.Focus()` to focus on the input field with the invalid data.
+
+By referencing the files inside the repository and following this blueprint, you can develop robust validation and data routing for any new module.
