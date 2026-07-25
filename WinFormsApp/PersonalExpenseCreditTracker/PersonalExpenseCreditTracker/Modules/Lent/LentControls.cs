@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +10,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using PersonalExpenseCreditTracker.Common;
 using System.Runtime.InteropServices;
-
+using PersonalExpenseCreditTracker.Forms.Main;
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public partial class LentControls : Form
@@ -188,7 +188,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                                  "Information",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Information);
-
+                 
                  dgvLentDataTable.DataSource = null;
                  return;
              }
@@ -199,6 +199,30 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             AllLentData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
+        }
+
+        public Boolean LoadFilteredLentData(int statusId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = LentUi.retriveFilteredDataByStatusAtUi("spFilterLentByStatus", userID, statusId);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                //MainForm mainForm = new MainForm();
+                //mainForm.RefreshStatusDropDown(0);
+                
+                //dgvLentDataTable.DataSource = null;
+                //AllLentData = null;
+                
+                return false;
+            }
+            AllLentData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
         }
 
 

@@ -608,7 +608,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlMainSideBarSection.Location = new System.Drawing.Point(0, 0);
             this.pnlMainSideBarSection.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMainSideBarSection.Name = "pnlMainSideBarSection";
-            this.pnlMainSideBarSection.Size = new System.Drawing.Size(300, 857);
+            this.pnlMainSideBarSection.Size = new System.Drawing.Size(300, 1055);
             this.pnlMainSideBarSection.TabIndex = 0;
             // 
             // pnlSideBar
@@ -621,7 +621,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlSideBar.Location = new System.Drawing.Point(0, 98);
             this.pnlSideBar.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSideBar.Name = "pnlSideBar";
-            this.pnlSideBar.Size = new System.Drawing.Size(300, 694);
+            this.pnlSideBar.Size = new System.Drawing.Size(300, 892);
             this.pnlSideBar.TabIndex = 17;
             this.pnlSideBar.Resize += new System.EventHandler(this.pnlSideBar_Resize);
             // 
@@ -5159,7 +5159,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlUserProfile.Controls.Add(this.picUserProfile);
             this.pnlUserProfile.Controls.Add(this.lblUserName);
             this.pnlUserProfile.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlUserProfile.Location = new System.Drawing.Point(0, 792);
+            this.pnlUserProfile.Location = new System.Drawing.Point(0, 990);
             this.pnlUserProfile.Margin = new System.Windows.Forms.Padding(0);
             this.pnlUserProfile.Name = "pnlUserProfile";
             this.pnlUserProfile.Size = new System.Drawing.Size(300, 65);
@@ -5227,7 +5227,6 @@ namespace PersonalExpenseCreditTracker
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(300, 98);
             this.panelLogo.TabIndex = 0;
-            this.panelLogo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLogo_Paint);
             // 
             // panel1
             // 
@@ -5300,7 +5299,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlContainer.Location = new System.Drawing.Point(300, 0);
             this.pnlContainer.Margin = new System.Windows.Forms.Padding(2);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(657, 857);
+            this.pnlContainer.Size = new System.Drawing.Size(976, 1055);
             this.pnlContainer.TabIndex = 1;
             // 
             // pnlPersonAddPage
@@ -5310,7 +5309,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlPersonAddPage.Location = new System.Drawing.Point(0, 63);
             this.pnlPersonAddPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPersonAddPage.Name = "pnlPersonAddPage";
-            this.pnlPersonAddPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlPersonAddPage.Size = new System.Drawing.Size(976, 992);
             this.pnlPersonAddPage.TabIndex = 0;
             // 
             // pnlCreditCategoryPage
@@ -5320,7 +5319,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditCategoryPage.Location = new System.Drawing.Point(0, 63);
             this.pnlCreditCategoryPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCreditCategoryPage.Name = "pnlCreditCategoryPage";
-            this.pnlCreditCategoryPage.Size = new System.Drawing.Size(657, 794);
+            this.pnlCreditCategoryPage.Size = new System.Drawing.Size(976, 992);
             this.pnlCreditCategoryPage.TabIndex = 0;
             // 
             // pnlExpenseCategory
@@ -5330,7 +5329,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlExpenseCategory.Location = new System.Drawing.Point(0, 63);
             this.pnlExpenseCategory.Margin = new System.Windows.Forms.Padding(2);
             this.pnlExpenseCategory.Name = "pnlExpenseCategory";
-            this.pnlExpenseCategory.Size = new System.Drawing.Size(657, 794);
+            this.pnlExpenseCategory.Size = new System.Drawing.Size(976, 992);
             this.pnlExpenseCategory.TabIndex = 0;
             // 
             // pnlOverview
@@ -5340,7 +5339,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlOverview.Location = new System.Drawing.Point(0, 63);
             this.pnlOverview.Margin = new System.Windows.Forms.Padding(2);
             this.pnlOverview.Name = "pnlOverview";
-            this.pnlOverview.Size = new System.Drawing.Size(657, 794);
+            this.pnlOverview.Size = new System.Drawing.Size(976, 992);
             this.pnlOverview.TabIndex = 0;
             // 
             // pnlExpensePage
@@ -5350,7 +5349,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlExpensePage.Location = new System.Drawing.Point(0, 63);
             this.pnlExpensePage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlExpensePage.Name = "pnlExpensePage";
-            this.pnlExpensePage.Size = new System.Drawing.Size(657, 794);
+            this.pnlExpensePage.Size = new System.Drawing.Size(976, 992);
             this.pnlExpensePage.TabIndex = 1;
             // 
             // pnlCreditPage
@@ -5360,7 +5359,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditPage.Location = new System.Drawing.Point(0, 63);
             this.pnlCreditPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCreditPage.Name = "pnlCreditPage";
-            this.pnlCreditPage.Size = new System.Drawing.Size(657, 794);
+            this.pnlCreditPage.Size = new System.Drawing.Size(976, 992);
             this.pnlCreditPage.TabIndex = 0;
             // 
             // pnlLentPage
@@ -5370,7 +5369,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentPage.Location = new System.Drawing.Point(0, 63);
             this.pnlLentPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlLentPage.Name = "pnlLentPage";
-            this.pnlLentPage.Size = new System.Drawing.Size(657, 794);
+            this.pnlLentPage.Size = new System.Drawing.Size(976, 992);
             this.pnlLentPage.TabIndex = 0;
             // 
             // pnlBorrowPage
@@ -5380,7 +5379,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowPage.Location = new System.Drawing.Point(0, 63);
             this.pnlBorrowPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlBorrowPage.Name = "pnlBorrowPage";
-            this.pnlBorrowPage.Size = new System.Drawing.Size(657, 794);
+            this.pnlBorrowPage.Size = new System.Drawing.Size(976, 992);
             this.pnlBorrowPage.TabIndex = 0;
             // 
             // pnlTaskPage
@@ -5390,7 +5389,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlTaskPage.Location = new System.Drawing.Point(0, 63);
             this.pnlTaskPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTaskPage.Name = "pnlTaskPage";
-            this.pnlTaskPage.Size = new System.Drawing.Size(657, 794);
+            this.pnlTaskPage.Size = new System.Drawing.Size(976, 992);
             this.pnlTaskPage.TabIndex = 0;
             // 
             // pnlNotesPage
@@ -5400,7 +5399,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlNotesPage.Location = new System.Drawing.Point(0, 63);
             this.pnlNotesPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlNotesPage.Name = "pnlNotesPage";
-            this.pnlNotesPage.Size = new System.Drawing.Size(657, 794);
+            this.pnlNotesPage.Size = new System.Drawing.Size(976, 992);
             this.pnlNotesPage.TabIndex = 0;
             // 
             // pnlSettingPage
@@ -5411,7 +5410,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlSettingPage.Location = new System.Drawing.Point(0, 63);
             this.pnlSettingPage.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSettingPage.Name = "pnlSettingPage";
-            this.pnlSettingPage.Size = new System.Drawing.Size(657, 794);
+            this.pnlSettingPage.Size = new System.Drawing.Size(976, 992);
             this.pnlSettingPage.TabIndex = 0;
             // 
             // pnlTop
@@ -5426,7 +5425,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlTop.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Padding = new System.Windows.Forms.Padding(15, 12, 15, 12);
-            this.pnlTop.Size = new System.Drawing.Size(657, 63);
+            this.pnlTop.Size = new System.Drawing.Size(976, 63);
             this.pnlTop.TabIndex = 2;
             // 
             // lblSubtitle
@@ -5446,7 +5445,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlRight.Controls.Add(this.panel5);
             this.pnlRight.Controls.Add(this.pnlDate);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(383, 12);
+            this.pnlRight.Location = new System.Drawing.Point(702, 12);
             this.pnlRight.Margin = new System.Windows.Forms.Padding(2);
             this.pnlRight.Name = "pnlRight";
             this.pnlRight.Size = new System.Drawing.Size(259, 39);
@@ -5562,9 +5561,8 @@ namespace PersonalExpenseCreditTracker
             this.pnlProfilePage.Location = new System.Drawing.Point(300, 0);
             this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(0, 16, 8, 16);
             this.pnlProfilePage.Name = "pnlProfilePage";
-            this.pnlProfilePage.Size = new System.Drawing.Size(657, 857);
+            this.pnlProfilePage.Size = new System.Drawing.Size(976, 1055);
             this.pnlProfilePage.TabIndex = 0;
-            this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
             // 
             // tmSidebar
             // 

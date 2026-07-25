@@ -40,11 +40,11 @@ namespace BLLayer.Lent
             }
 
             // Status Validation
-            result = CommonValidator.ValidateStatus(statusId);
-            if (result != CommonValidator.ValidationResult.Success)
-            {
-                return result;
-            }
+            //result = CommonValidator.ValidateStatus(statusId);
+            //if (result != CommonValidator.ValidationResult.Success)
+            //{
+            //    return result;
+            //}
 
             //Amount Validation
             result = CommonValidator.ValidateAmount(amount);

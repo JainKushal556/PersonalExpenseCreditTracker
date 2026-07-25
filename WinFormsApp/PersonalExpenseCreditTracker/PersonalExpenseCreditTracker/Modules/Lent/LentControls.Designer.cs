@@ -28,21 +28,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< HEAD
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-=======
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
->>>>>>> origin/main
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTotalTransaction = new System.Windows.Forms.Panel();
             this.labelTotalTransactionNumber = new System.Windows.Forms.Label();
@@ -127,17 +118,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalTransaction
             // 
-<<<<<<< HEAD
-            this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTotalTransaction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(252)))), ((int)(((byte)(232)))));
-=======
             this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalTransaction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(72)))), ((int)(((byte)(18)))));
->>>>>>> origin/main
             this.panelTotalTransaction.Controls.Add(this.labelTotalTransactionNumber);
             this.panelTotalTransaction.Controls.Add(this.lblTotalTransaction);
             this.panelTotalTransaction.Controls.Add(this.pictureBoxTotalTransaction);
@@ -189,18 +173,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalDue
             // 
-<<<<<<< HEAD
-            this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTotalDue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-=======
             this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalDue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(44)))), ((int)(((byte)(60)))));
             this.panelTotalDue.Controls.Add(this.lblTotalDueAmount);
->>>>>>> origin/main
             this.panelTotalDue.Controls.Add(this.lblTotalDue);
             this.panelTotalDue.Controls.Add(this.pictureBoxTotalDue);
             this.panelTotalDue.Location = new System.Drawing.Point(586, 13);
@@ -251,18 +228,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalRepaid
             // 
-<<<<<<< HEAD
-            this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTotalRepaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(255)))), ((int)(((byte)(231)))));
-=======
             this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalRepaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(95)))), ((int)(((byte)(66)))));
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaidAmount);
->>>>>>> origin/main
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaid);
             this.panelTotalRepaid.Controls.Add(this.pictureBoxTotalRepaid);
             this.panelTotalRepaid.Location = new System.Drawing.Point(300, 13);
@@ -314,18 +284,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalLent
             // 
-<<<<<<< HEAD
-            this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTotalLent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(246)))), ((int)(((byte)(255)))));
-=======
             this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalLent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(48)))), ((int)(((byte)(88)))));
             this.panelTotalLent.Controls.Add(this.lblTotalLentAmount);
->>>>>>> origin/main
             this.panelTotalLent.Controls.Add(this.lblTotalLent);
             this.panelTotalLent.Controls.Add(this.pictureBoxTotalLent);
             this.panelTotalLent.Location = new System.Drawing.Point(14, 13);
@@ -376,37 +339,22 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // tableLayoutPanelMainData
             // 
-<<<<<<< HEAD
-            this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanelMainData.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-=======
             this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
->>>>>>> origin/main
             this.tableLayoutPanelMainData.ColumnCount = 1;
             this.tableLayoutPanelMainData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMainData.Controls.Add(this.panelExportReport, 0, 0);
             this.tableLayoutPanelMainData.Controls.Add(this.dgvLentDataTable, 0, 1);
-<<<<<<< HEAD
             this.tableLayoutPanelMainData.Controls.Add(this.panel2, 0, 2);
-            this.tableLayoutPanelMainData.Location = new System.Drawing.Point(10, 145);
-=======
             this.tableLayoutPanelMainData.Location = new System.Drawing.Point(0, 135);
->>>>>>> origin/main
             this.tableLayoutPanelMainData.Name = "tableLayoutPanelMainData";
             this.tableLayoutPanelMainData.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.tableLayoutPanelMainData.RowCount = 3;
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-<<<<<<< HEAD
-            this.tableLayoutPanelMainData.Size = new System.Drawing.Size(1133, 598);
-=======
             this.tableLayoutPanelMainData.Size = new System.Drawing.Size(1153, 572);
->>>>>>> origin/main
             this.tableLayoutPanelMainData.TabIndex = 1;
             // 
             // panel2
@@ -419,11 +367,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel2.Controls.Add(this.btnNextPage);
             this.panel2.Controls.Add(this.btnLastPage);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-<<<<<<< HEAD
-            this.panel2.Location = new System.Drawing.Point(1, 544);
-=======
             this.panel2.Location = new System.Drawing.Point(8, 516);
->>>>>>> origin/main
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1137, 51);
@@ -636,7 +580,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.colRemainingAmount,
             this.colDeadline,
             this.colDescription});
-<<<<<<< HEAD
             dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -645,16 +588,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle30;
-=======
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle6;
->>>>>>> origin/main
             this.dgvLentDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLentDataTable.EnableHeadersVisualStyles = false;
             this.dgvLentDataTable.GridColor = System.Drawing.Color.White;
@@ -717,13 +650,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colStatus.DataPropertyName = "StatusName";
-<<<<<<< HEAD
             dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.colStatus.DefaultCellStyle = dataGridViewCellStyle29;
-=======
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colStatus.DefaultCellStyle = dataGridViewCellStyle5;
->>>>>>> origin/main
             this.colStatus.FillWeight = 70F;
             this.colStatus.HeaderText = "Status";
             this.colStatus.Name = "colStatus";
@@ -775,13 +703,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1153, 753);
-=======
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.ClientSize = new System.Drawing.Size(1153, 707);
->>>>>>> origin/main
             this.Controls.Add(this.tableLayoutPanelMainData);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "LentControls";

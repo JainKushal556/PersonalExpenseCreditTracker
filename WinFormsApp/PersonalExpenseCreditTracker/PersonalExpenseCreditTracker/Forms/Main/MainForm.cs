@@ -19,6 +19,7 @@ using PersonalExpenseCreditTracker.Modules.Task;
 using PersonalExpenseCreditTracker.Modules.Settings.Person;
 using PersonalExpenseCreditTracker.Modules.Settings.Category;
 using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Session;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -2017,8 +2018,8 @@ namespace PersonalExpenseCreditTracker
             UpdateLentClearAllButton();
             flowSidebar.Top = 0;
             //load status from db on click to status drop down 
-            Common.CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", ComboBoxLentStatus);
-
+             Common.CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", ComboBoxLentStatus);
+             
         }
 
         private void pnlLentPaymentHeader_Click(object sender, EventArgs e)
@@ -2163,7 +2164,20 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxLentStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateLentClearAllButton();
-            MessageBox.Show(ComboBoxLentStatus.SelectedIndex.ToString());
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                if (ComboBoxLentStatus.SelectedIndex > 0)
+                {
+                    int statusId = Convert.ToInt32(ComboBoxLentStatus.SelectedValue);
+                    if(!lentControl.LoadFilteredLentData(statusId))
+                     ComboBoxLentStatus.SelectedIndex = 0;
+                }
+                else
+                {
+                    lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                }
+            }
+            //MessageBox.Show(ComboBoxLentStatus.SelectedIndex.ToString());
 
         }
 
@@ -2174,6 +2188,13 @@ namespace PersonalExpenseCreditTracker
         private void pnlAllLent_Click(object sender, EventArgs e)
         {
             SetActiveLentSubMenu(pnlAllLent);
+
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+            }
+
+            ShowPage(pnlLentPage);
         }
 
         private void pnlAllLent_MouseEnter(object sender, EventArgs e)
@@ -2224,7 +2245,7 @@ namespace PersonalExpenseCreditTracker
                 lentControl.LoadLentData(Session.LogedInUser.GetUserId());
             }
 
-            ShowPage(pnlLentPage);   
+            ShowPage(pnlLentPage);
         }
         private void pnlAddLent_MouseEnter(object sender, EventArgs e)
         {
@@ -3177,7 +3198,7 @@ namespace PersonalExpenseCreditTracker
                 expenseCategoryControls.TopLevel = false;
                 expenseCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 expenseCategoryControls.Dock = DockStyle.Fill;
-                pnlTop.Visible = true;
+                pnlTop.Visible = false;
                 pnlExpenseCategory.Controls.Clear();
 
                 pnlExpenseCategory.Controls.Add(expenseCategoryControls);
@@ -3227,7 +3248,7 @@ namespace PersonalExpenseCreditTracker
                 creditCategoryControls.TopLevel = false;
                 creditCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 creditCategoryControls.Dock = DockStyle.Fill;
-                pnlTop.Visible = true;
+                pnlTop.Visible = false;
                 pnlCreditCategoryPage.Controls.Clear();
 
                 pnlCreditCategoryPage.Controls.Add(creditCategoryControls);
@@ -3363,16 +3384,10 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-        private void panelLogo_Paint(object sender, PaintEventArgs e)
+        public void RefreshStatusDropDown(int index)
         {
-
+            ComboBoxLentStatus.SelectedIndex = index;
         }
-
-        private void pnlProfilePage_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
 
       
 
