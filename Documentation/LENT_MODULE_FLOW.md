@@ -1,224 +1,188 @@
-# 📘 Lent Module Architecture & Data Flow Guide
+# 🚀 Developer Guide: How to Build a New Module (e.g., Add Expense)
 
-This document describes how the **Add Lent** feature is structured and how data flows across different layers: from loading database values into dropdowns, validating user inputs using enums, displaying errors, and finally storing the data in the database. 
-
-This guide serves as a reference pattern. Developers can use this exact architecture and flow to implement other modules like **Add Expense**, **Add Borrow**, etc.
+যখনই আমরা কোনো নতুন মডিউল বানাবো (যেমন: **Add Expense**, **Add Borrow** ইত্যাদি), তখন ডাটাবেজ থেকে ডেটা নিয়ে ড্রপডাউন-এ লোড করা, ইনপুট চেক করা এবং ডাটাবেজে সেভ করার কাজগুলো নিচের **৫টি সহজ ধাপে** করতে হবে।
 
 ---
 
-## 🏗️ Architectural Overview (Layered Design)
+## 🛠️ Step-by-Step Implementation Guide (ধাপে ধাপে গাইড)
 
-The project uses a **3-Layer Architecture** (Presentation/UI Layer, Business Logic Layer, and Data Access Layer). This ensures:
-1. **Separation of Concerns (SoC)**: The UI is only responsible for rendering controls; the BLL handles business rules; the DAL handles SQL execution.
-2. **Reusability**: Shared tasks like database connections and basic validations are centralized in `Common` folders.
-3. **Robust Error Handling**: Standardized validation enums are passed between layers, preventing invalid data from ever reaching the database.
-
-Here is the folder and layer mapping:
-
-```text
-PersonalExpenseCreditTracker (Solution)
-│
-├── 📂 PersonalExpenseCreditTracker (UI Layer - Forms, UserControls, UI Models)
-│   ├── 📂 Common                      # UI Helpers (CommonUiFunction, ErrorHelper)
-│   └── 📂 Modules/Lent                # UI Form (AddLentControls) & UI Model (LentUi)
-│
-├── 📂 BLLayer (Business Logic Layer)
-│   ├── 📂 Common                      # CommonValidator (Business Validation Rules & Enums)
-│   └── 📂 Lent                        # BLL logic class (LentBLL)
-│
-└── 📂 DALayer (Data Access Layer)
-    ├── 📂 Common                      # SqlHelper (Shared SQL connection & query functions)
-    └── 📂 Lent                        # DAL database class (LentDAL)
-```
+### 1️⃣ STEP 1: Stored Procedures (ডাটাবেজ কাজ)
+ডাটাবেজে ২টি Stored Procedure বানাতে হবে:
+* **Dropdown-এর জন্য (List Fetching):** ড্রপডাউন-এ ডেটা দেখানোর জন্য। যেমন: `spGetAllExpenseCategories` (এটি Category_ID এবং Category_Name রিটার্ন করবে)।
+* **Save করার জন্য (Insertion):** টেবিলে ডেটা সেভ করার জন্য। যেমন: `spInsertExpense` (প্যারামিটার হিসেবে Expense-এর ফিল্ডগুলো নেবে)।
 
 ---
 
-## 🔄 Visualizing the Flows
-
-### 1. Dropdown Load Flow (Loading ComboBoxes on Form Open)
-
-This flow loads dynamic lists (like Persons, Payment Types, and Statuses) from SQL database tables into WinForm ComboBoxes.
-
-```mermaid
-sequenceDiagram
-    participant UI as AddLentControls
-    participant CU as CommonUiFunction
-    participant UM as LentUi
-    participant BLL as LentBLL
-    participant DAL as SqlHelper
-    participant DB as SQL Server (DB)
-
-    UI->>CU: LoadInComboBox("spGetAllPersons", 11, "Select Person", comboBox)
-    CU->>UM: retriveListForComboBoxAtUi("spGetAllPersons", 11)
-    UM->>BLL: retriveListForComboBoxAtBal("spGetAllPersons", 11)
-    BLL->>DAL: retriveListForComboBoxAtDal("spGetAllPersons", 11)
-    DAL->>DB: Execute Stored Procedure
-    DB-->>DAL: Return DataTable (Data)
-    DAL-->>BLL: Return DataTable
-    BLL-->>UM: Return DataTable
-    UM-->>CU: Return DataTable
-    CU-->>UI: Inserts placeholder row (Index 0, e.g. "Select Person") & binds to ComboBox
-```
-
-### 2. Save & Validate Flow (On clicking Save button)
-
-This flow handles what happens when a user clicks the "Save" button to submit data.
-
-```mermaid
-sequenceDiagram
-    participant UI as AddLentControls
-    participant UM as LentUi
-    participant BLL as LentBLL
-    participant VAL as CommonValidator
-    participant DAL as LentDAL
-    participant DB as SQL Server (DB)
-    participant ERR as ErrorHelper
-
-    UI->>UI: Click Save -> errorProvider1.Clear()
-    UI->>UM: Map Form control inputs to LentUi properties
-    UI->>UM: Call InsertDataIntoLentUi()
-    UM->>BLL: Copy values & call DataValidatorIntoLentBll()
-    BLL->>VAL: Run sequentially: ValidatePerson, ValidatePayment, ValidateStatus, ValidateAmount, etc.
-    VAL-->>BLL: Return ValidationResult (Enum)
-
-    alt Validation Fails (e.g., AmountEmpty)
-        BLL-->>UM: Return specific Error Enum
-        UM-->>UI: Return Error Enum
-        UI->>ERR: ShowValidationError(result, errorProvider1, txtLentAddAmount)
-        ERR-->>UI: Focus control & display red validation icon
-    else Validation Passes
-        BLL->>DAL: Copy values & call SaveLentToDb()
-        DAL->>DB: Execute spInsertLent Stored Procedure
-        DB-->>DAL: Return Rows Affected > 0
-        DAL-->>BLL: Return true/false
-        alt Database Insert Success
-            BLL-->>UM: Return ValidationResult.Success
-            UM-->>UI: Return ValidationResult.Success
-            UI-->>UI: Show success MessageBox.Show("Lent added successfully!")
-        else Database Insert Fails
-            BLL-->>UM: Return ValidationResult.StoreProcedureError
-            UM-->>UI: Return ValidationResult.StoreProcedureError
-            UI-->>UI: Show failure MessageBox.Show("Lent added Unsuccessfully!")
-        end
-    end
-```
-
----
-
-## 🔎 Layer-by-Layer Code & Function Analysis
-
-### 1. Presentation/UI Layer
-
-#### 📄 [AddLentControls.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/AddLentControls.cs)
-- **Form Load (`AddLentControls_Load`)**: Populates the UI ComboBoxes by calling:
+### 2️⃣ STEP 2: Data Access Layer (DAL)
+ডাটাবেজের সাথে কানেকশন ও কোয়েরি রান করার জন্য `DALayer` ফোল্ডারে কাজ করতে হবে।
+* **কোথায় বানাবেন?** `DALayer/Expense/ExpenseDAL.cs` ফাইলে।
+* **কী করবেন?** 
+  1. ফর্মের প্রতিটি ইনপুট ফিল্ডের জন্য Properties (Variables) ডিক্লেয়ার করুন।
+  2. `SaveExpenseToDb()` নামের একটি মেথড লিখুন যা `spInsertExpense` কল করবে।
+* **কোড টেমপ্লেট (Code Template):**
   ```csharp
-  CommonUiFunction.LoadInComboBox("spGetAllPersons", 11, "Select Person", comboBoxLentSelectPerson);
-  CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", comboBoxLentPaymentType);
-  CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", comboBoxLentStatus);
-  ```
-- **Save Event (`btnLentAddSave_Click`)**:
-  - Clears previous error icons: `errorProvider1.Clear()`.
-  - Instantiates `LentUi` and extracts values from the form. It sanitizes inputs (e.g., placeholder texts like `"Select Amount"` are mapped to `""`, and missing dates are mapped to `DateTime.MinValue`).
-  - Calls validation: `CommonValidator.ValidationResult result = lentUi.InsertDataIntoLentUi();`.
-  - Processes results inside a `switch (result)` block. If it receives an error enum, it calls `ErrorHelper.ShowValidationError(...)` to point the user to the invalid field.
-
-#### 📄 [LentUi.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Modules/Lent/LentUi.cs)
-- **Purpose**: Acts as a Data Transfer Object (DTO) and boundary between WinForms UI controls and logic layers.
-- **Key Methods**:
-  - `InsertDataIntoLentUi()`: Copies UI properties into `LentBLL` and calls `lentBLL.DataValidatorIntoLentBll()`.
-  - `retriveListForComboBoxAtUi()`: Acts as a static pass-through method calling BLL methods to get data lists for dropdowns.
-
----
-
-### 2. Business Logic Layer (BLL)
-
-#### 📄 [LentBLL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Lent/LentBLL.cs)
-- **Purpose**: Implements core business logic. It does not know about the database connection or the textboxes on the form.
-- **Key Methods**:
-  - `DataValidatorIntoLentBll()`: Checks fields one by one using `CommonValidator` functions. If any validation fails, it aborts execution immediately and returns the failure enum. If all pass, it maps BLL properties to `LentDAL` properties and triggers `lentDal.SaveLentToDb()`.
-    ```csharp
-    result = CommonValidator.ValidateAmount(amount);
-    if (result != CommonValidator.ValidationResult.Success) return result;
-    ```
-  - `retriveListForComboBoxAtBal()`: Passes request to `SqlHelper` in the DAL.
-
----
-
-### 3. Data Access Layer (DAL)
-
-#### 📄 [LentDAL.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/DALayer/Lent/LentDAL.cs)
-- **Purpose**: Executes SQL statements. It uses raw SQL connections but encapsulates queries inside Stored Procedures.
-- **Key Methods**:
-  - `SaveLentToDb()`: Opens SQL connection using `SqlHelper.connectionString`, calls the stored procedure `"spInsertLent"`, passes inputs as parameters (protects against SQL Injection), calls `ExecuteNonQuery()`, and returns a boolean status.
-  - `ReturnBoolean(int value)`: Helper that maps rows affected (usually `> 0`) to `true` or `false`.
-
----
-
-### 4. Common & Utility Layer
-
-#### 📄 [CommonValidator.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Common/CommonValidator.cs)
-- **Enum `ValidationResult`**: A single centralized place for all potential statuses:
-  ```csharp
-  public enum ValidationResult
+  public class ExpenseDAL
   {
-      Success,
-      PersonInvalid,
-      PaymentInvalid,
-      StatusInvalid,
-      AmountEmpty,
-      AmountInvalid,
-      AmountTooLarge,
-      DeadlineInvalid,
-      DescriptionInvalid,
-      StoreProcedureError
-      // ... (other values like EmailInvalid, PhoneInvalid etc.)
+      public int userId { get; set; }
+      public decimal amount { get; set; }
+      public int categoryId { get; set; }
+      public string description { get; set; }
+
+      public bool SaveExpenseToDb()
+      {
+          using (SqlConnection conn = new SqlConnection(SqlHelper.connectionString))
+          {
+              using (SqlCommand cmd = new SqlCommand("spInsertExpense", conn))
+              {
+                  cmd.CommandType = CommandType.StoredProcedure;
+                  cmd.Parameters.AddWithValue("@UserID", this.userId);
+                  cmd.Parameters.AddWithValue("@Amount", this.amount);
+                  cmd.Parameters.AddWithValue("@CategoryID", this.categoryId);
+                  cmd.Parameters.AddWithValue("@Description", this.description);
+
+                  conn.Open();
+                  int rows = cmd.ExecuteNonQuery();
+                  return rows > 0; // ডেটা সেভ হলে true, না হলে false
+              }
+          }
+      }
   }
   ```
-- **Validation Rules**: Standard static rules such as parsing decimals, range checks, pattern matching (Regex), and string length limits.
-
-#### 📄 [CommonUiFunction.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/CommonUiFunction.cs)
-- **`LoadInComboBox(...)`**: Loads data into dropdowns. It retrieves the table from the DB, inserts a placeholder row at Index 0 (e.g. Value = `0`, Display = `"Select Person"`), binds it as the ComboBox datasource, and pre-selects the first row.
-
-#### 📄 [ErrorHelper.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/ErrorHelper.cs)
-- **`ShowValidationError(...)`**: Inspects the validation result enum and assigns clear error messages directly to the WinForms controls using an `ErrorProvider` (e.g., showing `"Please select a person."` next to a ComboBox, or `"Amount is required."` next to a TextBox).
-
-#### 📄 [SqlHelper.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/DALayer/Common/SqlHelper.cs)
-- **Purpose**: Provides a global SQL connection string read from `App.config` (`DBCS`) and standard database data-retrieval functions (e.g., executing stored procedures and returning `DataTable` objects).
 
 ---
 
-## 🛠️ Step-by-Step Developer Checklist: Implementing a New Module (e.g., Add Expense)
+### 3️⃣ STEP 3: Business Logic Layer (BLL)
+ইউজার ফর্মে কোনো ভুল বা ফাঁকা ইনপুট দিয়েছে কিনা তা ডাটাবেজে পাঠানোর আগেই চেক করা।
+* **কোথায় বানাবেন?** `BLLayer/Expense/ExpenseBLL.cs` ফাইলে।
+* **কী করবেন?** 
+  1. DAL-এর মতো একই Properties ডিক্লেয়ার করুন।
+  2. `CommonValidator` ব্যবহার করে প্রতিটি ফিল্ড ভ্যালিডেট করুন। ভুল থাকলে সেই এরর এনাম রিটার্ন করে দিন। সব ঠিক থাকলে DAL কল করে সেভ করুন।
+* **কোড টেমপ্লেট (Code Template):**
+  ```csharp
+  public class ExpenseBLL
+  {
+      public int userId { get; set; }
+      public string amount { get; set; }
+      public int categoryId { get; set; }
+      public string description { get; set; }
 
-To create a new module like **Add Expense** following this exact pattern, follow these steps:
+      private ExpenseDAL expenseDal = new ExpenseDAL();
 
-### Step 1: Database Setup
-1. Create your database table (e.g., `Expenses`).
-2. Write a stored procedure to insert data (e.g., `spInsertExpense`).
-3. Write procedures to fetch list data for any dropdowns you need (e.g., `spGetAllExpenseCategories`).
+      public CommonValidator.ValidationResult DataValidatorIntoExpenseBll()
+      {
+          // ১. ক্যাটাগরি ড্রপডাউন সিলেক্ট করা হয়েছে কিনা চেক
+          if (categoryId <= 0) return CommonValidator.ValidationResult.CategoryInvalid; 
 
-### Step 2: Implement DAL
-1. Create `ExpenseDAL.cs` inside `DALayer/Expense/`.
-2. Define the properties to represent an expense (e.g., `amount`, `categoryId`, `expenseDate`, etc.).
-3. Write `SaveExpenseToDb()` using `SqlHelper.connectionString`, parameter-binding to call `spInsertExpense`, and returning `true/false`.
+          // ২. অ্যামাউন্ট ভ্যালিডেশন
+          var result = CommonValidator.ValidateAmount(amount);
+          if (result != CommonValidator.ValidationResult.Success) return result;
 
-### Step 3: Implement BLL & Validator Extensions
-1. Open [CommonValidator.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Common/CommonValidator.cs) and add any new error enums needed (e.g. `CategoryInvalid`).
-2. Add any module-specific validation logic (if not already handled by common methods).
-3. Create `ExpenseBLL.cs` inside `BLLayer/Expense/`.
-4. Implement `DataValidatorIntoExpenseBll()` which runs sequential validation checks via `CommonValidator` functions. If they pass, map BLL properties to `ExpenseDAL` and call its save method.
+          // ৩. ডেসক্রিপশন ভ্যালিডেশন
+          result = CommonValidator.ValidateDescription(description);
+          if (result != CommonValidator.ValidationResult.Success) return result;
 
-### Step 4: Implement UI Model
-1. Create `ExpenseUi.cs` in your WinForms module folder.
-2. Bind it with BLL (`ExpenseBLL`) to pass parameters and call BLL validation.
+          // সব ঠিক থাকলে DAL-এ ডেটা পাস করে সেভ করা
+          expenseDal.userId = this.userId;
+          expenseDal.amount = Convert.ToDecimal(this.amount);
+          expenseDal.categoryId = this.categoryId;
+          expenseDal.description = this.description;
 
-### Step 5: Design WinForm UI & Wire Events
-1. In the Form Load handler, load your dropdown values:
+          if (expenseDal.SaveExpenseToDb())
+          {
+              return CommonValidator.ValidationResult.Success;
+          }
+          return CommonValidator.ValidationResult.StoreProcedureError;
+      }
+  }
+  ```
+
+---
+
+### 4️⃣ STEP 4: UI Model (The Bridge)
+এটি UI ফর্মের সাথে BLL-এর সংযোগ ঘটিয়ে ফর্মের কোডকে পরিষ্কার রাখে।
+* **কোথায় বানাবেন?** `PersonalExpenseCreditTracker/Modules/Expense/ExpenseUi.cs` ফাইলে।
+* **কোড টেমপ্লেট (Code Template):**
+  ```csharp
+  public class ExpenseUi
+  {
+      public int userId { get; set; }
+      public string amount { get; set; }
+      public int categoryId { get; set; }
+      public string description { get; set; }
+
+      private ExpenseBLL expenseBll = new ExpenseBLL();
+
+      public CommonValidator.ValidationResult InsertDataIntoExpenseUi()
+      {
+          expenseBll.userId = userId;
+          expenseBll.amount = amount;
+          expenseBll.categoryId = categoryId;
+          expenseBll.description = description;
+
+          return expenseBll.DataValidatorIntoExpenseBll();
+      }
+  }
+  ```
+
+---
+
+### 5️⃣ STEP 5: UI Form & Helpers (ডিজাইন ও ইভেন্ট কোড)
+সবশেষে ইউজার ইন্টারফেসে ডাটাবেজ থেকে ড্রপডাউন ডেটা নিয়ে আসা ও ভুল ইনপুটের জন্য লাল এরর আইকন দেখানো।
+
+1. **ফর্ম লোড-এ ড্রপডাউন ডেটা বাইন্ডিং (Load Dropdowns):**
+   `CommonUiFunction.LoadInComboBox` দিয়ে ডাটাবেজ থেকে ড্রপডাউনে ডেটা লোড করুন। এটি নিজে নিজেই প্রথম অপশন হিসেবে placeholders (যেমন "Select Category") অ্যাড করে দেবে।
    ```csharp
    CommonUiFunction.LoadInComboBox("spGetAllExpenseCategories", "Select Category", comboBoxCategory);
    ```
-2. Open [ErrorHelper.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/ErrorHelper.cs) and update `ShowValidationError()` to handle your new validation enums and map them to friendly error text.
-3. In the form's "Save" click event handler:
-   - Clear existing error flags: `errorProvider1.Clear()`.
-   - Instantiate your UI Model (`ExpenseUi`), assign form values (handling placeholders).
-   - Call `InsertDataIntoExpenseUi()`.
-   - Use a `switch (result)` block to handle the return status (either displaying error icons on the control, or displaying a success message).
+
+2. **ভ্যালিডেশন এরর মেসেজ সেটআপ করা (Error Messages Setup):**
+   * [CommonValidator.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/BLLayer/Common/CommonValidator.cs) ফাইলের `ValidationResult` এনামে নতুন কোনো এরর টাইপ লাগলে যোগ করুন (যেমন `CategoryInvalid`).
+   * [ErrorHelper.cs](file:///e:/Dekstop%20Application/PersonalExpenseCreditTracker/WinFormsApp/PersonalExpenseCreditTracker/PersonalExpenseCreditTracker/Common/ErrorHelper.cs) ফাইলে যান এবং নতুন এনামের জন্য মেসেজটি ডিফাইন করে দিন:
+     ```csharp
+     case CommonValidator.ValidationResult.CategoryInvalid:
+         errorProvider.SetError(comboBox, "Please select an expense category.");
+         comboBox.Focus();
+         break;
+     ```
+
+3. **সেভ বাটনের ক্লিক কোড (Save Button Click Event):**
+   ```csharp
+   private void btnExpenseSave_Click(object sender, EventArgs e)
+   {
+       errorProvider1.Clear(); // আগের সব এরর সাইন মুছে ফেলা
+
+       ExpenseUi expenseUi = new ExpenseUi();
+       expenseUi.userId = 11; // কারেন্ট ইউজার আইডি
+       expenseUi.categoryId = Convert.ToInt32(comboBoxCategory.SelectedValue);
+       expenseUi.amount = (txtAmount.Text == "Select Amount") ? "" : txtAmount.Text; // প্লেসহোল্ডার হ্যান্ডেল করা
+       expenseUi.description = (txtDescription.Text == "Enter description") ? "" : txtDescription.Text;
+
+       // BLL কল করা ভ্যালিডেশনের জন্য
+       CommonValidator.ValidationResult result = expenseUi.InsertDataIntoExpenseUi();
+
+       // রেজাল্ট অনুযায়ী অ্যাকশন নেওয়া
+       switch (result)
+       {
+           case CommonValidator.ValidationResult.Success:
+               MessageBox.Show("Expense added successfully!");
+               break;
+           case CommonValidator.ValidationResult.CategoryInvalid:
+               ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxCategory);
+               break;
+           case CommonValidator.ValidationResult.AmountEmpty:
+           case CommonValidator.ValidationResult.AmountInvalid:
+               ErrorHelper.ShowValidationError(result, errorProvider1, txtAmount);
+               break;
+           case CommonValidator.ValidationResult.StoreProcedureError:
+               MessageBox.Show("Failed to save expense!");
+               break;
+       }
+   }
+   ```
+
+---
+
+## 🎯 এই নিয়মের মূল সুবিধা (কেন করা হচ্ছে?)
+1. **ভুল ইনপুট প্রতিরোধ:** ডেটা ভুল থাকলে BLL-ই তা আটকে দেবে। UI-তে ভুল ইনপুটের ঠিক পাশে লাল সতর্ক সংকেত দেখানো হবে।
+2. **একই কোড বারবার না লেখা (Reusability):** `CommonUiFunction` ও `ErrorHelper`-এ কোড রেডি থাকায় নতুন কোনো ফর্মে কানেকশন ওপেন/ক্লোজ বা এরর মেসেজ লেখার পেছনে সময় নষ্ট হয় না।
+3. **পরিষ্কার ও ক্লিন কোড:** ডিজাইন এবং লজিক আলাদা থাকায় কোড মেনটেইন করা সহজ।
