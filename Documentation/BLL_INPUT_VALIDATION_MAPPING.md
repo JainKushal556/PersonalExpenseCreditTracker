@@ -129,6 +129,7 @@ graph LR
 | **`spGetLentPersonHistory`** | History pop-up list | `@UserID`, `@PersonID` | • Valid PersonID check. |
 | **`spGetPendingLentByStatusName`**| Filter Tab -> "Pending" Click | `@UserID` | • Pull entries where status is 'Pending' or 'Partially Paid'. |
 | **`SpGetCompletedLentByStatusName`**| Filter Tab -> "Completed" Click| `@UserID` | • Pull entries where status is 'Paid' / 'Settled'. |
+| **`spGetAllLentBorrowStatus`** | `LentControls.cs` / `AddLentControls.cs` <br> Status ComboBox load | None | • Retrieves all status options for Lent/Borrow. |
 
 ---
 

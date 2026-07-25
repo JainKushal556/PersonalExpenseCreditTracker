@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.panelLentAddCalenderShow = new System.Windows.Forms.Panel();
             this.monthCalendarAddLent = new System.Windows.Forms.MonthCalendar();
@@ -59,11 +60,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblLentDetails = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelMainBody.SuspendLayout();
             this.panelLentAddCalenderShow.SuspendLayout();
             this.panelLentAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMainBody
@@ -163,7 +166,7 @@
             this.txtLentAddDeadlineDatePicker.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtLentAddDeadlineDatePicker.Location = new System.Drawing.Point(5, 3);
             this.txtLentAddDeadlineDatePicker.Name = "txtLentAddDeadlineDatePicker";
-            this.txtLentAddDeadlineDatePicker.Size = new System.Drawing.Size(313, 23);
+            this.txtLentAddDeadlineDatePicker.Size = new System.Drawing.Size(267, 23);
             this.txtLentAddDeadlineDatePicker.TabIndex = 2;
             this.txtLentAddDeadlineDatePicker.TextChanged += new System.EventHandler(this.txtLentAddDeadlineDatePicker_TextChanged);
             // 
@@ -172,7 +175,7 @@
             this.btnLentAddCalendar.FlatAppearance.BorderSize = 0;
             this.btnLentAddCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentAddCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
-            this.btnLentAddCalendar.Location = new System.Drawing.Point(324, -1);
+            this.btnLentAddCalendar.Location = new System.Drawing.Point(325, -1);
             this.btnLentAddCalendar.Name = "btnLentAddCalendar";
             this.btnLentAddCalendar.Size = new System.Drawing.Size(37, 31);
             this.btnLentAddCalendar.TabIndex = 1;
@@ -204,7 +207,7 @@
             this.panel3.Controls.Add(this.pictureBoxLentRupee);
             this.panel3.Location = new System.Drawing.Point(21, 390);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(356, 32);
+            this.panel3.Size = new System.Drawing.Size(395, 32);
             this.panel3.TabIndex = 25;
             this.panel3.Enter += new System.EventHandler(this.txtLentAddAmount_Enter);
             this.panel3.Leave += new System.EventHandler(this.txtLentAddAmount_Leave);
@@ -276,10 +279,6 @@
             this.comboBoxLentStatus.FormattingEnabled = true;
             this.comboBoxLentStatus.IntegralHeight = false;
             this.comboBoxLentStatus.ItemHeight = 23;
-            this.comboBoxLentStatus.Items.AddRange(new object[] {
-            "Paid",
-            "Panding",
-            "Over Due"});
             this.comboBoxLentStatus.Location = new System.Drawing.Point(23, 304);
             this.comboBoxLentStatus.Name = "comboBoxLentStatus";
             this.comboBoxLentStatus.Size = new System.Drawing.Size(354, 31);
@@ -310,11 +309,6 @@
             this.comboBoxLentPaymentType.FormattingEnabled = true;
             this.comboBoxLentPaymentType.IntegralHeight = false;
             this.comboBoxLentPaymentType.ItemHeight = 23;
-            this.comboBoxLentPaymentType.Items.AddRange(new object[] {
-            "Cash",
-            "UPI",
-            "Debit Card",
-            "Credit Card"});
             this.comboBoxLentPaymentType.Location = new System.Drawing.Point(20, 207);
             this.comboBoxLentPaymentType.Name = "comboBoxLentPaymentType";
             this.comboBoxLentPaymentType.Size = new System.Drawing.Size(357, 31);
@@ -345,18 +339,11 @@
             this.comboBoxLentSelectPerson.FormattingEnabled = true;
             this.comboBoxLentSelectPerson.IntegralHeight = false;
             this.comboBoxLentSelectPerson.ItemHeight = 23;
-            this.comboBoxLentSelectPerson.Items.AddRange(new object[] {
-            "Akhmal",
-            "Sujit",
-            "Kushal",
-            "Anikat",
-            "Arpita",
-            "Debajyoti"});
             this.comboBoxLentSelectPerson.Location = new System.Drawing.Point(20, 106);
             this.comboBoxLentSelectPerson.Name = "comboBoxLentSelectPerson";
             this.comboBoxLentSelectPerson.Size = new System.Drawing.Size(357, 31);
             this.comboBoxLentSelectPerson.TabIndex = 14;
-            this.comboBoxLentSelectPerson.Text = "Select Person";
+            this.comboBoxLentSelectPerson.SelectedIndexChanged += new System.EventHandler(this.comboBoxLentSelectPerson_SelectedIndexChanged);
             // 
             // btnLentAddSave
             // 
@@ -434,6 +421,10 @@
             this.lblLentDetails.TabIndex = 0;
             this.lblLentDetails.Text = "Lent Details";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // AddLentControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -452,6 +443,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -489,5 +481,6 @@
         private System.Windows.Forms.TextBox txtLentAddDeadlineDatePicker;
         private System.Windows.Forms.Panel panelLentAddCalenderShow;
         private System.Windows.Forms.MonthCalendar monthCalendarAddLent;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

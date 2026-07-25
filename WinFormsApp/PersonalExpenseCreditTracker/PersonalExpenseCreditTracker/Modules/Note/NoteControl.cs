@@ -27,6 +27,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             SetRoundedPanel(pnlThisMonth, 15);
         }
 
+
         private void lblNoteSubtitle_Click(object sender, EventArgs e)
         {
 

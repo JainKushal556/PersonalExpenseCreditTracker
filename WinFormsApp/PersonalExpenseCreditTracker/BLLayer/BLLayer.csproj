@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Authentication\AuthBLL.cs" />
     <Compile Include="Borrow\BorrowBLL.cs" />
+    <Compile Include="Common\CommonValidator.cs" />
     <Compile Include="Credit\CreditBLL.cs" />
     <Compile Include="Dashboard\DashboardBLL.cs" />
     <Compile Include="Expense\ExpenseBLL.cs" />
