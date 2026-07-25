@@ -37,9 +37,21 @@
             this.lblNoteCardDate = new System.Windows.Forms.Label();
             this.lblNoteCardDescription = new System.Windows.Forms.Label();
             this.lblNoteCardTitle = new System.Windows.Forms.Label();
-            this.pnlAllNotes = new System.Windows.Forms.Panel();
-            this.lblAllNoteHearderSubTitle = new System.Windows.Forms.Label();
-            this.lblAllNoteHearderTitle = new System.Windows.Forms.Label();
+            this.pnlFooter = new System.Windows.Forms.Panel();
+            this.pnlControl = new System.Windows.Forms.Panel();
+            this.btnLastPage = new System.Windows.Forms.Button();
+            this.btnNextpage = new System.Windows.Forms.Button();
+            this.btnCurrentPage = new System.Windows.Forms.Button();
+            this.btnPreviousPage = new System.Windows.Forms.Button();
+            this.btnFirstpage = new System.Windows.Forms.Button();
+            this.pnlNoteFooter = new System.Windows.Forms.Panel();
+            this.lblentries = new System.Windows.Forms.Label();
+            this.lblNoteTotalPageNumber = new System.Windows.Forms.Label();
+            this.lblof = new System.Windows.Forms.Label();
+            this.lblNoteEndingPageNumber = new System.Windows.Forms.Label();
+            this.lblto = new System.Windows.Forms.Label();
+            this.lblNoteStartingPageNumber = new System.Windows.Forms.Label();
+            this.lblShowing = new System.Windows.Forms.Label();
             this.tblNoteSummary = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTotalNotes = new System.Windows.Forms.Panel();
             this.lblAllNote = new System.Windows.Forms.Label();
@@ -64,7 +76,9 @@
             this.flpNotes.SuspendLayout();
             this.pnlNoteCard.SuspendLayout();
             this.pnlNoteCardFooter.SuspendLayout();
-            this.pnlAllNotes.SuspendLayout();
+            this.pnlFooter.SuspendLayout();
+            this.pnlControl.SuspendLayout();
+            this.pnlNoteFooter.SuspendLayout();
             this.tblNoteSummary.SuspendLayout();
             this.pnlTotalNotes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicNote)).BeginInit();
@@ -80,7 +94,7 @@
             this.pnlNoteMain.AutoScroll = true;
             this.pnlNoteMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
             this.pnlNoteMain.Controls.Add(this.flpNotes);
-            this.pnlNoteMain.Controls.Add(this.pnlAllNotes);
+            this.pnlNoteMain.Controls.Add(this.pnlFooter);
             this.pnlNoteMain.Controls.Add(this.tblNoteSummary);
             this.pnlNoteMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlNoteMain.Location = new System.Drawing.Point(0, 0);
@@ -95,10 +109,10 @@
             this.flpNotes.AutoSize = true;
             this.flpNotes.Controls.Add(this.pnlNoteCard);
             this.flpNotes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpNotes.Location = new System.Drawing.Point(20, 206);
+            this.flpNotes.Location = new System.Drawing.Point(20, 140);
             this.flpNotes.Name = "flpNotes";
             this.flpNotes.Padding = new System.Windows.Forms.Padding(8);
-            this.flpNotes.Size = new System.Drawing.Size(1163, 404);
+            this.flpNotes.Size = new System.Drawing.Size(1163, 417);
             this.flpNotes.TabIndex = 3;
             this.flpNotes.Paint += new System.Windows.Forms.PaintEventHandler(this.flpNotes_Paint);
             // 
@@ -114,7 +128,7 @@
             this.pnlNoteCard.Margin = new System.Windows.Forms.Padding(10);
             this.pnlNoteCard.Name = "pnlNoteCard";
             this.pnlNoteCard.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlNoteCard.Size = new System.Drawing.Size(300, 150);
+            this.pnlNoteCard.Size = new System.Drawing.Size(320, 193);
             this.pnlNoteCard.TabIndex = 0;
             // 
             // pnlNoteCardFooter
@@ -122,9 +136,9 @@
             this.pnlNoteCardFooter.Controls.Add(this.btnNoteMore);
             this.pnlNoteCardFooter.Controls.Add(this.lblNoteCardDate);
             this.pnlNoteCardFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlNoteCardFooter.Location = new System.Drawing.Point(10, 98);
+            this.pnlNoteCardFooter.Location = new System.Drawing.Point(10, 141);
             this.pnlNoteCardFooter.Name = "pnlNoteCardFooter";
-            this.pnlNoteCardFooter.Size = new System.Drawing.Size(278, 40);
+            this.pnlNoteCardFooter.Size = new System.Drawing.Size(298, 40);
             this.pnlNoteCardFooter.TabIndex = 2;
             // 
             // btnNoteMore
@@ -134,7 +148,7 @@
             this.btnNoteMore.FlatAppearance.BorderSize = 0;
             this.btnNoteMore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNoteMore.Image = global::PersonalExpenseCreditTracker.Properties.Resources.more2;
-            this.btnNoteMore.Location = new System.Drawing.Point(248, 0);
+            this.btnNoteMore.Location = new System.Drawing.Point(268, 0);
             this.btnNoteMore.Name = "btnNoteMore";
             this.btnNoteMore.Size = new System.Drawing.Size(30, 40);
             this.btnNoteMore.TabIndex = 1;
@@ -154,54 +168,182 @@
             // lblNoteCardDescription
             // 
             this.lblNoteCardDescription.AutoEllipsis = true;
-            this.lblNoteCardDescription.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteCardDescription.Location = new System.Drawing.Point(18, 39);
+            this.lblNoteCardDescription.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteCardDescription.Location = new System.Drawing.Point(18, 45);
+            this.lblNoteCardDescription.MaximumSize = new System.Drawing.Size(270, 75);
             this.lblNoteCardDescription.Name = "lblNoteCardDescription";
-            this.lblNoteCardDescription.Size = new System.Drawing.Size(230, 70);
+            this.lblNoteCardDescription.Size = new System.Drawing.Size(270, 75);
             this.lblNoteCardDescription.TabIndex = 1;
             this.lblNoteCardDescription.Text = "Finish the project proposal, review team updates and prepare for tomorrow\'s meeti" +
-    "ng.";
+                "ng.";
             // 
             // lblNoteCardTitle
             // 
-            this.lblNoteCardTitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteCardTitle.Location = new System.Drawing.Point(16, 10);
+            this.lblNoteCardTitle.AutoSize = true;
+            this.lblNoteCardTitle.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteCardTitle.Location = new System.Drawing.Point(10, 10);
             this.lblNoteCardTitle.Name = "lblNoteCardTitle";
-            this.lblNoteCardTitle.Size = new System.Drawing.Size(102, 28);
+            this.lblNoteCardTitle.Size = new System.Drawing.Size(113, 25);
             this.lblNoteCardTitle.TabIndex = 0;
             this.lblNoteCardTitle.Text = "Daily Notes";
             this.lblNoteCardTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pnlAllNotes
+            // pnlFooter
             // 
-            this.pnlAllNotes.Controls.Add(this.lblAllNoteHearderSubTitle);
-            this.pnlAllNotes.Controls.Add(this.lblAllNoteHearderTitle);
-            this.pnlAllNotes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlAllNotes.Location = new System.Drawing.Point(20, 140);
-            this.pnlAllNotes.Name = "pnlAllNotes";
-            this.pnlAllNotes.Size = new System.Drawing.Size(1163, 66);
-            this.pnlAllNotes.TabIndex = 2;
+            this.pnlFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.pnlFooter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFooter.Controls.Add(this.pnlControl);
+            this.pnlFooter.Controls.Add(this.pnlNoteFooter);
+            this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlFooter.Location = new System.Drawing.Point(20, 557);
+            this.pnlFooter.Name = "pnlFooter";
+            this.pnlFooter.Size = new System.Drawing.Size(1163, 53);
+            this.pnlFooter.TabIndex = 2;
             // 
-            // lblAllNoteHearderSubTitle
+            // pnlControl
             // 
-            this.lblAllNoteHearderSubTitle.AutoSize = true;
-            this.lblAllNoteHearderSubTitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAllNoteHearderSubTitle.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblAllNoteHearderSubTitle.Location = new System.Drawing.Point(10, 39);
-            this.lblAllNoteHearderSubTitle.Name = "lblAllNoteHearderSubTitle";
-            this.lblAllNoteHearderSubTitle.Size = new System.Drawing.Size(214, 23);
-            this.lblAllNoteHearderSubTitle.TabIndex = 1;
-            this.lblAllNoteHearderSubTitle.Text = "Showing 1 to 9 of 42 notes";
+            this.pnlControl.Controls.Add(this.btnLastPage);
+            this.pnlControl.Controls.Add(this.btnNextpage);
+            this.pnlControl.Controls.Add(this.btnCurrentPage);
+            this.pnlControl.Controls.Add(this.btnPreviousPage);
+            this.pnlControl.Controls.Add(this.btnFirstpage);
+            this.pnlControl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlControl.Location = new System.Drawing.Point(911, 0);
+            this.pnlControl.Name = "pnlControl";
+            this.pnlControl.Size = new System.Drawing.Size(250, 51);
+            this.pnlControl.TabIndex = 0;
             // 
-            // lblAllNoteHearderTitle
+            // btnLastPage
             // 
-            this.lblAllNoteHearderTitle.AutoSize = true;
-            this.lblAllNoteHearderTitle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAllNoteHearderTitle.Location = new System.Drawing.Point(10, 8);
-            this.lblAllNoteHearderTitle.Name = "lblAllNoteHearderTitle";
-            this.lblAllNoteHearderTitle.Size = new System.Drawing.Size(120, 32);
-            this.lblAllNoteHearderTitle.TabIndex = 0;
-            this.lblAllNoteHearderTitle.Text = "All Notes";
+            this.btnLastPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.right;
+            this.btnLastPage.Location = new System.Drawing.Point(198, 6);
+            this.btnLastPage.Name = "btnLastPage";
+            this.btnLastPage.Size = new System.Drawing.Size(40, 40);
+            this.btnLastPage.TabIndex = 4;
+            this.btnLastPage.UseVisualStyleBackColor = true;
+            // 
+            // btnNextpage
+            // 
+            this.btnNextpage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next;
+            this.btnNextpage.Location = new System.Drawing.Point(152, 6);
+            this.btnNextpage.Name = "btnNextpage";
+            this.btnNextpage.Size = new System.Drawing.Size(40, 40);
+            this.btnNextpage.TabIndex = 3;
+            this.btnNextpage.UseVisualStyleBackColor = true;
+            // 
+            // btnCurrentPage
+            // 
+            this.btnCurrentPage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCurrentPage.Location = new System.Drawing.Point(106, 6);
+            this.btnCurrentPage.Name = "btnCurrentPage";
+            this.btnCurrentPage.Size = new System.Drawing.Size(40, 40);
+            this.btnCurrentPage.TabIndex = 2;
+            this.btnCurrentPage.Text = "1";
+            this.btnCurrentPage.UseVisualStyleBackColor = true;
+            // 
+            // btnPreviousPage
+            // 
+            this.btnPreviousPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.preview;
+            this.btnPreviousPage.Location = new System.Drawing.Point(59, 6);
+            this.btnPreviousPage.Name = "btnPreviousPage";
+            this.btnPreviousPage.Size = new System.Drawing.Size(40, 40);
+            this.btnPreviousPage.TabIndex = 1;
+            this.btnPreviousPage.UseVisualStyleBackColor = true;
+            // 
+            // btnFirstpage
+            // 
+            this.btnFirstpage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFirstpage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.left;
+            this.btnFirstpage.Location = new System.Drawing.Point(13, 6);
+            this.btnFirstpage.Name = "btnFirstpage";
+            this.btnFirstpage.Size = new System.Drawing.Size(40, 40);
+            this.btnFirstpage.TabIndex = 0;
+            this.btnFirstpage.UseVisualStyleBackColor = true;
+            // 
+            // pnlNoteFooter
+            // 
+            this.pnlNoteFooter.Controls.Add(this.lblentries);
+            this.pnlNoteFooter.Controls.Add(this.lblNoteTotalPageNumber);
+            this.pnlNoteFooter.Controls.Add(this.lblof);
+            this.pnlNoteFooter.Controls.Add(this.lblNoteEndingPageNumber);
+            this.pnlNoteFooter.Controls.Add(this.lblto);
+            this.pnlNoteFooter.Controls.Add(this.lblNoteStartingPageNumber);
+            this.pnlNoteFooter.Controls.Add(this.lblShowing);
+            this.pnlNoteFooter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlNoteFooter.Location = new System.Drawing.Point(0, 0);
+            this.pnlNoteFooter.Name = "pnlNoteFooter";
+            this.pnlNoteFooter.Size = new System.Drawing.Size(348, 51);
+            this.pnlNoteFooter.TabIndex = 1;
+            // 
+            // lblentries
+            // 
+            this.lblentries.AutoSize = true;
+            this.lblentries.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblentries.Location = new System.Drawing.Point(225, 15);
+            this.lblentries.Name = "lblentries";
+            this.lblentries.Size = new System.Drawing.Size(61, 23);
+            this.lblentries.TabIndex = 6;
+            this.lblentries.Text = "entries";
+            // 
+            // lblNoteTotalPageNumber
+            // 
+            this.lblNoteTotalPageNumber.AutoSize = true;
+            this.lblNoteTotalPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteTotalPageNumber.Location = new System.Drawing.Point(191, 16);
+            this.lblNoteTotalPageNumber.Name = "lblNoteTotalPageNumber";
+            this.lblNoteTotalPageNumber.Size = new System.Drawing.Size(28, 23);
+            this.lblNoteTotalPageNumber.TabIndex = 5;
+            this.lblNoteTotalPageNumber.Text = "10";
+            // 
+            // lblof
+            // 
+            this.lblof.AutoSize = true;
+            this.lblof.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblof.Location = new System.Drawing.Point(158, 15);
+            this.lblof.Name = "lblof";
+            this.lblof.Size = new System.Drawing.Size(25, 23);
+            this.lblof.TabIndex = 4;
+            this.lblof.Text = "of";
+            // 
+            // lblNoteEndingPageNumber
+            // 
+            this.lblNoteEndingPageNumber.AutoSize = true;
+            this.lblNoteEndingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteEndingPageNumber.Location = new System.Drawing.Point(128, 16);
+            this.lblNoteEndingPageNumber.Name = "lblNoteEndingPageNumber";
+            this.lblNoteEndingPageNumber.Size = new System.Drawing.Size(28, 23);
+            this.lblNoteEndingPageNumber.TabIndex = 3;
+            this.lblNoteEndingPageNumber.Text = "10";
+            // 
+            // lblto
+            // 
+            this.lblto.AutoSize = true;
+            this.lblto.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblto.Location = new System.Drawing.Point(103, 15);
+            this.lblto.Name = "lblto";
+            this.lblto.Size = new System.Drawing.Size(26, 23);
+            this.lblto.TabIndex = 2;
+            this.lblto.Text = "to";
+            // 
+            // lblNoteStartingPageNumber
+            // 
+            this.lblNoteStartingPageNumber.AutoSize = true;
+            this.lblNoteStartingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteStartingPageNumber.Location = new System.Drawing.Point(76, 15);
+            this.lblNoteStartingPageNumber.Name = "lblNoteStartingPageNumber";
+            this.lblNoteStartingPageNumber.Size = new System.Drawing.Size(19, 23);
+            this.lblNoteStartingPageNumber.TabIndex = 1;
+            this.lblNoteStartingPageNumber.Text = "1";
+            // 
+            // lblShowing
+            // 
+            this.lblShowing.AutoSize = true;
+            this.lblShowing.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowing.Location = new System.Drawing.Point(3, 13);
+            this.lblShowing.Name = "lblShowing";
+            this.lblShowing.Size = new System.Drawing.Size(75, 23);
+            this.lblShowing.TabIndex = 0;
+            this.lblShowing.Text = "Showing";
             // 
             // tblNoteSummary
             // 
@@ -407,21 +549,21 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
             this.viewToolStripMenuItem.Text = "View";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -438,10 +580,13 @@
             this.pnlNoteMain.PerformLayout();
             this.flpNotes.ResumeLayout(false);
             this.pnlNoteCard.ResumeLayout(false);
+            this.pnlNoteCard.PerformLayout();
             this.pnlNoteCardFooter.ResumeLayout(false);
             this.pnlNoteCardFooter.PerformLayout();
-            this.pnlAllNotes.ResumeLayout(false);
-            this.pnlAllNotes.PerformLayout();
+            this.pnlFooter.ResumeLayout(false);
+            this.pnlControl.ResumeLayout(false);
+            this.pnlNoteFooter.ResumeLayout(false);
+            this.pnlNoteFooter.PerformLayout();
             this.tblNoteSummary.ResumeLayout(false);
             this.pnlTotalNotes.ResumeLayout(false);
             this.pnlTotalNotes.PerformLayout();
@@ -456,6 +601,8 @@
             this.ResumeLayout(false);
 
         }
+
+       
 
         #endregion
 
@@ -474,9 +621,6 @@
         private System.Windows.Forms.Label lblNoteImportant;
         private System.Windows.Forms.PictureBox picNoteCalender;
         private System.Windows.Forms.FlowLayoutPanel flpNotes;
-        private System.Windows.Forms.Panel pnlAllNotes;
-        private System.Windows.Forms.Label lblAllNoteHearderSubTitle;
-        private System.Windows.Forms.Label lblAllNoteHearderTitle;
         private System.Windows.Forms.Label lblMothDescription;
         private System.Windows.Forms.Label lblMonthNoteNumber;
         private System.Windows.Forms.Label lblMothTitle;
@@ -490,6 +634,22 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlFooter;
+        private System.Windows.Forms.Panel pnlNoteFooter;
+        private System.Windows.Forms.Label lblentries;
+        private System.Windows.Forms.Label lblNoteTotalPageNumber;
+        private System.Windows.Forms.Label lblof;
+        private System.Windows.Forms.Label lblNoteEndingPageNumber;
+        private System.Windows.Forms.Label lblto;
+        private System.Windows.Forms.Label lblNoteStartingPageNumber;
+        private System.Windows.Forms.Label lblShowing;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlControl;
+        private System.Windows.Forms.Button btnLastPage;
+        private System.Windows.Forms.Button btnNextpage;
+        private System.Windows.Forms.Button btnCurrentPage;
+        private System.Windows.Forms.Button btnPreviousPage;
+        private System.Windows.Forms.Button btnFirstpage;
         //private System.Windows.Forms.ContextMenuStrip cmsnote;
     }
 }

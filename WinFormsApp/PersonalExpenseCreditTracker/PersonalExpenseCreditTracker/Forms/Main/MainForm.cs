@@ -14,6 +14,7 @@ using PersonalExpenseCreditTracker.Modules.Credit;
 using PersonalExpenseCreditTracker.Modules.Borrow;
 using PersonalExpenseCreditTracker.Modules.Note;
 using PersonalExpenseCreditTracker.Modules.Profile;
+using PersonalExpenseCreditTracker.Modules.Settings;
 using PersonalExpenseCreditTracker.Modules.Task;
 using PersonalExpenseCreditTracker.Modules.Settings.Person;
 using PersonalExpenseCreditTracker.Modules.Settings.Category;
@@ -3166,7 +3167,7 @@ namespace PersonalExpenseCreditTracker
                 expenseCategoryControls.TopLevel = false;
                 expenseCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 expenseCategoryControls.Dock = DockStyle.Fill;
-                pnlTop.Visible = false;
+                pnlTop.Visible = true;
                 pnlExpenseCategory.Controls.Clear();
 
                 pnlExpenseCategory.Controls.Add(expenseCategoryControls);
@@ -3216,7 +3217,7 @@ namespace PersonalExpenseCreditTracker
                 creditCategoryControls.TopLevel = false;
                 creditCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 creditCategoryControls.Dock = DockStyle.Fill;
-                pnlTop.Visible = false;
+                pnlTop.Visible = true;
                 pnlCreditCategoryPage.Controls.Clear();
 
                 pnlCreditCategoryPage.Controls.Add(creditCategoryControls);
@@ -3285,6 +3286,8 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveSettingSubMenu(pnlSettingChangesPassword);
 
+            ChangePasswordControls changePasswordControls = new ChangePasswordControls();
+            changePasswordControls.Show();
             RefreshSidebarScroll();
             ExpandSidebar();
         }
@@ -3350,9 +3353,16 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-     
+        private void panelLogo_Paint(object sender, PaintEventArgs e)
+        {
 
-      
+        }
+
+        private void pnlProfilePage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
 
       
 

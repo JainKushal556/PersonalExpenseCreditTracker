@@ -9,11 +9,20 @@ using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Credit
 {
     public partial class CreditControl : Form
     {
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse);
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllCreditData = new DataTable();
         private int currentPage = 1;
@@ -22,6 +31,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             InitializeComponent();
             StyleCreditGrid();
+            ApplyRoundCorners();
             //dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             this.Resize += CreditControl_Resize;
 
@@ -39,6 +49,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void CreditControl_Load(object sender, EventArgs e)
         {
             dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
+            ApplyRoundCorners();
             pageSize = GetRowsPerPage();
             int userID = 11; 
             LoadCreditData(userID);
@@ -256,6 +267,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
        
         private void CreditControl_Resize(object sender, EventArgs e)
         {
+            ApplyRoundCorners();
             if (AllCreditData == null || AllCreditData.Rows.Count == 0)
                 return;
 
@@ -312,7 +324,34 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         }
 
-        
+        private void pnlTotalCredit_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+               e.Graphics,
+               pnlTotalCredit.ClientRectangle,
+               Color.FromArgb(86,160,118),
+               ButtonBorderStyle.Solid);
+        }
+
+        private void pnlTransactionCard_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlTransactionCard.ClientRectangle,
+                Color.FromArgb(88,168,160),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void ApplyRoundCorners()
+        {
+            pnlTotalCredit.Region = Region.FromHrgn(
+                CreateRoundRectRgn(0, 0, pnlTotalCredit.Width, pnlTotalCredit.Height, 10, 10));
+
+            pnlTransactionCard.Region = Region.FromHrgn(
+                CreateRoundRectRgn(0, 0, pnlTransactionCard.Width, pnlTransactionCard.Height, 10, 10));
+
+
+        }
 
     }
 }

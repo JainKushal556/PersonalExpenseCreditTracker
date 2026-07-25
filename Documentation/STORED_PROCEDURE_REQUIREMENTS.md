@@ -2074,6 +2074,28 @@ The first version will include borrow return reminders, lent return reminders, a
 
 - `tblPersons`
 
+### 78. spGetAllLentBorrowStatus
+
+**Purpose:**
+
+- Get all lent/borrow status list (StatusID, StatusName) for combo box binding.
+
+**Parameters:**
+
+- None
+
+**Expected Output:**
+
+- List of all statuses.
+
+**When Used:**
+
+- Lent/Borrow page loads or form loads for status selection.
+
+**Tables Used:**
+
+- `tblLentBorrowStatus`
+
 ### 79. spGetAllPersons
 
 **Purpose:**
