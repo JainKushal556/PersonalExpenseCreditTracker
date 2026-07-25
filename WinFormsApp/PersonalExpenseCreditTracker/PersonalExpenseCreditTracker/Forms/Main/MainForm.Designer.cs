@@ -674,6 +674,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlDashboard
             // 
+            this.pnlDashboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlDashboard.Controls.Add(this.panel4);
             this.pnlDashboard.Controls.Add(this.lblDashboard);
             this.pnlDashboard.Controls.Add(this.picDashboard);
@@ -5143,6 +5144,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // panelLogo
             // 
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.panelLogo.Controls.Add(this.panel1);
             this.panelLogo.Controls.Add(this.lblManager);
             this.panelLogo.Controls.Add(this.lblPersonalExpense);
@@ -5153,6 +5155,7 @@ namespace PersonalExpenseCreditTracker
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(400, 121);
             this.panelLogo.TabIndex = 0;
+            this.panelLogo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLogo_Paint);
             // 
             // panel1
             // 
@@ -5485,6 +5488,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlProfilePage.Name = "pnlProfilePage";
             this.pnlProfilePage.Size = new System.Drawing.Size(876, 1055);
             this.pnlProfilePage.TabIndex = 0;
+            this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
             // 
             // tmSidebar
             // 
@@ -5495,6 +5499,7 @@ namespace PersonalExpenseCreditTracker
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.ClientSize = new System.Drawing.Size(1276, 1055);
             this.Controls.Add(this.pnlProfilePage);
             this.Controls.Add(this.pnlContainer);

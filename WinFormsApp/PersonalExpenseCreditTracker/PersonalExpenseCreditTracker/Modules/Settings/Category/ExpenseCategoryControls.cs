@@ -107,10 +107,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             dgvCategory.ColumnHeadersDefaultCellStyle.Font =new Font("Segoe UI", 10, FontStyle.Bold);
             
             dgvCategory.DefaultCellStyle.Font =new Font("Segoe UI", 10);
-            dgvCategory.DefaultCellStyle.SelectionBackColor =Color.FromArgb(236, 233, 255);
-            dgvCategory.DefaultCellStyle.SelectionForeColor =Color.Black;
+            dgvCategory.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 231, 255);
+            dgvCategory.DefaultCellStyle.SelectionForeColor = Color.FromArgb(15, 23, 42);
             dgvCategory.RowTemplate.Height = 40;
-            dgvCategory.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250);
+            //dgvCategory.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250);
 
             dgvCategory.Columns["Type"].HeaderCell.Style.Padding = new Padding(10, 0, 0, 0);
             dgvCategory.Columns["Name"].DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);

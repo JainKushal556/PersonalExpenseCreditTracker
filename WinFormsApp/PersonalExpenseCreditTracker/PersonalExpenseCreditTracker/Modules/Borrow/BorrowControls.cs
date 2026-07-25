@@ -81,7 +81,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     10,
                     10));
 
-            pnlRepaidAmount.Region = Region.FromHrgn(
+            pnlPaidAmount.Region = Region.FromHrgn(
                 CreateRoundRectRgn(
                     0,
                     0,
@@ -90,6 +90,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     10,
                     10));
 
+            
             pnlActiveBorrowings.Region = Region.FromHrgn(
                 CreateRoundRectRgn(
                     0,
@@ -218,8 +219,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.DefaultCellStyle.BackColor = Color.White;
             dgvBorrowDataTable.DefaultCellStyle.ForeColor = Color.Black;
             //dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dgvBorrowDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
-            dgvBorrowDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvBorrowDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224,231,255);
+            dgvBorrowDataTable.DefaultCellStyle.SelectionForeColor = Color.FromArgb(15,23,42);
             dgvBorrowDataTable.RowTemplate.Height = 40;
             dgvBorrowDataTable.RowHeadersVisible = false;
             dgvBorrowDataTable.MultiSelect = false;
@@ -395,6 +396,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     DrawHeader(e, Properties.Resources.loading, "Status");
                     break;
             }
+
+        }
+
+        private void lblBorrowRepaidAmount_Click(object sender, EventArgs e)
+        {
 
         }
        

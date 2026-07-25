@@ -26,6 +26,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         public TaskControls()
         {
             InitializeComponent();
+            StyleTaskGrid();
         }
 
         private void TaskControls_Load(object sender, EventArgs e)
@@ -38,6 +39,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             this.Resize += TaskControls_Resize;
             dataGridViewTask.EnableHeadersVisualStyles = false;
+            dataGridViewTask.CellPainting += dataGridViewTask_CellPainting;
 
             //Padding Add Specific Col
             dataGridViewTask.Columns["colPriority"].HeaderCell.Style.Padding = new Padding(20, 0, 0, 0);
@@ -45,20 +47,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             dataGridViewTask.Columns["colStatus"].HeaderCell.Style.Padding = new Padding(20, 0, 0, 0);
 
             dataGridViewTask.Columns["colDeadline"].HeaderCell.Style.Padding = new Padding(17, 0, 0, 0);
-
-            //Font
-            foreach (DataGridViewRow row in dataGridViewTask.Rows)
-            {
-                row.DefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
-            }
-
-            foreach (DataGridViewColumn col in dataGridViewTask.Columns)
-            {
-                col.HeaderCell.Style.BackColor = Color.RoyalBlue;
-                col.HeaderCell.Style.ForeColor = Color.White;
-            }
-
-           
 
         }
         //Applies  styling to the Task Context Menu.
@@ -178,17 +166,17 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 {
                     case "High":
                         e.CellStyle.ForeColor = Color.Red;
-                        e.CellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                        e.CellStyle.Font = new Font("Segoe UI", 10);
                         break;
 
                     case "Medium":
                         e.CellStyle.ForeColor = Color.DarkOrange;
-                        e.CellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                        e.CellStyle.Font = new Font("Segoe UI", 10);
                         break;
 
                     case "Low":
                         e.CellStyle.ForeColor = Color.Green;
-                        e.CellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                        e.CellStyle.Font = new Font("Segoe UI", 10);
                         break;
                 }
             }
@@ -202,19 +190,19 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 {
                     case "Pending":
                         //e.CellStyle.BackColor = Color.Moccasin;
-                        //e.CellStyle.ForeColor = Color.DarkGoldenrod;
+                        e.CellStyle.ForeColor = Color.DarkGoldenrod;
                         e.CellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
                         break;
 
                     case "In Progress":
                         //e.CellStyle.BackColor = Color.LightBlue;
-                        //e.CellStyle.ForeColor = Color.RoyalBlue;
+                        e.CellStyle.ForeColor = Color.RoyalBlue;
                         e.CellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
                         break;
 
                     case "Completed":
                         //e.CellStyle.BackColor = Color.Honeydew;
-                        //e.CellStyle.ForeColor = Color.Green;
+                        e.CellStyle.ForeColor = Color.Green;
                         e.CellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
                         break;
                 }
@@ -225,22 +213,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void cmsTaskAction_Opening(object sender, CancelEventArgs e)
         {
 
-        }
-
-        private void dataGridViewTask_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-                return;
-
-            if (dataGridViewTask.Columns[e.ColumnIndex].Name == "colAction")
-            {
-                Rectangle rect = dataGridViewTask.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-
-                cmsTaskAction.Show(
-                    dataGridViewTask,
-                    rect.Left,
-                    rect.Bottom);
-            }
         }
 
         private void TaskControls_Resize(object sender, EventArgs e)
@@ -264,6 +236,161 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             DeleteTask deleteTask = new DeleteTask();
             deleteTask.ShowDialog();
+        }
+
+        
+
+        private void StyleTaskGrid()
+        {
+            //colDate.DataPropertyName = "ExpenseAt";
+            //colDescription.DataPropertyName = "Description";
+            //colCategory.DataPropertyName = "CategoryName";
+            //colSubCategory.DataPropertyName = "SubCategoryName";
+            //colAmount.DataPropertyName = "Amount";
+            //colPaymentMethod.DataPropertyName = "PaymentName";
+
+            //Column Style
+            dataGridViewTask.AllowUserToOrderColumns = false;
+            dataGridViewTask.AutoGenerateColumns = false;
+            dataGridViewTask.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            //Column HeaderStyle
+            dataGridViewTask.EnableHeadersVisualStyles = false;
+            dataGridViewTask.ColumnHeadersHeight = 45;
+            dataGridViewTask.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewTask.ColumnHeadersDefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+            dataGridViewTask.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dataGridViewTask.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 255);
+            dataGridViewTask.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
+            dataGridViewTask.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            ////Column Background Color
+            colDate.DefaultCellStyle.BackColor=Color.White;
+            colAction.DefaultCellStyle.BackColor = Color.White;
+            colDeadline.DefaultCellStyle.BackColor = Color.White;
+            colTask.DefaultCellStyle.BackColor = Color.White;
+            colStatus.DefaultCellStyle.BackColor = Color.White;
+            colPriority.DefaultCellStyle.BackColor = Color.White;
+
+            ////Column FontStyle
+            colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colAction.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colDeadline.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colTask.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colStatus.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colPriority.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+
+            //Row Style
+            dataGridViewTask.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
+            dataGridViewTask.DefaultCellStyle.ForeColor = Color.Black;
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
+            //dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
+            dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewTask.RowTemplate.Height = 40;
+            dataGridViewTask.RowHeadersVisible = false;
+            dataGridViewTask.MultiSelect = false;
+            dataGridViewTask.ReadOnly = true;
+            dataGridViewTask.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            //Border style
+            dataGridViewTask.BorderStyle = BorderStyle.None;
+            dataGridViewTask.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewTask.GridColor = Color.FromArgb(230, 230, 230);
+
+            // Cell Alignment
+            colDate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colStatus.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colTask.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colDeadline.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colAction.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colPriority.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            ////row data color
+            //colAmount.DefaultCellStyle.ForeColor = Color.Red;
+            //colCategory.DefaultCellStyle.ForeColor = Color.Green;
+            //colPaymentMethod.DefaultCellStyle.ForeColor = Color.Blue;
+            //colSubCategory.DefaultCellStyle.ForeColor = Color.Purple;
+        }
+
+        private void dataGridViewTask_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (dataGridViewTask.Columns[e.ColumnIndex].Name == "colAction")
+            {
+                Rectangle rect = dataGridViewTask.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+
+                cmsTaskAction.Show(
+                    dataGridViewTask,
+                    rect.Left,
+                    rect.Bottom);
+            }
+        }
+
+        private void dataGridViewTask_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex != -1)
+                return;
+
+            switch (dataGridViewTask.Columns[e.ColumnIndex].Name)
+            {
+                case "colDate":
+                    DrawHeader(e, Properties.Resources.date, "Date");
+                    break;
+
+                case "colPriority":
+                    DrawHeader(e, Properties.Resources.priority, "Priority");
+                    break;
+                case "colTask":
+                    DrawHeader(e, Properties.Resources.note, "Task");
+                    break;
+
+                case "colStatus":
+                    DrawHeader(e, Properties.Resources.loading, "Status");
+                    break;
+
+                case "colAction":
+                    DrawHeader(e, Properties.Resources.Action, "Action");
+                    break;
+
+                case "colDeadline":
+                    DrawHeader(e, Properties.Resources.deadline, "Deadline");
+                    break;
+            }
+
+        }
+
+        private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
+        {
+            e.Paint(e.CellBounds,
+                DataGridViewPaintParts.Background |
+                DataGridViewPaintParts.Border);
+
+            int iconSize = 16;
+            int spacing = 6;
+
+            SizeF textSize = e.Graphics.MeasureString(text, e.CellStyle.Font);
+
+            int totalWidth = iconSize + spacing + (int)textSize.Width;
+
+            int startX = e.CellBounds.X + (e.CellBounds.Width - totalWidth) / 2;
+            int iconY = e.CellBounds.Y + (e.CellBounds.Height - iconSize) / 2;
+
+            e.Graphics.DrawImage(icon, startX, iconY, iconSize, iconSize);
+
+            using (Brush brush = new SolidBrush(Color.FromArgb(80, 60, 180)))
+            {
+                e.Graphics.DrawString(
+                    text,
+                    e.CellStyle.Font,
+                    brush,
+                    startX + iconSize + spacing,
+                    e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2);
+            }
+
+            e.Handled = true;
         }
 
 
