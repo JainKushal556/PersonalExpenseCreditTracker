@@ -2169,7 +2169,7 @@ namespace PersonalExpenseCreditTracker
                 if (ComboBoxLentStatus.SelectedIndex > 0)
                 {
                     int statusId = Convert.ToInt32(ComboBoxLentStatus.SelectedValue);
-                    if (!lentControl.LoadFilteredLentData(statusId))
+                    if (!lentControl.LoadFilteredLentData(statusId, "@StatusID"))
                     {
                         ComboBoxLentStatus.SelectedIndex = 0;
                     }

@@ -72,7 +72,7 @@ namespace DALayer.Common
             }
         }
 
-        public static DataTable retriveFilteredDataByStatusAtDal(string spName, int userId, int statusID)
+        public static DataTable retriveDataByUserIdAndFilterIdAtDal(string spName, int userId, string paramName, int paramId)
         {
             SqlConnection sqlConnection = null;
             DataTable dataTable = null;
@@ -85,7 +85,7 @@ namespace DALayer.Common
                 {
                     sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
                     sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
-                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@StatusID", statusID);
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue(paramName, paramId);
                     sqlDataAdapter.Fill(dataTable);
                     return dataTable;
                 }

@@ -201,10 +201,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             ShowCurrentPage();
         }
 
-        public Boolean LoadFilteredLentData(int statusId)
+        public Boolean LoadFilteredLentData(int statusId, string paramName)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
-            DataTable dataTable = LentUi.retriveFilteredDataByStatusAtUi("spFilterLentByStatus", userID, statusId);
+            DataTable dataTable = LentUi.retriveFilteredDataByStatusAtUi("spFilterLentByStatus", userID,paramName, statusId);
             if (dataTable.Columns.Contains("Message"))
             {
                 MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),

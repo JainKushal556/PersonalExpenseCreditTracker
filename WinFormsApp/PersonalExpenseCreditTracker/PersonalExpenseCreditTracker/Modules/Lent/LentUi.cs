@@ -51,10 +51,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dataTable = LentBLL.retriveListForComboBoxAtBll(spName);
             return dataTable;
         }
-        public static DataTable retriveFilteredDataByStatusAtUi(string spName, int userid, int statusId)
+        public static DataTable retriveFilteredDataByStatusAtUi(string spName, int userid,string paramName, int statusId)
         {
             DataTable dataTable = new DataTable();
-            dataTable = LentBLL.retriveFilteredDataByStatusAtBll(spName, userid, statusId);
+            dataTable = LentBLL.retriveFilteredDataByStatusAtBll(spName, userid,paramName ,statusId);
             return dataTable;
         }
         // Retrieve GridView data from the BLL (Stored Procedure without UserId)
