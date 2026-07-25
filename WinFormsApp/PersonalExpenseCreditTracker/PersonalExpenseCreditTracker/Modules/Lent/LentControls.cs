@@ -211,12 +211,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                                 "Information",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
-                //MainForm mainForm = new MainForm();
-                //mainForm.RefreshStatusDropDown(0);
-                
-                //dgvLentDataTable.DataSource = null;
-                //AllLentData = null;
-                
                 return false;
             }
             AllLentData = dataTable;
