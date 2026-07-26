@@ -58,7 +58,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             CommonUiFunction.LoadInComboBox("spGetAllPersons", 11, "Select Person", comboBoxLentSelectPerson);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", comboBoxLentPaymentType);
-            CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", comboBoxLentStatus);
+            //CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", comboBoxLentStatus);
         }
 
 
@@ -185,19 +185,19 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void comboBoxLentStatus_Enter(object sender, EventArgs e)
         {
-            if (comboBoxLentStatus.Text == "Select Status")
-                comboBoxLentStatus.ForeColor = Color.Black;
+            //if (comboBoxLentStatus.Text == "Select Status")
+            //    comboBoxLentStatus.ForeColor = Color.Black;
 
-            panelLentAddCalenderShow.Visible = false;
+            //panelLentAddCalenderShow.Visible = false;
         }
 
         private void comboBoxLentStatus_Leave(object sender, EventArgs e)
         {
-            if (comboBoxLentStatus.SelectedIndex == -1 || comboBoxLentStatus.Text == "Select Status")
-            {
-                comboBoxLentStatus.Text = "Select Status";
-                comboBoxLentStatus.ForeColor = Color.Gray;
-            }
+            //if (comboBoxLentStatus.SelectedIndex == -1 || comboBoxLentStatus.Text == "Select Status")
+            //{
+            //    comboBoxLentStatus.Text = "Select Status";
+            //    comboBoxLentStatus.ForeColor = Color.Gray;
+            //}
         }
 
         private void AddLentControls_Load(object sender, EventArgs e)
@@ -210,8 +210,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             comboBoxLentPaymentType.Text = "Select Payment Type";
             comboBoxLentPaymentType.ForeColor = Color.Gray;
 
-            comboBoxLentStatus.Text = "Select Status";
-            comboBoxLentStatus.ForeColor = Color.Gray;
+            //comboBoxLentStatus.Text = "Select Status";
+            //comboBoxLentStatus.ForeColor = Color.Gray;
 
             txtLentAddAmount.Text = "Select Amount";
             txtLentAddAmount.ForeColor = Color.Gray;
@@ -232,11 +232,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             comboBoxLentSelectPerson.Text = "Select Person";
             comboBoxLentPaymentType.Text = "Select Payment Type";
-            comboBoxLentStatus.Text = "Select Status";
+            //comboBoxLentStatus.Text = "Select Status";
 
             comboBoxLentSelectPerson.ForeColor = Color.Gray;
             comboBoxLentPaymentType.ForeColor = Color.Gray;
-            comboBoxLentStatus.ForeColor = Color.Gray;
+            //comboBoxLentStatus.ForeColor = Color.Gray;
 
             txtLentAddAmount.Text = "Select Amount";
             txtLentAddAmount.ForeColor = Color.Gray;
@@ -268,7 +268,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             lentUi.lentId = -1;
             lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
             lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
-            lentUi.statusId = Convert.ToInt32(comboBoxLentStatus.SelectedValue);
+            //lentUi.statusId = Convert.ToInt32(comboBoxLentStatus.SelectedValue);
 
             // If the placeholder text is still present, pass an empty string
             lentUi.amount = (txtLentAddAmount.Text == "Select Amount") ? "" : txtLentAddAmount.Text;
@@ -296,7 +296,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
 
                 case CommonValidator.ValidationResult.StatusInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentStatus);
+                    //ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentStatus);
                     break;
 
                 case CommonValidator.ValidationResult.AmountEmpty:

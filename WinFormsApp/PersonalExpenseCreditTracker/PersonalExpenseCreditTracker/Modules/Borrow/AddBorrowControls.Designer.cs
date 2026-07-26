@@ -45,7 +45,6 @@
             this.lblLentAmount = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblBorrowStatus = new System.Windows.Forms.Label();
-            this.cmbBorrowStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblBorrowPaymentType = new System.Windows.Forms.Label();
             this.cmbBorrowPaymentType = new System.Windows.Forms.ComboBox();
@@ -59,11 +58,14 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblBorrowDetails = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.txtBorrowStatus = new System.Windows.Forms.TextBox();
             this.pnlBorrowAddCalenderShow.SuspendLayout();
             this.panelBorrowAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBorrowRupee)).BeginInit();
             this.pnlAddBorrowMainBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBorrowAddCalenderShow
@@ -241,23 +243,6 @@
             this.lblBorrowStatus.TabIndex = 21;
             this.lblBorrowStatus.Text = "Status";
             // 
-            // cmbBorrowStatus
-            // 
-            this.cmbBorrowStatus.FormattingEnabled = true;
-            this.cmbBorrowStatus.IntegralHeight = false;
-            this.cmbBorrowStatus.ItemHeight = 23;
-            this.cmbBorrowStatus.Items.AddRange(new object[] {
-            "Paid",
-            "Panding",
-            "Over Due"});
-            this.cmbBorrowStatus.Location = new System.Drawing.Point(23, 304);
-            this.cmbBorrowStatus.Name = "cmbBorrowStatus";
-            this.cmbBorrowStatus.Size = new System.Drawing.Size(354, 31);
-            this.cmbBorrowStatus.TabIndex = 20;
-            this.cmbBorrowStatus.Text = "Select Status";
-            this.cmbBorrowStatus.Enter += new System.EventHandler(this.cmbBorrowStatus_Enter);
-            this.cmbBorrowStatus.Leave += new System.EventHandler(this.cmbBorrowStatus_Leave);
-            // 
             // label3
             // 
             this.label3.ForeColor = System.Drawing.Color.Red;
@@ -379,6 +364,8 @@
             // 
             this.pnlAddBorrowMainBody.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlAddBorrowMainBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAddBorrowMainBody.Controls.Add(this.pictureBox6);
+            this.pnlAddBorrowMainBody.Controls.Add(this.txtBorrowStatus);
             this.pnlAddBorrowMainBody.Controls.Add(this.pnlBorrowAddCalenderShow);
             this.pnlAddBorrowMainBody.Controls.Add(this.txtBorrowAddDescription);
             this.pnlAddBorrowMainBody.Controls.Add(this.label9);
@@ -391,7 +378,6 @@
             this.pnlAddBorrowMainBody.Controls.Add(this.lblLentAmount);
             this.pnlAddBorrowMainBody.Controls.Add(this.label5);
             this.pnlAddBorrowMainBody.Controls.Add(this.lblBorrowStatus);
-            this.pnlAddBorrowMainBody.Controls.Add(this.cmbBorrowStatus);
             this.pnlAddBorrowMainBody.Controls.Add(this.label3);
             this.pnlAddBorrowMainBody.Controls.Add(this.lblBorrowPaymentType);
             this.pnlAddBorrowMainBody.Controls.Add(this.cmbBorrowPaymentType);
@@ -461,6 +447,29 @@
             this.lblBorrowDetails.TabIndex = 0;
             this.lblBorrowDetails.Text = "Borrow Details";
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
+            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
+            this.pictureBox6.Location = new System.Drawing.Point(350, 306);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(25, 26);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 36;
+            this.pictureBox6.TabStop = false;
+            // 
+            // txtBorrowStatus
+            // 
+            this.txtBorrowStatus.BackColor = System.Drawing.Color.Gainsboro;
+            this.txtBorrowStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBorrowStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtBorrowStatus.Location = new System.Drawing.Point(20, 304);
+            this.txtBorrowStatus.Name = "txtBorrowStatus";
+            this.txtBorrowStatus.ReadOnly = true;
+            this.txtBorrowStatus.Size = new System.Drawing.Size(357, 30);
+            this.txtBorrowStatus.TabIndex = 35;
+            this.txtBorrowStatus.Text = "  Pending";
+            // 
             // AddBorrowControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -482,6 +491,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBorrowRupee)).EndInit();
             this.pnlAddBorrowMainBody.ResumeLayout(false);
             this.pnlAddBorrowMainBody.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -505,7 +515,6 @@
         private System.Windows.Forms.Label lblLentAmount;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblBorrowStatus;
-        private System.Windows.Forms.ComboBox cmbBorrowStatus;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblBorrowPaymentType;
         private System.Windows.Forms.ComboBox cmbBorrowPaymentType;
@@ -519,5 +528,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblBorrowDetails;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.TextBox txtBorrowStatus;
     }
 }

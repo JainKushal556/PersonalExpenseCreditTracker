@@ -186,23 +186,23 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void cmbBorrowStatus_Enter(object sender, EventArgs e)
         {
-            if (cmbBorrowStatus.Text == "Select Status")
-                cmbBorrowStatus.ForeColor = Color.Black;
+            //if (cmbBorrowStatus.Text == "Select Status")
+            //    cmbBorrowStatus.ForeColor = Color.Black;
 
-            pnlBorrowAddCalenderShow.Visible = false;
+            //pnlBorrowAddCalenderShow.Visible = false;
         }
 
         private void cmbBorrowStatus_Leave(object sender, EventArgs e)
         {
-            if (cmbBorrowStatus.SelectedIndex == -1)
-            {
-                cmbBorrowStatus.Text = "Select Status";
-                cmbBorrowStatus.ForeColor = Color.Gray;
-            }
-            else
-            {
-                cmbBorrowStatus.ForeColor = Color.Black;
-            }
+            //if (cmbBorrowStatus.SelectedIndex == -1)
+            //{
+            //    cmbBorrowStatus.Text = "Select Status";
+            //    cmbBorrowStatus.ForeColor = Color.Gray;
+            //}
+            //else
+            //{
+            //    cmbBorrowStatus.ForeColor = Color.Black;
+            //}
         }
 
         private void AddBorrowControls_Load(object sender, EventArgs e)
@@ -215,8 +215,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             cmbBorrowPaymentType.Text = "Select Payment Type";
             cmbBorrowPaymentType.ForeColor = Color.Gray;
 
-            cmbBorrowStatus.Text = "Select Status";
-            cmbBorrowStatus.ForeColor = Color.Gray;
+            //cmbBorrowStatus.Text = "Select Status";
+            //cmbBorrowStatus.ForeColor = Color.Gray;
 
             txtBorrowAddAmount.Text = "Select Amount";
             txtBorrowAddAmount.ForeColor = Color.Gray;
@@ -238,7 +238,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             cmbBorrowSelectPerson.Text = "Select Person";
             cmbBorrowPaymentType.Text = "Select Payment Type";
-            cmbBorrowStatus.Text = "Select Status";
+            //cmbBorrowStatus.Text = "Select Status";
             txtBorrowAddAmount.Text = "Select Amount";
             txtBorrowAddDescription.Text = "Enter description";
             txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
@@ -257,7 +257,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             if (txtBorrowAddDeadlineDatePicker.Text == "DD-MM-YYYY" ||
                 txtBorrowAddDescription.Text == "Enter description" ||
                 txtBorrowAddAmount.Text == "Select Amount" ||
-                cmbBorrowStatus.Text == "Select Status" ||
                 cmbBorrowPaymentType.Text == "Select Payment Type" ||
                 cmbBorrowSelectPerson.Text == "Select Person")
                 MessageBox.Show("Please fill all fields");

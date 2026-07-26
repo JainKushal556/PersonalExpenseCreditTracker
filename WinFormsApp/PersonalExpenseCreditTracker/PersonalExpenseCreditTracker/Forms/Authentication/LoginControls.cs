@@ -6,110 +6,135 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using PersonalExpenseCreditTracker.Forms.Main;
 
 namespace PersonalExpenseCreditTracker.Forms.Authentication
 {
     public partial class LoginControls : Form
     {
+        bool isPasswordVisible = true;
         public LoginControls()
         {
             InitializeComponent();
         }
-        private void textBox2_Event(object sender, EventArgs e)
-        {
-            if (txtEmail.Text == "Enter your email address")
-            {
-                txtEmail.Text = "";
-                txtEmail.ForeColor = Color.Black;
-            }
-        }
 
-        private void textBox2_Leave(object sender, EventArgs e)
-        {
-            if (txtEmail.Text.Trim() == "")
-            {
-                txtEmail.Text = "Enter your email address";
-                txtEmail.ForeColor = Color.Gray;
-            }
-        }
+        
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse);
 
-        private void textBox3_Event(object sender, EventArgs e)
-        {
-            if (txtPassword.Text == "Enter your password")
-            {
-                txtPassword.Text = "";
-                txtPassword.ForeColor = Color.Black;
-            }
-        }
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
 
-        private void textBox3_Leave(object sender, EventArgs e)
+        // Radius Corner of These Panels
+        private void SetRadius(Control control, int radius)
         {
-            if (txtPassword.Text.Trim() == "")
-            {
-                txtPassword.Text = "Enter your password";
-                txtPassword.ForeColor = Color.Gray;
-            }
-        }
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
 
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
+        }
+        
         private void LoginControls_Load(object sender, EventArgs e)
         {
-            txtEmail.Text = "Enter your email address";
-            txtEmail.ForeColor = Color.Gray;
-            txtEmail.BackColor = Color.White;
-            txtEmail.SelectionStart = 0;
-            txtEmail.SelectionLength = 0;
+            SetRadius(pnlLoginDataInput, 20);
+            SetRadius(btnLogin, 17);
 
-            txtPassword.Text = "Enter your password";
-            txtPassword.ForeColor = Color.Gray;
-            txtPassword.BackColor = Color.White;
-            txtPassword.SelectionStart = 0;
-            txtPassword.SelectionLength = 0;
+            picEye.Image = Properties.Resources.open_eye__2_;
 
+            txtLoginEmail.Text = "Enter Email Address";
+            txtLoginPassword.Text = "Enter Password";
 
-            tableLayoutPanel1.Left = (this.ClientSize.Width - tableLayoutPanel1.Width) / 2;
-            tableLayoutPanel1.Top = (this.ClientSize.Height - tableLayoutPanel1.Height) / 2;
-
-        }
-
-        private void LoginControls_Resize(object sender, EventArgs e)
-        {
-
-            tableLayoutPanel1.Left = (this.ClientSize.Width - tableLayoutPanel1.Width) / 2;
-            tableLayoutPanel1.Top = (this.ClientSize.Height - tableLayoutPanel1.Height) / 2;
+            txtLoginEmail.ForeColor = Color.Gray;
+            txtLoginPassword.ForeColor = Color.Gray;
+            this.ActiveControl = pnlLoginDataInput;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            AuthUI authUi = new AuthUI();
-            authUi.email = txtEmail.Text;
-            authUi.password = txtPassword.Text;
+            if (txtLoginEmail.Text == "Enter Email Address" || txtLoginPassword.Text == "Enter Password")
+                MessageBox.Show("Please fill all fields");
 
-            bool result = authUi.LoginDataIntoAuthUi(authUi);
-            if (result)
-            {
-                MessageBox.Show("Validation Success");
-            }
-            else
-            {
-                MessageBox.Show("Validation Failed");
-            }
+            this.Close();
         }
 
-        private void LblForgotPassword_Click(object sender, EventArgs e)
+        private void picEye_Click(object sender, EventArgs e)
         {
-            AuthUI authUi = new AuthUI();
-            authUi.email = txtEmail.Text;
+            isPasswordVisible = !isPasswordVisible;
 
-            bool result = authUi.ForgetPasswordIntoAuthUi();
-            if (result)
+            txtLoginPassword.UseSystemPasswordChar = !isPasswordVisible;
+
+            if (isPasswordVisible)
             {
-                MessageBox.Show("Validation Success");
+                picEye.Image = Properties.Resources.open_eye__2_;
             }
             else
             {
-                MessageBox.Show("Validation Falied");
+                picEye.Image = Properties.Resources.eye;
             }
         }
 
+        private void txtLoginEmail_Enter(object sender, EventArgs e)
+        {
+            if (txtLoginEmail.Text == "Enter Email Address")
+            {
+                txtLoginEmail.Text = "";
+                txtLoginEmail.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtLoginEmail_Leave(object sender, EventArgs e)
+        {
+            if (txtLoginEmail.Text == "")
+            {
+                txtLoginEmail.Text = "Enter Email Address";
+                txtLoginEmail.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtLoginPassword_Enter(object sender, EventArgs e)
+        {
+            if (txtLoginPassword.Text == "Enter Password")
+            {
+                txtLoginPassword.Text = "";
+                txtLoginPassword.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtLoginPassword_Leave(object sender, EventArgs e)
+        {
+            if (txtLoginPassword.Text == "")
+            {
+                txtLoginPassword.Text = "Enter Password";
+                txtLoginPassword.ForeColor = Color.Gray;
+            }
+        }
+
+        private void lblForgotPassword_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

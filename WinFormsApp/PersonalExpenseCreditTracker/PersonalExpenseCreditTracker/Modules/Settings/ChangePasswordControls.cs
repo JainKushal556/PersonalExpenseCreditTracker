@@ -67,15 +67,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void ChangePasswordControls_Load(object sender, EventArgs e)
         {
-            SetRadius(btnChangePasswordCancel, 20);
-            SetRadius(btnChangePasswordUpdatePassword, 20);
-            SetRadius(pnlMainBody, 30);
-            SetRadius(this, 30);
-            SetRadius(pnlWeak, 10);
-            SetRadius(pnlMedium, 10);
-            SetRadius(pnlStrong, 10);
-            SetRadius(pnlVeryStrong, 10);
-            SetRadius(pnlChangePasswordAbout, 10);
+            //SetRadius(btnChangePasswordCancel, 20);
+            //SetRadius(btnChangePasswordUpdatePassword, 20);
+            //SetRadius(pnlMainBody, 30);
+            //SetRadius(this, 30);
+            //SetRadius(pnlWeak, 10);
+            //SetRadius(pnlMedium, 10);
+            //SetRadius(pnlStrong, 10);
+            //SetRadius(pnlVeryStrong, 10);
+            //SetRadius(pnlChangePasswordAbout, 10);
 
             txtCurrentPassword.Text = "Abcd123@";
             txtNewPassword.Text = "Enter new password";
@@ -296,7 +296,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
         {
-            if (_PasswordMatch)
+            if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Enter new password")
+            {
+                lblPasswordMatch.Text = "";
+            }
+            else if (txtCurrentPassword.Text == txtConfirmPassword.Text)
+            {
+                lblPasswordMatch.Text = "Your current password and new password are same..";
+            }
+            else if (_PasswordMatch)
             {
                 if (txtNewPassword.Text != txtConfirmPassword.Text)
                 {
@@ -361,7 +369,22 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void btnChangePasswordUpdatePassword_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Password Changed Successfully");
+            if (txtCurrentPassword.Text == txtConfirmPassword.Text)
+            {
+                MessageBox.Show("Your current password and new password are same..");
+            }
+            else if (txtConfirmPassword.Text == "Confirm new password" || txtNewPassword.Text == "Enter new password" || txtCurrentPassword.Text == "Enter current password")
+            {
+                MessageBox.Show("Please fill all fields");
+            }
+            else if (txtNewPassword.Text != txtConfirmPassword.Text)
+            {
+                MessageBox.Show("Password doesn't match");
+            }
+            else
+            {
+                MessageBox.Show("Password Changed Successfully");
+            }
         }
 
         private void pnlMainBody_Resize(object sender, EventArgs e)
@@ -372,6 +395,16 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         private void ChangePasswordControls_Resize(object sender, EventArgs e)
         {
             SetRadius(this, 30);
+        }
+
+        private void btnChangePasswordClose_MouseEnter(object sender, EventArgs e)
+        {
+            btnChangePasswordClose.BackColor = Color.Red;
+        }
+
+        private void btnChangePasswordClose_MouseLeave(object sender, EventArgs e)
+        {
+            btnChangePasswordClose.BackColor = Color.Transparent;
         }
     }
 }
