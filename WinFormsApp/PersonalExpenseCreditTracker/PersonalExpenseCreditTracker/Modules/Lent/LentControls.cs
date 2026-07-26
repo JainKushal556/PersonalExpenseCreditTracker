@@ -180,6 +180,23 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             return true;
         }
 
+        public Boolean LoadFilteredLentData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = LentUi.retriveDataByUserIdAndFilterIdAtUi(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            AllLentData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
 
         private void StyleLentGrid()
         {

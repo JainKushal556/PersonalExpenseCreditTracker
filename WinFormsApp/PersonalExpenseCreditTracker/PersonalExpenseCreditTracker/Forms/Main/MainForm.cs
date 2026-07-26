@@ -2141,21 +2141,41 @@ namespace PersonalExpenseCreditTracker
             UpdateLentCustomDatePanel();
             UpdateLentClearAllButton();
 
-            //if (lentControl != null && !lentControl.IsDisposed)
-            //{
-            //    if (ComboBoxLentStatus.SelectedIndex > 0)
-            //    {
-            //        int statusId = Convert.ToInt32(ComboBoxLentStatus.SelectedValue);
-            //        if (!lentControl.LoadFilteredLentData(statusId, "@StatusID"))
-            //        {
-            //            ComboBoxLentStatus.SelectedIndex = 0;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        lentControl.LoadLentData(Session.LogedInUser.GetUserId());
-            //    }
-            //}
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                //if (ComboBoxLentStatus.SelectedIndex > 0)
+                //{
+                //    int statusId = Convert.ToInt32(ComboBoxLentStatus.SelectedValue);
+                //    if (!lentControl.LoadFilteredLentData(statusId, "@StatusID"))
+                //    {
+                //        ComboBoxLentStatus.SelectedIndex = 0;
+                //    }
+                //}
+                //else
+                //{
+                //    lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                //}
+
+                DateTime firstDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                 1);
+
+                DateTime lastDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                //MessageBox.Show(firstDayOfMonth.ToString());
+                //MessageBox.Show(lastDayOfMonth.ToString());
+
+                lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+                
+            }
+
+          
+            
+
         }
 
         private void rbLentLast7Days_CheckedChanged(object sender, EventArgs e)
@@ -2579,6 +2599,8 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateBorrowCustomDatePanel();
             UpdateBorrowClearAllButton();
+
+            //LentUi.retriveDataByUserIdAndFilterIdAtUi("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", "@ToDate");
         }
 
         private void rbBorrowLast7Days_CheckedChanged(object sender, EventArgs e)
