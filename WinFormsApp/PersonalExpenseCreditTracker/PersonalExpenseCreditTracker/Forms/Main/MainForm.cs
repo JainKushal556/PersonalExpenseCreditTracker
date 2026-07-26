@@ -20,6 +20,8 @@ using PersonalExpenseCreditTracker.Modules.Settings.Person;
 using PersonalExpenseCreditTracker.Modules.Settings.Category;
 using PersonalExpenseCreditTracker.Common;
 using PersonalExpenseCreditTracker.Session;
+using PersonalExpenseCreditTracker.Forms.Main;
+using BLLayer.Common;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -2077,6 +2079,8 @@ namespace PersonalExpenseCreditTracker
             dtpLentToDate.Value = DateTime.Today;
 
             btnLentClearAll.Visible = false;
+
+            lentControl.LoadLentData(Session.LogedInUser.GetUserId());
         }
 
         private void UpdateLentClearAllButton()
@@ -2182,12 +2186,24 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateLentCustomDatePanel();
             UpdateLentClearAllButton();
+
+            DateTime fromDate = DateTime.Today.AddDays(-6);
+            DateTime toDate = DateTime.Today;
+
+            lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
+
         }
 
         private void rbLentThisYear_CheckedChanged(object sender, EventArgs e)
         {
             UpdateLentCustomDatePanel();
             UpdateLentClearAllButton();
+
+            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+
+            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+            lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
+
         }
 
         private void txtLentMinAmount_TextChanged(object sender, EventArgs e)
@@ -3477,10 +3493,112 @@ namespace PersonalExpenseCreditTracker
             }
             
         }
+
+        private void btnLentApplyDateFilter_Click(object sender, EventArgs e)
+        {
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            MainUI mainUi = new MainUI();
+            mainUi.fromDate = dtpLentFromDate.Value;
+            mainUi.toDate = dtpLentToDate.Value;
+
+
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
+
+            switch (result)
+            {
+                // Data is valid and inserted successfully
+                case CommonValidator.ValidationResult.Success:
+                    if (lentControl != null && !lentControl.IsDisposed)
+                    {
+                        if (!lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpLentFromDate.Value, "@ToDate", dtpLentToDate.Value))
+                        {
+                            lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                            //MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                    }
+                    //MessageBox.Show("Apply successfully!");
+             
+                    break;
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpLentFromDate,dtpLentToDate);
+                    break;
+
+            }
+           
+        }
+
+        private void pnlProfilePage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnLentApplyAmountFilter_Click(object sender, EventArgs e)
+        {
+             //Clear all previous validation errors
+                errorProvider1.Clear();
+            
+                // Create a new object to store the user's input
+                MainUI mainUi = new MainUI();
+                // Assign values from the form controls to the object
+
+                mainUi.minAmount = txtLentMinAmount.Text;
+                mainUi.maxAmount = txtLentMaxAmount.Text;
+
+                CommonValidator.ValidationResult result = mainUi.InsertAmountDataIntoMainUi();
+
+                switch (result)
+                {
+                    case CommonValidator.ValidationResult.Success:
+                        if (lentControl != null && !lentControl.IsDisposed)
+                        {
+                            if (!lentControl.LoadFilteredLentData("spFilterLentByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", Convert.ToDecimal(txtLentMinAmount.Text), "@MaxAmount", Convert.ToDecimal(txtLentMaxAmount.Text)))
+                            {
+                                lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                                MessageBox.Show("No Specific Record Exist!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Apply successfully!");
+                            }
+                            
+                        }
+                        else
+                        {
+                             lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                        }
+                     
+                        //this.Close();
+                        break;
+
+                    case CommonValidator.ValidationResult.MinimumAmountInvalid:
+                        ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMinAmount);
+                        break;
+
+                    case CommonValidator.ValidationResult.MaximumAmountInvalid:
+                        ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMaxAmount);
+                        break;
+
+                    case CommonValidator.ValidationResult.AmountRangeInvalid:
+                        ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMinAmount,txtLentMaxAmount);
+                        break;
+                }
+        }
+
+       
        
 
         
-
        
 
     }

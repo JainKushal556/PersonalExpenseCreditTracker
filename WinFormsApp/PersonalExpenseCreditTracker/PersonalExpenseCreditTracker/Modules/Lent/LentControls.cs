@@ -192,12 +192,37 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                                 MessageBoxIcon.Information);
                 return false;
             }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
             AllLentData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
             return true;
         }
-
+        //
+        public Boolean LoadFilteredLentData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = LentUi.retriveDataByUserIdAndFilterIdAtUi(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllLentData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
         private void StyleLentGrid()
         {
             

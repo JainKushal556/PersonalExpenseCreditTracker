@@ -30,6 +30,7 @@ namespace BLLayer.Common
             DateRangeInvalid,
             MinimumAmountInvalid,
             MaximumAmountInvalid,
+            AmountRangeInvalid,
 
             StoreProcedureError
         }
@@ -137,7 +138,8 @@ namespace BLLayer.Common
                 return ValidationResult.Success;
             }
 
-            return ValidationResult.AmountInvalid;
+
+            return ValidationResult.MaximumAmountInvalid;
         }
 
         //Status Validation

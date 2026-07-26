@@ -123,7 +123,7 @@ namespace DALayer.Common
         //                                                           .
         // sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@StatusID", paramId);
         // paramId is the value of the parameter 
-        public static DataTable retriveDataByUserIdAndFilterIdAtDal(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        public static DataTable retriveDataByUserIdAndFilterIdAtDal(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
         {
             SqlConnection sqlConnection = null;
             DataTable dataTable = null;

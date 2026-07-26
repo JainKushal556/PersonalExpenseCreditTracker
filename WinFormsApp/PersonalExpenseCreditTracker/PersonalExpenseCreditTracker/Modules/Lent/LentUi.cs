@@ -72,7 +72,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dataTable = LentBLL.retriveDataForGridViewAtBll(spName, userId);
             return dataTable;
         }
-        public static DataTable retriveDataByUserIdAndFilterIdAtUi(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        public static DataTable retriveDataByUserIdAndFilterIdAtUi(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
         {
             DataTable dataTable = new DataTable();
             dataTable = LentBLL.retriveDataByUserIdAndFilterIdAtBll(spName,userId,paramName1,paramId1,paramName2,paramId2);

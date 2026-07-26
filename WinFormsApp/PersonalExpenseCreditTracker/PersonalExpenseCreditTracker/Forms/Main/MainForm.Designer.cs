@@ -163,6 +163,7 @@ namespace PersonalExpenseCreditTracker
             this.picLentPersonIcone = new System.Windows.Forms.PictureBox();
             this.lblLentFilterByPerson = new System.Windows.Forms.Label();
             this.pnlLentAmountBody = new System.Windows.Forms.Panel();
+            this.btnLentApplyAmountFilter = new System.Windows.Forms.Button();
             this.txtLentMaxAmount = new System.Windows.Forms.TextBox();
             this.lblLentMaxAmount = new System.Windows.Forms.Label();
             this.txtLentMinAmount = new System.Windows.Forms.TextBox();
@@ -399,7 +400,7 @@ namespace PersonalExpenseCreditTracker
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
-            this.btnLentApplyAmountFilter = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlMainSideBarSection.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             this.pnlScrollBar.SuspendLayout();
@@ -597,6 +598,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMainSideBarSection
@@ -614,7 +616,6 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlSideBar
             // 
-            this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlSideBar.Controls.Add(this.pnlScrollBar);
             this.pnlSideBar.Controls.Add(this.flowSidebar);
@@ -631,10 +632,10 @@ namespace PersonalExpenseCreditTracker
             this.pnlScrollBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlScrollBar.Controls.Add(this.pnlThumb);
             this.pnlScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlScrollBar.Location = new System.Drawing.Point(400, 0);
+            this.pnlScrollBar.Location = new System.Drawing.Point(380, 0);
             this.pnlScrollBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlScrollBar.Name = "pnlScrollBar";
-            this.pnlScrollBar.Size = new System.Drawing.Size(20, 5362);
+            this.pnlScrollBar.Size = new System.Drawing.Size(20, 854);
             this.pnlScrollBar.TabIndex = 5;
             this.pnlScrollBar.Visible = false;
             // 
@@ -2379,6 +2380,20 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentAmountBody.TabIndex = 7;
             this.pnlLentAmountBody.Visible = false;
             // 
+            // btnLentApplyAmountFilter
+            // 
+            this.btnLentApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnLentApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnLentApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLentApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnLentApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLentApplyAmountFilter.Name = "btnLentApplyAmountFilter";
+            this.btnLentApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnLentApplyAmountFilter.TabIndex = 5;
+            this.btnLentApplyAmountFilter.Text = "Apply";
+            this.btnLentApplyAmountFilter.UseVisualStyleBackColor = false;
+            this.btnLentApplyAmountFilter.Click += new System.EventHandler(this.btnLentApplyAmountFilter_Click);
+            // 
             // txtLentMaxAmount
             // 
             this.txtLentMaxAmount.Location = new System.Drawing.Point(91, 89);
@@ -2511,6 +2526,7 @@ namespace PersonalExpenseCreditTracker
             this.btnLentApplyDateFilter.TabIndex = 4;
             this.btnLentApplyDateFilter.Text = "Apply";
             this.btnLentApplyDateFilter.UseVisualStyleBackColor = false;
+            this.btnLentApplyDateFilter.Click += new System.EventHandler(this.btnLentApplyDateFilter_Click);
             // 
             // dtpLentToDate
             // 
@@ -5477,23 +5493,15 @@ namespace PersonalExpenseCreditTracker
             this.pnlProfilePage.Name = "pnlProfilePage";
             this.pnlProfilePage.Size = new System.Drawing.Size(1301, 1055);
             this.pnlProfilePage.TabIndex = 0;
+            this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
             // 
             // tmSidebar
             // 
             this.tmSidebar.Interval = 10;
             // 
-            // btnLentApplyAmountFilter
+            // errorProvider1
             // 
-            this.btnLentApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnLentApplyAmountFilter.FlatAppearance.BorderSize = 0;
-            this.btnLentApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLentApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
-            this.btnLentApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnLentApplyAmountFilter.Name = "btnLentApplyAmountFilter";
-            this.btnLentApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
-            this.btnLentApplyAmountFilter.TabIndex = 5;
-            this.btnLentApplyAmountFilter.Text = "Apply";
-            this.btnLentApplyAmountFilter.UseVisualStyleBackColor = false;
+            this.errorProvider1.ContainerControl = this;
             // 
             // MainForm
             // 
@@ -5505,7 +5513,7 @@ namespace PersonalExpenseCreditTracker
             this.Controls.Add(this.pnlProfilePage);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.pnlMainSideBarSection);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -5796,6 +5804,7 @@ namespace PersonalExpenseCreditTracker
             ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -6174,6 +6183,7 @@ namespace PersonalExpenseCreditTracker
         private System.Windows.Forms.PictureBox picSettingChangePassword;
         private System.Windows.Forms.Panel pnlPersonAddPage;
         private System.Windows.Forms.Button btnLentApplyAmountFilter;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
