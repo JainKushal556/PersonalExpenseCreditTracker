@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,54 +35,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             // Call the BLL method for validation
             return lentBLL.DataValidatorIntoLentBll();
-        }
-
-        // Retrieve ComboBox data from the BLL (Stored Procedure with UserId)
-        public static DataTable retriveListForComboBoxAtUi(string spName, int userId)
-        {
-            DataTable dataTable = null;
-            dataTable = LentBLL.retriveListForComboBoxAtBll(spName, userId);
-            return dataTable;
-        }
-        // Retrieve ComboBox data from the BLL (Stored Procedure without UserId)
-        public static DataTable retriveListForComboBoxAtUi(string spName)
-        {
-            DataTable dataTable = null;
-            dataTable = LentBLL.retriveListForComboBoxAtBll(spName);
-            return dataTable;
-        }
-        public static DataTable retriveFilteredDataByStatusAtUi(string spName, int userid,string paramName, int filterId)
-        {
-            DataTable dataTable = new DataTable();
-            dataTable = LentBLL.retriveFilteredDataByStatusAtBll(spName, userid, paramName, filterId);
-            return dataTable;
-        }
-        // Retrieve GridView data from the BLL (Stored Procedure without UserId)
-        public static DataTable retriveDataForGridViewAtUi(string spName)
-        {
-            DataTable dataTable = null;
-            dataTable = LentBLL.retriveDataForGridViewAtBll(spName);
-            return dataTable;
-        }
-
-        // Retrieve GridView data from the BLL (Stored Procedure with UserId)
-        public static DataTable retriveDataForGridViewAtUi(string spName,int userId)
-        {
-            DataTable dataTable = null;
-            dataTable = LentBLL.retriveDataForGridViewAtBll(spName, userId);
-            return dataTable;
-        }
-        public static DataTable retriveDataByUserIdAndFilterIdAtUi(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
-        {
-            DataTable dataTable = new DataTable();
-            dataTable = LentBLL.retriveDataByUserIdAndFilterIdAtBll(spName,userId,paramName1,paramId1,paramName2,paramId2);
-            return dataTable;
-        }
-        public static DataTable retriveDataByUserIdAndFilterIdAtUi(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
-        {
-            DataTable dataTable = new DataTable();
-            dataTable = LentBLL.retriveDataByUserIdAndFilterIdAtBll(spName, userId, paramName1, paramId1, paramName2, paramId2);
-            return dataTable;
         }
     }
 }

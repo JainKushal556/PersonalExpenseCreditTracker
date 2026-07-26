@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,56 +87,6 @@ namespace BLLayer.Lent
                 return CommonValidator.ValidationResult.StoreProcedureError;
             }
             
-        }
-
-        // Retrieves ComboBox data from the DAL using a stored procedure with UserId
-        public static DataTable retriveListForComboBoxAtBll(string spName, int userId)
-        {
-            DataTable dataTable = null;
-            dataTable = SqlHelper.retrieveDataTableBySpNameAndUserId(spName, userId);
-            return dataTable;
-        }
-
-        // Retrieves ComboBox data from the DAL using a stored procedure without UserId
-        public static DataTable retriveListForComboBoxAtBll(string spName)
-        {
-            DataTable dataTable = null;
-            dataTable = SqlHelper.retriveDataTableBySpName(spName);
-            return dataTable;
-        }
-        // Retrieves GirdView data from the DAL using a stored procedure without UserId
-        public static DataTable retriveDataForGridViewAtBll(string spName)
-        {
-            DataTable dataTable = null;
-            dataTable = SqlHelper.retriveDataTableBySpName(spName);
-            return dataTable;
-        }
-        // Retrieves GirdView data from the DAL using a stored procedure with UserId
-        public static DataTable retriveDataForGridViewAtBll(string spName,int userId)
-        {
-            DataTable dataTable = null;
-            dataTable = SqlHelper.retrieveDataTableBySpNameAndUserId(spName, userId);
-            return dataTable;
-        }
-
-        public static DataTable retriveFilteredDataByStatusAtBll(string spName, int userId,string paramName,int filterId)
-        {
-            DataTable dataTable = new DataTable();
-            dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName, userId, paramName, filterId);
-            return dataTable;
-        }
-
-        public static DataTable retriveDataByUserIdAndFilterIdAtBll(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
-        {
-            DataTable dataTable = new DataTable();
-            dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName,userId,paramName1,paramId1,paramName2,paramId2);
-            return dataTable;
-        }
-        public static DataTable retriveDataByUserIdAndFilterIdAtBll(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
-        {
-            DataTable dataTable = new DataTable();
-            dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName, userId, paramName1, paramId1, paramName2, paramId2);
-            return dataTable;
         }
     }
 }

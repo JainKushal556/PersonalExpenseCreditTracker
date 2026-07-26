@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -145,7 +145,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public  void LoadLentData(int userID)
         {
 
-            DataTable dataTable = LentUi.retriveDataForGridViewAtUi("spGetAllLent", userID);
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllLent", userID);
             if (dataTable.Columns.Contains("Message"))
              {
                  MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
@@ -165,7 +165,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public Boolean LoadFilteredLentData(string spName, string paramName, int filterId)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
-            DataTable dataTable = LentUi.retriveFilteredDataByStatusAtUi(spName, userID, paramName, filterId);
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(spName, userID, paramName, filterId);
             if (dataTable.Columns.Contains("Message"))
             {
                 MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
@@ -183,7 +183,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public Boolean LoadFilteredLentData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
-            DataTable dataTable = LentUi.retriveDataByUserIdAndFilterIdAtUi(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
             if (dataTable.Columns.Contains("Message"))
             {
                 MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
@@ -205,7 +205,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public Boolean LoadFilteredLentData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
-            DataTable dataTable = LentUi.retriveDataByUserIdAndFilterIdAtUi(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
             if (dataTable.Columns.Contains("Message"))
             {
                 MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
