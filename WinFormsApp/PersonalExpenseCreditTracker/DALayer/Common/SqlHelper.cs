@@ -111,6 +111,7 @@ namespace DALayer.Common
                 }
             }
         }
+        // takes intiger as pararm value
         // function that retrive datatables after filtering by any double parameter (e,g. { Start Date , Ending Date } , { Min Amount , Max Amount } )
         // spName - StroeProcedure Name 
         // As We Have Two Parameters so we denoted as { paramName1 , paramId1 } , { paramName2 , paramId2 }
@@ -123,6 +124,50 @@ namespace DALayer.Common
         // sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@StatusID", paramId);
         // paramId is the value of the parameter 
         public static DataTable retriveDataByUserIdAndFilterIdAtDal(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        {
+            SqlConnection sqlConnection = null;
+            DataTable dataTable = null;
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                dataTable = new DataTable();
+
+                using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
+                {
+                    sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue(paramName1, paramId1);
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue(paramName2, paramId2);
+                    sqlDataAdapter.Fill(dataTable);
+                    return dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                return dataTable;
+            }
+            finally
+            {
+                if (sqlConnection != null)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
+        // over loaded it take date time as paramvalue 
+        // function that retrive datatables after filtering by any double parameter  (e,g. { Start Date , Ending Date } , { Min Amount , Max Amount } )
+        // spName - StroeProcedure Name 
+        // As We Have Two Parameters so we denoted as { paramName1 , paramId1 } , { paramName2 , paramId2 }
+        // paramName - its is the parameter name that is used in store procedure in data base 
+        //   |
+        //   ---------------------------------------------------------
+        //                                                           |
+        //                                                          \ /
+        //                                                           .
+        // sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@StatusID", paramId);
+        // paramId is the value of the parameter 
+        public static DataTable retriveDataByUserIdAndFilterIdAtDal(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
         {
             SqlConnection sqlConnection = null;
             DataTable dataTable = null;

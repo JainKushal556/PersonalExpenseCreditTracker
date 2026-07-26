@@ -78,5 +78,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dataTable = LentBLL.retriveDataByUserIdAndFilterIdAtBll(spName,userId,paramName1,paramId1,paramName2,paramId2);
             return dataTable;
         }
+        public static DataTable retriveDataByUserIdAndFilterIdAtUi(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = LentBLL.retriveDataByUserIdAndFilterIdAtBll(spName, userId, paramName1, paramId1, paramName2, paramId2);
+            return dataTable;
+        }
     }
 }
