@@ -125,5 +125,12 @@ namespace BLLayer.Lent
             dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName, userId, paramName ,statusId);
             return dataTable;
         }
+
+        public static DataTable retriveDataByUserIdAndFilterIdAtBll(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName,userId,paramName1,paramId1,paramName2,paramId2);
+            return dataTable;
+        }
     }
 }

@@ -2132,6 +2132,22 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateLentCustomDatePanel();
             UpdateLentClearAllButton();
+
+            //if (lentControl != null && !lentControl.IsDisposed)
+            //{
+            //    if (ComboBoxLentStatus.SelectedIndex > 0)
+            //    {
+            //        int statusId = Convert.ToInt32(ComboBoxLentStatus.SelectedValue);
+            //        if (!lentControl.LoadFilteredLentData(statusId, "@StatusID"))
+            //        {
+            //            ComboBoxLentStatus.SelectedIndex = 0;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+            //    }
+            //}
         }
 
         private void rbLentLast7Days_CheckedChanged(object sender, EventArgs e)
@@ -3390,10 +3406,6 @@ namespace PersonalExpenseCreditTracker
         {
             ComboBoxLentStatus.SelectedIndex = index;
         }
-
-      
-
-       
 
        
 
