@@ -2198,7 +2198,7 @@ namespace PersonalExpenseCreditTracker
                 }
                 else
                 {
-                    //lentControl.LoadFilteredLentData("spFilterLentByPerson", "@PersonID",Session.LogedInUser.GetUserId());
+                    lentControl.LoadLentData(Session.LogedInUser.GetUserId());
                 }
             }
         }
