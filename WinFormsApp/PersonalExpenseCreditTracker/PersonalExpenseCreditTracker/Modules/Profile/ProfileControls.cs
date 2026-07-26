@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace PersonalExpenseCreditTracker.Modules.Profile
 {
@@ -134,6 +136,22 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             ImageCropControls crop = new ImageCropControls(this);
             crop.SetImageInImgBoxCrop();
             crop.ShowDialog();
+
+            ProfileUI profileUi = new ProfileUI();
+            profileUi.userId = 1;
+            MemoryStream ms = new MemoryStream();
+            picProfileUserPhoto.Image.Save(ms, ImageFormat.Jpeg);
+            profileUi.photoData =ms.ToArray();
+
+            bool result = profileUi.UpdateProfilePhotoIntoProfUi();
+            if (result)
+            {
+                MessageBox.Show("Validation Success");
+            }
+            else
+            {
+                MessageBox.Show("Validation Failed");
+            }
         }
         private void btnProfileEditButton_Click(object sender, EventArgs e)
         {

@@ -50,7 +50,7 @@
     <Compile Include="Lent\LentBLL.cs" />
     <Compile Include="Mainform\MainformBLL.cs" />
     <Compile Include="Note\NoteBLL.cs" />
-    <Compile Include="Profile\Profile.cs" />
+    <Compile Include="Profile\ProfileBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Category\CategoryBLL.cs" />
     <Compile Include="Settings\Person\PersonBLL.cs" />

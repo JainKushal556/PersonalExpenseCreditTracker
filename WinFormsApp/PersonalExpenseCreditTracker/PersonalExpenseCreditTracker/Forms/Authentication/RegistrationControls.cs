@@ -15,5 +15,23 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             InitializeComponent();
         }
+
+        private void btnSignUp_Click(object sender, EventArgs e)
+        {
+            AuthUI authUi = new AuthUI();
+            authUi.userName = txtUserName.Text;
+            authUi.email = txtEmail.Text;
+            authUi.password = txtPassword.Text;
+
+            bool result = authUi.InsertDataIntoAuthUi(authUi);
+            if (result)
+            {
+                MessageBox.Show("Validation Passed");
+            }
+            else
+            {
+                MessageBox.Show("Validation Failed");
+            }
+        }
     }
 }
