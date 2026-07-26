@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -144,42 +144,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         public  void LoadLentData(int userID)
         {
-            //try
-            //{
-            //    using (SqlConnection con = new SqlConnection(ConnectionString))
-            //    {
-            //        using (SqlCommand cmd = new SqlCommand("spGetAllLent", con))
-            //        {
-            //            cmd.CommandType = CommandType.StoredProcedure;
-            //            cmd.Parameters.AddWithValue("@UserID", userID);
-
-            //            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            //            DataTable dt = new DataTable();
-
-            //            da.Fill(dt);
-
-
-            //            if (dt.Columns.Contains("Message"))
-            //            {
-            //                MessageBox.Show(dt.Rows[0]["Message"].ToString(),
-            //                                "Information",
-            //                                MessageBoxButtons.OK,
-            //                                MessageBoxIcon.Information);
-
-            //                dgvLentDataTable.DataSource = null;
-            //                return;
-            //            }
-
-            //            AllLentData = dt;
-            //            currentPage = 1;
-            //            ShowCurrentPage();
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
 
             DataTable dataTable = LentUi.retriveDataForGridViewAtUi("spGetAllLent", userID);
             if (dataTable.Columns.Contains("Message"))
@@ -192,19 +156,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                  dgvLentDataTable.DataSource = null;
                  return;
              }
-            //if (dgvLentDataTable.DataSource != null)
-            //{
-            //    dgvLentDataTable.DataSource = null;
-            //}
+
             AllLentData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
         }
 
-        public Boolean LoadFilteredLentData(int statusId, string paramName)
+        public Boolean LoadFilteredLentData(string spName, string paramName, int filterId)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
-            DataTable dataTable = LentUi.retriveFilteredDataByStatusAtUi("spFilterLentByStatus", userID,paramName, statusId);
+            DataTable dataTable = LentUi.retriveFilteredDataByStatusAtUi(spName, userID, paramName, filterId);
             if (dataTable.Columns.Contains("Message"))
             {
                 MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),

@@ -119,10 +119,10 @@ namespace BLLayer.Lent
             return dataTable;
         }
 
-        public static DataTable retriveFilteredDataByStatusAtBll(string spName, int userId,string paramName,int statusId)
+        public static DataTable retriveFilteredDataByStatusAtBll(string spName, int userId,string paramName,int filterId)
         {
             DataTable dataTable = new DataTable();
-            dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName, userId, paramName ,statusId);
+            dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName, userId, paramName, filterId);
             return dataTable;
         }
 

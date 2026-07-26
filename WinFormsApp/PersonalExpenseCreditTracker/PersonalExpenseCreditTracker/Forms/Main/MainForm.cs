@@ -149,25 +149,25 @@ namespace PersonalExpenseCreditTracker
         {
             flowSidebar.Location = new Point(0, 0);
             flowSidebar.Width = pnlSideBar.ClientSize.Width;
-            ComboBoxCategory.SelectedIndex = 0;
-            cmbSubCategory.SelectedIndex = 0;
+            //ComboBoxCategory.SelectedIndex = 0;
+            //cmbSubCategory.SelectedIndex = 0;
 
-            ComboBoxCreditCategory.SelectedIndex = 0;
-            ComboBoxCreditSubCategory.SelectedIndex = 0;
+            //ComboBoxCreditCategory.SelectedIndex = 0;
+            //ComboBoxCreditSubCategory.SelectedIndex = 0;
 
-            ComboBoxLentPerson.SelectedIndex = 0;
-            ComboBoxLentStatus.SelectedIndex = 0;
-            ComboBoxLentPayment.SelectedIndex = 0;
+            //ComboBoxLentPerson.SelectedIndex = 0;
+            //ComboBoxLentStatus.SelectedIndex = 0;
+            //ComboBoxLentPayment.SelectedIndex = 0;
 
-            ComboBoxBorrowPerson.SelectedIndex = 0;
-            ComboBoxBorrowStatus.SelectedIndex = 0;
-            ComboBoxBorrowPayment.SelectedIndex = 0;
+            //ComboBoxBorrowPerson.SelectedIndex = 0;
+            //ComboBoxBorrowStatus.SelectedIndex = 0;
+            //ComboBoxBorrowPayment.SelectedIndex = 0;
 
-            ComboBoxTaskStatus.SelectedIndex = 0;
-            ComboBoxTaskPriority.SelectedIndex = 0;
+            //ComboBoxTaskStatus.SelectedIndex = 0;
+            //ComboBoxTaskPriority.SelectedIndex = 0;
 
-            ComboBoxNoteStatus.SelectedIndex = 0;
-            ComboBoxNotePriority.SelectedIndex = 0;
+            //ComboBoxNoteStatus.SelectedIndex = 0;
+            //ComboBoxNotePriority.SelectedIndex = 0;
 
 
             ShowPage(pnlOverview);
@@ -1989,6 +1989,11 @@ namespace PersonalExpenseCreditTracker
             UpdateLentClearAllButton();
 
             flowSidebar.Top = 0;
+
+            //load status from db on click to Person drop down 
+            Common.CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", ComboBoxLentPerson);
+
+
         }
 
         private void pnlLentStatusHeader_Click(object sender, EventArgs e)
@@ -2049,6 +2054,9 @@ namespace PersonalExpenseCreditTracker
             UpdateLentClearAllButton();
 
             flowSidebar.Top = 0;
+
+            //load status from db on click to status drop down 
+            Common.CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select PaymentType", ComboBoxLentPayment);
         }
 
         private void btnLentClearAll_Click(object sender, EventArgs e)
@@ -2061,9 +2069,9 @@ namespace PersonalExpenseCreditTracker
             txtLentMinAmount.Clear();
             txtLentMaxAmount.Clear();
 
-            ComboBoxLentPerson.SelectedIndex = 0;
-            ComboBoxLentStatus.SelectedIndex = 0;
-            ComboBoxLentPayment.SelectedIndex = 0;
+            //ComboBoxLentPerson.SelectedIndex = 0;
+            //ComboBoxLentStatus.SelectedIndex = 0;
+            //ComboBoxLentPayment.SelectedIndex = 0;
 
             dtpLentFromDate.Value = DateTime.Today;
             dtpLentToDate.Value = DateTime.Today;
@@ -2165,6 +2173,7 @@ namespace PersonalExpenseCreditTracker
         private void txtLentMinAmount_TextChanged(object sender, EventArgs e)
         {
             UpdateLentClearAllButton();
+
         }
 
         private void txtLentMaxAmount_TextChanged(object sender, EventArgs e)
@@ -2175,6 +2184,23 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxLentPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateLentClearAllButton();
+
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                if (ComboBoxLentPerson.SelectedIndex > 0)
+                {
+                    int filterId = Convert.ToInt32(ComboBoxLentPerson.SelectedValue);
+                    //MessageBox.Show(filterId.ToString());
+                    if (!lentControl.LoadFilteredLentData("spFilterLentByPerson", "@PersonID", filterId))
+                    {
+                        ComboBoxLentPerson.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    //lentControl.LoadFilteredLentData("spFilterLentByPerson", "@PersonID",Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
         private void ComboBoxLentStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -2185,7 +2211,7 @@ namespace PersonalExpenseCreditTracker
                 if (ComboBoxLentStatus.SelectedIndex > 0)
                 {
                     int statusId = Convert.ToInt32(ComboBoxLentStatus.SelectedValue);
-                    if (!lentControl.LoadFilteredLentData(statusId, "@StatusID"))
+                    if (!lentControl.LoadFilteredLentData("spFilterLentByStatus", "@StatusID",statusId))
                     {
                         ComboBoxLentStatus.SelectedIndex = 0;
                     }
@@ -3407,6 +3433,28 @@ namespace PersonalExpenseCreditTracker
             ComboBoxLentStatus.SelectedIndex = index;
         }
 
+        private void ComboBoxLentPayment_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            UpdateLentClearAllButton();
+
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                if (ComboBoxLentPayment.SelectedIndex > 0)
+                {
+                    int filterId = Convert.ToInt32(ComboBoxLentPayment.SelectedValue);
+                    //MessageBox.Show(filterId.ToString());
+                    if (!lentControl.LoadFilteredLentData("spFilterLentByPaymentMethod", "@PaymentID", filterId))
+                    {
+                        ComboBoxLentPayment.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    //lentControl.LoadFilteredLentData("spFilterLentByPaymentMethod", "@PersonID", Session.LogedInUser.GetUserId());
+                }
+            }
+            
+        }
        
 
         
