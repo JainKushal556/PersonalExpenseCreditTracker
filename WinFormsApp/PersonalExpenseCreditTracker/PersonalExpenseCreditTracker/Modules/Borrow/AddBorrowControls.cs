@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using PersonalExpenseCreditTracker.Common;
+using BLLayer.Common;
 namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     public partial class AddBorrowControls : Form
@@ -205,6 +206,32 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             //}
         }
 
+        //private void LoadFormData()
+        //{
+        //    comboBoxBorrowSelectPerson.Text = "Select Person";
+            
+        //    txtLentAddDeadlineDatePicker.Text = "DD-MM-YYYY";
+        //    panelLentAddCalenderShow.Visible = false;
+
+        //    textBoxLentAddDescription.Text = "Enter description";
+        //    txtLentAddAmount.Text = "Select Amount";
+
+        //    CommonUiFunction.LoadInComboBox("spGetAllPersons", 11, "Select Person", comboBoxLentSelectPerson);
+        //    CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", comboBoxLentPaymentType);
+        //}
+        private void LoadFormData()
+        {
+            cmbBorrowSelectPerson.Text = "Select Person";
+            txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
+            pnlBorrowAddCalenderShow.Visible = false;
+
+            txtBorrowAddDescription.Text = "Enter description";
+            txtBorrowAddAmount.Text = "Select Amount"; ;
+
+            CommonUiFunction.LoadInComboBox("spGetAllPersons", 12, "Select Person", cmbBorrowSelectPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbBorrowPaymentType);
+            
+        }
         private void AddBorrowControls_Load(object sender, EventArgs e)
         {
 
@@ -226,6 +253,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
             txtBorrowAddDeadlineDatePicker.ForeColor = Color.Gray;
+            LoadFormData();
         }
 
         private void AddBorrowControls_Click(object sender, EventArgs e)
@@ -252,16 +280,129 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
 
 
+        //private void btnLentAddSave_Click(object sender, EventArgs e)
+        //{
+        //    // Clear all previous validation errors
+        //    errorProvider1.Clear();
+
+        //    // Create a new object to store the user's input
+        //    LentUi lentUi = new LentUi();
+
+        //    // Assign values from the form controls to the object
+        //    lentUi.userId = Session.LogedInUser.GetUserId();
+        //    lentUi.lentId = -1;
+        //    lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
+        //    lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
+
+
+        //    // If the placeholder text is still present, pass an empty string
+        //    lentUi.amount = (txtLentAddAmount.Text == "Select Amount") ? "" : txtLentAddAmount.Text;
+        //    lentUi.description = (textBoxLentAddDescription.Text == "Enter description") ? "" : textBoxLentAddDescription.Text;
+
+        //    // If no deadline is selected, assign DateTime.MinValue
+        //    // Otherwise, assign the selected date from the calendar
+        //    lentUi.deadlineAt = (txtLentAddDeadlineDatePicker.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendarAddLent.SelectionStart;
+
+
+        //    CommonValidator.ValidationResult result = lentUi.InsertDataIntoLentUi();
+        //    // Perform action based on the validation result
+        //    switch (result)
+        //    {
+        //        // Data is valid and inserted successfully
+        //        case CommonValidator.ValidationResult.Success:
+        //            MessageBox.Show("Lent added successfully!");
+        //            this.Close();
+
+        //            break;
+        //        case CommonValidator.ValidationResult.PersonInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentSelectPerson);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.PaymentInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentPaymentType);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.StatusInvalid:
+        //            //ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentStatus);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.AmountEmpty:
+        //        case CommonValidator.ValidationResult.AmountInvalid:
+        //        case CommonValidator.ValidationResult.AmountTooLarge:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtLentAddAmount);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.DescriptionInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, textBoxLentAddDescription);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.DeadlineInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtLentAddDeadlineDatePicker);
+        //            break;
+        //        case CommonValidator.ValidationResult.StoreProcedureError:
+        //            MessageBox.Show("Lent added Unsuccessfully!");
+        //            break;
+        //    }
+
+        //}
         private void btnBorrowAddSave_Click(object sender, EventArgs e)
         {
-            if (txtBorrowAddDeadlineDatePicker.Text == "DD-MM-YYYY" ||
-                txtBorrowAddDescription.Text == "Enter description" ||
-                txtBorrowAddAmount.Text == "Select Amount" ||
-                cmbBorrowPaymentType.Text == "Select Payment Type" ||
-                cmbBorrowSelectPerson.Text == "Select Person")
-                MessageBox.Show("Please fill all fields");
-            else
-            MessageBox.Show("Borrow Details Saved");
+            errorProvider1.Clear();
+
+            BorrowUI borrowUi = new BorrowUI();
+            // Assign values from the form controls to the object
+            borrowUi.userId = Session.LogedInUser.GetUserId();
+            borrowUi.personId = Convert.ToInt32(cmbBorrowSelectPerson.SelectedValue);
+            borrowUi.paymentId = Convert.ToInt32(cmbBorrowPaymentType.SelectedValue);
+
+           //  If the placeholder text is still present, pass an empty string
+            borrowUi.amount = (txtBorrowAddAmount.Text == "Select Amount") ? "" : txtBorrowAddAmount.Text;
+            borrowUi.description = (txtBorrowAddDescription.Text == "Enter description") ? "" : txtBorrowAddDescription.Text;
+            
+            // If no deadline is selected, assign DateTime.MinValue
+            //    // Otherwise, assign the selected date from the calendar
+            borrowUi.deadlineAt = (txtBorrowAddDeadlineDatePicker.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendarAddBorrow.SelectionStart;
+
+            CommonValidator.ValidationResult result = borrowUi.InsertDataIntoLentUi();
+
+            switch (result)
+            {
+                // Data is valid and inserted successfully
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Lent added successfully!");
+                    this.Close();
+
+                    break;
+                case CommonValidator.ValidationResult.PersonInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbBorrowSelectPerson);
+                    break;
+
+                case CommonValidator.ValidationResult.PaymentInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbBorrowPaymentType);
+                    break;
+
+                case CommonValidator.ValidationResult.StatusInvalid:
+                    //ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentStatus);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountEmpty:
+                case CommonValidator.ValidationResult.AmountInvalid:
+                case CommonValidator.ValidationResult.AmountTooLarge:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowAddAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.DescriptionInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowAddDescription);
+                    break;
+
+                case CommonValidator.ValidationResult.DeadlineInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowAddDeadlineDatePicker);
+                    break;
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Lent added Unsuccessfully!");
+                    break;
+            }
+
         }
 
 
@@ -290,5 +431,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             SetRadius(btnBorrowAddSave, 5);
         }
+
+        
     }
 }

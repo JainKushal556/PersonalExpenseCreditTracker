@@ -1145,7 +1145,6 @@ The first version will include borrow return reminders, lent return reminders, a
 - `@UserID`
 - `@PersonID`
 - `@PaymentID`
-- `@StatusID`
 - `@Amount`
 - `@DeadlineAt`
 - `@Description`
@@ -1162,8 +1161,8 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Tables Used:**
 
-- `Borrow`
-- `Credit`
+- `tblBorrow`
+- `tblCredit`
 
 ### 37. spGetAllBorrow
 

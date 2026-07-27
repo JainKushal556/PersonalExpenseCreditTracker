@@ -145,7 +145,7 @@ graph LR
 
 | Stored Procedure | UI Trigger Event & Source File | Input Parameters from UI | BLL Validation & Constraints |
 | :--- | :--- | :--- | :--- |
-| **`spInsertBorrow`** | `AddBorrowControls.cs` <br> "Save Borrow" Button Click (`btnBorrowAddSave_Click`) | `@UserID` (Session)<br>`@PersonID`<br>`@Amount`<br>`@BorrowDate`<br>`@DueDate`<br>`@Description` | • **PersonID**: Must select a valid person (> 0).<br>• **Amount**: Must be $> 0$.<br>• **BorrowDate / DueDate**: `@DueDate` must be $\ge$ `@BorrowDate`. |
+| **`spInsertBorrow`** | `AddBorrowControls.cs` <br> "Save Borrow" Button Click (`btnBorrowAddSave_Click`) | `@UserID` (Session)<br>`@PersonID`<br>`@PaymentID`<br>`@Amount`<br>`@DeadlineAt`<br>`@Description` | • **PersonID**: Must select a valid person (> 0).<br>• **PaymentID**: Must select a valid payment type (> 0).<br>• **Amount**: Must be $> 0$.<br>• **DeadlineAt**: `@DeadlineAt` must be $\ge$ current date. |
 | **`spPayBorrow`** | `BorrowControls.cs` <br> "Pay Borrow" Button Click | `@BorrowID`<br>`@PayAmount`<br>`@PayDate`<br>`@UserID` | • **BorrowID**: Must be valid.<br>• **PayAmount**: Must be $> 0$.<br>• **Business Rule Check**: `@PayAmount` must not exceed the remaining unpaid borrow balance. |
 | **`spGetAllBorrow`** | `BorrowControls.cs` <br> Grid view load | `@UserID` (Session) | • Valid session check. |
 | **`spGetBorrowPersonHistory`** | History pop-up list | `@UserID`, `@PersonID` | • Valid PersonID check. |

@@ -2,7 +2,7 @@ CREATE PROCEDURE spInsertBorrow
 (
     @UserID INT,
     @PersonID INT,
-    @PaymentName VARCHAR(100),
+    @PaymentID INT,
     @Amount DECIMAL(10,2),
     @DeadlineAt DATETIME,
     @Description VARCHAR(MAX)
@@ -10,7 +10,7 @@ CREATE PROCEDURE spInsertBorrow
 AS
 BEGIN
 
-    DECLARE @PaymentID INT;
+    
     DECLARE @StatusID INT;
     DECLARE @CreditCategoryID INT;
     DECLARE @CreditSubCategoryID INT;
@@ -19,7 +19,7 @@ BEGIN
     -- Trim Inputs
     -------------------------------------------------
 
-    SET @PaymentName = LTRIM(RTRIM(@PaymentName));
+    
     SET @Description = LTRIM(RTRIM(@Description));
 
     BEGIN TRY
@@ -78,19 +78,7 @@ BEGIN
             RETURN;
         END
 
-        -------------------------------------------------
-        -- Payment Type Validation
-        -------------------------------------------------
-
-        SELECT @PaymentID = PaymentID
-        FROM tblPaymentType
-        WHERE LTRIM(RTRIM(PaymentName)) = @PaymentName;
-
-        IF @PaymentID IS NULL
-        BEGIN
-            SELECT 'Invalid Payment Type.' AS Message;
-            RETURN;
-        END
+        
 
         -------------------------------------------------
         -- Default Status = Pending

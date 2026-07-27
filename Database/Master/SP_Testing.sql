@@ -763,7 +763,6 @@ EXEC spInsertBorrow
     @UserID = '',
     @PersonID = '',
     @PaymentID = '',
-    @StatusID = '',
     @Amount = '',
     @DeadlineAt = '',
     @Description = ''
