@@ -14,6 +14,13 @@ namespace BLLayer.Common
             return dataTable;
         }
 
+        // Retrieves list data for ComboBoxes from the database using UserID
+        public static DataTable RetrieveListForComboBox(string spName, string paramName,int paramValue)
+        {
+            DataTable dataTable = null;
+            dataTable = SqlHelper.retriveDataByAndFilterIdAtDal(spName, paramName, paramValue);
+            return dataTable;
+        }
         // Retrieves list data for ComboBoxes from the database without UserID
         public static DataTable RetrieveListForComboBox(string spName)
         {

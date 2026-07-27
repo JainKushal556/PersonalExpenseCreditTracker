@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlCreditDetailsContent = new System.Windows.Forms.Panel();
             this.tlpAddCredit = new System.Windows.Forms.TableLayoutPanel();
             this.pnlAddCreditCard = new System.Windows.Forms.Panel();
@@ -56,6 +57,7 @@
             this.pnlAddCreditControll = new System.Windows.Forms.Panel();
             this.btnSaveCredit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlCreditDetailsContent.SuspendLayout();
             this.tlpAddCredit.SuspendLayout();
             this.pnlAddCreditCard.SuspendLayout();
@@ -70,6 +72,7 @@
             this.pnlAddCreditFooter.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlAddCreditControll.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlCreditDetailsContent
@@ -154,7 +157,7 @@
             this.cmbAddCreditCategory.Name = "cmbAddCreditCategory";
             this.cmbAddCreditCategory.Size = new System.Drawing.Size(347, 31);
             this.cmbAddCreditCategory.TabIndex = 1;
-            this.cmbAddCreditCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCreditCategory_SelectedIndexChanged);
+            this.cmbAddCreditCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditCategory_SelectedIndexChanged);
             // 
             // lblAddCreditCategory
             // 
@@ -187,6 +190,7 @@
             this.cmbAddCreditSubCategory.Name = "cmbAddCreditSubCategory";
             this.cmbAddCreditSubCategory.Size = new System.Drawing.Size(348, 31);
             this.cmbAddCreditSubCategory.TabIndex = 1;
+            this.cmbAddCreditSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditSubCategory_SelectedIndexChanged_1);
             // 
             // lblAddCreditSubCategory
             // 
@@ -389,6 +393,7 @@
             this.btnSaveCredit.Text = "  Save Credit";
             this.btnSaveCredit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveCredit.UseVisualStyleBackColor = true;
+            this.btnSaveCredit.Click += new System.EventHandler(this.btnSaveCredit_Click);
             // 
             // btnCancel
             // 
@@ -401,6 +406,10 @@
             this.btnCancel.Text = "  Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // CreditDetailsControl
             // 
@@ -432,6 +441,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlAddCreditControll.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -466,5 +476,6 @@
         private System.Windows.Forms.ComboBox cmbAddCreditSubCategory;
         private System.Windows.Forms.ComboBox cmbAddCreditPaymentType;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

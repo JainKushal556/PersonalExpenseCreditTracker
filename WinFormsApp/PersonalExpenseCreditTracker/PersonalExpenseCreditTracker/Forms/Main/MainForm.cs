@@ -1824,7 +1824,11 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveCreditSubMenu(pnlAllCredit);
 
-      
+            if (creditControl != null && !creditControl.IsDisposed)
+            {
+                creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+            }
+
         }
 
         private void pnlAddCredit_MouseEnter(object sender, EventArgs e)
@@ -3596,6 +3600,11 @@ namespace PersonalExpenseCreditTracker
         }
 
         private void pnlAddLent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlLent_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -198,5 +198,38 @@ namespace DALayer.Common
                 }
             }
         }
+
+
+        // sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@StatusID", paramId);
+        // paramId is the value of the parameter 
+        public static DataTable retriveDataByAndFilterIdAtDal(string spName,string paramName, int paramId)
+        {
+            SqlConnection sqlConnection = null;
+            DataTable dataTable = null;
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                dataTable = new DataTable();
+
+                using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
+                {
+                    sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue(paramName, paramId);
+                    sqlDataAdapter.Fill(dataTable);
+                    return dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                return dataTable;
+            }
+            finally
+            {
+                if (sqlConnection != null)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
     }
 }

@@ -9,6 +9,8 @@ using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Session;
 using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Credit
@@ -51,7 +53,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             ApplyRoundCorners();
             pageSize = GetRowsPerPage();
-            int userID = 11; 
+            int userID = Session.LogedInUser.GetUserId(); 
             LoadCreditData(userID);
         }
 
@@ -133,42 +135,23 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             colPaymentMethod.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        private void LoadCreditData(int userID)
+        public void LoadCreditData(int userID)
         {
-            try
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllCreditsByID", userID);
+            if (dataTable.Columns.Contains("Message"))
             {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spGetAllCreditsByID", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserID", userID);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-
-                        da.Fill(dt);
-
-                        if (dt.Columns.Contains("Message"))
-                        {
-                            MessageBox.Show(dt.Rows[0]["Message"].ToString(),
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
                                 "Information",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
 
-                            dgvCreditDataTable.DataSource = null;
-                            return;
-                        }
+                dgvCreditDataTable.DataSource = null;
+                return;
+            }
 
-                        AllCreditData = dt;
-                        dgvCreditDataTable.DataSource = AllCreditData;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            AllCreditData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
         }
         private void dgvCreditDataTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -350,6 +333,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             pnlTransactionCard.Region = Region.FromHrgn(
                 CreateRoundRectRgn(0, 0, pnlTransactionCard.Width, pnlTransactionCard.Height, 10, 10));
 
+
+        }
+
+        private void picCredit_Click(object sender, EventArgs e)
+        {
 
         }
 

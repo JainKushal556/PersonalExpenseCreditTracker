@@ -401,6 +401,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.process1 = new System.Diagnostics.Process();
             this.pnlMainSideBarSection.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             this.pnlScrollBar.SuspendLayout();
@@ -2062,6 +2063,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLent.Size = new System.Drawing.Size(400, 60);
             this.pnlLent.TabIndex = 7;
             this.pnlLent.Click += new System.EventHandler(this.pnlLent_Click);
+            this.pnlLent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlLent_Paint);
             this.pnlLent.MouseEnter += new System.EventHandler(this.pnlLent_MouseEnter);
             this.pnlLent.MouseLeave += new System.EventHandler(this.pnlLent_MouseLeave);
             // 
@@ -5506,6 +5508,16 @@ namespace PersonalExpenseCreditTracker
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // process1
+            // 
+            this.process1.StartInfo.Domain = "";
+            this.process1.StartInfo.LoadUserProfile = false;
+            this.process1.StartInfo.Password = null;
+            this.process1.StartInfo.StandardErrorEncoding = null;
+            this.process1.StartInfo.StandardOutputEncoding = null;
+            this.process1.StartInfo.UserName = "";
+            this.process1.SynchronizingObject = this;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -5516,7 +5528,7 @@ namespace PersonalExpenseCreditTracker
             this.Controls.Add(this.pnlProfilePage);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.pnlMainSideBarSection);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -6187,6 +6199,7 @@ namespace PersonalExpenseCreditTracker
         private System.Windows.Forms.Panel pnlPersonAddPage;
         private System.Windows.Forms.Button btnLentApplyAmountFilter;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Diagnostics.Process process1;
     }
 }
 

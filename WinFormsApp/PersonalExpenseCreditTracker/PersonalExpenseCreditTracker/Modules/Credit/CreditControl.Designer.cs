@@ -462,6 +462,7 @@
             this.picCredit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCredit.TabIndex = 0;
             this.picCredit.TabStop = false;
+            this.picCredit.Click += new System.EventHandler(this.picCredit_Click);
             // 
             // lblTotalCredit
             // 

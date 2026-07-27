@@ -490,5 +490,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         }
 
+        private void panelTotalRepaid_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
       }
     }
