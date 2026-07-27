@@ -5319,24 +5319,11 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlChnagePasswordPage
             // 
-            this.pnlChnagePasswordPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.pnlChnagePasswordPage.Controls.Add(this.pnlLogoutPage);
-            this.pnlChnagePasswordPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlChnagePasswordPage.Location = new System.Drawing.Point(0, 78);
-            this.pnlChnagePasswordPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlChnagePasswordPage.Name = "pnlChnagePasswordPage";
-            this.pnlChnagePasswordPage.Size = new System.Drawing.Size(876, 977);
-            this.pnlChnagePasswordPage.TabIndex = 0;
+           
             // 
             // pnlLogoutPage
             // 
-            this.pnlLogoutPage.BackColor = System.Drawing.Color.Silver;
-            this.pnlLogoutPage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLogoutPage.Location = new System.Drawing.Point(0, 0);
-            this.pnlLogoutPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlLogoutPage.Name = "pnlLogoutPage";
-            this.pnlLogoutPage.Size = new System.Drawing.Size(876, 977);
-            this.pnlLogoutPage.TabIndex = 0;
+            
             // 
             // pnlCreditCategoryPage
             // 
