@@ -24,7 +24,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             InitializeComponent();
             CreateColumns();
             StyleGrid();
-            dgvCategory.CellClick += dgvCategory_CellClick;
+            
             //tsmiEdit.Click += tsmiEdit_Click;
             //tsmiAddSubCategory.Click += tsmiAddSubCategory_Click;
             //tsmiDelete.Click += tsmiDelete_Click;
@@ -36,6 +36,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             LoadCategories();
             LoadSubCategories();
             FillGrid();
+            dgvCategory.CellClick += dgvCategory_CellClick;
+            dgvCategory.CellFormatting += dgvCategory_CellFormatting;
         }
 
         private void CreateColumns()
@@ -235,6 +237,31 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             }
         }
 
+        private void dgvCategory_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // status Color
+            if (dgvCategory.Columns[e.ColumnIndex].Name == "colStatus")
+            {
+                if (e.Value == null) return;
+
+                switch (e.Value.ToString())
+                {
+                    case "Inactive":
+                        e.CellStyle.ForeColor = Color.Red;
+                        e.CellStyle.Font = new Font("Segoe UI", 10);
+                        break;
+
+                    case "Active":
+                        e.CellStyle.ForeColor = Color.Green;
+                        e.CellStyle.Font = new Font("Segoe UI", 10);
+                        break;
+                }
+            }
+
+          
+
+        }
+
         private void FillGrid()
         {
             dgvCategory.Rows.Clear();
@@ -283,6 +310,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             ExpenseAddSubCategoryControls expenseAddSubCategoryControls = new ExpenseAddSubCategoryControls();
             expenseAddSubCategoryControls.Show();
+        }
+
+        private void tsmiEdit_Click(object sender, EventArgs e)
+        {
+            ExpenseEditCategoryControls expenseEditCategoryControls = new ExpenseEditCategoryControls();
+            expenseEditCategoryControls.Show();
         }
 
 

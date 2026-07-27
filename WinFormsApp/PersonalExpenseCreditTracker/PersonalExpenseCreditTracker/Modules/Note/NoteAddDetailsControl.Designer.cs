@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.pnlAddNoteDetails = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblRedStar = new System.Windows.Forms.Label();
+            this.btnCancelDialog = new System.Windows.Forms.Button();
+            this.pnlDescription = new System.Windows.Forms.Panel();
+            this.rtxtDescription = new System.Windows.Forms.TextBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnSaveNote = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -58,16 +65,14 @@
             this.rbMedium = new System.Windows.Forms.RadioButton();
             this.lblPriority = new System.Windows.Forms.Label();
             this.lblDescriptionCount = new System.Windows.Forms.Label();
-            this.rtxtDescription = new System.Windows.Forms.RichTextBox();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblTitleCount = new System.Windows.Forms.Label();
             this.txtNoteTitle = new System.Windows.Forms.TextBox();
             this.lblNoteTitle = new System.Windows.Forms.Label();
             this.pnlAddNoteHeader = new System.Windows.Forms.Panel();
-            this.btnCancelDialog = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.pnlDescription = new System.Windows.Forms.Panel();
             this.pnlAddNoteDetails.SuspendLayout();
+            this.pnlDescription.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             this.flpNoteColors.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -76,13 +81,17 @@
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlAddNoteHeader.SuspendLayout();
-            this.pnlDescription.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlAddNoteDetails
             // 
             this.pnlAddNoteDetails.BackColor = System.Drawing.Color.White;
             this.pnlAddNoteDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAddNoteDetails.Controls.Add(this.panel4);
+            this.pnlAddNoteDetails.Controls.Add(this.label2);
+            this.pnlAddNoteDetails.Controls.Add(this.label1);
+            this.pnlAddNoteDetails.Controls.Add(this.lblRedStar);
+            this.pnlAddNoteDetails.Controls.Add(this.btnCancelDialog);
             this.pnlAddNoteDetails.Controls.Add(this.pnlDescription);
             this.pnlAddNoteDetails.Controls.Add(this.pnlButtons);
             this.pnlAddNoteDetails.Controls.Add(this.flpNoteColors);
@@ -95,44 +104,134 @@
             this.pnlAddNoteDetails.Controls.Add(this.txtNoteTitle);
             this.pnlAddNoteDetails.Controls.Add(this.lblNoteTitle);
             this.pnlAddNoteDetails.Controls.Add(this.pnlAddNoteHeader);
-            this.pnlAddNoteDetails.Location = new System.Drawing.Point(318, 40);
+            this.pnlAddNoteDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlAddNoteDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlAddNoteDetails.Location = new System.Drawing.Point(0, 0);
+            this.pnlAddNoteDetails.Margin = new System.Windows.Forms.Padding(0);
             this.pnlAddNoteDetails.Name = "pnlAddNoteDetails";
             this.pnlAddNoteDetails.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlAddNoteDetails.Size = new System.Drawing.Size(500, 560);
+            this.pnlAddNoteDetails.Size = new System.Drawing.Size(487, 538);
             this.pnlAddNoteDetails.TabIndex = 0;
             this.pnlAddNoteDetails.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Location = new System.Drawing.Point(21, 51);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(450, 1);
+            this.panel4.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(80, 303);
+            this.label2.Margin = new System.Windows.Forms.Padding(0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 21);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "*";
+            // 
+            // label1
+            // 
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(110, 154);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 21);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "*";
+            // 
+            // lblRedStar
+            // 
+            this.lblRedStar.ForeColor = System.Drawing.Color.Red;
+            this.lblRedStar.Location = new System.Drawing.Point(98, 70);
+            this.lblRedStar.Margin = new System.Windows.Forms.Padding(0);
+            this.lblRedStar.Name = "lblRedStar";
+            this.lblRedStar.Size = new System.Drawing.Size(46, 21);
+            this.lblRedStar.TabIndex = 17;
+            this.lblRedStar.Text = "*";
+            // 
+            // btnCancelDialog
+            // 
+            this.btnCancelDialog.FlatAppearance.BorderSize = 0;
+            this.btnCancelDialog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelDialog.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
+            this.btnCancelDialog.Location = new System.Drawing.Point(435, 8);
+            this.btnCancelDialog.Name = "btnCancelDialog";
+            this.btnCancelDialog.Size = new System.Drawing.Size(44, 42);
+            this.btnCancelDialog.TabIndex = 1;
+            this.btnCancelDialog.UseVisualStyleBackColor = true;
+            this.btnCancelDialog.Click += new System.EventHandler(this.btnCancelDialog_Click);
+            this.btnCancelDialog.MouseEnter += new System.EventHandler(this.btnCancelDialog_MouseEnter);
+            this.btnCancelDialog.MouseLeave += new System.EventHandler(this.btnCancelDialog_MouseLeave);
+            // 
+            // pnlDescription
+            // 
+            this.pnlDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDescription.Controls.Add(this.rtxtDescription);
+            this.pnlDescription.Location = new System.Drawing.Point(18, 184);
+            this.pnlDescription.Name = "pnlDescription";
+            this.pnlDescription.Size = new System.Drawing.Size(450, 96);
+            this.pnlDescription.TabIndex = 12;
+            // 
+            // rtxtDescription
+            // 
+            this.rtxtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtxtDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDescription.Location = new System.Drawing.Point(0, 0);
+            this.rtxtDescription.Multiline = true;
+            this.rtxtDescription.Name = "rtxtDescription";
+            this.rtxtDescription.Size = new System.Drawing.Size(448, 94);
+            this.rtxtDescription.TabIndex = 0;
             // 
             // pnlButtons
             // 
             this.pnlButtons.Controls.Add(this.btnSaveNote);
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(10, 488);
+            this.pnlButtons.Location = new System.Drawing.Point(10, 466);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(478, 60);
+            this.pnlButtons.Size = new System.Drawing.Size(465, 60);
             this.pnlButtons.TabIndex = 11;
             // 
             // btnSaveNote
             // 
-            this.btnSaveNote.BackColor = System.Drawing.Color.White;
+            this.btnSaveNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnSaveNote.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
+            this.btnSaveNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
+            this.btnSaveNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSaveNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveNote.ForeColor = System.Drawing.Color.Black;
-            this.btnSaveNote.Location = new System.Drawing.Point(347, 12);
+            this.btnSaveNote.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveNote.ForeColor = System.Drawing.Color.White;
+            this.btnSaveNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.floppy_disk__3_;
+            this.btnSaveNote.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSaveNote.Location = new System.Drawing.Point(303, 14);
             this.btnSaveNote.Name = "btnSaveNote";
-            this.btnSaveNote.Size = new System.Drawing.Size(120, 35);
+            this.btnSaveNote.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.btnSaveNote.Size = new System.Drawing.Size(162, 41);
             this.btnSaveNote.TabIndex = 1;
-            this.btnSaveNote.Text = "Save Note";
+            this.btnSaveNote.Text = " Save Note";
+            this.btnSaveNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveNote.UseVisualStyleBackColor = false;
+            this.btnSaveNote.Click += new System.EventHandler(this.btnSaveNote_Click);
             // 
             // btnCancel
             // 
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(240, 12);
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(172, 14);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 35);
+            this.btnCancel.Size = new System.Drawing.Size(120, 41);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // flpNoteColors
             // 
@@ -150,11 +249,11 @@
             this.flpNoteColors.Controls.Add(this.panel5);
             this.flpNoteColors.Controls.Add(this.pnlTextPurple);
             this.flpNoteColors.Controls.Add(this.pnlTextBrown);
-            this.flpNoteColors.Location = new System.Drawing.Point(27, 401);
+            this.flpNoteColors.Location = new System.Drawing.Point(18, 411);
             this.flpNoteColors.Margin = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.flpNoteColors.Name = "flpNoteColors";
             this.flpNoteColors.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.flpNoteColors.Size = new System.Drawing.Size(450, 86);
+            this.flpNoteColors.Size = new System.Drawing.Size(450, 50);
             this.flpNoteColors.TabIndex = 10;
             // 
             // pnlColorWhite
@@ -326,7 +425,7 @@
             // 
             this.lblNoteColor.AutoSize = true;
             this.lblNoteColor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteColor.Location = new System.Drawing.Point(29, 377);
+            this.lblNoteColor.Location = new System.Drawing.Point(16, 387);
             this.lblNoteColor.Name = "lblNoteColor";
             this.lblNoteColor.Size = new System.Drawing.Size(85, 20);
             this.lblNoteColor.TabIndex = 9;
@@ -342,7 +441,7 @@
             this.tblPriority.Controls.Add(this.panel1, 0, 0);
             this.tblPriority.Controls.Add(this.panel3, 2, 0);
             this.tblPriority.Controls.Add(this.panel2, 1, 0);
-            this.tblPriority.Location = new System.Drawing.Point(24, 320);
+            this.tblPriority.Location = new System.Drawing.Point(18, 330);
             this.tblPriority.Name = "tblPriority";
             this.tblPriority.RowCount = 1;
             this.tblPriority.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -427,11 +526,11 @@
             // 
             this.lblPriority.AutoSize = true;
             this.lblPriority.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPriority.Location = new System.Drawing.Point(25, 294);
+            this.lblPriority.Location = new System.Drawing.Point(16, 304);
             this.lblPriority.Name = "lblPriority";
-            this.lblPriority.Size = new System.Drawing.Size(72, 20);
+            this.lblPriority.Size = new System.Drawing.Size(61, 20);
             this.lblPriority.TabIndex = 7;
-            this.lblPriority.Text = "Priority *";
+            this.lblPriority.Text = "Priority";
             // 
             // lblDescriptionCount
             // 
@@ -439,41 +538,28 @@
             this.lblDescriptionCount.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescriptionCount.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblDescriptionCount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblDescriptionCount.Location = new System.Drawing.Point(415, 273);
+            this.lblDescriptionCount.Location = new System.Drawing.Point(415, 283);
             this.lblDescriptionCount.Name = "lblDescriptionCount";
             this.lblDescriptionCount.Size = new System.Drawing.Size(54, 19);
             this.lblDescriptionCount.TabIndex = 6;
             this.lblDescriptionCount.Text = "0/1000";
             // 
-            // rtxtDescription
-            // 
-            this.rtxtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtxtDescription.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtxtDescription.Location = new System.Drawing.Point(-1, -1);
-            this.rtxtDescription.MaxLength = 1000;
-            this.rtxtDescription.Name = "rtxtDescription";
-            this.rtxtDescription.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtxtDescription.Size = new System.Drawing.Size(450, 96);
-            this.rtxtDescription.TabIndex = 5;
-            this.rtxtDescription.Text = "";
-            this.rtxtDescription.TextChanged += new System.EventHandler(this.rtxtDescription_TextChanged);
-            // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(20, 145);
+            this.lblDescription.Location = new System.Drawing.Point(18, 155);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(100, 20);
+            this.lblDescription.Size = new System.Drawing.Size(89, 20);
             this.lblDescription.TabIndex = 4;
-            this.lblDescription.Text = "Description *";
+            this.lblDescription.Text = "Description";
             // 
             // lblTitleCount
             // 
             this.lblTitleCount.AutoSize = true;
             this.lblTitleCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleCount.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblTitleCount.Location = new System.Drawing.Point(417, 125);
+            this.lblTitleCount.Location = new System.Drawing.Point(417, 135);
             this.lblTitleCount.Name = "lblTitleCount";
             this.lblTitleCount.Size = new System.Drawing.Size(47, 20);
             this.lblTitleCount.TabIndex = 3;
@@ -484,43 +570,30 @@
             // 
             this.txtNoteTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNoteTitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNoteTitle.Location = new System.Drawing.Point(19, 90);
+            this.txtNoteTitle.Location = new System.Drawing.Point(18, 100);
             this.txtNoteTitle.MaxLength = 100;
             this.txtNoteTitle.Name = "txtNoteTitle";
             this.txtNoteTitle.Size = new System.Drawing.Size(450, 30);
             this.txtNoteTitle.TabIndex = 2;
+            this.txtNoteTitle.TextChanged += new System.EventHandler(this.txtNoteTitle_TextChanged);
             // 
             // lblNoteTitle
             // 
             this.lblNoteTitle.AutoSize = true;
             this.lblNoteTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteTitle.Location = new System.Drawing.Point(14, 60);
+            this.lblNoteTitle.Location = new System.Drawing.Point(16, 70);
             this.lblNoteTitle.Name = "lblNoteTitle";
-            this.lblNoteTitle.Size = new System.Drawing.Size(90, 20);
+            this.lblNoteTitle.Size = new System.Drawing.Size(79, 20);
             this.lblNoteTitle.TabIndex = 1;
-            this.lblNoteTitle.Text = "Note Title *";
+            this.lblNoteTitle.Text = "Note Title";
             // 
             // pnlAddNoteHeader
             // 
-            this.pnlAddNoteHeader.Controls.Add(this.btnCancelDialog);
             this.pnlAddNoteHeader.Controls.Add(this.lblTitle);
-            this.pnlAddNoteHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlAddNoteHeader.Location = new System.Drawing.Point(10, 10);
             this.pnlAddNoteHeader.Name = "pnlAddNoteHeader";
-            this.pnlAddNoteHeader.Size = new System.Drawing.Size(478, 39);
+            this.pnlAddNoteHeader.Size = new System.Drawing.Size(192, 40);
             this.pnlAddNoteHeader.TabIndex = 0;
-            // 
-            // btnCancelDialog
-            // 
-            this.btnCancelDialog.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancelDialog.FlatAppearance.BorderSize = 0;
-            this.btnCancelDialog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelDialog.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnCancelDialog.Location = new System.Drawing.Point(438, 0);
-            this.btnCancelDialog.Name = "btnCancelDialog";
-            this.btnCancelDialog.Size = new System.Drawing.Size(40, 39);
-            this.btnCancelDialog.TabIndex = 1;
-            this.btnCancelDialog.UseVisualStyleBackColor = true;
             // 
             // lblTitle
             // 
@@ -532,29 +605,23 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Add Note";
             // 
-            // pnlDescription
-            // 
-            this.pnlDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlDescription.Controls.Add(this.rtxtDescription);
-            this.pnlDescription.Location = new System.Drawing.Point(21, 174);
-            this.pnlDescription.Name = "pnlDescription";
-            this.pnlDescription.Size = new System.Drawing.Size(450, 96);
-            this.pnlDescription.TabIndex = 12;
-            // 
             // NoteAddDetailsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 656);
+            this.ClientSize = new System.Drawing.Size(487, 538);
             this.Controls.Add(this.pnlAddNoteDetails);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "NoteAddDetailsControl";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NoteAddDetailsControl";
             this.Load += new System.EventHandler(this.NoteAddDetailsControl_Load);
             this.pnlAddNoteDetails.ResumeLayout(false);
             this.pnlAddNoteDetails.PerformLayout();
+            this.pnlDescription.ResumeLayout(false);
+            this.pnlDescription.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
             this.flpNoteColors.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -567,7 +634,6 @@
             this.panel2.PerformLayout();
             this.pnlAddNoteHeader.ResumeLayout(false);
             this.pnlAddNoteHeader.PerformLayout();
-            this.pnlDescription.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -580,7 +646,6 @@
         private System.Windows.Forms.Label lblNoteTitle;
         private System.Windows.Forms.Label lblTitleCount;
         private System.Windows.Forms.TextBox txtNoteTitle;
-        private System.Windows.Forms.RichTextBox rtxtDescription;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.RadioButton rbHigh;
         private System.Windows.Forms.RadioButton rbMedium;
@@ -613,5 +678,10 @@
         private System.Windows.Forms.Panel pnlTextPurple;
         private System.Windows.Forms.Panel pnlTextBrown;
         private System.Windows.Forms.Panel pnlDescription;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblRedStar;
+        private System.Windows.Forms.TextBox rtxtDescription;
+        private System.Windows.Forms.Panel panel4;
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTaskContent = new System.Windows.Forms.Panel();
             this.pnlTaskList = new System.Windows.Forms.Panel();
             this.tableLayoutPanelTask = new System.Windows.Forms.TableLayoutPanel();
@@ -82,6 +82,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlTaskContent.SuspendLayout();
             this.pnlTaskList.SuspendLayout();
             this.tableLayoutPanelTask.SuspendLayout();
@@ -101,11 +102,12 @@
             this.pnlDueToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTaskDueIcone)).BeginInit();
             this.cmsTaskAction.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTaskContent
             // 
-            this.pnlTaskContent.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlTaskContent.BackColor = System.Drawing.Color.Transparent;
             this.pnlTaskContent.Controls.Add(this.pnlTaskList);
             this.pnlTaskContent.Controls.Add(this.tblCardContant);
             this.pnlTaskContent.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -116,11 +118,11 @@
             // 
             // pnlTaskList
             // 
+            this.pnlTaskList.BackColor = System.Drawing.Color.Transparent;
             this.pnlTaskList.Controls.Add(this.tableLayoutPanelTask);
             this.pnlTaskList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTaskList.Location = new System.Drawing.Point(0, 110);
             this.pnlTaskList.Name = "pnlTaskList";
-            this.pnlTaskList.Padding = new System.Windows.Forms.Padding(9, 11, 9, 11);
             this.pnlTaskList.Size = new System.Drawing.Size(1048, 567);
             this.pnlTaskList.TabIndex = 4;
             // 
@@ -132,14 +134,14 @@
             this.tableLayoutPanelTask.Controls.Add(this.pnlTaskTitle, 0, 0);
             this.tableLayoutPanelTask.Controls.Add(this.dataGridViewTask, 0, 1);
             this.tableLayoutPanelTask.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelTask.Location = new System.Drawing.Point(9, 11);
+            this.tableLayoutPanelTask.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTask.Name = "tableLayoutPanelTask";
-            this.tableLayoutPanelTask.Padding = new System.Windows.Forms.Padding(3);
+            this.tableLayoutPanelTask.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.tableLayoutPanelTask.RowCount = 3;
             this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
-            this.tableLayoutPanelTask.Size = new System.Drawing.Size(1030, 545);
+            this.tableLayoutPanelTask.Size = new System.Drawing.Size(1048, 567);
             this.tableLayoutPanelTask.TabIndex = 1;
             // 
             // pnlTaskFooter
@@ -147,9 +149,9 @@
             this.pnlTaskFooter.Controls.Add(this.pnlFooterTask);
             this.pnlTaskFooter.Controls.Add(this.pnlControl);
             this.pnlTaskFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskFooter.Location = new System.Drawing.Point(6, 491);
+            this.pnlTaskFooter.Location = new System.Drawing.Point(11, 511);
             this.pnlTaskFooter.Name = "pnlTaskFooter";
-            this.pnlTaskFooter.Size = new System.Drawing.Size(1018, 48);
+            this.pnlTaskFooter.Size = new System.Drawing.Size(1026, 48);
             this.pnlTaskFooter.TabIndex = 4;
             // 
             // pnlFooterTask
@@ -171,17 +173,18 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(174, 16);
+            this.label7.Location = new System.Drawing.Point(217, 16);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 23);
             this.label7.TabIndex = 6;
             this.label7.Text = "entries";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // lblTaskTotalPageNumber
             // 
             this.lblTaskTotalPageNumber.AutoSize = true;
             this.lblTaskTotalPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskTotalPageNumber.Location = new System.Drawing.Point(146, 17);
+            this.lblTaskTotalPageNumber.Location = new System.Drawing.Point(183, 17);
             this.lblTaskTotalPageNumber.Name = "lblTaskTotalPageNumber";
             this.lblTaskTotalPageNumber.Size = new System.Drawing.Size(28, 23);
             this.lblTaskTotalPageNumber.TabIndex = 5;
@@ -191,7 +194,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(125, 16);
+            this.label5.Location = new System.Drawing.Point(152, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(25, 23);
             this.label5.TabIndex = 4;
@@ -201,7 +204,7 @@
             // 
             this.lblTaskEndingPageNumber.AutoSize = true;
             this.lblTaskEndingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskEndingPageNumber.Location = new System.Drawing.Point(100, 17);
+            this.lblTaskEndingPageNumber.Location = new System.Drawing.Point(121, 17);
             this.lblTaskEndingPageNumber.Name = "lblTaskEndingPageNumber";
             this.lblTaskEndingPageNumber.Size = new System.Drawing.Size(28, 23);
             this.lblTaskEndingPageNumber.TabIndex = 3;
@@ -211,7 +214,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(80, 16);
+            this.label3.Location = new System.Drawing.Point(95, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(26, 23);
             this.label3.TabIndex = 2;
@@ -221,7 +224,7 @@
             // 
             this.lblTaskStartingPageNumber.AutoSize = true;
             this.lblTaskStartingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskStartingPageNumber.Location = new System.Drawing.Point(66, 16);
+            this.lblTaskStartingPageNumber.Location = new System.Drawing.Point(76, 16);
             this.lblTaskStartingPageNumber.Name = "lblTaskStartingPageNumber";
             this.lblTaskStartingPageNumber.Size = new System.Drawing.Size(19, 23);
             this.lblTaskStartingPageNumber.TabIndex = 1;
@@ -245,7 +248,7 @@
             this.pnlControl.Controls.Add(this.btnPreviousPage);
             this.pnlControl.Controls.Add(this.btnFirstpage);
             this.pnlControl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlControl.Location = new System.Drawing.Point(799, 0);
+            this.pnlControl.Location = new System.Drawing.Point(807, 0);
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(219, 48);
             this.pnlControl.TabIndex = 0;
@@ -301,21 +304,21 @@
             // 
             this.pnlTaskTitle.Controls.Add(this.pnlTableHeader);
             this.pnlTaskTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskTitle.Location = new System.Drawing.Point(6, 6);
+            this.pnlTaskTitle.Location = new System.Drawing.Point(11, 8);
             this.pnlTaskTitle.Name = "pnlTaskTitle";
-            this.pnlTaskTitle.Size = new System.Drawing.Size(1018, 47);
+            this.pnlTaskTitle.Size = new System.Drawing.Size(1026, 47);
             this.pnlTaskTitle.TabIndex = 3;
             // 
             // pnlTableHeader
             // 
             this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
+            this.pnlTableHeader.Controls.Add(this.panel1);
             this.pnlTableHeader.Controls.Add(this.pnlSingleLine);
             this.pnlTableHeader.Controls.Add(this.lblTaskList);
-            this.pnlTableHeader.Controls.Add(this.btnExport);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTableHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlTableHeader.Name = "pnlTableHeader";
-            this.pnlTableHeader.Size = new System.Drawing.Size(1018, 47);
+            this.pnlTableHeader.Size = new System.Drawing.Size(1026, 47);
             this.pnlTableHeader.TabIndex = 1;
             // 
             // pnlSingleLine
@@ -339,21 +342,22 @@
             // 
             // btnExport
             // 
-            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(165)))), ((int)(((byte)(233)))));
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(127)))), ((int)(((byte)(242)))));
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
+            this.btnExport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(91)))), ((int)(((byte)(176)))));
             this.btnExport.FlatAppearance.BorderSize = 0;
-            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
-            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(103)))), ((int)(((byte)(199)))));
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(145)))), ((int)(((byte)(255)))));
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.btnExport.ForeColor = System.Drawing.Color.White;
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
-            this.btnExport.Location = new System.Drawing.Point(921, 0);
+            this.btnExport.Location = new System.Drawing.Point(83, 5);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(97, 47);
+            this.btnExport.Size = new System.Drawing.Size(109, 37);
             this.btnExport.TabIndex = 0;
             this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExport.UseVisualStyleBackColor = false;
             // 
@@ -375,16 +379,16 @@
             this.dataGridViewTask.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewTask.EnableHeadersVisualStyles = false;
             this.dataGridViewTask.GridColor = System.Drawing.Color.Gainsboro;
-            this.dataGridViewTask.Location = new System.Drawing.Point(6, 59);
+            this.dataGridViewTask.Location = new System.Drawing.Point(11, 61);
             this.dataGridViewTask.Name = "dataGridViewTask";
             this.dataGridViewTask.ReadOnly = true;
             this.dataGridViewTask.RowHeadersVisible = false;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTask.RowTemplate.Height = 24;
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewTask.Size = new System.Drawing.Size(1018, 426);
+            this.dataGridViewTask.Size = new System.Drawing.Size(1026, 444);
             this.dataGridViewTask.TabIndex = 1;
             this.dataGridViewTask.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
             // 
@@ -452,7 +456,6 @@
             this.tblCardContant.Location = new System.Drawing.Point(0, 0);
             this.tblCardContant.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tblCardContant.Name = "tblCardContant";
-            this.tblCardContant.Padding = new System.Windows.Forms.Padding(3);
             this.tblCardContant.RowCount = 1;
             this.tblCardContant.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblCardContant.Size = new System.Drawing.Size(1048, 110);
@@ -460,23 +463,24 @@
             // 
             // pnlTotalTask
             // 
-            this.pnlTotalTask.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
+            this.pnlTotalTask.BackColor = System.Drawing.Color.White;
             this.pnlTotalTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pnlTotalTask.Controls.Add(this.lblTotalTaskCount);
             this.pnlTotalTask.Controls.Add(this.lblTotalTask);
             this.pnlTotalTask.Controls.Add(this.picTotaltaskIcone);
             this.pnlTotalTask.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalTask.Location = new System.Drawing.Point(14, 13);
+            this.pnlTotalTask.Location = new System.Drawing.Point(11, 10);
             this.pnlTotalTask.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTotalTask.Name = "pnlTotalTask";
-            this.pnlTotalTask.Size = new System.Drawing.Size(238, 84);
+            this.pnlTotalTask.Size = new System.Drawing.Size(240, 90);
             this.pnlTotalTask.TabIndex = 0;
+            this.pnlTotalTask.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTotalTask_Paint);
             // 
             // lblTotalTaskCount
             // 
             this.lblTotalTaskCount.AutoSize = true;
             this.lblTotalTaskCount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalTaskCount.ForeColor = System.Drawing.Color.White;
+            this.lblTotalTaskCount.ForeColor = System.Drawing.Color.Black;
             this.lblTotalTaskCount.Location = new System.Drawing.Point(71, 38);
             this.lblTotalTaskCount.Name = "lblTotalTaskCount";
             this.lblTotalTaskCount.Size = new System.Drawing.Size(43, 32);
@@ -487,7 +491,7 @@
             // 
             this.lblTotalTask.AutoSize = true;
             this.lblTotalTask.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalTask.ForeColor = System.Drawing.Color.White;
+            this.lblTotalTask.ForeColor = System.Drawing.Color.Black;
             this.lblTotalTask.Location = new System.Drawing.Point(71, 16);
             this.lblTotalTask.Name = "lblTotalTask";
             this.lblTotalTask.Size = new System.Drawing.Size(89, 23);
@@ -507,22 +511,23 @@
             // 
             // pnlTaskComplete
             // 
-            this.pnlTaskComplete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(101)))), ((int)(((byte)(52)))));
+            this.pnlTaskComplete.BackColor = System.Drawing.Color.White;
             this.pnlTaskComplete.Controls.Add(this.lblTaskCompleteCount);
             this.pnlTaskComplete.Controls.Add(this.lblTaskComplete);
             this.pnlTaskComplete.Controls.Add(this.picTaskCompleteIcone);
             this.pnlTaskComplete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskComplete.Location = new System.Drawing.Point(274, 13);
+            this.pnlTaskComplete.Location = new System.Drawing.Point(273, 10);
             this.pnlTaskComplete.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTaskComplete.Name = "pnlTaskComplete";
-            this.pnlTaskComplete.Size = new System.Drawing.Size(239, 84);
+            this.pnlTaskComplete.Size = new System.Drawing.Size(240, 90);
             this.pnlTaskComplete.TabIndex = 1;
+            this.pnlTaskComplete.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskComplete_Paint);
             // 
             // lblTaskCompleteCount
             // 
             this.lblTaskCompleteCount.AutoSize = true;
             this.lblTaskCompleteCount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskCompleteCount.ForeColor = System.Drawing.Color.White;
+            this.lblTaskCompleteCount.ForeColor = System.Drawing.Color.Black;
             this.lblTaskCompleteCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskCompleteCount.Name = "lblTaskCompleteCount";
             this.lblTaskCompleteCount.Size = new System.Drawing.Size(43, 32);
@@ -533,7 +538,7 @@
             // 
             this.lblTaskComplete.AutoSize = true;
             this.lblTaskComplete.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskComplete.ForeColor = System.Drawing.Color.White;
+            this.lblTaskComplete.ForeColor = System.Drawing.Color.Black;
             this.lblTaskComplete.Location = new System.Drawing.Point(71, 16);
             this.lblTaskComplete.Name = "lblTaskComplete";
             this.lblTaskComplete.Size = new System.Drawing.Size(88, 23);
@@ -553,22 +558,23 @@
             // 
             // pnlTaskPanding
             // 
-            this.pnlTaskPanding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(83)))), ((int)(((byte)(9)))));
+            this.pnlTaskPanding.BackColor = System.Drawing.Color.White;
             this.pnlTaskPanding.Controls.Add(this.lblTaskPandingCount);
             this.pnlTaskPanding.Controls.Add(this.lblTaskPanding);
             this.pnlTaskPanding.Controls.Add(this.picPandingIcone);
             this.pnlTaskPanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskPanding.Location = new System.Drawing.Point(535, 13);
+            this.pnlTaskPanding.Location = new System.Drawing.Point(535, 10);
             this.pnlTaskPanding.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTaskPanding.Name = "pnlTaskPanding";
-            this.pnlTaskPanding.Size = new System.Drawing.Size(237, 84);
+            this.pnlTaskPanding.Size = new System.Drawing.Size(238, 90);
             this.pnlTaskPanding.TabIndex = 2;
+            this.pnlTaskPanding.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaskPanding_Paint);
             // 
             // lblTaskPandingCount
             // 
             this.lblTaskPandingCount.AutoSize = true;
             this.lblTaskPandingCount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskPandingCount.ForeColor = System.Drawing.Color.White;
+            this.lblTaskPandingCount.ForeColor = System.Drawing.Color.Black;
             this.lblTaskPandingCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskPandingCount.Name = "lblTaskPandingCount";
             this.lblTaskPandingCount.Size = new System.Drawing.Size(43, 32);
@@ -579,7 +585,7 @@
             // 
             this.lblTaskPanding.AutoSize = true;
             this.lblTaskPanding.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskPanding.ForeColor = System.Drawing.Color.White;
+            this.lblTaskPanding.ForeColor = System.Drawing.Color.Black;
             this.lblTaskPanding.Location = new System.Drawing.Point(71, 16);
             this.lblTaskPanding.Name = "lblTaskPanding";
             this.lblTaskPanding.Size = new System.Drawing.Size(75, 23);
@@ -599,23 +605,24 @@
             // 
             // pnlDueToday
             // 
-            this.pnlDueToday.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.pnlDueToday.BackColor = System.Drawing.Color.White;
             this.pnlDueToday.Controls.Add(this.lblLentAmount);
             this.pnlDueToday.Controls.Add(this.lblDue);
             this.pnlDueToday.Controls.Add(this.picTaskDueIcone);
             this.pnlDueToday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDueToday.ForeColor = System.Drawing.Color.White;
-            this.pnlDueToday.Location = new System.Drawing.Point(794, 13);
+            this.pnlDueToday.Location = new System.Drawing.Point(795, 10);
             this.pnlDueToday.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlDueToday.Name = "pnlDueToday";
-            this.pnlDueToday.Size = new System.Drawing.Size(240, 84);
+            this.pnlDueToday.Size = new System.Drawing.Size(242, 90);
             this.pnlDueToday.TabIndex = 3;
+            this.pnlDueToday.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDueToday_Paint);
             // 
             // lblLentAmount
             // 
             this.lblLentAmount.AutoSize = true;
             this.lblLentAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLentAmount.ForeColor = System.Drawing.Color.White;
+            this.lblLentAmount.ForeColor = System.Drawing.Color.Black;
             this.lblLentAmount.Location = new System.Drawing.Point(71, 38);
             this.lblLentAmount.Name = "lblLentAmount";
             this.lblLentAmount.Size = new System.Drawing.Size(43, 32);
@@ -626,7 +633,7 @@
             // 
             this.lblDue.AutoSize = true;
             this.lblDue.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDue.ForeColor = System.Drawing.Color.White;
+            this.lblDue.ForeColor = System.Drawing.Color.Black;
             this.lblDue.Location = new System.Drawing.Point(71, 16);
             this.lblDue.Name = "lblDue";
             this.lblDue.Size = new System.Drawing.Size(89, 23);
@@ -685,11 +692,21 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 28);
             this.toolStripMenuItem4.Text = "Cancel";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnExport);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(826, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(10, 5, 8, 5);
+            this.panel1.Size = new System.Drawing.Size(200, 47);
+            this.panel1.TabIndex = 3;
+            // 
             // TaskControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1048, 677);
             this.Controls.Add(this.pnlTaskContent);
             this.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -723,6 +740,7 @@
             this.pnlDueToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTaskDueIcone)).EndInit();
             this.cmsTaskAction.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -781,6 +799,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeadline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAction;
+        private System.Windows.Forms.Panel panel1;
 
     }
 }

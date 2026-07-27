@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteControl));
             this.pnlNoteMain = new System.Windows.Forms.Panel();
             this.flpNotes = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlNoteCard = new System.Windows.Forms.Panel();
@@ -92,14 +93,13 @@
             // pnlNoteMain
             // 
             this.pnlNoteMain.AutoScroll = true;
-            this.pnlNoteMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
+            this.pnlNoteMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.pnlNoteMain.Controls.Add(this.flpNotes);
             this.pnlNoteMain.Controls.Add(this.pnlFooter);
             this.pnlNoteMain.Controls.Add(this.tblNoteSummary);
             this.pnlNoteMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlNoteMain.Location = new System.Drawing.Point(0, 0);
             this.pnlNoteMain.Name = "pnlNoteMain";
-            this.pnlNoteMain.Padding = new System.Windows.Forms.Padding(20);
             this.pnlNoteMain.Size = new System.Drawing.Size(1203, 630);
             this.pnlNoteMain.TabIndex = 0;
             // 
@@ -109,36 +109,36 @@
             this.flpNotes.AutoSize = true;
             this.flpNotes.Controls.Add(this.pnlNoteCard);
             this.flpNotes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpNotes.Location = new System.Drawing.Point(20, 140);
+            this.flpNotes.Location = new System.Drawing.Point(0, 120);
             this.flpNotes.Name = "flpNotes";
-            this.flpNotes.Padding = new System.Windows.Forms.Padding(8);
-            this.flpNotes.Size = new System.Drawing.Size(1163, 417);
+            this.flpNotes.Padding = new System.Windows.Forms.Padding(3);
+            this.flpNotes.Size = new System.Drawing.Size(1203, 457);
             this.flpNotes.TabIndex = 3;
             this.flpNotes.Paint += new System.Windows.Forms.PaintEventHandler(this.flpNotes_Paint);
             // 
             // pnlNoteCard
             // 
             this.pnlNoteCard.BackColor = System.Drawing.Color.SeaShell;
-            this.pnlNoteCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlNoteCard.Controls.Add(this.pnlNoteCardFooter);
             this.pnlNoteCard.Controls.Add(this.lblNoteCardDescription);
             this.pnlNoteCard.Controls.Add(this.lblNoteCardTitle);
             this.pnlNoteCard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlNoteCard.Location = new System.Drawing.Point(18, 18);
-            this.pnlNoteCard.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlNoteCard.Location = new System.Drawing.Point(14, 13);
+            this.pnlNoteCard.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlNoteCard.Name = "pnlNoteCard";
             this.pnlNoteCard.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlNoteCard.Size = new System.Drawing.Size(320, 193);
+            this.pnlNoteCard.Size = new System.Drawing.Size(331, 170);
             this.pnlNoteCard.TabIndex = 0;
+            this.pnlNoteCard.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlNoteCard_Paint);
             // 
             // pnlNoteCardFooter
             // 
             this.pnlNoteCardFooter.Controls.Add(this.btnNoteMore);
             this.pnlNoteCardFooter.Controls.Add(this.lblNoteCardDate);
             this.pnlNoteCardFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlNoteCardFooter.Location = new System.Drawing.Point(10, 141);
+            this.pnlNoteCardFooter.Location = new System.Drawing.Point(10, 120);
             this.pnlNoteCardFooter.Name = "pnlNoteCardFooter";
-            this.pnlNoteCardFooter.Size = new System.Drawing.Size(298, 40);
+            this.pnlNoteCardFooter.Size = new System.Drawing.Size(311, 40);
             this.pnlNoteCardFooter.TabIndex = 2;
             // 
             // btnNoteMore
@@ -148,7 +148,7 @@
             this.btnNoteMore.FlatAppearance.BorderSize = 0;
             this.btnNoteMore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNoteMore.Image = global::PersonalExpenseCreditTracker.Properties.Resources.more2;
-            this.btnNoteMore.Location = new System.Drawing.Point(268, 0);
+            this.btnNoteMore.Location = new System.Drawing.Point(281, 0);
             this.btnNoteMore.Name = "btnNoteMore";
             this.btnNoteMore.Size = new System.Drawing.Size(30, 40);
             this.btnNoteMore.TabIndex = 1;
@@ -168,14 +168,15 @@
             // lblNoteCardDescription
             // 
             this.lblNoteCardDescription.AutoEllipsis = true;
-            this.lblNoteCardDescription.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteCardDescription.Location = new System.Drawing.Point(18, 45);
-            this.lblNoteCardDescription.MaximumSize = new System.Drawing.Size(270, 75);
+            this.lblNoteCardDescription.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.lblNoteCardDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.lblNoteCardDescription.Location = new System.Drawing.Point(15, 45);
+            this.lblNoteCardDescription.MaximumSize = new System.Drawing.Size(310, 60);
             this.lblNoteCardDescription.Name = "lblNoteCardDescription";
-            this.lblNoteCardDescription.Size = new System.Drawing.Size(270, 75);
+            this.lblNoteCardDescription.Size = new System.Drawing.Size(310, 60);
             this.lblNoteCardDescription.TabIndex = 1;
-            this.lblNoteCardDescription.Text = "Finish the project proposal, review team updates and prepare for tomorrow\'s meeti" +
-                "ng.";
+            this.lblNoteCardDescription.Text = resources.GetString("lblNoteCardDescription.Text");
+            this.lblNoteCardDescription.Click += new System.EventHandler(this.lblNoteCardDescription_Click);
             // 
             // lblNoteCardTitle
             // 
@@ -195,9 +196,9 @@
             this.pnlFooter.Controls.Add(this.pnlControl);
             this.pnlFooter.Controls.Add(this.pnlNoteFooter);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(20, 557);
+            this.pnlFooter.Location = new System.Drawing.Point(0, 577);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(1163, 53);
+            this.pnlFooter.Size = new System.Drawing.Size(1203, 53);
             this.pnlFooter.TabIndex = 2;
             // 
             // pnlControl
@@ -208,7 +209,7 @@
             this.pnlControl.Controls.Add(this.btnPreviousPage);
             this.pnlControl.Controls.Add(this.btnFirstpage);
             this.pnlControl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlControl.Location = new System.Drawing.Point(911, 0);
+            this.pnlControl.Location = new System.Drawing.Point(951, 0);
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(250, 51);
             this.pnlControl.TabIndex = 0;
@@ -356,29 +357,29 @@
             this.tblNoteSummary.Controls.Add(this.pnlImportant, 1, 0);
             this.tblNoteSummary.Controls.Add(this.pnlThisMonth, 2, 0);
             this.tblNoteSummary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tblNoteSummary.Location = new System.Drawing.Point(20, 20);
+            this.tblNoteSummary.Location = new System.Drawing.Point(0, 0);
             this.tblNoteSummary.Margin = new System.Windows.Forms.Padding(0);
             this.tblNoteSummary.MinimumSize = new System.Drawing.Size(830, 120);
             this.tblNoteSummary.Name = "tblNoteSummary";
-            this.tblNoteSummary.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tblNoteSummary.Padding = new System.Windows.Forms.Padding(3);
             this.tblNoteSummary.RowCount = 1;
             this.tblNoteSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblNoteSummary.Size = new System.Drawing.Size(1163, 120);
+            this.tblNoteSummary.Size = new System.Drawing.Size(1203, 120);
             this.tblNoteSummary.TabIndex = 1;
             // 
             // pnlTotalNotes
             // 
-            this.pnlTotalNotes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(212)))), ((int)(((byte)(248)))));
+            this.pnlTotalNotes.BackColor = System.Drawing.Color.White;
             this.pnlTotalNotes.Controls.Add(this.lblAllNote);
             this.pnlTotalNotes.Controls.Add(this.lblNoteTotal);
             this.pnlTotalNotes.Controls.Add(this.lblTotalTitle);
             this.pnlTotalNotes.Controls.Add(this.PicNote);
             this.pnlTotalNotes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalNotes.Location = new System.Drawing.Point(20, 10);
-            this.pnlTotalNotes.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlTotalNotes.Location = new System.Drawing.Point(14, 13);
+            this.pnlTotalNotes.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTotalNotes.MinimumSize = new System.Drawing.Size(250, 100);
             this.pnlTotalNotes.Name = "pnlTotalNotes";
-            this.pnlTotalNotes.Size = new System.Drawing.Size(357, 100);
+            this.pnlTotalNotes.Size = new System.Drawing.Size(373, 100);
             this.pnlTotalNotes.TabIndex = 0;
             this.pnlTotalNotes.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTotalNotes_Paint);
             // 
@@ -425,25 +426,27 @@
             // 
             // pnlImportant
             // 
-            this.pnlImportant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(228)))), ((int)(((byte)(198)))));
+            this.pnlImportant.BackColor = System.Drawing.Color.White;
             this.pnlImportant.Controls.Add(this.lblNoteImportantDescription);
             this.pnlImportant.Controls.Add(this.lblNoteImportantNumber);
             this.pnlImportant.Controls.Add(this.lblNoteImportant);
             this.pnlImportant.Controls.Add(this.picNoteImportant);
             this.pnlImportant.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlImportant.Location = new System.Drawing.Point(407, 10);
-            this.pnlImportant.Margin = new System.Windows.Forms.Padding(20, 10, 10, 10);
+            this.pnlImportant.Location = new System.Drawing.Point(409, 13);
+            this.pnlImportant.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlImportant.MinimumSize = new System.Drawing.Size(250, 100);
             this.pnlImportant.Name = "pnlImportant";
-            this.pnlImportant.Size = new System.Drawing.Size(358, 100);
+            this.pnlImportant.Padding = new System.Windows.Forms.Padding(3);
+            this.pnlImportant.Size = new System.Drawing.Size(384, 100);
             this.pnlImportant.TabIndex = 1;
+            this.pnlImportant.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlImportant_Paint);
             // 
             // lblNoteImportantDescription
             // 
             this.lblNoteImportantDescription.AutoSize = true;
             this.lblNoteImportantDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoteImportantDescription.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblNoteImportantDescription.Location = new System.Drawing.Point(78, 70);
+            this.lblNoteImportantDescription.Location = new System.Drawing.Point(81, 73);
             this.lblNoteImportantDescription.Name = "lblNoteImportantDescription";
             this.lblNoteImportantDescription.Size = new System.Drawing.Size(97, 20);
             this.lblNoteImportantDescription.TabIndex = 3;
@@ -453,7 +456,7 @@
             // 
             this.lblNoteImportantNumber.AutoSize = true;
             this.lblNoteImportantNumber.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteImportantNumber.Location = new System.Drawing.Point(78, 35);
+            this.lblNoteImportantNumber.Location = new System.Drawing.Point(81, 38);
             this.lblNoteImportantNumber.Name = "lblNoteImportantNumber";
             this.lblNoteImportantNumber.Size = new System.Drawing.Size(29, 32);
             this.lblNoteImportantNumber.TabIndex = 2;
@@ -463,7 +466,7 @@
             // 
             this.lblNoteImportant.AutoSize = true;
             this.lblNoteImportant.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteImportant.Location = new System.Drawing.Point(74, 12);
+            this.lblNoteImportant.Location = new System.Drawing.Point(77, 15);
             this.lblNoteImportant.Name = "lblNoteImportant";
             this.lblNoteImportant.Size = new System.Drawing.Size(92, 23);
             this.lblNoteImportant.TabIndex = 1;
@@ -482,26 +485,27 @@
             // 
             // pnlThisMonth
             // 
-            this.pnlThisMonth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(211)))), ((int)(((byte)(221)))));
+            this.pnlThisMonth.BackColor = System.Drawing.Color.White;
             this.pnlThisMonth.Controls.Add(this.lblMothDescription);
             this.pnlThisMonth.Controls.Add(this.lblMonthNoteNumber);
             this.pnlThisMonth.Controls.Add(this.lblMothTitle);
             this.pnlThisMonth.Controls.Add(this.picNoteCalender);
             this.pnlThisMonth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlThisMonth.Location = new System.Drawing.Point(795, 10);
-            this.pnlThisMonth.Margin = new System.Windows.Forms.Padding(20, 10, 10, 10);
+            this.pnlThisMonth.Location = new System.Drawing.Point(815, 13);
+            this.pnlThisMonth.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlThisMonth.MinimumSize = new System.Drawing.Size(250, 100);
             this.pnlThisMonth.Name = "pnlThisMonth";
-            this.pnlThisMonth.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.pnlThisMonth.Size = new System.Drawing.Size(348, 100);
+            this.pnlThisMonth.Padding = new System.Windows.Forms.Padding(3);
+            this.pnlThisMonth.Size = new System.Drawing.Size(374, 100);
             this.pnlThisMonth.TabIndex = 2;
+            this.pnlThisMonth.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlThisMonth_Paint);
             // 
             // lblMothDescription
             // 
             this.lblMothDescription.AutoSize = true;
             this.lblMothDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMothDescription.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblMothDescription.Location = new System.Drawing.Point(78, 70);
+            this.lblMothDescription.Location = new System.Drawing.Point(71, 73);
             this.lblMothDescription.Name = "lblMothDescription";
             this.lblMothDescription.Size = new System.Drawing.Size(97, 20);
             this.lblMothDescription.TabIndex = 3;
@@ -511,7 +515,7 @@
             // 
             this.lblMonthNoteNumber.AutoSize = true;
             this.lblMonthNoteNumber.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMonthNoteNumber.Location = new System.Drawing.Point(78, 35);
+            this.lblMonthNoteNumber.Location = new System.Drawing.Point(71, 38);
             this.lblMonthNoteNumber.Name = "lblMonthNoteNumber";
             this.lblMonthNoteNumber.Size = new System.Drawing.Size(43, 32);
             this.lblMonthNoteNumber.TabIndex = 2;
@@ -521,7 +525,7 @@
             // 
             this.lblMothTitle.AutoSize = true;
             this.lblMothTitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMothTitle.Location = new System.Drawing.Point(74, 12);
+            this.lblMothTitle.Location = new System.Drawing.Point(67, 15);
             this.lblMothTitle.Name = "lblMothTitle";
             this.lblMothTitle.Size = new System.Drawing.Size(100, 23);
             this.lblMothTitle.TabIndex = 1;
