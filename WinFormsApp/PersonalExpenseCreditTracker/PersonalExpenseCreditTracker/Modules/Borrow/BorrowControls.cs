@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using PersonalExpenseCreditTracker.Common;
 //using PersonalExpenseCreditTracker.Modules.Borrow.PayBorrowAmountControls;
 
 
@@ -123,7 +124,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
 
 
-        private void LoadBorrowData(int userID)
+        public void LoadBorrowData(int userID)
         {
             try
             {
@@ -163,7 +164,67 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
         }
 
+        public Boolean LoadFilteredBorrowtData(string spName, string paramName, int filterId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(spName, userID, paramName, filterId);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            AllBorrowData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
 
+        public Boolean LoadFilteredBorrowData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllBorrowData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+        //
+        public Boolean LoadFilteredBorowData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllBorrowData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
 
 
 

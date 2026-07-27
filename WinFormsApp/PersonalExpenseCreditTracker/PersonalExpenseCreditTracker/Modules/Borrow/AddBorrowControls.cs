@@ -228,7 +228,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             txtBorrowAddDescription.Text = "Enter description";
             txtBorrowAddAmount.Text = "Select Amount"; ;
 
-            CommonUiFunction.LoadInComboBox("spGetAllPersons", 12, "Select Person", cmbBorrowSelectPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", cmbBorrowSelectPerson);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbBorrowPaymentType);
             
         }
@@ -280,71 +280,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
 
 
-        //private void btnLentAddSave_Click(object sender, EventArgs e)
-        //{
-        //    // Clear all previous validation errors
-        //    errorProvider1.Clear();
-
-        //    // Create a new object to store the user's input
-        //    LentUi lentUi = new LentUi();
-
-        //    // Assign values from the form controls to the object
-        //    lentUi.userId = Session.LogedInUser.GetUserId();
-        //    lentUi.lentId = -1;
-        //    lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
-        //    lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
-
-
-        //    // If the placeholder text is still present, pass an empty string
-        //    lentUi.amount = (txtLentAddAmount.Text == "Select Amount") ? "" : txtLentAddAmount.Text;
-        //    lentUi.description = (textBoxLentAddDescription.Text == "Enter description") ? "" : textBoxLentAddDescription.Text;
-
-        //    // If no deadline is selected, assign DateTime.MinValue
-        //    // Otherwise, assign the selected date from the calendar
-        //    lentUi.deadlineAt = (txtLentAddDeadlineDatePicker.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendarAddLent.SelectionStart;
-
-
-        //    CommonValidator.ValidationResult result = lentUi.InsertDataIntoLentUi();
-        //    // Perform action based on the validation result
-        //    switch (result)
-        //    {
-        //        // Data is valid and inserted successfully
-        //        case CommonValidator.ValidationResult.Success:
-        //            MessageBox.Show("Lent added successfully!");
-        //            this.Close();
-
-        //            break;
-        //        case CommonValidator.ValidationResult.PersonInvalid:
-        //            ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentSelectPerson);
-        //            break;
-
-        //        case CommonValidator.ValidationResult.PaymentInvalid:
-        //            ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentPaymentType);
-        //            break;
-
-        //        case CommonValidator.ValidationResult.StatusInvalid:
-        //            //ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentStatus);
-        //            break;
-
-        //        case CommonValidator.ValidationResult.AmountEmpty:
-        //        case CommonValidator.ValidationResult.AmountInvalid:
-        //        case CommonValidator.ValidationResult.AmountTooLarge:
-        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtLentAddAmount);
-        //            break;
-
-        //        case CommonValidator.ValidationResult.DescriptionInvalid:
-        //            ErrorHelper.ShowValidationError(result, errorProvider1, textBoxLentAddDescription);
-        //            break;
-
-        //        case CommonValidator.ValidationResult.DeadlineInvalid:
-        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtLentAddDeadlineDatePicker);
-        //            break;
-        //        case CommonValidator.ValidationResult.StoreProcedureError:
-        //            MessageBox.Show("Lent added Unsuccessfully!");
-        //            break;
-        //    }
-
-        //}
+        
         private void btnBorrowAddSave_Click(object sender, EventArgs e)
         {
             errorProvider1.Clear();
