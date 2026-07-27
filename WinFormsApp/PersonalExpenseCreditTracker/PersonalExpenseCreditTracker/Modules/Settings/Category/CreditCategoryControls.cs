@@ -286,6 +286,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             CreditAddSubCategoryControls creditAddSubCategoryControls = new CreditAddSubCategoryControls();
             creditAddSubCategoryControls.Show();
         }
+
+        private void tsmiEdit_Click(object sender, EventArgs e)
+        {
+            CreditEditCategoryControls creditEditCategoryControls = new CreditEditCategoryControls();
+            creditEditCategoryControls.Show();
+        }
         //private void tsmiEdit_Click(object sender, EventArgs e)
         //{
         //    DataGridViewRow row = (DataGridViewRow)cmsCategoryAction.Tag;

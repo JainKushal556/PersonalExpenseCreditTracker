@@ -95,7 +95,7 @@
             this.pnlMainBody.Name = "pnlMainBody";
             this.pnlMainBody.Size = new System.Drawing.Size(739, 745);
             this.pnlMainBody.TabIndex = 0;
-            this.pnlMainBody.Resize += new System.EventHandler(this.pnlMainBody_Resize);
+            //this.pnlMainBody.Resize += new System.EventHandler(this.pnlMainBody_Resize);
             // 
             // panel4
             // 
@@ -357,7 +357,7 @@
             this.pnlCurrentPasswordText.Name = "pnlCurrentPasswordText";
             this.pnlCurrentPasswordText.Size = new System.Drawing.Size(697, 56);
             this.pnlCurrentPasswordText.TabIndex = 1;
-            this.pnlCurrentPasswordText.Resize += new System.EventHandler(this.pnlCurrentPasswordText_Resize);
+            //this.pnlCurrentPasswordText.Resize += new System.EventHandler(this.pnlCurrentPasswordText_Resize);
             // 
             // picEye1
             // 
@@ -429,7 +429,7 @@
             this.btnChangePasswordCancel.Text = "Cancel";
             this.btnChangePasswordCancel.UseVisualStyleBackColor = false;
             this.btnChangePasswordCancel.Click += new System.EventHandler(this.btnChangePasswordCancel_Click);
-            this.btnChangePasswordCancel.Resize += new System.EventHandler(this.btnChangePasswordCancel_Resize);
+            //this.btnChangePasswordCancel.Resize += new System.EventHandler(this.btnChangePasswordCancel_Resize);
             // 
             // btnChangePasswordUpdatePassword
             // 
@@ -448,7 +448,7 @@
             this.btnChangePasswordUpdatePassword.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnChangePasswordUpdatePassword.UseVisualStyleBackColor = false;
             this.btnChangePasswordUpdatePassword.Click += new System.EventHandler(this.btnChangePasswordUpdatePassword_Click);
-            this.btnChangePasswordUpdatePassword.Resize += new System.EventHandler(this.btnChangePasswordUpdatePassword_Resize);
+            //this.btnChangePasswordUpdatePassword.Resize += new System.EventHandler(this.btnChangePasswordUpdatePassword_Resize);
             // 
             // panel2
             // 
