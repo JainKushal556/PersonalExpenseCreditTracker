@@ -3595,6 +3595,11 @@ namespace PersonalExpenseCreditTracker
                 }
         }
 
+        private void pnlAddLent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
        
        
 

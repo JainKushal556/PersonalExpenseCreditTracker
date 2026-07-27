@@ -335,6 +335,35 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             lblStartingPageNumber.Text = total == 0 ? "0" : start.ToString();
             lblEndingPageNumber.Text = end.ToString();
             lblTotalPageNumber.Text = total.ToString();
+
+            if (AllLentData != null && AllLentData.Rows.Count > 0)
+            {
+                // Total Lent Amount
+                decimal totalLent = AllLentData.AsEnumerable().Sum(row => row.Field<decimal>("Amount"));
+
+                // Total Repaid Amount
+                decimal totalRepaid = AllLentData.AsEnumerable().Sum(row => row.Field<decimal>("ReturnedAmount"));
+
+                // Total Due Amount
+                decimal totalDue = AllLentData.AsEnumerable().Sum(row => row.Field<decimal>("RemainingAmount"));
+
+                // Total Transactions
+                int totalTransaction = AllLentData.Rows.Count;
+
+                // Display
+                lblTotalLentAmount.Text = "₹ " + totalLent.ToString("#,##0.##");
+                lblTotalRepaidAmount.Text = "₹ " + totalRepaid.ToString("#,##0.##");
+                lblTotalDueAmount.Text = "₹ " + totalDue.ToString("#,##0.##");
+                labelTotalTransactionNumber.Text = totalTransaction.ToString();
+            }
+            else
+            {
+                lblTotalLentAmount.Text = "₹ 0";
+                lblTotalRepaidAmount.Text = "₹ 0";
+                lblTotalDueAmount.Text = "₹ 0";
+                labelTotalTransactionNumber.Text = "0";
+            }
+
         }
 
         private int GetRowsPerPage()
