@@ -367,6 +367,14 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             {
                 MessageBox.Show("Your current password and new password are same..");
             }
+            else if (txtConfirmPassword.Text == "Confirm new password" || txtNewPassword.Text == "Enter new password")
+            {
+                MessageBox.Show("Please fill all fields");
+            }
+            else if (txtNewPassword.Text != txtConfirmPassword.Text)
+            {
+                MessageBox.Show("Password doesn't match");
+            }
             else
             {
                 MessageBox.Show("Password Reset Successfully");

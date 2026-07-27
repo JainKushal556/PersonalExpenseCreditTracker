@@ -7,11 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Note
 {
     public partial class NoteControl : Form
     {
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse);
+
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
         public NoteControl()
         {
             InitializeComponent();
@@ -21,10 +33,19 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void NoteControl_Load(object sender, EventArgs e)
         {
             btnNoteMore.ContextMenuStrip = cmsNote;
+            
+            foreach (Control c in flpNotes.Controls)
+            {
+                if (c is Panel)
+                {
+                    SetRadius(c, 20);
+                }
+            }
             ResizeNoteCards();
-            SetRoundedPanel(pnlTotalNotes, 15);
-            SetRoundedPanel(pnlImportant, 15);
-            SetRoundedPanel(pnlThisMonth, 15);
+            SetRoundedPanel(pnlTotalNotes, 20);
+            SetRoundedPanel(pnlImportant, 20);
+            SetRoundedPanel(pnlThisMonth, 20);
+
         }
 
 
@@ -43,9 +64,14 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         }
 
+       
         private void pnlTotalNotes_Paint(object sender, PaintEventArgs e)
         {
-
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlTotalNotes.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -68,6 +94,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             cmsNote.Show(btnNoteMore, 0, btnNoteMore.Height);
 
         }
+
         private void NoteControl_Resize(object sender, EventArgs e)
         {
             ResizeNoteCards();
@@ -75,6 +102,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             SetRoundedPanel(pnlImportant, 15);
             SetRoundedPanel(pnlThisMonth, 15);
         }
+
         private void ResizeNoteCards()
         {
             int margin = 10;
@@ -102,8 +130,29 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     c.Width = cardWidth;
                     c.Height = 120;
                     c.Margin = new Padding(margin);
+
+                    SetRadius(c, 20);
                 }
             }
+            //foreach (Control c in flpNotes.Controls)
+            //{
+            //    if (c is Panel)
+            //    {
+            //        c.Width = cardWidth;
+            //        c.Height = 120;
+            //        c.Margin = new Padding(margin);
+
+            //        Label lblDescription = c.Controls["lblNoteCardDescription"] as Label;
+
+            //        if (lblDescription != null)
+            //        {
+            //            lblDescription.Width = c.Width - 30;      // 15 px padding on each side
+            //            lblDescription.MaximumSize = new Size(c.Width - 30, 60);
+            //        }
+
+            //        SetRadius(c, 20);
+            //    }
+            //}
         }
 
         private void pnlNoteHeader_Paint(object sender, PaintEventArgs e)
@@ -136,6 +185,63 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SetRadius(Control control, int radius)
+        {
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
+        }
+
+        
+
+        private void pnlNoteCard_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlImportant.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlImportant_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlImportant.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlThisMonth_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlImportant.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void lblNoteCardDescription_Click(object sender, EventArgs e)
         {
 
         }

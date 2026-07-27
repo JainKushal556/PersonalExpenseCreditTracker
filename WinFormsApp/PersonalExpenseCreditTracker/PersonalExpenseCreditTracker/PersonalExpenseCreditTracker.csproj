@@ -85,6 +85,12 @@
     </Compile>
     <Compile Include="Forms\Main\MainUI.cs" />
     <Compile Include="Modules\Borrow\BorrowUI.cs" />
+    <Compile Include="Modules\Borrow\PayBorrowAmountControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Borrow\PayBorrowAmountControls.Designer.cs">
+      <DependentUpon>PayBorrowAmountControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Credit\CreditUI.cs" />
     <Compile Include="Modules\Dashboard\DashboardControl.cs">
       <SubType>Form</SubType>
@@ -146,6 +152,12 @@
     </Compile>
     <!-- Program -->
     <Compile Include="Modules\Lent\LentUi.cs" />
+    <Compile Include="Modules\Lent\ReturnAmountControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Lent\ReturnAmountControls.Designer.cs">
+      <DependentUpon>ReturnAmountControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Note\NoteUI.cs" />
     <Compile Include="Modules\Profile\EditProfileControls.cs">
       <SubType>Form</SubType>
@@ -191,6 +203,18 @@
     </Compile>
     <Compile Include="Modules\Profile\ProfileUI.cs" />
     <Compile Include="Modules\Settings\Category\CategoryUI.cs" />
+    <Compile Include="Modules\Settings\Category\CreditEditCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\CreditEditCategoryControls.Designer.cs">
+      <DependentUpon>CreditEditCategoryControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseEditCategoryControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Settings\Category\ExpenseEditCategoryControls.Designer.cs">
+      <DependentUpon>ExpenseEditCategoryControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Settings\Person\PersonUI.cs" />
     <Compile Include="Modules\Settings\SettingsUi.cs" />
     <Compile Include="Modules\Task\AddTaskControl.cs">
@@ -286,6 +310,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session\LogedInUser.cs" />
     <EmbeddedResource Include="Forms\Authentication\ForgotPasswordControls.resx">
       <DependentUpon>ForgotPasswordControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -298,6 +323,9 @@
     <!-- Form Resources -->
     <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Borrow\PayBorrowAmountControls.resx">
+      <DependentUpon>PayBorrowAmountControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Dashboard\DashboardControl.resx">
       <DependentUpon>DashboardControl.cs</DependentUpon>
@@ -329,6 +357,9 @@
       <DependentUpon>ExpenseDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Application Resources -->
+    <EmbeddedResource Include="Modules\Lent\ReturnAmountControls.resx">
+      <DependentUpon>ReturnAmountControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Profile\EditProfileControls.resx">
       <DependentUpon>EditProfileControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -349,6 +380,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Note\NoteViewDetailsControl.resx">
       <DependentUpon>NoteViewDetailsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\CreditEditCategoryControls.resx">
+      <DependentUpon>CreditEditCategoryControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Settings\Category\ExpenseEditCategoryControls.resx">
+      <DependentUpon>ExpenseEditCategoryControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Task\AddTaskControl.resx">
       <DependentUpon>AddTaskControl.cs</DependentUpon>
@@ -404,7 +441,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -424,7 +460,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Session\" />
   </ItemGroup>
   <!-- Expense Resources -->
   <ItemGroup>
@@ -599,6 +634,20 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\PersonIcon %282%29.png" />
+    <None Include="Resources\SL.png" />
+    <None Include="Resources\phone.png" />
+    <None Include="Resources\Registration Page.jpg" />
+    <None Include="Resources\Registration Page Image1.png" />
+    <None Include="Resources\Registration Page Image.png" />
+    <None Include="Resources\user %288%29.png" />
+    <None Include="Resources\Untitled design %283%29.png" />
+    <None Include="Resources\Registration image.png" />
+    <None Include="Resources\pie-charts.png" />
+    <None Include="Resources\shield.png" />
+    <None Include="Resources\Untitled design %282%29.png" />
+    <None Include="Resources\Untitled design %281%29.png" />
+    <None Include="Resources\update.png" />
     <None Include="Resources\priority.png" />
     <None Include="Resources\telephone %283%29.png" />
     <None Include="Resources\PersonIcon.png" />
@@ -684,6 +733,28 @@
     <None Include="Resources\open-eye %282%29.png" />
     <None Include="Resources\eye.png" />
     <None Include="Resources\padlock %284%29.png" />
+    <None Include="Resources\address-location.png" />
+    <None Include="Resources\floppy-disk.png" />
+    <None Include="Resources\floppy-disk %281%29.png" />
+    <None Include="Resources\floppy-disk %282%29.png" />
+    <None Include="Resources\floppy-disk %283%29.png" />
+    <None Include="Resources\floppy-disk %284%29.png" />
+    <None Include="Resources\gemini-svg.jpg" />
+    <None Include="Resources\mail %284%29.png" />
+    <None Include="Resources\mail %285%29.png" />
+    <None Include="Resources\Login Page Image.png" />
+    <None Include="Resources\dashboard_500x350_high_quality.png" />
+    <None Include="Resources\Gemini_Generated_Image_5b0wb05b0wb05b0w.png" />
+    <None Include="Resources\Login Page Image1.png" />
+    <None Include="Resources\column.png" />
+    <None Include="Resources\column %281%29.png" />
+    <None Include="Resources\mail %285%291.png" />
+    <None Include="Resources\mail %286%29.png" />
+    <None Include="Resources\padlock %285%29.png" />
+    <None Include="Resources\line.png" />
+    <None Include="Resources\line1.png" />
+    <None Include="Resources\Image.png" />
+    <None Include="Resources\Gemini_Generated_Image_bup5imbup5imbup5.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>

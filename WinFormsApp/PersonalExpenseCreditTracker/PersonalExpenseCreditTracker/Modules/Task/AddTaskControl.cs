@@ -26,11 +26,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             InitializeComponent();
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;
 
-            this.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10)
-            );
+            //this.Region = Region.FromHrgn(
+            //    CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10)
+            //);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -141,13 +141,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {
             btnClose.BackColor = Color.Red;
-            btnClose.ForeColor = Color.White;
         }
 
         private void btnClose_MouseLeave(object sender, EventArgs e)
         {
-            btnClose.BackColor = Color.White;
-            btnClose.ForeColor = Color.Black;
+            btnClose.BackColor = Color.Transparent;
         }
 
         private void btnAddTask_Click(object sender, EventArgs e)
@@ -174,18 +172,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             MessageBox.Show("Task Add Successfully.");
             this.Close();
         }
-
-
-       
-
-      
-
-       
-
-       
-
-       
-
 
     }
 }

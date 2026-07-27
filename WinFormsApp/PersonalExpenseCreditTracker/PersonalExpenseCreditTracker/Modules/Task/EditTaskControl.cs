@@ -38,19 +38,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.StartPosition = FormStartPosition.CenterScreen;
             txtTaskTitle.Text = "Enter task title";
             txtTaskTitle.ForeColor = Color.Gray;
-
-            // Form
-            this.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10));
-
-            // Main Panel
-            pnlEditTask.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, pnlEditTask.Width, pnlEditTask.Height, 10, 10));
-
-            // Panels
-            pnlTaskTitle.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, pnlTaskTitle.Width, pnlTaskTitle.Height, 6, 6));
-            pnlPriority.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, pnlPriority.Width, pnlPriority.Height, 6, 6));
-            pnlStatus.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, pnlStatus.Width, pnlStatus.Height, 6, 6));
-            pnlDeadline.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, pnlDeadline.Width, pnlDeadline.Height, 6, 6));
-
             // Buttons
             btnCancel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnCancel.Width, btnCancel.Height, 6, 6));
             btnUpdateTask.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnUpdateTask.Width, btnUpdateTask.Height, 6, 6));
@@ -105,13 +92,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {
             btnClose.BackColor = Color.Red;
-            btnClose.ForeColor = Color.White;
         }
 
         private void btnClose_MouseLeave(object sender, EventArgs e)
         {
-            btnClose.BackColor = Color.White;
-            btnClose.ForeColor = Color.Black;
+            btnClose.BackColor = Color.Transparent;
         }
 
         private void txtTaskTitle_Enter(object sender, EventArgs e)

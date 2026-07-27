@@ -130,6 +130,11 @@ graph LR
 | **`spGetPendingLentByStatusName`**| Filter Tab -> "Pending" Click | `@UserID` | • Pull entries where status is 'Pending' or 'Partially Paid'. |
 | **`SpGetCompletedLentByStatusName`**| Filter Tab -> "Completed" Click| `@UserID` | • Pull entries where status is 'Paid' / 'Settled'. |
 | **`spGetAllLentBorrowStatus`** | `LentControls.cs` / `AddLentControls.cs` <br> Status ComboBox load | None | • Retrieves all status options for Lent/Borrow. |
+| **`spFilterLentByStatus`** | `LentControls.cs` <br> Status Combo Filter | `@UserID`, `@StatusID` | • Valid status ID check. |
+| **`spFilterLentByAmountRange`**| `LentControls.cs` <br> Amount Textbox Filter | `@UserID`, `@MinAmount`, `@MaxAmount`| • `@MinAmount` must be $\ge 0$ and $\le$ `@MaxAmount`. |
+| **`spFilterLentByDateRange`**  | `LentControls.cs` <br> Date Picker Filter | `@UserID`, `@FromDate`, `@ToDate` | • `@FromDate` must be $\le$ `@ToDate`. |
+| **`spFilterLentByPerson`**     | `LentControls.cs` <br> Person Combo Filter | `@UserID`, `@PersonID` | • Valid PersonID check. |
+| **`spFilterLentByPaymentMethod`**| `LentControls.cs` <br> Payment Combo Filter | `@UserID`, `@PaymentID` | • Valid PaymentID check. |
 
 ---
 
@@ -146,6 +151,11 @@ graph LR
 | **`spGetCompletedBorrow`** | Filter Tab -> "Completed" Click| `@UserID` | • Pull entries where status is 'Paid'. |
 | **`spGetOverduedBorrow`** | Filter Tab -> "Overdue" Click | `@UserID` | • Pull entries marked as 'Overdue'. |
 | **`spGetTotalBorrowByPerson`** | Settings -> Persons list loading | `@UserID` | • Aggregates borrow balances per person. |
+| **`spFilterBorrowByStatus`** | `BorrowControls.cs` <br> Status Combo Filter | `@UserID`, `@StatusID` | • Valid status ID check. |
+| **`spFilterBorrowByAmountRange`**| `BorrowControls.cs` <br> Amount Textbox Filter | `@UserID`, `@MinAmount`, `@MaxAmount`| • `@MinAmount` must be $\ge 0$ and $\le$ `@MaxAmount`. |
+| **`spFilterBorrowByDateRange`**  | `BorrowControls.cs` <br> Date Picker Filter | `@UserID`, `@FromDate`, `@ToDate` | • `@FromDate` must be $\le$ `@ToDate`. |
+| **`spFilterBorrowByPerson`**     | `BorrowControls.cs` <br> Person Combo Filter | `@UserID`, `@PersonID` | • Valid PersonID check. |
+| **`spFilterBorrowByPaymentMethod`**| `BorrowControls.cs` <br> Payment Combo Filter | `@UserID`, `@PaymentID` | • Valid PaymentID check. |
 
 ---
 

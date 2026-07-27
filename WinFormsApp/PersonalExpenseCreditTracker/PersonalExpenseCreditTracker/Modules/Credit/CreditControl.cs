@@ -57,7 +57,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         
 
-        private void StyleCreditGrid()
+        private void StyleCreditGrid()  
         {
             colDate.DataPropertyName = "CreditAt";
             colCategory.DataPropertyName = "CategoryName";
@@ -329,7 +329,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             ControlPaint.DrawBorder(
                e.Graphics,
                pnlTotalCredit.ClientRectangle,
-               Color.FromArgb(86,160,118),
+               ColorTranslator.FromHtml("#E7ECF3"),
                ButtonBorderStyle.Solid);
         }
 
@@ -338,17 +338,17 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             ControlPaint.DrawBorder(
                 e.Graphics,
                 pnlTransactionCard.ClientRectangle,
-                Color.FromArgb(88,168,160),
+                ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
         }
 
         private void ApplyRoundCorners()
         {
             pnlTotalCredit.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTotalCredit.Width, pnlTotalCredit.Height, 10, 10));
+                CreateRoundRectRgn(0, 0, pnlTotalCredit.Width, pnlTotalCredit.Height, 15, 15));
 
             pnlTransactionCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTransactionCard.Width, pnlTransactionCard.Height, 10, 10));
+                CreateRoundRectRgn(0, 0, pnlTransactionCard.Width, pnlTransactionCard.Height, 15, 15));
 
 
         }

@@ -27,6 +27,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             InitializeComponent();
             StyleTaskGrid();
+            this.Resize += TaskControls_Resize;
         }
 
         private void TaskControls_Load(object sender, EventArgs e)
@@ -40,8 +41,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.Resize += TaskControls_Resize;
             dataGridViewTask.EnableHeadersVisualStyles = false;
             dataGridViewTask.CellPainting += dataGridViewTask_CellPainting;
+            dataGridViewTask.CellFormatting += dataGridViewTask_CellFormatting;
+            
 
-            //Padding Add Specific Col
+            //Padding Add 
             dataGridViewTask.Columns["colPriority"].HeaderCell.Style.Padding = new Padding(20, 0, 0, 0);
 
             dataGridViewTask.Columns["colStatus"].HeaderCell.Style.Padding = new Padding(20, 0, 0, 0);
@@ -98,16 +101,16 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void SetPanelRadius()
         {
             pnlTotalTask.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTotalTask.Width, pnlTotalTask.Height, 3, 3));
+                CreateRoundRectRgn(0, 0, pnlTotalTask.Width, pnlTotalTask.Height, 10, 10));
 
             pnlTaskComplete.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTaskComplete.Width, pnlTaskComplete.Height, 3, 3));
+                CreateRoundRectRgn(0, 0, pnlTaskComplete.Width, pnlTaskComplete.Height, 10, 10));
 
             pnlTaskPanding.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTaskPanding.Width, pnlTaskPanding.Height, 3, 3));
+                CreateRoundRectRgn(0, 0, pnlTaskPanding.Width, pnlTaskPanding.Height, 10, 10));
 
             pnlDueToday.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlDueToday.Width, pnlDueToday.Height, 3, 3));
+                CreateRoundRectRgn(0, 0, pnlDueToday.Width, pnlDueToday.Height, 10, 10));
         }
 
         private void LoadDummyData()
@@ -391,6 +394,64 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
 
             e.Handled = true;
+        }
+
+        
+        private void pnlTotalTask_Resize(object sender, EventArgs e)
+        {
+            SetPanelRadius();
+        }
+        private void pnlDueToday_Resize(object sender, EventArgs e)
+        {
+            SetPanelRadius();
+        }
+        private void pnlTaskPanding_Resize(object sender, EventArgs e)
+        {
+            SetPanelRadius();
+        }
+        private void pnlTaskComplete_Resize(object sender, EventArgs e)
+        {
+            SetPanelRadius();
+        }
+
+        private void pnlTotalTask_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlTotalTask.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+        private void pnlTaskComplete_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlTaskComplete.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlTaskPanding_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlTaskPanding.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlDueToday_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlDueToday.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
 
 

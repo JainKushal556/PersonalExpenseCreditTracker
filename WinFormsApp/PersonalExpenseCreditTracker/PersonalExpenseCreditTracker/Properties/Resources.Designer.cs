@@ -73,16 +73,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Action {
-            get {
-                object obj = ResourceManager.GetObject("Action", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _lock {
             get {
                 object obj = ResourceManager.GetObject("lock", resourceCulture);
@@ -93,9 +83,29 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Action {
+            get {
+                object obj = ResourceManager.GetObject("Action", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap add_contact {
             get {
                 object obj = ResourceManager.GetObject("add-contact", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap address_location {
+            get {
+                object obj = ResourceManager.GetObject("address_location", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,6 +313,26 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap column {
+            get {
+                object obj = ResourceManager.GetObject("column", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap column__1_ {
+            get {
+                object obj = ResourceManager.GetObject("column (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap credit_card {
             get {
                 object obj = ResourceManager.GetObject("credit_card", resourceCulture);
@@ -336,6 +366,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap credit_card1 {
             get {
                 object obj = ResourceManager.GetObject("credit-card1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dashboard_500x350_high_quality {
+            get {
+                object obj = ResourceManager.GetObject("dashboard_500x350_high_quality", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -523,6 +563,56 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk {
+            get {
+                object obj = ResourceManager.GetObject("floppy-disk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk__1_ {
+            get {
+                object obj = ResourceManager.GetObject("floppy-disk (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk__2_ {
+            get {
+                object obj = ResourceManager.GetObject("floppy-disk (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk__3_ {
+            get {
+                object obj = ResourceManager.GetObject("floppy-disk (3)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk__4_ {
+            get {
+                object obj = ResourceManager.GetObject("floppy-disk (4)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap folder {
             get {
                 object obj = ResourceManager.GetObject("folder", resourceCulture);
@@ -536,6 +626,36 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap Gave_Money {
             get {
                 object obj = ResourceManager.GetObject("Gave Money", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_5b0wb05b0wb05b0w {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_5b0wb05b0wb05b0w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_bup5imbup5imbup5 {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_bup5imbup5imbup5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gemini_svg {
+            get {
+                object obj = ResourceManager.GetObject("gemini-svg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -683,6 +803,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Image {
+            get {
+                object obj = ResourceManager.GetObject("Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap info {
             get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
@@ -733,6 +863,26 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap line {
+            get {
+                object obj = ResourceManager.GetObject("line", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap line1 {
+            get {
+                object obj = ResourceManager.GetObject("line1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap list {
             get {
                 object obj = ResourceManager.GetObject("list", resourceCulture);
@@ -773,6 +923,26 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Login_Page_Image {
+            get {
+                object obj = ResourceManager.GetObject("Login Page Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Login_Page_Image1 {
+            get {
+                object obj = ResourceManager.GetObject("Login Page Image1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap logout {
             get {
                 object obj = ResourceManager.GetObject("logout", resourceCulture);
@@ -793,8 +963,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-
-
         internal static System.Drawing.Bitmap logout_white_36x36 {
             get {
                 object obj = ResourceManager.GetObject("logout_white_36x36", resourceCulture);
@@ -848,6 +1016,46 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap mail__3_ {
             get {
                 object obj = ResourceManager.GetObject("mail (3)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mail__4_ {
+            get {
+                object obj = ResourceManager.GetObject("mail (4)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mail__5_ {
+            get {
+                object obj = ResourceManager.GetObject("mail (5)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mail__5_1 {
+            get {
+                object obj = ResourceManager.GetObject("mail (5)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mail__6_ {
+            get {
+                object obj = ResourceManager.GetObject("mail (6)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1125,6 +1333,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap padlock__5_ {
+            get {
+                object obj = ResourceManager.GetObject("padlock (5)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap payment_3948571 {
             get {
                 object obj = ResourceManager.GetObject("payment_3948571", resourceCulture);
@@ -1285,6 +1503,36 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PersonIcon__2_ {
+            get {
+                object obj = ResourceManager.GetObject("PersonIcon__2_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap phone {
+            get {
+                object obj = ResourceManager.GetObject("phone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pie_charts {
+            get {
+                object obj = ResourceManager.GetObject("pie-charts", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pin {
             get {
                 object obj = ResourceManager.GetObject("pin", resourceCulture);
@@ -1435,6 +1683,46 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Registration_image {
+            get {
+                object obj = ResourceManager.GetObject("Registration image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Registration_Page {
+            get {
+                object obj = ResourceManager.GetObject("Registration Page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Registration_Page_Image {
+            get {
+                object obj = ResourceManager.GetObject("Registration Page Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Registration_Page_Image1 {
+            get {
+                object obj = ResourceManager.GetObject("Registration Page Image1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap repaid {
             get {
                 object obj = ResourceManager.GetObject("repaid", resourceCulture);
@@ -1555,9 +1843,29 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap shield {
+            get {
+                object obj = ResourceManager.GetObject("shield", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap shop {
             get {
                 object obj = ResourceManager.GetObject("shop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SL {
+            get {
+                object obj = ResourceManager.GetObject("SL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1755,9 +2063,49 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Untitled_design__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Untitled design (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Untitled_design__2_ {
+            get {
+                object obj = ResourceManager.GetObject("Untitled design (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Untitled_design__3_ {
+            get {
+                object obj = ResourceManager.GetObject("Untitled design (3)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap up_and_down_arrows {
             get {
                 object obj = ResourceManager.GetObject("up_and_down_arrows", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap update {
+            get {
+                object obj = ResourceManager.GetObject("update", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1798,6 +2146,16 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap user__7_ {
             get {
                 object obj = ResourceManager.GetObject("user (7)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user__8_ {
+            get {
+                object obj = ResourceManager.GetObject("user (8)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

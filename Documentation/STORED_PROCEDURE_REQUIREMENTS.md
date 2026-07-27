@@ -932,6 +932,138 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Lent`
 - `Person`
 
+### 34A. spFilterLentByStatus
+
+**Purpose:**
+
+- Filter lent records by status for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@StatusID`
+
+**Expected Output:**
+
+- Lent records filtered by the selected status.
+
+**When Used:**
+
+- Filtering lent grid by status in the Lent module UI.
+
+**Tables Used:**
+
+- `tblLent`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+### 34B. spFilterLentByAmountRange
+
+**Purpose:**
+
+- Filter lent records by amount range for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@MinAmount`
+- `@MaxAmount`
+
+**Expected Output:**
+
+- Lent records filtered by the selected amount range.
+
+**When Used:**
+
+- Filtering lent grid by amount range in the Lent module UI.
+
+**Tables Used:**
+
+- `tblLent`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+### 34C. spFilterLentByDateRange
+
+**Purpose:**
+
+- Filter lent records by date range for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@FromDate`
+- `@ToDate`
+
+**Expected Output:**
+
+- Lent records filtered by the selected date range.
+
+**When Used:**
+
+- Filtering lent grid by date range in the Lent module UI.
+
+**Tables Used:**
+
+- `tblLent`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+### 34D. spFilterLentByPerson
+
+**Purpose:**
+
+- Filter lent records by person for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@PersonID`
+
+**Expected Output:**
+
+- Lent records filtered by the selected person.
+
+**When Used:**
+
+- Filtering lent grid by person in the Lent module UI.
+
+**Tables Used:**
+
+- `tblLent`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+### 34E. spFilterLentByPaymentMethod
+
+**Purpose:**
+
+- Filter lent records by payment method for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@PaymentID`
+
+**Expected Output:**
+
+- Lent records filtered by the selected payment method.
+
+**When Used:**
+
+- Filtering lent grid by payment method in the Lent module UI.
+
+**Tables Used:**
+
+- `tblLent`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
 ### 35. spGetAllPersons
 
 **Purpose:**
@@ -1011,6 +1143,138 @@ The first version will include borrow return reminders, lent return reminders, a
 **Tables Used:**
 
 - `Borrow`
+
+### 37A. spFilterBorrowByAmountRange
+
+**Purpose:**
+
+- Filter borrow records by amount range for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@MinAmount`
+- `@MaxAmount`
+
+**Expected Output:**
+
+- Borrow records filtered by the selected amount range.
+
+**When Used:**
+
+- Filtering borrow grid by amount range in the Borrow module UI.
+
+**Tables Used:**
+
+- `tblBorrow`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+### 37B. spFilterBorrowByDateRange
+
+**Purpose:**
+
+- Filter borrow records by date range for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@FromDate`
+- `@ToDate`
+
+**Expected Output:**
+
+- Borrow records filtered by the selected date range.
+
+**When Used:**
+
+- Filtering borrow grid by date range in the Borrow module UI.
+
+**Tables Used:**
+
+- `tblBorrow`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+### 37C. spFilterBorrowByPerson
+
+**Purpose:**
+
+- Filter borrow records by person for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@PersonID`
+
+**Expected Output:**
+
+- Borrow records filtered by the selected person.
+
+**When Used:**
+
+- Filtering borrow grid by person in the Borrow module UI.
+
+**Tables Used:**
+
+- `tblBorrow`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+### 37D. spFilterBorrowByStatus
+
+**Purpose:**
+
+- Filter borrow records by status for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@StatusID`
+
+**Expected Output:**
+
+- Borrow records filtered by the selected status.
+
+**When Used:**
+
+- Filtering borrow grid by status in the Borrow module UI.
+
+**Tables Used:**
+
+- `tblBorrow`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
+
+### 37E. spFilterBorrowByPaymentMethod
+
+**Purpose:**
+
+- Filter borrow records by payment method for a specific user.
+
+**Parameters:**
+
+- `@UserID`
+- `@PaymentID`
+
+**Expected Output:**
+
+- Borrow records filtered by the selected payment method.
+
+**When Used:**
+
+- Filtering borrow grid by payment method in the Borrow module UI.
+
+**Tables Used:**
+
+- `tblBorrow`
+- `tblPersons`
+- `tblPaymentType`
+- `tblLentBorrowStatus`
 
 ### 38. spGetPendingBorrow
 
@@ -2198,10 +2462,11 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Total Procedures:**
 
-- 82
+- 83
 
-**Recent Additions (10 new procedures):**
+**Recent Additions (11 new procedures):**
 
+- 34A. spFilterLentByStatus
 - 20A. spFilterExpenseByAmountRange
 - 28A. spFilterCreditByAmountRange
 - 62-77: Updated Category Management (16 procedures with UserID, soft delete, multi-user support)
