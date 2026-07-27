@@ -342,7 +342,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             ControlPaint.DrawBorder(
                 e.Graphics,
                 pnlTotalExpense.ClientRectangle,
-                Color.FromArgb(38, 50, 75),
+                ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
         }
 
@@ -351,16 +351,16 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             ControlPaint.DrawBorder(
                 e.Graphics,
                 pnlTransactionCard.ClientRectangle,
-                Color.FromArgb(55, 90, 210),
+                ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
         }
         private void ApplyRoundCorners()
         {
             pnlTotalExpense.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTotalExpense.Width, pnlTotalExpense.Height, 10, 10));
+                CreateRoundRectRgn(0, 0, pnlTotalExpense.Width, pnlTotalExpense.Height, 15, 15));
 
             pnlTransactionCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTransactionCard.Width, pnlTransactionCard.Height, 10, 10));
+                CreateRoundRectRgn(0, 0, pnlTransactionCard.Width, pnlTransactionCard.Height, 15, 15));
 
             
         }
@@ -372,6 +372,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void pnlTransactionCard_Resize(object sender, EventArgs e)
         {
             ApplyRoundCorners();
+        }
+
+        private void dgvExpenseDataTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

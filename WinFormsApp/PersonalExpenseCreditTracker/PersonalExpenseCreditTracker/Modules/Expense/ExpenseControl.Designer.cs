@@ -32,8 +32,10 @@
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
-            this.btnRefresh = new System.Windows.Forms.Button();
+            this.pnlButton = new System.Windows.Forms.Panel();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvExpenseDataTable = new System.Windows.Forms.DataGridView();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,10 +67,10 @@
             this.lblTransactionAmount = new System.Windows.Forms.Label();
             this.lblTransction = new System.Windows.Forms.Label();
             this.picTransaction = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
+            this.pnlButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).BeginInit();
             this.pnlFooter.SuspendLayout();
             this.pnlExpenseFooter.SuspendLayout();
@@ -78,13 +80,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.picExpense)).BeginInit();
             this.pnlTransactionCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTransaction)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContent
             // 
-            this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
-            this.pnlContent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.pnlContent.Controls.Add(this.tblTable);
             this.pnlContent.Controls.Add(this.pnlFooter);
             this.pnlContent.Controls.Add(this.tblSummary);
@@ -92,77 +92,111 @@
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
             this.pnlContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Padding = new System.Windows.Forms.Padding(3);
             this.pnlContent.Size = new System.Drawing.Size(1250, 753);
             this.pnlContent.TabIndex = 0;
             // 
             // tblTable
             // 
-            this.tblTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.tblTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.tblTable.ColumnCount = 1;
             this.tblTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblTable.Controls.Add(this.pnlTableHeader, 0, 0);
             this.tblTable.Controls.Add(this.dgvExpenseDataTable, 0, 1);
             this.tblTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblTable.Location = new System.Drawing.Point(0, 110);
+            this.tblTable.Location = new System.Drawing.Point(3, 113);
             this.tblTable.Name = "tblTable";
             this.tblTable.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.tblTable.RowCount = 2;
             this.tblTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tblTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblTable.Size = new System.Drawing.Size(1248, 590);
+            this.tblTable.Size = new System.Drawing.Size(1244, 586);
             this.tblTable.TabIndex = 3;
             // 
             // pnlTableHeader
             // 
             this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
-            this.pnlTableHeader.Controls.Add(this.panel1);
+            this.pnlTableHeader.Controls.Add(this.pnlButton);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTableHeader.Location = new System.Drawing.Point(11, 8);
             this.pnlTableHeader.Name = "pnlTableHeader";
-            this.pnlTableHeader.Size = new System.Drawing.Size(1226, 44);
+            this.pnlTableHeader.Size = new System.Drawing.Size(1222, 44);
             this.pnlTableHeader.TabIndex = 0;
             // 
-            // btnRefresh
+            // pnlButton
             // 
-            this.btnRefresh.AutoSize = true;
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
-            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(98)))), ((int)(((byte)(180)))));
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(0, 0);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(103, 44);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.pnlButton.Controls.Add(this.btnPrint);
+            this.pnlButton.Controls.Add(this.btnExport);
+            this.pnlButton.Controls.Add(this.btnRefresh);
+            this.pnlButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButton.Location = new System.Drawing.Point(881, 0);
+            this.pnlButton.Name = "pnlButton";
+            this.pnlButton.Size = new System.Drawing.Size(341, 44);
+            this.pnlButton.TabIndex = 0;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(127)))), ((int)(((byte)(242)))));
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(91)))), ((int)(((byte)(176)))));
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(103)))), ((int)(((byte)(199)))));
+            this.btnPrint.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(145)))), ((int)(((byte)(255)))));
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
+            this.btnPrint.Location = new System.Drawing.Point(122, 0);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(99, 44);
+            this.btnPrint.TabIndex = 4;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = false;
             // 
             // btnExport
             // 
-            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(127)))), ((int)(((byte)(242)))));
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
+            this.btnExport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(91)))), ((int)(((byte)(176)))));
             this.btnExport.FlatAppearance.BorderSize = 0;
-            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
-            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(98)))), ((int)(((byte)(180)))));
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(103)))), ((int)(((byte)(199)))));
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(145)))), ((int)(((byte)(255)))));
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.btnExport.ForeColor = System.Drawing.Color.White;
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
-            this.btnExport.Location = new System.Drawing.Point(130, 0);
+            this.btnExport.Location = new System.Drawing.Point(232, 0);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(109, 44);
             this.btnExport.TabIndex = 0;
             this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExport.UseVisualStyleBackColor = false;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(127)))), ((int)(((byte)(242)))));
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(91)))), ((int)(((byte)(176)))));
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(103)))), ((int)(((byte)(199)))));
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(145)))), ((int)(((byte)(255)))));
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(0, 0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(109, 44);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // dgvExpenseDataTable
             // 
@@ -181,18 +215,20 @@
             this.colPaymentMethod});
             this.dgvExpenseDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvExpenseDataTable.EnableHeadersVisualStyles = false;
-            this.dgvExpenseDataTable.GridColor = System.Drawing.Color.Gainsboro;
+            this.dgvExpenseDataTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(236)))), ((int)(((byte)(242)))));
             this.dgvExpenseDataTable.Location = new System.Drawing.Point(11, 58);
             this.dgvExpenseDataTable.Name = "dgvExpenseDataTable";
             this.dgvExpenseDataTable.ReadOnly = true;
             this.dgvExpenseDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvExpenseDataTable.RowTemplate.Height = 24;
             this.dgvExpenseDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvExpenseDataTable.Size = new System.Drawing.Size(1226, 524);
+            this.dgvExpenseDataTable.Size = new System.Drawing.Size(1222, 520);
             this.dgvExpenseDataTable.TabIndex = 1;
+            this.dgvExpenseDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExpenseDataTable_CellContentClick);
             // 
             // colDate
             // 
@@ -247,9 +283,9 @@
             this.pnlFooter.Controls.Add(this.pnlExpenseFooter);
             this.pnlFooter.Controls.Add(this.pnlControl);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(0, 700);
+            this.pnlFooter.Location = new System.Drawing.Point(3, 699);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(1248, 51);
+            this.pnlFooter.Size = new System.Drawing.Size(1244, 51);
             this.pnlFooter.TabIndex = 2;
             // 
             // pnlExpenseFooter
@@ -345,7 +381,7 @@
             this.pnlControl.Controls.Add(this.btnPreviousPage);
             this.pnlControl.Controls.Add(this.btnFirstpage);
             this.pnlControl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlControl.Location = new System.Drawing.Point(998, 0);
+            this.pnlControl.Location = new System.Drawing.Point(994, 0);
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(250, 51);
             this.pnlControl.TabIndex = 0;
@@ -411,18 +447,18 @@
             this.tblSummary.Controls.Add(this.pnlTransactionCard, 1, 0);
             this.tblSummary.Dock = System.Windows.Forms.DockStyle.Top;
             this.tblSummary.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tblSummary.Location = new System.Drawing.Point(0, 0);
+            this.tblSummary.Location = new System.Drawing.Point(3, 3);
             this.tblSummary.Margin = new System.Windows.Forms.Padding(0);
             this.tblSummary.Name = "tblSummary";
             this.tblSummary.RowCount = 1;
             this.tblSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblSummary.Size = new System.Drawing.Size(1248, 110);
+            this.tblSummary.Size = new System.Drawing.Size(1244, 110);
             this.tblSummary.TabIndex = 0;
             // 
             // pnlTotalExpense
             // 
-            this.pnlTotalExpense.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(34)))), ((int)(((byte)(56)))));
+            this.pnlTotalExpense.BackColor = System.Drawing.Color.White;
             this.pnlTotalExpense.Controls.Add(this.lblExpenseAmount);
             this.pnlTotalExpense.Controls.Add(this.picExpense);
             this.pnlTotalExpense.Controls.Add(this.lblTotalExpense);
@@ -431,7 +467,7 @@
             this.pnlTotalExpense.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTotalExpense.Name = "pnlTotalExpense";
             this.pnlTotalExpense.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlTotalExpense.Size = new System.Drawing.Size(602, 90);
+            this.pnlTotalExpense.Size = new System.Drawing.Size(600, 90);
             this.pnlTotalExpense.TabIndex = 0;
             this.pnlTotalExpense.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTotalExpense_Paint);
             // 
@@ -439,7 +475,7 @@
             // 
             this.lblExpenseAmount.AutoSize = true;
             this.lblExpenseAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpenseAmount.ForeColor = System.Drawing.Color.White;
+            this.lblExpenseAmount.ForeColor = System.Drawing.Color.Black;
             this.lblExpenseAmount.Location = new System.Drawing.Point(85, 42);
             this.lblExpenseAmount.Name = "lblExpenseAmount";
             this.lblExpenseAmount.Size = new System.Drawing.Size(106, 32);
@@ -460,7 +496,7 @@
             // 
             this.lblTotalExpense.AutoSize = true;
             this.lblTotalExpense.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalExpense.ForeColor = System.Drawing.Color.White;
+            this.lblTotalExpense.ForeColor = System.Drawing.Color.Black;
             this.lblTotalExpense.Location = new System.Drawing.Point(85, 12);
             this.lblTotalExpense.Name = "lblTotalExpense";
             this.lblTotalExpense.Size = new System.Drawing.Size(118, 23);
@@ -469,16 +505,16 @@
             // 
             // pnlTransactionCard
             // 
-            this.pnlTransactionCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
+            this.pnlTransactionCard.BackColor = System.Drawing.Color.White;
             this.pnlTransactionCard.Controls.Add(this.lblTransactionAmount);
             this.pnlTransactionCard.Controls.Add(this.lblTransction);
             this.pnlTransactionCard.Controls.Add(this.picTransaction);
             this.pnlTransactionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTransactionCard.Location = new System.Drawing.Point(635, 10);
+            this.pnlTransactionCard.Location = new System.Drawing.Point(633, 10);
             this.pnlTransactionCard.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTransactionCard.Name = "pnlTransactionCard";
             this.pnlTransactionCard.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlTransactionCard.Size = new System.Drawing.Size(602, 90);
+            this.pnlTransactionCard.Size = new System.Drawing.Size(600, 90);
             this.pnlTransactionCard.TabIndex = 1;
             this.pnlTransactionCard.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTransactionCard_Paint);
             // 
@@ -486,7 +522,7 @@
             // 
             this.lblTransactionAmount.AutoSize = true;
             this.lblTransactionAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionAmount.ForeColor = System.Drawing.Color.White;
+            this.lblTransactionAmount.ForeColor = System.Drawing.Color.Black;
             this.lblTransactionAmount.Location = new System.Drawing.Point(85, 42);
             this.lblTransactionAmount.Name = "lblTransactionAmount";
             this.lblTransactionAmount.Size = new System.Drawing.Size(43, 32);
@@ -497,7 +533,7 @@
             // 
             this.lblTransction.AutoSize = true;
             this.lblTransction.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransction.ForeColor = System.Drawing.Color.White;
+            this.lblTransction.ForeColor = System.Drawing.Color.Black;
             this.lblTransction.Location = new System.Drawing.Point(85, 12);
             this.lblTransction.Name = "lblTransction";
             this.lblTransction.Size = new System.Drawing.Size(152, 23);
@@ -514,16 +550,6 @@
             this.picTransaction.TabIndex = 0;
             this.picTransaction.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnExport);
-            this.panel1.Controls.Add(this.btnRefresh);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(987, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(239, 44);
-            this.panel1.TabIndex = 0;
-            // 
             // ExpenseControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -537,6 +563,8 @@
             this.pnlContent.ResumeLayout(false);
             this.tblTable.ResumeLayout(false);
             this.pnlTableHeader.ResumeLayout(false);
+            this.pnlButton.ResumeLayout(false);
+            this.pnlButton.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlExpenseFooter.ResumeLayout(false);
@@ -549,8 +577,6 @@
             this.pnlTransactionCard.ResumeLayout(false);
             this.pnlTransactionCard.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTransaction)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -593,7 +619,8 @@
         private System.Windows.Forms.Label lblto;
         private System.Windows.Forms.Label lblExpenseStartingPageNumber;
         private System.Windows.Forms.Label lblShowing;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlButton;
+        private System.Windows.Forms.Button btnPrint;
 
 
      

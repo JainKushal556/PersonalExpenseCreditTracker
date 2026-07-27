@@ -186,6 +186,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 errorProvider1.Clear();
             }
         }
+
+        private void comboBoxLentPaymentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

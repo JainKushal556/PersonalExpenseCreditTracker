@@ -18,6 +18,16 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         public AddPersonControls()
         {
             InitializeComponent();
+            StylePersonGrid();
+            typeof(DataGridView).InvokeMember(
+                 "DoubleBuffered",
+                 System.Reflection.BindingFlags.NonPublic |
+                 System.Reflection.BindingFlags.Instance |
+                 System.Reflection.BindingFlags.SetProperty,
+                 null,
+                 dataGridViewAddPerson,
+                 new object[] { true });
+
         }
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -35,11 +45,13 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         private void AddPersonSControls_Load(object sender, EventArgs e)
         {
+            dataGridViewAddPerson.CellPainting += dataGridViewAddPerson_CellPainting;
+            int userID = 11;
             SetRadius(pnlAddPersonDataGridView, 15);
             SetRadius(pnlAddPersonInput, 15);
             SetRadius(pnlIdia, 15);
-            SetRadius(btnAddPersonInputSavePerson, 10);
-            SetRadius(btnAddPersonInputClear, 10);
+            //SetRadius(btnAddPersonInputSavePerson, 10);
+            //SetRadius(btnAddPersonInputClear, 10);
 
             //Place Holder Text
             txtAddPersonInputFullName.Text = "Enter full name";
@@ -54,7 +66,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             txtAddPersonSearchBar.ForeColor = Color.FromArgb(191, 192, 199);
 
             //Load Data On DataGridView
-            DataSet dataset = GetDataSet();
+            DataSet dataset = GetDataSet(userID);
 
             if (dataset != null)
             {
@@ -70,7 +82,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         }
 
-        private DataSet GetDataSet()
+        private DataSet GetDataSet(int userID)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection sqlConnection = null;
@@ -80,7 +92,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 sqlConnection = new SqlConnection(CS);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter("spGetAllPersons", sqlConnection);
                 dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                dataAdapter.SelectCommand.Parameters.AddWithValue("@UserId", 12);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@UserId", userID);
                 dataset = new DataSet();
                 dataAdapter.Fill(dataset);
                 return dataset;
@@ -131,14 +143,19 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             SetRadius(pnlIdia, 15);
         }
-        private void btnAddPersonInputSavePerson_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnAddPersonInputSavePerson, 10);
-        }
-        private void btnAddPersonInputClear_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnAddPersonInputClear, 10);
-        }
+
+        //private void pnlAddPersonInputFullName_Resize(object sender, EventArgs e)
+        //{
+        //    SetRadius(pnlIdia, 15);
+        //}
+        //private void btnAddPersonInputSavePerson_Resize(object sender, EventArgs e)
+        //{
+        //    SetRadius(btnAddPersonInputSavePerson, 10);
+        //}
+        //private void btnAddPersonInputClear_Resize(object sender, EventArgs e)
+        //{
+        //    SetRadius(btnAddPersonInputClear, 10);
+        //}
         private void dataGridViewAddPerson_Resize(object sender, EventArgs e)
         {
             //SetRadius(dataGridViewAddPerson, 15);
@@ -224,19 +241,57 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         private void dataGridViewAddPerson_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
+
+            // Header
+            if (e.RowIndex == -1)
+            {
+                switch (dataGridViewAddPerson.Columns[e.ColumnIndex].Name)
+                {
+                    case "colName":
+                        DrawHeader(e, Properties.Resources.PersonIcon__2_, "Name");
+                        break;
+
+                    case "colPhoneNumber":
+                        DrawHeader(e, Properties.Resources.phone, "Phone");
+                        break;
+
+                    case "colAddress":
+                        DrawHeader(e, Properties.Resources.address_location, "Address");
+                        break;
+
+                    case "colAction":
+                        DrawHeader(e, Properties.Resources.Action, "Action");
+                        break;
+                    case "colSL":
+                        DrawHeader(e, Properties.Resources.SL, "SL");
+                        break;
+                }
+
+
+                return;
+            }
+
+            // Action column
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewAddPerson.Columns["colAction"].Index)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
                 Image img = Properties.Resources.pen__1_;
 
+                int iconSize = 23;
+
                 int x = e.CellBounds.Left + (e.CellBounds.Width - 20) / 2;
                 int y = e.CellBounds.Top + (e.CellBounds.Height - 20) / 2;
 
-                e.Graphics.DrawImage(img, new Rectangle(x, y, 20, 20));
+                e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
 
                 e.Handled = true;
             }
+            
         }
         private void dataGridViewAddPerson_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -281,5 +336,180 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             MessageBox.Show("Person Details Save Successfully");
         }
+
+        private void StylePersonGrid()
+        {
+           
+            colPersonID.DataPropertyName = "PersonID";
+            colName.DataPropertyName = "PersonName";
+            colPhoneNumber.DataPropertyName = "PhoneNumber";
+            colAddress.DataPropertyName = "Address";
+
+            //Column Style
+            dataGridViewAddPerson.AllowUserToOrderColumns = false;
+            dataGridViewAddPerson.AutoGenerateColumns = false;
+            dataGridViewAddPerson.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            //Column HeaderStyle
+            dataGridViewAddPerson.EnableHeadersVisualStyles = false;
+            dataGridViewAddPerson.ColumnHeadersHeight = 45;
+            dataGridViewAddPerson.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewAddPerson.ColumnHeadersDefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+            dataGridViewAddPerson.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dataGridViewAddPerson.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 255);
+            dataGridViewAddPerson.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
+            dataGridViewAddPerson.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+           
+            
+            colAction.DefaultCellStyle.BackColor = Color.White;
+            colAddress.DefaultCellStyle.BackColor = Color.White;
+            colPersonID.DefaultCellStyle.BackColor = Color.White;
+            colPhoneNumber.DefaultCellStyle.BackColor = Color.White;
+            colName.DefaultCellStyle.BackColor = Color.White;
+            colSL.DefaultCellStyle.BackColor = Color.White;
+            
+            colAction.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colAddress.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colPersonID.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colPhoneNumber.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+
+            colSL.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            colName.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+
+            //Row Style
+            dataGridViewAddPerson.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            dataGridViewAddPerson.DefaultCellStyle.BackColor = Color.White;
+            dataGridViewAddPerson.DefaultCellStyle.ForeColor = Color.Black;
+            //dataGridViewAddPerson.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
+            //dataGridViewAddPerson.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 231, 255);
+            //dataGridViewAddPerson.DefaultCellStyle.SelectionForeColor = Color.FromArgb(15, 23, 42);
+            dataGridViewAddPerson.RowTemplate.Height = 40;
+            dataGridViewAddPerson.RowHeadersVisible = false;
+            dataGridViewAddPerson.MultiSelect = false;
+            dataGridViewAddPerson.ReadOnly = true;
+            dataGridViewAddPerson.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            //Border style
+            dataGridViewAddPerson.BorderStyle = BorderStyle.None;
+            dataGridViewAddPerson.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewAddPerson.GridColor = Color.FromArgb(230, 230, 230);
+
+            //cell Alignment
+            colAction.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colAddress.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colPersonID.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colPhoneNumber.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colName.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colSL.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colSL.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colSL.Resizable = DataGridViewTriState.False;
+            colAction.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colAction.Resizable = DataGridViewTriState.False;
+
+            
+        }
+
+        //private void dataGridViewAddPerson_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        //{
+          
+        //}
+        private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
+        {
+            e.Paint(e.CellBounds,
+                DataGridViewPaintParts.Background |
+                DataGridViewPaintParts.Border);
+
+            int iconSize = 16;
+            int spacing = 6;
+
+            SizeF textSize = e.Graphics.MeasureString(text, e.CellStyle.Font);
+
+            int totalWidth = iconSize + spacing + (int)textSize.Width;
+
+            int startX = e.CellBounds.X + (e.CellBounds.Width - totalWidth) / 2;
+            int iconY = e.CellBounds.Y + (e.CellBounds.Height - iconSize) / 2;
+
+            e.Graphics.DrawImage(icon, startX, iconY, iconSize, iconSize);
+
+            using (Brush brush = new SolidBrush(Color.FromArgb(80, 60, 180)))
+            {
+                e.Graphics.DrawString(
+                    text,
+                    e.CellStyle.Font,
+                    brush,
+                    startX + iconSize + spacing,
+                    e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2);
+            }
+
+            e.Handled = true;
+        }
+
+        private void txtAddPersonInputFullName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlAddPersonInputFullName_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlAddPersonInput.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void txtAddPersonInputPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlAddPersonInputPhoneNumber_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlAddPersonInput.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlAddPersonInputAddress_Paint(object sender, PaintEventArgs e)
+        {
+
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlAddPersonInput.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlAddPersonSearchBar_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlAddPersonInput.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        //private void pnlAddPersonInput_Paint(object sender, PaintEventArgs e)
+        //{
+        //    ControlPaint.DrawBorder(
+        //        e.Graphics,
+        //        pnlAddPersonInput.ClientRectangle,
+        //        ColorTranslator.FromHtml("#E7ECF3"),
+        //        ButtonBorderStyle.Solid);
+        //}
+
+        //private void panel2_Paint(object sender, PaintEventArgs e)
+        //{
+        //    ControlPaint.DrawBorder(
+        //       e.Graphics,
+        //       panel2.ClientRectangle,
+        //       ColorTranslator.FromHtml("#E7ECF3"),
+        //       ButtonBorderStyle.Solid);
+        //}
+
+
     }
 }
