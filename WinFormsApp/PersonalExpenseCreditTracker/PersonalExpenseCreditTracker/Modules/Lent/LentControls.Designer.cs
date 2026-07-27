@@ -754,16 +754,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvLentDataTable.ColumnHeadersHeight = 35;
             this.dgvLentDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvLentDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colDate,
-            this.colPersonName,
-            this.colAmount,
-            this.colPaymentType,
-            this.colStatus,
-            this.colReturnedAmount,
-            this.colRemainingAmount,
-            this.colDeadline,
-            this.colDescription});
+            //this.dgvLentDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            //this.colDate,
+            //this.colPersonName,
+            //this.colAmount,
+            //this.colPaymentType,
+            //this.colStatus,
+            //this.colReturnedAmount,
+            //this.colRemainingAmount,
+            //this.colDeadline,
+            //this.colDescription});
             dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

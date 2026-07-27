@@ -54,12 +54,12 @@
             this.btnBorrowAddSave = new System.Windows.Forms.Button();
             this.btnBorrowAddCancel = new System.Windows.Forms.Button();
             this.pnlAddBorrowMainBody = new System.Windows.Forms.Panel();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.txtBorrowStatus = new System.Windows.Forms.TextBox();
             this.btnBorrowAddClear = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblBorrowDetails = new System.Windows.Forms.Label();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.txtBorrowStatus = new System.Windows.Forms.TextBox();
             this.pnlBorrowAddCalenderShow.SuspendLayout();
             this.panelBorrowAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -399,6 +399,30 @@
             this.pnlAddBorrowMainBody.Size = new System.Drawing.Size(864, 527);
             this.pnlAddBorrowMainBody.TabIndex = 1;
             this.pnlAddBorrowMainBody.Click += new System.EventHandler(this.pnlAddBorrowMainBody_Click);
+            this.pnlAddBorrowMainBody.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddBorrowMainBody_Paint);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
+            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
+            this.pictureBox6.Location = new System.Drawing.Point(350, 306);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(25, 26);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 36;
+            this.pictureBox6.TabStop = false;
+            // 
+            // txtBorrowStatus
+            // 
+            this.txtBorrowStatus.BackColor = System.Drawing.Color.Gainsboro;
+            this.txtBorrowStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBorrowStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtBorrowStatus.Location = new System.Drawing.Point(20, 304);
+            this.txtBorrowStatus.Name = "txtBorrowStatus";
+            this.txtBorrowStatus.ReadOnly = true;
+            this.txtBorrowStatus.Size = new System.Drawing.Size(357, 30);
+            this.txtBorrowStatus.TabIndex = 35;
+            this.txtBorrowStatus.Text = "  Pending";
             // 
             // btnBorrowAddClear
             // 
@@ -446,29 +470,6 @@
             this.lblBorrowDetails.Size = new System.Drawing.Size(152, 25);
             this.lblBorrowDetails.TabIndex = 0;
             this.lblBorrowDetails.Text = "Borrow Details";
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
-            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
-            this.pictureBox6.Location = new System.Drawing.Point(350, 306);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(25, 26);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 36;
-            this.pictureBox6.TabStop = false;
-            // 
-            // txtBorrowStatus
-            // 
-            this.txtBorrowStatus.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtBorrowStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBorrowStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtBorrowStatus.Location = new System.Drawing.Point(20, 304);
-            this.txtBorrowStatus.Name = "txtBorrowStatus";
-            this.txtBorrowStatus.ReadOnly = true;
-            this.txtBorrowStatus.Size = new System.Drawing.Size(357, 30);
-            this.txtBorrowStatus.TabIndex = 35;
-            this.txtBorrowStatus.Text = "  Pending";
             // 
             // AddBorrowControls
             // 

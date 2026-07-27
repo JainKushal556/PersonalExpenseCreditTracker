@@ -290,5 +290,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             SetRadius(btnBorrowAddSave, 5);
         }
+
+        private void pnlAddBorrowMainBody_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

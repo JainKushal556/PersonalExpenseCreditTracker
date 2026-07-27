@@ -109,6 +109,14 @@ namespace PersonalExpenseCreditTracker.Common
             return dataTable;
         }
 
+        // Retrieves filtered data by a range of two int values from BLL layer
+        public static DataTable RetrieveDataByUserIdAndFilterId(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = CommonBllFunction.RetrieveDataByUserIdAndFilterId(spName, userId, paramName1, paramId1, paramName2, paramId2);
+            return dataTable;
+        }
+
         // Retrieves filtered data by a date range from BLL layer
         public static DataTable RetrieveDataByUserIdAndFilterId(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
         {

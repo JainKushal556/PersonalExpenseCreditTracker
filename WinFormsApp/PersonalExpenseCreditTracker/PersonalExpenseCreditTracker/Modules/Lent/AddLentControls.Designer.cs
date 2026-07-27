@@ -30,6 +30,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             this.components = new System.ComponentModel.Container();
             this.panelMainBody = new System.Windows.Forms.Panel();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.txtLentStatus = new System.Windows.Forms.TextBox();
             this.panelLentAddCalenderShow = new System.Windows.Forms.Panel();
             this.monthCalendarAddLent = new System.Windows.Forms.MonthCalendar();
             this.textBoxLentAddDescription = new System.Windows.Forms.TextBox();
@@ -59,15 +61,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblLentDetails = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtLentStatus = new System.Windows.Forms.TextBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.panelMainBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panelLentAddCalenderShow.SuspendLayout();
             this.panelLentAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMainBody
@@ -106,6 +106,29 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelMainBody.Size = new System.Drawing.Size(864, 527);
             this.panelMainBody.TabIndex = 0;
             this.panelMainBody.Click += new System.EventHandler(this.panelMainBody_Click);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
+            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
+            this.pictureBox6.Location = new System.Drawing.Point(350, 306);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(25, 26);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 34;
+            this.pictureBox6.TabStop = false;
+            // 
+            // txtLentStatus
+            // 
+            this.txtLentStatus.BackColor = System.Drawing.Color.Gainsboro;
+            this.txtLentStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLentStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtLentStatus.Location = new System.Drawing.Point(20, 304);
+            this.txtLentStatus.Name = "txtLentStatus";
+            this.txtLentStatus.ReadOnly = true;
+            this.txtLentStatus.Size = new System.Drawing.Size(357, 30);
+            this.txtLentStatus.TabIndex = 33;
+            this.txtLentStatus.Text = "  Pending";
             // 
             // panelLentAddCalenderShow
             // 
@@ -397,8 +420,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 463);
             this.panel2.Name = "panel2";
@@ -407,8 +430,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";
@@ -428,29 +451,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // txtLentStatus
-            // 
-            this.txtLentStatus.BackColor = System.Drawing.Color.Gainsboro;
-            this.txtLentStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtLentStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtLentStatus.Location = new System.Drawing.Point(20, 304);
-            this.txtLentStatus.Name = "txtLentStatus";
-            this.txtLentStatus.ReadOnly = true;
-            this.txtLentStatus.Size = new System.Drawing.Size(357, 30);
-            this.txtLentStatus.TabIndex = 33;
-            this.txtLentStatus.Text = "  Pending";
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
-            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
-            this.pictureBox6.Location = new System.Drawing.Point(350, 306);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(25, 26);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 34;
-            this.pictureBox6.TabStop = false;
-            // 
             // AddLentControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -464,6 +464,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.Load += new System.EventHandler(this.AddLentControls_Load);
             this.panelMainBody.ResumeLayout(false);
             this.panelMainBody.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panelLentAddCalenderShow.ResumeLayout(false);
             this.panelLentAddDeadlineAt.ResumeLayout(false);
             this.panelLentAddDeadlineAt.PerformLayout();
@@ -471,7 +472,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
 
         }

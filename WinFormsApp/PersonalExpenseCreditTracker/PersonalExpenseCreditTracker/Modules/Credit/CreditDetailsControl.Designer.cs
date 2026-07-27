@@ -50,10 +50,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditCategory = new System.Windows.Forms.ComboBox();
             this.btnSaveCredit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnClear = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelCreditDetailsMainBody.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).BeginInit();
@@ -63,6 +63,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // lblCreditDetails
             // 
             this.lblCreditDetails.AutoSize = true;
+            this.lblCreditDetails.Location = new System.Drawing.Point(0, 0);
+            this.lblCreditDetails.Name = "lblCreditDetails";
+            this.lblCreditDetails.Size = new System.Drawing.Size(0, 23);
+            this.lblCreditDetails.TabIndex = 0;
             // 
             // txtAddCreditDescription
             // 
@@ -204,9 +208,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditSubCategory.FormattingEnabled = true;
             this.cmbAddCreditSubCategory.IntegralHeight = false;
             this.cmbAddCreditSubCategory.ItemHeight = 23;
-            this.cmbAddCreditSubCategory.Items.AddRange(new object[] {
-            "Select Sub Category",
-            "Momo"});
             this.cmbAddCreditSubCategory.Location = new System.Drawing.Point(436, 106);
             this.cmbAddCreditSubCategory.Name = "cmbAddCreditSubCategory";
             this.cmbAddCreditSubCategory.Size = new System.Drawing.Size(354, 31);
@@ -269,12 +270,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditCategory.FormattingEnabled = true;
             this.cmbAddCreditCategory.IntegralHeight = false;
             this.cmbAddCreditCategory.ItemHeight = 23;
-            this.cmbAddCreditCategory.Items.AddRange(new object[] {
-            "Food"});
             this.cmbAddCreditCategory.Location = new System.Drawing.Point(20, 106);
             this.cmbAddCreditCategory.Name = "cmbAddCreditCategory";
             this.cmbAddCreditCategory.Size = new System.Drawing.Size(357, 31);
             this.cmbAddCreditCategory.TabIndex = 14;
+            this.cmbAddCreditCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditCategory_SelectedIndexChanged);
             this.cmbAddCreditCategory.Enter += new System.EventHandler(this.cmbAddCreditCategory_Enter);
             this.cmbAddCreditCategory.Leave += new System.EventHandler(this.cmbAddCreditCategory_Leave);
             // 
@@ -377,6 +377,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }

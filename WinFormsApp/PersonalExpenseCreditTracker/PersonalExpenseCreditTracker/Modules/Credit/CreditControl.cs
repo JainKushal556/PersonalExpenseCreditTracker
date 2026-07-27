@@ -153,6 +153,90 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             currentPage = 1;
             ShowCurrentPage();
         }
+
+        public Boolean LoadFilteredCreditData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllCreditData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+
+        public Boolean LoadFilteredCreditData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllCreditData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+
+        public Boolean LoadFilteredCreditData(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllCreditData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+
+        public Boolean LoadFilteredCreditData(string spName, string paramName,int paramValue,int filterId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(spName, userID, paramName, filterId);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            AllCreditData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
         private void dgvCreditDataTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex != -1)
@@ -236,6 +320,24 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             lblCreditStartingPageNumber.Text = total == 0 ? "0" : start.ToString();
             lblCreditEndingPageNumber.Text = end.ToString();
             lblCreditTotalPageNumber.Text = total.ToString();
+
+            if (AllCreditData != null && AllCreditData.Rows.Count > 0)
+            {
+                // Total Credit Amount
+                decimal totalCredit = AllCreditData.AsEnumerable().Sum(row => row.Field<decimal>("Amount"));
+
+                // Total Transactions
+                int totalTransaction = AllCreditData.Rows.Count;
+
+                // Display
+                lblCreditAmount.Text = "₹ " + totalCredit.ToString("#,##0.##");
+                lblTransactionAmount.Text = totalTransaction.ToString();
+            }
+            else
+            {
+                lblCreditAmount.Text = "₹ 0";
+                lblTransactionAmount.Text = "0";
+            }
         }
 
         private int GetRowsPerPage()
@@ -337,6 +439,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         }
 
         private void picCredit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTransction_Click(object sender, EventArgs e)
         {
 
         }

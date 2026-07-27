@@ -165,7 +165,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void cmbAddCreditSubCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmbAddCreditSubCategory.ForeColor = Color.Gray;
+            cmbAddCreditSubCategory.ForeColor = Color.Black;
         }
 
         private void cmbAddCreditSubCategory_Enter(object sender, EventArgs e)
@@ -271,9 +271,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
              }
         }
 
-        private void cmbAddCreditSubCategory_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
