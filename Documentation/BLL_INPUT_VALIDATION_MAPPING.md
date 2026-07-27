@@ -106,7 +106,7 @@ graph LR
 
 | Stored Procedure | UI Trigger Event & Source File | Input Parameters from UI | BLL Validation & Constraints |
 | :--- | :--- | :--- | :--- |
-| **`spInsertCreditByUserID`** | `CreditDetailsControl.cs` <br> "Save Credit" Button Click | `@UserID` (Session)<br>`@CategoryID`<br>`@SubCategoryID`<br>`@PaymentTypeID`<br>`@Amount`<br>`@Date`<br>`@Description` | • **Amount**: Must be $> 0$.<br>• **Category/SubCategory/PaymentType**: Must be selected (> 0).<br>• **Date**: Valid format, cannot exceed current date.<br>• **Description**: Max 200 chars. |
+| **`spInsertCreditByUserID`** | `CreditDetailsControl.cs` <br> "Save Credit" Button Click | `@UserID` (Session)<br>`@CategoryID`<br>`@SubCategoryID`<br>`@PaymentID`<br>`@Amount`<br>`@Description` | • **Amount**: Must be $> 0$.<br>• **Category/SubCategory/PaymentType**: Must be selected (> 0).<br>• **Description**: Max 200 chars. |
 | **`spGetAllCreditsByID`** | `CreditControl.cs` <br> Grid Load | `@UserID` (Session) | • Valid session UserID check. |
 | **`spFilterCreditByDateRange`** | `CreditControl.cs` <br> Date Filter Click | `@UserID`, `@StartDate`, `@EndDate` | • **Date Range**: `@StartDate` must be $\le$ `@EndDate`. |
 | **`spFilterCreditByAmountRange`**| `CreditControl.cs` <br> Amount Filter Click | `@UserID`, `@MinAmount`, `@MaxAmount`| • `@MinAmount` must be $\ge 0$ and $\le$ `@MaxAmount`. |
@@ -115,6 +115,8 @@ graph LR
 | **`spGetMonthlyCreditSummary`**| Reports / Dashboard Charts | `@UserID` | • Valid session check. |
 | **`spGetTodayCredit`** | Dashboard Control Load | `@UserID` | • Retrieves today's total credit. |
 | **`spGetCategoryWiseCreditReport`**| Category Chart UI | `@UserID`, `@StartDate`, `@EndDate` | • **Date Range**: `@StartDate` must be $\le$ `@EndDate`. |
+| **`spGetCreditSubCategoryByCategoryID`**| `CreditDetailsControl.cs` <br> Category Select | `@CategoryID` | • CategoryID must be valid (> 0). |
+| **`spGetAllCreditCategory`**| `CreditDetailsControl.cs` <br> Form Load | None | • None. |
 
 ---
 

@@ -197,8 +197,24 @@ EXEC spInsertCreditByUserID
     @SubCategoryID = '',
     @Amount = '',
     @Description = '',
-    @PaymentID = '',
-    @CreditAt = ''
+    @PaymentID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetCreditSubCategoryByCategoryID
+-- From File: ✔️spGetCreditSubCategoryByCategoryID.sql
+-- ==========================================================
+EXEC spGetCreditSubCategoryByCategoryID
+    @CategoryID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetAllCreditCategory
+-- From File: ✔️spGetAllCreditCategory.sql
+-- ==========================================================
+EXEC spGetAllCreditCategory
 
 GO
 

@@ -74,9 +74,9 @@
 
 ## 🟢 Team B — Expense, Credit, Settings
 **Assigned Area:** Expense, Credit, Categories, Subcategories, Payment Type
-**Total Allotted Procedures:** 35
+**Total Allotted Procedures:** 37
 
-### `✔️` ALL OKAY (35)
+### `✔️` ALL OKAY (37)
 - `spDeleteCreditCategoryByUserID`
 - `spDeleteCreditSubCategoryByUserID`
 - `spDeleteExpenseCategoryByUserID`
@@ -89,6 +89,7 @@
 - `spFilterExpenseByCategory`
 - `spFilterExpenseByCategoryAndSubCategory`
 - `spFilterExpenseByDateRange`
+- `spGetAllCreditCategory`
 - `spGetAllCreditsByID`
 - `spGetAllExpensesByID`
 - `spGetAllPaymentTypes`
@@ -96,6 +97,7 @@
 - `spGetCategoryWiseExpenseReport`
 - `spGetCreditCategoriesByUserID`
 - `spGetCreditSubCategoriesByUserID`
+- `spGetCreditSubCategoryByCategoryID`
 - `spGetExpenseCategoriesByUserID`
 - `spGetExpenseSubCategoriesByUserID`
 - `spGetMonthlyCreditSummary`
