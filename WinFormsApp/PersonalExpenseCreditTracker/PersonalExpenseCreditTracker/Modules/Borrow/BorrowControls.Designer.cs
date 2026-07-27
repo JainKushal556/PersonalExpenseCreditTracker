@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -55,22 +56,25 @@
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnLastPage = new System.Windows.Forms.Button();
             this.pnlBorrowExportReport = new System.Windows.Forms.Panel();
-            this.btnBorrowExportReport = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnBorrowExport = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlRepaidAmount = new System.Windows.Forms.Panel();
             this.lblBorrowRepaidAmount = new System.Windows.Forms.Label();
             this.lblBorrowRepaidAmountText = new System.Windows.Forms.Label();
             this.picBorrowRepaidAmount = new System.Windows.Forms.PictureBox();
             this.pnlActiveBorrowings = new System.Windows.Forms.Panel();
-            this.lblBorrowActiveBorrowingsText = new System.Windows.Forms.Label();
             this.lblBorrowActiveBorrowingsAmount = new System.Windows.Forms.Label();
+            this.lblBorrowActiveBorrowingsText = new System.Windows.Forms.Label();
             this.piclblBorrowActiveBorrowings = new System.Windows.Forms.PictureBox();
             this.pnlPaidAmount = new System.Windows.Forms.Panel();
+            this.lblBorrowPaidAmount = new System.Windows.Forms.Label();
             this.lblBorrowPaidAmountText = new System.Windows.Forms.Label();
             this.picBorrowPaidAmount = new System.Windows.Forms.PictureBox();
             this.pnlBorrowTotalBorrowed = new System.Windows.Forms.Panel();
-            this.lblBorrowTotalBorrowedText = new System.Windows.Forms.Label();
             this.lblBorrowTotalBorrowedAmount = new System.Windows.Forms.Label();
+            this.lblBorrowTotalBorrowedText = new System.Windows.Forms.Label();
             this.picBorrowTotalBorrowed = new System.Windows.Forms.PictureBox();
             this.dgvBorrowDataTable = new System.Windows.Forms.DataGridView();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,10 +88,10 @@
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanelMainData = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.lblBorrowPaidAmount = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlBorrowExportReport.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlRepaidAmount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBorrowRepaidAmount)).BeginInit();
@@ -113,7 +117,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.panel5);
             this.panel2.Controls.Add(this.btnCurrentPage);
             this.panel2.Controls.Add(this.btnFirstpage);
@@ -265,37 +269,70 @@
             // pnlBorrowExportReport
             // 
             this.pnlBorrowExportReport.BackColor = System.Drawing.Color.Transparent;
-            this.pnlBorrowExportReport.Controls.Add(this.btnBorrowExportReport);
+            this.pnlBorrowExportReport.Controls.Add(this.panel1);
             this.pnlBorrowExportReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBorrowExportReport.Location = new System.Drawing.Point(8, 5);
             this.pnlBorrowExportReport.Margin = new System.Windows.Forms.Padding(0);
             this.pnlBorrowExportReport.Name = "pnlBorrowExportReport";
+            this.pnlBorrowExportReport.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.pnlBorrowExportReport.Size = new System.Drawing.Size(1137, 50);
             this.pnlBorrowExportReport.TabIndex = 0;
             // 
-            // btnBorrowExportReport
+            // panel1
             // 
-            this.btnBorrowExportReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.btnBorrowExportReport.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnBorrowExportReport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
-            this.btnBorrowExportReport.FlatAppearance.BorderSize = 0;
-            this.btnBorrowExportReport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
-            this.btnBorrowExportReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(98)))), ((int)(((byte)(180)))));
-            this.btnBorrowExportReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBorrowExportReport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBorrowExportReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.btnBorrowExportReport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
-            this.btnBorrowExportReport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorrowExportReport.Location = new System.Drawing.Point(1028, 0);
-            this.btnBorrowExportReport.Name = "btnBorrowExportReport";
-            this.btnBorrowExportReport.Size = new System.Drawing.Size(109, 50);
-            this.btnBorrowExportReport.TabIndex = 0;
-            this.btnBorrowExportReport.Text = "Export ";
-            this.btnBorrowExportReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBorrowExportReport.UseVisualStyleBackColor = false;
+            this.panel1.Controls.Add(this.btnPrint);
+            this.panel1.Controls.Add(this.btnBorrowExport);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(905, 5);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(224, 40);
+            this.panel1.TabIndex = 0;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(127)))), ((int)(((byte)(242)))));
+            this.btnPrint.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(91)))), ((int)(((byte)(176)))));
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(103)))), ((int)(((byte)(199)))));
+            this.btnPrint.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(145)))), ((int)(((byte)(255)))));
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
+            this.btnPrint.Location = new System.Drawing.Point(0, 0);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(99, 40);
+            this.btnPrint.TabIndex = 1;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            // 
+            // btnBorrowExport
+            // 
+            this.btnBorrowExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(127)))), ((int)(((byte)(242)))));
+            this.btnBorrowExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnBorrowExport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(91)))), ((int)(((byte)(176)))));
+            this.btnBorrowExport.FlatAppearance.BorderSize = 0;
+            this.btnBorrowExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(103)))), ((int)(((byte)(199)))));
+            this.btnBorrowExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(145)))), ((int)(((byte)(255)))));
+            this.btnBorrowExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorrowExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBorrowExport.ForeColor = System.Drawing.Color.White;
+            this.btnBorrowExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
+            this.btnBorrowExport.Location = new System.Drawing.Point(115, 0);
+            this.btnBorrowExport.Name = "btnBorrowExport";
+            this.btnBorrowExport.Size = new System.Drawing.Size(109, 40);
+            this.btnBorrowExport.TabIndex = 0;
+            this.btnBorrowExport.Text = "Export ";
+            this.btnBorrowExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBorrowExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBorrowExport.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -320,7 +357,7 @@
             this.pnlRepaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlRepaidAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(74)))), ((int)(((byte)(160)))));
+            this.pnlRepaidAmount.BackColor = System.Drawing.Color.White;
             this.pnlRepaidAmount.Controls.Add(this.lblBorrowRepaidAmount);
             this.pnlRepaidAmount.Controls.Add(this.lblBorrowRepaidAmountText);
             this.pnlRepaidAmount.Controls.Add(this.picBorrowRepaidAmount);
@@ -329,13 +366,14 @@
             this.pnlRepaidAmount.Name = "pnlRepaidAmount";
             this.pnlRepaidAmount.Size = new System.Drawing.Size(267, 94);
             this.pnlRepaidAmount.TabIndex = 3;
+            this.pnlRepaidAmount.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlRepaidAmount_Paint);
             // 
             // lblBorrowRepaidAmount
             // 
             this.lblBorrowRepaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblBorrowRepaidAmount.AutoSize = true;
             this.lblBorrowRepaidAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowRepaidAmount.ForeColor = System.Drawing.Color.White;
+            this.lblBorrowRepaidAmount.ForeColor = System.Drawing.Color.Black;
             this.lblBorrowRepaidAmount.Location = new System.Drawing.Point(93, 44);
             this.lblBorrowRepaidAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowRepaidAmount.Name = "lblBorrowRepaidAmount";
@@ -349,7 +387,7 @@
             // 
             this.lblBorrowRepaidAmountText.AutoSize = true;
             this.lblBorrowRepaidAmountText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowRepaidAmountText.ForeColor = System.Drawing.Color.White;
+            this.lblBorrowRepaidAmountText.ForeColor = System.Drawing.Color.Black;
             this.lblBorrowRepaidAmountText.Location = new System.Drawing.Point(93, 12);
             this.lblBorrowRepaidAmountText.Name = "lblBorrowRepaidAmountText";
             this.lblBorrowRepaidAmountText.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -376,7 +414,7 @@
             this.pnlActiveBorrowings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlActiveBorrowings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(116)))), ((int)(((byte)(165)))));
+            this.pnlActiveBorrowings.BackColor = System.Drawing.Color.White;
             this.pnlActiveBorrowings.Controls.Add(this.lblBorrowActiveBorrowingsAmount);
             this.pnlActiveBorrowings.Controls.Add(this.lblBorrowActiveBorrowingsText);
             this.pnlActiveBorrowings.Controls.Add(this.piclblBorrowActiveBorrowings);
@@ -385,26 +423,14 @@
             this.pnlActiveBorrowings.Name = "pnlActiveBorrowings";
             this.pnlActiveBorrowings.Size = new System.Drawing.Size(264, 94);
             this.pnlActiveBorrowings.TabIndex = 2;
-            // 
-            // lblBorrowActiveBorrowingsText
-            // 
-            this.lblBorrowActiveBorrowingsText.AutoSize = true;
-            this.lblBorrowActiveBorrowingsText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowActiveBorrowingsText.ForeColor = System.Drawing.Color.White;
-            this.lblBorrowActiveBorrowingsText.Location = new System.Drawing.Point(93, 12);
-            this.lblBorrowActiveBorrowingsText.Name = "lblBorrowActiveBorrowingsText";
-            this.lblBorrowActiveBorrowingsText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblBorrowActiveBorrowingsText.Size = new System.Drawing.Size(157, 23);
-            this.lblBorrowActiveBorrowingsText.TabIndex = 1;
-            this.lblBorrowActiveBorrowingsText.Text = "Active Borrowings";
-            this.lblBorrowActiveBorrowingsText.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.pnlActiveBorrowings.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlActiveBorrowings_Paint);
             // 
             // lblBorrowActiveBorrowingsAmount
             // 
             this.lblBorrowActiveBorrowingsAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblBorrowActiveBorrowingsAmount.AutoSize = true;
             this.lblBorrowActiveBorrowingsAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowActiveBorrowingsAmount.ForeColor = System.Drawing.Color.White;
+            this.lblBorrowActiveBorrowingsAmount.ForeColor = System.Drawing.Color.Black;
             this.lblBorrowActiveBorrowingsAmount.Location = new System.Drawing.Point(93, 44);
             this.lblBorrowActiveBorrowingsAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowActiveBorrowingsAmount.Name = "lblBorrowActiveBorrowingsAmount";
@@ -412,6 +438,20 @@
             this.lblBorrowActiveBorrowingsAmount.TabIndex = 3;
             this.lblBorrowActiveBorrowingsAmount.Text = "₹5,300";
             this.lblBorrowActiveBorrowingsAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBorrowActiveBorrowingsAmount.Click += new System.EventHandler(this.lblBorrowActiveBorrowingsAmount_Click);
+            // 
+            // lblBorrowActiveBorrowingsText
+            // 
+            this.lblBorrowActiveBorrowingsText.AutoSize = true;
+            this.lblBorrowActiveBorrowingsText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBorrowActiveBorrowingsText.ForeColor = System.Drawing.Color.Black;
+            this.lblBorrowActiveBorrowingsText.Location = new System.Drawing.Point(93, 12);
+            this.lblBorrowActiveBorrowingsText.Name = "lblBorrowActiveBorrowingsText";
+            this.lblBorrowActiveBorrowingsText.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblBorrowActiveBorrowingsText.Size = new System.Drawing.Size(157, 23);
+            this.lblBorrowActiveBorrowingsText.TabIndex = 1;
+            this.lblBorrowActiveBorrowingsText.Text = "Active Borrowings";
+            this.lblBorrowActiveBorrowingsText.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // piclblBorrowActiveBorrowings
             // 
@@ -431,7 +471,7 @@
             this.pnlPaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPaidAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(139)))), ((int)(((byte)(94)))));
+            this.pnlPaidAmount.BackColor = System.Drawing.Color.White;
             this.pnlPaidAmount.Controls.Add(this.lblBorrowPaidAmount);
             this.pnlPaidAmount.Controls.Add(this.lblBorrowPaidAmountText);
             this.pnlPaidAmount.Controls.Add(this.picBorrowPaidAmount);
@@ -441,12 +481,27 @@
             this.pnlPaidAmount.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.pnlPaidAmount.Size = new System.Drawing.Size(264, 94);
             this.pnlPaidAmount.TabIndex = 1;
+            this.pnlPaidAmount.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPaidAmount_Paint);
+            // 
+            // lblBorrowPaidAmount
+            // 
+            this.lblBorrowPaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblBorrowPaidAmount.AutoSize = true;
+            this.lblBorrowPaidAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBorrowPaidAmount.ForeColor = System.Drawing.Color.Black;
+            this.lblBorrowPaidAmount.Location = new System.Drawing.Point(93, 44);
+            this.lblBorrowPaidAmount.Margin = new System.Windows.Forms.Padding(0);
+            this.lblBorrowPaidAmount.Name = "lblBorrowPaidAmount";
+            this.lblBorrowPaidAmount.Size = new System.Drawing.Size(92, 32);
+            this.lblBorrowPaidAmount.TabIndex = 3;
+            this.lblBorrowPaidAmount.Text = "₹7,450";
+            this.lblBorrowPaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblBorrowPaidAmountText
             // 
             this.lblBorrowPaidAmountText.AutoSize = true;
             this.lblBorrowPaidAmountText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowPaidAmountText.ForeColor = System.Drawing.Color.White;
+            this.lblBorrowPaidAmountText.ForeColor = System.Drawing.Color.Black;
             this.lblBorrowPaidAmountText.Location = new System.Drawing.Point(93, 12);
             this.lblBorrowPaidAmountText.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.lblBorrowPaidAmountText.Name = "lblBorrowPaidAmountText";
@@ -474,7 +529,7 @@
             this.pnlBorrowTotalBorrowed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlBorrowTotalBorrowed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(108)))), ((int)(((byte)(18)))));
+            this.pnlBorrowTotalBorrowed.BackColor = System.Drawing.Color.White;
             this.pnlBorrowTotalBorrowed.Controls.Add(this.lblBorrowTotalBorrowedAmount);
             this.pnlBorrowTotalBorrowed.Controls.Add(this.lblBorrowTotalBorrowedText);
             this.pnlBorrowTotalBorrowed.Controls.Add(this.picBorrowTotalBorrowed);
@@ -483,26 +538,14 @@
             this.pnlBorrowTotalBorrowed.Name = "pnlBorrowTotalBorrowed";
             this.pnlBorrowTotalBorrowed.Size = new System.Drawing.Size(264, 94);
             this.pnlBorrowTotalBorrowed.TabIndex = 0;
-            // 
-            // lblBorrowTotalBorrowedText
-            // 
-            this.lblBorrowTotalBorrowedText.AutoSize = true;
-            this.lblBorrowTotalBorrowedText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowTotalBorrowedText.ForeColor = System.Drawing.Color.White;
-            this.lblBorrowTotalBorrowedText.Location = new System.Drawing.Point(93, 12);
-            this.lblBorrowTotalBorrowedText.Name = "lblBorrowTotalBorrowedText";
-            this.lblBorrowTotalBorrowedText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblBorrowTotalBorrowedText.Size = new System.Drawing.Size(133, 23);
-            this.lblBorrowTotalBorrowedText.TabIndex = 1;
-            this.lblBorrowTotalBorrowedText.Text = "Total Borrowed";
-            this.lblBorrowTotalBorrowedText.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.pnlBorrowTotalBorrowed.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBorrowTotalBorrowed_Paint);
             // 
             // lblBorrowTotalBorrowedAmount
             // 
             this.lblBorrowTotalBorrowedAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblBorrowTotalBorrowedAmount.AutoSize = true;
             this.lblBorrowTotalBorrowedAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowTotalBorrowedAmount.ForeColor = System.Drawing.Color.White;
+            this.lblBorrowTotalBorrowedAmount.ForeColor = System.Drawing.Color.Black;
             this.lblBorrowTotalBorrowedAmount.Location = new System.Drawing.Point(93, 44);
             this.lblBorrowTotalBorrowedAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowTotalBorrowedAmount.Name = "lblBorrowTotalBorrowedAmount";
@@ -510,6 +553,19 @@
             this.lblBorrowTotalBorrowedAmount.TabIndex = 3;
             this.lblBorrowTotalBorrowedAmount.Text = "₹12,750";
             this.lblBorrowTotalBorrowedAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblBorrowTotalBorrowedText
+            // 
+            this.lblBorrowTotalBorrowedText.AutoSize = true;
+            this.lblBorrowTotalBorrowedText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBorrowTotalBorrowedText.ForeColor = System.Drawing.Color.Black;
+            this.lblBorrowTotalBorrowedText.Location = new System.Drawing.Point(93, 12);
+            this.lblBorrowTotalBorrowedText.Name = "lblBorrowTotalBorrowedText";
+            this.lblBorrowTotalBorrowedText.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblBorrowTotalBorrowedText.Size = new System.Drawing.Size(133, 23);
+            this.lblBorrowTotalBorrowedText.TabIndex = 1;
+            this.lblBorrowTotalBorrowedText.Text = "Total Borrowed";
+            this.lblBorrowTotalBorrowedText.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // picBorrowTotalBorrowed
             // 
@@ -538,8 +594,6 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvBorrowDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBorrowDataTable.ColumnHeadersHeight = 38;
@@ -558,8 +612,8 @@
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvBorrowDataTable.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvBorrowDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -573,16 +627,19 @@
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvBorrowDataTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvBorrowDataTable.RowHeadersVisible = false;
             this.dgvBorrowDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.dgvBorrowDataTable.RowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBorrowDataTable.RowTemplate.Height = 30;
             this.dgvBorrowDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvBorrowDataTable.Size = new System.Drawing.Size(1131, 455);
             this.dgvBorrowDataTable.TabIndex = 3;
+            this.dgvBorrowDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBorrowDataTable_CellContentClick);
             // 
             // colDate
             // 
@@ -714,25 +771,11 @@
             this.dataGridViewImageColumn1.ReadOnly = true;
             this.dataGridViewImageColumn1.Width = 20;
             // 
-            // lblBorrowPaidAmount
-            // 
-            this.lblBorrowPaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblBorrowPaidAmount.AutoSize = true;
-            this.lblBorrowPaidAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowPaidAmount.ForeColor = System.Drawing.Color.White;
-            this.lblBorrowPaidAmount.Location = new System.Drawing.Point(93, 44);
-            this.lblBorrowPaidAmount.Margin = new System.Windows.Forms.Padding(0);
-            this.lblBorrowPaidAmount.Name = "lblBorrowPaidAmount";
-            this.lblBorrowPaidAmount.Size = new System.Drawing.Size(92, 32);
-            this.lblBorrowPaidAmount.TabIndex = 3;
-            this.lblBorrowPaidAmount.Text = "₹7,450";
-            this.lblBorrowPaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // BorrowControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1153, 707);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanelMainData);
@@ -743,6 +786,7 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.pnlBorrowExportReport.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlRepaidAmount.ResumeLayout(false);
             this.pnlRepaidAmount.PerformLayout();
@@ -780,7 +824,7 @@
         private System.Windows.Forms.Button btnNextPage;
         private System.Windows.Forms.Button btnLastPage;
         private System.Windows.Forms.Panel pnlBorrowExportReport;
-        private System.Windows.Forms.Button btnBorrowExportReport;
+        private System.Windows.Forms.Button btnBorrowExport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlRepaidAmount;
         private System.Windows.Forms.Label lblBorrowRepaidAmountText;
@@ -809,5 +853,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeadline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.Label lblBorrowPaidAmount;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnPrint;
     }
 }

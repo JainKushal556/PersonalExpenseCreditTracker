@@ -114,16 +114,16 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
         private void ApplyRoundCorners()
         {
             pnlExpenseCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlExpenseCard.Width, pnlExpenseCard.Height, 10, 10));
+                CreateRoundRectRgn(0, 0, pnlExpenseCard.Width, pnlExpenseCard.Height, 15, 15));
 
             pnlCreditCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlCreditCard.Width, pnlCreditCard.Height, 10, 10));
+                CreateRoundRectRgn(0, 0, pnlCreditCard.Width, pnlCreditCard.Height, 15, 15));
 
             pnlCardBorrowCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlCardBorrowCard.Width, pnlCardBorrowCard.Height, 10, 10));
+                CreateRoundRectRgn(0, 0, pnlCardBorrowCard.Width, pnlCardBorrowCard.Height, 15, 15));
 
             pnlCardLentCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlCardLentCard.Width, pnlCardLentCard.Height, 10, 10));
+                CreateRoundRectRgn(0, 0, pnlCardLentCard.Width, pnlCardLentCard.Height, 15, 15));
         }
 
         private void pnlExpenseCard_Resize(object sender, EventArgs e)

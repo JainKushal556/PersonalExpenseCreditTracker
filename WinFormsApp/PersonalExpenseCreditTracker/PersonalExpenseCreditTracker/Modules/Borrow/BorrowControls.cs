@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+//using PersonalExpenseCreditTracker.Modules.Borrow.PayBorrowAmountControls;
+
 
 namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
@@ -23,6 +25,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             InitializeComponent();
             StyleBorrowGrid();
             dgvBorrowDataTable.AutoGenerateColumns = false;
+            dgvBorrowDataTable.CellDoubleClick += dgvBorrowDataTable_CellDoubleClick;
 
             ApplyRoundCorners();
 
@@ -78,8 +81,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     0,
                     pnlBorrowTotalBorrowed.Width,
                     pnlBorrowTotalBorrowed.Height,
-                    10,
-                    10));
+                    15,
+                    15));
 
             pnlPaidAmount.Region = Region.FromHrgn(
                 CreateRoundRectRgn(
@@ -87,18 +90,18 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     0,
                     pnlRepaidAmount.Width,
                     pnlRepaidAmount.Height,
-                    10,
-                    10));
+                    15,
+                    15));
 
-            
+
             pnlActiveBorrowings.Region = Region.FromHrgn(
                 CreateRoundRectRgn(
                     0,
                     0,
                     pnlActiveBorrowings.Width,
                     pnlActiveBorrowings.Height,
-                    10,
-                    10));
+                    15,
+                    15));
 
             pnlRepaidAmount.Region = Region.FromHrgn(
                 CreateRoundRectRgn(
@@ -106,20 +109,20 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     0,
                     pnlRepaidAmount.Width,
                     pnlRepaidAmount.Height,
-                    10,
-                    10));
+                    15,
+                    15));
         }
 
         private void BorrowControls_Load(object sender, EventArgs e)
         {
             ApplyRoundCorners();
             dgvBorrowDataTable.CellPainting += dgvBorrowDataTable_CellPainting;
-           pageSize = GetRowsPerPage();
+            pageSize = GetRowsPerPage();
             int userID = 11;
             LoadBorrowData(userID);
         }
 
-      
+
         private void LoadBorrowData(int userID)
         {
             try
@@ -150,7 +153,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
                         AllBorrowData = dt;
                         currentPage = 1;
-                       ShowCurrentPage();
+                        ShowCurrentPage();
                     }
                 }
             }
@@ -161,12 +164,12 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
 
 
-        
 
-       
+
+
         private void StyleBorrowGrid()
         {
-            
+
             colDate.DataPropertyName = "BorrowAt";
             colPersonName.DataPropertyName = "PersonName";
             colPaymentType.DataPropertyName = "PaymentName";
@@ -191,7 +194,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 255);
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            
+
             //Column Background Color
             colDate.DefaultCellStyle.BackColor = Color.White;
             colPersonName.DefaultCellStyle.BackColor = Color.White;
@@ -218,9 +221,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
             dgvBorrowDataTable.DefaultCellStyle.BackColor = Color.White;
             dgvBorrowDataTable.DefaultCellStyle.ForeColor = Color.Black;
-            //dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            dgvBorrowDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224,231,255);
-            dgvBorrowDataTable.DefaultCellStyle.SelectionForeColor = Color.FromArgb(15,23,42);
             dgvBorrowDataTable.RowTemplate.Height = 40;
             dgvBorrowDataTable.RowHeadersVisible = false;
             dgvBorrowDataTable.MultiSelect = false;
@@ -270,7 +270,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             dgvBorrowDataTable.DataSource = pageTable;
 
-            
+
 
             int start = startIndex + 1;
             int end = endIndex;
@@ -287,7 +287,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             int rowHeight = dgvBorrowDataTable.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight)-1;
+            return Math.Max(1, display.Height / rowHeight) - 1;
         }
 
         //Page control button
@@ -319,7 +319,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
         private void btnLastPage_Click(object sender, EventArgs e)
         {
-            int totalPages = Math.Max(1,(int)Math.Ceiling((double)AllBorrowData.Rows.Count / pageSize));
+            int totalPages = Math.Max(1, (int)Math.Ceiling((double)AllBorrowData.Rows.Count / pageSize));
             if (currentPage != totalPages)
             {
                 currentPage = totalPages;
@@ -403,7 +403,63 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
 
         }
-       
-        
+
+        private void pnlBorrowTotalBorrowed_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlBorrowTotalBorrowed.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlPaidAmount_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlPaidAmount.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void lblBorrowActiveBorrowingsAmount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlActiveBorrowings_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlActiveBorrowings.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void pnlRepaidAmount_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                pnlRepaidAmount.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void dgvBorrowDataTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvBorrowDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            PayBorrowAmountControls frm = new PayBorrowAmountControls();
+
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog(this);
+        }
     }
 }
+

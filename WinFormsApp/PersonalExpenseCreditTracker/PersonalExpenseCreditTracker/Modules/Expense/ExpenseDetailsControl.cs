@@ -135,5 +135,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             cmbAddExpensePaymentType.ForeColor = Color.Gray;
         }
+
+        private void pnlAddExpenseHeader_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

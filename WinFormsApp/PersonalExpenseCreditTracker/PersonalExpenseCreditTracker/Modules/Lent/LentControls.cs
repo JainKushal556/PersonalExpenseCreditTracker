@@ -33,7 +33,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             InitializeComponent();
 
-            StyleLentGrid();      
+            StyleLentGrid();
+            dgvLentDataTable.CellDoubleClick += dgvLentDataTable_CellDoubleClick;
 
             dgvLentDataTable.AutoGenerateColumns = false;
 
@@ -70,6 +71,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 ShowCurrentPage();
             }
         }
+
         private void ApplyRoundCorners()
         {
             panelTotalLent.Region = Region.FromHrgn(
@@ -87,8 +89,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     0,
                     panelTotalRepaid.Width,
                     panelTotalRepaid.Height,
-                    10,
-                    10));
+                    15,
+                    15));
 
             panelTotalDue.Region = Region.FromHrgn(
                 CreateRoundRectRgn(
@@ -96,8 +98,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     0,
                     panelTotalDue.Width,
                     panelTotalDue.Height,
-                    10,
-                    10));
+                    15,
+                    15));
 
             panelTotalTransaction.Region = Region.FromHrgn(
                 CreateRoundRectRgn(
@@ -105,17 +107,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     0,
                     panelTotalTransaction.Width,
                     panelTotalTransaction.Height,
-                    10,
-                    10));
+                    15,
+                    15));
 
-            panelExportReport.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelExportReport.Width,
-                    panelExportReport.Height,
-                    10,
-                    10));
         }
 
       
@@ -237,7 +231,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dgvLentDataTable.DefaultCellStyle.BackColor = Color.White;
             dgvLentDataTable.DefaultCellStyle.ForeColor = Color.Black;
             //dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dgvBorrowDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
+            //dgvLentDataTable.DefaultCellStyle.SelectionBackColor = Color.Red;
             dgvLentDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvLentDataTable.RowTemplate.Height = 40;
             dgvLentDataTable.RowHeadersVisible = false;
@@ -420,5 +414,57 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         }
 
+        private void panelTotalLent_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                panelTotalLent.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void panelTotalRepaid_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                panelTotalRepaid.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void panelTotalDue_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                panelTotalDue.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void panelTotalTransaction_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                panelTotalTransaction.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+
+        private void dgvLentDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            ReturnAmountControls frm = new ReturnAmountControls();
+
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog(this);
+        }
+
+        private void btnExportReport_Click(object sender, EventArgs e)
+        {
+
+        }
       }
     }
