@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.pnlEditTask = new System.Windows.Forms.Panel();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnUpdateTask = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pnlDeadline = new System.Windows.Forms.Panel();
             this.btnCalendar = new System.Windows.Forms.Button();
             this.txtDeadline = new System.Windows.Forms.TextBox();
@@ -60,13 +61,15 @@
             // 
             // pnlEditTask
             // 
+            this.pnlEditTask.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlEditTask.Controls.Add(this.monthCalendar1);
+            this.pnlEditTask.Controls.Add(this.panel1);
             this.pnlEditTask.Controls.Add(this.label4);
             this.pnlEditTask.Controls.Add(this.label3);
             this.pnlEditTask.Controls.Add(this.label2);
             this.pnlEditTask.Controls.Add(this.label1);
             this.pnlEditTask.Controls.Add(this.btnUpdateTask);
             this.pnlEditTask.Controls.Add(this.btnCancel);
-            this.pnlEditTask.Controls.Add(this.monthCalendar1);
             this.pnlEditTask.Controls.Add(this.pnlDeadline);
             this.pnlEditTask.Controls.Add(this.lblDeadline);
             this.pnlEditTask.Controls.Add(this.pnlStatus);
@@ -82,6 +85,22 @@
             this.pnlEditTask.Name = "pnlEditTask";
             this.pnlEditTask.Size = new System.Drawing.Size(513, 580);
             this.pnlEditTask.TabIndex = 0;
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(185, 0);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 10;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(27, 69);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(460, 1);
+            this.panel1.TabIndex = 17;
             // 
             // label4
             // 
@@ -133,24 +152,29 @@
             this.btnUpdateTask.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdateTask.FlatAppearance.BorderSize = 0;
             this.btnUpdateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateTask.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateTask.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateTask.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateTask.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update;
             this.btnUpdateTask.Location = new System.Drawing.Point(286, 487);
             this.btnUpdateTask.Name = "btnUpdateTask";
             this.btnUpdateTask.Size = new System.Drawing.Size(196, 59);
             this.btnUpdateTask.TabIndex = 12;
             this.btnUpdateTask.Text = "Update Task";
+            this.btnUpdateTask.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUpdateTask.UseVisualStyleBackColor = false;
             this.btnUpdateTask.Click += new System.EventHandler(this.btnUpdateTask_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.White;
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.ForeColor = System.Drawing.Color.Black;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.Location = new System.Drawing.Point(33, 487);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(196, 59);
@@ -158,14 +182,6 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(185, 0);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 10;
-            this.monthCalendar1.Visible = false;
-            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
             // 
             // pnlDeadline
             // 
@@ -182,7 +198,7 @@
             this.btnCalendar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCalendar.FlatAppearance.BorderSize = 0;
             this.btnCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
+            this.btnCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
             this.btnCalendar.Location = new System.Drawing.Point(404, 11);
             this.btnCalendar.Name = "btnCalendar";
             this.btnCalendar.Size = new System.Drawing.Size(28, 28);
@@ -202,10 +218,10 @@
             // lblDeadline
             // 
             this.lblDeadline.AutoSize = true;
-            this.lblDeadline.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDeadline.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDeadline.Location = new System.Drawing.Point(23, 337);
             this.lblDeadline.Name = "lblDeadline";
-            this.lblDeadline.Size = new System.Drawing.Size(96, 28);
+            this.lblDeadline.Size = new System.Drawing.Size(92, 28);
             this.lblDeadline.TabIndex = 8;
             this.lblDeadline.Text = "Deadline";
             // 
@@ -236,10 +252,10 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.Location = new System.Drawing.Point(286, 211);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(71, 28);
+            this.lblStatus.Size = new System.Drawing.Size(67, 28);
             this.lblStatus.TabIndex = 6;
             this.lblStatus.Text = "Status";
             // 
@@ -271,10 +287,10 @@
             // lblPriority
             // 
             this.lblPriority.AutoSize = true;
-            this.lblPriority.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPriority.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPriority.Location = new System.Drawing.Point(27, 211);
             this.lblPriority.Name = "lblPriority";
-            this.lblPriority.Size = new System.Drawing.Size(83, 28);
+            this.lblPriority.Size = new System.Drawing.Size(77, 28);
             this.lblPriority.TabIndex = 4;
             this.lblPriority.Text = "Priority";
             // 
@@ -301,10 +317,10 @@
             // lblTaskTitle
             // 
             this.lblTaskTitle.AutoSize = true;
-            this.lblTaskTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaskTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaskTitle.Location = new System.Drawing.Point(21, 87);
             this.lblTaskTitle.Name = "lblTaskTitle";
-            this.lblTaskTitle.Size = new System.Drawing.Size(102, 28);
+            this.lblTaskTitle.Size = new System.Drawing.Size(96, 28);
             this.lblTaskTitle.TabIndex = 2;
             this.lblTaskTitle.Text = "Task Title";
             // 
@@ -314,11 +330,11 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.ForeColor = System.Drawing.Color.Black;
-            this.btnClose.Location = new System.Drawing.Point(459, 28);
+            this.btnClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
+            this.btnClose.Location = new System.Drawing.Point(454, 21);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(35, 30);
+            this.btnClose.Size = new System.Drawing.Size(44, 42);
             this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "✕";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
@@ -327,10 +343,10 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(21, 28);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(118, 35);
+            this.lblTitle.Size = new System.Drawing.Size(115, 35);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Edit Task";
             // 
@@ -382,5 +398,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel1;
     }
 }

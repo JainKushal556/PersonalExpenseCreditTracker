@@ -27,14 +27,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             this.FormBorderStyle = FormBorderStyle.None;
 
-            this.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    this.Width,
-                    this.Height,
-                    10,
-                    10));
+          
         }
 
         private void DeleteTaskControl_Load(object sender, EventArgs e)
@@ -43,8 +36,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             btnCancel.Region = Region.FromHrgn(
                 CreateRoundRectRgn(0, 0, btnCancel.Width, btnCancel.Height, 8, 8));
 
-            btnUpdateTask.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, btnUpdateTask.Width, btnUpdateTask.Height, 8, 8));
+            btnDeleteTask.Region = Region.FromHrgn(
+                CreateRoundRectRgn(0, 0, btnDeleteTask.Width, btnDeleteTask.Height, 8, 8));
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -60,8 +53,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnClose_MouseLeave(object sender, EventArgs e)
         {
-            btnClose.BackColor = Color.White;
-            btnClose.ForeColor = Color.Black;
+            btnClose.BackColor = Color.Transparent;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -69,11 +61,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.Close();
         }
 
-        private void btnUpdateTask_Click(object sender, EventArgs e)
+        private void btnDeleteTask_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Task Delete Successfully");
             this.Close();
         }
-
-
     }
 }

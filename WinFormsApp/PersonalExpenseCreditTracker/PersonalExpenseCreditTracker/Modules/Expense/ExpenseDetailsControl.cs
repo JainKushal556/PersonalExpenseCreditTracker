@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Expense
 {
@@ -14,44 +15,20 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         public ExpenseDetailsControl()
         {
             InitializeComponent();
-            this.Load += new System.EventHandler(this.ExpenseDetailsControl_Load);
-            pnlExpenseDetailsContent.Resize += (s, e) => CenterTableLayout();
-            this.txtAddExpenseAmount.Enter += new System.EventHandler(this.txtAmount_Enter);
-            this.txtAddExpenseAmount.Leave += new System.EventHandler(this.txtAmount_Leave);
-            this.txtAddExpenseDescription.Enter += new System.EventHandler(this.txtDescription_Enter);
-            this.txtAddExpenseDescription.Leave += new System.EventHandler(this.txtDescription_Leave);
-           
         }
 
-        private void txtCategory_TextChanged(object sender, EventArgs e)
-        {
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse);
 
-        }
-
-        private void pnlDescription_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblDescription_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtDescription_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlExpenseDetailsContent_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
 
         private void ExpenseDetailsControl_Load(object sender, EventArgs e)
         {
@@ -59,17 +36,38 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             txtAddExpenseAmount.ForeColor = Color.Gray;
             txtAddExpenseDescription.Text = "Enter Description";
             txtAddExpenseDescription.ForeColor = Color.Gray;
-            CenterTableLayout();
-            cmbAddExpenseCategory.ForeColor = Color.Gray;
             cmbAddExpenseCategory.Text = "Select Category";
+            cmbAddExpenseCategory.ForeColor = Color.Gray;
+            cmbAddExpenseSubCategory.Text = "Select Sub Category";
             cmbAddExpenseSubCategory.ForeColor = Color.Gray;
-            cmbAddExpenseSubCategory.Text = "Select SubCategory";
+            cmbAddExpensePaymentType.Text = "Select Payment Type";
             cmbAddExpensePaymentType.ForeColor = Color.Gray;
-            cmbAddExpensePaymentType.Text = "Select Category";
-
-           
-            
         }
+
+        // All Border Cornar Radius
+        private void SetRadius(Control control, int radius)
+        {
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
+        }
+
         private void txtAmount_Enter(object sender, EventArgs e)
         {
             if (txtAddExpenseAmount.Text == "Enter Amount")
@@ -106,39 +104,107 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
         }
 
-        private void cmbExpenseCategory_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
-        }
-        private void CenterTableLayout()
+        private void btnCloseEditPersonDetails_Click(object sender, EventArgs e)
         {
-            tlpAddExpense.Location = new Point(
-                (pnlExpenseDetailsContent.ClientSize.Width - tlpAddExpense.Width) / 2,
-                (pnlExpenseDetailsContent.ClientSize.Height - tlpAddExpense.Height) / 2
-            );
+            this.Close();
         }
-        
-        private void ExpenseDetailsControl_Resize(object sender, EventArgs e)
+
+        private void btnSaveExpense_Click(object sender, EventArgs e)
         {
-            CenterTableLayout();
+            if (txtAddExpenseAmount.Text == "Enter Amount" || txtAddExpenseDescription.Text == "Enter Description"
+                || cmbAddExpenseCategory.Text == "Select Category" || cmbAddExpensePaymentType.Text == "Select Payment Type"
+                || cmbAddExpenseSubCategory.Text == "Select Sub Category")
+            {
+                MessageBox.Show("Please fill all fields");
+            }
+            else
+            {
+                MessageBox.Show("Expense Details Added Successfully...");
+                this.Close();
+            }
         }
-        private void cmbAddExpenseCategory_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void btnClear_Click(object sender, EventArgs e)
         {
+            txtAddExpenseAmount.Text = "Enter Amount";
+            txtAddExpenseAmount.ForeColor = Color.Gray;
+            txtAddExpenseDescription.Text = "Enter Description";
+            txtAddExpenseDescription.ForeColor = Color.Gray;
+            cmbAddExpenseCategory.Text = "Select Category";
             cmbAddExpenseCategory.ForeColor = Color.Gray;
-        }
-        private void cmbAddExpenseSubCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            cmbAddExpenseSubCategory.Text = "Select Sub Category";
             cmbAddExpenseSubCategory.ForeColor = Color.Gray;
-        }
-
-        private void cmbAddExpensePaymentType_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            cmbAddExpensePaymentType.Text = "Select Payment Type";
             cmbAddExpensePaymentType.ForeColor = Color.Gray;
         }
 
-        private void pnlAddExpenseHeader_Paint(object sender, PaintEventArgs e)
+        private void cmbAddExpenseCategory_Enter(object sender, EventArgs e)
         {
-
+            if (cmbAddExpenseCategory.Text == "Select Category")
+            cmbAddExpenseCategory.ForeColor = Color.Black;
         }
+
+        private void cmbAddExpenseCategory_Leave(object sender, EventArgs e)
+        {
+            if (cmbAddExpenseCategory.SelectedIndex == -1 || cmbAddExpenseCategory.Text == "Select Category")
+            {
+                cmbAddExpenseCategory.Text = "Select Category";
+                cmbAddExpenseCategory.ForeColor = Color.Gray;
+            }
+        }
+
+        private void cmbAddExpenseSubCategory_Enter(object sender, EventArgs e)
+        {
+            if (cmbAddExpenseSubCategory.Text == "Select Sub Category")
+                cmbAddExpenseSubCategory.ForeColor = Color.Black;
+        }
+
+        private void cmbAddExpenseSubCategory_Leave(object sender, EventArgs e)
+        {
+            if (cmbAddExpenseSubCategory.SelectedIndex == -1 || cmbAddExpenseSubCategory.Text == "Select Sub Category")
+            {
+                cmbAddExpenseSubCategory.Text = "Select Sub Category";
+                cmbAddExpenseSubCategory.ForeColor = Color.Gray;
+            }
+        }
+
+        private void cmbAddExpensePaymentType_Enter(object sender, EventArgs e)
+        {
+            if (cmbAddExpensePaymentType.Text == "Select Payment Type")
+                cmbAddExpensePaymentType.ForeColor = Color.Black;
+        }
+
+        private void cmbAddExpensePaymentType_Leave(object sender, EventArgs e)
+        {
+            if (cmbAddExpensePaymentType.SelectedIndex == -1 || cmbAddExpensePaymentType.Text == "Select Payment Type")
+            {
+                cmbAddExpensePaymentType.Text = "Select Payment Type";
+                cmbAddExpensePaymentType.ForeColor = Color.Gray;
+            }
+        }
+
+        private void btnSaveExpense_Resize(object sender, EventArgs e)
+        {
+            SetRadius(btnSaveExpense, 5);
+        }
+
+        private void btnCancel_Resize(object sender, EventArgs e)
+        {
+            SetRadius(btnCancel, 5);
+        }
+
+        private void btnLentAddClear_Resize(object sender, EventArgs e)
+        {
+            SetRadius(btnClear, 5);
+        }
+
+        
+
+
     }
 }

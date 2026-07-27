@@ -38,6 +38,47 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             CenterPanel();
         }
+
+        private void pnlEditNoteDetails_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancelDialog_MouseEnter(object sender, EventArgs e)
+        {
+            btnCancelDialog.BackColor = Color.Red;
+        }
+
+        private void btnCancelDialog_MouseLeave(object sender, EventArgs e)
+        {
+            btnCancelDialog.BackColor = Color.Transparent;
+        }
+
+        private void btnCancelDialog_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnUpdateNote_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Note Edited Successfully");
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtNoteTitle_TextChanged(object sender, EventArgs e)
+        {
+            lblTitleCount.Text = txtNoteTitle.TextLength + "/100";
+        }
+
+        private void rtxtDescription_TextChanged(object sender, EventArgs e)
+        {
+            lblDescriptionCount.Text = rtxtDescription.TextLength + "/1000";
+        }
     }
 }
 

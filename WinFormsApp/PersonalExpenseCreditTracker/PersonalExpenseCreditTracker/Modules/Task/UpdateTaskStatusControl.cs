@@ -26,37 +26,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             InitializeComponent();
 
-            this.FormBorderStyle = FormBorderStyle.None;
-
-            this.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10));
         }
 
         private void UpdateTaskStatus_Load(object sender, EventArgs e)
         {
-            pnlTaskTitle.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                pnlTaskTitle.Width,
-                pnlTaskTitle.Height,
-                5,
-                5));
-
-            pnlCurrentStatus.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                pnlCurrentStatus.Width,
-                pnlCurrentStatus.Height,
-                5,
-                5));
-
-            pnlStatus.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                pnlStatus.Width,
-                pnlStatus.Height,
-                5,
-                5));
 
             btnCancel.Region = Region.FromHrgn(CreateRoundRectRgn(
                 0,
@@ -83,13 +56,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {
             btnClose.BackColor = Color.Red;
-            btnClose.ForeColor = Color.White;
         }
 
         private void btnClose_MouseLeave(object sender, EventArgs e)
         {
-            btnClose.BackColor = Color.White;
-            btnClose.ForeColor = Color.Black;
+            btnClose.BackColor = Color.Transparent;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -116,6 +87,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                             MessageBoxIcon.Information);
 
             this.Close();
+        }
+
+        private void pnlMain_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         
