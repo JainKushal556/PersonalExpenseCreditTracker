@@ -1691,7 +1691,7 @@ namespace PersonalExpenseCreditTracker
             flowSidebar.Top = 0;
 
             CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", ComboBoxCreditCategory);
-           
+
         }
 
         private void btnCreditClearAll_Click(object sender, EventArgs e)
@@ -1896,7 +1896,7 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-      
+
 
         private void txtCreditMaxAmount_TextChanged(object sender, EventArgs e)
         {
@@ -2268,7 +2268,7 @@ namespace PersonalExpenseCreditTracker
 
             if (lentControl != null && !lentControl.IsDisposed)
             {
-                
+
 
                 DateTime firstDayOfMonth = new DateTime(
                 DateTime.Today.Year,
@@ -2803,7 +2803,7 @@ namespace PersonalExpenseCreditTracker
                 {
                     int filterId = Convert.ToInt32(ComboBoxBorrowPerson.SelectedValue);
                     //MessageBox.Show(filterId.ToString());
-                    if(!borrowControls.LoadFilteredBorrowtData("spFilterBorrowByPerson", "@PersonID", filterId)) 
+                    if (!borrowControls.LoadFilteredBorrowtData("spFilterBorrowByPerson", "@PersonID", filterId))
                     {
                         ComboBoxBorrowPerson.SelectedIndex = 0;
                     }
@@ -2825,7 +2825,7 @@ namespace PersonalExpenseCreditTracker
                 if (ComboBoxBorrowStatus.SelectedIndex > 0)
                 {
                     int statusId = Convert.ToInt32(ComboBoxBorrowStatus.SelectedValue);
-               
+
                     if (!borrowControls.LoadFilteredBorrowtData("spFilterBorrowByStatus", "@StatusID", statusId))
                     {
                         ComboBoxBorrowStatus.SelectedIndex = 0;
@@ -2833,7 +2833,7 @@ namespace PersonalExpenseCreditTracker
                 }
                 else
                 {
-              
+
                     borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
                 }
             }
@@ -2843,13 +2843,13 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateBorrowClearAllButton();
             if (borrowControls != null && !borrowControls.IsDisposed)
-            
-                
+
+
                 if (ComboBoxBorrowPayment.SelectedIndex > 0)
                 {
                     int filterId = Convert.ToInt32(ComboBoxBorrowPayment.SelectedValue);
                     //MessageBox.Show(filterId.ToString());
-                    if(!borrowControls.LoadFilteredBorrowtData("spFilterBorrowByPaymentMethod","@PaymentID", filterId))
+                    if (!borrowControls.LoadFilteredBorrowtData("spFilterBorrowByPaymentMethod", "@PaymentID", filterId))
                     {
                         ComboBoxBorrowPayment.SelectedIndex = 0;
                     }
@@ -2858,9 +2858,9 @@ namespace PersonalExpenseCreditTracker
                 {
                     borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
                 }
-            }
+        }
 
-        
+
 
         private void pnlAllBorrow_Click(object sender, EventArgs e)
         {
@@ -3865,10 +3865,10 @@ namespace PersonalExpenseCreditTracker
                 case CommonValidator.ValidationResult.Success:
                     if (borrowControls != null && !borrowControls.IsDisposed)
                     {
-                        
-                        if(!borrowControls.LoadFilteredBorowData("spFilterBorrowByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", Convert.ToDecimal(txtBorrowMinAmount.Text), "@MaxAmount", Convert.ToDecimal(txtBorrowMaxAmount.Text)))
+
+                        if (!borrowControls.LoadFilteredBorowData("spFilterBorrowByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", Convert.ToDecimal(txtBorrowMinAmount.Text), "@MaxAmount", Convert.ToDecimal(txtBorrowMaxAmount.Text)))
                         {
-                            borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId()); 
+                            borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
                             MessageBox.Show("No Specific Record Exist!");
                         }
                         else
@@ -4023,5 +4023,6 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateCreditClearAllButton();
         }
+    }
 }
 
