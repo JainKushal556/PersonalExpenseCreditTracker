@@ -17,9 +17,9 @@
 
 | Status | Count |
 | ------ | ----: |
-| Total Allotted Procedures | 95 |
-| Total Procedures Found | 95 |
-| `✔️` (All Okay) | 95 |
+| Total Allotted Procedures | 99 |
+| Total Procedures Found | 99 |
+| `✔️` (All Okay) | 99 |
 | `✅` (Pending Review) | 0 |
 | `❌` (Fix Needed) | 0 |
 
@@ -27,9 +27,9 @@
 
 ## 🟣 Team A — User, Task, Note
 **Assigned Area:** Authentication, User Management, Task, Note, Task Reminder
-**Total Allotted Procedures:** 30
+**Total Allotted Procedures:** 31
 
-### `✔️` ALL OKAY (30)
+### `✔️` ALL OKAY (31)
 - `spChangePassword`
 - `spDeleteNote`
 - `spDeleteTask`
@@ -39,6 +39,7 @@
 - `spForgetPassword`
 - `spGetActiveUserDetails`
 - `spGetAllNotes`
+- `spGetAllTaskPriorities`
 - `spGetAllTasks`
 - `spGetCompletedTasks`
 - `spGetNotesBetweenDates`

@@ -340,6 +340,35 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             lblBorrowStartingPageNumber.Text = total == 0 ? "0" : start.ToString();
             lblBorrowEndingPageNumber.Text = end.ToString();
             lblBorrowTotalPageNumber.Text = total.ToString();
+
+            if (AllBorrowData != null && AllBorrowData.Rows.Count > 0)
+            {
+                // Total Lent Amount
+                decimal totalBorrow = AllBorrowData.AsEnumerable().Sum(row => row.Field<decimal>("Amount"));
+
+                // Total Repaid Amount
+                decimal totalPaid = AllBorrowData.AsEnumerable().Sum(row => row.Field<decimal>("PaidAmount"));
+
+                // Total Due Amount
+                decimal totalDue = AllBorrowData.AsEnumerable().Sum(row => row.Field<decimal>("RemainingAmount"));
+
+                // Total Transactions
+                int totalTransaction = AllBorrowData.Rows.Count;
+                
+                // Display
+                 this.lblBorrowTotalBorrowedAmount.Text = "₹ " + totalBorrow.ToString("#,##0.##");
+                 this.lblBorrowPaidAmount.Text = "₹ " + totalPaid.ToString("#,##0.##");
+                 this.lblBorrowActiveBorrowingsAmount.Text = "₹ " + totalDue.ToString("#,##0.##");
+                 this.labelTotalTransactionNumber.Text = totalTransaction.ToString();
+                 
+            }
+            else
+            {
+                lblBorrowTotalBorrowedAmount.Text = "₹ 0";
+                this.lblBorrowPaidAmount.Text = "₹ 0";
+                this.lblBorrowActiveBorrowingsAmount.Text = "₹ 0";
+                this.labelTotalTransactionNumber.Text = "0";
+            }
         }
 
         private int GetRowsPerPage()

@@ -1731,7 +1731,29 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Task`
 - `Task_Status`
 
-## ðŸ“ NOTE MODULE
+### 51A. spGetAllTaskPriorities
+
+**Purpose:**
+
+- Retrieve all task priorities.
+
+**Parameters:**
+
+- None
+
+**Expected Output:**
+
+- List of all task priorities (PriorityID, PriorityName) sorted by PriorityName.
+
+**When Used:**
+
+- Populating task priority dropdown in the task management module.
+
+**Tables Used:**
+
+- `tblTaskPriorities`
+
+## 📝 NOTE MODULE
 
 ### 52. spInsertNote
 

@@ -864,3 +864,12 @@ EXEC spUpdatePerson
     @Address = ''
 
 GO
+
+-- ==========================================================
+-- SP: spGetAllTaskPriorities
+-- From File: ✔️spGetAllTaskPriorities.sql
+-- ==========================================================
+EXEC spGetAllTaskPriorities
+
+GO
+

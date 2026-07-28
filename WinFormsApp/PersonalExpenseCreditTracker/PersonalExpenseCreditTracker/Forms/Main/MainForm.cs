@@ -2548,14 +2548,16 @@ namespace PersonalExpenseCreditTracker
             txtBorrowMinAmount.Clear();
             txtBorrowMaxAmount.Clear();
 
-            ComboBoxBorrowPerson.SelectedIndex = 0;
-            ComboBoxBorrowStatus.SelectedIndex = 0;
-            ComboBoxBorrowPayment.SelectedIndex = 0;
+            //ComboBoxBorrowPerson.SelectedIndex = 0;
+            //ComboBoxBorrowStatus.SelectedIndex = 0;
+            //ComboBoxBorrowPayment.SelectedIndex = 0;
 
             dtpBorrowFromDate.Value = DateTime.Today;
             dtpBorrowToDate.Value = DateTime.Today;
 
             btnBorrowClearAll.Visible = false;
+
+            this.borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
         }
 
         private void UpdateBorrowClearAllButton()
@@ -3700,8 +3702,8 @@ namespace PersonalExpenseCreditTracker
             errorProvider1.Clear();
 
             MainUI mainUi = new MainUI();
-            mainUi.fromDate = dtpBorrowFromDate.Value;
-            mainUi.toDate = dtpBorrowToDate.Value;
+            mainUi.fromDate = dtpBorrowFromDate.Value.Date;
+            mainUi.toDate = dtpBorrowToDate.Value.Date;
 
             CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
 
@@ -3735,6 +3737,59 @@ namespace PersonalExpenseCreditTracker
 
             }
 
+        }
+
+        private void btnBorrowApplyAmountFilter_Click(object sender, EventArgs e)
+        {
+            //Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            MainUI mainUi = new MainUI();
+            // Assign values from the form controls to the object
+
+            mainUi.minAmount = txtBorrowMinAmount.Text;
+            mainUi.maxAmount = txtBorrowMaxAmount.Text;
+
+            CommonValidator.ValidationResult result = mainUi.InsertAmountDataIntoMainUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (borrowControls != null && !borrowControls.IsDisposed)
+                    {
+                        
+                        if(!borrowControls.LoadFilteredBorowData("spFilterBorrowByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", Convert.ToDecimal(txtBorrowMinAmount.Text), "@MaxAmount", Convert.ToDecimal(txtBorrowMaxAmount.Text)))
+                        {
+                            borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId()); 
+                            MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                    }
+
+                    //this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.MinimumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMinAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.MaximumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMaxAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMinAmount, txtLentMaxAmount);
+                    break;
+            }
         }
 
 

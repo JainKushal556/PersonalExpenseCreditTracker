@@ -61,8 +61,8 @@
             this.btnBorrowExport = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlRepaidAmount = new System.Windows.Forms.Panel();
-            this.lblBorrowRepaidAmount = new System.Windows.Forms.Label();
-            this.lblBorrowRepaidAmountText = new System.Windows.Forms.Label();
+            this.labelTotalTransactionNumber = new System.Windows.Forms.Label();
+            this.lblTotalTransaction = new System.Windows.Forms.Label();
             this.picBorrowRepaidAmount = new System.Windows.Forms.PictureBox();
             this.pnlActiveBorrowings = new System.Windows.Forms.Panel();
             this.lblBorrowActiveBorrowingsAmount = new System.Windows.Forms.Label();
@@ -109,9 +109,10 @@
             // 
             this.lblBorrowTotalPageNumber.AutoSize = true;
             this.lblBorrowTotalPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowTotalPageNumber.Location = new System.Drawing.Point(185, 12);
+            this.lblBorrowTotalPageNumber.Location = new System.Drawing.Point(139, 10);
+            this.lblBorrowTotalPageNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBorrowTotalPageNumber.Name = "lblBorrowTotalPageNumber";
-            this.lblBorrowTotalPageNumber.Size = new System.Drawing.Size(28, 23);
+            this.lblBorrowTotalPageNumber.Size = new System.Drawing.Size(25, 19);
             this.lblBorrowTotalPageNumber.TabIndex = 5;
             this.lblBorrowTotalPageNumber.Text = "10";
             // 
@@ -125,10 +126,10 @@
             this.panel2.Controls.Add(this.btnNextPage);
             this.panel2.Controls.Add(this.btnLastPage);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(8, 516);
+            this.panel2.Location = new System.Drawing.Point(6, 420);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1137, 51);
+            this.panel2.Size = new System.Drawing.Size(853, 41);
             this.panel2.TabIndex = 2;
             // 
             // panel5
@@ -142,17 +143,19 @@
             this.panel5.Controls.Add(this.lblBorrowShowing);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(348, 51);
+            this.panel5.Size = new System.Drawing.Size(261, 41);
             this.panel5.TabIndex = 1;
             // 
             // lblBorrowEntries
             // 
             this.lblBorrowEntries.AutoSize = true;
             this.lblBorrowEntries.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowEntries.Location = new System.Drawing.Point(215, 12);
+            this.lblBorrowEntries.Location = new System.Drawing.Point(161, 10);
+            this.lblBorrowEntries.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBorrowEntries.Name = "lblBorrowEntries";
-            this.lblBorrowEntries.Size = new System.Drawing.Size(61, 23);
+            this.lblBorrowEntries.Size = new System.Drawing.Size(50, 19);
             this.lblBorrowEntries.TabIndex = 0;
             this.lblBorrowEntries.Text = "entries";
             // 
@@ -160,9 +163,10 @@
             // 
             this.lblof.AutoSize = true;
             this.lblof.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblof.Location = new System.Drawing.Point(159, 12);
+            this.lblof.Location = new System.Drawing.Point(119, 10);
+            this.lblof.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblof.Name = "lblof";
-            this.lblof.Size = new System.Drawing.Size(25, 23);
+            this.lblof.Size = new System.Drawing.Size(21, 19);
             this.lblof.TabIndex = 4;
             this.lblof.Text = "of";
             // 
@@ -170,9 +174,10 @@
             // 
             this.lblBorrowEndingPageNumber.AutoSize = true;
             this.lblBorrowEndingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowEndingPageNumber.Location = new System.Drawing.Point(128, 12);
+            this.lblBorrowEndingPageNumber.Location = new System.Drawing.Point(96, 10);
+            this.lblBorrowEndingPageNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBorrowEndingPageNumber.Name = "lblBorrowEndingPageNumber";
-            this.lblBorrowEndingPageNumber.Size = new System.Drawing.Size(28, 23);
+            this.lblBorrowEndingPageNumber.Size = new System.Drawing.Size(25, 19);
             this.lblBorrowEndingPageNumber.TabIndex = 3;
             this.lblBorrowEndingPageNumber.Text = "10";
             // 
@@ -180,9 +185,10 @@
             // 
             this.lblTo.AutoSize = true;
             this.lblTo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTo.Location = new System.Drawing.Point(103, 12);
+            this.lblTo.Location = new System.Drawing.Point(77, 10);
+            this.lblTo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(26, 23);
+            this.lblTo.Size = new System.Drawing.Size(22, 19);
             this.lblTo.TabIndex = 2;
             this.lblTo.Text = "to";
             // 
@@ -190,9 +196,10 @@
             // 
             this.lblBorrowStartingPageNumber.AutoSize = true;
             this.lblBorrowStartingPageNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowStartingPageNumber.Location = new System.Drawing.Point(77, 12);
+            this.lblBorrowStartingPageNumber.Location = new System.Drawing.Point(58, 10);
+            this.lblBorrowStartingPageNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBorrowStartingPageNumber.Name = "lblBorrowStartingPageNumber";
-            this.lblBorrowStartingPageNumber.Size = new System.Drawing.Size(19, 23);
+            this.lblBorrowStartingPageNumber.Size = new System.Drawing.Size(17, 19);
             this.lblBorrowStartingPageNumber.TabIndex = 1;
             this.lblBorrowStartingPageNumber.Text = "1";
             // 
@@ -200,9 +207,10 @@
             // 
             this.lblBorrowShowing.AutoSize = true;
             this.lblBorrowShowing.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowShowing.Location = new System.Drawing.Point(3, 12);
+            this.lblBorrowShowing.Location = new System.Drawing.Point(2, 10);
+            this.lblBorrowShowing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBorrowShowing.Name = "lblBorrowShowing";
-            this.lblBorrowShowing.Size = new System.Drawing.Size(75, 23);
+            this.lblBorrowShowing.Size = new System.Drawing.Size(61, 19);
             this.lblBorrowShowing.TabIndex = 0;
             this.lblBorrowShowing.Text = "Showing";
             // 
@@ -210,10 +218,10 @@
             // 
             this.btnCurrentPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCurrentPage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCurrentPage.Location = new System.Drawing.Point(993, 6);
+            this.btnCurrentPage.Location = new System.Drawing.Point(745, 5);
             this.btnCurrentPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnCurrentPage.Name = "btnCurrentPage";
-            this.btnCurrentPage.Size = new System.Drawing.Size(40, 40);
+            this.btnCurrentPage.Size = new System.Drawing.Size(30, 32);
             this.btnCurrentPage.TabIndex = 11;
             this.btnCurrentPage.Text = "1";
             this.btnCurrentPage.UseVisualStyleBackColor = true;
@@ -222,10 +230,10 @@
             // 
             this.btnFirstpage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFirstpage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.left;
-            this.btnFirstpage.Location = new System.Drawing.Point(895, 6);
+            this.btnFirstpage.Location = new System.Drawing.Point(671, 5);
             this.btnFirstpage.Margin = new System.Windows.Forms.Padding(0);
             this.btnFirstpage.Name = "btnFirstpage";
-            this.btnFirstpage.Size = new System.Drawing.Size(40, 40);
+            this.btnFirstpage.Size = new System.Drawing.Size(30, 32);
             this.btnFirstpage.TabIndex = 10;
             this.btnFirstpage.UseVisualStyleBackColor = true;
             this.btnFirstpage.Click += new System.EventHandler(this.btnFirstpage_Click);
@@ -234,10 +242,10 @@
             // 
             this.btnPreviousPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPreviousPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.preview;
-            this.btnPreviousPage.Location = new System.Drawing.Point(945, 6);
+            this.btnPreviousPage.Location = new System.Drawing.Point(709, 5);
             this.btnPreviousPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnPreviousPage.Name = "btnPreviousPage";
-            this.btnPreviousPage.Size = new System.Drawing.Size(40, 40);
+            this.btnPreviousPage.Size = new System.Drawing.Size(30, 32);
             this.btnPreviousPage.TabIndex = 9;
             this.btnPreviousPage.UseVisualStyleBackColor = true;
             this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
@@ -246,10 +254,10 @@
             // 
             this.btnNextPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNextPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next__1_;
-            this.btnNextPage.Location = new System.Drawing.Point(1042, 6);
+            this.btnNextPage.Location = new System.Drawing.Point(782, 5);
             this.btnNextPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnNextPage.Name = "btnNextPage";
-            this.btnNextPage.Size = new System.Drawing.Size(40, 40);
+            this.btnNextPage.Size = new System.Drawing.Size(30, 32);
             this.btnNextPage.TabIndex = 8;
             this.btnNextPage.UseVisualStyleBackColor = true;
             this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
@@ -258,10 +266,10 @@
             // 
             this.btnLastPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLastPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next_page;
-            this.btnLastPage.Location = new System.Drawing.Point(1090, 6);
+            this.btnLastPage.Location = new System.Drawing.Point(818, 5);
             this.btnLastPage.Margin = new System.Windows.Forms.Padding(0);
             this.btnLastPage.Name = "btnLastPage";
-            this.btnLastPage.Size = new System.Drawing.Size(40, 40);
+            this.btnLastPage.Size = new System.Drawing.Size(30, 32);
             this.btnLastPage.TabIndex = 7;
             this.btnLastPage.UseVisualStyleBackColor = true;
             this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
@@ -271,11 +279,11 @@
             this.pnlBorrowExportReport.BackColor = System.Drawing.Color.Transparent;
             this.pnlBorrowExportReport.Controls.Add(this.panel1);
             this.pnlBorrowExportReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBorrowExportReport.Location = new System.Drawing.Point(8, 5);
+            this.pnlBorrowExportReport.Location = new System.Drawing.Point(6, 4);
             this.pnlBorrowExportReport.Margin = new System.Windows.Forms.Padding(0);
             this.pnlBorrowExportReport.Name = "pnlBorrowExportReport";
-            this.pnlBorrowExportReport.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
-            this.pnlBorrowExportReport.Size = new System.Drawing.Size(1137, 50);
+            this.pnlBorrowExportReport.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.pnlBorrowExportReport.Size = new System.Drawing.Size(853, 41);
             this.pnlBorrowExportReport.TabIndex = 0;
             // 
             // panel1
@@ -283,9 +291,10 @@
             this.panel1.Controls.Add(this.btnPrint);
             this.panel1.Controls.Add(this.btnBorrowExport);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(905, 5);
+            this.panel1.Location = new System.Drawing.Point(679, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(224, 40);
+            this.panel1.Size = new System.Drawing.Size(168, 33);
             this.panel1.TabIndex = 0;
             // 
             // btnPrint
@@ -301,8 +310,9 @@
             this.btnPrint.ForeColor = System.Drawing.Color.White;
             this.btnPrint.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
             this.btnPrint.Location = new System.Drawing.Point(0, 0);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(99, 40);
+            this.btnPrint.Size = new System.Drawing.Size(74, 33);
             this.btnPrint.TabIndex = 1;
             this.btnPrint.Text = "Print";
             this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -321,9 +331,10 @@
             this.btnBorrowExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBorrowExport.ForeColor = System.Drawing.Color.White;
             this.btnBorrowExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
-            this.btnBorrowExport.Location = new System.Drawing.Point(115, 0);
+            this.btnBorrowExport.Location = new System.Drawing.Point(86, 0);
+            this.btnBorrowExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBorrowExport.Name = "btnBorrowExport";
-            this.btnBorrowExport.Size = new System.Drawing.Size(109, 40);
+            this.btnBorrowExport.Size = new System.Drawing.Size(82, 33);
             this.btnBorrowExport.TabIndex = 0;
             this.btnBorrowExport.Text = "Export ";
             this.btnBorrowExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -344,12 +355,12 @@
             this.tableLayoutPanel1.Controls.Add(this.pnlBorrowTotalBorrowed, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1153, 120);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(865, 98);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // pnlRepaidAmount
@@ -358,53 +369,55 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlRepaidAmount.BackColor = System.Drawing.Color.White;
-            this.pnlRepaidAmount.Controls.Add(this.lblBorrowRepaidAmount);
-            this.pnlRepaidAmount.Controls.Add(this.lblBorrowRepaidAmountText);
+            this.pnlRepaidAmount.Controls.Add(this.labelTotalTransactionNumber);
+            this.pnlRepaidAmount.Controls.Add(this.lblTotalTransaction);
             this.pnlRepaidAmount.Controls.Add(this.picBorrowRepaidAmount);
-            this.pnlRepaidAmount.Location = new System.Drawing.Point(872, 13);
-            this.pnlRepaidAmount.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
+            this.pnlRepaidAmount.Location = new System.Drawing.Point(655, 10);
+            this.pnlRepaidAmount.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.pnlRepaidAmount.Name = "pnlRepaidAmount";
-            this.pnlRepaidAmount.Size = new System.Drawing.Size(267, 94);
+            this.pnlRepaidAmount.Size = new System.Drawing.Size(200, 78);
             this.pnlRepaidAmount.TabIndex = 3;
             this.pnlRepaidAmount.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlRepaidAmount_Paint);
             // 
-            // lblBorrowRepaidAmount
+            // labelTotalTransactionNumber
             // 
-            this.lblBorrowRepaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblBorrowRepaidAmount.AutoSize = true;
-            this.lblBorrowRepaidAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowRepaidAmount.ForeColor = System.Drawing.Color.Black;
-            this.lblBorrowRepaidAmount.Location = new System.Drawing.Point(93, 44);
-            this.lblBorrowRepaidAmount.Margin = new System.Windows.Forms.Padding(0);
-            this.lblBorrowRepaidAmount.Name = "lblBorrowRepaidAmount";
-            this.lblBorrowRepaidAmount.Size = new System.Drawing.Size(92, 32);
-            this.lblBorrowRepaidAmount.TabIndex = 3;
-            this.lblBorrowRepaidAmount.Text = "₹5,300";
-            this.lblBorrowRepaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblBorrowRepaidAmount.Click += new System.EventHandler(this.lblBorrowRepaidAmount_Click);
+            this.labelTotalTransactionNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelTotalTransactionNumber.AutoSize = true;
+            this.labelTotalTransactionNumber.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalTransactionNumber.ForeColor = System.Drawing.Color.Black;
+            this.labelTotalTransactionNumber.Location = new System.Drawing.Point(70, 38);
+            this.labelTotalTransactionNumber.Margin = new System.Windows.Forms.Padding(0);
+            this.labelTotalTransactionNumber.Name = "labelTotalTransactionNumber";
+            this.labelTotalTransactionNumber.Size = new System.Drawing.Size(72, 25);
+            this.labelTotalTransactionNumber.TabIndex = 3;
+            this.labelTotalTransactionNumber.Text = "₹5,300";
+            this.labelTotalTransactionNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTotalTransactionNumber.Click += new System.EventHandler(this.lblBorrowRepaidAmount_Click);
             // 
-            // lblBorrowRepaidAmountText
+            // lblTotalTransaction
             // 
-            this.lblBorrowRepaidAmountText.AutoSize = true;
-            this.lblBorrowRepaidAmountText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowRepaidAmountText.ForeColor = System.Drawing.Color.Black;
-            this.lblBorrowRepaidAmountText.Location = new System.Drawing.Point(93, 12);
-            this.lblBorrowRepaidAmountText.Name = "lblBorrowRepaidAmountText";
-            this.lblBorrowRepaidAmountText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblBorrowRepaidAmountText.Size = new System.Drawing.Size(136, 23);
-            this.lblBorrowRepaidAmountText.TabIndex = 1;
-            this.lblBorrowRepaidAmountText.Text = "Repaid Amount";
-            this.lblBorrowRepaidAmountText.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lblTotalTransaction.AutoSize = true;
+            this.lblTotalTransaction.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTransaction.ForeColor = System.Drawing.Color.Black;
+            this.lblTotalTransaction.Location = new System.Drawing.Point(70, 10);
+            this.lblTotalTransaction.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalTransaction.Name = "lblTotalTransaction";
+            this.lblTotalTransaction.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblTotalTransaction.Size = new System.Drawing.Size(122, 19);
+            this.lblTotalTransaction.TabIndex = 1;
+            this.lblTotalTransaction.Text = "Total Transaction";
+            this.lblTotalTransaction.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // picBorrowRepaidAmount
             // 
             this.picBorrowRepaidAmount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.picBorrowRepaidAmount.Image = global::PersonalExpenseCreditTracker.Properties.Resources.repaid;
-            this.picBorrowRepaidAmount.Location = new System.Drawing.Point(7, 11);
-            this.picBorrowRepaidAmount.MaximumSize = new System.Drawing.Size(93, 80);
-            this.picBorrowRepaidAmount.MinimumSize = new System.Drawing.Size(80, 70);
+            this.picBorrowRepaidAmount.Location = new System.Drawing.Point(5, 10);
+            this.picBorrowRepaidAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowRepaidAmount.MaximumSize = new System.Drawing.Size(70, 65);
+            this.picBorrowRepaidAmount.MinimumSize = new System.Drawing.Size(60, 57);
             this.picBorrowRepaidAmount.Name = "picBorrowRepaidAmount";
-            this.picBorrowRepaidAmount.Size = new System.Drawing.Size(80, 70);
+            this.picBorrowRepaidAmount.Size = new System.Drawing.Size(60, 57);
             this.picBorrowRepaidAmount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBorrowRepaidAmount.TabIndex = 0;
             this.picBorrowRepaidAmount.TabStop = false;
@@ -418,10 +431,10 @@
             this.pnlActiveBorrowings.Controls.Add(this.lblBorrowActiveBorrowingsAmount);
             this.pnlActiveBorrowings.Controls.Add(this.lblBorrowActiveBorrowingsText);
             this.pnlActiveBorrowings.Controls.Add(this.piclblBorrowActiveBorrowings);
-            this.pnlActiveBorrowings.Location = new System.Drawing.Point(586, 13);
-            this.pnlActiveBorrowings.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
+            this.pnlActiveBorrowings.Location = new System.Drawing.Point(440, 10);
+            this.pnlActiveBorrowings.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.pnlActiveBorrowings.Name = "pnlActiveBorrowings";
-            this.pnlActiveBorrowings.Size = new System.Drawing.Size(264, 94);
+            this.pnlActiveBorrowings.Size = new System.Drawing.Size(199, 78);
             this.pnlActiveBorrowings.TabIndex = 2;
             this.pnlActiveBorrowings.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlActiveBorrowings_Paint);
             // 
@@ -431,10 +444,10 @@
             this.lblBorrowActiveBorrowingsAmount.AutoSize = true;
             this.lblBorrowActiveBorrowingsAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowActiveBorrowingsAmount.ForeColor = System.Drawing.Color.Black;
-            this.lblBorrowActiveBorrowingsAmount.Location = new System.Drawing.Point(93, 44);
+            this.lblBorrowActiveBorrowingsAmount.Location = new System.Drawing.Point(70, 38);
             this.lblBorrowActiveBorrowingsAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowActiveBorrowingsAmount.Name = "lblBorrowActiveBorrowingsAmount";
-            this.lblBorrowActiveBorrowingsAmount.Size = new System.Drawing.Size(92, 32);
+            this.lblBorrowActiveBorrowingsAmount.Size = new System.Drawing.Size(72, 25);
             this.lblBorrowActiveBorrowingsAmount.TabIndex = 3;
             this.lblBorrowActiveBorrowingsAmount.Text = "₹5,300";
             this.lblBorrowActiveBorrowingsAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -445,10 +458,11 @@
             this.lblBorrowActiveBorrowingsText.AutoSize = true;
             this.lblBorrowActiveBorrowingsText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowActiveBorrowingsText.ForeColor = System.Drawing.Color.Black;
-            this.lblBorrowActiveBorrowingsText.Location = new System.Drawing.Point(93, 12);
+            this.lblBorrowActiveBorrowingsText.Location = new System.Drawing.Point(70, 10);
+            this.lblBorrowActiveBorrowingsText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBorrowActiveBorrowingsText.Name = "lblBorrowActiveBorrowingsText";
             this.lblBorrowActiveBorrowingsText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblBorrowActiveBorrowingsText.Size = new System.Drawing.Size(157, 23);
+            this.lblBorrowActiveBorrowingsText.Size = new System.Drawing.Size(132, 19);
             this.lblBorrowActiveBorrowingsText.TabIndex = 1;
             this.lblBorrowActiveBorrowingsText.Text = "Active Borrowings";
             this.lblBorrowActiveBorrowingsText.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -457,11 +471,12 @@
             // 
             this.piclblBorrowActiveBorrowings.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.piclblBorrowActiveBorrowings.Image = global::PersonalExpenseCreditTracker.Properties.Resources.ChatGPT_Image_Jul_12__2026__01_07_09_AM;
-            this.piclblBorrowActiveBorrowings.Location = new System.Drawing.Point(7, 11);
-            this.piclblBorrowActiveBorrowings.MaximumSize = new System.Drawing.Size(93, 80);
-            this.piclblBorrowActiveBorrowings.MinimumSize = new System.Drawing.Size(80, 70);
+            this.piclblBorrowActiveBorrowings.Location = new System.Drawing.Point(5, 10);
+            this.piclblBorrowActiveBorrowings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.piclblBorrowActiveBorrowings.MaximumSize = new System.Drawing.Size(70, 65);
+            this.piclblBorrowActiveBorrowings.MinimumSize = new System.Drawing.Size(60, 57);
             this.piclblBorrowActiveBorrowings.Name = "piclblBorrowActiveBorrowings";
-            this.piclblBorrowActiveBorrowings.Size = new System.Drawing.Size(80, 70);
+            this.piclblBorrowActiveBorrowings.Size = new System.Drawing.Size(60, 57);
             this.piclblBorrowActiveBorrowings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.piclblBorrowActiveBorrowings.TabIndex = 0;
             this.piclblBorrowActiveBorrowings.TabStop = false;
@@ -475,11 +490,11 @@
             this.pnlPaidAmount.Controls.Add(this.lblBorrowPaidAmount);
             this.pnlPaidAmount.Controls.Add(this.lblBorrowPaidAmountText);
             this.pnlPaidAmount.Controls.Add(this.picBorrowPaidAmount);
-            this.pnlPaidAmount.Location = new System.Drawing.Point(300, 13);
-            this.pnlPaidAmount.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
+            this.pnlPaidAmount.Location = new System.Drawing.Point(225, 10);
+            this.pnlPaidAmount.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.pnlPaidAmount.Name = "pnlPaidAmount";
-            this.pnlPaidAmount.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.pnlPaidAmount.Size = new System.Drawing.Size(264, 94);
+            this.pnlPaidAmount.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.pnlPaidAmount.Size = new System.Drawing.Size(199, 78);
             this.pnlPaidAmount.TabIndex = 1;
             this.pnlPaidAmount.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPaidAmount_Paint);
             // 
@@ -489,10 +504,10 @@
             this.lblBorrowPaidAmount.AutoSize = true;
             this.lblBorrowPaidAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowPaidAmount.ForeColor = System.Drawing.Color.Black;
-            this.lblBorrowPaidAmount.Location = new System.Drawing.Point(93, 44);
+            this.lblBorrowPaidAmount.Location = new System.Drawing.Point(70, 38);
             this.lblBorrowPaidAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowPaidAmount.Name = "lblBorrowPaidAmount";
-            this.lblBorrowPaidAmount.Size = new System.Drawing.Size(92, 32);
+            this.lblBorrowPaidAmount.Size = new System.Drawing.Size(72, 25);
             this.lblBorrowPaidAmount.TabIndex = 3;
             this.lblBorrowPaidAmount.Text = "₹7,450";
             this.lblBorrowPaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -502,11 +517,11 @@
             this.lblBorrowPaidAmountText.AutoSize = true;
             this.lblBorrowPaidAmountText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowPaidAmountText.ForeColor = System.Drawing.Color.Black;
-            this.lblBorrowPaidAmountText.Location = new System.Drawing.Point(93, 12);
-            this.lblBorrowPaidAmountText.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
+            this.lblBorrowPaidAmountText.Location = new System.Drawing.Point(70, 10);
+            this.lblBorrowPaidAmountText.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.lblBorrowPaidAmountText.Name = "lblBorrowPaidAmountText";
             this.lblBorrowPaidAmountText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblBorrowPaidAmountText.Size = new System.Drawing.Size(115, 23);
+            this.lblBorrowPaidAmountText.Size = new System.Drawing.Size(96, 19);
             this.lblBorrowPaidAmountText.TabIndex = 1;
             this.lblBorrowPaidAmountText.Text = "Paid Amount";
             this.lblBorrowPaidAmountText.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -515,11 +530,12 @@
             // 
             this.picBorrowPaidAmount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.picBorrowPaidAmount.Image = global::PersonalExpenseCreditTracker.Properties.Resources.ChatGPT_Image_Jul_12__2026__01_40_51_AM;
-            this.picBorrowPaidAmount.Location = new System.Drawing.Point(7, 11);
-            this.picBorrowPaidAmount.MaximumSize = new System.Drawing.Size(93, 80);
-            this.picBorrowPaidAmount.MinimumSize = new System.Drawing.Size(80, 70);
+            this.picBorrowPaidAmount.Location = new System.Drawing.Point(5, 10);
+            this.picBorrowPaidAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowPaidAmount.MaximumSize = new System.Drawing.Size(70, 65);
+            this.picBorrowPaidAmount.MinimumSize = new System.Drawing.Size(60, 57);
             this.picBorrowPaidAmount.Name = "picBorrowPaidAmount";
-            this.picBorrowPaidAmount.Size = new System.Drawing.Size(80, 70);
+            this.picBorrowPaidAmount.Size = new System.Drawing.Size(60, 57);
             this.picBorrowPaidAmount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBorrowPaidAmount.TabIndex = 0;
             this.picBorrowPaidAmount.TabStop = false;
@@ -533,10 +549,10 @@
             this.pnlBorrowTotalBorrowed.Controls.Add(this.lblBorrowTotalBorrowedAmount);
             this.pnlBorrowTotalBorrowed.Controls.Add(this.lblBorrowTotalBorrowedText);
             this.pnlBorrowTotalBorrowed.Controls.Add(this.picBorrowTotalBorrowed);
-            this.pnlBorrowTotalBorrowed.Location = new System.Drawing.Point(14, 13);
-            this.pnlBorrowTotalBorrowed.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
+            this.pnlBorrowTotalBorrowed.Location = new System.Drawing.Point(10, 10);
+            this.pnlBorrowTotalBorrowed.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.pnlBorrowTotalBorrowed.Name = "pnlBorrowTotalBorrowed";
-            this.pnlBorrowTotalBorrowed.Size = new System.Drawing.Size(264, 94);
+            this.pnlBorrowTotalBorrowed.Size = new System.Drawing.Size(199, 78);
             this.pnlBorrowTotalBorrowed.TabIndex = 0;
             this.pnlBorrowTotalBorrowed.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBorrowTotalBorrowed_Paint);
             // 
@@ -546,10 +562,10 @@
             this.lblBorrowTotalBorrowedAmount.AutoSize = true;
             this.lblBorrowTotalBorrowedAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowTotalBorrowedAmount.ForeColor = System.Drawing.Color.Black;
-            this.lblBorrowTotalBorrowedAmount.Location = new System.Drawing.Point(93, 44);
+            this.lblBorrowTotalBorrowedAmount.Location = new System.Drawing.Point(70, 38);
             this.lblBorrowTotalBorrowedAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowTotalBorrowedAmount.Name = "lblBorrowTotalBorrowedAmount";
-            this.lblBorrowTotalBorrowedAmount.Size = new System.Drawing.Size(106, 32);
+            this.lblBorrowTotalBorrowedAmount.Size = new System.Drawing.Size(83, 25);
             this.lblBorrowTotalBorrowedAmount.TabIndex = 3;
             this.lblBorrowTotalBorrowedAmount.Text = "₹12,750";
             this.lblBorrowTotalBorrowedAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -559,10 +575,11 @@
             this.lblBorrowTotalBorrowedText.AutoSize = true;
             this.lblBorrowTotalBorrowedText.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowTotalBorrowedText.ForeColor = System.Drawing.Color.Black;
-            this.lblBorrowTotalBorrowedText.Location = new System.Drawing.Point(93, 12);
+            this.lblBorrowTotalBorrowedText.Location = new System.Drawing.Point(70, 10);
+            this.lblBorrowTotalBorrowedText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBorrowTotalBorrowedText.Name = "lblBorrowTotalBorrowedText";
             this.lblBorrowTotalBorrowedText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblBorrowTotalBorrowedText.Size = new System.Drawing.Size(133, 23);
+            this.lblBorrowTotalBorrowedText.Size = new System.Drawing.Size(113, 19);
             this.lblBorrowTotalBorrowedText.TabIndex = 1;
             this.lblBorrowTotalBorrowedText.Text = "Total Borrowed";
             this.lblBorrowTotalBorrowedText.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -571,11 +588,12 @@
             // 
             this.picBorrowTotalBorrowed.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.picBorrowTotalBorrowed.Image = global::PersonalExpenseCreditTracker.Properties.Resources._49001bca_2af4_4908_b1f5_551d2534db661;
-            this.picBorrowTotalBorrowed.Location = new System.Drawing.Point(7, 11);
-            this.picBorrowTotalBorrowed.MaximumSize = new System.Drawing.Size(93, 80);
-            this.picBorrowTotalBorrowed.MinimumSize = new System.Drawing.Size(80, 70);
+            this.picBorrowTotalBorrowed.Location = new System.Drawing.Point(5, 10);
+            this.picBorrowTotalBorrowed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBorrowTotalBorrowed.MaximumSize = new System.Drawing.Size(70, 65);
+            this.picBorrowTotalBorrowed.MinimumSize = new System.Drawing.Size(60, 57);
             this.picBorrowTotalBorrowed.Name = "picBorrowTotalBorrowed";
-            this.picBorrowTotalBorrowed.Size = new System.Drawing.Size(80, 70);
+            this.picBorrowTotalBorrowed.Size = new System.Drawing.Size(60, 57);
             this.picBorrowTotalBorrowed.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBorrowTotalBorrowed.TabIndex = 0;
             this.picBorrowTotalBorrowed.TabStop = false;
@@ -619,7 +637,8 @@
             this.dgvBorrowDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBorrowDataTable.EnableHeadersVisualStyles = false;
             this.dgvBorrowDataTable.GridColor = System.Drawing.Color.White;
-            this.dgvBorrowDataTable.Location = new System.Drawing.Point(11, 58);
+            this.dgvBorrowDataTable.Location = new System.Drawing.Point(8, 47);
+            this.dgvBorrowDataTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvBorrowDataTable.Name = "dgvBorrowDataTable";
             this.dgvBorrowDataTable.ReadOnly = true;
             this.dgvBorrowDataTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -637,7 +656,7 @@
             this.dgvBorrowDataTable.RowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBorrowDataTable.RowTemplate.Height = 30;
             this.dgvBorrowDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBorrowDataTable.Size = new System.Drawing.Size(1131, 455);
+            this.dgvBorrowDataTable.Size = new System.Drawing.Size(849, 371);
             this.dgvBorrowDataTable.TabIndex = 3;
             this.dgvBorrowDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBorrowDataTable_CellContentClick);
             // 
@@ -751,14 +770,15 @@
             this.tableLayoutPanelMainData.Controls.Add(this.panel2, 0, 2);
             this.tableLayoutPanelMainData.Controls.Add(this.pnlBorrowExportReport, 0, 0);
             this.tableLayoutPanelMainData.Controls.Add(this.dgvBorrowDataTable, 0, 1);
-            this.tableLayoutPanelMainData.Location = new System.Drawing.Point(0, 135);
+            this.tableLayoutPanelMainData.Location = new System.Drawing.Point(0, 110);
+            this.tableLayoutPanelMainData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanelMainData.Name = "tableLayoutPanelMainData";
-            this.tableLayoutPanelMainData.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.tableLayoutPanelMainData.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.tableLayoutPanelMainData.RowCount = 3;
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanelMainData.Size = new System.Drawing.Size(1153, 572);
+            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanelMainData.Size = new System.Drawing.Size(865, 465);
             this.tableLayoutPanelMainData.TabIndex = 3;
             // 
             // dataGridViewImageColumn1
@@ -773,12 +793,13 @@
             // 
             // BorrowControls
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
-            this.ClientSize = new System.Drawing.Size(1153, 707);
+            this.ClientSize = new System.Drawing.Size(865, 574);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanelMainData);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "BorrowControls";
             this.Text = "BorrowControls";
             this.Load += new System.EventHandler(this.BorrowControls_Load);
@@ -827,7 +848,7 @@
         private System.Windows.Forms.Button btnBorrowExport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlRepaidAmount;
-        private System.Windows.Forms.Label lblBorrowRepaidAmountText;
+        private System.Windows.Forms.Label lblTotalTransaction;
         private System.Windows.Forms.PictureBox picBorrowRepaidAmount;
         private System.Windows.Forms.Panel pnlActiveBorrowings;
         private System.Windows.Forms.Label lblBorrowActiveBorrowingsText;
@@ -842,7 +863,7 @@
         private System.Windows.Forms.DataGridView dgvBorrowDataTable;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMainData;
         private System.Windows.Forms.Panel pnlPaidAmount;
-        private System.Windows.Forms.Label lblBorrowRepaidAmount;
+        private System.Windows.Forms.Label labelTotalTransactionNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPersonName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
