@@ -28,6 +28,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,6 +59,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.lblTotalLent = new System.Windows.Forms.Label();
             this.pictureBoxTotalLent = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanelMainData = new System.Windows.Forms.TableLayoutPanel();
+            this.panelExportReport = new System.Windows.Forms.Panel();
+            this.btnExportReport = new System.Windows.Forms.Button();
+            this.dgvLentDataTable = new System.Windows.Forms.DataGridView();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPersonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReturnedAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemainingAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblEntries = new System.Windows.Forms.Label();
@@ -67,18 +85,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnPreviousPage = new System.Windows.Forms.Button();
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnLastPage = new System.Windows.Forms.Button();
-            this.panelExportReport = new System.Windows.Forms.Panel();
-            this.btnExportReport = new System.Windows.Forms.Button();
-            this.dgvLentDataTable = new System.Windows.Forms.DataGridView();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPersonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReturnedAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemainingAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -92,10 +98,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelTotalLent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalLent)).BeginInit();
             this.tableLayoutPanelMainData.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.panelExportReport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLentDataTable)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -347,6 +353,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // tableLayoutPanelMainData
             // 
+
             this.tableLayoutPanelMainData.ColumnCount = 1;
             this.tableLayoutPanelMainData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMainData.Controls.Add(this.panelExportReport, 0, 0);
@@ -362,6 +369,175 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this.tableLayoutPanelMainData.Size = new System.Drawing.Size(1153, 587);
             this.tableLayoutPanelMainData.TabIndex = 1;
+            // 
+            // panelExportReport
+            // 
+            this.panelExportReport.BackColor = System.Drawing.Color.Transparent;
+            this.panelExportReport.Controls.Add(this.btnExportReport);
+            this.panelExportReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelExportReport.Location = new System.Drawing.Point(8, 5);
+            this.panelExportReport.Margin = new System.Windows.Forms.Padding(0);
+            this.panelExportReport.Name = "panelExportReport";
+            this.panelExportReport.Size = new System.Drawing.Size(1137, 45);
+            this.panelExportReport.TabIndex = 0;
+            // 
+            // btnExportReport
+            // 
+            this.btnExportReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.btnExportReport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExportReport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(132)))), ((int)(((byte)(199)))));
+            this.btnExportReport.FlatAppearance.BorderSize = 0;
+            this.btnExportReport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(105)))), ((int)(((byte)(161)))));
+            this.btnExportReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(98)))), ((int)(((byte)(180)))));
+            this.btnExportReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportReport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.btnExportReport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.share;
+            this.btnExportReport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExportReport.Location = new System.Drawing.Point(1028, 0);
+            this.btnExportReport.Name = "btnExportReport";
+            this.btnExportReport.Size = new System.Drawing.Size(109, 45);
+            this.btnExportReport.TabIndex = 0;
+            this.btnExportReport.Text = "Export ";
+            this.btnExportReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExportReport.UseVisualStyleBackColor = false;
+            // 
+            // dgvLentDataTable
+            // 
+            this.dgvLentDataTable.AllowUserToAddRows = false;
+            this.dgvLentDataTable.AllowUserToDeleteRows = false;
+            this.dgvLentDataTable.BackgroundColor = System.Drawing.Color.White;
+            this.dgvLentDataTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvLentDataTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvLentDataTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvLentDataTable.ColumnHeadersHeight = 35;
+            this.dgvLentDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvLentDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colDate,
+            this.colPersonName,
+            this.colAmount,
+            this.colPaymentType,
+            this.colStatus,
+            this.colReturnedAmount,
+            this.colRemainingAmount,
+            this.colDeadline,
+            this.colDescription});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvLentDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLentDataTable.EnableHeadersVisualStyles = false;
+            this.dgvLentDataTable.GridColor = System.Drawing.Color.White;
+            this.dgvLentDataTable.Location = new System.Drawing.Point(11, 53);
+            this.dgvLentDataTable.Name = "dgvLentDataTable";
+            this.dgvLentDataTable.ReadOnly = true;
+            this.dgvLentDataTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvLentDataTable.RowHeadersVisible = false;
+            this.dgvLentDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
+            this.dgvLentDataTable.RowTemplate.Height = 30;
+            this.dgvLentDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.Size = new System.Drawing.Size(1131, 460);
+            this.dgvLentDataTable.TabIndex = 3;
+            this.dgvLentDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLentDataTable_CellContentClick);
+            // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.DataPropertyName = "LentAt";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDate.FillWeight = 80F;
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colPersonName
+            // 
+            this.colPersonName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPersonName.DataPropertyName = "PersonName";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colPersonName.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colPersonName.FillWeight = 120F;
+            this.colPersonName.HeaderText = "Person Name";
+            this.colPersonName.Name = "colPersonName";
+            this.colPersonName.ReadOnly = true;
+            // 
+            // colAmount
+            // 
+            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.DataPropertyName = "Amount";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colAmount.FillWeight = 70F;
+            this.colAmount.HeaderText = "Amount";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            // 
+            // colPaymentType
+            // 
+            this.colPaymentType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentType.DataPropertyName = "PaymentName";
+            this.colPaymentType.HeaderText = "Payment Type";
+            this.colPaymentType.Name = "colPaymentType";
+            this.colPaymentType.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colStatus.DataPropertyName = "StatusName";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colStatus.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colStatus.FillWeight = 70F;
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
+            // colReturnedAmount
+            // 
+            this.colReturnedAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colReturnedAmount.DataPropertyName = "ReturnedAmount";
+            this.colReturnedAmount.HeaderText = "Returned Amount";
+            this.colReturnedAmount.Name = "colReturnedAmount";
+            this.colReturnedAmount.ReadOnly = true;
+            // 
+            // colRemainingAmount
+            // 
+            this.colRemainingAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colRemainingAmount.DataPropertyName = "RemainingAmount";
+            this.colRemainingAmount.HeaderText = "Remaining Amount";
+            this.colRemainingAmount.Name = "colRemainingAmount";
+            this.colRemainingAmount.ReadOnly = true;
+            // 
+            // colDeadline
+            // 
+            this.colDeadline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDeadline.DataPropertyName = "DeadlineAt";
+            this.colDeadline.HeaderText = "Deadline";
+            this.colDeadline.Name = "colDeadline";
+            this.colDeadline.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.DataPropertyName = "Description";
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
             // 
             // panel2
             // 
@@ -578,16 +754,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvLentDataTable.ColumnHeadersHeight = 35;
             this.dgvLentDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvLentDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colDate,
-            this.colPersonName,
-            this.colAmount,
-            this.colPaymentType,
-            this.colStatus,
-            this.colReturnedAmount,
-            this.colRemainingAmount,
-            this.colDeadline,
-            this.colDescription});
+            //this.dgvLentDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            //this.colDate,
+            //this.colPersonName,
+            //this.colAmount,
+            //this.colPaymentType,
+            //this.colStatus,
+            //this.colReturnedAmount,
+            //this.colRemainingAmount,
+            //this.colDeadline,
+            //this.colDescription});
             dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -767,11 +943,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelTotalLent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalLent)).EndInit();
             this.tableLayoutPanelMainData.ResumeLayout(false);
+            this.panelExportReport.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLentDataTable)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panelExportReport.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLentDataTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

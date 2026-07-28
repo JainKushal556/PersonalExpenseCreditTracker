@@ -12,6 +12,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public AddLentControls()
         {
             InitializeComponent();
+            LoadFormData();
         }
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -60,7 +61,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             textBoxLentAddDescription.Text ="Enter description";
             txtLentAddAmount.Text = "Select Amount";
 
-            CommonUiFunction.LoadInComboBox("spGetAllPersons",11,"Select Person",comboBoxLentSelectPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPersons",Session.LogedInUser.GetUserId() ,"Select Person",comboBoxLentSelectPerson);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes","Select Payment Type", comboBoxLentPaymentType);
         }
 
@@ -224,6 +225,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             txtLentAddDeadlineDatePicker.Text = "DD-MM-YYYY";
             txtLentAddDeadlineDatePicker.ForeColor = Color.Gray;
+            LoadFormData();
         }
 
         private void AddLentControls_Click(object sender, EventArgs e)
@@ -364,5 +366,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             SetRadius(btnLentAddSave, 5);
         }
+
+        
     }
 }

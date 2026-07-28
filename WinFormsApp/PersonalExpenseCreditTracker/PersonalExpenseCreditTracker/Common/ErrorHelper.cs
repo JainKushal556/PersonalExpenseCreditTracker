@@ -13,7 +13,7 @@ namespace PersonalExpenseCreditTracker.Common
         public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, ComboBox comboBox)
         {
             errorProvider.SetIconAlignment(comboBox, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(comboBox, 10); 
+            errorProvider.SetIconPadding(comboBox, -30); 
             //errorProvider.Clear();
 
             switch (result)
@@ -36,7 +36,14 @@ namespace PersonalExpenseCreditTracker.Common
                     errorProvider.SetError(comboBox, "Please select status.");
                     comboBox.Focus();
                     break;
-               
+                case CommonValidator.ValidationResult.CategoryInvalid:
+                    errorProvider.SetError(comboBox, "Please select a category.");
+                    break;
+
+                case CommonValidator.ValidationResult.SubCategoryInvalid:
+                    errorProvider.SetError(comboBox, "Please select a sub category.");
+                    break;
+
             }
         }
 
@@ -44,7 +51,7 @@ namespace PersonalExpenseCreditTracker.Common
         public static void ShowValidationError(CommonValidator.ValidationResult result,  ErrorProvider errorProvider,TextBox textBox)
         {
             errorProvider.SetIconAlignment(textBox, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(textBox, 10); 
+            errorProvider.SetIconPadding(textBox, -30); 
             switch (result)
             {
                 // Amount field is empty

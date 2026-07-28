@@ -197,8 +197,24 @@ EXEC spInsertCreditByUserID
     @SubCategoryID = '',
     @Amount = '',
     @Description = '',
-    @PaymentID = '',
-    @CreditAt = ''
+    @PaymentID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetCreditSubCategoryByCategoryID
+-- From File: ✔️spGetCreditSubCategoryByCategoryID.sql
+-- ==========================================================
+EXEC spGetCreditSubCategoryByCategoryID
+    @CategoryID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetAllCreditCategory
+-- From File: ✔️spGetAllCreditCategory.sql
+-- ==========================================================
+EXEC spGetAllCreditCategory
 
 GO
 
@@ -747,7 +763,6 @@ EXEC spInsertBorrow
     @UserID = '',
     @PersonID = '',
     @PaymentID = '',
-    @StatusID = '',
     @Amount = '',
     @DeadlineAt = '',
     @Description = ''
@@ -849,3 +864,12 @@ EXEC spUpdatePerson
     @Address = ''
 
 GO
+
+-- ==========================================================
+-- SP: spGetAllTaskPriorities
+-- From File: ✔️spGetAllTaskPriorities.sql
+-- ==========================================================
+EXEC spGetAllTaskPriorities
+
+GO
+

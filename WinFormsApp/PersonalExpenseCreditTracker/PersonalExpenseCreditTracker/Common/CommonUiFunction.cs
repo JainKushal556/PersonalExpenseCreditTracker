@@ -25,6 +25,20 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.SelectedIndex = 0;
         }
 
+        // Helper method to load a ComboBox with data (with UserID)
+        public static void LoadInComboBox(string spName, string initialText, ComboBox comboBox,string paramName,int paramValue)
+        {
+            DataTable dataTable = RetrieveListForComboBox(spName, paramName,paramValue);
+            DataRow dataRow = dataTable.NewRow();
+            dataRow[0] = 0;
+            dataRow[1] = initialText;
+            dataTable.Rows.InsertAt(dataRow, 0);
+
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = dataTable.Columns[1].ColumnName;
+            comboBox.ValueMember = dataTable.Columns[0].ColumnName;
+            comboBox.SelectedIndex = 0;
+        }
         // Helper method to load a ComboBox with data (without UserID)
         public static void LoadInComboBox(string spName, string initialText, ComboBox comboBox)
         {            
@@ -55,6 +69,13 @@ namespace PersonalExpenseCreditTracker.Common
             dataTable = CommonBllFunction.RetrieveListForComboBox(spName);
             return dataTable;
         }
+        // Retrieves list data for ComboBoxes from BLL layer (without UserID)
+        public static DataTable RetrieveListForComboBox(string spName, string paramName, int paramValue)
+        {
+            DataTable dataTable = null;
+            dataTable = CommonBllFunction.RetrieveListForComboBox(spName,paramName,paramValue);
+            return dataTable;
+        }
 
         // Retrieves filtered data by Status ID from BLL layer
         public static DataTable RetrieveFilteredDataByStatus(string spName, int userid, string paramName, int filterId)
@@ -82,6 +103,14 @@ namespace PersonalExpenseCreditTracker.Common
 
         // Retrieves filtered data by a range of two decimal values from BLL layer
         public static DataTable RetrieveDataByUserIdAndFilterId(string spName, int userId, string paramName1, decimal paramId1, string paramName2, decimal paramId2)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = CommonBllFunction.RetrieveDataByUserIdAndFilterId(spName, userId, paramName1, paramId1, paramName2, paramId2);
+            return dataTable;
+        }
+
+        // Retrieves filtered data by a range of two int values from BLL layer
+        public static DataTable RetrieveDataByUserIdAndFilterId(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
         {
             DataTable dataTable = new DataTable();
             dataTable = CommonBllFunction.RetrieveDataByUserIdAndFilterId(spName, userId, paramName1, paramId1, paramName2, paramId2);
