@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Credit
+namespace PersonalExpenseCreditTracker.Modules.Credit
 {
     partial class CreditDetailsControl
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblCreditDetails = new System.Windows.Forms.Label();
             this.txtAddCreditDescription = new System.Windows.Forms.TextBox();
             this.panelCreditDetailsMainBody = new System.Windows.Forms.Panel();
@@ -52,21 +53,20 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelCreditDetailsMainBody.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblCreditDetails
             // 
             this.lblCreditDetails.AutoSize = true;
-            this.lblCreditDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreditDetails.ForeColor = System.Drawing.Color.Black;
-            this.lblCreditDetails.Location = new System.Drawing.Point(15, 15);
+            this.lblCreditDetails.Location = new System.Drawing.Point(0, 0);
             this.lblCreditDetails.Name = "lblCreditDetails";
-            this.lblCreditDetails.Size = new System.Drawing.Size(133, 28);
-            this.lblCreditDetails.TabIndex = 32;
-            this.lblCreditDetails.Text = "Credit Details";
+            this.lblCreditDetails.Size = new System.Drawing.Size(0, 23);
+            this.lblCreditDetails.TabIndex = 0;
             // 
             // txtAddCreditDescription
             // 
@@ -208,9 +208,6 @@
             this.cmbAddCreditSubCategory.FormattingEnabled = true;
             this.cmbAddCreditSubCategory.IntegralHeight = false;
             this.cmbAddCreditSubCategory.ItemHeight = 23;
-            this.cmbAddCreditSubCategory.Items.AddRange(new object[] {
-            "Select Sub Category",
-            "Momo"});
             this.cmbAddCreditSubCategory.Location = new System.Drawing.Point(436, 106);
             this.cmbAddCreditSubCategory.Name = "cmbAddCreditSubCategory";
             this.cmbAddCreditSubCategory.Size = new System.Drawing.Size(354, 31);
@@ -273,12 +270,11 @@
             this.cmbAddCreditCategory.FormattingEnabled = true;
             this.cmbAddCreditCategory.IntegralHeight = false;
             this.cmbAddCreditCategory.ItemHeight = 23;
-            this.cmbAddCreditCategory.Items.AddRange(new object[] {
-            "Food"});
             this.cmbAddCreditCategory.Location = new System.Drawing.Point(20, 106);
             this.cmbAddCreditCategory.Name = "cmbAddCreditCategory";
             this.cmbAddCreditCategory.Size = new System.Drawing.Size(357, 31);
             this.cmbAddCreditCategory.TabIndex = 14;
+            this.cmbAddCreditCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditCategory_SelectedIndexChanged);
             this.cmbAddCreditCategory.Enter += new System.EventHandler(this.cmbAddCreditCategory_Enter);
             this.cmbAddCreditCategory.Leave += new System.EventHandler(this.cmbAddCreditCategory_Leave);
             // 
@@ -361,6 +357,10 @@
             this.panel1.Size = new System.Drawing.Size(788, 1);
             this.panel1.TabIndex = 1;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // CreditDetailsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -377,6 +377,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -407,6 +408,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -171,6 +171,9 @@ namespace PersonalExpenseCreditTracker
             //ComboBoxNoteStatus.SelectedIndex = 0;
             //ComboBoxNotePriority.SelectedIndex = 0;
 
+            ComboBoxCreditSubCategory.Visible = false;
+            lblCreditSelectSubCategory.Visible = false;
+
 
             ShowPage(pnlOverview);
             btnClearAll.Visible = false;
@@ -1520,7 +1523,7 @@ namespace PersonalExpenseCreditTracker
             }
 
             // Amount
-            if (txtMixAmount.Text.Trim() != "" ||
+            if (txtMinAmount.Text.Trim() != "" ||
                 txtMaxAmount.Text.Trim() != "")
             {
                 hasFilter = true;
@@ -1558,7 +1561,7 @@ namespace PersonalExpenseCreditTracker
             rbThisYear.Checked = false;
             rbCustom.Checked = false;
 
-            txtMixAmount.Clear();
+            txtMinAmount.Clear();
             txtMaxAmount.Clear();
 
             ComboBoxCategory.SelectedIndex = 0;
@@ -1686,25 +1689,43 @@ namespace PersonalExpenseCreditTracker
             UpdateCreditClearAllButton();
 
             flowSidebar.Top = 0;
+
+            CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", ComboBoxCreditCategory);
+           
         }
 
         private void btnCreditClearAll_Click(object sender, EventArgs e)
         {
+            // Date Filter
             rbCreditThisMonth.Checked = false;
             rbCreditLast7Days.Checked = false;
             rbCreditThisYear.Checked = false;
             rbCreditCustom.Checked = false;
 
-            txtCreditMixAmount.Clear();
+            // Amount Filter
             txtCreditMinAmount.Clear();
+            txtCreditMaxAmount.Clear();
 
-            ComboBoxCreditCategory.SelectedIndex = 0;
-            ComboBoxCreditSubCategory.SelectedIndex = 0;
+            // Category Filter
+            if (ComboBoxCreditCategory.Items.Count > 0)
+                ComboBoxCreditCategory.SelectedIndex = 0;
 
+            if (ComboBoxCreditSubCategory.Items.Count > 0)
+                ComboBoxCreditSubCategory.SelectedIndex = 0;
+
+            // Date Picker
             dtpCreditFromDate.Value = DateTime.Today;
             dtpCreditToDate.Value = DateTime.Today;
 
+            // Hide SubCategory
+            ComboBoxCreditSubCategory.Visible = false;
+            lblCreditSelectSubCategory.Visible = false;
+
+            // Hide Clear Button
             btnCreditClearAll.Visible = false;
+
+            // Reload Data
+            creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
         }
 
         private void UpdateCreditClearAllButton()
@@ -1721,8 +1742,8 @@ namespace PersonalExpenseCreditTracker
             }
 
             // Amount
-            if (txtCreditMixAmount.Text.Trim() != "" ||
-                txtCreditMinAmount.Text.Trim() != "")
+            if (txtCreditMinAmount.Text.Trim() != "" ||
+                txtCreditMaxAmount.Text.Trim() != "")
             {
                 hasFilter = true;
             }
@@ -1762,18 +1783,46 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
+
+            if (creditControl != null && !creditControl.IsDisposed)
+            {
+
+
+                DateTime firstDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                 1);
+
+                DateTime lastDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+
+            }
         }
 
         private void rbCreditLast7Days_CheckedChanged(object sender, EventArgs e)
         {
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
+
+            DateTime fromDate = DateTime.Today.AddDays(-6);
+            DateTime toDate = DateTime.Today;
+
+            creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void rbCreditThisYear_CheckedChanged(object sender, EventArgs e)
         {
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
+
+            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+
+            creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void pnlAllCredit_MouseEnter(object sender, EventArgs e)
@@ -1824,6 +1873,10 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveCreditSubMenu(pnlAllCredit);
 
+            if (creditControl != null && !creditControl.IsDisposed)
+            {
+                creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+            }
 
         }
 
@@ -1843,12 +1896,9 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-        private void txtCreditMixAmount_TextChanged(object sender, EventArgs e)
-        {
-            UpdateCreditClearAllButton();
-        }
+      
 
-        private void txtCreditMinAmount_TextChanged(object sender, EventArgs e)
+        private void txtCreditMaxAmount_TextChanged(object sender, EventArgs e)
         {
             UpdateCreditClearAllButton();
         }
@@ -1856,11 +1906,82 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxCreditCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateCreditClearAllButton();
+
+            if (ComboBoxCreditCategory.SelectedIndex <= 0)
+            {
+                ComboBoxCreditSubCategory.Visible = false;
+                lblCreditSelectSubCategory.Visible = false;
+
+                //creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                return;
+            }
+
+            ComboBoxCreditSubCategory.Visible = true;
+            lblCreditSelectSubCategory.Visible = true;
+
+            if (ComboBoxCreditCategory.SelectedValue == null)
+                return;
+
+            if (ComboBoxCreditCategory.SelectedValue is DataRowView)
+                return;
+
+            int categoryId = Convert.ToInt32(ComboBoxCreditCategory.SelectedValue);
+
+            // Load Sub Category
+            CommonUiFunction.LoadInComboBox(
+                "spGetCreditSubCategoryByCategoryID",
+                "Select SubCategory",
+                ComboBoxCreditSubCategory,
+                "@CategoryID",
+                categoryId);
+
+            // Filter Credit Data
+            if (!creditControl.LoadFilteredCreditData(
+                    "spFilterCreditByCategory",
+                    "@CategoryID",
+                    categoryId,
+                    categoryId))
+            {
+                ComboBoxCreditSubCategory.SelectedIndex = 0;
+            }
         }
 
         private void ComboBoxCreditSubCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateCreditClearAllButton();
+
+            if (creditControl == null || creditControl.IsDisposed)
+                return;
+
+            if (ComboBoxCreditSubCategory.SelectedIndex <= 0)
+            {
+                creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                return;
+            }
+
+            if (ComboBoxCreditCategory.SelectedValue == null ||
+                ComboBoxCreditCategory.SelectedValue is DataRowView)
+                return;
+
+            if (ComboBoxCreditSubCategory.SelectedValue == null ||
+                ComboBoxCreditSubCategory.SelectedValue is DataRowView)
+                return;
+
+            int categoryId = Convert.ToInt32(ComboBoxCreditCategory.SelectedValue);
+            int subCategoryId = Convert.ToInt32(ComboBoxCreditSubCategory.SelectedValue);
+
+            if (!creditControl.LoadFilteredCreditData(
+                    "spFilterCreditByCategoryAndSubCategory",
+                    Session.LogedInUser.GetUserId(),
+                    "@CategoryID",
+                    categoryId,
+                    "@SubCategoryID",
+                    subCategoryId))
+            {
+                ComboBoxCreditSubCategory.SelectedIndex = 0;
+            }
+
+
         }
         //Lent Start
 
@@ -2147,18 +2268,7 @@ namespace PersonalExpenseCreditTracker
 
             if (lentControl != null && !lentControl.IsDisposed)
             {
-                //if (ComboBoxLentStatus.SelectedIndex > 0)
-                //{
-                //    int statusId = Convert.ToInt32(ComboBoxLentStatus.SelectedValue);
-                //    if (!lentControl.LoadFilteredLentData(statusId, "@StatusID"))
-                //    {
-                //        ComboBoxLentStatus.SelectedIndex = 0;
-                //    }
-                //}
-                //else
-                //{
-                //    lentControl.LoadLentData(Session.LogedInUser.GetUserId());
-                //}
+                
 
                 DateTime firstDayOfMonth = new DateTime(
                 DateTime.Today.Year,
@@ -2169,9 +2279,6 @@ namespace PersonalExpenseCreditTracker
                 DateTime.Today.Year,
                 DateTime.Today.Month,
                 DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
-
-                //MessageBox.Show(firstDayOfMonth.ToString());
-                //MessageBox.Show(lastDayOfMonth.ToString());
 
                 lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
 
@@ -3779,30 +3886,142 @@ namespace PersonalExpenseCreditTracker
                     break;
 
                 case CommonValidator.ValidationResult.MinimumAmountInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMinAmount);
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowMinAmount);
                     break;
 
                 case CommonValidator.ValidationResult.MaximumAmountInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMaxAmount);
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowMaxAmount);
                     break;
 
                 case CommonValidator.ValidationResult.AmountRangeInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMinAmount, txtLentMaxAmount);
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowMinAmount, txtBorrowMaxAmount);
                     break;
             }
         }
 
+        private void pnlLent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dtpLentFromDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreditApplyDateFilter_Click(object sender, EventArgs e)
+        {
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            MainUI mainUi = new MainUI();
+            mainUi.fromDate = dtpCreditFromDate.Value;
+            mainUi.toDate = dtpCreditToDate.Value;
 
 
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
 
+            switch (result)
+            {
+                // Data is valid and inserted successfully
+                case CommonValidator.ValidationResult.Success:
+                    if (creditControl != null && !creditControl.IsDisposed)
+                    {
+                        if (!creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpCreditFromDate.Value, "@ToDate", dtpCreditToDate.Value))
+                        {
+                            creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                            //MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
 
+                    }
+                    else
+                    {
+                        creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                    }
+                    //MessageBox.Show("Apply successfully!");
 
-    }    
-       
+                    break;
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpCreditFromDate, dtpCreditToDate);
+                    break;
 
-        
-       
+            }
+        }
 
-    
+        private void dtpLentToDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreditApplyAmountFilter_Click(object sender, EventArgs e)
+        {
+            //Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            MainUI mainUi = new MainUI();
+            // Assign values from the form controls to the object
+
+            mainUi.minAmount = txtCreditMinAmount.Text;
+            mainUi.maxAmount = txtCreditMaxAmount.Text;
+
+            CommonValidator.ValidationResult result = mainUi.InsertAmountDataIntoMainUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (creditControl != null && !creditControl.IsDisposed)
+                    {
+                        if (!creditControl.LoadFilteredCreditData("spFilterCreditByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", Convert.ToDecimal(txtCreditMinAmount.Text), "@MaxAmount", Convert.ToDecimal(txtCreditMaxAmount.Text)))
+                        {
+                            creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                            MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                    }
+
+                    //this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.MinimumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCreditMinAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.MaximumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCreditMaxAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCreditMaxAmount, txtCreditMaxAmount);
+                    break;
+            }
+        }
+
+        private void txtMinAmount_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCreditClearAllButton();
+        }
+
+        private void txtCreditMinAmount_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCreditClearAllButton();
+        }
+
+        private void txtCreditMaxAmount_TextChanged_1(object sender, EventArgs e)
+        {
+            UpdateCreditClearAllButton();
+        }
 }
 

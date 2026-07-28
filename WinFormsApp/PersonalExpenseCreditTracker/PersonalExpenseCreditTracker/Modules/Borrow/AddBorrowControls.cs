@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -368,6 +368,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             SetRadius(btnBorrowAddSave, 5);
         }
 
-        
+        private void pnlAddBorrowMainBody_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

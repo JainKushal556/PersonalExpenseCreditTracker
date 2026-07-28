@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Borrow
+namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     partial class AddBorrowControls
     {
@@ -403,6 +403,8 @@
             this.pnlAddBorrowMainBody.Size = new System.Drawing.Size(648, 428);
             this.pnlAddBorrowMainBody.TabIndex = 1;
             this.pnlAddBorrowMainBody.Click += new System.EventHandler(this.pnlAddBorrowMainBody_Click);
+            this.pnlAddBorrowMainBody.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddBorrowMainBody_Paint);
+            // 
             // 
             // pictureBox6
             // 
@@ -483,7 +485,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
             // AddBorrowControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
