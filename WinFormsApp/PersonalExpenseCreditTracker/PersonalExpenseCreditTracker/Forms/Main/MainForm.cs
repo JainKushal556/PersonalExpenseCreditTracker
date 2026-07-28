@@ -4023,6 +4023,16 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateCreditClearAllButton();
         }
+
+        private void pnlAddLent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlProfilePage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 
