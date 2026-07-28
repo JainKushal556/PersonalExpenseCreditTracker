@@ -299,11 +299,11 @@ GO
 
 INSERT INTO tblUserAuthentication (UserID, Password, Active)
 VALUES
-(11, 'Ritwik@112', 1),
-(12, 'Moumita@113', 1),
-(13, 'Sayan@114', 1),
-(14, 'Tania@115', 1),
-(15, 'Subham@116', 1);
+(11, 'Ritwik@112', 0),
+(12, 'Moumita@113', 0),
+(13, 'Sayan@114', 0),
+(14, 'Tania@115', 0),
+(15, 'Subham@116', 0);
 GO
 
 INSERT INTO tblPersons (UserID, PersonName, PhoneNumber, Address)
@@ -565,6 +565,79 @@ VALUES
 (7, 2, 'January 2026 family note', 'Family support is overdue.', '2026-01-29 09:45:00'),
 (8, 1, 'March 2026 course note', 'Course fee support is partially settled.', '2026-03-17 10:55:00'),
 (9, 2, 'May 2026 summer note', 'Summer expense support is pending.', '2026-05-23 12:05:00');
+GO
+
+
+-- =========================================================================
+-- EXPLICIT RECENT TEST DATA FOR USER 1 & 2 (FOR EASY UI & FILTER TESTING)
+-- =========================================================================
+
+-- Expense
+INSERT INTO tblExpense (UserID, CategoryID, SubCategoryID, PaymentID, Amount, Description, ExpenseAt)
+VALUES
+-- User 1 (Sujit)
+(1, 1, 1, 1, 500.00, 'Lunch today (Sujit)', GETDATE()),
+(1, 2, 2, 2, 150.00, 'Commute yesterday (Sujit)', DATEADD(day, -1, GETDATE())),
+(1, 3, 3, 3, 2500.00, 'Shopping this week (Sujit)', DATEADD(day, -4, GETDATE())),
+(1, 4, 4, 1, 1200.00, 'Electricity bill this month (Sujit)', DATEADD(day, -12, GETDATE())),
+(1, 6, 6, 2, 8000.00, 'Medical tests this year (Sujit)', DATEADD(day, -45, GETDATE())),
+(1, 7, 7, 3, 15000.00, 'Course fee last year (Sujit)', DATEADD(day, -400, GETDATE())),
+-- User 2 (Kushal)
+(2, 1, 1, 1, 650.00, 'Dinner today (Kushal)', GETDATE()),
+(2, 2, 2, 2, 120.00, 'Cab fare yesterday (Kushal)', DATEADD(day, -1, GETDATE())),
+(2, 3, 3, 3, 4500.00, 'Gadget purchase this week (Kushal)', DATEADD(day, -3, GETDATE())),
+(2, 4, 4, 1, 2200.00, 'Internet bill this month (Kushal)', DATEADD(day, -10, GETDATE())),
+(2, 6, 6, 2, 3500.00, 'Dental checkup this year (Kushal)', DATEADD(day, -35, GETDATE())),
+(2, 7, 7, 3, 25000.00, 'Tuition payment last year (Kushal)', DATEADD(day, -380, GETDATE()));
+GO
+
+-- Credit
+INSERT INTO tblCredit (UserID, CategoryID, SubCategoryID, PaymentID, Amount, Description, CreditAt)
+VALUES
+-- User 1 (Sujit)
+(1, 5, 5, 2, 15000.00, 'Freelance payment today (Sujit)', GETDATE()),
+(1, 7, 7, 1, 500.00, 'Cashback yesterday (Sujit)', DATEADD(day, -1, GETDATE())),
+(1, 4, 4, 2, 3000.00, 'Birthday gift this week (Sujit)', DATEADD(day, -5, GETDATE())),
+(1, 1, 1, 9, 45000.00, 'Salary this month (Sujit)', DATEADD(day, -15, GETDATE())),
+(1, 9, 9, 2, 12000.00, 'Bonus this year (Sujit)', DATEADD(day, -50, GETDATE())),
+(1, 3, 3, 3, 2500.00, 'Mutual fund profit last year (Sujit)', DATEADD(day, -410, GETDATE())),
+-- User 2 (Kushal)
+(2, 5, 5, 2, 20000.00, 'Freelance project today (Kushal)', GETDATE()),
+(2, 7, 7, 1, 750.00, 'App cashback yesterday (Kushal)', DATEADD(day, -1, GETDATE())),
+(2, 4, 4, 2, 5000.00, 'Gift from uncle this week (Kushal)', DATEADD(day, -4, GETDATE())),
+(2, 1, 1, 9, 55000.00, 'Salary this month (Kushal)', DATEADD(day, -12, GETDATE())),
+(2, 9, 9, 2, 15000.00, 'Performance bonus this year (Kushal)', DATEADD(day, -45, GETDATE())),
+(2, 3, 3, 3, 3500.00, 'Stock profit last year (Kushal)', DATEADD(day, -390, GETDATE()));
+GO
+
+-- Lent
+INSERT INTO tblLent (UserID, PersonID, PaymentID, StatusID, Amount, ReturnedAmount, RemainingAmount, LentAt, DeadlineAt, Description)
+VALUES
+-- User 1 (Sujit)
+(1, 1, 1, 1, 2000.00, 0.00, 2000.00, GETDATE(), DATEADD(day, 5, GETDATE()), 'Lent today (Sujit)'),
+(1, 2, 2, 5, 5000.00, 1500.00, 3500.00, DATEADD(day, -4, GETDATE()), DATEADD(day, 10, GETDATE()), 'Lent this week (Sujit)'),
+(1, 3, 3, 2, 6000.00, 6000.00, 0.00, DATEADD(day, -45, GETDATE()), DATEADD(day, -15, GETDATE()), 'Lent fully paid (Sujit)'),
+(1, 4, 1, 3, 3000.00, 0.00, 3000.00, DATEADD(day, -35, GETDATE()), DATEADD(day, -5, GETDATE()), 'Lent overdue (Sujit)'),
+-- User 2 (Kushal)
+(2, 1, 1, 1, 3000.00, 0.00, 3000.00, GETDATE(), DATEADD(day, 7, GETDATE()), 'Lent today (Kushal)'),
+(2, 2, 2, 5, 8000.00, 2000.00, 6000.00, DATEADD(day, -3, GETDATE()), DATEADD(day, 12, GETDATE()), 'Lent this week (Kushal)'),
+(2, 3, 3, 2, 10000.00, 10000.00, 0.00, DATEADD(day, -50, GETDATE()), DATEADD(day, -20, GETDATE()), 'Lent fully paid (Kushal)'),
+(2, 4, 1, 3, 4000.00, 0.00, 4000.00, DATEADD(day, -40, GETDATE()), DATEADD(day, -10, GETDATE()), 'Lent overdue (Kushal)');
+GO
+
+-- Borrow
+INSERT INTO tblBorrow (UserID, PersonID, PaymentID, StatusID, Amount, PaidAmount, RemainingAmount, BorrowAt, DeadlineAt, Description)
+VALUES
+-- User 1 (Sujit)
+(1, 1, 1, 1, 1200.00, 0.00, 1200.00, GETDATE(), DATEADD(day, 3, GETDATE()), 'Borrowed today (Sujit)'),
+(1, 2, 2, 5, 3500.00, 1000.00, 2500.00, DATEADD(day, -4, GETDATE()), DATEADD(day, 7, GETDATE()), 'Borrowed this week (Sujit)'),
+(1, 3, 3, 2, 4000.00, 4000.00, 0.00, DATEADD(day, -45, GETDATE()), DATEADD(day, -15, GETDATE()), 'Borrowed fully paid (Sujit)'),
+(1, 4, 1, 3, 2500.00, 0.00, 2500.00, DATEADD(day, -35, GETDATE()), DATEADD(day, -5, GETDATE()), 'Borrowed overdue (Sujit)'),
+-- User 2 (Kushal)
+(2, 1, 1, 1, 1500.00, 0.00, 1500.00, GETDATE(), DATEADD(day, 4, GETDATE()), 'Borrowed today (Kushal)'),
+(2, 2, 2, 5, 5000.00, 1500.00, 3500.00, DATEADD(day, -3, GETDATE()), DATEADD(day, 8, GETDATE()), 'Borrowed this week (Kushal)'),
+(2, 3, 3, 2, 7000.00, 7000.00, 0.00, DATEADD(day, -50, GETDATE()), DATEADD(day, -20, GETDATE()), 'Borrowed fully paid (Kushal)'),
+(2, 4, 1, 3, 3000.00, 0.00, 3000.00, DATEADD(day, -40, GETDATE()), DATEADD(day, -10, GETDATE()), 'Borrowed overdue (Kushal)');
 GO
 
 -- =========================================================================
