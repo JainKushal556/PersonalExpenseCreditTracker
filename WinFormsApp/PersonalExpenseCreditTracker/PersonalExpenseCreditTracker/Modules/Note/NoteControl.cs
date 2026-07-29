@@ -121,6 +121,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
             footer.Dock = DockStyle.Bottom;
             footer.Height = 35;
+            //footer.Location = new Point(15,140);
             Label date = new Label();
 
             date.Text = Convert.ToDateTime(row["CreatedAt"]) .ToString("dd MMM yyyy");
@@ -134,7 +135,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             priority.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
             priority.ForeColor = Color.FromArgb(200, 80, 80);
             priority.AutoSize = true;
-            priority.Location = new Point(150, 7);
+            priority.Location = new Point(150, 8);
             Button btnMore = new Button();
 
             btnMore.Size = new Size(30, 30);
@@ -310,7 +311,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 if (c is Panel)
                 {
                     c.Width = cardWidth;
-                    c.Height = 170;
+                    c.Height = 155;
                     c.Margin = new Padding(margin);
 
 
@@ -325,19 +326,19 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                         if (availableWidth < 500)
                         {
                             // Small screen
-                            description.Height = 40;
+                            description.Height = 30;
                             description.MaximumSize = new Size(c.Width - 30, 40);
                         }
                         else if (availableWidth < 850)
                         {
                             // Medium screen
-                            description.Height = 60;
+                            description.Height = 40;
                             description.MaximumSize = new Size(c.Width - 30, 60);
                         }
                         else
                         {
                             // Large screen
-                            description.Height = 90;
+                            description.Height = 50;
                             description.MaximumSize = new Size(c.Width - 30, 90);
                         }
 

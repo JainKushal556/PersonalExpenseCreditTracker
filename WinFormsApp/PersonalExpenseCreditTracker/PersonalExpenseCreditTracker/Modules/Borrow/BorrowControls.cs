@@ -374,7 +374,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                  this.lblBorrowTotalBorrowedAmount.Text = "₹ " + totalBorrow.ToString("#,##0.##");
                  this.lblBorrowPaidAmount.Text = "₹ " + totalPaid.ToString("#,##0.##");
                  this.lblBorrowActiveBorrowingsAmount.Text = "₹ " + totalDue.ToString("#,##0.##");
-                 this.labelTotalTransactionNumber.Text = totalTransaction.ToString();
+                 this.lblBorrowRepaidAmount.Text = totalTransaction.ToString();
                  
             }
             else
@@ -382,7 +382,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 lblBorrowTotalBorrowedAmount.Text = "₹ 0";
                 this.lblBorrowPaidAmount.Text = "₹ 0";
                 this.lblBorrowActiveBorrowingsAmount.Text = "₹ 0";
-                this.labelTotalTransactionNumber.Text = "0";
+                this.lblBorrowRepaidAmount.Text = "0";
             }
         }
 
