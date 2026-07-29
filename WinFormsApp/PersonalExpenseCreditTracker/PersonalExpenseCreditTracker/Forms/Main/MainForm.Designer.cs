@@ -5259,7 +5259,11 @@ namespace PersonalExpenseCreditTracker
             this.pnlPersonAddPage.Location = new System.Drawing.Point(0, 78);
             this.pnlPersonAddPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPersonAddPage.Name = "pnlPersonAddPage";
+
             this.pnlPersonAddPage.Size = new System.Drawing.Size(1301, 977);
+
+            this.pnlPersonAddPage.Size = new System.Drawing.Size(876, 977);
+
             this.pnlPersonAddPage.TabIndex = 0;
             // 
             // pnlCreditCategoryPage
@@ -5441,7 +5445,6 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlDate
             // 
-            this.pnlDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDate.Controls.Add(this.picCalendar);
             this.pnlDate.Controls.Add(this.lblDate);
             this.pnlDate.Dock = System.Windows.Forms.DockStyle.Left;
@@ -5459,7 +5462,7 @@ namespace PersonalExpenseCreditTracker
             this.picCalendar.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.picCalendar.Name = "picCalendar";
             this.picCalendar.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-            this.picCalendar.Size = new System.Drawing.Size(37, 46);
+            this.picCalendar.Size = new System.Drawing.Size(37, 48);
             this.picCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picCalendar.TabIndex = 0;
             this.picCalendar.TabStop = false;
@@ -5469,11 +5472,11 @@ namespace PersonalExpenseCreditTracker
             this.lblDate.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
-            this.lblDate.Location = new System.Drawing.Point(43, 0);
+            this.lblDate.Location = new System.Drawing.Point(45, 0);
             this.lblDate.Margin = new System.Windows.Forms.Padding(0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.lblDate.Size = new System.Drawing.Size(205, 46);
+            this.lblDate.Size = new System.Drawing.Size(205, 48);
             this.lblDate.TabIndex = 1;
             this.lblDate.Text = "May 1, 2023 – May 31, 2024";
             this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

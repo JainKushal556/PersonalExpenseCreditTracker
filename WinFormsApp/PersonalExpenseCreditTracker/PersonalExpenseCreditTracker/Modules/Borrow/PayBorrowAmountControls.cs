@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +11,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     public partial class PayBorrowAmountControls : Form
     {
+        public int UserID { get; set; }
+        public int PersonID { get; set; }
+
         public PayBorrowAmountControls()
         {
             InitializeComponent();

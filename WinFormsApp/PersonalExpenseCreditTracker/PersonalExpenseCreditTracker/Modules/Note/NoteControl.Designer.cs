@@ -35,6 +35,7 @@
             this.pnlNoteCard = new System.Windows.Forms.Panel();
             this.pnlNoteCardFooter = new System.Windows.Forms.Panel();
             this.btnNoteMore = new System.Windows.Forms.Button();
+            this.lblPriorityName = new System.Windows.Forms.Label();
             this.lblNoteCardDate = new System.Windows.Forms.Label();
             this.lblNoteCardDescription = new System.Windows.Forms.Label();
             this.lblNoteCardTitle = new System.Windows.Forms.Label();
@@ -69,10 +70,47 @@
             this.lblMonthNoteNumber = new System.Windows.Forms.Label();
             this.lblMothTitle = new System.Windows.Forms.Label();
             this.picNoteCalender = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnSerach = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.cmsNote = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPriority = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlPriorityFilter = new System.Windows.Forms.Panel();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.btnPriorityApply = new System.Windows.Forms.Button();
+            this.lblPriorityFilter = new System.Windows.Forms.Label();
+            this.pnlPriority = new System.Windows.Forms.Panel();
+            this.cmbPriority = new System.Windows.Forms.ComboBox();
+            this.btnPriorityClose = new System.Windows.Forms.Button();
+            this.pnlDateFilter = new System.Windows.Forms.Panel();
+            this.pnlDateHeader = new System.Windows.Forms.Panel();
+            this.btnDateApply = new System.Windows.Forms.Button();
+            this.btnDateClose = new System.Windows.Forms.Button();
+            this.pnlToDate = new System.Windows.Forms.Panel();
+            this.pnlToDateCalenderShow = new System.Windows.Forms.Panel();
+            this.monthCalendarToDate = new System.Windows.Forms.MonthCalendar();
+            this.picCalenderToDate = new System.Windows.Forms.PictureBox();
+            this.txtToDate = new System.Windows.Forms.TextBox();
+            this.pnlFromDateCalenderShow = new System.Windows.Forms.Panel();
+            this.monthCalendarFromDate = new System.Windows.Forms.MonthCalendar();
+            this.lblFromDate = new System.Windows.Forms.Label();
+            this.pnlFromDate = new System.Windows.Forms.Panel();
+            this.picCalenderFromDate = new System.Windows.Forms.PictureBox();
+            this.txtFromdate = new System.Windows.Forms.TextBox();
+            this.lblToDate = new System.Windows.Forms.Label();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.pnlSearchHeader = new System.Windows.Forms.Panel();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.pnlSearchTxt = new System.Windows.Forms.Panel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlNoteMain.SuspendLayout();
             this.flpNotes.SuspendLayout();
             this.pnlNoteCard.SuspendLayout();
@@ -87,7 +125,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.picNoteImportant)).BeginInit();
             this.pnlThisMonth.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picNoteCalender)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.cmsNote.SuspendLayout();
+            this.cmsFilter.SuspendLayout();
+            this.pnlPriorityFilter.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
+            this.pnlPriority.SuspendLayout();
+            this.pnlDateFilter.SuspendLayout();
+            this.pnlDateHeader.SuspendLayout();
+            this.pnlToDate.SuspendLayout();
+            this.pnlToDateCalenderShow.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCalenderToDate)).BeginInit();
+            this.pnlFromDateCalenderShow.SuspendLayout();
+            this.pnlFromDate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCalenderFromDate)).BeginInit();
+            this.pnlSearch.SuspendLayout();
+            this.pnlSearchHeader.SuspendLayout();
+            this.pnlSearchTxt.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlNoteMain
@@ -102,17 +157,17 @@
             this.pnlNoteMain.Name = "pnlNoteMain";
             this.pnlNoteMain.Size = new System.Drawing.Size(1203, 630);
             this.pnlNoteMain.TabIndex = 0;
+            this.pnlNoteMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlNoteMain_Paint);
             // 
             // flpNotes
             // 
-            this.flpNotes.AutoScroll = true;
             this.flpNotes.AutoSize = true;
             this.flpNotes.Controls.Add(this.pnlNoteCard);
             this.flpNotes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpNotes.Location = new System.Drawing.Point(0, 120);
+            this.flpNotes.Location = new System.Drawing.Point(0, 188);
             this.flpNotes.Name = "flpNotes";
             this.flpNotes.Padding = new System.Windows.Forms.Padding(3);
-            this.flpNotes.Size = new System.Drawing.Size(1203, 457);
+            this.flpNotes.Size = new System.Drawing.Size(1203, 389);
             this.flpNotes.TabIndex = 3;
             this.flpNotes.Paint += new System.Windows.Forms.PaintEventHandler(this.flpNotes_Paint);
             // 
@@ -134,6 +189,7 @@
             // pnlNoteCardFooter
             // 
             this.pnlNoteCardFooter.Controls.Add(this.btnNoteMore);
+            this.pnlNoteCardFooter.Controls.Add(this.lblPriorityName);
             this.pnlNoteCardFooter.Controls.Add(this.lblNoteCardDate);
             this.pnlNoteCardFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlNoteCardFooter.Location = new System.Drawing.Point(10, 120);
@@ -144,8 +200,9 @@
             // btnNoteMore
             // 
             this.btnNoteMore.BackColor = System.Drawing.Color.Transparent;
-            this.btnNoteMore.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnNoteMore.FlatAppearance.BorderSize = 0;
+            this.btnNoteMore.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SeaShell;
+            this.btnNoteMore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SeaShell;
             this.btnNoteMore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNoteMore.Image = global::PersonalExpenseCreditTracker.Properties.Resources.more2;
             this.btnNoteMore.Location = new System.Drawing.Point(281, 0);
@@ -154,6 +211,16 @@
             this.btnNoteMore.TabIndex = 1;
             this.btnNoteMore.UseVisualStyleBackColor = false;
             this.btnNoteMore.Click += new System.EventHandler(this.btnMore_Click);
+            // 
+            // lblPriorityName
+            // 
+            this.lblPriorityName.AutoSize = true;
+            this.lblPriorityName.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPriorityName.Location = new System.Drawing.Point(135, 10);
+            this.lblPriorityName.Name = "lblPriorityName";
+            this.lblPriorityName.Size = new System.Drawing.Size(73, 23);
+            this.lblPriorityName.TabIndex = 2;
+            this.lblPriorityName.Text = "Medium";
             // 
             // lblNoteCardDate
             // 
@@ -222,6 +289,7 @@
             this.btnLastPage.Size = new System.Drawing.Size(40, 40);
             this.btnLastPage.TabIndex = 4;
             this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
             // 
             // btnNextpage
             // 
@@ -231,6 +299,7 @@
             this.btnNextpage.Size = new System.Drawing.Size(40, 40);
             this.btnNextpage.TabIndex = 3;
             this.btnNextpage.UseVisualStyleBackColor = true;
+            this.btnNextpage.Click += new System.EventHandler(this.btnNextpage_Click);
             // 
             // btnCurrentPage
             // 
@@ -250,6 +319,7 @@
             this.btnPreviousPage.Size = new System.Drawing.Size(40, 40);
             this.btnPreviousPage.TabIndex = 1;
             this.btnPreviousPage.UseVisualStyleBackColor = true;
+            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
             // 
             // btnFirstpage
             // 
@@ -260,6 +330,7 @@
             this.btnFirstpage.Size = new System.Drawing.Size(40, 40);
             this.btnFirstpage.TabIndex = 0;
             this.btnFirstpage.UseVisualStyleBackColor = true;
+            this.btnFirstpage.Click += new System.EventHandler(this.btnFirstpage_Click);
             // 
             // pnlNoteFooter
             // 
@@ -356,15 +427,19 @@
             this.tblNoteSummary.Controls.Add(this.pnlTotalNotes, 0, 0);
             this.tblNoteSummary.Controls.Add(this.pnlImportant, 1, 0);
             this.tblNoteSummary.Controls.Add(this.pnlThisMonth, 2, 0);
+            this.tblNoteSummary.Controls.Add(this.panel2, 0, 1);
             this.tblNoteSummary.Dock = System.Windows.Forms.DockStyle.Top;
             this.tblNoteSummary.Location = new System.Drawing.Point(0, 0);
             this.tblNoteSummary.Margin = new System.Windows.Forms.Padding(0);
             this.tblNoteSummary.MinimumSize = new System.Drawing.Size(830, 120);
             this.tblNoteSummary.Name = "tblNoteSummary";
             this.tblNoteSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tblNoteSummary.RowCount = 1;
+            this.tblNoteSummary.RowCount = 2;
             this.tblNoteSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblNoteSummary.Size = new System.Drawing.Size(1203, 120);
+            this.tblNoteSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tblNoteSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblNoteSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblNoteSummary.Size = new System.Drawing.Size(1203, 188);
             this.tblNoteSummary.TabIndex = 1;
             // 
             // pnlTotalNotes
@@ -379,7 +454,7 @@
             this.pnlTotalNotes.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTotalNotes.MinimumSize = new System.Drawing.Size(250, 100);
             this.pnlTotalNotes.Name = "pnlTotalNotes";
-            this.pnlTotalNotes.Size = new System.Drawing.Size(373, 100);
+            this.pnlTotalNotes.Size = new System.Drawing.Size(373, 102);
             this.pnlTotalNotes.TabIndex = 0;
             this.pnlTotalNotes.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTotalNotes_Paint);
             // 
@@ -437,7 +512,7 @@
             this.pnlImportant.MinimumSize = new System.Drawing.Size(250, 100);
             this.pnlImportant.Name = "pnlImportant";
             this.pnlImportant.Padding = new System.Windows.Forms.Padding(3);
-            this.pnlImportant.Size = new System.Drawing.Size(384, 100);
+            this.pnlImportant.Size = new System.Drawing.Size(384, 102);
             this.pnlImportant.TabIndex = 1;
             this.pnlImportant.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlImportant_Paint);
             // 
@@ -496,7 +571,7 @@
             this.pnlThisMonth.MinimumSize = new System.Drawing.Size(250, 100);
             this.pnlThisMonth.Name = "pnlThisMonth";
             this.pnlThisMonth.Padding = new System.Windows.Forms.Padding(3);
-            this.pnlThisMonth.Size = new System.Drawing.Size(374, 100);
+            this.pnlThisMonth.Size = new System.Drawing.Size(374, 102);
             this.pnlThisMonth.TabIndex = 2;
             this.pnlThisMonth.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlThisMonth_Paint);
             // 
@@ -541,6 +616,94 @@
             this.picNoteCalender.TabIndex = 0;
             this.picNoteCalender.TabStop = false;
             // 
+            // panel2
+            // 
+            this.tblNoteSummary.SetColumnSpan(this.panel2, 3);
+            this.panel2.Controls.Add(this.btnSerach);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(6, 128);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1191, 54);
+            this.panel2.TabIndex = 3;
+            // 
+            // btnSerach
+            // 
+            this.btnSerach.FlatAppearance.BorderSize = 0;
+            this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
+            this.btnSerach.Location = new System.Drawing.Point(2, 5);
+            this.btnSerach.Name = "btnSerach";
+            this.btnSerach.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.btnSerach.Size = new System.Drawing.Size(53, 44);
+            this.btnSerach.TabIndex = 4;
+            this.btnSerach.UseVisualStyleBackColor = true;
+            this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnFilter);
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.btnRefresh);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(991, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(0, 5, 10, 5);
+            this.panel3.Size = new System.Drawing.Size(200, 54);
+            this.panel3.TabIndex = 1;
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.BackColor = System.Drawing.Color.Transparent;
+            this.btnFilter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnFilter.FlatAppearance.BorderSize = 0;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFilter.ForeColor = System.Drawing.Color.White;
+            this.btnFilter.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter1;
+            this.btnFilter.Location = new System.Drawing.Point(0, 5);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(53, 44);
+            this.btnFilter.TabIndex = 11;
+            this.btnFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnFilter.UseVisualStyleBackColor = false;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
+            this.button1.Location = new System.Drawing.Point(137, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(53, 44);
+            this.button1.TabIndex = 10;
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.AutoSize = true;
+            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.sync1;
+            this.btnRefresh.Location = new System.Drawing.Point(69, 5);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(53, 44);
+            this.btnRefresh.TabIndex = 9;
+            this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            // 
             // cmsNote
             // 
             this.cmsNote.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -571,11 +734,350 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
+            // cmsFilter
+            // 
+            this.cmsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDate,
+            this.tsmiPriority});
+            this.cmsFilter.Name = "cmsFilter";
+            this.cmsFilter.Size = new System.Drawing.Size(126, 52);
+            // 
+            // tsmiDate
+            // 
+            this.tsmiDate.Name = "tsmiDate";
+            this.tsmiDate.Size = new System.Drawing.Size(125, 24);
+            this.tsmiDate.Text = "Date";
+            this.tsmiDate.Click += new System.EventHandler(this.tsmiDate_Click);
+            // 
+            // tsmiPriority
+            // 
+            this.tsmiPriority.Name = "tsmiPriority";
+            this.tsmiPriority.Size = new System.Drawing.Size(125, 24);
+            this.tsmiPriority.Text = "Priority";
+            this.tsmiPriority.Click += new System.EventHandler(this.tsmiPriority_Click);
+            // 
+            // pnlPriorityFilter
+            // 
+            this.pnlPriorityFilter.BackColor = System.Drawing.Color.Transparent;
+            this.pnlPriorityFilter.Controls.Add(this.pnlHeader);
+            this.pnlPriorityFilter.Location = new System.Drawing.Point(318, 400);
+            this.pnlPriorityFilter.Name = "pnlPriorityFilter";
+            this.pnlPriorityFilter.Size = new System.Drawing.Size(567, 48);
+            this.pnlPriorityFilter.TabIndex = 10;
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.Controls.Add(this.btnPriorityApply);
+            this.pnlHeader.Controls.Add(this.lblPriorityFilter);
+            this.pnlHeader.Controls.Add(this.pnlPriority);
+            this.pnlHeader.Controls.Add(this.btnPriorityClose);
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(565, 45);
+            this.pnlHeader.TabIndex = 4;
+            // 
+            // btnPriorityApply
+            // 
+            this.btnPriorityApply.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnPriorityApply.FlatAppearance.BorderSize = 0;
+            this.btnPriorityApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPriorityApply.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPriorityApply.ForeColor = System.Drawing.Color.White;
+            this.btnPriorityApply.Location = new System.Drawing.Point(411, 5);
+            this.btnPriorityApply.Name = "btnPriorityApply";
+            this.btnPriorityApply.Size = new System.Drawing.Size(92, 36);
+            this.btnPriorityApply.TabIndex = 4;
+            this.btnPriorityApply.Text = "Apply";
+            this.btnPriorityApply.UseVisualStyleBackColor = false;
+            // 
+            // lblPriorityFilter
+            // 
+            this.lblPriorityFilter.AutoSize = true;
+            this.lblPriorityFilter.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPriorityFilter.Location = new System.Drawing.Point(3, 9);
+            this.lblPriorityFilter.Name = "lblPriorityFilter";
+            this.lblPriorityFilter.Size = new System.Drawing.Size(79, 25);
+            this.lblPriorityFilter.TabIndex = 2;
+            this.lblPriorityFilter.Text = "Priority";
+            // 
+            // pnlPriority
+            // 
+            this.pnlPriority.BackColor = System.Drawing.Color.White;
+            this.pnlPriority.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPriority.Controls.Add(this.cmbPriority);
+            this.pnlPriority.Location = new System.Drawing.Point(103, 6);
+            this.pnlPriority.Name = "pnlPriority";
+            this.pnlPriority.Size = new System.Drawing.Size(293, 34);
+            this.pnlPriority.TabIndex = 3;
+            // 
+            // cmbPriority
+            // 
+            this.cmbPriority.BackColor = System.Drawing.Color.White;
+            this.cmbPriority.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbPriority.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPriority.FormattingEnabled = true;
+            this.cmbPriority.Location = new System.Drawing.Point(3, 2);
+            this.cmbPriority.Name = "cmbPriority";
+            this.cmbPriority.Size = new System.Drawing.Size(285, 31);
+            this.cmbPriority.TabIndex = 0;
+            // 
+            // btnPriorityClose
+            // 
+            this.btnPriorityClose.FlatAppearance.BorderSize = 0;
+            this.btnPriorityClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnPriorityClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
+            this.btnPriorityClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPriorityClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
+            this.btnPriorityClose.Location = new System.Drawing.Point(521, 5);
+            this.btnPriorityClose.Name = "btnPriorityClose";
+            this.btnPriorityClose.Size = new System.Drawing.Size(39, 38);
+            this.btnPriorityClose.TabIndex = 1;
+            this.btnPriorityClose.UseVisualStyleBackColor = true;
+            this.btnPriorityClose.Click += new System.EventHandler(this.btnPriorityClose_Click);
+            // 
+            // pnlDateFilter
+            // 
+            this.pnlDateFilter.BackColor = System.Drawing.Color.Transparent;
+            this.pnlDateFilter.Controls.Add(this.pnlDateHeader);
+            this.pnlDateFilter.Location = new System.Drawing.Point(174, 291);
+            this.pnlDateFilter.Name = "pnlDateFilter";
+            this.pnlDateFilter.Size = new System.Drawing.Size(855, 48);
+            this.pnlDateFilter.TabIndex = 11;
+            // 
+            // pnlDateHeader
+            // 
+            this.pnlDateHeader.Controls.Add(this.btnDateApply);
+            this.pnlDateHeader.Controls.Add(this.btnDateClose);
+            this.pnlDateHeader.Controls.Add(this.pnlToDate);
+            this.pnlDateHeader.Controls.Add(this.pnlFromDateCalenderShow);
+            this.pnlDateHeader.Controls.Add(this.lblFromDate);
+            this.pnlDateHeader.Controls.Add(this.pnlFromDate);
+            this.pnlDateHeader.Controls.Add(this.lblToDate);
+            this.pnlDateHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDateHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlDateHeader.Name = "pnlDateHeader";
+            this.pnlDateHeader.Size = new System.Drawing.Size(855, 48);
+            this.pnlDateHeader.TabIndex = 7;
+            // 
+            // btnDateApply
+            // 
+            this.btnDateApply.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnDateApply.FlatAppearance.BorderSize = 0;
+            this.btnDateApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDateApply.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDateApply.ForeColor = System.Drawing.Color.White;
+            this.btnDateApply.Location = new System.Drawing.Point(705, 5);
+            this.btnDateApply.Name = "btnDateApply";
+            this.btnDateApply.Size = new System.Drawing.Size(92, 36);
+            this.btnDateApply.TabIndex = 7;
+            this.btnDateApply.Text = "Apply";
+            this.btnDateApply.UseVisualStyleBackColor = false;
+            // 
+            // btnDateClose
+            // 
+            this.btnDateClose.FlatAppearance.BorderSize = 0;
+            this.btnDateClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnDateClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
+            this.btnDateClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDateClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
+            this.btnDateClose.Location = new System.Drawing.Point(809, 2);
+            this.btnDateClose.Name = "btnDateClose";
+            this.btnDateClose.Size = new System.Drawing.Size(39, 41);
+            this.btnDateClose.TabIndex = 1;
+            this.btnDateClose.UseVisualStyleBackColor = true;
+            this.btnDateClose.Click += new System.EventHandler(this.btnDateClose_Click_1);
+            // 
+            // pnlToDate
+            // 
+            this.pnlToDate.BackColor = System.Drawing.Color.White;
+            this.pnlToDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlToDate.Controls.Add(this.pnlToDateCalenderShow);
+            this.pnlToDate.Controls.Add(this.picCalenderToDate);
+            this.pnlToDate.Controls.Add(this.txtToDate);
+            this.pnlToDate.Location = new System.Drawing.Point(400, 5);
+            this.pnlToDate.Name = "pnlToDate";
+            this.pnlToDate.Size = new System.Drawing.Size(284, 36);
+            this.pnlToDate.TabIndex = 5;
+            // 
+            // pnlToDateCalenderShow
+            // 
+            this.pnlToDateCalenderShow.BackColor = System.Drawing.Color.Transparent;
+            this.pnlToDateCalenderShow.Controls.Add(this.monthCalendarToDate);
+            this.pnlToDateCalenderShow.Location = new System.Drawing.Point(-19, 4);
+            this.pnlToDateCalenderShow.Name = "pnlToDateCalenderShow";
+            this.pnlToDateCalenderShow.Size = new System.Drawing.Size(302, 198);
+            this.pnlToDateCalenderShow.TabIndex = 7;
+            this.pnlToDateCalenderShow.Visible = false;
+            // 
+            // monthCalendarToDate
+            // 
+            this.monthCalendarToDate.BackColor = System.Drawing.Color.White;
+            this.monthCalendarToDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monthCalendarToDate.Location = new System.Drawing.Point(0, 0);
+            this.monthCalendarToDate.Name = "monthCalendarToDate";
+            this.monthCalendarToDate.TabIndex = 0;
+            this.monthCalendarToDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateChanged_1);
+            // 
+            // picCalenderToDate
+            // 
+            this.picCalenderToDate.Dock = System.Windows.Forms.DockStyle.Right;
+            this.picCalenderToDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
+            this.picCalenderToDate.Location = new System.Drawing.Point(249, 0);
+            this.picCalenderToDate.Name = "picCalenderToDate";
+            this.picCalenderToDate.Size = new System.Drawing.Size(33, 34);
+            this.picCalenderToDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picCalenderToDate.TabIndex = 2;
+            this.picCalenderToDate.TabStop = false;
+            this.picCalenderToDate.Click += new System.EventHandler(this.picCalenderToDate_Click_1);
+            // 
+            // txtToDate
+            // 
+            this.txtToDate.BackColor = System.Drawing.Color.White;
+            this.txtToDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtToDate.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtToDate.Location = new System.Drawing.Point(4, 7);
+            this.txtToDate.Name = "txtToDate";
+            this.txtToDate.Size = new System.Drawing.Size(239, 24);
+            this.txtToDate.TabIndex = 1;
+            // 
+            // pnlFromDateCalenderShow
+            // 
+            this.pnlFromDateCalenderShow.BackColor = System.Drawing.Color.Transparent;
+            this.pnlFromDateCalenderShow.Controls.Add(this.monthCalendarFromDate);
+            this.pnlFromDateCalenderShow.Location = new System.Drawing.Point(47, 32);
+            this.pnlFromDateCalenderShow.Name = "pnlFromDateCalenderShow";
+            this.pnlFromDateCalenderShow.Size = new System.Drawing.Size(302, 198);
+            this.pnlFromDateCalenderShow.TabIndex = 6;
+            this.pnlFromDateCalenderShow.Visible = false;
+            // 
+            // monthCalendarFromDate
+            // 
+            this.monthCalendarFromDate.BackColor = System.Drawing.Color.White;
+            this.monthCalendarFromDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monthCalendarFromDate.Location = new System.Drawing.Point(0, 0);
+            this.monthCalendarFromDate.Name = "monthCalendarFromDate";
+            this.monthCalendarFromDate.TabIndex = 0;
+            this.monthCalendarFromDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarFromDate_DateChanged_1);
+            // 
+            // lblFromDate
+            // 
+            this.lblFromDate.AutoSize = true;
+            this.lblFromDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblFromDate.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFromDate.Location = new System.Drawing.Point(3, 10);
+            this.lblFromDate.Name = "lblFromDate";
+            this.lblFromDate.Size = new System.Drawing.Size(59, 25);
+            this.lblFromDate.TabIndex = 2;
+            this.lblFromDate.Text = "From";
+            // 
+            // pnlFromDate
+            // 
+            this.pnlFromDate.BackColor = System.Drawing.Color.White;
+            this.pnlFromDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFromDate.Controls.Add(this.picCalenderFromDate);
+            this.pnlFromDate.Controls.Add(this.txtFromdate);
+            this.pnlFromDate.Location = new System.Drawing.Point(74, 5);
+            this.pnlFromDate.Name = "pnlFromDate";
+            this.pnlFromDate.Size = new System.Drawing.Size(284, 36);
+            this.pnlFromDate.TabIndex = 4;
+            // 
+            // picCalenderFromDate
+            // 
+            this.picCalenderFromDate.Dock = System.Windows.Forms.DockStyle.Right;
+            this.picCalenderFromDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
+            this.picCalenderFromDate.Location = new System.Drawing.Point(249, 0);
+            this.picCalenderFromDate.Name = "picCalenderFromDate";
+            this.picCalenderFromDate.Size = new System.Drawing.Size(33, 34);
+            this.picCalenderFromDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picCalenderFromDate.TabIndex = 1;
+            this.picCalenderFromDate.TabStop = false;
+            this.picCalenderFromDate.Click += new System.EventHandler(this.picCalenderFromDate_Click_1);
+            // 
+            // txtFromdate
+            // 
+            this.txtFromdate.BackColor = System.Drawing.Color.White;
+            this.txtFromdate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFromdate.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFromdate.Location = new System.Drawing.Point(4, 7);
+            this.txtFromdate.Name = "txtFromdate";
+            this.txtFromdate.Size = new System.Drawing.Size(179, 24);
+            this.txtFromdate.TabIndex = 0;
+            // 
+            // lblToDate
+            // 
+            this.lblToDate.AutoSize = true;
+            this.lblToDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblToDate.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblToDate.Location = new System.Drawing.Point(363, 10);
+            this.lblToDate.Name = "lblToDate";
+            this.lblToDate.Size = new System.Drawing.Size(33, 25);
+            this.lblToDate.TabIndex = 3;
+            this.lblToDate.Text = "To";
+            // 
+            // pnlSearch
+            // 
+            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSearch.Controls.Add(this.pnlSearchHeader);
+            this.pnlSearch.Location = new System.Drawing.Point(364, 200);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Size = new System.Drawing.Size(474, 48);
+            this.pnlSearch.TabIndex = 12;
+            // 
+            // pnlSearchHeader
+            // 
+            this.pnlSearchHeader.Controls.Add(this.btnSearch);
+            this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
+            this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlSearchHeader.Name = "pnlSearchHeader";
+            this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
+            this.pnlSearchHeader.Size = new System.Drawing.Size(474, 48);
+            this.pnlSearchHeader.TabIndex = 0;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(373, 8);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(92, 32);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // pnlSearchTxt
+            // 
+            this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
+            this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSearchTxt.Controls.Add(this.txtSearch);
+            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 8);
+            this.pnlSearchTxt.Name = "pnlSearchTxt";
+            this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.pnlSearchTxt.Size = new System.Drawing.Size(346, 32);
+            this.pnlSearchTxt.TabIndex = 1;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(8, 4);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(334, 23);
+            this.txtSearch.TabIndex = 6;
+            // 
             // NoteControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1203, 630);
+            this.Controls.Add(this.pnlSearch);
+            this.Controls.Add(this.pnlDateFilter);
+            this.Controls.Add(this.pnlPriorityFilter);
             this.Controls.Add(this.pnlNoteMain);
             this.Name = "NoteControl";
             this.Text = "NoteControl";
@@ -601,7 +1103,30 @@
             this.pnlThisMonth.ResumeLayout(false);
             this.pnlThisMonth.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picNoteCalender)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.cmsNote.ResumeLayout(false);
+            this.cmsFilter.ResumeLayout(false);
+            this.pnlPriorityFilter.ResumeLayout(false);
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
+            this.pnlPriority.ResumeLayout(false);
+            this.pnlDateFilter.ResumeLayout(false);
+            this.pnlDateHeader.ResumeLayout(false);
+            this.pnlDateHeader.PerformLayout();
+            this.pnlToDate.ResumeLayout(false);
+            this.pnlToDate.PerformLayout();
+            this.pnlToDateCalenderShow.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picCalenderToDate)).EndInit();
+            this.pnlFromDateCalenderShow.ResumeLayout(false);
+            this.pnlFromDate.ResumeLayout(false);
+            this.pnlFromDate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCalenderFromDate)).EndInit();
+            this.pnlSearch.ResumeLayout(false);
+            this.pnlSearchHeader.ResumeLayout(false);
+            this.pnlSearchTxt.ResumeLayout(false);
+            this.pnlSearchTxt.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -654,6 +1179,44 @@
         private System.Windows.Forms.Button btnCurrentPage;
         private System.Windows.Forms.Button btnPreviousPage;
         private System.Windows.Forms.Button btnFirstpage;
+        private System.Windows.Forms.Label lblPriorityName;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.Button btnSerach;
+        private System.Windows.Forms.ContextMenuStrip cmsFilter;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPriority;
+        private System.Windows.Forms.Panel pnlPriorityFilter;
+        private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.Button btnPriorityApply;
+        private System.Windows.Forms.Label lblPriorityFilter;
+        private System.Windows.Forms.Panel pnlPriority;
+        private System.Windows.Forms.ComboBox cmbPriority;
+        private System.Windows.Forms.Button btnPriorityClose;
+        private System.Windows.Forms.Panel pnlDateFilter;
+        private System.Windows.Forms.Panel pnlDateHeader;
+        private System.Windows.Forms.Button btnDateApply;
+        private System.Windows.Forms.Button btnDateClose;
+        private System.Windows.Forms.Panel pnlToDate;
+        private System.Windows.Forms.Panel pnlToDateCalenderShow;
+        private System.Windows.Forms.MonthCalendar monthCalendarToDate;
+        private System.Windows.Forms.PictureBox picCalenderToDate;
+        private System.Windows.Forms.TextBox txtToDate;
+        private System.Windows.Forms.Panel pnlFromDateCalenderShow;
+        private System.Windows.Forms.MonthCalendar monthCalendarFromDate;
+        private System.Windows.Forms.Label lblFromDate;
+        private System.Windows.Forms.Panel pnlFromDate;
+        private System.Windows.Forms.PictureBox picCalenderFromDate;
+        private System.Windows.Forms.TextBox txtFromdate;
+        private System.Windows.Forms.Label lblToDate;
+        private System.Windows.Forms.Panel pnlSearch;
+        private System.Windows.Forms.Panel pnlSearchHeader;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Panel pnlSearchTxt;
+        private System.Windows.Forms.TextBox txtSearch;
         //private System.Windows.Forms.ContextMenuStrip cmsnote;
     }
 }
