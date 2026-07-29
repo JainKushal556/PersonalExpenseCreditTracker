@@ -61,6 +61,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblBorrowDetails = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label5 = new System.Windows.Forms.Label();
             this.pnlBorrowAddCalenderShow.SuspendLayout();
             this.panelBorrowAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -542,5 +543,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.TextBox txtBorrowStatus;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label5;
     }
 }

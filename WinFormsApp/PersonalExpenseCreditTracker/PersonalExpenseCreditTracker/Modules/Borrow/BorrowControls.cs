@@ -570,7 +570,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             //MessageBox.Show("PersonID = " + personID);
 
-            PayBorrowAmountControls frm = new PayBorrowAmountControls();
+            PayBorrowReturnAmountControls frm = new PayBorrowReturnAmountControls();
 
             frm.UserID = userID;
             frm.PersonID = personID;
