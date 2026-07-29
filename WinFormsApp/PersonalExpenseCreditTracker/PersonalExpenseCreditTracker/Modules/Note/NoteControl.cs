@@ -9,6 +9,9 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 
+using System.Data.SqlClient;
+using System.Configuration;
+
 namespace PersonalExpenseCreditTracker.Modules.Note
 {
     public partial class NoteControl : Form
@@ -21,6 +24,10 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             int nBottomRect,
             int nWidthEllipse,
             int nHeightEllipse);
+        private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        private DataTable AllNoteData = new DataTable();
+        private int currentPage = 1;
+        private int pageSize ;
 
         [DllImport("gdi32.dll")]
         private static extern bool DeleteObject(IntPtr hObject);
@@ -32,7 +39,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void NoteControl_Load(object sender, EventArgs e)
         {
-            btnNoteMore.ContextMenuStrip = cmsNote;
+            
+            int UserID = 11;
             
             foreach (Control c in flpNotes.Controls)
             {
@@ -41,13 +49,163 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     SetRadius(c, 20);
                 }
             }
+            DesignContextMenu();
             ResizeNoteCards();
             SetRoundedPanel(pnlTotalNotes, 20);
             SetRoundedPanel(pnlImportant, 20);
             SetRoundedPanel(pnlThisMonth, 20);
+            HideAllFilterPanels();
+            DesignContextMenu();
+
+            LoadNoteData(UserID);
+            
 
         }
 
+        private void LoadNoteData(int userID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("spGetAllNotes", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = userID;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                    AllNoteData.Clear();
+                    da.Fill(AllNoteData);
+                }
+
+                currentPage = 1;
+                ShowCurrentPage();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AddNoteCard(DataRow row)
+        {
+            Panel card = new Panel();
+
+            card.BackColor = Color.SeaShell;
+            card.Size = new Size(331, 170);
+            card.Margin = new Padding(10);
+            card.Padding = new Padding(10);
+            Label title = new Label();
+
+            title.Text = row["NoteTitle"].ToString();
+            title.Font = new Font("Segoe UI", 10.8f, FontStyle.Bold);
+            title.Location = new Point(10, 10);
+            title.AutoSize = true;
+            Label description = new Label();
+
+            description.Name = "lblNoteCardDescription";
+            description.Text = row["Description"].ToString();
+            description.Font = new Font("Segoe UI", 9.5f);
+            description.ForeColor = Color.FromArgb(90, 90, 90);
+            description.Location = new Point(15, 45);
+            description.AutoEllipsis = true;
+            Panel footer = new Panel();
+
+            footer.Dock = DockStyle.Bottom;
+            footer.Height = 35;
+            Label date = new Label();
+
+            date.Text = Convert.ToDateTime(row["CreatedAt"]) .ToString("dd MMM yyyy");
+
+            date.Font = new Font("Segoe UI", 10F);
+            date.AutoSize = true;
+            date.Location = new Point(0, 8);
+            Label priority = new Label();
+
+            priority.Text = row["NotePriorityName"].ToString();   
+            priority.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
+            priority.ForeColor = Color.FromArgb(200, 80, 80);
+            priority.AutoSize = true;
+            priority.Location = new Point(150, 7);
+            Button btnMore = new Button();
+
+            btnMore.Size = new Size(30, 30);
+            btnMore.Dock = DockStyle.Right;
+
+            btnMore.FlatStyle = FlatStyle.Flat;
+            btnMore.FlatAppearance.BorderSize = 0;
+            btnMore.BackColor = Color.Transparent;
+            btnMore.Image = Properties.Resources.more2;
+            btnMore.Cursor = Cursors.Hand;
+            btnMore.Click += delegate(object sender, EventArgs e)
+            {
+                cmsNote.Show(btnMore, new Point(0, (btnMore.Height)-10));
+            };
+            footer.Controls.Add(priority);
+            footer.Controls.Add(btnMore);
+            footer.Controls.Add(date);
+            card.Controls.Add(title);
+            card.Controls.Add(description);
+            card.Controls.Add(footer);
+            SetRadius(card, 20);
+
+
+            flpNotes.Controls.Add(card);
+        }
+
+        private void UpdatePageSize()
+        {
+            int availableWidth = flpNotes.ClientSize.Width
+                               - flpNotes.Padding.Left
+                               - flpNotes.Padding.Right;
+
+            int columns;
+
+            if (availableWidth < 500)
+                columns = 1;
+            else if (availableWidth < 850)
+                columns = 2;
+            else if (availableWidth < 1150)
+                columns = 3;
+            else
+                columns = 4;
+
+            // Always show 3 rows
+            pageSize = columns * 3;
+        }
+
+        private void ShowCurrentPage()
+        {
+            UpdatePageSize();
+            flpNotes.SuspendLayout();
+            flpNotes.Controls.Clear();
+
+            int start = (currentPage - 1) * pageSize;
+            int end = Math.Min(start + pageSize, AllNoteData.Rows.Count);
+
+            for (int i = start; i < end; i++)
+            {
+                AddNoteCard(AllNoteData.Rows[i]);
+            }
+
+            flpNotes.ResumeLayout();
+
+            ResizeNoteCards();
+
+            lblNoteStartingPageNumber.Text = (AllNoteData.Rows.Count == 0) ? "0" : (start + 1).ToString();
+            lblNoteEndingPageNumber.Text = end.ToString();
+            lblNoteTotalPageNumber.Text = AllNoteData.Rows.Count.ToString();
+
+            int totalPages = (int)Math.Ceiling(AllNoteData.Rows.Count / (double)pageSize);
+
+            btnCurrentPage.Text = currentPage.ToString();
+
+            btnFirstpage.Enabled = currentPage > 1;
+            btnPreviousPage.Enabled = currentPage > 1;
+
+            btnNextpage.Enabled = currentPage < totalPages;
+            btnLastPage.Enabled = currentPage < totalPages;
+        }
 
         private void lblNoteSubtitle_Click(object sender, EventArgs e)
         {
@@ -98,17 +256,31 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void NoteControl_Resize(object sender, EventArgs e)
         {
             ResizeNoteCards();
+            UpdatePageSize();
+
+            int totalPages = (int)Math.Ceiling(AllNoteData.Rows.Count / (double)pageSize);
+
+            if (currentPage > totalPages)
+                currentPage = totalPages;
+
+            if (currentPage < 1)
+                currentPage = 1;
+
+            ShowCurrentPage();
             SetRoundedPanel(pnlTotalNotes, 15);
             SetRoundedPanel(pnlImportant, 15);
             SetRoundedPanel(pnlThisMonth, 15);
         }
 
+
         private void ResizeNoteCards()
         {
             int margin = 10;
+
             int availableWidth = flpNotes.ClientSize.Width
-                               - flpNotes.Padding.Left
-                               - flpNotes.Padding.Right;
+                                 - flpNotes.Padding.Left
+                                 - flpNotes.Padding.Right;
+
 
             int columns;
 
@@ -121,39 +293,56 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             else
                 columns = 4;
 
+
             int cardWidth = (availableWidth - (columns * margin * 2)) / columns;
+
 
             foreach (Control c in flpNotes.Controls)
             {
                 if (c is Panel)
                 {
                     c.Width = cardWidth;
-                    c.Height = 120;
+                    c.Height = 170;
                     c.Margin = new Padding(margin);
+
+
+                    Label description = c.Controls["lblNoteCardDescription"] as Label;
+
+                    if (description != null)
+                    {
+                        description.Width = c.Width - 30;
+
+
+                        // Screen size অনুযায়ী description line
+                        if (availableWidth < 500)
+                        {
+                            // Small screen
+                            description.Height = 40;
+                            description.MaximumSize = new Size(c.Width - 30, 40);
+                        }
+                        else if (availableWidth < 850)
+                        {
+                            // Medium screen
+                            description.Height = 60;
+                            description.MaximumSize = new Size(c.Width - 30, 60);
+                        }
+                        else
+                        {
+                            // Large screen
+                            description.Height = 90;
+                            description.MaximumSize = new Size(c.Width - 30, 90);
+                        }
+
+
+                        description.AutoEllipsis = true;
+                    }
+
 
                     SetRadius(c, 20);
                 }
             }
-            //foreach (Control c in flpNotes.Controls)
-            //{
-            //    if (c is Panel)
-            //    {
-            //        c.Width = cardWidth;
-            //        c.Height = 120;
-            //        c.Margin = new Padding(margin);
-
-            //        Label lblDescription = c.Controls["lblNoteCardDescription"] as Label;
-
-            //        if (lblDescription != null)
-            //        {
-            //            lblDescription.Width = c.Width - 30;      // 15 px padding on each side
-            //            lblDescription.MaximumSize = new Size(c.Width - 30, 60);
-            //        }
-
-            //        SetRadius(c, 20);
-            //    }
-            //}
         }
+
 
         private void pnlNoteHeader_Paint(object sender, PaintEventArgs e)
         {
@@ -212,7 +401,66 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             DeleteObject(hrgn);
         }
 
-        
+
+        private void DesignContextMenu()
+        {
+            // Context Menu
+            cmsNote.ShowImageMargin = true;
+            cmsNote.ShowCheckMargin = false;
+            cmsNote.ImageScalingSize = new Size(10, 10);
+            cmsNote.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
+         
+
+            // Menu Item Height
+            viewToolStripMenuItem.AutoSize = false;
+            viewToolStripMenuItem.Height = 30;
+
+            editToolStripMenuItem.AutoSize = false;
+            editToolStripMenuItem.Height = 30;
+
+            deleteToolStripMenuItem.AutoSize = false;
+            deleteToolStripMenuItem.Height = 30;
+
+            
+
+            // Images
+            viewToolStripMenuItem.Image = Properties.Resources.open_eye;
+            editToolStripMenuItem.Image = Properties.Resources.pen;
+            deleteToolStripMenuItem.Image = Properties.Resources.trash;
+            
+
+            // Display Style
+            viewToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            editToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            deleteToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            
+
+            // Image Scaling
+            viewToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
+            editToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
+            deleteToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
+
+            //filter cms
+            cmsFilter.ShowImageMargin = true;
+            cmsFilter.ShowCheckMargin = false;
+            cmsFilter.ImageScalingSize = new Size(10, 10);
+
+            tsmiDate.AutoSize = false;
+            tsmiDate.Height = 30;
+
+            tsmiPriority.AutoSize = false;
+            tsmiPriority.Height = 30;
+
+            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiPriority.Image = Properties.Resources.shop;
+
+            tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiPriority.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+
+            tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiPriority.ImageScaling = ToolStripItemImageScaling.None;
+           
+        }
 
         private void pnlNoteCard_Paint(object sender, PaintEventArgs e)
         {
@@ -244,6 +492,234 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void lblNoteCardDescription_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnFirstpage_Click(object sender, EventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                currentPage = 1;
+                ShowCurrentPage();
+            }
+        }
+
+        private void btnPreviousPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                ShowCurrentPage();
+            }
+        }
+
+        private void btnNextpage_Click(object sender, EventArgs e)
+        {
+            int totalPages = (int)Math.Ceiling((double)AllNoteData.Rows.Count / pageSize);
+
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                ShowCurrentPage();
+            }
+        }
+
+        private void btnLastPage_Click(object sender, EventArgs e)
+        {
+            int totalPages = (int)Math.Ceiling((double)AllNoteData.Rows.Count / pageSize);
+            if (currentPage != totalPages)
+            {
+                currentPage = totalPages;
+                ShowCurrentPage();
+            }
+        }
+
+        private void pnlNoteMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tsmiDate_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlDateFilter);
+        }
+
+        private void tsmiPriority_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlPriorityFilter);
+        }
+
+        private void btnSerach_Click(object sender, EventArgs e)
+        {
+            ShowSearchPanel(pnlSearch);
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            cmsFilter.Show(btnFilter, 0, btnFilter.Height);
+        }
+
+        
+
+       
+
+        private void btnDateClose_Click(object sender, EventArgs e)
+        {
+            pnlDateFilter.Visible = false;
+        }
+
+        private void btnPriorityClose_Click(object sender, EventArgs e)
+        {
+            pnlPriorityFilter.Visible = false;
+        }
+
+       
+        private void HideAllFilterPanels()
+        {
+            pnlDateFilter.Visible = false;
+            pnlPriorityFilter.Visible = false;
+            pnlSearch.Visible = false;
+
+        }
+        private void HidePopupPanels()
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+        private void ShowFilterPanel(Panel panel)
+        {
+            HideAllFilterPanels();
+
+            Point p = flpNotes.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Parent = this;
+
+            panel.Location = new Point(
+                p.X + flpNotes.Width - panel.Width - 170,
+                p.Y - 45);
+
+            panel.BringToFront();
+            panel.Visible = true;
+        }
+
+        private void ShowSearchPanel(Panel panel)
+        {
+            HideAllFilterPanels();
+            Point p = flpNotes.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+            panel.Location = new Point(
+                p.X + flpNotes.Width - panel.Width - 830,
+                p.Y - 45);
+            panel.BringToFront();
+            panel.Visible = true;
+        }
+
+        private void ShowCalenderFromDatePanel(Panel panel)
+        {
+            HidePopupPanels();
+
+            Point p = pnlDateFilter.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Parent = this;
+
+            panel.Location = new Point(
+                p.X + pnlDateFilter.Width - panel.Width - 300,
+                p.Y + 35);
+
+            panel.BringToFront();
+            panel.Visible = true;
+        }
+        private void ShowCalenderToDatePanel(Panel panel)
+        {
+            HidePopupPanels();
+
+            Point p = pnlDateFilter.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Parent = this;
+
+            panel.Location = new Point(
+                p.X + pnlDateFilter.Width - panel.Width - 70,
+                p.Y + 35);
+
+            panel.BringToFront();
+            panel.Visible = true;
+        }
+        private void RegisterMouseDown(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                ctrl.MouseDown += NoteControls_MouseDown;
+
+                if (ctrl.HasChildren)
+                    RegisterMouseDown(ctrl);
+            }
+        }
+        private void NoteControls_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point mousePos = this.PointToClient(Control.MousePosition);
+
+            // From Date Calendar
+            if (pnlFromDateCalenderShow.Visible)
+            {
+                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
+                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle)
+                        .Contains(Control.MousePosition))
+                {
+                    pnlFromDateCalenderShow.Visible = false;
+                }
+            }
+
+            // To Date Calendar
+            if (pnlToDateCalenderShow.Visible)
+            {
+                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
+                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle)
+                        .Contains(Control.MousePosition))
+                {
+                    pnlToDateCalenderShow.Visible = false;
+                }
+            }
+        }
+
+        private void btnDateClose_Click_1(object sender, EventArgs e)
+        {
+            pnlDateFilter.Visible = false;
+        }
+
+        private void picCalenderFromDate_Click_1(object sender, EventArgs e)
+        {
+            if (pnlFromDateCalenderShow.Visible)
+            {
+                pnlFromDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+            }
+        }
+
+        private void picCalenderToDate_Click_1(object sender, EventArgs e)
+        {
+            if (pnlToDateCalenderShow.Visible)
+            {
+                pnlToDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderToDatePanel(pnlToDateCalenderShow);
+            }
+        }
+
+        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        {
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+        }
+
+        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        {
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
         }
     }
 }

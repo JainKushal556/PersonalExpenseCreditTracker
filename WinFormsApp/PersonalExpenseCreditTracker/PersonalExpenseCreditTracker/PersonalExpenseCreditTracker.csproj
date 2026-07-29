@@ -616,6 +616,9 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\search.png" />
+    <None Include="Resources\sync1.png" />
+    <None Include="Resources\refresh-page-option.png" />
     <None Include="Resources\PersonIcon %282%29.png" />
     <None Include="Resources\SL.png" />
     <None Include="Resources\phone.png" />
@@ -705,6 +708,9 @@
     <None Include="Resources\eye.png" />
     <None Include="Resources\padlock %284%29.png" />
     <None Include="Resources\address-location.png" />
+    <None Include="Resources\Export.png" />
+    <None Include="Resources\filter1.png" />
+    <None Include="Resources\magnifying-glass.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>
