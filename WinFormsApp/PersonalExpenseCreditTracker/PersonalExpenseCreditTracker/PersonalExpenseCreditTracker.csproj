@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <GenerateResourceUsePreserializedResources>false</GenerateResourceUsePreserializedResources>
+
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -637,6 +637,9 @@
     <None Include="Resources\update %284%29.png" />
     <None Include="Resources\update %283%29.png" />
     <None Include="Resources\update %282%29.png" />
+    <None Include="Resources\search.png" />
+    <None Include="Resources\sync1.png" />
+    <None Include="Resources\refresh-page-option.png" />
     <None Include="Resources\PersonIcon %282%29.png" />
     <None Include="Resources\SL.png" />
     <None Include="Resources\phone.png" />
@@ -737,6 +740,9 @@
     <None Include="Resources\eye.png" />
     <None Include="Resources\padlock %284%29.png" />
     <None Include="Resources\address-location.png" />
+    <None Include="Resources\Export.png" />
+    <None Include="Resources\filter1.png" />
+    <None Include="Resources\magnifying-glass.png" />
     <None Include="Resources\floppy-disk.png" />
     <None Include="Resources\floppy-disk %281%29.png" />
     <None Include="Resources\floppy-disk %282%29.png" />

@@ -106,7 +106,7 @@ graph LR
 
 | Stored Procedure | UI Trigger Event & Source File | Input Parameters from UI | BLL Validation & Constraints |
 | :--- | :--- | :--- | :--- |
-| **`spInsertCreditByUserID`** | `CreditDetailsControl.cs` <br> "Save Credit" Button Click | `@UserID` (Session)<br>`@CategoryID`<br>`@SubCategoryID`<br>`@PaymentTypeID`<br>`@Amount`<br>`@Date`<br>`@Description` | • **Amount**: Must be $> 0$.<br>• **Category/SubCategory/PaymentType**: Must be selected (> 0).<br>• **Date**: Valid format, cannot exceed current date.<br>• **Description**: Max 200 chars. |
+| **`spInsertCreditByUserID`** | `CreditDetailsControl.cs` <br> "Save Credit" Button Click | `@UserID` (Session)<br>`@CategoryID`<br>`@SubCategoryID`<br>`@PaymentID`<br>`@Amount`<br>`@Description` | • **Amount**: Must be $> 0$.<br>• **Category/SubCategory/PaymentType**: Must be selected (> 0).<br>• **Description**: Max 200 chars. |
 | **`spGetAllCreditsByID`** | `CreditControl.cs` <br> Grid Load | `@UserID` (Session) | • Valid session UserID check. |
 | **`spFilterCreditByDateRange`** | `CreditControl.cs` <br> Date Filter Click | `@UserID`, `@StartDate`, `@EndDate` | • **Date Range**: `@StartDate` must be $\le$ `@EndDate`. |
 | **`spFilterCreditByAmountRange`**| `CreditControl.cs` <br> Amount Filter Click | `@UserID`, `@MinAmount`, `@MaxAmount`| • `@MinAmount` must be $\ge 0$ and $\le$ `@MaxAmount`. |
@@ -115,6 +115,8 @@ graph LR
 | **`spGetMonthlyCreditSummary`**| Reports / Dashboard Charts | `@UserID` | • Valid session check. |
 | **`spGetTodayCredit`** | Dashboard Control Load | `@UserID` | • Retrieves today's total credit. |
 | **`spGetCategoryWiseCreditReport`**| Category Chart UI | `@UserID`, `@StartDate`, `@EndDate` | • **Date Range**: `@StartDate` must be $\le$ `@EndDate`. |
+| **`spGetCreditSubCategoryByCategoryID`**| `CreditDetailsControl.cs` <br> Category Select | `@CategoryID` | • CategoryID must be valid (> 0). |
+| **`spGetAllCreditCategory`**| `CreditDetailsControl.cs` <br> Form Load | None | • None. |
 
 ---
 
@@ -143,7 +145,7 @@ graph LR
 
 | Stored Procedure | UI Trigger Event & Source File | Input Parameters from UI | BLL Validation & Constraints |
 | :--- | :--- | :--- | :--- |
-| **`spInsertBorrow`** | `AddBorrowControls.cs` <br> "Save Borrow" Button Click (`btnBorrowAddSave_Click`) | `@UserID` (Session)<br>`@PersonID`<br>`@Amount`<br>`@BorrowDate`<br>`@DueDate`<br>`@Description` | • **PersonID**: Must select a valid person (> 0).<br>• **Amount**: Must be $> 0$.<br>• **BorrowDate / DueDate**: `@DueDate` must be $\ge$ `@BorrowDate`. |
+| **`spInsertBorrow`** | `AddBorrowControls.cs` <br> "Save Borrow" Button Click (`btnBorrowAddSave_Click`) | `@UserID` (Session)<br>`@PersonID`<br>`@PaymentID`<br>`@Amount`<br>`@DeadlineAt`<br>`@Description` | • **PersonID**: Must select a valid person (> 0).<br>• **PaymentID**: Must select a valid payment type (> 0).<br>• **Amount**: Must be $> 0$.<br>• **DeadlineAt**: `@DeadlineAt` must be $\ge$ current date. |
 | **`spPayBorrow`** | `BorrowControls.cs` <br> "Pay Borrow" Button Click | `@BorrowID`<br>`@PayAmount`<br>`@PayDate`<br>`@UserID` | • **BorrowID**: Must be valid.<br>• **PayAmount**: Must be $> 0$.<br>• **Business Rule Check**: `@PayAmount` must not exceed the remaining unpaid borrow balance. |
 | **`spGetAllBorrow`** | `BorrowControls.cs` <br> Grid view load | `@UserID` (Session) | • Valid session check. |
 | **`spGetBorrowPersonHistory`** | History pop-up list | `@UserID`, `@PersonID` | • Valid PersonID check. |

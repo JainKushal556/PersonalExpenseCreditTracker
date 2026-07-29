@@ -14,6 +14,13 @@ namespace BLLayer.Common
             return dataTable;
         }
 
+        // Retrieves list data for ComboBoxes from the database using UserID
+        public static DataTable RetrieveListForComboBox(string spName, string paramName,int paramValue)
+        {
+            DataTable dataTable = null;
+            dataTable = SqlHelper.retriveDataByAndFilterIdAtDal(spName, paramName, paramValue);
+            return dataTable;
+        }
         // Retrieves list data for ComboBoxes from the database without UserID
         public static DataTable RetrieveListForComboBox(string spName)
         {
@@ -54,6 +61,13 @@ namespace BLLayer.Common
             return dataTable;
         }
 
+        // Filters and retrieves data by a range of two int values (e.g., Min and Max Amount)
+        public static DataTable RetrieveDataByUserIdAndFilterId(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName, userId, paramName1, paramId1, paramName2, paramId2);
+            return dataTable;
+        }
         // Filters and retrieves data by a date range (e.g., Start Date and End Date)
         public static DataTable RetrieveDataByUserIdAndFilterId(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
         {

@@ -563,7 +563,6 @@ The first version will include borrow return reminders, lent return reminders, a
 - `@Amount`
 - `@Description`
 - `@PaymentID`
-- `@CreditAt`
 
 **Expected Output:**
 
@@ -575,7 +574,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Tables Used:**
 
-- `Credit`
+- `tblCredit`
 
 ### 22. spGetAllCreditsByID
 
@@ -771,7 +770,51 @@ The first version will include borrow return reminders, lent return reminders, a
 - `CreditSubCategory`
 - `PaymentType`
 
-## ðŸ¤ LENT MODULE
+### 28B. spGetCreditSubCategoryByCategoryID
+
+**Purpose:**
+
+- Get sub categories of credit based on CategoryID.
+
+**Parameters:**
+
+- `@CategoryID`
+
+**Expected Output:**
+
+- List of sub categories belonging to category.
+
+**When Used:**
+
+- Selecting credit category in dropdown to populate sub category dropdown.
+
+**Tables Used:**
+
+- `tblCreditSubCategory`
+
+### 28C. spGetAllCreditCategory
+
+**Purpose:**
+
+- Get all credit categories.
+
+**Parameters:**
+
+- None
+
+**Expected Output:**
+
+- List of all credit categories.
+
+**When Used:**
+
+- Populating credit category dropdown.
+
+**Tables Used:**
+
+- `tblCreditCategory`
+
+## 🤝 LENT MODULE
 
 ### 29. spInsertLent
 
@@ -1102,7 +1145,6 @@ The first version will include borrow return reminders, lent return reminders, a
 - `@UserID`
 - `@PersonID`
 - `@PaymentID`
-- `@StatusID`
 - `@Amount`
 - `@DeadlineAt`
 - `@Description`
@@ -1119,8 +1161,8 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Tables Used:**
 
-- `Borrow`
-- `Credit`
+- `tblBorrow`
+- `tblCredit`
 
 ### 37. spGetAllBorrow
 
@@ -1689,7 +1731,29 @@ The first version will include borrow return reminders, lent return reminders, a
 - `Task`
 - `Task_Status`
 
-## ðŸ“ NOTE MODULE
+### 51A. spGetAllTaskPriorities
+
+**Purpose:**
+
+- Retrieve all task priorities.
+
+**Parameters:**
+
+- None
+
+**Expected Output:**
+
+- List of all task priorities (PriorityID, PriorityName) sorted by PriorityName.
+
+**When Used:**
+
+- Populating task priority dropdown in the task management module.
+
+**Tables Used:**
+
+- `tblTaskPriorities`
+
+## 📝 NOTE MODULE
 
 ### 52. spInsertNote
 
