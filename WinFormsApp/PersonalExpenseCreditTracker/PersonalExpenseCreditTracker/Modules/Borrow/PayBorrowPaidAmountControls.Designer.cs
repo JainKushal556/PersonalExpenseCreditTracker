@@ -1,6 +1,6 @@
 ﻿namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
-    partial class PayBorrowReturnAmountControls
+    partial class PayBorrowPaidAmountControls
     {
         /// <summary>
         /// Required designer variable.
@@ -600,7 +600,7 @@
             this.lblPersonNameText.TabIndex = 33;
             this.lblPersonNameText.Text = "Sujit Kar";
             // 
-            // PayBorrowReturnAmountControls
+            // PayBorrowPaidAmountControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -608,7 +608,7 @@
             this.ClientSize = new System.Drawing.Size(618, 774);
             this.Controls.Add(this.panelMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "PayBorrowReturnAmountControls";
+            this.Name = "PayBorrowPaidAmountControls";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PayBorrowAmountControls";
             this.Load += new System.EventHandler(this.PayBorrowAmountControls_Load);

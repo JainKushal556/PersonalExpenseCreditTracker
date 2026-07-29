@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
-    public partial class PayBorrowReturnAmountControls : Form
+    public partial class PayBorrowPaidAmountControls : Form
     {
-        public PayBorrowReturnAmountControls()
+        public PayBorrowPaidAmountControls()
         {
             InitializeComponent();
             //this.txtDescription.Enter += new System.EventHandler(this.txtDescription_Leave);
