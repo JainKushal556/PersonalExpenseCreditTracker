@@ -106,6 +106,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelMainBody.Size = new System.Drawing.Size(864, 527);
             this.panelMainBody.TabIndex = 0;
             this.panelMainBody.Click += new System.EventHandler(this.panelMainBody_Click);
+            this.panelMainBody.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMainBody_Paint);
             // 
             // pictureBox6
             // 

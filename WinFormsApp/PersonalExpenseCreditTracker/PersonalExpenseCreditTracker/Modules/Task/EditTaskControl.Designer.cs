@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlEditTask = new System.Windows.Forms.Panel();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -52,11 +53,13 @@
             this.lblTaskTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlEditTask.SuspendLayout();
             this.pnlDeadline.SuspendLayout();
             this.pnlStatus.SuspendLayout();
             this.pnlPriority.SuspendLayout();
             this.pnlTaskTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlEditTask
@@ -88,7 +91,7 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(185, 0);
+            this.monthCalendar1.Location = new System.Drawing.Point(145, 172);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 10;
             this.monthCalendar1.Visible = false;
@@ -214,6 +217,9 @@
             this.txtDeadline.Name = "txtDeadline";
             this.txtDeadline.Size = new System.Drawing.Size(376, 27);
             this.txtDeadline.TabIndex = 0;
+            this.txtDeadline.TextChanged += new System.EventHandler(this.txtDeadline_TextChanged);
+            this.txtDeadline.Enter += new System.EventHandler(this.txtDeadline_Enter);
+            this.txtDeadline.Leave += new System.EventHandler(this.txtDeadline_Leave);
             // 
             // lblDeadline
             // 
@@ -240,10 +246,6 @@
             this.cmbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
-            "Select Priority",
-            "Pending",
-            "Completed"});
             this.cmbStatus.Location = new System.Drawing.Point(11, 8);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(172, 36);
@@ -274,11 +276,6 @@
             this.cmbPriority.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbPriority.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPriority.FormattingEnabled = true;
-            this.cmbPriority.Items.AddRange(new object[] {
-            "Select Priority",
-            "Low",
-            "Medium",
-            "High"});
             this.cmbPriority.Location = new System.Drawing.Point(12, 8);
             this.cmbPriority.Name = "cmbPriority";
             this.cmbPriority.Size = new System.Drawing.Size(172, 36);
@@ -350,6 +347,10 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Edit Task";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // EditTaskControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -369,6 +370,7 @@
             this.pnlPriority.ResumeLayout(false);
             this.pnlTaskTitle.ResumeLayout(false);
             this.pnlTaskTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -399,5 +401,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -50,9 +50,10 @@
             this.btnFirstpage = new System.Windows.Forms.Button();
             this.pnlTaskTitle = new System.Windows.Forms.Panel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExport = new System.Windows.Forms.Button();
             this.pnlSingleLine = new System.Windows.Forms.Panel();
             this.lblTaskList = new System.Windows.Forms.Label();
-            this.btnExport = new System.Windows.Forms.Button();
             this.dataGridViewTask = new System.Windows.Forms.DataGridView();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,7 +83,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlTaskContent.SuspendLayout();
             this.pnlTaskList.SuspendLayout();
             this.tableLayoutPanelTask.SuspendLayout();
@@ -91,6 +91,7 @@
             this.pnlControl.SuspendLayout();
             this.pnlTaskTitle.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTask)).BeginInit();
             this.tblCardContant.SuspendLayout();
             this.pnlTotalTask.SuspendLayout();
@@ -102,7 +103,6 @@
             this.pnlDueToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTaskDueIcone)).BeginInit();
             this.cmsTaskAction.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTaskContent
@@ -321,24 +321,15 @@
             this.pnlTableHeader.Size = new System.Drawing.Size(1026, 47);
             this.pnlTableHeader.TabIndex = 1;
             // 
-            // pnlSingleLine
+            // panel1
             // 
-            this.pnlSingleLine.BackColor = System.Drawing.Color.Black;
-            this.pnlSingleLine.Location = new System.Drawing.Point(4, 46);
-            this.pnlSingleLine.Name = "pnlSingleLine";
-            this.pnlSingleLine.Size = new System.Drawing.Size(114, 3);
-            this.pnlSingleLine.TabIndex = 2;
-            // 
-            // lblTaskList
-            // 
-            this.lblTaskList.AutoSize = true;
-            this.lblTaskList.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskList.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.lblTaskList.Location = new System.Drawing.Point(4, 5);
-            this.lblTaskList.Name = "lblTaskList";
-            this.lblTaskList.Size = new System.Drawing.Size(116, 32);
-            this.lblTaskList.TabIndex = 1;
-            this.lblTaskList.Text = "Tasks List";
+            this.panel1.Controls.Add(this.btnExport);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(826, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(10, 5, 8, 5);
+            this.panel1.Size = new System.Drawing.Size(200, 47);
+            this.panel1.TabIndex = 3;
             // 
             // btnExport
             // 
@@ -360,6 +351,25 @@
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExport.UseVisualStyleBackColor = false;
+            // 
+            // pnlSingleLine
+            // 
+            this.pnlSingleLine.BackColor = System.Drawing.Color.Black;
+            this.pnlSingleLine.Location = new System.Drawing.Point(4, 46);
+            this.pnlSingleLine.Name = "pnlSingleLine";
+            this.pnlSingleLine.Size = new System.Drawing.Size(114, 3);
+            this.pnlSingleLine.TabIndex = 2;
+            // 
+            // lblTaskList
+            // 
+            this.lblTaskList.AutoSize = true;
+            this.lblTaskList.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaskList.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.lblTaskList.Location = new System.Drawing.Point(4, 5);
+            this.lblTaskList.Name = "lblTaskList";
+            this.lblTaskList.Size = new System.Drawing.Size(116, 32);
+            this.lblTaskList.TabIndex = 1;
+            this.lblTaskList.Text = "Tasks List";
             // 
             // dataGridViewTask
             // 
@@ -390,7 +400,7 @@
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewTask.Size = new System.Drawing.Size(1026, 444);
             this.dataGridViewTask.TabIndex = 1;
-            this.dataGridViewTask.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
+            this.dataGridViewTask.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
             // 
             // colDate
             // 
@@ -692,16 +702,6 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 28);
             this.toolStripMenuItem4.Text = "Cancel";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnExport);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(826, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(10, 5, 8, 5);
-            this.panel1.Size = new System.Drawing.Size(200, 47);
-            this.panel1.TabIndex = 3;
-            // 
             // TaskControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -725,6 +725,7 @@
             this.pnlTaskTitle.ResumeLayout(false);
             this.pnlTableHeader.ResumeLayout(false);
             this.pnlTableHeader.PerformLayout();
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTask)).EndInit();
             this.tblCardContant.ResumeLayout(false);
             this.pnlTotalTask.ResumeLayout(false);
@@ -740,7 +741,6 @@
             this.pnlDueToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTaskDueIcone)).EndInit();
             this.cmsTaskAction.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

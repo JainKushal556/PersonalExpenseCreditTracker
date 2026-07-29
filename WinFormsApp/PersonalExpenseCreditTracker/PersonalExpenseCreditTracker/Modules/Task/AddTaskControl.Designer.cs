@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlAddTask = new System.Windows.Forms.Panel();
+            this.pnlDeadlinePicker = new System.Windows.Forms.Panel();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblStart = new System.Windows.Forms.Label();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pnlDeadline = new System.Windows.Forms.Panel();
             this.btnCalendar = new System.Windows.Forms.Button();
             this.txtDeadline = new System.Windows.Forms.TextBox();
@@ -51,19 +54,21 @@
             this.lblTaskTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlAddTask.SuspendLayout();
+            this.pnlDeadlinePicker.SuspendLayout();
             this.pnlDeadline.SuspendLayout();
             this.pnlStatus.SuspendLayout();
             this.pnlPriority.SuspendLayout();
             this.pnlTaskTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAddTask
             // 
             this.pnlAddTask.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlAddTask.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAddTask.Controls.Add(this.monthCalendar1);
+            this.pnlAddTask.Controls.Add(this.pnlDeadlinePicker);
             this.pnlAddTask.Controls.Add(this.panel1);
             this.pnlAddTask.Controls.Add(this.label3);
             this.pnlAddTask.Controls.Add(this.label2);
@@ -88,6 +93,31 @@
             this.pnlAddTask.Name = "pnlAddTask";
             this.pnlAddTask.Size = new System.Drawing.Size(513, 580);
             this.pnlAddTask.TabIndex = 0;
+            this.pnlAddTask.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddTask_Paint);
+            // 
+            // pnlDeadlinePicker
+            // 
+            this.pnlDeadlinePicker.BackColor = System.Drawing.Color.Transparent;
+            this.pnlDeadlinePicker.Controls.Add(this.monthCalendar1);
+            this.pnlDeadlinePicker.Location = new System.Drawing.Point(128, 113);
+            this.pnlDeadlinePicker.Name = "pnlDeadlinePicker";
+            this.pnlDeadlinePicker.Size = new System.Drawing.Size(327, 264);
+            this.pnlDeadlinePicker.TabIndex = 22;
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(16, 42);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 0;
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(25, 66);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(462, 1);
+            this.panel1.TabIndex = 21;
             // 
             // label3
             // 
@@ -133,14 +163,6 @@
             this.lblStart.TabIndex = 17;
             this.lblStart.Text = "*";
             // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(163, -8);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 16;
-            this.monthCalendar1.Visible = false;
-            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
-            // 
             // pnlDeadline
             // 
             this.pnlDeadline.BackColor = System.Drawing.Color.White;
@@ -172,6 +194,9 @@
             this.txtDeadline.Name = "txtDeadline";
             this.txtDeadline.Size = new System.Drawing.Size(376, 27);
             this.txtDeadline.TabIndex = 0;
+            this.txtDeadline.TextChanged += new System.EventHandler(this.txtDeadline_TextChanged);
+            this.txtDeadline.Enter += new System.EventHandler(this.txtDeadline_Enter);
+            this.txtDeadline.Leave += new System.EventHandler(this.txtDeadline_Leave);
             // 
             // pnlStatus
             // 
@@ -184,14 +209,9 @@
             // 
             // cmbStatus
             // 
-            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
-            "Select Priority",
-            "Pending",
-            "Completed"});
             this.cmbStatus.Location = new System.Drawing.Point(11, 7);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(172, 36);
@@ -208,19 +228,14 @@
             // 
             // cmbPriority
             // 
-            this.cmbPriority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPriority.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbPriority.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPriority.FormattingEnabled = true;
-            this.cmbPriority.Items.AddRange(new object[] {
-            "Select Priority",
-            "Low",
-            "Medium",
-            "High"});
             this.cmbPriority.Location = new System.Drawing.Point(12, 8);
             this.cmbPriority.Name = "cmbPriority";
             this.cmbPriority.Size = new System.Drawing.Size(172, 36);
             this.cmbPriority.TabIndex = 0;
+            this.cmbPriority.SelectedIndexChanged += new System.EventHandler(this.cmbPriority_SelectedIndexChanged);
             // 
             // pnlTaskTitle
             // 
@@ -342,13 +357,9 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Add New Task";
             // 
-            // panel1
+            // errorProvider1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(25, 66);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(462, 1);
-            this.panel1.TabIndex = 21;
+            this.errorProvider1.ContainerControl = this;
             // 
             // AddTaskControl
             // 
@@ -366,12 +377,14 @@
             this.Load += new System.EventHandler(this.AddTaskControl_Load);
             this.pnlAddTask.ResumeLayout(false);
             this.pnlAddTask.PerformLayout();
+            this.pnlDeadlinePicker.ResumeLayout(false);
             this.pnlDeadline.ResumeLayout(false);
             this.pnlDeadline.PerformLayout();
             this.pnlStatus.ResumeLayout(false);
             this.pnlPriority.ResumeLayout(false);
             this.pnlTaskTitle.ResumeLayout(false);
             this.pnlTaskTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -395,12 +408,14 @@
         private System.Windows.Forms.Panel pnlDeadline;
         private System.Windows.Forms.Button btnCalendar;
         private System.Windows.Forms.TextBox txtDeadline;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblStart;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Panel pnlDeadlinePicker;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
     }
 }

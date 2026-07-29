@@ -62,11 +62,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // lblCreditDetails
             // 
-            this.lblCreditDetails.AutoSize = true;
-            this.lblCreditDetails.Location = new System.Drawing.Point(0, 0);
+            this.lblCreditDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCreditDetails.Location = new System.Drawing.Point(15, 15);
             this.lblCreditDetails.Name = "lblCreditDetails";
-            this.lblCreditDetails.Size = new System.Drawing.Size(0, 23);
+            this.lblCreditDetails.Size = new System.Drawing.Size(152, 25);
             this.lblCreditDetails.TabIndex = 0;
+            this.lblCreditDetails.Text = "Credit Details";
             // 
             // txtAddCreditDescription
             // 

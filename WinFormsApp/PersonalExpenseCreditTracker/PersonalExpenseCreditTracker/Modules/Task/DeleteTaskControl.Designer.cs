@@ -109,7 +109,7 @@
             this.btnDeleteTask.TabIndex = 20;
             this.btnDeleteTask.Text = "Delete Task";
             this.btnDeleteTask.UseVisualStyleBackColor = false;
-            this.btnDeleteTask.Click += new System.EventHandler(this.btnDeleteTask_Click);
+            this.btnDeleteTask.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnCancel
             // 

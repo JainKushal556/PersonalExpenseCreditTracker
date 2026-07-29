@@ -1781,6 +1781,7 @@ namespace PersonalExpenseCreditTracker
 
         private void rbCreditThisMonth_CheckedChanged(object sender, EventArgs e)
         {
+            if (!rbCreditThisMonth.Checked) return;
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
 
@@ -1805,6 +1806,7 @@ namespace PersonalExpenseCreditTracker
 
         private void rbCreditLast7Days_CheckedChanged(object sender, EventArgs e)
         {
+            if (!rbCreditLast7Days.Checked) return;
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
 
@@ -1816,6 +1818,7 @@ namespace PersonalExpenseCreditTracker
 
         private void rbCreditThisYear_CheckedChanged(object sender, EventArgs e)
         {
+            if (!rbCreditThisYear.Checked) return;
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
 
@@ -2910,6 +2913,9 @@ namespace PersonalExpenseCreditTracker
             UpdateTaskClearAllButton();
 
             flowSidebar.Top = 0;
+
+            //load status from db on click to Person drop down 
+            CommonUiFunction.LoadInComboBox("spGetAllTaskStatus", "Select Status", ComboBoxTaskStatus);
         }
 
         private void pnlTaskPriorityHeader_Click(object sender, EventArgs e)
@@ -2933,6 +2939,9 @@ namespace PersonalExpenseCreditTracker
             UpdateTaskClearAllButton();
 
             flowSidebar.Top = 0;
+
+            //load status from db on click to Person drop down 
+            CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select Priority", ComboBoxTaskPriority);
         }
 
         private void btnTaskClearAll_Click(object sender, EventArgs e)
@@ -2999,28 +3008,88 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateTaskCustomDatePanel();
             UpdateTaskClearAllButton();
+
+            if (taskControl != null && !taskControl.IsDisposed)
+            {
+
+
+                DateTime firstDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                 1);
+
+                DateTime lastDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                taskControl.LoadFilteredTaskData("spGetTasksBetweenDates", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+
+            }
+
         }
 
         private void rbTaskLast7Days_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTaskCustomDatePanel();
             UpdateTaskClearAllButton();
+
+            DateTime fromDate = DateTime.Today.AddDays(-6);
+            DateTime toDate = DateTime.Today;
+
+            taskControl.LoadFilteredTaskData("spGetTasksBetweenDates", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void rbTaskThisYear_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTaskCustomDatePanel();
             UpdateTaskClearAllButton();
+
+            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+
+            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+            taskControl.LoadFilteredTaskData("spGetTasksBetweenDates", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void ComboBoxTaskStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTaskClearAllButton();
+            if (taskControl != null && !taskControl.IsDisposed)
+            {
+                if (ComboBoxTaskStatus.SelectedIndex > 0)
+                {
+                    int statusId = Convert.ToInt32(ComboBoxTaskStatus.SelectedValue);
+                    if (!taskControl.LoadFilteredTaskData("spFilterTasksByStatus", "@TaskStatusID", statusId))
+                    {
+                        ComboBoxTaskStatus.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    taskControl.LoadTaskData(Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
         private void ComboBoxTaskPriority_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTaskClearAllButton();
+
+            if (taskControl != null && !taskControl.IsDisposed)
+            {
+                if (ComboBoxTaskPriority.SelectedIndex > 0)
+                {
+                    int priorityId = Convert.ToInt32(ComboBoxTaskPriority.SelectedValue);
+                    if (!taskControl.LoadFilteredTaskData("spFilterTasksByPriority", "@PriorityID", priorityId))
+                    {
+                        ComboBoxTaskPriority.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    taskControl.LoadTaskData(Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
         private void pnlAllTask_Click(object sender, EventArgs e)
@@ -3070,6 +3139,11 @@ namespace PersonalExpenseCreditTracker
         private void Task_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetActiveTaskSubMenu(pnlAllTask);
+
+            if (taskControl != null && !taskControl.IsDisposed)
+            {
+                taskControl.LoadTaskData(Session.LogedInUser.GetUserId());
+            }
         }
 
         private void pnlAddTask_MouseEnter(object sender, EventArgs e)
@@ -3607,8 +3681,8 @@ namespace PersonalExpenseCreditTracker
             errorProvider1.Clear();
 
             MainUI mainUi = new MainUI();
-            mainUi.fromDate = dtpLentFromDate.Value;
-            mainUi.toDate = dtpLentToDate.Value;
+            mainUi.fromDate = dtpLentFromDate.Value.Date;
+            mainUi.toDate = dtpLentToDate.Value.Date;
 
 
             CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
@@ -3619,7 +3693,7 @@ namespace PersonalExpenseCreditTracker
                 case CommonValidator.ValidationResult.Success:
                     if (lentControl != null && !lentControl.IsDisposed)
                     {
-                        if (!lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpLentFromDate.Value, "@ToDate", dtpLentToDate.Value))
+                        if (!lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpLentFromDate.Value.Date, "@ToDate", dtpLentToDate.Value.Date))
                         {
                             lentControl.LoadLentData(Session.LogedInUser.GetUserId());
                             //MessageBox.Show("No Specific Record Exist!");
@@ -3723,8 +3797,8 @@ namespace PersonalExpenseCreditTracker
             errorProvider1.Clear();
 
             MainUI mainUi = new MainUI();
-            mainUi.fromDate = dtpCreditFromDate.Value;
-            mainUi.toDate = dtpCreditToDate.Value;
+            mainUi.fromDate = dtpCreditFromDate.Value.Date;
+            mainUi.toDate = dtpCreditToDate.Value.Date;
 
 
             CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
@@ -3735,7 +3809,7 @@ namespace PersonalExpenseCreditTracker
                 case CommonValidator.ValidationResult.Success:
                     if (creditControl != null && !creditControl.IsDisposed)
                     {
-                        if (!creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpCreditFromDate.Value, "@ToDate", dtpCreditToDate.Value))
+                        if (!creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpCreditFromDate.Value.Date, "@ToDate", dtpCreditToDate.Value.Date))
                         {
                             creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
                             //MessageBox.Show("No Specific Record Exist!");
@@ -3831,6 +3905,50 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateCreditClearAllButton();
         }
+
+        private void btnApplyDateFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTaskApplyDateFilter_Click(object sender, EventArgs e)
+        {
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            DateTime fromDate = dtpTaskFromDate.Value.Date;
+
+
+            DateTime toDate = dtpTaskToDate.Value.Date.AddDays(1).AddTicks(-1);
+
+            MainUI mainUi = new MainUI();
+            mainUi.fromDate = fromDate;
+            mainUi.toDate = toDate;
+
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (taskControl != null && !taskControl.IsDisposed)
+                    {
+                        if (!taskControl.LoadFilteredTaskData("spGetTasksBetweenCreatedDates", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate))
+                        {
+                            MessageBox.Show("No record exists for the selected date range!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpTaskFromDate, dtpTaskToDate);
+                    break;
+            }
+        }
+
 
       
 

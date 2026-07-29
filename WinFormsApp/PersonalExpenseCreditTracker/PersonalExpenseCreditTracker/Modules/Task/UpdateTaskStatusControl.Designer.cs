@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -44,11 +46,14 @@
             this.lblTaskTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.piclock = new System.Windows.Forms.PictureBox();
             this.pnlMain.SuspendLayout();
             this.pnlStatus.SuspendLayout();
             this.pnlCurrentStatus.SuspendLayout();
             this.pnlTaskTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.piclock)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -75,6 +80,14 @@
             this.pnlMain.Size = new System.Drawing.Size(513, 524);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(28, 53);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(460, 1);
+            this.panel1.TabIndex = 13;
             // 
             // label2
             // 
@@ -152,10 +165,6 @@
             this.cmbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
-            "Pending",
-            "In Progress",
-            "Completed"});
             this.cmbStatus.Location = new System.Drawing.Point(10, 8);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(432, 36);
@@ -205,6 +214,7 @@
             // 
             this.pnlTaskTitle.BackColor = System.Drawing.Color.White;
             this.pnlTaskTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTaskTitle.Controls.Add(this.piclock);
             this.pnlTaskTitle.Controls.Add(this.txtTaskTitle);
             this.pnlTaskTitle.Location = new System.Drawing.Point(30, 129);
             this.pnlTaskTitle.Name = "pnlTaskTitle";
@@ -213,11 +223,14 @@
             // 
             // txtTaskTitle
             // 
+            this.txtTaskTitle.BackColor = System.Drawing.Color.White;
             this.txtTaskTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTaskTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTaskTitle.ForeColor = System.Drawing.Color.Black;
             this.txtTaskTitle.Location = new System.Drawing.Point(10, 13);
             this.txtTaskTitle.Name = "txtTaskTitle";
-            this.txtTaskTitle.Size = new System.Drawing.Size(432, 27);
+            this.txtTaskTitle.ReadOnly = true;
+            this.txtTaskTitle.Size = new System.Drawing.Size(387, 27);
             this.txtTaskTitle.TabIndex = 0;
             // 
             // lblTaskTitle
@@ -255,13 +268,19 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Update Task Status";
             // 
-            // panel1
+            // errorProvider1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(28, 53);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(460, 1);
-            this.panel1.TabIndex = 13;
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // piclock
+            // 
+            this.piclock.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock;
+            this.piclock.Location = new System.Drawing.Point(404, 5);
+            this.piclock.Name = "piclock";
+            this.piclock.Size = new System.Drawing.Size(40, 40);
+            this.piclock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.piclock.TabIndex = 1;
+            this.piclock.TabStop = false;
             // 
             // UpdateTaskStatus
             // 
@@ -280,6 +299,8 @@
             this.pnlCurrentStatus.PerformLayout();
             this.pnlTaskTitle.ResumeLayout(false);
             this.pnlTaskTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.piclock)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -303,5 +324,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.PictureBox piclock;
     }
 }

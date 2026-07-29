@@ -15,6 +15,8 @@ namespace BLLayer.Common
             PersonInvalid,
             PaymentInvalid,
             StatusInvalid,
+            PriorityInvalid,
+            TaskTitleInvalid,
 
             AmountEmpty,
             AmountInvalid,
@@ -35,7 +37,8 @@ namespace BLLayer.Common
             CategoryInvalid,
             SubCategoryInvalid,
 
-            StoreProcedureError
+            StoreProcedureError,
+            TaskAlreadyUpdated
         }
 
         
@@ -265,6 +268,37 @@ namespace BLLayer.Common
 
             return ValidationResult.SubCategoryInvalid;
         }
+
+        // Task Title Validation
+        public static ValidationResult ValidateTaskTitle(string taskTitle)
+        {
+            if (!string.IsNullOrWhiteSpace(taskTitle))
+            {
+                taskTitle = taskTitle.Trim();
+
+                if (taskTitle.Length >= 3)
+                {
+                    if (taskTitle.Length <= 150)
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
+            }
+
+            return ValidationResult.TaskTitleInvalid;
+        }
+
+        // Priority Validation
+        public static ValidationResult ValidatePriority(int priorityId)
+        {
+            if (priorityId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.PriorityInvalid;
+        }
+
 
 
     }

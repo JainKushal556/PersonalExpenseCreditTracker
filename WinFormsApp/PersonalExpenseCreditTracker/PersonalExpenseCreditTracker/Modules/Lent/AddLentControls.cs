@@ -365,5 +365,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             SetRadius(btnLentAddSave, 5);
         }
+
+        private void panelMainBody_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

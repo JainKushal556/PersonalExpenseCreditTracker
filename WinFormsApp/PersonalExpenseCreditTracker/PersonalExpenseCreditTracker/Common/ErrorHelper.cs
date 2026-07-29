@@ -44,6 +44,11 @@ namespace PersonalExpenseCreditTracker.Common
                     errorProvider.SetError(comboBox, "Please select a sub category.");
                     break;
 
+                case CommonValidator.ValidationResult.PriorityInvalid:
+                    errorProvider.SetError(comboBox, "Please select a priority.");
+                    comboBox.Focus();
+                    break;
+
             }
         }
 
@@ -88,6 +93,11 @@ namespace PersonalExpenseCreditTracker.Common
                 // Deadline is not selected or invalid
                 case CommonValidator.ValidationResult.DeadlineInvalid:
                     errorProvider.SetError(textBox, "Select valid deadline.");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.TaskTitleInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid task title.");
                     textBox.Focus();
                     break;
             }

@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using PersonalExpenseCreditTracker.Common;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Task
 {
     public partial class UpdateTaskStatus : Form
     {
+        private TaskControls taskControl;
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
@@ -21,11 +24,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             int nWidthEllipse,
             int nHeightEllipse
         );
-
-        public UpdateTaskStatus()
+        public UpdateTaskStatus(TaskControls taskcontrol)
         {
             InitializeComponent();
-
+            taskControl = taskcontrol;
         }
 
         private void UpdateTaskStatus_Load(object sender, EventArgs e)
@@ -46,6 +48,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 btnUpdate.Height,
                 5,
                 5));
+
+            txtTaskTitle.Text = taskControl.SelectedTaskTitle;
+            lblCurrentStatus.Text = taskControl.selectStatus;
+
+            CommonUiFunction.LoadInComboBox("spGetAllTaskStatus", "Select Status", cmbStatus);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -70,23 +77,37 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (cmbStatus.SelectedIndex == -1)
+            
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            TaskUI taskUi = new TaskUI();
+
+            taskUi.taskId = taskControl.SelectedTaskID;
+            taskUi.statusId = Convert.ToInt32(cmbStatus.SelectedValue);
+
+            CommonValidator.ValidationResult result = taskUi.UpdateStatusIntoTaskUi();
+
+            switch (result)
             {
-                MessageBox.Show("Please select status.",
-                                "Validation",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Task status updated successfully!");
+                    this.Close();
+                    break;
 
-                cmbStatus.Focus();
-                return;
+                case CommonValidator.ValidationResult.StatusInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbStatus);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Task status update unsuccessful!");
+                    break;
+
+                case CommonValidator.ValidationResult.TaskAlreadyUpdated:
+                    MessageBox.Show("Task is already in this status.");
+                    break;
             }
-
-            MessageBox.Show("Task status updated successfully.",
-                            "Success",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-
-            this.Close();
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)
