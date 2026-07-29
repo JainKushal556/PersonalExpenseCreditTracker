@@ -13,7 +13,7 @@ namespace PersonalExpenseCreditTracker.Common
         public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, ComboBox comboBox)
         {
             errorProvider.SetIconAlignment(comboBox, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(comboBox, 10); 
+            errorProvider.SetIconPadding(comboBox, -30); 
             //errorProvider.Clear();
 
             switch (result)
@@ -36,7 +36,14 @@ namespace PersonalExpenseCreditTracker.Common
                     errorProvider.SetError(comboBox, "Please select status.");
                     comboBox.Focus();
                     break;
-               
+                case CommonValidator.ValidationResult.CategoryInvalid:
+                    errorProvider.SetError(comboBox, "Please select a category.");
+                    break;
+
+                case CommonValidator.ValidationResult.SubCategoryInvalid:
+                    errorProvider.SetError(comboBox, "Please select a sub category.");
+                    break;
+
             }
         }
 
@@ -44,7 +51,7 @@ namespace PersonalExpenseCreditTracker.Common
         public static void ShowValidationError(CommonValidator.ValidationResult result,  ErrorProvider errorProvider,TextBox textBox)
         {
             errorProvider.SetIconAlignment(textBox, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(textBox, 10); 
+            errorProvider.SetIconPadding(textBox, -30); 
             switch (result)
             {
                 // Amount field is empty
@@ -61,6 +68,16 @@ namespace PersonalExpenseCreditTracker.Common
                 // Amount exceeds the allowed limit
                 case CommonValidator.ValidationResult.AmountTooLarge:
                     errorProvider.SetError(textBox, "Amount is too large.");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.MinimumAmountInvalid:
+                    errorProvider.SetError(textBox, "MinimumAmountInvalid.");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.MaximumAmountInvalid:
+                    errorProvider.SetError(textBox, "MaximumAmountInvalid.");
                     textBox.Focus();
                     break;
                 // Description is invalid
@@ -90,5 +107,47 @@ namespace PersonalExpenseCreditTracker.Common
                 
             }
         }
+
+         // Displays validation errors for Date
+        public static void ShowValidationError(CommonValidator.ValidationResult result,ErrorProvider errorProvider,DateTimePicker dtp1, DateTimePicker dtp2)
+        {
+            errorProvider.SetIconAlignment(dtp1, ErrorIconAlignment.MiddleRight);
+            errorProvider.SetIconPadding(dtp1, 10);
+
+            errorProvider.SetIconAlignment(dtp2, ErrorIconAlignment.MiddleRight);
+            errorProvider.SetIconPadding(dtp2, 10);
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+
+                    errorProvider.SetError(dtp1, "From Date cannot be greater than To Date.");
+                    errorProvider.SetError(dtp2, "To Date must be greater than or equal to From Date.");
+
+                    dtp1.Focus();
+                    dtp2.Focus();
+                    break;
+            }
+        }
+
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider,TextBox textBox1, TextBox textBox2)
+        {
+            errorProvider.SetIconAlignment(textBox1, ErrorIconAlignment.MiddleRight);
+            errorProvider.SetIconPadding(textBox1, 10);
+
+            errorProvider.SetIconAlignment(textBox2, ErrorIconAlignment.MiddleRight);
+            errorProvider.SetIconPadding(textBox2, 10);
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.AmountRangeInvalid:
+
+                    errorProvider.SetError(textBox2, "Invalid Maximum amount");
+                    textBox1.Focus();
+
+                    break;
+            }
+        }
+
     }
 }

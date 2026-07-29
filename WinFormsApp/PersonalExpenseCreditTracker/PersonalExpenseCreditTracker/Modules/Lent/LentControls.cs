@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,8 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
+using PersonalExpenseCreditTracker.Common;
 using System.Runtime.InteropServices;
-
+using PersonalExpenseCreditTracker.Forms.Main;
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public partial class LentControls : Form
@@ -129,7 +130,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             ApplyRoundCorners();
             dgvLentDataTable.CellPainting += dgvLentDataTable_CellPainting;
             pageSize = GetRowsPerPage();
-            int userID = 11;
+            int userID = Session.LogedInUser.GetUserId();
             LoadLentData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
@@ -145,47 +146,87 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             tsmiDate.Width = cmsFilter.Width;
             tsmiCategory.Width = cmsFilter.Width;
         }
-        private void LoadLentData(int userID)
+        public void LoadLentData(int userID)
         {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spGetAllLent", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserID", userID);
 
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllLent", userID);
+            if (dataTable.Columns.Contains("Message"))
+             {
+                 MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                 "Information",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
+                 
+                 dgvLentDataTable.DataSource = null;
+                 return;
+             }
 
-                        da.Fill(dt);
-
-
-                        if (dt.Columns.Contains("Message"))
-                        {
-                            MessageBox.Show(dt.Rows[0]["Message"].ToString(),
-                                            "Information",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Information);
-
-                            dgvLentDataTable.DataSource = null;
-                            return;
-                        }
-
-                        AllLentData = dt;
-                        currentPage = 1;
-                        ShowCurrentPage();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            AllLentData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
         }
 
+        public Boolean LoadFilteredLentData(string spName, string paramName, int filterId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(spName, userID, paramName, filterId);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            AllLentData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
 
+        public Boolean LoadFilteredLentData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllLentData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+        //
+        public Boolean LoadFilteredLentData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllLentData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
         private void StyleLentGrid()
         {
             
@@ -291,8 +332,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             dgvLentDataTable.DataSource = pageTable;
 
-            
-
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllLentData.Rows.Count;
@@ -300,6 +339,35 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             lblStartingPageNumber.Text = total == 0 ? "0" : start.ToString();
             lblEndingPageNumber.Text = end.ToString();
             lblTotalPageNumber.Text = total.ToString();
+
+            if (AllLentData != null && AllLentData.Rows.Count > 0)
+            {
+                // Total Lent Amount
+                decimal totalLent = AllLentData.AsEnumerable().Sum(row => row.Field<decimal>("Amount"));
+
+                // Total Repaid Amount
+                decimal totalRepaid = AllLentData.AsEnumerable().Sum(row => row.Field<decimal>("ReturnedAmount"));
+
+                // Total Due Amount
+                decimal totalDue = AllLentData.AsEnumerable().Sum(row => row.Field<decimal>("RemainingAmount"));
+
+                // Total Transactions
+                int totalTransaction = AllLentData.Rows.Count;
+
+                // Display
+                lblTotalLentAmount.Text = "₹ " + totalLent.ToString("#,##0.##");
+                lblTotalRepaidAmount.Text = "₹ " + totalRepaid.ToString("#,##0.##");
+                lblTotalDueAmount.Text = "₹ " + totalDue.ToString("#,##0.##");
+                labelTotalTransactionNumber.Text = totalTransaction.ToString();
+            }
+            else
+            {
+                lblTotalLentAmount.Text = "₹ 0";
+                lblTotalRepaidAmount.Text = "₹ 0";
+                lblTotalDueAmount.Text = "₹ 0";
+                labelTotalTransactionNumber.Text = "0";
+            }
+
         }
 
         private int GetRowsPerPage()
@@ -309,6 +377,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             int rowHeight = dgvLentDataTable.RowTemplate.Height;
 
             return Math.Max(1, display.Height / rowHeight) - 1;
+
+           
         }
 
 

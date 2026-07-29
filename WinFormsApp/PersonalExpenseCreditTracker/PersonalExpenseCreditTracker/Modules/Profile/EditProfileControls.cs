@@ -150,6 +150,28 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             SetUserProfileDetails();
             MessageBox.Show("Profile Updated Successfully");
             this.Close();
+
+
+            ProfileUI profileUi = new ProfileUI();
+
+
+            profileUi.userId = 1;
+            profileUi.fullName = txtEditProfileFullName.Text;
+            profileUi.email = txtEditProfileEmailAddress.Text;
+            profileUi.phoneNumber = txtEditProfilePhoneNumber.Text;
+            profileUi.address = txtEditProfileEmailAddress.Text;
+            profileUi.dateOfBirth =Convert.ToDateTime( txtEditProfileDathOfBirth.Text);
+
+            bool result = profileUi.UpdateUserProfileIntoProfUi();
+            if (result)
+            {
+                MessageBox.Show("Validation Success");
+            }
+            else
+            {
+                MessageBox.Show("Validation Failed");
+            }
+
         }
         private void btnCloseEditProfile_Click(object sender, EventArgs e)
         {

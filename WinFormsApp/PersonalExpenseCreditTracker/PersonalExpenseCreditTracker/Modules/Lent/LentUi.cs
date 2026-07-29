@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,21 +35,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             // Call the BLL method for validation
             return lentBLL.DataValidatorIntoLentBll();
-        }
-
-        // Retrieve ComboBox data from the BLL (Stored Procedure with UserId)
-        public static DataTable retriveListForComboBoxAtUi(string spName, int userId)
-        {
-            DataTable dataTable = null;
-            dataTable = LentBLL.retriveListForComboBoxAtBal(spName, userId);
-            return dataTable;
-        }
-        // Retrieve ComboBox data from the BLL (Stored Procedure without UserId)
-        public static DataTable retriveListForComboBoxAtUi(string spName)
-        {
-            DataTable dataTable = null;
-            dataTable = LentBLL.retriveListForComboBoxAtBal(spName);
-            return dataTable;
         }
     }
 }

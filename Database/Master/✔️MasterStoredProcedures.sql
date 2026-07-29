@@ -1307,6 +1307,34 @@ GO
 
 -- ==========================================================
 
+-- SP: ✔️spGetAllCreditCategory.sql
+
+-- ==========================================================
+
+CREATE PROC spGetAllCreditCategory
+AS
+BEGIN
+    BEGIN TRY
+
+        -- Get All Credit Categories
+        SELECT
+            CategoryID,
+            CategoryName
+        FROM tblCreditCategory
+        ORDER BY CategoryName ASC;
+
+    END TRY
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+END
+GO
+
+
+-- ==========================================================
+
 -- SP: ✔️spGetAllCreditsByID.sql
 
 -- ==========================================================
@@ -1425,6 +1453,38 @@ BEGIN
 END
 GO
 
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetCreditSubCategoryByCategoryID.sql
+
+-- ==========================================================
+
+CREATE PROC spGetCreditSubCategoryByCategoryID
+(
+    @CategoryID INT
+)
+AS
+BEGIN
+    BEGIN TRY
+
+        -- Get Sub Categories by CategoryID
+        SELECT
+            SubCategoryID,
+            SubCategoryName
+        FROM tblCreditSubCategory
+        WHERE CategoryID = @CategoryID
+        ORDER BY SubCategoryName ASC;
+
+    END TRY
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+END
 GO
 
 
@@ -1569,26 +1629,25 @@ CREATE PROCEDURE spInsertCreditByUserID
     @SubCategoryID INT,
     @Amount DECIMAL(10,2),
     @Description VARCHAR(MAX),
-    @PaymentID INT,
-    @CreditAt DATETIME
+    @PaymentID INT
 )
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT ON;
 
-      IF NOT EXISTS
+    IF NOT EXISTS
     (
         SELECT 1
-        FROM tblUserAuthentication UserAuthentication
-        INNER JOIN tblUsers Users
-            ON UserAuthentication.UserID = Users.UserID
-        WHERE Users.UserID = @UserID
-        AND UserAuthentication.Active = 1
+        FROM tblUserAuthentication UA
+        INNER JOIN tblUsers U
+            ON UA.UserID = U.UserID
+        WHERE U.UserID = @UserID
+          AND UA.Active = 1
     )
     BEGIN
-        SELECT 'Invalid or Inactive User' AS Message
-        RETURN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
     END
 
     IF NOT EXISTS
@@ -1598,8 +1657,8 @@ BEGIN
         WHERE CategoryID = @CategoryID
     )
     BEGIN
-        SELECT 'Invalid CategoryID' AS Message
-        RETURN
+        SELECT 'Invalid CategoryID' AS Message;
+        RETURN;
     END
 
     IF NOT EXISTS
@@ -1607,11 +1666,11 @@ BEGIN
         SELECT 1
         FROM tblCreditSubCategory
         WHERE SubCategoryID = @SubCategoryID
-        AND CategoryID = @CategoryID
+          AND CategoryID = @CategoryID
     )
     BEGIN
-        SELECT 'SubCategory does not belong to selected Category' AS Message
-        RETURN
+        SELECT 'SubCategory does not belong to selected Category' AS Message;
+        RETURN;
     END
 
     IF NOT EXISTS
@@ -1621,29 +1680,22 @@ BEGIN
         WHERE PaymentID = @PaymentID
     )
     BEGIN
-        SELECT 'Invalid PaymentID' AS Message
-        RETURN
+        SELECT 'Invalid PaymentID' AS Message;
+        RETURN;
     END
 
     IF @Amount <= 0
     BEGIN
-        SELECT 'Amount must be greater than zero' AS Message
-        RETURN
+        SELECT 'Amount must be greater than zero' AS Message;
+        RETURN;
     END
 
-    SET @Description = LTRIM(RTRIM(@Description))
+    SET @Description = LTRIM(RTRIM(@Description));
 
-    IF @Description IS NULL
-       OR @Description = ''
+    IF @Description IS NULL OR @Description = ''
     BEGIN
-        SELECT 'Description cannot be empty' AS Message
-        RETURN
-    END
-
-    IF @CreditAt > GETDATE()
-    BEGIN
-        SELECT 'Future date is not allowed' AS Message
-        RETURN
+        SELECT 'Description cannot be empty' AS Message;
+        RETURN;
     END
 
     INSERT INTO tblCredit
@@ -1653,8 +1705,7 @@ BEGIN
         SubCategoryID,
         Amount,
         Description,
-        PaymentID,
-        CreditAt
+        PaymentID
     )
     VALUES
     (
@@ -1663,11 +1714,10 @@ BEGIN
         @SubCategoryID,
         @Amount,
         @Description,
-        @PaymentID,
-        @CreditAt
-    )
+        @PaymentID
+    );
 
-    SELECT 'Credit inserted successfully' AS Message
+    SELECT 'Credit inserted successfully' AS Message;
 
 END
 GO
@@ -5562,6 +5612,80 @@ END
 GO
 
 
+-- SP: ✔️spFilterLentByStatus.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterLentByStatus
+    @UserID INT,
+    @StatusID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+
+    -- Validate Status
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLentBorrowStatus
+        WHERE StatusID = @StatusID
+    )
+    BEGIN
+        SELECT 'Invalid Status' AS MESSAGE;
+        RETURN;
+    END;
+
+    -- Check Records
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLent
+        WHERE UserID = @UserID
+          AND StatusID = @StatusID
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+
+    -- Fetch Records
+    SELECT
+        L.LentID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        L.Amount,
+        L.ReturnedAmount,
+        L.RemainingAmount,
+        L.DeadlineAt,
+        LTRIM(RTRIM(L.Description)) AS Description,
+        L.LentAt
+    FROM tblLent L
+    LEFT JOIN tblPersons P
+        ON L.PersonID = P.PersonID
+    LEFT JOIN tblPaymentType PT
+        ON L.PaymentID = PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S
+        ON L.StatusID = S.StatusID
+    WHERE L.UserID = @UserID
+      AND L.StatusID = @StatusID
+    ORDER BY L.LentAt DESC;
+END
+GO
+
 -- eta ektu check korbi mne thik oo ache but problem oo ache null validatiopn nae kichu jaygay total ta dekhbi . partialy paid dekhache na kono khetre setao dekhbi 
 
 
@@ -6046,7 +6170,7 @@ CREATE PROCEDURE spInsertBorrow
 (
     @UserID INT,
     @PersonID INT,
-    @PaymentName VARCHAR(100),
+    @PaymentID INT,
     @Amount DECIMAL(10,2),
     @DeadlineAt DATETIME,
     @Description VARCHAR(MAX)
@@ -6054,7 +6178,7 @@ CREATE PROCEDURE spInsertBorrow
 AS
 BEGIN
 
-    DECLARE @PaymentID INT;
+    
     DECLARE @StatusID INT;
     DECLARE @CreditCategoryID INT;
     DECLARE @CreditSubCategoryID INT;
@@ -6063,7 +6187,7 @@ BEGIN
     -- Trim Inputs
     -------------------------------------------------
 
-    SET @PaymentName = LTRIM(RTRIM(@PaymentName));
+    
     SET @Description = LTRIM(RTRIM(@Description));
 
     BEGIN TRY
@@ -6122,19 +6246,7 @@ BEGIN
             RETURN;
         END
 
-        -------------------------------------------------
-        -- Payment Type Validation
-        -------------------------------------------------
-
-        SELECT @PaymentID = PaymentID
-        FROM tblPaymentType
-        WHERE LTRIM(RTRIM(PaymentName)) = @PaymentName;
-
-        IF @PaymentID IS NULL
-        BEGIN
-            SELECT 'Invalid Payment Type.' AS Message;
-            RETURN;
-        END
+        
 
         -------------------------------------------------
         -- Default Status = Pending
@@ -6928,3 +7040,606 @@ BEGIN
 END;
 
 GO
+
+-- ==========================================================
+-- SP: ✔️spFilterLentByAmountRange.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterLentByAmountRange
+    @UserID INT,
+    @MinAmount DECIMAL(10,2),
+    @MaxAmount DECIMAL(10,2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
+    END;
+    -- Validate Amount Range
+    IF @MinAmount < 0 OR @MaxAmount < 0
+    BEGIN
+        SELECT 'Amount cannot be negative' AS Message;
+        RETURN;
+    END;
+    IF @MinAmount > @MaxAmount
+    BEGIN
+        SELECT 'Minimum Amount cannot be greater than Maximum Amount' AS Message;
+        RETURN;
+    END;
+    -- Filter Lent Records
+    SELECT
+        L.LentID,
+        L.UserID,
+        L.PersonID,
+        PS.PersonName,
+        L.PaymentID,
+        PT.PaymentName,
+        L.StatusID,
+        S.StatusName,
+        L.Amount,
+        L.ReturnedAmount,
+        L.RemainingAmount,
+        L.LentAt,
+        L.DeadlineAt,
+        L.Description
+    FROM tblLent L
+        INNER JOIN tblPersons PS
+            ON L.PersonID = PS.PersonID
+        INNER JOIN tblPaymentType PT
+            ON L.PaymentID = PT.PaymentID
+        INNER JOIN tblLentBorrowStatus S
+            ON L.StatusID = S.StatusID
+    WHERE
+        L.UserID = @UserID
+        AND L.Amount BETWEEN @MinAmount AND @MaxAmount
+    ORDER BY
+        L.Amount DESC,
+        L.LentAt DESC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spFilterLentByDateRange.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterLentByDateRange
+    @UserID INT,
+    @FromDate DATETIME,
+    @ToDate DATETIME
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+    -- Validate Date Range
+    IF @FromDate > @ToDate
+    BEGIN
+        SELECT 'FromDate Cannot Be Greater Than ToDate' AS MESSAGE;
+        RETURN;
+    END;
+    -- Check Records
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLent
+        WHERE UserID = @UserID
+          AND CAST(LentAt AS DATE) BETWEEN CAST(@FromDate AS DATE) AND CAST(@ToDate AS DATE)
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+    -- Fetch Records
+    SELECT
+        L.LentID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        L.Amount,
+        L.ReturnedAmount,
+        L.RemainingAmount,
+		L.LentAt,
+        L.DeadlineAt,
+        LTRIM(RTRIM(L.Description)) AS Description,
+        L.LentAt
+    FROM tblLent L
+    LEFT JOIN tblPersons P
+        ON L.PersonID = P.PersonID
+    LEFT JOIN tblPaymentType PT
+        ON L.PaymentID = PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S
+        ON L.StatusID = S.StatusID
+    WHERE L.UserID = @UserID
+      AND CAST(L.LentAt AS DATE)
+          BETWEEN CAST(@FromDate AS DATE) AND CAST(@ToDate AS DATE)
+    ORDER BY L.LentAt DESC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spFilterLentByPerson.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterLentByPerson
+    @UserID INT,
+    @PersonID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+    -- Validate Person
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblPersons
+        WHERE PersonID = @PersonID
+          AND UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid Person' AS MESSAGE;
+        RETURN;
+    END;
+    -- Check Records
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLent
+        WHERE UserID = @UserID
+          AND PersonID = @PersonID
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+    -- Fetch Records
+    SELECT
+        L.LentID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        L.Amount,
+        L.ReturnedAmount,
+        L.RemainingAmount,
+        L.DeadlineAt,
+        LTRIM(RTRIM(L.Description)) AS Description,
+        L.LentAt
+    FROM tblLent L
+    LEFT JOIN tblPersons P
+        ON L.PersonID = P.PersonID
+    LEFT JOIN tblPaymentType PT
+        ON L.PaymentID = PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S
+        ON L.StatusID = S.StatusID
+    WHERE L.UserID = @UserID
+      AND L.PersonID = @PersonID
+    ORDER BY L.LentAt DESC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spFilterLentByPaymentMethod.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterLentByPaymentMethod
+    @UserID INT,
+    @PaymentID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+    -- Validate Payment Method
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblPaymentType
+        WHERE PaymentID = @PaymentID
+    )
+    BEGIN
+        SELECT 'Invalid Payment Method' AS MESSAGE;
+        RETURN;
+    END;
+    -- Check Records
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLent
+        WHERE UserID = @UserID
+          AND PaymentID = @PaymentID
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+    -- Fetch Records
+    SELECT
+        L.LentID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        L.Amount,
+        L.ReturnedAmount,
+        L.RemainingAmount,
+        L.DeadlineAt,
+        LTRIM(RTRIM(L.Description)) AS Description,
+        L.LentAt
+    FROM tblLent L
+    LEFT JOIN tblPersons P
+        ON L.PersonID = P.PersonID
+    LEFT JOIN tblPaymentType PT
+        ON L.PaymentID = PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S
+        ON L.StatusID = S.StatusID
+    WHERE L.UserID = @UserID
+      AND L.PaymentID = @PaymentID
+    ORDER BY L.LentAt DESC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spFilterBorrowByDateRange.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterBorrowByDateRange
+    @UserID INT,
+    @FromDate DATETIME,
+    @ToDate DATETIME
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID=@UserID
+        AND Active=1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+    IF @FromDate>@ToDate
+    BEGIN
+        SELECT 'FromDate Cannot Be Greater Than ToDate' AS MESSAGE;
+        RETURN;
+    END;
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow
+        WHERE UserID=@UserID
+        AND CAST(BorrowAt AS DATE)
+        BETWEEN @FromDate AND @ToDate
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+    SELECT
+        B.BorrowID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        B.Amount,
+        B.PaidAmount,
+        B.RemainingAmount,
+        B.DeadlineAt,
+        LTRIM(RTRIM(B.Description)) AS Description,
+        B.BorrowAt
+    FROM tblBorrow B
+    LEFT JOIN tblPersons P ON B.PersonID=P.PersonID
+    LEFT JOIN tblPaymentType PT ON B.PaymentID=PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S ON B.StatusID=S.StatusID
+    WHERE B.UserID=@UserID
+    AND CAST(B.BorrowAt AS DATE)
+    BETWEEN @FromDate AND @ToDate
+    ORDER BY B.BorrowAt DESC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spFilterBorrowByAmountRange.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterBorrowByAmountRange
+    @UserID INT,
+    @MinAmount DECIMAL(10,2),
+    @MaxAmount DECIMAL(10,2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID=@UserID
+        AND Active=1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+    IF @MinAmount<0 OR @MaxAmount<0
+    BEGIN
+        SELECT 'Amount Cannot Be Negative' AS MESSAGE;
+        RETURN;
+    END;
+    IF @MinAmount>@MaxAmount
+    BEGIN
+        SELECT 'Minimum Amount Cannot Be Greater Than Maximum Amount' AS MESSAGE;
+        RETURN;
+    END;
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblBorrow
+        WHERE UserID=@UserID
+        AND Amount BETWEEN @MinAmount AND @MaxAmount
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+    SELECT
+        B.BorrowID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        B.Amount,
+        B.PaidAmount,
+        B.RemainingAmount,
+        B.DeadlineAt,
+        LTRIM(RTRIM(B.Description)) AS Description,
+        B.BorrowAt
+    FROM tblBorrow B
+    LEFT JOIN tblPersons P ON B.PersonID=P.PersonID
+    LEFT JOIN tblPaymentType PT ON B.PaymentID=PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S ON B.StatusID=S.StatusID
+    WHERE B.UserID=@UserID
+    AND B.Amount BETWEEN @MinAmount AND @MaxAmount
+    ORDER BY B.Amount DESC,B.BorrowAt DESC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spFilterBorrowByPerson.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterBorrowByPerson
+    @UserID INT,
+    @PersonID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblUserAuthentication
+        WHERE UserID=@UserID
+        AND Active=1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblPersons
+        WHERE PersonID=@PersonID
+        AND UserID=@UserID
+    )
+    BEGIN
+        SELECT 'Invalid Person' AS MESSAGE;
+        RETURN;
+    END;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblBorrow
+        WHERE UserID=@UserID
+        AND PersonID=@PersonID
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+    SELECT
+        B.BorrowID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        B.Amount,
+        B.PaidAmount,
+        B.RemainingAmount,
+        B.DeadlineAt,
+        LTRIM(RTRIM(B.Description)) AS Description,
+        B.BorrowAt
+    FROM tblBorrow B
+    LEFT JOIN tblPersons P ON B.PersonID=P.PersonID
+    LEFT JOIN tblPaymentType PT ON B.PaymentID=PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S ON B.StatusID=S.StatusID
+    WHERE B.UserID=@UserID
+    AND B.PersonID=@PersonID
+    ORDER BY B.BorrowAt DESC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spFilterBorrowByStatus.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterBorrowByStatus
+    @UserID INT,
+    @StatusID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblUserAuthentication
+        WHERE UserID=@UserID
+        AND Active=1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblLentBorrowStatus
+        WHERE StatusID=@StatusID
+    )
+    BEGIN
+        SELECT 'Invalid Status' AS MESSAGE;
+        RETURN;
+    END;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblBorrow
+        WHERE UserID=@UserID
+        AND StatusID=@StatusID
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+    SELECT
+        B.BorrowID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        B.Amount,
+        B.PaidAmount,
+        B.RemainingAmount,
+        B.DeadlineAt,
+        LTRIM(RTRIM(B.Description)) AS Description,
+        B.BorrowAt
+    FROM tblBorrow B
+    LEFT JOIN tblPersons P ON B.PersonID=P.PersonID
+    LEFT JOIN tblPaymentType PT ON B.PaymentID=PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S ON B.StatusID=S.StatusID
+    WHERE B.UserID=@UserID
+    AND B.StatusID=@StatusID
+    ORDER BY B.BorrowAt DESC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spFilterBorrowByPaymentMethod.sql
+-- ==========================================================
+CREATE PROCEDURE spFilterBorrowByPaymentMethod
+    @UserID INT,
+    @PaymentID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblUserAuthentication
+        WHERE UserID=@UserID
+        AND Active=1
+    )
+    BEGIN
+        SELECT 'Invalid Or Inactive User' AS MESSAGE;
+        RETURN;
+    END;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblPaymentType
+        WHERE PaymentID=@PaymentID
+    )
+    BEGIN
+        SELECT 'Invalid Payment Method' AS MESSAGE;
+        RETURN;
+    END;
+    IF NOT EXISTS
+    (
+        SELECT 1 FROM tblBorrow
+        WHERE UserID=@UserID
+        AND PaymentID=@PaymentID
+    )
+    BEGIN
+        SELECT 'NO RECORD FOUND' AS MESSAGE;
+        RETURN;
+    END;
+    SELECT
+        B.BorrowID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        B.Amount,
+        B.PaidAmount,
+        B.RemainingAmount,
+        B.DeadlineAt,
+        LTRIM(RTRIM(B.Description)) AS Description,
+        B.BorrowAt
+    FROM tblBorrow B
+    LEFT JOIN tblPersons P ON B.PersonID=P.PersonID
+    LEFT JOIN tblPaymentType PT ON B.PaymentID=PT.PaymentID
+    LEFT JOIN tblLentBorrowStatus S ON B.StatusID=S.StatusID
+    WHERE B.UserID=@UserID
+    AND B.PaymentID=@PaymentID
+    ORDER BY B.BorrowAt DESC;
+END;
+GO
+
+
+-- ==========================================================
+-- SP: ✔️spGetAllTaskPriorities.sql
+-- ==========================================================
+CREATE PROCEDURE spGetAllTaskPriorities
+AS
+BEGIN
+
+    SET NOCOUNT OFF;
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTaskPriorities
+    )
+    BEGIN
+        SELECT 'No Task Priority Found' AS Message;
+        RETURN;
+    END
+
+    SELECT
+        PriorityID,
+        PriorityName
+    FROM tblTaskPriorities
+    ORDER BY PriorityName ASC;
+
+END;
+GO
+
+

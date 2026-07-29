@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlViewNoteDetails = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.pnlColor = new System.Windows.Forms.Panel();
             this.lblPriority = new System.Windows.Forms.Label();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
@@ -50,9 +52,7 @@
             this.lblNoteTitle = new System.Windows.Forms.Label();
             this.lblTitleCaption = new System.Windows.Forms.Label();
             this.pnlViewHeader = new System.Windows.Forms.Panel();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.pnlColor = new System.Windows.Forms.Panel();
             this.pnlViewNoteDetails.SuspendLayout();
             this.pnlBottom.SuspendLayout();
             this.pnlViewHeader.SuspendLayout();
@@ -62,6 +62,7 @@
             // 
             this.pnlViewNoteDetails.BackColor = System.Drawing.Color.White;
             this.pnlViewNoteDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlViewNoteDetails.Controls.Add(this.btnCancel);
             this.pnlViewNoteDetails.Controls.Add(this.pnlColor);
             this.pnlViewNoteDetails.Controls.Add(this.lblPriority);
             this.pnlViewNoteDetails.Controls.Add(this.pnlBottom);
@@ -83,12 +84,36 @@
             this.pnlViewNoteDetails.Controls.Add(this.lblNoteTitle);
             this.pnlViewNoteDetails.Controls.Add(this.lblTitleCaption);
             this.pnlViewNoteDetails.Controls.Add(this.pnlViewHeader);
-            this.pnlViewNoteDetails.Location = new System.Drawing.Point(306, 64);
+            this.pnlViewNoteDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlViewNoteDetails.Location = new System.Drawing.Point(0, 0);
+            this.pnlViewNoteDetails.Margin = new System.Windows.Forms.Padding(0);
             this.pnlViewNoteDetails.Name = "pnlViewNoteDetails";
             this.pnlViewNoteDetails.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlViewNoteDetails.Size = new System.Drawing.Size(500, 580);
+            this.pnlViewNoteDetails.Size = new System.Drawing.Size(503, 584);
             this.pnlViewNoteDetails.TabIndex = 0;
             this.pnlViewNoteDetails.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
+            this.btnCancel.Location = new System.Drawing.Point(441, 10);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(40, 40);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.MouseEnter += new System.EventHandler(this.btnCancel_MouseEnter);
+            this.btnCancel.MouseLeave += new System.EventHandler(this.btnCancel_MouseLeave);
+            // 
+            // pnlColor
+            // 
+            this.pnlColor.BackColor = System.Drawing.Color.Orange;
+            this.pnlColor.Location = new System.Drawing.Point(34, 273);
+            this.pnlColor.Name = "pnlColor";
+            this.pnlColor.Size = new System.Drawing.Size(16, 16);
+            this.pnlColor.TabIndex = 21;
             // 
             // lblPriority
             // 
@@ -105,9 +130,9 @@
             // 
             this.pnlBottom.Controls.Add(this.btnClose);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(10, 520);
+            this.pnlBottom.Location = new System.Drawing.Point(10, 524);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(478, 48);
+            this.pnlBottom.Size = new System.Drawing.Size(481, 48);
             this.pnlBottom.TabIndex = 18;
             // 
             // btnClose
@@ -117,12 +142,13 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.btnClose.Location = new System.Drawing.Point(381, 6);
+            this.btnClose.Location = new System.Drawing.Point(384, 6);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(90, 35);
             this.btnClose.TabIndex = 0;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblUpdatedDate
             // 
@@ -249,7 +275,7 @@
             this.lblDescription.Size = new System.Drawing.Size(419, 40);
             this.lblDescription.TabIndex = 5;
             this.lblDescription.Text = "Finish the project proposal, review team updates and prepare for tomorrow\'s meeti" +
-                "ng.";
+    "ng.";
             // 
             // lblDescriptionCaption
             // 
@@ -292,25 +318,11 @@
             // 
             // pnlViewHeader
             // 
-            this.pnlViewHeader.Controls.Add(this.btnCancel);
             this.pnlViewHeader.Controls.Add(this.lblTitle);
-            this.pnlViewHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlViewHeader.Location = new System.Drawing.Point(10, 10);
             this.pnlViewHeader.Name = "pnlViewHeader";
-            this.pnlViewHeader.Size = new System.Drawing.Size(478, 40);
+            this.pnlViewHeader.Size = new System.Drawing.Size(196, 40);
             this.pnlViewHeader.TabIndex = 0;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancel.FlatAppearance.BorderSize = 0;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnCancel.Location = new System.Drawing.Point(438, 0);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(40, 40);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // lblTitle
             // 
@@ -322,22 +334,17 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "View Note";
             // 
-            // pnlColor
-            // 
-            this.pnlColor.BackColor = System.Drawing.Color.Orange;
-            this.pnlColor.Location = new System.Drawing.Point(34, 273);
-            this.pnlColor.Name = "pnlColor";
-            this.pnlColor.Size = new System.Drawing.Size(16, 16);
-            this.pnlColor.TabIndex = 21;
-            // 
             // NoteViewDetailsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1027, 793);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(503, 584);
             this.Controls.Add(this.pnlViewNoteDetails);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimizeBox = false;
             this.Name = "NoteViewDetailsControl";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NoteViewDetailsControl";
             this.Load += new System.EventHandler(this.NoteViewDetailsControl_Load);
             this.pnlViewNoteDetails.ResumeLayout(false);

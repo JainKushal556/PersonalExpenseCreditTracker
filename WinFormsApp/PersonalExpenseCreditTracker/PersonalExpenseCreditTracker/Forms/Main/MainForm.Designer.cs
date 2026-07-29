@@ -56,7 +56,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlAmountBody = new System.Windows.Forms.Panel();
             this.txtMaxAmount = new System.Windows.Forms.TextBox();
             this.lblMaxAmount = new System.Windows.Forms.Label();
-            this.txtMixAmount = new System.Windows.Forms.TextBox();
+            this.txtMinAmount = new System.Windows.Forms.TextBox();
             this.lblMinAmount = new System.Windows.Forms.Label();
             this.pnlAmountHeader = new System.Windows.Forms.Panel();
             this.picFilterByAmountArrow = new System.Windows.Forms.PictureBox();
@@ -104,9 +104,10 @@ namespace PersonalExpenseCreditTracker
             this.picCreditCategoryIcone = new System.Windows.Forms.PictureBox();
             this.lblCreditCategory = new System.Windows.Forms.Label();
             this.pnlCreditAmountBody = new System.Windows.Forms.Panel();
-            this.txtCreditMinAmount = new System.Windows.Forms.TextBox();
+            this.btnCreditApplyAmountFilter = new System.Windows.Forms.Button();
+            this.txtCreditMaxAmount = new System.Windows.Forms.TextBox();
             this.lblCreditMaxAmount = new System.Windows.Forms.Label();
-            this.txtCreditMixAmount = new System.Windows.Forms.TextBox();
+            this.txtCreditMinAmount = new System.Windows.Forms.TextBox();
             this.lblCreditMinAmount = new System.Windows.Forms.Label();
             this.pnlCreditAmountHeader = new System.Windows.Forms.Panel();
             this.picCreditFilterByAmountArrow = new System.Windows.Forms.PictureBox();
@@ -163,6 +164,7 @@ namespace PersonalExpenseCreditTracker
             this.picLentPersonIcone = new System.Windows.Forms.PictureBox();
             this.lblLentFilterByPerson = new System.Windows.Forms.Label();
             this.pnlLentAmountBody = new System.Windows.Forms.Panel();
+            this.btnLentApplyAmountFilter = new System.Windows.Forms.Button();
             this.txtLentMaxAmount = new System.Windows.Forms.TextBox();
             this.lblLentMaxAmount = new System.Windows.Forms.Label();
             this.txtLentMinAmount = new System.Windows.Forms.TextBox();
@@ -399,6 +401,10 @@ namespace PersonalExpenseCreditTracker
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.process1 = new System.Diagnostics.Process();
+            this.btnBorrowApplyAmountFilter = new System.Windows.Forms.Button();
+            this.btnExpenseApplyAmountFilter = new System.Windows.Forms.Button();
             this.pnlMainSideBarSection.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             this.pnlScrollBar.SuspendLayout();
@@ -596,6 +602,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMainSideBarSection
@@ -668,7 +675,7 @@ namespace PersonalExpenseCreditTracker
             this.flowSidebar.Location = new System.Drawing.Point(0, 0);
             this.flowSidebar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowSidebar.Name = "flowSidebar";
-            this.flowSidebar.Size = new System.Drawing.Size(400, 5362);
+            this.flowSidebar.Size = new System.Drawing.Size(400, 5428);
             this.flowSidebar.TabIndex = 4;
             this.flowSidebar.WrapContents = false;
             // 
@@ -790,7 +797,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlExpenseDropDown.Location = new System.Drawing.Point(0, 120);
             this.pnlExpenseDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.pnlExpenseDropDown.Name = "pnlExpenseDropDown";
-            this.pnlExpenseDropDown.Size = new System.Drawing.Size(400, 798);
+            this.pnlExpenseDropDown.Size = new System.Drawing.Size(400, 844);
             this.pnlExpenseDropDown.TabIndex = 4;
             this.pnlExpenseDropDown.Visible = false;
             // 
@@ -809,7 +816,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlFilterContent.Location = new System.Drawing.Point(0, 136);
             this.pnlFilterContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlFilterContent.Name = "pnlFilterContent";
-            this.pnlFilterContent.Size = new System.Drawing.Size(400, 662);
+            this.pnlFilterContent.Size = new System.Drawing.Size(400, 708);
             this.pnlFilterContent.TabIndex = 2;
             this.pnlFilterContent.Visible = false;
             // 
@@ -824,7 +831,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCategoryBody.Controls.Add(this.lblSelectCategory);
             this.pnlCategoryBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCategoryBody.ForeColor = System.Drawing.Color.White;
-            this.pnlCategoryBody.Location = new System.Drawing.Point(0, 538);
+            this.pnlCategoryBody.Location = new System.Drawing.Point(0, 584);
             this.pnlCategoryBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCategoryBody.Name = "pnlCategoryBody";
             this.pnlCategoryBody.Size = new System.Drawing.Size(400, 124);
@@ -889,7 +896,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCategoryHeader.Controls.Add(this.lblCategory);
             this.pnlCategoryHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCategoryHeader.ForeColor = System.Drawing.Color.White;
-            this.pnlCategoryHeader.Location = new System.Drawing.Point(0, 499);
+            this.pnlCategoryHeader.Location = new System.Drawing.Point(0, 545);
             this.pnlCategoryHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlCategoryHeader.Name = "pnlCategoryHeader";
             this.pnlCategoryHeader.Size = new System.Drawing.Size(400, 39);
@@ -935,16 +942,17 @@ namespace PersonalExpenseCreditTracker
             this.pnlAmountBody.AutoSize = true;
             this.pnlAmountBody.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlAmountBody.BackColor = System.Drawing.Color.Transparent;
+            this.pnlAmountBody.Controls.Add(this.btnExpenseApplyAmountFilter);
             this.pnlAmountBody.Controls.Add(this.txtMaxAmount);
             this.pnlAmountBody.Controls.Add(this.lblMaxAmount);
-            this.pnlAmountBody.Controls.Add(this.txtMixAmount);
+            this.pnlAmountBody.Controls.Add(this.txtMinAmount);
             this.pnlAmountBody.Controls.Add(this.lblMinAmount);
             this.pnlAmountBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlAmountBody.ForeColor = System.Drawing.Color.White;
             this.pnlAmountBody.Location = new System.Drawing.Point(0, 386);
             this.pnlAmountBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAmountBody.Name = "pnlAmountBody";
-            this.pnlAmountBody.Size = new System.Drawing.Size(400, 113);
+            this.pnlAmountBody.Size = new System.Drawing.Size(400, 159);
             this.pnlAmountBody.TabIndex = 5;
             this.pnlAmountBody.Visible = false;
             // 
@@ -967,14 +975,14 @@ namespace PersonalExpenseCreditTracker
             this.lblMaxAmount.TabIndex = 2;
             this.lblMaxAmount.Text = "Max Amount";
             // 
-            // txtMixAmount
+            // txtMinAmount
             // 
-            this.txtMixAmount.Location = new System.Drawing.Point(91, 30);
-            this.txtMixAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtMixAmount.Name = "txtMixAmount";
-            this.txtMixAmount.Size = new System.Drawing.Size(151, 22);
-            this.txtMixAmount.TabIndex = 1;
-            this.txtMixAmount.TextChanged += new System.EventHandler(this.txtMixAmount_TextChanged);
+            this.txtMinAmount.Location = new System.Drawing.Point(91, 30);
+            this.txtMinAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtMinAmount.Name = "txtMinAmount";
+            this.txtMinAmount.Size = new System.Drawing.Size(151, 22);
+            this.txtMinAmount.TabIndex = 1;
+            this.txtMinAmount.TextChanged += new System.EventHandler(this.txtMinAmount_TextChanged);
             // 
             // lblMinAmount
             // 
@@ -1391,7 +1399,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCredit.Controls.Add(this.lblCredit);
             this.pnlCredit.Controls.Add(this.picCredit);
             this.pnlCredit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlCredit.Location = new System.Drawing.Point(0, 918);
+            this.pnlCredit.Location = new System.Drawing.Point(0, 964);
             this.pnlCredit.Margin = new System.Windows.Forms.Padding(0);
             this.pnlCredit.Name = "pnlCredit";
             this.pnlCredit.Size = new System.Drawing.Size(400, 60);
@@ -1450,10 +1458,10 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditDropDown.Controls.Add(this.pnlAddCredit);
             this.pnlCreditDropDown.Controls.Add(this.pnlAllCredit);
             this.pnlCreditDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCreditDropDown.Location = new System.Drawing.Point(0, 978);
+            this.pnlCreditDropDown.Location = new System.Drawing.Point(0, 1024);
             this.pnlCreditDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.pnlCreditDropDown.Name = "pnlCreditDropDown";
-            this.pnlCreditDropDown.Size = new System.Drawing.Size(400, 798);
+            this.pnlCreditDropDown.Size = new System.Drawing.Size(400, 844);
             this.pnlCreditDropDown.TabIndex = 6;
             this.pnlCreditDropDown.Visible = false;
             // 
@@ -1471,7 +1479,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditFilterContant.Location = new System.Drawing.Point(0, 136);
             this.pnlCreditFilterContant.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCreditFilterContant.Name = "pnlCreditFilterContant";
-            this.pnlCreditFilterContant.Size = new System.Drawing.Size(400, 662);
+            this.pnlCreditFilterContant.Size = new System.Drawing.Size(400, 708);
             this.pnlCreditFilterContant.TabIndex = 6;
             // 
             // pnlCreditCategoryBody
@@ -1485,7 +1493,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditCategoryBody.Controls.Add(this.lblCreditSelectCategory);
             this.pnlCreditCategoryBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCreditCategoryBody.ForeColor = System.Drawing.Color.White;
-            this.pnlCreditCategoryBody.Location = new System.Drawing.Point(0, 538);
+            this.pnlCreditCategoryBody.Location = new System.Drawing.Point(0, 584);
             this.pnlCreditCategoryBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCreditCategoryBody.Name = "pnlCreditCategoryBody";
             this.pnlCreditCategoryBody.Size = new System.Drawing.Size(400, 124);
@@ -1496,10 +1504,6 @@ namespace PersonalExpenseCreditTracker
             // 
             this.ComboBoxCreditSubCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxCreditSubCategory.FormattingEnabled = true;
-            this.ComboBoxCreditSubCategory.Items.AddRange(new object[] {
-            "Select SubCategory",
-            "sadf",
-            "dsfdf"});
             this.ComboBoxCreditSubCategory.Location = new System.Drawing.Point(104, 98);
             this.ComboBoxCreditSubCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ComboBoxCreditSubCategory.Name = "ComboBoxCreditSubCategory";
@@ -1521,10 +1525,6 @@ namespace PersonalExpenseCreditTracker
             // 
             this.ComboBoxCreditCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxCreditCategory.FormattingEnabled = true;
-            this.ComboBoxCreditCategory.Items.AddRange(new object[] {
-            "Select Category",
-            "Food",
-            "Travel"});
             this.ComboBoxCreditCategory.Location = new System.Drawing.Point(104, 37);
             this.ComboBoxCreditCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ComboBoxCreditCategory.Name = "ComboBoxCreditCategory";
@@ -1550,7 +1550,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditCategoryHeader.Controls.Add(this.lblCreditCategory);
             this.pnlCreditCategoryHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCreditCategoryHeader.ForeColor = System.Drawing.Color.White;
-            this.pnlCreditCategoryHeader.Location = new System.Drawing.Point(0, 499);
+            this.pnlCreditCategoryHeader.Location = new System.Drawing.Point(0, 545);
             this.pnlCreditCategoryHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlCreditCategoryHeader.Name = "pnlCreditCategoryHeader";
             this.pnlCreditCategoryHeader.Size = new System.Drawing.Size(400, 39);
@@ -1596,27 +1596,42 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditAmountBody.AutoSize = true;
             this.pnlCreditAmountBody.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlCreditAmountBody.BackColor = System.Drawing.Color.Transparent;
-            this.pnlCreditAmountBody.Controls.Add(this.txtCreditMinAmount);
+            this.pnlCreditAmountBody.Controls.Add(this.btnCreditApplyAmountFilter);
+            this.pnlCreditAmountBody.Controls.Add(this.txtCreditMaxAmount);
             this.pnlCreditAmountBody.Controls.Add(this.lblCreditMaxAmount);
-            this.pnlCreditAmountBody.Controls.Add(this.txtCreditMixAmount);
+            this.pnlCreditAmountBody.Controls.Add(this.txtCreditMinAmount);
             this.pnlCreditAmountBody.Controls.Add(this.lblCreditMinAmount);
             this.pnlCreditAmountBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlCreditAmountBody.ForeColor = System.Drawing.Color.White;
             this.pnlCreditAmountBody.Location = new System.Drawing.Point(0, 386);
             this.pnlCreditAmountBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCreditAmountBody.Name = "pnlCreditAmountBody";
-            this.pnlCreditAmountBody.Size = new System.Drawing.Size(400, 113);
+            this.pnlCreditAmountBody.Size = new System.Drawing.Size(400, 159);
             this.pnlCreditAmountBody.TabIndex = 6;
             this.pnlCreditAmountBody.Visible = false;
             // 
-            // txtCreditMinAmount
+            // btnCreditApplyAmountFilter
             // 
-            this.txtCreditMinAmount.Location = new System.Drawing.Point(91, 89);
-            this.txtCreditMinAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCreditMinAmount.Name = "txtCreditMinAmount";
-            this.txtCreditMinAmount.Size = new System.Drawing.Size(151, 22);
-            this.txtCreditMinAmount.TabIndex = 4;
-            this.txtCreditMinAmount.TextChanged += new System.EventHandler(this.txtCreditMinAmount_TextChanged);
+            this.btnCreditApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCreditApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnCreditApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreditApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnCreditApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCreditApplyAmountFilter.Name = "btnCreditApplyAmountFilter";
+            this.btnCreditApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnCreditApplyAmountFilter.TabIndex = 6;
+            this.btnCreditApplyAmountFilter.Text = "Apply";
+            this.btnCreditApplyAmountFilter.UseVisualStyleBackColor = false;
+            this.btnCreditApplyAmountFilter.Click += new System.EventHandler(this.btnCreditApplyAmountFilter_Click);
+            // 
+            // txtCreditMaxAmount
+            // 
+            this.txtCreditMaxAmount.Location = new System.Drawing.Point(91, 89);
+            this.txtCreditMaxAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCreditMaxAmount.Name = "txtCreditMaxAmount";
+            this.txtCreditMaxAmount.Size = new System.Drawing.Size(151, 22);
+            this.txtCreditMaxAmount.TabIndex = 4;
+            this.txtCreditMaxAmount.TextChanged += new System.EventHandler(this.txtCreditMaxAmount_TextChanged_1);
             // 
             // lblCreditMaxAmount
             // 
@@ -1628,14 +1643,14 @@ namespace PersonalExpenseCreditTracker
             this.lblCreditMaxAmount.TabIndex = 2;
             this.lblCreditMaxAmount.Text = "Max Amount";
             // 
-            // txtCreditMixAmount
+            // txtCreditMinAmount
             // 
-            this.txtCreditMixAmount.Location = new System.Drawing.Point(91, 30);
-            this.txtCreditMixAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCreditMixAmount.Name = "txtCreditMixAmount";
-            this.txtCreditMixAmount.Size = new System.Drawing.Size(151, 22);
-            this.txtCreditMixAmount.TabIndex = 1;
-            this.txtCreditMixAmount.TextChanged += new System.EventHandler(this.txtCreditMixAmount_TextChanged);
+            this.txtCreditMinAmount.Location = new System.Drawing.Point(91, 30);
+            this.txtCreditMinAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCreditMinAmount.Name = "txtCreditMinAmount";
+            this.txtCreditMinAmount.Size = new System.Drawing.Size(151, 22);
+            this.txtCreditMinAmount.TabIndex = 1;
+            this.txtCreditMinAmount.TextChanged += new System.EventHandler(this.txtCreditMinAmount_TextChanged);
             // 
             // lblCreditMinAmount
             // 
@@ -1742,6 +1757,7 @@ namespace PersonalExpenseCreditTracker
             this.btnCreditApplyDateFilter.TabIndex = 4;
             this.btnCreditApplyDateFilter.Text = "Apply";
             this.btnCreditApplyDateFilter.UseVisualStyleBackColor = false;
+            this.btnCreditApplyDateFilter.Click += new System.EventHandler(this.btnCreditApplyDateFilter_Click);
             // 
             // dtpCreditToDate
             // 
@@ -2052,12 +2068,13 @@ namespace PersonalExpenseCreditTracker
             this.pnlLent.Controls.Add(this.lblLent);
             this.pnlLent.Controls.Add(this.picLent);
             this.pnlLent.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLent.Location = new System.Drawing.Point(0, 1776);
+            this.pnlLent.Location = new System.Drawing.Point(0, 1868);
             this.pnlLent.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLent.Name = "pnlLent";
             this.pnlLent.Size = new System.Drawing.Size(400, 60);
             this.pnlLent.TabIndex = 7;
             this.pnlLent.Click += new System.EventHandler(this.pnlLent_Click);
+            this.pnlLent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlLent_Paint);
             this.pnlLent.MouseEnter += new System.EventHandler(this.pnlLent_MouseEnter);
             this.pnlLent.MouseLeave += new System.EventHandler(this.pnlLent_MouseLeave);
             // 
@@ -2111,10 +2128,10 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentDropDown.Controls.Add(this.pnlAddLent);
             this.pnlLentDropDown.Controls.Add(this.pnlAllLent);
             this.pnlLentDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLentDropDown.Location = new System.Drawing.Point(0, 1836);
+            this.pnlLentDropDown.Location = new System.Drawing.Point(0, 1928);
             this.pnlLentDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLentDropDown.Name = "pnlLentDropDown";
-            this.pnlLentDropDown.Size = new System.Drawing.Size(400, 845);
+            this.pnlLentDropDown.Size = new System.Drawing.Size(400, 891);
             this.pnlLentDropDown.TabIndex = 8;
             this.pnlLentDropDown.Visible = false;
             // 
@@ -2136,7 +2153,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentFilterContant.Location = new System.Drawing.Point(0, 136);
             this.pnlLentFilterContant.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLentFilterContant.Name = "pnlLentFilterContant";
-            this.pnlLentFilterContant.Size = new System.Drawing.Size(400, 709);
+            this.pnlLentFilterContant.Size = new System.Drawing.Size(400, 755);
             this.pnlLentFilterContant.TabIndex = 7;
             // 
             // pnlLentPaymentBody
@@ -2144,7 +2161,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentPaymentBody.AutoSize = true;
             this.pnlLentPaymentBody.Controls.Add(this.ComboBoxLentPayment);
             this.pnlLentPaymentBody.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLentPaymentBody.Location = new System.Drawing.Point(0, 678);
+            this.pnlLentPaymentBody.Location = new System.Drawing.Point(0, 724);
             this.pnlLentPaymentBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLentPaymentBody.Name = "pnlLentPaymentBody";
             this.pnlLentPaymentBody.Size = new System.Drawing.Size(400, 31);
@@ -2155,16 +2172,12 @@ namespace PersonalExpenseCreditTracker
             // 
             this.ComboBoxLentPayment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxLentPayment.FormattingEnabled = true;
-            this.ComboBoxLentPayment.Items.AddRange(new object[] {
-            "Select  Payment Method",
-            "UPI",
-            "Cash",
-            "Card"});
             this.ComboBoxLentPayment.Location = new System.Drawing.Point(99, 5);
             this.ComboBoxLentPayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ComboBoxLentPayment.Name = "ComboBoxLentPayment";
             this.ComboBoxLentPayment.Size = new System.Drawing.Size(160, 24);
             this.ComboBoxLentPayment.TabIndex = 9;
+            this.ComboBoxLentPayment.SelectedIndexChanged += new System.EventHandler(this.ComboBoxLentPayment_SelectedIndexChanged_1);
             // 
             // pnlLentPaymentHeader
             // 
@@ -2174,7 +2187,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentPaymentHeader.Controls.Add(this.lblLentFilterByPayment);
             this.pnlLentPaymentHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLentPaymentHeader.ForeColor = System.Drawing.Color.White;
-            this.pnlLentPaymentHeader.Location = new System.Drawing.Point(0, 639);
+            this.pnlLentPaymentHeader.Location = new System.Drawing.Point(0, 685);
             this.pnlLentPaymentHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLentPaymentHeader.Name = "pnlLentPaymentHeader";
             this.pnlLentPaymentHeader.Size = new System.Drawing.Size(400, 39);
@@ -2221,7 +2234,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentStatusBody.AutoSize = true;
             this.pnlLentStatusBody.Controls.Add(this.ComboBoxLentStatus);
             this.pnlLentStatusBody.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLentStatusBody.Location = new System.Drawing.Point(0, 608);
+            this.pnlLentStatusBody.Location = new System.Drawing.Point(0, 654);
             this.pnlLentStatusBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLentStatusBody.Name = "pnlLentStatusBody";
             this.pnlLentStatusBody.Size = new System.Drawing.Size(400, 31);
@@ -2232,10 +2245,6 @@ namespace PersonalExpenseCreditTracker
             // 
             this.ComboBoxLentStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxLentStatus.FormattingEnabled = true;
-            this.ComboBoxLentStatus.Items.AddRange(new object[] {
-            "Select Status",
-            "Complete",
-            "Pandding"});
             this.ComboBoxLentStatus.Location = new System.Drawing.Point(99, 5);
             this.ComboBoxLentStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ComboBoxLentStatus.Name = "ComboBoxLentStatus";
@@ -2251,7 +2260,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentStatusHeader.Controls.Add(this.lblLentFilterByStatus);
             this.pnlLentStatusHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLentStatusHeader.ForeColor = System.Drawing.Color.White;
-            this.pnlLentStatusHeader.Location = new System.Drawing.Point(0, 569);
+            this.pnlLentStatusHeader.Location = new System.Drawing.Point(0, 615);
             this.pnlLentStatusHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLentStatusHeader.Name = "pnlLentStatusHeader";
             this.pnlLentStatusHeader.Size = new System.Drawing.Size(400, 39);
@@ -2298,7 +2307,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentPersonBody.AutoSize = true;
             this.pnlLentPersonBody.Controls.Add(this.ComboBoxLentPerson);
             this.pnlLentPersonBody.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLentPersonBody.Location = new System.Drawing.Point(0, 538);
+            this.pnlLentPersonBody.Location = new System.Drawing.Point(0, 584);
             this.pnlLentPersonBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLentPersonBody.Name = "pnlLentPersonBody";
             this.pnlLentPersonBody.Size = new System.Drawing.Size(400, 31);
@@ -2309,12 +2318,6 @@ namespace PersonalExpenseCreditTracker
             // 
             this.ComboBoxLentPerson.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxLentPerson.FormattingEnabled = true;
-            this.ComboBoxLentPerson.Items.AddRange(new object[] {
-            "Select Person Name",
-            "Sujit Kar",
-            "Akhmal",
-            "Kushal",
-            "Arpita"});
             this.ComboBoxLentPerson.Location = new System.Drawing.Point(99, 5);
             this.ComboBoxLentPerson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ComboBoxLentPerson.Name = "ComboBoxLentPerson";
@@ -2330,7 +2333,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentPersonHeader.Controls.Add(this.lblLentFilterByPerson);
             this.pnlLentPersonHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLentPersonHeader.ForeColor = System.Drawing.Color.White;
-            this.pnlLentPersonHeader.Location = new System.Drawing.Point(0, 499);
+            this.pnlLentPersonHeader.Location = new System.Drawing.Point(0, 545);
             this.pnlLentPersonHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLentPersonHeader.Name = "pnlLentPersonHeader";
             this.pnlLentPersonHeader.Size = new System.Drawing.Size(400, 39);
@@ -2377,6 +2380,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentAmountBody.AutoSize = true;
             this.pnlLentAmountBody.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlLentAmountBody.BackColor = System.Drawing.Color.Transparent;
+            this.pnlLentAmountBody.Controls.Add(this.btnLentApplyAmountFilter);
             this.pnlLentAmountBody.Controls.Add(this.txtLentMaxAmount);
             this.pnlLentAmountBody.Controls.Add(this.lblLentMaxAmount);
             this.pnlLentAmountBody.Controls.Add(this.txtLentMinAmount);
@@ -2386,9 +2390,23 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentAmountBody.Location = new System.Drawing.Point(0, 386);
             this.pnlLentAmountBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLentAmountBody.Name = "pnlLentAmountBody";
-            this.pnlLentAmountBody.Size = new System.Drawing.Size(400, 113);
+            this.pnlLentAmountBody.Size = new System.Drawing.Size(400, 159);
             this.pnlLentAmountBody.TabIndex = 7;
             this.pnlLentAmountBody.Visible = false;
+            // 
+            // btnLentApplyAmountFilter
+            // 
+            this.btnLentApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnLentApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnLentApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLentApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnLentApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLentApplyAmountFilter.Name = "btnLentApplyAmountFilter";
+            this.btnLentApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnLentApplyAmountFilter.TabIndex = 5;
+            this.btnLentApplyAmountFilter.Text = "Apply";
+            this.btnLentApplyAmountFilter.UseVisualStyleBackColor = false;
+            this.btnLentApplyAmountFilter.Click += new System.EventHandler(this.btnLentApplyAmountFilter_Click);
             // 
             // txtLentMaxAmount
             // 
@@ -2522,6 +2540,7 @@ namespace PersonalExpenseCreditTracker
             this.btnLentApplyDateFilter.TabIndex = 4;
             this.btnLentApplyDateFilter.Text = "Apply";
             this.btnLentApplyDateFilter.UseVisualStyleBackColor = false;
+            this.btnLentApplyDateFilter.Click += new System.EventHandler(this.btnLentApplyDateFilter_Click);
             // 
             // dtpLentToDate
             // 
@@ -2532,6 +2551,7 @@ namespace PersonalExpenseCreditTracker
             this.dtpLentToDate.Name = "dtpLentToDate";
             this.dtpLentToDate.Size = new System.Drawing.Size(169, 27);
             this.dtpLentToDate.TabIndex = 3;
+            this.dtpLentToDate.ValueChanged += new System.EventHandler(this.dtpLentToDate_ValueChanged);
             // 
             // label3
             // 
@@ -2552,6 +2572,7 @@ namespace PersonalExpenseCreditTracker
             this.dtpLentFromDate.Name = "dtpLentFromDate";
             this.dtpLentFromDate.Size = new System.Drawing.Size(169, 27);
             this.dtpLentFromDate.TabIndex = 1;
+            this.dtpLentFromDate.ValueChanged += new System.EventHandler(this.dtpLentFromDate_ValueChanged);
             // 
             // label4
             // 
@@ -2752,6 +2773,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlAddLent.Size = new System.Drawing.Size(400, 46);
             this.pnlAddLent.TabIndex = 4;
             this.pnlAddLent.Click += new System.EventHandler(this.pnlAddLent_Click);
+            this.pnlAddLent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddLent_Paint);
             this.pnlAddLent.MouseEnter += new System.EventHandler(this.pnlAddLent_MouseEnter);
             this.pnlAddLent.MouseLeave += new System.EventHandler(this.pnlAddLent_MouseLeave);
             // 
@@ -2832,7 +2854,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrow.Controls.Add(this.lblBorrow);
             this.pnlBorrow.Controls.Add(this.picBorrow);
             this.pnlBorrow.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlBorrow.Location = new System.Drawing.Point(0, 2681);
+            this.pnlBorrow.Location = new System.Drawing.Point(0, 2819);
             this.pnlBorrow.Margin = new System.Windows.Forms.Padding(0);
             this.pnlBorrow.Name = "pnlBorrow";
             this.pnlBorrow.Size = new System.Drawing.Size(400, 60);
@@ -2861,6 +2883,7 @@ namespace PersonalExpenseCreditTracker
             this.lblBorrow.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrow.ForeColor = System.Drawing.Color.White;
             this.lblBorrow.Location = new System.Drawing.Point(80, 17);
+            this.lblBorrow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBorrow.Name = "lblBorrow";
             this.lblBorrow.Size = new System.Drawing.Size(77, 28);
             this.lblBorrow.TabIndex = 1;
@@ -2890,10 +2913,10 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowDropDown.Controls.Add(this.pnlAddBorrow);
             this.pnlBorrowDropDown.Controls.Add(this.pnlAllBorrow);
             this.pnlBorrowDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBorrowDropDown.Location = new System.Drawing.Point(0, 2741);
+            this.pnlBorrowDropDown.Location = new System.Drawing.Point(0, 2879);
             this.pnlBorrowDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.pnlBorrowDropDown.Name = "pnlBorrowDropDown";
-            this.pnlBorrowDropDown.Size = new System.Drawing.Size(400, 845);
+            this.pnlBorrowDropDown.Size = new System.Drawing.Size(400, 891);
             this.pnlBorrowDropDown.TabIndex = 10;
             this.pnlBorrowDropDown.Visible = false;
             // 
@@ -2915,7 +2938,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowFilterContant.Location = new System.Drawing.Point(0, 136);
             this.pnlBorrowFilterContant.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlBorrowFilterContant.Name = "pnlBorrowFilterContant";
-            this.pnlBorrowFilterContant.Size = new System.Drawing.Size(400, 709);
+            this.pnlBorrowFilterContant.Size = new System.Drawing.Size(400, 755);
             this.pnlBorrowFilterContant.TabIndex = 8;
             // 
             // pnlBorrowPaymentBody
@@ -2923,7 +2946,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowPaymentBody.AutoSize = true;
             this.pnlBorrowPaymentBody.Controls.Add(this.ComboBoxBorrowPayment);
             this.pnlBorrowPaymentBody.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlBorrowPaymentBody.Location = new System.Drawing.Point(0, 678);
+            this.pnlBorrowPaymentBody.Location = new System.Drawing.Point(0, 724);
             this.pnlBorrowPaymentBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlBorrowPaymentBody.Name = "pnlBorrowPaymentBody";
             this.pnlBorrowPaymentBody.Size = new System.Drawing.Size(400, 31);
@@ -2954,7 +2977,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowPaymentHeader.Controls.Add(this.lblBorrowFilterByPayment);
             this.pnlBorrowPaymentHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBorrowPaymentHeader.ForeColor = System.Drawing.Color.White;
-            this.pnlBorrowPaymentHeader.Location = new System.Drawing.Point(0, 639);
+            this.pnlBorrowPaymentHeader.Location = new System.Drawing.Point(0, 685);
             this.pnlBorrowPaymentHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlBorrowPaymentHeader.Name = "pnlBorrowPaymentHeader";
             this.pnlBorrowPaymentHeader.Size = new System.Drawing.Size(400, 39);
@@ -3001,7 +3024,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowStatusBody.AutoSize = true;
             this.pnlBorrowStatusBody.Controls.Add(this.ComboBoxBorrowStatus);
             this.pnlBorrowStatusBody.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlBorrowStatusBody.Location = new System.Drawing.Point(0, 608);
+            this.pnlBorrowStatusBody.Location = new System.Drawing.Point(0, 654);
             this.pnlBorrowStatusBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlBorrowStatusBody.Name = "pnlBorrowStatusBody";
             this.pnlBorrowStatusBody.Size = new System.Drawing.Size(400, 31);
@@ -3031,7 +3054,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowStatusHeader.Controls.Add(this.lblBorrowFilterByStatus);
             this.pnlBorrowStatusHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBorrowStatusHeader.ForeColor = System.Drawing.Color.White;
-            this.pnlBorrowStatusHeader.Location = new System.Drawing.Point(0, 569);
+            this.pnlBorrowStatusHeader.Location = new System.Drawing.Point(0, 615);
             this.pnlBorrowStatusHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlBorrowStatusHeader.Name = "pnlBorrowStatusHeader";
             this.pnlBorrowStatusHeader.Size = new System.Drawing.Size(400, 39);
@@ -3078,7 +3101,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowPersonBody.AutoSize = true;
             this.pnlBorrowPersonBody.Controls.Add(this.ComboBoxBorrowPerson);
             this.pnlBorrowPersonBody.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlBorrowPersonBody.Location = new System.Drawing.Point(0, 538);
+            this.pnlBorrowPersonBody.Location = new System.Drawing.Point(0, 584);
             this.pnlBorrowPersonBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlBorrowPersonBody.Name = "pnlBorrowPersonBody";
             this.pnlBorrowPersonBody.Size = new System.Drawing.Size(400, 31);
@@ -3110,7 +3133,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowPersonHeader.Controls.Add(this.lblBorrowFilterByPerson);
             this.pnlBorrowPersonHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBorrowPersonHeader.ForeColor = System.Drawing.Color.White;
-            this.pnlBorrowPersonHeader.Location = new System.Drawing.Point(0, 499);
+            this.pnlBorrowPersonHeader.Location = new System.Drawing.Point(0, 545);
             this.pnlBorrowPersonHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlBorrowPersonHeader.Name = "pnlBorrowPersonHeader";
             this.pnlBorrowPersonHeader.Size = new System.Drawing.Size(400, 39);
@@ -3157,6 +3180,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowAmountBody.AutoSize = true;
             this.pnlBorrowAmountBody.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlBorrowAmountBody.BackColor = System.Drawing.Color.Transparent;
+            this.pnlBorrowAmountBody.Controls.Add(this.btnBorrowApplyAmountFilter);
             this.pnlBorrowAmountBody.Controls.Add(this.txtBorrowMaxAmount);
             this.pnlBorrowAmountBody.Controls.Add(this.lblBorrowMaxAmount);
             this.pnlBorrowAmountBody.Controls.Add(this.txtBorrowMinAmount);
@@ -3166,7 +3190,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowAmountBody.Location = new System.Drawing.Point(0, 386);
             this.pnlBorrowAmountBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlBorrowAmountBody.Name = "pnlBorrowAmountBody";
-            this.pnlBorrowAmountBody.Size = new System.Drawing.Size(400, 113);
+            this.pnlBorrowAmountBody.Size = new System.Drawing.Size(400, 159);
             this.pnlBorrowAmountBody.TabIndex = 8;
             this.pnlBorrowAmountBody.Visible = false;
             // 
@@ -3613,7 +3637,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlTasks.Controls.Add(this.lblTasks);
             this.pnlTasks.Controls.Add(this.picTasks);
             this.pnlTasks.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTasks.Location = new System.Drawing.Point(0, 3586);
+            this.pnlTasks.Location = new System.Drawing.Point(0, 3770);
             this.pnlTasks.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTasks.Name = "pnlTasks";
             this.pnlTasks.Size = new System.Drawing.Size(400, 60);
@@ -3672,7 +3696,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlTaskDropDown.Controls.Add(this.pnlAddTask);
             this.pnlTaskDropDown.Controls.Add(this.pnlAllTask);
             this.pnlTaskDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskDropDown.Location = new System.Drawing.Point(0, 3646);
+            this.pnlTaskDropDown.Location = new System.Drawing.Point(0, 3830);
             this.pnlTaskDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.pnlTaskDropDown.Name = "pnlTaskDropDown";
             this.pnlTaskDropDown.Size = new System.Drawing.Size(400, 624);
@@ -4212,7 +4236,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlNotes.Controls.Add(this.lblNotes);
             this.pnlNotes.Controls.Add(this.picNotes);
             this.pnlNotes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNotes.Location = new System.Drawing.Point(0, 4270);
+            this.pnlNotes.Location = new System.Drawing.Point(0, 4454);
             this.pnlNotes.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNotes.Name = "pnlNotes";
             this.pnlNotes.Size = new System.Drawing.Size(400, 60);
@@ -4265,7 +4289,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlNotesDropDown.Controls.Add(this.pnlAddNote);
             this.pnlNotesDropDown.Controls.Add(this.pnlAllNote);
             this.pnlNotesDropDown.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNotesDropDown.Location = new System.Drawing.Point(0, 4330);
+            this.pnlNotesDropDown.Location = new System.Drawing.Point(0, 4514);
             this.pnlNotesDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNotesDropDown.Name = "pnlNotesDropDown";
             this.pnlNotesDropDown.Size = new System.Drawing.Size(400, 624);
@@ -4802,7 +4826,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlSettings.Controls.Add(this.lblSettings);
             this.pnlSettings.Controls.Add(this.picSettings);
             this.pnlSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSettings.Location = new System.Drawing.Point(0, 4954);
+            this.pnlSettings.Location = new System.Drawing.Point(0, 5138);
             this.pnlSettings.Margin = new System.Windows.Forms.Padding(0);
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(400, 60);
@@ -4863,7 +4887,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlSettingsDropDown.Controls.Add(this.pnlSettingCreditCategories);
             this.pnlSettingsDropDown.Controls.Add(this.pnlSettingExpenseCategories);
             this.pnlSettingsDropDown.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSettingsDropDown.Location = new System.Drawing.Point(0, 5014);
+            this.pnlSettingsDropDown.Location = new System.Drawing.Point(0, 5198);
             this.pnlSettingsDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.pnlSettingsDropDown.Name = "pnlSettingsDropDown";
             this.pnlSettingsDropDown.Size = new System.Drawing.Size(400, 230);
@@ -5155,7 +5179,6 @@ namespace PersonalExpenseCreditTracker
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(400, 121);
             this.panelLogo.TabIndex = 0;
-            this.panelLogo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLogo_Paint);
             // 
             // panel1
             // 
@@ -5226,7 +5249,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlContainer.Location = new System.Drawing.Point(400, 0);
             this.pnlContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(876, 1055);
+            this.pnlContainer.Size = new System.Drawing.Size(1301, 1055);
             this.pnlContainer.TabIndex = 1;
             // 
             // pnlPersonAddPage
@@ -5236,7 +5259,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlPersonAddPage.Location = new System.Drawing.Point(0, 78);
             this.pnlPersonAddPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPersonAddPage.Name = "pnlPersonAddPage";
-            this.pnlPersonAddPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlPersonAddPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlPersonAddPage.TabIndex = 0;
             // 
             // pnlCreditCategoryPage
@@ -5246,7 +5269,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditCategoryPage.Location = new System.Drawing.Point(0, 78);
             this.pnlCreditCategoryPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCreditCategoryPage.Name = "pnlCreditCategoryPage";
-            this.pnlCreditCategoryPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlCreditCategoryPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlCreditCategoryPage.TabIndex = 0;
             // 
             // pnlExpenseCategory
@@ -5256,7 +5279,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlExpenseCategory.Location = new System.Drawing.Point(0, 78);
             this.pnlExpenseCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlExpenseCategory.Name = "pnlExpenseCategory";
-            this.pnlExpenseCategory.Size = new System.Drawing.Size(876, 977);
+            this.pnlExpenseCategory.Size = new System.Drawing.Size(1301, 977);
             this.pnlExpenseCategory.TabIndex = 0;
             // 
             // pnlOverview
@@ -5266,7 +5289,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlOverview.Location = new System.Drawing.Point(0, 78);
             this.pnlOverview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlOverview.Name = "pnlOverview";
-            this.pnlOverview.Size = new System.Drawing.Size(876, 977);
+            this.pnlOverview.Size = new System.Drawing.Size(1301, 977);
             this.pnlOverview.TabIndex = 0;
             // 
             // pnlExpensePage
@@ -5276,7 +5299,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlExpensePage.Location = new System.Drawing.Point(0, 78);
             this.pnlExpensePage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlExpensePage.Name = "pnlExpensePage";
-            this.pnlExpensePage.Size = new System.Drawing.Size(876, 977);
+            this.pnlExpensePage.Size = new System.Drawing.Size(1301, 977);
             this.pnlExpensePage.TabIndex = 1;
             // 
             // pnlCreditPage
@@ -5286,7 +5309,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlCreditPage.Location = new System.Drawing.Point(0, 78);
             this.pnlCreditPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlCreditPage.Name = "pnlCreditPage";
-            this.pnlCreditPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlCreditPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlCreditPage.TabIndex = 0;
             // 
             // pnlLentPage
@@ -5296,7 +5319,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlLentPage.Location = new System.Drawing.Point(0, 78);
             this.pnlLentPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLentPage.Name = "pnlLentPage";
-            this.pnlLentPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlLentPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlLentPage.TabIndex = 0;
             // 
             // pnlBorrowPage
@@ -5306,7 +5329,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowPage.Location = new System.Drawing.Point(0, 78);
             this.pnlBorrowPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlBorrowPage.Name = "pnlBorrowPage";
-            this.pnlBorrowPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlBorrowPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlBorrowPage.TabIndex = 0;
             // 
             // pnlTaskPage
@@ -5316,7 +5339,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlTaskPage.Location = new System.Drawing.Point(0, 78);
             this.pnlTaskPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlTaskPage.Name = "pnlTaskPage";
-            this.pnlTaskPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlTaskPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlTaskPage.TabIndex = 0;
             // 
             // pnlNotesPage
@@ -5326,7 +5349,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlNotesPage.Location = new System.Drawing.Point(0, 78);
             this.pnlNotesPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlNotesPage.Name = "pnlNotesPage";
-            this.pnlNotesPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlNotesPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlNotesPage.TabIndex = 0;
             // 
             // pnlSettingPage
@@ -5337,7 +5360,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlSettingPage.Location = new System.Drawing.Point(0, 78);
             this.pnlSettingPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSettingPage.Name = "pnlSettingPage";
-            this.pnlSettingPage.Size = new System.Drawing.Size(876, 977);
+            this.pnlSettingPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlSettingPage.TabIndex = 0;
             // 
             // pnlTop
@@ -5352,7 +5375,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Padding = new System.Windows.Forms.Padding(20, 15, 20, 15);
-            this.pnlTop.Size = new System.Drawing.Size(876, 78);
+            this.pnlTop.Size = new System.Drawing.Size(1301, 78);
             this.pnlTop.TabIndex = 2;
             // 
             // lblSubtitle
@@ -5372,7 +5395,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlRight.Controls.Add(this.panel5);
             this.pnlRight.Controls.Add(this.pnlDate);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(511, 15);
+            this.pnlRight.Location = new System.Drawing.Point(936, 15);
             this.pnlRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlRight.Name = "pnlRight";
             this.pnlRight.Size = new System.Drawing.Size(345, 48);
@@ -5418,6 +5441,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlDate
             // 
+            this.pnlDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDate.Controls.Add(this.picCalendar);
             this.pnlDate.Controls.Add(this.lblDate);
             this.pnlDate.Dock = System.Windows.Forms.DockStyle.Left;
@@ -5435,7 +5459,7 @@ namespace PersonalExpenseCreditTracker
             this.picCalendar.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.picCalendar.Name = "picCalendar";
             this.picCalendar.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-            this.picCalendar.Size = new System.Drawing.Size(37, 48);
+            this.picCalendar.Size = new System.Drawing.Size(37, 46);
             this.picCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picCalendar.TabIndex = 0;
             this.picCalendar.TabStop = false;
@@ -5445,11 +5469,11 @@ namespace PersonalExpenseCreditTracker
             this.lblDate.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
-            this.lblDate.Location = new System.Drawing.Point(45, 0);
+            this.lblDate.Location = new System.Drawing.Point(43, 0);
             this.lblDate.Margin = new System.Windows.Forms.Padding(0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.lblDate.Size = new System.Drawing.Size(205, 48);
+            this.lblDate.Size = new System.Drawing.Size(205, 46);
             this.lblDate.TabIndex = 1;
             this.lblDate.Text = "May 1, 2023 – May 31, 2024";
             this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -5486,7 +5510,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlProfilePage.Location = new System.Drawing.Point(400, 0);
             this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(0, 20, 11, 20);
             this.pnlProfilePage.Name = "pnlProfilePage";
-            this.pnlProfilePage.Size = new System.Drawing.Size(876, 1055);
+            this.pnlProfilePage.Size = new System.Drawing.Size(1301, 1055);
             this.pnlProfilePage.TabIndex = 0;
             this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
             // 
@@ -5494,17 +5518,58 @@ namespace PersonalExpenseCreditTracker
             // 
             this.tmSidebar.Interval = 10;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // process1
+            // 
+            this.process1.StartInfo.Domain = "";
+            this.process1.StartInfo.LoadUserProfile = false;
+            this.process1.StartInfo.Password = null;
+            this.process1.StartInfo.StandardErrorEncoding = null;
+            this.process1.StartInfo.StandardOutputEncoding = null;
+            this.process1.StartInfo.UserName = "";
+            this.process1.SynchronizingObject = this;
+            // 
+            // btnBorrowApplyAmountFilter
+            // 
+            this.btnBorrowApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnBorrowApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnBorrowApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorrowApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnBorrowApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBorrowApplyAmountFilter.Name = "btnBorrowApplyAmountFilter";
+            this.btnBorrowApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnBorrowApplyAmountFilter.TabIndex = 6;
+            this.btnBorrowApplyAmountFilter.Text = "Apply";
+            this.btnBorrowApplyAmountFilter.UseVisualStyleBackColor = false;
+            this.btnBorrowApplyAmountFilter.Click += new System.EventHandler(this.btnBorrowApplyAmountFilter_Click);
+            // 
+            // btnExpenseApplyAmountFilter
+            // 
+            this.btnExpenseApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnExpenseApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnExpenseApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExpenseApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnExpenseApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExpenseApplyAmountFilter.Name = "btnExpenseApplyAmountFilter";
+            this.btnExpenseApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnExpenseApplyAmountFilter.TabIndex = 7;
+            this.btnExpenseApplyAmountFilter.Text = "Apply";
+            this.btnExpenseApplyAmountFilter.UseVisualStyleBackColor = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
-            this.ClientSize = new System.Drawing.Size(1276, 1055);
+            this.ClientSize = new System.Drawing.Size(1701, 1055);
             this.Controls.Add(this.pnlProfilePage);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.pnlMainSideBarSection);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -5795,6 +5860,7 @@ namespace PersonalExpenseCreditTracker
             ((System.ComponentModel.ISupportInitialize)(this.picCalendar)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5859,7 +5925,7 @@ namespace PersonalExpenseCreditTracker
         private System.Windows.Forms.Panel pnlAmountBody;
         private System.Windows.Forms.TextBox txtMaxAmount;
         private System.Windows.Forms.Label lblMaxAmount;
-        private System.Windows.Forms.TextBox txtMixAmount;
+        private System.Windows.Forms.TextBox txtMinAmount;
         private System.Windows.Forms.Label lblMinAmount;
         private System.Windows.Forms.Panel pnlAmountHeader;
         private System.Windows.Forms.PictureBox picFilterByAmountArrow;
@@ -5907,9 +5973,9 @@ namespace PersonalExpenseCreditTracker
         private System.Windows.Forms.PictureBox picCreditCategoryIcone;
         private System.Windows.Forms.Label lblCreditCategory;
         private System.Windows.Forms.Panel pnlCreditAmountBody;
-        private System.Windows.Forms.TextBox txtCreditMinAmount;
+        private System.Windows.Forms.TextBox txtCreditMaxAmount;
         private System.Windows.Forms.Label lblCreditMaxAmount;
-        private System.Windows.Forms.TextBox txtCreditMixAmount;
+        private System.Windows.Forms.TextBox txtCreditMinAmount;
         private System.Windows.Forms.Label lblCreditMinAmount;
         private System.Windows.Forms.Panel pnlCreditAmountHeader;
         private System.Windows.Forms.PictureBox picCreditFilterByAmountArrow;
@@ -6172,6 +6238,12 @@ namespace PersonalExpenseCreditTracker
         private System.Windows.Forms.Label lblSettingPersonAdd;
         private System.Windows.Forms.PictureBox picSettingChangePassword;
         private System.Windows.Forms.Panel pnlPersonAddPage;
+        private System.Windows.Forms.Button btnLentApplyAmountFilter;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Diagnostics.Process process1;
+        private System.Windows.Forms.Button btnCreditApplyAmountFilter;
+        private System.Windows.Forms.Button btnExpenseApplyAmountFilter;
+        private System.Windows.Forms.Button btnBorrowApplyAmountFilter;
     }
 }
 

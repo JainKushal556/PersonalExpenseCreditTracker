@@ -1,4 +1,4 @@
-﻿-- =========================================================================
+-- =========================================================================
 -- STORED PROCEDURES TESTING TEMPLATE
 -- Fill in the blanks with test data to execute the SPs.
 -- =========================================================================
@@ -197,8 +197,24 @@ EXEC spInsertCreditByUserID
     @SubCategoryID = '',
     @Amount = '',
     @Description = '',
-    @PaymentID = '',
-    @CreditAt = ''
+    @PaymentID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetCreditSubCategoryByCategoryID
+-- From File: ✔️spGetCreditSubCategoryByCategoryID.sql
+-- ==========================================================
+EXEC spGetCreditSubCategoryByCategoryID
+    @CategoryID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetAllCreditCategory
+-- From File: ✔️spGetAllCreditCategory.sql
+-- ==========================================================
+EXEC spGetAllCreditCategory
 
 GO
 
@@ -747,7 +763,6 @@ EXEC spInsertBorrow
     @UserID = '',
     @PersonID = '',
     @PaymentID = '',
-    @StatusID = '',
     @Amount = '',
     @DeadlineAt = '',
     @Description = ''
@@ -801,6 +816,15 @@ EXEC spReturnLentByReturnAmount
 
 GO
 -- ==========================================================
+-- SP: spFilterLentByStatus
+-- From File: ✔️spFilterLentByStatus.sql
+-- ==========================================================
+EXEC spFilterLentByStatus
+    @UserID = '',
+    @StatusID = ''
+
+GO
+-- ==========================================================
 -- SP: spGetAllPersons
 -- From File: ✔️spGetAllPersons.sql
 -- ==========================================================
@@ -840,3 +864,12 @@ EXEC spUpdatePerson
     @Address = ''
 
 GO
+
+-- ==========================================================
+-- SP: spGetAllTaskPriorities
+-- From File: ✔️spGetAllTaskPriorities.sql
+-- ==========================================================
+EXEC spGetAllTaskPriorities
+
+GO
+

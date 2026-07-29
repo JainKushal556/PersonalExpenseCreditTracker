@@ -30,6 +30,10 @@ namespace BLLayer.Common
             DateRangeInvalid,
             MinimumAmountInvalid,
             MaximumAmountInvalid,
+            AmountRangeInvalid,
+
+            CategoryInvalid,
+            SubCategoryInvalid,
 
             StoreProcedureError
         }
@@ -137,7 +141,8 @@ namespace BLLayer.Common
                 return ValidationResult.Success;
             }
 
-            return ValidationResult.AmountInvalid;
+
+            return ValidationResult.MaximumAmountInvalid;
         }
 
         //Status Validation
@@ -237,6 +242,28 @@ namespace BLLayer.Common
             }
 
             return ValidationResult.DateRangeInvalid;
+        }
+
+        // Category Validation
+        public static ValidationResult ValidateCategory(int categoryId)
+        {
+            if (categoryId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.CategoryInvalid;
+        }
+
+        // SubCategory Validation
+        public static ValidationResult ValidateSubCategory(int subCategoryId)
+        {
+            if (subCategoryId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.SubCategoryInvalid;
         }
 
 
