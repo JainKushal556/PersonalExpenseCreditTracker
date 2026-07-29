@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.pnlAddTask = new System.Windows.Forms.Panel();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblStart = new System.Windows.Forms.Label();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pnlDeadline = new System.Windows.Forms.Panel();
             this.btnCalendar = new System.Windows.Forms.Button();
             this.txtDeadline = new System.Windows.Forms.TextBox();
@@ -51,7 +52,6 @@
             this.lblTaskTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlAddTask.SuspendLayout();
             this.pnlDeadline.SuspendLayout();
             this.pnlStatus.SuspendLayout();
@@ -63,7 +63,6 @@
             // 
             this.pnlAddTask.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlAddTask.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAddTask.Controls.Add(this.monthCalendar1);
             this.pnlAddTask.Controls.Add(this.panel1);
             this.pnlAddTask.Controls.Add(this.label3);
             this.pnlAddTask.Controls.Add(this.label2);
@@ -88,6 +87,22 @@
             this.pnlAddTask.Name = "pnlAddTask";
             this.pnlAddTask.Size = new System.Drawing.Size(513, 580);
             this.pnlAddTask.TabIndex = 0;
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(-158, -29);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 16;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(25, 66);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(462, 1);
+            this.panel1.TabIndex = 21;
             // 
             // label3
             // 
@@ -133,14 +148,6 @@
             this.lblStart.TabIndex = 17;
             this.lblStart.Text = "*";
             // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(163, -8);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 16;
-            this.monthCalendar1.Visible = false;
-            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
-            // 
             // pnlDeadline
             // 
             this.pnlDeadline.BackColor = System.Drawing.Color.White;
@@ -176,6 +183,7 @@
             // pnlStatus
             // 
             this.pnlStatus.BackColor = System.Drawing.Color.White;
+            this.pnlStatus.Controls.Add(this.monthCalendar1);
             this.pnlStatus.Controls.Add(this.cmbStatus);
             this.pnlStatus.Location = new System.Drawing.Point(286, 252);
             this.pnlStatus.Name = "pnlStatus";
@@ -341,14 +349,6 @@
             this.lblTitle.Size = new System.Drawing.Size(176, 35);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Add New Task";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(25, 66);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(462, 1);
-            this.panel1.TabIndex = 21;
             // 
             // AddTaskControl
             // 

@@ -526,7 +526,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             if (e.RowIndex < 0)
                 return;
 
-            ReturnAmountControls frm = new ReturnAmountControls();
+            PayLentReturnAmountControls frm = new PayLentReturnAmountControls();
 
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog(this);

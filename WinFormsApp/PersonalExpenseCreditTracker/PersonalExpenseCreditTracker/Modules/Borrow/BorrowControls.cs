@@ -455,7 +455,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             if (e.RowIndex < 0)
                 return;
 
-            PayBorrowAmountControls frm = new PayBorrowAmountControls();
+            PayBorrowReturnAmountControls frm = new PayBorrowReturnAmountControls();
 
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog(this);

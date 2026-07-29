@@ -59,13 +59,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlBorrowAddCalenderShow.Visible = !pnlBorrowAddCalenderShow.Visible;
         }
 
-        private void monthCalendarAddBorrow_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            txtBorrowAddDeadlineDatePicker.Text = e.Start.ToString("dd-MM-yyyy");
-            txtBorrowAddDeadlineDatePicker.ForeColor = Color.Black;
-            //pnlBorrowAddCalenderShow.Visible = false;
-        }
-
         private void txtBorrowAddDeadlineDatePicker_TextChanged(object sender, EventArgs e)
         {
             pnlBorrowAddCalenderShow.Visible = false;
@@ -81,6 +74,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlBorrowAddCalenderShow.Visible = true;
         }
 
+        private void monthCalendarAddBorrow_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtBorrowAddDeadlineDatePicker.Text = e.Start.ToString("dd-MM-yyyy");
+            txtBorrowAddDeadlineDatePicker.ForeColor = Color.Black;
+            pnlBorrowAddCalenderShow.Visible = false;
+        }
+
         private void txtBorrowAddDeadlineDatePicker_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtBorrowAddDeadlineDatePicker.Text))
@@ -92,8 +92,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             {
                 txtBorrowAddDeadlineDatePicker.ForeColor = Color.Black;
             }
-
-            //pnlBorrowAddCalenderShow.Visible = false;
         }
 
         private void txtBorrowAddDescription_Enter(object sender, EventArgs e)
@@ -184,27 +182,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
         }
 
-        private void cmbBorrowStatus_Enter(object sender, EventArgs e)
-        {
-            //if (cmbBorrowStatus.Text == "Select Status")
-            //    cmbBorrowStatus.ForeColor = Color.Black;
-
-            //pnlBorrowAddCalenderShow.Visible = false;
-        }
-
-        private void cmbBorrowStatus_Leave(object sender, EventArgs e)
-        {
-            //if (cmbBorrowStatus.SelectedIndex == -1)
-            //{
-            //    cmbBorrowStatus.Text = "Select Status";
-            //    cmbBorrowStatus.ForeColor = Color.Gray;
-            //}
-            //else
-            //{
-            //    cmbBorrowStatus.ForeColor = Color.Black;
-            //}
-        }
-
         private void AddBorrowControls_Load(object sender, EventArgs e)
         {
 
@@ -215,9 +192,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             cmbBorrowPaymentType.Text = "Select Payment Type";
             cmbBorrowPaymentType.ForeColor = Color.Gray;
 
-            //cmbBorrowStatus.Text = "Select Status";
-            //cmbBorrowStatus.ForeColor = Color.Gray;
-
             txtBorrowAddAmount.Text = "Select Amount";
             txtBorrowAddAmount.ForeColor = Color.Gray;
 
@@ -226,6 +200,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
             txtBorrowAddDeadlineDatePicker.ForeColor = Color.Gray;
+
+            SetRadius(btnBorrowAddClear, 5);
+            SetRadius(btnBorrowAddSave, 5);
+            SetRadius(btnBorrowAddCancel, 5);
         }
 
         private void AddBorrowControls_Click(object sender, EventArgs e)
@@ -270,25 +248,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlBorrowAddCalenderShow.Visible = false;
         }
 
-
         private void btnAddBorrowClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void btnBorrowAddClear_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnBorrowAddClear, 5);
-        }
-
-        private void btnBorrowAddCancel_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnBorrowAddCancel, 5);
-        }
-
-        private void btnBorrowAddSave_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnBorrowAddSave, 5);
-        }
+        
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace PersonalExpenseCreditTracker.Modules.Expense
 {
-    partial class ExpenseDetailsControl
+    partial class AddExpenseControls
     {
         /// <summary>
         /// Required designer variable.
@@ -59,7 +59,7 @@
             // 
             // panelExpenseDetailsMainBody
             // 
-            this.panelExpenseDetailsMainBody.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelExpenseDetailsMainBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
             this.panelExpenseDetailsMainBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelExpenseDetailsMainBody.Controls.Add(this.label2);
             this.panelExpenseDetailsMainBody.Controls.Add(this.txtAddExpenseDescription);
@@ -87,7 +87,7 @@
             this.panelExpenseDetailsMainBody.Location = new System.Drawing.Point(0, 0);
             this.panelExpenseDetailsMainBody.Name = "panelExpenseDetailsMainBody";
             this.panelExpenseDetailsMainBody.Padding = new System.Windows.Forms.Padding(15);
-            this.panelExpenseDetailsMainBody.Size = new System.Drawing.Size(828, 440);
+            this.panelExpenseDetailsMainBody.Size = new System.Drawing.Size(568, 579);
             this.panelExpenseDetailsMainBody.TabIndex = 2;
             // 
             // label2
@@ -104,10 +104,10 @@
             // txtAddExpenseDescription
             // 
             this.txtAddExpenseDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtAddExpenseDescription.Location = new System.Drawing.Point(436, 208);
+            this.txtAddExpenseDescription.Location = new System.Drawing.Point(186, 334);
             this.txtAddExpenseDescription.Multiline = true;
             this.txtAddExpenseDescription.Name = "txtAddExpenseDescription";
-            this.txtAddExpenseDescription.Size = new System.Drawing.Size(366, 131);
+            this.txtAddExpenseDescription.Size = new System.Drawing.Size(354, 150);
             this.txtAddExpenseDescription.TabIndex = 31;
             this.txtAddExpenseDescription.Enter += new System.EventHandler(this.txtDescription_Enter);
             this.txtAddExpenseDescription.Leave += new System.EventHandler(this.txtDescription_Leave);
@@ -115,7 +115,7 @@
             // label9
             // 
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(534, 173);
+            this.label9.Location = new System.Drawing.Point(118, 333);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(46, 21);
@@ -124,7 +124,7 @@
             // 
             // lblAddExpenseDescription
             // 
-            this.lblAddExpenseDescription.Location = new System.Drawing.Point(432, 174);
+            this.lblAddExpenseDescription.Location = new System.Drawing.Point(16, 334);
             this.lblAddExpenseDescription.Margin = new System.Windows.Forms.Padding(0);
             this.lblAddExpenseDescription.Name = "lblAddExpenseDescription";
             this.lblAddExpenseDescription.Size = new System.Drawing.Size(123, 30);
@@ -137,9 +137,9 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.txtAddExpenseAmount);
             this.panel3.Controls.Add(this.pictureBoxLentRupee);
-            this.panel3.Location = new System.Drawing.Point(20, 207);
+            this.panel3.Location = new System.Drawing.Point(186, 203);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(356, 32);
+            this.panel3.Size = new System.Drawing.Size(354, 31);
             this.panel3.TabIndex = 25;
             // 
             // txtAddExpenseAmount
@@ -168,7 +168,7 @@
             // label7
             // 
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(94, 174);
+            this.label7.Location = new System.Drawing.Point(94, 205);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 21);
@@ -177,7 +177,7 @@
             // 
             // lblAddExpenseAmount
             // 
-            this.lblAddExpenseAmount.Location = new System.Drawing.Point(16, 174);
+            this.lblAddExpenseAmount.Location = new System.Drawing.Point(16, 205);
             this.lblAddExpenseAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblAddExpenseAmount.Name = "lblAddExpenseAmount";
             this.lblAddExpenseAmount.Size = new System.Drawing.Size(123, 30);
@@ -187,7 +187,7 @@
             // label5
             // 
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(552, 72);
+            this.label5.Location = new System.Drawing.Point(136, 138);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 21);
@@ -196,7 +196,7 @@
             // 
             // lblAddExpenseSubCategory
             // 
-            this.lblAddExpenseSubCategory.Location = new System.Drawing.Point(432, 73);
+            this.lblAddExpenseSubCategory.Location = new System.Drawing.Point(16, 139);
             this.lblAddExpenseSubCategory.Margin = new System.Windows.Forms.Padding(0);
             this.lblAddExpenseSubCategory.Name = "lblAddExpenseSubCategory";
             this.lblAddExpenseSubCategory.Size = new System.Drawing.Size(141, 30);
@@ -211,26 +211,27 @@
             this.cmbAddExpenseSubCategory.Items.AddRange(new object[] {
             "Select Sub Category",
             "Momo"});
-            this.cmbAddExpenseSubCategory.Location = new System.Drawing.Point(436, 106);
+            this.cmbAddExpenseSubCategory.Location = new System.Drawing.Point(186, 136);
             this.cmbAddExpenseSubCategory.Name = "cmbAddExpenseSubCategory";
             this.cmbAddExpenseSubCategory.Size = new System.Drawing.Size(354, 31);
             this.cmbAddExpenseSubCategory.TabIndex = 20;
+            this.cmbAddExpenseSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpenseSubCategory_SelectedIndexChanged);
             this.cmbAddExpenseSubCategory.Enter += new System.EventHandler(this.cmbAddExpenseSubCategory_Enter);
             this.cmbAddExpenseSubCategory.Leave += new System.EventHandler(this.cmbAddExpenseSubCategory_Leave);
             // 
             // label3
             // 
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(142, 273);
+            this.label3.Location = new System.Drawing.Point(139, 269);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 21);
+            this.label3.Size = new System.Drawing.Size(41, 21);
             this.label3.TabIndex = 19;
             this.label3.Text = "*";
             // 
             // lblAddExpensePaymentType
             // 
-            this.lblAddExpensePaymentType.Location = new System.Drawing.Point(19, 275);
+            this.lblAddExpensePaymentType.Location = new System.Drawing.Point(16, 271);
             this.lblAddExpensePaymentType.Margin = new System.Windows.Forms.Padding(0);
             this.lblAddExpensePaymentType.Name = "lblAddExpensePaymentType";
             this.lblAddExpensePaymentType.Size = new System.Drawing.Size(133, 30);
@@ -247,9 +248,9 @@
             "Cash",
             "UPI",
             "Credit Card"});
-            this.cmbAddExpensePaymentType.Location = new System.Drawing.Point(23, 308);
+            this.cmbAddExpensePaymentType.Location = new System.Drawing.Point(186, 270);
             this.cmbAddExpensePaymentType.Name = "cmbAddExpensePaymentType";
-            this.cmbAddExpensePaymentType.Size = new System.Drawing.Size(357, 31);
+            this.cmbAddExpensePaymentType.Size = new System.Drawing.Size(354, 31);
             this.cmbAddExpensePaymentType.TabIndex = 17;
             this.cmbAddExpensePaymentType.Enter += new System.EventHandler(this.cmbAddExpensePaymentType_Enter);
             this.cmbAddExpensePaymentType.Leave += new System.EventHandler(this.cmbAddExpensePaymentType_Leave);
@@ -281,16 +282,15 @@
             this.cmbAddExpenseCategory.Items.AddRange(new object[] {
             "Select Category",
             "Food"});
-            this.cmbAddExpenseCategory.Location = new System.Drawing.Point(20, 106);
+            this.cmbAddExpenseCategory.Location = new System.Drawing.Point(186, 73);
             this.cmbAddExpenseCategory.Name = "cmbAddExpenseCategory";
-            this.cmbAddExpenseCategory.Size = new System.Drawing.Size(357, 31);
+            this.cmbAddExpenseCategory.Size = new System.Drawing.Size(354, 31);
             this.cmbAddExpenseCategory.TabIndex = 14;
             this.cmbAddExpenseCategory.Enter += new System.EventHandler(this.cmbAddExpenseCategory_Enter);
             this.cmbAddExpenseCategory.Leave += new System.EventHandler(this.cmbAddExpenseCategory_Leave);
             // 
             // btnSaveExpense
             // 
-            this.btnSaveExpense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveExpense.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
             this.btnSaveExpense.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSaveExpense.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
@@ -298,7 +298,7 @@
             this.btnSaveExpense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveExpense.ForeColor = System.Drawing.Color.White;
             this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
-            this.btnSaveExpense.Location = new System.Drawing.Point(611, 382);
+            this.btnSaveExpense.Location = new System.Drawing.Point(351, 521);
             this.btnSaveExpense.Name = "btnSaveExpense";
             this.btnSaveExpense.Size = new System.Drawing.Size(194, 41);
             this.btnSaveExpense.TabIndex = 8;
@@ -311,7 +311,6 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
@@ -319,7 +318,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(459, 382);
+            this.btnCancel.Location = new System.Drawing.Point(199, 521);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 41);
             this.btnCancel.TabIndex = 7;
@@ -331,13 +330,12 @@
             // 
             // btnClear
             // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClear.Location = new System.Drawing.Point(20, 384);
+            this.btnClear.Location = new System.Drawing.Point(18, 521);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(133, 41);
             this.btnClear.TabIndex = 6;
@@ -349,37 +347,32 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(19, 363);
+            this.panel2.Location = new System.Drawing.Point(19, 502);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(788, 1);
+            this.panel2.Size = new System.Drawing.Size(528, 1);
             this.panel2.TabIndex = 5;
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(788, 1);
+            this.panel1.Size = new System.Drawing.Size(528, 1);
             this.panel1.TabIndex = 1;
             // 
-            // ExpenseDetailsControl
+            // AddExpenseControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 440);
+            this.ClientSize = new System.Drawing.Size(568, 579);
             this.Controls.Add(this.panelExpenseDetailsMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "ExpenseDetailsControl";
+            this.Name = "AddExpenseControl";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExpenseDetailsControl";
             this.Load += new System.EventHandler(this.ExpenseDetailsControl_Load);
-
             this.panelExpenseDetailsMainBody.ResumeLayout(false);
             this.panelExpenseDetailsMainBody.PerformLayout();
             this.panel3.ResumeLayout(false);

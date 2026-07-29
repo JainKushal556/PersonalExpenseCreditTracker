@@ -1481,7 +1481,7 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveExpenseSubMenu(pnlAddExpense);
 
-            ExpenseDetailsControl expenseDetailsControl = new ExpenseDetailsControl();
+            AddExpenseControls expenseDetailsControl = new AddExpenseControls();
             expenseDetailsControl.FormClosed += Expense_FormClosed;
             expenseDetailsControl.Show();
         }
@@ -1814,7 +1814,7 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveCreditSubMenu(pnlAddCredit);
 
-            CreditDetailsControl creditDetailsControl = new CreditDetailsControl();
+            AddCreditControls creditDetailsControl = new AddCreditControls();
 
             creditDetailsControl.FormClosed += Credit_FormClosed;
 

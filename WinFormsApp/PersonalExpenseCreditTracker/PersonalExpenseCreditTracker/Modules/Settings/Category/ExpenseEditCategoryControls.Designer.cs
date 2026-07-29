@@ -51,7 +51,7 @@
             // 
             // pnlMainBody
             // 
-            this.pnlMainBody.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlMainBody.BackColor = System.Drawing.Color.Transparent;
             this.pnlMainBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMainBody.Controls.Add(this.btnClose);
             this.pnlMainBody.Controls.Add(this.panel4);
@@ -73,7 +73,7 @@
             this.pnlMainBody.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMainBody.Name = "pnlMainBody";
             this.pnlMainBody.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlMainBody.Size = new System.Drawing.Size(582, 373);
+            this.pnlMainBody.Size = new System.Drawing.Size(547, 347);
             this.pnlMainBody.TabIndex = 0;
             // 
             // btnClose
@@ -81,9 +81,9 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnClose.Location = new System.Drawing.Point(513, 17);
+            this.btnClose.Location = new System.Drawing.Point(491, 14);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(44, 42);
+            this.btnClose.Size = new System.Drawing.Size(39, 35);
             this.btnClose.TabIndex = 14;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -93,9 +93,9 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(23, 279);
+            this.panel4.Location = new System.Drawing.Point(23, 264);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(534, 1);
+            this.panel4.Size = new System.Drawing.Size(500, 1);
             this.panel4.TabIndex = 13;
             // 
             // btnCancel
@@ -107,9 +107,9 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(181, 298);
+            this.btnCancel.Location = new System.Drawing.Point(159, 283);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(162, 53);
+            this.btnCancel.Size = new System.Drawing.Size(162, 41);
             this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -124,9 +124,9 @@
             this.btnUpdateCategory.ForeColor = System.Drawing.Color.White;
             this.btnUpdateCategory.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update;
             this.btnUpdateCategory.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.btnUpdateCategory.Location = new System.Drawing.Point(362, 298);
+            this.btnUpdateCategory.Location = new System.Drawing.Point(338, 283);
             this.btnUpdateCategory.Name = "btnUpdateCategory";
-            this.btnUpdateCategory.Size = new System.Drawing.Size(195, 53);
+            this.btnUpdateCategory.Size = new System.Drawing.Size(187, 41);
             this.btnUpdateCategory.TabIndex = 11;
             this.btnUpdateCategory.Text = "Update";
             this.btnUpdateCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -136,45 +136,47 @@
             // rdobtnInactive
             // 
             this.rdobtnInactive.AutoSize = true;
-            this.rdobtnInactive.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdobtnInactive.Location = new System.Drawing.Point(133, 219);
+            this.rdobtnInactive.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdobtnInactive.Location = new System.Drawing.Point(133, 208);
             this.rdobtnInactive.Name = "rdobtnInactive";
-            this.rdobtnInactive.Size = new System.Drawing.Size(91, 27);
+            this.rdobtnInactive.Size = new System.Drawing.Size(90, 27);
             this.rdobtnInactive.TabIndex = 9;
             this.rdobtnInactive.TabStop = true;
             this.rdobtnInactive.Text = "Inactive";
             this.rdobtnInactive.UseVisualStyleBackColor = true;
+            this.rdobtnInactive.CheckedChanged += new System.EventHandler(this.rdobtnInactive_CheckedChanged);
             // 
             // rdobtnActive
             // 
             this.rdobtnActive.AutoSize = true;
-            this.rdobtnActive.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdobtnActive.Location = new System.Drawing.Point(37, 219);
+            this.rdobtnActive.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdobtnActive.Location = new System.Drawing.Point(37, 208);
             this.rdobtnActive.Name = "rdobtnActive";
-            this.rdobtnActive.Size = new System.Drawing.Size(78, 27);
+            this.rdobtnActive.Size = new System.Drawing.Size(77, 27);
             this.rdobtnActive.TabIndex = 8;
             this.rdobtnActive.TabStop = true;
             this.rdobtnActive.Text = "Active";
             this.rdobtnActive.UseVisualStyleBackColor = true;
+            this.rdobtnActive.CheckedChanged += new System.EventHandler(this.rdobtnActive_CheckedChanged);
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(23, 188);
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(23, 177);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(57, 23);
+            this.lblStatus.Size = new System.Drawing.Size(64, 25);
             this.lblStatus.TabIndex = 7;
             this.lblStatus.Text = "Status";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(161, 94);
+            this.label4.Location = new System.Drawing.Point(177, 94);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(16, 20);
+            this.label4.Size = new System.Drawing.Size(18, 23);
             this.label4.TabIndex = 6;
             this.label4.Text = "*";
             // 
@@ -183,27 +185,27 @@
             this.pnlCategoryName.BackColor = System.Drawing.Color.White;
             this.pnlCategoryName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlCategoryName.Controls.Add(this.txtCategoryName);
-            this.pnlCategoryName.Location = new System.Drawing.Point(27, 119);
+            this.pnlCategoryName.Location = new System.Drawing.Point(27, 124);
             this.pnlCategoryName.Name = "pnlCategoryName";
-            this.pnlCategoryName.Size = new System.Drawing.Size(530, 47);
+            this.pnlCategoryName.Size = new System.Drawing.Size(495, 35);
             this.pnlCategoryName.TabIndex = 5;
             // 
             // txtCategoryName
             // 
             this.txtCategoryName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCategoryName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCategoryName.Location = new System.Drawing.Point(5, 10);
+            this.txtCategoryName.Location = new System.Drawing.Point(4, 4);
             this.txtCategoryName.Name = "txtCategoryName";
-            this.txtCategoryName.Size = new System.Drawing.Size(520, 25);
+            this.txtCategoryName.Size = new System.Drawing.Size(486, 25);
             this.txtCategoryName.TabIndex = 0;
             // 
             // lblCategoryName
             // 
             this.lblCategoryName.AutoSize = true;
-            this.lblCategoryName.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategoryName.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCategoryName.Location = new System.Drawing.Point(23, 92);
             this.lblCategoryName.Name = "lblCategoryName";
-            this.lblCategoryName.Size = new System.Drawing.Size(132, 23);
+            this.lblCategoryName.Size = new System.Drawing.Size(148, 25);
             this.lblCategoryName.TabIndex = 4;
             this.lblCategoryName.Text = "Category Name";
             // 
@@ -212,7 +214,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(23, 79);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(534, 1);
+            this.panel2.Size = new System.Drawing.Size(500, 1);
             this.panel2.TabIndex = 3;
             // 
             // label2
@@ -248,13 +250,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(582, 373);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.ClientSize = new System.Drawing.Size(547, 347);
             this.Controls.Add(this.pnlMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ExpenseEditCategoryControls";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExpenseCategoryEditControls";
+            this.Load += new System.EventHandler(this.ExpenseEditCategoryControls_Load);
             this.pnlMainBody.ResumeLayout(false);
             this.pnlMainBody.PerformLayout();
             this.pnlCategoryName.ResumeLayout(false);
