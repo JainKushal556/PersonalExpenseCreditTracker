@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlBorrowAddCalenderShow = new System.Windows.Forms.Panel();
             this.monthCalendarAddBorrow = new System.Windows.Forms.MonthCalendar();
             this.txtBorrowAddDescription = new System.Windows.Forms.TextBox();
@@ -59,12 +60,14 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblBorrowDetails = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlBorrowAddCalenderShow.SuspendLayout();
             this.panelBorrowAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBorrowRupee)).BeginInit();
             this.pnlAddBorrowMainBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBorrowAddCalenderShow
@@ -452,6 +455,10 @@
             this.lblBorrowDetails.TabIndex = 0;
             this.lblBorrowDetails.Text = "Borrow Details";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // AddBorrowControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -474,6 +481,7 @@
             this.pnlAddBorrowMainBody.ResumeLayout(false);
             this.pnlAddBorrowMainBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -511,5 +519,6 @@
         private System.Windows.Forms.Label lblBorrowDetails;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.TextBox txtBorrowStatus;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
