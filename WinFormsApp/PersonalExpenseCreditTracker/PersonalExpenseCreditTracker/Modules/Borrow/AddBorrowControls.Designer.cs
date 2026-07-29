@@ -1,4 +1,4 @@
-namespace PersonalExpenseCreditTracker.Modules.Borrow
+﻿namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     partial class AddBorrowControls
     {
@@ -28,7 +28,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pnlBorrowAddCalenderShow = new System.Windows.Forms.Panel();
             this.monthCalendarAddBorrow = new System.Windows.Forms.MonthCalendar();
             this.txtBorrowAddDescription = new System.Windows.Forms.TextBox();
@@ -60,25 +59,21 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblBorrowDetails = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label5 = new System.Windows.Forms.Label();
             this.pnlBorrowAddCalenderShow.SuspendLayout();
             this.panelBorrowAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBorrowRupee)).BeginInit();
             this.pnlAddBorrowMainBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBorrowAddCalenderShow
             // 
             this.pnlBorrowAddCalenderShow.BackColor = System.Drawing.Color.White;
             this.pnlBorrowAddCalenderShow.Controls.Add(this.monthCalendarAddBorrow);
-            this.pnlBorrowAddCalenderShow.Location = new System.Drawing.Point(370, 116);
-            this.pnlBorrowAddCalenderShow.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlBorrowAddCalenderShow.Location = new System.Drawing.Point(224, 370);
             this.pnlBorrowAddCalenderShow.Name = "pnlBorrowAddCalenderShow";
-            this.pnlBorrowAddCalenderShow.Size = new System.Drawing.Size(226, 168);
+            this.pnlBorrowAddCalenderShow.Size = new System.Drawing.Size(301, 207);
             this.pnlBorrowAddCalenderShow.TabIndex = 32;
             this.pnlBorrowAddCalenderShow.Visible = false;
             // 
@@ -86,7 +81,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             this.monthCalendarAddBorrow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.monthCalendarAddBorrow.Location = new System.Drawing.Point(0, 0);
-            this.monthCalendarAddBorrow.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendarAddBorrow.Name = "monthCalendarAddBorrow";
             this.monthCalendarAddBorrow.TabIndex = 0;
             this.monthCalendarAddBorrow.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarAddBorrow_DateSelected);
@@ -94,11 +88,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // txtBorrowAddDescription
             // 
             this.txtBorrowAddDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBorrowAddDescription.Location = new System.Drawing.Point(338, 169);
-            this.txtBorrowAddDescription.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBorrowAddDescription.Location = new System.Drawing.Point(186, 399);
             this.txtBorrowAddDescription.Multiline = true;
             this.txtBorrowAddDescription.Name = "txtBorrowAddDescription";
-            this.txtBorrowAddDescription.Size = new System.Drawing.Size(275, 174);
+            this.txtBorrowAddDescription.Size = new System.Drawing.Size(354, 178);
             this.txtBorrowAddDescription.TabIndex = 31;
             this.txtBorrowAddDescription.Enter += new System.EventHandler(this.txtBorrowAddDescription_Enter);
             this.txtBorrowAddDescription.Leave += new System.EventHandler(this.txtBorrowAddDescription_Leave);
@@ -106,19 +99,19 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // label9
             // 
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(406, 141);
+            this.label9.Location = new System.Drawing.Point(121, 400);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(34, 17);
+            this.label9.Size = new System.Drawing.Size(46, 21);
             this.label9.TabIndex = 30;
             this.label9.Text = "*";
             // 
             // lblBorrowDescription
             // 
-            this.lblBorrowDescription.Location = new System.Drawing.Point(334, 141);
+            this.lblBorrowDescription.Location = new System.Drawing.Point(16, 400);
             this.lblBorrowDescription.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowDescription.Name = "lblBorrowDescription";
-            this.lblBorrowDescription.Size = new System.Drawing.Size(92, 24);
+            this.lblBorrowDescription.Size = new System.Drawing.Size(123, 30);
             this.lblBorrowDescription.TabIndex = 29;
             this.lblBorrowDescription.Text = "Description";
             // 
@@ -128,21 +121,18 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.panelBorrowAddDeadlineAt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelBorrowAddDeadlineAt.Controls.Add(this.txtBorrowAddDeadlineDatePicker);
             this.panelBorrowAddDeadlineAt.Controls.Add(this.btnBorrowAddCalendar);
-            this.panelBorrowAddDeadlineAt.Location = new System.Drawing.Point(338, 86);
-            this.panelBorrowAddDeadlineAt.Margin = new System.Windows.Forms.Padding(2);
+            this.panelBorrowAddDeadlineAt.Location = new System.Drawing.Point(186, 333);
             this.panelBorrowAddDeadlineAt.Name = "panelBorrowAddDeadlineAt";
-            this.panelBorrowAddDeadlineAt.Size = new System.Drawing.Size(275, 26);
+            this.panelBorrowAddDeadlineAt.Size = new System.Drawing.Size(354, 31);
             this.panelBorrowAddDeadlineAt.TabIndex = 28;
             // 
             // txtBorrowAddDeadlineDatePicker
             // 
             this.txtBorrowAddDeadlineDatePicker.BackColor = System.Drawing.Color.White;
             this.txtBorrowAddDeadlineDatePicker.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBorrowAddDeadlineDatePicker.Location = new System.Drawing.Point(4, 2);
-            this.txtBorrowAddDeadlineDatePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBorrowAddDeadlineDatePicker.Location = new System.Drawing.Point(5, 3);
             this.txtBorrowAddDeadlineDatePicker.Name = "txtBorrowAddDeadlineDatePicker";
-            this.txtBorrowAddDeadlineDatePicker.ReadOnly = true;
-            this.txtBorrowAddDeadlineDatePicker.Size = new System.Drawing.Size(235, 19);
+            this.txtBorrowAddDeadlineDatePicker.Size = new System.Drawing.Size(283, 23);
             this.txtBorrowAddDeadlineDatePicker.TabIndex = 2;
             this.txtBorrowAddDeadlineDatePicker.TextChanged += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_TextChanged);
             this.txtBorrowAddDeadlineDatePicker.Enter += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_Enter);
@@ -153,10 +143,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnBorrowAddCalendar.FlatAppearance.BorderSize = 0;
             this.btnBorrowAddCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorrowAddCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
-            this.btnBorrowAddCalendar.Location = new System.Drawing.Point(243, -1);
-            this.btnBorrowAddCalendar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBorrowAddCalendar.Location = new System.Drawing.Point(313, -1);
             this.btnBorrowAddCalendar.Name = "btnBorrowAddCalendar";
-            this.btnBorrowAddCalendar.Size = new System.Drawing.Size(28, 25);
+            this.btnBorrowAddCalendar.Size = new System.Drawing.Size(37, 31);
             this.btnBorrowAddCalendar.TabIndex = 1;
             this.btnBorrowAddCalendar.UseVisualStyleBackColor = true;
             this.btnBorrowAddCalendar.Click += new System.EventHandler(this.btnBorrowAddCalendar_Click);
@@ -164,19 +153,19 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // label1
             // 
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(410, 58);
+            this.label1.Location = new System.Drawing.Point(126, 333);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 17);
+            this.label1.Size = new System.Drawing.Size(33, 21);
             this.label1.TabIndex = 27;
             this.label1.Text = "*";
             // 
             // lblBorrowDeadlineAt
             // 
-            this.lblBorrowDeadlineAt.Location = new System.Drawing.Point(334, 59);
+            this.lblBorrowDeadlineAt.Location = new System.Drawing.Point(16, 334);
             this.lblBorrowDeadlineAt.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowDeadlineAt.Name = "lblBorrowDeadlineAt";
-            this.lblBorrowDeadlineAt.Size = new System.Drawing.Size(92, 24);
+            this.lblBorrowDeadlineAt.Size = new System.Drawing.Size(123, 30);
             this.lblBorrowDeadlineAt.TabIndex = 26;
             this.lblBorrowDeadlineAt.Text = "Deadline At";
             // 
@@ -186,19 +175,17 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.txtBorrowAddAmount);
             this.panel3.Controls.Add(this.picBorrowRupee);
-            this.panel3.Location = new System.Drawing.Point(16, 317);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Location = new System.Drawing.Point(186, 270);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(268, 26);
+            this.panel3.Size = new System.Drawing.Size(354, 32);
             this.panel3.TabIndex = 25;
             // 
             // txtBorrowAddAmount
             // 
             this.txtBorrowAddAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBorrowAddAmount.Location = new System.Drawing.Point(34, 2);
-            this.txtBorrowAddAmount.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBorrowAddAmount.Location = new System.Drawing.Point(46, 3);
             this.txtBorrowAddAmount.Name = "txtBorrowAddAmount";
-            this.txtBorrowAddAmount.Size = new System.Drawing.Size(232, 19);
+            this.txtBorrowAddAmount.Size = new System.Drawing.Size(310, 23);
             this.txtBorrowAddAmount.TabIndex = 1;
             this.txtBorrowAddAmount.Enter += new System.EventHandler(this.txtBorrowAddAmount_Enter);
             this.txtBorrowAddAmount.Leave += new System.EventHandler(this.txtBorrowAddAmount_Leave);
@@ -209,10 +196,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.picBorrowRupee.ErrorImage = global::PersonalExpenseCreditTracker.Properties.Resources.rupee;
             this.picBorrowRupee.Image = global::PersonalExpenseCreditTracker.Properties.Resources.rupee;
             this.picBorrowRupee.Location = new System.Drawing.Point(-1, -1);
-            this.picBorrowRupee.Margin = new System.Windows.Forms.Padding(2);
             this.picBorrowRupee.Name = "picBorrowRupee";
-            this.picBorrowRupee.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.picBorrowRupee.Size = new System.Drawing.Size(32, 26);
+            this.picBorrowRupee.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.picBorrowRupee.Size = new System.Drawing.Size(43, 32);
             this.picBorrowRupee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picBorrowRupee.TabIndex = 0;
             this.picBorrowRupee.TabStop = false;
@@ -220,57 +206,47 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // label7
             // 
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(68, 294);
+            this.label7.Location = new System.Drawing.Point(90, 270);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 17);
+            this.label7.Size = new System.Drawing.Size(46, 21);
             this.label7.TabIndex = 24;
             this.label7.Text = "*";
             // 
             // lblLentAmount
             // 
-            this.lblLentAmount.Location = new System.Drawing.Point(14, 295);
+            this.lblLentAmount.Location = new System.Drawing.Point(16, 271);
             this.lblLentAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblLentAmount.Name = "lblLentAmount";
-            this.lblLentAmount.Size = new System.Drawing.Size(92, 24);
+            this.lblLentAmount.Size = new System.Drawing.Size(123, 30);
             this.lblLentAmount.TabIndex = 23;
             this.lblLentAmount.Text = "Amount";
             // 
-            // label5
-            // 
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(58, 219);
-            this.label5.Margin = new System.Windows.Forms.Padding(0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 17);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "*";
-            // 
             // lblBorrowStatus
             // 
-            this.lblBorrowStatus.Location = new System.Drawing.Point(14, 220);
+            this.lblBorrowStatus.Location = new System.Drawing.Point(16, 205);
             this.lblBorrowStatus.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowStatus.Name = "lblBorrowStatus";
-            this.lblBorrowStatus.Size = new System.Drawing.Size(92, 24);
+            this.lblBorrowStatus.Size = new System.Drawing.Size(123, 30);
             this.lblBorrowStatus.TabIndex = 21;
             this.lblBorrowStatus.Text = "Status";
             // 
             // label3
             // 
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(104, 141);
+            this.label3.Location = new System.Drawing.Point(138, 138);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 17);
+            this.label3.Size = new System.Drawing.Size(46, 21);
             this.label3.TabIndex = 19;
             this.label3.Text = "*";
             // 
             // lblBorrowPaymentType
             // 
-            this.lblBorrowPaymentType.Location = new System.Drawing.Point(12, 141);
+            this.lblBorrowPaymentType.Location = new System.Drawing.Point(16, 139);
             this.lblBorrowPaymentType.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowPaymentType.Name = "lblBorrowPaymentType";
-            this.lblBorrowPaymentType.Size = new System.Drawing.Size(100, 24);
+            this.lblBorrowPaymentType.Size = new System.Drawing.Size(133, 30);
             this.lblBorrowPaymentType.TabIndex = 18;
             this.lblBorrowPaymentType.Text = "Payment Type";
             // 
@@ -278,11 +254,15 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             this.cmbBorrowPaymentType.FormattingEnabled = true;
             this.cmbBorrowPaymentType.IntegralHeight = false;
-            this.cmbBorrowPaymentType.ItemHeight = 19;
-            this.cmbBorrowPaymentType.Location = new System.Drawing.Point(15, 168);
-            this.cmbBorrowPaymentType.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbBorrowPaymentType.ItemHeight = 23;
+            this.cmbBorrowPaymentType.Items.AddRange(new object[] {
+            "Cash",
+            "UPI",
+            "Debit Card",
+            "Credit Card"});
+            this.cmbBorrowPaymentType.Location = new System.Drawing.Point(186, 138);
             this.cmbBorrowPaymentType.Name = "cmbBorrowPaymentType";
-            this.cmbBorrowPaymentType.Size = new System.Drawing.Size(269, 27);
+            this.cmbBorrowPaymentType.Size = new System.Drawing.Size(354, 31);
             this.cmbBorrowPaymentType.TabIndex = 17;
             this.cmbBorrowPaymentType.Enter += new System.EventHandler(this.cmbBorrowPaymentType_Enter);
             this.cmbBorrowPaymentType.Leave += new System.EventHandler(this.cmbBorrowPaymentType_Leave);
@@ -290,19 +270,19 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // lblRedStar
             // 
             this.lblRedStar.ForeColor = System.Drawing.Color.Red;
-            this.lblRedStar.Location = new System.Drawing.Point(100, 58);
+            this.lblRedStar.Location = new System.Drawing.Point(133, 72);
             this.lblRedStar.Margin = new System.Windows.Forms.Padding(0);
             this.lblRedStar.Name = "lblRedStar";
-            this.lblRedStar.Size = new System.Drawing.Size(34, 17);
+            this.lblRedStar.Size = new System.Drawing.Size(46, 21);
             this.lblRedStar.TabIndex = 16;
             this.lblRedStar.Text = "*";
             // 
             // lblBorrowPersonName
             // 
-            this.lblBorrowPersonName.Location = new System.Drawing.Point(12, 59);
+            this.lblBorrowPersonName.Location = new System.Drawing.Point(16, 73);
             this.lblBorrowPersonName.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowPersonName.Name = "lblBorrowPersonName";
-            this.lblBorrowPersonName.Size = new System.Drawing.Size(92, 24);
+            this.lblBorrowPersonName.Size = new System.Drawing.Size(123, 30);
             this.lblBorrowPersonName.TabIndex = 15;
             this.lblBorrowPersonName.Text = "Person Name";
             // 
@@ -310,11 +290,17 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             this.cmbBorrowSelectPerson.FormattingEnabled = true;
             this.cmbBorrowSelectPerson.IntegralHeight = false;
-            this.cmbBorrowSelectPerson.ItemHeight = 19;
-            this.cmbBorrowSelectPerson.Location = new System.Drawing.Point(15, 86);
-            this.cmbBorrowSelectPerson.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbBorrowSelectPerson.ItemHeight = 23;
+            this.cmbBorrowSelectPerson.Items.AddRange(new object[] {
+            "Akhmal",
+            "Sujit",
+            "Kushal",
+            "Anikat",
+            "Arpita",
+            "Debajyoti"});
+            this.cmbBorrowSelectPerson.Location = new System.Drawing.Point(186, 72);
             this.cmbBorrowSelectPerson.Name = "cmbBorrowSelectPerson";
-            this.cmbBorrowSelectPerson.Size = new System.Drawing.Size(269, 27);
+            this.cmbBorrowSelectPerson.Size = new System.Drawing.Size(354, 31);
             this.cmbBorrowSelectPerson.TabIndex = 14;
             this.cmbBorrowSelectPerson.Enter += new System.EventHandler(this.cmbBorrowSelectPerson_Enter);
             this.cmbBorrowSelectPerson.Leave += new System.EventHandler(this.cmbBorrowSelectPerson_Leave);
@@ -330,10 +316,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnBorrowAddSave.ForeColor = System.Drawing.Color.White;
             this.btnBorrowAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
             this.btnBorrowAddSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorrowAddSave.Location = new System.Drawing.Point(500, 382);
-            this.btnBorrowAddSave.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBorrowAddSave.Location = new System.Drawing.Point(370, 616);
             this.btnBorrowAddSave.Name = "btnBorrowAddSave";
-            this.btnBorrowAddSave.Size = new System.Drawing.Size(133, 33);
+            this.btnBorrowAddSave.Size = new System.Drawing.Size(177, 41);
             this.btnBorrowAddSave.TabIndex = 8;
             this.btnBorrowAddSave.Text = "  Save Borrow";
             this.btnBorrowAddSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -350,10 +335,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnBorrowAddCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorrowAddCancel.ForeColor = System.Drawing.Color.White;
             this.btnBorrowAddCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorrowAddCancel.Location = new System.Drawing.Point(382, 382);
-            this.btnBorrowAddCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBorrowAddCancel.Location = new System.Drawing.Point(213, 616);
             this.btnBorrowAddCancel.Name = "btnBorrowAddCancel";
-            this.btnBorrowAddCancel.Size = new System.Drawing.Size(105, 33);
+            this.btnBorrowAddCancel.Size = new System.Drawing.Size(140, 41);
             this.btnBorrowAddCancel.TabIndex = 7;
             this.btnBorrowAddCancel.Text = " Cancel";
             this.btnBorrowAddCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -394,22 +378,18 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.pnlAddBorrowMainBody.Location = new System.Drawing.Point(0, 0);
             this.pnlAddBorrowMainBody.Margin = new System.Windows.Forms.Padding(0);
             this.pnlAddBorrowMainBody.Name = "pnlAddBorrowMainBody";
-            this.pnlAddBorrowMainBody.Padding = new System.Windows.Forms.Padding(11, 12, 11, 12);
-            this.pnlAddBorrowMainBody.Size = new System.Drawing.Size(648, 428);
+            this.pnlAddBorrowMainBody.Padding = new System.Windows.Forms.Padding(15);
+            this.pnlAddBorrowMainBody.Size = new System.Drawing.Size(568, 675);
             this.pnlAddBorrowMainBody.TabIndex = 1;
             this.pnlAddBorrowMainBody.Click += new System.EventHandler(this.pnlAddBorrowMainBody_Click);
-            this.pnlAddBorrowMainBody.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddBorrowMainBody_Paint);
             // 
-            // 
-            //
             // pictureBox6
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
-            this.pictureBox6.Location = new System.Drawing.Point(262, 249);
-            this.pictureBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox6.Location = new System.Drawing.Point(500, 206);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(19, 21);
+            this.pictureBox6.Size = new System.Drawing.Size(25, 26);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox6.TabIndex = 36;
             this.pictureBox6.TabStop = false;
@@ -419,11 +399,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.txtBorrowStatus.BackColor = System.Drawing.Color.Gainsboro;
             this.txtBorrowStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBorrowStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtBorrowStatus.Location = new System.Drawing.Point(15, 247);
-            this.txtBorrowStatus.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBorrowStatus.Location = new System.Drawing.Point(186, 204);
             this.txtBorrowStatus.Name = "txtBorrowStatus";
             this.txtBorrowStatus.ReadOnly = true;
-            this.txtBorrowStatus.Size = new System.Drawing.Size(268, 26);
+            this.txtBorrowStatus.Size = new System.Drawing.Size(354, 30);
             this.txtBorrowStatus.TabIndex = 35;
             this.txtBorrowStatus.Text = "  Pending";
             // 
@@ -435,62 +414,53 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnBorrowAddClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorrowAddClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnBorrowAddClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorrowAddClear.Location = new System.Drawing.Point(12, 382);
-            this.btnBorrowAddClear.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBorrowAddClear.Location = new System.Drawing.Point(16, 616);
             this.btnBorrowAddClear.Name = "btnBorrowAddClear";
-            this.btnBorrowAddClear.Size = new System.Drawing.Size(100, 33);
+            this.btnBorrowAddClear.Size = new System.Drawing.Size(133, 41);
             this.btnBorrowAddClear.TabIndex = 6;
             this.btnBorrowAddClear.Text = "  Clear";
             this.btnBorrowAddClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBorrowAddClear.UseVisualStyleBackColor = false;
             this.btnBorrowAddClear.Click += new System.EventHandler(this.btnBorrowAddClear_Click);
-            this.btnBorrowAddClear.Resize += new System.EventHandler(this.btnBorrowAddClear_Resize);
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(14, 374);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.panel2.Location = new System.Drawing.Point(19, 601);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(618, 1);
+            this.panel2.Size = new System.Drawing.Size(528, 1);
             this.panel2.TabIndex = 5;
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(14, 41);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(618, 1);
+            this.panel1.Size = new System.Drawing.Size(528, 1);
             this.panel1.TabIndex = 1;
             // 
             // lblBorrowDetails
             // 
             this.lblBorrowDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowDetails.Location = new System.Drawing.Point(11, 12);
-            this.lblBorrowDetails.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBorrowDetails.Location = new System.Drawing.Point(15, 15);
             this.lblBorrowDetails.Name = "lblBorrowDetails";
-            this.lblBorrowDetails.Size = new System.Drawing.Size(114, 20);
+            this.lblBorrowDetails.Size = new System.Drawing.Size(152, 25);
             this.lblBorrowDetails.TabIndex = 0;
             this.lblBorrowDetails.Text = "Borrow Details";
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
             // AddBorrowControls
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(232)))));
-            this.ClientSize = new System.Drawing.Size(648, 428);
+            this.ClientSize = new System.Drawing.Size(568, 675);
             this.ControlBox = false;
             this.Controls.Add(this.pnlAddBorrowMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddBorrowControls";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.AddBorrowControls_Load);
@@ -504,7 +474,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.pnlAddBorrowMainBody.ResumeLayout(false);
             this.pnlAddBorrowMainBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -542,7 +511,5 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.Label lblBorrowDetails;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.TextBox txtBorrowStatus;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Label label5;
     }
 }
