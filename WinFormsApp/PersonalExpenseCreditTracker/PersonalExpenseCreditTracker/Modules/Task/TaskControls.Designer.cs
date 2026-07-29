@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTaskContent = new System.Windows.Forms.Panel();
             this.pnlTaskList = new System.Windows.Forms.Panel();
             this.tableLayoutPanelTask = new System.Windows.Forms.TableLayoutPanel();
@@ -52,7 +52,7 @@
             this.pnlTableHeader = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnSerach = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -125,7 +125,7 @@
             this.pnlTaskTitle.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlButtonControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTask)).BeginInit();
             this.tblCardContant.SuspendLayout();
             this.pnlTotalTask.SuspendLayout();
@@ -187,7 +187,7 @@
             this.tableLayoutPanelTask.Name = "tableLayoutPanelTask";
             this.tableLayoutPanelTask.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.tableLayoutPanelTask.RowCount = 3;
-            this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelTask.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
             this.tableLayoutPanelTask.Size = new System.Drawing.Size(1048, 567);
@@ -359,18 +359,18 @@
             this.pnlTaskTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTaskTitle.Location = new System.Drawing.Point(11, 8);
             this.pnlTaskTitle.Name = "pnlTaskTitle";
-            this.pnlTaskTitle.Size = new System.Drawing.Size(1026, 47);
+            this.pnlTaskTitle.Size = new System.Drawing.Size(1026, 44);
             this.pnlTaskTitle.TabIndex = 3;
             // 
             // pnlTableHeader
             // 
             this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
             this.pnlTableHeader.Controls.Add(this.panel2);
-            this.pnlTableHeader.Controls.Add(this.panel1);
+            this.pnlTableHeader.Controls.Add(this.pnlButtonControls);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTableHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlTableHeader.Name = "pnlTableHeader";
-            this.pnlTableHeader.Size = new System.Drawing.Size(1026, 47);
+            this.pnlTableHeader.Size = new System.Drawing.Size(1026, 44);
             this.pnlTableHeader.TabIndex = 1;
             // 
             // panel2
@@ -380,7 +380,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.panel2.Size = new System.Drawing.Size(58, 47);
+            this.panel2.Size = new System.Drawing.Size(58, 44);
             this.panel2.TabIndex = 4;
             // 
             // btnSerach
@@ -391,22 +391,22 @@
             this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
             this.btnSerach.Location = new System.Drawing.Point(0, 5);
             this.btnSerach.Name = "btnSerach";
-            this.btnSerach.Size = new System.Drawing.Size(53, 37);
+            this.btnSerach.Size = new System.Drawing.Size(53, 34);
             this.btnSerach.TabIndex = 4;
             this.btnSerach.UseVisualStyleBackColor = true;
             this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
             // 
-            // panel1
+            // pnlButtonControls
             // 
-            this.panel1.Controls.Add(this.btnFilter);
-            this.panel1.Controls.Add(this.btnRefresh);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(844, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 5, 10, 5);
-            this.panel1.Size = new System.Drawing.Size(182, 47);
-            this.panel1.TabIndex = 3;
+            this.pnlButtonControls.Controls.Add(this.btnFilter);
+            this.pnlButtonControls.Controls.Add(this.btnRefresh);
+            this.pnlButtonControls.Controls.Add(this.button1);
+            this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtonControls.Location = new System.Drawing.Point(844, 0);
+            this.pnlButtonControls.Name = "pnlButtonControls";
+            this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 5, 10, 5);
+            this.pnlButtonControls.Size = new System.Drawing.Size(182, 44);
+            this.pnlButtonControls.TabIndex = 3;
             // 
             // btnFilter
             // 
@@ -419,7 +419,7 @@
             this.btnFilter.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter1;
             this.btnFilter.Location = new System.Drawing.Point(0, 5);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(53, 37);
+            this.btnFilter.Size = new System.Drawing.Size(53, 34);
             this.btnFilter.TabIndex = 10;
             this.btnFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -454,7 +454,7 @@
             this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
             this.button1.Location = new System.Drawing.Point(119, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(53, 37);
+            this.button1.Size = new System.Drawing.Size(53, 34);
             this.button1.TabIndex = 8;
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -478,16 +478,16 @@
             this.dataGridViewTask.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewTask.EnableHeadersVisualStyles = false;
             this.dataGridViewTask.GridColor = System.Drawing.Color.Gainsboro;
-            this.dataGridViewTask.Location = new System.Drawing.Point(11, 61);
+            this.dataGridViewTask.Location = new System.Drawing.Point(11, 58);
             this.dataGridViewTask.Name = "dataGridViewTask";
             this.dataGridViewTask.ReadOnly = true;
             this.dataGridViewTask.RowHeadersVisible = false;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTask.RowTemplate.Height = 24;
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewTask.Size = new System.Drawing.Size(1026, 444);
+            this.dataGridViewTask.Size = new System.Drawing.Size(1026, 447);
             this.dataGridViewTask.TabIndex = 1;
             this.dataGridViewTask.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
             // 
@@ -1077,7 +1077,7 @@
             this.pnlSearch.Controls.Add(this.pnlSearchHeader);
             this.pnlSearch.Location = new System.Drawing.Point(287, 314);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(404, 48);
+            this.pnlSearch.Size = new System.Drawing.Size(404, 45);
             this.pnlSearch.TabIndex = 11;
             // 
             // pnlSearchHeader
@@ -1088,7 +1088,7 @@
             this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlSearchHeader.Name = "pnlSearchHeader";
             this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
-            this.pnlSearchHeader.Size = new System.Drawing.Size(404, 48);
+            this.pnlSearchHeader.Size = new System.Drawing.Size(404, 45);
             this.pnlSearchHeader.TabIndex = 0;
             // 
             // btnSearch
@@ -1098,7 +1098,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(304, 8);
+            this.btnSearch.Location = new System.Drawing.Point(304, 7);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(92, 32);
@@ -1111,7 +1111,7 @@
             this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
             this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSearchTxt.Controls.Add(this.txtSearch);
-            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 8);
+            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 7);
             this.pnlSearchTxt.Name = "pnlSearchTxt";
             this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.pnlSearchTxt.Size = new System.Drawing.Size(282, 32);
@@ -1123,7 +1123,7 @@
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Location = new System.Drawing.Point(8, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(319, 23);
+            this.txtSearch.Size = new System.Drawing.Size(269, 23);
             this.txtSearch.TabIndex = 6;
             // 
             // TaskControls
@@ -1152,8 +1152,8 @@
             this.pnlTaskTitle.ResumeLayout(false);
             this.pnlTableHeader.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlButtonControls.ResumeLayout(false);
+            this.pnlButtonControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTask)).EndInit();
             this.tblCardContant.ResumeLayout(false);
             this.pnlTotalTask.ResumeLayout(false);
@@ -1244,7 +1244,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeadline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAction;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlButtonControls;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnFilter;

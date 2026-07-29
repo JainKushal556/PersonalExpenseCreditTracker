@@ -53,6 +53,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             dataGridViewTask.EnableHeadersVisualStyles = false;
             dataGridViewTask.CellPainting += dataGridViewTask_CellPainting;
             dataGridViewTask.CellFormatting += dataGridViewTask_CellFormatting;
+            cmsFilter.Opening += cmsFilter_Opening;
             
 
             //Padding Add 
@@ -91,12 +92,16 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                             return;
                         }
 
-                        AllTaskData = dt;
                         dataGridViewTask.DataSource = AllTaskData;
                         foreach (DataGridViewRow row in dataGridViewTask.Rows)
                         {
                             row.Cells["colAction"].Value = "⋮";
                         }
+
+                        AllTaskData = dt;
+                        currentPage = 1;
+                        ShowCurrentPage();
+                        
                     }
                 }
             }
@@ -118,6 +123,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             // Menu Item Height
             toolStripMenuItem1.AutoSize = false;
             toolStripMenuItem1.Height = 30;
+
 
             toolStripMenuItem2.AutoSize = false;
             toolStripMenuItem2.Height = 30;
@@ -156,6 +162,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             tsmiDate.AutoSize = false;
             tsmiDate.Height = 30;
+            
 
             tsmiPriority.AutoSize = false;
             tsmiPriority.Height = 30;
@@ -169,7 +176,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
             tsmiPriority.ImageScaling = ToolStripItemImageScaling.None;
         }
+        private void cmsFilter_Opening(object sender, CancelEventArgs e)
+        {
+            tsmiDate.AutoSize = false;
+            tsmiPriority.AutoSize = false;
 
+            tsmiDate.Width = cmsFilter.Width;
+            tsmiPriority.Width = cmsFilter.Width;
+        }
         private void SetPanelRadius()
         {
             pnlTotalTask.Region = Region.FromHrgn(
@@ -625,27 +639,36 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             HideAllFilterPanels();
 
-            Point p = dataGridViewTask.PointToScreen(Point.Empty);
+            Point p = pnlButtonControls.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
             panel.Parent = this;
 
             panel.Location = new Point(
-                p.X + dataGridViewTask.Width - panel.Width - 170,
-                p.Y - 55);
+                p.X - panel.Width - 10,
+                p.Y);
 
             panel.BringToFront();
             panel.Visible = true;
         }
 
+
+
         private void ShowSearchPanel(Panel panel)
         {
             HideAllFilterPanels();
-            Point p = dataGridViewTask.PointToScreen(Point.Empty);
+
+            panel.Parent = this;
+
+
+            Point p = btnSerach.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
+
             panel.Location = new Point(
-                p.X + dataGridViewTask.Width - panel.Width - 750,
-                p.Y - 55);
+                p.X + btnSerach.Width + 10,
+                p.Y-8
+            );
+
             panel.BringToFront();
             panel.Visible = true;
         }

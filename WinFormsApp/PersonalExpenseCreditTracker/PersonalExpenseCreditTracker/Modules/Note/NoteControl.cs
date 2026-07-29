@@ -58,10 +58,18 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             DesignContextMenu();
 
             LoadNoteData(UserID);
-            
+            cmsFilter.Opening += cmsFilter_Opening;
 
         }
 
+        private void cmsFilter_Opening(object sender, CancelEventArgs e)
+        {
+            tsmiDate.AutoSize = false;
+            tsmiPriority.AutoSize = false;
+
+            tsmiDate.Width = cmsFilter.Width;
+            tsmiPriority.Width = cmsFilter.Width;
+        }
         private void LoadNoteData(int userID)
         {
             try
@@ -589,27 +597,36 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             HideAllFilterPanels();
 
-            Point p = flpNotes.PointToScreen(Point.Empty);
+            Point p = pnlButtonControls.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
             panel.Parent = this;
 
             panel.Location = new Point(
-                p.X + flpNotes.Width - panel.Width - 170,
-                p.Y - 45);
+                p.X - panel.Width - 10,
+                p.Y);
 
             panel.BringToFront();
             panel.Visible = true;
         }
 
+
+
         private void ShowSearchPanel(Panel panel)
         {
             HideAllFilterPanels();
-            Point p = flpNotes.PointToScreen(Point.Empty);
+
+            panel.Parent = this;
+
+
+            Point p = btnSerach.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
+
             panel.Location = new Point(
-                p.X + flpNotes.Width - panel.Width - 830,
-                p.Y - 45);
+                p.X + btnSerach.Width + 10,
+                p.Y
+            );
+
             panel.BringToFront();
             panel.Visible = true;
         }

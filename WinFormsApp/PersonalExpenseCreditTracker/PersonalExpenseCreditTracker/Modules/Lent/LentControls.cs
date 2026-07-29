@@ -133,9 +133,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             LoadLentData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
+        cmsFilter.Opening += cmsFilter_Opening;
+
         }
 
+        private void cmsFilter_Opening(object sender, CancelEventArgs e)
+        {
+            tsmiDate.AutoSize = false;
+            tsmiCategory.AutoSize = false;
 
+            tsmiDate.Width = cmsFilter.Width;
+            tsmiCategory.Width = cmsFilter.Width;
+        }
         private void LoadLentData(int userID)
         {
             try
@@ -514,30 +523,40 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             HideAllFilterPanels();
 
-            Point p = dgvLentDataTable.PointToScreen(Point.Empty);
+            Point p = pnlButtonControls.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
             panel.Parent = this;
 
             panel.Location = new Point(
-                p.X + dgvLentDataTable.Width - panel.Width - 157,
-                p.Y - 40);
+                p.X - panel.Width - 10,
+                p.Y);
 
             panel.BringToFront();
             panel.Visible = true;
         }
+
+
 
         private void ShowSearchPanel(Panel panel)
         {
             HideAllFilterPanels();
-            Point p = dgvLentDataTable.PointToScreen(Point.Empty);
+
+            panel.Parent = this;
+
+
+            Point p = btnSerach.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
+
             panel.Location = new Point(
-                p.X + dgvLentDataTable.Width - panel.Width - 815,
-                p.Y - 42);
+                p.X + btnSerach.Width + 10,
+                p.Y
+            );
+
             panel.BringToFront();
             panel.Visible = true;
         }
+
         private void DesignContextMenu()
         {
             cmsFilter.ShowImageMargin = true;

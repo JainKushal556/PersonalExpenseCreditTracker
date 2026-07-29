@@ -72,7 +72,7 @@
             this.picNoteCalender = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnSerach = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnFilter = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -126,7 +126,7 @@
             this.pnlThisMonth.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picNoteCalender)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnlButtonControls.SuspendLayout();
             this.cmsNote.SuspendLayout();
             this.cmsFilter.SuspendLayout();
             this.pnlPriorityFilter.SuspendLayout();
@@ -620,7 +620,7 @@
             // 
             this.tblNoteSummary.SetColumnSpan(this.panel2, 3);
             this.panel2.Controls.Add(this.btnSerach);
-            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.pnlButtonControls);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(6, 128);
             this.panel2.Name = "panel2";
@@ -640,17 +640,17 @@
             this.btnSerach.UseVisualStyleBackColor = true;
             this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
             // 
-            // panel3
+            // pnlButtonControls
             // 
-            this.panel3.Controls.Add(this.btnFilter);
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.btnRefresh);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(991, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(0, 5, 10, 5);
-            this.panel3.Size = new System.Drawing.Size(200, 54);
-            this.panel3.TabIndex = 1;
+            this.pnlButtonControls.Controls.Add(this.btnFilter);
+            this.pnlButtonControls.Controls.Add(this.button1);
+            this.pnlButtonControls.Controls.Add(this.btnRefresh);
+            this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtonControls.Location = new System.Drawing.Point(991, 0);
+            this.pnlButtonControls.Name = "pnlButtonControls";
+            this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 5, 10, 5);
+            this.pnlButtonControls.Size = new System.Drawing.Size(200, 54);
+            this.pnlButtonControls.TabIndex = 1;
             // 
             // btnFilter
             // 
@@ -1104,8 +1104,8 @@
             this.pnlThisMonth.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picNoteCalender)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pnlButtonControls.ResumeLayout(false);
+            this.pnlButtonControls.PerformLayout();
             this.cmsNote.ResumeLayout(false);
             this.cmsFilter.ResumeLayout(false);
             this.pnlPriorityFilter.ResumeLayout(false);
@@ -1181,7 +1181,7 @@
         private System.Windows.Forms.Button btnFirstpage;
         private System.Windows.Forms.Label lblPriorityName;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlButtonControls;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnFilter;

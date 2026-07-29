@@ -34,7 +34,7 @@
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
             this.btnSerach = new System.Windows.Forms.Button();
-            this.pnlButton = new System.Windows.Forms.Panel();
+            this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -103,7 +103,7 @@
             this.pnlContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
-            this.pnlButton.SuspendLayout();
+            this.pnlButtonControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).BeginInit();
             this.pnlFooter.SuspendLayout();
             this.pnlExpenseFooter.SuspendLayout();
@@ -165,7 +165,7 @@
             // 
             this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
             this.pnlTableHeader.Controls.Add(this.btnSerach);
-            this.pnlTableHeader.Controls.Add(this.pnlButton);
+            this.pnlTableHeader.Controls.Add(this.pnlButtonControls);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTableHeader.Location = new System.Drawing.Point(11, 8);
             this.pnlTableHeader.Name = "pnlTableHeader";
@@ -185,17 +185,17 @@
             this.btnSerach.UseVisualStyleBackColor = true;
             this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
             // 
-            // pnlButton
+            // pnlButtonControls
             // 
-            this.pnlButton.Controls.Add(this.btnFilter);
-            this.pnlButton.Controls.Add(this.btnExport);
-            this.pnlButton.Controls.Add(this.btnRefresh);
-            this.pnlButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButton.Location = new System.Drawing.Point(1030, 0);
-            this.pnlButton.Name = "pnlButton";
-            this.pnlButton.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.pnlButton.Size = new System.Drawing.Size(192, 44);
-            this.pnlButton.TabIndex = 0;
+            this.pnlButtonControls.Controls.Add(this.btnFilter);
+            this.pnlButtonControls.Controls.Add(this.btnExport);
+            this.pnlButtonControls.Controls.Add(this.btnRefresh);
+            this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtonControls.Location = new System.Drawing.Point(1030, 0);
+            this.pnlButtonControls.Name = "pnlButtonControls";
+            this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.pnlButtonControls.Size = new System.Drawing.Size(192, 44);
+            this.pnlButtonControls.TabIndex = 0;
             // 
             // btnFilter
             // 
@@ -954,8 +954,8 @@
             this.pnlContent.ResumeLayout(false);
             this.tblTable.ResumeLayout(false);
             this.pnlTableHeader.ResumeLayout(false);
-            this.pnlButton.ResumeLayout(false);
-            this.pnlButton.PerformLayout();
+            this.pnlButtonControls.ResumeLayout(false);
+            this.pnlButtonControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlExpenseFooter.ResumeLayout(false);
@@ -1030,7 +1030,7 @@
         private System.Windows.Forms.Label lblto;
         private System.Windows.Forms.Label lblExpenseStartingPageNumber;
         private System.Windows.Forms.Label lblShowing;
-        private System.Windows.Forms.Panel pnlButton;
+        private System.Windows.Forms.Panel pnlButtonControls;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Panel pnlCategoryFilter;
         private System.Windows.Forms.Panel pnlHeader;
