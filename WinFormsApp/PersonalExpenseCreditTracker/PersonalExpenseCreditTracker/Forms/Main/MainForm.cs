@@ -2281,9 +2281,9 @@ namespace PersonalExpenseCreditTracker
             txtLentMinAmount.Clear();
             txtLentMaxAmount.Clear();
 
-            //ComboBoxLentPerson.SelectedIndex = 0;
-            //ComboBoxLentStatus.SelectedIndex = 0;
-            //ComboBoxLentPayment.SelectedIndex = 0;
+            ComboBoxLentPerson.SelectedIndex = -1;
+            ComboBoxLentStatus.SelectedIndex = -1;
+            ComboBoxLentPayment.SelectedIndex = -1;
 
             dtpLentFromDate.Value = DateTime.Today;
             dtpLentToDate.Value = DateTime.Today;
