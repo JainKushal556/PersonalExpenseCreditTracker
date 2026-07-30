@@ -11,7 +11,7 @@ CREATE PROCEDURE spInsertExpenseByUserID
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
       IF NOT EXISTS
     (

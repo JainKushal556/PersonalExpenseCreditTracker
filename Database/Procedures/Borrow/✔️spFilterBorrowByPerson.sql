@@ -3,7 +3,7 @@ CREATE PROCEDURE spFilterBorrowByPerson
     @PersonID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     IF NOT EXISTS
     (
         SELECT 1 FROM tblUserAuthentication

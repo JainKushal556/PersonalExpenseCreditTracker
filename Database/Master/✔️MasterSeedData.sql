@@ -100,6 +100,19 @@ VALUES
 ('Important');
 GO
 
+INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES
+('Default', '#FFFFFF'),
+('Red', '#FF8A80'),
+('Orange', '#FFD180'),
+('Yellow', '#FFFF8D'),
+('Green', '#CCFF90'),
+('Teal', '#A7FFEB'),
+('Blue', '#80D8FF'),
+('Purple', '#B388FF'),
+('Pink', '#FF80AB'),
+('Grey', '#CFD8DC');
+GO
+
 
 
 INSERT INTO tblUserProfile (UserID, Name, ProfilePhoto)
@@ -254,18 +267,18 @@ VALUES
 (10, 1, 1, 'Prepare Exam Notes', '2026-06-15', '2026-05-24 16:30:00');
 GO
 
-INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description)
+INSERT INTO tblNote (UserID, NotePriorityID, NoteColorID, NoteTitle, Description)
 VALUES
-(1, 1, 'Project Meeting Notes', 'Discussed project requirements and deadlines.'),
-(2, 2, 'Shopping List', 'Buy groceries, vegetables, and snacks for the week.'),
-(3, 1, 'Exam Preparation', 'Complete revision of DBMS and Compiler Design topics.'),
-(4, 2, 'Workout Plan', 'Morning cardio and evening strength training routine.'),
-(5, 1, 'React Ideas', 'Create a task manager UI using React and Tailwind CSS.'),
-(6, 2, 'Birthday Reminder', 'Plan surprise birthday party for friend next weekend.'),
-(7, 1, 'Office Tasks', 'Submit monthly report and attend team meeting.'),
-(8, 2, 'Travel Plan', 'Book train tickets and hotel for vacation trip.'),
-(9, 1, 'Daily Goals', 'Finish coding assignment and practice SQL queries.'),
-(10, 2, 'Movie Watchlist', 'Add new action and sci-fi movies to watch later.');
+(1, 1, 1, 'Project Meeting Notes', 'Discussed project requirements and deadlines.'),
+(2, 2, 2, 'Shopping List', 'Buy groceries, vegetables, and snacks for the week.'),
+(3, 1, 3, 'Exam Preparation', 'Complete revision of DBMS and Compiler Design topics.'),
+(4, 2, 4, 'Workout Plan', 'Morning cardio and evening strength training routine.'),
+(5, 1, 5, 'React Ideas', 'Create a task manager UI using React and Tailwind CSS.'),
+(6, 2, 6, 'Birthday Reminder', 'Plan surprise birthday party for friend next weekend.'),
+(7, 1, 7, 'Office Tasks', 'Submit monthly report and attend team meeting.'),
+(8, 2, 8, 'Travel Plan', 'Book train tickets and hotel for vacation trip.'),
+(9, 1, 9, 'Daily Goals', 'Finish coding assignment and practice SQL queries.'),
+(10, 2, 10, 'Movie Watchlist', 'Add new action and sci-fi movies to watch later.');
 GO
 
 -- Two year test data for main tables only. Type/status/priority tables are intentionally not repeated.
@@ -299,7 +312,7 @@ GO
 
 INSERT INTO tblUserAuthentication (UserID, Password, Active)
 VALUES
-(11, 'Ritwik@112', 0),
+(11, 'Ritwik@112', 1),
 (12, 'Moumita@113', 0),
 (13, 'Sayan@114', 0),
 (14, 'Tania@115', 0),
@@ -551,20 +564,20 @@ VALUES
 (9, 3, 1, 'Follow summer borrowing', '2026-07-25', '2026-05-19 11:50:00');
 GO
 
-INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description, CreatedAt)
+INSERT INTO tblNote (UserID, NotePriorityID, NoteColorID, NoteTitle, Description, CreatedAt)
 VALUES
-(13, 1, 'July 2024 shop note', 'Shop repair lending and borrowing records created.', '2024-07-09 10:15:00'),
-(14, 1, 'September 2024 closed note', 'Emergency amount fully settled.', '2024-09-20 11:25:00'),
-(15, 2, 'November 2024 medical note', 'Medical support is partially settled.', '2024-11-30 12:35:00'),
-(1, 2, 'January 2025 overdue note', 'Temporary cash support needs follow up.', '2025-01-24 13:45:00'),
-(2, 1, 'March 2025 tuition note', 'Tuition related support is completed.', '2025-03-14 14:55:00'),
-(3, 2, 'May 2025 business note', 'Business support has pending balance.', '2025-05-25 16:05:00'),
-(4, 1, 'July 2025 personal note', 'Personal support is partially paid.', '2025-07-13 17:15:00'),
-(5, 1, 'September 2025 device note', 'Device support is completed.', '2025-09-23 18:25:00'),
-(6, 2, 'November 2025 shifting note', 'House shifting support needs review.', '2025-11-18 19:35:00'),
-(7, 2, 'January 2026 family note', 'Family support is overdue.', '2026-01-29 09:45:00'),
-(8, 1, 'March 2026 course note', 'Course fee support is partially settled.', '2026-03-17 10:55:00'),
-(9, 2, 'May 2026 summer note', 'Summer expense support is pending.', '2026-05-23 12:05:00');
+(13, 1, 1, 'July 2024 shop note', 'Shop repair lending and borrowing records created.', '2024-07-09 10:15:00'),
+(14, 1, 2, 'September 2024 closed note', 'Emergency amount fully settled.', '2024-09-20 11:25:00'),
+(15, 2, 3, 'November 2024 medical note', 'Medical support is partially settled.', '2024-11-30 12:35:00'),
+(1, 2, 4, 'January 2025 overdue note', 'Temporary cash support needs follow up.', '2025-01-24 13:45:00'),
+(2, 1, 5, 'March 2025 tuition note', 'Tuition related support is completed.', '2025-03-14 14:55:00'),
+(3, 2, 6, 'May 2025 business note', 'Business support has pending balance.', '2025-05-25 16:05:00'),
+(4, 1, 7, 'July 2025 personal note', 'Personal support is partially paid.', '2025-07-13 17:15:00'),
+(5, 1, 8, 'September 2025 device note', 'Device support is completed.', '2025-09-23 18:25:00'),
+(6, 2, 9, 'November 2025 shifting note', 'House shifting support needs review.', '2025-11-18 19:35:00'),
+(7, 2, 10, 'January 2026 family note', 'Family support is overdue.', '2026-01-29 09:45:00'),
+(8, 1, 1, 'March 2026 course note', 'Course fee support is partially settled.', '2026-03-17 10:55:00'),
+(9, 2, 2, 'May 2026 summer note', 'Summer expense support is pending.', '2026-05-23 12:05:00');
 GO
 
 
