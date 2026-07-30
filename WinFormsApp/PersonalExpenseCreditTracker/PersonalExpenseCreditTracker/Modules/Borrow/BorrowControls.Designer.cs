@@ -43,6 +43,19 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 
+            this.btnCurrentPage = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.btnFirstpage = new System.Windows.Forms.Button();
+            this.btnLastPage = new System.Windows.Forms.Button();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.btnPreviousPage = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnSerach = new System.Windows.Forms.Button();
+            this.lblBorrowEndingPageNumber = new System.Windows.Forms.Label();
+            this.lblBorrowEntries = new System.Windows.Forms.Label();
+            this.lblBorrowShowing = new System.Windows.Forms.Label();
+            this.lblBorrowStartingPageNumber = new System.Windows.Forms.Label();
             this.lblBorrowTotalPageNumber = new System.Windows.Forms.Label();
             this.lblTo = new System.Windows.Forms.Label();
             this.lblof = new System.Windows.Forms.Label();
