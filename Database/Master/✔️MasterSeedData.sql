@@ -312,7 +312,7 @@ GO
 
 INSERT INTO tblUserAuthentication (UserID, Password, Active)
 VALUES
-(11, 'Ritwik@112', 0),
+(11, 'Ritwik@112', 1),
 (12, 'Moumita@113', 0),
 (13, 'Sayan@114', 0),
 (14, 'Tania@115', 0),
