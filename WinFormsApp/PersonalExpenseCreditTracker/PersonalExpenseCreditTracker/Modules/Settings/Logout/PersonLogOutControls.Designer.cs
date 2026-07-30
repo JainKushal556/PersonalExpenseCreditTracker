@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.pnlContent = new System.Windows.Forms.Panel();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblSubTitle = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
             this.picLogOut = new System.Windows.Forms.PictureBox();
-            this.buttonClose = new System.Windows.Forms.Button();
             this.pnlContent.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogOut)).BeginInit();
@@ -50,13 +49,26 @@
             this.pnlContent.Controls.Add(this.panel1);
             this.pnlContent.Controls.Add(this.lblSubTitle);
             this.pnlContent.Controls.Add(this.lblTitle);
-            this.pnlContent.Controls.Add(this.btnClose);
             this.pnlContent.Controls.Add(this.picLogOut);
             this.pnlContent.Location = new System.Drawing.Point(3, 4);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(10);
             this.pnlContent.Size = new System.Drawing.Size(384, 261);
             this.pnlContent.TabIndex = 0;
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.FlatAppearance.BorderSize = 0;
+            this.buttonClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.buttonClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
+            this.buttonClose.Location = new System.Drawing.Point(332, 9);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(39, 35);
+            this.buttonClose.TabIndex = 5;
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // panel1
             // 
@@ -69,21 +81,42 @@
             this.panel1.Size = new System.Drawing.Size(362, 62);
             this.panel1.TabIndex = 4;
             // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.Red;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Firebrick;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.White;
+            this.btnLogout.Image = global::PersonalExpenseCreditTracker.Properties.Resources.logout_white_24x24;
+            this.btnLogout.Location = new System.Drawing.Point(191, 13);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(158, 40);
+            this.btnLogout.TabIndex = 1;
+            this.btnLogout.Text = "Yes,Logout";
+            this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // btnCancel
             // 
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.ForeColor = System.Drawing.Color.Black;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.Location = new System.Drawing.Point(19, 11);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(112, 41);
+            this.btnCancel.Size = new System.Drawing.Size(123, 41);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblSubTitle
             // 
@@ -107,36 +140,6 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "LogOut";
             // 
-            // btnClose
-            // 
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(303, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(44, 36);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.BackColor = System.Drawing.Color.Red;
-            this.btnLogout.FlatAppearance.BorderSize = 0;
-            this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
-            this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Firebrick;
-            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.Image = global::PersonalExpenseCreditTracker.Properties.Resources.logout_white_24x24;
-            this.btnLogout.Location = new System.Drawing.Point(191, 13);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(158, 40);
-            this.btnLogout.TabIndex = 1;
-            this.btnLogout.Text = "Yes,Logout";
-            this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLogout.UseVisualStyleBackColor = false;
-            // 
             // picLogOut
             // 
             this.picLogOut.Image = global::PersonalExpenseCreditTracker.Properties.Resources.log_out;
@@ -146,18 +149,6 @@
             this.picLogOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picLogOut.TabIndex = 0;
             this.picLogOut.TabStop = false;
-            // 
-            // buttonClose
-            // 
-            this.buttonClose.FlatAppearance.BorderSize = 0;
-            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.buttonClose.Location = new System.Drawing.Point(331, 7);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(40, 40);
-            this.buttonClose.TabIndex = 5;
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // PersonLogOutControls
             // 
@@ -187,7 +178,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblSubTitle;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox picLogOut;
         private System.Windows.Forms.Button buttonClose;
     }

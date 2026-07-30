@@ -85,7 +85,7 @@
             // 
             // pnlMainBody
             // 
-            this.pnlMainBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.pnlMainBody.BackColor = System.Drawing.Color.Transparent;
             this.pnlMainBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMainBody.Controls.Add(this.panel4);
             this.pnlMainBody.Controls.Add(this.panel3);
@@ -95,10 +95,10 @@
             this.pnlMainBody.Name = "pnlMainBody";
             this.pnlMainBody.Size = new System.Drawing.Size(739, 745);
             this.pnlMainBody.TabIndex = 0;
-            //this.pnlMainBody.Resize += new System.EventHandler(this.pnlMainBody_Resize);
             // 
             // panel4
             // 
+            this.panel4.BackColor = System.Drawing.Color.Transparent;
             this.panel4.Controls.Add(this.lblPasswordMatch);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Controls.Add(this.pnlConfirmPassword);
@@ -357,7 +357,6 @@
             this.pnlCurrentPasswordText.Name = "pnlCurrentPasswordText";
             this.pnlCurrentPasswordText.Size = new System.Drawing.Size(697, 56);
             this.pnlCurrentPasswordText.TabIndex = 1;
-            //this.pnlCurrentPasswordText.Resize += new System.EventHandler(this.pnlCurrentPasswordText_Resize);
             // 
             // picEye1
             // 
@@ -408,6 +407,7 @@
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
             this.panel3.Controls.Add(this.btnChangePasswordCancel);
             this.panel3.Controls.Add(this.btnChangePasswordUpdatePassword);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -429,7 +429,6 @@
             this.btnChangePasswordCancel.Text = "Cancel";
             this.btnChangePasswordCancel.UseVisualStyleBackColor = false;
             this.btnChangePasswordCancel.Click += new System.EventHandler(this.btnChangePasswordCancel_Click);
-            //this.btnChangePasswordCancel.Resize += new System.EventHandler(this.btnChangePasswordCancel_Resize);
             // 
             // btnChangePasswordUpdatePassword
             // 
@@ -448,10 +447,10 @@
             this.btnChangePasswordUpdatePassword.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnChangePasswordUpdatePassword.UseVisualStyleBackColor = false;
             this.btnChangePasswordUpdatePassword.Click += new System.EventHandler(this.btnChangePasswordUpdatePassword_Click);
-            //this.btnChangePasswordUpdatePassword.Resize += new System.EventHandler(this.btnChangePasswordUpdatePassword_Resize);
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.btnChangePasswordClose);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
@@ -466,21 +465,19 @@
             // btnChangePasswordClose
             // 
             this.btnChangePasswordClose.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnChangePasswordClose.BackColor = System.Drawing.Color.White;
+            this.btnChangePasswordClose.BackColor = System.Drawing.Color.Transparent;
             this.btnChangePasswordClose.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.btnChangePasswordClose.FlatAppearance.BorderSize = 0;
             this.btnChangePasswordClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.btnChangePasswordClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnChangePasswordClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePasswordClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnChangePasswordClose.Location = new System.Drawing.Point(674, 25);
+            this.btnChangePasswordClose.Location = new System.Drawing.Point(678, 22);
             this.btnChangePasswordClose.Name = "btnChangePasswordClose";
-            this.btnChangePasswordClose.Size = new System.Drawing.Size(45, 43);
+            this.btnChangePasswordClose.Size = new System.Drawing.Size(39, 35);
             this.btnChangePasswordClose.TabIndex = 3;
             this.btnChangePasswordClose.UseVisualStyleBackColor = false;
             this.btnChangePasswordClose.Click += new System.EventHandler(this.btnChangePasswordClose_Click);
-            this.btnChangePasswordClose.MouseEnter += new System.EventHandler(this.btnChangePasswordClose_MouseEnter);
-            this.btnChangePasswordClose.MouseLeave += new System.EventHandler(this.btnChangePasswordClose_MouseLeave);
             // 
             // label2
             // 
@@ -516,7 +513,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
             this.ClientSize = new System.Drawing.Size(739, 745);
             this.Controls.Add(this.pnlMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -526,7 +523,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChangePasswordControls";
             this.Load += new System.EventHandler(this.ChangePasswordControls_Load);
-            this.Resize += new System.EventHandler(this.ChangePasswordControls_Resize);
             this.pnlMainBody.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();

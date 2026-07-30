@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using PersonalExpenseCreditTracker.Common;
+using BLLayer.Common;
 namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     public partial class AddBorrowControls : Form
@@ -59,13 +60,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlBorrowAddCalenderShow.Visible = !pnlBorrowAddCalenderShow.Visible;
         }
 
-        private void monthCalendarAddBorrow_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            txtBorrowAddDeadlineDatePicker.Text = e.Start.ToString("dd-MM-yyyy");
-            txtBorrowAddDeadlineDatePicker.ForeColor = Color.Black;
-            //pnlBorrowAddCalenderShow.Visible = false;
-        }
-
         private void txtBorrowAddDeadlineDatePicker_TextChanged(object sender, EventArgs e)
         {
             pnlBorrowAddCalenderShow.Visible = false;
@@ -81,6 +75,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlBorrowAddCalenderShow.Visible = true;
         }
 
+        private void monthCalendarAddBorrow_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtBorrowAddDeadlineDatePicker.Text = e.Start.ToString("dd-MM-yyyy");
+            txtBorrowAddDeadlineDatePicker.ForeColor = Color.Black;
+            pnlBorrowAddCalenderShow.Visible = false;
+        }
+
         private void txtBorrowAddDeadlineDatePicker_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtBorrowAddDeadlineDatePicker.Text))
@@ -92,8 +93,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             {
                 txtBorrowAddDeadlineDatePicker.ForeColor = Color.Black;
             }
-
-            //pnlBorrowAddCalenderShow.Visible = false;
         }
 
         private void txtBorrowAddDescription_Enter(object sender, EventArgs e)
@@ -205,6 +204,19 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             //}
         }
 
+        private void LoadFormData()
+        {
+            cmbBorrowSelectPerson.Text = "Select Person";
+            txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
+            pnlBorrowAddCalenderShow.Visible = false;
+
+            txtBorrowAddDescription.Text = "Enter description";
+            txtBorrowAddAmount.Text = "Select Amount"; ;
+
+            CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", cmbBorrowSelectPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbBorrowPaymentType);
+            
+        }
         private void AddBorrowControls_Load(object sender, EventArgs e)
         {
 
@@ -215,9 +227,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             cmbBorrowPaymentType.Text = "Select Payment Type";
             cmbBorrowPaymentType.ForeColor = Color.Gray;
 
-            //cmbBorrowStatus.Text = "Select Status";
-            //cmbBorrowStatus.ForeColor = Color.Gray;
-
             txtBorrowAddAmount.Text = "Select Amount";
             txtBorrowAddAmount.ForeColor = Color.Gray;
 
@@ -226,6 +235,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
             txtBorrowAddDeadlineDatePicker.ForeColor = Color.Gray;
+
+            SetRadius(btnBorrowAddClear, 5);
+            SetRadius(btnBorrowAddSave, 5);
+            SetRadius(btnBorrowAddCancel, 5);
+            LoadFormData();
         }
 
         private void AddBorrowControls_Click(object sender, EventArgs e)
@@ -252,16 +266,65 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
 
 
+        
         private void btnBorrowAddSave_Click(object sender, EventArgs e)
         {
-            if (txtBorrowAddDeadlineDatePicker.Text == "DD-MM-YYYY" ||
-                txtBorrowAddDescription.Text == "Enter description" ||
-                txtBorrowAddAmount.Text == "Select Amount" ||
-                cmbBorrowPaymentType.Text == "Select Payment Type" ||
-                cmbBorrowSelectPerson.Text == "Select Person")
-                MessageBox.Show("Please fill all fields");
-            else
-            MessageBox.Show("Borrow Details Saved");
+            errorProvider1.Clear();
+
+            BorrowUI borrowUi = new BorrowUI();
+            // Assign values from the form controls to the object
+            borrowUi.userId = Session.LogedInUser.GetUserId();
+            borrowUi.personId = Convert.ToInt32(cmbBorrowSelectPerson.SelectedValue);
+            borrowUi.paymentId = Convert.ToInt32(cmbBorrowPaymentType.SelectedValue);
+
+           //  If the placeholder text is still present, pass an empty string
+            borrowUi.amount = (txtBorrowAddAmount.Text == "Select Amount") ? "" : txtBorrowAddAmount.Text;
+            borrowUi.description = (txtBorrowAddDescription.Text == "Enter description") ? "" : txtBorrowAddDescription.Text;
+            
+            // If no deadline is selected, assign DateTime.MinValue
+            //    // Otherwise, assign the selected date from the calendar
+            borrowUi.deadlineAt = (txtBorrowAddDeadlineDatePicker.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendarAddBorrow.SelectionStart;
+
+            CommonValidator.ValidationResult result = borrowUi.InsertDataIntoLentUi();
+
+            switch (result)
+            {
+                // Data is valid and inserted successfully
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Lent added successfully!");
+                    this.Close();
+
+                    break;
+                case CommonValidator.ValidationResult.PersonInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbBorrowSelectPerson);
+                    break;
+
+                case CommonValidator.ValidationResult.PaymentInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbBorrowPaymentType);
+                    break;
+
+                case CommonValidator.ValidationResult.StatusInvalid:
+                    //ErrorHelper.ShowValidationError(result, errorProvider1, comboBoxLentStatus);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountEmpty:
+                case CommonValidator.ValidationResult.AmountInvalid:
+                case CommonValidator.ValidationResult.AmountTooLarge:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowAddAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.DescriptionInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowAddDescription);
+                    break;
+
+                case CommonValidator.ValidationResult.DeadlineInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowAddDeadlineDatePicker);
+                    break;
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Lent added Unsuccessfully!");
+                    break;
+            }
+
         }
 
 
@@ -270,12 +333,12 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlBorrowAddCalenderShow.Visible = false;
         }
 
-
         private void btnAddBorrowClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        
         private void btnBorrowAddClear_Resize(object sender, EventArgs e)
         {
             SetRadius(btnBorrowAddClear, 5);

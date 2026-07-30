@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -188,7 +188,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
 
         }
-
         private void pnlAddTask_Paint(object sender, PaintEventArgs e)
         {
 
@@ -208,6 +207,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtDeadline.ForeColor = Color.Black;
             }
 
+            pnlDeadlinePicker.BringToFront();
             pnlDeadlinePicker.Visible = true;
         }
 
@@ -233,12 +233,13 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnCalendar_Click(object sender, EventArgs e)
         {
+            pnlDeadlinePicker.BringToFront();
             pnlDeadlinePicker.Visible = !pnlDeadlinePicker.Visible;
         }
 
         private void txtDeadline_TextChanged(object sender, EventArgs e)
         {
-            pnlDeadlinePicker.Visible = false;
+
         }
     }
 }

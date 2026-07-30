@@ -11,9 +11,9 @@ using BLLayer.Common;
 using System.Runtime.InteropServices;
 namespace PersonalExpenseCreditTracker.Modules.Credit
 {
-    public partial class CreditDetailsControl : Form
+    public partial class AddCreditControls : Form
     {
-        public CreditDetailsControl()
+        public AddCreditControls()
         {
             InitializeComponent();
         }
@@ -41,7 +41,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             cmbAddCreditCategory.ForeColor = Color.Gray;
             cmbAddCreditSubCategory.Text = "Select Sub Category";
             cmbAddCreditSubCategory.ForeColor = Color.Gray;
-            cmbAddCreditPaymentType.Text = "Select Category";
+            cmbAddCreditPaymentType.Text = "Select Payment Type";
             cmbAddCreditPaymentType.ForeColor = Color.Gray;
             cmbAddCreditPaymentType.Text = "Select PaymentType";
 
@@ -159,7 +159,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void cmbAddCreditCategory_Leave(object sender, EventArgs e)
         {
-            if (cmbAddCreditCategory.Text == "Select Category")
+            if (cmbAddCreditCategory.SelectedIndex == -1 || cmbAddCreditCategory.Text == "Select Category")
                 cmbAddCreditCategory.ForeColor = Color.Gray;
         }
 
@@ -176,7 +176,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void cmbAddCreditSubCategory_Leave(object sender, EventArgs e)
         {
-            if (cmbAddCreditSubCategory.SelectedIndex == -1)
+            if (cmbAddCreditSubCategory.SelectedIndex == -1 || cmbAddCreditSubCategory.Text == "Select Sub Category")
             {
                 cmbAddCreditSubCategory.Text = "Select Sub Category";
                 cmbAddCreditSubCategory.ForeColor = Color.Gray;
@@ -191,7 +191,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void cmbAddCreditPaymentType_Leave(object sender, EventArgs e)
         {
-            if (cmbAddCreditPaymentType.SelectedIndex == -1)
+            if (cmbAddCreditPaymentType.SelectedIndex == -1 || cmbAddCreditPaymentType.Text == "Select Payment Type")
             {
                 cmbAddCreditPaymentType.Text = "Select Payment Type";
                 cmbAddCreditPaymentType.ForeColor = Color.Gray;

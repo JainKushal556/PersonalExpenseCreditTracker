@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Task
+namespace PersonalExpenseCreditTracker.Modules.Task
 {
     partial class AddTaskControl
     {
@@ -99,14 +99,15 @@
             // 
             this.pnlDeadlinePicker.BackColor = System.Drawing.Color.Transparent;
             this.pnlDeadlinePicker.Controls.Add(this.monthCalendar1);
-            this.pnlDeadlinePicker.Location = new System.Drawing.Point(128, 113);
+            this.pnlDeadlinePicker.Location = new System.Drawing.Point(215, 175);
             this.pnlDeadlinePicker.Name = "pnlDeadlinePicker";
-            this.pnlDeadlinePicker.Size = new System.Drawing.Size(327, 264);
+            this.pnlDeadlinePicker.Size = new System.Drawing.Size(268, 203);
             this.pnlDeadlinePicker.TabIndex = 22;
+            this.pnlDeadlinePicker.Visible = false;
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(16, 42);
+            this.monthCalendar1.Location = new System.Drawing.Point(0, 0);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 0;
             this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
@@ -356,6 +357,7 @@
             this.lblTitle.Size = new System.Drawing.Size(176, 35);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Add New Task";
+            // 
             // 
             // errorProvider1
             // 

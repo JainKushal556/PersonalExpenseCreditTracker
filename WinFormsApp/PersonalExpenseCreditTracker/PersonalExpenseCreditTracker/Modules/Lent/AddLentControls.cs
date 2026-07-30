@@ -61,21 +61,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             textBoxLentAddDescription.Text ="Enter description";
             txtLentAddAmount.Text = "Select Amount";
 
-            CommonUiFunction.LoadInComboBox("spGetAllPersons",11,"Select Person",comboBoxLentSelectPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPersons",Session.LogedInUser.GetUserId() ,"Select Person",comboBoxLentSelectPerson);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes","Select Payment Type", comboBoxLentPaymentType);
         }
-
 
         private void btnLentAddCalendar_Click(object sender, EventArgs e)
         {
              panelLentAddCalenderShow.Visible = !panelLentAddCalenderShow.Visible;
-        }
-
-        private void monthCalendarAddLent_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            txtLentAddDeadlineDatePicker.Text = e.Start.ToString("dd-MM-yyyy");
-            txtLentAddDeadlineDatePicker.ForeColor = Color.Black;
-            //panelLentAddCalenderShow.Visible = false;
         }
 
         private void txtLentAddDeadlineDatePicker_TextChanged(object sender, EventArgs e)
@@ -90,7 +82,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 txtLentAddDeadlineDatePicker.Text = "";
                 txtLentAddDeadlineDatePicker.ForeColor = Color.Black;
             }
-
             panelLentAddCalenderShow.Visible = true;
         }
 
@@ -105,8 +96,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             {
                 txtLentAddDeadlineDatePicker.ForeColor = Color.Black;
             }
-
-            //panelLentAddCalenderShow.Visible = false;
         }
 
         private void textBoxLentAddDescription_Enter(object sender, EventArgs e)
@@ -225,6 +214,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             txtLentAddDeadlineDatePicker.Text = "DD-MM-YYYY";
             txtLentAddDeadlineDatePicker.ForeColor = Color.Gray;
+            LoadFormData();
         }
 
         private void AddLentControls_Click(object sender, EventArgs e)
@@ -325,8 +315,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         }
 
-
-
         private void comboBoxLentSelectPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
            
@@ -369,6 +357,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void panelMainBody_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void monthCalendarAddLent_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtLentAddDeadlineDatePicker.Text = e.Start.ToString("dd-MM-yyyy");
+            txtLentAddDeadlineDatePicker.ForeColor = Color.Black;
+            panelLentAddCalenderShow.Visible = false;
         }
     }
 }

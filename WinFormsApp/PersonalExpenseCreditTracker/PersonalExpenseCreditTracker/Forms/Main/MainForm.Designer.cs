@@ -5561,6 +5561,33 @@ namespace PersonalExpenseCreditTracker
             this.process1.StartInfo.UserName = "";
             this.process1.SynchronizingObject = this;
             // 
+            // 
+            // btnBorrowApplyAmountFilter
+            // 
+            this.btnBorrowApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnBorrowApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnBorrowApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorrowApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnBorrowApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBorrowApplyAmountFilter.Name = "btnBorrowApplyAmountFilter";
+            this.btnBorrowApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnBorrowApplyAmountFilter.TabIndex = 6;
+            this.btnBorrowApplyAmountFilter.Text = "Apply";
+            this.btnBorrowApplyAmountFilter.UseVisualStyleBackColor = false;
+            this.btnBorrowApplyAmountFilter.Click += new System.EventHandler(this.btnBorrowApplyAmountFilter_Click);
+            // 
+            // btnExpenseApplyAmountFilter
+            // 
+            this.btnExpenseApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnExpenseApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnExpenseApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExpenseApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnExpenseApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExpenseApplyAmountFilter.Name = "btnExpenseApplyAmountFilter";
+            this.btnExpenseApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnExpenseApplyAmountFilter.TabIndex = 7;
+            this.btnExpenseApplyAmountFilter.Text = "Apply";
+            this.btnExpenseApplyAmountFilter.UseVisualStyleBackColor = false;
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
