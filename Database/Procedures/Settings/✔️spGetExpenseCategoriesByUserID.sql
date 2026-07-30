@@ -4,7 +4,7 @@ CREATE PROCEDURE spGetExpenseCategoriesByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS

@@ -7,7 +7,7 @@ CREATE PROCEDURE spFilterCreditByCategoryAndSubCategory
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (

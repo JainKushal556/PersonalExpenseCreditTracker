@@ -2,7 +2,7 @@ CREATE PROCEDURE spUpdateOverdueStatus
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
     DECLARE @OverdueStatusID INT;

@@ -615,6 +615,16 @@ EXEC spFilterTasksByStatus
 GO
 
 -- ==========================================================
+-- SP: spFilterTasksByPriority
+-- From File: ✔️spFilterTasksByPriority.sql
+-- ==========================================================
+EXEC spFilterTasksByPriority
+    @UserID = '',
+    @PriorityID = ''
+
+GO
+
+-- ==========================================================
 -- SP: spGetAllTasks
 -- From File: ✔️spGetAllTasks.sql
 -- ==========================================================
@@ -646,6 +656,17 @@ GO
 -- From File: ✔️spGetTasksBetweenDates.sql
 -- ==========================================================
 EXEC spGetTasksBetweenDates
+    @UserID = '',
+    @FromDate = '',
+    @ToDate = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetTasksBetweenCreatedDates
+-- From File: ✔️spGetTasksBetweenCreatedDates.sql
+-- ==========================================================
+EXEC spGetTasksBetweenCreatedDates
     @UserID = '',
     @FromDate = '',
     @ToDate = ''

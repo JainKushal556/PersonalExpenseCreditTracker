@@ -3,7 +3,7 @@ CREATE PROCEDURE spFilterLentByPerson
     @PersonID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     -- Validate User
     IF NOT EXISTS
     (

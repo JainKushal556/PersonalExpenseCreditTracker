@@ -3,7 +3,7 @@ CREATE PROCEDURE spFilterLentByStatus
     @StatusID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     
     -- Validate User
     IF NOT EXISTS

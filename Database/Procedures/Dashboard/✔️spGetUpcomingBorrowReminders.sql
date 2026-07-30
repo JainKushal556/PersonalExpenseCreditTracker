@@ -5,7 +5,7 @@ CREATE PROCEDURE spGetUpcomingBorrowReminders
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
 
