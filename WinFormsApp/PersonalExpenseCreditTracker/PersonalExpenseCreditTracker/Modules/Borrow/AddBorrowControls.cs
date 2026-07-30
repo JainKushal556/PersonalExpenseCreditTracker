@@ -291,9 +291,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             {
                 // Data is valid and inserted successfully
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Lent added successfully!");
+                    MessageBox.Show("Borrow added successfully!");
                     this.Close();
-
                     break;
                 case CommonValidator.ValidationResult.PersonInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, cmbBorrowSelectPerson);
@@ -321,7 +320,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowAddDeadlineDatePicker);
                     break;
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    MessageBox.Show("Lent added Unsuccessfully!");
+                    MessageBox.Show("Borrow added Unsuccessfully!");
                     break;
             }
 

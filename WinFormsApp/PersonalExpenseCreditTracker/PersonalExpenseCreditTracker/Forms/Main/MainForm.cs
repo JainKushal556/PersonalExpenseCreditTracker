@@ -2715,6 +2715,8 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateBorrowCustomDatePanel();
             UpdateBorrowClearAllButton();
+
+
         }
 
         private void UpdateBorrowCustomDatePanel()
@@ -4150,6 +4152,8 @@ namespace PersonalExpenseCreditTracker
         {
 
         }
+
+        
     }
 }
 
