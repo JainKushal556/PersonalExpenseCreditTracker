@@ -6,7 +6,7 @@ CREATE PROCEDURE spInsertNewExpenseSubCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS

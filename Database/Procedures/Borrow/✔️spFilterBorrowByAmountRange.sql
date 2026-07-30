@@ -4,7 +4,7 @@ CREATE PROCEDURE spFilterBorrowByAmountRange
     @MaxAmount DECIMAL(10,2)
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     IF NOT EXISTS
     (
         SELECT 1

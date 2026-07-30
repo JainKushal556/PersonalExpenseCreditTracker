@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -528,11 +528,6 @@
   </ItemGroup>
   <!-- Common Shell Resources -->
   <ItemGroup>
-    <None Include="Resources\house-regular %281%29.png" />
-    <None Include="Resources\Home4.png" />
-    <None Include="Resources\Home6.png" />
-    <None Include="Resources\home_white.png" />
-    <None Include="Resources\down.png" />
     <None Include="Resources\credit-card-white.png" />
     <None Include="Resources\handshake.png" />
     <None Include="Resources\payment_3948571.png" />
@@ -669,7 +664,6 @@
     <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />
     <None Include="Resources\filter %282%29.png" />
-    <None Include="Resources\list.png" />
     <None Include="Resources\pricing.png" />
     <None Include="Resources\project.png" />
     <None Include="Resources\clipboard %281%29.png" />
@@ -732,12 +726,7 @@
     <None Include="Resources\loupe.png" />
     <None Include="Resources\loupe %281%29.png" />
     <None Include="Resources\Action.png" />
-    <None Include="Resources\padlock.png" />
     <None Include="Resources\mail %283%29.png" />
-    <None Include="Resources\padlock %283%29.png" />
-    <None Include="Resources\open-eye %282%29.png" />
-    <None Include="Resources\eye.png" />
-    <None Include="Resources\padlock %284%29.png" />
     <None Include="Resources\address-location.png" />
     <None Include="Resources\Export.png" />
     <None Include="Resources\filter1.png" />
@@ -763,6 +752,7 @@
     <None Include="Resources\line1.png" />
     <None Include="Resources\Image.png" />
     <None Include="Resources\Gemini_Generated_Image_bup5imbup5imbup5.png" />
+
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>
@@ -772,7 +762,6 @@
     <None Include="Resources\log-out.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logout.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\grid.png" />

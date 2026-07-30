@@ -995,7 +995,7 @@ CREATE PROCEDURE spFilterCreditByAmountRange
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     IF NOT EXISTS
     (
@@ -1063,7 +1063,7 @@ CREATE PROCEDURE spFilterCreditByCategory
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (
@@ -1145,7 +1145,7 @@ CREATE PROCEDURE spFilterCreditByCategoryAndSubCategory
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (
@@ -1242,7 +1242,7 @@ CREATE PROCEDURE spFilterCreditByDateRange
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 	    IF NOT EXISTS
 		  (
 		     SELECT 1
@@ -1346,7 +1346,7 @@ CREATE PROCEDURE spGetAllCreditsByID
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (
@@ -1413,7 +1413,7 @@ CREATE PROCEDURE spGetCategoryWiseCreditReport
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     IF NOT EXISTS
     (
@@ -1501,7 +1501,7 @@ CREATE PROCEDURE spGetMonthlyCreditSummary
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     IF NOT EXISTS
     (
@@ -1559,7 +1559,7 @@ CREATE PROCEDURE spGetTodayCredit
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (
@@ -1634,7 +1634,7 @@ CREATE PROCEDURE spInsertCreditByUserID
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     IF NOT EXISTS
     (
@@ -1821,7 +1821,7 @@ CREATE PROCEDURE spFilterExpenseByAmountRange
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     IF NOT EXISTS
     (
@@ -1889,7 +1889,7 @@ CREATE PROCEDURE spFilterExpenseByCategory
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (
@@ -1971,7 +1971,7 @@ CREATE PROCEDURE spFilterExpenseByCategoryAndSubCategory
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (
@@ -2068,7 +2068,7 @@ CREATE PROCEDURE spFilterExpenseByDateRange
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 	    IF NOT EXISTS
 		  (
 		     SELECT 1
@@ -2144,7 +2144,7 @@ CREATE PROCEDURE spGetAllExpensesByID
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (
@@ -2211,7 +2211,7 @@ CREATE PROCEDURE spGetCategoryWiseExpenseReport
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     IF NOT EXISTS
     (
@@ -2268,7 +2268,7 @@ CREATE PROCEDURE spGetMonthlyExpenseSummary
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     IF NOT EXISTS
     (
@@ -2325,7 +2325,7 @@ CREATE PROCEDURE spGetTodayExpense
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
     IF NOT EXISTS
     (
@@ -2401,7 +2401,7 @@ CREATE PROCEDURE spInsertExpenseByUserID
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
 
       IF NOT EXISTS
     (
@@ -2719,12 +2719,16 @@ BEGIN TRY
 SELECT
 tblNote.NoteID,
 tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
 tblNote.NoteTitle,
 tblNote.Description,
 tblNotePriorities.NotePriorityName,
 tblNote.CreatedAt
 FROM tblNote
 LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
 WHERE tblNote.UserID=@UserID
 AND tblNote.NotePriorityID=@PriorityID
 
@@ -2776,6 +2780,9 @@ BEGIN TRY
 SELECT
 tblNote.NoteID,
 tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
 tblNote.NoteTitle,
 tblNote.Description,
 tblNotePriorities.NotePriorityName,
@@ -2783,6 +2790,7 @@ tblNote.CreatedAt
 
 FROM tblNote
 LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
 WHERE tblNote.UserID=@UserID
 ORDER BY tblNote.CreatedAt DESC
 
@@ -2844,12 +2852,17 @@ BEGIN TRY
 
 SELECT
 tblNote.NoteID,
+tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
 tblNote.NoteTitle,
 tblNote.Description,
 tblNotePriorities.NotePriorityName,
 tblNote.CreatedAt
 FROM tblNote
 LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
 WHERE tblNote.UserID=@UserID
 AND CAST(tblNote.CreatedAt AS DATE)
 BETWEEN @FromDate AND @ToDate
@@ -2874,6 +2887,7 @@ CREATE PROCEDURE spInsertNote
 
 @UserID INT,
 @PriorityID INT,
+@NoteColorID INT = 1,
 @NoteTitle VARCHAR(MAX),
 @Description VARCHAR(MAX)
 
@@ -2926,11 +2940,21 @@ SELECT 'Invalid Note PriorityID' AS Message
 RETURN 
 END
 
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'Invalid Note ColorID' AS Message 
+RETURN 
+END
+
 BEGIN TRY
 
-INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description)
+INSERT INTO tblNote (UserID, NotePriorityID, NoteColorID, NoteTitle, Description)
 VALUES
-(@UserID,@PriorityID,@NoteTitle,@Description)
+(@UserID,@PriorityID,@NoteColorID,@NoteTitle,@Description)
 
 SELECT 'Note Inserted Successfully' AS Message
 
@@ -2955,6 +2979,7 @@ CREATE PROCEDURE spUpdateNote
 @UserID INT,
 @NoteID INT,
 @PriorityID INT,
+@NoteColorID INT = 1,
 @NoteTitle VARCHAR(MAX),
 @Description VARCHAR(MAX)
 )
@@ -2997,18 +3022,27 @@ SELECT 'Invalid Note PriorityID' AS Message
 RETURN 
 END
 
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'Invalid Note ColorID' AS Message
+RETURN 
+END
 
 BEGIN TRY
 
 UPDATE tblNote 
 SET
     NotePriorityID=@PriorityID,
+    NoteColorID=@NoteColorID,
     NoteTitle=@NoteTitle,
     Description=@Description
 WHERE UserID=@UserID 
 AND NoteID=@NoteID
 SELECT 'Note Updated Successfully' AS Message
-
 
 END TRY
 BEGIN CATCH
@@ -3076,6 +3110,159 @@ GO
 
 -- ==========================================================
 
+-- SP: ✔️spGetAllNoteColors.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllNoteColors
+AS
+BEGIN
+    BEGIN TRY
+        SELECT
+            NoteColorID,
+            ColorName,
+            ColorHexCode
+        FROM tblNoteColor
+        ORDER BY NoteColorID ASC;
+    END TRY
+    BEGIN CATCH
+        SELECT ERROR_MESSAGE() AS Message;
+    END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateNoteColor.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateNoteColor
+(
+@UserID INT,
+@NoteID INT,
+@NoteColorID INT
+)
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteID=@NoteID
+)
+BEGIN
+SELECT 'Invalid UserID Or NoteID' AS Message
+RETURN 
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'Invalid Note ColorID' AS Message
+RETURN 
+END
+
+BEGIN TRY
+
+UPDATE tblNote 
+SET
+    NoteColorID=@NoteColorID
+WHERE UserID=@UserID 
+AND NoteID=@NoteID
+
+SELECT 'Note Color Updated Successfully' AS Message
+END TRY
+
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterNotesByColor.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterNotesByColor
+
+@UserID INT,
+@NoteColorID INT
+
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblUsers
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'UserID Does Not Exist' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN 
+SELECT 'Invalid Note ColorID' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'No Notes Found' AS Message
+RETURN
+END
+
+BEGIN TRY
+SELECT
+tblNote.NoteID,
+tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
+tblNote.NoteTitle,
+tblNote.Description,
+tblNotePriorities.NotePriorityName,
+tblNote.CreatedAt
+FROM tblNote
+LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
+WHERE tblNote.UserID=@UserID
+AND tblNote.NoteColorID=@NoteColorID
+
+ORDER BY tblNote.CreatedAt DESC
+
+END TRY
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
 -- SP: ✔️spDeleteCreditCategoryByUserID.sql
 
 -- ==========================================================
@@ -3087,7 +3274,7 @@ CREATE PROCEDURE spDeleteCreditCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     IF NOT EXISTS 
     (
         SELECT 1
@@ -3151,7 +3338,7 @@ CREATE PROCEDURE spDeleteCreditSubCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS 
@@ -3221,7 +3408,7 @@ CREATE PROCEDURE spDeleteExpenseCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS 
@@ -3291,7 +3478,7 @@ CREATE PROCEDURE spDeleteExpenseSubCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS 
@@ -3358,7 +3545,7 @@ CREATE PROCEDURE spGetAllPaymentTypes
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     IF NOT EXISTS
     (
@@ -3394,7 +3581,7 @@ CREATE PROCEDURE spGetCreditCategoriesByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3440,7 +3627,7 @@ CREATE PROCEDURE spGetCreditSubCategoriesByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3487,7 +3674,7 @@ CREATE PROCEDURE spGetExpenseCategoriesByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3533,7 +3720,7 @@ CREATE PROCEDURE spGetExpenseSubCategoriesByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3581,7 +3768,7 @@ CREATE PROCEDURE spInsertNewCreditCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3647,7 +3834,7 @@ CREATE PROCEDURE spInsertNewCreditSubCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3727,7 +3914,7 @@ CREATE PROCEDURE spInsertNewExpenseCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3793,7 +3980,7 @@ CREATE PROCEDURE spInsertNewExpenseSubCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3875,7 +4062,7 @@ CREATE PROCEDURE spUpdateCreditCategoryByUserID
 AS
 BEGIN
     
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -3972,7 +4159,7 @@ CREATE PROCEDURE spUpdateCreditSubCategoryByUserID
 AS
 BEGIN
     
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -4069,7 +4256,7 @@ CREATE PROCEDURE spUpdateExpenseCategoryByUserID
 AS
 BEGIN
     
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -4166,7 +4353,7 @@ CREATE PROCEDURE spUpdateExpenseSubCategoryByUserID
 AS
 BEGIN
     
-    SET NOCOUNT ON
+    SET NOCOUNT OFF
     
     
     IF NOT EXISTS
@@ -4303,6 +4490,7 @@ CREATE PROCEDURE spFilterTasksByStatus
     @TaskStatusID INT
 AS
 BEGIN
+    SET NOCOUNT OFF;
 
     IF NOT EXISTS
     (
@@ -4357,7 +4545,8 @@ BEGIN
         Task.TaskTitle,
         TaskPriorities.PriorityName,
         TaskStatus.TaskStatusName,
-        Task.Deadline
+        Task.Deadline,
+        Task.CreatedAt  
     FROM tblTask Task
 
     INNER JOIN tblTaskPriorities TaskPriorities
@@ -4379,15 +4568,18 @@ GO
 
 -- ==========================================================
 
--- SP: ✔️spGetAllTasks.sql
+-- SP: ✔️spFilterTasksByPriority.sql
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllTasks
-    @UserID INT
+CREATE PROCEDURE spFilterTasksByPriority
+    @UserID INT,
+    @PriorityID INT
 AS
 BEGIN
+    SET NOCOUNT OFF;
 
+    -- Check User Exists
     IF NOT EXISTS
     (
         SELECT 1
@@ -4399,51 +4591,145 @@ BEGIN
         RETURN;
     END
 
+    -- Check User Active
     IF NOT EXISTS
     (
         SELECT 1
         FROM tblUserAuthentication
         WHERE UserID = @UserID
-        AND Active = 1
+          AND Active = 1
     )
     BEGIN
         SELECT 'User Account Is Not Active' AS Message;
         RETURN;
     END
 
+    -- Check Priority Exists
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTaskPriorities
+        WHERE PriorityID = @PriorityID
+    )
+    BEGIN
+        SELECT 'Invalid PriorityID' AS Message;
+        RETURN;
+    END
+
+    -- Check Any Task Exists For This Priority
     IF NOT EXISTS
     (
         SELECT 1
         FROM tblTask
         WHERE UserID = @UserID
+          AND PriorityID = @PriorityID
     )
     BEGIN
         SELECT 'No Tasks Found' AS Message;
         RETURN;
     END
 
-
+    -- Return Filtered Tasks
     SELECT
         Task.TaskID,
         Task.TaskTitle,
         TaskPriorities.PriorityName,
         TaskStatus.TaskStatusName,
-        Task.Deadline
-    FROM tblTask Task
+        Task.Deadline,
+        Task.CreatedAt  
+    FROM tblTask AS Task
 
-    INNER JOIN tblTaskPriorities TaskPriorities
+    INNER JOIN tblTaskPriorities AS TaskPriorities
         ON Task.PriorityID = TaskPriorities.PriorityID
 
-    INNER JOIN tblTaskStatus TaskStatus
+    INNER JOIN tblTaskStatus AS TaskStatus
         ON Task.TaskStatusID = TaskStatus.TaskStatusID
 
     WHERE Task.UserID = @UserID
+      AND Task.PriorityID = @PriorityID
+
+    ORDER BY Task.Deadline ASC;
 
 END;
 
 
 GO
 
+
+-- ==========================================================
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllTasks.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllTasks  
+    @UserID INT  
+AS  
+BEGIN  
+    SET NOCOUNT OFF;
+
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUsers  
+        WHERE UserID = @UserID  
+    )  
+    BEGIN  
+        SELECT 'Invalid UserID' AS Message;  
+        RETURN;  
+    END  
+  
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblUserAuthentication  
+        WHERE UserID = @UserID  
+        AND Active = 1  
+    )  
+    BEGIN  
+        SELECT 'User Account Is Not Active' AS Message;  
+        RETURN;  
+    END  
+  
+    IF NOT EXISTS  
+    (  
+        SELECT 1  
+        FROM tblTask  
+        WHERE UserID = @UserID  
+    )  
+    BEGIN  
+        SELECT 'No Tasks Found' AS Message;  
+        RETURN;  
+    END  
+  
+  
+    SELECT  
+        Task.TaskID,  
+        Task.TaskTitle,  
+        TaskPriorities.PriorityName,  
+        TaskStatus.TaskStatusName,  
+        Task.Deadline,  
+        Task.CreatedAt  
+  
+    FROM tblTask Task  
+  
+    INNER JOIN tblTaskPriorities TaskPriorities  
+        ON Task.PriorityID = TaskPriorities.PriorityID  
+  
+    INNER JOIN tblTaskStatus TaskStatus  
+        ON Task.TaskStatusID = TaskStatus.TaskStatusID  
+  
+    WHERE Task.UserID = @UserID  
+  
+END;
+
+
+GO
+
+
+-- ==========================================================
 
 -- ==========================================================
 
@@ -4603,7 +4889,7 @@ CREATE PROCEDURE spGetTasksBetweenDates
 )
 AS
 BEGIN
-
+    SET NOCOUNT OFF;
 
     BEGIN TRY
 
@@ -4672,6 +4958,92 @@ END
 
 GO
 
+
+-- ==========================================================
+
+-- SP: ✔️spGetTasksBetweenCreatedDates.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetTasksBetweenCreatedDates
+(
+    @UserID INT,
+    @FromDate DATE,
+    @ToDate DATE
+)
+AS
+BEGIN
+    SET NOCOUNT OFF;
+
+    BEGIN TRY
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUsers
+            WHERE UserID = @UserID
+        )
+        BEGIN
+            SELECT 'Invalid UserID' AS Message;
+            RETURN;
+        END
+
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUserAuthentication
+            WHERE UserID = @UserID
+              AND Active = 1
+        )
+        BEGIN
+            SELECT 'Inactive User Cannot View Tasks' AS Message;
+            RETURN;
+        END
+
+        IF @FromDate IS NULL OR @ToDate IS NULL
+        BEGIN
+            SELECT 'Date Cannot Be NULL' AS Message;
+            RETURN;
+        END
+
+        IF @FromDate > @ToDate
+        BEGIN
+            SELECT 'FromDate Cannot Be Greater Than ToDate' AS Message;
+            RETURN;
+        END
+
+        SELECT
+            T.TaskID,
+            T.TaskTitle,
+            P.PriorityName,
+            S.TaskStatusName,
+            T.Deadline,
+            T.CreatedAt
+        FROM tblTask T
+        INNER JOIN tblTaskPriorities P
+            ON T.PriorityID = P.PriorityID
+        INNER JOIN tblTaskStatus S
+            ON T.TaskStatusID = S.TaskStatusID
+        WHERE
+            T.UserID = @UserID
+            AND CAST(T.CreatedAt AS DATE) BETWEEN @FromDate AND @ToDate
+        ORDER BY T.CreatedAt ASC;
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+
+END;
+
+
+GO
+
+
+-- ==========================================================
 
 -- ==========================================================
 
@@ -5621,7 +5993,7 @@ CREATE PROCEDURE spFilterLentByStatus
     @StatusID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     
     -- Validate User
     IF NOT EXISTS
@@ -5802,7 +6174,7 @@ CREATE PROCEDURE spGetUpcomingBorrowReminders
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
 
@@ -6040,7 +6412,7 @@ CREATE PROCEDURE spGetPendingBorrow
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     DECLARE @PaymentID INT;
 
@@ -6419,7 +6791,7 @@ CREATE PROCEDURE spUpdateOverdueStatus
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
     DECLARE @OverdueStatusID INT;
@@ -7050,7 +7422,7 @@ CREATE PROCEDURE spFilterLentByAmountRange
     @MaxAmount DECIMAL(10,2)
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     -- Validate User
     IF NOT EXISTS
     (
@@ -7115,7 +7487,7 @@ CREATE PROCEDURE spFilterLentByDateRange
     @ToDate DATETIME
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     -- Validate User
     IF NOT EXISTS
     (
@@ -7181,7 +7553,7 @@ CREATE PROCEDURE spFilterLentByPerson
     @PersonID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     -- Validate User
     IF NOT EXISTS
     (
@@ -7251,7 +7623,7 @@ CREATE PROCEDURE spFilterLentByPaymentMethod
     @PaymentID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     -- Validate User
     IF NOT EXISTS
     (
@@ -7321,7 +7693,7 @@ CREATE PROCEDURE spFilterBorrowByDateRange
     @ToDate DATETIME
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     IF NOT EXISTS
     (
         SELECT 1
@@ -7381,7 +7753,7 @@ CREATE PROCEDURE spFilterBorrowByAmountRange
     @MaxAmount DECIMAL(10,2)
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     IF NOT EXISTS
     (
         SELECT 1
@@ -7443,7 +7815,7 @@ CREATE PROCEDURE spFilterBorrowByPerson
     @PersonID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     IF NOT EXISTS
     (
         SELECT 1 FROM tblUserAuthentication
@@ -7503,7 +7875,7 @@ CREATE PROCEDURE spFilterBorrowByStatus
     @StatusID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     IF NOT EXISTS
     (
         SELECT 1 FROM tblUserAuthentication
@@ -7562,7 +7934,7 @@ CREATE PROCEDURE spFilterBorrowByPaymentMethod
     @PaymentID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     IF NOT EXISTS
     (
         SELECT 1 FROM tblUserAuthentication
