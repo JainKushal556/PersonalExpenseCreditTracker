@@ -230,6 +230,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             AllExpenseData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
+            UpdateExpenseSummaryCards();
         }
 
         public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
@@ -251,6 +252,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             AllExpenseData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
+            UpdateExpenseSummaryCards();
             return true;
         }
 
@@ -281,7 +283,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             AllExpenseData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
-
+            UpdateExpenseSummaryCards();
             return true;
         }
 
@@ -312,7 +314,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             AllExpenseData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
-
+            UpdateExpenseSummaryCards();
             return true;
         }
 
@@ -343,7 +345,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             AllExpenseData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
-
+            UpdateExpenseSummaryCards();
             return true;
         }
 
@@ -371,6 +373,31 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             lblExpenseEndingPageNumber.Text = end.ToString();
             lblExpenseTotalPageNumber.Text = total.ToString();
         }
+
+        private void UpdateExpenseSummaryCards()
+        {
+            if (AllExpenseData == null || AllExpenseData.Rows.Count == 0)
+            {
+                lblExpenseAmount.Text = "₹ 0";
+                lblTransactionAmount.Text = "0";
+                return;
+            }
+
+            decimal totalExpense = 0;
+
+            foreach (DataRow row in AllExpenseData.Rows)
+            {
+                if (row["Amount"] != DBNull.Value)
+                {
+                    totalExpense += Convert.ToDecimal(row["Amount"]);
+                }
+            }
+
+            lblExpenseAmount.Text = "₹ " + totalExpense.ToString("#,##0");
+            lblTransactionAmount.Text = AllExpenseData.Rows.Count.ToString();
+        }
+
+
 
         private int GetRowsPerPage()
         {
