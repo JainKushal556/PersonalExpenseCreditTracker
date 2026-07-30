@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Task
 {
@@ -21,6 +22,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             int nWidthEllipse,
             int nHeightEllipse);
 
+
+        private TaskControls taskControl = null;
         public DeleteTask()
         {
             InitializeComponent();
@@ -28,6 +31,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.FormBorderStyle = FormBorderStyle.None;
 
           
+        }
+        public DeleteTask(TaskControls taskControl)
+        {
+            InitializeComponent();
+            this.taskControl = taskControl;
         }
 
         private void DeleteTaskControl_Load(object sender, EventArgs e)
@@ -61,10 +69,33 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.Close();
         }
 
-        private void btnDeleteTask_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Task Delete Successfully");
-            this.Close();
+            DialogResult dialogResult = MessageBox.Show(
+                "Are you sure you want to delete this task?",
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                TaskUI taskUi = new TaskUI();
+                taskUi.taskId = taskControl.SelectedTaskID;
+
+                CommonValidator.ValidationResult result = taskUi.DeleteTaskIntoTaskUi();
+
+                switch (result)
+                {
+                    case CommonValidator.ValidationResult.Success:
+                        MessageBox.Show("Task deleted successfully!");
+                        this.Close();
+                        break;
+
+                    case CommonValidator.ValidationResult.StoreProcedureError:
+                        MessageBox.Show("Task could not be deleted.");
+                        break;
+                }
+            }
         }
     }
 }

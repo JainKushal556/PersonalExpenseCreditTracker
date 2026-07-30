@@ -82,7 +82,7 @@
             // 
             // pnlEditPersonDetailsMainBody
             // 
-            this.pnlEditPersonDetailsMainBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
+            this.pnlEditPersonDetailsMainBody.BackColor = System.Drawing.Color.Transparent;
             this.pnlEditPersonDetailsMainBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlEditPersonDetailsMainBody.Controls.Add(this.btnUpdatePersonDetails);
             this.pnlEditPersonDetailsMainBody.Controls.Add(this.btnCancelEditPersonDetails);
@@ -105,7 +105,7 @@
             this.btnUpdatePersonDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdatePersonDetails.ForeColor = System.Drawing.Color.White;
             this.btnUpdatePersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
-            this.btnUpdatePersonDetails.Location = new System.Drawing.Point(424, 434);
+            this.btnUpdatePersonDetails.Location = new System.Drawing.Point(451, 434);
             this.btnUpdatePersonDetails.Name = "btnUpdatePersonDetails";
             this.btnUpdatePersonDetails.Size = new System.Drawing.Size(253, 41);
             this.btnUpdatePersonDetails.TabIndex = 1;
@@ -114,7 +114,6 @@
             this.btnUpdatePersonDetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUpdatePersonDetails.UseVisualStyleBackColor = false;
             this.btnUpdatePersonDetails.Click += new System.EventHandler(this.btnUpdatePersonDetails_Click);
-            //this.btnUpdatePersonDetails.Resize += new System.EventHandler(this.btnUpdatePersonDetails_Resize);
             // 
             // btnCancelEditPersonDetails
             // 
@@ -126,14 +125,13 @@
             this.btnCancelEditPersonDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelEditPersonDetails.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelEditPersonDetails.ForeColor = System.Drawing.Color.White;
-            this.btnCancelEditPersonDetails.Location = new System.Drawing.Point(26, 434);
+            this.btnCancelEditPersonDetails.Location = new System.Drawing.Point(294, 434);
             this.btnCancelEditPersonDetails.Name = "btnCancelEditPersonDetails";
             this.btnCancelEditPersonDetails.Size = new System.Drawing.Size(140, 41);
             this.btnCancelEditPersonDetails.TabIndex = 1;
             this.btnCancelEditPersonDetails.Text = "Cancel";
             this.btnCancelEditPersonDetails.UseVisualStyleBackColor = false;
             this.btnCancelEditPersonDetails.Click += new System.EventHandler(this.btnCancelEditPersonDetails_Click);
-            ////this.btnCancelEditPersonDetails.Resize += new System.EventHandler(this.btnCancelEditPersonDetails_Resize);
             // 
             // tableLayoutPanel1
             // 
@@ -206,8 +204,8 @@
             // 
             // panel40
             // 
-            this.panel40.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel40.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel40.Controls.Add(this.lblEditPersonDetailsAddress);
             this.panel40.Location = new System.Drawing.Point(65, 7);
             this.panel40.Name = "panel40";
@@ -279,24 +277,22 @@
             // 
             // btnCloseEditPersonDetails
             // 
-            this.btnCloseEditPersonDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCloseEditPersonDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCloseEditPersonDetails.BackColor = System.Drawing.Color.Transparent;
             this.btnCloseEditPersonDetails.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCloseEditPersonDetails.FlatAppearance.BorderSize = 0;
             this.btnCloseEditPersonDetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.btnCloseEditPersonDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
+            this.btnCloseEditPersonDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnCloseEditPersonDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseEditPersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close__2_;
+            this.btnCloseEditPersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
             this.btnCloseEditPersonDetails.Location = new System.Drawing.Point(364, 16);
             this.btnCloseEditPersonDetails.Name = "btnCloseEditPersonDetails";
-            this.btnCloseEditPersonDetails.Size = new System.Drawing.Size(38, 36);
+            this.btnCloseEditPersonDetails.Size = new System.Drawing.Size(39, 35);
             this.btnCloseEditPersonDetails.TabIndex = 0;
             this.btnCloseEditPersonDetails.TabStop = false;
             this.btnCloseEditPersonDetails.UseVisualStyleBackColor = false;
             this.btnCloseEditPersonDetails.Click += new System.EventHandler(this.btnCloseEditPersonDetails_Click);
-            //this.btnCloseEditPersonDetails.MouseEnter += new System.EventHandler(this.btnCloseEditPersonDetails_MouseEnter);
-            //this.btnCloseEditPersonDetails.MouseLeave += new System.EventHandler(this.btnCloseEditPersonDetails_MouseLeave);
             // 
             // panel1
             // 
@@ -309,8 +305,8 @@
             // 
             // panel16
             // 
-            this.panel16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel16.Controls.Add(this.lblEditProfile);
             this.panel16.Location = new System.Drawing.Point(5, 3);
             this.panel16.Name = "panel16";
@@ -340,8 +336,8 @@
             // 
             // panel12
             // 
-            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel12.Controls.Add(this.lblEditPersonDetailsFullName);
             this.panel12.Location = new System.Drawing.Point(65, 7);
             this.panel12.Name = "panel12";
@@ -383,8 +379,8 @@
             // 
             // panel30
             // 
-            this.panel30.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel30.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel30.Controls.Add(this.lblEditPersonDetailsPhoneNumber);
             this.panel30.Location = new System.Drawing.Point(65, 7);
             this.panel30.Name = "panel30";
@@ -449,7 +445,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
             this.ClientSize = new System.Drawing.Size(726, 506);
             this.Controls.Add(this.pnlEditPersonDetailsMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

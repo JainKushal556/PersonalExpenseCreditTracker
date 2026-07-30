@@ -79,5 +79,23 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             btnClose.BackColor = Color.Transparent;
         }
+
+        private void rdobtnInactive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdobtnInactive.Checked)
+                rdobtnActive.Checked = false;
+        }
+
+        private void rdobtnActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdobtnActive.Checked)
+                rdobtnInactive.Checked = false;
+        }
+
+        private void ExpenseEditCategoryControls_Load(object sender, EventArgs e)
+        {
+            SetRadius(btnCancel, 5);
+            SetRadius(btnUpdateCategory,5);
+        }
     }
 }

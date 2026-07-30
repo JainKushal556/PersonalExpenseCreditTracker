@@ -27,25 +27,7 @@ namespace BLLayer.Mainform
                 return result;
             }
 
-            ////  MinAmount Validation
-            //result = CommonValidator.ValidateMinimumAmount(minAmount);
-            //if (result != CommonValidator.ValidationResult.Success)
-            //{
-            //    return result;
-            //}
-
-            ////  MaxAmount Validation
-            //result = CommonValidator.ValidateMaximumAmount(maxAmount);
-            //if (result != CommonValidator.ValidationResult.Success)
-            //{
-            //    return result;
-            //}
-            ////  AmountRange Validation
-            //result = CommonValidator.ValidateAmountRange(Convert.ToDecimal(minAmount),Convert.ToDecimal(maxAmount));
-            //if (result != CommonValidator.ValidationResult.Success)
-            //{
-            //    return result;
-            //}
+           
 
             return CommonValidator.ValidationResult.Success;
         }

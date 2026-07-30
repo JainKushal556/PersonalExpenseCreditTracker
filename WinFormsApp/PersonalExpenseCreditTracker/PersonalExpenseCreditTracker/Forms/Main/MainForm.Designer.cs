@@ -54,6 +54,7 @@ namespace PersonalExpenseCreditTracker
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblCategory = new System.Windows.Forms.Label();
             this.pnlAmountBody = new System.Windows.Forms.Panel();
+            this.btnExpenseApplyAmountFilter = new System.Windows.Forms.Button();
             this.txtMaxAmount = new System.Windows.Forms.TextBox();
             this.lblMaxAmount = new System.Windows.Forms.Label();
             this.txtMinAmount = new System.Windows.Forms.TextBox();
@@ -224,6 +225,7 @@ namespace PersonalExpenseCreditTracker
             this.picBorrowPersonIcone = new System.Windows.Forms.PictureBox();
             this.lblBorrowFilterByPerson = new System.Windows.Forms.Label();
             this.pnlBorrowAmountBody = new System.Windows.Forms.Panel();
+            this.btnBorrowApplyAmountFilter = new System.Windows.Forms.Button();
             this.txtBorrowMaxAmount = new System.Windows.Forms.TextBox();
             this.lblBorrowMaxAmount = new System.Windows.Forms.Label();
             this.txtBorrowMinAmount = new System.Windows.Forms.TextBox();
@@ -403,8 +405,6 @@ namespace PersonalExpenseCreditTracker
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.process1 = new System.Diagnostics.Process();
-            this.btnBorrowApplyAmountFilter = new System.Windows.Forms.Button();
-            this.btnExpenseApplyAmountFilter = new System.Windows.Forms.Button();
             this.pnlMainSideBarSection.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             this.pnlScrollBar.SuspendLayout();
@@ -620,6 +620,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlSideBar
             // 
+            this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlSideBar.Controls.Add(this.pnlScrollBar);
             this.pnlSideBar.Controls.Add(this.flowSidebar);
@@ -636,10 +637,10 @@ namespace PersonalExpenseCreditTracker
             this.pnlScrollBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlScrollBar.Controls.Add(this.pnlThumb);
             this.pnlScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlScrollBar.Location = new System.Drawing.Point(380, 0);
+            this.pnlScrollBar.Location = new System.Drawing.Point(400, 0);
             this.pnlScrollBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlScrollBar.Name = "pnlScrollBar";
-            this.pnlScrollBar.Size = new System.Drawing.Size(20, 854);
+            this.pnlScrollBar.Size = new System.Drawing.Size(20, 5440);
             this.pnlScrollBar.TabIndex = 5;
             this.pnlScrollBar.Visible = false;
             // 
@@ -675,7 +676,7 @@ namespace PersonalExpenseCreditTracker
             this.flowSidebar.Location = new System.Drawing.Point(0, 0);
             this.flowSidebar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowSidebar.Name = "flowSidebar";
-            this.flowSidebar.Size = new System.Drawing.Size(400, 5428);
+            this.flowSidebar.Size = new System.Drawing.Size(400, 5440);
             this.flowSidebar.TabIndex = 4;
             this.flowSidebar.WrapContents = false;
             // 
@@ -956,6 +957,19 @@ namespace PersonalExpenseCreditTracker
             this.pnlAmountBody.TabIndex = 5;
             this.pnlAmountBody.Visible = false;
             // 
+            // btnExpenseApplyAmountFilter
+            // 
+            this.btnExpenseApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnExpenseApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnExpenseApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExpenseApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnExpenseApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExpenseApplyAmountFilter.Name = "btnExpenseApplyAmountFilter";
+            this.btnExpenseApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnExpenseApplyAmountFilter.TabIndex = 7;
+            this.btnExpenseApplyAmountFilter.Text = "Apply";
+            this.btnExpenseApplyAmountFilter.UseVisualStyleBackColor = false;
+            // 
             // txtMaxAmount
             // 
             this.txtMaxAmount.Location = new System.Drawing.Point(91, 89);
@@ -1089,6 +1103,7 @@ namespace PersonalExpenseCreditTracker
             this.btnApplyDateFilter.TabIndex = 4;
             this.btnApplyDateFilter.Text = "Apply";
             this.btnApplyDateFilter.UseVisualStyleBackColor = false;
+            this.btnApplyDateFilter.Click += new System.EventHandler(this.btnApplyDateFilter_Click);
             // 
             // dtpToDate
             // 
@@ -3194,6 +3209,20 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowAmountBody.TabIndex = 8;
             this.pnlBorrowAmountBody.Visible = false;
             // 
+            // btnBorrowApplyAmountFilter
+            // 
+            this.btnBorrowApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnBorrowApplyAmountFilter.FlatAppearance.BorderSize = 0;
+            this.btnBorrowApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorrowApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
+            this.btnBorrowApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBorrowApplyAmountFilter.Name = "btnBorrowApplyAmountFilter";
+            this.btnBorrowApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
+            this.btnBorrowApplyAmountFilter.TabIndex = 6;
+            this.btnBorrowApplyAmountFilter.Text = "Apply";
+            this.btnBorrowApplyAmountFilter.UseVisualStyleBackColor = false;
+            this.btnBorrowApplyAmountFilter.Click += new System.EventHandler(this.btnBorrowApplyAmountFilter_Click);
+            // 
             // txtBorrowMaxAmount
             // 
             this.txtBorrowMaxAmount.Location = new System.Drawing.Point(91, 89);
@@ -3327,6 +3356,7 @@ namespace PersonalExpenseCreditTracker
             this.btnBorrowApplyDateFilter.TabIndex = 4;
             this.btnBorrowApplyDateFilter.Text = "Apply";
             this.btnBorrowApplyDateFilter.UseVisualStyleBackColor = false;
+            this.btnBorrowApplyDateFilter.Click += new System.EventHandler(this.btnBorrowApplyDateFilter_Click);
             // 
             // dtpBorrowToDate
             // 
@@ -3923,6 +3953,7 @@ namespace PersonalExpenseCreditTracker
             this.btnTaskApplyDateFilter.TabIndex = 4;
             this.btnTaskApplyDateFilter.Text = "Apply";
             this.btnTaskApplyDateFilter.UseVisualStyleBackColor = false;
+            this.btnTaskApplyDateFilter.Click += new System.EventHandler(this.btnTaskApplyDateFilter_Click);
             // 
             // dtpTaskToDate
             // 
@@ -5531,33 +5562,6 @@ namespace PersonalExpenseCreditTracker
             this.process1.StartInfo.StandardOutputEncoding = null;
             this.process1.StartInfo.UserName = "";
             this.process1.SynchronizingObject = this;
-            // 
-            // btnBorrowApplyAmountFilter
-            // 
-            this.btnBorrowApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnBorrowApplyAmountFilter.FlatAppearance.BorderSize = 0;
-            this.btnBorrowApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBorrowApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
-            this.btnBorrowApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnBorrowApplyAmountFilter.Name = "btnBorrowApplyAmountFilter";
-            this.btnBorrowApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
-            this.btnBorrowApplyAmountFilter.TabIndex = 6;
-            this.btnBorrowApplyAmountFilter.Text = "Apply";
-            this.btnBorrowApplyAmountFilter.UseVisualStyleBackColor = false;
-            this.btnBorrowApplyAmountFilter.Click += new System.EventHandler(this.btnBorrowApplyAmountFilter_Click);
-            // 
-            // btnExpenseApplyAmountFilter
-            // 
-            this.btnExpenseApplyAmountFilter.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnExpenseApplyAmountFilter.FlatAppearance.BorderSize = 0;
-            this.btnExpenseApplyAmountFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExpenseApplyAmountFilter.Location = new System.Drawing.Point(121, 127);
-            this.btnExpenseApplyAmountFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnExpenseApplyAmountFilter.Name = "btnExpenseApplyAmountFilter";
-            this.btnExpenseApplyAmountFilter.Size = new System.Drawing.Size(91, 30);
-            this.btnExpenseApplyAmountFilter.TabIndex = 7;
-            this.btnExpenseApplyAmountFilter.Text = "Apply";
-            this.btnExpenseApplyAmountFilter.UseVisualStyleBackColor = false;
             // 
             // MainForm
             // 

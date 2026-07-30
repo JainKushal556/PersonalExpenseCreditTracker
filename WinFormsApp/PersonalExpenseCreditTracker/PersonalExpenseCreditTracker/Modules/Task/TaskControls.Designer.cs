@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Task
+namespace PersonalExpenseCreditTracker.Modules.Task
 {
     partial class TaskControls
     {
@@ -137,6 +137,7 @@
             this.pnlDueToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTaskDueIcone)).BeginInit();
             this.cmsTaskAction.SuspendLayout();
+
             this.cmsFilter.SuspendLayout();
             this.pnlPriorityFilter.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -489,7 +490,7 @@
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewTask.Size = new System.Drawing.Size(1026, 447);
             this.dataGridViewTask.TabIndex = 1;
-            this.dataGridViewTask.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
+            this.dataGridViewTask.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
             // 
             // colDate
             // 
@@ -791,6 +792,7 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 28);
             this.toolStripMenuItem4.Text = "Cancel";
             // 
+
             // cmsFilter
             // 
             this.cmsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1125,7 +1127,6 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(269, 23);
             this.txtSearch.TabIndex = 6;
-            // 
             // TaskControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1169,6 +1170,7 @@
             this.pnlDueToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTaskDueIcone)).EndInit();
             this.cmsTaskAction.ResumeLayout(false);
+
             this.cmsFilter.ResumeLayout(false);
             this.pnlPriorityFilter.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
