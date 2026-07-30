@@ -15,7 +15,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
     public partial class AddTaskControl : Form
     {
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
             int nTopRect,
@@ -23,6 +23,34 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             int nBottomRect,
             int nWidthEllipse,
             int nHeightEllipse);
+
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        // All Border Cornar Radius
+        private void SetRadius(Control control, int radius)
+        {
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
+        }
 
         public AddTaskControl()
         {
@@ -42,67 +70,18 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void AddTaskControl_Load(object sender, EventArgs e)
         {
-
+            SetRadius(pnlBody, 15);
+            SetRadius(btnAddTask, 5);
+            SetRadius(btnCancel, 5);
             txtDeadline.Text = "DD-MM-YYYY";
             txtDeadline.ForeColor = Color.Gray;
             pnlDeadlinePicker.Visible = false;
 
             txtTaskTitle.Text = "Enter task title";
             txtTaskTitle.ForeColor = Color.Gray;
-            //cmbPriority.SelectedIndex = 0;
-            //cmbStatus.SelectedIndex = 0;
-
-            pnlTaskTitle.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                pnlTaskTitle.Width,
-                pnlTaskTitle.Height,
-                5,
-                5));
-
-            pnlPriority.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                pnlPriority.Width,
-                pnlPriority.Height,
-                5,
-                5));
-
-            pnlStatus.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                pnlStatus.Width,
-                pnlStatus.Height,
-                5,
-                5));
-
-            pnlDeadline.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                pnlDeadline.Width,
-                pnlDeadline.Height,
-                5,
-                5));
-
-            btnCancel.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                btnCancel.Width,
-                btnCancel.Height,
-                5,
-                5));
-
-            btnAddTask.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                btnAddTask.Width,
-                btnAddTask.Height,
-                5,
-                5));
 
             CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select the Proiority", cmbPriority);
-
-             }
+        }
 
         private void txtTaskTitle_Enter(object sender, EventArgs e)
         {
@@ -111,13 +90,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtTaskTitle.Text = "";
                 txtTaskTitle.ForeColor = Color.Black;
             }
+            pnlDeadlinePicker.Visible = false;
         }
 
         private void txtTaskTitle_Leave(object sender, EventArgs e)
         {
             if (txtTaskTitle.Text.Trim() == "")
             {
-                //txtTaskTitle.Text = "Enter task title";
+                txtTaskTitle.Text = "Enter task title";
                 txtTaskTitle.ForeColor = Color.Gray;
             }
         }
@@ -126,9 +106,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             this.Close();
         }
-
-       
-
      
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {
@@ -188,16 +165,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
 
         }
-        private void pnlAddTask_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void txtDeadline_Enter(object sender, EventArgs e)
         {
@@ -235,11 +202,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             pnlDeadlinePicker.BringToFront();
             pnlDeadlinePicker.Visible = !pnlDeadlinePicker.Visible;
-        }
-
-        private void txtDeadline_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
