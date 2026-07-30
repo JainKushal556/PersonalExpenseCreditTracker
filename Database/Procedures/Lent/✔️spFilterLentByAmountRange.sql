@@ -4,7 +4,7 @@ CREATE PROCEDURE spFilterLentByAmountRange
     @MaxAmount DECIMAL(10,2)
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
     -- Validate User
     IF NOT EXISTS
     (

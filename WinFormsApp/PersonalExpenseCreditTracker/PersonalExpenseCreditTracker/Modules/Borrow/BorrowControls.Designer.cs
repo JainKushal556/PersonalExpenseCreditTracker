@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Borrow
+namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     partial class BorrowControls
     {
@@ -42,20 +42,26 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+
+            this.btnCurrentPage = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.btnFirstpage = new System.Windows.Forms.Button();
+            this.btnLastPage = new System.Windows.Forms.Button();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.btnPreviousPage = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnSerach = new System.Windows.Forms.Button();
+            this.lblBorrowEndingPageNumber = new System.Windows.Forms.Label();
+            this.lblBorrowEntries = new System.Windows.Forms.Label();
+            this.lblBorrowShowing = new System.Windows.Forms.Label();
+            this.lblBorrowStartingPageNumber = new System.Windows.Forms.Label();
             this.lblBorrowTotalPageNumber = new System.Windows.Forms.Label();
+            this.lblTo = new System.Windows.Forms.Label();
+            this.lblof = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.lblBorrowEntries = new System.Windows.Forms.Label();
-            this.lblof = new System.Windows.Forms.Label();
-            this.lblBorrowEndingPageNumber = new System.Windows.Forms.Label();
-            this.lblTo = new System.Windows.Forms.Label();
-            this.lblBorrowStartingPageNumber = new System.Windows.Forms.Label();
-            this.lblBorrowShowing = new System.Windows.Forms.Label();
-            this.btnCurrentPage = new System.Windows.Forms.Button();
-            this.btnFirstpage = new System.Windows.Forms.Button();
-            this.btnPreviousPage = new System.Windows.Forms.Button();
-            this.btnNextPage = new System.Windows.Forms.Button();
-            this.btnLastPage = new System.Windows.Forms.Button();
             this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnSerach = new System.Windows.Forms.Button();
             this.pnlButton = new System.Windows.Forms.Panel();
@@ -825,6 +831,7 @@
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             // 
+            // 
             // tableLayoutPanelMainData
             // 
             this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1252,7 +1259,7 @@
         }
 
         #endregion
-
+    
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.Label lblBorrowTotalPageNumber;
         private System.Windows.Forms.Panel panel2;
@@ -1268,7 +1275,8 @@
         private System.Windows.Forms.Button btnPreviousPage;
         private System.Windows.Forms.Button btnNextPage;
         private System.Windows.Forms.Button btnLastPage;
-        private System.Windows.Forms.Panel pnlButtonControls;
+        private System.Windows.Forms.Panel pnlBorrowExportReport;
+        private System.Windows.Forms.Button btnBorrowExport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlRepaidAmount;
         private System.Windows.Forms.Label lblBorrowRepaidAmountText;
@@ -1286,12 +1294,8 @@
         private System.Windows.Forms.DataGridView dgvBorrowDataTable;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMainData;
         private System.Windows.Forms.Panel pnlPaidAmount;
-        private System.Windows.Forms.Label lblBorrowRepaidAmount;
-        private System.Windows.Forms.Label lblBorrowPaidAmount;
-        private System.Windows.Forms.Panel pnlButton;
-        private System.Windows.Forms.Button btnRefresh;
+
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPersonID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPersonName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentType;
@@ -1300,9 +1304,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemainingAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeadline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Label lblBorrowPaidAmount;
+        private System.Windows.Forms.Label lblBorrowRepaidAmount;
+        private System.Windows.Forms.Panel pnlButtonControls;
+        private System.Windows.Forms.Panel pnlButton;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnSerach;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPersonID;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
         private System.Windows.Forms.ToolStripMenuItem tsmiCategory;

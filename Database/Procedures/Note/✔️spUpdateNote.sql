@@ -3,6 +3,7 @@ CREATE PROCEDURE spUpdateNote
 @UserID INT,
 @NoteID INT,
 @PriorityID INT,
+@NoteColorID INT = 1,
 @NoteTitle VARCHAR(MAX),
 @Description VARCHAR(MAX)
 )
@@ -45,18 +46,27 @@ SELECT 'Invalid Note PriorityID' AS Message
 RETURN 
 END
 
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'Invalid Note ColorID' AS Message
+RETURN 
+END
 
 BEGIN TRY
 
 UPDATE tblNote 
 SET
     NotePriorityID=@PriorityID,
+    NoteColorID=@NoteColorID,
     NoteTitle=@NoteTitle,
     Description=@Description
 WHERE UserID=@UserID 
 AND NoteID=@NoteID
 SELECT 'Note Updated Successfully' AS Message
-
 
 END TRY
 BEGIN CATCH
