@@ -70,6 +70,13 @@ CREATE TABLE tblNotePriorities (
 );
 GO
 
+CREATE TABLE tblNoteColor (
+    NoteColorID INT PRIMARY KEY IDENTITY(1,1),
+    ColorName VARCHAR(50) NOT NULL UNIQUE,
+    ColorHexCode VARCHAR(20) NULL
+);
+GO
+
 
 
 --Dependent Tables
@@ -249,6 +256,7 @@ CREATE TABLE tblNote
 
     UserID INT NOT NULL,
     NotePriorityID INT NOT NULL,
+    NoteColorID INT NOT NULL DEFAULT 1,
 
     NoteTitle VARCHAR(MAX) NOT NULL,
     Description VARCHAR(MAX) NOT NULL,
@@ -259,6 +267,9 @@ CREATE TABLE tblNote
     REFERENCES tblUsers(UserID),
 
     FOREIGN KEY (NotePriorityID)
-    REFERENCES tblNotePriorities(NotePriorityID)
+    REFERENCES tblNotePriorities(NotePriorityID),
+
+    FOREIGN KEY (NoteColorID)
+    REFERENCES tblNoteColor(NoteColorID)
 );
 GO

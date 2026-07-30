@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Task
+namespace PersonalExpenseCreditTracker.Modules.Task
 {
     partial class AddTaskControl
     {
@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlAddTask = new System.Windows.Forms.Panel();
+            this.pnlDeadlinePicker = new System.Windows.Forms.Panel();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblStart = new System.Windows.Forms.Label();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pnlDeadline = new System.Windows.Forms.Panel();
             this.btnCalendar = new System.Windows.Forms.Button();
             this.txtDeadline = new System.Windows.Forms.TextBox();
@@ -51,20 +54,26 @@
             this.lblTaskTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlAddTask.SuspendLayout();
+            this.pnlDeadlinePicker.SuspendLayout();
             this.pnlDeadline.SuspendLayout();
             this.pnlStatus.SuspendLayout();
             this.pnlPriority.SuspendLayout();
             this.pnlTaskTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAddTask
             // 
+            this.pnlAddTask.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlAddTask.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAddTask.Controls.Add(this.pnlDeadlinePicker);
+            this.pnlAddTask.Controls.Add(this.panel1);
             this.pnlAddTask.Controls.Add(this.label3);
             this.pnlAddTask.Controls.Add(this.label2);
             this.pnlAddTask.Controls.Add(this.label1);
             this.pnlAddTask.Controls.Add(this.lblStart);
-            this.pnlAddTask.Controls.Add(this.monthCalendar1);
             this.pnlAddTask.Controls.Add(this.pnlDeadline);
             this.pnlAddTask.Controls.Add(this.pnlStatus);
             this.pnlAddTask.Controls.Add(this.pnlPriority);
@@ -80,9 +89,36 @@
             this.pnlAddTask.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAddTask.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlAddTask.Location = new System.Drawing.Point(0, 0);
+            this.pnlAddTask.Margin = new System.Windows.Forms.Padding(0);
             this.pnlAddTask.Name = "pnlAddTask";
             this.pnlAddTask.Size = new System.Drawing.Size(513, 580);
             this.pnlAddTask.TabIndex = 0;
+            this.pnlAddTask.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddTask_Paint);
+            // 
+            // pnlDeadlinePicker
+            // 
+            this.pnlDeadlinePicker.BackColor = System.Drawing.Color.Transparent;
+            this.pnlDeadlinePicker.Controls.Add(this.monthCalendar1);
+            this.pnlDeadlinePicker.Location = new System.Drawing.Point(133, 152);
+            this.pnlDeadlinePicker.Name = "pnlDeadlinePicker";
+            this.pnlDeadlinePicker.Size = new System.Drawing.Size(332, 232);
+            this.pnlDeadlinePicker.TabIndex = 22;
+            this.pnlDeadlinePicker.Visible = false;
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(11, 19);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 0;
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(25, 66);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(462, 1);
+            this.panel1.TabIndex = 21;
             // 
             // label3
             // 
@@ -128,14 +164,6 @@
             this.lblStart.TabIndex = 17;
             this.lblStart.Text = "*";
             // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(163, -8);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 16;
-            this.monthCalendar1.Visible = false;
-            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
-            // 
             // pnlDeadline
             // 
             this.pnlDeadline.BackColor = System.Drawing.Color.White;
@@ -150,7 +178,7 @@
             // 
             this.btnCalendar.FlatAppearance.BorderSize = 0;
             this.btnCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
+            this.btnCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
             this.btnCalendar.Location = new System.Drawing.Point(403, 8);
             this.btnCalendar.Name = "btnCalendar";
             this.btnCalendar.Size = new System.Drawing.Size(32, 32);
@@ -167,6 +195,9 @@
             this.txtDeadline.Name = "txtDeadline";
             this.txtDeadline.Size = new System.Drawing.Size(376, 27);
             this.txtDeadline.TabIndex = 0;
+            this.txtDeadline.TextChanged += new System.EventHandler(this.txtDeadline_TextChanged);
+            this.txtDeadline.Enter += new System.EventHandler(this.txtDeadline_Enter);
+            this.txtDeadline.Leave += new System.EventHandler(this.txtDeadline_Leave);
             // 
             // pnlStatus
             // 
@@ -179,14 +210,9 @@
             // 
             // cmbStatus
             // 
-            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
-            "Select Priority",
-            "Pending",
-            "Completed"});
             this.cmbStatus.Location = new System.Drawing.Point(11, 7);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(172, 36);
@@ -203,19 +229,14 @@
             // 
             // cmbPriority
             // 
-            this.cmbPriority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPriority.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbPriority.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPriority.FormattingEnabled = true;
-            this.cmbPriority.Items.AddRange(new object[] {
-            "Select Priority",
-            "Low",
-            "Medium",
-            "High"});
             this.cmbPriority.Location = new System.Drawing.Point(12, 8);
             this.cmbPriority.Name = "cmbPriority";
             this.cmbPriority.Size = new System.Drawing.Size(172, 36);
             this.cmbPriority.TabIndex = 0;
+            this.cmbPriority.SelectedIndexChanged += new System.EventHandler(this.cmbPriority_SelectedIndexChanged);
             // 
             // pnlTaskTitle
             // 
@@ -243,7 +264,7 @@
             this.btnAddTask.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddTask.FlatAppearance.BorderSize = 0;
             this.btnAddTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddTask.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddTask.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddTask.ForeColor = System.Drawing.Color.White;
             this.btnAddTask.Location = new System.Drawing.Point(286, 487);
             this.btnAddTask.Name = "btnAddTask";
@@ -255,11 +276,14 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.White;
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.ForeColor = System.Drawing.Color.Black;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.Location = new System.Drawing.Point(33, 487);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(196, 59);
@@ -271,40 +295,40 @@
             // lblDeadline
             // 
             this.lblDeadline.AutoSize = true;
-            this.lblDeadline.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDeadline.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDeadline.Location = new System.Drawing.Point(23, 337);
             this.lblDeadline.Name = "lblDeadline";
-            this.lblDeadline.Size = new System.Drawing.Size(96, 28);
+            this.lblDeadline.Size = new System.Drawing.Size(92, 28);
             this.lblDeadline.TabIndex = 8;
             this.lblDeadline.Text = "Deadline";
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.Location = new System.Drawing.Point(286, 211);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(71, 28);
+            this.lblStatus.Size = new System.Drawing.Size(67, 28);
             this.lblStatus.TabIndex = 6;
             this.lblStatus.Text = "Status";
             // 
             // lblPriority
             // 
             this.lblPriority.AutoSize = true;
-            this.lblPriority.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPriority.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPriority.Location = new System.Drawing.Point(27, 211);
             this.lblPriority.Name = "lblPriority";
-            this.lblPriority.Size = new System.Drawing.Size(83, 28);
+            this.lblPriority.Size = new System.Drawing.Size(77, 28);
             this.lblPriority.TabIndex = 4;
             this.lblPriority.Text = "Priority";
             // 
             // lblTaskTitle
             // 
             this.lblTaskTitle.AutoSize = true;
-            this.lblTaskTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaskTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaskTitle.Location = new System.Drawing.Point(27, 87);
             this.lblTaskTitle.Name = "lblTaskTitle";
-            this.lblTaskTitle.Size = new System.Drawing.Size(108, 28);
+            this.lblTaskTitle.Size = new System.Drawing.Size(102, 28);
             this.lblTaskTitle.TabIndex = 2;
             this.lblTaskTitle.Text = "Task Title ";
             // 
@@ -314,11 +338,11 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.ForeColor = System.Drawing.Color.Black;
-            this.btnClose.Location = new System.Drawing.Point(459, 28);
+            this.btnClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
+            this.btnClose.Location = new System.Drawing.Point(450, 19);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(38, 33);
+            this.btnClose.Size = new System.Drawing.Size(51, 44);
             this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "✕";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
@@ -327,12 +351,16 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(20, 28);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(182, 35);
+            this.lblTitle.Size = new System.Drawing.Size(176, 35);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Add New Task";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // AddTaskControl
             // 
@@ -350,12 +378,14 @@
             this.Load += new System.EventHandler(this.AddTaskControl_Load);
             this.pnlAddTask.ResumeLayout(false);
             this.pnlAddTask.PerformLayout();
+            this.pnlDeadlinePicker.ResumeLayout(false);
             this.pnlDeadline.ResumeLayout(false);
             this.pnlDeadline.PerformLayout();
             this.pnlStatus.ResumeLayout(false);
             this.pnlPriority.ResumeLayout(false);
             this.pnlTaskTitle.ResumeLayout(false);
             this.pnlTaskTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -379,11 +409,14 @@
         private System.Windows.Forms.Panel pnlDeadline;
         private System.Windows.Forms.Button btnCalendar;
         private System.Windows.Forms.TextBox txtDeadline;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblStart;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Panel pnlDeadlinePicker;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
     }
 }

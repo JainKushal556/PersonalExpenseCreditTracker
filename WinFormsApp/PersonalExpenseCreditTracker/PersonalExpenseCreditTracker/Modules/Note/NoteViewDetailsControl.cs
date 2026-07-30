@@ -15,20 +15,22 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
     public partial class NoteViewDetailsControl : Form
     {
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
             int nTopRect,
             int nRightRect,
             int nBottomRect,
             int nWidthEllipse,
-            int nHeightEllipse
-        );
+            int nHeightEllipse);
+
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
         public NoteViewDetailsControl()
         {
             InitializeComponent();
-            this.Resize += NoteViewDetailsControl_Resize;
-            
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -38,43 +40,57 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void NoteViewDetailsControl_Load(object sender, EventArgs e)
         {
-            CenterPanel();
-            ApplyBorderRadius();
+            SetRadius(pnlBody,15);
+            SetRadius(btnClose, 5);
         }
-        private void CenterPanel()
+        //private void CenterPanel()
+        //{
+        //    pnlViewNoteDetails.Left = (this.ClientSize.Width - pnlViewNoteDetails.Width) / 2;
+        //    pnlViewNoteDetails.Top = (this.ClientSize.Height - pnlViewNoteDetails.Height) / 2;
+        //}
+
+        // All Border Cornar Radius
+        private void SetRadius(Control control, int radius)
         {
-            pnlViewNoteDetails.Left = (this.ClientSize.Width - pnlViewNoteDetails.Width) / 2;
-            pnlViewNoteDetails.Top = (this.ClientSize.Height - pnlViewNoteDetails.Height) / 2;
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
         }
 
-
-        private void NoteViewDetailsControl_Resize(object sender, EventArgs e)
+        private void btnCancel_MouseEnter(object sender, EventArgs e)
         {
-            CenterPanel();
-
-            
+            btnCancel.BackColor = Color.Red;
         }
 
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
+        private void btnCancel_MouseLeave(object sender, EventArgs e)
         {
-
+            btnCancel.BackColor = Color.Transparent;
         }
 
-        private void lblUpdatedCaption_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
-        private void ApplyBorderRadius()
+
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            pnlColor.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    pnlColor.Width,
-                    pnlColor.Height,
-                    pnlColor.Width,
-                    pnlColor.Height
-                ));
+            this.Close();
         }
     }
 }

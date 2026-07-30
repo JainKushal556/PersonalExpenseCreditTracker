@@ -2,12 +2,12 @@
 (
     @UserID INT,
     @PersonID INT = NULL,
-    @PaymentName VARCHAR(100) = NULL
+    @PaymentID INT = NULL
 )
 AS
 BEGIN
 
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     DECLARE @PaymentID INT;
 
@@ -52,22 +52,6 @@ BEGIN
         END
     END
 
-    -------------------------------------------------
-    -- Resolve PaymentName → PaymentID (optional)
-    -------------------------------------------------
-
-    IF @PaymentName IS NOT NULL AND LTRIM(RTRIM(@PaymentName)) <> ''
-    BEGIN
-        SELECT @PaymentID = PaymentID
-        FROM tblPaymentType
-        WHERE LTRIM(RTRIM(PaymentName)) = LTRIM(RTRIM(@PaymentName));
-
-        IF @PaymentID IS NULL
-        BEGIN
-            SELECT 'Invalid Payment Name!' AS Message;
-            RETURN;
-        END
-    END
 
     -------------------------------------------------
     -- Check data exists

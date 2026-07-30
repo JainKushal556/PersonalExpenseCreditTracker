@@ -5,26 +5,25 @@ CREATE PROCEDURE spInsertCreditByUserID
     @SubCategoryID INT,
     @Amount DECIMAL(10,2),
     @Description VARCHAR(MAX),
-    @PaymentID INT,
-    @CreditAt DATETIME
+    @PaymentID INT
 )
 AS
 BEGIN
 
-    SET NOCOUNT ON
+    SET NOCOUNT OFF;
 
-      IF NOT EXISTS
+    IF NOT EXISTS
     (
         SELECT 1
-        FROM tblUserAuthentication UserAuthentication
-        INNER JOIN tblUsers Users
-            ON UserAuthentication.UserID = Users.UserID
-        WHERE Users.UserID = @UserID
-        AND UserAuthentication.Active = 1
+        FROM tblUserAuthentication UA
+        INNER JOIN tblUsers U
+            ON UA.UserID = U.UserID
+        WHERE U.UserID = @UserID
+          AND UA.Active = 1
     )
     BEGIN
-        SELECT 'Invalid or Inactive User' AS Message
-        RETURN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
     END
 
     IF NOT EXISTS
@@ -34,8 +33,8 @@ BEGIN
         WHERE CategoryID = @CategoryID
     )
     BEGIN
-        SELECT 'Invalid CategoryID' AS Message
-        RETURN
+        SELECT 'Invalid CategoryID' AS Message;
+        RETURN;
     END
 
     IF NOT EXISTS
@@ -43,11 +42,11 @@ BEGIN
         SELECT 1
         FROM tblCreditSubCategory
         WHERE SubCategoryID = @SubCategoryID
-        AND CategoryID = @CategoryID
+          AND CategoryID = @CategoryID
     )
     BEGIN
-        SELECT 'SubCategory does not belong to selected Category' AS Message
-        RETURN
+        SELECT 'SubCategory does not belong to selected Category' AS Message;
+        RETURN;
     END
 
     IF NOT EXISTS
@@ -57,29 +56,22 @@ BEGIN
         WHERE PaymentID = @PaymentID
     )
     BEGIN
-        SELECT 'Invalid PaymentID' AS Message
-        RETURN
+        SELECT 'Invalid PaymentID' AS Message;
+        RETURN;
     END
 
     IF @Amount <= 0
     BEGIN
-        SELECT 'Amount must be greater than zero' AS Message
-        RETURN
+        SELECT 'Amount must be greater than zero' AS Message;
+        RETURN;
     END
 
-    SET @Description = LTRIM(RTRIM(@Description))
+    SET @Description = LTRIM(RTRIM(@Description));
 
-    IF @Description IS NULL
-       OR @Description = ''
+    IF @Description IS NULL OR @Description = ''
     BEGIN
-        SELECT 'Description cannot be empty' AS Message
-        RETURN
-    END
-
-    IF @CreditAt > GETDATE()
-    BEGIN
-        SELECT 'Future date is not allowed' AS Message
-        RETURN
+        SELECT 'Description cannot be empty' AS Message;
+        RETURN;
     END
 
     INSERT INTO tblCredit
@@ -89,8 +81,7 @@ BEGIN
         SubCategoryID,
         Amount,
         Description,
-        PaymentID,
-        CreditAt
+        PaymentID
     )
     VALUES
     (
@@ -99,11 +90,10 @@ BEGIN
         @SubCategoryID,
         @Amount,
         @Description,
-        @PaymentID,
-        @CreditAt
-    )
+        @PaymentID
+    );
 
-    SELECT 'Credit inserted successfully' AS Message
+    SELECT 'Credit inserted successfully' AS Message;
 
 END
 GO

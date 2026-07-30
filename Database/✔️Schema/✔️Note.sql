@@ -4,6 +4,7 @@ CREATE TABLE tblNote
 
     UserID INT NOT NULL,
     NotePriorityID INT NOT NULL,
+    NoteColorID INT NOT NULL DEFAULT 1,
 
     NoteTitle VARCHAR(MAX) NOT NULL,
     Description VARCHAR(MAX) NOT NULL,
@@ -14,6 +15,8 @@ CREATE TABLE tblNote
     REFERENCES tblUsers(UserID),
 
     FOREIGN KEY (NotePriorityID)
-    REFERENCES tblNotePriorities(NotePriorityID)
-);
+    REFERENCES tblNotePriorities(NotePriorityID),
 
+    FOREIGN KEY (NoteColorID)
+    REFERENCES tblNoteColor(NoteColorID)
+);

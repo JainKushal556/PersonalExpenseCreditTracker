@@ -3,6 +3,7 @@ CREATE PROCEDURE spFilterTasksByStatus
     @TaskStatusID INT
 AS
 BEGIN
+    SET NOCOUNT OFF;
 
     IF NOT EXISTS
     (
@@ -57,7 +58,8 @@ BEGIN
         Task.TaskTitle,
         TaskPriorities.PriorityName,
         TaskStatus.TaskStatusName,
-        Task.Deadline
+        Task.Deadline,
+        Task.CreatedAt  
     FROM tblTask Task
 
     INNER JOIN tblTaskPriorities TaskPriorities

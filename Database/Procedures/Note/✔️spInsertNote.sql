@@ -2,6 +2,7 @@ CREATE PROCEDURE spInsertNote
 
 @UserID INT,
 @PriorityID INT,
+@NoteColorID INT = 1,
 @NoteTitle VARCHAR(MAX),
 @Description VARCHAR(MAX)
 
@@ -54,11 +55,21 @@ SELECT 'Invalid Note PriorityID' AS Message
 RETURN 
 END
 
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'Invalid Note ColorID' AS Message 
+RETURN 
+END
+
 BEGIN TRY
 
-INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description)
+INSERT INTO tblNote (UserID, NotePriorityID, NoteColorID, NoteTitle, Description)
 VALUES
-(@UserID,@PriorityID,@NoteTitle,@Description)
+(@UserID,@PriorityID,@NoteColorID,@NoteTitle,@Description)
 
 SELECT 'Note Inserted Successfully' AS Message
 

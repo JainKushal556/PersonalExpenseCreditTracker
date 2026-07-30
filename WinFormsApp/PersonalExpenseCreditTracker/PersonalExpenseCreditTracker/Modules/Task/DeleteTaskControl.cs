@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Task
 {
@@ -21,20 +22,20 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             int nWidthEllipse,
             int nHeightEllipse);
 
+
+        private TaskControls taskControl = null;
         public DeleteTask()
         {
             InitializeComponent();
 
             this.FormBorderStyle = FormBorderStyle.None;
 
-            this.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    this.Width,
-                    this.Height,
-                    10,
-                    10));
+          
+        }
+        public DeleteTask(TaskControls taskControl)
+        {
+            InitializeComponent();
+            this.taskControl = taskControl;
         }
 
         private void DeleteTaskControl_Load(object sender, EventArgs e)
@@ -43,8 +44,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             btnCancel.Region = Region.FromHrgn(
                 CreateRoundRectRgn(0, 0, btnCancel.Width, btnCancel.Height, 8, 8));
 
-            btnUpdateTask.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, btnUpdateTask.Width, btnUpdateTask.Height, 8, 8));
+            btnDeleteTask.Region = Region.FromHrgn(
+                CreateRoundRectRgn(0, 0, btnDeleteTask.Width, btnDeleteTask.Height, 8, 8));
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -60,8 +61,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnClose_MouseLeave(object sender, EventArgs e)
         {
-            btnClose.BackColor = Color.White;
-            btnClose.ForeColor = Color.Black;
+            btnClose.BackColor = Color.Transparent;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -69,11 +69,33 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.Close();
         }
 
-        private void btnUpdateTask_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult dialogResult = MessageBox.Show(
+                "Are you sure you want to delete this task?",
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                TaskUI taskUi = new TaskUI();
+                taskUi.taskId = taskControl.SelectedTaskID;
+
+                CommonValidator.ValidationResult result = taskUi.DeleteTaskIntoTaskUi();
+
+                switch (result)
+                {
+                    case CommonValidator.ValidationResult.Success:
+                        MessageBox.Show("Task deleted successfully!");
+                        this.Close();
+                        break;
+
+                    case CommonValidator.ValidationResult.StoreProcedureError:
+                        MessageBox.Show("Task could not be deleted.");
+                        break;
+                }
+            }
         }
-
-
     }
 }

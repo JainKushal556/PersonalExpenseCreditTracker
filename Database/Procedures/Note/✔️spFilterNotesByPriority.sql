@@ -1,4 +1,4 @@
-CREATE PROCEDURE  spFilterNotesByPriority
+CREATE PROCEDURE spFilterNotesByPriority
 
 @UserID INT,
 @PriorityID INT
@@ -41,12 +41,16 @@ BEGIN TRY
 SELECT
 tblNote.NoteID,
 tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
 tblNote.NoteTitle,
 tblNote.Description,
 tblNotePriorities.NotePriorityName,
 tblNote.CreatedAt
 FROM tblNote
 LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
 WHERE tblNote.UserID=@UserID
 AND tblNote.NotePriorityID=@PriorityID
 

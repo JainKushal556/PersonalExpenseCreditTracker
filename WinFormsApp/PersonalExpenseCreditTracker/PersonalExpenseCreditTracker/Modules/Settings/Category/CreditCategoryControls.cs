@@ -107,7 +107,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             dgvCategory.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
 
             dgvCategory.DefaultCellStyle.Font = new Font("Segoe UI", 10);
-            dgvCategory.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224,231,255);
+            dgvCategory.DefaultCellStyle.SelectionBackColor = Color.FromArgb(226,235,255);
             dgvCategory.DefaultCellStyle.SelectionForeColor = Color.FromArgb(15,23,42);
             dgvCategory.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvCategory.RowTemplate.Height = 40;
@@ -285,6 +285,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             CreditAddSubCategoryControls creditAddSubCategoryControls = new CreditAddSubCategoryControls();
             creditAddSubCategoryControls.Show();
+        }
+
+        private void tsmiEdit_Click(object sender, EventArgs e)
+        {
+            CreditEditCategoryControls creditEditCategoryControls = new CreditEditCategoryControls();
+            creditEditCategoryControls.Show();
         }
         //private void tsmiEdit_Click(object sender, EventArgs e)
         //{

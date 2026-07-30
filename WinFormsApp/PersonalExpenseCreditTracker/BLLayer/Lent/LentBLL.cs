@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,11 +40,11 @@ namespace BLLayer.Lent
             }
 
             // Status Validation
-            result = CommonValidator.ValidateStatus(statusId);
-            if (result != CommonValidator.ValidationResult.Success)
-            {
-                return result;
-            }
+            //result = CommonValidator.ValidateStatus(statusId);
+            //if (result != CommonValidator.ValidationResult.Success)
+            //{
+            //    return result;
+            //}
 
             //Amount Validation
             result = CommonValidator.ValidateAmount(amount);
@@ -88,22 +88,5 @@ namespace BLLayer.Lent
             }
             
         }
-
-        // Retrieves ComboBox data from the DAL using a stored procedure with UserId
-        public static DataTable retriveListForComboBoxAtBal(string spName, int userId)
-        {
-            DataTable dataTable = null;
-            dataTable= SqlHelper.retriveListForComboBoxAtDal(spName,userId);
-            return dataTable;
-        }
-
-        // Retrieves ComboBox data from the DAL using a stored procedure without UserId
-        public static DataTable retriveListForComboBoxAtBal(string spName)
-        {
-            DataTable dataTable = null;
-            dataTable = SqlHelper.retriveListForComboBoxAtDal(spName);
-            return dataTable;
-        }
-
     }
 }

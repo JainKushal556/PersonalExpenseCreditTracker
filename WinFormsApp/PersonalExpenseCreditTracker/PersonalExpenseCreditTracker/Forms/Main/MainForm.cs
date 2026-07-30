@@ -18,20 +18,24 @@ using PersonalExpenseCreditTracker.Modules.Settings;
 using PersonalExpenseCreditTracker.Modules.Task;
 using PersonalExpenseCreditTracker.Modules.Settings.Person;
 using PersonalExpenseCreditTracker.Modules.Settings.Category;
+using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Session;
+using PersonalExpenseCreditTracker.Forms.Main;
+using BLLayer.Common;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
     {
         private Panel lastOpenedPage = null;
-       
-       // Sidebar Smooth Scroll er Target Position
+
+        // Sidebar Smooth Scroll er Target Position
         private int targetTop = 0;
 
-       // Smooth Scroll Animation er jano Timer
+        // Smooth Scroll Animation er jano Timer
 
         private Timer tmScroll = new Timer();
 
-       //Contant page Load korer jano use kora hoye
+        //Contant page Load korer jano use kora hoye
 
         private ExpenseControl expenseControl;
         private DashboardControl dashboardControl;
@@ -44,7 +48,7 @@ namespace PersonalExpenseCreditTracker
         private AddPersonControls addPersonSControls;
         private ExpenseCategoryControls expenseCategoryControls;
         private CreditCategoryControls creditCategoryControls;
-       // Dropdown Open/Close Status
+        // Dropdown Open/Close Status
         //Kon Menu present open ache ta Track korer jano
 
         private bool expenseOpen = false;
@@ -55,61 +59,61 @@ namespace PersonalExpenseCreditTracker
         private bool notesOpen = false;
         private bool settingOpen = false;
 
-         private Panel activePanel = null;
-         private bool isSidebarExpanded = true;
-         private const int SidebarExpandedWidth = 300;
-         private const int SidebarCollapsedWidth = 70;
+        private Panel activePanel = null;
+        private bool isSidebarExpanded = true;
+        private const int SidebarExpandedWidth = 300;
+        private const int SidebarCollapsedWidth = 70;
 
-         private Panel activeExpenseSubMenu = null;
-         private Panel activeCreditSubMenu = null;
-         private Panel activeLentSubMenu = null;
-         private Panel activeBorrowSubMenu = null;
-         private Panel activeTaskSubMenu = null;
-         private Panel activeNoteSubMenu = null;
-         private Panel activeSettingSubMenu = null;
+        private Panel activeExpenseSubMenu = null;
+        private Panel activeCreditSubMenu = null;
+        private Panel activeLentSubMenu = null;
+        private Panel activeBorrowSubMenu = null;
+        private Panel activeTaskSubMenu = null;
+        private Panel activeNoteSubMenu = null;
+        private Panel activeSettingSubMenu = null;
 
-         private bool filterOpen = false;
-         private bool dateOpen = false;
-         private bool amountOpen = false;
-         private bool categoryOpen = false;
+        private bool filterOpen = false;
+        private bool dateOpen = false;
+        private bool amountOpen = false;
+        private bool categoryOpen = false;
 
-         private bool creditFilterOpen = false;
-         private bool creditDateOpen = false;
-         private bool creditAmountOpen = false;
-         private bool creditCategoryOpen = false;
+        private bool creditFilterOpen = false;
+        private bool creditDateOpen = false;
+        private bool creditAmountOpen = false;
+        private bool creditCategoryOpen = false;
 
-         private bool lentFilterOpen = false;
-         private bool lentDateOpen = false;
-         private bool lentAmountOpen = false;
-         private bool lentPersonOpen = false;
-         private bool lentStatusOpen = false;
-         private bool lentPaymentOpen = false;
+        private bool lentFilterOpen = false;
+        private bool lentDateOpen = false;
+        private bool lentAmountOpen = false;
+        private bool lentPersonOpen = false;
+        private bool lentStatusOpen = false;
+        private bool lentPaymentOpen = false;
 
-         private bool borrowFilterOpen = false;
-         private bool borrowDateOpen = false;
-         private bool borrowAmountOpen = false;
-         private bool borrowPersonOpen = false;
-         private bool borrowStatusOpen = false;
-         private bool borrowPaymentOpen = false;
+        private bool borrowFilterOpen = false;
+        private bool borrowDateOpen = false;
+        private bool borrowAmountOpen = false;
+        private bool borrowPersonOpen = false;
+        private bool borrowStatusOpen = false;
+        private bool borrowPaymentOpen = false;
 
-         private bool taskFilterOpen = false;
-         private bool taskDateOpen = false;
-         private bool taskStatusOpen = false;
-         private bool taskPriorityOpen = false;
+        private bool taskFilterOpen = false;
+        private bool taskDateOpen = false;
+        private bool taskStatusOpen = false;
+        private bool taskPriorityOpen = false;
 
-         private bool noteFilterOpen = false;
-         private bool noteDateOpen = false;
-         private bool noteStatusOpen = false;
-         private bool notePriorityOpen = false;
+        private bool noteFilterOpen = false;
+        private bool noteDateOpen = false;
+        private bool noteStatusOpen = false;
+        private bool notePriorityOpen = false;
 
         public MainForm()
         {
-           
+
             InitializeComponent();
 
             tmScroll.Interval = 10;
             tmScroll.Tick += tmScroll_Tick;
-          
+
             pnlExpenseDropDown.Visible = false;
             tmSidebar.Interval = 15;
             tmSidebar.Tick += tmSidebar_Tick;
@@ -139,33 +143,36 @@ namespace PersonalExpenseCreditTracker
             pnlBorrowPaymentBody.Visible = false;
 
             this.Resize += MainForm_Resize;
-            
+
         }
-      
-      
+
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             flowSidebar.Location = new Point(0, 0);
             flowSidebar.Width = pnlSideBar.ClientSize.Width;
-            ComboBoxCategory.SelectedIndex = 0;
-            cmbSubCategory.SelectedIndex = 0;
+            //ComboBoxCategory.SelectedIndex = 0;
+            //cmbSubCategory.SelectedIndex = 0;
 
-            ComboBoxCreditCategory.SelectedIndex = 0;
-            ComboBoxCreditSubCategory.SelectedIndex = 0;
+            //ComboBoxCreditCategory.SelectedIndex = 0;
+            //ComboBoxCreditSubCategory.SelectedIndex = 0;
 
-            ComboBoxLentPerson.SelectedIndex = 0;
-            ComboBoxLentStatus.SelectedIndex = 0;
-            ComboBoxLentPayment.SelectedIndex = 0;
+            //ComboBoxLentPerson.SelectedIndex = 0;
+            //ComboBoxLentStatus.SelectedIndex = 0;
+            //ComboBoxLentPayment.SelectedIndex = 0;
 
-            ComboBoxBorrowPerson.SelectedIndex = 0;
-            ComboBoxBorrowStatus.SelectedIndex = 0;
-            ComboBoxBorrowPayment.SelectedIndex = 0;
+            //ComboBoxBorrowPerson.SelectedIndex = 0;
+            //ComboBoxBorrowStatus.SelectedIndex = 0;
+            //ComboBoxBorrowPayment.SelectedIndex = 0;
 
-            ComboBoxTaskStatus.SelectedIndex = 0;
-            ComboBoxTaskPriority.SelectedIndex = 0;
+            //ComboBoxTaskStatus.SelectedIndex = 0;
+            //ComboBoxTaskPriority.SelectedIndex = 0;
 
-            ComboBoxNoteStatus.SelectedIndex = 0;
-            ComboBoxNotePriority.SelectedIndex = 0;
+            //ComboBoxNoteStatus.SelectedIndex = 0;
+            //ComboBoxNotePriority.SelectedIndex = 0;
+
+            ComboBoxCreditSubCategory.Visible = false;
+            lblCreditSelectSubCategory.Visible = false;
 
 
             ShowPage(pnlOverview);
@@ -185,11 +192,11 @@ namespace PersonalExpenseCreditTracker
 
                 dashboardControl.Show();
             }
-          
+
             this.MinimumSize = new Size(1200, 700);
-            
+
         }
-    //Scroll Bar 
+        //Scroll Bar 
         // Mouse Wheel Scroll Control
         // Sidebar er upore Mouse Wheel ghorale Sidebar Scroll hobe
 
@@ -212,8 +219,8 @@ namespace PersonalExpenseCreditTracker
 
             base.WndProc(ref m);
         }
-      // Sidebar Scroll Function
-      // Mouse Wheel onujai Sidebar upore ba niche Scroll kore
+        // Sidebar Scroll Function
+        // Mouse Wheel onujai Sidebar upore ba niche Scroll kore
 
         private void ScrollSidebar(int delta)
         {
@@ -256,8 +263,8 @@ namespace PersonalExpenseCreditTracker
             RefreshSidebarScroll();
         }
 
-    // Sidebar er Content Height onijai Scroll Position Update kore
-    // jate Sidebar er Content upore ba niche otirikto Scroll na hoye
+        // Sidebar er Content Height onijai Scroll Position Update kore
+        // jate Sidebar er Content upore ba niche otirikto Scroll na hoye
 
         private void RefreshSidebarScroll()
         {
@@ -317,8 +324,8 @@ namespace PersonalExpenseCreditTracker
                 tmScroll.Stop();
         }
 
-     // All Dropdown Close kore
-     // New Menu Open Korer age ager Menu off kore dai
+        // All Dropdown Close kore
+        // New Menu Open Korer age ager Menu off kore dai
         private void CloseAllDropDown()
         {
             pnlExpenseDropDown.Visible = false;
@@ -328,7 +335,7 @@ namespace PersonalExpenseCreditTracker
             pnlTaskDropDown.Visible = false;
             pnlNotesDropDown.Visible = false;
             pnlSettingsDropDown.Visible = false;
-           
+
             expenseOpen = false;
             creditOpen = false;
             lentOpen = false;
@@ -346,7 +353,7 @@ namespace PersonalExpenseCreditTracker
             picSettingsArrow.Image = Properties.Resources.down;
             picFilterHeader.Image = Properties.Resources.down;
 
-           
+
 
             // Reset Expense SubMenu
             if (activeExpenseSubMenu != null)
@@ -389,7 +396,7 @@ namespace PersonalExpenseCreditTracker
                 activeNoteSubMenu.BackColor = Color.Transparent;
                 activeNoteSubMenu = null;
 
-              
+
             }
 
             // Reset Setting SubMenu
@@ -404,8 +411,8 @@ namespace PersonalExpenseCreditTracker
             flowSidebar.PerformLayout();
 
             flowSidebar.Top = 0;
-           
-           
+
+
         }
 
 
@@ -422,9 +429,9 @@ namespace PersonalExpenseCreditTracker
             pnlProfilePage.Visible = false;
             pnlExpenseCategory.Visible = false;
             pnlCreditCategoryPage.Visible = false;
-           
+
             pnlPersonAddPage.Visible = false;
-           
+
             //pnlExpenseCategory.Visible = false;
 
             if (page != null)
@@ -445,7 +452,7 @@ namespace PersonalExpenseCreditTracker
             pnlTop.Visible = true;
         }
 
-       // Active Menu Highlight kore
+        // Active Menu Highlight kore
         private void SetActiveMenu(Panel panel, bool keepHighlight)
         {
             if (activePanel != null)
@@ -463,7 +470,7 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-       // Active Menu Onujai Icon Change kore
+        // Active Menu Onujai Icon Change kore
         private void ChangeMenuIcon(Panel panel, bool active)
         {
             if (panel == pnlDashboard)
@@ -472,7 +479,7 @@ namespace PersonalExpenseCreditTracker
             else if (panel == pnlExpense)
             {
                 picExpense.Image = active ? Properties.Resources.wallet_filled_money_tool : Properties.Resources.wallet_filled_money_tool1;
-            
+
             }
 
             else if (panel == pnlCredit)
@@ -495,14 +502,14 @@ namespace PersonalExpenseCreditTracker
             else if (panel == pnlUserProfile)
                 picUserProfile.Image = active ? Properties.Resources.user : Properties.Resources.user;
         }
-     //pnlDashboard all Function
+        //pnlDashboard all Function
         private void pnlDashboard_Click(object sender, EventArgs e)
         {
             UpdateHeader(
                      "Dashboard",
                     "Welcome back! Here's your financial overview.");
 
-            SetActiveMenu(pnlDashboard,true);
+            SetActiveMenu(pnlDashboard, true);
             CloseAllDropDown();
             RefreshSidebarScroll();
             ExpandSidebar();
@@ -525,7 +532,7 @@ namespace PersonalExpenseCreditTracker
             pnlTop.Visible = true;
 
             ExpandSidebar();
-            
+
         }
 
         private void pnlDashboard_MouseEnter(object sender, EventArgs e)
@@ -545,7 +552,7 @@ namespace PersonalExpenseCreditTracker
         }
 
 
-    //pnlExpense Function
+        //pnlExpense Function
         private void pnlExpense_MouseEnter(object sender, EventArgs e)
         {
             pnlExpense.BackColor = Color.FromArgb(59, 130, 246);
@@ -558,14 +565,14 @@ namespace PersonalExpenseCreditTracker
             picExpense.Image = Properties.Resources.wallet_filled_money_tool1;
         }
 
-       private void pnlExpense_Click(object sender, EventArgs e)
-         {
-             UpdateHeader(
-                    "Expense",
-                    "Track and manage your expenses");
+        private void pnlExpense_Click(object sender, EventArgs e)
+        {
+            UpdateHeader(
+                   "Expense",
+                   "Track and manage your expenses");
 
-             if (expenseControl == null || expenseControl.IsDisposed)
-              {
+            if (expenseControl == null || expenseControl.IsDisposed)
+            {
                 expenseControl = new ExpenseControl();
 
                 expenseControl.TopLevel = false;
@@ -576,55 +583,55 @@ namespace PersonalExpenseCreditTracker
                 pnlExpensePage.Controls.Add(expenseControl);
 
                 expenseControl.Show();
-               }
-
-             ShowPage(pnlExpensePage);
-
-                SetActiveMenu(pnlExpense, false);   
-                bool wasOpen = expenseOpen;
-
-                CloseAllDropDown();
-
-                if (!wasOpen)
-                {
-                    pnlExpenseDropDown.Visible = true;
-                    picExpenseArrow.Image = Properties.Resources.arrowhead_up;
-                    pnlTop.Visible = true;
-                    expenseOpen = true;
-
-                    SetActiveExpenseSubMenu(pnlAllExpense);
-                }
-                else
-                {
-                    pnlExpenseDropDown.Visible = false;
-                    picExpenseArrow.Image = Properties.Resources.down;
-                    expenseOpen = false;
-                }
-                RefreshSidebarScroll();
-                ExpandSidebar();
-                dateOpen = false;
-                amountOpen = false;
-                categoryOpen = false;
-
-                pnlDateBody.Visible = false;
-                pnlAmountBody.Visible = false;
-                pnlCategoryBody.Visible = false;
-
-                pnlFilterContent.Visible = true;
-
-                pnlDateHeader.Visible = false;
-                pnlAmountHeader.Visible = false;
-                pnlCategoryHeader.Visible = false;
-
-                picFilterByDateArrow.Image = Properties.Resources.down;
-                picFilterByAmountArrow.Image = Properties.Resources.down;
-                picFilterByCategoryArrow.Image = Properties.Resources.down;
-
-               
             }
 
+            ShowPage(pnlExpensePage);
 
-   //pnlCredit all Function
+            SetActiveMenu(pnlExpense, false);
+            bool wasOpen = expenseOpen;
+
+            CloseAllDropDown();
+
+            if (!wasOpen)
+            {
+                pnlExpenseDropDown.Visible = true;
+                picExpenseArrow.Image = Properties.Resources.arrowhead_up;
+                pnlTop.Visible = true;
+                expenseOpen = true;
+
+                SetActiveExpenseSubMenu(pnlAllExpense);
+            }
+            else
+            {
+                pnlExpenseDropDown.Visible = false;
+                picExpenseArrow.Image = Properties.Resources.down;
+                expenseOpen = false;
+            }
+            RefreshSidebarScroll();
+            ExpandSidebar();
+            dateOpen = false;
+            amountOpen = false;
+            categoryOpen = false;
+
+            pnlDateBody.Visible = false;
+            pnlAmountBody.Visible = false;
+            pnlCategoryBody.Visible = false;
+
+            pnlFilterContent.Visible = true;
+
+            pnlDateHeader.Visible = false;
+            pnlAmountHeader.Visible = false;
+            pnlCategoryHeader.Visible = false;
+
+            picFilterByDateArrow.Image = Properties.Resources.down;
+            picFilterByAmountArrow.Image = Properties.Resources.down;
+            picFilterByCategoryArrow.Image = Properties.Resources.down;
+
+
+        }
+
+
+        //pnlCredit all Function
         private void pnlCredit_MouseEnter(object sender, EventArgs e)
         {
             pnlCredit.BackColor = Color.FromArgb(59, 130, 246);
@@ -642,7 +649,7 @@ namespace PersonalExpenseCreditTracker
             UpdateHeader(
              "Credit",
              "Track and manage your credit transactions");
-             
+
             if (creditControl == null || creditControl.IsDisposed)
             {
                 creditControl = new CreditControl();
@@ -658,7 +665,7 @@ namespace PersonalExpenseCreditTracker
             }
 
             ShowPage(pnlCreditPage);
-           
+
 
             SetActiveMenu(pnlCredit, false);
 
@@ -703,7 +710,7 @@ namespace PersonalExpenseCreditTracker
             picCreditFilterByCategoryArrow.Image = Properties.Resources.down;
         }
 
-  //pnlLent all Function
+        //pnlLent all Function
 
         private void pnlLent_MouseEnter(object sender, EventArgs e)
         {
@@ -740,7 +747,7 @@ namespace PersonalExpenseCreditTracker
             ShowPage(pnlLentPage);
 
             bool wasOpen = lentOpen;
-           
+
             CloseAllDropDown();
             SetActiveMenu(pnlLent, false);
 
@@ -790,7 +797,7 @@ namespace PersonalExpenseCreditTracker
             picLentFilterByPaymentArrow.Image = Properties.Resources.down;
         }
 
-  //pnlBorrow Function
+        //pnlBorrow Function
         private void pnlBorrow_MouseEnter(object sender, EventArgs e)
         {
             pnlBorrow.BackColor = Color.FromArgb(59, 130, 246);
@@ -877,7 +884,7 @@ namespace PersonalExpenseCreditTracker
             picBorrowFilterBySPaymentArrow.Image = Properties.Resources.down;
         }
 
- // pnlTasks all Function
+        // pnlTasks all Function
         private void pnlTasks_MouseEnter(object sender, EventArgs e)
         {
             pnlTasks.BackColor = Color.FromArgb(59, 130, 246);
@@ -938,7 +945,7 @@ namespace PersonalExpenseCreditTracker
             RefreshSidebarScroll();
             ExpandSidebar();
 
-           
+
 
             taskDateOpen = false;
             taskStatusOpen = false;
@@ -960,7 +967,7 @@ namespace PersonalExpenseCreditTracker
         }
 
 
-     //Notes Function 
+        //Notes Function 
         private void pnlNotes_MouseEnter(object sender, EventArgs e)
         {
             pnlNotes.BackColor = Color.FromArgb(59, 130, 246);
@@ -1008,7 +1015,7 @@ namespace PersonalExpenseCreditTracker
 
             CloseAllDropDown();
 
-           
+
 
             if (!wasOpen)
             {
@@ -1049,12 +1056,12 @@ namespace PersonalExpenseCreditTracker
             picNoteFilterByDateArrow.Image = Properties.Resources.down;
             picTaskFilterByNoteArrow.Image = Properties.Resources.down;
 
-            
+
             picNotePriorityArrow.Image = Properties.Resources.down;
         }
-    //Setting Function
+        //Setting Function
 
-       
+
         private void pnlSettings_MouseEnter(object sender, EventArgs e)
         {
             pnlSettings.BackColor = Color.FromArgb(59, 130, 246);
@@ -1072,7 +1079,7 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlSettings_Click(object sender, EventArgs e)
         {
-            
+
             pnlTop.Visible = true;
             SetActiveMenu(pnlSettings, true);
 
@@ -1095,17 +1102,17 @@ namespace PersonalExpenseCreditTracker
                      "Dashboard",
                     "Welcome back! Here's your financial overview.");
                 ShowPage(pnlOverview);
-                
+
                 settingOpen = false;
             }
 
-           
+
             RefreshSidebarScroll();
             ExpandSidebar();
         }
 
-       
-   //UserProfileFunction
+
+        //UserProfileFunction
         private void pnlUserProfile_MouseEnter(object sender, EventArgs e)
         {
             if (activePanel != pnlUserProfile)
@@ -1152,9 +1159,9 @@ namespace PersonalExpenseCreditTracker
         {
             tmSidebar.Start();
         }
-    //Side Bar all work
-       // Sidebar Expand / Collapse Animation
-       // Timer choler সময় Sidebar slowly slowly choto ba bora kora
+        //Side Bar all work
+        // Sidebar Expand / Collapse Animation
+        // Timer choler সময় Sidebar slowly slowly choto ba bora kora
 
         private void tmSidebar_Tick(object sender, EventArgs e)
         {
@@ -1162,7 +1169,7 @@ namespace PersonalExpenseCreditTracker
             {
 
                 pnlMainSideBarSection.Width -= 20;
-               // Width 180px ba tar kom hole all Text and Arrow Hide korbe
+                // Width 180px ba tar kom hole all Text and Arrow Hide korbe
                 if (pnlMainSideBarSection.Width <= 180)
                 {
                     lblPersonalExpense.Visible = false;
@@ -1187,7 +1194,7 @@ namespace PersonalExpenseCreditTracker
                     lblUserName.Visible = false;
                     lblEmail.Visible = false;
                 }
-             // Width 80px er niche gele Sidebar puropuri Collapse hobe
+                // Width 80px er niche gele Sidebar puropuri Collapse hobe
 
                 if (pnlMainSideBarSection.Width < 80)
                 {
@@ -1207,7 +1214,7 @@ namespace PersonalExpenseCreditTracker
                     tmSidebar.Stop();
                     isSidebarExpanded = false;
                 }
-               
+
             }
             else
             {
@@ -1235,7 +1242,7 @@ namespace PersonalExpenseCreditTracker
                     picSettingsArrow.Visible = true;
                     lblUserName.Visible = true;
                     lblEmail.Visible = true;
-                    flowSidebar.AutoScroll = true; 
+                    flowSidebar.AutoScroll = true;
                 }
                 if (pnlMainSideBarSection.Width >= 300)
                 {
@@ -1246,7 +1253,7 @@ namespace PersonalExpenseCreditTracker
                     //flowSidebar.Refresh();
 
                     tmSidebar.Stop();
-                    
+
                     isSidebarExpanded = true;
                 }
             }
@@ -1284,7 +1291,7 @@ namespace PersonalExpenseCreditTracker
 
                 pictureBox1.Left = 15;
 
-               
+
             }
         }
         private void ExpandSidebar()
@@ -1300,9 +1307,9 @@ namespace PersonalExpenseCreditTracker
             pic.Left = (pnlMainSideBarSection.Width - pic.Width) / 2;
         }
 
-       
 
-     //FilterExpense all event
+
+        //FilterExpense all event
 
         private void pnlFilterHeader_Click(object sender, EventArgs e)
         {
@@ -1403,7 +1410,7 @@ namespace PersonalExpenseCreditTracker
             UpdateClearAllButton();
 
             flowSidebar.Top = 0;
-         
+
         }
 
         private void rbCustom_CheckedChanged(object sender, EventArgs e)
@@ -1457,7 +1464,7 @@ namespace PersonalExpenseCreditTracker
 
         private void SetActiveExpenseSubMenu(Panel activePanel)
         {
-            
+
             if (activeExpenseSubMenu != null)
             {
                 activeExpenseSubMenu.BackColor = Color.Transparent;
@@ -1477,7 +1484,7 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveExpenseSubMenu(pnlAddExpense);
 
-            ExpenseDetailsControl expenseDetailsControl = new ExpenseDetailsControl();
+            AddExpenseControls expenseDetailsControl = new AddExpenseControls();
             expenseDetailsControl.FormClosed += Expense_FormClosed;
             expenseDetailsControl.Show();
         }
@@ -1516,7 +1523,7 @@ namespace PersonalExpenseCreditTracker
             }
 
             // Amount
-            if (txtMixAmount.Text.Trim() != "" ||
+            if (txtMinAmount.Text.Trim() != "" ||
                 txtMaxAmount.Text.Trim() != "")
             {
                 hasFilter = true;
@@ -1554,7 +1561,7 @@ namespace PersonalExpenseCreditTracker
             rbThisYear.Checked = false;
             rbCustom.Checked = false;
 
-            txtMixAmount.Clear();
+            txtMinAmount.Clear();
             txtMaxAmount.Clear();
 
             ComboBoxCategory.SelectedIndex = 0;
@@ -1569,16 +1576,16 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-             UpdateClearAllButton();
+            UpdateClearAllButton();
 
         }
 
         private void cmbSubCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-             UpdateClearAllButton();
+            UpdateClearAllButton();
         }
 
-     //Credit Filter all event
+        //Credit Filter all event
 
         private void pnlFilterCreditHeader_Click(object sender, EventArgs e)
         {
@@ -1682,25 +1689,43 @@ namespace PersonalExpenseCreditTracker
             UpdateCreditClearAllButton();
 
             flowSidebar.Top = 0;
+
+            CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", ComboBoxCreditCategory);
+
         }
 
         private void btnCreditClearAll_Click(object sender, EventArgs e)
         {
+            // Date Filter
             rbCreditThisMonth.Checked = false;
             rbCreditLast7Days.Checked = false;
             rbCreditThisYear.Checked = false;
             rbCreditCustom.Checked = false;
 
-            txtCreditMixAmount.Clear();
+            // Amount Filter
             txtCreditMinAmount.Clear();
+            txtCreditMaxAmount.Clear();
 
-            ComboBoxCreditCategory.SelectedIndex = 0;
-            ComboBoxCreditSubCategory.SelectedIndex = 0;
+            // Category Filter
+            if (ComboBoxCreditCategory.Items.Count > 0)
+                ComboBoxCreditCategory.SelectedIndex = 0;
 
+            if (ComboBoxCreditSubCategory.Items.Count > 0)
+                ComboBoxCreditSubCategory.SelectedIndex = 0;
+
+            // Date Picker
             dtpCreditFromDate.Value = DateTime.Today;
             dtpCreditToDate.Value = DateTime.Today;
 
+            // Hide SubCategory
+            ComboBoxCreditSubCategory.Visible = false;
+            lblCreditSelectSubCategory.Visible = false;
+
+            // Hide Clear Button
             btnCreditClearAll.Visible = false;
+
+            // Reload Data
+            creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
         }
 
         private void UpdateCreditClearAllButton()
@@ -1717,8 +1742,8 @@ namespace PersonalExpenseCreditTracker
             }
 
             // Amount
-            if (txtCreditMixAmount.Text.Trim() != "" ||
-                txtCreditMinAmount.Text.Trim() != "")
+            if (txtCreditMinAmount.Text.Trim() != "" ||
+                txtCreditMaxAmount.Text.Trim() != "")
             {
                 hasFilter = true;
             }
@@ -1756,20 +1781,51 @@ namespace PersonalExpenseCreditTracker
 
         private void rbCreditThisMonth_CheckedChanged(object sender, EventArgs e)
         {
+            if (!rbCreditThisMonth.Checked) return;
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
+
+            if (creditControl != null && !creditControl.IsDisposed)
+            {
+
+
+                DateTime firstDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                 1);
+
+                DateTime lastDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+
+            }
         }
 
         private void rbCreditLast7Days_CheckedChanged(object sender, EventArgs e)
         {
+            if (!rbCreditLast7Days.Checked) return;
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
+
+            DateTime fromDate = DateTime.Today.AddDays(-6);
+            DateTime toDate = DateTime.Today;
+
+            creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void rbCreditThisYear_CheckedChanged(object sender, EventArgs e)
         {
+            if (!rbCreditThisYear.Checked) return;
             UpdateCreditCustomDatePanel();
             UpdateCreditClearAllButton();
+
+            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+
+            creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void pnlAllCredit_MouseEnter(object sender, EventArgs e)
@@ -1810,7 +1866,7 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveCreditSubMenu(pnlAddCredit);
 
-            CreditDetailsControl creditDetailsControl = new CreditDetailsControl();
+            AddCreditControls creditDetailsControl = new AddCreditControls();
 
             creditDetailsControl.FormClosed += Credit_FormClosed;
 
@@ -1820,7 +1876,11 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveCreditSubMenu(pnlAllCredit);
 
-      
+            if (creditControl != null && !creditControl.IsDisposed)
+            {
+                creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+            }
+
         }
 
         private void pnlAddCredit_MouseEnter(object sender, EventArgs e)
@@ -1839,12 +1899,9 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-        private void txtCreditMixAmount_TextChanged(object sender, EventArgs e)
-        {
-            UpdateCreditClearAllButton();
-        }
 
-        private void txtCreditMinAmount_TextChanged(object sender, EventArgs e)
+
+        private void txtCreditMaxAmount_TextChanged(object sender, EventArgs e)
         {
             UpdateCreditClearAllButton();
         }
@@ -1852,11 +1909,82 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxCreditCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateCreditClearAllButton();
+
+            if (ComboBoxCreditCategory.SelectedIndex <= 0)
+            {
+                ComboBoxCreditSubCategory.Visible = false;
+                lblCreditSelectSubCategory.Visible = false;
+
+                //creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                return;
+            }
+
+            ComboBoxCreditSubCategory.Visible = true;
+            lblCreditSelectSubCategory.Visible = true;
+
+            if (ComboBoxCreditCategory.SelectedValue == null)
+                return;
+
+            if (ComboBoxCreditCategory.SelectedValue is DataRowView)
+                return;
+
+            int categoryId = Convert.ToInt32(ComboBoxCreditCategory.SelectedValue);
+
+            // Load Sub Category
+            CommonUiFunction.LoadInComboBox(
+                "spGetCreditSubCategoryByCategoryID",
+                "Select SubCategory",
+                ComboBoxCreditSubCategory,
+                "@CategoryID",
+                categoryId);
+
+            // Filter Credit Data
+            if (!creditControl.LoadFilteredCreditData(
+                    "spFilterCreditByCategory",
+                    "@CategoryID",
+                    categoryId,
+                    categoryId))
+            {
+                ComboBoxCreditSubCategory.SelectedIndex = 0;
+            }
         }
 
         private void ComboBoxCreditSubCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateCreditClearAllButton();
+
+            if (creditControl == null || creditControl.IsDisposed)
+                return;
+
+            if (ComboBoxCreditSubCategory.SelectedIndex <= 0)
+            {
+                creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                return;
+            }
+
+            if (ComboBoxCreditCategory.SelectedValue == null ||
+                ComboBoxCreditCategory.SelectedValue is DataRowView)
+                return;
+
+            if (ComboBoxCreditSubCategory.SelectedValue == null ||
+                ComboBoxCreditSubCategory.SelectedValue is DataRowView)
+                return;
+
+            int categoryId = Convert.ToInt32(ComboBoxCreditCategory.SelectedValue);
+            int subCategoryId = Convert.ToInt32(ComboBoxCreditSubCategory.SelectedValue);
+
+            if (!creditControl.LoadFilteredCreditData(
+                    "spFilterCreditByCategoryAndSubCategory",
+                    Session.LogedInUser.GetUserId(),
+                    "@CategoryID",
+                    categoryId,
+                    "@SubCategoryID",
+                    subCategoryId))
+            {
+                ComboBoxCreditSubCategory.SelectedIndex = 0;
+            }
+
+
         }
         //Lent Start
 
@@ -1987,6 +2115,11 @@ namespace PersonalExpenseCreditTracker
             UpdateLentClearAllButton();
 
             flowSidebar.Top = 0;
+
+            //load status from db on click to Person drop down 
+            Common.CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", ComboBoxLentPerson);
+
+
         }
 
         private void pnlLentStatusHeader_Click(object sender, EventArgs e)
@@ -2014,8 +2147,10 @@ namespace PersonalExpenseCreditTracker
             picLentFilterByPaymentArrow.Image = Properties.Resources.down;
 
             UpdateLentClearAllButton();
-
             flowSidebar.Top = 0;
+            //load status from db on click to status drop down 
+            Common.CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", ComboBoxLentStatus);
+
         }
 
         private void pnlLentPaymentHeader_Click(object sender, EventArgs e)
@@ -2045,6 +2180,9 @@ namespace PersonalExpenseCreditTracker
             UpdateLentClearAllButton();
 
             flowSidebar.Top = 0;
+
+            //load status from db on click to status drop down 
+            Common.CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select PaymentType", ComboBoxLentPayment);
         }
 
         private void btnLentClearAll_Click(object sender, EventArgs e)
@@ -2057,14 +2195,16 @@ namespace PersonalExpenseCreditTracker
             txtLentMinAmount.Clear();
             txtLentMaxAmount.Clear();
 
-            ComboBoxLentPerson.SelectedIndex = 0;
-            ComboBoxLentStatus.SelectedIndex = 0;
-            ComboBoxLentPayment.SelectedIndex = 0;
+            //ComboBoxLentPerson.SelectedIndex = 0;
+            //ComboBoxLentStatus.SelectedIndex = 0;
+            //ComboBoxLentPayment.SelectedIndex = 0;
 
             dtpLentFromDate.Value = DateTime.Today;
             dtpLentToDate.Value = DateTime.Today;
 
             btnLentClearAll.Visible = false;
+
+            lentControl.LoadLentData(Session.LogedInUser.GetUserId());
         }
 
         private void UpdateLentClearAllButton()
@@ -2128,23 +2268,58 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateLentCustomDatePanel();
             UpdateLentClearAllButton();
+
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+
+
+                DateTime firstDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                 1);
+
+                DateTime lastDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+
+            }
+
+
+
+
         }
 
         private void rbLentLast7Days_CheckedChanged(object sender, EventArgs e)
         {
             UpdateLentCustomDatePanel();
             UpdateLentClearAllButton();
+
+            DateTime fromDate = DateTime.Today.AddDays(-6);
+            DateTime toDate = DateTime.Today;
+
+            lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
+
         }
 
         private void rbLentThisYear_CheckedChanged(object sender, EventArgs e)
         {
             UpdateLentCustomDatePanel();
             UpdateLentClearAllButton();
+
+            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+
+            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+            lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
+
         }
 
         private void txtLentMinAmount_TextChanged(object sender, EventArgs e)
         {
             UpdateLentClearAllButton();
+
         }
 
         private void txtLentMaxAmount_TextChanged(object sender, EventArgs e)
@@ -2155,11 +2330,45 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxLentPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateLentClearAllButton();
+
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                if (ComboBoxLentPerson.SelectedIndex > 0)
+                {
+                    int filterId = Convert.ToInt32(ComboBoxLentPerson.SelectedValue);
+                    //MessageBox.Show(filterId.ToString());
+                    if (!lentControl.LoadFilteredLentData("spFilterLentByPerson", "@PersonID", filterId))
+                    {
+                        ComboBoxLentPerson.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
         private void ComboBoxLentStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateLentClearAllButton();
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                if (ComboBoxLentStatus.SelectedIndex > 0)
+                {
+                    int statusId = Convert.ToInt32(ComboBoxLentStatus.SelectedValue);
+                    if (!lentControl.LoadFilteredLentData("spFilterLentByStatus", "@StatusID", statusId))
+                    {
+                        ComboBoxLentStatus.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                }
+            }
+            //MessageBox.Show(ComboBoxLentStatus.SelectedIndex.ToString());
+
         }
 
         private void ComboBoxLentPayment_SelectedIndexChanged(object sender, EventArgs e)
@@ -2169,6 +2378,13 @@ namespace PersonalExpenseCreditTracker
         private void pnlAllLent_Click(object sender, EventArgs e)
         {
             SetActiveLentSubMenu(pnlAllLent);
+
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+            }
+
+            ShowPage(pnlLentPage);
         }
 
         private void pnlAllLent_MouseEnter(object sender, EventArgs e)
@@ -2214,7 +2430,12 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveLentSubMenu(pnlAllLent);
 
-            ShowPage(pnlLentPage);   // চাইলে রাখতে পারো
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+            }
+
+            ShowPage(pnlLentPage);
         }
         private void pnlAddLent_MouseEnter(object sender, EventArgs e)
         {
@@ -2363,6 +2584,8 @@ namespace PersonalExpenseCreditTracker
             UpdateBorrowClearAllButton();
 
             flowSidebar.Top = 0;
+
+            Common.CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", ComboBoxBorrowPerson);
         }
 
         private void pnlBorrowStatusHeader_Click(object sender, EventArgs e)
@@ -2392,6 +2615,7 @@ namespace PersonalExpenseCreditTracker
             UpdateBorrowClearAllButton();
 
             flowSidebar.Top = 0;
+            Common.CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", ComboBoxBorrowStatus);
         }
 
         private void pnlBorrowPaymentHeader_Click(object sender, EventArgs e)
@@ -2421,6 +2645,7 @@ namespace PersonalExpenseCreditTracker
             UpdateBorrowClearAllButton();
 
             flowSidebar.Top = 0;
+            Common.CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select PaymentType", ComboBoxBorrowPayment);
         }
 
         private void btnBorrowClearAll_Click(object sender, EventArgs e)
@@ -2433,14 +2658,16 @@ namespace PersonalExpenseCreditTracker
             txtBorrowMinAmount.Clear();
             txtBorrowMaxAmount.Clear();
 
-            ComboBoxBorrowPerson.SelectedIndex = 0;
-            ComboBoxBorrowStatus.SelectedIndex = 0;
-            ComboBoxBorrowPayment.SelectedIndex = 0;
+            //ComboBoxBorrowPerson.SelectedIndex = 0;
+            //ComboBoxBorrowStatus.SelectedIndex = 0;
+            //ComboBoxBorrowPayment.SelectedIndex = 0;
 
             dtpBorrowFromDate.Value = DateTime.Today;
             dtpBorrowToDate.Value = DateTime.Today;
 
             btnBorrowClearAll.Visible = false;
+
+            this.borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
         }
 
         private void UpdateBorrowClearAllButton()
@@ -2488,6 +2715,8 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateBorrowCustomDatePanel();
             UpdateBorrowClearAllButton();
+
+
         }
 
         private void UpdateBorrowCustomDatePanel()
@@ -2504,18 +2733,56 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateBorrowCustomDatePanel();
             UpdateBorrowClearAllButton();
+
+
+
+
+            if (borrowControls != null && !borrowControls.IsDisposed)
+            {
+
+
+                DateTime firstDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                 1);
+
+                DateTime lastDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                //MessageBox.Show(firstDayOfMonth.ToString());
+                //MessageBox.Show(lastDayOfMonth.ToString());
+
+
+                borrowControls.LoadFilteredBorrowData("spFilterBorrowByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+
+            }
+            //LentUi.retriveDataByUserIdAndFilterIdAtUi("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", "@ToDate");
         }
 
         private void rbBorrowLast7Days_CheckedChanged(object sender, EventArgs e)
         {
             UpdateBorrowCustomDatePanel();
             UpdateBorrowClearAllButton();
+
+            DateTime fromDate = DateTime.Today.AddDays(-6);
+            DateTime toDate = DateTime.Today;
+
+            borrowControls.LoadFilteredBorrowData("spFilterBorrowByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
+
         }
 
         private void rbBorrowThisYear_CheckedChanged(object sender, EventArgs e)
         {
             UpdateBorrowCustomDatePanel();
             UpdateBorrowClearAllButton();
+
+            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+
+            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+            borrowControls.LoadFilteredBorrowData("spFilterBorrowByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
+
         }
 
         private void txtBorrowMinAmount_TextChanged(object sender, EventArgs e)
@@ -2531,17 +2798,74 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxBorrowPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateBorrowClearAllButton();
+
+
+
+            if (borrowControls != null && !borrowControls.IsDisposed)
+            {
+
+                if (ComboBoxBorrowPerson.SelectedIndex > 0)
+                {
+                    int filterId = Convert.ToInt32(ComboBoxBorrowPerson.SelectedValue);
+                    //MessageBox.Show(filterId.ToString());
+                    if (!borrowControls.LoadFilteredBorrowtData("spFilterBorrowByPerson", "@PersonID", filterId))
+                    {
+                        ComboBoxBorrowPerson.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
         private void ComboBoxBorrowStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateBorrowClearAllButton();
+
+            if (borrowControls != null && !borrowControls.IsDisposed)
+            {
+
+                if (ComboBoxBorrowStatus.SelectedIndex > 0)
+                {
+                    int statusId = Convert.ToInt32(ComboBoxBorrowStatus.SelectedValue);
+
+                    if (!borrowControls.LoadFilteredBorrowtData("spFilterBorrowByStatus", "@StatusID", statusId))
+                    {
+                        ComboBoxBorrowStatus.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+
+                    borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
         private void ComboBoxBorrowPayment_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateBorrowClearAllButton();
+            if (borrowControls != null && !borrowControls.IsDisposed)
+
+
+                if (ComboBoxBorrowPayment.SelectedIndex > 0)
+                {
+                    int filterId = Convert.ToInt32(ComboBoxBorrowPayment.SelectedValue);
+                    //MessageBox.Show(filterId.ToString());
+                    if (!borrowControls.LoadFilteredBorrowtData("spFilterBorrowByPaymentMethod", "@PaymentID", filterId))
+                    {
+                        ComboBoxBorrowPayment.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                }
         }
+
+
 
         private void pnlAllBorrow_Click(object sender, EventArgs e)
         {
@@ -2589,8 +2913,13 @@ namespace PersonalExpenseCreditTracker
         private void Borrow_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetActiveBorrowSubMenu(pnlAllBorrow);
+            if (borrowControls != null && !borrowControls.IsDisposed)
+            {
+                borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+            }
 
-            
+            ShowPage(pnlBorrowPage);
+
         }
 
         private void pnlAddBorrow_MouseEnter(object sender, EventArgs e)
@@ -2609,7 +2938,7 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-      //Task filter all event
+        //Task filter all event
         private void pnlFilterTaskHeader_Click(object sender, EventArgs e)
         {
             taskFilterOpen = !taskFilterOpen;
@@ -2690,6 +3019,9 @@ namespace PersonalExpenseCreditTracker
             UpdateTaskClearAllButton();
 
             flowSidebar.Top = 0;
+
+            //load status from db on click to Person drop down 
+            CommonUiFunction.LoadInComboBox("spGetAllTaskStatus", "Select Status", ComboBoxTaskStatus);
         }
 
         private void pnlTaskPriorityHeader_Click(object sender, EventArgs e)
@@ -2713,6 +3045,9 @@ namespace PersonalExpenseCreditTracker
             UpdateTaskClearAllButton();
 
             flowSidebar.Top = 0;
+
+            //load status from db on click to Person drop down 
+            CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select Priority", ComboBoxTaskPriority);
         }
 
         private void btnTaskClearAll_Click(object sender, EventArgs e)
@@ -2779,28 +3114,88 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateTaskCustomDatePanel();
             UpdateTaskClearAllButton();
+
+            if (taskControl != null && !taskControl.IsDisposed)
+            {
+
+
+                DateTime firstDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                 1);
+
+                DateTime lastDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                taskControl.LoadFilteredTaskData("spGetTasksBetweenDates", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+
+            }
+
         }
 
         private void rbTaskLast7Days_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTaskCustomDatePanel();
             UpdateTaskClearAllButton();
+
+            DateTime fromDate = DateTime.Today.AddDays(-6);
+            DateTime toDate = DateTime.Today;
+
+            taskControl.LoadFilteredTaskData("spGetTasksBetweenDates", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void rbTaskThisYear_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTaskCustomDatePanel();
             UpdateTaskClearAllButton();
+
+            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+
+            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+            taskControl.LoadFilteredTaskData("spGetTasksBetweenDates", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void ComboBoxTaskStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTaskClearAllButton();
+            if (taskControl != null && !taskControl.IsDisposed)
+            {
+                if (ComboBoxTaskStatus.SelectedIndex > 0)
+                {
+                    int statusId = Convert.ToInt32(ComboBoxTaskStatus.SelectedValue);
+                    if (!taskControl.LoadFilteredTaskData("spFilterTasksByStatus", "@TaskStatusID", statusId))
+                    {
+                        ComboBoxTaskStatus.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    taskControl.LoadTaskData(Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
         private void ComboBoxTaskPriority_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTaskClearAllButton();
+
+            if (taskControl != null && !taskControl.IsDisposed)
+            {
+                if (ComboBoxTaskPriority.SelectedIndex > 0)
+                {
+                    int priorityId = Convert.ToInt32(ComboBoxTaskPriority.SelectedValue);
+                    if (!taskControl.LoadFilteredTaskData("spFilterTasksByPriority", "@PriorityID", priorityId))
+                    {
+                        ComboBoxTaskPriority.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    taskControl.LoadTaskData(Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
         private void pnlAllTask_Click(object sender, EventArgs e)
@@ -2850,6 +3245,11 @@ namespace PersonalExpenseCreditTracker
         private void Task_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetActiveTaskSubMenu(pnlAllTask);
+
+            if (taskControl != null && !taskControl.IsDisposed)
+            {
+                taskControl.LoadTaskData(Session.LogedInUser.GetUserId());
+            }
         }
 
         private void pnlAddTask_MouseEnter(object sender, EventArgs e)
@@ -2930,7 +3330,7 @@ namespace PersonalExpenseCreditTracker
             flowSidebar.Top = 0;
         }
 
-      //statusHeader
+        //statusHeader
         private void pnlNoteStatusHeader_Click(object sender, EventArgs e)
         {
             noteStatusOpen = !noteStatusOpen;
@@ -3155,7 +3555,7 @@ namespace PersonalExpenseCreditTracker
                 "Manage expense categories and subcategories");
 
             ShowPage(pnlExpenseCategory);
-      
+
             SetActiveSettingSubMenu(pnlSettingExpenseCategories);
 
             RefreshSidebarScroll();
@@ -3167,7 +3567,7 @@ namespace PersonalExpenseCreditTracker
                 expenseCategoryControls.TopLevel = false;
                 expenseCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 expenseCategoryControls.Dock = DockStyle.Fill;
-                pnlTop.Visible = true;
+                pnlTop.Visible = false;
                 pnlExpenseCategory.Controls.Clear();
 
                 pnlExpenseCategory.Controls.Add(expenseCategoryControls);
@@ -3192,7 +3592,7 @@ namespace PersonalExpenseCreditTracker
                 pnlSettingExpenseCategories.BackColor = Color.Transparent;
             }
         }
-       
+
         private void pnlSettingCreditCategories_Click(object sender, EventArgs e)
         {
 
@@ -3217,7 +3617,7 @@ namespace PersonalExpenseCreditTracker
                 creditCategoryControls.TopLevel = false;
                 creditCategoryControls.FormBorderStyle = FormBorderStyle.None;
                 creditCategoryControls.Dock = DockStyle.Fill;
-                pnlTop.Visible = true;
+                pnlTop.Visible = false;
                 pnlCreditCategoryPage.Controls.Clear();
 
                 pnlCreditCategoryPage.Controls.Add(creditCategoryControls);
@@ -3234,7 +3634,7 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-       
+
 
         private void pnlSettingCreditCategories_MouseLeave(object sender, EventArgs e)
         {
@@ -3249,14 +3649,14 @@ namespace PersonalExpenseCreditTracker
             SetActiveSettingSubMenu(pnlLogout);
             pnlTop.Visible = false;
 
-            
+
             PersonLogOutControls personLogOutControls = new PersonLogOutControls();
             personLogOutControls.Show();
 
             RefreshSidebarScroll();
             ExpandSidebar();
 
-           
+
         }
 
         private void pnlLogout_MouseEnter(object sender, EventArgs e)
@@ -3353,7 +3753,397 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-        private void panelLogo_Paint(object sender, PaintEventArgs e)
+        public void RefreshStatusDropDown(int index)
+        {
+            ComboBoxLentStatus.SelectedIndex = index;
+        }
+
+        private void ComboBoxLentPayment_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            UpdateLentClearAllButton();
+
+            if (lentControl != null && !lentControl.IsDisposed)
+            {
+                if (ComboBoxLentPayment.SelectedIndex > 0)
+                {
+                    int filterId = Convert.ToInt32(ComboBoxLentPayment.SelectedValue);
+                    //MessageBox.Show(filterId.ToString());
+                    if (!lentControl.LoadFilteredLentData("spFilterLentByPaymentMethod", "@PaymentID", filterId))
+                    {
+                        ComboBoxLentPayment.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                }
+            }
+
+        }
+
+        private void btnLentApplyDateFilter_Click(object sender, EventArgs e)
+        {
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            MainUI mainUi = new MainUI();
+            mainUi.fromDate = dtpLentFromDate.Value.Date;
+            mainUi.toDate = dtpLentToDate.Value.Date;
+
+
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
+
+            switch (result)
+            {
+                // Data is valid and inserted successfully
+                case CommonValidator.ValidationResult.Success:
+                    if (lentControl != null && !lentControl.IsDisposed)
+                    {
+                        if (!lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpLentFromDate.Value.Date, "@ToDate", dtpLentToDate.Value.Date))
+                        {
+                            lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                            //MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                    }
+                    //MessageBox.Show("Apply successfully!");
+
+                    break;
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpLentFromDate, dtpLentToDate);
+                    break;
+
+            }
+
+        }
+
+
+
+        private void btnLentApplyAmountFilter_Click(object sender, EventArgs e)
+        {
+            //Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            MainUI mainUi = new MainUI();
+            // Assign values from the form controls to the object
+
+            mainUi.minAmount = txtLentMinAmount.Text;
+            mainUi.maxAmount = txtLentMaxAmount.Text;
+
+            CommonValidator.ValidationResult result = mainUi.InsertAmountDataIntoMainUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (lentControl != null && !lentControl.IsDisposed)
+                    {
+                        if (!lentControl.LoadFilteredLentData("spFilterLentByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", Convert.ToDecimal(txtLentMinAmount.Text), "@MaxAmount", Convert.ToDecimal(txtLentMaxAmount.Text)))
+                        {
+                            lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                            MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                    }
+
+                    //this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.MinimumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMinAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.MaximumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMaxAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLentMinAmount, txtLentMaxAmount);
+                    break;
+            }
+        }
+
+        private void btnBorrowApplyDateFilter_Click(object sender, EventArgs e)
+        {
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            MainUI mainUi = new MainUI();
+            mainUi.fromDate = dtpBorrowFromDate.Value.Date;
+            mainUi.toDate = dtpBorrowToDate.Value.Date;
+
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
+
+            switch (result)
+            {
+                // Data is valid and inserted successfully
+                case CommonValidator.ValidationResult.Success:
+                    if (borrowControls != null && !borrowControls.IsDisposed)
+                    {
+                        if (!borrowControls.LoadFilteredBorrowData("spFilterBorrowByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", mainUi.fromDate, "@ToDate", mainUi.toDate))
+                        {
+                            borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                            //MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                    }
+                    //MessageBox.Show("Apply successfully!");
+
+                    break;
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpLentFromDate, dtpLentToDate);
+                    break;
+
+            }
+
+        }
+
+        private void btnBorrowApplyAmountFilter_Click(object sender, EventArgs e)
+        {
+            //Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            MainUI mainUi = new MainUI();
+            // Assign values from the form controls to the object
+
+            mainUi.minAmount = txtBorrowMinAmount.Text;
+            mainUi.maxAmount = txtBorrowMaxAmount.Text;
+
+            CommonValidator.ValidationResult result = mainUi.InsertAmountDataIntoMainUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (borrowControls != null && !borrowControls.IsDisposed)
+                    {
+
+                        if (!borrowControls.LoadFilteredBorowData("spFilterBorrowByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", Convert.ToDecimal(txtBorrowMinAmount.Text), "@MaxAmount", Convert.ToDecimal(txtBorrowMaxAmount.Text)))
+                        {
+                            borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                            MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                    }
+
+                    //this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.MinimumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowMinAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.MaximumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowMaxAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtBorrowMinAmount, txtBorrowMaxAmount);
+                    break;
+            }
+        }
+
+        private void pnlLent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dtpLentFromDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreditApplyDateFilter_Click(object sender, EventArgs e)
+        {
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            MainUI mainUi = new MainUI();
+            mainUi.fromDate = dtpCreditFromDate.Value.Date;
+            mainUi.toDate = dtpCreditToDate.Value.Date;
+
+
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
+
+            switch (result)
+            {
+                // Data is valid and inserted successfully
+                case CommonValidator.ValidationResult.Success:
+                    if (creditControl != null && !creditControl.IsDisposed)
+                    {
+                        if (!creditControl.LoadFilteredCreditData("spFilterCreditByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpCreditFromDate.Value.Date, "@ToDate", dtpCreditToDate.Value.Date))
+                        {
+                            creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                            //MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                    }
+                    //MessageBox.Show("Apply successfully!");
+
+                    break;
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpCreditFromDate, dtpCreditToDate);
+                    break;
+
+            }
+        }
+
+        private void dtpLentToDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreditApplyAmountFilter_Click(object sender, EventArgs e)
+        {
+            //Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            MainUI mainUi = new MainUI();
+            // Assign values from the form controls to the object
+
+            mainUi.minAmount = txtCreditMinAmount.Text;
+            mainUi.maxAmount = txtCreditMaxAmount.Text;
+
+            CommonValidator.ValidationResult result = mainUi.InsertAmountDataIntoMainUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (creditControl != null && !creditControl.IsDisposed)
+                    {
+                        if (!creditControl.LoadFilteredCreditData("spFilterCreditByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", Convert.ToDecimal(txtCreditMinAmount.Text), "@MaxAmount", Convert.ToDecimal(txtCreditMaxAmount.Text)))
+                        {
+                            creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                            MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+
+                    }
+                    else
+                    {
+                        creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                    }
+
+                    //this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.MinimumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCreditMinAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.MaximumAmountInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCreditMaxAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCreditMaxAmount, txtCreditMaxAmount);
+                    break;
+            }
+        }
+
+        private void txtMinAmount_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCreditClearAllButton();
+        }
+
+        private void txtCreditMinAmount_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCreditClearAllButton();
+        }
+
+        private void txtCreditMaxAmount_TextChanged_1(object sender, EventArgs e)
+        {
+            UpdateCreditClearAllButton();
+        }
+
+        private void btnApplyDateFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTaskApplyDateFilter_Click(object sender, EventArgs e)
+        {
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            DateTime fromDate = dtpTaskFromDate.Value.Date;
+
+
+            DateTime toDate = dtpTaskToDate.Value.Date.AddDays(1).AddTicks(-1);
+
+            MainUI mainUi = new MainUI();
+            mainUi.fromDate = fromDate;
+            mainUi.toDate = toDate;
+
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (taskControl != null && !taskControl.IsDisposed)
+                    {
+                        if (!taskControl.LoadFilteredTaskData("spGetTasksBetweenCreatedDates", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate))
+                        {
+                            MessageBox.Show("No record exists for the selected date range!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpTaskFromDate, dtpTaskToDate);
+                    break;
+            }
+        }
+
+        private void pnlAddLent_Paint(object sender, PaintEventArgs e)
         {
 
         }
@@ -3363,17 +4153,7 @@ namespace PersonalExpenseCreditTracker
 
         }
 
-
-      
-
-       
-
-       
-
         
-
-       
-
     }
 }
 

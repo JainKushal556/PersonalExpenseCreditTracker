@@ -15,6 +15,8 @@ namespace BLLayer.Common
             PersonInvalid,
             PaymentInvalid,
             StatusInvalid,
+            PriorityInvalid,
+            TaskTitleInvalid,
 
             AmountEmpty,
             AmountInvalid,
@@ -30,8 +32,13 @@ namespace BLLayer.Common
             DateRangeInvalid,
             MinimumAmountInvalid,
             MaximumAmountInvalid,
+            AmountRangeInvalid,
 
-            StoreProcedureError
+            CategoryInvalid,
+            SubCategoryInvalid,
+
+            StoreProcedureError,
+            TaskAlreadyUpdated
         }
 
         
@@ -137,7 +144,8 @@ namespace BLLayer.Common
                 return ValidationResult.Success;
             }
 
-            return ValidationResult.AmountInvalid;
+
+            return ValidationResult.MaximumAmountInvalid;
         }
 
         //Status Validation
@@ -238,6 +246,59 @@ namespace BLLayer.Common
 
             return ValidationResult.DateRangeInvalid;
         }
+
+        // Category Validation
+        public static ValidationResult ValidateCategory(int categoryId)
+        {
+            if (categoryId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.CategoryInvalid;
+        }
+
+        // SubCategory Validation
+        public static ValidationResult ValidateSubCategory(int subCategoryId)
+        {
+            if (subCategoryId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.SubCategoryInvalid;
+        }
+
+        // Task Title Validation
+        public static ValidationResult ValidateTaskTitle(string taskTitle)
+        {
+            if (!string.IsNullOrWhiteSpace(taskTitle))
+            {
+                taskTitle = taskTitle.Trim();
+
+                if (taskTitle.Length >= 3)
+                {
+                    if (taskTitle.Length <= 150)
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
+            }
+
+            return ValidationResult.TaskTitleInvalid;
+        }
+
+        // Priority Validation
+        public static ValidationResult ValidatePriority(int priorityId)
+        {
+            if (priorityId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.PriorityInvalid;
+        }
+
 
 
     }

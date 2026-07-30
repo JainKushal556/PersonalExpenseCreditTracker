@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlAddPersonInput = new System.Windows.Forms.Panel();
@@ -140,12 +141,13 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(15);
+            this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(1109, 874);
             this.panel1.TabIndex = 0;
             // 
@@ -156,25 +158,25 @@
             this.tableLayoutPanel1.Controls.Add(this.pnlAddPersonInput, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlAddPersonDataGridView, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 15);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.90816F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.09184F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1079, 784);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1099, 804);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // pnlAddPersonInput
             // 
-            this.pnlAddPersonInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
+            this.pnlAddPersonInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
             this.pnlAddPersonInput.Controls.Add(this.tableLayoutPanel2);
             this.pnlAddPersonInput.Controls.Add(this.panel4);
             this.pnlAddPersonInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAddPersonInput.Location = new System.Drawing.Point(10, 10);
-            this.pnlAddPersonInput.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlAddPersonInput.Location = new System.Drawing.Point(8, 8);
             this.pnlAddPersonInput.Name = "pnlAddPersonInput";
-            this.pnlAddPersonInput.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlAddPersonInput.Size = new System.Drawing.Size(1059, 237);
+            this.pnlAddPersonInput.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlAddPersonInput.Size = new System.Drawing.Size(1083, 255);
             this.pnlAddPersonInput.TabIndex = 0;
             this.pnlAddPersonInput.Resize += new System.EventHandler(this.pnlAddPersonInput_Resize);
             // 
@@ -192,23 +194,23 @@
             this.tableLayoutPanel2.Controls.Add(this.panel8, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(15, 59);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 49);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1029, 163);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1073, 201);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // panel11
             // 
             this.panel11.Controls.Add(this.pnlAddPersonInputAddress);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(616, 32);
+            this.panel11.Location = new System.Drawing.Point(642, 40);
             this.panel11.Margin = new System.Windows.Forms.Padding(0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(413, 89);
+            this.panel11.Size = new System.Drawing.Size(431, 110);
             this.panel11.TabIndex = 5;
             // 
             // pnlAddPersonInputAddress
@@ -222,8 +224,9 @@
             this.pnlAddPersonInputAddress.Location = new System.Drawing.Point(4, 3);
             this.pnlAddPersonInputAddress.Name = "pnlAddPersonInputAddress";
             this.pnlAddPersonInputAddress.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlAddPersonInputAddress.Size = new System.Drawing.Size(404, 83);
+            this.pnlAddPersonInputAddress.Size = new System.Drawing.Size(422, 104);
             this.pnlAddPersonInputAddress.TabIndex = 1;
+            this.pnlAddPersonInputAddress.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddPersonInputAddress_Paint);
             this.pnlAddPersonInputAddress.Leave += new System.EventHandler(this.pnlAddPersonInputAddress_Leave);
             // 
             // txtAddPersonInputAddress
@@ -236,7 +239,7 @@
             this.txtAddPersonInputAddress.Location = new System.Drawing.Point(4, 6);
             this.txtAddPersonInputAddress.Multiline = true;
             this.txtAddPersonInputAddress.Name = "txtAddPersonInputAddress";
-            this.txtAddPersonInputAddress.Size = new System.Drawing.Size(392, 71);
+            this.txtAddPersonInputAddress.Size = new System.Drawing.Size(410, 92);
             this.txtAddPersonInputAddress.TabIndex = 0;
             this.txtAddPersonInputAddress.Enter += new System.EventHandler(this.txtAddPersonInputAddress_Enter);
             // 
@@ -244,10 +247,10 @@
             // 
             this.panel9.Controls.Add(this.pnlAddPersonInputPhoneNumber);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(308, 32);
+            this.panel9.Location = new System.Drawing.Point(321, 40);
             this.panel9.Margin = new System.Windows.Forms.Padding(0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(308, 89);
+            this.panel9.Size = new System.Drawing.Size(321, 110);
             this.panel9.TabIndex = 4;
             // 
             // pnlAddPersonInputPhoneNumber
@@ -259,8 +262,9 @@
             this.pnlAddPersonInputPhoneNumber.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pnlAddPersonInputPhoneNumber.Location = new System.Drawing.Point(4, 3);
             this.pnlAddPersonInputPhoneNumber.Name = "pnlAddPersonInputPhoneNumber";
-            this.pnlAddPersonInputPhoneNumber.Size = new System.Drawing.Size(299, 40);
+            this.pnlAddPersonInputPhoneNumber.Size = new System.Drawing.Size(312, 40);
             this.pnlAddPersonInputPhoneNumber.TabIndex = 1;
+            this.pnlAddPersonInputPhoneNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddPersonInputPhoneNumber_Paint);
             this.pnlAddPersonInputPhoneNumber.Leave += new System.EventHandler(this.pnlAddPersonInputPhoneNumber_Leave);
             // 
             // txtAddPersonInputPhoneNumber
@@ -270,18 +274,19 @@
             this.txtAddPersonInputPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddPersonInputPhoneNumber.Location = new System.Drawing.Point(3, 6);
             this.txtAddPersonInputPhoneNumber.Name = "txtAddPersonInputPhoneNumber";
-            this.txtAddPersonInputPhoneNumber.Size = new System.Drawing.Size(290, 27);
+            this.txtAddPersonInputPhoneNumber.Size = new System.Drawing.Size(303, 27);
             this.txtAddPersonInputPhoneNumber.TabIndex = 0;
+            this.txtAddPersonInputPhoneNumber.TextChanged += new System.EventHandler(this.txtAddPersonInputPhoneNumber_TextChanged);
             this.txtAddPersonInputPhoneNumber.Enter += new System.EventHandler(this.txtAddPersonInputPhoneNumber_Enter);
             // 
             // panel7
             // 
             this.panel7.Controls.Add(this.lblAddPersonInputAddress);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(616, 0);
+            this.panel7.Location = new System.Drawing.Point(642, 0);
             this.panel7.Margin = new System.Windows.Forms.Padding(0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(413, 32);
+            this.panel7.Size = new System.Drawing.Size(431, 40);
             this.panel7.TabIndex = 2;
             // 
             // lblAddPersonInputAddress
@@ -289,7 +294,7 @@
             this.lblAddPersonInputAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblAddPersonInputAddress.AutoSize = true;
             this.lblAddPersonInputAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddPersonInputAddress.Location = new System.Drawing.Point(6, 6);
+            this.lblAddPersonInputAddress.Location = new System.Drawing.Point(6, 10);
             this.lblAddPersonInputAddress.Name = "lblAddPersonInputAddress";
             this.lblAddPersonInputAddress.Size = new System.Drawing.Size(153, 23);
             this.lblAddPersonInputAddress.TabIndex = 0;
@@ -300,21 +305,21 @@
             this.panel6.Controls.Add(this.label6);
             this.panel6.Controls.Add(this.lblAddPersonInputPhoneNumber);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(308, 0);
+            this.panel6.Location = new System.Drawing.Point(321, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(308, 32);
+            this.panel6.Size = new System.Drawing.Size(321, 40);
             this.panel6.TabIndex = 1;
             // 
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(134, 4);
+            this.label6.Location = new System.Drawing.Point(134, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 23);
+            this.label6.Size = new System.Drawing.Size(18, 23);
             this.label6.TabIndex = 1;
             this.label6.Text = "*";
             // 
@@ -323,7 +328,7 @@
             this.lblAddPersonInputPhoneNumber.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblAddPersonInputPhoneNumber.AutoSize = true;
             this.lblAddPersonInputPhoneNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddPersonInputPhoneNumber.Location = new System.Drawing.Point(1, 4);
+            this.lblAddPersonInputPhoneNumber.Location = new System.Drawing.Point(1, 8);
             this.lblAddPersonInputPhoneNumber.Name = "lblAddPersonInputPhoneNumber";
             this.lblAddPersonInputPhoneNumber.Size = new System.Drawing.Size(127, 23);
             this.lblAddPersonInputPhoneNumber.TabIndex = 0;
@@ -337,18 +342,18 @@
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(308, 32);
+            this.panel5.Size = new System.Drawing.Size(321, 40);
             this.panel5.TabIndex = 0;
             // 
             // label5
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(93, 4);
+            this.label5.Location = new System.Drawing.Point(93, 8);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 23);
+            this.label5.Size = new System.Drawing.Size(18, 23);
             this.label5.TabIndex = 1;
             this.label5.Text = "*";
             // 
@@ -357,7 +362,7 @@
             this.lblAddPersonInputFullName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblAddPersonInputFullName.AutoSize = true;
             this.lblAddPersonInputFullName.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddPersonInputFullName.Location = new System.Drawing.Point(3, 4);
+            this.lblAddPersonInputFullName.Location = new System.Drawing.Point(3, 8);
             this.lblAddPersonInputFullName.Name = "lblAddPersonInputFullName";
             this.lblAddPersonInputFullName.Size = new System.Drawing.Size(88, 23);
             this.lblAddPersonInputFullName.TabIndex = 0;
@@ -367,10 +372,10 @@
             // 
             this.panel8.Controls.Add(this.pnlAddPersonInputFullName);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(0, 32);
+            this.panel8.Location = new System.Drawing.Point(0, 40);
             this.panel8.Margin = new System.Windows.Forms.Padding(0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(308, 89);
+            this.panel8.Size = new System.Drawing.Size(321, 110);
             this.panel8.TabIndex = 3;
             // 
             // pnlAddPersonInputFullName
@@ -382,8 +387,9 @@
             this.pnlAddPersonInputFullName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pnlAddPersonInputFullName.Location = new System.Drawing.Point(4, 3);
             this.pnlAddPersonInputFullName.Name = "pnlAddPersonInputFullName";
-            this.pnlAddPersonInputFullName.Size = new System.Drawing.Size(299, 40);
+            this.pnlAddPersonInputFullName.Size = new System.Drawing.Size(312, 40);
             this.pnlAddPersonInputFullName.TabIndex = 1;
+            this.pnlAddPersonInputFullName.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddPersonInputFullName_Paint);
             this.pnlAddPersonInputFullName.Leave += new System.EventHandler(this.pnlAddPersonInputFullName_Leave);
             // 
             // txtAddPersonInputFullName
@@ -393,8 +399,9 @@
             this.txtAddPersonInputFullName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddPersonInputFullName.Location = new System.Drawing.Point(3, 6);
             this.txtAddPersonInputFullName.Name = "txtAddPersonInputFullName";
-            this.txtAddPersonInputFullName.Size = new System.Drawing.Size(290, 27);
+            this.txtAddPersonInputFullName.Size = new System.Drawing.Size(303, 27);
             this.txtAddPersonInputFullName.TabIndex = 0;
+            this.txtAddPersonInputFullName.TextChanged += new System.EventHandler(this.txtAddPersonInputFullName_TextChanged);
             this.txtAddPersonInputFullName.Enter += new System.EventHandler(this.txtAddPersonInputFullName_Enter);
             // 
             // tableLayoutPanel3
@@ -405,33 +412,31 @@
             this.tableLayoutPanel3.Controls.Add(this.btnAddPersonInputClear, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnAddPersonInputSavePerson, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 121);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 150);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(308, 42);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(321, 51);
             this.tableLayoutPanel3.TabIndex = 6;
             // 
             // btnAddPersonInputClear
             // 
-            this.btnAddPersonInputClear.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnAddPersonInputClear.BackColor = System.Drawing.Color.Transparent;
             this.btnAddPersonInputClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddPersonInputClear.FlatAppearance.BorderSize = 0;
-            this.btnAddPersonInputClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPersonInputClear.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddPersonInputClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
-            this.btnAddPersonInputClear.Location = new System.Drawing.Point(174, 0);
+            this.btnAddPersonInputClear.Location = new System.Drawing.Point(181, 0);
             this.btnAddPersonInputClear.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnAddPersonInputClear.Name = "btnAddPersonInputClear";
-            this.btnAddPersonInputClear.Size = new System.Drawing.Size(134, 42);
+            this.btnAddPersonInputClear.Size = new System.Drawing.Size(140, 51);
             this.btnAddPersonInputClear.TabIndex = 1;
             this.btnAddPersonInputClear.Text = " Clear";
             this.btnAddPersonInputClear.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddPersonInputClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddPersonInputClear.UseVisualStyleBackColor = false;
             this.btnAddPersonInputClear.Click += new System.EventHandler(this.btnAddPersonInputClear_Click);
-            this.btnAddPersonInputClear.Resize += new System.EventHandler(this.btnAddPersonInputClear_Resize);
             // 
             // btnAddPersonInputSavePerson
             // 
@@ -445,23 +450,22 @@
             this.btnAddPersonInputSavePerson.Location = new System.Drawing.Point(0, 0);
             this.btnAddPersonInputSavePerson.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.btnAddPersonInputSavePerson.Name = "btnAddPersonInputSavePerson";
-            this.btnAddPersonInputSavePerson.Size = new System.Drawing.Size(164, 42);
+            this.btnAddPersonInputSavePerson.Size = new System.Drawing.Size(171, 51);
             this.btnAddPersonInputSavePerson.TabIndex = 0;
             this.btnAddPersonInputSavePerson.Text = "Save Person";
             this.btnAddPersonInputSavePerson.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddPersonInputSavePerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddPersonInputSavePerson.UseVisualStyleBackColor = false;
             this.btnAddPersonInputSavePerson.Click += new System.EventHandler(this.btnAddPersonInputSavePerson_Click);
-            this.btnAddPersonInputSavePerson.Resize += new System.EventHandler(this.btnAddPersonInputSavePerson_Resize);
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.pictureBox3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(15, 15);
+            this.panel4.Location = new System.Drawing.Point(5, 5);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1029, 44);
+            this.panel4.Size = new System.Drawing.Size(1073, 44);
             this.panel4.TabIndex = 0;
             // 
             // label3
@@ -493,11 +497,10 @@
             this.pnlAddPersonDataGridView.Controls.Add(this.tableLayoutPanel4);
             this.pnlAddPersonDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAddPersonDataGridView.ForeColor = System.Drawing.Color.White;
-            this.pnlAddPersonDataGridView.Location = new System.Drawing.Point(10, 267);
-            this.pnlAddPersonDataGridView.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlAddPersonDataGridView.Location = new System.Drawing.Point(8, 269);
             this.pnlAddPersonDataGridView.Name = "pnlAddPersonDataGridView";
-            this.pnlAddPersonDataGridView.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlAddPersonDataGridView.Size = new System.Drawing.Size(1059, 507);
+            this.pnlAddPersonDataGridView.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlAddPersonDataGridView.Size = new System.Drawing.Size(1083, 527);
             this.pnlAddPersonDataGridView.TabIndex = 1;
             this.pnlAddPersonDataGridView.Resize += new System.EventHandler(this.pnlAddPersonDataGridView_Resize);
             // 
@@ -509,13 +512,13 @@
             this.tableLayoutPanel4.Controls.Add(this.panel10, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.panel12, 0, 2);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(15, 15);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(5, 5);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 3;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.40909F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.59091F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1029, 477);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1073, 517);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // panel2
@@ -528,14 +531,14 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1029, 102);
+            this.panel2.Size = new System.Drawing.Size(1073, 112);
             this.panel2.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.refresh__5_;
-            this.button1.Location = new System.Drawing.Point(969, 53);
+            this.button1.Location = new System.Drawing.Point(1013, 63);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(51, 43);
             this.button1.TabIndex = 5;
@@ -547,10 +550,11 @@
             this.pnlAddPersonSearchBar.BackColor = System.Drawing.Color.White;
             this.pnlAddPersonSearchBar.Controls.Add(this.txtAddPersonSearchBar);
             this.pnlAddPersonSearchBar.Controls.Add(this.pictureBox4);
-            this.pnlAddPersonSearchBar.Location = new System.Drawing.Point(1, 50);
+            this.pnlAddPersonSearchBar.Location = new System.Drawing.Point(1, 55);
             this.pnlAddPersonSearchBar.Name = "pnlAddPersonSearchBar";
             this.pnlAddPersonSearchBar.Size = new System.Drawing.Size(493, 45);
             this.pnlAddPersonSearchBar.TabIndex = 4;
+            this.pnlAddPersonSearchBar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddPersonSearchBar_Paint);
             this.pnlAddPersonSearchBar.Leave += new System.EventHandler(this.pnlAddPersonSearchBar_Leave);
             // 
             // txtAddPersonSearchBar
@@ -580,7 +584,7 @@
             this.lblAddPersonSavePerson.AutoSize = true;
             this.lblAddPersonSavePerson.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddPersonSavePerson.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(93)))), ((int)(((byte)(255)))));
-            this.lblAddPersonSavePerson.Location = new System.Drawing.Point(47, 9);
+            this.lblAddPersonSavePerson.Location = new System.Drawing.Point(47, 12);
             this.lblAddPersonSavePerson.Name = "lblAddPersonSavePerson";
             this.lblAddPersonSavePerson.Size = new System.Drawing.Size(156, 32);
             this.lblAddPersonSavePerson.TabIndex = 3;
@@ -590,7 +594,7 @@
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user__7_;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 9);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(46, 38);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -601,11 +605,11 @@
             // 
             this.panel10.Controls.Add(this.dataGridViewAddPerson);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(0, 102);
+            this.panel10.Location = new System.Drawing.Point(0, 112);
             this.panel10.Margin = new System.Windows.Forms.Padding(0);
             this.panel10.Name = "panel10";
             this.panel10.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel10.Size = new System.Drawing.Size(1029, 336);
+            this.panel10.Size = new System.Drawing.Size(1073, 366);
             this.panel10.TabIndex = 1;
             // 
             // dataGridViewAddPerson
@@ -614,15 +618,13 @@
             this.dataGridViewAddPerson.AllowUserToDeleteRows = false;
             this.dataGridViewAddPerson.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewAddPerson.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle69.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle69.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle69.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle69.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(213)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle69.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle69.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAddPerson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle69;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAddPerson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewAddPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAddPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colPersonID,
@@ -631,29 +633,32 @@
             this.colPhoneNumber,
             this.colAddress,
             this.colAction});
-            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle75.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle75.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle75.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle75.Padding = new System.Windows.Forms.Padding(4);
-            dataGridViewCellStyle75.SelectionBackColor = System.Drawing.Color.Cyan;
-            dataGridViewCellStyle75.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle75.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewAddPerson.DefaultCellStyle = dataGridViewCellStyle75;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(4);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewAddPerson.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewAddPerson.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewAddPerson.Location = new System.Drawing.Point(0, 5);
             this.dataGridViewAddPerson.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.dataGridViewAddPerson.Name = "dataGridViewAddPerson";
             this.dataGridViewAddPerson.ReadOnly = true;
             this.dataGridViewAddPerson.RowHeadersVisible = false;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewAddPerson.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
-            this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
+            this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.dataGridViewAddPerson.RowTemplate.Height = 39;
             this.dataGridViewAddPerson.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewAddPerson.Size = new System.Drawing.Size(1029, 331);
+            this.dataGridViewAddPerson.Size = new System.Drawing.Size(1073, 361);
             this.dataGridViewAddPerson.TabIndex = 1;
             this.dataGridViewAddPerson.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAddPerson_CellClick);
             this.dataGridViewAddPerson.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewAddPerson_CellPainting);
@@ -669,9 +674,9 @@
             // 
             // colSL
             // 
-            dataGridViewCellStyle70.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle70.SelectionForeColor = System.Drawing.Color.Black;
-            this.colSL.DefaultCellStyle = dataGridViewCellStyle70;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.colSL.DefaultCellStyle = dataGridViewCellStyle2;
             this.colSL.FillWeight = 60F;
             this.colSL.HeaderText = "SL";
             this.colSL.Name = "colSL";
@@ -682,9 +687,9 @@
             // 
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colName.DataPropertyName = "PersonName";
-            dataGridViewCellStyle71.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle71.SelectionForeColor = System.Drawing.Color.Black;
-            this.colName.DefaultCellStyle = dataGridViewCellStyle71;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.colName.DefaultCellStyle = dataGridViewCellStyle3;
             this.colName.FillWeight = 100.25F;
             this.colName.HeaderText = "Name";
             this.colName.Name = "colName";
@@ -694,11 +699,11 @@
             // 
             this.colPhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colPhoneNumber.DataPropertyName = "PhoneNumber";
-            dataGridViewCellStyle72.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle72.Format = "N0";
-            dataGridViewCellStyle72.NullValue = null;
-            dataGridViewCellStyle72.SelectionForeColor = System.Drawing.Color.Black;
-            this.colPhoneNumber.DefaultCellStyle = dataGridViewCellStyle72;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.colPhoneNumber.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPhoneNumber.FillWeight = 76.38889F;
             this.colPhoneNumber.HeaderText = "Phone Number";
             this.colPhoneNumber.Name = "colPhoneNumber";
@@ -708,19 +713,19 @@
             // 
             this.colAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colAddress.DataPropertyName = "Address";
-            dataGridViewCellStyle73.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle73.SelectionForeColor = System.Drawing.Color.Black;
-            this.colAddress.DefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.colAddress.DefaultCellStyle = dataGridViewCellStyle5;
             this.colAddress.HeaderText = "Address";
             this.colAddress.Name = "colAddress";
             this.colAddress.ReadOnly = true;
             // 
             // colAction
             // 
-            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle74.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle74.SelectionForeColor = System.Drawing.Color.Black;
-            this.colAction.DefaultCellStyle = dataGridViewCellStyle74;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            this.colAction.DefaultCellStyle = dataGridViewCellStyle6;
             this.colAction.FillWeight = 65F;
             this.colAction.HeaderText = "Action";
             this.colAction.Name = "colAction";
@@ -733,7 +738,7 @@
             this.panel12.Controls.Add(this.lblDataGridViewTotalPersonsNumber);
             this.panel12.Controls.Add(this.lblDataGridViewTotalPersons);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel12.Location = new System.Drawing.Point(0, 438);
+            this.panel12.Location = new System.Drawing.Point(0, 478);
             this.panel12.Margin = new System.Windows.Forms.Padding(0);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(164, 39);
@@ -767,10 +772,10 @@
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(248)))), ((int)(((byte)(252)))));
             this.panel3.Controls.Add(this.pnlIdia);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(15, 799);
+            this.panel3.Location = new System.Drawing.Point(5, 809);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.panel3.Size = new System.Drawing.Size(1079, 60);
+            this.panel3.Size = new System.Drawing.Size(1099, 60);
             this.panel3.TabIndex = 3;
             // 
             // pnlIdia
@@ -781,7 +786,7 @@
             this.pnlIdia.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlIdia.Location = new System.Drawing.Point(10, 0);
             this.pnlIdia.Name = "pnlIdia";
-            this.pnlIdia.Size = new System.Drawing.Size(1059, 60);
+            this.pnlIdia.Size = new System.Drawing.Size(1079, 60);
             this.pnlIdia.TabIndex = 0;
             this.pnlIdia.Resize += new System.EventHandler(this.pnlIdia_Resize);
             // 
@@ -814,9 +819,9 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle76.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle76.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle76;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn2.HeaderText = "SL";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
@@ -824,9 +829,9 @@
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn3.DataPropertyName = "PersonName";
-            dataGridViewCellStyle77.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle77.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle77;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn3.HeaderText = "Name";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
@@ -834,11 +839,11 @@
             // 
             this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn4.DataPropertyName = "PhoneNumber";
-            dataGridViewCellStyle78.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle78.Format = "N0";
-            dataGridViewCellStyle78.NullValue = null;
-            dataGridViewCellStyle78.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle78;
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = null;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn4.HeaderText = "Phone Number";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
@@ -846,19 +851,19 @@
             // 
             this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn5.DataPropertyName = "Address";
-            dataGridViewCellStyle79.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle79.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle79;
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn5.HeaderText = "Address";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // dataGridViewButtonColumn1
             // 
-            dataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle80.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle80.NullValue = null;
-            dataGridViewCellStyle80.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewButtonColumn1.DefaultCellStyle = dataGridViewCellStyle80;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle13.NullValue = null;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewButtonColumn1.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewButtonColumn1.FillWeight = 65F;
             this.dataGridViewButtonColumn1.HeaderText = "Action";
             this.dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
@@ -873,9 +878,9 @@
             // 
             // dataGridViewTextBoxColumn7
             // 
-            dataGridViewCellStyle81.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle81.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle81;
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewTextBoxColumn7.HeaderText = "SL";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
@@ -883,9 +888,9 @@
             // 
             this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn8.DataPropertyName = "PersonName";
-            dataGridViewCellStyle82.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle82.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle82;
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewTextBoxColumn8.HeaderText = "Name";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
@@ -893,11 +898,11 @@
             // 
             this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn9.DataPropertyName = "PhoneNumber";
-            dataGridViewCellStyle83.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle83.Format = "N0";
-            dataGridViewCellStyle83.NullValue = null;
-            dataGridViewCellStyle83.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle83;
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle16.Format = "N0";
+            dataGridViewCellStyle16.NullValue = null;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewTextBoxColumn9.HeaderText = "Phone Number";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
@@ -905,19 +910,19 @@
             // 
             this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn10.DataPropertyName = "Address";
-            dataGridViewCellStyle84.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle84.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle84;
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridViewTextBoxColumn10.HeaderText = "Address";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             // 
             // dataGridViewButtonColumn2
             // 
-            dataGridViewCellStyle85.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle85.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle85.NullValue = null;
-            dataGridViewCellStyle85.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewButtonColumn2.DefaultCellStyle = dataGridViewCellStyle85;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.NullValue = null;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewButtonColumn2.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewButtonColumn2.FillWeight = 65F;
             this.dataGridViewButtonColumn2.HeaderText = "Action";
             this.dataGridViewButtonColumn2.Name = "dataGridViewButtonColumn2";

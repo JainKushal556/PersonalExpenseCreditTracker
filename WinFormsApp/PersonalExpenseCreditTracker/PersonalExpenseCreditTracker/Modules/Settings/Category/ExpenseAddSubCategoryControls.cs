@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 {
@@ -14,48 +15,70 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         public ExpenseAddSubCategoryControls()
         {
             InitializeComponent();
-            this.Resize += ExpenseAddSubCategoryControls_Resize;
-            CenterPanel();
-            this.txtSubCategory.Enter += new System.EventHandler(this.txtSubCategory_Enter);
-            this.txtSubCategory.Leave += new System.EventHandler(this.txtSubCategory_Leave);
         }
 
-        private void pnlContent_Paint(object sender, PaintEventArgs e)
-        {
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse);
 
-        }
-        private void CenterPanel()
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        // All Border Cornar Radius
+        private void SetRadius(Control control, int radius)
         {
-            pnlContent.Location = new Point(
-                (this.ClientSize.Width - pnlContent.Width) / 2,
-                (this.ClientSize.Height - pnlContent.Height) / 2
-            );
-        }
-        private void ExpenseAddSubCategoryControls_Resize(object sender, EventArgs e)
-        {
-            CenterPanel();
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
         }
 
         private void ExpenseAddSubCategoryControls_Load(object sender, EventArgs e)
         {
-            txtSubCategory.Text = "  Enter Subcategory name";
-            txtSubCategory.ForeColor = Color.FromArgb(45, 45, 45);
+            txtSubCategory.Text = "  Enter Sub Category Name";
+            txtSubCategory.ForeColor = Color.Gray;
+            SetRadius(pnlBody, 15);
+            SetRadius(btnCancel, 5);
+            SetRadius(btnSave, 5);
+
+            rdActive.Checked = true;
 
         }
         private void txtSubCategory_Enter(object sender, EventArgs e)
         {
-            if (txtSubCategory.Text == "  Enter Subcategory name")
+            if (txtSubCategory.Text == "  Enter Sub Category Name")
             {
                 txtSubCategory.Text = "";
-                txtSubCategory.ForeColor = Color.FromArgb(45, 45, 45);
+                txtSubCategory.ForeColor = Color.Black;
             }
         }
         private void txtSubCategory_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtSubCategory.Text))
             {
-                txtSubCategory.Text = "  Enter Subcategory name";
-                txtSubCategory.ForeColor = Color.FromArgb(150, 150, 150);
+                txtSubCategory.Text = "  Enter Sub Category Name";
+                txtSubCategory.ForeColor = Color.Gray;
             }
         }
 
@@ -72,6 +95,19 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         private void btnSave_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Saved Expense SubCategory");
+            this.Close();
+        }
+
+        private void rbInactive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdInactive.Checked)
+                rdActive.Checked = false;
+        }
+
+        private void rbActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdActive.Checked)
+                rdInactive.Checked = false;
         }
     }
 }

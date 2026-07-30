@@ -17,9 +17,9 @@
 
 | Status | Count |
 | ------ | ----: |
-| Total Allotted Procedures | 86 |
-| Total Procedures Found | 86 |
-| `✔️` (All Okay) | 86 |
+| Total Allotted Procedures | 99 |
+| Total Procedures Found | 99 |
+| `✔️` (All Okay) | 99 |
 | `✅` (Pending Review) | 0 |
 | `❌` (Fix Needed) | 0 |
 
@@ -27,9 +27,9 @@
 
 ## 🟣 Team A — User, Task, Note
 **Assigned Area:** Authentication, User Management, Task, Note, Task Reminder
-**Total Allotted Procedures:** 30
+**Total Allotted Procedures:** 31
 
-### `✔️` ALL OKAY (30)
+### `✔️` ALL OKAY (31)
 - `spChangePassword`
 - `spDeleteNote`
 - `spDeleteTask`
@@ -39,6 +39,7 @@
 - `spForgetPassword`
 - `spGetActiveUserDetails`
 - `spGetAllNotes`
+- `spGetAllTaskPriorities`
 - `spGetAllTasks`
 - `spGetCompletedTasks`
 - `spGetNotesBetweenDates`
@@ -74,9 +75,9 @@
 
 ## 🟢 Team B — Expense, Credit, Settings
 **Assigned Area:** Expense, Credit, Categories, Subcategories, Payment Type
-**Total Allotted Procedures:** 35
+**Total Allotted Procedures:** 37
 
-### `✔️` ALL OKAY (35)
+### `✔️` ALL OKAY (37)
 - `spDeleteCreditCategoryByUserID`
 - `spDeleteCreditSubCategoryByUserID`
 - `spDeleteExpenseCategoryByUserID`
@@ -89,6 +90,7 @@
 - `spFilterExpenseByCategory`
 - `spFilterExpenseByCategoryAndSubCategory`
 - `spFilterExpenseByDateRange`
+- `spGetAllCreditCategory`
 - `spGetAllCreditsByID`
 - `spGetAllExpensesByID`
 - `spGetAllPaymentTypes`
@@ -96,6 +98,7 @@
 - `spGetCategoryWiseExpenseReport`
 - `spGetCreditCategoriesByUserID`
 - `spGetCreditSubCategoriesByUserID`
+- `spGetCreditSubCategoryByCategoryID`
 - `spGetExpenseCategoriesByUserID`
 - `spGetExpenseSubCategoriesByUserID`
 - `spGetMonthlyCreditSummary`
@@ -126,9 +129,19 @@
 
 ## 🟠 Team C — Lent, Borrow
 **Assigned Area:** Lent, Borrow, Persons, Status, Reminders
-**Total Allotted Procedures:** 21
+**Total Allotted Procedures:** 31
 
-### `✔️` ALL OKAY (21)
+### `✔️` ALL OKAY (31)
+- `spFilterBorrowByAmountRange`
+- `spFilterBorrowByDateRange`
+- `spFilterBorrowByPaymentMethod`
+- `spFilterBorrowByPerson`
+- `spFilterBorrowByStatus`
+- `spFilterLentByAmountRange`
+- `spFilterLentByDateRange`
+- `spFilterLentByPaymentMethod`
+- `spFilterLentByPerson`
+- `spFilterLentByStatus`
 - `spGetAllBorrow`
 - `spGetAllLent`
 - `spGetAllLentBorrowStatus`

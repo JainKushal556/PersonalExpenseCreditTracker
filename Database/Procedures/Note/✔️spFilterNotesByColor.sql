@@ -1,0 +1,63 @@
+CREATE PROCEDURE spFilterNotesByColor
+
+@UserID INT,
+@NoteColorID INT
+
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblUsers
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'UserID Does Not Exist' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN 
+SELECT 'Invalid Note ColorID' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'No Notes Found' AS Message
+RETURN
+END
+
+BEGIN TRY
+SELECT
+tblNote.NoteID,
+tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
+tblNote.NoteTitle,
+tblNote.Description,
+tblNotePriorities.NotePriorityName,
+tblNote.CreatedAt
+FROM tblNote
+LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
+WHERE tblNote.UserID=@UserID
+AND tblNote.NoteColorID=@NoteColorID
+
+ORDER BY tblNote.CreatedAt DESC
+
+END TRY
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
