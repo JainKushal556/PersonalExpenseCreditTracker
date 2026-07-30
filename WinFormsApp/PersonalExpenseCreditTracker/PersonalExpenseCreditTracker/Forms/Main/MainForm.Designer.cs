@@ -843,10 +843,6 @@ namespace PersonalExpenseCreditTracker
             // 
             this.cmbSubCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubCategory.FormattingEnabled = true;
-            this.cmbSubCategory.Items.AddRange(new object[] {
-            "Select SubCategory",
-            "sadf",
-            "dsfdf"});
             this.cmbSubCategory.Location = new System.Drawing.Point(104, 98);
             this.cmbSubCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbSubCategory.Name = "cmbSubCategory";
@@ -868,10 +864,6 @@ namespace PersonalExpenseCreditTracker
             // 
             this.ComboBoxCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxCategory.FormattingEnabled = true;
-            this.ComboBoxCategory.Items.AddRange(new object[] {
-            "Select Category",
-            "Food",
-            "Travel"});
             this.ComboBoxCategory.Location = new System.Drawing.Point(104, 37);
             this.ComboBoxCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ComboBoxCategory.Name = "ComboBoxCategory";
@@ -969,6 +961,7 @@ namespace PersonalExpenseCreditTracker
             this.btnExpenseApplyAmountFilter.TabIndex = 7;
             this.btnExpenseApplyAmountFilter.Text = "Apply";
             this.btnExpenseApplyAmountFilter.UseVisualStyleBackColor = false;
+            this.btnExpenseApplyAmountFilter.Click += new System.EventHandler(this.btnExpenseApplyAmountFilter_Click);
             // 
             // txtMaxAmount
             // 
