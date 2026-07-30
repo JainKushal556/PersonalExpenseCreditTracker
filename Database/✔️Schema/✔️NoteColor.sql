@@ -1,0 +1,5 @@
+CREATE TABLE tblNoteColor (
+    NoteColorID INT PRIMARY KEY IDENTITY(1,1),
+    ColorName VARCHAR(50) NOT NULL UNIQUE,
+    ColorHexCode VARCHAR(20) NULL
+);

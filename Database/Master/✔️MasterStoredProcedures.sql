@@ -2719,12 +2719,16 @@ BEGIN TRY
 SELECT
 tblNote.NoteID,
 tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
 tblNote.NoteTitle,
 tblNote.Description,
 tblNotePriorities.NotePriorityName,
 tblNote.CreatedAt
 FROM tblNote
 LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
 WHERE tblNote.UserID=@UserID
 AND tblNote.NotePriorityID=@PriorityID
 
@@ -2776,6 +2780,9 @@ BEGIN TRY
 SELECT
 tblNote.NoteID,
 tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
 tblNote.NoteTitle,
 tblNote.Description,
 tblNotePriorities.NotePriorityName,
@@ -2783,6 +2790,7 @@ tblNote.CreatedAt
 
 FROM tblNote
 LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
 WHERE tblNote.UserID=@UserID
 ORDER BY tblNote.CreatedAt DESC
 
@@ -2844,12 +2852,17 @@ BEGIN TRY
 
 SELECT
 tblNote.NoteID,
+tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
 tblNote.NoteTitle,
 tblNote.Description,
 tblNotePriorities.NotePriorityName,
 tblNote.CreatedAt
 FROM tblNote
 LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
 WHERE tblNote.UserID=@UserID
 AND CAST(tblNote.CreatedAt AS DATE)
 BETWEEN @FromDate AND @ToDate
@@ -2874,6 +2887,7 @@ CREATE PROCEDURE spInsertNote
 
 @UserID INT,
 @PriorityID INT,
+@NoteColorID INT = 1,
 @NoteTitle VARCHAR(MAX),
 @Description VARCHAR(MAX)
 
@@ -2926,11 +2940,21 @@ SELECT 'Invalid Note PriorityID' AS Message
 RETURN 
 END
 
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'Invalid Note ColorID' AS Message 
+RETURN 
+END
+
 BEGIN TRY
 
-INSERT INTO tblNote (UserID, NotePriorityID, NoteTitle, Description)
+INSERT INTO tblNote (UserID, NotePriorityID, NoteColorID, NoteTitle, Description)
 VALUES
-(@UserID,@PriorityID,@NoteTitle,@Description)
+(@UserID,@PriorityID,@NoteColorID,@NoteTitle,@Description)
 
 SELECT 'Note Inserted Successfully' AS Message
 
@@ -2955,6 +2979,7 @@ CREATE PROCEDURE spUpdateNote
 @UserID INT,
 @NoteID INT,
 @PriorityID INT,
+@NoteColorID INT = 1,
 @NoteTitle VARCHAR(MAX),
 @Description VARCHAR(MAX)
 )
@@ -2997,18 +3022,27 @@ SELECT 'Invalid Note PriorityID' AS Message
 RETURN 
 END
 
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'Invalid Note ColorID' AS Message
+RETURN 
+END
 
 BEGIN TRY
 
 UPDATE tblNote 
 SET
     NotePriorityID=@PriorityID,
+    NoteColorID=@NoteColorID,
     NoteTitle=@NoteTitle,
     Description=@Description
 WHERE UserID=@UserID 
 AND NoteID=@NoteID
 SELECT 'Note Updated Successfully' AS Message
-
 
 END TRY
 BEGIN CATCH
@@ -3066,6 +3100,159 @@ AND NoteID=@NoteID
 SELECT 'Note Priority Updated Successfully' AS Message
 END TRY
 
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetAllNoteColors.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spGetAllNoteColors
+AS
+BEGIN
+    BEGIN TRY
+        SELECT
+            NoteColorID,
+            ColorName,
+            ColorHexCode
+        FROM tblNoteColor
+        ORDER BY NoteColorID ASC;
+    END TRY
+    BEGIN CATCH
+        SELECT ERROR_MESSAGE() AS Message;
+    END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateNoteColor.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spUpdateNoteColor
+(
+@UserID INT,
+@NoteID INT,
+@NoteColorID INT
+)
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteID=@NoteID
+)
+BEGIN
+SELECT 'Invalid UserID Or NoteID' AS Message
+RETURN 
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'Invalid Note ColorID' AS Message
+RETURN 
+END
+
+BEGIN TRY
+
+UPDATE tblNote 
+SET
+    NoteColorID=@NoteColorID
+WHERE UserID=@UserID 
+AND NoteID=@NoteID
+
+SELECT 'Note Color Updated Successfully' AS Message
+END TRY
+
+BEGIN CATCH
+SELECT ERROR_MESSAGE() AS Message
+END CATCH
+END
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterNotesByColor.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterNotesByColor
+
+@UserID INT,
+@NoteColorID INT
+
+AS
+BEGIN
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblUsers
+WHERE UserID=@UserID
+)
+BEGIN
+SELECT 'UserID Does Not Exist' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNoteColor
+WHERE NoteColorID=@NoteColorID
+)
+BEGIN 
+SELECT 'Invalid Note ColorID' AS Message
+RETURN
+END
+
+IF NOT EXISTS
+(
+SELECT 1 FROM tblNote
+WHERE UserID=@UserID
+AND NoteColorID=@NoteColorID
+)
+BEGIN
+SELECT 'No Notes Found' AS Message
+RETURN
+END
+
+BEGIN TRY
+SELECT
+tblNote.NoteID,
+tblNote.NotePriorityID,
+tblNote.NoteColorID,
+tblNoteColor.ColorName,
+tblNoteColor.ColorHexCode,
+tblNote.NoteTitle,
+tblNote.Description,
+tblNotePriorities.NotePriorityName,
+tblNote.CreatedAt
+FROM tblNote
+LEFT JOIN tblNotePriorities ON tblNote.NotePriorityID=tblNotePriorities.NotePriorityID
+LEFT JOIN tblNoteColor ON tblNote.NoteColorID=tblNoteColor.NoteColorID
+WHERE tblNote.UserID=@UserID
+AND tblNote.NoteColorID=@NoteColorID
+
+ORDER BY tblNote.CreatedAt DESC
+
+END TRY
 BEGIN CATCH
 SELECT ERROR_MESSAGE() AS Message
 END CATCH
