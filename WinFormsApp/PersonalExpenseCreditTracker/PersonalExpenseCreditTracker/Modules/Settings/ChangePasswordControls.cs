@@ -67,10 +67,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void ChangePasswordControls_Load(object sender, EventArgs e)
         {
-            //SetRadius(btnChangePasswordCancel, 20);
-            //SetRadius(btnChangePasswordUpdatePassword, 20);
-            //SetRadius(pnlMainBody, 30);
-            SetRadius(this, 30);
+            SetRadius(btnChangePasswordCancel, 5);
+            SetRadius(btnChangePasswordUpdatePassword, 5);
             SetRadius(pnlWeak, 10);
             SetRadius(pnlMedium, 10);
             SetRadius(pnlStrong, 10);
@@ -101,21 +99,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
             picEye2.Image = Properties.Resources.open_eye__2_;
             picEye3.Image = Properties.Resources.open_eye__2_;
         }
-
-        //private void btnChangePasswordUpdatePassword_Resize(object sender, EventArgs e)
-        //{
-        //    SetRadius(btnChangePasswordUpdatePassword, 20);
-        //}
-
-        //private void btnChangePasswordCancel_Resize(object sender, EventArgs e)
-        //{
-        //    SetRadius(btnChangePasswordCancel, 20);
-        //}
-
-        //private void pnlCurrentPasswordText_Resize(object sender, EventArgs e)
-        //{
-        ////    SetRadius(pnlCurrentPasswordText, 20);
-        //}
 
         private int CheckPasswordStrengthLevel(string password)
         {
@@ -385,31 +368,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
             {
                 MessageBox.Show("Password Changed Successfully");
             }
-        }
-
-        //private void pnlMainBody_Resize(object sender, EventArgs e)
-        //{
-        //    SetRadius(pnlMainBody, 30);
-        //}
-
-        private void ChangePasswordControls_Resize(object sender, EventArgs e)
-        {
-            SetRadius(this, 30);
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btnChangePasswordClose_MouseEnter(object sender, EventArgs e)
-        {
-            btnChangePasswordClose.BackColor = Color.Red;
-        }
-
-        private void btnChangePasswordClose_MouseLeave(object sender, EventArgs e)
-        {
-            btnChangePasswordClose.BackColor = Color.Transparent;
         }
     }
 }

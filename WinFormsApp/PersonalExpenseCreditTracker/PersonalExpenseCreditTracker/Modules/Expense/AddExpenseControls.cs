@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 
 namespace PersonalExpenseCreditTracker.Modules.Expense
 {
-    public partial class ExpenseDetailsControl : Form
+    public partial class AddExpenseControls : Form
     {
-        public ExpenseDetailsControl()
+        public AddExpenseControls()
         {
             InitializeComponent();
         }
@@ -203,8 +203,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             SetRadius(btnClear, 5);
         }
 
-        
+        private void cmbAddExpenseSubCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

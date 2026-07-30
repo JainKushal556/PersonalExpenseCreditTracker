@@ -29,33 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlEditNoteDetails = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblRedStar = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.btnCancelDialog = new System.Windows.Forms.Button();
-            this.pnlDescription = new System.Windows.Forms.Panel();
-            this.rtxtDescription = new System.Windows.Forms.RichTextBox();
-            this.pnlButtons = new System.Windows.Forms.Panel();
-            this.btnUpdateNote = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.flpNoteColors = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnlColorWhite = new System.Windows.Forms.Panel();
-            this.pnlColorCream = new System.Windows.Forms.Panel();
-            this.pnlColorYellow = new System.Windows.Forms.Panel();
-            this.pnlColorOrange = new System.Windows.Forms.Panel();
-            this.pnlColorPink = new System.Windows.Forms.Panel();
-            this.pnlColorPurple = new System.Windows.Forms.Panel();
-            this.pnlColorBlue = new System.Windows.Forms.Panel();
-            this.pnlColorGreen = new System.Windows.Forms.Panel();
-            this.pnlColorMint = new System.Windows.Forms.Panel();
-            this.pnlColorGray = new System.Windows.Forms.Panel();
-            this.pnlTextBlack = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.pnlTextRed = new System.Windows.Forms.Panel();
-            this.pnlTextPurple = new System.Windows.Forms.Panel();
-            this.pnlTextBrown = new System.Windows.Forms.Panel();
-            this.lblNoteColor = new System.Windows.Forms.Label();
+            this.btnUpdateNote = new System.Windows.Forms.Button();
             this.tblPriority = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbLow = new System.Windows.Forms.RadioButton();
@@ -63,6 +38,30 @@
             this.rbHigh = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rbMedium = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblRedStar = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnCancelDialog = new System.Windows.Forms.Button();
+            this.pnlDescription = new System.Windows.Forms.Panel();
+            this.rtxtDescription = new System.Windows.Forms.RichTextBox();
+            this.flpNoteColors = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlColorWhite = new System.Windows.Forms.Panel();
+            this.pnlColorCream = new System.Windows.Forms.Panel();
+            this.pnlColorYellow = new System.Windows.Forms.Panel();
+            this.pnlColorOrange = new System.Windows.Forms.Panel();
+            this.pnlColorPink = new System.Windows.Forms.Panel();
+            this.pnlColorLavender = new System.Windows.Forms.Panel();
+            this.pnlColorBlue = new System.Windows.Forms.Panel();
+            this.pnlColorGreen = new System.Windows.Forms.Panel();
+            this.pnlColorMint = new System.Windows.Forms.Panel();
+            this.pnlColorGray = new System.Windows.Forms.Panel();
+            this.pnlColorBlack = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.pnlColorRed = new System.Windows.Forms.Panel();
+            this.pnlColorPurple = new System.Windows.Forms.Panel();
+            this.pnlColorBrown = new System.Windows.Forms.Panel();
+            this.lblNoteColor = new System.Windows.Forms.Label();
             this.lblPriority = new System.Windows.Forms.Label();
             this.lblDescriptionCount = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
@@ -72,31 +71,31 @@
             this.pnlAddNoteHeader = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlEditNoteDetails.SuspendLayout();
-            this.pnlDescription.SuspendLayout();
-            this.pnlButtons.SuspendLayout();
-            this.flpNoteColors.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.tblPriority.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.pnlDescription.SuspendLayout();
+            this.flpNoteColors.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.pnlAddNoteHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlEditNoteDetails
             // 
-            this.pnlEditNoteDetails.BackColor = System.Drawing.Color.White;
+            this.pnlEditNoteDetails.BackColor = System.Drawing.Color.Transparent;
             this.pnlEditNoteDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlEditNoteDetails.Controls.Add(this.btnCancel);
+            this.pnlEditNoteDetails.Controls.Add(this.btnUpdateNote);
+            this.pnlEditNoteDetails.Controls.Add(this.tblPriority);
             this.pnlEditNoteDetails.Controls.Add(this.label2);
             this.pnlEditNoteDetails.Controls.Add(this.label1);
             this.pnlEditNoteDetails.Controls.Add(this.lblRedStar);
             this.pnlEditNoteDetails.Controls.Add(this.panel4);
             this.pnlEditNoteDetails.Controls.Add(this.btnCancelDialog);
             this.pnlEditNoteDetails.Controls.Add(this.pnlDescription);
-            this.pnlEditNoteDetails.Controls.Add(this.pnlButtons);
             this.pnlEditNoteDetails.Controls.Add(this.flpNoteColors);
             this.pnlEditNoteDetails.Controls.Add(this.lblNoteColor);
-            this.pnlEditNoteDetails.Controls.Add(this.tblPriority);
             this.pnlEditNoteDetails.Controls.Add(this.lblPriority);
             this.pnlEditNoteDetails.Controls.Add(this.lblDescriptionCount);
             this.pnlEditNoteDetails.Controls.Add(this.lblDescription);
@@ -105,20 +104,157 @@
             this.pnlEditNoteDetails.Controls.Add(this.lblNoteTitle);
             this.pnlEditNoteDetails.Controls.Add(this.pnlAddNoteHeader);
             this.pnlEditNoteDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEditNoteDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlEditNoteDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlEditNoteDetails.Location = new System.Drawing.Point(0, 0);
             this.pnlEditNoteDetails.Margin = new System.Windows.Forms.Padding(0);
             this.pnlEditNoteDetails.Name = "pnlEditNoteDetails";
             this.pnlEditNoteDetails.Padding = new System.Windows.Forms.Padding(10);
             this.pnlEditNoteDetails.Size = new System.Drawing.Size(487, 538);
             this.pnlEditNoteDetails.TabIndex = 0;
-            this.pnlEditNoteDetails.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            this.pnlEditNoteDetails.MouseEnter += new System.EventHandler(this.pnlEditNoteDetails_MouseEnter);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.3F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(136, 479);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(120, 41);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Resize += new System.EventHandler(this.btnCancel_Resize);
+            // 
+            // btnUpdateNote
+            // 
+            this.btnUpdateNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnUpdateNote.FlatAppearance.BorderSize = 0;
+            this.btnUpdateNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
+            this.btnUpdateNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
+            this.btnUpdateNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateNote.Font = new System.Drawing.Font("Segoe UI Semibold", 9.3F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateNote.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update__4_;
+            this.btnUpdateNote.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnUpdateNote.Location = new System.Drawing.Point(280, 479);
+            this.btnUpdateNote.Name = "btnUpdateNote";
+            this.btnUpdateNote.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.btnUpdateNote.Size = new System.Drawing.Size(182, 41);
+            this.btnUpdateNote.TabIndex = 1;
+            this.btnUpdateNote.Text = " Update Note";
+            this.btnUpdateNote.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUpdateNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUpdateNote.UseVisualStyleBackColor = false;
+            this.btnUpdateNote.Click += new System.EventHandler(this.btnUpdateNote_Click);
+            this.btnUpdateNote.Resize += new System.EventHandler(this.btnUpdateNote_Resize);
+            // 
+            // tblPriority
+            // 
+            this.tblPriority.BackColor = System.Drawing.Color.Transparent;
+            this.tblPriority.ColumnCount = 3;
+            this.tblPriority.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.tblPriority.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
+            this.tblPriority.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.tblPriority.Controls.Add(this.panel1, 0, 0);
+            this.tblPriority.Controls.Add(this.panel3, 2, 0);
+            this.tblPriority.Controls.Add(this.panel2, 1, 0);
+            this.tblPriority.Location = new System.Drawing.Point(18, 330);
+            this.tblPriority.Name = "tblPriority";
+            this.tblPriority.RowCount = 1;
+            this.tblPriority.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblPriority.Size = new System.Drawing.Size(450, 45);
+            this.tblPriority.TabIndex = 25;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rbLow);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(10, 5);
+            this.panel1.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(133, 35);
+            this.panel1.TabIndex = 0;
+            // 
+            // rbLow
+            // 
+            this.rbLow.AutoSize = true;
+            this.rbLow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbLow.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbLow.ForeColor = System.Drawing.Color.ForestGreen;
+            this.rbLow.Location = new System.Drawing.Point(38, 4);
+            this.rbLow.Name = "rbLow";
+            this.rbLow.Size = new System.Drawing.Size(58, 24);
+            this.rbLow.TabIndex = 0;
+            this.rbLow.TabStop = true;
+            this.rbLow.Text = "Low";
+            this.rbLow.UseVisualStyleBackColor = true;
+            this.rbLow.CheckedChanged += new System.EventHandler(this.rbLow_CheckedChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.rbHigh);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(311, 5);
+            this.panel3.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(134, 35);
+            this.panel3.TabIndex = 2;
+            // 
+            // rbHigh
+            // 
+            this.rbHigh.AutoSize = true;
+            this.rbHigh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbHigh.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbHigh.ForeColor = System.Drawing.Color.Red;
+            this.rbHigh.Location = new System.Drawing.Point(35, 5);
+            this.rbHigh.Name = "rbHigh";
+            this.rbHigh.Size = new System.Drawing.Size(62, 24);
+            this.rbHigh.TabIndex = 2;
+            this.rbHigh.Text = "High";
+            this.rbHigh.UseVisualStyleBackColor = true;
+            this.rbHigh.CheckedChanged += new System.EventHandler(this.rbHigh_CheckedChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.rbMedium);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(158, 5);
+            this.panel2.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(138, 35);
+            this.panel2.TabIndex = 1;
+            // 
+            // rbMedium
+            // 
+            this.rbMedium.AutoSize = true;
+            this.rbMedium.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbMedium.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbMedium.ForeColor = System.Drawing.Color.DarkOrange;
+            this.rbMedium.Location = new System.Drawing.Point(25, 5);
+            this.rbMedium.Name = "rbMedium";
+            this.rbMedium.Size = new System.Drawing.Size(87, 24);
+            this.rbMedium.TabIndex = 1;
+            this.rbMedium.TabStop = true;
+            this.rbMedium.Text = "Medium";
+            this.rbMedium.UseVisualStyleBackColor = true;
+            this.rbMedium.CheckedChanged += new System.EventHandler(this.rbMedium_CheckedChanged);
             // 
             // label2
             // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(80, 303);
+            this.label2.Location = new System.Drawing.Point(85, 303);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 21);
@@ -127,8 +263,9 @@
             // 
             // label1
             // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(108, 154);
+            this.label1.Location = new System.Drawing.Point(115, 154);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 21);
@@ -137,8 +274,9 @@
             // 
             // lblRedStar
             // 
+            this.lblRedStar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRedStar.ForeColor = System.Drawing.Color.Red;
-            this.lblRedStar.Location = new System.Drawing.Point(98, 69);
+            this.lblRedStar.Location = new System.Drawing.Point(107, 70);
             this.lblRedStar.Margin = new System.Windows.Forms.Padding(0);
             this.lblRedStar.Name = "lblRedStar";
             this.lblRedStar.Size = new System.Drawing.Size(46, 21);
@@ -158,9 +296,9 @@
             this.btnCancelDialog.FlatAppearance.BorderSize = 0;
             this.btnCancelDialog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelDialog.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnCancelDialog.Location = new System.Drawing.Point(435, 8);
+            this.btnCancelDialog.Location = new System.Drawing.Point(435, 10);
             this.btnCancelDialog.Name = "btnCancelDialog";
-            this.btnCancelDialog.Size = new System.Drawing.Size(44, 42);
+            this.btnCancelDialog.Size = new System.Drawing.Size(39, 35);
             this.btnCancelDialog.TabIndex = 1;
             this.btnCancelDialog.UseVisualStyleBackColor = true;
             this.btnCancelDialog.Click += new System.EventHandler(this.btnCancelDialog_Click);
@@ -171,15 +309,17 @@
             // 
             this.pnlDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDescription.Controls.Add(this.rtxtDescription);
-            this.pnlDescription.Location = new System.Drawing.Point(18, 186);
+            this.pnlDescription.Location = new System.Drawing.Point(18, 184);
             this.pnlDescription.Name = "pnlDescription";
-            this.pnlDescription.Size = new System.Drawing.Size(450, 95);
+            this.pnlDescription.Size = new System.Drawing.Size(450, 96);
             this.pnlDescription.TabIndex = 12;
             // 
             // rtxtDescription
             // 
+            this.rtxtDescription.BackColor = System.Drawing.Color.White;
             this.rtxtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtxtDescription.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtxtDescription.ForeColor = System.Drawing.Color.Black;
             this.rtxtDescription.Location = new System.Drawing.Point(0, -1);
             this.rtxtDescription.MaxLength = 1000;
             this.rtxtDescription.Name = "rtxtDescription";
@@ -189,54 +329,6 @@
             this.rtxtDescription.Text = "";
             this.rtxtDescription.TextChanged += new System.EventHandler(this.rtxtDescription_TextChanged);
             // 
-            // pnlButtons
-            // 
-            this.pnlButtons.Controls.Add(this.btnUpdateNote);
-            this.pnlButtons.Controls.Add(this.btnCancel);
-            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(10, 466);
-            this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(465, 60);
-            this.pnlButtons.TabIndex = 11;
-            // 
-            // btnUpdateNote
-            // 
-            this.btnUpdateNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
-            this.btnUpdateNote.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
-            this.btnUpdateNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
-            this.btnUpdateNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
-            this.btnUpdateNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateNote.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateNote.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update;
-            this.btnUpdateNote.Location = new System.Drawing.Point(287, 13);
-            this.btnUpdateNote.Name = "btnUpdateNote";
-            this.btnUpdateNote.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.btnUpdateNote.Size = new System.Drawing.Size(173, 41);
-            this.btnUpdateNote.TabIndex = 1;
-            this.btnUpdateNote.Text = " Update Note";
-            this.btnUpdateNote.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUpdateNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUpdateNote.UseVisualStyleBackColor = false;
-            this.btnUpdateNote.Click += new System.EventHandler(this.btnUpdateNote_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(155, 14);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(120, 41);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // flpNoteColors
             // 
             this.flpNoteColors.Controls.Add(this.pnlColorWhite);
@@ -244,24 +336,25 @@
             this.flpNoteColors.Controls.Add(this.pnlColorYellow);
             this.flpNoteColors.Controls.Add(this.pnlColorOrange);
             this.flpNoteColors.Controls.Add(this.pnlColorPink);
-            this.flpNoteColors.Controls.Add(this.pnlColorPurple);
+            this.flpNoteColors.Controls.Add(this.pnlColorLavender);
             this.flpNoteColors.Controls.Add(this.pnlColorBlue);
             this.flpNoteColors.Controls.Add(this.pnlColorGreen);
             this.flpNoteColors.Controls.Add(this.pnlColorMint);
             this.flpNoteColors.Controls.Add(this.pnlColorGray);
-            this.flpNoteColors.Controls.Add(this.pnlTextBlack);
+            this.flpNoteColors.Controls.Add(this.pnlColorBlack);
             this.flpNoteColors.Controls.Add(this.panel5);
-            this.flpNoteColors.Controls.Add(this.pnlTextPurple);
-            this.flpNoteColors.Controls.Add(this.pnlTextBrown);
+            this.flpNoteColors.Controls.Add(this.pnlColorPurple);
+            this.flpNoteColors.Controls.Add(this.pnlColorBrown);
             this.flpNoteColors.Location = new System.Drawing.Point(18, 411);
             this.flpNoteColors.Margin = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.flpNoteColors.Name = "flpNoteColors";
             this.flpNoteColors.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.flpNoteColors.Size = new System.Drawing.Size(450, 54);
+            this.flpNoteColors.Size = new System.Drawing.Size(450, 42);
             this.flpNoteColors.TabIndex = 10;
             // 
             // pnlColorWhite
             // 
+            this.pnlColorWhite.BackColor = System.Drawing.Color.White;
             this.pnlColorWhite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlColorWhite.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pnlColorWhite.Location = new System.Drawing.Point(5, 10);
@@ -269,6 +362,7 @@
             this.pnlColorWhite.Name = "pnlColorWhite";
             this.pnlColorWhite.Size = new System.Drawing.Size(20, 20);
             this.pnlColorWhite.TabIndex = 0;
+            this.pnlColorWhite.Click += new System.EventHandler(this.pnlColorWhite_Click);
             // 
             // pnlColorCream
             // 
@@ -280,6 +374,7 @@
             this.pnlColorCream.Name = "pnlColorCream";
             this.pnlColorCream.Size = new System.Drawing.Size(20, 20);
             this.pnlColorCream.TabIndex = 1;
+            this.pnlColorCream.Click += new System.EventHandler(this.pnlColorCream_Click);
             // 
             // pnlColorYellow
             // 
@@ -291,6 +386,7 @@
             this.pnlColorYellow.Name = "pnlColorYellow";
             this.pnlColorYellow.Size = new System.Drawing.Size(20, 20);
             this.pnlColorYellow.TabIndex = 2;
+            this.pnlColorYellow.Click += new System.EventHandler(this.pnlColorYellow_Click);
             // 
             // pnlColorOrange
             // 
@@ -302,6 +398,7 @@
             this.pnlColorOrange.Name = "pnlColorOrange";
             this.pnlColorOrange.Size = new System.Drawing.Size(20, 20);
             this.pnlColorOrange.TabIndex = 3;
+            this.pnlColorOrange.Click += new System.EventHandler(this.pnlColorOrange_Click);
             // 
             // pnlColorPink
             // 
@@ -313,17 +410,19 @@
             this.pnlColorPink.Name = "pnlColorPink";
             this.pnlColorPink.Size = new System.Drawing.Size(20, 20);
             this.pnlColorPink.TabIndex = 4;
+            this.pnlColorPink.Click += new System.EventHandler(this.pnlColorPink_Click);
             // 
-            // pnlColorPurple
+            // pnlColorLavender
             // 
-            this.pnlColorPurple.BackColor = System.Drawing.Color.Lavender;
-            this.pnlColorPurple.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorPurple.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorPurple.Location = new System.Drawing.Point(155, 10);
-            this.pnlColorPurple.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorPurple.Name = "pnlColorPurple";
-            this.pnlColorPurple.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorPurple.TabIndex = 5;
+            this.pnlColorLavender.BackColor = System.Drawing.Color.Lavender;
+            this.pnlColorLavender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlColorLavender.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlColorLavender.Location = new System.Drawing.Point(155, 10);
+            this.pnlColorLavender.Margin = new System.Windows.Forms.Padding(5);
+            this.pnlColorLavender.Name = "pnlColorLavender";
+            this.pnlColorLavender.Size = new System.Drawing.Size(20, 20);
+            this.pnlColorLavender.TabIndex = 5;
+            this.pnlColorLavender.Click += new System.EventHandler(this.pnlColorLavender_Click);
             // 
             // pnlColorBlue
             // 
@@ -335,6 +434,7 @@
             this.pnlColorBlue.Name = "pnlColorBlue";
             this.pnlColorBlue.Size = new System.Drawing.Size(20, 20);
             this.pnlColorBlue.TabIndex = 6;
+            this.pnlColorBlue.Click += new System.EventHandler(this.pnlColorBlue_Click);
             // 
             // pnlColorGreen
             // 
@@ -346,6 +446,7 @@
             this.pnlColorGreen.Name = "pnlColorGreen";
             this.pnlColorGreen.Size = new System.Drawing.Size(20, 20);
             this.pnlColorGreen.TabIndex = 7;
+            this.pnlColorGreen.Click += new System.EventHandler(this.pnlColorGreen_Click);
             // 
             // pnlColorMint
             // 
@@ -357,6 +458,7 @@
             this.pnlColorMint.Name = "pnlColorMint";
             this.pnlColorMint.Size = new System.Drawing.Size(20, 20);
             this.pnlColorMint.TabIndex = 8;
+            this.pnlColorMint.Click += new System.EventHandler(this.pnlColorMint_Click);
             // 
             // pnlColorGray
             // 
@@ -368,23 +470,25 @@
             this.pnlColorGray.Name = "pnlColorGray";
             this.pnlColorGray.Size = new System.Drawing.Size(20, 20);
             this.pnlColorGray.TabIndex = 9;
+            this.pnlColorGray.Click += new System.EventHandler(this.pnlColorGray_Click);
             // 
-            // pnlTextBlack
+            // pnlColorBlack
             // 
-            this.pnlTextBlack.BackColor = System.Drawing.Color.Black;
-            this.pnlTextBlack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlTextBlack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlTextBlack.Location = new System.Drawing.Point(305, 10);
-            this.pnlTextBlack.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlTextBlack.Name = "pnlTextBlack";
-            this.pnlTextBlack.Size = new System.Drawing.Size(20, 20);
-            this.pnlTextBlack.TabIndex = 10;
+            this.pnlColorBlack.BackColor = System.Drawing.Color.Black;
+            this.pnlColorBlack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlColorBlack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlColorBlack.Location = new System.Drawing.Point(305, 10);
+            this.pnlColorBlack.Margin = new System.Windows.Forms.Padding(5);
+            this.pnlColorBlack.Name = "pnlColorBlack";
+            this.pnlColorBlack.Size = new System.Drawing.Size(20, 20);
+            this.pnlColorBlack.TabIndex = 10;
+            this.pnlColorBlack.Click += new System.EventHandler(this.pnlColorBlack_Click);
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Gainsboro;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.pnlTextRed);
+            this.panel5.Controls.Add(this.pnlColorRed);
             this.panel5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panel5.Location = new System.Drawing.Point(335, 10);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
@@ -392,147 +496,59 @@
             this.panel5.Size = new System.Drawing.Size(20, 20);
             this.panel5.TabIndex = 11;
             // 
-            // pnlTextRed
+            // pnlColorRed
             // 
-            this.pnlTextRed.BackColor = System.Drawing.Color.Red;
-            this.pnlTextRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlTextRed.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlTextRed.Location = new System.Drawing.Point(-1, -1);
-            this.pnlTextRed.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlTextRed.Name = "pnlTextRed";
-            this.pnlTextRed.Size = new System.Drawing.Size(20, 20);
-            this.pnlTextRed.TabIndex = 10;
+            this.pnlColorRed.BackColor = System.Drawing.Color.Red;
+            this.pnlColorRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlColorRed.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlColorRed.Location = new System.Drawing.Point(-1, -1);
+            this.pnlColorRed.Margin = new System.Windows.Forms.Padding(5);
+            this.pnlColorRed.Name = "pnlColorRed";
+            this.pnlColorRed.Size = new System.Drawing.Size(20, 20);
+            this.pnlColorRed.TabIndex = 10;
+            this.pnlColorRed.Click += new System.EventHandler(this.pnlColorRed_Click);
             // 
-            // pnlTextPurple
+            // pnlColorPurple
             // 
-            this.pnlTextPurple.BackColor = System.Drawing.Color.Purple;
-            this.pnlTextPurple.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlTextPurple.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlTextPurple.Location = new System.Drawing.Point(365, 10);
-            this.pnlTextPurple.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlTextPurple.Name = "pnlTextPurple";
-            this.pnlTextPurple.Size = new System.Drawing.Size(20, 20);
-            this.pnlTextPurple.TabIndex = 12;
+            this.pnlColorPurple.BackColor = System.Drawing.Color.Purple;
+            this.pnlColorPurple.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlColorPurple.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlColorPurple.Location = new System.Drawing.Point(365, 10);
+            this.pnlColorPurple.Margin = new System.Windows.Forms.Padding(5);
+            this.pnlColorPurple.Name = "pnlColorPurple";
+            this.pnlColorPurple.Size = new System.Drawing.Size(20, 20);
+            this.pnlColorPurple.TabIndex = 12;
+            this.pnlColorPurple.Click += new System.EventHandler(this.pnlColorPurple_Click);
             // 
-            // pnlTextBrown
+            // pnlColorBrown
             // 
-            this.pnlTextBrown.BackColor = System.Drawing.Color.SaddleBrown;
-            this.pnlTextBrown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlTextBrown.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlTextBrown.Location = new System.Drawing.Point(395, 10);
-            this.pnlTextBrown.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlTextBrown.Name = "pnlTextBrown";
-            this.pnlTextBrown.Size = new System.Drawing.Size(20, 20);
-            this.pnlTextBrown.TabIndex = 13;
+            this.pnlColorBrown.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pnlColorBrown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlColorBrown.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlColorBrown.Location = new System.Drawing.Point(395, 10);
+            this.pnlColorBrown.Margin = new System.Windows.Forms.Padding(5);
+            this.pnlColorBrown.Name = "pnlColorBrown";
+            this.pnlColorBrown.Size = new System.Drawing.Size(20, 20);
+            this.pnlColorBrown.TabIndex = 13;
+            this.pnlColorBrown.Click += new System.EventHandler(this.pnlColorBrown_Click);
             // 
             // lblNoteColor
             // 
             this.lblNoteColor.AutoSize = true;
-            this.lblNoteColor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteColor.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoteColor.Location = new System.Drawing.Point(16, 387);
             this.lblNoteColor.Name = "lblNoteColor";
-            this.lblNoteColor.Size = new System.Drawing.Size(85, 20);
+            this.lblNoteColor.Size = new System.Drawing.Size(93, 21);
             this.lblNoteColor.TabIndex = 9;
             this.lblNoteColor.Text = "Note Color";
-            // 
-            // tblPriority
-            // 
-            this.tblPriority.BackColor = System.Drawing.Color.Transparent;
-            this.tblPriority.ColumnCount = 3;
-            this.tblPriority.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tblPriority.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            this.tblPriority.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tblPriority.Controls.Add(this.panel1, 0, 0);
-            this.tblPriority.Controls.Add(this.panel3, 2, 0);
-            this.tblPriority.Controls.Add(this.panel2, 1, 0);
-            this.tblPriority.Location = new System.Drawing.Point(18, 330);
-            this.tblPriority.Name = "tblPriority";
-            this.tblPriority.RowCount = 1;
-            this.tblPriority.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblPriority.Size = new System.Drawing.Size(450, 45);
-            this.tblPriority.TabIndex = 8;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.rbLow);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(142, 39);
-            this.panel1.TabIndex = 0;
-            // 
-            // rbLow
-            // 
-            this.rbLow.AutoSize = true;
-            this.rbLow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbLow.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbLow.ForeColor = System.Drawing.Color.ForestGreen;
-            this.rbLow.Location = new System.Drawing.Point(34, 7);
-            this.rbLow.Name = "rbLow";
-            this.rbLow.Size = new System.Drawing.Size(58, 24);
-            this.rbLow.TabIndex = 0;
-            this.rbLow.TabStop = true;
-            this.rbLow.Text = "Low";
-            this.rbLow.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.rbHigh);
-            this.panel3.Location = new System.Drawing.Point(311, 3);
-            this.panel3.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(136, 39);
-            this.panel3.TabIndex = 2;
-            // 
-            // rbHigh
-            // 
-            this.rbHigh.AutoSize = true;
-            this.rbHigh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbHigh.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbHigh.ForeColor = System.Drawing.Color.Red;
-            this.rbHigh.Location = new System.Drawing.Point(30, 7);
-            this.rbHigh.Name = "rbHigh";
-            this.rbHigh.Size = new System.Drawing.Size(62, 24);
-            this.rbHigh.TabIndex = 2;
-            this.rbHigh.TabStop = true;
-            this.rbHigh.Text = "High";
-            this.rbHigh.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.rbMedium);
-            this.panel2.Location = new System.Drawing.Point(163, 3);
-            this.panel2.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(128, 39);
-            this.panel2.TabIndex = 1;
-            // 
-            // rbMedium
-            // 
-            this.rbMedium.AutoSize = true;
-            this.rbMedium.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbMedium.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMedium.ForeColor = System.Drawing.Color.DarkOrange;
-            this.rbMedium.Location = new System.Drawing.Point(16, 7);
-            this.rbMedium.Name = "rbMedium";
-            this.rbMedium.Size = new System.Drawing.Size(87, 24);
-            this.rbMedium.TabIndex = 1;
-            this.rbMedium.TabStop = true;
-            this.rbMedium.Text = "Medium";
-            this.rbMedium.UseVisualStyleBackColor = true;
             // 
             // lblPriority
             // 
             this.lblPriority.AutoSize = true;
-            this.lblPriority.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPriority.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPriority.Location = new System.Drawing.Point(16, 304);
             this.lblPriority.Name = "lblPriority";
-            this.lblPriority.Size = new System.Drawing.Size(61, 20);
+            this.lblPriority.Size = new System.Drawing.Size(67, 21);
             this.lblPriority.TabIndex = 7;
             this.lblPriority.Text = "Priority";
             // 
@@ -551,10 +567,10 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescription.Location = new System.Drawing.Point(16, 155);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(89, 20);
+            this.lblDescription.Size = new System.Drawing.Size(98, 21);
             this.lblDescription.TabIndex = 4;
             this.lblDescription.Text = "Description";
             // 
@@ -572,8 +588,10 @@
             // 
             // txtNoteTitle
             // 
+            this.txtNoteTitle.BackColor = System.Drawing.Color.White;
             this.txtNoteTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNoteTitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNoteTitle.ForeColor = System.Drawing.Color.Black;
             this.txtNoteTitle.Location = new System.Drawing.Point(18, 100);
             this.txtNoteTitle.MaxLength = 100;
             this.txtNoteTitle.Name = "txtNoteTitle";
@@ -584,10 +602,10 @@
             // lblNoteTitle
             // 
             this.lblNoteTitle.AutoSize = true;
-            this.lblNoteTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoteTitle.Location = new System.Drawing.Point(16, 70);
             this.lblNoteTitle.Name = "lblNoteTitle";
-            this.lblNoteTitle.Size = new System.Drawing.Size(79, 20);
+            this.lblNoteTitle.Size = new System.Drawing.Size(86, 21);
             this.lblNoteTitle.TabIndex = 1;
             this.lblNoteTitle.Text = "Note Title";
             // 
@@ -613,6 +631,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
             this.ClientSize = new System.Drawing.Size(487, 538);
             this.Controls.Add(this.pnlEditNoteDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -623,10 +642,6 @@
             this.Text = "NoteAddDetailsControl";
             this.pnlEditNoteDetails.ResumeLayout(false);
             this.pnlEditNoteDetails.PerformLayout();
-            this.pnlDescription.ResumeLayout(false);
-            this.pnlButtons.ResumeLayout(false);
-            this.flpNoteColors.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.tblPriority.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -634,6 +649,9 @@
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.pnlDescription.ResumeLayout(false);
+            this.flpNoteColors.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.pnlAddNoteHeader.ResumeLayout(false);
             this.pnlAddNoteHeader.PerformLayout();
             this.ResumeLayout(false);
@@ -650,16 +668,8 @@
         private System.Windows.Forms.TextBox txtNoteTitle;
         private System.Windows.Forms.RichTextBox rtxtDescription;
         private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.RadioButton rbHigh;
-        private System.Windows.Forms.RadioButton rbMedium;
-        private System.Windows.Forms.RadioButton rbLow;
         private System.Windows.Forms.Label lblPriority;
         private System.Windows.Forms.Label lblDescriptionCount;
-        private System.Windows.Forms.TableLayoutPanel tblPriority;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnUpdateNote;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.FlowLayoutPanel flpNoteColors;
@@ -668,22 +678,29 @@
         private System.Windows.Forms.Panel pnlColorYellow;
         private System.Windows.Forms.Panel pnlColorOrange;
         private System.Windows.Forms.Panel pnlColorPink;
-        private System.Windows.Forms.Panel pnlColorPurple;
+        private System.Windows.Forms.Panel pnlColorLavender;
         private System.Windows.Forms.Panel pnlColorBlue;
         private System.Windows.Forms.Panel pnlColorGreen;
         private System.Windows.Forms.Panel pnlColorMint;
         private System.Windows.Forms.Panel pnlColorGray;
         private System.Windows.Forms.Label lblNoteColor;
         private System.Windows.Forms.Button btnCancelDialog;
-        private System.Windows.Forms.Panel pnlTextBlack;
+        private System.Windows.Forms.Panel pnlColorBlack;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel pnlTextRed;
-        private System.Windows.Forms.Panel pnlTextPurple;
-        private System.Windows.Forms.Panel pnlTextBrown;
+        private System.Windows.Forms.Panel pnlColorRed;
+        private System.Windows.Forms.Panel pnlColorPurple;
+        private System.Windows.Forms.Panel pnlColorBrown;
         private System.Windows.Forms.Panel pnlDescription;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblRedStar;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TableLayoutPanel tblPriority;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rbLow;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.RadioButton rbHigh;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton rbMedium;
     }
 }

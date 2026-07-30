@@ -134,10 +134,19 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             LoadLentData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
+        cmsFilter.Opening += cmsFilter_Opening;
+
         }
 
+        private void cmsFilter_Opening(object sender, CancelEventArgs e)
+        {
+            tsmiDate.AutoSize = false;
+            tsmiCategory.AutoSize = false;
 
-        public  void LoadLentData(int userID)
+            tsmiDate.Width = cmsFilter.Width;
+            tsmiCategory.Width = cmsFilter.Width;
+        }
+        public void LoadLentData(int userID)
         {
 
             DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllLent", userID);
@@ -527,7 +536,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             if (e.RowIndex < 0)
                 return;
 
-            ReturnAmountControls frm = new ReturnAmountControls();
+            PayLentReturnAmountControls frm = new PayLentReturnAmountControls();
 
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog(this);
@@ -584,30 +593,40 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             HideAllFilterPanels();
 
-            Point p = dgvLentDataTable.PointToScreen(Point.Empty);
+            Point p = pnlButtonControls.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
             panel.Parent = this;
 
             panel.Location = new Point(
-                p.X + dgvLentDataTable.Width - panel.Width - 157,
-                p.Y - 40);
+                p.X - panel.Width - 10,
+                p.Y);
 
             panel.BringToFront();
             panel.Visible = true;
         }
+
+
 
         private void ShowSearchPanel(Panel panel)
         {
             HideAllFilterPanels();
-            Point p = dgvLentDataTable.PointToScreen(Point.Empty);
+
+            panel.Parent = this;
+
+
+            Point p = btnSerach.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
+
             panel.Location = new Point(
-                p.X + dgvLentDataTable.Width - panel.Width - 815,
-                p.Y - 42);
+                p.X + btnSerach.Width + 10,
+                p.Y
+            );
+
             panel.BringToFront();
             panel.Visible = true;
         }
+
         private void DesignContextMenu()
         {
             cmsFilter.ShowImageMargin = true;

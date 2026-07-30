@@ -58,10 +58,18 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             DesignContextMenu();
 
             LoadNoteData(UserID);
-            
+            cmsFilter.Opening += cmsFilter_Opening;
 
         }
 
+        private void cmsFilter_Opening(object sender, CancelEventArgs e)
+        {
+            tsmiDate.AutoSize = false;
+            tsmiPriority.AutoSize = false;
+
+            tsmiDate.Width = cmsFilter.Width;
+            tsmiPriority.Width = cmsFilter.Width;
+        }
         private void LoadNoteData(int userID)
         {
             try
@@ -113,6 +121,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
             footer.Dock = DockStyle.Bottom;
             footer.Height = 35;
+            //footer.Location = new Point(15,140);
             Label date = new Label();
 
             date.Text = Convert.ToDateTime(row["CreatedAt"]) .ToString("dd MMM yyyy");
@@ -126,7 +135,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             priority.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
             priority.ForeColor = Color.FromArgb(200, 80, 80);
             priority.AutoSize = true;
-            priority.Location = new Point(150, 7);
+            priority.Location = new Point(150, 8);
             Button btnMore = new Button();
 
             btnMore.Size = new Size(30, 30);
@@ -302,7 +311,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 if (c is Panel)
                 {
                     c.Width = cardWidth;
-                    c.Height = 170;
+                    c.Height = 155;
                     c.Margin = new Padding(margin);
 
 
@@ -317,19 +326,19 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                         if (availableWidth < 500)
                         {
                             // Small screen
-                            description.Height = 40;
+                            description.Height = 30;
                             description.MaximumSize = new Size(c.Width - 30, 40);
                         }
                         else if (availableWidth < 850)
                         {
                             // Medium screen
-                            description.Height = 60;
+                            description.Height = 40;
                             description.MaximumSize = new Size(c.Width - 30, 60);
                         }
                         else
                         {
                             // Large screen
-                            description.Height = 90;
+                            description.Height = 50;
                             description.MaximumSize = new Size(c.Width - 30, 90);
                         }
 
@@ -589,27 +598,36 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             HideAllFilterPanels();
 
-            Point p = flpNotes.PointToScreen(Point.Empty);
+            Point p = pnlButtonControls.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
             panel.Parent = this;
 
             panel.Location = new Point(
-                p.X + flpNotes.Width - panel.Width - 170,
-                p.Y - 45);
+                p.X - panel.Width - 10,
+                p.Y);
 
             panel.BringToFront();
             panel.Visible = true;
         }
 
+
+
         private void ShowSearchPanel(Panel panel)
         {
             HideAllFilterPanels();
-            Point p = flpNotes.PointToScreen(Point.Empty);
+
+            panel.Parent = this;
+
+
+            Point p = btnSerach.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
+
             panel.Location = new Point(
-                p.X + flpNotes.Width - panel.Width - 830,
-                p.Y - 45);
+                p.X + btnSerach.Width + 10,
+                p.Y
+            );
+
             panel.BringToFront();
             panel.Visible = true;
         }

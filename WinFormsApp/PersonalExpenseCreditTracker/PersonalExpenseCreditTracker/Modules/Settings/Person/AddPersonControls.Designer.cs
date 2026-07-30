@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle97 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle98 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle92 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle93 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle94 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle95 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle96 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle99 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle100 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle101 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle102 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle103 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle104 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle105 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle106 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle107 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle108 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlAddPersonInput = new System.Windows.Forms.Panel();
@@ -215,9 +215,9 @@
             // 
             // pnlAddPersonInputAddress
             // 
-            this.pnlAddPersonInputAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAddPersonInputAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlAddPersonInputAddress.BackColor = System.Drawing.Color.White;
             this.pnlAddPersonInputAddress.Controls.Add(this.txtAddPersonInputAddress);
             this.pnlAddPersonInputAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -231,9 +231,9 @@
             // 
             // txtAddPersonInputAddress
             // 
-            this.txtAddPersonInputAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAddPersonInputAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddPersonInputAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAddPersonInputAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddPersonInputAddress.Location = new System.Drawing.Point(4, 6);
@@ -255,8 +255,8 @@
             // 
             // pnlAddPersonInputPhoneNumber
             // 
-            this.pnlAddPersonInputPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAddPersonInputPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlAddPersonInputPhoneNumber.BackColor = System.Drawing.Color.White;
             this.pnlAddPersonInputPhoneNumber.Controls.Add(this.txtAddPersonInputPhoneNumber);
             this.pnlAddPersonInputPhoneNumber.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -315,11 +315,11 @@
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Red;
             this.label6.Location = new System.Drawing.Point(134, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 23);
+            this.label6.Size = new System.Drawing.Size(18, 23);
             this.label6.TabIndex = 1;
             this.label6.Text = "*";
             // 
@@ -349,11 +349,11 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
             this.label5.Location = new System.Drawing.Point(93, 8);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 23);
+            this.label5.Size = new System.Drawing.Size(18, 23);
             this.label5.TabIndex = 1;
             this.label5.Text = "*";
             // 
@@ -380,8 +380,8 @@
             // 
             // pnlAddPersonInputFullName
             // 
-            this.pnlAddPersonInputFullName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAddPersonInputFullName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlAddPersonInputFullName.BackColor = System.Drawing.Color.White;
             this.pnlAddPersonInputFullName.Controls.Add(this.txtAddPersonInputFullName);
             this.pnlAddPersonInputFullName.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -618,13 +618,13 @@
             this.dataGridViewAddPerson.AllowUserToDeleteRows = false;
             this.dataGridViewAddPerson.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewAddPerson.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle91.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle91.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle91.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle91.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle91.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAddPerson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle91;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAddPerson.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewAddPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAddPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colPersonID,
@@ -633,24 +633,24 @@
             this.colPhoneNumber,
             this.colAddress,
             this.colAction});
-            dataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle97.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle97.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle97.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle97.Padding = new System.Windows.Forms.Padding(4);
-            dataGridViewCellStyle97.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle97.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle97.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewAddPerson.DefaultCellStyle = dataGridViewCellStyle97;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(4);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewAddPerson.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewAddPerson.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewAddPerson.Location = new System.Drawing.Point(0, 5);
             this.dataGridViewAddPerson.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.dataGridViewAddPerson.Name = "dataGridViewAddPerson";
             this.dataGridViewAddPerson.ReadOnly = true;
             this.dataGridViewAddPerson.RowHeadersVisible = false;
-            dataGridViewCellStyle98.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle98.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewAddPerson.RowsDefaultCellStyle = dataGridViewCellStyle98;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewAddPerson.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
@@ -674,9 +674,9 @@
             // 
             // colSL
             // 
-            dataGridViewCellStyle92.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle92.SelectionForeColor = System.Drawing.Color.Black;
-            this.colSL.DefaultCellStyle = dataGridViewCellStyle92;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.colSL.DefaultCellStyle = dataGridViewCellStyle2;
             this.colSL.FillWeight = 60F;
             this.colSL.HeaderText = "SL";
             this.colSL.Name = "colSL";
@@ -687,9 +687,9 @@
             // 
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colName.DataPropertyName = "PersonName";
-            dataGridViewCellStyle93.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle93.SelectionForeColor = System.Drawing.Color.Black;
-            this.colName.DefaultCellStyle = dataGridViewCellStyle93;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.colName.DefaultCellStyle = dataGridViewCellStyle3;
             this.colName.FillWeight = 100.25F;
             this.colName.HeaderText = "Name";
             this.colName.Name = "colName";
@@ -699,11 +699,11 @@
             // 
             this.colPhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colPhoneNumber.DataPropertyName = "PhoneNumber";
-            dataGridViewCellStyle94.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle94.Format = "N0";
-            dataGridViewCellStyle94.NullValue = null;
-            dataGridViewCellStyle94.SelectionForeColor = System.Drawing.Color.Black;
-            this.colPhoneNumber.DefaultCellStyle = dataGridViewCellStyle94;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.colPhoneNumber.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPhoneNumber.FillWeight = 76.38889F;
             this.colPhoneNumber.HeaderText = "Phone Number";
             this.colPhoneNumber.Name = "colPhoneNumber";
@@ -713,19 +713,19 @@
             // 
             this.colAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colAddress.DataPropertyName = "Address";
-            dataGridViewCellStyle95.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle95.SelectionForeColor = System.Drawing.Color.Black;
-            this.colAddress.DefaultCellStyle = dataGridViewCellStyle95;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.colAddress.DefaultCellStyle = dataGridViewCellStyle5;
             this.colAddress.HeaderText = "Address";
             this.colAddress.Name = "colAddress";
             this.colAddress.ReadOnly = true;
             // 
             // colAction
             // 
-            dataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle96.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle96.SelectionForeColor = System.Drawing.Color.Black;
-            this.colAction.DefaultCellStyle = dataGridViewCellStyle96;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            this.colAction.DefaultCellStyle = dataGridViewCellStyle6;
             this.colAction.FillWeight = 65F;
             this.colAction.HeaderText = "Action";
             this.colAction.Name = "colAction";
@@ -819,9 +819,9 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle99.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle99.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle99;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn2.HeaderText = "SL";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
@@ -829,9 +829,9 @@
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn3.DataPropertyName = "PersonName";
-            dataGridViewCellStyle100.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle100.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle100;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn3.HeaderText = "Name";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
@@ -839,11 +839,11 @@
             // 
             this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn4.DataPropertyName = "PhoneNumber";
-            dataGridViewCellStyle101.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle101.Format = "N0";
-            dataGridViewCellStyle101.NullValue = null;
-            dataGridViewCellStyle101.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle101;
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = null;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn4.HeaderText = "Phone Number";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
@@ -851,19 +851,19 @@
             // 
             this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn5.DataPropertyName = "Address";
-            dataGridViewCellStyle102.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle102.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle102;
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn5.HeaderText = "Address";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // dataGridViewButtonColumn1
             // 
-            dataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle103.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle103.NullValue = null;
-            dataGridViewCellStyle103.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewButtonColumn1.DefaultCellStyle = dataGridViewCellStyle103;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle13.NullValue = null;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewButtonColumn1.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewButtonColumn1.FillWeight = 65F;
             this.dataGridViewButtonColumn1.HeaderText = "Action";
             this.dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
@@ -878,9 +878,9 @@
             // 
             // dataGridViewTextBoxColumn7
             // 
-            dataGridViewCellStyle104.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle104.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle104;
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewTextBoxColumn7.HeaderText = "SL";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
@@ -888,9 +888,9 @@
             // 
             this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn8.DataPropertyName = "PersonName";
-            dataGridViewCellStyle105.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle105.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle105;
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewTextBoxColumn8.HeaderText = "Name";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
@@ -898,11 +898,11 @@
             // 
             this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn9.DataPropertyName = "PhoneNumber";
-            dataGridViewCellStyle106.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle106.Format = "N0";
-            dataGridViewCellStyle106.NullValue = null;
-            dataGridViewCellStyle106.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle106;
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle16.Format = "N0";
+            dataGridViewCellStyle16.NullValue = null;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewTextBoxColumn9.HeaderText = "Phone Number";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
@@ -910,19 +910,19 @@
             // 
             this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn10.DataPropertyName = "Address";
-            dataGridViewCellStyle107.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle107.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle107;
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridViewTextBoxColumn10.HeaderText = "Address";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             // 
             // dataGridViewButtonColumn2
             // 
-            dataGridViewCellStyle108.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle108.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle108.NullValue = null;
-            dataGridViewCellStyle108.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridViewButtonColumn2.DefaultCellStyle = dataGridViewCellStyle108;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.NullValue = null;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewButtonColumn2.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewButtonColumn2.FillWeight = 65F;
             this.dataGridViewButtonColumn2.HeaderText = "Action";
             this.dataGridViewButtonColumn2.Name = "dataGridViewButtonColumn2";

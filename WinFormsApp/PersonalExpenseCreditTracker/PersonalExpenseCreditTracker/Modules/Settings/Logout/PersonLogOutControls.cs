@@ -38,5 +38,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             this.Close();
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Credit
+namespace PersonalExpenseCreditTracker.Modules.Credit
 {
     partial class CreditControl
     {
@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-                        this.components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlCreditContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
             this.btnSerach = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
@@ -104,7 +103,7 @@
             this.pnlCreditContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlButtonControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditDataTable)).BeginInit();
             this.pnlFooter.SuspendLayout();
             this.pnlCreditFooter.SuspendLayout();
@@ -165,7 +164,7 @@
             // 
             this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
             this.pnlTableHeader.Controls.Add(this.btnSerach);
-            this.pnlTableHeader.Controls.Add(this.panel1);
+            this.pnlTableHeader.Controls.Add(this.pnlButtonControls);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTableHeader.Location = new System.Drawing.Point(11, 8);
             this.pnlTableHeader.Name = "pnlTableHeader";
@@ -185,17 +184,17 @@
             this.btnSerach.UseVisualStyleBackColor = true;
             this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
             // 
-            // panel1
+            // pnlButtonControls
             // 
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.btnRefresh);
-            this.panel1.Controls.Add(this.btnFilter);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(1023, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.panel1.Size = new System.Drawing.Size(199, 44);
-            this.panel1.TabIndex = 0;
+            this.pnlButtonControls.Controls.Add(this.button1);
+            this.pnlButtonControls.Controls.Add(this.btnRefresh);
+            this.pnlButtonControls.Controls.Add(this.btnFilter);
+            this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtonControls.Location = new System.Drawing.Point(1023, 0);
+            this.pnlButtonControls.Name = "pnlButtonControls";
+            this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.pnlButtonControls.Size = new System.Drawing.Size(199, 44);
+            this.pnlButtonControls.TabIndex = 0;
             // 
             // button1
             // 
@@ -271,9 +270,9 @@
             this.dgvCreditDataTable.Name = "dgvCreditDataTable";
             this.dgvCreditDataTable.ReadOnly = true;
             this.dgvCreditDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvCreditDataTable.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dgvCreditDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCreditDataTable.RowTemplate.Height = 24;
             this.dgvCreditDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCreditDataTable.Size = new System.Drawing.Size(1222, 520);
@@ -950,8 +949,8 @@
             this.pnlCreditContent.ResumeLayout(false);
             this.tblTable.ResumeLayout(false);
             this.pnlTableHeader.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlButtonControls.ResumeLayout(false);
+            this.pnlButtonControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditDataTable)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlCreditFooter.ResumeLayout(false);
@@ -1027,8 +1026,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSubCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMethod;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Panel pnlButtonControls;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
         private System.Windows.Forms.ToolStripMenuItem tsmiCategory;

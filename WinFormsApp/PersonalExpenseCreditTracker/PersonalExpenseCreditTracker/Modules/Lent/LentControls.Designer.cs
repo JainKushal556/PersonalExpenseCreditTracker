@@ -28,27 +28,14 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         /// </summary>
         private void InitializeComponent()
         {
-                        this.components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTotalTransaction = new System.Windows.Forms.Panel();
             this.labelTotalTransactionNumber = new System.Windows.Forms.Label();
@@ -83,7 +70,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnLastPage = new System.Windows.Forms.Button();
             this.panelExportReport = new System.Windows.Forms.Panel();
             this.btnSerach = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
@@ -142,7 +129,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panelExportReport.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlButtonControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLentDataTable)).BeginInit();
             this.cmsFilter.SuspendLayout();
             this.pnlCategoryFilter.SuspendLayout();
@@ -415,23 +402,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.tableLayoutPanelMainData.Controls.Add(this.panel2, 0, 2);
             this.tableLayoutPanelMainData.Controls.Add(this.panelExportReport, 0, 0);
             this.tableLayoutPanelMainData.Controls.Add(this.dgvLentDataTable, 0, 1);
-            this.tableLayoutPanelMainData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelMainData.Location = new System.Drawing.Point(0, 98);
-            this.tableLayoutPanelMainData.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanelMainData.Name = "tableLayoutPanelMainData";
-            this.tableLayoutPanelMainData.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.tableLayoutPanelMainData.RowCount = 3;
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMainData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tableLayoutPanelMainData.Size = new System.Drawing.Size(865, 476);
-            this.tableLayoutPanelMainData.TabIndex = 1;
-            // 
-            this.tableLayoutPanelMainData.ColumnCount = 1;
-            this.tableLayoutPanelMainData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMainData.Controls.Add(this.panel2, 0, 2);
-            this.tableLayoutPanelMainData.Controls.Add(this.panelExportReport, 0, 0);
-            this.tableLayoutPanelMainData.Controls.Add(this.dgvLentDataTable, 0, 1);
+
             this.tableLayoutPanelMainData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMainData.Location = new System.Drawing.Point(0, 120);
             this.tableLayoutPanelMainData.Name = "tableLayoutPanelMainData";
@@ -610,7 +581,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.panelExportReport.BackColor = System.Drawing.Color.Transparent;
             this.panelExportReport.Controls.Add(this.btnSerach);
-            this.panelExportReport.Controls.Add(this.panel1);
+            this.panelExportReport.Controls.Add(this.pnlButtonControls);
             this.panelExportReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelExportReport.Location = new System.Drawing.Point(8, 5);
             this.panelExportReport.Margin = new System.Windows.Forms.Padding(0);
@@ -632,16 +603,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnSerach.UseVisualStyleBackColor = true;
             this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
             // 
-            // panel1
+            // pnlButtonControls
             // 
-            this.panel1.Controls.Add(this.btnRefresh);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.btnFilter);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(941, 5);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(188, 40);
-            this.panel1.TabIndex = 0;
+            this.pnlButtonControls.Controls.Add(this.btnRefresh);
+            this.pnlButtonControls.Controls.Add(this.button1);
+            this.pnlButtonControls.Controls.Add(this.btnFilter);
+            this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtonControls.Location = new System.Drawing.Point(941, 5);
+            this.pnlButtonControls.Name = "pnlButtonControls";
+            this.pnlButtonControls.Size = new System.Drawing.Size(188, 40);
+            this.pnlButtonControls.TabIndex = 0;
             // 
             // btnRefresh
             // 
@@ -703,12 +674,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvLentDataTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvLentDataTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLentDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLentDataTable.ColumnHeadersHeight = 35;
             this.dgvLentDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvLentDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -721,14 +692,14 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.colRemainingAmount,
             this.colDeadline,
             this.colDescription});
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvLentDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLentDataTable.EnableHeadersVisualStyles = false;
             this.dgvLentDataTable.GridColor = System.Drawing.Color.White;
@@ -738,10 +709,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvLentDataTable.RowHeadersVisible = false;
             this.dgvLentDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvLentDataTable.RowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvLentDataTable.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvLentDataTable.RowTemplate.Height = 30;
             this.dgvLentDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLentDataTable.Size = new System.Drawing.Size(1131, 470);
@@ -752,8 +723,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDate.DataPropertyName = "LentAt";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colDate.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDate.FillWeight = 80F;
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
@@ -763,8 +734,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colPersonName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colPersonName.DataPropertyName = "PersonName";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colPersonName.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colPersonName.DefaultCellStyle = dataGridViewCellStyle3;
             this.colPersonName.FillWeight = 120F;
             this.colPersonName.HeaderText = "Person Name";
             this.colPersonName.Name = "colPersonName";
@@ -774,10 +745,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colAmount.DataPropertyName = "Amount";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle4;
             this.colAmount.FillWeight = 70F;
             this.colAmount.HeaderText = "Amount";
             this.colAmount.Name = "colAmount";
@@ -795,8 +766,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colStatus.DataPropertyName = "StatusName";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colStatus.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colStatus.DefaultCellStyle = dataGridViewCellStyle5;
             this.colStatus.FillWeight = 70F;
             this.colStatus.HeaderText = "Status";
             this.colStatus.Name = "colStatus";
@@ -1211,8 +1182,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panelExportReport.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlButtonControls.ResumeLayout(false);
+            this.pnlButtonControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLentDataTable)).EndInit();
             this.cmsFilter.ResumeLayout(false);
             this.pnlCategoryFilter.ResumeLayout(false);
@@ -1298,6 +1269,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btncategoryClose;
         private System.Windows.Forms.Button btnSerach;
+        private System.Windows.Forms.Panel pnlButtonControls;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnRefresh;

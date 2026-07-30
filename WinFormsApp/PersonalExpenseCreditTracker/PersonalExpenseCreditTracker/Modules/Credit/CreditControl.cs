@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -56,9 +56,18 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             LoadCreditData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
+            cmsFilter.Opening += cmsFilter_Opening;
+
         }
 
-        
+        private void cmsFilter_Opening(object sender, CancelEventArgs e)
+        {
+            tsmiDate.AutoSize = false;
+            tsmiCategory.AutoSize = false;
+
+            tsmiDate.Width = cmsFilter.Width;
+            tsmiCategory.Width = cmsFilter.Width;
+        }
 
         private void StyleCreditGrid()  
         {
@@ -478,30 +487,41 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             HideAllFilterPanels();
 
-            Point p = dgvCreditDataTable.PointToScreen(Point.Empty);
+            Point p = pnlButtonControls.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
             panel.Parent = this;
 
             panel.Location = new Point(
-                p.X + dgvCreditDataTable.Width - panel.Width - 157,
-                p.Y - 40);
+                p.X - panel.Width - 10,
+                p.Y);
 
             panel.BringToFront();
             panel.Visible = true;
         }
+
+      
 
         private void ShowSearchPanel(Panel panel)
         {
             HideAllFilterPanels();
-            Point p = dgvCreditDataTable.PointToScreen(Point.Empty);
+
+            panel.Parent = this;
+
+            
+            Point p = btnSerach.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
+
             panel.Location = new Point(
-                p.X + dgvCreditDataTable.Width - panel.Width - 815,
-                p.Y - 42);
+                p.X + btnSerach.Width + 10,
+                p.Y                     
+            );
+
             panel.BringToFront();
             panel.Visible = true;
         }
+
+
         private void DesignContextMenu()
         {
             cmsFilter.ShowImageMargin = true;
@@ -643,15 +663,14 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
         }
-            private void picCredit_Click(object sender, EventArgs e)
+        private void picCredit_Click(object sender, EventArgs e)
         {
 
         }
 
-            private void lblTransction_Click(object sender, EventArgs e)
+        private void lblTransction_Click(object sender, EventArgs e)
         {
 
         }
-
     }
 }
