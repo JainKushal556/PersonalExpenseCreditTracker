@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelExpenseDetailsMainBody = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAddExpenseDescription = new System.Windows.Forms.TextBox();
@@ -52,9 +53,11 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelExpenseDetailsMainBody.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelExpenseDetailsMainBody
@@ -286,6 +289,7 @@
             this.cmbAddExpenseCategory.Name = "cmbAddExpenseCategory";
             this.cmbAddExpenseCategory.Size = new System.Drawing.Size(354, 31);
             this.cmbAddExpenseCategory.TabIndex = 14;
+            this.cmbAddExpenseCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpenseCategory_SelectedIndexChanged);
             this.cmbAddExpenseCategory.Enter += new System.EventHandler(this.cmbAddExpenseCategory_Enter);
             this.cmbAddExpenseCategory.Leave += new System.EventHandler(this.cmbAddExpenseCategory_Leave);
             // 
@@ -361,6 +365,13 @@
             this.panel1.Size = new System.Drawing.Size(528, 1);
             this.panel1.TabIndex = 1;
             // 
+<<<<<<< HEAD
+=======
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+>>>>>>> origin/BLL&DAL&UI-SUJIT
             // AddExpenseControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -378,6 +389,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -408,6 +420,7 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
 
     }
 }

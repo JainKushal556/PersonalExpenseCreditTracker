@@ -9,6 +9,8 @@ using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Session;
 
 using System.Windows.Forms;
 
@@ -57,7 +59,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             pageSize = GetRowsPerPage();
             HideAllFilterPanels();
             DesignContextMenu();
-            int userID = 11;
+            int userID =Session.LogedInUser.GetUserId();
             LoadExpenseData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
 
@@ -210,45 +212,143 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             e.Handled = true;
         }
 
-        private void LoadExpenseData(int userID)
+        public void LoadExpenseData(int userID)
         {
-            try
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllExpensesByID", userID);
+
+            if (dataTable.Columns.Contains("Message"))
             {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spGetAllExpensesByID", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserID", userID);
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
 
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-
-                        da.Fill(dt);
-
-
-                        if (dt.Columns.Contains("Message"))
-                        {
-                            MessageBox.Show(dt.Rows[0]["Message"].ToString(),
-                                            "Information",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Information);
-
-                            dgvExpenseDataTable.DataSource = null;
-                            return;
-                        }
-
-                        AllExpenseData = dt;
-                        currentPage = 1;
-                        ShowCurrentPage();
-                    }
-                }
+                dgvExpenseDataTable.DataSource = null;
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
         }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
+        {
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(
+                spName,
+                userId,
+                paramName1,
+                paramId1,
+                paramName2,
+                paramId2);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        {
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(
+                spName,
+                userId,
+                paramName1,
+                paramId1,
+                paramName2,
+                paramId2);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count == 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, string paramName, int paramValue, int filterId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(
+                spName,
+                userID,
+                paramName,
+                filterId);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
 
         private void ShowCurrentPage()
         {
@@ -273,6 +373,31 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             lblExpenseEndingPageNumber.Text = end.ToString();
             lblExpenseTotalPageNumber.Text = total.ToString();
         }
+
+        private void UpdateExpenseSummaryCards()
+        {
+            if (AllExpenseData == null || AllExpenseData.Rows.Count == 0)
+            {
+                lblExpenseAmount.Text = "₹ 0";
+                lblTransactionAmount.Text = "0";
+                return;
+            }
+
+            decimal totalExpense = 0;
+
+            foreach (DataRow row in AllExpenseData.Rows)
+            {
+                if (row["Amount"] != DBNull.Value)
+                {
+                    totalExpense += Convert.ToDecimal(row["Amount"]);
+                }
+            }
+
+            lblExpenseAmount.Text = "₹ " + totalExpense.ToString("#,##0");
+            lblTransactionAmount.Text = AllExpenseData.Rows.Count.ToString();
+        }
+
+
 
         private int GetRowsPerPage()
         {

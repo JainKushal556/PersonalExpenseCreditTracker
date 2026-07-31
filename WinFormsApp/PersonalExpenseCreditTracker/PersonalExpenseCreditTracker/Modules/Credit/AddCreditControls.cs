@@ -254,14 +254,14 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                      ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddCreditSubCategory);
                      break;
 
-                 case CommonValidator.ValidationResult.PaymentInvalid:
-                     ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddCreditPaymentType);
-                     break;
-
                  case CommonValidator.ValidationResult.AmountEmpty:
                  case CommonValidator.ValidationResult.AmountInvalid:
                  case CommonValidator.ValidationResult.AmountTooLarge:
                      ErrorHelper.ShowValidationError(result, errorProvider1, txtAddCreditAmount);
+                     break;
+
+                 case CommonValidator.ValidationResult.PaymentInvalid:
+                     ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddCreditPaymentType);
                      break;
 
                  case CommonValidator.ValidationResult.DescriptionInvalid:
