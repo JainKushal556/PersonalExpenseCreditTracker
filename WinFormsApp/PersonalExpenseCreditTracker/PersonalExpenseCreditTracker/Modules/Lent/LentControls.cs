@@ -134,7 +134,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             LoadLentData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
-        cmsFilter.Opening += cmsFilter_Opening;
+            cmsFilter.Opening += cmsFilter_Opening;
 
         }
 
@@ -557,17 +557,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             ShowFilterPanel(pnlCategoryFilter);
         }
 
-        
-
         private void btncategoryClose_Click(object sender, EventArgs e)
         {
             pnlCategoryFilter.Visible = false;
         }
-
         
-
-        
-
         private void btnFilter_Click(object sender, EventArgs e)
         {
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
@@ -575,7 +569,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnSerach_Click(object sender, EventArgs e)
         {
-            ShowSearchPanel(pnlSearch);
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+
+            if (pnlSearch.Visible)
+                pnlSearch.Visible = false;
+            else
+                ShowSearchPanel(pnlSearch);
         }
         private void HideAllFilterPanels()
         {
@@ -610,6 +610,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void ShowSearchPanel(Panel panel)
         {
+            if (panel.Visible)
+            {
+                panel.Visible = false;
+                return;
+            }
             HideAllFilterPanels();
 
             panel.Parent = this;
@@ -639,7 +644,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiCategory.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -702,6 +707,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 }
             }
         }
+
         private void ShowCalenderToDatePanel(Panel panel)
         {
             HidePopupPanels();
@@ -755,7 +761,33 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             pnlDateFilter.Visible = false;
+        }
+
+        private void panelExportReport_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void tableLayoutPanel1_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void dgvLentDataTable_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
         }
       }
     }

@@ -55,12 +55,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         public AddTaskControl()
         {
             InitializeComponent();
-
-            //this.FormBorderStyle = FormBorderStyle.None;
-
-            //this.Region = Region.FromHrgn(
-            //    CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10)
-            //);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -163,7 +157,13 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                     MessageBox.Show("Task added unsuccessfully!");
                     break;
             }
+        }
 
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtDeadline.Text = e.Start.ToString("dd-MM-yyyy");
+            txtDeadline.ForeColor = Color.Black;
+            pnlDeadlinePicker.Visible = false;
         }
 
         private void txtDeadline_Enter(object sender, EventArgs e)
@@ -173,9 +173,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtDeadline.Text = "";
                 txtDeadline.ForeColor = Color.Black;
             }
-
-            pnlDeadlinePicker.BringToFront();
             pnlDeadlinePicker.Visible = true;
+            //pnlDeadlinePicker.BringToFront();
         }
 
         private void txtDeadline_Leave(object sender, EventArgs e)
@@ -190,18 +189,26 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtDeadline.ForeColor = Color.Black;
             }
         }
-
-        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        
+        private void btnCalendar_Click(object sender, EventArgs e)
         {
-            txtDeadline.Text = e.Start.ToString("dd-MM-yyyy");
-            txtDeadline.ForeColor = Color.Black;
+            //pnlDeadlinePicker.BringToFront();
+            pnlDeadlinePicker.Visible = !pnlDeadlinePicker.Visible;
+        }
+
+        private void txtDeadline_TextChanged(object sender, EventArgs e)
+        {
             pnlDeadlinePicker.Visible = false;
         }
 
-        private void btnCalendar_Click(object sender, EventArgs e)
+        private void pnlAddTask_Click(object sender, EventArgs e)
         {
-            pnlDeadlinePicker.BringToFront();
-            pnlDeadlinePicker.Visible = !pnlDeadlinePicker.Visible;
+            pnlDeadlinePicker.Visible = false;
+        }
+
+        private void pnlBody_Click(object sender, EventArgs e)
+        {
+            pnlDeadlinePicker.Visible = false;
         }
     }
 }

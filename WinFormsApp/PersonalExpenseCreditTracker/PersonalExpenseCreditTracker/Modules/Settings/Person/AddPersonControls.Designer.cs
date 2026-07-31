@@ -150,6 +150,7 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(1109, 874);
             this.panel1.TabIndex = 0;
+            this.panel1.Click += new System.EventHandler(this.panel1_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -236,7 +237,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddPersonInputAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAddPersonInputAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddPersonInputAddress.Location = new System.Drawing.Point(4, 6);
+            this.txtAddPersonInputAddress.Location = new System.Drawing.Point(5, 6);
             this.txtAddPersonInputAddress.Multiline = true;
             this.txtAddPersonInputAddress.Name = "txtAddPersonInputAddress";
             this.txtAddPersonInputAddress.Size = new System.Drawing.Size(410, 92);
@@ -272,7 +273,7 @@
             this.txtAddPersonInputPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddPersonInputPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAddPersonInputPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddPersonInputPhoneNumber.Location = new System.Drawing.Point(3, 6);
+            this.txtAddPersonInputPhoneNumber.Location = new System.Drawing.Point(6, 6);
             this.txtAddPersonInputPhoneNumber.Name = "txtAddPersonInputPhoneNumber";
             this.txtAddPersonInputPhoneNumber.Size = new System.Drawing.Size(303, 27);
             this.txtAddPersonInputPhoneNumber.TabIndex = 0;
@@ -397,7 +398,7 @@
             this.txtAddPersonInputFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddPersonInputFullName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAddPersonInputFullName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddPersonInputFullName.Location = new System.Drawing.Point(3, 6);
+            this.txtAddPersonInputFullName.Location = new System.Drawing.Point(7, 6);
             this.txtAddPersonInputFullName.Name = "txtAddPersonInputFullName";
             this.txtAddPersonInputFullName.Size = new System.Drawing.Size(303, 27);
             this.txtAddPersonInputFullName.TabIndex = 0;
@@ -422,9 +423,12 @@
             // 
             // btnAddPersonInputClear
             // 
-            this.btnAddPersonInputClear.BackColor = System.Drawing.Color.Transparent;
-            this.btnAddPersonInputClear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddPersonInputClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddPersonInputClear.BackColor = System.Drawing.Color.Silver;
             this.btnAddPersonInputClear.FlatAppearance.BorderSize = 0;
+            this.btnAddPersonInputClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPersonInputClear.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddPersonInputClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnAddPersonInputClear.Location = new System.Drawing.Point(181, 0);
@@ -437,11 +441,14 @@
             this.btnAddPersonInputClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddPersonInputClear.UseVisualStyleBackColor = false;
             this.btnAddPersonInputClear.Click += new System.EventHandler(this.btnAddPersonInputClear_Click);
+            this.btnAddPersonInputClear.Resize += new System.EventHandler(this.btnAddPersonInputClear_Resize);
             // 
             // btnAddPersonInputSavePerson
             // 
+            this.btnAddPersonInputSavePerson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddPersonInputSavePerson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(93)))), ((int)(((byte)(207)))));
-            this.btnAddPersonInputSavePerson.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddPersonInputSavePerson.FlatAppearance.BorderSize = 0;
             this.btnAddPersonInputSavePerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPersonInputSavePerson.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -452,11 +459,12 @@
             this.btnAddPersonInputSavePerson.Name = "btnAddPersonInputSavePerson";
             this.btnAddPersonInputSavePerson.Size = new System.Drawing.Size(171, 51);
             this.btnAddPersonInputSavePerson.TabIndex = 0;
-            this.btnAddPersonInputSavePerson.Text = "Save Person";
+            this.btnAddPersonInputSavePerson.Text = "Add Person";
             this.btnAddPersonInputSavePerson.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddPersonInputSavePerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddPersonInputSavePerson.UseVisualStyleBackColor = false;
             this.btnAddPersonInputSavePerson.Click += new System.EventHandler(this.btnAddPersonInputSavePerson_Click);
+            this.btnAddPersonInputSavePerson.Resize += new System.EventHandler(this.btnAddPersonInputSavePerson_Resize);
             // 
             // panel4
             // 
@@ -938,6 +946,7 @@
             this.Name = "AddPersonControls";
             this.Text = "AddPersonSControls";
             this.Load += new System.EventHandler(this.AddPersonSControls_Load);
+            this.Click += new System.EventHandler(this.AddPersonControls_Click);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlAddPersonInput.ResumeLayout(false);

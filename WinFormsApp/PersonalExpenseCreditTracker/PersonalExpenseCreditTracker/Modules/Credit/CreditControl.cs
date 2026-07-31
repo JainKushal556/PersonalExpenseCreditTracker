@@ -469,6 +469,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void btnSerach_Click(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             ShowSearchPanel(pnlSearch);
         }
         private void HideAllFilterPanels()
@@ -504,6 +506,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void ShowSearchPanel(Panel panel)
         {
+            if (panel.Visible)
+            {
+                panel.Visible = false;
+                return;
+            }
             HideAllFilterPanels();
 
             panel.Parent = this;
@@ -534,7 +541,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiCategory.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -622,6 +629,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
@@ -651,6 +660,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             pnlDateFilter.Visible = false;
         }
 
@@ -671,6 +682,42 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void lblTransction_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pnlTableHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void tblCreditSummary_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void dgvCreditDataTable_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
         }
     }
 }

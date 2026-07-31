@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
@@ -171,11 +171,14 @@
             this.pnlTableHeader.Name = "pnlTableHeader";
             this.pnlTableHeader.Size = new System.Drawing.Size(1222, 44);
             this.pnlTableHeader.TabIndex = 0;
+            this.pnlTableHeader.Click += new System.EventHandler(this.pnlTableHeader_Click);
             // 
             // btnSerach
             // 
             this.btnSerach.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSerach.FlatAppearance.BorderSize = 0;
+            this.btnSerach.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSerach.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
             this.btnSerach.Location = new System.Drawing.Point(0, 0);
@@ -202,6 +205,8 @@
             this.btnFilter.BackColor = System.Drawing.Color.Transparent;
             this.btnFilter.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnFilter.FlatAppearance.BorderSize = 0;
+            this.btnFilter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnFilter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFilter.ForeColor = System.Drawing.Color.White;
@@ -220,6 +225,8 @@
             this.btnExport.BackColor = System.Drawing.Color.Transparent;
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.ForeColor = System.Drawing.Color.White;
@@ -231,12 +238,15 @@
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnRefresh
             // 
             this.btnRefresh.AutoSize = true;
             this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
@@ -272,15 +282,16 @@
             this.dgvExpenseDataTable.Name = "dgvExpenseDataTable";
             this.dgvExpenseDataTable.ReadOnly = true;
             this.dgvExpenseDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvExpenseDataTable.RowTemplate.Height = 24;
             this.dgvExpenseDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvExpenseDataTable.Size = new System.Drawing.Size(1222, 520);
             this.dgvExpenseDataTable.TabIndex = 1;
             this.dgvExpenseDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExpenseDataTable_CellContentClick);
+            this.dgvExpenseDataTable.Click += new System.EventHandler(this.dgvExpenseDataTable_Click);
             // 
             // colDate
             // 
@@ -507,6 +518,7 @@
             this.tblSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblSummary.Size = new System.Drawing.Size(1244, 110);
             this.tblSummary.TabIndex = 0;
+            this.tblSummary.Click += new System.EventHandler(this.tblSummary_Click);
             // 
             // pnlTotalExpense
             // 
@@ -692,6 +704,7 @@
             // 
             // pnlDateHeader
             // 
+            this.pnlDateHeader.Controls.Add(this.pnlToDateCalenderShow);
             this.pnlDateHeader.Controls.Add(this.btnDateApply);
             this.pnlDateHeader.Controls.Add(this.btnDateClose);
             this.pnlDateHeader.Controls.Add(this.pnlToDate);
@@ -704,6 +717,7 @@
             this.pnlDateHeader.Name = "pnlDateHeader";
             this.pnlDateHeader.Size = new System.Drawing.Size(855, 48);
             this.pnlDateHeader.TabIndex = 7;
+            this.pnlDateHeader.Click += new System.EventHandler(this.pnlDateHeader_Click);
             // 
             // btnDateApply
             // 
@@ -737,7 +751,6 @@
             // 
             this.pnlToDate.BackColor = System.Drawing.Color.White;
             this.pnlToDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlToDate.Controls.Add(this.pnlToDateCalenderShow);
             this.pnlToDate.Controls.Add(this.picCalenderToDate);
             this.pnlToDate.Controls.Add(this.txtToDate);
             this.pnlToDate.Location = new System.Drawing.Point(400, 5);
@@ -749,7 +762,7 @@
             // 
             this.pnlToDateCalenderShow.BackColor = System.Drawing.Color.Transparent;
             this.pnlToDateCalenderShow.Controls.Add(this.monthCalendarToDate);
-            this.pnlToDateCalenderShow.Location = new System.Drawing.Point(-19, 4);
+            this.pnlToDateCalenderShow.Location = new System.Drawing.Point(382, 43);
             this.pnlToDateCalenderShow.Name = "pnlToDateCalenderShow";
             this.pnlToDateCalenderShow.Size = new System.Drawing.Size(302, 198);
             this.pnlToDateCalenderShow.TabIndex = 7;

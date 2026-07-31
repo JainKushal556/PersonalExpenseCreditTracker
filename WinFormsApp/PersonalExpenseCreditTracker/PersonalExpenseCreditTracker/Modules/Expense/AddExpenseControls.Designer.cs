@@ -297,12 +297,12 @@
             this.btnSaveExpense.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSaveExpense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveExpense.ForeColor = System.Drawing.Color.White;
-            this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnSaveExpense.Location = new System.Drawing.Point(351, 521);
             this.btnSaveExpense.Name = "btnSaveExpense";
             this.btnSaveExpense.Size = new System.Drawing.Size(194, 41);
             this.btnSaveExpense.TabIndex = 8;
-            this.btnSaveExpense.Text = "  Save Expense";
+            this.btnSaveExpense.Text = "  Add Expense";
             this.btnSaveExpense.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveExpense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveExpense.UseVisualStyleBackColor = false;
@@ -361,7 +361,7 @@
             this.panel1.Size = new System.Drawing.Size(528, 1);
             this.panel1.TabIndex = 1;
             // 
-            // AddExpenseControl
+            // AddExpenseControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -369,7 +369,7 @@
             this.Controls.Add(this.panelExpenseDetailsMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "AddExpenseControl";
+            this.Name = "AddExpenseControls";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExpenseDetailsControl";
             this.Load += new System.EventHandler(this.ExpenseDetailsControl_Load);

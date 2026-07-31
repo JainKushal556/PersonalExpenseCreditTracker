@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -752,7 +752,9 @@
     <None Include="Resources\line1.png" />
     <None Include="Resources\Image.png" />
     <None Include="Resources\Gemini_Generated_Image_bup5imbup5imbup5.png" />
-
+    <None Include="Resources\add.png" />
+    <None Include="Resources\add %281%29.png" />
+    <None Include="Resources\add %282%29.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>

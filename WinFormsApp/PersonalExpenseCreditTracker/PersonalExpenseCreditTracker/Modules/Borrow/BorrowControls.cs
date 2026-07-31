@@ -21,7 +21,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private DataTable AllBorrowData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
-        private int userID = 11;
+        private int userID = Session.LogedInUser.GetUserId();
         public BorrowControls()
         {
             InitializeComponent();
@@ -568,14 +568,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             int personID = Convert.ToInt32(row.Cells["colPersonID"].Value);
 
-            //MessageBox.Show("PersonID = " + personID);
+            MessageBox.Show("PersonID = " + personID);
 
-            //PayBorrowReturnAmountControls frm = new PayBorrowReturnAmountControls();
+            PayBorrowPaidAmountControls frm = new PayBorrowPaidAmountControls();
 
             //frm.UserID = userID;
             //frm.PersonID = personID;
 
-            //frm.ShowDialog(this);
+            frm.ShowDialog(this);
         }
         private void HideAllFilterPanels()
         {
@@ -594,6 +594,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
@@ -619,6 +621,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void ShowSearchPanel(Panel panel)
         {
+            if (panel.Visible)
+            {
+                panel.Visible = false;
+                return;
+            }
             HideAllFilterPanels();
 
             panel.Parent = this;
@@ -649,6 +656,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnSerach_Click(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             ShowSearchPanel(pnlSearch);
         }
 
@@ -684,7 +693,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiCategory.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -814,6 +823,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnDateClose_Click(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             pnlDateFilter.Visible = false;
         }
 
@@ -827,6 +838,42 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+        }
+
+        private void pnlButtonControls_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void tableLayoutPanel1_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void dgvBorrowDataTable_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
         }
     }
 }

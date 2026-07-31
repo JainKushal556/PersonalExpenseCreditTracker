@@ -97,7 +97,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void txtBorrowAddDescription_Enter(object sender, EventArgs e)
         {
-            if (txtBorrowAddDescription.Text == "Enter description")
+            if (txtBorrowAddDescription.Text == "Enter Description")
             {
                 txtBorrowAddDescription.Text = "";
                 txtBorrowAddDescription.ForeColor = Color.Black;
@@ -109,7 +109,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             if (string.IsNullOrWhiteSpace(txtBorrowAddDescription.Text))
             {
-                txtBorrowAddDescription.Text = "Enter description";
+                txtBorrowAddDescription.Text = "Enter Description";
                 txtBorrowAddDescription.ForeColor = Color.Gray;
             }
             else
@@ -151,7 +151,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void cmbBorrowSelectPerson_Leave(object sender, EventArgs e)
         {
-            if (cmbBorrowSelectPerson.SelectedIndex == -1)
+            if (cmbBorrowSelectPerson.SelectedIndex == -1 || cmbBorrowSelectPerson.Text == "Select Person")
             {
                 cmbBorrowSelectPerson.Text = "Select Person";
                 cmbBorrowSelectPerson.ForeColor = Color.Gray;
@@ -172,7 +172,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void cmbBorrowPaymentType_Leave(object sender, EventArgs e)
         {
-            if (cmbBorrowPaymentType.SelectedIndex == -1)
+            if (cmbBorrowPaymentType.SelectedIndex == -1 || cmbBorrowPaymentType.Text == "Select Payment Type")
             {
                 cmbBorrowPaymentType.Text = "Select Payment Type";
                 cmbBorrowPaymentType.ForeColor = Color.Gray;
@@ -183,34 +183,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
         }
 
-        private void cmbBorrowStatus_Enter(object sender, EventArgs e)
-        {
-            //if (cmbBorrowStatus.Text == "Select Status")
-            //    cmbBorrowStatus.ForeColor = Color.Black;
-
-            //pnlBorrowAddCalenderShow.Visible = false;
-        }
-
-        private void cmbBorrowStatus_Leave(object sender, EventArgs e)
-        {
-            //if (cmbBorrowStatus.SelectedIndex == -1)
-            //{
-            //    cmbBorrowStatus.Text = "Select Status";
-            //    cmbBorrowStatus.ForeColor = Color.Gray;
-            //}
-            //else
-            //{
-            //    cmbBorrowStatus.ForeColor = Color.Black;
-            //}
-        }
-
         private void LoadFormData()
         {
             cmbBorrowSelectPerson.Text = "Select Person";
             txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
             pnlBorrowAddCalenderShow.Visible = false;
 
-            txtBorrowAddDescription.Text = "Enter description";
+            txtBorrowAddDescription.Text = "Enter Description";
             txtBorrowAddAmount.Text = "Select Amount"; ;
 
             CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", cmbBorrowSelectPerson);
@@ -230,7 +209,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             txtBorrowAddAmount.Text = "Select Amount";
             txtBorrowAddAmount.ForeColor = Color.Gray;
 
-            txtBorrowAddDescription.Text = "Enter description";
+            txtBorrowAddDescription.Text = "Enter Description";
             txtBorrowAddDescription.ForeColor = Color.Gray;
 
             txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
@@ -252,10 +231,15 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             cmbBorrowSelectPerson.Text = "Select Person";
             cmbBorrowPaymentType.Text = "Select Payment Type";
-            //cmbBorrowStatus.Text = "Select Status";
             txtBorrowAddAmount.Text = "Select Amount";
             txtBorrowAddDescription.Text = "Enter description";
             txtBorrowAddDeadlineDatePicker.Text = "DD-MM-YYYY";
+
+            cmbBorrowSelectPerson.ForeColor = Color.Gray;
+            txtBorrowAddAmount.ForeColor = Color.Gray;
+            txtBorrowAddDeadlineDatePicker.ForeColor = Color.Gray;
+            txtBorrowAddDescription.ForeColor = Color.Gray;
+            cmbBorrowPaymentType.ForeColor = Color.Gray;
             pnlBorrowAddCalenderShow.Visible = false;
         }
 

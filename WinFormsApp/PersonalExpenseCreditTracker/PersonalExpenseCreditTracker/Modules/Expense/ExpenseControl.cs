@@ -345,7 +345,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
 
         }
 
@@ -394,7 +395,16 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnSerach_Click(object sender, EventArgs e)
         {
-            ShowSearchPanel(pnlSearch);
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+
+            if (pnlSearch.Visible)
+                pnlSearch.Visible = false;
+            else
+                ShowSearchPanel(pnlSearch);
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -434,6 +444,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void ShowSearchPanel(Panel panel)
         {
+            if (panel.Visible)
+            {
+                panel.Visible = false;
+                return;
+            }
+
             HideAllFilterPanels();
 
             panel.Parent = this;
@@ -463,6 +479,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnDateClose_Click(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             pnlDateFilter.Visible = false;
         }
 
@@ -482,7 +500,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiCategory.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -600,6 +618,36 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             {
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
+        }
+
+        private void pnlTableHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void dgvExpenseDataTable_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void tblSummary_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
         }
     }
 }
