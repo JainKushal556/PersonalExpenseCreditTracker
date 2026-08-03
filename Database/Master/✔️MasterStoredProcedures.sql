@@ -225,8 +225,8 @@ CREATE PROCEDURE spGetActiveUserDetails
 )
 AS
 BEGIN
+    SET NOCOUNT OFF;
 
-    -- User Exists Check
     IF NOT EXISTS
     (
         SELECT 1
@@ -236,41 +236,41 @@ BEGIN
     BEGIN
         SELECT 'Invalid UserID' AS Message;
         RETURN;
-    END
+    END;
 
-
-    -- Active User Check
     IF NOT EXISTS
     (
         SELECT 1
         FROM tblUserAuthentication
         WHERE UserID = @UserID
-        AND Active = 1
+          AND Active = 1
     )
     BEGIN
         SELECT 'User Is Not Active' AS Message;
         RETURN;
-    END
+    END;
 
-
-    -- Active User Details
     SELECT
         U.UserID,
-        U.UserName,
+        P.FullName,
         P.ProfilePhoto,
         C.Email,
         C.PhoneNumber,
-        U.CreatedAt
+        U.CreatedAt AS MemberSince,
+        A.Active AS AccountStatus,
+        P.DOB,
+        G.GenderName AS Gender,
+        P.Address
     FROM tblUsers U
-
     LEFT JOIN tblUserProfile P
         ON U.UserID = P.UserID
-
     LEFT JOIN tblUserContact C
         ON U.UserID = C.UserID
-
+    LEFT JOIN tblUserAuthentication A
+        ON U.UserID = A.UserID
+    LEFT JOIN tblGender G
+        ON P.GenderID = G.GenderID
     WHERE U.UserID = @UserID;
-
 END;
 
 
@@ -460,7 +460,7 @@ BEGIN
         INSERT INTO tblUserProfile
         (
             UserID,
-            Name
+            FullName
         )
         VALUES
         (
@@ -2874,6 +2874,99 @@ SELECT ERROR_MESSAGE() AS Message
 END CATCH
 END
 
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spFilterNoteByDateRange.sql
+
+-- ==========================================================
+
+CREATE PROCEDURE spFilterNoteByDateRange
+    @UserID INT,
+    @FromDate DATETIME,
+    @ToDate DATETIME
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'UserID Does Not Exists' AS Message;
+        RETURN;
+    END;
+
+
+    IF @FromDate > @ToDate
+    BEGIN
+        SELECT 'FromDate Cannot Be Greater Than ToDate' AS Message;
+        RETURN;
+    END;
+
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblNote
+        WHERE UserID = @UserID
+          AND CAST(CreatedAt AS DATE)
+              BETWEEN CAST(@FromDate AS DATE)
+              AND CAST(@ToDate AS DATE)
+    )
+    BEGIN
+        SELECT 'No Notes Found For This Date Range' AS Message;
+        RETURN;
+    END;
+
+
+    BEGIN TRY
+
+        SELECT
+            tblNote.NoteID,
+            tblNote.NotePriorityID,
+            tblNote.NoteColorID,
+
+            tblNoteColor.ColorName,
+            tblNoteColor.ColorHexCode,
+
+            tblNote.NoteTitle,
+            tblNote.Description,
+
+            tblNotePriorities.NotePriorityName,
+
+            tblNote.CreatedAt
+
+        FROM tblNote
+
+        LEFT JOIN tblNotePriorities
+            ON tblNote.NotePriorityID =
+               tblNotePriorities.NotePriorityID
+
+        LEFT JOIN tblNoteColor
+            ON tblNote.NoteColorID =
+               tblNoteColor.NoteColorID
+
+        WHERE tblNote.UserID = @UserID
+          AND CAST(tblNote.CreatedAt AS DATE)
+              BETWEEN CAST(@FromDate AS DATE)
+              AND CAST(@ToDate AS DATE)
+
+        ORDER BY tblNote.CreatedAt DESC;
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+
+END
 GO
 
 
@@ -5847,139 +5940,186 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spReturnLentByReturnAmount
-@LentID INT, @PaymentID INT, @ReturnedAmount DECIMAL(10,2), @Description VARCHAR(MAX)
+CREATE PROCEDURE spReturnLentByReturnAmount
+(
+    @LentID INT,
+    @PaymentID INT,
+    @ReturnedAmount DECIMAL(10,2),
+    @Description VARCHAR(MAX)
+)
 AS
 BEGIN
-	DECLARE @TotalAmount DECIMAL(10,2);
-	DECLARE @RemainingAmount DECIMAL(10,2);
-	DECLARE @NewRemainingAmount DECIMAL(10,2);
-	DECLARE @NewReturnedAmount DECIMAL(10,2);
-	DECLARE @OldReturnedAmount DECIMAL(10,2);
-	DECLARE @StatusID INT;
-	DECLARE @UserID INT;
-	DECLARE @CategoryID INT;
-	DECLARE @SubCategoryID INT;
+    DECLARE @TotalAmount DECIMAL(10,2);
+    DECLARE @RemainingAmount DECIMAL(10,2);
+    DECLARE @NewRemainingAmount DECIMAL(10,2);
+    DECLARE @NewReturnedAmount DECIMAL(10,2);
+    DECLARE @OldReturnedAmount DECIMAL(10,2);
+    DECLARE @StatusID INT;
+    DECLARE @UserID INT;
+    DECLARE @CategoryID INT;
+    DECLARE @SubCategoryID INT;
 
-	BEGIN TRY
-		BEGIN TRANSACTION
-			----------------------------All Validation-----------------------------------------
-			IF NOT EXISTS (SELECT 1 FROM tblLent WHERE LentID = @LentID)
-			BEGIN
-				SELECT 'Invalid LentID!!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+    BEGIN TRY
+        BEGIN TRANSACTION
 
-			IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID = @PaymentID)
-			BEGIN
-				SELECT 'Invalid PaymentID!!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+        -------------------------------------------------
+        -- Validation
+        -------------------------------------------------
 
-			IF @ReturnedAmount <= 0
-			BEGIN
-				SELECT 'Returned Amount Must Be Greater Than 0!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+        IF NOT EXISTS (SELECT 1 FROM tblLent WHERE LentID=@LentID)
+        BEGIN
+            SELECT 'Invalid LentID' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			----------------------------All Validation-----------------------------------------
-			
+        IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID=@PaymentID)
+        BEGIN
+            SELECT 'Invalid PaymentID' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			--Get Amount & RemainingAmount
-			SELECT @TotalAmount = Amount,
-			@RemainingAmount = RemainingAmount,
-			@OldReturnedAmount = ReturnedAmount,
-			@UserID = UserID
-			FROM tblLent
-			WHERE LentID = @LentID;
+        IF @ReturnedAmount IS NULL OR @ReturnedAmount<=0
+        BEGIN
+            SELECT 'Returned Amount Must Be Greater Than 0' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			--IF RemainingAmount is NULL THEN @RemainingAmount = @TotalAmount
-			IF @RemainingAmount is NULL
-			BEGIN
-				SET @RemainingAmount = @TotalAmount;
-			END
+        IF @Description IS NULL
+            SET @Description='';
 
+        -------------------------------------------------
+        -- Get Lent Details
+        -------------------------------------------------
 
-			--Calculating  New RemainingAmount
-			SET @NewRemainingAmount = @RemainingAmount - @ReturnedAmount;
+        SELECT
+            @TotalAmount=Amount,
+            @RemainingAmount=RemainingAmount,
+            @OldReturnedAmount=ISNULL(ReturnedAmount,0),
+            @UserID=UserID
+        FROM tblLent
+        WHERE LentID=@LentID;
 
-			--Calculate Total Returned Amount
-			SET @NewReturnedAmount = @ReturnedAmount + @OldReturnedAmount;
+        IF @TotalAmount IS NULL
+        BEGIN
+            SELECT 'Amount Not Found' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			SELECT @SubCategoryID = SubCategoryID,
-			@CategoryID = CategoryID
-			FROM tblCreditSubCategory
-			WHERE SubCategoryName = 'Lent Returned';
-             
-            IF @CategoryID IS NULL OR @SubCategoryID IS NULL
-            BEGIN
-            SELECT 'Lent Returned Credit Category/SubCategory Not Found' AS Message
-            ROLLBACK TRANSACTION
-            RETURN
-            END
+        SET @RemainingAmount=ISNULL(@RemainingAmount,@TotalAmount);
 
-			IF @NewRemainingAmount = 0
-			BEGIN
-				--Get 'Complete' StatusName ID
-				SELECT @StatusID = StatusID FROM tblLentBorrowStatus
-				WHERE StatusName = 'Paid';
+        -------------------------------------------------
+        -- Calculate
+        -------------------------------------------------
 
-				--Update Lent Table Data
-				UPDATE tblLent
-				SET RemainingAmount = 0,
-				ReturnedAmount = @NewReturnedAmount,
-				StatusID = @StatusID
-				WHERE LentID = @LentID;
+        SET @NewRemainingAmount=@RemainingAmount-@ReturnedAmount;
+        SET @NewReturnedAmount=@OldReturnedAmount+@ReturnedAmount;
 
-			END
-			ELSE IF @NewRemainingAmount > 0
-			BEGIN
-				--Get 'Pending' StatusName ID
-				SELECT @StatusID = StatusID FROM tblLentBorrowStatus
-				WHERE StatusName = 'Pending';
+        IF @NewRemainingAmount<0
+        BEGIN
+            RAISERROR('Returned amount exceeds remaining amount.',16,1);
+        END
 
-				--Update Lent Table Data
-				UPDATE tblLent
-				SET RemainingAmount = @NewRemainingAmount,
-				ReturnedAmount = @NewReturnedAmount,
-				StatusID = @StatusID
-				WHERE LentID = @LentID;
+        -------------------------------------------------
+        -- Category Lookup
+        -------------------------------------------------
 
-			END
-			ELSE
-			BEGIN
-				RAISERROR('Returned amount exceeds remaining amount.',16,1);
-			END
+        SELECT
+            @CategoryID=CategoryID,
+            @SubCategoryID=SubCategoryID
+        FROM tblCreditSubCategory
+        WHERE SubCategoryName='Lent Returned';
 
-			--Data Insert On Credit Table
-				INSERT INTO tblCredit(
-					UserID,
-					CategoryID,
-					SubCategoryID,
-					PaymentID,
-					Amount,
-					Description
-					)
-				VALUES(
-					@UserID, 
-					@CategoryID,
-					@SubCategoryID,
-					@PaymentID,
-					@ReturnedAmount,
-					@Description
-					);
+        IF @CategoryID IS NULL OR @SubCategoryID IS NULL
+        BEGIN
+            SELECT 'Lent Returned Credit Category/SubCategory Not Found' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			COMMIT TRANSACTION
-			SELECT 'Lent Returned Successfully' AS MESSAGE
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRANSACTION
-			SELECT
-				ERROR_MESSAGE() AS ErrorMessage
-		END CATCH
+        -------------------------------------------------
+        -- Status
+        -------------------------------------------------
+
+        IF @NewRemainingAmount=0
+        BEGIN
+            SELECT @StatusID=StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName='Paid';
+        END
+        ELSE
+        BEGIN
+            SELECT @StatusID=StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName='Partially Paid';
+        END
+
+        -------------------------------------------------
+        -- Update Lent
+        -------------------------------------------------
+
+        UPDATE tblLent
+        SET
+            RemainingAmount=@NewRemainingAmount,
+            ReturnedAmount=@NewReturnedAmount,
+            StatusID=@StatusID
+        WHERE LentID=@LentID;
+
+        IF @@ROWCOUNT=0
+        BEGIN
+            ROLLBACK;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Insert Credit
+        -------------------------------------------------
+
+        INSERT INTO tblCredit
+        (
+            UserID,
+            CategoryID,
+            SubCategoryID,
+            PaymentID,
+            Amount,
+            Description
+        )
+        VALUES
+        (
+            @UserID,
+            @CategoryID,
+            @SubCategoryID,
+            @PaymentID,
+            @ReturnedAmount,
+            @Description
+        );
+
+        IF @@ROWCOUNT=0
+        BEGIN
+            ROLLBACK;
+            RETURN;
+        END
+
+        COMMIT;
+
+        IF @NewRemainingAmount=0
+            SELECT 'Lent Fully Returned Successfully' AS Message;
+        ELSE
+            SELECT 'Lent Partially Returned Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        IF @@TRANCOUNT>0
+            ROLLBACK;
+
+        SELECT ERROR_MESSAGE() AS ErrorMessage;
+
+    END CATCH
 END
 GO
 
@@ -7197,55 +7337,47 @@ GO
 CREATE PROCEDURE spPayBorrow
 (
     @BorrowID INT,
+    @PaymentID INT,
     @PaidAmount DECIMAL(10,2),
-    @PaymentName VARCHAR(100)
+    @Description VARCHAR(MAX)
 )
 AS
 BEGIN
+    DECLARE @UserID INT;
+    DECLARE @TotalAmount DECIMAL(10,2);
+    DECLARE @RemainingAmount DECIMAL(10,2);
+    DECLARE @OldPaidAmount DECIMAL(10,2);
+    DECLARE @NewPaidAmount DECIMAL(10,2);
+    DECLARE @NewRemainingAmount DECIMAL(10,2);
+    DECLARE @StatusID INT;
+    DECLARE @CategoryID INT;
+    DECLARE @SubCategoryID INT;
 
     BEGIN TRY
-
-        DECLARE @UserID INT;
-        DECLARE @RemainingAmount DECIMAL(10,2);
-        DECLARE @NewRemainingAmount DECIMAL(10,2);
-
-        DECLARE @PaymentID INT;
-        DECLARE @StatusID INT;
-        DECLARE @CategoryID INT;
-        DECLARE @SubCategoryID INT;
+        BEGIN TRANSACTION
 
         -------------------------------------------------
         -- Validation
         -------------------------------------------------
 
-        IF @BorrowID IS NULL OR @BorrowID <= 0
+        IF NOT EXISTS (SELECT 1 FROM tblBorrow WHERE BorrowID = @BorrowID)
         BEGIN
-            SELECT 'Invalid BorrowID' AS Message;
+            SELECT 'Invalid BorrowID!!' AS Message;
+            ROLLBACK TRANSACTION;
             RETURN;
         END
 
-        IF @PaidAmount IS NULL OR @PaidAmount <= 0
+        IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID = @PaymentID)
         BEGIN
-            SELECT 'Invalid Paid Amount' AS Message;
+            SELECT 'Invalid PaymentID!!' AS Message;
+            ROLLBACK TRANSACTION;
             RETURN;
         END
 
-        IF @PaymentName IS NULL OR LTRIM(RTRIM(@PaymentName)) = ''
+        IF @PaidAmount <= 0
         BEGIN
-            SELECT 'Payment Name required' AS Message;
-            RETURN;
-        END
-
-        -------------------------------------------------
-        -- Borrow Exists Check
-        -------------------------------------------------
-
-        IF NOT EXISTS
-        (
-            SELECT 1 FROM tblBorrow WHERE BorrowID = @BorrowID
-        )
-        BEGIN
-            SELECT 'Borrow record not found' AS Message;
+            SELECT 'Paid Amount Must Be Greater Than 0!' AS Message;
+            ROLLBACK TRANSACTION;
             RETURN;
         END
 
@@ -7255,80 +7387,73 @@ BEGIN
 
         SELECT
             @UserID = UserID,
-            @RemainingAmount = RemainingAmount
+            @TotalAmount = Amount,
+            @RemainingAmount = RemainingAmount,
+            @OldPaidAmount = ISNULL(PaidAmount,0)
         FROM tblBorrow
         WHERE BorrowID = @BorrowID;
 
+        SET @RemainingAmount = ISNULL(@RemainingAmount, @TotalAmount);
+
         -------------------------------------------------
-        -- Over Payment Check
+        -- Calculate Amount
         -------------------------------------------------
 
-        IF @PaidAmount > @RemainingAmount
+        SET @NewRemainingAmount = @RemainingAmount - @PaidAmount;
+        SET @NewPaidAmount = @OldPaidAmount + @PaidAmount;
+
+        IF @NewRemainingAmount < 0
         BEGIN
-            SELECT 'Paid amount exceeds remaining balance' AS Message;
-            RETURN;
+            RAISERROR('Paid amount exceeds remaining amount.',16,1);
         END
 
         -------------------------------------------------
-        -- Payment Lookup
+        -- Category & SubCategory
         -------------------------------------------------
 
-        SELECT @PaymentID = PaymentID
-        FROM tblPaymentType
-        WHERE LTRIM(RTRIM(PaymentName)) = LTRIM(RTRIM(@PaymentName));
-
-        IF @PaymentID IS NULL
-        BEGIN
-            SELECT 'Invalid Payment Name' AS Message;
-            RETURN;
-        END
-
-        -------------------------------------------------
-        -- Status Lookup
-        -------------------------------------------------
-
-        SELECT @StatusID = StatusID
-        FROM tblLentBorrowStatus
-        WHERE StatusName =
-            CASE 
-                WHEN (@RemainingAmount - @PaidAmount) = 0 THEN 'Paid'
-                ELSE 'Partially Paid'
-            END;
-
-        IF @StatusID IS NULL
-        BEGIN
-            SELECT 'Status not found' AS Message;
-            RETURN;
-        END
-
-        -------------------------------------------------
-        -- Expense Category Lookup
-        -------------------------------------------------
-
-        SELECT @CategoryID = CategoryID
-        FROM tblExpenseCategory
-        WHERE CategoryName = 'Borrow';
-
-        SELECT @SubCategoryID = SubCategoryID
+        SELECT
+            @CategoryID = CategoryID,
+            @SubCategoryID = SubCategoryID
         FROM tblExpenseSubCategory
-        WHERE SubCategoryName = 'Borrow Returned'
-          AND CategoryID = @CategoryID;
+        WHERE SubCategoryName = 'Borrow Returned';
+
+        IF @CategoryID IS NULL OR @SubCategoryID IS NULL
+        BEGIN
+            SELECT 'Borrow Returned Expense Category/SubCategory Not Found' AS Message;
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
 
         -------------------------------------------------
-        -- Transaction Start
+        -- Status Update
         -------------------------------------------------
 
-        BEGIN TRANSACTION;
+        IF @NewRemainingAmount = @TotalAmount
+        BEGIN
+            SELECT @StatusID = StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName = 'Pending';
+        END
+        ELSE IF @NewRemainingAmount = 0
+        BEGIN
+            SELECT @StatusID = StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName = 'Paid';
+        END
+        ELSE
+        BEGIN
+            SELECT @StatusID = StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName = 'Partially Paid';
+        END
 
         -------------------------------------------------
         -- Update Borrow
         -------------------------------------------------
 
-        SET @NewRemainingAmount = @RemainingAmount - @PaidAmount;
-
         UPDATE tblBorrow
         SET
-            PaidAmount = PaidAmount + @PaidAmount,
+            PaidAmount = @NewPaidAmount,
             RemainingAmount = @NewRemainingAmount,
             StatusID = @StatusID
         WHERE BorrowID = @BorrowID;
@@ -7354,24 +7479,13 @@ BEGIN
             @SubCategoryID,
             @PaymentID,
             @PaidAmount,
-            'Borrow repayment payment',
+            @Description,
             GETDATE()
         );
 
-        -------------------------------------------------
-        -- Commit
-        -------------------------------------------------
-
         COMMIT TRANSACTION;
 
-        -------------------------------------------------
-        -- Result Output (no RETURN)
-        -------------------------------------------------
-
-        IF @NewRemainingAmount = 0
-            SELECT 'Fully Paid' AS Message, 1 AS Result;
-        ELSE
-            SELECT 'Partially Paid' AS Message, 2 AS Result;
+        SELECT 'Borrow Paid Successfully' AS Message;
 
     END TRY
 
@@ -7380,12 +7494,10 @@ BEGIN
         IF @@TRANCOUNT > 0
             ROLLBACK TRANSACTION;
 
-        SELECT ERROR_MESSAGE() AS Message, 0 AS Result;
+        SELECT ERROR_MESSAGE() AS ErrorMessage;
 
     END CATCH
-
-END;
-
+END
 GO
 
 

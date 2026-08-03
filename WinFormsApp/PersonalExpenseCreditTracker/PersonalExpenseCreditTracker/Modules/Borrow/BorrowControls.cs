@@ -19,9 +19,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllBorrowData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
-        private int userID = 11;
         public BorrowControls()
         {
             InitializeComponent();
@@ -166,6 +166,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                         }
 
                         AllBorrowData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -345,7 +346,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
 
             dgvBorrowDataTable.DataSource = pageTable;
-
+            Common.CommonUiFunction.HighlightSearch(dgvBorrowDataTable, txtSearch);
 
 
             int start = startIndex + 1;
@@ -828,6 +829,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
         }
+
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+           AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+           ShowCurrentPage();
+        }
+
     }
 }
 

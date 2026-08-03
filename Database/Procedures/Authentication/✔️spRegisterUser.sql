@@ -82,7 +82,7 @@ BEGIN
         INSERT INTO tblUserProfile
         (
             UserID,
-            Name
+            FullName
         )
         VALUES
         (
