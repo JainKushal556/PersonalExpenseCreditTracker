@@ -229,6 +229,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
 
             AllExpenseData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             UpdateExpenseSummaryCards();
