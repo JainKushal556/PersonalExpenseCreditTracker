@@ -425,7 +425,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
 
                 case "colPersonName":
-                    DrawHeader(e, Properties.Resources.PersonIcon, "PersonName");
+                    DrawHeader(e, Properties.Resources.PersonIcon, "Person Name");
                     break;
                 case "colDescription":
                     DrawHeader(e, Properties.Resources.note, "Description");
@@ -434,16 +434,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     DrawHeader(e, Properties.Resources.money, "Amount");
                     break;
                 case "colPaymentType":
-                    DrawHeader(e, Properties.Resources.credit_card1, "PaymentType");
+                    DrawHeader(e, Properties.Resources.credit_card1, "Payment Type");
                     break;
                 case "colReturnedAmount":
-                    DrawHeader(e, Properties.Resources.money, "ReturnedAmount");
+                    DrawHeader(e, Properties.Resources.money, "Returned Amount");
                     break;
                 case "colRemainingAmount":
-                    DrawHeader(e, Properties.Resources.money, "RemainingAmount");
+                    DrawHeader(e, Properties.Resources.money, "Remaining Amount");
                     break;
                 case "colDeadline":
-                    DrawHeader(e, Properties.Resources.deadline, "DeadlineAt");
+                    DrawHeader(e, Properties.Resources.deadline, "Deadline");
                     break;
                 case "colStatus":
                     DrawHeader(e, Properties.Resources.loading, "Status");
@@ -530,7 +530,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 ButtonBorderStyle.Solid);
         }
 
-
         private void dgvLentDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
@@ -564,24 +563,26 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            //pnlSearch.Visible = false;
+            HidePopupPanels();
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            pnlFromDateCalenderShow.Visible = false;
-            pnlToDateCalenderShow.Visible = false;
+        //private void btnSerach_Click(object sender, EventArgs e)
+        //{
+        //    pnlFromDateCalenderShow.Visible = false;
+        //    pnlToDateCalenderShow.Visible = false;
 
-            if (pnlSearch.Visible)
-                pnlSearch.Visible = false;
-            else
-                ShowSearchPanel(pnlSearch);
-        }
+        //    if (pnlSearch.Visible)
+        //        pnlSearch.Visible = false;
+        //    else
+        //        ShowSearchPanel(pnlSearch);
+        //}
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
-            pnlSearch.Visible = false;
+            //pnlSearch.Visible = false;
 
         }
         private void HidePopupPanels()
@@ -608,29 +609,29 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            if (panel.Visible)
-            {
-                panel.Visible = false;
-                return;
-            }
-            HideAllFilterPanels();
+        //private void ShowSearchPanel(Panel panel)
+        //{
+        //    if (panel.Visible)
+        //    {
+        //        panel.Visible = false;
+        //        return;
+        //    }
+        //    HideAllFilterPanels();
 
-            panel.Parent = this;
+        //    panel.Parent = this;
 
 
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
+        //    Point p = btnSerach.PointToScreen(Point.Empty);
+        //    p = this.PointToClient(p);
 
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
+        //    panel.Location = new Point(
+        //        p.X + btnSerach.Width + 10,
+        //        p.Y
+        //    );
 
-            panel.BringToFront();
-            panel.Visible = true;
-        }
+        //    panel.BringToFront();
+        //    panel.Visible = true;
+        //}
 
         private void DesignContextMenu()
         {
@@ -749,16 +750,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
         }
 
-        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
-        {
-            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-        }
-
-        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
-        {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
-        }
-
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
             pnlFromDateCalenderShow.Visible = false;
@@ -788,6 +779,30 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlFromDateCalenderShow.Visible = false;
             pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void txtToDate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderToDatePanel(pnlToDateCalenderShow);
+        }
+
+        private void txtFromdate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+        }
+
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
         }
       }
     }

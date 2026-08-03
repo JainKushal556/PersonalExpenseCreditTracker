@@ -4338,9 +4338,7 @@ namespace PersonalExpenseCreditTracker
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtMinAmount, txtMaxAmount);
                     break;
             }
-        }
-
-        
+        }  
     }
 }
 

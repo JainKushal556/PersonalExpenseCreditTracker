@@ -365,13 +365,10 @@
             this.panel1.Size = new System.Drawing.Size(528, 1);
             this.panel1.TabIndex = 1;
             // 
-<<<<<<< HEAD
-=======
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
->>>>>>> origin/BLL&DAL&UI-SUJIT
             // AddExpenseControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);

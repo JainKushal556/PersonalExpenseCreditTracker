@@ -47,7 +47,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
 
             CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", cmbAddExpenseCategory);
-            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select PaymentType", cmbAddExpensePaymentType);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddExpensePaymentType);
         }
 
         // All Border Cornar Radius
@@ -273,7 +273,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
             CommonUiFunction.LoadInComboBox(
                 "spGetExpenseSubCategoryByCategoryID",
-                "Select SubCategory",
+                "Select Sub Category",
                 cmbAddExpenseSubCategory,
                 "@CategoryID",
                 categoryId);
