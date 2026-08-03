@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Expense
+namespace PersonalExpenseCreditTracker.Modules.Expense
 {
     partial class ExpenseControl
     {
@@ -335,6 +335,7 @@
             // colDate
             // 
             this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.DataPropertyName = "CreatedAt";
             this.colDate.FillWeight = 10F;
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
@@ -343,6 +344,7 @@
             // colDescription
             // 
             this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.DataPropertyName = "Description";
             this.colDescription.FillWeight = 20F;
             this.colDescription.HeaderText = "Description";
             this.colDescription.Name = "colDescription";
@@ -351,6 +353,7 @@
             // colCategory
             // 
             this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCategory.DataPropertyName = "CategoryName";
             this.colCategory.FillWeight = 15F;
             this.colCategory.HeaderText = "Category";
             this.colCategory.Name = "colCategory";
@@ -359,6 +362,7 @@
             // colSubCategory
             // 
             this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSubCategory.DataPropertyName = "SubCategoryName";
             this.colSubCategory.FillWeight = 15F;
             this.colSubCategory.HeaderText = "SubCategory";
             this.colSubCategory.Name = "colSubCategory";
@@ -367,6 +371,7 @@
             // colAmount
             // 
             this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.DataPropertyName = "Amount";
             this.colAmount.FillWeight = 10F;
             this.colAmount.HeaderText = "Amount";
             this.colAmount.Name = "colAmount";
@@ -375,6 +380,7 @@
             // colPaymentMethod
             // 
             this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.DataPropertyName = "PaymentName";
             this.colPaymentMethod.FillWeight = 15F;
             this.colPaymentMethod.HeaderText = "Payment Method";
             this.colPaymentMethod.Name = "colPaymentMethod";
@@ -915,6 +921,7 @@
             this.lblToDate.TabIndex = 3;
             this.lblToDate.Text = "To";
             // 
+
             // cmsFilter
             // 
             this.cmsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {

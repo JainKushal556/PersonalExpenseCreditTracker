@@ -96,8 +96,9 @@ GO
 
 INSERT INTO tblNotePriorities (NotePriorityName)
 VALUES
-('Normal'),
-('Important');
+('Low'),
+('Medium'),
+('High');
 GO
 
 INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES
@@ -113,9 +114,16 @@ INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES
 ('Grey', '#CFD8DC');
 GO
 
+INSERT INTO tblGender (GenderName)
+VALUES
+('Male'),
+('Female'),
+('Other');
+GO
 
 
-INSERT INTO tblUserProfile (UserID, Name, ProfilePhoto)
+
+INSERT INTO tblUserProfile (UserID, FullName, ProfilePhoto)
 VALUES
 (1, 'Sujit Kar', 0xFFD8FFE000104A46494600010101006000600000),
 (2, 'Kushal Jain', 0xFFD8FFE000104A46494600010101006000600001),
@@ -292,7 +300,7 @@ VALUES
 ('Subham Nandi', '2026-01-11 10:05:00');
 GO
 
-INSERT INTO tblUserProfile (UserID, Name, ProfilePhoto)
+INSERT INTO tblUserProfile (UserID, FullName, ProfilePhoto)
 VALUES
 (11, 'Ritwik Ghosh', NULL),
 (12, 'Moumita Dey', NULL),

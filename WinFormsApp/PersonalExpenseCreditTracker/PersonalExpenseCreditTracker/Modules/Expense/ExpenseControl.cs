@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,6 +30,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         );
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllExpenseData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
         public ExpenseControl()
@@ -365,6 +366,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
 
             dgvExpenseDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvExpenseDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllExpenseData.Rows.Count;
@@ -738,7 +740,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
-
         private void pnlTableHeader_Click(object sender, EventArgs e)
         {
             pnlFromDateCalenderShow.Visible = false;
@@ -790,6 +791,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
             pnlFromDateCalenderShow.Visible = false;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+           AllExpenseData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
+           ShowCurrentPage();
         }
     }
 }

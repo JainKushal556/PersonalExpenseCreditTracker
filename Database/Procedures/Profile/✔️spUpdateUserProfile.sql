@@ -104,7 +104,7 @@ END
         WHERE UserID = @UserID;
 
         UPDATE tblUserProfile
-        SET Name = @Name,
+        SET FullName = @Name,
             ProfilePhoto = @ProfilePhoto
         WHERE UserID = @UserID;
 

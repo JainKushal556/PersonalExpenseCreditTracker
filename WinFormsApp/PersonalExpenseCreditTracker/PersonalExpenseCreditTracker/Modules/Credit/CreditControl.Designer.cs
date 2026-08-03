@@ -228,6 +228,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 6;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+
             // 
             // pnlButtonControls
             // 
@@ -341,6 +343,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // colDate
             // 
             this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.DataPropertyName = "CreditAt";
             this.colDate.FillWeight = 10F;
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
@@ -357,6 +360,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // colCategory
             // 
             this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCategory.DataPropertyName = "CategoryName";
             this.colCategory.FillWeight = 15F;
             this.colCategory.HeaderText = "Category";
             this.colCategory.Name = "colCategory";
@@ -365,6 +369,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // colSubCategory
             // 
             this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSubCategory.DataPropertyName = "SubCategoryName";
             this.colSubCategory.FillWeight = 15F;
             this.colSubCategory.HeaderText = "SubCategory";
             this.colSubCategory.Name = "colSubCategory";
@@ -373,6 +378,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // colAmount
             // 
             this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.DataPropertyName = "Amount";
             this.colAmount.FillWeight = 10F;
             this.colAmount.HeaderText = "Amount";
             this.colAmount.Name = "colAmount";
@@ -381,6 +387,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // colPaymentMethod
             // 
             this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.DataPropertyName = "PaymentName";
             this.colPaymentMethod.FillWeight = 15F;
             this.colPaymentMethod.HeaderText = "Payment Method";
             this.colPaymentMethod.Name = "colPaymentMethod";
@@ -865,6 +872,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pnlToDate.Size = new System.Drawing.Size(285, 36);
             this.pnlToDate.TabIndex = 5;
             // 
+
             // picCalenderToDate
             // 
             this.picCalenderToDate.Dock = System.Windows.Forms.DockStyle.Right;
@@ -895,6 +903,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pnlFromDateCalenderShow.BackColor = System.Drawing.Color.Transparent;
             this.pnlFromDateCalenderShow.Controls.Add(this.monthCalendarFromDate);
             this.pnlFromDateCalenderShow.Location = new System.Drawing.Point(47, 32);
+
             this.pnlFromDateCalenderShow.Name = "pnlFromDateCalenderShow";
             this.pnlFromDateCalenderShow.Size = new System.Drawing.Size(301, 198);
             this.pnlFromDateCalenderShow.TabIndex = 6;
@@ -968,12 +977,14 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.lblToDate.TabIndex = 3;
             this.lblToDate.Text = "To";
             // 
+
             // CreditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1251, 753);
+
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlCategoryFilter);
             this.Controls.Add(this.pnlCreditContent);
