@@ -390,6 +390,17 @@ EXEC spGetNotesBetweenDates
 GO
 
 -- ==========================================================
+-- SP: spFilterNoteByDateRange
+-- From File: ✔️spFilterNoteByDateRange.sql
+-- ==========================================================
+EXEC spFilterNoteByDateRange
+    @UserID = '',
+    @FromDate = '',
+    @ToDate = ''
+
+GO
+
+-- ==========================================================
 -- SP: spInsertNote
 -- From File: ✔️spInsertNote.sql
 -- ==========================================================

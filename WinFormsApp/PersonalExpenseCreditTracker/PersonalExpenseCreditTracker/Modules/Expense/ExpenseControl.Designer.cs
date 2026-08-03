@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
@@ -272,10 +272,10 @@
             this.dgvExpenseDataTable.Name = "dgvExpenseDataTable";
             this.dgvExpenseDataTable.ReadOnly = true;
             this.dgvExpenseDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvExpenseDataTable.RowTemplate.Height = 24;
             this.dgvExpenseDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvExpenseDataTable.Size = new System.Drawing.Size(1222, 520);
@@ -285,6 +285,7 @@
             // colDate
             // 
             this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.DataPropertyName = "ExpenseAt";
             this.colDate.FillWeight = 10F;
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
@@ -301,6 +302,7 @@
             // colCategory
             // 
             this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCategory.DataPropertyName = "CategoryName";
             this.colCategory.FillWeight = 15F;
             this.colCategory.HeaderText = "Category";
             this.colCategory.Name = "colCategory";
@@ -309,6 +311,7 @@
             // colSubCategory
             // 
             this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSubCategory.DataPropertyName = "SubCategoryName";
             this.colSubCategory.FillWeight = 15F;
             this.colSubCategory.HeaderText = "SubCategory";
             this.colSubCategory.Name = "colSubCategory";
@@ -317,6 +320,7 @@
             // colAmount
             // 
             this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.DataPropertyName = "Amount";
             this.colAmount.FillWeight = 10F;
             this.colAmount.HeaderText = "Amount";
             this.colAmount.Name = "colAmount";
@@ -325,6 +329,7 @@
             // colPaymentMethod
             // 
             this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.DataPropertyName = "PaymentName";
             this.colPaymentMethod.FillWeight = 15F;
             this.colPaymentMethod.HeaderText = "Payment Method";
             this.colPaymentMethod.Name = "colPaymentMethod";
@@ -915,6 +920,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(334, 23);
             this.txtSearch.TabIndex = 6;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // cmsFilter
             // 

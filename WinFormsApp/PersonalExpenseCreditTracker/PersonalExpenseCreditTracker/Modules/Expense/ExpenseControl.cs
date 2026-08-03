@@ -601,5 +601,27 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
+        private void SearchData()
+        {
+            DataTable dt = (DataTable)dgvExpenseDataTable.DataSource;
+
+            if (dt == null)
+                return;
+
+            string search = this.txtSearch.Text.Trim().Replace("'", "''");
+
+            dt.DefaultView.RowFilter = string.Format(
+                "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
+                "Convert(ExpenseAt, 'System.String') LIKE '%{0}%' OR " +
+                "CategoryName LIKE '%{0}%' OR " +
+                "PaymentName LIKE '%{0}%' OR " +
+                "SubCategoryName LIKE '%{0}%'",
+                search);
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            this.SearchData();
+        }
     }
 }

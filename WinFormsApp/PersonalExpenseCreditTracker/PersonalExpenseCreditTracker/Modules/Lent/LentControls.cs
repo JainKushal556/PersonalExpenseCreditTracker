@@ -757,5 +757,31 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlDateFilter.Visible = false;
         }
+
+        private void SearchData()
+        {
+            DataTable dt = (DataTable)dgvLentDataTable.DataSource;
+
+            if (dt == null)
+                return;
+
+            string search = this.txtSearch.Text.Trim().Replace("'", "''");
+
+            dt.DefaultView.RowFilter = string.Format(
+                "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
+                "Convert(LentAt, 'System.String') LIKE '%{0}%' OR " +
+                "PersonName LIKE '%{0}%' OR " +
+                "PaymentName LIKE '%{0}%' OR " +
+                "StatusName LIKE '%{0}%'",
+                search);
+        }
+
+       
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            this.SearchData();
+        }
       }
     }
+    

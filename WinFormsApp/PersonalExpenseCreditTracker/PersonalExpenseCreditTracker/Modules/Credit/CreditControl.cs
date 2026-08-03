@@ -672,5 +672,28 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
 
         }
+        private void SearchData()
+        {
+            DataTable dt = (DataTable)dgvCreditDataTable.DataSource;
+
+            if (dt == null)
+                return;
+
+            string search = this.txtSearch.Text.Trim().Replace("'", "''");
+
+            dt.DefaultView.RowFilter = string.Format(
+                "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
+                "Convert(CreditAt, 'System.String') LIKE '%{0}%' OR " +
+                "CategoryName LIKE '%{0}%' OR " +
+                "PaymentName LIKE '%{0}%' OR " +
+                "SubCategoryName LIKE '%{0}%'",
+                search);
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            this.SearchData();
+        }
+
     }
 }

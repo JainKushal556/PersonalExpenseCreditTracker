@@ -1,137 +1,182 @@
-CREATE PROC spReturnLentByReturnAmount
-@LentID INT, @PaymentID INT, @ReturnedAmount DECIMAL(10,2), @Description VARCHAR(MAX)
+CREATE PROCEDURE spReturnLentByReturnAmount
+(
+    @LentID INT,
+    @PaymentID INT,
+    @ReturnedAmount DECIMAL(10,2),
+    @Description VARCHAR(MAX)
+)
 AS
 BEGIN
-	DECLARE @TotalAmount DECIMAL(10,2);
-	DECLARE @RemainingAmount DECIMAL(10,2);
-	DECLARE @NewRemainingAmount DECIMAL(10,2);
-	DECLARE @NewReturnedAmount DECIMAL(10,2);
-	DECLARE @OldReturnedAmount DECIMAL(10,2);
-	DECLARE @StatusID INT;
-	DECLARE @UserID INT;
-	DECLARE @CategoryID INT;
-	DECLARE @SubCategoryID INT;
+    DECLARE @TotalAmount DECIMAL(10,2);
+    DECLARE @RemainingAmount DECIMAL(10,2);
+    DECLARE @NewRemainingAmount DECIMAL(10,2);
+    DECLARE @NewReturnedAmount DECIMAL(10,2);
+    DECLARE @OldReturnedAmount DECIMAL(10,2);
+    DECLARE @StatusID INT;
+    DECLARE @UserID INT;
+    DECLARE @CategoryID INT;
+    DECLARE @SubCategoryID INT;
 
-	BEGIN TRY
-		BEGIN TRANSACTION
-			----------------------------All Validation-----------------------------------------
-			IF NOT EXISTS (SELECT 1 FROM tblLent WHERE LentID = @LentID)
-			BEGIN
-				SELECT 'Invalid LentID!!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+    BEGIN TRY
+        BEGIN TRANSACTION
 
-			IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID = @PaymentID)
-			BEGIN
-				SELECT 'Invalid PaymentID!!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+        -------------------------------------------------
+        -- Validation
+        -------------------------------------------------
 
-			IF @ReturnedAmount <= 0
-			BEGIN
-				SELECT 'Returned Amount Must Be Greater Than 0!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+        IF NOT EXISTS (SELECT 1 FROM tblLent WHERE LentID=@LentID)
+        BEGIN
+            SELECT 'Invalid LentID' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			----------------------------All Validation-----------------------------------------
-			
+        IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID=@PaymentID)
+        BEGIN
+            SELECT 'Invalid PaymentID' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			--Get Amount & RemainingAmount
-			SELECT @TotalAmount = Amount,
-			@RemainingAmount = RemainingAmount,
-			@OldReturnedAmount = ReturnedAmount,
-			@UserID = UserID
-			FROM tblLent
-			WHERE LentID = @LentID;
+        IF @ReturnedAmount IS NULL OR @ReturnedAmount<=0
+        BEGIN
+            SELECT 'Returned Amount Must Be Greater Than 0' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			--IF RemainingAmount is NULL THEN @RemainingAmount = @TotalAmount
-			IF @RemainingAmount is NULL
-			BEGIN
-				SET @RemainingAmount = @TotalAmount;
-			END
+        IF @Description IS NULL
+            SET @Description='';
 
+        -------------------------------------------------
+        -- Get Lent Details
+        -------------------------------------------------
 
-			--Calculating  New RemainingAmount
-			SET @NewRemainingAmount = @RemainingAmount - @ReturnedAmount;
+        SELECT
+            @TotalAmount=Amount,
+            @RemainingAmount=RemainingAmount,
+            @OldReturnedAmount=ISNULL(ReturnedAmount,0),
+            @UserID=UserID
+        FROM tblLent
+        WHERE LentID=@LentID;
 
-			--Calculate Total Returned Amount
-			SET @NewReturnedAmount = @ReturnedAmount + @OldReturnedAmount;
+        IF @TotalAmount IS NULL
+        BEGIN
+            SELECT 'Amount Not Found' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			SELECT @SubCategoryID = SubCategoryID,
-			@CategoryID = CategoryID
-			FROM tblCreditSubCategory
-			WHERE SubCategoryName = 'Lent Returned';
-             
-            IF @CategoryID IS NULL OR @SubCategoryID IS NULL
-            BEGIN
-            SELECT 'Lent Returned Credit Category/SubCategory Not Found' AS Message
-            ROLLBACK TRANSACTION
-            RETURN
-            END
+        SET @RemainingAmount=ISNULL(@RemainingAmount,@TotalAmount);
 
-			IF @NewRemainingAmount = 0
-			BEGIN
-				--Get 'Complete' StatusName ID
-				SELECT @StatusID = StatusID FROM tblLentBorrowStatus
-				WHERE StatusName = 'Paid';
+        -------------------------------------------------
+        -- Calculate
+        -------------------------------------------------
 
-				--Update Lent Table Data
-				UPDATE tblLent
-				SET RemainingAmount = 0,
-				ReturnedAmount = @NewReturnedAmount,
-				StatusID = @StatusID
-				WHERE LentID = @LentID;
+        SET @NewRemainingAmount=@RemainingAmount-@ReturnedAmount;
+        SET @NewReturnedAmount=@OldReturnedAmount+@ReturnedAmount;
 
-			END
-			ELSE IF @NewRemainingAmount > 0
-			BEGIN
-				--Get 'Pending' StatusName ID
-				SELECT @StatusID = StatusID FROM tblLentBorrowStatus
-				WHERE StatusName = 'Pending';
+        IF @NewRemainingAmount<0
+        BEGIN
+            RAISERROR('Returned amount exceeds remaining amount.',16,1);
+        END
 
-				--Update Lent Table Data
-				UPDATE tblLent
-				SET RemainingAmount = @NewRemainingAmount,
-				ReturnedAmount = @NewReturnedAmount,
-				StatusID = @StatusID
-				WHERE LentID = @LentID;
+        -------------------------------------------------
+        -- Category Lookup
+        -------------------------------------------------
 
-			END
-			ELSE
-			BEGIN
-				RAISERROR('Returned amount exceeds remaining amount.',16,1);
-			END
+        SELECT
+            @CategoryID=CategoryID,
+            @SubCategoryID=SubCategoryID
+        FROM tblCreditSubCategory
+        WHERE SubCategoryName='Lent Returned';
 
-			--Data Insert On Credit Table
-				INSERT INTO tblCredit(
-					UserID,
-					CategoryID,
-					SubCategoryID,
-					PaymentID,
-					Amount,
-					Description
-					)
-				VALUES(
-					@UserID, 
-					@CategoryID,
-					@SubCategoryID,
-					@PaymentID,
-					@ReturnedAmount,
-					@Description
-					);
+        IF @CategoryID IS NULL OR @SubCategoryID IS NULL
+        BEGIN
+            SELECT 'Lent Returned Credit Category/SubCategory Not Found' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			COMMIT TRANSACTION
-			SELECT 'Lent Returned Successfully' AS MESSAGE
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRANSACTION
-			SELECT
-				ERROR_MESSAGE() AS ErrorMessage
-		END CATCH
+        -------------------------------------------------
+        -- Status
+        -------------------------------------------------
+
+        IF @NewRemainingAmount=0
+        BEGIN
+            SELECT @StatusID=StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName='Paid';
+        END
+        ELSE
+        BEGIN
+            SELECT @StatusID=StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName='Partially Paid';
+        END
+
+        -------------------------------------------------
+        -- Update Lent
+        -------------------------------------------------
+
+        UPDATE tblLent
+        SET
+            RemainingAmount=@NewRemainingAmount,
+            ReturnedAmount=@NewReturnedAmount,
+            StatusID=@StatusID
+        WHERE LentID=@LentID;
+
+        IF @@ROWCOUNT=0
+        BEGIN
+            ROLLBACK;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Insert Credit
+        -------------------------------------------------
+
+        INSERT INTO tblCredit
+        (
+            UserID,
+            CategoryID,
+            SubCategoryID,
+            PaymentID,
+            Amount,
+            Description
+        )
+        VALUES
+        (
+            @UserID,
+            @CategoryID,
+            @SubCategoryID,
+            @PaymentID,
+            @ReturnedAmount,
+            @Description
+        );
+
+        IF @@ROWCOUNT=0
+        BEGIN
+            ROLLBACK;
+            RETURN;
+        END
+
+        COMMIT;
+
+        IF @NewRemainingAmount=0
+            SELECT 'Lent Fully Returned Successfully' AS Message;
+        ELSE
+            SELECT 'Lent Partially Returned Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        IF @@TRANCOUNT>0
+            ROLLBACK;
+
+        SELECT ERROR_MESSAGE() AS ErrorMessage;
+
+    END CATCH
 END
-
-
--- eta ektu check korbi mne thik oo ache but problem oo ache null validatiopn nae kichu jaygay total ta dekhbi . partialy paid dekhache na kono khetre setao dekhbi 
+GO
