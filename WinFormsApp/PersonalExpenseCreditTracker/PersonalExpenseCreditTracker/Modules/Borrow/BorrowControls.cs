@@ -19,9 +19,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllBorrowData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
-        private int userID = 11;
         public BorrowControls()
         {
             InitializeComponent();
@@ -166,6 +166,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                         }
 
                         AllBorrowData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -345,7 +346,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
 
             dgvBorrowDataTable.DataSource = pageTable;
-
+            Common.CommonUiFunction.HighlightSearch(dgvBorrowDataTable, txtSearch);
 
 
             int start = startIndex + 1;
@@ -829,27 +830,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
         }
 
-        private void SearchData()
-        {
-            DataTable dt = (DataTable)dgvBorrowDataTable.DataSource;
-
-            if (dt == null)
-                return;
-
-            string search = this.txtSearch.Text.Trim().Replace("'", "''");
-
-            dt.DefaultView.RowFilter = string.Format(
-                "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
-                "Convert(BorrowAt, 'System.String') LIKE '%{0}%' OR " +
-                "PersonName LIKE '%{0}%' OR " +
-                "PaymentName LIKE '%{0}%' OR " +
-                "StatusName LIKE '%{0}%'",
-                search);
-        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            this.SearchData();
+           AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+           ShowCurrentPage();
         }
 
     }

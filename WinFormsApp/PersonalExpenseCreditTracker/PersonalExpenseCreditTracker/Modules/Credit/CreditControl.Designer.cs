@@ -29,7 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlCreditContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
@@ -278,9 +278,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.dgvCreditDataTable.Name = "dgvCreditDataTable";
             this.dgvCreditDataTable.ReadOnly = true;
             this.dgvCreditDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvCreditDataTable.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dgvCreditDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCreditDataTable.RowTemplate.Height = 24;
             this.dgvCreditDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCreditDataTable.Size = new System.Drawing.Size(1223, 525);
@@ -535,7 +535,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pnlTotalCredit.Location = new System.Drawing.Point(11, 10);
             this.pnlTotalCredit.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTotalCredit.Name = "pnlTotalCredit";
-            this.pnlTotalCredit.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pnlTotalCredit.Padding = new System.Windows.Forms.Padding(20);
             this.pnlTotalCredit.Size = new System.Drawing.Size(600, 90);
             this.pnlTotalCredit.TabIndex = 0;
             this.pnlTotalCredit.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTotalCredit_Paint);
@@ -583,7 +583,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pnlTransactionCard.Location = new System.Drawing.Point(633, 10);
             this.pnlTransactionCard.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTransactionCard.Name = "pnlTransactionCard";
-            this.pnlTransactionCard.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pnlTransactionCard.Padding = new System.Windows.Forms.Padding(20);
             this.pnlTransactionCard.Size = new System.Drawing.Size(601, 90);
             this.pnlTransactionCard.TabIndex = 1;
             this.pnlTransactionCard.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTransactionCard_Paint);

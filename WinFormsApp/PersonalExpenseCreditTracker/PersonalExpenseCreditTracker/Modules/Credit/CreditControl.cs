@@ -26,6 +26,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             int nHeightEllipse);
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllCreditData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
         public CreditControl() 
@@ -173,6 +174,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                         }
 
                         AllCreditData = dt;
+                        masterData = dt.Copy();
                         dgvCreditDataTable.DataSource = AllCreditData;
                     }
                 }
@@ -342,6 +344,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
 
             dgvCreditDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvCreditDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllCreditData.Rows.Count;
@@ -672,27 +675,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
 
         }
-        private void SearchData()
-        {
-            DataTable dt = (DataTable)dgvCreditDataTable.DataSource;
-
-            if (dt == null)
-                return;
-
-            string search = this.txtSearch.Text.Trim().Replace("'", "''");
-
-            dt.DefaultView.RowFilter = string.Format(
-                "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
-                "Convert(CreditAt, 'System.String') LIKE '%{0}%' OR " +
-                "CategoryName LIKE '%{0}%' OR " +
-                "PaymentName LIKE '%{0}%' OR " +
-                "SubCategoryName LIKE '%{0}%'",
-                search);
-        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            this.SearchData();
+          AllCreditData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
+            ShowCurrentPage();
         }
 
     }

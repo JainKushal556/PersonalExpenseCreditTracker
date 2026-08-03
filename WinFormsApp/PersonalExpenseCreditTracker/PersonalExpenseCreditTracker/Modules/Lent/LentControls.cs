@@ -17,6 +17,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllLentData = new DataTable();
+        private DataTable masterData = new DataTable();
+        
         private int currentPage = 1;
         private int pageSize = 0;
 
@@ -162,6 +164,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
              }
 
             AllLentData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
         }
@@ -332,6 +335,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             dgvLentDataTable.DataSource = pageTable;
 
+            Common.CommonUiFunction.HighlightSearch(dgvLentDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllLentData.Rows.Count;
@@ -369,6 +373,60 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
 
         }
+
+        //private void ShowCurrentPage(DataTable filteredData)
+        //{
+        //    DataTable pageTable = filteredData.Clone();
+
+        //    btnCurrentPage.Text = currentPage.ToString();
+
+        //    int startIndex = (currentPage - 1) * pageSize;
+        //    int endIndex = Math.Min(startIndex + pageSize, filteredData.Rows.Count);
+
+        //    for (int i = startIndex; i < endIndex; i++)
+        //    {
+        //        pageTable.ImportRow(filteredData.Rows[i]);
+        //    }
+
+        //    dgvLentDataTable.DataSource = pageTable;
+
+        //    int start = startIndex + 1;
+        //    int end = endIndex;
+        //    int total = filteredData.Rows.Count;
+
+        //    lblStartingPageNumber.Text = total == 0 ? "0" : start.ToString();
+        //    lblEndingPageNumber.Text = end.ToString();
+        //    lblTotalPageNumber.Text = total.ToString();
+
+        //    if (filteredData != null && filteredData.Rows.Count > 0)
+        //    {
+        //        // Total Lent Amount
+        //        decimal totalLent = filteredData.AsEnumerable().Sum(row => row.Field<decimal>("Amount"));
+
+        //        // Total Repaid Amount
+        //        decimal totalRepaid = filteredData.AsEnumerable().Sum(row => row.Field<decimal>("ReturnedAmount"));
+
+        //        // Total Due Amount
+        //        decimal totalDue = filteredData.AsEnumerable().Sum(row => row.Field<decimal>("RemainingAmount"));
+
+        //        // Total Transactions
+        //        int totalTransaction = filteredData.Rows.Count;
+
+        //        // Display
+        //        lblTotalLentAmount.Text = "₹ " + totalLent.ToString("#,##0.##");
+        //        lblTotalRepaidAmount.Text = "₹ " + totalRepaid.ToString("#,##0.##");
+        //        lblTotalDueAmount.Text = "₹ " + totalDue.ToString("#,##0.##");
+        //        labelTotalTransactionNumber.Text = totalTransaction.ToString();
+        //    }
+        //    else
+        //    {
+        //        lblTotalLentAmount.Text = "₹ 0";
+        //        lblTotalRepaidAmount.Text = "₹ 0";
+        //        lblTotalDueAmount.Text = "₹ 0";
+        //        labelTotalTransactionNumber.Text = "0";
+        //    }
+
+        //}
 
         private int GetRowsPerPage()
         {
@@ -757,30 +815,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlDateFilter.Visible = false;
         }
-
-        private void SearchData()
-        {
-            DataTable dt = (DataTable)dgvLentDataTable.DataSource;
-
-            if (dt == null)
-                return;
-
-            string search = this.txtSearch.Text.Trim().Replace("'", "''");
-
-            dt.DefaultView.RowFilter = string.Format(
-                "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
-                "Convert(LentAt, 'System.String') LIKE '%{0}%' OR " +
-                "PersonName LIKE '%{0}%' OR " +
-                "PaymentName LIKE '%{0}%' OR " +
-                "StatusName LIKE '%{0}%'",
-                search);
-        }
-
-       
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            this.SearchData();
+            AllLentData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData,txtSearch);
+            ShowCurrentPage();
         }
       }
     }

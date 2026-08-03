@@ -28,6 +28,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         );
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllExpenseData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
         public ExpenseControl()
@@ -239,6 +240,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                         }
 
                         AllExpenseData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -265,6 +267,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
 
             dgvExpenseDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvExpenseDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllExpenseData.Rows.Count;
@@ -601,27 +604,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
-        private void SearchData()
-        {
-            DataTable dt = (DataTable)dgvExpenseDataTable.DataSource;
-
-            if (dt == null)
-                return;
-
-            string search = this.txtSearch.Text.Trim().Replace("'", "''");
-
-            dt.DefaultView.RowFilter = string.Format(
-                "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
-                "Convert(ExpenseAt, 'System.String') LIKE '%{0}%' OR " +
-                "CategoryName LIKE '%{0}%' OR " +
-                "PaymentName LIKE '%{0}%' OR " +
-                "SubCategoryName LIKE '%{0}%'",
-                search);
-        }
+        
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            this.SearchData();
+           AllExpenseData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
+           ShowCurrentPage();
         }
     }
 }
