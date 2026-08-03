@@ -137,7 +137,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlDueToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTaskDueIcone)).BeginInit();
             this.cmsTaskAction.SuspendLayout();
-
             this.cmsFilter.SuspendLayout();
             this.pnlPriorityFilter.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -792,7 +791,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 28);
             this.toolStripMenuItem4.Text = "Cancel";
             // 
-
             // cmsFilter
             // 
             this.cmsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1127,6 +1125,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(269, 23);
             this.txtSearch.TabIndex = 6;
+            // 
             // TaskControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1170,7 +1169,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlDueToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTaskDueIcone)).EndInit();
             this.cmsTaskAction.ResumeLayout(false);
-
             this.cmsFilter.ResumeLayout(false);
             this.pnlPriorityFilter.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);

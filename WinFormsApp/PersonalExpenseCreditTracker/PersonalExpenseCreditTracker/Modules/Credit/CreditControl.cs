@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -51,12 +51,15 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             ApplyRoundCorners();
+
             pageSize = GetRowsPerPage();
-            int userID = 11; 
+            int userID = Session.LogedInUser.GetUserId(); 
             LoadCreditData(userID);
+
             HideAllFilterPanels();
             DesignContextMenu();
             cmsFilter.Opening += cmsFilter_Opening;
+            UpdateCreditSummaryCards();
 
         }
 
@@ -144,6 +147,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             colAmount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             colPaymentMethod.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
+     
+
 
         public void LoadCreditData(int userID)
         {
@@ -174,6 +179,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
                         AllCreditData = dt;
                         dgvCreditDataTable.DataSource = AllCreditData;
+                        UpdateCreditSummaryCards();
                     }
                 }
             }
@@ -198,6 +204,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             AllCreditData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -220,6 +227,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             AllCreditData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -242,6 +250,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             AllCreditData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -264,6 +273,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             AllCreditData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
         private void dgvCreditDataTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -327,6 +337,28 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
 
             e.Handled = true;
+        }
+
+        private void UpdateCreditSummaryCards()
+        {
+            if (AllCreditData == null || AllCreditData.Rows.Count == 0)
+            {
+                lblCreditAmount.Text = "₹ 0";
+                return;
+            }
+
+            decimal totalCredit = 0;
+
+            foreach (DataRow row in AllCreditData.Rows)
+            {
+                if (row["Amount"] != DBNull.Value)
+                {
+                    totalCredit += Convert.ToDecimal(row["Amount"]);
+                }
+            }
+
+            lblCreditAmount.Text = "₹ " + totalCredit.ToString("#,##0");
+            lblTransactionAmount.Text = AllCreditData.Rows.Count.ToString();
         }
 
         private void ShowCurrentPage()
@@ -672,5 +704,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
 
         }
+
+
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel5 = new System.Windows.Forms.Panel();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.panelMainBody = new System.Windows.Forms.Panel();
@@ -72,6 +73,7 @@
             this.lblReturedAmountText = new System.Windows.Forms.Label();
             this.lblTotalAmountText = new System.Windows.Forms.Label();
             this.lblPersonNameText = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel5.SuspendLayout();
             this.panelMainBody.SuspendLayout();
             this.pnlInputField.SuspendLayout();
@@ -81,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRupee)).BeginInit();
             this.panel4.SuspendLayout();
             this.pnlPersonDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel5
@@ -146,6 +149,7 @@
             this.btnSave.Text = "  Save Lent";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -599,6 +603,10 @@
             this.lblPersonNameText.TabIndex = 33;
             this.lblPersonNameText.Text = "Sujit Kar";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // PayLentReturnAmountControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -624,6 +632,7 @@
             this.panel4.ResumeLayout(false);
             this.pnlPersonDetails.ResumeLayout(false);
             this.pnlPersonDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -674,6 +683,7 @@
         private System.Windows.Forms.Label lblReturedAmountText;
         private System.Windows.Forms.Label lblTotalAmountText;
         private System.Windows.Forms.Label lblPersonNameText;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
 
 
 

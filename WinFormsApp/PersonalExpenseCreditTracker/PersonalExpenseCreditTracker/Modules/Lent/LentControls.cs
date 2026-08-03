@@ -35,8 +35,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             InitializeComponent();
 
             StyleLentGrid();
-            dgvLentDataTable.CellDoubleClick += dgvLentDataTable_CellDoubleClick;
-
+           
             dgvLentDataTable.AutoGenerateColumns = false;
 
             ApplyRoundCorners();
@@ -489,10 +488,45 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
         }
 
-        private void dgvLentDataTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvLentDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+                return;
 
+            DataGridViewRow row = dgvLentDataTable.Rows[e.RowIndex];
+
+            int lentId = 0;
+
+            DataRowView drv = row.DataBoundItem as DataRowView;
+            if (drv != null && drv.Row.Table.Columns.Contains("LentID"))
+            {
+                lentId = Convert.ToInt32(drv["LentID"]);
+            }
+
+            string personName = Convert.ToString(row.Cells["colPersonName"].Value);
+            string totalAmount = Convert.ToString(row.Cells["colAmount"].Value);
+            string remainingAmount = Convert.ToString(row.Cells["colRemainingAmount"].Value);
+            string status = Convert.ToString(row.Cells["colStatus"].Value);
+            string returnAmount = Convert.ToString(row.Cells["colReturnedAmount"].Value);
+
+            using (PayLentReturnAmountControls frm = new PayLentReturnAmountControls())
+            {
+                frm.SetLentDetails(
+                    lentId,
+                    personName,
+                    totalAmount,
+                    remainingAmount,
+                    status,
+                    returnAmount);
+
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+                    LoadLentData(userID);
+                }
+            }
         }
+
 
         private void panelTotalLent_Paint(object sender, PaintEventArgs e)
         {
@@ -531,16 +565,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         }
 
 
-        private void dgvLentDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-                return;
+        //private void dgvLentDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.RowIndex < 0)
+        //        return;
 
-            PayLentReturnAmountControls frm = new PayLentReturnAmountControls();
+        //    PayLentReturnAmountControls frm = new PayLentReturnAmountControls();
 
-            frm.StartPosition = FormStartPosition.CenterParent;
-            frm.ShowDialog(this);
-        }
+        //    frm.StartPosition = FormStartPosition.CenterParent;
+        //    frm.ShowDialog(this);
+        //}
 
         private void btnExportReport_Click(object sender, EventArgs e)
         {

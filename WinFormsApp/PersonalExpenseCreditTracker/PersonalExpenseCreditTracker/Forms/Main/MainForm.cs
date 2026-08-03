@@ -22,6 +22,8 @@ using PersonalExpenseCreditTracker.Common;
 using PersonalExpenseCreditTracker.Session;
 using PersonalExpenseCreditTracker.Forms.Main;
 using BLLayer.Common;
+using System.IO;
+using System.Drawing.Drawing2D;
 namespace PersonalExpenseCreditTracker
 {
     public partial class MainForm : Form
@@ -151,6 +153,9 @@ namespace PersonalExpenseCreditTracker
         {
             flowSidebar.Location = new Point(0, 0);
             flowSidebar.Width = pnlSideBar.ClientSize.Width;
+
+            LoadSidebarUserProfile();
+            MakeCircularPictureBox(picUserProfile);
             //ComboBoxCategory.SelectedIndex = 0;
             //cmbSubCategory.SelectedIndex = 0;
 
@@ -502,8 +507,8 @@ namespace PersonalExpenseCreditTracker
 
             else if (panel == pnlSettings)
                 picSettings.Image = active ? Properties.Resources.cogwheel__1_ : Properties.Resources.cogwheel;
-            else if (panel == pnlUserProfile)
-                picUserProfile.Image = active ? Properties.Resources.user : Properties.Resources.user;
+            //else if (panel == pnlUserProfile)
+                //picUserProfile.Image = active ? Properties.Resources.user : Properties.Resources.user;
         }
         //pnlDashboard all Function
         private void pnlDashboard_Click(object sender, EventArgs e)
@@ -530,6 +535,7 @@ namespace PersonalExpenseCreditTracker
 
                 dashboardControl.Show();
             }
+            dashboardControl.LoadDashboardSummary(Session.LogedInUser.GetUserId());
 
             ShowPage(pnlOverview);
             pnlTop.Visible = true;
@@ -1157,6 +1163,65 @@ namespace PersonalExpenseCreditTracker
 
             ExpandSidebar();
         }
+
+        private void MakeCircularPictureBox(PictureBox pictureBox)
+        {
+            // ১. ছবির ফ্রেমটি যেন নিখুঁত বর্গক্ষেত্র (Square) হয়
+            int diameter = Math.Min(pictureBox.Width, pictureBox.Height);
+            pictureBox.Width = diameter;
+            pictureBox.Height = diameter;
+
+            // ২. এবার গোল মাস্ক তৈরি করা
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 0, diameter - 1, diameter - 1);
+            pictureBox.Region = new Region(path);
+
+            // ৩. ছবি বিকৃত হওয়া এড়াতে Zoom ব্যবহার করা
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+
+        public void LoadSidebarUserProfile()
+        {
+            int userID = Session.LogedInUser.GetUserId();
+
+            DataTable dt = CommonUiFunction.RetrieveDataForGridView("spGetActiveUserDetails", userID);
+
+            if (dt != null && dt.Rows.Count > 0 && !dt.Columns.Contains("Message"))
+            {
+                DataRow row = dt.Rows[0];
+
+                // Full Name
+                lblUserName.Text = Convert.ToString(row["FullName"]);
+
+                // Email
+                lblEmail.Text = Convert.ToString(row["Email"]);
+
+                // Profile Photo
+                if (row["ProfilePhoto"] != DBNull.Value)
+                {
+                    byte[] imgBytes = (byte[])row["ProfilePhoto"];
+
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        picUserProfile.Image = Image.FromStream(ms);
+                    }
+                }
+                else
+                {
+                    // Default Image
+                    picUserProfile.Image = Properties.Resources.user;
+                }
+            }
+            else
+            {
+                lblUserName.Text = "";
+                lblEmail.Text = "";
+                picUserProfile.Image = Properties.Resources.user;
+            }
+        }
+
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -4339,6 +4404,7 @@ namespace PersonalExpenseCreditTracker
                     break;
             }
         }
+
 
         
     }

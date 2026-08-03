@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblAmount = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -72,6 +73,7 @@
             this.lblPaidAmountText = new System.Windows.Forms.Label();
             this.lblTotalAmountText = new System.Windows.Forms.Label();
             this.lblPersonNameText = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelMainBody.SuspendLayout();
             this.pnlInputField.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -81,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRupee)).BeginInit();
             this.panel4.SuspendLayout();
             this.pnlPersonDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAmount
@@ -169,6 +172,7 @@
             this.panelMainBody.Size = new System.Drawing.Size(618, 774);
             this.panelMainBody.TabIndex = 1;
             this.panelMainBody.Click += new System.EventHandler(this.panelMainBody_Click);
+            this.panelMainBody.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMainBody_Paint);
             // 
             // btnSave
             // 
@@ -600,6 +604,10 @@
             this.lblPersonNameText.TabIndex = 33;
             this.lblPersonNameText.Text = "Sujit Kar";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // PayBorrowPaidAmountControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -625,6 +633,7 @@
             this.panel4.ResumeLayout(false);
             this.pnlPersonDetails.ResumeLayout(false);
             this.pnlPersonDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -675,6 +684,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
 
     }
 }

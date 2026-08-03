@@ -569,9 +569,9 @@
             this.lblProfileInfoPersonPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileInfoPersonPhoneNumber.Location = new System.Drawing.Point(30, 14);
             this.lblProfileInfoPersonPhoneNumber.Name = "lblProfileInfoPersonPhoneNumber";
-            this.lblProfileInfoPersonPhoneNumber.Size = new System.Drawing.Size(168, 28);
+            this.lblProfileInfoPersonPhoneNumber.Size = new System.Drawing.Size(127, 28);
             this.lblProfileInfoPersonPhoneNumber.TabIndex = 0;
-            this.lblProfileInfoPersonPhoneNumber.Text = "+91 98765 43210";
+            this.lblProfileInfoPersonPhoneNumber.Text = "98765 43210";
             // 
             // panel4
             // 

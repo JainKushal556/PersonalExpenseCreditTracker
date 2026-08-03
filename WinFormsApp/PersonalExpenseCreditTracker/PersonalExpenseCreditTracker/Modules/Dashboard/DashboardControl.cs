@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.DataVisualization.Charting;
+using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Session;
 
 namespace PersonalExpenseCreditTracker.Modules.Dashboard
 {
@@ -35,6 +37,9 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
         private void DashboardControl_Load(object sender, EventArgs e)
         {
             ApplyRoundCorners();
+
+             int userID = LogedInUser.GetUserId();
+             LoadDashboardSummary(userID);
 
             chartExpenseCategory.Series[0].Points.Clear();
 
@@ -223,6 +228,87 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                 ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
         }
+
+
+        public void LoadDashboardSummary(int userID)
+        {
+            //Total Expense 
+            DataTable dtExpense = CommonUiFunction.RetrieveDataForGridView("spGetAllExpensesByID", userID);
+
+            decimal totalExpense = 0;
+            if (dtExpense != null && dtExpense.Rows.Count > 0 && !dtExpense.Columns.Contains("Message"))
+            {
+                totalExpense = dtExpense.AsEnumerable().Sum(r => Convert.ToDecimal(r["Amount"]));
+            }
+
+            lblExpenseAmount.Text = "₹ " + totalExpense.ToString("#,##0");
+           lblExpenseValue.Text = "₹ " + totalExpense.ToString("#,##0");
+
+           //Total Credit (Income)
+           DataTable dtCredit = CommonUiFunction.RetrieveDataForGridView("spGetAllCreditsByID", userID);
+           decimal totalCredit = 0;
+           decimal amt = 0;
+
+           if (dtCredit != null &&
+               dtCredit.Rows.Count > 0 &&
+               !dtCredit.Columns.Contains("Message") &&
+               dtCredit.Columns.Contains("Amount"))
+           {
+               foreach (DataRow r in dtCredit.Rows)
+               {
+                   if (r["Amount"] != DBNull.Value &&
+                       decimal.TryParse(r["Amount"].ToString(), out amt))
+                   {
+                       totalCredit += amt;
+                   }
+               }
+           }
+
+           lblCreditAmount.Text = "₹ " + totalCredit.ToString("#,##0");
+           lblIncomeValue.Text = "₹ " + totalCredit.ToString("#,##0");
+
+
+            // Total Borrow 
+            DataTable dtBorrow = CommonUiFunction.RetrieveDataForGridView("spGetAllBorrow", userID);
+            decimal totalBorrow = 0;
+            if (dtBorrow != null && dtBorrow.Rows.Count > 0 && !dtBorrow.Columns.Contains("Message"))
+            {
+                totalBorrow = dtBorrow.AsEnumerable().Sum(r => Convert.ToDecimal(r["Amount"]));
+            }
+           lblBorrowAmount.Text = "₹ " + totalBorrow.ToString("#,##0");
+            lblBorrowValue.Text = "₹ " + totalBorrow.ToString("#,##0");
+
+            // Total Lent 
+            DataTable dtLent = CommonUiFunction.RetrieveDataForGridView("spGetAllLent", userID);
+            decimal totalLent = 0;
+            if (dtLent != null && dtLent.Rows.Count > 0 && !dtLent.Columns.Contains("Message"))
+            {
+                totalLent = dtLent.AsEnumerable().Sum(r => Convert.ToDecimal(r["Amount"]));
+            }
+           lblLentAmount.Text = "₹ " + totalLent.ToString("#,##0");
+            lblLentValue.Text = "₹ " + totalLent.ToString("#,##0");
+
+            //Net Balance (Income - Expense)
+            decimal netBalance = totalCredit - totalExpense;
+
+            if (netBalance < 0)
+            {
+                lblNetBalanceValue.Text = "-₹ " + Math.Abs(netBalance).ToString("#,##0");
+                lblNetBalanceValue.ForeColor = Color.Red;
+            }
+            else if (netBalance > 0)
+            {
+                lblNetBalanceValue.Text = "₹ " + netBalance.ToString("#,##0");
+                lblNetBalanceValue.ForeColor = Color.Green;
+            }
+            else
+            {
+                lblNetBalanceValue.Text = "₹ 0";
+                lblNetBalanceValue.ForeColor = Color.Black;
+            }
+
+        }
+
 
     }
 }

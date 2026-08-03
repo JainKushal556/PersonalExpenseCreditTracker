@@ -48,6 +48,10 @@ namespace PersonalExpenseCreditTracker.Common
                     errorProvider.SetError(comboBox, "Please select a priority.");
                     comboBox.Focus();
                     break;
+                case CommonValidator.ValidationResult.GenderInvalid:
+                    errorProvider.SetError(comboBox, "Please select a gender.");
+                    comboBox.Focus();
+                    break;
 
             }
         }
@@ -98,6 +102,31 @@ namespace PersonalExpenseCreditTracker.Common
 
                 case CommonValidator.ValidationResult.TaskTitleInvalid:
                     errorProvider.SetError(textBox, "Please enter a valid task title.");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.FullNameInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid full name.");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.EmailInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid email address.");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid phone number.");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.AddressInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid address.");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.DateOfBirthInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid date of birth.");
                     textBox.Focus();
                     break;
             }

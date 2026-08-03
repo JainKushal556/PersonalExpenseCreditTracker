@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,17 +75,23 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             DeleteObject(hrgn);
         }
         //Show ImageBox and load Image on this Area
-        protected internal void SetImageInImgBoxCrop()
+        protected internal bool SetImageInImgBoxCrop()
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
-
-            if (ofd.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                ImgBoxCrop.Image = Image.FromFile(ofd.FileName);
-                ImgBoxCrop.ZoomToFit();
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    ImgBoxCrop.Image = Image.FromFile(ofd.FileName);
+                    ImgBoxCrop.ZoomToFit();
+                    return true; 
+                }
             }
+
+            return false; 
         }
+
         
         //Circle Image
         protected internal void MakePictureCircular(PictureBox pic)
@@ -144,7 +150,10 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
             profileControls.picProfileUserPhoto.Image = bmp;
             ImgBoxCrop.SelectionRegion = RectangleF.Empty;
+
+            this.DialogResult = DialogResult.OK;
             this.Close();
+        
         }
 
         private void btnCropImageCancel_Click(object sender, EventArgs e)

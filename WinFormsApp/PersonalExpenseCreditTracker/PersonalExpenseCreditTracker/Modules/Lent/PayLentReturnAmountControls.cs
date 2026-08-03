@@ -7,16 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public partial class PayLentReturnAmountControls : Form
     {
+        private int selectedLentId = 0;
         public PayLentReturnAmountControls()
         {
             InitializeComponent();
             //this.rtxtDescription.Enter += new System.EventHandler(this.rtxtDescription_Leave);
             //this.rtxtDescription.Leave += new System.EventHandler(this.rtxtDescription_Enter);
+        }
+        public void SetLentDetails(int lentId, string personName, string totalAmount, string remainingAmount, string status, string returnAmount)
+        {
+            this.selectedLentId = lentId;
+            lblPersonNameText.Text = personName;
+            lblTotalAmountText.Text = totalAmount;
+            lblRemainingAmountText.Text = remainingAmount;
+            lblReturedAmountText.Text = returnAmount;
         }
 
         private void ReturnAmountControls_Load(object sender, EventArgs e)
@@ -38,6 +48,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             cmbPaymentType.ForeColor = Color.Gray;
             cmbStatus.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
+
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbPaymentType);
         }
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -234,5 +246,63 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlCalenderShow.Visible = false;
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+            LentUi lentUi = new LentUi();
+
+            // Assign values from the form controls to the object
+            lentUi.userId = Session.LogedInUser.GetUserId();
+            lentUi.lentId = this.selectedLentId;
+            lentUi.paymentId = Convert.ToInt32(cmbPaymentType.SelectedValue);
+
+            // If the placeholder text is still present, pass an empty string
+            lentUi.returnAmount = (txtReturnAmount.Text == "Select Amount") ? "" : txtReturnAmount.Text;
+            lentUi.description = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
+
+            // If no return date is selected, assign DateTime.MinValue
+            // Otherwise, assign the selected date from the calendar
+            lentUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY")
+                ? DateTime.MinValue
+                : monthCalendar.SelectionStart;
+
+            // Call UI Layer
+            CommonValidator.ValidationResult result = lentUi.InsertReturnLentIntoLentUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Lent returned successfully!");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.AmountEmpty:
+                case CommonValidator.ValidationResult.AmountInvalid:
+                case CommonValidator.ValidationResult.AmountTooLarge:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.PaymentInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbPaymentType);
+                    break;
+
+                case CommonValidator.ValidationResult.DeadlineInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnDate);
+                    break;
+
+                case CommonValidator.ValidationResult.DescriptionInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtDescription);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Lent return failed!");
+                    break;
+            }
+        }
+
+       
     }
 }

@@ -620,7 +620,6 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlSideBar
             // 
-            this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlSideBar.Controls.Add(this.pnlScrollBar);
             this.pnlSideBar.Controls.Add(this.flowSidebar);
@@ -637,10 +636,10 @@ namespace PersonalExpenseCreditTracker
             this.pnlScrollBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlScrollBar.Controls.Add(this.pnlThumb);
             this.pnlScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlScrollBar.Location = new System.Drawing.Point(400, 0);
+            this.pnlScrollBar.Location = new System.Drawing.Point(380, 0);
             this.pnlScrollBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlScrollBar.Name = "pnlScrollBar";
-            this.pnlScrollBar.Size = new System.Drawing.Size(20, 5522);
+            this.pnlScrollBar.Size = new System.Drawing.Size(20, 854);
             this.pnlScrollBar.TabIndex = 5;
             this.pnlScrollBar.Visible = false;
             // 
@@ -5166,7 +5165,7 @@ namespace PersonalExpenseCreditTracker
             this.picUserProfile.Location = new System.Drawing.Point(29, 18);
             this.picUserProfile.Margin = new System.Windows.Forms.Padding(29, 16, 11, 10);
             this.picUserProfile.Name = "picUserProfile";
-            this.picUserProfile.Size = new System.Drawing.Size(35, 36);
+            this.picUserProfile.Size = new System.Drawing.Size(40, 40);
             this.picUserProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picUserProfile.TabIndex = 0;
             this.picUserProfile.TabStop = false;
@@ -5566,7 +5565,7 @@ namespace PersonalExpenseCreditTracker
             this.Controls.Add(this.pnlProfilePage);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.pnlMainSideBarSection);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);

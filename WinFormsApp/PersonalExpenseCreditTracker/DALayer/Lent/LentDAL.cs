@@ -18,6 +18,11 @@ namespace DALayer.Lent
         public string amount { get; set; }
         public DateTime deadlineAt { get; set; }
         public string description { get; set; }
+
+        // Add these for Return Lent
+        public string returnAmount { get; set; }
+        public DateTime returnDate { get; set; }
+
         private Boolean ReturnBoolean(int value)
         {
             if (value > 0) return true;
@@ -43,6 +48,46 @@ namespace DALayer.Lent
                     sqlConnection.Open();
                     rowsEffected = sqlCommand.ExecuteNonQuery();
                     return ReturnBoolean(rowsEffected); 
+                }
+            }
+            catch (Exception ex)
+            {
+                return ReturnBoolean(rowsEffected);
+            }
+            finally
+            {
+                if (sqlConnection != null)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
+
+        public Boolean ReturnLent()
+        {
+            string connectionString = Common.SqlHelper.connectionString;
+            SqlConnection sqlConnection = null;
+            int rowsEffected = 0;
+
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+
+                using (SqlCommand sqlCommand = new SqlCommand("spReturnLentByReturnAmount", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    sqlCommand.Parameters.AddWithValue("@LentID", this.lentId);
+                    sqlCommand.Parameters.AddWithValue("@PaymentID", this.paymentId);
+                    sqlCommand.Parameters.AddWithValue("@ReturnedAmount", Convert.ToDecimal(this.returnAmount));
+                    sqlCommand.Parameters.AddWithValue("@Description", this.description);
+
+                    sqlConnection.Open();
+
+                    rowsEffected = sqlCommand.ExecuteNonQuery();
+
+                    return ReturnBoolean(rowsEffected);
                 }
             }
             catch (Exception ex)

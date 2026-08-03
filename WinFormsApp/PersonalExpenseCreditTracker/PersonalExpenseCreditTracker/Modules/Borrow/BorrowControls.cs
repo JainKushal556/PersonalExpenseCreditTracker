@@ -555,9 +555,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         }
 
-      
-
-    
 
         private void dgvBorrowDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -566,17 +563,38 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             DataGridViewRow row = dgvBorrowDataTable.Rows[e.RowIndex];
 
-            int personID = Convert.ToInt32(row.Cells["colPersonID"].Value);
+            int borrowId = 0;
 
-            //MessageBox.Show("PersonID = " + personID);
+            DataRowView drv = row.DataBoundItem as DataRowView;
+            if (drv != null && drv.Row.Table.Columns.Contains("BorrowID"))
+            {
+                borrowId = Convert.ToInt32(drv["BorrowID"]);
+            }
 
-            //PayBorrowReturnAmountControls frm = new PayBorrowReturnAmountControls();
+            string personName = Convert.ToString(row.Cells["colPersonName"].Value);
+            string totalAmount = Convert.ToString(row.Cells["colAmount"].Value);
+            string remainingAmount = Convert.ToString(row.Cells["colRemainingAmount"].Value);
+            string status = Convert.ToString(row.Cells["colStatus"].Value);
+            string paidAmount = Convert.ToString(row.Cells["colPaidAmount"].Value);
 
-            //frm.UserID = userID;
-            //frm.PersonID = personID;
+            using (PayBorrowPaidAmountControls frm = new PayBorrowPaidAmountControls())
+            {
+                frm.SetBorrowDetails(
+                    borrowId,
+                    personName,
+                    totalAmount,
+                    remainingAmount,
+                    status,
+                    paidAmount);
 
-            //frm.ShowDialog(this);
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+                    LoadBorrowData(userID);
+                }
+            }
         }
+
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
