@@ -229,7 +229,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-
             // 
             // pnlButtonControls
             // 
@@ -681,19 +680,19 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.tsmiDate,
             this.tsmiCategory});
             this.cmsFilter.Name = "cmsFilter";
-            this.cmsFilter.Size = new System.Drawing.Size(139, 52);
+            this.cmsFilter.Size = new System.Drawing.Size(153, 74);
             // 
             // tsmiDate
             // 
             this.tsmiDate.Name = "tsmiDate";
-            this.tsmiDate.Size = new System.Drawing.Size(138, 24);
+            this.tsmiDate.Size = new System.Drawing.Size(152, 24);
             this.tsmiDate.Text = "Date";
             this.tsmiDate.Click += new System.EventHandler(this.tsmiDate_Click);
             // 
             // tsmiCategory
             // 
             this.tsmiCategory.Name = "tsmiCategory";
-            this.tsmiCategory.Size = new System.Drawing.Size(138, 24);
+            this.tsmiCategory.Size = new System.Drawing.Size(152, 24);
             this.tsmiCategory.Text = "Category";
             this.tsmiCategory.Click += new System.EventHandler(this.tsmiCategory_Click);
             // 
@@ -872,7 +871,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pnlToDate.Size = new System.Drawing.Size(285, 36);
             this.pnlToDate.TabIndex = 5;
             // 
-
             // picCalenderToDate
             // 
             this.picCalenderToDate.Dock = System.Windows.Forms.DockStyle.Right;
@@ -903,7 +901,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pnlFromDateCalenderShow.BackColor = System.Drawing.Color.Transparent;
             this.pnlFromDateCalenderShow.Controls.Add(this.monthCalendarFromDate);
             this.pnlFromDateCalenderShow.Location = new System.Drawing.Point(47, 32);
-
             this.pnlFromDateCalenderShow.Name = "pnlFromDateCalenderShow";
             this.pnlFromDateCalenderShow.Size = new System.Drawing.Size(301, 198);
             this.pnlFromDateCalenderShow.TabIndex = 6;
@@ -977,14 +974,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.lblToDate.TabIndex = 3;
             this.lblToDate.Text = "To";
             // 
-
             // CreditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1251, 753);
-
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlCategoryFilter);
             this.Controls.Add(this.pnlCreditContent);

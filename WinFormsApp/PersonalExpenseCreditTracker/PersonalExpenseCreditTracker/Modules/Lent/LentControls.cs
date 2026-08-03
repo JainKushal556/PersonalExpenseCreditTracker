@@ -612,6 +612,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
+            comboBox1.DroppedDown = true;
         }
 
         private void btncategoryClose_Click(object sender, EventArgs e)

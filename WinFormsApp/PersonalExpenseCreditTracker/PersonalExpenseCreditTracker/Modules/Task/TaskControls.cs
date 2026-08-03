@@ -669,6 +669,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void tsmiPriority_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlPriorityFilter);
+            cmbPriority.DroppedDown = true;
         }
 
         private void btnSerach_Click(object sender, EventArgs e)

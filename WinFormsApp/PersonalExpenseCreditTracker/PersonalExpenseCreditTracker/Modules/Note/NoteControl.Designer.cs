@@ -1105,14 +1105,12 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblToDate.TabIndex = 3;
             this.lblToDate.Text = "To";
             // 
-
             // NoteControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1203, 630);
-
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlPriorityFilter);
             this.Controls.Add(this.pnlNoteMain);

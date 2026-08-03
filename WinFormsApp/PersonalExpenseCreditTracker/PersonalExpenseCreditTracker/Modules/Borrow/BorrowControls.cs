@@ -653,6 +653,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void tsmiCategory_Click_1(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
+            comboBox1.DroppedDown = true;
         }
 
         private void btnSerach_Click(object sender, EventArgs e)
