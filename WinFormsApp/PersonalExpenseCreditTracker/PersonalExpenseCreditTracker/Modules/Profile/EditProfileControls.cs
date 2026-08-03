@@ -42,13 +42,8 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         {
             GetUserProfileDetails();
 
-            SetRadius(pnlEditProfileMainBody, 20);
-            SetRadius(btnCancelEditProfile, 20);
-            SetRadius(btnUpdateProfile, 25);
-
-            pnlEditProfileMainBody.Resize += pnlEditProfileMainBody_Resize;
-            btnCancelEditProfile.Resize += btnCancelEditProfile_Resize;
-            btnUpdateProfile.Resize += btnUpdateProfile_Resize;
+            SetRadius(btnCancelEditProfile, 10);
+            SetRadius(btnUpdateProfile, 15);
 
             this.ActiveControl = pnlEditProfileMainBody;
         }
@@ -76,10 +71,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
             DeleteObject(hrgn);
         }
-        private void pnlEditProfileMainBody_Resize(object sender, EventArgs e)
-        {
-            SetRadius(pnlEditProfileMainBody, 20);
-        }
+
         private void btnCancelEditProfile_Resize(object sender, EventArgs e)
         {
             SetRadius(btnCancelEditProfile, 20);

@@ -317,13 +317,13 @@
             this.btnBorrowAddSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnBorrowAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorrowAddSave.ForeColor = System.Drawing.Color.White;
-            this.btnBorrowAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnBorrowAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnBorrowAddSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBorrowAddSave.Location = new System.Drawing.Point(370, 616);
             this.btnBorrowAddSave.Name = "btnBorrowAddSave";
             this.btnBorrowAddSave.Size = new System.Drawing.Size(177, 41);
             this.btnBorrowAddSave.TabIndex = 8;
-            this.btnBorrowAddSave.Text = "  Save Borrow";
+            this.btnBorrowAddSave.Text = "  Add Borrow";
             this.btnBorrowAddSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBorrowAddSave.UseVisualStyleBackColor = false;
             this.btnBorrowAddSave.Click += new System.EventHandler(this.btnBorrowAddSave_Click);
@@ -391,7 +391,7 @@
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
-            this.pictureBox6.Location = new System.Drawing.Point(500, 206);
+            this.pictureBox6.Location = new System.Drawing.Point(510, 206);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(25, 26);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

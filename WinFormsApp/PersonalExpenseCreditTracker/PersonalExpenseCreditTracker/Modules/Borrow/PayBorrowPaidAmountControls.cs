@@ -74,13 +74,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             txtReturnDate.Text = "DD-MM-YYYY";
             txtDescription.Text = "Enter Description";
             cmbPaymentType.Text = "Enter Payment Type";
-            cmbStatus.Text = "Enetr Status";
 
             txtAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
-            cmbStatus.ForeColor = Color.Gray;
         }
 
         private void btnAddCancel_Click(object sender, EventArgs e)
@@ -93,14 +91,12 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             txtAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
             cmbPaymentType.Text = "Enter Payment Type";
-            cmbStatus.Text = "Enetr Status";
             txtDescription.Text = "Enter Description";
 
             txtAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
-            cmbStatus.ForeColor = Color.Gray;
 
             pnlCalenderShow.Visible = false;
         }
@@ -121,25 +117,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             {
                 txtAmount.Text = "Enter Return Amount";
                 txtAmount.ForeColor = Color.Gray;
-            }
-        }
-
-        private void cmbStatus_Enter(object sender, EventArgs e)
-        {
-            if (cmbStatus.Text == "Enetr Status")
-            {
-                cmbStatus.Text = "";
-                cmbStatus.ForeColor = Color.Black;
-            }
-            pnlCalenderShow.Visible = false;
-        }
-
-        private void cmbStatus_Leave(object sender, EventArgs e)
-        {
-            if (cmbStatus.Text == "")
-            {
-                cmbStatus.Text = "Enetr Status";
-                cmbStatus.ForeColor = Color.Gray;
             }
         }
 

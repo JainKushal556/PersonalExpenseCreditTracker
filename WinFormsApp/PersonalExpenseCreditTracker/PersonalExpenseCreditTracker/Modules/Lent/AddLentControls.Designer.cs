@@ -113,7 +113,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
-            this.pictureBox6.Location = new System.Drawing.Point(500, 206);
+            this.pictureBox6.Location = new System.Drawing.Point(510, 206);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(25, 26);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -371,13 +371,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnLentAddSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnLentAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentAddSave.ForeColor = System.Drawing.Color.White;
-            this.btnLentAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnLentAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnLentAddSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLentAddSave.Location = new System.Drawing.Point(370, 619);
             this.btnLentAddSave.Name = "btnLentAddSave";
             this.btnLentAddSave.Size = new System.Drawing.Size(177, 41);
             this.btnLentAddSave.TabIndex = 8;
-            this.btnLentAddSave.Text = "  Save Lent";
+            this.btnLentAddSave.Text = "  Add Lent";
             this.btnLentAddSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLentAddSave.UseVisualStyleBackColor = false;
             this.btnLentAddSave.Click += new System.EventHandler(this.btnLentAddSave_Click);

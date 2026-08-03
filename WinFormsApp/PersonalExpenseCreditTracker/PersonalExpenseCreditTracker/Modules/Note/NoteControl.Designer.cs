@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Note
+namespace PersonalExpenseCreditTracker.Modules.Note
 {
     partial class NoteControl
     {
@@ -71,11 +71,15 @@
             this.lblMothTitle = new System.Windows.Forms.Label();
             this.picNoteCalender = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnSerach = new System.Windows.Forms.Button();
             this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnFilter = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.pnlSearchHeader = new System.Windows.Forms.Panel();
+            this.pnlSearchTxt = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.cmsNote = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,11 +110,6 @@
             this.picCalenderFromDate = new System.Windows.Forms.PictureBox();
             this.txtFromdate = new System.Windows.Forms.TextBox();
             this.lblToDate = new System.Windows.Forms.Label();
-            this.pnlSearch = new System.Windows.Forms.Panel();
-            this.pnlSearchHeader = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.pnlSearchTxt = new System.Windows.Forms.Panel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlNoteMain.SuspendLayout();
             this.flpNotes.SuspendLayout();
             this.pnlNoteCard.SuspendLayout();
@@ -127,6 +126,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picNoteCalender)).BeginInit();
             this.panel2.SuspendLayout();
             this.pnlButtonControls.SuspendLayout();
+            this.pnlSearch.SuspendLayout();
+            this.pnlSearchHeader.SuspendLayout();
+            this.pnlSearchTxt.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.cmsNote.SuspendLayout();
             this.cmsFilter.SuspendLayout();
             this.pnlPriorityFilter.SuspendLayout();
@@ -140,9 +143,6 @@
             this.pnlFromDateCalenderShow.SuspendLayout();
             this.pnlFromDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalenderFromDate)).BeginInit();
-            this.pnlSearch.SuspendLayout();
-            this.pnlSearchHeader.SuspendLayout();
-            this.pnlSearchTxt.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlNoteMain
@@ -171,6 +171,7 @@
             this.flpNotes.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flpNotes.Size = new System.Drawing.Size(1203, 390);
             this.flpNotes.TabIndex = 3;
+            this.flpNotes.Click += new System.EventHandler(this.flpNotes_Click);
             this.flpNotes.Paint += new System.Windows.Forms.PaintEventHandler(this.flpNotes_Paint);
             // 
             // pnlNoteCard
@@ -453,6 +454,7 @@
             this.tblNoteSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblNoteSummary.Size = new System.Drawing.Size(1203, 188);
             this.tblNoteSummary.TabIndex = 1;
+            this.tblNoteSummary.Click += new System.EventHandler(this.tblNoteSummary_Click);
             // 
             // pnlTotalNotes
             // 
@@ -634,28 +636,15 @@
             // panel2
             // 
             this.tblNoteSummary.SetColumnSpan(this.panel2, 3);
-            this.panel2.Controls.Add(this.btnSerach);
             this.panel2.Controls.Add(this.pnlButtonControls);
+            this.panel2.Controls.Add(this.pnlSearch);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(6, 128);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1191, 56);
             this.panel2.TabIndex = 3;
-            // 
-            // btnSerach
-            // 
-            this.btnSerach.FlatAppearance.BorderSize = 0;
-            this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
-            this.btnSerach.Location = new System.Drawing.Point(3, 5);
-            this.btnSerach.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSerach.Name = "btnSerach";
-            this.btnSerach.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.btnSerach.Size = new System.Drawing.Size(53, 44);
-            this.btnSerach.TabIndex = 4;
-            this.btnSerach.UseVisualStyleBackColor = true;
-            this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
+            this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
             // pnlButtonControls
             // 
@@ -675,6 +664,8 @@
             this.btnFilter.BackColor = System.Drawing.Color.Transparent;
             this.btnFilter.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnFilter.FlatAppearance.BorderSize = 0;
+            this.btnFilter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnFilter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFilter.ForeColor = System.Drawing.Color.White;
@@ -694,6 +685,8 @@
             this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
@@ -712,6 +705,8 @@
             this.btnRefresh.AutoSize = true;
             this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
@@ -724,6 +719,60 @@
             this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
+            // 
+            // pnlSearch
+            // 
+            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSearch.Controls.Add(this.pnlSearchHeader);
+            this.pnlSearch.Location = new System.Drawing.Point(4, 0);
+            this.pnlSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Size = new System.Drawing.Size(417, 48);
+            this.pnlSearch.TabIndex = 12;
+            // 
+            // pnlSearchHeader
+            // 
+            this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
+            this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlSearchHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlSearchHeader.Name = "pnlSearchHeader";
+            this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
+            this.pnlSearchHeader.Size = new System.Drawing.Size(417, 48);
+            this.pnlSearchHeader.TabIndex = 0;
+            // 
+            // pnlSearchTxt
+            // 
+            this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
+            this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSearchTxt.Controls.Add(this.pictureBox1);
+            this.pnlSearchTxt.Controls.Add(this.txtSearch);
+            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 4);
+            this.pnlSearchTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlSearchTxt.Name = "pnlSearchTxt";
+            this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
+            this.pnlSearchTxt.Size = new System.Drawing.Size(403, 36);
+            this.pnlSearchTxt.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.loupe__1_;
+            this.pictureBox1.Location = new System.Drawing.Point(4, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(28, 25);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(45, 6);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(347, 23);
+            this.txtSearch.TabIndex = 6;
             // 
             // cmsNote
             // 
@@ -887,6 +936,7 @@
             this.pnlDateHeader.Name = "pnlDateHeader";
             this.pnlDateHeader.Size = new System.Drawing.Size(855, 48);
             this.pnlDateHeader.TabIndex = 7;
+            this.pnlDateHeader.Click += new System.EventHandler(this.pnlDateHeader_Click);
             // 
             // btnDateApply
             // 
@@ -949,7 +999,7 @@
             this.monthCalendarToDate.Location = new System.Drawing.Point(0, 0);
             this.monthCalendarToDate.Name = "monthCalendarToDate";
             this.monthCalendarToDate.TabIndex = 0;
-            this.monthCalendarToDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateChanged_1);
+            this.monthCalendarToDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateSelected);
             // 
             // picCalenderToDate
             // 
@@ -974,6 +1024,7 @@
             this.txtToDate.Name = "txtToDate";
             this.txtToDate.Size = new System.Drawing.Size(239, 24);
             this.txtToDate.TabIndex = 1;
+            this.txtToDate.Enter += new System.EventHandler(this.txtToDate_Enter);
             // 
             // pnlFromDateCalenderShow
             // 
@@ -993,7 +1044,7 @@
             this.monthCalendarFromDate.Location = new System.Drawing.Point(0, 0);
             this.monthCalendarFromDate.Name = "monthCalendarFromDate";
             this.monthCalendarFromDate.TabIndex = 0;
-            this.monthCalendarFromDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarFromDate_DateChanged_1);
+            this.monthCalendarFromDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarFromDate_DateSelected);
             // 
             // lblFromDate
             // 
@@ -1041,6 +1092,7 @@
             this.txtFromdate.Name = "txtFromdate";
             this.txtFromdate.Size = new System.Drawing.Size(179, 24);
             this.txtFromdate.TabIndex = 0;
+            this.txtFromdate.Enter += new System.EventHandler(this.txtFromdate_Enter);
             // 
             // lblToDate
             // 
@@ -1053,72 +1105,14 @@
             this.lblToDate.TabIndex = 3;
             this.lblToDate.Text = "To";
             // 
-            // pnlSearch
-            // 
-            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSearch.Controls.Add(this.pnlSearchHeader);
-            this.pnlSearch.Location = new System.Drawing.Point(364, 199);
-            this.pnlSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(475, 48);
-            this.pnlSearch.TabIndex = 12;
-            // 
-            // pnlSearchHeader
-            // 
-            this.pnlSearchHeader.Controls.Add(this.btnSearch);
-            this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
-            this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlSearchHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlSearchHeader.Name = "pnlSearchHeader";
-            this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
-            this.pnlSearchHeader.Size = new System.Drawing.Size(475, 48);
-            this.pnlSearchHeader.TabIndex = 0;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(373, 7);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(92, 32);
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            // 
-            // pnlSearchTxt
-            // 
-            this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
-            this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSearchTxt.Controls.Add(this.txtSearch);
-            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 7);
-            this.pnlSearchTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlSearchTxt.Name = "pnlSearchTxt";
-            this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.pnlSearchTxt.Size = new System.Drawing.Size(346, 32);
-            this.pnlSearchTxt.TabIndex = 1;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(8, 4);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(333, 23);
-            this.txtSearch.TabIndex = 6;
-            // 
+
             // NoteControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1203, 630);
-            this.Controls.Add(this.pnlSearch);
+
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlPriorityFilter);
             this.Controls.Add(this.pnlNoteMain);
@@ -1150,6 +1144,11 @@
             this.panel2.ResumeLayout(false);
             this.pnlButtonControls.ResumeLayout(false);
             this.pnlButtonControls.PerformLayout();
+            this.pnlSearch.ResumeLayout(false);
+            this.pnlSearchHeader.ResumeLayout(false);
+            this.pnlSearchTxt.ResumeLayout(false);
+            this.pnlSearchTxt.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.cmsNote.ResumeLayout(false);
             this.cmsFilter.ResumeLayout(false);
             this.pnlPriorityFilter.ResumeLayout(false);
@@ -1167,10 +1166,6 @@
             this.pnlFromDate.ResumeLayout(false);
             this.pnlFromDate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalenderFromDate)).EndInit();
-            this.pnlSearch.ResumeLayout(false);
-            this.pnlSearchHeader.ResumeLayout(false);
-            this.pnlSearchTxt.ResumeLayout(false);
-            this.pnlSearchTxt.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1229,7 +1224,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnFilter;
-        private System.Windows.Forms.Button btnSerach;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
         private System.Windows.Forms.ToolStripMenuItem tsmiPriority;
@@ -1258,9 +1252,9 @@
         private System.Windows.Forms.Label lblToDate;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Panel pnlSearchHeader;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel pnlSearchTxt;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.PictureBox pictureBox1;
         //private System.Windows.Forms.ContextMenuStrip cmsnote;
     }
 }

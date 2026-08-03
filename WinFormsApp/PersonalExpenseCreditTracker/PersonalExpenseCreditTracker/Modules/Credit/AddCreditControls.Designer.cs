@@ -288,12 +288,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnSaveCredit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSaveCredit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveCredit.ForeColor = System.Drawing.Color.White;
-            this.btnSaveCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnSaveCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnSaveCredit.Location = new System.Drawing.Point(351, 521);
             this.btnSaveCredit.Name = "btnSaveCredit";
             this.btnSaveCredit.Size = new System.Drawing.Size(194, 41);
             this.btnSaveCredit.TabIndex = 8;
-            this.btnSaveCredit.Text = "  Save Credit";
+            this.btnSaveCredit.Text = "  Add Credit";
             this.btnSaveCredit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveCredit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveCredit.UseVisualStyleBackColor = false;

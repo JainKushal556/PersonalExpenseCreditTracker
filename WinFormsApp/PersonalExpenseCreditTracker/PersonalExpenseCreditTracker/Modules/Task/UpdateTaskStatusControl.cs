@@ -15,39 +15,56 @@ namespace PersonalExpenseCreditTracker.Modules.Task
     public partial class UpdateTaskStatus : Form
     {
         private TaskControls taskControl;
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn(
-            int nLeftRect,
-            int nTopRect,
-            int nRightRect,
-            int nBottomRect,
-            int nWidthEllipse,
-            int nHeightEllipse
-        );
+        
         public UpdateTaskStatus(TaskControls taskcontrol)
         {
             InitializeComponent();
             taskControl = taskcontrol;
         }
 
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse);
+
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        // All Border Cornar Radius
+        private void SetRadius(Control control, int radius)
+        {
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
+        }
+
         private void UpdateTaskStatus_Load(object sender, EventArgs e)
         {
 
-            btnCancel.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                btnCancel.Width,
-                btnCancel.Height,
-                5,
-                5));
-
-            btnUpdate.Region = Region.FromHrgn(CreateRoundRectRgn(
-                0,
-                0,
-                btnUpdate.Width,
-                btnUpdate.Height,
-                5,
-                5));
+            SetRadius(pnlBody, 15);
+            SetRadius(btnCancel, 5);
+            SetRadius(btnUpdate, 5);
 
             txtTaskTitle.Text = taskControl.SelectedTaskTitle;
             lblCurrentStatus.Text = taskControl.selectStatus;

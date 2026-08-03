@@ -50,8 +50,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             SetRadius(pnlAddPersonDataGridView, 15);
             SetRadius(pnlAddPersonInput, 15);
             SetRadius(pnlIdia, 15);
-            //SetRadius(btnAddPersonInputSavePerson, 10);
-            //SetRadius(btnAddPersonInputClear, 10);
+            SetRadius(btnAddPersonInputSavePerson, 5);
+            SetRadius(btnAddPersonInputClear, 5);
 
             //Place Holder Text
             txtAddPersonInputFullName.Text = "Enter full name";
@@ -143,25 +143,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             SetRadius(pnlIdia, 15);
         }
-
-        //private void pnlAddPersonInputFullName_Resize(object sender, EventArgs e)
-        //{
-        //    SetRadius(pnlIdia, 15);
-        //}
-        //private void btnAddPersonInputSavePerson_Resize(object sender, EventArgs e)
-        //{
-        //    SetRadius(btnAddPersonInputSavePerson, 10);
-        //}
-        //private void btnAddPersonInputClear_Resize(object sender, EventArgs e)
-        //{
-        //    SetRadius(btnAddPersonInputClear, 10);
-        //}
-        private void dataGridViewAddPerson_Resize(object sender, EventArgs e)
-        {
-            //SetRadius(dataGridViewAddPerson, 15);
-        }
-        
-
 
         // All Text Outside Border
         private void pnlAddPersonInputFullName_Leave(object sender, EventArgs e)
@@ -490,6 +471,26 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 pnlAddPersonInput.ClientRectangle,
                 ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
+        }
+
+        private void btnAddPersonInputClear_Resize(object sender, EventArgs e)
+        {
+            SetRadius(btnAddPersonInputClear, 5);
+        }
+
+        private void btnAddPersonInputSavePerson_Resize(object sender, EventArgs e)
+        {
+            SetRadius(btnAddPersonInputSavePerson, 5);
+        }
+
+        private void AddPersonControls_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
         }
 
         //private void pnlAddPersonInput_Paint(object sender, PaintEventArgs e)

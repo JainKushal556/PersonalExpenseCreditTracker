@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlAddNoteDetails = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSaveNote = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,8 +38,6 @@
             this.btnCancelDialog = new System.Windows.Forms.Button();
             this.pnlDescription = new System.Windows.Forms.Panel();
             this.rtxtDescription = new System.Windows.Forms.TextBox();
-            this.btnSaveNote = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.flpNoteColors = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlColorWhite = new System.Windows.Forms.Panel();
             this.pnlColorCream = new System.Windows.Forms.Panel();
@@ -112,6 +112,45 @@
             this.pnlAddNoteDetails.Size = new System.Drawing.Size(487, 538);
             this.pnlAddNoteDetails.TabIndex = 0;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(163, 482);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(120, 41);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnSaveNote
+            // 
+            this.btnSaveNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnSaveNote.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
+            this.btnSaveNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
+            this.btnSaveNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
+            this.btnSaveNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveNote.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveNote.ForeColor = System.Drawing.Color.White;
+            this.btnSaveNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
+            this.btnSaveNote.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSaveNote.Location = new System.Drawing.Point(299, 482);
+            this.btnSaveNote.Name = "btnSaveNote";
+            this.btnSaveNote.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.btnSaveNote.Size = new System.Drawing.Size(162, 41);
+            this.btnSaveNote.TabIndex = 1;
+            this.btnSaveNote.Text = " Add";
+            this.btnSaveNote.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSaveNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSaveNote.UseVisualStyleBackColor = false;
+            this.btnSaveNote.Click += new System.EventHandler(this.btnSaveNote_Click);
+            // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -122,8 +161,9 @@
             // 
             // label2
             // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(80, 303);
+            this.label2.Location = new System.Drawing.Point(87, 299);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 21);
@@ -132,8 +172,9 @@
             // 
             // label1
             // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(108, 154);
+            this.label1.Location = new System.Drawing.Point(117, 153);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 21);
@@ -142,11 +183,12 @@
             // 
             // lblRedStar
             // 
+            this.lblRedStar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRedStar.ForeColor = System.Drawing.Color.Red;
-            this.lblRedStar.Location = new System.Drawing.Point(98, 70);
+            this.lblRedStar.Location = new System.Drawing.Point(105, 69);
             this.lblRedStar.Margin = new System.Windows.Forms.Padding(0);
             this.lblRedStar.Name = "lblRedStar";
-            this.lblRedStar.Size = new System.Drawing.Size(46, 21);
+            this.lblRedStar.Size = new System.Drawing.Size(28, 21);
             this.lblRedStar.TabIndex = 17;
             this.lblRedStar.Text = "*";
             // 
@@ -182,44 +224,6 @@
             this.rtxtDescription.Name = "rtxtDescription";
             this.rtxtDescription.Size = new System.Drawing.Size(448, 94);
             this.rtxtDescription.TabIndex = 0;
-            // 
-            // btnSaveNote
-            // 
-            this.btnSaveNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
-            this.btnSaveNote.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
-            this.btnSaveNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
-            this.btnSaveNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
-            this.btnSaveNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveNote.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveNote.ForeColor = System.Drawing.Color.White;
-            this.btnSaveNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.floppy_disk__3_;
-            this.btnSaveNote.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveNote.Location = new System.Drawing.Point(299, 482);
-            this.btnSaveNote.Name = "btnSaveNote";
-            this.btnSaveNote.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.btnSaveNote.Size = new System.Drawing.Size(162, 41);
-            this.btnSaveNote.TabIndex = 1;
-            this.btnSaveNote.Text = " Save Note";
-            this.btnSaveNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSaveNote.UseVisualStyleBackColor = false;
-            this.btnSaveNote.Click += new System.EventHandler(this.btnSaveNote_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(163, 482);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(120, 41);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // flpNoteColors
             // 
@@ -426,10 +430,10 @@
             // lblNoteColor
             // 
             this.lblNoteColor.AutoSize = true;
-            this.lblNoteColor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteColor.Location = new System.Drawing.Point(16, 387);
+            this.lblNoteColor.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteColor.Location = new System.Drawing.Point(16, 384);
             this.lblNoteColor.Name = "lblNoteColor";
-            this.lblNoteColor.Size = new System.Drawing.Size(85, 20);
+            this.lblNoteColor.Size = new System.Drawing.Size(93, 21);
             this.lblNoteColor.TabIndex = 9;
             this.lblNoteColor.Text = "Note Color";
             // 
@@ -533,10 +537,10 @@
             // lblPriority
             // 
             this.lblPriority.AutoSize = true;
-            this.lblPriority.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPriority.Location = new System.Drawing.Point(16, 304);
+            this.lblPriority.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPriority.Location = new System.Drawing.Point(16, 301);
             this.lblPriority.Name = "lblPriority";
-            this.lblPriority.Size = new System.Drawing.Size(61, 20);
+            this.lblPriority.Size = new System.Drawing.Size(67, 21);
             this.lblPriority.TabIndex = 7;
             this.lblPriority.Text = "Priority";
             // 
@@ -555,10 +559,10 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(16, 155);
+            this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescription.Location = new System.Drawing.Point(16, 154);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(89, 20);
+            this.lblDescription.Size = new System.Drawing.Size(98, 21);
             this.lblDescription.TabIndex = 4;
             this.lblDescription.Text = "Description";
             // 
@@ -588,10 +592,10 @@
             // lblNoteTitle
             // 
             this.lblNoteTitle.AutoSize = true;
-            this.lblNoteTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteTitle.Location = new System.Drawing.Point(16, 70);
+            this.lblNoteTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteTitle.Location = new System.Drawing.Point(16, 69);
             this.lblNoteTitle.Name = "lblNoteTitle";
-            this.lblNoteTitle.Size = new System.Drawing.Size(79, 20);
+            this.lblNoteTitle.Size = new System.Drawing.Size(86, 21);
             this.lblNoteTitle.TabIndex = 1;
             this.lblNoteTitle.Text = "Note Title";
             // 

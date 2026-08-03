@@ -30,13 +30,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             txtReturnAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
             cmbPaymentType.Text = "Enter Payment Type";
-            cmbStatus.Text = "Enetr Status";
             txtDescription.Text = "Enter Description";
 
             txtReturnAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
-            cmbStatus.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
         }
 
@@ -93,14 +91,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             txtReturnAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
             cmbPaymentType.Text = "Enter Payment Type";
-            cmbStatus.Text = "Enetr Status";
             txtDescription.Text = "Enter Description";
 
             txtReturnAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
-            cmbStatus.ForeColor = Color.Gray;
 
             pnlCalenderShow.Visible = false;
         }
@@ -123,25 +119,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 txtReturnAmount.ForeColor = Color.Gray;
             }
             pnlCalenderShow.Visible = false;
-        }
-
-        private void cmbStatus_Enter(object sender, EventArgs e)
-        {
-            if (cmbStatus.Text == "Enetr Status")
-            {
-                cmbStatus.Text = "";
-                cmbStatus.ForeColor = Color.Black;
-            }
-            pnlCalenderShow.Visible = false;
-        }
-
-        private void cmbStatus_Leave(object sender, EventArgs e)
-        {
-            if (cmbStatus.Text == "")
-            {
-                cmbStatus.Text = "Enetr Status";
-                cmbStatus.ForeColor = Color.Gray;
-            }
         }
 
         private void cmbPaymentType_Enter(object sender, EventArgs e)
@@ -217,8 +194,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlCalenderShow.Visible = !pnlCalenderShow.Visible;
         }
-
-        
 
         private void panelMainBody_Click(object sender, EventArgs e)
         {
