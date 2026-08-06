@@ -30,10 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlBody = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblUpdateStatus = new System.Windows.Forms.Label();
@@ -44,17 +42,19 @@
             this.piclock = new System.Windows.Forms.PictureBox();
             this.txtTaskTitle = new System.Windows.Forms.TextBox();
             this.lblTaskTitle = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlMain.SuspendLayout();
+            this.pnlBody.SuspendLayout();
             this.pnlStatus.SuspendLayout();
             this.pnlCurrentStatus.SuspendLayout();
             this.pnlTaskTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.pnlBody.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -75,13 +75,20 @@
             this.pnlMain.TabIndex = 0;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             // 
-            // panel1
+            // pnlBody
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(19, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(508, 1);
-            this.panel1.TabIndex = 13;
+            this.pnlBody.BackColor = System.Drawing.Color.White;
+            this.pnlBody.Controls.Add(this.label2);
+            this.pnlBody.Controls.Add(this.pnlStatus);
+            this.pnlBody.Controls.Add(this.lblUpdateStatus);
+            this.pnlBody.Controls.Add(this.pnlCurrentStatus);
+            this.pnlBody.Controls.Add(this.lblCurrentStatusTitle);
+            this.pnlBody.Controls.Add(this.pnlTaskTitle);
+            this.pnlBody.Controls.Add(this.lblTaskTitle);
+            this.pnlBody.Location = new System.Drawing.Point(19, 65);
+            this.pnlBody.Name = "pnlBody";
+            this.pnlBody.Size = new System.Drawing.Size(508, 174);
+            this.pnlBody.TabIndex = 14;
             // 
             // label2
             // 
@@ -94,44 +101,6 @@
             this.label2.Size = new System.Drawing.Size(18, 23);
             this.label2.TabIndex = 12;
             this.label2.Text = "*";
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
-            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update__4_;
-            this.btnUpdate.Location = new System.Drawing.Point(372, 255);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.btnUpdate.Size = new System.Drawing.Size(152, 41);
-            this.btnUpdate.TabIndex = 10;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
-            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.btnCancel.FlatAppearance.BorderSize = 0;
-            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(197, 255);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(152, 41);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // pnlStatus
             // 
@@ -239,6 +208,52 @@
             this.lblTaskTitle.TabIndex = 2;
             this.lblTaskTitle.Text = "Task Title";
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(19, 49);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(508, 1);
+            this.panel1.TabIndex = 13;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
+            this.btnUpdate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update__4_;
+            this.btnUpdate.Location = new System.Drawing.Point(390, 255);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.btnUpdate.Size = new System.Drawing.Size(137, 41);
+            this.btnUpdate.TabIndex = 10;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(259, 255);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(120, 41);
+            this.btnCancel.TabIndex = 9;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // btnClose
             // 
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -268,21 +283,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // pnlBody
-            // 
-            this.pnlBody.BackColor = System.Drawing.Color.White;
-            this.pnlBody.Controls.Add(this.label2);
-            this.pnlBody.Controls.Add(this.pnlStatus);
-            this.pnlBody.Controls.Add(this.lblUpdateStatus);
-            this.pnlBody.Controls.Add(this.pnlCurrentStatus);
-            this.pnlBody.Controls.Add(this.lblCurrentStatusTitle);
-            this.pnlBody.Controls.Add(this.pnlTaskTitle);
-            this.pnlBody.Controls.Add(this.lblTaskTitle);
-            this.pnlBody.Location = new System.Drawing.Point(19, 65);
-            this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(508, 174);
-            this.pnlBody.TabIndex = 14;
-            // 
             // UpdateTaskStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -296,6 +296,8 @@
             this.Load += new System.EventHandler(this.UpdateTaskStatus_Load);
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
+            this.pnlBody.ResumeLayout(false);
+            this.pnlBody.PerformLayout();
             this.pnlStatus.ResumeLayout(false);
             this.pnlCurrentStatus.ResumeLayout(false);
             this.pnlCurrentStatus.PerformLayout();
@@ -303,8 +305,6 @@
             this.pnlTaskTitle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.pnlBody.ResumeLayout(false);
-            this.pnlBody.PerformLayout();
             this.ResumeLayout(false);
 
         }

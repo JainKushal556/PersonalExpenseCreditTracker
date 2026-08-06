@@ -77,12 +77,12 @@ namespace PersonalExpenseCreditTracker.Common
                     break;
 
                 case CommonValidator.ValidationResult.MinimumAmountInvalid:
-                    errorProvider.SetError(textBox, "MinimumAmountInvalid.");
+                    errorProvider.SetError(textBox, "Minimum amount invalid.");
                     textBox.Focus();
                     break;
 
                 case CommonValidator.ValidationResult.MaximumAmountInvalid:
-                    errorProvider.SetError(textBox, "MaximumAmountInvalid.");
+                    errorProvider.SetError(textBox, "Maximum amount invalid.");
                     textBox.Focus();
                     break;
                 // Description is invalid
@@ -98,6 +98,42 @@ namespace PersonalExpenseCreditTracker.Common
 
                 case CommonValidator.ValidationResult.TaskTitleInvalid:
                     errorProvider.SetError(textBox, "Please enter a valid task title.");
+                    textBox.Focus();
+                    break;
+
+                // Phone Number Invalid
+                case CommonValidator.ValidationResult.PhoneInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid phone number.");
+                    textBox.Focus();
+                    break;
+
+                // Person Name Invalid
+                case CommonValidator.ValidationResult.PersonNameInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid person name");
+                    textBox.Focus();
+                    break;
+
+                // Duplicate Phone Number
+                case CommonValidator.ValidationResult.PhoneNumberAlreadyExists:
+                    errorProvider.SetError(textBox, "Phone number already exists");
+                    textBox.Focus();
+                    break;
+
+                // Amount field is empty
+                case CommonValidator.ValidationResult.PhoneNumberEmpty:
+                    errorProvider.SetError(textBox, "Phone number is required.");
+                    textBox.Focus();
+                    break;
+
+                // Amount field is empty
+                case CommonValidator.ValidationResult.PersonNameEmpty:
+                    errorProvider.SetError(textBox, "Person Name is required.");
+                    textBox.Focus();
+                    break;
+
+                // Phone Number Invalid
+                case CommonValidator.ValidationResult.PersonInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid person.");
                     textBox.Focus();
                     break;
             }

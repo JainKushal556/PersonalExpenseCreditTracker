@@ -994,7 +994,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // pnlDateHeader
             // 
-            this.pnlDateHeader.Controls.Add(this.pnlToDateCalenderShow);
             this.pnlDateHeader.Controls.Add(this.btnDateApply);
             this.pnlDateHeader.Controls.Add(this.btnDateClose);
             this.pnlDateHeader.Controls.Add(this.pnlToDate);
@@ -1009,49 +1008,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.pnlDateHeader.Size = new System.Drawing.Size(855, 48);
             this.pnlDateHeader.TabIndex = 7;
             this.pnlDateHeader.Click += new System.EventHandler(this.pnlDateHeader_Click);
-            // 
-            // btnDateApply
-            // 
-            this.btnDateApply.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnDateApply.FlatAppearance.BorderSize = 0;
-            this.btnDateApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDateApply.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDateApply.ForeColor = System.Drawing.Color.White;
-            this.btnDateApply.Location = new System.Drawing.Point(705, 5);
-            this.btnDateApply.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDateApply.Name = "btnDateApply";
-            this.btnDateApply.Size = new System.Drawing.Size(92, 36);
-            this.btnDateApply.TabIndex = 7;
-            this.btnDateApply.Text = "Apply";
-            this.btnDateApply.UseVisualStyleBackColor = false;
-            // 
-            // btnDateClose
-            // 
-            this.btnDateClose.FlatAppearance.BorderSize = 0;
-            this.btnDateClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.btnDateClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
-            this.btnDateClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDateClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnDateClose.Location = new System.Drawing.Point(809, 2);
-            this.btnDateClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDateClose.Name = "btnDateClose";
-            this.btnDateClose.Size = new System.Drawing.Size(39, 41);
-            this.btnDateClose.TabIndex = 1;
-            this.btnDateClose.UseVisualStyleBackColor = true;
-            this.btnDateClose.Click += new System.EventHandler(this.btnDateClose_Click_1);
-            // 
-            // pnlToDate
-            // 
-            this.pnlToDate.BackColor = System.Drawing.Color.White;
-            this.pnlToDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlToDate.Controls.Add(this.pnlToDateCalenderShow);
-            this.pnlToDate.Controls.Add(this.picCalenderToDate);
-            this.pnlToDate.Controls.Add(this.txtToDate);
-            this.pnlToDate.Location = new System.Drawing.Point(400, 5);
-            this.pnlToDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlToDate.Name = "pnlToDate";
-            this.pnlToDate.Size = new System.Drawing.Size(285, 36);
-            this.pnlToDate.TabIndex = 5;
             // 
             // pnlToDateCalenderShow
             // 
@@ -1107,6 +1063,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.pnlToDate.BackColor = System.Drawing.Color.White;
             this.pnlToDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlToDate.Controls.Add(this.pnlToDateCalenderShow);
             this.pnlToDate.Controls.Add(this.picCalenderToDate);
             this.pnlToDate.Controls.Add(this.txtToDate);
             this.pnlToDate.Location = new System.Drawing.Point(400, 5);
@@ -1218,13 +1175,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.lblToDate.Size = new System.Drawing.Size(31, 25);
             this.lblToDate.TabIndex = 3;
             this.lblToDate.Text = "To";
+            // 
             // LentControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(1153, 706);
-
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlCategoryFilter);
             this.Controls.Add(this.tableLayoutPanelMainData);

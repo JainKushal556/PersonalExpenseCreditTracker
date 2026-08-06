@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlEditPersonDetailsMainBody = new System.Windows.Forms.Panel();
             this.btnUpdatePersonDetails = new System.Windows.Forms.Button();
             this.btnCancelEditPersonDetails = new System.Windows.Forms.Button();
@@ -42,9 +43,8 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.pnlEditPersonDetailsFullName = new System.Windows.Forms.Panel();
             this.txtEditPersonDetailsFullName = new System.Windows.Forms.TextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.btnCloseEditPersonDetails = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.lblEditProfile = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -58,8 +58,10 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.pnlEditPersonDetailsPhoneNumber = new System.Windows.Forms.Panel();
             this.txtEditPersonDetailsPhoneNumber = new System.Windows.Forms.TextBox();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btnCloseEditPersonDetails = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlEditPersonDetailsMainBody.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -69,7 +71,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.panel5.SuspendLayout();
             this.pnlEditPersonDetailsFullName.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -80,6 +81,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel10.SuspendLayout();
             this.pnlEditPersonDetailsPhoneNumber.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlEditPersonDetailsMainBody
@@ -271,36 +274,6 @@
             this.txtEditPersonDetailsFullName.TabIndex = 0;
             this.txtEditPersonDetailsFullName.Click += new System.EventHandler(this.txtEditPersonDetailsFullName_Click);
             // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.panel7);
-            this.panel4.Controls.Add(this.btnCloseEditPersonDetails);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(279, 0);
-            this.panel4.Margin = new System.Windows.Forms.Padding(0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(419, 65);
-            this.panel4.TabIndex = 3;
-            // 
-            // btnCloseEditPersonDetails
-            // 
-            this.btnCloseEditPersonDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCloseEditPersonDetails.BackColor = System.Drawing.Color.Transparent;
-            this.btnCloseEditPersonDetails.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCloseEditPersonDetails.FlatAppearance.BorderSize = 0;
-            this.btnCloseEditPersonDetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.btnCloseEditPersonDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.btnCloseEditPersonDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseEditPersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnCloseEditPersonDetails.Location = new System.Drawing.Point(375, 3);
-            this.btnCloseEditPersonDetails.Name = "btnCloseEditPersonDetails";
-            this.btnCloseEditPersonDetails.Size = new System.Drawing.Size(39, 41);
-            this.btnCloseEditPersonDetails.TabIndex = 0;
-            this.btnCloseEditPersonDetails.TabStop = false;
-            this.btnCloseEditPersonDetails.UseVisualStyleBackColor = false;
-            this.btnCloseEditPersonDetails.Click += new System.EventHandler(this.btnCloseEditPersonDetails_Click);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.panel6);
@@ -311,6 +284,14 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(279, 65);
             this.panel1.TabIndex = 0;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Location = new System.Drawing.Point(15, 54);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(269, 1);
+            this.panel6.TabIndex = 2;
             // 
             // panel16
             // 
@@ -451,13 +432,16 @@
             this.txtEditPersonDetailsPhoneNumber.TabIndex = 0;
             this.txtEditPersonDetailsPhoneNumber.Click += new System.EventHandler(this.txtEditPersonDetailsPhoneNumber_Click);
             // 
-            // panel6
+            // panel4
             // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(15, 54);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(269, 1);
-            this.panel6.TabIndex = 2;
+            this.panel4.Controls.Add(this.panel7);
+            this.panel4.Controls.Add(this.btnCloseEditPersonDetails);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(279, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(419, 65);
+            this.panel4.TabIndex = 3;
             // 
             // panel7
             // 
@@ -467,6 +451,29 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(420, 1);
             this.panel7.TabIndex = 1;
+            // 
+            // btnCloseEditPersonDetails
+            // 
+            this.btnCloseEditPersonDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCloseEditPersonDetails.BackColor = System.Drawing.Color.Transparent;
+            this.btnCloseEditPersonDetails.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCloseEditPersonDetails.FlatAppearance.BorderSize = 0;
+            this.btnCloseEditPersonDetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnCloseEditPersonDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.btnCloseEditPersonDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseEditPersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
+            this.btnCloseEditPersonDetails.Location = new System.Drawing.Point(375, 3);
+            this.btnCloseEditPersonDetails.Name = "btnCloseEditPersonDetails";
+            this.btnCloseEditPersonDetails.Size = new System.Drawing.Size(39, 41);
+            this.btnCloseEditPersonDetails.TabIndex = 0;
+            this.btnCloseEditPersonDetails.TabStop = false;
+            this.btnCloseEditPersonDetails.UseVisualStyleBackColor = false;
+            this.btnCloseEditPersonDetails.Click += new System.EventHandler(this.btnCloseEditPersonDetails_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // EditPersons
             // 
@@ -492,7 +499,6 @@
             this.panel5.ResumeLayout(false);
             this.pnlEditPersonDetailsFullName.ResumeLayout(false);
             this.pnlEditPersonDetailsFullName.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
             this.panel16.PerformLayout();
@@ -507,6 +513,8 @@
             this.panel10.ResumeLayout(false);
             this.pnlEditPersonDetailsPhoneNumber.ResumeLayout(false);
             this.pnlEditPersonDetailsPhoneNumber.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -545,5 +553,6 @@
         private System.Windows.Forms.TextBox txtEditPersonDetailsPhoneNumber;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

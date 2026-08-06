@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -109,6 +110,7 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewButtonColumn2 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlAddPersonInput.SuspendLayout();
@@ -137,6 +139,7 @@
             this.panel3.SuspendLayout();
             this.pnlIdia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -243,6 +246,7 @@
             this.txtAddPersonInputAddress.Size = new System.Drawing.Size(410, 92);
             this.txtAddPersonInputAddress.TabIndex = 0;
             this.txtAddPersonInputAddress.Enter += new System.EventHandler(this.txtAddPersonInputAddress_Enter);
+            this.txtAddPersonInputAddress.Leave += new System.EventHandler(this.pnlAddPersonInputAddress_Leave);
             // 
             // panel9
             // 
@@ -277,8 +281,8 @@
             this.txtAddPersonInputPhoneNumber.Name = "txtAddPersonInputPhoneNumber";
             this.txtAddPersonInputPhoneNumber.Size = new System.Drawing.Size(303, 27);
             this.txtAddPersonInputPhoneNumber.TabIndex = 0;
-            this.txtAddPersonInputPhoneNumber.TextChanged += new System.EventHandler(this.txtAddPersonInputPhoneNumber_TextChanged);
             this.txtAddPersonInputPhoneNumber.Enter += new System.EventHandler(this.txtAddPersonInputPhoneNumber_Enter);
+            this.txtAddPersonInputPhoneNumber.Leave += new System.EventHandler(this.pnlAddPersonInputPhoneNumber_Leave);
             // 
             // panel7
             // 
@@ -402,8 +406,8 @@
             this.txtAddPersonInputFullName.Name = "txtAddPersonInputFullName";
             this.txtAddPersonInputFullName.Size = new System.Drawing.Size(303, 27);
             this.txtAddPersonInputFullName.TabIndex = 0;
-            this.txtAddPersonInputFullName.TextChanged += new System.EventHandler(this.txtAddPersonInputFullName_TextChanged);
             this.txtAddPersonInputFullName.Enter += new System.EventHandler(this.txtAddPersonInputFullName_Enter);
+            this.txtAddPersonInputFullName.Leave += new System.EventHandler(this.txtAddPersonInputFullName_Enter);
             // 
             // tableLayoutPanel3
             // 
@@ -551,6 +555,7 @@
             this.button1.Size = new System.Drawing.Size(51, 43);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pnlAddPersonSearchBar
             // 
@@ -574,7 +579,9 @@
             this.txtAddPersonSearchBar.Name = "txtAddPersonSearchBar";
             this.txtAddPersonSearchBar.Size = new System.Drawing.Size(440, 27);
             this.txtAddPersonSearchBar.TabIndex = 4;
+            this.txtAddPersonSearchBar.TextChanged += new System.EventHandler(this.txtAddPersonSearchBar_TextChanged);
             this.txtAddPersonSearchBar.Enter += new System.EventHandler(this.txtAddPersonSearchBar_Enter);
+            this.txtAddPersonSearchBar.Leave += new System.EventHandler(this.pnlAddPersonSearchBar_Leave);
             // 
             // pictureBox4
             // 
@@ -759,9 +766,8 @@
             this.lblDataGridViewTotalPersonsNumber.ForeColor = System.Drawing.Color.Black;
             this.lblDataGridViewTotalPersonsNumber.Location = new System.Drawing.Point(124, 8);
             this.lblDataGridViewTotalPersonsNumber.Name = "lblDataGridViewTotalPersonsNumber";
-            this.lblDataGridViewTotalPersonsNumber.Size = new System.Drawing.Size(19, 23);
+            this.lblDataGridViewTotalPersonsNumber.Size = new System.Drawing.Size(37, 23);
             this.lblDataGridViewTotalPersonsNumber.TabIndex = 0;
-            this.lblDataGridViewTotalPersonsNumber.Text = "5";
             // 
             // lblDataGridViewTotalPersons
             // 
@@ -936,6 +942,10 @@
             this.dataGridViewButtonColumn2.Name = "dataGridViewButtonColumn2";
             this.dataGridViewButtonColumn2.Width = 65;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // AddPersonControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -986,6 +996,7 @@
             this.pnlIdia.ResumeLayout(false);
             this.pnlIdia.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1046,15 +1057,16 @@
         private System.Windows.Forms.Panel pnlIdia;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
-        protected internal System.Windows.Forms.TextBox txtAddPersonInputAddress;
-        protected internal System.Windows.Forms.TextBox txtAddPersonInputPhoneNumber;
-        protected internal System.Windows.Forms.TextBox txtAddPersonInputFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPersonID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSL;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhoneNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewButtonColumn colAction;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.TextBox txtAddPersonInputAddress;
+        private System.Windows.Forms.TextBox txtAddPersonInputPhoneNumber;
+        private System.Windows.Forms.TextBox txtAddPersonInputFullName;
 
     }
 }

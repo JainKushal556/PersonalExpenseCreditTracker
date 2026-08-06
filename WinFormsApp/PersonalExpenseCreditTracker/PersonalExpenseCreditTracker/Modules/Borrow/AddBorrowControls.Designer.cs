@@ -319,11 +319,11 @@
             this.btnBorrowAddSave.ForeColor = System.Drawing.Color.White;
             this.btnBorrowAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnBorrowAddSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorrowAddSave.Location = new System.Drawing.Point(370, 616);
+            this.btnBorrowAddSave.Location = new System.Drawing.Point(367, 616);
             this.btnBorrowAddSave.Name = "btnBorrowAddSave";
-            this.btnBorrowAddSave.Size = new System.Drawing.Size(177, 41);
+            this.btnBorrowAddSave.Size = new System.Drawing.Size(180, 41);
             this.btnBorrowAddSave.TabIndex = 8;
-            this.btnBorrowAddSave.Text = "  Add Borrow";
+            this.btnBorrowAddSave.Text = "Add Borrow";
             this.btnBorrowAddSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBorrowAddSave.UseVisualStyleBackColor = false;
             this.btnBorrowAddSave.Click += new System.EventHandler(this.btnBorrowAddSave_Click);
@@ -429,8 +429,8 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 601);
             this.panel2.Name = "panel2";
@@ -439,8 +439,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";

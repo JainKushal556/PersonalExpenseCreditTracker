@@ -302,11 +302,11 @@
             this.btnSaveExpense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveExpense.ForeColor = System.Drawing.Color.White;
             this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
-            this.btnSaveExpense.Location = new System.Drawing.Point(351, 521);
+            this.btnSaveExpense.Location = new System.Drawing.Point(366, 521);
             this.btnSaveExpense.Name = "btnSaveExpense";
-            this.btnSaveExpense.Size = new System.Drawing.Size(194, 41);
+            this.btnSaveExpense.Size = new System.Drawing.Size(179, 41);
             this.btnSaveExpense.TabIndex = 8;
-            this.btnSaveExpense.Text = "  Add Expense";
+            this.btnSaveExpense.Text = "Add Expense";
             this.btnSaveExpense.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveExpense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveExpense.UseVisualStyleBackColor = false;
@@ -322,7 +322,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(199, 521);
+            this.btnCancel.Location = new System.Drawing.Point(211, 521);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 41);
             this.btnCancel.TabIndex = 7;
