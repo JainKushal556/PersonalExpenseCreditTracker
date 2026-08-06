@@ -373,11 +373,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnLentAddSave.ForeColor = System.Drawing.Color.White;
             this.btnLentAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnLentAddSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLentAddSave.Location = new System.Drawing.Point(370, 619);
+            this.btnLentAddSave.Location = new System.Drawing.Point(391, 621);
             this.btnLentAddSave.Name = "btnLentAddSave";
-            this.btnLentAddSave.Size = new System.Drawing.Size(177, 41);
+            this.btnLentAddSave.Size = new System.Drawing.Size(155, 41);
             this.btnLentAddSave.TabIndex = 8;
-            this.btnLentAddSave.Text = "  Add Lent";
+            this.btnLentAddSave.Text = "Add Lent";
             this.btnLentAddSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLentAddSave.UseVisualStyleBackColor = false;
             this.btnLentAddSave.Click += new System.EventHandler(this.btnLentAddSave_Click);
@@ -393,7 +393,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnLentAddCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentAddCancel.ForeColor = System.Drawing.Color.White;
             this.btnLentAddCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLentAddCancel.Location = new System.Drawing.Point(213, 619);
+            this.btnLentAddCancel.Location = new System.Drawing.Point(234, 621);
             this.btnLentAddCancel.Name = "btnLentAddCancel";
             this.btnLentAddCancel.Size = new System.Drawing.Size(140, 41);
             this.btnLentAddCancel.TabIndex = 7;
@@ -411,7 +411,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnLentAddClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentAddClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnLentAddClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLentAddClear.Location = new System.Drawing.Point(16, 619);
+            this.btnLentAddClear.Location = new System.Drawing.Point(16, 621);
             this.btnLentAddClear.Name = "btnLentAddClear";
             this.btnLentAddClear.Size = new System.Drawing.Size(133, 41);
             this.btnLentAddClear.TabIndex = 6;

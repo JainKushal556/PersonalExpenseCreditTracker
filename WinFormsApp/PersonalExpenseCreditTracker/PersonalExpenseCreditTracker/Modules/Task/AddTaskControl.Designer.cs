@@ -40,6 +40,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnCalendar = new System.Windows.Forms.Button();
             this.txtDeadline = new System.Windows.Forms.TextBox();
             this.pnlStatus = new System.Windows.Forms.Panel();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.lvlStatus = new System.Windows.Forms.Label();
             this.pnlPriority = new System.Windows.Forms.Panel();
             this.cmbPriority = new System.Windows.Forms.ComboBox();
@@ -55,16 +56,15 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pnlAddTask.SuspendLayout();
             this.pnlDeadlinePicker.SuspendLayout();
             this.pnlBody.SuspendLayout();
             this.pnlDeadline.SuspendLayout();
             this.pnlStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.pnlPriority.SuspendLayout();
             this.pnlTaskTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAddTask
@@ -206,6 +206,17 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlStatus.Size = new System.Drawing.Size(295, 31);
             this.pnlStatus.TabIndex = 14;
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
+            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
+            this.pictureBox6.Location = new System.Drawing.Point(265, 2);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(25, 26);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 35;
+            this.pictureBox6.TabStop = false;
+            // 
             // lvlStatus
             // 
             this.lvlStatus.AutoSize = true;
@@ -319,15 +330,15 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnAddTask.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
             this.btnAddTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnAddTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddTask.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddTask.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddTask.ForeColor = System.Drawing.Color.White;
             this.btnAddTask.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
-            this.btnAddTask.Location = new System.Drawing.Point(328, 311);
+            this.btnAddTask.Location = new System.Drawing.Point(319, 311);
             this.btnAddTask.Name = "btnAddTask";
             this.btnAddTask.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.btnAddTask.Size = new System.Drawing.Size(137, 41);
+            this.btnAddTask.Size = new System.Drawing.Size(146, 41);
             this.btnAddTask.TabIndex = 11;
-            this.btnAddTask.Text = " Add ";
+            this.btnAddTask.Text = "Add Task";
             this.btnAddTask.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddTask.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddTask.UseVisualStyleBackColor = false;
@@ -342,9 +353,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(193, 311);
+            this.btnCancel.Location = new System.Drawing.Point(187, 311);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 41);
             this.btnCancel.TabIndex = 10;
@@ -382,17 +393,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
-            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
-            this.pictureBox6.Location = new System.Drawing.Point(265, 2);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(25, 26);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 35;
-            this.pictureBox6.TabStop = false;
-            // 
             // AddTaskControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -417,11 +417,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlDeadline.PerformLayout();
             this.pnlStatus.ResumeLayout(false);
             this.pnlStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.pnlPriority.ResumeLayout(false);
             this.pnlTaskTitle.ResumeLayout(false);
             this.pnlTaskTitle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
 
         }
