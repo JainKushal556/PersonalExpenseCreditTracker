@@ -29,6 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.txtLentStatus = new System.Windows.Forms.TextBox();
@@ -60,15 +61,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblLentDetails = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panelMainBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panelLentAddCalenderShow.SuspendLayout();
             this.panelLentAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // panelMainBody
             // 
@@ -423,8 +427,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 609);
             this.panel2.Name = "panel2";
@@ -433,8 +437,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";
@@ -450,10 +454,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.lblLentDetails.TabIndex = 0;
             this.lblLentDetails.Text = "Lent Details";
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // AddLentControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -466,6 +466,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddLentControls";
             this.Load += new System.EventHandler(this.AddLentControls_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panelMainBody.ResumeLayout(false);
             this.panelMainBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -475,7 +476,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }

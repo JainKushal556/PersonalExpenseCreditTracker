@@ -67,9 +67,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             tsmiDate.AutoSize = false;
             tsmiCategory.AutoSize = false;
-
+            tsmiAmount.AutoSize = false;
+            tsmiSubCategory.AutoSize = false;
             tsmiDate.Width = cmsFilter.Width;
             tsmiCategory.Width = cmsFilter.Width;
+            tsmiSubCategory.Width = cmsFilter.Width;
+            tsmiAmount.Width = cmsFilter.Width;
         }
 
         private void StyleExpenseGrid()
@@ -406,7 +409,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
             pnlSearch.Visible = false;
-           
+            pnlAmountFilter.Visible = false;
+            pnlSubCategoryFilter.Visible = false;
         }
         private void HidePopupPanels()
         {
@@ -459,6 +463,15 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
+        }
+        private void tsmiSubCategory_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlSubCategoryFilter);
+        }
+
+        private void tsmiAmount_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlAmountFilter);
         }
 
         private void btnDateClose_Click(object sender, EventArgs e)
@@ -601,5 +614,17 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            pnlSubCategoryFilter.Visible = false;
+        }
+
+        private void btnAmountClose_Click(object sender, EventArgs e)
+        {
+            pnlAmountFilter.Visible = false;
+        }
+
+        
     }
 }

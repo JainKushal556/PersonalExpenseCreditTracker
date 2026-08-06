@@ -64,9 +64,13 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             tsmiDate.AutoSize = false;
             tsmiCategory.AutoSize = false;
+            tsmiSubCategory.AutoSize = false;
+            tsmiAmount.AutoSize = false;
 
             tsmiDate.Width = cmsFilter.Width;
             tsmiCategory.Width = cmsFilter.Width;
+            //tsmiSubCategory= cmsFilter.Width;
+            //tsmiAmount = cmsFilter.Width;
         }
 
         private void StyleCreditGrid()  
@@ -466,7 +470,15 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             ShowFilterPanel(pnlCategoryFilter);
         }
 
+        private void tsmiSubCategory_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlSubCategoryFilter);
+        }
 
+        private void tsmiAmount_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlAmountFilter);
+        }
         private void btnSerach_Click(object sender, EventArgs e)
         {
             ShowSearchPanel(pnlSearch);
@@ -476,7 +488,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
             pnlSearch.Visible = false;
-
+            pnlAmountFilter.Visible = false;
+            pnlSubCategoryFilter.Visible = false;
         }
         private void HidePopupPanels()
         {
@@ -672,5 +685,17 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
 
         }
+
+        private void btnSubCategoryclose_Click(object sender, EventArgs e)
+        {
+            pnlSubCategoryFilter.Visible = false;
+        }
+
+        private void btnAmountClose_Click(object sender, EventArgs e)
+        {
+            pnlAmountFilter.Visible = false;
+        }
+
+        
     }
 }

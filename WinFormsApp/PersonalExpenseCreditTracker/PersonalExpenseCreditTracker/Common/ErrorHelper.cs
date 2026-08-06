@@ -100,6 +100,11 @@ namespace PersonalExpenseCreditTracker.Common
                     errorProvider.SetError(textBox, "Please enter a valid task title.");
                     textBox.Focus();
                     break;
+
+                case CommonValidator.ValidationResult.NoteTitleInvalid:
+                    errorProvider.SetError(textBox, "Please enter a valid note title.");
+                    textBox.Focus();
+                    break;
             }
         }
         // Displays validation errors for MonthCalendar controls
@@ -158,6 +163,41 @@ namespace PersonalExpenseCreditTracker.Common
                     break;
             }
         }
+        // Displays validation errors for Richtextbox controls
+        public static void ShowValidationError(CommonValidator.ValidationResult result,ErrorProvider errorProvider, RichTextBox richTextBox)
+        {
+            errorProvider.SetIconAlignment(richTextBox, ErrorIconAlignment.MiddleRight);
+            errorProvider.SetIconPadding(richTextBox, -30);
 
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.DescriptionInvalid:
+                    errorProvider.SetError(richTextBox, "Please enter a valid description.");
+                    richTextBox.Focus();
+                    break;
+            }
+        }
+
+        
+
+        // Displays validation errors for Color selection ans Priority selection
+
+        public static void ShowValidationError(CommonValidator.ValidationResult result,ErrorProvider errorProvider,Label label)
+        {
+            errorProvider.SetIconAlignment(label, ErrorIconAlignment.MiddleRight);
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.ColorInvalid:
+                    errorProvider.SetIconPadding(label, 13);
+                    errorProvider.SetError(label, "Please select a color.");
+                    break;
+
+                case CommonValidator.ValidationResult.PriorityInvalid:
+                    errorProvider.SetIconPadding(label, 13);
+                    errorProvider.SetError(label, "Please select a priority.");
+                    break;
+            }
+        }
     }
 }

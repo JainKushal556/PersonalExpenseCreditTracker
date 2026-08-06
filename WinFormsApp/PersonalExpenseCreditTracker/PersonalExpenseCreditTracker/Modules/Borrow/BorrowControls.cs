@@ -132,10 +132,16 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void cmsFilter_Opening(object sender, CancelEventArgs e)
         {
             tsmiDate.AutoSize = false;
-            tsmiCategory.AutoSize = false;
+            tsmiAmount.AutoSize = false;
+            tsmiPayment.AutoSize = false;
+            tsmiPerson.AutoSize = false;
+            tsmiStatus.AutoSize = false;
 
             tsmiDate.Width = cmsFilter.Width;
-            tsmiCategory.Width = cmsFilter.Width;
+            tsmiAmount.Width = cmsFilter.Width;
+            tsmiStatus.Width = cmsFilter.Width;
+            tsmiPerson.Width = cmsFilter.Width;
+            tsmiPayment.Width = cmsFilter.Width;
         }
         public void LoadBorrowData(int userID)
         {
@@ -580,9 +586,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
-            pnlCategoryFilter.Visible = false;
+            pnlAmountFilter.Visible = false;
             pnlSearch.Visible = false;
-            //pnlFromDateCalenderShow.Visible = false;
+            pnlPaymentFilter.Visible = false;
+            pnlPersonFilter.Visible = false;
+            pnlStatusFilter.Visible = false;
         }
         private void HidePopupPanels()
         {
@@ -644,9 +652,23 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void tsmiCategory_Click_1(object sender, EventArgs e)
         {
-            ShowFilterPanel(pnlCategoryFilter);
+            ShowFilterPanel(pnlAmountFilter);
         }
 
+        private void tsmiPerson_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlPersonFilter);
+        }
+
+        private void tsmiStatus_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlStatusFilter);
+        }
+
+        private void tsmiPayment_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlPaymentFilter);
+        }
         private void btnSerach_Click(object sender, EventArgs e)
         {
             ShowSearchPanel(pnlSearch);
@@ -669,7 +691,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btncategoryClose_Click(object sender, EventArgs e)
         {
-            pnlCategoryFilter.Visible = false;
+            pnlAmountFilter.Visible = false;
         }
 
         private void DesignContextMenu()
@@ -681,17 +703,17 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             tsmiDate.AutoSize = false;
             tsmiDate.Height = 30;
 
-            tsmiCategory.AutoSize = false;
-            tsmiCategory.Height = 30;
+            tsmiAmount.AutoSize = false;
+            tsmiAmount.Height = 30;
 
             tsmiDate.Image = Properties.Resources.calendar;
-            tsmiCategory.Image = Properties.Resources.shop;
+            tsmiAmount.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiCategory.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiCategory.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
 
 
         }
@@ -817,6 +839,20 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlDateFilter.Visible = false;
         }
 
+        private void btnPersonClose_Click(object sender, EventArgs e)
+        {
+            pnlPersonFilter.Visible = false;
+        }
+
+        private void btnStatusClose_Click(object sender, EventArgs e)
+        {
+            pnlStatusFilter.Visible = false;
+        }
+
+        private void btnPaymentClose_Click(object sender, EventArgs e)
+        {
+            pnlPaymentFilter.Visible = false;
+        }
        
 
         private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
@@ -828,6 +864,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
         }
+
+        
+
+       
     }
 }
 

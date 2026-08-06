@@ -17,6 +17,7 @@ namespace BLLayer.Common
             StatusInvalid,
             PriorityInvalid,
             TaskTitleInvalid,
+            NoteTitleInvalid,
 
             AmountEmpty,
             AmountInvalid,
@@ -33,6 +34,8 @@ namespace BLLayer.Common
             MinimumAmountInvalid,
             MaximumAmountInvalid,
             AmountRangeInvalid,
+
+            ColorInvalid,
 
             CategoryInvalid,
             SubCategoryInvalid,
@@ -300,6 +303,35 @@ namespace BLLayer.Common
         }
 
 
+        // Note Title Validation
+        public static ValidationResult ValidateNoteTitle(string noteTitle)
+        {
+            if (!string.IsNullOrWhiteSpace(noteTitle))
+            {
+                noteTitle = noteTitle.Trim();
 
+                if (noteTitle.Length >= 3)
+                {
+                    if (noteTitle.Length <= 150)
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
+            }
+
+            return ValidationResult.NoteTitleInvalid;
+        }
+
+        // Color Validation
+        public static ValidationResult ValidateColor(int colorId)
+        {
+            if (colorId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.ColorInvalid;
+        }
+        
     }
 }
