@@ -965,4 +965,16 @@ EXEC spFilterNotesByColor
 
 GO
 
+-- ==========================================================
+-- SP: spGetDuplicatePersonNumberByUserIDAndPhoneNumber
+-- From File: ✔️spGetDuplicatePersonNumberByUserIDAndPhoneNumber.sql
+-- ==========================================================
+EXEC spGetDuplicatePersonNumberByUserIDAndPhoneNumber
+    @UserID = 1,
+    @PersonID = -1,
+    @PhoneNumber = '01700000000'
+
+GO
+
+
 

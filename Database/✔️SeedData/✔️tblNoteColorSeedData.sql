@@ -1,11 +1,16 @@
 INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES
-('Default', '#FFFFFF'),
-('Red', '#FF8A80'),
-('Orange', '#FFD180'),
-('Yellow', '#FFFF8D'),
-('Green', '#CCFF90'),
-('Teal', '#A7FFEB'),
-('Blue', '#80D8FF'),
-('Purple', '#B388FF'),
-('Pink', '#FF80AB'),
-('Grey', '#CFD8DC');
+('White', '#FFFFFF'),
+('Red', '#FF6B6B'),
+('Orange', '#FFB74D'),
+('Yellow', '#FDD835'),
+('Green', '#81C784'),
+('Teal', '#4DB6AC'),
+('Blue', '#64B5F6'),
+('Purple', '#9575CD'),
+('Pink', '#F06292'),
+('Grey', '#90A4AE'),
+('Lavender', '#BA68C8'),
+('Coral', '#FF8A65'),
+('Mint', '#80CBC4'),
+('Indigo', '#7986CB');
+
