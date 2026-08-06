@@ -342,7 +342,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
 
             dgvLentDataTable.DataSource = pageTable;
-
+            Common.CommonUiFunction.HighlightSearch(dgvLentDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllLentData.Rows.Count;
@@ -597,15 +597,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearchFilter);
-        }
+
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlAmountFilter.Visible = false;
-            pnlSearchFilter.Visible = false;
             pnlStatusFilter.Visible = false;
             pnlPaymentFilter.Visible = false;
             pnlPersonFilter.Visible = false;
@@ -635,24 +631,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
 
         private void DesignContextMenu()
         {

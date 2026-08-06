@@ -173,6 +173,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                         }
 
                         AllBorrowData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -355,9 +356,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
 
             dgvBorrowDataTable.DataSource = pageTable;
-
-
-
+            Common.CommonUiFunction.HighlightSearch(dgvBorrowDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllBorrowData.Rows.Count;
@@ -591,7 +590,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             pnlDateFilter.Visible = false;
             pnlAmountFilter.Visible = false;
-            pnlSearch.Visible = false;
             pnlPaymentFilter.Visible = false;
             pnlPersonFilter.Visible = false;
             pnlStatusFilter.Visible = false;
@@ -629,24 +627,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
        
 
         private void tsmiDate_Click_1(object sender, EventArgs e)
@@ -673,10 +654,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             ShowFilterPanel(pnlPaymentFilter);
         }
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
+
 
         private void pnlCategoryFilter_Paint(object sender, PaintEventArgs e)
         {

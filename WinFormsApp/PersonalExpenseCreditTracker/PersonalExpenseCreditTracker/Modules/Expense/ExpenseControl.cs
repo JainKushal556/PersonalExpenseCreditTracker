@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -243,6 +243,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                         }
 
                         AllExpenseData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -269,6 +270,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
 
             dgvExpenseDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvExpenseDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllExpenseData.Rows.Count;
@@ -396,10 +398,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         }
 
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
@@ -409,7 +407,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
-            pnlSearch.Visible = false;
             pnlAmountFilter.Visible = false;
             pnlSubCategoryFilter.Visible = false;
         }
@@ -437,24 +434,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
 
         private void tsmiDate_Click(object sender, EventArgs e)
         {

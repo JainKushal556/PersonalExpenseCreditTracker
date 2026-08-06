@@ -3557,6 +3557,12 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveNoteSubMenu(pnlAllNote);
 
+            if (noteControl != null && !noteControl.IsDisposed)
+            {
+                noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+            }
+
+            ShowPage(pnlNotesPage);
         }
 
         private void pnlAddNote_MouseEnter(object sender, EventArgs e)

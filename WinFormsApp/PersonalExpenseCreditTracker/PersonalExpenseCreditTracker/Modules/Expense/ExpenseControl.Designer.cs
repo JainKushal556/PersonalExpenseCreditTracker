@@ -29,15 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
-            this.btnSerach = new System.Windows.Forms.Button();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.pnlSearchHeader = new System.Windows.Forms.Panel();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.pnlSearchTxt = new System.Windows.Forms.Panel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.dgvExpenseDataTable = new System.Windows.Forms.DataGridView();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.pnlExpenseFooter = new System.Windows.Forms.Panel();
             this.lblentries = new System.Windows.Forms.Label();
@@ -85,14 +96,11 @@
             this.picCalenderFromDate = new System.Windows.Forms.PictureBox();
             this.txtFromdate = new System.Windows.Forms.TextBox();
             this.lblToDate = new System.Windows.Forms.Label();
-            this.pnlSearch = new System.Windows.Forms.Panel();
-            this.pnlSearchHeader = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.pnlSearchTxt = new System.Windows.Forms.Panel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.cmsFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSubCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAmount = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlAmountFilter = new System.Windows.Forms.Panel();
             this.pnlAmountHeader = new System.Windows.Forms.Panel();
             this.btnAmountApply = new System.Windows.Forms.Button();
@@ -100,29 +108,24 @@
             this.pnlAmount = new System.Windows.Forms.Panel();
             this.cmbAmount = new System.Windows.Forms.ComboBox();
             this.btnAmountClose = new System.Windows.Forms.Button();
-            this.tsmiSubCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiAmount = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSubCategoryFilter = new System.Windows.Forms.Panel();
             this.pnlSubCategoryHeader = new System.Windows.Forms.Panel();
             this.btnSubCategoryApply = new System.Windows.Forms.Button();
             this.btnSubCategoryclose = new System.Windows.Forms.Button();
             this.pnlSubCategory = new System.Windows.Forms.Panel();
+            this.cmbSubCategory = new System.Windows.Forms.ComboBox();
             this.lblcategory = new System.Windows.Forms.Label();
             this.pnlCategorycmb = new System.Windows.Forms.Panel();
-            this.lblSubcategory = new System.Windows.Forms.Label();
-            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvExpenseDataTable = new System.Windows.Forms.DataGridView();
             this.cmbCategorytxt = new System.Windows.Forms.ComboBox();
-            this.cmbSubCategory = new System.Windows.Forms.ComboBox();
+            this.lblSubcategory = new System.Windows.Forms.Label();
             this.pnlContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
+            this.pnlSearch.SuspendLayout();
+            this.pnlSearchHeader.SuspendLayout();
+            this.pnlSearchTxt.SuspendLayout();
             this.pnlButtonControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).BeginInit();
             this.pnlFooter.SuspendLayout();
             this.pnlExpenseFooter.SuspendLayout();
             this.pnlControl.SuspendLayout();
@@ -142,9 +145,6 @@
             this.pnlFromDateCalenderShow.SuspendLayout();
             this.pnlFromDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalenderFromDate)).BeginInit();
-            this.pnlSearch.SuspendLayout();
-            this.pnlSearchHeader.SuspendLayout();
-            this.pnlSearchTxt.SuspendLayout();
             this.cmsFilter.SuspendLayout();
             this.pnlAmountFilter.SuspendLayout();
             this.pnlAmountHeader.SuspendLayout();
@@ -153,7 +153,6 @@
             this.pnlSubCategoryHeader.SuspendLayout();
             this.pnlSubCategory.SuspendLayout();
             this.pnlCategorycmb.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlContent
@@ -190,7 +189,7 @@
             // pnlTableHeader
             // 
             this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
-            this.pnlTableHeader.Controls.Add(this.btnSerach);
+            this.pnlTableHeader.Controls.Add(this.pnlSearch);
             this.pnlTableHeader.Controls.Add(this.pnlButtonControls);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTableHeader.Location = new System.Drawing.Point(11, 8);
@@ -198,18 +197,62 @@
             this.pnlTableHeader.Size = new System.Drawing.Size(1222, 44);
             this.pnlTableHeader.TabIndex = 0;
             // 
-            // btnSerach
+            // pnlSearch
             // 
-            this.btnSerach.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSerach.FlatAppearance.BorderSize = 0;
-            this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
-            this.btnSerach.Location = new System.Drawing.Point(0, 0);
-            this.btnSerach.Name = "btnSerach";
-            this.btnSerach.Size = new System.Drawing.Size(53, 44);
-            this.btnSerach.TabIndex = 2;
-            this.btnSerach.UseVisualStyleBackColor = true;
-            this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
+            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSearch.Controls.Add(this.pnlSearchHeader);
+            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSearch.Location = new System.Drawing.Point(0, 0);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Size = new System.Drawing.Size(349, 44);
+            this.pnlSearch.TabIndex = 9;
+            // 
+            // pnlSearchHeader
+            // 
+            this.pnlSearchHeader.Controls.Add(this.btnSearch);
+            this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
+            this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlSearchHeader.Name = "pnlSearchHeader";
+            this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
+            this.pnlSearchHeader.Size = new System.Drawing.Size(349, 44);
+            this.pnlSearchHeader.TabIndex = 0;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(243, 7);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(92, 32);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // pnlSearchTxt
+            // 
+            this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
+            this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSearchTxt.Controls.Add(this.txtSearch);
+            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 8);
+            this.pnlSearchTxt.Name = "pnlSearchTxt";
+            this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.pnlSearchTxt.Size = new System.Drawing.Size(226, 32);
+            this.pnlSearchTxt.TabIndex = 1;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(8, 4);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(213, 23);
+            this.txtSearch.TabIndex = 6;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // pnlButtonControls
             // 
@@ -275,6 +318,86 @@
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // dgvExpenseDataTable
+            // 
+            this.dgvExpenseDataTable.AllowUserToAddRows = false;
+            this.dgvExpenseDataTable.AllowUserToDeleteRows = false;
+            this.dgvExpenseDataTable.AllowUserToResizeColumns = false;
+            this.dgvExpenseDataTable.AllowUserToResizeRows = false;
+            this.dgvExpenseDataTable.BackgroundColor = System.Drawing.Color.White;
+            this.dgvExpenseDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvExpenseDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colDate,
+            this.colDescription,
+            this.colCategory,
+            this.colSubCategory,
+            this.colAmount,
+            this.colPaymentMethod});
+            this.dgvExpenseDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvExpenseDataTable.EnableHeadersVisualStyles = false;
+            this.dgvExpenseDataTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(236)))), ((int)(((byte)(242)))));
+            this.dgvExpenseDataTable.Location = new System.Drawing.Point(11, 58);
+            this.dgvExpenseDataTable.Name = "dgvExpenseDataTable";
+            this.dgvExpenseDataTable.ReadOnly = true;
+            this.dgvExpenseDataTable.RowHeadersVisible = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvExpenseDataTable.RowTemplate.Height = 24;
+            this.dgvExpenseDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvExpenseDataTable.Size = new System.Drawing.Size(1222, 520);
+            this.dgvExpenseDataTable.TabIndex = 1;
+            this.dgvExpenseDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExpenseDataTable_CellContentClick);
+            // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.FillWeight = 10F;
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.FillWeight = 20F;
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCategory.FillWeight = 15F;
+            this.colCategory.HeaderText = "Category";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            // 
+            // colSubCategory
+            // 
+            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSubCategory.FillWeight = 15F;
+            this.colSubCategory.HeaderText = "SubCategory";
+            this.colSubCategory.Name = "colSubCategory";
+            this.colSubCategory.ReadOnly = true;
+            // 
+            // colAmount
+            // 
+            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.FillWeight = 10F;
+            this.colAmount.HeaderText = "Amount";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            // 
+            // colPaymentMethod
+            // 
+            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.FillWeight = 15F;
+            this.colPaymentMethod.HeaderText = "Payment Method";
+            this.colPaymentMethod.Name = "colPaymentMethod";
+            this.colPaymentMethod.ReadOnly = true;
             // 
             // pnlFooter
             // 
@@ -808,61 +931,6 @@
             this.lblToDate.TabIndex = 3;
             this.lblToDate.Text = "To";
             // 
-            // pnlSearch
-            // 
-            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSearch.Controls.Add(this.pnlSearchHeader);
-            this.pnlSearch.Location = new System.Drawing.Point(600, 230);
-            this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(349, 48);
-            this.pnlSearch.TabIndex = 9;
-            // 
-            // pnlSearchHeader
-            // 
-            this.pnlSearchHeader.Controls.Add(this.btnSearch);
-            this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
-            this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlSearchHeader.Name = "pnlSearchHeader";
-            this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
-            this.pnlSearchHeader.Size = new System.Drawing.Size(349, 48);
-            this.pnlSearchHeader.TabIndex = 0;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(243, 7);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(92, 32);
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            // 
-            // pnlSearchTxt
-            // 
-            this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
-            this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSearchTxt.Controls.Add(this.txtSearch);
-            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 8);
-            this.pnlSearchTxt.Name = "pnlSearchTxt";
-            this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.pnlSearchTxt.Size = new System.Drawing.Size(226, 32);
-            this.pnlSearchTxt.TabIndex = 1;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(8, 4);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(213, 23);
-            this.txtSearch.TabIndex = 6;
-            // 
             // cmsFilter
             // 
             this.cmsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -886,6 +954,20 @@
             this.tsmiCategory.Size = new System.Drawing.Size(163, 24);
             this.tsmiCategory.Text = "Category";
             this.tsmiCategory.Click += new System.EventHandler(this.tsmiCategory_Click);
+            // 
+            // tsmiSubCategory
+            // 
+            this.tsmiSubCategory.Name = "tsmiSubCategory";
+            this.tsmiSubCategory.Size = new System.Drawing.Size(163, 24);
+            this.tsmiSubCategory.Text = "SubCategory";
+            this.tsmiSubCategory.Click += new System.EventHandler(this.tsmiSubCategory_Click);
+            // 
+            // tsmiAmount
+            // 
+            this.tsmiAmount.Name = "tsmiAmount";
+            this.tsmiAmount.Size = new System.Drawing.Size(163, 24);
+            this.tsmiAmount.Text = "Amount";
+            this.tsmiAmount.Click += new System.EventHandler(this.tsmiAmount_Click);
             // 
             // pnlAmountFilter
             // 
@@ -967,20 +1049,6 @@
             this.btnAmountClose.UseVisualStyleBackColor = true;
             this.btnAmountClose.Click += new System.EventHandler(this.btnAmountClose_Click);
             // 
-            // tsmiSubCategory
-            // 
-            this.tsmiSubCategory.Name = "tsmiSubCategory";
-            this.tsmiSubCategory.Size = new System.Drawing.Size(163, 24);
-            this.tsmiSubCategory.Text = "SubCategory";
-            this.tsmiSubCategory.Click += new System.EventHandler(this.tsmiSubCategory_Click);
-            // 
-            // tsmiAmount
-            // 
-            this.tsmiAmount.Name = "tsmiAmount";
-            this.tsmiAmount.Size = new System.Drawing.Size(163, 24);
-            this.tsmiAmount.Text = "Amount";
-            this.tsmiAmount.Click += new System.EventHandler(this.tsmiAmount_Click);
-            // 
             // pnlSubCategoryFilter
             // 
             this.pnlSubCategoryFilter.BackColor = System.Drawing.Color.Transparent;
@@ -1042,6 +1110,17 @@
             this.pnlSubCategory.Size = new System.Drawing.Size(210, 36);
             this.pnlSubCategory.TabIndex = 5;
             // 
+            // cmbSubCategory
+            // 
+            this.cmbSubCategory.BackColor = System.Drawing.Color.White;
+            this.cmbSubCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbSubCategory.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSubCategory.FormattingEnabled = true;
+            this.cmbSubCategory.Location = new System.Drawing.Point(1, 2);
+            this.cmbSubCategory.Name = "cmbSubCategory";
+            this.cmbSubCategory.Size = new System.Drawing.Size(204, 31);
+            this.cmbSubCategory.TabIndex = 1;
+            // 
             // lblcategory
             // 
             this.lblcategory.AutoSize = true;
@@ -1063,97 +1142,6 @@
             this.pnlCategorycmb.Size = new System.Drawing.Size(253, 36);
             this.pnlCategorycmb.TabIndex = 4;
             // 
-            // lblSubcategory
-            // 
-            this.lblSubcategory.AutoSize = true;
-            this.lblSubcategory.BackColor = System.Drawing.Color.Transparent;
-            this.lblSubcategory.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubcategory.Location = new System.Drawing.Point(356, 10);
-            this.lblSubcategory.Name = "lblSubcategory";
-            this.lblSubcategory.Size = new System.Drawing.Size(129, 25);
-            this.lblSubcategory.TabIndex = 3;
-            this.lblSubcategory.Text = "SubCategory";
-            // 
-            // colPaymentMethod
-            // 
-            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPaymentMethod.FillWeight = 15F;
-            this.colPaymentMethod.HeaderText = "Payment Method";
-            this.colPaymentMethod.Name = "colPaymentMethod";
-            this.colPaymentMethod.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAmount.FillWeight = 10F;
-            this.colAmount.HeaderText = "Amount";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            // 
-            // colSubCategory
-            // 
-            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSubCategory.FillWeight = 15F;
-            this.colSubCategory.HeaderText = "SubCategory";
-            this.colSubCategory.Name = "colSubCategory";
-            this.colSubCategory.ReadOnly = true;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCategory.FillWeight = 15F;
-            this.colCategory.HeaderText = "Category";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.FillWeight = 20F;
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
-            // colDate
-            // 
-            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDate.FillWeight = 10F;
-            this.colDate.HeaderText = "Date";
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            // 
-            // dgvExpenseDataTable
-            // 
-            this.dgvExpenseDataTable.AllowUserToAddRows = false;
-            this.dgvExpenseDataTable.AllowUserToDeleteRows = false;
-            this.dgvExpenseDataTable.AllowUserToResizeColumns = false;
-            this.dgvExpenseDataTable.AllowUserToResizeRows = false;
-            this.dgvExpenseDataTable.BackgroundColor = System.Drawing.Color.White;
-            this.dgvExpenseDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvExpenseDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colDate,
-            this.colDescription,
-            this.colCategory,
-            this.colSubCategory,
-            this.colAmount,
-            this.colPaymentMethod});
-            this.dgvExpenseDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvExpenseDataTable.EnableHeadersVisualStyles = false;
-            this.dgvExpenseDataTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(236)))), ((int)(((byte)(242)))));
-            this.dgvExpenseDataTable.Location = new System.Drawing.Point(11, 58);
-            this.dgvExpenseDataTable.Name = "dgvExpenseDataTable";
-            this.dgvExpenseDataTable.ReadOnly = true;
-            this.dgvExpenseDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvExpenseDataTable.RowTemplate.Height = 24;
-            this.dgvExpenseDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvExpenseDataTable.Size = new System.Drawing.Size(1222, 520);
-            this.dgvExpenseDataTable.TabIndex = 1;
-            this.dgvExpenseDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExpenseDataTable_CellContentClick);
-            // 
             // cmbCategorytxt
             // 
             this.cmbCategorytxt.BackColor = System.Drawing.Color.White;
@@ -1165,16 +1153,16 @@
             this.cmbCategorytxt.Size = new System.Drawing.Size(243, 31);
             this.cmbCategorytxt.TabIndex = 1;
             // 
-            // cmbSubCategory
+            // lblSubcategory
             // 
-            this.cmbSubCategory.BackColor = System.Drawing.Color.White;
-            this.cmbSubCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbSubCategory.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbSubCategory.FormattingEnabled = true;
-            this.cmbSubCategory.Location = new System.Drawing.Point(1, 2);
-            this.cmbSubCategory.Name = "cmbSubCategory";
-            this.cmbSubCategory.Size = new System.Drawing.Size(204, 31);
-            this.cmbSubCategory.TabIndex = 1;
+            this.lblSubcategory.AutoSize = true;
+            this.lblSubcategory.BackColor = System.Drawing.Color.Transparent;
+            this.lblSubcategory.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubcategory.Location = new System.Drawing.Point(356, 10);
+            this.lblSubcategory.Name = "lblSubcategory";
+            this.lblSubcategory.Size = new System.Drawing.Size(129, 25);
+            this.lblSubcategory.TabIndex = 3;
+            this.lblSubcategory.Text = "SubCategory";
             // 
             // ExpenseControl
             // 
@@ -1184,7 +1172,6 @@
             this.ClientSize = new System.Drawing.Size(1250, 753);
             this.Controls.Add(this.pnlSubCategoryFilter);
             this.Controls.Add(this.pnlAmountFilter);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlCategoryFilter);
             this.Controls.Add(this.pnlContent);
@@ -1194,8 +1181,13 @@
             this.pnlContent.ResumeLayout(false);
             this.tblTable.ResumeLayout(false);
             this.pnlTableHeader.ResumeLayout(false);
+            this.pnlSearch.ResumeLayout(false);
+            this.pnlSearchHeader.ResumeLayout(false);
+            this.pnlSearchTxt.ResumeLayout(false);
+            this.pnlSearchTxt.PerformLayout();
             this.pnlButtonControls.ResumeLayout(false);
             this.pnlButtonControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlExpenseFooter.ResumeLayout(false);
             this.pnlExpenseFooter.PerformLayout();
@@ -1222,10 +1214,6 @@
             this.pnlFromDate.ResumeLayout(false);
             this.pnlFromDate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalenderFromDate)).EndInit();
-            this.pnlSearch.ResumeLayout(false);
-            this.pnlSearchHeader.ResumeLayout(false);
-            this.pnlSearchTxt.ResumeLayout(false);
-            this.pnlSearchTxt.PerformLayout();
             this.cmsFilter.ResumeLayout(false);
             this.pnlAmountFilter.ResumeLayout(false);
             this.pnlAmountHeader.ResumeLayout(false);
@@ -1236,7 +1224,6 @@
             this.pnlSubCategoryHeader.PerformLayout();
             this.pnlSubCategory.ResumeLayout(false);
             this.pnlCategorycmb.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseDataTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1301,7 +1288,6 @@
         private System.Windows.Forms.Panel pnlSearchHeader;
         private System.Windows.Forms.Panel pnlSearchTxt;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Button btnSerach;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
         private System.Windows.Forms.ToolStripMenuItem tsmiCategory;

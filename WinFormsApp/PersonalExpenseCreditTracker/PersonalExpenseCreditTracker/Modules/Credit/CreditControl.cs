@@ -178,6 +178,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                         }
 
                         AllCreditData = dt;
+                        masterData = dt.Copy();
                         dgvCreditDataTable.DataSource = AllCreditData;
                     }
                 }
@@ -351,6 +352,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
 
             dgvCreditDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvCreditDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllCreditData.Rows.Count;
@@ -484,15 +486,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             ShowFilterPanel(pnlAmountFilter);
         }
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
+
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
-            pnlSearch.Visible = false;
             pnlAmountFilter.Visible = false;
             pnlSubCategoryFilter.Visible = false;
         }
@@ -520,24 +518,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
       
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-            
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y                     
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
 
 
         private void DesignContextMenu()
