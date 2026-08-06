@@ -14,7 +14,21 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 {
     public partial class EditTaskControl : Form
     {
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private TaskControls taskControl;
+
+        public EditTaskControl()
+        {
+            InitializeComponent();
+        }
+
+        public EditTaskControl(TaskControls taskcontrol)
+        {
+            InitializeComponent();
+
+            taskControl = taskcontrol;
+        }
+
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
             int nTopRect,
@@ -23,24 +37,42 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             int nWidthEllipse,
             int nHeightEllipse);
 
-        private TaskControls taskControl;
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
 
-        public EditTaskControl()
+        // All Border Cornar Radius
+        private void SetRadius(Control control, int radius)
         {
-            InitializeComponent();
-        }
-        public EditTaskControl(TaskControls taskcontrol)
-        {
-            InitializeComponent();
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
 
-            taskControl = taskcontrol;
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
         }
        
-      private void EditTaskControl_Load(object sender, EventArgs e)
+        private void EditTaskControl_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-    
-           
+
+            SetRadius(pnlBody, 15);
+            SetRadius(btnCancel, 5);
+            SetRadius(btnUpdateTask, 5);
+
             txtTaskTitle.Text = taskControl.SelectedTaskTitle;
             txtTaskTitle.ForeColor = Color.Black;
 
@@ -186,6 +218,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtTaskTitle.Text = "";
                 txtTaskTitle.ForeColor = Color.Black;
             }
+            monthCalendar1.Visible = false;
         }
 
         private void txtTaskTitle_Leave(object sender, EventArgs e)
@@ -222,10 +255,24 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             monthCalendar1.Visible = false;
         }
 
+        private void pnlBody_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+        }
 
-      
+        private void pnlEditTask_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+        }
 
-     
+        private void cmbPriority_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+        }
 
+        private void cmbStatus_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+        }
     }
 }

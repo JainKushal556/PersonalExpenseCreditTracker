@@ -19,9 +19,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllBorrowData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
-        private int userID = 11;
+        private int userID = Session.LogedInUser.GetUserId();
         public BorrowControls()
         {
             InitializeComponent();
@@ -172,6 +173,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                         }
 
                         AllBorrowData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -351,7 +353,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
 
             dgvBorrowDataTable.DataSource = pageTable;
-
+            Common.CommonUiFunction.HighlightSearch(dgvBorrowDataTable, txtSearch);
 
 
             int start = startIndex + 1;
@@ -483,7 +485,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     break;
 
                 case "colPersonName":
-                    DrawHeader(e, Properties.Resources.PersonIcon, "PersonName");
+                    DrawHeader(e, Properties.Resources.PersonIcon, "Person Name");
                     break;
                 case "colDescription":
                     DrawHeader(e, Properties.Resources.note, "Description");
@@ -492,16 +494,16 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     DrawHeader(e, Properties.Resources.money, "Amount");
                     break;
                 case "colPaymentType":
-                    DrawHeader(e, Properties.Resources.credit_card1, "PaymentType");
+                    DrawHeader(e, Properties.Resources.credit_card1, "Payment Type");
                     break;
                 case "colPaidAmount":
-                    DrawHeader(e, Properties.Resources.money, "PaidAmount");
+                    DrawHeader(e, Properties.Resources.money, "Paid Amount");
                     break;
                 case "colRemainingAmount":
-                    DrawHeader(e, Properties.Resources.money, "RemainingAmount");
+                    DrawHeader(e, Properties.Resources.money, "Remaining Amount");
                     break;
                 case "colDeadline":
-                    DrawHeader(e, Properties.Resources.deadline, "DeadlineAt");
+                    DrawHeader(e, Properties.Resources.deadline, "Deadline");
                     break;
                 case "colStatus":
                     DrawHeader(e, Properties.Resources.loading, "Status");
@@ -574,14 +576,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             int personID = Convert.ToInt32(row.Cells["colPersonID"].Value);
 
-            //MessageBox.Show("PersonID = " + personID);
+            MessageBox.Show("PersonID = " + personID);
 
-            //PayBorrowReturnAmountControls frm = new PayBorrowReturnAmountControls();
+            PayBorrowPaidAmountControls frm = new PayBorrowPaidAmountControls();
 
             //frm.UserID = userID;
             //frm.PersonID = personID;
 
-            //frm.ShowDialog(this);
+            frm.ShowDialog(this);
         }
         private void HideAllFilterPanels()
         {
@@ -591,6 +593,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlPaymentFilter.Visible = false;
             pnlPersonFilter.Visible = false;
             pnlStatusFilter.Visible = false;
+            //pnlSearch.Visible = false;
         }
         private void HidePopupPanels()
         {
@@ -602,6 +605,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            //pnlSearch.Visible = false;
+            HidePopupPanels();
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
@@ -625,24 +630,29 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
+        //private void ShowSearchPanel(Panel panel)
+        //{
+        //    if (panel.Visible)
+        //    {
+        //        panel.Visible = false;
+        //        return;
+        //    }
+        //    HideAllFilterPanels();
 
-            panel.Parent = this;
+        //    panel.Parent = this;
 
 
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
+        //    Point p = btnSerach.PointToScreen(Point.Empty);
+        //    p = this.PointToClient(p);
 
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
+        //    panel.Location = new Point(
+        //        p.X + btnSerach.Width + 10,
+        //        p.Y
+        //    );
 
-            panel.BringToFront();
-            panel.Visible = true;
-        }
+        //    panel.BringToFront();
+        //    panel.Visible = true;
+        //}
        
 
         private void tsmiDate_Click_1(object sender, EventArgs e)
@@ -671,7 +681,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
         private void btnSerach_Click(object sender, EventArgs e)
         {
-            ShowSearchPanel(pnlSearch);
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+            //ShowSearchPanel(pnlSearch);
         }
 
         private void pnlCategoryFilter_Paint(object sender, PaintEventArgs e)
@@ -692,6 +704,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void btncategoryClose_Click(object sender, EventArgs e)
         {
             pnlAmountFilter.Visible = false;
+            HidePopupPanels();
         }
 
         private void DesignContextMenu()
@@ -714,14 +727,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
             tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
-
-
         }
-
-      
-
         
-
         private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
@@ -836,6 +843,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnDateClose_Click(object sender, EventArgs e)
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
         }
 
@@ -854,20 +862,75 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlPaymentFilter.Visible = false;
         }
        
-
-        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        private void pnlButtonControls_Click(object sender, EventArgs e)
         {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            HidePopupPanels();
         }
 
-        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            HidePopupPanels();
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            HidePopupPanels();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            HidePopupPanels();
+        }
+
+        private void tableLayoutPanel1_Click(object sender, EventArgs e)
+        {
+            HidePopupPanels();
+        }
+
+        private void dgvBorrowDataTable_Click(object sender, EventArgs e)
+        {
+            HidePopupPanels();
+        }
+
+
+
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
         }
 
         
 
        
+        private void txtToDate_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtToDate_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            ShowCalenderToDatePanel(pnlToDateCalenderShow);
+        }
+
+        private void txtFromdate_Click(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+            ShowCurrentPage();
+        }
     }
 }
-

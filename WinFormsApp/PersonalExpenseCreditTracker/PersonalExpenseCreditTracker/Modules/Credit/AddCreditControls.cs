@@ -35,7 +35,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             txtAddCreditAmount.Text = "Enter Amount";
             txtAddCreditAmount.ForeColor = Color.Gray;
-            //txtAddCreditDescription.Text = "Enter Description";
+            txtAddCreditDescription.Text = "Enter Description";
             txtAddCreditDescription.ForeColor = Color.Gray;
             cmbAddCreditCategory.Text = "Select Category";
             cmbAddCreditCategory.ForeColor = Color.Gray;
@@ -43,10 +43,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             cmbAddCreditSubCategory.ForeColor = Color.Gray;
             cmbAddCreditPaymentType.Text = "Select Payment Type";
             cmbAddCreditPaymentType.ForeColor = Color.Gray;
-            cmbAddCreditPaymentType.Text = "Select PaymentType";
 
             CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", cmbAddCreditCategory);
-            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select PaymentType", cmbAddCreditPaymentType);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddCreditPaymentType);
         }
 
         // All Border Cornar Radius
@@ -146,7 +145,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
             CommonUiFunction.LoadInComboBox(
                 "spGetCreditSubCategoryByCategoryID",
-                "Select SubCategory",
+                "Select Sub Category",
                 cmbAddCreditSubCategory,
                 "@CategoryID",
                 categoryId);
@@ -154,6 +153,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void cmbAddCreditCategory_Enter(object sender, EventArgs e)
         {
+            if(cmbAddCreditCategory.Text == "Select Category")
+            {
+                cmbAddCreditCategory.Text = "";
+            }
             cmbAddCreditCategory.ForeColor = Color.Black;
         }
 
@@ -165,7 +168,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void cmbAddCreditSubCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmbAddCreditSubCategory.ForeColor = Color.Black;
+            //cmbAddCreditSubCategory.ForeColor = Color.Black;
         }
 
         private void cmbAddCreditSubCategory_Enter(object sender, EventArgs e)
@@ -232,7 +235,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
             // If the placeholder text is still present, pass an empty string
              creditUi.amount = (txtAddCreditAmount.Text == "Select Amount") ? "" : txtAddCreditAmount.Text;
-             creditUi.description = (txtAddCreditDescription.Text == "Enter description") ? "" : txtAddCreditDescription.Text;
+             creditUi.description = (txtAddCreditDescription.Text == "Enter Description") ? "" : txtAddCreditDescription.Text;
 
              CommonValidator.ValidationResult result = creditUi.InsertDataIntoCreditUi();
              // Perform action based on the validation result
@@ -251,14 +254,14 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                      ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddCreditSubCategory);
                      break;
 
-                 case CommonValidator.ValidationResult.PaymentInvalid:
-                     ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddCreditPaymentType);
-                     break;
-
                  case CommonValidator.ValidationResult.AmountEmpty:
                  case CommonValidator.ValidationResult.AmountInvalid:
                  case CommonValidator.ValidationResult.AmountTooLarge:
                      ErrorHelper.ShowValidationError(result, errorProvider1, txtAddCreditAmount);
+                     break;
+
+                 case CommonValidator.ValidationResult.PaymentInvalid:
+                     ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddCreditPaymentType);
                      break;
 
                  case CommonValidator.ValidationResult.DescriptionInvalid:

@@ -93,11 +93,13 @@
             this.pnlMainBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMainBody.Location = new System.Drawing.Point(0, 0);
             this.pnlMainBody.Name = "pnlMainBody";
-            this.pnlMainBody.Size = new System.Drawing.Size(739, 745);
+            this.pnlMainBody.Size = new System.Drawing.Size(589, 730);
             this.pnlMainBody.TabIndex = 0;
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.Transparent;
             this.panel4.Controls.Add(this.lblPasswordMatch);
             this.panel4.Controls.Add(this.panel5);
@@ -107,23 +109,24 @@
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.pnlCurrentPasswordText);
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 103);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(15);
-            this.panel4.Size = new System.Drawing.Size(737, 545);
+            this.panel4.Size = new System.Drawing.Size(587, 524);
             this.panel4.TabIndex = 2;
             // 
             // lblPasswordMatch
             // 
             this.lblPasswordMatch.AutoSize = true;
-            this.lblPasswordMatch.Location = new System.Drawing.Point(25, 355);
+            this.lblPasswordMatch.Location = new System.Drawing.Point(25, 349);
             this.lblPasswordMatch.Name = "lblPasswordMatch";
             this.lblPasswordMatch.Size = new System.Drawing.Size(0, 17);
             this.lblPasswordMatch.TabIndex = 7;
             // 
             // panel5
             // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.Controls.Add(this.pnlChangePasswordAbout);
             this.panel5.Controls.Add(this.pnlVeryStrong);
             this.panel5.Controls.Add(this.pnlStrong);
@@ -131,19 +134,21 @@
             this.panel5.Controls.Add(this.pnlWeak);
             this.panel5.Controls.Add(this.lblPasswordStrengthLevel);
             this.panel5.Controls.Add(this.label6);
-            this.panel5.Location = new System.Drawing.Point(22, 375);
+            this.panel5.Location = new System.Drawing.Point(22, 356);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(697, 163);
+            this.panel5.Size = new System.Drawing.Size(547, 163);
             this.panel5.TabIndex = 6;
             // 
             // pnlChangePasswordAbout
             // 
-            this.pnlChangePasswordAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.pnlChangePasswordAbout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlChangePasswordAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
             this.pnlChangePasswordAbout.Controls.Add(this.label7);
             this.pnlChangePasswordAbout.Controls.Add(this.pictureBox7);
             this.pnlChangePasswordAbout.Location = new System.Drawing.Point(0, 80);
             this.pnlChangePasswordAbout.Name = "pnlChangePasswordAbout";
-            this.pnlChangePasswordAbout.Size = new System.Drawing.Size(697, 83);
+            this.pnlChangePasswordAbout.Size = new System.Drawing.Size(547, 83);
             this.pnlChangePasswordAbout.TabIndex = 6;
             this.pnlChangePasswordAbout.Resize += new System.EventHandler(this.pnlChangePasswordAbout_Resize);
             // 
@@ -151,7 +156,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(74, 19);
+            this.label7.Location = new System.Drawing.Point(60, 19);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(451, 46);
             this.label7.TabIndex = 1;
@@ -161,7 +166,7 @@
             // pictureBox7
             // 
             this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.info__3_;
-            this.pictureBox7.Location = new System.Drawing.Point(17, 20);
+            this.pictureBox7.Location = new System.Drawing.Point(9, 20);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(47, 44);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -229,14 +234,15 @@
             this.pnlConfirmPassword.Controls.Add(this.picEye3);
             this.pnlConfirmPassword.Controls.Add(this.txtConfirmPassword);
             this.pnlConfirmPassword.Controls.Add(this.pictureBox4);
-            this.pnlConfirmPassword.Location = new System.Drawing.Point(22, 291);
+            this.pnlConfirmPassword.Location = new System.Drawing.Point(22, 279);
             this.pnlConfirmPassword.Name = "pnlConfirmPassword";
-            this.pnlConfirmPassword.Size = new System.Drawing.Size(697, 56);
+            this.pnlConfirmPassword.Size = new System.Drawing.Size(547, 50);
             this.pnlConfirmPassword.TabIndex = 5;
             // 
             // picEye3
             // 
-            this.picEye3.Location = new System.Drawing.Point(648, 11);
+            this.picEye3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picEye3.Location = new System.Drawing.Point(498, 11);
             this.picEye3.Name = "picEye3";
             this.picEye3.Size = new System.Drawing.Size(34, 33);
             this.picEye3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -249,9 +255,9 @@
             this.txtConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmPassword.Location = new System.Drawing.Point(74, 12);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(74, 9);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.Size = new System.Drawing.Size(569, 29);
+            this.txtConfirmPassword.Size = new System.Drawing.Size(419, 29);
             this.txtConfirmPassword.TabIndex = 1;
             this.txtConfirmPassword.TextChanged += new System.EventHandler(this.txtConfirmPassword_TextChanged);
             this.txtConfirmPassword.Enter += new System.EventHandler(this.txtConfirmPassword_Enter);
@@ -276,7 +282,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 253);
+            this.label5.Location = new System.Drawing.Point(18, 241);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 23);
             this.label5.TabIndex = 4;
@@ -291,14 +297,15 @@
             this.pnlNewPassword.Controls.Add(this.picEye2);
             this.pnlNewPassword.Controls.Add(this.txtNewPassword);
             this.pnlNewPassword.Controls.Add(this.pictureBox3);
-            this.pnlNewPassword.Location = new System.Drawing.Point(22, 172);
+            this.pnlNewPassword.Location = new System.Drawing.Point(22, 166);
             this.pnlNewPassword.Name = "pnlNewPassword";
-            this.pnlNewPassword.Size = new System.Drawing.Size(697, 56);
+            this.pnlNewPassword.Size = new System.Drawing.Size(547, 50);
             this.pnlNewPassword.TabIndex = 3;
             // 
             // picEye2
             // 
-            this.picEye2.Location = new System.Drawing.Point(648, 11);
+            this.picEye2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picEye2.Location = new System.Drawing.Point(498, 11);
             this.picEye2.Name = "picEye2";
             this.picEye2.Size = new System.Drawing.Size(34, 33);
             this.picEye2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -311,9 +318,9 @@
             this.txtNewPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNewPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewPassword.Location = new System.Drawing.Point(74, 12);
+            this.txtNewPassword.Location = new System.Drawing.Point(74, 9);
             this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.Size = new System.Drawing.Size(569, 29);
+            this.txtNewPassword.Size = new System.Drawing.Size(419, 29);
             this.txtNewPassword.TabIndex = 1;
             this.txtNewPassword.TextChanged += new System.EventHandler(this.txtNewPassword_TextChanged);
             this.txtNewPassword.Enter += new System.EventHandler(this.txtNewPassword_Enter);
@@ -338,7 +345,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 134);
+            this.label4.Location = new System.Drawing.Point(18, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 23);
             this.label4.TabIndex = 2;
@@ -355,12 +362,13 @@
             this.pnlCurrentPasswordText.Controls.Add(this.pictureBox2);
             this.pnlCurrentPasswordText.Location = new System.Drawing.Point(22, 53);
             this.pnlCurrentPasswordText.Name = "pnlCurrentPasswordText";
-            this.pnlCurrentPasswordText.Size = new System.Drawing.Size(697, 56);
+            this.pnlCurrentPasswordText.Size = new System.Drawing.Size(547, 50);
             this.pnlCurrentPasswordText.TabIndex = 1;
             // 
             // picEye1
             // 
-            this.picEye1.Location = new System.Drawing.Point(648, 11);
+            this.picEye1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picEye1.Location = new System.Drawing.Point(498, 11);
             this.picEye1.Name = "picEye1";
             this.picEye1.Size = new System.Drawing.Size(34, 33);
             this.picEye1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -373,9 +381,9 @@
             this.txtCurrentPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCurrentPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCurrentPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCurrentPassword.Location = new System.Drawing.Point(74, 12);
+            this.txtCurrentPassword.Location = new System.Drawing.Point(74, 9);
             this.txtCurrentPassword.Name = "txtCurrentPassword";
-            this.txtCurrentPassword.Size = new System.Drawing.Size(569, 29);
+            this.txtCurrentPassword.Size = new System.Drawing.Size(419, 29);
             this.txtCurrentPassword.TabIndex = 1;
             this.txtCurrentPassword.Enter += new System.EventHandler(this.txtCurrentPassword_Enter);
             this.txtCurrentPassword.Leave += new System.EventHandler(this.txtCurrentPassword_Leave);
@@ -411,20 +419,24 @@
             this.panel3.Controls.Add(this.btnChangePasswordCancel);
             this.panel3.Controls.Add(this.btnChangePasswordUpdatePassword);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 648);
+            this.panel3.Location = new System.Drawing.Point(0, 628);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(737, 95);
+            this.panel3.Size = new System.Drawing.Size(587, 100);
             this.panel3.TabIndex = 1;
             // 
             // btnChangePasswordCancel
             // 
-            this.btnChangePasswordCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnChangePasswordCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
+            this.btnChangePasswordCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnChangePasswordCancel.FlatAppearance.BorderSize = 0;
+            this.btnChangePasswordCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
+            this.btnChangePasswordCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnChangePasswordCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangePasswordCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePasswordCancel.Location = new System.Drawing.Point(52, 17);
+            this.btnChangePasswordCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePasswordCancel.ForeColor = System.Drawing.Color.White;
+            this.btnChangePasswordCancel.Location = new System.Drawing.Point(18, 17);
             this.btnChangePasswordCancel.Name = "btnChangePasswordCancel";
-            this.btnChangePasswordCancel.Size = new System.Drawing.Size(274, 53);
+            this.btnChangePasswordCancel.Size = new System.Drawing.Size(196, 53);
             this.btnChangePasswordCancel.TabIndex = 1;
             this.btnChangePasswordCancel.Text = "Cancel";
             this.btnChangePasswordCancel.UseVisualStyleBackColor = false;
@@ -435,12 +447,12 @@
             this.btnChangePasswordUpdatePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(87)))), ((int)(((byte)(243)))));
             this.btnChangePasswordUpdatePassword.FlatAppearance.BorderSize = 0;
             this.btnChangePasswordUpdatePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangePasswordUpdatePassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePasswordUpdatePassword.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePasswordUpdatePassword.ForeColor = System.Drawing.Color.White;
             this.btnChangePasswordUpdatePassword.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__3_;
-            this.btnChangePasswordUpdatePassword.Location = new System.Drawing.Point(372, 17);
+            this.btnChangePasswordUpdatePassword.Location = new System.Drawing.Point(346, 17);
             this.btnChangePasswordUpdatePassword.Name = "btnChangePasswordUpdatePassword";
-            this.btnChangePasswordUpdatePassword.Size = new System.Drawing.Size(317, 53);
+            this.btnChangePasswordUpdatePassword.Size = new System.Drawing.Size(223, 53);
             this.btnChangePasswordUpdatePassword.TabIndex = 0;
             this.btnChangePasswordUpdatePassword.Text = "Update Pasword";
             this.btnChangePasswordUpdatePassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -459,7 +471,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(15);
-            this.panel2.Size = new System.Drawing.Size(737, 103);
+            this.panel2.Size = new System.Drawing.Size(587, 103);
             this.panel2.TabIndex = 0;
             // 
             // btnChangePasswordClose
@@ -472,7 +484,7 @@
             this.btnChangePasswordClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnChangePasswordClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePasswordClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnChangePasswordClose.Location = new System.Drawing.Point(678, 22);
+            this.btnChangePasswordClose.Location = new System.Drawing.Point(528, 22);
             this.btnChangePasswordClose.Name = "btnChangePasswordClose";
             this.btnChangePasswordClose.Size = new System.Drawing.Size(39, 35);
             this.btnChangePasswordClose.TabIndex = 3;
@@ -514,11 +526,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(739, 745);
+            this.ClientSize = new System.Drawing.Size(589, 730);
             this.Controls.Add(this.pnlMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximumSize = new System.Drawing.Size(739, 745);
-            this.MinimumSize = new System.Drawing.Size(739, 745);
             this.Name = "ChangePasswordControls";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChangePasswordControls";

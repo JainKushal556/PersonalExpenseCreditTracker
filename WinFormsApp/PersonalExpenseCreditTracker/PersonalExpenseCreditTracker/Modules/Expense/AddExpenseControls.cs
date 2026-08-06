@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Expense
 {
@@ -42,6 +44,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             cmbAddExpenseSubCategory.ForeColor = Color.Gray;
             cmbAddExpensePaymentType.Text = "Select Payment Type";
             cmbAddExpensePaymentType.ForeColor = Color.Gray;
+
+
+            CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", cmbAddExpenseCategory);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddExpensePaymentType);
         }
 
         // All Border Cornar Radius
@@ -116,17 +122,64 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnSaveExpense_Click(object sender, EventArgs e)
         {
-            if (txtAddExpenseAmount.Text == "Enter Amount" || txtAddExpenseDescription.Text == "Enter Description"
-                || cmbAddExpenseCategory.Text == "Select Category" || cmbAddExpensePaymentType.Text == "Select Payment Type"
-                || cmbAddExpenseSubCategory.Text == "Select Sub Category")
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            ExpenseUI expenseUi = new ExpenseUI();
+
+            // Assign values from the form controls to the object
+            expenseUi.userId = Session.LogedInUser.GetUserId();
+            expenseUi.expenseId = -1;
+
+            expenseUi.categoryId = Convert.ToInt32(cmbAddExpenseCategory.SelectedValue);
+            expenseUi.subCategoryId = Convert.ToInt32(cmbAddExpenseSubCategory.SelectedValue);
+            expenseUi.paymentId = Convert.ToInt32(cmbAddExpensePaymentType.SelectedValue);
+
+
+            // If the placeholder text is still present, pass an empty string
+            expenseUi.amount = (txtAddExpenseAmount.Text == "Select Amount") ? "" : txtAddExpenseAmount.Text;
+            expenseUi.description = (txtAddExpenseDescription.Text == "Enter Description") ? "" : txtAddExpenseDescription.Text;
+
+            CommonValidator.ValidationResult result = expenseUi.InsertDataIntoExpenseUi();
+
+            // Perform action based on the validation result
+            switch (result)
             {
-                MessageBox.Show("Please fill all fields");
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Expense added successfully!");
+                    this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddExpenseCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.SubCategoryInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddExpenseSubCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.AmountEmpty:
+                case CommonValidator.ValidationResult.AmountInvalid:
+                case CommonValidator.ValidationResult.AmountTooLarge:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddExpenseAmount);
+                    break;
+
+                case CommonValidator.ValidationResult.PaymentInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbAddExpensePaymentType);
+                    break;     
+
+                case CommonValidator.ValidationResult.DescriptionInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddExpenseDescription);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Expense added unsuccessfully!");
+                    break;
             }
-            else
-            {
-                MessageBox.Show("Expense Details Added Successfully...");
-                this.Close();
-            }
+
+
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -206,6 +259,24 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void cmbAddExpenseSubCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbAddExpenseCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbAddExpenseCategory.SelectedValue == null)
+                return;
+
+            if (cmbAddExpenseCategory.SelectedValue is DataRowView)
+                return;
+
+            int categoryId = Convert.ToInt32(cmbAddExpenseCategory.SelectedValue);
+
+            CommonUiFunction.LoadInComboBox(
+                "spGetExpenseSubCategoryByCategoryID",
+                "Select Sub Category",
+                cmbAddExpenseSubCategory,
+                "@CategoryID",
+                categoryId);
         }
     }
 }

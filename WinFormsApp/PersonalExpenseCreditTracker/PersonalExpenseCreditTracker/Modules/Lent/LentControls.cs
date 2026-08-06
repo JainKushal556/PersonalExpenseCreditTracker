@@ -17,6 +17,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllLentData = new DataTable();
+        private DataTable masterData = new DataTable();
+        
         private int currentPage = 1;
         private int pageSize = 0;
 
@@ -168,6 +170,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
              }
 
             AllLentData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
         }
@@ -338,6 +341,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             dgvLentDataTable.DataSource = pageTable;
 
+            Common.CommonUiFunction.HighlightSearch(dgvLentDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllLentData.Rows.Count;
@@ -375,6 +379,60 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
 
         }
+
+        //private void ShowCurrentPage(DataTable filteredData)
+        //{
+        //    DataTable pageTable = filteredData.Clone();
+
+        //    btnCurrentPage.Text = currentPage.ToString();
+
+        //    int startIndex = (currentPage - 1) * pageSize;
+        //    int endIndex = Math.Min(startIndex + pageSize, filteredData.Rows.Count);
+
+        //    for (int i = startIndex; i < endIndex; i++)
+        //    {
+        //        pageTable.ImportRow(filteredData.Rows[i]);
+        //    }
+
+        //    dgvLentDataTable.DataSource = pageTable;
+
+        //    int start = startIndex + 1;
+        //    int end = endIndex;
+        //    int total = filteredData.Rows.Count;
+
+        //    lblStartingPageNumber.Text = total == 0 ? "0" : start.ToString();
+        //    lblEndingPageNumber.Text = end.ToString();
+        //    lblTotalPageNumber.Text = total.ToString();
+
+        //    if (filteredData != null && filteredData.Rows.Count > 0)
+        //    {
+        //        // Total Lent Amount
+        //        decimal totalLent = filteredData.AsEnumerable().Sum(row => row.Field<decimal>("Amount"));
+
+        //        // Total Repaid Amount
+        //        decimal totalRepaid = filteredData.AsEnumerable().Sum(row => row.Field<decimal>("ReturnedAmount"));
+
+        //        // Total Due Amount
+        //        decimal totalDue = filteredData.AsEnumerable().Sum(row => row.Field<decimal>("RemainingAmount"));
+
+        //        // Total Transactions
+        //        int totalTransaction = filteredData.Rows.Count;
+
+        //        // Display
+        //        lblTotalLentAmount.Text = "₹ " + totalLent.ToString("#,##0.##");
+        //        lblTotalRepaidAmount.Text = "₹ " + totalRepaid.ToString("#,##0.##");
+        //        lblTotalDueAmount.Text = "₹ " + totalDue.ToString("#,##0.##");
+        //        labelTotalTransactionNumber.Text = totalTransaction.ToString();
+        //    }
+        //    else
+        //    {
+        //        lblTotalLentAmount.Text = "₹ 0";
+        //        lblTotalRepaidAmount.Text = "₹ 0";
+        //        lblTotalDueAmount.Text = "₹ 0";
+        //        labelTotalTransactionNumber.Text = "0";
+        //    }
+
+        //}
 
         private int GetRowsPerPage()
         {
@@ -431,7 +489,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
 
                 case "colPersonName":
-                    DrawHeader(e, Properties.Resources.PersonIcon, "PersonName");
+                    DrawHeader(e, Properties.Resources.PersonIcon, "Person Name");
                     break;
                 case "colDescription":
                     DrawHeader(e, Properties.Resources.note, "Description");
@@ -440,16 +498,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     DrawHeader(e, Properties.Resources.money, "Amount");
                     break;
                 case "colPaymentType":
-                    DrawHeader(e, Properties.Resources.credit_card1, "PaymentType");
+                    DrawHeader(e, Properties.Resources.credit_card1, "Payment Type");
                     break;
                 case "colReturnedAmount":
-                    DrawHeader(e, Properties.Resources.money, "ReturnedAmount");
+                    DrawHeader(e, Properties.Resources.money, "Returned Amount");
                     break;
                 case "colRemainingAmount":
-                    DrawHeader(e, Properties.Resources.money, "RemainingAmount");
+                    DrawHeader(e, Properties.Resources.money, "Remaining Amount");
                     break;
                 case "colDeadline":
-                    DrawHeader(e, Properties.Resources.deadline, "DeadlineAt");
+                    DrawHeader(e, Properties.Resources.deadline, "Deadline");
                     break;
                 case "colStatus":
                     DrawHeader(e, Properties.Resources.loading, "Status");
@@ -536,7 +594,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 ButtonBorderStyle.Solid);
         }
 
-
         private void dgvLentDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
@@ -582,13 +639,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlAmountFilter.Visible = false;
         }
-
         
-
-        
-
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            //pnlSearch.Visible = false;
+            HidePopupPanels();
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
@@ -632,6 +687,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void ShowSearchPanel(Panel panel)
         {
+            if (panel.Visible)
+            {
+                panel.Visible = false;
+                return;
+            }
             HideAllFilterPanels();
 
             panel.Parent = this;
@@ -663,6 +723,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             tsmiDate.Image = Properties.Resources.calendar;
             tsmiAmount.Image = Properties.Resources.shop;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
+            tsmiCategory.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -724,6 +786,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 }
             }
         }
+
         private void ShowCalenderToDatePanel(Panel panel)
         {
             HidePopupPanels();
@@ -765,19 +828,64 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
         }
 
-        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
-        {
-            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-        }
-
-        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
-        {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
-        }
-
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
             pnlDateFilter.Visible = false;
+        }
+        private void panelExportReport_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void tableLayoutPanel1_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void dgvLentDataTable_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void txtToDate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderToDatePanel(pnlToDateCalenderShow);
+        }
+
+        private void txtFromdate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+        }
+
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllLentData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData,txtSearch);
+            ShowCurrentPage();
         }
 
         private void btnPersonClose_Click(object sender, EventArgs e)
@@ -794,7 +902,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlStatusFilter.Visible = false;
         }
-
-      
-      }
     }
+}
+    

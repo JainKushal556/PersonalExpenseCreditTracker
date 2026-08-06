@@ -4,8 +4,8 @@ CREATE PROCEDURE spGetActiveUserDetails
 )
 AS
 BEGIN
+    SET NOCOUNT OFF;
 
-    -- User Exists Check
     IF NOT EXISTS
     (
         SELECT 1
@@ -15,40 +15,40 @@ BEGIN
     BEGIN
         SELECT 'Invalid UserID' AS Message;
         RETURN;
-    END
+    END;
 
-
-    -- Active User Check
     IF NOT EXISTS
     (
         SELECT 1
         FROM tblUserAuthentication
         WHERE UserID = @UserID
-        AND Active = 1
+          AND Active = 1
     )
     BEGIN
         SELECT 'User Is Not Active' AS Message;
         RETURN;
-    END
+    END;
 
-
-    -- Active User Details
     SELECT
         U.UserID,
-        U.UserName,
+        P.FullName,
         P.ProfilePhoto,
         C.Email,
         C.PhoneNumber,
-        U.CreatedAt
+        U.CreatedAt AS MemberSince,
+        A.Active AS AccountStatus,
+        P.DOB,
+        G.GenderName AS Gender,
+        P.Address
     FROM tblUsers U
-
     LEFT JOIN tblUserProfile P
         ON U.UserID = P.UserID
-
     LEFT JOIN tblUserContact C
         ON U.UserID = C.UserID
-
+    LEFT JOIN tblUserAuthentication A
+        ON U.UserID = A.UserID
+    LEFT JOIN tblGender G
+        ON P.GenderID = G.GenderID
     WHERE U.UserID = @UserID;
-
 END;
-
+GO

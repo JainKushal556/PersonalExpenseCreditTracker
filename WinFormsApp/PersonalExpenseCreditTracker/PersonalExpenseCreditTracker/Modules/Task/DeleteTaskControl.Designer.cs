@@ -42,7 +42,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.lblTitle);
             this.panel1.Controls.Add(this.lblMessage);
@@ -55,7 +55,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(478, 329);
+            this.panel1.Size = new System.Drawing.Size(416, 329);
             this.panel1.TabIndex = 0;
             // 
             // lblTitle
@@ -63,7 +63,7 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(161, 121);
+            this.lblTitle.Location = new System.Drawing.Point(130, 136);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(140, 32);
             this.lblTitle.TabIndex = 16;
@@ -74,7 +74,7 @@
             // 
             this.lblMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMessage.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessage.Location = new System.Drawing.Point(59, 158);
+            this.lblMessage.Location = new System.Drawing.Point(28, 173);
             this.lblMessage.Margin = new System.Windows.Forms.Padding(0);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(362, 39);
@@ -88,7 +88,7 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Location = new System.Drawing.Point(112, 197);
+            this.label1.Location = new System.Drawing.Point(81, 212);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(242, 23);
             this.label1.TabIndex = 14;
@@ -103,7 +103,7 @@
             this.btnDeleteTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteTask.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteTask.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteTask.Location = new System.Drawing.Point(283, 261);
+            this.btnDeleteTask.Location = new System.Drawing.Point(232, 261);
             this.btnDeleteTask.Name = "btnDeleteTask";
             this.btnDeleteTask.Size = new System.Drawing.Size(161, 45);
             this.btnDeleteTask.TabIndex = 20;
@@ -121,7 +121,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(38, 261);
+            this.btnCancel.Location = new System.Drawing.Point(22, 261);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(161, 45);
             this.btnCancel.TabIndex = 19;
@@ -132,7 +132,7 @@
             // picBin
             // 
             this.picBin.Image = global::PersonalExpenseCreditTracker.Properties.Resources.bin;
-            this.picBin.Location = new System.Drawing.Point(200, 36);
+            this.picBin.Location = new System.Drawing.Point(169, 51);
             this.picBin.Name = "picBin";
             this.picBin.Size = new System.Drawing.Size(70, 70);
             this.picBin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -145,9 +145,9 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.ForeColor = System.Drawing.Color.Black;
             this.btnClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnClose.Location = new System.Drawing.Point(424, 10);
+            this.btnClose.Location = new System.Drawing.Point(358, 11);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(44, 42);
+            this.btnClose.Size = new System.Drawing.Size(35, 35);
             this.btnClose.TabIndex = 15;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -158,8 +158,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(478, 329);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.ClientSize = new System.Drawing.Size(416, 329);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DeleteTask";
