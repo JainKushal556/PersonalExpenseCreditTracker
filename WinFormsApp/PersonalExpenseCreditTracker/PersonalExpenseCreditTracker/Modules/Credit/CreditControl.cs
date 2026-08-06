@@ -65,9 +65,13 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             tsmiDate.AutoSize = false;
             tsmiCategory.AutoSize = false;
+            tsmiSubCategory.AutoSize = false;
+            tsmiAmount.AutoSize = false;
 
             tsmiDate.Width = cmsFilter.Width;
             tsmiCategory.Width = cmsFilter.Width;
+            //tsmiSubCategory= cmsFilter.Width;
+            //tsmiAmount = cmsFilter.Width;
         }
 
         private void StyleCreditGrid()  
@@ -198,6 +202,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -220,6 +225,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -242,6 +248,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -264,6 +271,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -296,7 +304,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                     break;
 
                 case "colPaymentMethod":
-                    DrawHeader(e, Properties.Resources.credit_card1, "Payment Type");
+                    DrawHeader(e, Properties.Resources.credit_card1, "Payment");
                     break;
             }
         }
@@ -469,19 +477,22 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             ShowFilterPanel(pnlCategoryFilter);
         }
 
-
-        private void btnSerach_Click(object sender, EventArgs e)
+        private void tsmiSubCategory_Click(object sender, EventArgs e)
         {
-            pnlFromDateCalenderShow.Visible = false;
-            pnlToDateCalenderShow.Visible = false;
-            //ShowSearchPanel(pnlSearch);
+            ShowFilterPanel(pnlSubCategoryFilter);
         }
+
+        private void tsmiAmount_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlAmountFilter);
+        }
+
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
-            //pnlSearch.Visible = false;
-
+            pnlAmountFilter.Visible = false;
+            pnlSubCategoryFilter.Visible = false;
         }
         private void HidePopupPanels()
         {
@@ -507,29 +518,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
       
 
-        //private void ShowSearchPanel(Panel panel)
-        //{
-        //    if (panel.Visible)
-        //    {
-        //        panel.Visible = false;
-        //        return;
-        //    }
-        //    HideAllFilterPanels();
 
-        //    panel.Parent = this;
-
-            
-        //    Point p = btnSerach.PointToScreen(Point.Empty);
-        //    p = this.PointToClient(p);
-
-        //    panel.Location = new Point(
-        //        p.X + btnSerach.Width + 10,
-        //        p.Y                     
-        //    );
-
-        //    panel.BringToFront();
-        //    panel.Visible = true;
-        //}
 
 
         private void DesignContextMenu()
@@ -544,7 +533,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar__1_;
+            tsmiDate.Image = Properties.Resources.calendar;
             tsmiCategory.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -632,8 +621,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            //pnlSearch.Visible = false;
-            HidePopupPanels();
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
@@ -663,10 +650,18 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
-            HidePopupPanels();
             pnlDateFilter.Visible = false;
         }
 
+        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        {
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+        }
+
+        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        {
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+        }
         private void picCredit_Click(object sender, EventArgs e)
         {
 
@@ -677,64 +672,23 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         }
 
-        private void pnlTableHeader_Click(object sender, EventArgs e)
+        private void btnSubCategoryclose_Click(object sender, EventArgs e)
         {
-            HidePopupPanels();
+            pnlSubCategoryFilter.Visible = false;
         }
 
-        private void pnlDateHeader_Click(object sender, EventArgs e)
+        private void btnAmountClose_Click(object sender, EventArgs e)
         {
-            HidePopupPanels();
+            pnlAmountFilter.Visible = false;
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            HidePopupPanels();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            HidePopupPanels();
-        }
-
-        private void tblCreditSummary_Click(object sender, EventArgs e)
-        {
-            HidePopupPanels();
-        }
-
-        private void dgvCreditDataTable_Click(object sender, EventArgs e)
-        {
-            HidePopupPanels();
-        }
-
-        private void txtToDate_Enter(object sender, EventArgs e)
-        {
-            pnlFromDateCalenderShow.Visible = false;
-            ShowCalenderToDatePanel(pnlToDateCalenderShow);
-        }
-
-        private void txtFromdate_Enter(object sender, EventArgs e)
-        {
-            pnlToDateCalenderShow.Visible = false;
-            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
-        }
-
-        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
-            pnlToDateCalenderShow.Visible = false;
-        }
-
-        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-            pnlFromDateCalenderShow.Visible = false;
-        }
+        
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-          AllCreditData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
+            AllCreditData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
             ShowCurrentPage();
         }
+
     }
 }

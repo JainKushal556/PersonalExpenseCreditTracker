@@ -29,6 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllTaskData = new DataTable();
+        private DataTable masterData = new DataTable();
 
         public int SelectedTaskID = 0;
         public string SelectedTaskTitle = "";
@@ -84,6 +85,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
 
             AllTaskData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
         }
@@ -101,6 +103,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return false;
             }
             AllTaskData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -123,6 +126,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return false;
             }
             AllTaskData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -137,39 +141,39 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             //cmsTaskAction.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
 
             // Menu Item Height
-            toolStripMenuItem1.AutoSize = false;
-            toolStripMenuItem1.Height = 30;
+            tsmiEdit.AutoSize = false;
+            tsmiEdit.Height = 30;
 
 
-            toolStripMenuItem2.AutoSize = false;
-            toolStripMenuItem2.Height = 30;
+            tsmiUpdateStatus.AutoSize = false;
+            tsmiUpdateStatus.Height = 30;
 
-            toolStripMenuItem3.AutoSize = false;
-            toolStripMenuItem3.Height = 30;
+            tsmiDeleteTask.AutoSize = false;
+            tsmiDeleteTask.Height = 30;
 
-            toolStripMenuItem4.AutoSize = false;
-            toolStripMenuItem4.Height = 30;
+            tsmiCancel.AutoSize = false;
+            tsmiCancel.Height = 30;
 
             // Delete Color
-            toolStripMenuItem3.ForeColor = Color.Red;
+            tsmiDeleteTask.ForeColor = Color.Red;
 
             // Images
-            toolStripMenuItem1.Image = Properties.Resources.pen;
-            toolStripMenuItem2.Image = Properties.Resources.refresh1;
-            toolStripMenuItem3.Image = Properties.Resources.trash;
-            toolStripMenuItem4.Image = Properties.Resources.delete;
+            tsmiEdit.Image = Properties.Resources.pen;
+            tsmiUpdateStatus.Image = Properties.Resources.refresh1;
+            tsmiDeleteTask.Image = Properties.Resources.trash;
+            tsmiCancel.Image = Properties.Resources.delete;
 
             // Display Style
-            toolStripMenuItem1.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            toolStripMenuItem2.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            toolStripMenuItem3.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            toolStripMenuItem4.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiEdit.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiUpdateStatus.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiDeleteTask.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiCancel.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
 
             // Image Scaling
-            toolStripMenuItem1.ImageScaling = ToolStripItemImageScaling.None;
-            toolStripMenuItem2.ImageScaling = ToolStripItemImageScaling.None;
-            toolStripMenuItem3.ImageScaling = ToolStripItemImageScaling.None;
-            toolStripMenuItem4.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiEdit.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiUpdateStatus.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiDeleteTask.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiCancel.ImageScaling = ToolStripItemImageScaling.None;
 
             //filter cms
             cmsFilter.ShowImageMargin = true;
@@ -183,8 +187,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             tsmiPriority.AutoSize = false;
             tsmiPriority.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar__1_ ;
+            tsmiStatus.Height = 30;
+
+            tsmiDate.Image = Properties.Resources.calendar;
             tsmiPriority.Image = Properties.Resources.shop;
+           // tsmiStatus.Image= Properties.Resources.
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsmiPriority.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -196,9 +203,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             tsmiDate.AutoSize = false;
             tsmiPriority.AutoSize = false;
-
+            tsmiStatus.AutoSize = false;
             tsmiDate.Width = cmsFilter.Width;
             tsmiPriority.Width = cmsFilter.Width;
+            tsmiStatus.Width = cmsFilter.Width;
         }
         private void SetPanelRadius()
         {
@@ -286,7 +294,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void cmsTaskAction_Opening(object sender, CancelEventArgs e)
         {
-
+            tsmiEdit.AutoSize = false;
+            tsmiUpdateStatus.AutoSize = false;
+            tsmiDeleteTask.AutoSize = false;
+            tsmiCancel.AutoSize = false;
+            tsmiCancel.Width = cmsTaskAction.Width;
+            tsmiDeleteTask.Width = cmsTaskAction.Width;
+            tsmiUpdateStatus.Width = cmsTaskAction.Width;
+            tsmiEdit.Width = cmsTaskAction.Width;
         }
 
         private void TaskControls_Resize(object sender, EventArgs e)
@@ -582,11 +597,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return;
             }
 
-            // 1. Total Task
+            // ১. Total Task
             int totalTasks = AllTaskData.Rows.Count;
             lblTotalTaskCount.Text = totalTasks.ToString();
 
-            // 2. Complete Task
+            // ২. Complete Task ("Complete" এবং "Completed" দুটি বানানের জন্যই সেফ-চেক)
             int completedTasks = AllTaskData.AsEnumerable()
                 .Count(row =>
                 {
@@ -596,7 +611,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 });
             lblTaskCompleteCount.Text = completedTasks.ToString();
 
-            // 3. Pending Task 
+            // ৩. Pending Task ("Pending" এবং "In Progress")
             int pendingTasks = AllTaskData.AsEnumerable()
                 .Count(row =>
                 {
@@ -606,7 +621,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 });
             lblTaskPandingCount.Text = pendingTasks.ToString();
 
-            // 8. Due Today
+            // ৪. Due Today
             DateTime today = DateTime.Today;
             int dueTodayTasks = AllTaskData.AsEnumerable()
                 .Count(row => row["Deadline"] != DBNull.Value &&
@@ -670,18 +685,17 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             ShowFilterPanel(pnlPriorityFilter);
         }
-
+        private void tsmiStatus_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlStatusFilter);
+        }
         private void btnSerach_Click(object sender, EventArgs e)
         {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
-            //ShowSearchPanel(pnlSearch);
+            ShowSearchPanel(pnlSearch);
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            //pnlSearch.Visible = false;
-            HidePopupPanels();
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
@@ -689,18 +703,22 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             pnlPriorityFilter.Visible = false;
         }
-
+        private void btnStatusClose_Click(object sender, EventArgs e)
+        {
+            pnlStatusFilter.Visible = false;
+        }
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlPriorityFilter.Visible = false;
-            //pnlSearch.Visible = false;
+            pnlSearch.Visible = false;
+            pnlStatusFilter.Visible = false;
 
         }
         private void HidePopupPanels()
         {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
         }
         private void ShowFilterPanel(Panel panel)
         {
@@ -719,60 +737,55 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             panel.Visible = true;
         }
 
-        //private void ShowSearchPanel(Panel panel)
-        //{
-        //    if (panel.Visible)
-        //    {
-        //        panel.Visible = false;
-        //        return;
-        //    }
-        //    HideAllFilterPanels();
-
-        //    panel.Parent = this;
-
-        //    Point p = btnSerach.PointToScreen(Point.Empty);
-        //    p = this.PointToClient(p);
-
-        //    panel.Location = new Point(
-        //        p.X + btnSerach.Width + 10,
-        //        p.Y-8
-        //    );
-
-        //    panel.BringToFront();
-        //    panel.Visible = true;
-        //}
-       
-        private void ShowCalenderFromDatePanel(MonthCalendar moncal)
+        private void ShowSearchPanel(Panel panel)
         {
-            HidePopupPanels();
+            HideAllFilterPanels();
 
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
+            panel.Parent = this;
+
+            Point p = btnSerach.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
-            moncal.Parent = this;
+            panel.Location = new Point(
+                p.X + btnSerach.Width + 10,
+                p.Y-8
+            );
 
-            moncal.Location = new Point(
-                p.X + pnlDateFilter.Width - moncal.Width - 330,
-                p.Y + 35);
-
-            moncal.BringToFront();
-            moncal.Visible = true;
+            panel.BringToFront();
+            panel.Visible = true;
         }
-        private void ShowCalenderToDatePanel(MonthCalendar moncal)
+       
+        private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
 
             Point p = pnlDateFilter.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
-            moncal.Parent = this;
+            panel.Parent = this;
 
-            moncal.Location = new Point(
-                p.X + pnlDateFilter.Width - moncal.Width - 70,
+            panel.Location = new Point(
+                p.X + pnlDateFilter.Width - panel.Width - 300,
                 p.Y + 35);
 
-            moncal.BringToFront();
-            moncal.Visible = true;
+            panel.BringToFront();
+            panel.Visible = true;
+        }
+        private void ShowCalenderToDatePanel(Panel panel)
+        {
+            HidePopupPanels();
+
+            Point p = pnlDateFilter.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Parent = this;
+
+            panel.Location = new Point(
+                p.X + pnlDateFilter.Width - panel.Width - 70,
+                p.Y + 35);
+
+            panel.BringToFront();
+            panel.Visible = true;
         }
         private void RegisterMouseDown(Control parent)
         {
@@ -789,24 +802,24 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             Point mousePos = this.PointToClient(Control.MousePosition);
 
             // From Date Calendar
-            if (monthCalendarFromDate.Visible)
+            if (pnlFromDateCalenderShow.Visible)
             {
-                if (!monthCalendarFromDate.Bounds.Contains(mousePos) &&
+                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
                     !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle)
                         .Contains(Control.MousePosition))
                 {
-                    monthCalendarFromDate.Visible = false;
+                    pnlFromDateCalenderShow.Visible = false;
                 }
             }
 
             // To Date Calendar
-            if (monthCalendarToDate.Visible)
+            if (pnlToDateCalenderShow.Visible)
             {
-                if (!monthCalendarToDate.Bounds.Contains(mousePos) &&
+                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
                     !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle)
                         .Contains(Control.MousePosition))
                 {
-                    monthCalendarToDate.Visible = false;
+                    pnlToDateCalenderShow.Visible = false;
                 }
             }
         }
@@ -814,112 +827,58 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
             pnlDateFilter.Visible = false;
-            HidePopupPanels();
         }
 
         private void picCalenderFromDate_Click_1(object sender, EventArgs e)
         {
-            if (monthCalendarFromDate.Visible)
+            if (pnlFromDateCalenderShow.Visible)
             {
-                monthCalendarFromDate.Visible = false;
+                pnlFromDateCalenderShow.Visible = false;
             }
             else
             {
-                ShowCalenderFromDatePanel(monthCalendarFromDate);
+                ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
             }
         }
 
         private void picCalenderToDate_Click_1(object sender, EventArgs e)
         {
-            if (monthCalendarToDate.Visible)
+            if (pnlToDateCalenderShow.Visible)
             {
-                monthCalendarToDate.Visible = false;
+                pnlToDateCalenderShow.Visible = false;
             }
             else
             {
-                ShowCalenderToDatePanel(monthCalendarToDate);
+                ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
 
-        private void pnlTableHeader_Click(object sender, EventArgs e)
-        {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
-        }
-
-        private void pnlDateHeader_Click(object sender, EventArgs e)
-        {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
-        }
-
-        private void tblCardContant_Click(object sender, EventArgs e)
-        {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
-        }
-
-        private void dataGridViewTask_Click(object sender, EventArgs e)
-        {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
-        }
-
-        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
-            monthCalendarToDate.Visible = false;
-        }
-
-        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-            monthCalendarFromDate.Visible = false;
         }
 
-        private void txtToDate_TextChanged(object sender, EventArgs e)
+        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
         {
-            
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
         }
 
-        private void txtFromdate_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void txtToDate_Enter(object sender, EventArgs e)
-        {
-            monthCalendarFromDate.Visible = false;
-            ShowCalenderToDatePanel(monthCalendarToDate);
-        }
-
-        private void txtFromdate_Enter(object sender, EventArgs e)
-        {
-            monthCalendarToDate.Visible = false;
-            ShowCalenderFromDatePanel(monthCalendarFromDate);
-        }
-
-        private void tableLayoutPanelTask_Click(object sender, EventArgs e)
-        {
-            monthCalendarFromDate.Visible = false;
-            monthCalendarToDate.Visible = false;
-        }
-
-        private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
 
         }
+
+        
+
+        
+
+        
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllTaskData = Common.CommonUiFunction.SearchDataInTask(masterData, txtSearch);
+            ShowCurrentPage();
+        }
+
     }
 }
