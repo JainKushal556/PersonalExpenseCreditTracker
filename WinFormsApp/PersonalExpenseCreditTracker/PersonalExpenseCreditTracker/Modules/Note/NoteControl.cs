@@ -29,6 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             int nHeightEllipse);
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllNoteData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize ;
 
@@ -89,6 +90,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 return false;
             }
             AllNoteData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -111,6 +113,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 return false;
             }
             AllNoteData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -132,6 +135,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 return false;
             }
             AllNoteData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -174,6 +178,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 return false;
             }
             AllNoteData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -930,5 +935,12 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         
 
        
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllNoteData = Common.CommonUiFunction.SearchDataInNote(masterData, txtSearch);
+            ShowCurrentPage();
+        }
+
     }
 }

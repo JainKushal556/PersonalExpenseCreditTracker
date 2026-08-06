@@ -174,9 +174,6 @@ namespace PersonalExpenseCreditTracker
             ComboBoxCreditSubCategory.Visible = false;
             lblCreditSelectSubCategory.Visible = false;
 
-            cmbSubCategory.Visible = false;
-            lblSubCategory.Visible = false;
-
 
             ShowPage(pnlOverview);
             btnClearAll.Visible = false;
@@ -1414,14 +1411,11 @@ namespace PersonalExpenseCreditTracker
 
             flowSidebar.Top = 0;
 
-            CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", ComboBoxCategory);
-
         }
 
         private void rbCustom_CheckedChanged(object sender, EventArgs e)
         {
             UpdateCustomDatePanel();
-            UpdateClearAllButton();
         }
 
         private void UpdateCustomDatePanel()
@@ -1438,53 +1432,18 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateCustomDatePanel();
             UpdateClearAllButton();
-
-            if (!rbThisMonth.Checked) return;
-
-
-            if (expenseControl != null && !expenseControl.IsDisposed)
-            {
-
-
-                DateTime firstDayOfMonth = new DateTime(
-                DateTime.Today.Year,
-                DateTime.Today.Month,
-                 1);
-
-                DateTime lastDayOfMonth = new DateTime(
-                DateTime.Today.Year,
-                DateTime.Today.Month,
-                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
-
-                expenseControl.LoadFilteredExpenseData("spFilterExpenseByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
-            }
         }
 
         private void rbLast7Days_CheckedChanged(object sender, EventArgs e)
         {
-            if (!rbLast7Days.Checked) return;
             UpdateCustomDatePanel();
             UpdateClearAllButton();
-
-           
-
-            DateTime fromDate = DateTime.Today.AddDays(-6);
-            DateTime toDate = DateTime.Today;
-
-            expenseControl.LoadFilteredExpenseData("spFilterExpenseByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
-
         }
 
         private void rbThisYear_CheckedChanged(object sender, EventArgs e)
         {
-           
             UpdateCustomDatePanel();
             UpdateClearAllButton();
-
-            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
-            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
-
-            expenseControl.LoadFilteredExpenseData("spFilterExpenseByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void pnlAllExpense_MouseEnter(object sender, EventArgs e)
@@ -1532,10 +1491,6 @@ namespace PersonalExpenseCreditTracker
         private void Expense_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetActiveExpenseSubMenu(pnlAllExpense);
-            if (expenseControl != null && !expenseControl.IsDisposed)
-            {
-                expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
-            }
         }
 
         private void pnlAddExpense_MouseEnter(object sender, EventArgs e)
@@ -1609,15 +1564,13 @@ namespace PersonalExpenseCreditTracker
             txtMinAmount.Clear();
             txtMaxAmount.Clear();
 
-            ComboBoxCategory.SelectedIndex = -1;
-            cmbSubCategory.SelectedIndex = -1;
+            ComboBoxCategory.SelectedIndex = 0;
+            cmbSubCategory.SelectedIndex = 0;
 
             dtpFromDate.Value = DateTime.Today;
             dtpToDate.Value = DateTime.Today;
 
             btnClearAll.Visible = false;
-
-            expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
         }
 
         private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -1625,45 +1578,6 @@ namespace PersonalExpenseCreditTracker
 
             UpdateClearAllButton();
 
-            if (ComboBoxCategory.SelectedIndex <= 0)
-            {
-                cmbSubCategory.Visible = false;
-                lblSubCategory.Visible = false;
-
-                //expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
-                return;
-            }
-
-            cmbSubCategory.Visible = true;
-            lblSubCategory.Visible = true;
-
-            if (ComboBoxCategory.SelectedValue == null)
-                return;
-
-            if (ComboBoxCategory.SelectedValue is DataRowView)
-                return;
-
-            int categoryId = Convert.ToInt32(ComboBoxCategory.SelectedValue);
-
-            // Load Sub Category
-            CommonUiFunction.LoadInComboBox(
-                "spGetExpenseSubCategoryByCategoryID",
-                "Select SubCategory",
-                cmbSubCategory,
-                "@CategoryID",
-                categoryId);
-
-            // Filter Expense Data
-            if (!expenseControl.LoadFilteredExpenseData(
-                    "spFilterExpenseByCategory",
-                    "@CategoryID",
-                    categoryId,
-                    categoryId))
-            {
-                cmbSubCategory.SelectedIndex = 0;
-            }
-
-            
         }
 
         private void cmbSubCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -2281,9 +2195,9 @@ namespace PersonalExpenseCreditTracker
             txtLentMinAmount.Clear();
             txtLentMaxAmount.Clear();
 
-            ComboBoxLentPerson.SelectedIndex = -1;
-            ComboBoxLentStatus.SelectedIndex = -1;
-            ComboBoxLentPayment.SelectedIndex = -1;
+            //ComboBoxLentPerson.SelectedIndex = 0;
+            //ComboBoxLentStatus.SelectedIndex = 0;
+            //ComboBoxLentPayment.SelectedIndex = 0;
 
             dtpLentFromDate.Value = DateTime.Today;
             dtpLentToDate.Value = DateTime.Today;
@@ -2372,8 +2286,6 @@ namespace PersonalExpenseCreditTracker
                 lentControl.LoadFilteredLentData("spFilterLentByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
 
             }
-
-
 
 
         }
@@ -3527,29 +3439,76 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateNoteCustomDatePanel();
             UpdateNoteClearAllButton();
+
+
+            if (noteControl != null && !noteControl.IsDisposed)
+            {
+
+
+                DateTime firstDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                 1);
+
+                DateTime lastDayOfMonth = new DateTime(
+                DateTime.Today.Year,
+                DateTime.Today.Month,
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                noteControl.LoadFilteredNoteData("spFilterNoteByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+
+            }
         }
 
         private void rbNoteLast7Days_CheckedChanged(object sender, EventArgs e)
         {
             UpdateNoteCustomDatePanel();
             UpdateNoteClearAllButton();
+
+
+            DateTime fromDate = DateTime.Today.AddDays(-6);
+            DateTime toDate = DateTime.Today;
+
+            noteControl.LoadFilteredNoteData("spFilterNoteByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void rbNoteThisYear_CheckedChanged(object sender, EventArgs e)
         {
             UpdateNoteCustomDatePanel();
             UpdateNoteClearAllButton();
+
+            DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+
+            DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+            noteControl.LoadFilteredNoteData("spFilterNoteByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
         }
 
         private void ComboBoxNoteStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateNoteClearAllButton();
+
         }
 
         private void ComboBoxNotePriority_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateNoteClearAllButton();
+
+            if (ComboBoxNotePriority.SelectedIndex > 0)
+            {
+                int filterId = Convert.ToInt32(ComboBoxNotePriority.SelectedIndex);
+                //MessageBox.Show(filterId.ToString());
+                if (!noteControl.LoadFilteredNotetData("spFilterNotesByPriority", "@PriorityID", filterId))
+                {
+                    ComboBoxNotePriority.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+            }
         }
+
+       
 
         private void pnlAllNote_Click(object sender, EventArgs e)
         {
@@ -4188,51 +4147,7 @@ namespace PersonalExpenseCreditTracker
 
         private void btnApplyDateFilter_Click(object sender, EventArgs e)
         {
-           
-            // Clear all previous validation errors
 
-            errorProvider1.Clear();
-
-            MainUI mainUi = new MainUI();
-            mainUi.fromDate = dtpFromDate.Value.Date;
-            mainUi.toDate = dtpToDate.Value.Date;
-
-            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
-
-            switch (result)
-            {
-                // Data is valid
-                case CommonValidator.ValidationResult.Success:
-
-                    if (expenseControl != null && !expenseControl.IsDisposed)
-                    {
-                        if (!expenseControl.LoadFilteredExpenseData(
-                                "spFilterExpenseByDateRange",
-                                Session.LogedInUser.GetUserId(),
-                                "@FromDate",
-                                dtpFromDate.Value.Date,
-                                "@ToDate",
-                                dtpToDate.Value.Date))
-                        {
-                            expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
-                            // MessageBox.Show("No Specific Record Exist!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Apply successfully!");
-                        }
-                    }
-                    else
-                    {
-                        expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
-                    }
-
-                    break;
-
-                case CommonValidator.ValidationResult.DateRangeInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpFromDate, dtpToDate);
-                    break;
-            }
         }
 
         private void btnTaskApplyDateFilter_Click(object sender, EventArgs e)
@@ -4283,62 +4198,55 @@ namespace PersonalExpenseCreditTracker
 
         }
 
-        private void btnExpenseApplyAmountFilter_Click(object sender, EventArgs e)
+        private void btnNoteApplyDateFilter_Click(object sender, EventArgs e)
         {
             // Clear all previous validation errors
             errorProvider1.Clear();
 
-            // Create a new object to store the user's input
             MainUI mainUi = new MainUI();
+            mainUi.fromDate = dtpNoteFromDate.Value.Date;
+            mainUi.toDate = dtpNoteToDate.Value.Date;
 
-            // Assign values from the form controls to the object
-            mainUi.minAmount = txtMinAmount.Text;
-            mainUi.maxAmount = txtMaxAmount.Text;
 
-            CommonValidator.ValidationResult result = mainUi.InsertAmountDataIntoMainUi();
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
 
             switch (result)
             {
+                // Data is valid and inserted successfully
                 case CommonValidator.ValidationResult.Success:
-
-                    if (expenseControl != null && !expenseControl.IsDisposed)
+                    if (noteControl != null && !noteControl.IsDisposed)
                     {
-                        if (!expenseControl.LoadFilteredExpenseData(
-                                "spFilterExpenseByAmountRange",
-                                Session.LogedInUser.GetUserId(),
-                                "@MinAmount",
-                                Convert.ToDecimal(txtMinAmount.Text),
-                                "@MaxAmount",
-                                Convert.ToDecimal(txtMaxAmount.Text)))
+                        if (!noteControl.LoadFilteredNoteData("spFilterNoteByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpNoteFromDate.Value.Date, "@ToDate", dtpNoteToDate.Value.Date))
                         {
-                            expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
-                            MessageBox.Show("No Specific Record Exist!");
+                            noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+                            //MessageBox.Show("No Specific Record Exist!");
                         }
                         else
                         {
                             MessageBox.Show("Apply successfully!");
                         }
+
                     }
                     else
                     {
-                        expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
+                        noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
                     }
+                    //MessageBox.Show("Apply successfully!");
 
                     break;
-
-                case CommonValidator.ValidationResult.MinimumAmountInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtMinAmount);
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpNoteFromDate, dtpNoteToDate);
                     break;
 
-                case CommonValidator.ValidationResult.MaximumAmountInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtMaxAmount);
-                    break;
-
-                case CommonValidator.ValidationResult.AmountRangeInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtMinAmount, txtMaxAmount);
-                    break;
             }
-        }  
+        }
+
+        private void pnlBorrowPersonBody_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        
     }
 }
 

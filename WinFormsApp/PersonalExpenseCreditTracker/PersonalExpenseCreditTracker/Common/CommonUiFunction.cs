@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -234,6 +234,47 @@ namespace PersonalExpenseCreditTracker.Common
                 }
             }
         }
+        public static DataTable SearchDataInNote(DataTable masterTable, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim().Replace("'", "''");
 
+            if (masterTable == null) return null;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+
+            masterTable.DefaultView.RowFilter = string.Format(
+                "NoteTitle LIKE '%{0}%' OR " +
+                "Description LIKE '%{0}%' OR " +
+                "NotePriorityName LIKE '%{0}%'",
+                search);
+
+            DataTable filteredTable = masterTable.DefaultView.ToTable();
+            return filteredTable;
+        }
+
+        public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim().Replace("'", "''");
+
+            if (masterTable == null) return null;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+
+            masterTable.DefaultView.RowFilter = string.Format(
+                "TaskTitle LIKE '%{0}%' OR " +
+                "Description LIKE '%{0}%' OR " +
+                "TaskStatusName LIKE '%{0}%' OR " +
+                "TaskPriorityName LIKE '%{0}%'",
+                search);
+
+            DataTable filteredTable = masterTable.DefaultView.ToTable();
+            return filteredTable;
+        }
     }
 }
