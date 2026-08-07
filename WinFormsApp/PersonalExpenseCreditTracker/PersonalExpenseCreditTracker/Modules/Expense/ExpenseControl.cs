@@ -58,7 +58,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             pageSize = GetRowsPerPage();
             HideAllFilterPanels();
             DesignContextMenu();
-            int userID = 11;
+            int userID = Session.LogedInUser.GetUserId();
             LoadExpenseData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
 

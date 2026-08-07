@@ -53,7 +53,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             ApplyRoundCorners();
             pageSize = GetRowsPerPage();
-            int userID = 11; 
+            int userID = Session.LogedInUser.GetUserId(); 
             LoadCreditData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
