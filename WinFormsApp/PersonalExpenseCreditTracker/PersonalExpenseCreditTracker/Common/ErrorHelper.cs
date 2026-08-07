@@ -109,13 +109,13 @@ namespace PersonalExpenseCreditTracker.Common
 
                 // Person Name Invalid
                 case CommonValidator.ValidationResult.PersonNameInvalid:
-                    errorProvider.SetError(textBox, "Please enter a valid person name");
+                    errorProvider.SetError(textBox, "Please enter a valid person name.");
                     textBox.Focus();
                     break;
 
                 // Duplicate Phone Number
                 case CommonValidator.ValidationResult.PhoneNumberAlreadyExists:
-                    errorProvider.SetError(textBox, "Phone number already exists");
+                    errorProvider.SetError(textBox, "Phone number already exists.");
                     textBox.Focus();
                     break;
 
@@ -134,6 +134,26 @@ namespace PersonalExpenseCreditTracker.Common
                 // Phone Number Invalid
                 case CommonValidator.ValidationResult.PersonInvalid:
                     errorProvider.SetError(textBox, "Please enter a valid person.");
+                    textBox.Focus();
+                    break;
+
+                // Password field is empty
+                case CommonValidator.ValidationResult.CurrentPasswordEmpty:
+                case CommonValidator.ValidationResult.NewPasswordEmpty:
+                case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
+                    errorProvider.SetError(textBox, "Password is required.");
+                    textBox.Focus();
+                    break;
+
+                // CurrentPassword And NewPassword Same
+                case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
+                    errorProvider.SetError(textBox, "Your current password and new password are same.");
+                    textBox.Focus();
+                    break;
+
+                // Not Match Password
+                case CommonValidator.ValidationResult.NotMatchPassword:
+                    errorProvider.SetError(textBox, "Password doesn't match.");
                     textBox.Focus();
                     break;
             }
