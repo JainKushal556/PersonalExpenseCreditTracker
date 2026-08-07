@@ -29,11 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-<<<<<<< Updated upstream
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-=======
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
->>>>>>> Stashed changes
             this.pnlCreditContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
@@ -308,15 +304,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.dgvCreditDataTable.Name = "dgvCreditDataTable";
             this.dgvCreditDataTable.ReadOnly = true;
             this.dgvCreditDataTable.RowHeadersVisible = false;
-<<<<<<< Updated upstream
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvCreditDataTable.RowsDefaultCellStyle = dataGridViewCellStyle3;
-=======
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.dgvCreditDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
->>>>>>> Stashed changes
             this.dgvCreditDataTable.RowTemplate.Height = 24;
             this.dgvCreditDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCreditDataTable.Size = new System.Drawing.Size(1223, 525);

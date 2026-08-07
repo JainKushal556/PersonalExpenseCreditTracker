@@ -1026,6 +1026,11 @@ namespace PersonalExpenseCreditTracker
                 noteControl.Show();
             }
 
+            if (noteControl != null && !noteControl.IsDisposed)
+            {
+                noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+            }
+
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -1157,6 +1162,10 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlUserProfile_Click(object sender, EventArgs e)
         {
+            UpdateHeader(
+                "Profile",
+                "Manage your personal profile and account settings");
+
             SetActiveMenu(pnlUserProfile, true);
 
             CloseAllDropDown();
@@ -1174,6 +1183,11 @@ namespace PersonalExpenseCreditTracker
                 pnlProfilePage.Controls.Add(profileControl);
 
                 profileControl.Show();
+            }
+
+            if (profileControl != null && !profileControl.IsDisposed)
+            {
+                profileControl.LoadUserProfileData();
             }
 
             ShowPage(pnlProfilePage);
@@ -3563,6 +3577,11 @@ namespace PersonalExpenseCreditTracker
             dtpNoteToDate.Value = DateTime.Today;
 
             btnNoteClearAll.Visible = false;
+
+            if (noteControl != null && !noteControl.IsDisposed)
+            {
+                noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+            }
         }
 
         private void UpdateNoteClearAllButton()
@@ -3613,18 +3632,45 @@ namespace PersonalExpenseCreditTracker
         {
             UpdateNoteCustomDatePanel();
             UpdateNoteClearAllButton();
+
+            if (rbNoteThisMonth.Checked && noteControl != null && !noteControl.IsDisposed)
+            {
+                DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                DateTime lastDayOfMonth = new DateTime(
+                    DateTime.Today.Year,
+                    DateTime.Today.Month,
+                    DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
+                noteControl.LoadFilteredNoteData("spFilterNoteByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", firstDayOfMonth, "@ToDate", lastDayOfMonth);
+            }
         }
 
         private void rbNoteLast7Days_CheckedChanged(object sender, EventArgs e)
         {
             UpdateNoteCustomDatePanel();
             UpdateNoteClearAllButton();
+
+            if (rbNoteLast7Days.Checked && noteControl != null && !noteControl.IsDisposed)
+            {
+                DateTime fromDate = DateTime.Today.AddDays(-6);
+                DateTime toDate = DateTime.Today;
+
+                noteControl.LoadFilteredNoteData("spFilterNoteByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
+            }
         }
 
         private void rbNoteThisYear_CheckedChanged(object sender, EventArgs e)
         {
             UpdateNoteCustomDatePanel();
             UpdateNoteClearAllButton();
+
+            if (rbNoteThisYear.Checked && noteControl != null && !noteControl.IsDisposed)
+            {
+                DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
+                DateTime toDate = new DateTime(DateTime.Today.Year, 12, 31);
+
+                noteControl.LoadFilteredNoteData("spFilterNoteByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", fromDate, "@ToDate", toDate);
+            }
         }
 
         private void ComboBoxNoteStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -3635,11 +3681,34 @@ namespace PersonalExpenseCreditTracker
         private void ComboBoxNotePriority_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateNoteClearAllButton();
+
+            if (noteControl == null || noteControl.IsDisposed)
+                return;
+
+            if (ComboBoxNotePriority.SelectedIndex > 0)
+            {
+                int filterId = Convert.ToInt32(ComboBoxNotePriority.SelectedIndex);
+                if (!noteControl.LoadFilteredNotetData("spFilterNotesByPriority", "@PriorityID", filterId))
+                {
+                    ComboBoxNotePriority.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+            }
         }
 
         private void pnlAllNote_Click(object sender, EventArgs e)
         {
             SetActiveNoteSubMenu(pnlAllNote);
+
+            if (noteControl != null && !noteControl.IsDisposed)
+            {
+                noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+            }
+
+            ShowPage(pnlNotesPage);
         }
 
         private void pnlAllNote_MouseEnter(object sender, EventArgs e)
@@ -3684,6 +3753,10 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveNoteSubMenu(pnlAllNote);
 
+            if (noteControl != null && !noteControl.IsDisposed)
+            {
+                noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+            }
         }
 
         private void pnlAddNote_MouseEnter(object sender, EventArgs e)
@@ -4356,6 +4429,42 @@ namespace PersonalExpenseCreditTracker
 
                 case CommonValidator.ValidationResult.DateRangeInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, dtpTaskFromDate, dtpTaskToDate);
+                    break;
+            }
+        }
+
+        private void btnNoteApplyDateFilter_Click(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+            MainUI mainUi = new MainUI();
+            mainUi.fromDate = dtpNoteFromDate.Value.Date;
+            mainUi.toDate = dtpNoteToDate.Value.Date;
+
+            CommonValidator.ValidationResult result = mainUi.InsertDateDataIntoMainUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (noteControl != null && !noteControl.IsDisposed)
+                    {
+                        if (!noteControl.LoadFilteredNoteData("spFilterNoteByDateRange", Session.LogedInUser.GetUserId(), "@FromDate", dtpNoteFromDate.Value.Date, "@ToDate", dtpNoteToDate.Value.Date))
+                        {
+                            noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Apply successfully!");
+                        }
+                    }
+                    else
+                    {
+                        noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpNoteFromDate, dtpNoteToDate);
                     break;
             }
         }

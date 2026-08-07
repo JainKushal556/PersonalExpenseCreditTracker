@@ -162,7 +162,17 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             profileUi.email = txtEditProfileEmailAddress.Text.Trim();
             profileUi.phoneNumber = txtEditProfilePhoneNumber.Text.Trim();
             profileUi.address = txtEditProfileAddress.Text.Trim();
-            profileUi.dateOfBirth = Convert.ToDateTime(txtEditProfileDathOfBirth.Text);
+            DateTime dob = DateTime.MinValue;
+            if (!string.IsNullOrWhiteSpace(txtEditProfileDathOfBirth.Text))
+            {
+                string[] formats = new string[] { "dd-MM-yyyy", "d-M-yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy", "dd MMM yyyy", "d MMM yyyy", "dd MMMM yyyy" };
+                if (!DateTime.TryParseExact(txtEditProfileDathOfBirth.Text.Trim(), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dob))
+                {
+                    DateTime.TryParse(txtEditProfileDathOfBirth.Text.Trim(), out dob);
+                }
+            }
+
+            profileUi.dateOfBirth = dob;
 
             CommonValidator.ValidationResult result = profileUi.UpdateUserProfileIntoProfUi();
 
@@ -172,9 +182,16 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                     MessageBox.Show("Profile updated successfully!");
                     if (profileControls != null)
                     {
-                     profileControls.LoadUserProfileData();
-                     }
-                     this.Close();
+                        profileControls.LoadUserProfileData();
+                    }
+
+                    MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+                    if (mainForm != null)
+                    {
+                        mainForm.LoadSidebarUserProfile();
+                    }
+
+                    this.Close();
                     break;
 
                 case CommonValidator.ValidationResult.FullNameInvalid:

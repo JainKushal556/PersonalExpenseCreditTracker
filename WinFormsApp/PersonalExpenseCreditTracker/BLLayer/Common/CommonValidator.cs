@@ -414,7 +414,7 @@ namespace BLLayer.Common
        
         public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth)
         {
-            if (dateOfBirth > DateTime.Today)
+            if (dateOfBirth == DateTime.MinValue || dateOfBirth > DateTime.Today)
                 return ValidationResult.DateOfBirthInvalid;
 
             return ValidationResult.Success;

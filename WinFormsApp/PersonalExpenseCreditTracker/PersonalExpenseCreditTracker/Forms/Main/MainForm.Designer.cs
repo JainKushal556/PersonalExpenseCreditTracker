@@ -389,6 +389,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlBorrowPage = new System.Windows.Forms.Panel();
             this.pnlTaskPage = new System.Windows.Forms.Panel();
             this.pnlNotesPage = new System.Windows.Forms.Panel();
+            this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.pnlSettingPage = new System.Windows.Forms.Panel();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblSubtitle = new System.Windows.Forms.Label();
@@ -4536,6 +4537,7 @@ namespace PersonalExpenseCreditTracker
             this.btnNoteApplyDateFilter.TabIndex = 4;
             this.btnNoteApplyDateFilter.Text = "Apply";
             this.btnNoteApplyDateFilter.UseVisualStyleBackColor = false;
+            this.btnNoteApplyDateFilter.Click += new System.EventHandler(this.btnNoteApplyDateFilter_Click);
             // 
             // dtpNoteToDate
             // 
@@ -5266,6 +5268,7 @@ namespace PersonalExpenseCreditTracker
             this.pnlContainer.Controls.Add(this.pnlBorrowPage);
             this.pnlContainer.Controls.Add(this.pnlTaskPage);
             this.pnlContainer.Controls.Add(this.pnlNotesPage);
+            this.pnlContainer.Controls.Add(this.pnlProfilePage);
             this.pnlContainer.Controls.Add(this.pnlSettingPage);
             this.pnlContainer.Controls.Add(this.pnlTop);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -5385,6 +5388,16 @@ namespace PersonalExpenseCreditTracker
             this.pnlSettingPage.Name = "pnlSettingPage";
             this.pnlSettingPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlSettingPage.TabIndex = 0;
+            // 
+            // pnlProfilePage
+            // 
+            this.pnlProfilePage.BackColor = System.Drawing.Color.White;
+            this.pnlProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProfilePage.Location = new System.Drawing.Point(0, 78);
+            this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlProfilePage.Name = "pnlProfilePage";
+            this.pnlProfilePage.Size = new System.Drawing.Size(1301, 977);
+            this.pnlProfilePage.TabIndex = 0;
             // 
             // pnlTop
             // 

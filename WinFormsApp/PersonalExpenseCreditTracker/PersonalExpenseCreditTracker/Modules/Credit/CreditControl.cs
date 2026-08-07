@@ -151,19 +151,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             colPaymentMethod.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-<<<<<<< Updated upstream
         public void LoadCreditData(int userID)
-=======
-        public bool LoadCreditData(int userID)
->>>>>>> Stashed changes
         {
             try
             {
-                DataTable dataTable = Common.CommonUiFunction.RetrieveDataForGridView("spGetAllCreditsByID", userID);
-
-                if (dataTable == null)
+                using (SqlConnection con = new SqlConnection(ConnectionString))
                 {
-<<<<<<< Updated upstream
                     using (SqlCommand cmd = new SqlCommand("spGetAllCreditsByID", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -191,30 +184,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                         ShowCurrentPage();
                         UpdateCreditSummaryCards();
                     }
-=======
-                    return false;
->>>>>>> Stashed changes
                 }
-
-                if (dataTable.Columns.Contains("Message"))
-                {
-                    MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
-                                    "Information",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-                    return false;
-                }
-
-                if (dataTable.Rows.Count <= 0)
-                {
-                    return false;
-                }
-
-                AllCreditData = dataTable;
-                dgvCreditDataTable.DataSource = AllCreditData;
-                UpdateCreditSummaryCards();
-
-                return true;
             }
             catch (Exception ex)
             {
@@ -222,7 +192,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                                 "Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
-                return false;
             }
         }
         public Boolean LoadFilteredCreditData(string spName, string paramName,int paramValue,int filterId)

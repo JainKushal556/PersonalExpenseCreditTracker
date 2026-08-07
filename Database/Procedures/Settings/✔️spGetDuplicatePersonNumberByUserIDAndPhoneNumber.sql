@@ -6,7 +6,7 @@ CREATE PROC spGetDuplicatePersonNumberByUserIDAndPhoneNumber
 )
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     BEGIN TRY
 

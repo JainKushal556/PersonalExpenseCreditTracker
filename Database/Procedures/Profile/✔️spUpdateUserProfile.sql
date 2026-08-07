@@ -1,18 +1,21 @@
 CREATE PROCEDURE spUpdateUserProfile
     @UserID INT,
-    @Name VARCHAR(100),
+    @FullName VARCHAR(100),
     @Email VARCHAR(150),
     @PhoneNumber VARCHAR(15),
-    @ProfilePhoto VARBINARY(MAX)
+    @Address VARCHAR(500),
+    @DOB DATE,
+    @GenderID INT
 AS
 BEGIN
+    SET NOCOUNT OFF;
 
-    SET @Name = LTRIM(RTRIM(@Name));
+    SET @FullName = LTRIM(RTRIM(@FullName));
     SET @Email = LTRIM(RTRIM(@Email));
     SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+    SET @Address = LTRIM(RTRIM(@Address));
 
-
-    IF @Name IS NULL OR @Name = ''
+    IF @FullName IS NULL OR @FullName = ''
     BEGIN
         SELECT 'Name Cannot Be Empty' AS Message;
         RETURN;
@@ -30,7 +33,6 @@ BEGIN
         RETURN;
     END
 
-
     IF NOT EXISTS
     (
         SELECT 1
@@ -41,7 +43,6 @@ BEGIN
         SELECT 'Invalid UserID' AS Message;
         RETURN;
     END
-
 
     IF NOT EXISTS
     (
@@ -55,80 +56,89 @@ BEGIN
         RETURN;
     END
 
+    -- Check if Email already belongs to another user
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE Email = @Email
+        AND UserID != @UserID
+    )
+    BEGIN
+        SELECT 'Email Already Exists' AS Message;
+        RETURN;
+    END
 
-IF EXISTS
-(
-    SELECT 1
-    FROM tblUsers
-    WHERE UserName = @Name
-	AND UserID = @UserID
-)
-BEGIN
-    SELECT 'User Name Already Exists' AS Message;
-    RETURN;
-END
+    -- Check if PhoneNumber already belongs to another user
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE PhoneNumber = @PhoneNumber
+        AND UserID != @UserID
+    )
+    BEGIN
+        SELECT 'Phone Number Already Exists' AS Message;
+        RETURN;
+    END
 
-
-IF EXISTS
-(
-    SELECT 1
-    FROM tblUserContact
-    WHERE Email = @Email
-)
-BEGIN
-    SELECT 'Email Already Exists' AS Message;
-    RETURN;
-END
-
-
-IF EXISTS
-(
-    SELECT 1
-    FROM tblUserContact
-    WHERE PhoneNumber = @PhoneNumber
-)
-BEGIN
-    SELECT 'Phone Number Already Exists' AS Message;
-    RETURN;
-END
-
+    -- Check GenderID if provided
+    IF @GenderID IS NOT NULL AND @GenderID > 0 AND NOT EXISTS
+    (
+        SELECT 1
+        FROM tblGender
+        WHERE GenderID = @GenderID
+    )
+    BEGIN
+        SELECT 'Invalid Gender' AS Message;
+        RETURN;
+    END
 
     BEGIN TRY
-
-
         BEGIN TRANSACTION;
 
-
         UPDATE tblUsers
-        SET UserName = @Name
+        SET UserName = @FullName
         WHERE UserID = @UserID;
 
-        UPDATE tblUserProfile
-        SET FullName = @Name,
-            ProfilePhoto = @ProfilePhoto
-        WHERE UserID = @UserID;
+        IF EXISTS (SELECT 1 FROM tblUserProfile WHERE UserID = @UserID)
+        BEGIN
+            UPDATE tblUserProfile
+            SET FullName = @FullName,
+                DOB = @DOB,
+                GenderID = CASE WHEN @GenderID > 0 THEN @GenderID ELSE GenderID END,
+                Address = @Address
+            WHERE UserID = @UserID;
+        END
+        ELSE
+        BEGIN
+            INSERT INTO tblUserProfile (UserID, FullName, DOB, GenderID, Address)
+            VALUES (@UserID, @FullName, @DOB, CASE WHEN @GenderID > 0 THEN @GenderID ELSE NULL END, @Address);
+        END
 
-        UPDATE tblUserContact
-        SET Email = @Email,
-            PhoneNumber = @PhoneNumber
-        WHERE UserID = @UserID;
+        IF EXISTS (SELECT 1 FROM tblUserContact WHERE UserID = @UserID)
+        BEGIN
+            UPDATE tblUserContact
+            SET Email = @Email,
+                PhoneNumber = @PhoneNumber
+            WHERE UserID = @UserID;
+        END
+        ELSE
+        BEGIN
+            INSERT INTO tblUserContact (UserID, Email, PhoneNumber)
+            VALUES (@UserID, @Email, @PhoneNumber);
+        END
 
         COMMIT TRANSACTION;
-
 
         SELECT 'User Profile Updated Successfully' AS Message;
 
     END TRY
-
     BEGIN CATCH
-
         IF @@TRANCOUNT > 0
             ROLLBACK TRANSACTION;
 
-
         SELECT ERROR_MESSAGE() AS Message;
-
     END CATCH
-
 END;
-
+GO
