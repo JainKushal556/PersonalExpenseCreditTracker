@@ -194,6 +194,28 @@ namespace PersonalExpenseCreditTracker.Common
             return filteredTable;
         }
 
+        //public static DataTable SearchDataInPersons(DataTable masterTable, TextBox txtBox)
+        //{
+        //    string search = txtBox.Text.Trim().Replace("'", "''");
+
+        //    if (masterTable == null)
+        //        return null;
+
+        //    if (string.IsNullOrWhiteSpace(search))
+        //    {
+        //        masterTable.DefaultView.RowFilter = "";
+        //        return masterTable.DefaultView.ToTable();
+        //    }
+
+        //    masterTable.DefaultView.RowFilter = string.Format(
+        //        "PersonName LIKE '%{0}%' OR " +
+        //        "PhoneNumber LIKE '%{0}%' OR " +
+        //        "Address LIKE '%{0}%'",
+        //        search);
+
+        //    return masterTable.DefaultView.ToTable();
+        //}
+
         public static void HighlightSearch(DataGridView dgv, TextBox txtBox)
         {
             string search = txtBox.Text.Trim();

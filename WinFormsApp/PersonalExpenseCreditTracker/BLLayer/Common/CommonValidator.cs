@@ -13,6 +13,8 @@ namespace BLLayer.Common
             Success,
 
             PersonInvalid,
+            PersonNameInvalid,
+            PersonNameEmpty,
             PaymentInvalid,
             StatusInvalid,
             PriorityInvalid,
@@ -29,6 +31,8 @@ namespace BLLayer.Common
 
             EmailInvalid,
             PhoneInvalid,
+            PhoneNumberEmpty,
+            PhoneNumberAlreadyExists,
 
             DateRangeInvalid,
             MinimumAmountInvalid,
@@ -54,6 +58,23 @@ namespace BLLayer.Common
             }
 
             return ValidationResult.PersonInvalid;
+        }
+
+        //PersonName Validation
+        public static ValidationResult ValidationPersonName(string personName)
+        {
+            if (string.IsNullOrWhiteSpace(personName))
+                return ValidationResult.PersonNameEmpty;
+
+            if (!Regex.IsMatch(personName, @"^[A-Za-z]+(?:[ '-][A-Za-z]+)*$"))
+                return ValidationResult.PersonNameInvalid;
+            
+            personName = personName.Trim();
+
+            if (personName.Length < 3)
+                return ValidationResult.PersonNameInvalid;
+
+            return ValidationResult.Success;
         }
 
         //Payment Validation
@@ -95,7 +116,7 @@ namespace BLLayer.Common
             return ValidationResult.Success;
         }
 
-        //ValidateMinimumAmount
+        //Validate MinimumAmount
         public static ValidationResult ValidateMinimumAmount(string minAmount)
         {
             decimal value;
@@ -117,7 +138,7 @@ namespace BLLayer.Common
             return ValidationResult.MinimumAmountInvalid;
         }
 
-        //ValidateMaximumAmount
+        //Validate MaximumAmount
         public static ValidationResult ValidateMaximumAmount(string maxAmount)
         {
             decimal value;
@@ -139,7 +160,7 @@ namespace BLLayer.Common
             return ValidationResult.MaximumAmountInvalid;
         }
 
-        //ValidateAmountRange
+        //Validate AmountRange
         public static ValidationResult ValidateAmountRange(decimal minAmount, decimal maxAmount)
         {
             if (minAmount <= maxAmount)
@@ -217,6 +238,11 @@ namespace BLLayer.Common
         // Phone Number Validation
         public static ValidationResult ValidatePhoneNumber(string phoneNumber)
         {
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                return ValidationResult.PhoneNumberEmpty;
+            }
+
             if (!string.IsNullOrWhiteSpace(phoneNumber))
             {
                 phoneNumber = phoneNumber.Trim();

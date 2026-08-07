@@ -444,6 +444,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
+            cmbCategory.DroppedDown = true;
         }
         private void tsmiSubCategory_Click(object sender, EventArgs e)
         {

@@ -289,11 +289,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnSaveCredit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveCredit.ForeColor = System.Drawing.Color.White;
             this.btnSaveCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
-            this.btnSaveCredit.Location = new System.Drawing.Point(351, 521);
+            this.btnSaveCredit.Location = new System.Drawing.Point(372, 521);
             this.btnSaveCredit.Name = "btnSaveCredit";
-            this.btnSaveCredit.Size = new System.Drawing.Size(194, 41);
+            this.btnSaveCredit.Size = new System.Drawing.Size(173, 41);
             this.btnSaveCredit.TabIndex = 8;
-            this.btnSaveCredit.Text = "  Add Credit";
+            this.btnSaveCredit.Text = "Add Credit";
             this.btnSaveCredit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveCredit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveCredit.UseVisualStyleBackColor = false;
@@ -310,7 +310,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(199, 521);
+            this.btnCancel.Location = new System.Drawing.Point(219, 521);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 41);
             this.btnCancel.TabIndex = 7;

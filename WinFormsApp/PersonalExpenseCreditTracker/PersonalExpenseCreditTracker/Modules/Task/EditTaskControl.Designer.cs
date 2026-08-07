@@ -32,6 +32,7 @@
             this.pnlEditTask = new System.Windows.Forms.Panel();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pnlBody = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,7 +55,6 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label3 = new System.Windows.Forms.Label();
             this.pnlEditTask.SuspendLayout();
             this.pnlBody.SuspendLayout();
             this.pnlDeadline.SuspendLayout();
@@ -110,6 +110,17 @@
             this.pnlBody.Size = new System.Drawing.Size(450, 226);
             this.pnlBody.TabIndex = 18;
             this.pnlBody.Click += new System.EventHandler(this.pnlBody_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(83, 122);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(18, 23);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "*";
             // 
             // label4
             // 
@@ -306,13 +317,13 @@
             this.btnUpdateTask.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
             this.btnUpdateTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnUpdateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateTask.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateTask.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateTask.ForeColor = System.Drawing.Color.White;
             this.btnUpdateTask.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update__4_;
-            this.btnUpdateTask.Location = new System.Drawing.Point(317, 311);
+            this.btnUpdateTask.Location = new System.Drawing.Point(332, 311);
             this.btnUpdateTask.Name = "btnUpdateTask";
             this.btnUpdateTask.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.btnUpdateTask.Size = new System.Drawing.Size(152, 41);
+            this.btnUpdateTask.Size = new System.Drawing.Size(137, 41);
             this.btnUpdateTask.TabIndex = 12;
             this.btnUpdateTask.Text = "Update";
             this.btnUpdateTask.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -328,9 +339,9 @@
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(182, 312);
+            this.btnCancel.Location = new System.Drawing.Point(198, 312);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 41);
             this.btnCancel.TabIndex = 11;
@@ -367,17 +378,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(83, 122);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(18, 23);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "*";
             // 
             // EditTaskControl
             // 
