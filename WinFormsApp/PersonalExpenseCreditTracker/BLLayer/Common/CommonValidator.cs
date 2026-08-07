@@ -54,7 +54,7 @@ namespace BLLayer.Common
             FullNameInvalid,
             AddressInvalid,
             DateOfBirthInvalid,
-            GenderInvalid
+            GenderInvalid,
             CurrentAndNewPasswordSame,
             CurrentPasswordEmpty,
             NewPasswordEmpty,

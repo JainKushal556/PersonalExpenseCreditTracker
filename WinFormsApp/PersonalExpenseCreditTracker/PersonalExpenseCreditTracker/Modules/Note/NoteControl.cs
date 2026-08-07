@@ -509,6 +509,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             NoteViewDetailsControl noteViewDetailsControl = new NoteViewDetailsControl();
             noteViewDetailsControl.Show();
+
+
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
