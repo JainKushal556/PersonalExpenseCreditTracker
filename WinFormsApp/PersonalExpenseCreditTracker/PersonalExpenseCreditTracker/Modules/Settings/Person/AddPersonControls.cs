@@ -9,18 +9,12 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
 using System.Data.SqlClient;
-using BLLayer.Settings;
-using BLLayer.Common;
-using PersonalExpenseCreditTracker.Common;
-using PersonalExpenseCreditTracker.Session;
+using System.Configuration;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 {
     public partial class AddPersonControls : Form
     {
-        private DataTable AllLentData = new DataTable();
-        private DataTable masterData = new DataTable();
-
         public AddPersonControls()
         {
             InitializeComponent();
@@ -33,6 +27,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                  null,
                  dataGridViewAddPerson,
                  new object[] { true });
+
         }
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -51,43 +46,64 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         private void AddPersonSControls_Load(object sender, EventArgs e)
         {
             dataGridViewAddPerson.CellPainting += dataGridViewAddPerson_CellPainting;
-            //int userID = 11;
+            int userID = 11;
             SetRadius(pnlAddPersonDataGridView, 15);
             SetRadius(pnlAddPersonInput, 15);
             SetRadius(pnlIdia, 15);
-            SetRadius(btnAddPersonInputSavePerson, 5);
-            SetRadius(btnAddPersonInputClear, 5);
+            //SetRadius(btnAddPersonInputSavePerson, 10);
+            //SetRadius(btnAddPersonInputClear, 10);
 
             //Place Holder Text
-            txtAddPersonInputFullName.Text = "Enter Full Name";
-            txtAddPersonInputPhoneNumber.Text = "Enter Phone Number";
-            txtAddPersonInputAddress.Text = "Enter Address";
+            txtAddPersonInputFullName.Text = "Enter full name";
+            txtAddPersonInputPhoneNumber.Text = "Enter phone number";
+            txtAddPersonInputAddress.Text = "Enter address";
             txtAddPersonSearchBar.Text = "Search by name or phone number ...";
 
             //Place Holder Color
-            txtAddPersonInputFullName.ForeColor = Color.Gray;
-            txtAddPersonInputPhoneNumber.ForeColor = Color.Gray;
-            txtAddPersonInputAddress.ForeColor = Color.Gray;
+            txtAddPersonInputFullName.ForeColor = Color.FromArgb(191, 192, 199);
+            txtAddPersonInputPhoneNumber.ForeColor = Color.FromArgb(191, 192, 199);
+            txtAddPersonInputAddress.ForeColor = Color.FromArgb(191, 192, 199);
             txtAddPersonSearchBar.ForeColor = Color.FromArgb(191, 192, 199);
 
             //Load Data On DataGridView
-            LoadData();
+            DataSet dataset = GetDataSet(userID);
 
-        }
-
-        public void LoadData()
-        {
-            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllPersons", Session.LogedInUser.GetUserId());
-
-            if (dataTable != null)
+            if (dataset != null)
             {
+                DataTable Table1 = dataset.Tables[0];
                 BindingSource bindingSource1 = new BindingSource();
-                bindingSource1.DataSource = dataTable;
+                bindingSource1.DataSource = Table1;
                 dataGridViewAddPerson.DataSource = bindingSource1;
             }
             else
             {
                 MessageBox.Show("No Data Found");
+            }
+
+        }
+
+        private DataSet GetDataSet(int userID)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection sqlConnection = null;
+            DataSet dataset = null;
+            try
+            {
+                sqlConnection = new SqlConnection(CS);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("spGetAllPersons", sqlConnection);
+                dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@UserId", userID);
+                dataset = new DataSet();
+                dataAdapter.Fill(dataset);
+                return dataset;
+            }
+            catch (Exception)
+            {
+                return dataset;
+            }
+            finally
+            {
+                sqlConnection.Close();
             }
         }
 
@@ -128,76 +144,96 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             SetRadius(pnlIdia, 15);
         }
 
+        //private void pnlAddPersonInputFullName_Resize(object sender, EventArgs e)
+        //{
+        //    SetRadius(pnlIdia, 15);
+        //}
+        //private void btnAddPersonInputSavePerson_Resize(object sender, EventArgs e)
+        //{
+        //    SetRadius(btnAddPersonInputSavePerson, 10);
+        //}
+        //private void btnAddPersonInputClear_Resize(object sender, EventArgs e)
+        //{
+        //    SetRadius(btnAddPersonInputClear, 10);
+        //}
+        private void dataGridViewAddPerson_Resize(object sender, EventArgs e)
+        {
+            //SetRadius(dataGridViewAddPerson, 15);
+        }
+        
+
+
         // All Text Outside Border
         private void pnlAddPersonInputFullName_Leave(object sender, EventArgs e)
         {
             if (txtAddPersonInputFullName.Text == "")
             {
-                txtAddPersonInputFullName.Text = "Enter Full Name";
-                txtAddPersonInputFullName.ForeColor = Color.Gray;
+                txtAddPersonInputFullName.Text = "Enter full name";
+                txtAddPersonInputFullName.ForeColor = Color.FromArgb(191, 192, 199);
             }
             pnlAddPersonInputFullName.BorderStyle = BorderStyle.None;
         }
         private void txtAddPersonInputFullName_Enter(object sender, EventArgs e)
         {
             pnlAddPersonInputFullName.BorderStyle = BorderStyle.FixedSingle;
-            if (txtAddPersonInputFullName.Text == "Enter Full Name")
+            if (txtAddPersonInputFullName.Text == "Enter full name")
             {
                 txtAddPersonInputFullName.Text = "";
             }
-            txtAddPersonInputFullName.ForeColor = Color.Black;
+            txtAddPersonInputFullName.ForeColor = Color.FromArgb(0, 0, 0);
         }
         private void pnlAddPersonInputPhoneNumber_Leave(object sender, EventArgs e)
         {
             if (txtAddPersonInputPhoneNumber.Text == "")
             {
-                txtAddPersonInputPhoneNumber.Text = "Enter Phone Number";
-                txtAddPersonInputPhoneNumber.ForeColor = Color.Gray;
+                txtAddPersonInputPhoneNumber.Text = "Enter phone number";
+                txtAddPersonInputPhoneNumber.ForeColor = Color.FromArgb(191, 192, 199);
             }
             pnlAddPersonInputPhoneNumber.BorderStyle = BorderStyle.None;
         }
         private void txtAddPersonInputPhoneNumber_Enter(object sender, EventArgs e)
         {
             pnlAddPersonInputPhoneNumber.BorderStyle = BorderStyle.FixedSingle;
-            if (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number")
+            if (txtAddPersonInputPhoneNumber.Text == "Enter phone number")
             {
                 txtAddPersonInputPhoneNumber.Text = "";
             }
-            txtAddPersonInputPhoneNumber.ForeColor = Color.Black;
+            txtAddPersonInputPhoneNumber.ForeColor = Color.FromArgb(0, 0, 0);
         }
         private void pnlAddPersonInputAddress_Leave(object sender, EventArgs e)
         {
             if (txtAddPersonInputAddress.Text == "")
             {
-                txtAddPersonInputAddress.Text = "Enter Address";
-                txtAddPersonInputAddress.ForeColor = Color.Gray;
+                txtAddPersonInputAddress.Text = "Enter address";
+                txtAddPersonInputAddress.ForeColor = Color.FromArgb(191, 192, 199);
             }
             pnlAddPersonInputAddress.BorderStyle = BorderStyle.None;
         }
         private void txtAddPersonInputAddress_Enter(object sender, EventArgs e)
         {
-            if (txtAddPersonInputAddress.Text == "Enter Address")
+            if (txtAddPersonInputAddress.Text == "Enter address")
             {
                 txtAddPersonInputAddress.Text = "";
             }
-            txtAddPersonInputAddress.ForeColor = Color.Black;
+            txtAddPersonInputAddress.ForeColor = Color.FromArgb(0, 0, 0);
             pnlAddPersonInputAddress.BorderStyle = BorderStyle.FixedSingle;
         }
         private void txtAddPersonSearchBar_Enter(object sender, EventArgs e)
         {
+            
             if (txtAddPersonSearchBar.Text == "Search by name or phone number ...")
             {
                 txtAddPersonSearchBar.Text = "";
             }
             pnlAddPersonSearchBar.BorderStyle = BorderStyle.FixedSingle;
-            txtAddPersonSearchBar.ForeColor = Color.Black;
+            txtAddPersonSearchBar.ForeColor = Color.FromArgb(0, 0, 0);
         }
         private void pnlAddPersonSearchBar_Leave(object sender, EventArgs e)
         {
             if (txtAddPersonSearchBar.Text == "")
             {
                 txtAddPersonSearchBar.Text = "Search by name or phone number ...";
-                txtAddPersonSearchBar.ForeColor = Color.Gray;
+                txtAddPersonSearchBar.ForeColor = Color.FromArgb(191, 192, 199);
             }
             pnlAddPersonSearchBar.BorderStyle = BorderStyle.None;
         }
@@ -265,7 +301,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 dataGridViewAddPerson.Rows[i].Cells["colSL"].Value = i + 1;
             }
 
-            lblDataGridViewTotalPersonsNumber.Text = 
+            lblDataGridViewTotalPersonsNumber.Text =
                 dataGridViewAddPerson.Rows.Count.ToString();
 
             // Remove selection
@@ -281,73 +317,24 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             if (e.ColumnIndex == dataGridViewAddPerson.Columns["colAction"].Index)
             {
                 EditPersons editPerson = new EditPersons(this);
-
-                editPerson.personID = Convert.ToInt32(dataGridViewAddPerson.Rows[e.RowIndex].Cells["colPersonID"].Value);
-                editPerson.PersonName = dataGridViewAddPerson.Rows[e.RowIndex].Cells["colName"].Value.ToString();
-                editPerson.PhoneNumber = dataGridViewAddPerson.Rows[e.RowIndex].Cells["colPhoneNumber"].Value.ToString();
-                editPerson.Address = dataGridViewAddPerson.Rows[e.RowIndex].Cells["colAddress"].Value.ToString();
-
                 editPerson.Show();          // Opens the form
-
-                LoadData();
+                // frm.ShowDialog(); // Opens it as a modal dialog
             }
         }
 
         private void btnAddPersonInputClear_Click(object sender, EventArgs e)
         {
-            txtAddPersonInputFullName.Text = "Enter Full Name";
-            txtAddPersonInputPhoneNumber.Text = "Enter Phone Number";
-            txtAddPersonInputAddress.Text = "Enter Address";
-            txtAddPersonInputFullName.ForeColor = Color.Gray;
-            txtAddPersonInputPhoneNumber.ForeColor = Color.Gray;
-            txtAddPersonInputAddress.ForeColor = Color.Gray;
+            txtAddPersonInputFullName.Text = "Enter full name";
+            txtAddPersonInputPhoneNumber.Text = "Enter phone number";
+            txtAddPersonInputAddress.Text = "Enter address";
+            txtAddPersonInputFullName.ForeColor = Color.FromArgb(191, 192, 199);
+            txtAddPersonInputPhoneNumber.ForeColor = Color.FromArgb(191, 192, 199);
+            txtAddPersonInputAddress.ForeColor = Color.FromArgb(191, 192, 199);
         }
 
         private void btnAddPersonInputSavePerson_Click(object sender, EventArgs e)
         {
-            //Clear All Previous Validation
-            errorProvider1.Clear();
-
-            PersonUI personUI = new PersonUI();
-
-            personUI.userId = Session.LogedInUser.GetUserId();
-            personUI.personId = -1;
-            personUI.personName = (txtAddPersonInputFullName.Text == "Enter Full Name")? "" : txtAddPersonInputFullName.Text;
-            personUI.personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text;
-            personUI.address = (txtAddPersonInputAddress.Text == "Enter Address") ? "" : txtAddPersonInputAddress.Text;
-
-            CommonValidator.ValidationResult result = personUI.InsertDataIntoPersonUi();
-
-            switch (result)
-            {
-                case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Person Details Save Successfully");
-                    break;
-
-                case CommonValidator.ValidationResult.PersonNameEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputFullName);
-                    break;
-
-                case CommonValidator.ValidationResult.PersonNameInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputFullName);
-                    break;
-
-                case CommonValidator.ValidationResult.PhoneNumberEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputPhoneNumber);
-                    break;
-
-                case CommonValidator.ValidationResult.PhoneInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputPhoneNumber);
-                    break;
-
-                case CommonValidator.ValidationResult.PhoneNumberAlreadyExists:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputPhoneNumber);
-                    break;
-
-                case CommonValidator.ValidationResult.StoreProcedureError:
-                    MessageBox.Show("Person Not Saved");
-                    break;
-            }
+            MessageBox.Show("Person Details Save Successfully");
         }
 
         private void StylePersonGrid()
@@ -423,6 +410,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             
         }
 
+        //private void dataGridViewAddPerson_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        //{
+          
+        //}
         private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
         {
             e.Paint(e.CellBounds,
@@ -454,6 +445,11 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             e.Handled = true;
         }
 
+        private void txtAddPersonInputFullName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void pnlAddPersonInputFullName_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(
@@ -461,6 +457,11 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 pnlAddPersonInput.ClientRectangle,
                 ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
+        }
+
+        private void txtAddPersonInputPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void pnlAddPersonInputPhoneNumber_Paint(object sender, PaintEventArgs e)
@@ -491,35 +492,24 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 ButtonBorderStyle.Solid);
         }
 
-        private void btnAddPersonInputClear_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnAddPersonInputClear, 5);
-        }
+        //private void pnlAddPersonInput_Paint(object sender, PaintEventArgs e)
+        //{
+        //    ControlPaint.DrawBorder(
+        //        e.Graphics,
+        //        pnlAddPersonInput.ClientRectangle,
+        //        ColorTranslator.FromHtml("#E7ECF3"),
+        //        ButtonBorderStyle.Solid);
+        //}
 
-        private void btnAddPersonInputSavePerson_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnAddPersonInputSavePerson, 5);
-        }
+        //private void panel2_Paint(object sender, PaintEventArgs e)
+        //{
+        //    ControlPaint.DrawBorder(
+        //       e.Graphics,
+        //       panel2.ClientRectangle,
+        //       ColorTranslator.FromHtml("#E7ECF3"),
+        //       ButtonBorderStyle.Solid);
+        //}
 
-        private void AddPersonControls_Click(object sender, EventArgs e)
-        {
-            this.ActiveControl = null;
-        }
 
-        private void panel1_Click(object sender, EventArgs e)
-        {
-            this.ActiveControl = null;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LoadData();
-        }
-
-        private void txtAddPersonSearchBar_TextChanged(object sender, EventArgs e)
-        {
-            //AllLentData = Common.CommonUiFunction.SearchDataInPersons(masterData, txtAddPersonSearchBar);
-            //LoadData();
-        }
     }
 }

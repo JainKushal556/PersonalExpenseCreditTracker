@@ -22,7 +22,6 @@ BEGIN
     
     SELECT 
         CategoryID,
-        UserID,
         CategoryName,
         IsDefault,
         IsActive

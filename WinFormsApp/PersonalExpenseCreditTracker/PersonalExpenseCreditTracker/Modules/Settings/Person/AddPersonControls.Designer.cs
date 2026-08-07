@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -110,7 +109,6 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewButtonColumn2 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlAddPersonInput.SuspendLayout();
@@ -139,7 +137,6 @@
             this.panel3.SuspendLayout();
             this.pnlIdia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -153,7 +150,6 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(1109, 874);
             this.panel1.TabIndex = 0;
-            this.panel1.Click += new System.EventHandler(this.panel1_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -240,13 +236,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddPersonInputAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAddPersonInputAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddPersonInputAddress.Location = new System.Drawing.Point(5, 6);
+            this.txtAddPersonInputAddress.Location = new System.Drawing.Point(4, 6);
             this.txtAddPersonInputAddress.Multiline = true;
             this.txtAddPersonInputAddress.Name = "txtAddPersonInputAddress";
             this.txtAddPersonInputAddress.Size = new System.Drawing.Size(410, 92);
             this.txtAddPersonInputAddress.TabIndex = 0;
             this.txtAddPersonInputAddress.Enter += new System.EventHandler(this.txtAddPersonInputAddress_Enter);
-            this.txtAddPersonInputAddress.Leave += new System.EventHandler(this.pnlAddPersonInputAddress_Leave);
             // 
             // panel9
             // 
@@ -277,12 +272,12 @@
             this.txtAddPersonInputPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddPersonInputPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAddPersonInputPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddPersonInputPhoneNumber.Location = new System.Drawing.Point(6, 6);
+            this.txtAddPersonInputPhoneNumber.Location = new System.Drawing.Point(3, 6);
             this.txtAddPersonInputPhoneNumber.Name = "txtAddPersonInputPhoneNumber";
             this.txtAddPersonInputPhoneNumber.Size = new System.Drawing.Size(303, 27);
             this.txtAddPersonInputPhoneNumber.TabIndex = 0;
+            this.txtAddPersonInputPhoneNumber.TextChanged += new System.EventHandler(this.txtAddPersonInputPhoneNumber_TextChanged);
             this.txtAddPersonInputPhoneNumber.Enter += new System.EventHandler(this.txtAddPersonInputPhoneNumber_Enter);
-            this.txtAddPersonInputPhoneNumber.Leave += new System.EventHandler(this.pnlAddPersonInputPhoneNumber_Leave);
             // 
             // panel7
             // 
@@ -402,12 +397,12 @@
             this.txtAddPersonInputFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddPersonInputFullName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAddPersonInputFullName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddPersonInputFullName.Location = new System.Drawing.Point(7, 6);
+            this.txtAddPersonInputFullName.Location = new System.Drawing.Point(3, 6);
             this.txtAddPersonInputFullName.Name = "txtAddPersonInputFullName";
             this.txtAddPersonInputFullName.Size = new System.Drawing.Size(303, 27);
             this.txtAddPersonInputFullName.TabIndex = 0;
+            this.txtAddPersonInputFullName.TextChanged += new System.EventHandler(this.txtAddPersonInputFullName_TextChanged);
             this.txtAddPersonInputFullName.Enter += new System.EventHandler(this.txtAddPersonInputFullName_Enter);
-            this.txtAddPersonInputFullName.Leave += new System.EventHandler(this.txtAddPersonInputFullName_Enter);
             // 
             // tableLayoutPanel3
             // 
@@ -427,12 +422,9 @@
             // 
             // btnAddPersonInputClear
             // 
-            this.btnAddPersonInputClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddPersonInputClear.BackColor = System.Drawing.Color.Silver;
+            this.btnAddPersonInputClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddPersonInputClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddPersonInputClear.FlatAppearance.BorderSize = 0;
-            this.btnAddPersonInputClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPersonInputClear.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddPersonInputClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnAddPersonInputClear.Location = new System.Drawing.Point(181, 0);
@@ -445,14 +437,11 @@
             this.btnAddPersonInputClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddPersonInputClear.UseVisualStyleBackColor = false;
             this.btnAddPersonInputClear.Click += new System.EventHandler(this.btnAddPersonInputClear_Click);
-            this.btnAddPersonInputClear.Resize += new System.EventHandler(this.btnAddPersonInputClear_Resize);
             // 
             // btnAddPersonInputSavePerson
             // 
-            this.btnAddPersonInputSavePerson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddPersonInputSavePerson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(93)))), ((int)(((byte)(207)))));
+            this.btnAddPersonInputSavePerson.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddPersonInputSavePerson.FlatAppearance.BorderSize = 0;
             this.btnAddPersonInputSavePerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPersonInputSavePerson.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -463,12 +452,11 @@
             this.btnAddPersonInputSavePerson.Name = "btnAddPersonInputSavePerson";
             this.btnAddPersonInputSavePerson.Size = new System.Drawing.Size(171, 51);
             this.btnAddPersonInputSavePerson.TabIndex = 0;
-            this.btnAddPersonInputSavePerson.Text = "Add Person";
+            this.btnAddPersonInputSavePerson.Text = "Save Person";
             this.btnAddPersonInputSavePerson.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddPersonInputSavePerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddPersonInputSavePerson.UseVisualStyleBackColor = false;
             this.btnAddPersonInputSavePerson.Click += new System.EventHandler(this.btnAddPersonInputSavePerson_Click);
-            this.btnAddPersonInputSavePerson.Resize += new System.EventHandler(this.btnAddPersonInputSavePerson_Resize);
             // 
             // panel4
             // 
@@ -555,7 +543,6 @@
             this.button1.Size = new System.Drawing.Size(51, 43);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pnlAddPersonSearchBar
             // 
@@ -579,9 +566,7 @@
             this.txtAddPersonSearchBar.Name = "txtAddPersonSearchBar";
             this.txtAddPersonSearchBar.Size = new System.Drawing.Size(440, 27);
             this.txtAddPersonSearchBar.TabIndex = 4;
-            this.txtAddPersonSearchBar.TextChanged += new System.EventHandler(this.txtAddPersonSearchBar_TextChanged);
             this.txtAddPersonSearchBar.Enter += new System.EventHandler(this.txtAddPersonSearchBar_Enter);
-            this.txtAddPersonSearchBar.Leave += new System.EventHandler(this.pnlAddPersonSearchBar_Leave);
             // 
             // pictureBox4
             // 
@@ -766,8 +751,9 @@
             this.lblDataGridViewTotalPersonsNumber.ForeColor = System.Drawing.Color.Black;
             this.lblDataGridViewTotalPersonsNumber.Location = new System.Drawing.Point(124, 8);
             this.lblDataGridViewTotalPersonsNumber.Name = "lblDataGridViewTotalPersonsNumber";
-            this.lblDataGridViewTotalPersonsNumber.Size = new System.Drawing.Size(37, 23);
+            this.lblDataGridViewTotalPersonsNumber.Size = new System.Drawing.Size(19, 23);
             this.lblDataGridViewTotalPersonsNumber.TabIndex = 0;
+            this.lblDataGridViewTotalPersonsNumber.Text = "5";
             // 
             // lblDataGridViewTotalPersons
             // 
@@ -942,10 +928,6 @@
             this.dataGridViewButtonColumn2.Name = "dataGridViewButtonColumn2";
             this.dataGridViewButtonColumn2.Width = 65;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // AddPersonControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -956,7 +938,6 @@
             this.Name = "AddPersonControls";
             this.Text = "AddPersonSControls";
             this.Load += new System.EventHandler(this.AddPersonSControls_Load);
-            this.Click += new System.EventHandler(this.AddPersonControls_Click);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlAddPersonInput.ResumeLayout(false);
@@ -996,7 +977,6 @@
             this.pnlIdia.ResumeLayout(false);
             this.pnlIdia.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1057,16 +1037,15 @@
         private System.Windows.Forms.Panel pnlIdia;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
+        protected internal System.Windows.Forms.TextBox txtAddPersonInputAddress;
+        protected internal System.Windows.Forms.TextBox txtAddPersonInputPhoneNumber;
+        protected internal System.Windows.Forms.TextBox txtAddPersonInputFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPersonID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSL;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhoneNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewButtonColumn colAction;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox txtAddPersonInputAddress;
-        private System.Windows.Forms.TextBox txtAddPersonInputPhoneNumber;
-        private System.Windows.Forms.TextBox txtAddPersonInputFullName;
 
     }
 }

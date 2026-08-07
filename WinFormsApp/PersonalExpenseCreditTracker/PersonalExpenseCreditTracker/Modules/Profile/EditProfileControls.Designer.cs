@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlEditProfileMainBody = new System.Windows.Forms.Panel();
+            this.panelProfileCalenderShow = new System.Windows.Forms.Panel();
+            this.monthCalendarProfile = new System.Windows.Forms.MonthCalendar();
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.btnCancelEditProfile = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -59,15 +62,14 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlEditProfileDathOfBirth = new System.Windows.Forms.Panel();
+            this.btnProfileCalendar = new System.Windows.Forms.Button();
             this.txtEditProfileDathOfBirth = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.pnlEditProfileFullName = new System.Windows.Forms.Panel();
             this.txtEditProfileFullName = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel19 = new System.Windows.Forms.Panel();
             this.btnCloseEditProfile = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel18 = new System.Windows.Forms.Panel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.lblEditProfile = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -82,7 +84,9 @@
             this.pnlEditProfileGender = new System.Windows.Forms.Panel();
             this.cmbEditProfileGender = new System.Windows.Forms.ComboBox();
             this.txtEditProfileGender = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlEditProfileMainBody.SuspendLayout();
+            this.panelProfileCalenderShow.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel15.SuspendLayout();
             this.pnlEditProfileAddress.SuspendLayout();
@@ -117,13 +121,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel13.SuspendLayout();
             this.pnlEditProfileGender.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlEditProfileMainBody
             // 
             this.pnlEditProfileMainBody.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnlEditProfileMainBody.BackColor = System.Drawing.Color.Transparent;
-            this.pnlEditProfileMainBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlEditProfileMainBody.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlEditProfileMainBody.Controls.Add(this.btnUpdateProfile);
             this.pnlEditProfileMainBody.Controls.Add(this.btnCancelEditProfile);
             this.pnlEditProfileMainBody.Controls.Add(this.tableLayoutPanel1);
@@ -133,19 +137,37 @@
             this.pnlEditProfileMainBody.Size = new System.Drawing.Size(638, 736);
             this.pnlEditProfileMainBody.TabIndex = 0;
             // 
+            // panelProfileCalenderShow
+            // 
+            this.panelProfileCalenderShow.BackColor = System.Drawing.Color.Transparent;
+            this.panelProfileCalenderShow.Controls.Add(this.monthCalendarProfile);
+            this.panelProfileCalenderShow.Location = new System.Drawing.Point(28, 49);
+            this.panelProfileCalenderShow.Name = "panelProfileCalenderShow";
+            this.panelProfileCalenderShow.Size = new System.Drawing.Size(301, 199);
+            this.panelProfileCalenderShow.TabIndex = 33;
+            this.panelProfileCalenderShow.Visible = false;
+            // 
+            // monthCalendarProfile
+            // 
+            this.monthCalendarProfile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monthCalendarProfile.Location = new System.Drawing.Point(0, 0);
+            this.monthCalendarProfile.Name = "monthCalendarProfile";
+            this.monthCalendarProfile.TabIndex = 0;
+            this.monthCalendarProfile.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarProfile_DateSelected);
+            // 
             // btnUpdateProfile
             // 
             this.btnUpdateProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(101)))), ((int)(((byte)(247)))));
             this.btnUpdateProfile.FlatAppearance.BorderSize = 0;
             this.btnUpdateProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateProfile.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update;
-            this.btnUpdateProfile.Location = new System.Drawing.Point(372, 664);
+            this.btnUpdateProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnUpdateProfile.Location = new System.Drawing.Point(312, 663);
             this.btnUpdateProfile.Name = "btnUpdateProfile";
-            this.btnUpdateProfile.Size = new System.Drawing.Size(247, 59);
+            this.btnUpdateProfile.Size = new System.Drawing.Size(299, 59);
             this.btnUpdateProfile.TabIndex = 1;
-            this.btnUpdateProfile.Text = " Update Profile";
+            this.btnUpdateProfile.Text = "Update Profile";
             this.btnUpdateProfile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnUpdateProfile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUpdateProfile.UseVisualStyleBackColor = false;
@@ -153,17 +175,13 @@
             // 
             // btnCancelEditProfile
             // 
-            this.btnCancelEditProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
-            this.btnCancelEditProfile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnCancelEditProfile.BackColor = System.Drawing.Color.White;
             this.btnCancelEditProfile.FlatAppearance.BorderSize = 0;
-            this.btnCancelEditProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
-            this.btnCancelEditProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancelEditProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelEditProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelEditProfile.ForeColor = System.Drawing.Color.White;
-            this.btnCancelEditProfile.Location = new System.Drawing.Point(17, 664);
+            this.btnCancelEditProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelEditProfile.Location = new System.Drawing.Point(32, 663);
             this.btnCancelEditProfile.Name = "btnCancelEditProfile";
-            this.btnCancelEditProfile.Size = new System.Drawing.Size(194, 59);
+            this.btnCancelEditProfile.Size = new System.Drawing.Size(210, 59);
             this.btnCancelEditProfile.TabIndex = 1;
             this.btnCancelEditProfile.Text = "Cancel";
             this.btnCancelEditProfile.UseVisualStyleBackColor = false;
@@ -189,7 +207,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel13, 1, 5);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 13);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(14, 13);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -199,7 +217,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 640);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 642);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel15
@@ -208,7 +226,7 @@
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel15.Location = new System.Drawing.Point(247, 483);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(360, 154);
+            this.panel15.Size = new System.Drawing.Size(360, 156);
             this.panel15.TabIndex = 13;
             // 
             // pnlEditProfileAddress
@@ -217,7 +235,7 @@
             this.pnlEditProfileAddress.BackColor = System.Drawing.Color.White;
             this.pnlEditProfileAddress.Controls.Add(this.txtEditProfileAddress);
             this.pnlEditProfileAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pnlEditProfileAddress.Location = new System.Drawing.Point(1, 18);
+            this.pnlEditProfileAddress.Location = new System.Drawing.Point(1, 19);
             this.pnlEditProfileAddress.Name = "pnlEditProfileAddress";
             this.pnlEditProfileAddress.Size = new System.Drawing.Size(357, 119);
             this.pnlEditProfileAddress.TabIndex = 1;
@@ -228,10 +246,10 @@
             this.txtEditProfileAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEditProfileAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtEditProfileAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEditProfileAddress.Location = new System.Drawing.Point(6, 15);
+            this.txtEditProfileAddress.Location = new System.Drawing.Point(6, 4);
             this.txtEditProfileAddress.Multiline = true;
             this.txtEditProfileAddress.Name = "txtEditProfileAddress";
-            this.txtEditProfileAddress.Size = new System.Drawing.Size(348, 97);
+            this.txtEditProfileAddress.Size = new System.Drawing.Size(348, 111);
             this.txtEditProfileAddress.TabIndex = 0;
             this.txtEditProfileAddress.Click += new System.EventHandler(this.txtEditProfileAddress_Click);
             // 
@@ -242,7 +260,7 @@
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel14.Location = new System.Drawing.Point(3, 483);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(238, 154);
+            this.panel14.Size = new System.Drawing.Size(238, 156);
             this.panel14.TabIndex = 12;
             // 
             // panel40
@@ -252,7 +270,7 @@
             this.panel40.Controls.Add(this.lblProfileAddress);
             this.panel40.Location = new System.Drawing.Point(65, 7);
             this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(117, 60);
+            this.panel40.Size = new System.Drawing.Size(117, 62);
             this.panel40.TabIndex = 8;
             // 
             // lblProfileAddress
@@ -260,7 +278,7 @@
             this.lblProfileAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProfileAddress.AutoSize = true;
             this.lblProfileAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfileAddress.Location = new System.Drawing.Point(8, 17);
+            this.lblProfileAddress.Location = new System.Drawing.Point(8, 18);
             this.lblProfileAddress.Name = "lblProfileAddress";
             this.lblProfileAddress.Size = new System.Drawing.Size(85, 28);
             this.lblProfileAddress.TabIndex = 1;
@@ -271,7 +289,7 @@
             this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pin;
-            this.pictureBox7.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox7.Location = new System.Drawing.Point(11, 18);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(42, 40);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -484,6 +502,8 @@
             // 
             this.pnlEditProfileDathOfBirth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlEditProfileDathOfBirth.BackColor = System.Drawing.Color.White;
+            this.pnlEditProfileDathOfBirth.Controls.Add(this.panelProfileCalenderShow);
+            this.pnlEditProfileDathOfBirth.Controls.Add(this.btnProfileCalendar);
             this.pnlEditProfileDathOfBirth.Controls.Add(this.txtEditProfileDathOfBirth);
             this.pnlEditProfileDathOfBirth.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pnlEditProfileDathOfBirth.Location = new System.Drawing.Point(1, 15);
@@ -492,6 +512,18 @@
             this.pnlEditProfileDathOfBirth.TabIndex = 1;
             this.pnlEditProfileDathOfBirth.Leave += new System.EventHandler(this.pnlEditProfileDathOfBirth_Leave);
             // 
+            // btnProfileCalendar
+            // 
+            this.btnProfileCalendar.FlatAppearance.BorderSize = 0;
+            this.btnProfileCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfileCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
+            this.btnProfileCalendar.Location = new System.Drawing.Point(314, 6);
+            this.btnProfileCalendar.Name = "btnProfileCalendar";
+            this.btnProfileCalendar.Size = new System.Drawing.Size(37, 31);
+            this.btnProfileCalendar.TabIndex = 2;
+            this.btnProfileCalendar.UseVisualStyleBackColor = true;
+            this.btnProfileCalendar.Click += new System.EventHandler(this.btnProfileCalendar_Click);
+            // 
             // txtEditProfileDathOfBirth
             // 
             this.txtEditProfileDathOfBirth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -499,9 +531,12 @@
             this.txtEditProfileDathOfBirth.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEditProfileDathOfBirth.Location = new System.Drawing.Point(6, 9);
             this.txtEditProfileDathOfBirth.Name = "txtEditProfileDathOfBirth";
-            this.txtEditProfileDathOfBirth.Size = new System.Drawing.Size(348, 27);
+            this.txtEditProfileDathOfBirth.Size = new System.Drawing.Size(302, 27);
             this.txtEditProfileDathOfBirth.TabIndex = 0;
             this.txtEditProfileDathOfBirth.Click += new System.EventHandler(this.txtEditProfileDathOfBirth_Click);
+            this.txtEditProfileDathOfBirth.TextChanged += new System.EventHandler(this.txtEditProfileDathOfBirth_TextChanged);
+            this.txtEditProfileDathOfBirth.Enter += new System.EventHandler(this.txtEditProfileDathOfBirth_Enter);
+            this.txtEditProfileDathOfBirth.Leave += new System.EventHandler(this.txtEditProfileDathOfBirth_Leave);
             // 
             // panel5
             // 
@@ -537,35 +572,21 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.panel19);
             this.panel4.Controls.Add(this.btnCloseEditProfile);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(244, 0);
-            this.panel4.Margin = new System.Windows.Forms.Padding(0);
+            this.panel4.Location = new System.Drawing.Point(247, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(366, 80);
+            this.panel4.Size = new System.Drawing.Size(360, 74);
             this.panel4.TabIndex = 3;
-            // 
-            // panel19
-            // 
-            this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel19.Location = new System.Drawing.Point(-1, 69);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(360, 1);
-            this.panel19.TabIndex = 1;
             // 
             // btnCloseEditProfile
             // 
             this.btnCloseEditProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCloseEditProfile.FlatAppearance.BorderSize = 0;
-            this.btnCloseEditProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.btnCloseEditProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.btnCloseEditProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseEditProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnCloseEditProfile.Location = new System.Drawing.Point(324, 18);
+            this.btnCloseEditProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close__2_;
+            this.btnCloseEditProfile.Location = new System.Drawing.Point(311, 16);
             this.btnCloseEditProfile.Name = "btnCloseEditProfile";
-            this.btnCloseEditProfile.Size = new System.Drawing.Size(39, 41);
+            this.btnCloseEditProfile.Size = new System.Drawing.Size(38, 33);
             this.btnCloseEditProfile.TabIndex = 0;
             this.btnCloseEditProfile.TabStop = false;
             this.btnCloseEditProfile.UseVisualStyleBackColor = true;
@@ -573,22 +594,12 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.panel18);
             this.panel1.Controls.Add(this.panel16);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(244, 80);
+            this.panel1.Size = new System.Drawing.Size(238, 74);
             this.panel1.TabIndex = 0;
-            // 
-            // panel18
-            // 
-            this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel18.Location = new System.Drawing.Point(12, 69);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(235, 1);
-            this.panel18.TabIndex = 10;
             // 
             // panel16
             // 
@@ -597,7 +608,7 @@
             this.panel16.Controls.Add(this.lblEditProfile);
             this.panel16.Location = new System.Drawing.Point(5, 3);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(151, 74);
+            this.panel16.Size = new System.Drawing.Size(151, 68);
             this.panel16.TabIndex = 9;
             // 
             // lblEditProfile
@@ -605,7 +616,7 @@
             this.lblEditProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEditProfile.AutoSize = true;
             this.lblEditProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditProfile.Location = new System.Drawing.Point(6, 21);
+            this.lblEditProfile.Location = new System.Drawing.Point(6, 18);
             this.lblEditProfile.Name = "lblEditProfile";
             this.lblEditProfile.Size = new System.Drawing.Size(133, 32);
             this.lblEditProfile.TabIndex = 1;
@@ -724,10 +735,6 @@
             this.cmbEditProfileGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEditProfileGender.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbEditProfileGender.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbEditProfileGender.Items.AddRange(new object[] {
-            "Male",
-            "Female",
-            "Custom"});
             this.cmbEditProfileGender.Location = new System.Drawing.Point(0, 5);
             this.cmbEditProfileGender.Name = "cmbEditProfileGender";
             this.cmbEditProfileGender.Size = new System.Drawing.Size(357, 33);
@@ -745,11 +752,15 @@
             this.txtEditProfileGender.Size = new System.Drawing.Size(348, 27);
             this.txtEditProfileGender.TabIndex = 0;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // EditProfileControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(640, 739);
             this.Controls.Add(this.pnlEditProfileMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -759,6 +770,7 @@
             this.Text = "EditProfileControls";
             this.Load += new System.EventHandler(this.EditProfileControls_Load);
             this.pnlEditProfileMainBody.ResumeLayout(false);
+            this.panelProfileCalenderShow.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
             this.pnlEditProfileAddress.ResumeLayout(false);
@@ -806,6 +818,7 @@
             this.panel13.ResumeLayout(false);
             this.pnlEditProfileGender.ResumeLayout(false);
             this.pnlEditProfileGender.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -864,7 +877,9 @@
         private System.Windows.Forms.Button btnCloseEditProfile;
         private System.Windows.Forms.ComboBox cmbEditProfileGender;
         private System.Windows.Forms.TextBox txtEditProfileGender;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.Panel panel18;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btnProfileCalendar;
+        private System.Windows.Forms.Panel panelProfileCalenderShow;
+        private System.Windows.Forms.MonthCalendar monthCalendarProfile;
     }
 }

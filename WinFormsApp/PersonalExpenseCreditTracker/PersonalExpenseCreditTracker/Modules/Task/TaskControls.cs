@@ -29,7 +29,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllTaskData = new DataTable();
-        private DataTable masterData = new DataTable();
 
         public int SelectedTaskID = 0;
         public string SelectedTaskTitle = "";
@@ -85,7 +84,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
 
             AllTaskData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
         }
@@ -103,7 +101,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return false;
             }
             AllTaskData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -126,7 +123,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return false;
             }
             AllTaskData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -584,7 +580,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             lblTaskEndingPageNumber.Text = end.ToString();
             lblTaskTotalPageNumber.Text = total.ToString();
             UpdateTaskSummaryCards();
-            Common.CommonUiFunction.HighlightSearch(dataGridViewTask, txtSearch);
         }
 
         private void UpdateTaskSummaryCards()
@@ -685,12 +680,16 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void tsmiPriority_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlPriorityFilter);
-            cmbPriority.DroppedDown = true;
         }
         private void tsmiStatus_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlStatusFilter);
         }
+        private void btnSerach_Click(object sender, EventArgs e)
+        {
+            ShowSearchPanel(pnlSearch);
+        }
+
         private void btnFilter_Click(object sender, EventArgs e)
         {
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
@@ -708,6 +707,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             pnlDateFilter.Visible = false;
             pnlPriorityFilter.Visible = false;
+            pnlSearch.Visible = false;
             pnlStatusFilter.Visible = false;
 
         }
@@ -739,7 +739,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             panel.Parent = this;
 
-            
+            Point p = btnSerach.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Location = new Point(
+                p.X + btnSerach.Width + 10,
+                p.Y-8
+            );
+
             panel.BringToFront();
             panel.Visible = true;
         }
@@ -862,12 +869,5 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         
 
         
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            AllTaskData = Common.CommonUiFunction.SearchDataInTask(masterData, txtSearch);
-            ShowCurrentPage();
-        }
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +27,6 @@ namespace DALayer.Settings.Person
         {
             string connectionString = Common.SqlHelper.connectionString;
             SqlConnection sqlConnection = null;
-            int rowEffected = 0;
 
             try
             {
@@ -40,17 +39,19 @@ namespace DALayer.Settings.Person
                     sqlCommand.Parameters.AddWithValue("@PhoneNumber", this.personNumber);
                     sqlCommand.Parameters.AddWithValue("@Address", this.address);
                     sqlConnection.Open();
-                    rowEffected = sqlCommand.ExecuteNonQuery();
-                    return ReturnBoolean(rowEffected);
+                    object result = sqlCommand.ExecuteScalar();
+                    string msg = result != null ? result.ToString() : "";
+                    return msg == "Person Details Inserted Successfully";
                 }
             }
             catch (Exception ex)
             {
-                return ReturnBoolean(rowEffected);
+                return false;
             }
             finally
             {
-                sqlConnection.Close();
+                if (sqlConnection != null)
+                    sqlConnection.Close();
             }
         }
 
@@ -88,7 +89,6 @@ namespace DALayer.Settings.Person
         {
             string connectionString = Common.SqlHelper.connectionString;
             SqlConnection sqlConnection = null;
-            int rowEffected = 0;
 
             try
             {
@@ -102,17 +102,19 @@ namespace DALayer.Settings.Person
                     sqlCommand.Parameters.AddWithValue("@PhoneNumber", this.personNumber);
                     sqlCommand.Parameters.AddWithValue("@Address", this.address);
                     sqlConnection.Open();
-                    rowEffected = sqlCommand.ExecuteNonQuery();
-                    return ReturnBoolean(rowEffected);
+                    object result = sqlCommand.ExecuteScalar();
+                    string msg = result != null ? result.ToString() : "";
+                    return msg == "Person Details Updated Successfully";
                 }
             }
             catch (Exception ex)
             {
-                return ReturnBoolean(rowEffected);
+                return false;
             }
             finally
             {
-                sqlConnection.Close();
+                if (sqlConnection != null)
+                    sqlConnection.Close();
             }
         }
     }

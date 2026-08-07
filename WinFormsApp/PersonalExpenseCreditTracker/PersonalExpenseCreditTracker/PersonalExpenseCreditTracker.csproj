@@ -752,9 +752,7 @@
     <None Include="Resources\line1.png" />
     <None Include="Resources\Image.png" />
     <None Include="Resources\Gemini_Generated_Image_bup5imbup5imbup5.png" />
-    <None Include="Resources\add.png" />
-    <None Include="Resources\add %281%29.png" />
-    <None Include="Resources\add %282%29.png" />
+    <None Include="Resources\edit.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>

@@ -36,6 +36,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             ApplyRoundCorners();
             //dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             this.Resize += CreditControl_Resize;
+            txtSearch.TextChanged += txtSearch_TextChanged;
 
             typeof(DataGridView).InvokeMember(
                 "DoubleBuffered",
@@ -179,7 +180,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
                         AllCreditData = dt;
                         masterData = dt.Copy();
-                        dgvCreditDataTable.DataSource = AllCreditData;
+                        currentPage = 1;
+                        ShowCurrentPage();
+                        UpdateCreditSummaryCards();
                     }
                 }
             }
@@ -202,9 +205,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -225,9 +228,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -248,9 +251,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -271,9 +274,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
         private void dgvCreditDataTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -475,7 +478,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
-            comboBox1.DroppedDown = true;
         }
 
         private void tsmiSubCategory_Click(object sender, EventArgs e)
@@ -487,11 +489,15 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             ShowFilterPanel(pnlAmountFilter);
         }
-
+        private void btnSerach_Click(object sender, EventArgs e)
+        {
+            ShowSearchPanel(pnlSearch);
+        }
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
+            pnlSearch.Visible = false;
             pnlAmountFilter.Visible = false;
             pnlSubCategoryFilter.Visible = false;
         }
@@ -519,7 +525,24 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
       
 
+        private void ShowSearchPanel(Panel panel)
+        {
+            HideAllFilterPanels();
 
+            panel.Parent = this;
+
+            
+            Point p = btnSerach.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Location = new Point(
+                p.X + btnSerach.Width + 10,
+                p.Y                     
+            );
+
+            panel.BringToFront();
+            panel.Visible = true;
+        }
 
 
         private void DesignContextMenu()
@@ -683,13 +706,33 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             pnlAmountFilter.Visible = false;
         }
 
-        
+        private void UpdateCreditSummaryCards()
+        {
+            if (AllCreditData == null || AllCreditData.Rows.Count == 0)
+            {
+                lblCreditAmount.Text = "₹ 0";
+                lblTransactionAmount.Text = "0";
+                return;
+            }
+
+            decimal totalCredit = 0;
+
+            foreach (DataRow row in AllCreditData.Rows)
+            {
+                if (row["Amount"] != DBNull.Value)
+                {
+                    totalCredit += Convert.ToDecimal(row["Amount"]);
+                }
+            }
+
+            lblCreditAmount.Text = "₹ " + totalCredit.ToString("#,##0");
+            lblTransactionAmount.Text = AllCreditData.Rows.Count.ToString();
+        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             AllCreditData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
             ShowCurrentPage();
         }
-
     }
 }

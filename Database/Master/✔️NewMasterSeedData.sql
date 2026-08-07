@@ -158,7 +158,8 @@ VALUES
 (NULL, 'Transportation', 1, 1),
 (NULL, 'Personal Care', 1, 1),
 (NULL, 'Lent', 1, 1),
-(NULL, 'Tuition', 1, 1);
+(NULL, 'Tuition', 1, 1),
+(NULL, 'Borrow', 1, 1);
 GO
 
 -- Insert Default Credit Categories
@@ -174,7 +175,8 @@ VALUES
 (NULL,'Scholarship',1,1),
 (NULL,'Bonus',1,1),
 (NULL,'Refund',1,1),
-(NULL,'Borrow',1,1);
+(NULL,'Borrow',1,1),
+(NULL,'Lent',1,1);
 GO
 
 
@@ -258,12 +260,15 @@ VALUES
 (9,NULL,'Bank Loan EMI',1,1),
 (9,NULL,'Credit Card EMI',1,1),
 (9,NULL,'Personal Loan EMI',1,1),
+(9,NULL,'Lent Given',1,1),
 -- Tuition
 (10,NULL,'School Tuition',1,1),
 (10,NULL,'College Tuition',1,1),
 (10,NULL,'Private Tutor',1,1),
 (10,NULL,'Coaching Center',1,1),
-(10,NULL,'Online Tuition',1,1);
+(10,NULL,'Online Tuition',1,1),
+-- Borrow
+(11,NULL,'Borrow Returned',1,1);
 GO
 
 -- Insert Credit Sub Categories
@@ -319,7 +324,10 @@ VALUES
 (10,NULL,'Friend Loan',1,1),
 (10,NULL,'Family Loan',1,1),
 (10,NULL,'Bank Loan',1,1),
-(10,NULL,'Personal Loan',1,1);
+(10,NULL,'Personal Loan',1,1),
+(10,NULL,'Borrow Received',1,1),
+-- Lent
+(11,NULL,'Lent Returned',1,1);
 GO
 
 

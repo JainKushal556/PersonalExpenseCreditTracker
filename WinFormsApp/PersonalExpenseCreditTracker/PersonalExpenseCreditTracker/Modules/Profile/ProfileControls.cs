@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +10,9 @@ using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Drawing.Imaging;
+using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Session;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Profile
 {
@@ -56,6 +59,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             pnlProfileStatus.Resize += pnlProfileStatus_Resize;
 
             imageCropControls.MakePictureCircular(picProfileUserPhoto);
+            LoadUserProfileData();
 
             
         }
@@ -134,30 +138,189 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         private void picProfileImageEditButton_Click(object sender, EventArgs e)
         {
             ImageCropControls crop = new ImageCropControls(this);
-            crop.SetImageInImgBoxCrop();
-            crop.ShowDialog();
 
-            ProfileUI profileUi = new ProfileUI();
-            profileUi.userId = Session.LogedInUser.GetUserId();
-            MemoryStream ms = new MemoryStream();
-            picProfileUserPhoto.Image.Save(ms, ImageFormat.Jpeg);
-            profileUi.photoData =ms.ToArray();
+            if (crop.SetImageInImgBoxCrop())
+            {
+                if (crop.ShowDialog() == DialogResult.OK)
+                {
+                    if (picProfileUserPhoto.Image != null)
+                    {
+                        ProfileUI profileUi = new ProfileUI();
+                        profileUi.userId = Session.LogedInUser.GetUserId();
 
-            bool result = profileUi.UpdateProfilePhotoIntoProfUi();
-            if (result)
-            {
-                MessageBox.Show("Validation Success");
-            }
-            else
-            {
-                MessageBox.Show("Validation Failed");
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            picProfileUserPhoto.Image.Save(ms, ImageFormat.Jpeg);
+                            profileUi.photoData = ms.ToArray();
+                        }
+
+                        CommonValidator.ValidationResult result = profileUi.UpdateProfilePhotoIntoProfUi();
+
+                        switch (result)
+                        {
+                            case CommonValidator.ValidationResult.Success:
+                                MessageBox.Show("Profile photo updated successfully.");
+                                LoadUserProfileData();
+
+                                MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+                                if (mainForm != null)
+                                {
+                                    mainForm.LoadSidebarUserProfile(); 
+                                }
+                                break;
+
+                            case CommonValidator.ValidationResult.PhotoInvalid:
+                                MessageBox.Show("Invalid profile photo data.");
+                                break;
+
+                            case CommonValidator.ValidationResult.StoreProcedureError:
+                                MessageBox.Show("Failed to update profile photo into database.");
+                                break;
+                        }
+                    }
+                }
             }
         }
+
+
+
         private void btnProfileEditButton_Click(object sender, EventArgs e)
         {
             EditProfileControls edit = new EditProfileControls(this);
             edit.ShowDialog();
             
         }
+
+        public void LoadUserProfileData()
+        {
+            int userID = Session.LogedInUser.GetUserId();
+
+            DataTable dt = CommonUiFunction.RetrieveDataForGridView("spGetActiveUserDetails", userID);
+
+            if (dt != null && dt.Rows.Count > 0 && !dt.Columns.Contains("Message"))
+            {
+                DataRow row = dt.Rows[0];
+
+                // Full Name
+                if (dt.Columns.Contains("FullName"))
+                {
+                    lblProfileInfoPersonFullName.Text = Convert.ToString(row["FullName"]);
+                    RichTextBoxUserProfileName.Text = Convert.ToString(row["FullName"]);
+                    RichTextBoxUserProfileName.SelectAll();
+                    RichTextBoxUserProfileName.SelectionAlignment = HorizontalAlignment.Center;
+                    RichTextBoxUserProfileName.DeselectAll();
+
+                }
+
+                // Email
+                if (dt.Columns.Contains("Email"))
+                {
+                    lblProfileInfoPersonEmail.Text = Convert.ToString(row["Email"]);
+
+                    if (lblProfileEmailvalue != null)
+                        lblProfileEmailvalue.Text = Convert.ToString(row["Email"]);
+                }
+
+                // Phone Number
+                if (dt.Columns.Contains("PhoneNumber"))
+                {
+                    string phoneNumber = Convert.ToString(row["PhoneNumber"]);
+
+                    if (!string.IsNullOrWhiteSpace(phoneNumber))
+                    {
+                        if (!phoneNumber.StartsWith("+91"))
+                            phoneNumber = "+91 " + phoneNumber;
+
+                        lblProfileInfoPersonPhoneNumber.Text = phoneNumber;
+
+                        if (lblProfilePhoneValue != null)
+                            lblProfilePhoneValue.Text = phoneNumber;
+                    }
+                    else
+                    {
+                        lblProfileInfoPersonPhoneNumber.Text = "";
+
+                        if (lblProfilePhoneValue != null)
+                            lblProfilePhoneValue.Text = "";
+                    }
+                }
+
+                // Date Of Birth
+                if (dt.Columns.Contains("DOB") && row["DOB"] != DBNull.Value)
+                {
+                    lblProfileInfoPersonDathOfBirth.Text =
+                        Convert.ToDateTime(row["DOB"]).ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    lblProfileInfoPersonDathOfBirth.Text = "";
+                }
+
+                // Gender
+                if (dt.Columns.Contains("Gender") && row["Gender"] != DBNull.Value)
+                {
+                    lblProfileInfoPersonGender.Text = Convert.ToString(row["Gender"]);
+                }
+                else
+                {
+                    lblProfileInfoPersonGender.Text = "";
+                }
+
+                // Address
+                if (dt.Columns.Contains("Address") && row["Address"] != DBNull.Value)
+                {
+                    lblProfileInfoPersonAddress.Text = Convert.ToString(row["Address"]);
+                }
+                else
+                {
+                    lblProfileInfoPersonAddress.Text = "";
+                }
+
+                // Member Since
+                if (dt.Columns.Contains("MemberSince") && row["MemberSince"] != DBNull.Value)
+                {
+                    lblProfileUserSinceValue.Text =
+                        Convert.ToDateTime(row["MemberSince"]).ToString("dd MMM yyyy");
+                }
+                else
+                {
+                    lblProfileUserSinceValue.Text = "";
+                }
+
+                // Account Status
+                if (dt.Columns.Contains("AccountStatus") && row["AccountStatus"] != DBNull.Value)
+                {
+                    bool isActive = Convert.ToBoolean(row["AccountStatus"]);
+
+                    lblProfileAccountStatusValue.Text = isActive ? "Active" : "Inactive";
+                }
+                else
+                {
+                    lblProfileAccountStatusValue.Text = "";
+                }
+
+                // Profile Photo
+                if (dt.Columns.Contains("ProfilePhoto") && row["ProfilePhoto"] != DBNull.Value)
+                {
+                    byte[] imgBytes = (byte[])row["ProfilePhoto"];
+
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        picProfileUserPhoto.Image = Image.FromStream(ms);
+                    }
+                }
+                else
+                {
+                    picProfileUserPhoto.Image = Properties.Resources.people__3_1;
+                }
+            }
+            else
+            {
+                picProfileUserPhoto.Image = Properties.Resources.people__3_1;
+            }
+        }
+
+      
+
     }
 }

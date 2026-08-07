@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using PersonalExpenseCreditTracker.Common;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     public partial class PayBorrowPaidAmountControls : Form
     {
+        private bool ignoreEvents = true;
+        private string selectedStatus = "";
+        private int selectedBorrowId = 0;
         public PayBorrowPaidAmountControls()
         {
             InitializeComponent();
@@ -56,10 +61,63 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             DeleteObject(hrgn);
         }
 
+        public void SetBorrowDetails(int borrowId,string personName, string totalAmount, string remainingAmount, string status,string paidAmount)
+        {
+            selectedBorrowId = borrowId;
+            lblPersonNameText.Text = personName;
+            lblTotalAmountText.Text = totalAmount;
+            lblRemainingAmountText.Text = remainingAmount;
+            lblPaidAmountText.Text = paidAmount;
+            selectedStatus = status;
+        }
+
+
         private void btnAddSave_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Amount Return Successfully");
-            this.Close();
+            pnlCalenderShow.Visible = false;
+            errorProvider1.Clear();
+
+            BorrowUI borrowUi = new BorrowUI();
+            // Assign values from the form controls to the object
+            borrowUi.userId = Session.LogedInUser.GetUserId();
+            borrowUi.borrowId = this.selectedBorrowId;
+            borrowUi.paymentId = Convert.ToInt32(cmbPaymentType.SelectedValue);
+
+            //  If the placeholder text is still present, pass an empty string
+            borrowUi.returnAmount = (txtAmount.Text == "Select Amount") ? "" : txtAmount.Text;
+            borrowUi.description = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
+
+            // If no deadline is selected, assign DateTime.MinValue
+            //    // Otherwise, assign the selected date from the calendar
+            borrowUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar.SelectionStart;
+            CommonValidator.ValidationResult result = borrowUi.InsertPayBorrowIntoBorrowUi();
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Borrow paid successfully!");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    break;
+                case CommonValidator.ValidationResult.AmountEmpty:
+                case CommonValidator.ValidationResult.AmountInvalid:
+                case CommonValidator.ValidationResult.AmountTooLarge:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAmount);
+                    break;
+                case CommonValidator.ValidationResult.PaymentInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbPaymentType);
+                    break;
+                case CommonValidator.ValidationResult.DeadlineInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnDate);
+                    break;
+                case CommonValidator.ValidationResult.DescriptionInvalid:
+                case CommonValidator.ValidationResult.DescriptionTooShort:
+                case CommonValidator.ValidationResult.DescriptionTooLong:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtDescription);
+                    break;
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Borrow payment failed!");
+                    break;
+            }
         }
 
         private void PayBorrowAmountControls_Load(object sender, EventArgs e)
@@ -73,32 +131,39 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             txtAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
             txtDescription.Text = "Enter Description";
-            cmbPaymentType.Text = "Enter Payment Type";
+            cmbPaymentType.Text = "Select Payment Type";
+          
 
             txtAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
+         
+
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbPaymentType);
+              cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
+              txtReturnDate.Click += txtReturnDate_Click;
+              ignoreEvents = false;
         }
 
         private void btnAddCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void btnAddClear_Click(object sender, EventArgs e)
         {
             txtAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
-            cmbPaymentType.Text = "Enter Payment Type";
+            cmbPaymentType.Text = "Select Payment Type";
+         
             txtDescription.Text = "Enter Description";
-
             txtAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
-
+         
             pnlCalenderShow.Visible = false;
+            errorProvider1.Clear();
         }
 
         private void txtAmount_Enter(object sender, EventArgs e)
@@ -120,11 +185,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
         }
 
+     
         private void cmbPaymentType_Enter(object sender, EventArgs e)
         {
-            if (cmbPaymentType.Text == "Enter Payment Type")
+            if (cmbPaymentType.Text == "Select Payment Type")
             {
-                cmbPaymentType.Text = "";
                 cmbPaymentType.ForeColor = Color.Black;
             }
             pnlCalenderShow.Visible = false;
@@ -132,12 +197,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void cmbPaymentType_Leave(object sender, EventArgs e)
         {
-            if (cmbPaymentType.Text == "")
+            if (cmbPaymentType.SelectedIndex == -1 || string.IsNullOrWhiteSpace(cmbPaymentType.Text))
             {
-                cmbPaymentType.Text = "Enter Payment Type";
+                cmbPaymentType.SelectedIndex = 0;
+                cmbPaymentType.Text = "Select Payment Type";
                 cmbPaymentType.ForeColor = Color.Gray;
             }
         }
+
 
         private void txtReturnDate_Enter(object sender, EventArgs e)
         {
@@ -146,7 +213,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 txtReturnDate.Text = "";
                 txtReturnDate.ForeColor = Color.Black;
             }
-            pnlCalenderShow.Visible = true;
+           
         }
 
         private void txtReturnDate_Leave(object sender, EventArgs e)
@@ -158,16 +225,22 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
         }
 
+
         private void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
             txtReturnDate.Text = e.Start.ToString("dd-MM-yyyy");
             txtReturnDate.ForeColor = Color.Black;
             pnlCalenderShow.Visible = false;
+            ErrorHelper.HideErrorForControl(txtReturnDate);
         }
 
         private void txtReturnDate_TextChanged(object sender, EventArgs e)
         {
             pnlCalenderShow.Visible = false;
+            if (txtReturnDate.Text != "DD-MM-YYYY" && !string.IsNullOrWhiteSpace(txtReturnDate.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtReturnDate);
+            }
         }
 
         private void btnAddCalendar_Click(object sender, EventArgs e)
@@ -207,6 +280,46 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void pnlInputField_Click(object sender, EventArgs e)
         {
             pnlCalenderShow.Visible = false;
+        }
+
+        private void panelMainBody_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void txtReturnDate_Click(object sender, EventArgs e)
+        {
+            pnlCalenderShow.Visible = true;
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAmount.Text != "Enter Return Amount" && !string.IsNullOrWhiteSpace(txtAmount.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtAmount);
+            }
+        }
+
+        private void txtDescription_TextChanged(object sender, EventArgs e)
+        {
+            if (txtDescription.Text != "Enter Description" && !string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtDescription);
+            }
+        }
+
+        private void cmbPaymentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(cmbPaymentType);
+            cmbPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void cmbPaymentType_TextChanged(object sender, EventArgs e)
+        {
+            if(ignoreEvents) return;
+            cmbPaymentType.DroppedDown = true;
+
         }
     }
 }

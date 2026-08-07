@@ -187,7 +187,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 return false;
             }
             AllLentData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -210,7 +209,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 return false;
             }
             AllLentData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -233,7 +231,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 return false;
             }
             AllLentData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -343,6 +340,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             dgvLentDataTable.DataSource = pageTable;
             Common.CommonUiFunction.HighlightSearch(dgvLentDataTable, txtSearch);
+
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllLentData.Rows.Count;
@@ -547,10 +545,38 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             if (e.RowIndex < 0)
                 return;
 
-            PayLentReturnAmountControls frm = new PayLentReturnAmountControls();
+            DataGridViewRow row = dgvLentDataTable.Rows[e.RowIndex];
 
-            frm.StartPosition = FormStartPosition.CenterParent;
-            frm.ShowDialog(this);
+            int lentId = 0;
+
+            DataRowView drv = row.DataBoundItem as DataRowView;
+            if (drv != null && drv.Row.Table.Columns.Contains("LentID"))
+            {
+                lentId = Convert.ToInt32(drv["LentID"]);
+            }
+
+            string personName = Convert.ToString(row.Cells["colPersonName"].Value);
+            string totalAmount = Convert.ToString(row.Cells["colAmount"].Value);
+            string remainingAmount = Convert.ToString(row.Cells["colRemainingAmount"].Value);
+            string status = Convert.ToString(row.Cells["colStatus"].Value);
+            string returnAmount = Convert.ToString(row.Cells["colReturnedAmount"].Value);
+
+            using (PayLentReturnAmountControls frm = new PayLentReturnAmountControls())
+            {
+                frm.SetLentDetails(
+                    lentId,
+                    personName,
+                    totalAmount,
+                    remainingAmount,
+                    status,
+                    returnAmount);
+
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+                    LoadLentData(userID);
+                }
+            }
         }
 
         private void btnExportReport_Click(object sender, EventArgs e)
@@ -597,11 +623,15 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
-
+        private void btnSerach_Click(object sender, EventArgs e)
+        {
+            ShowSearchPanel(pnlSearchFilter);
+        }
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlAmountFilter.Visible = false;
+            pnlSearchFilter.Visible = false;
             pnlStatusFilter.Visible = false;
             pnlPaymentFilter.Visible = false;
             pnlPersonFilter.Visible = false;
@@ -631,7 +661,24 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
 
 
+        private void ShowSearchPanel(Panel panel)
+        {
+            HideAllFilterPanels();
 
+            panel.Parent = this;
+
+
+            Point p = btnSerach.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Location = new Point(
+                p.X + btnSerach.Width + 10,
+                p.Y
+            );
+
+            panel.BringToFront();
+            panel.Visible = true;
+        }
 
         private void DesignContextMenu()
         {
@@ -774,18 +821,15 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             pnlPaymentFilter.Visible = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            pnlStatusFilter.Visible = false;
-        }
-
-      
+         private void button3_Click(object sender, EventArgs e)
+         {
+             pnlStatusFilter.Visible = false;
+         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             AllLentData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
             ShowCurrentPage();
         }
-
       }
     }
