@@ -22,7 +22,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
-        private int userID = 11;
+        private int userID = Session.LogedInUser.GetUserId();
         public BorrowControls()
         {
             InitializeComponent();
@@ -122,7 +122,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             ApplyRoundCorners();
             dgvBorrowDataTable.CellPainting += dgvBorrowDataTable_CellPainting;
             pageSize = GetRowsPerPage();
-            int userID = 11;
+            int userID = Session.LogedInUser.GetUserId();
             LoadBorrowData(userID);
             HideAllFilterPanels();
             DesignContextMenu();

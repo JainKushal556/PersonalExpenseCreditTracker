@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -147,7 +147,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             ProfileUI profileUi = new ProfileUI();
 
 
-            profileUi.userId = 1;
+            profileUi.userId = Session.LogedInUser.GetUserId();
             profileUi.fullName = txtEditProfileFullName.Text;
             profileUi.email = txtEditProfileEmailAddress.Text;
             profileUi.phoneNumber = txtEditProfilePhoneNumber.Text;

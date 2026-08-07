@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -138,7 +138,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             crop.ShowDialog();
 
             ProfileUI profileUi = new ProfileUI();
-            profileUi.userId = 1;
+            profileUi.userId = Session.LogedInUser.GetUserId();
             MemoryStream ms = new MemoryStream();
             picProfileUserPhoto.Image.Save(ms, ImageFormat.Jpeg);
             profileUi.photoData =ms.ToArray();
