@@ -14,6 +14,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     public partial class AddBorrowControls : Form
     {
+        private bool ignoreEvents = true;
         public AddBorrowControls()
         {
             InitializeComponent();
@@ -227,6 +228,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", "+ Add New Person", cmbBorrowSelectPerson);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbBorrowPaymentType);
+            ignoreEvents = false;
         }
         private void AddBorrowControls_Load(object sender, EventArgs e)
         {
@@ -453,6 +455,18 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             {
                 ErrorHelper.HideErrorForControl(txtBorrowAddDescription);
             }
+        }
+
+        private void cmbBorrowSelectPerson_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            cmbBorrowSelectPerson.DroppedDown = true;
+        }
+
+        private void cmbBorrowPaymentType_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            cmbBorrowPaymentType.DroppedDown = true;
         }
 
        

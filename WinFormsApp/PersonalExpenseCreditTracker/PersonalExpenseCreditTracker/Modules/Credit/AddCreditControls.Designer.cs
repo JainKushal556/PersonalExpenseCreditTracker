@@ -216,6 +216,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditSubCategory.Size = new System.Drawing.Size(354, 31);
             this.cmbAddCreditSubCategory.TabIndex = 1;
             this.cmbAddCreditSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditSubCategory_SelectedIndexChanged);
+            this.cmbAddCreditSubCategory.TextChanged += new System.EventHandler(this.cmbAddCreditSubCategory_TextChanged);
             this.cmbAddCreditSubCategory.Click += new System.EventHandler(this.cmbAddCreditSubCategory_Click);
             this.cmbAddCreditSubCategory.Enter += new System.EventHandler(this.cmbAddCreditSubCategory_Enter);
             this.cmbAddCreditSubCategory.Leave += new System.EventHandler(this.cmbAddCreditSubCategory_Leave);
@@ -249,6 +250,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditPaymentType.Size = new System.Drawing.Size(354, 31);
             this.cmbAddCreditPaymentType.TabIndex = 3;
             this.cmbAddCreditPaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditPaymentType_SelectedIndexChanged);
+            this.cmbAddCreditPaymentType.TextChanged += new System.EventHandler(this.cmbAddCreditPaymentType_TextChanged);
             this.cmbAddCreditPaymentType.Click += new System.EventHandler(this.cmbAddCreditPaymentType_Click);
             this.cmbAddCreditPaymentType.Enter += new System.EventHandler(this.cmbAddCreditPaymentType_Enter);
             this.cmbAddCreditPaymentType.Leave += new System.EventHandler(this.cmbAddCreditPaymentType_Leave);
@@ -282,6 +284,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditCategory.Size = new System.Drawing.Size(354, 31);
             this.cmbAddCreditCategory.TabIndex = 0;
             this.cmbAddCreditCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditCategory_SelectedIndexChanged);
+            this.cmbAddCreditCategory.TextChanged += new System.EventHandler(this.cmbAddCreditCategory_TextChanged);
             this.cmbAddCreditCategory.Click += new System.EventHandler(this.cmbAddCreditCategory_Click);
             this.cmbAddCreditCategory.Enter += new System.EventHandler(this.cmbAddCreditCategory_Enter);
             this.cmbAddCreditCategory.Leave += new System.EventHandler(this.cmbAddCreditCategory_Leave);
@@ -347,8 +350,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 512);
             this.panel2.Name = "panel2";
@@ -357,8 +360,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";

@@ -12,8 +12,10 @@ using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Modules.Settings.Category;
 namespace PersonalExpenseCreditTracker.Modules.Credit
 {
+    
     public partial class AddCreditControls : Form
     {
+        private bool ignoreEvents = true;
         public AddCreditControls()
         {
             InitializeComponent();
@@ -48,6 +50,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", "+ Add New Category", cmbAddCreditCategory);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddCreditPaymentType);
             cmbAddCreditPaymentType.MouseClick += (s, ev) => { cmbAddCreditPaymentType.DroppedDown = true; };
+            ignoreEvents = false;
         }
 
 
@@ -442,6 +445,30 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void cmbAddCreditPaymentType_Click(object sender, EventArgs e)
         {
+            cmbAddCreditPaymentType.DroppedDown = true;
+        }
+
+        private void cmbAddCreditCategory_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+
+            cmbAddCreditCategory.DroppedDown = true;
+        }
+
+        private void cmbAddCreditSubCategory_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+
+            if (cmbAddCreditSubCategory.Text != "Select Sub Category")
+            {
+                cmbAddCreditSubCategory.DroppedDown = true;
+            }
+        }
+
+        private void cmbAddCreditPaymentType_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+
             cmbAddCreditPaymentType.DroppedDown = true;
         }
 

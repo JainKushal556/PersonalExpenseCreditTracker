@@ -26,6 +26,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             int nHeightEllipse);
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllCreditData = new DataTable();
+         private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
         public CreditControl() 
@@ -178,6 +179,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                         }
 
                         AllCreditData = dt;
+                        masterData= dt.Copy();
                         dgvCreditDataTable.DataSource = AllCreditData;
                         UpdateCreditSummaryCards();
                     }
@@ -372,8 +374,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             {
                 pageTable.ImportRow(AllCreditData.Rows[i]);
             }
-
+            
             dgvCreditDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvCreditDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllCreditData.Rows.Count;
@@ -705,6 +708,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllCreditData =Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData,txtSearch);
+            this.ShowCurrentPage();
+        }
 
+        
     }
 }

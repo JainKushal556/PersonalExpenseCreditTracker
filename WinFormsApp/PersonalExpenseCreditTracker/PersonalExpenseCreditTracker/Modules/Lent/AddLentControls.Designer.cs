@@ -329,6 +329,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.comboBoxLentPaymentType.TabIndex = 1;
             this.comboBoxLentPaymentType.Text = "Select Payment Type";
             this.comboBoxLentPaymentType.SelectedIndexChanged += new System.EventHandler(this.comboBoxLentPaymentType_SelectedIndexChanged);
+            this.comboBoxLentPaymentType.TextChanged += new System.EventHandler(this.comboBoxLentPaymentType_TextChanged);
             this.comboBoxLentPaymentType.Enter += new System.EventHandler(this.comboBoxLentPaymentType_Enter);
             this.comboBoxLentPaymentType.Leave += new System.EventHandler(this.comboBoxLentPaymentType_Leave);
             // 
@@ -361,6 +362,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.comboBoxLentSelectPerson.Size = new System.Drawing.Size(354, 31);
             this.comboBoxLentSelectPerson.TabIndex = 0;
             this.comboBoxLentSelectPerson.SelectedIndexChanged += new System.EventHandler(this.comboBoxLentSelectPerson_SelectedIndexChanged);
+            this.comboBoxLentSelectPerson.TextChanged += new System.EventHandler(this.comboBoxLentSelectPerson_TextChanged);
             this.comboBoxLentSelectPerson.Enter += new System.EventHandler(this.comboBoxLentSelectPerson_Enter);
             this.comboBoxLentSelectPerson.Leave += new System.EventHandler(this.comboBoxLentSelectPerson_Leave);
             // 

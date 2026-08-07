@@ -15,6 +15,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 {
     public partial class AddExpenseControls : Form
     {
+        private bool ignoreEvents = true;
         public AddExpenseControls()
         {
             InitializeComponent();
@@ -50,7 +51,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", "+ Add New Cetegory",cmbAddExpenseCategory);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddExpensePaymentType);
             cmbAddExpensePaymentType.MouseClick += (s, ev) => { cmbAddExpensePaymentType.DroppedDown = true; };
-          
+            ignoreEvents = false;
         }
 
         // All Border Cornar Radius
@@ -460,6 +461,29 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             {
                 ErrorHelper.HideErrorForControl(txtAddExpenseDescription);
             }
+        }
+
+        private void cmbAddExpenseCategory_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            cmbAddExpenseCategory.DroppedDown = true;
+        }
+
+        private void cmbAddExpenseSubCategory_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+
+            if (cmbAddExpenseSubCategory.Text != "Select Sub Category")
+            {
+                cmbAddExpenseSubCategory.DroppedDown = true;
+            }
+
+        }
+
+        private void cmbAddExpensePaymentType_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            cmbAddExpensePaymentType.DroppedDown = true;
         }
 
 

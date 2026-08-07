@@ -171,9 +171,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalTransaction
             // 
-            this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalTransaction.BackColor = System.Drawing.Color.White;
             this.panelTotalTransaction.Controls.Add(this.labelTotalTransactionNumber);
             this.panelTotalTransaction.Controls.Add(this.lblTotalTransaction);
@@ -228,9 +228,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalDue
             // 
-            this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalDue.BackColor = System.Drawing.Color.White;
             this.panelTotalDue.Controls.Add(this.lblTotalDueAmount);
             this.panelTotalDue.Controls.Add(this.lblTotalDue);
@@ -285,9 +285,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalRepaid
             // 
-            this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalRepaid.BackColor = System.Drawing.Color.White;
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaidAmount);
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaid);
@@ -343,9 +343,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalLent
             // 
-            this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalLent.BackColor = System.Drawing.Color.White;
             this.panelTotalLent.Controls.Add(this.lblTotalLentAmount);
             this.panelTotalLent.Controls.Add(this.lblTotalLent);
@@ -436,8 +436,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel5
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.panel5.Controls.Add(this.lblEntries);
             this.panel5.Controls.Add(this.lblTotalPageNumber);
             this.panel5.Controls.Add(this.lblof);
@@ -1181,6 +1181,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(333, 23);
             this.txtSearch.TabIndex = 6;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // LentControls
             // 

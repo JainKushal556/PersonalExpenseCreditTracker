@@ -17,6 +17,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllLentData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
 
@@ -163,6 +164,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
              }
 
             AllLentData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
         }
@@ -332,7 +334,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
 
             dgvLentDataTable.DataSource = pageTable;
-
+            Common.CommonUiFunction.HighlightSearch(dgvLentDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllLentData.Rows.Count;
@@ -792,6 +794,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
             pnlDateFilter.Visible = false;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllLentData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+            ShowCurrentPage();
         }
       }
     }

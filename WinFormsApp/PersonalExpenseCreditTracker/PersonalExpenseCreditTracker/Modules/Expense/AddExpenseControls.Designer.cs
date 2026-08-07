@@ -218,6 +218,7 @@
             this.cmbAddExpenseSubCategory.Size = new System.Drawing.Size(354, 31);
             this.cmbAddExpenseSubCategory.TabIndex = 1;
             this.cmbAddExpenseSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpenseSubCategory_SelectedIndexChanged);
+            this.cmbAddExpenseSubCategory.TextChanged += new System.EventHandler(this.cmbAddExpenseSubCategory_TextChanged);
             this.cmbAddExpenseSubCategory.Click += new System.EventHandler(this.cmbAddExpenseSubCategory_Click);
             this.cmbAddExpenseSubCategory.Enter += new System.EventHandler(this.cmbAddExpenseSubCategory_Enter);
             this.cmbAddExpenseSubCategory.Leave += new System.EventHandler(this.cmbAddExpenseSubCategory_Leave);
@@ -256,6 +257,7 @@
             this.cmbAddExpensePaymentType.Size = new System.Drawing.Size(354, 31);
             this.cmbAddExpensePaymentType.TabIndex = 3;
             this.cmbAddExpensePaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpensePaymentType_SelectedIndexChanged);
+           // this.cmbAddExpensePaymentType.TextChanged += new System.EventHandler(this.cmbAddExpensePaymentType_TextChanged);
             this.cmbAddExpensePaymentType.Enter += new System.EventHandler(this.cmbAddExpensePaymentType_Enter);
             this.cmbAddExpensePaymentType.Leave += new System.EventHandler(this.cmbAddExpensePaymentType_Leave);
             // 
@@ -288,6 +290,7 @@
             this.cmbAddExpenseCategory.Size = new System.Drawing.Size(354, 31);
             this.cmbAddExpenseCategory.TabIndex = 0;
             this.cmbAddExpenseCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpenseCategory_SelectedIndexChanged);
+            this.cmbAddExpenseCategory.TextChanged += new System.EventHandler(this.cmbAddExpenseCategory_TextChanged);
             this.cmbAddExpenseCategory.Click += new System.EventHandler(this.cmbAddExpenseCategory_Click);
             this.cmbAddExpenseCategory.Enter += new System.EventHandler(this.cmbAddExpenseCategory_Enter);
             this.cmbAddExpenseCategory.Leave += new System.EventHandler(this.cmbAddExpenseCategory_Leave);

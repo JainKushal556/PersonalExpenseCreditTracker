@@ -11,6 +11,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 {
     public partial class AddLentControls : Form
     {
+        private bool ignoreEvents = true;
         public AddLentControls()
         {
             InitializeComponent();
@@ -65,6 +66,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             CommonUiFunction.LoadInComboBox("spGetAllPersons",Session.LogedInUser.GetUserId() ,"Select Person","+ Add New Person",comboBoxLentSelectPerson);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes","Select Payment Type", comboBoxLentPaymentType);
+            ignoreEvents = false;
         }
 
         private void btnLentAddCalendar_Click(object sender, EventArgs e)
@@ -414,6 +416,19 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             {
                 ErrorHelper.HideErrorForControl(textBoxLentAddDescription);
             }
+        }
+
+        private void comboBoxLentSelectPerson_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+
+            comboBoxLentSelectPerson.DroppedDown = true;
+        }
+
+        private void comboBoxLentPaymentType_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            comboBoxLentPaymentType.DroppedDown = true;
         }
 
     }
