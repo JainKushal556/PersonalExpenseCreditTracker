@@ -402,7 +402,6 @@ namespace PersonalExpenseCreditTracker
             this.lblDate = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.process1 = new System.Diagnostics.Process();
@@ -5268,7 +5267,6 @@ namespace PersonalExpenseCreditTracker
             this.pnlContainer.Controls.Add(this.pnlBorrowPage);
             this.pnlContainer.Controls.Add(this.pnlTaskPage);
             this.pnlContainer.Controls.Add(this.pnlNotesPage);
-            this.pnlContainer.Controls.Add(this.pnlProfilePage);
             this.pnlContainer.Controls.Add(this.pnlSettingPage);
             this.pnlContainer.Controls.Add(this.pnlTop);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -5378,6 +5376,19 @@ namespace PersonalExpenseCreditTracker
             this.pnlNotesPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlNotesPage.TabIndex = 0;
             // 
+            // pnlProfilePage
+            // 
+            this.pnlProfilePage.AutoSize = true;
+            this.pnlProfilePage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlProfilePage.BackColor = System.Drawing.Color.Pink;
+            this.pnlProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProfilePage.Location = new System.Drawing.Point(400, 0);
+            this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(0, 20, 11, 20);
+            this.pnlProfilePage.Name = "pnlProfilePage";
+            this.pnlProfilePage.Size = new System.Drawing.Size(1301, 1055);
+            this.pnlProfilePage.TabIndex = 0;
+            this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
+            // 
             // pnlSettingPage
             // 
             this.pnlSettingPage.AutoSize = true;
@@ -5388,16 +5399,6 @@ namespace PersonalExpenseCreditTracker
             this.pnlSettingPage.Name = "pnlSettingPage";
             this.pnlSettingPage.Size = new System.Drawing.Size(1301, 977);
             this.pnlSettingPage.TabIndex = 0;
-            // 
-            // pnlProfilePage
-            // 
-            this.pnlProfilePage.BackColor = System.Drawing.Color.White;
-            this.pnlProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProfilePage.Location = new System.Drawing.Point(0, 78);
-            this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlProfilePage.Name = "pnlProfilePage";
-            this.pnlProfilePage.Size = new System.Drawing.Size(1301, 977);
-            this.pnlProfilePage.TabIndex = 0;
             // 
             // pnlTop
             // 
@@ -5536,19 +5537,6 @@ namespace PersonalExpenseCreditTracker
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = " Dashboard";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // pnlProfilePage
-            // 
-            this.pnlProfilePage.AutoSize = true;
-            this.pnlProfilePage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlProfilePage.BackColor = System.Drawing.Color.Pink;
-            this.pnlProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProfilePage.Location = new System.Drawing.Point(400, 0);
-            this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(0, 20, 11, 20);
-            this.pnlProfilePage.Name = "pnlProfilePage";
-            this.pnlProfilePage.Size = new System.Drawing.Size(1301, 1055);
-            this.pnlProfilePage.TabIndex = 0;
-            this.pnlProfilePage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProfilePage_Paint);
             // 
             // tmSidebar
             // 
