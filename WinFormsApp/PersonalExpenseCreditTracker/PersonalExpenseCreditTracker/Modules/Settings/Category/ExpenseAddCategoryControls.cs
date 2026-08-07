@@ -13,6 +13,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
     public partial class ExpenseAddCategoryControls : Form
     {
         ExpenseCategoryControls expenseCategoryControls;
+
+        public string AddedCategoryName { get; private set; }
         public ExpenseAddCategoryControls()
         {
             InitializeComponent();
@@ -88,20 +90,25 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                 txtCategory.ForeColor = Color.Gray;
             }
         }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+       
         private void btnSave_Click(object sender, EventArgs e)
         {
+           
+            AddedCategoryName = txtCategory.Text.Trim();
+          
             MessageBox.Show("Saved Expense Category");
+         
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 

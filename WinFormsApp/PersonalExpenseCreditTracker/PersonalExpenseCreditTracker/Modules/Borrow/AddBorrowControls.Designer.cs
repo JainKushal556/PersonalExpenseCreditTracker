@@ -95,7 +95,8 @@
             this.txtBorrowAddDescription.Multiline = true;
             this.txtBorrowAddDescription.Name = "txtBorrowAddDescription";
             this.txtBorrowAddDescription.Size = new System.Drawing.Size(354, 178);
-            this.txtBorrowAddDescription.TabIndex = 31;
+            this.txtBorrowAddDescription.TabIndex = 5;
+            this.txtBorrowAddDescription.TextChanged += new System.EventHandler(this.txtBorrowAddDescription_TextChanged);
             this.txtBorrowAddDescription.Enter += new System.EventHandler(this.txtBorrowAddDescription_Enter);
             this.txtBorrowAddDescription.Leave += new System.EventHandler(this.txtBorrowAddDescription_Leave);
             // 
@@ -127,7 +128,7 @@
             this.panelBorrowAddDeadlineAt.Location = new System.Drawing.Point(186, 333);
             this.panelBorrowAddDeadlineAt.Name = "panelBorrowAddDeadlineAt";
             this.panelBorrowAddDeadlineAt.Size = new System.Drawing.Size(354, 31);
-            this.panelBorrowAddDeadlineAt.TabIndex = 28;
+            this.panelBorrowAddDeadlineAt.TabIndex = 4;
             // 
             // txtBorrowAddDeadlineDatePicker
             // 
@@ -137,6 +138,7 @@
             this.txtBorrowAddDeadlineDatePicker.Name = "txtBorrowAddDeadlineDatePicker";
             this.txtBorrowAddDeadlineDatePicker.Size = new System.Drawing.Size(283, 23);
             this.txtBorrowAddDeadlineDatePicker.TabIndex = 2;
+            this.txtBorrowAddDeadlineDatePicker.Click += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_Click);
             this.txtBorrowAddDeadlineDatePicker.TextChanged += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_TextChanged);
             this.txtBorrowAddDeadlineDatePicker.Enter += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_Enter);
             this.txtBorrowAddDeadlineDatePicker.Leave += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_Leave);
@@ -181,7 +183,7 @@
             this.panel3.Location = new System.Drawing.Point(186, 270);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(354, 32);
-            this.panel3.TabIndex = 25;
+            this.panel3.TabIndex = 3;
             // 
             // txtBorrowAddAmount
             // 
@@ -190,6 +192,7 @@
             this.txtBorrowAddAmount.Name = "txtBorrowAddAmount";
             this.txtBorrowAddAmount.Size = new System.Drawing.Size(310, 23);
             this.txtBorrowAddAmount.TabIndex = 1;
+            this.txtBorrowAddAmount.TextChanged += new System.EventHandler(this.txtBorrowAddAmount_TextChanged);
             this.txtBorrowAddAmount.Enter += new System.EventHandler(this.txtBorrowAddAmount_Enter);
             this.txtBorrowAddAmount.Leave += new System.EventHandler(this.txtBorrowAddAmount_Leave);
             // 
@@ -266,7 +269,8 @@
             this.cmbBorrowPaymentType.Location = new System.Drawing.Point(186, 138);
             this.cmbBorrowPaymentType.Name = "cmbBorrowPaymentType";
             this.cmbBorrowPaymentType.Size = new System.Drawing.Size(354, 31);
-            this.cmbBorrowPaymentType.TabIndex = 17;
+            this.cmbBorrowPaymentType.TabIndex = 1;
+            this.cmbBorrowPaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbBorrowPaymentType_SelectedIndexChanged);
             this.cmbBorrowPaymentType.Enter += new System.EventHandler(this.cmbBorrowPaymentType_Enter);
             this.cmbBorrowPaymentType.Leave += new System.EventHandler(this.cmbBorrowPaymentType_Leave);
             // 
@@ -304,7 +308,8 @@
             this.cmbBorrowSelectPerson.Location = new System.Drawing.Point(186, 72);
             this.cmbBorrowSelectPerson.Name = "cmbBorrowSelectPerson";
             this.cmbBorrowSelectPerson.Size = new System.Drawing.Size(354, 31);
-            this.cmbBorrowSelectPerson.TabIndex = 14;
+            this.cmbBorrowSelectPerson.TabIndex = 0;
+            this.cmbBorrowSelectPerson.SelectedIndexChanged += new System.EventHandler(this.cmbBorrowSelectPerson_SelectedIndexChanged);
             this.cmbBorrowSelectPerson.Enter += new System.EventHandler(this.cmbBorrowSelectPerson_Enter);
             this.cmbBorrowSelectPerson.Leave += new System.EventHandler(this.cmbBorrowSelectPerson_Leave);
             // 
@@ -406,7 +411,7 @@
             this.txtBorrowStatus.Name = "txtBorrowStatus";
             this.txtBorrowStatus.ReadOnly = true;
             this.txtBorrowStatus.Size = new System.Drawing.Size(354, 30);
-            this.txtBorrowStatus.TabIndex = 35;
+            this.txtBorrowStatus.TabIndex = 2;
             this.txtBorrowStatus.Text = "  Pending";
             // 
             // btnBorrowAddClear

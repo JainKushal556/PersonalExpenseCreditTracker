@@ -25,6 +25,8 @@ namespace BLLayer.Common
             DeadlineInvalid,
 
             DescriptionInvalid,
+            DescriptionTooShort,
+            DescriptionTooLong,
 
             EmailInvalid,
             PhoneInvalid,
@@ -182,20 +184,24 @@ namespace BLLayer.Common
 
         public static ValidationResult ValidateDescription(string description)
         {
-            if (!string.IsNullOrWhiteSpace(description))
+            if (string.IsNullOrWhiteSpace(description))
             {
-                description = description.Trim();
-
-                if (description.Length >= 5)
-                {
-                    if (description.Length <= 150)
-                    {
-                        return ValidationResult.Success;
-                    }
-                }
+                return ValidationResult.DescriptionInvalid;
             }
 
-            return ValidationResult.DescriptionInvalid;
+            description = description.Trim();
+
+            if (description.Length < 5)
+            {
+                return ValidationResult.DescriptionTooShort;
+            }
+
+            if (description.Length > 150)
+            {
+                return ValidationResult.DescriptionTooLong;
+            }
+
+            return ValidationResult.Success;
         }
 
         //Email Validation

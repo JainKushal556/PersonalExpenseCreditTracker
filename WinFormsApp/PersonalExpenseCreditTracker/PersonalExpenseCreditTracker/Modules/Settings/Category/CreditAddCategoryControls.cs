@@ -13,11 +13,17 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
     public partial class CreditAddCategoryControls : Form
     {
         CreditCategoryControls creditCategoryControls;
+        public string AddedCategoryName { get; private set; }
+
         public CreditAddCategoryControls()
         {
             InitializeComponent();
         }
-
+        public CreditAddCategoryControls(CreditCategoryControls obj)
+        {
+            InitializeComponent();
+            creditCategoryControls = obj;
+        }
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
@@ -56,12 +62,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             DeleteObject(hrgn);
         }
 
-        public CreditAddCategoryControls(CreditCategoryControls Obj)
-        {
-            InitializeComponent();
-            creditCategoryControls = Obj;
-        }
-
         private void CreditAddCategoryControls_Load(object sender, EventArgs e)
         {
             txtCategory.Text = "Enter Category Name";
@@ -92,17 +92,23 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            AddedCategoryName = txtCategory.Text.Trim();
+
             MessageBox.Show("Saved Credit Category");
+
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 

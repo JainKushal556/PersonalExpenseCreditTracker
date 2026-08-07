@@ -20,7 +20,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private int currentPage = 1;
         private int pageSize = 0;
 
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
             int nTopRect,
@@ -28,6 +29,34 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             int nBottomRect,
             int nWidthEllipse,
             int nHeightEllipse);
+
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        // Radius Corner of These Panels
+        private void SetRadius(Control control, int radius)
+        {
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
+        }
 
 
         public LentControls()
@@ -74,41 +103,14 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void ApplyRoundCorners()
         {
-            panelTotalLent.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelTotalLent.Width,
-                    panelTotalLent.Height,
-                    10,
-                    10));
+           
+            SetRadius(panelTotalLent, 15);
 
-            panelTotalRepaid.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelTotalRepaid.Width,
-                    panelTotalRepaid.Height,
-                    15,
-                    15));
+            SetRadius(panelTotalRepaid, 15);
 
-            panelTotalDue.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelTotalDue.Width,
-                    panelTotalDue.Height,
-                    15,
-                    15));
+            SetRadius(panelTotalDue, 15);
 
-            panelTotalTransaction.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelTotalTransaction.Width,
-                    panelTotalTransaction.Height,
-                    15,
-                    15));
+            SetRadius(panelTotalTransaction, 15);
 
         }
 

@@ -17,8 +17,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public PayLentReturnAmountControls()
         {
             InitializeComponent();
-            //this.rtxtDescription.Enter += new System.EventHandler(this.rtxtDescription_Leave);
-            //this.rtxtDescription.Leave += new System.EventHandler(this.rtxtDescription_Enter);
+           
         }
         public void SetLentDetails(int lentId, string personName, string totalAmount, string remainingAmount, string status, string returnAmount)
         {
@@ -39,18 +38,20 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             txtReturnAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
-            cmbPaymentType.Text = "Enter Payment Type";
-            cmbStatus.Text = "Enetr Status";
+            cmbPaymentType.Text = "Select Payment Type";
+         
             txtDescription.Text = "Enter Description";
 
             txtReturnAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
-            cmbStatus.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
 
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbPaymentType);
+            cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
+            txtReturnDate.Click += txtReturnDate_Click;
         }
+
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
@@ -89,12 +90,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             DeleteObject(hrgn);
         }
 
-        private void btnAddSave_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Amount Return Successfully");
-            this.Close();
-        }
-
         private void btnAddCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -104,17 +99,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             txtReturnAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
-            cmbPaymentType.Text = "Enter Payment Type";
-            cmbStatus.Text = "Enetr Status";
-            txtDescription.Text = "Enter Description";
+            cmbPaymentType.Text = "Select Payment Type";
 
+            txtDescription.Text = "Enter Description";
             txtReturnAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
-            cmbStatus.ForeColor = Color.Gray;
 
             pnlCalenderShow.Visible = false;
+            errorProvider1.Clear();
         }
 
         private void txtReturnAmount_Enter(object sender, EventArgs e)
@@ -137,43 +131,34 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             pnlCalenderShow.Visible = false;
         }
 
-        private void cmbStatus_Enter(object sender, EventArgs e)
-        {
-            if (cmbStatus.Text == "Enetr Status")
-            {
-                cmbStatus.Text = "";
-                cmbStatus.ForeColor = Color.Black;
-            }
-            pnlCalenderShow.Visible = false;
-        }
+       
 
-        private void cmbStatus_Leave(object sender, EventArgs e)
-        {
-            if (cmbStatus.Text == "")
-            {
-                cmbStatus.Text = "Enetr Status";
-                cmbStatus.ForeColor = Color.Gray;
-            }
-        }
+
 
         private void cmbPaymentType_Enter(object sender, EventArgs e)
         {
-            if (cmbPaymentType.Text == "Enter Payment Type")
+          
+            if (cmbPaymentType.Text == "Select Payment Type")
             {
-                cmbPaymentType.Text = "";
                 cmbPaymentType.ForeColor = Color.Black;
             }
             pnlCalenderShow.Visible = false;
         }
-
         private void cmbPaymentType_Leave(object sender, EventArgs e)
         {
-            if (cmbPaymentType.Text == "")
+           
+            if (cmbPaymentType.SelectedIndex <= 0 || string.IsNullOrWhiteSpace(cmbPaymentType.Text) || cmbPaymentType.Text == "Select Payment Type" || cmbPaymentType.Text == "Enter Payment Type")
             {
-                cmbPaymentType.Text = "Enter Payment Type";
+                cmbPaymentType.SelectedIndex = 0;
+                cmbPaymentType.Text = "Select Payment Type";
                 cmbPaymentType.ForeColor = Color.Gray;
             }
+            else
+            {
+                cmbPaymentType.ForeColor = Color.Black;
+            }
         }
+
 
         private void txtReturnDate_Enter(object sender, EventArgs e)
         {
@@ -182,7 +167,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 txtReturnDate.Text = "";
                 txtReturnDate.ForeColor = Color.Black;
             }
-            pnlCalenderShow.Visible = true;
         }
 
         private void txtReturnDate_Leave(object sender, EventArgs e)
@@ -223,6 +207,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void txtReturnDate_TextChanged(object sender, EventArgs e)
         {
             pnlCalenderShow.Visible = false;
+            if (txtReturnDate.Text != "DD-MM-YYYY" && !string.IsNullOrWhiteSpace(txtReturnDate.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtReturnDate);
+            }
         }
 
         private void btnAddCalendar_Click(object sender, EventArgs e)
@@ -249,26 +237,22 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            pnlCalenderShow.Visible = false;
             errorProvider1.Clear();
 
             LentUi lentUi = new LentUi();
 
-            // Assign values from the form controls to the object
             lentUi.userId = Session.LogedInUser.GetUserId();
             lentUi.lentId = this.selectedLentId;
             lentUi.paymentId = Convert.ToInt32(cmbPaymentType.SelectedValue);
 
-            // If the placeholder text is still present, pass an empty string
-            lentUi.returnAmount = (txtReturnAmount.Text == "Select Amount") ? "" : txtReturnAmount.Text;
+            lentUi.returnAmount = (txtReturnAmount.Text == "Enter Return Amount" || txtReturnAmount.Text == "Select Amount") ? "" : txtReturnAmount.Text;
             lentUi.description = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
 
-            // If no return date is selected, assign DateTime.MinValue
-            // Otherwise, assign the selected date from the calendar
             lentUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY")
                 ? DateTime.MinValue
                 : monthCalendar.SelectionStart;
 
-            // Call UI Layer
             CommonValidator.ValidationResult result = lentUi.InsertReturnLentIntoLentUi();
 
             switch (result)
@@ -294,6 +278,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
 
                 case CommonValidator.ValidationResult.DescriptionInvalid:
+                case CommonValidator.ValidationResult.DescriptionTooShort:
+                case CommonValidator.ValidationResult.DescriptionTooLong:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtDescription);
                     break;
 
@@ -302,6 +288,35 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
             }
         }
+
+        private void txtReturnDate_Click(object sender, EventArgs e)
+        {
+            pnlCalenderShow.Visible = true;
+        }
+
+        private void txtReturnAmount_TextChanged(object sender, EventArgs e)
+        {
+            if (txtReturnAmount.Text != "Enter Return Amount" && !string.IsNullOrWhiteSpace(txtReturnAmount.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtReturnAmount);
+            }
+        }
+
+        private void txtDescription_TextChanged(object sender, EventArgs e)
+        {
+            if (txtDescription.Text != "Enter Description" && !string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtDescription);
+            }
+        }
+
+        private void cmbPaymentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(cmbPaymentType);
+            cmbPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
 
        
     }

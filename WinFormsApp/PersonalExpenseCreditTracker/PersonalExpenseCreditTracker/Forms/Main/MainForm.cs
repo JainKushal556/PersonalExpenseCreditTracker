@@ -639,6 +639,12 @@ namespace PersonalExpenseCreditTracker
 
         }
 
+        public void OpenExpenseCategorySettings()
+        {
+            
+            pnlSettingExpenseCategories_Click(null, null);
+        }
+
 
         //pnlCredit all Function
         private void pnlCredit_MouseEnter(object sender, EventArgs e)
@@ -1662,6 +1668,7 @@ namespace PersonalExpenseCreditTracker
         private void txtMaxAmount_TextChanged(object sender, EventArgs e)
         {
             UpdateClearAllButton();
+            ErrorHelper.HideErrorForControl(txtMaxAmount);
         }
 
         private void btnClearAll_Click(object sender, EventArgs e)
@@ -1682,7 +1689,10 @@ namespace PersonalExpenseCreditTracker
 
             btnClearAll.Visible = false;
 
+            ErrorHelper.ClearAllErrors(this);
+            errorProvider1.Clear();
             expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
+          
         }
 
         private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -4238,7 +4248,8 @@ namespace PersonalExpenseCreditTracker
 
         private void txtMinAmount_TextChanged(object sender, EventArgs e)
         {
-            UpdateCreditClearAllButton();
+            UpdateClearAllButton();
+            ErrorHelper.HideErrorForControl(txtMinAmount);
         }
 
         private void txtCreditMinAmount_TextChanged(object sender, EventArgs e)
@@ -4350,7 +4361,8 @@ namespace PersonalExpenseCreditTracker
 
         private void btnExpenseApplyAmountFilter_Click(object sender, EventArgs e)
         {
-            // Clear all previous validation errors
+            // 👇 ১. সমস্ত আগের লাল এরর মেসেজ ক্লিয়ার করা
+            ErrorHelper.ClearAllErrors(this);
             errorProvider1.Clear();
 
             // Create a new object to store the user's input
@@ -4365,16 +4377,18 @@ namespace PersonalExpenseCreditTracker
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-
                     if (expenseControl != null && !expenseControl.IsDisposed)
                     {
+                        decimal minVal = Convert.ToDecimal(txtMinAmount.Text);
+                        decimal maxVal = Convert.ToDecimal(txtMaxAmount.Text);
+
                         if (!expenseControl.LoadFilteredExpenseData(
                                 "spFilterExpenseByAmountRange",
                                 Session.LogedInUser.GetUserId(),
                                 "@MinAmount",
-                                Convert.ToDecimal(txtMinAmount.Text),
+                                minVal,
                                 "@MaxAmount",
-                                Convert.ToDecimal(txtMaxAmount.Text)))
+                                maxVal))
                         {
                             expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
                             MessageBox.Show("No Specific Record Exist!");
@@ -4404,6 +4418,9 @@ namespace PersonalExpenseCreditTracker
                     break;
             }
         }
+
+
+       
 
 
         

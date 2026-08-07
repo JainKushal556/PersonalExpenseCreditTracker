@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lblAmount = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblPaymentType = new System.Windows.Forms.Label();
             this.cmbPaymentType = new System.Windows.Forms.ComboBox();
@@ -43,9 +42,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblLentDetails = new System.Windows.Forms.Label();
             this.pnlInputField = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.pnlCalenderShow = new System.Windows.Forms.Panel();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.txtDescription = new System.Windows.Forms.TextBox();
@@ -76,7 +72,6 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelMainBody.SuspendLayout();
             this.pnlInputField.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.pnlCalenderShow.SuspendLayout();
             this.panelAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -96,21 +91,11 @@
             this.lblAmount.TabIndex = 23;
             this.lblAmount.Text = "Return Amount";
             // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(12, 75);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(57, 23);
-            this.lblStatus.TabIndex = 21;
-            this.lblStatus.Text = "Status";
-            // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(133, 133);
+            this.label3.Location = new System.Drawing.Point(133, 75);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 21);
@@ -120,7 +105,7 @@
             // lblPaymentType
             // 
             this.lblPaymentType.AutoSize = true;
-            this.lblPaymentType.Location = new System.Drawing.Point(12, 133);
+            this.lblPaymentType.Location = new System.Drawing.Point(12, 75);
             this.lblPaymentType.Margin = new System.Windows.Forms.Padding(0);
             this.lblPaymentType.Name = "lblPaymentType";
             this.lblPaymentType.Size = new System.Drawing.Size(119, 23);
@@ -137,7 +122,8 @@
             this.cmbPaymentType.Location = new System.Drawing.Point(0, 0);
             this.cmbPaymentType.Name = "cmbPaymentType";
             this.cmbPaymentType.Size = new System.Drawing.Size(352, 31);
-            this.cmbPaymentType.TabIndex = 17;
+            this.cmbPaymentType.TabIndex = 1;
+            this.cmbPaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbPaymentType_SelectedIndexChanged);
             this.cmbPaymentType.Enter += new System.EventHandler(this.cmbPaymentType_Enter);
             this.cmbPaymentType.Leave += new System.EventHandler(this.cmbPaymentType_Leave);
             // 
@@ -148,7 +134,8 @@
             this.txtAmount.Location = new System.Drawing.Point(45, 4);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(306, 23);
-            this.txtAmount.TabIndex = 1;
+            this.txtAmount.TabIndex = 0;
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             this.txtAmount.Enter += new System.EventHandler(this.txtAmount_Enter);
             this.txtAmount.Leave += new System.EventHandler(this.txtAmount_Leave);
             // 
@@ -169,14 +156,15 @@
             this.panelMainBody.Location = new System.Drawing.Point(0, 0);
             this.panelMainBody.Name = "panelMainBody";
             this.panelMainBody.Padding = new System.Windows.Forms.Padding(15);
-            this.panelMainBody.Size = new System.Drawing.Size(618, 774);
+            this.panelMainBody.Size = new System.Drawing.Size(618, 722);
             this.panelMainBody.TabIndex = 1;
             this.panelMainBody.Click += new System.EventHandler(this.panelMainBody_Click);
             this.panelMainBody.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMainBody_Paint);
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
             this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
@@ -185,10 +173,10 @@
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(420, 718);
+            this.btnSave.Location = new System.Drawing.Point(420, 662);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(177, 41);
-            this.btnSave.TabIndex = 8;
+            this.btnSave.TabIndex = 6;
             this.btnSave.Text = "  Save Borrow";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = false;
@@ -196,7 +184,8 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
@@ -204,10 +193,10 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(263, 718);
+            this.btnCancel.Location = new System.Drawing.Point(263, 662);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 41);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = " Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -215,13 +204,14 @@
             // 
             // btnClear
             // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClear.Location = new System.Drawing.Point(16, 718);
+            this.btnClear.Location = new System.Drawing.Point(16, 662);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(133, 41);
             this.btnClear.TabIndex = 6;
@@ -232,13 +222,13 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(19, 708);
+            this.panel2.Location = new System.Drawing.Point(19, 648);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(578, 1);
-            this.panel2.TabIndex = 5;
+            this.panel2.TabIndex = 4;
             // 
             // panel1
             // 
@@ -262,8 +252,6 @@
             // pnlInputField
             // 
             this.pnlInputField.BackColor = System.Drawing.Color.White;
-            this.pnlInputField.Controls.Add(this.panel5);
-            this.pnlInputField.Controls.Add(this.label2);
             this.pnlInputField.Controls.Add(this.pnlCalenderShow);
             this.pnlInputField.Controls.Add(this.txtDescription);
             this.pnlInputField.Controls.Add(this.label9);
@@ -274,56 +262,20 @@
             this.pnlInputField.Controls.Add(this.panel3);
             this.pnlInputField.Controls.Add(this.label7);
             this.pnlInputField.Controls.Add(this.lblAmount);
-            this.pnlInputField.Controls.Add(this.lblStatus);
             this.pnlInputField.Controls.Add(this.label3);
             this.pnlInputField.Controls.Add(this.lblPaymentType);
             this.pnlInputField.Controls.Add(this.panel4);
             this.pnlInputField.Location = new System.Drawing.Point(16, 246);
             this.pnlInputField.Name = "pnlInputField";
-            this.pnlInputField.Size = new System.Drawing.Size(585, 445);
+            this.pnlInputField.Size = new System.Drawing.Size(585, 389);
             this.pnlInputField.TabIndex = 39;
             this.pnlInputField.Click += new System.EventHandler(this.pnlInputField_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.cmbStatus);
-            this.panel5.Location = new System.Drawing.Point(213, 74);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(354, 33);
-            this.panel5.TabIndex = 40;
-            // 
-            // cmbStatus
-            // 
-            this.cmbStatus.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.cmbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.IntegralHeight = false;
-            this.cmbStatus.ItemHeight = 23;
-            this.cmbStatus.Location = new System.Drawing.Point(0, 0);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(352, 31);
-            this.cmbStatus.TabIndex = 17;
-            this.cmbStatus.Enter += new System.EventHandler(this.cmbStatus_Enter);
-            this.cmbStatus.Leave += new System.EventHandler(this.cmbStatus_Leave);
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(70, 75);
-            this.label2.Margin = new System.Windows.Forms.Padding(0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 21);
-            this.label2.TabIndex = 38;
-            this.label2.Text = "*";
             // 
             // pnlCalenderShow
             // 
             this.pnlCalenderShow.BackColor = System.Drawing.Color.Transparent;
             this.pnlCalenderShow.Controls.Add(this.monthCalendar);
-            this.pnlCalenderShow.Location = new System.Drawing.Point(251, 227);
+            this.pnlCalenderShow.Location = new System.Drawing.Point(251, 169);
             this.pnlCalenderShow.Name = "pnlCalenderShow";
             this.pnlCalenderShow.Size = new System.Drawing.Size(301, 199);
             this.pnlCalenderShow.TabIndex = 32;
@@ -341,11 +293,12 @@
             // 
             this.txtDescription.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDescription.Location = new System.Drawing.Point(213, 248);
+            this.txtDescription.Location = new System.Drawing.Point(213, 190);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(354, 178);
-            this.txtDescription.TabIndex = 31;
+            this.txtDescription.TabIndex = 3;
+            this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             this.txtDescription.Enter += new System.EventHandler(this.txtDescription_Enter);
             this.txtDescription.Leave += new System.EventHandler(this.txtDescription_Leave);
             // 
@@ -353,7 +306,7 @@
             // 
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(118, 249);
+            this.label9.Location = new System.Drawing.Point(118, 191);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(33, 21);
@@ -362,7 +315,7 @@
             // 
             // lblDescription
             // 
-            this.lblDescription.Location = new System.Drawing.Point(12, 249);
+            this.lblDescription.Location = new System.Drawing.Point(12, 191);
             this.lblDescription.Margin = new System.Windows.Forms.Padding(0);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(123, 30);
@@ -375,10 +328,10 @@
             this.panelAddDeadlineAt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelAddDeadlineAt.Controls.Add(this.txtReturnDate);
             this.panelAddDeadlineAt.Controls.Add(this.btnAddCalendar);
-            this.panelAddDeadlineAt.Location = new System.Drawing.Point(213, 190);
+            this.panelAddDeadlineAt.Location = new System.Drawing.Point(213, 132);
             this.panelAddDeadlineAt.Name = "panelAddDeadlineAt";
             this.panelAddDeadlineAt.Size = new System.Drawing.Size(354, 31);
-            this.panelAddDeadlineAt.TabIndex = 28;
+            this.panelAddDeadlineAt.TabIndex = 2;
             // 
             // txtReturnDate
             // 
@@ -388,6 +341,7 @@
             this.txtReturnDate.Name = "txtReturnDate";
             this.txtReturnDate.Size = new System.Drawing.Size(267, 23);
             this.txtReturnDate.TabIndex = 2;
+            this.txtReturnDate.Click += new System.EventHandler(this.txtReturnDate_Click);
             this.txtReturnDate.TextChanged += new System.EventHandler(this.txtReturnDate_TextChanged);
             this.txtReturnDate.Enter += new System.EventHandler(this.txtReturnDate_Enter);
             this.txtReturnDate.Leave += new System.EventHandler(this.txtReturnDate_Leave);
@@ -400,7 +354,7 @@
             this.btnAddCalendar.Location = new System.Drawing.Point(314, -1);
             this.btnAddCalendar.Name = "btnAddCalendar";
             this.btnAddCalendar.Size = new System.Drawing.Size(37, 31);
-            this.btnAddCalendar.TabIndex = 1;
+            this.btnAddCalendar.TabIndex = 3;
             this.btnAddCalendar.UseVisualStyleBackColor = true;
             this.btnAddCalendar.Click += new System.EventHandler(this.btnAddCalendar_Click);
             // 
@@ -408,7 +362,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(123, 190);
+            this.label1.Location = new System.Drawing.Point(123, 132);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 21);
@@ -417,7 +371,7 @@
             // 
             // lblDeadlineAt
             // 
-            this.lblDeadlineAt.Location = new System.Drawing.Point(12, 191);
+            this.lblDeadlineAt.Location = new System.Drawing.Point(12, 133);
             this.lblDeadlineAt.Margin = new System.Windows.Forms.Padding(0);
             this.lblDeadlineAt.Name = "lblDeadlineAt";
             this.lblDeadlineAt.Size = new System.Drawing.Size(123, 30);
@@ -433,7 +387,7 @@
             this.panel3.Location = new System.Drawing.Point(213, 16);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(354, 32);
-            this.panel3.TabIndex = 25;
+            this.panel3.TabIndex = 0;
             // 
             // pictureBoxRupee
             // 
@@ -464,10 +418,10 @@
             this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.cmbPaymentType);
-            this.panel4.Location = new System.Drawing.Point(213, 131);
+            this.panel4.Location = new System.Drawing.Point(213, 73);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(354, 32);
-            this.panel4.TabIndex = 39;
+            this.panel4.TabIndex = 1;
             // 
             // pnlPersonDetails
             // 
@@ -487,7 +441,7 @@
             this.pnlPersonDetails.Location = new System.Drawing.Point(16, 67);
             this.pnlPersonDetails.Name = "pnlPersonDetails";
             this.pnlPersonDetails.Size = new System.Drawing.Size(585, 164);
-            this.pnlPersonDetails.TabIndex = 42;
+            this.pnlPersonDetails.TabIndex = 0;
             this.pnlPersonDetails.Click += new System.EventHandler(this.pnlPersonDetails_Click);
             // 
             // label8
@@ -613,7 +567,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(618, 774);
+            this.ClientSize = new System.Drawing.Size(618, 722);
             this.Controls.Add(this.panelMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PayBorrowPaidAmountControls";
@@ -623,7 +577,6 @@
             this.panelMainBody.ResumeLayout(false);
             this.pnlInputField.ResumeLayout(false);
             this.pnlInputField.PerformLayout();
-            this.panel5.ResumeLayout(false);
             this.pnlCalenderShow.ResumeLayout(false);
             this.panelAddDeadlineAt.ResumeLayout(false);
             this.panelAddDeadlineAt.PerformLayout();
@@ -641,7 +594,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblAmount;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblPaymentType;
         private System.Windows.Forms.ComboBox cmbPaymentType;
@@ -671,15 +623,12 @@
         private System.Windows.Forms.Label lblTotalAmountText;
         private System.Windows.Forms.Label lblPaidAmountTitle;
         private System.Windows.Forms.Label lblRemainingAmountTitle;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblPersonNameTitle;
         private System.Windows.Forms.Label lblRemainingAmountText;
         private System.Windows.Forms.Label lblPaidAmountText;
         private System.Windows.Forms.Panel pnlInputField;
         private System.Windows.Forms.Panel pnlPersonDetails;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
