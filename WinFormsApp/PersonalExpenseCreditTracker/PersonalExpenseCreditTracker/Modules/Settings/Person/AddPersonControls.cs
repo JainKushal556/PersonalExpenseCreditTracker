@@ -322,6 +322,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Person Details Save Successfully");
+                    LoadData();
                     break;
 
                 case CommonValidator.ValidationResult.PersonNameEmpty:
