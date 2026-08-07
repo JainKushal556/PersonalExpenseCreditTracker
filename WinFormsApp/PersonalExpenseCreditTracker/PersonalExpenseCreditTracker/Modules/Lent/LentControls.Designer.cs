@@ -1062,7 +1062,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.pnlToDateCalenderShow.BackColor = System.Drawing.Color.Transparent;
             this.pnlToDateCalenderShow.Controls.Add(this.monthCalendarToDate);
-            this.pnlToDateCalenderShow.Location = new System.Drawing.Point(-19, 4);
+            this.pnlToDateCalenderShow.Location = new System.Drawing.Point(384, 37);
             this.pnlToDateCalenderShow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlToDateCalenderShow.Name = "pnlToDateCalenderShow";
             this.pnlToDateCalenderShow.Size = new System.Drawing.Size(301, 198);

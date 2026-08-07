@@ -54,9 +54,46 @@ namespace BLLayer.Common
             FullNameInvalid,
             AddressInvalid,
             DateOfBirthInvalid,
-            GenderInvalid
+            GenderInvalid,
+            CurrentAndNewPasswordSame,
+            CurrentPasswordEmpty,
+            NewPasswordEmpty,
+            ConfirmPasswordEmpty,
+            NotMatchPassword,
+            WeakPassword,
+            MediumPassword,
+            StrongPassword,
+            VeryStrongPassword
         }
 
+        // Validation Password
+        public static ValidationResult ValidatePassword(string CurrentPassword, string NewPassword, string ConfirmPassword)
+        {
+            if (string.IsNullOrWhiteSpace(CurrentPassword))
+            {
+                return ValidationResult.CurrentPasswordEmpty;
+            }
+            else if (string.IsNullOrWhiteSpace(NewPassword))
+            {
+                return ValidationResult.NewPasswordEmpty;
+            }
+            else if (string.IsNullOrWhiteSpace(ConfirmPassword))
+            {
+                return ValidationResult.ConfirmPasswordEmpty;
+            }
+            else if (NewPassword != ConfirmPassword)
+            {
+                return ValidationResult.NotMatchPassword;
+            }
+            else if (CurrentPassword == NewPassword)
+            {
+                return ValidationResult.CurrentAndNewPasswordSame;
+            }
+            else
+            {
+                return ValidationResult.Success;
+            }
+        }
         
         //Validation PersonID
         public static ValidationResult ValidatePerson(int personId)

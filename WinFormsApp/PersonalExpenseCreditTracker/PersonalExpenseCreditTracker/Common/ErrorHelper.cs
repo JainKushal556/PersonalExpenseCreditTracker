@@ -142,6 +142,26 @@ namespace PersonalExpenseCreditTracker.Common
                 case CommonValidator.ValidationResult.PersonInvalid:
                     message = "* Please enter a valid person.";
                     break;
+
+                // Password field is empty
+                case CommonValidator.ValidationResult.CurrentPasswordEmpty:
+                case CommonValidator.ValidationResult.NewPasswordEmpty:
+                case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
+                    errorProvider.SetError(textBox, "Password is required.");
+                    textBox.Focus();
+                    break;
+
+                // CurrentPassword And NewPassword Same
+                case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
+                    errorProvider.SetError(textBox, "Your current password and new password are same.");
+                    textBox.Focus();
+                    break;
+
+                // Not Match Password
+                case CommonValidator.ValidationResult.NotMatchPassword:
+                    errorProvider.SetError(textBox, "Password doesn't match.");
+                    textBox.Focus();
+                    break;
             }
 
             if (!string.IsNullOrEmpty(message))
