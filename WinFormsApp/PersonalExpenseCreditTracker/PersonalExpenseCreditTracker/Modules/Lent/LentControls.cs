@@ -21,8 +21,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private int currentPage = 1;
         private int pageSize = 0;
 
-
-        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
             int nTopRect,
@@ -31,41 +30,14 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             int nWidthEllipse,
             int nHeightEllipse);
 
-        // Free GDI object
-        [DllImport("gdi32.dll")]
-        private static extern bool DeleteObject(IntPtr hObject);
-
-        // Radius Corner of These Panels
-        private void SetRadius(Control control, int radius)
-        {
-            if (control.Width <= 0 || control.Height <= 0)
-                return;
-
-            IntPtr hrgn = CreateRoundRectRgn(
-                0,
-                0,
-                control.Width + 1,
-                control.Height + 1,
-                radius,
-                radius);
-
-            Region region = Region.FromHrgn(hrgn);
-
-            if (control.Region != null)
-                control.Region.Dispose();
-
-            control.Region = region;
-
-            DeleteObject(hrgn);
-        }
-
 
         public LentControls()
         {
             InitializeComponent();
 
             StyleLentGrid();
-           
+            dgvLentDataTable.CellDoubleClick += dgvLentDataTable_CellDoubleClick;
+
             dgvLentDataTable.AutoGenerateColumns = false;
 
             ApplyRoundCorners();
@@ -104,14 +76,41 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void ApplyRoundCorners()
         {
-           
-            SetRadius(panelTotalLent, 15);
+            panelTotalLent.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelTotalLent.Width,
+                    panelTotalLent.Height,
+                    10,
+                    10));
 
-            SetRadius(panelTotalRepaid, 15);
+            panelTotalRepaid.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelTotalRepaid.Width,
+                    panelTotalRepaid.Height,
+                    15,
+                    15));
 
-            SetRadius(panelTotalDue, 15);
+            panelTotalDue.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelTotalDue.Width,
+                    panelTotalDue.Height,
+                    15,
+                    15));
 
-            SetRadius(panelTotalTransaction, 15);
+            panelTotalTransaction.Region = Region.FromHrgn(
+                CreateRoundRectRgn(
+                    0,
+                    0,
+                    panelTotalTransaction.Width,
+                    panelTotalTransaction.Height,
+                    15,
+                    15));
 
         }
 
@@ -136,17 +135,23 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             LoadLentData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
-        cmsFilter.Opening += cmsFilter_Opening;
+             cmsFilter.Opening += cmsFilter_Opening;
 
         }
 
         private void cmsFilter_Opening(object sender, CancelEventArgs e)
         {
             tsmiDate.AutoSize = false;
-            tsmiCategory.AutoSize = false;
+            tsmiAmount.AutoSize = false;
+            tsmiPayment.AutoSize = false;
+            tsmiPerson.AutoSize = false;
+            tsmiStatus.AutoSize = false;
 
             tsmiDate.Width = cmsFilter.Width;
-            tsmiCategory.Width = cmsFilter.Width;
+            tsmiAmount.Width = cmsFilter.Width;
+            tsmiStatus.Width = cmsFilter.Width;
+            tsmiPerson.Width = cmsFilter.Width;
+            tsmiPayment.Width = cmsFilter.Width;
         }
         public void LoadLentData(int userID)
         {
@@ -335,6 +340,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             dgvLentDataTable.DataSource = pageTable;
             Common.CommonUiFunction.HighlightSearch(dgvLentDataTable, txtSearch);
+
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllLentData.Rows.Count;
@@ -492,6 +498,48 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
         }
 
+        private void dgvLentDataTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panelTotalLent_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                panelTotalLent.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void panelTotalRepaid_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                panelTotalRepaid.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void panelTotalDue_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                panelTotalDue.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+        private void panelTotalTransaction_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(
+                e.Graphics,
+                panelTotalTransaction.ClientRectangle,
+                ColorTranslator.FromHtml("#E7ECF3"),
+                ButtonBorderStyle.Solid);
+        }
+
+
         private void dgvLentDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
@@ -531,55 +579,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
         }
 
-
-        private void panelTotalLent_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(
-                e.Graphics,
-                panelTotalLent.ClientRectangle,
-                ColorTranslator.FromHtml("#E7ECF3"),
-                ButtonBorderStyle.Solid);
-        }
-
-        private void panelTotalRepaid_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(
-                e.Graphics,
-                panelTotalRepaid.ClientRectangle,
-                ColorTranslator.FromHtml("#E7ECF3"),
-                ButtonBorderStyle.Solid);
-        }
-
-        private void panelTotalDue_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(
-                e.Graphics,
-                panelTotalDue.ClientRectangle,
-                ColorTranslator.FromHtml("#E7ECF3"),
-                ButtonBorderStyle.Solid);
-        }
-
-        private void panelTotalTransaction_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(
-                e.Graphics,
-                panelTotalTransaction.ClientRectangle,
-                ColorTranslator.FromHtml("#E7ECF3"),
-                ButtonBorderStyle.Solid);
-        }
-
-
-        //private void dgvLentDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.RowIndex < 0)
-        //        return;
-
-        //    PayLentReturnAmountControls frm = new PayLentReturnAmountControls();
-
-        //    frm.StartPosition = FormStartPosition.CenterParent;
-        //    frm.ShowDialog(this);
-        //}
-
         private void btnExportReport_Click(object sender, EventArgs e)
         {
 
@@ -592,14 +591,27 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
-            ShowFilterPanel(pnlCategoryFilter);
+            ShowFilterPanel(pnlAmountFilter);
+        }
+        private void tsmiPerson_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlPersonFilter);
         }
 
+        private void tsmiStatus_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlStatusFilter);
+        }
+
+        private void tsmiPayment_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlPaymentFilter);
+        }
         
 
         private void btncategoryClose_Click(object sender, EventArgs e)
         {
-            pnlCategoryFilter.Visible = false;
+            pnlAmountFilter.Visible = false;
         }
 
         
@@ -613,13 +625,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnSerach_Click(object sender, EventArgs e)
         {
-            ShowSearchPanel(pnlSearch);
+            ShowSearchPanel(pnlSearchFilter);
         }
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
-            pnlCategoryFilter.Visible = false;
-            pnlSearch.Visible = false;
+            pnlAmountFilter.Visible = false;
+            pnlSearchFilter.Visible = false;
+            pnlStatusFilter.Visible = false;
+            pnlPaymentFilter.Visible = false;
+            pnlPersonFilter.Visible = false;
 
         }
         private void HidePopupPanels()
@@ -674,17 +689,17 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             tsmiDate.AutoSize = false;
             tsmiDate.Height = 30;
 
-            tsmiCategory.AutoSize = false;
-            tsmiCategory.Height = 30;
+            tsmiAmount.AutoSize = false;
+            tsmiAmount.Height = 30;
 
             tsmiDate.Image = Properties.Resources.calendar;
-            tsmiCategory.Image = Properties.Resources.shop;
+            tsmiAmount.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiCategory.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiCategory.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
 
 
         }
@@ -795,6 +810,21 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlDateFilter.Visible = false;
         }
+
+        private void btnPersonClose_Click(object sender, EventArgs e)
+        {
+            pnlPersonFilter.Visible = false;
+        }
+
+        private void btnPaymentClose_Click(object sender, EventArgs e)
+        {
+            pnlPaymentFilter.Visible = false;
+        }
+
+         private void button3_Click(object sender, EventArgs e)
+         {
+             pnlStatusFilter.Visible = false;
+         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
