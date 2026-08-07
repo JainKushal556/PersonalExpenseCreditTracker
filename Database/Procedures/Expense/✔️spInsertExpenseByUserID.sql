@@ -9,7 +9,7 @@ CREATE PROCEDURE spInsertExpenseByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     -- Check User
     IF NOT EXISTS

@@ -188,10 +188,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message,
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
         }
-
         public Boolean LoadFilteredCreditData(string spName, string paramName,int paramValue,int filterId)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
