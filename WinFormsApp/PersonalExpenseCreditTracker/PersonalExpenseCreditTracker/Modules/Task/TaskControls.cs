@@ -584,6 +584,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             lblTaskEndingPageNumber.Text = end.ToString();
             lblTaskTotalPageNumber.Text = total.ToString();
             UpdateTaskSummaryCards();
+            Common.CommonUiFunction.HighlightSearch(dataGridViewTask, txtSearch);
         }
 
         private void UpdateTaskSummaryCards()
@@ -690,11 +691,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             ShowFilterPanel(pnlStatusFilter);
         }
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
-
         private void btnFilter_Click(object sender, EventArgs e)
         {
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
@@ -712,7 +708,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             pnlDateFilter.Visible = false;
             pnlPriorityFilter.Visible = false;
-            pnlSearch.Visible = false;
             pnlStatusFilter.Visible = false;
 
         }
@@ -744,14 +739,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             panel.Parent = this;
 
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y-8
-            );
-
+            
             panel.BringToFront();
             panel.Visible = true;
         }
