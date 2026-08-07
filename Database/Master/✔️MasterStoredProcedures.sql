@@ -3577,7 +3577,6 @@ BEGIN
     
     SELECT 
         CategoryID,
-        UserID,
         CategoryName,
         IsDefault,
         IsActive
@@ -3670,7 +3669,6 @@ BEGIN
     
     SELECT 
         CategoryID,
-        UserID,
         CategoryName,
         IsDefault,
         IsActive

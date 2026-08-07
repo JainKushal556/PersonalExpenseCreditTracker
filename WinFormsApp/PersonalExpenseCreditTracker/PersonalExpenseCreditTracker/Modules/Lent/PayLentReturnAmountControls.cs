@@ -14,6 +14,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
     public partial class PayLentReturnAmountControls : Form
     {
         private int selectedLentId = 0;
+        private bool ignoreEvents = true;
         public PayLentReturnAmountControls()
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbPaymentType);
             cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
             txtReturnDate.Click += txtReturnDate_Click;
+            ignoreEvents = false;
         }
 
 
@@ -317,7 +319,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             cmbPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
-
-       
+        private void cmbPaymentType_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            cmbPaymentType.DroppedDown = true;
+        }
     }
 }

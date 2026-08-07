@@ -593,6 +593,11 @@ namespace PersonalExpenseCreditTracker
 
                 expenseControl.Show();
             }
+            if (expenseControl != null && !expenseControl.IsDisposed)
+            {
+                expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
+            }
+          
 
             ShowPage(pnlExpensePage);
 
@@ -679,7 +684,13 @@ namespace PersonalExpenseCreditTracker
                 creditControl.Show();
             }
 
+            if (creditControl != null && !creditControl.IsDisposed)
+            {
+                creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+            }
             ShowPage(pnlCreditPage);
+
+          
 
 
             SetActiveMenu(pnlCredit, false);

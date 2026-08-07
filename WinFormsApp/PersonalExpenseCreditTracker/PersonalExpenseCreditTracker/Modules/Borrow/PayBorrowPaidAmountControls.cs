@@ -14,6 +14,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     public partial class PayBorrowPaidAmountControls : Form
     {
+        private bool ignoreEvents = true;
         private string selectedStatus = "";
         private int selectedBorrowId = 0;
         public PayBorrowPaidAmountControls()
@@ -142,7 +143,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbPaymentType);
               cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
               txtReturnDate.Click += txtReturnDate_Click;
-            
+              ignoreEvents = false;
         }
 
         private void btnAddCancel_Click(object sender, EventArgs e)
@@ -312,6 +313,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             ErrorHelper.HideErrorForControl(cmbPaymentType);
             cmbPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
             cmbPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void cmbPaymentType_TextChanged(object sender, EventArgs e)
+        {
+            if(ignoreEvents) return;
+            cmbPaymentType.DroppedDown = true;
+
         }
     }
 }

@@ -48,7 +48,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             cmbAddExpensePaymentType.ForeColor = Color.Gray;
 
 
-            CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", "+ Add New Cetegory",cmbAddExpenseCategory);
+            Common.CommonUiFunction.LoadInComboBox("spGetExpenseCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", "+ Add New Cetegory", cmbAddExpenseCategory);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddExpensePaymentType);
             cmbAddExpensePaymentType.MouseClick += (s, ev) => { cmbAddExpensePaymentType.DroppedDown = true; };
             ignoreEvents = false;
@@ -486,10 +486,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             cmbAddExpensePaymentType.DroppedDown = true;
         }
 
-
-
        
-
-
     }
 }
