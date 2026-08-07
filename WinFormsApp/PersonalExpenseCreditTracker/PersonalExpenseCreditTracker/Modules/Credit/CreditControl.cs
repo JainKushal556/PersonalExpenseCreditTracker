@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +26,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             int nHeightEllipse);
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllCreditData = new DataTable();
-        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
         public CreditControl() 
@@ -52,12 +51,15 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             ApplyRoundCorners();
+
             pageSize = GetRowsPerPage();
             int userID = Session.LogedInUser.GetUserId(); 
             LoadCreditData(userID);
+
             HideAllFilterPanels();
             DesignContextMenu();
             cmsFilter.Opening += cmsFilter_Opening;
+            UpdateCreditSummaryCards();
 
         }
 
@@ -65,13 +67,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             tsmiDate.AutoSize = false;
             tsmiCategory.AutoSize = false;
-            tsmiSubCategory.AutoSize = false;
-            tsmiAmount.AutoSize = false;
 
             tsmiDate.Width = cmsFilter.Width;
             tsmiCategory.Width = cmsFilter.Width;
-            //tsmiSubCategory= cmsFilter.Width;
-            //tsmiAmount = cmsFilter.Width;
         }
 
         private void StyleCreditGrid()  
@@ -149,6 +147,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             colAmount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             colPaymentMethod.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
+     
+
 
         public void LoadCreditData(int userID)
         {
@@ -178,8 +178,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                         }
 
                         AllCreditData = dt;
-                        masterData = dt.Copy();
                         dgvCreditDataTable.DataSource = AllCreditData;
+                        UpdateCreditSummaryCards();
                     }
                 }
             }
@@ -202,9 +202,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -225,9 +225,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -248,9 +248,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
 
@@ -271,9 +271,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 return false;
             }
             AllCreditData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
+            UpdateCreditSummaryCards();
             return true;
         }
         private void dgvCreditDataTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -339,6 +339,28 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             e.Handled = true;
         }
 
+        private void UpdateCreditSummaryCards()
+        {
+            if (AllCreditData == null || AllCreditData.Rows.Count == 0)
+            {
+                lblCreditAmount.Text = "₹ 0";
+                return;
+            }
+
+            decimal totalCredit = 0;
+
+            foreach (DataRow row in AllCreditData.Rows)
+            {
+                if (row["Amount"] != DBNull.Value)
+                {
+                    totalCredit += Convert.ToDecimal(row["Amount"]);
+                }
+            }
+
+            lblCreditAmount.Text = "₹ " + totalCredit.ToString("#,##0");
+            lblTransactionAmount.Text = AllCreditData.Rows.Count.ToString();
+        }
+
         private void ShowCurrentPage()
         {
             DataTable pageTable = AllCreditData.Clone();
@@ -352,7 +374,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
 
             dgvCreditDataTable.DataSource = pageTable;
-            Common.CommonUiFunction.HighlightSearch(dgvCreditDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllCreditData.Rows.Count;
@@ -475,25 +496,19 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
-            comboBox1.DroppedDown = true;
         }
 
-        private void tsmiSubCategory_Click(object sender, EventArgs e)
+
+        private void btnSerach_Click(object sender, EventArgs e)
         {
-            ShowFilterPanel(pnlSubCategoryFilter);
+            ShowSearchPanel(pnlSearch);
         }
-
-        private void tsmiAmount_Click(object sender, EventArgs e)
-        {
-            ShowFilterPanel(pnlAmountFilter);
-        }
-
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
-            pnlAmountFilter.Visible = false;
-            pnlSubCategoryFilter.Visible = false;
+            pnlSearch.Visible = false;
+
         }
         private void HidePopupPanels()
         {
@@ -519,7 +534,24 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
       
 
+        private void ShowSearchPanel(Panel panel)
+        {
+            HideAllFilterPanels();
 
+            panel.Parent = this;
+
+            
+            Point p = btnSerach.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Location = new Point(
+                p.X + btnSerach.Width + 10,
+                p.Y                     
+            );
+
+            panel.BringToFront();
+            panel.Visible = true;
+        }
 
 
         private void DesignContextMenu()
@@ -673,23 +705,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         }
 
-        private void btnSubCategoryclose_Click(object sender, EventArgs e)
-        {
-            pnlSubCategoryFilter.Visible = false;
-        }
-
-        private void btnAmountClose_Click(object sender, EventArgs e)
-        {
-            pnlAmountFilter.Visible = false;
-        }
-
-        
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            AllCreditData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
-            ShowCurrentPage();
-        }
 
     }
 }

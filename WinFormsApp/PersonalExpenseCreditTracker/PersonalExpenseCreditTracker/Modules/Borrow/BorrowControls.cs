@@ -19,10 +19,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllBorrowData = new DataTable();
-        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
-        private int userID = Session.LogedInUser.GetUserId();
+        private int userID = 11;
         public BorrowControls()
         {
             InitializeComponent();
@@ -122,7 +121,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             ApplyRoundCorners();
             dgvBorrowDataTable.CellPainting += dgvBorrowDataTable_CellPainting;
             pageSize = GetRowsPerPage();
-            int userID = Session.LogedInUser.GetUserId();
+            int userID = 11;
             LoadBorrowData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
@@ -133,16 +132,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void cmsFilter_Opening(object sender, CancelEventArgs e)
         {
             tsmiDate.AutoSize = false;
-            tsmiAmount.AutoSize = false;
-            tsmiPayment.AutoSize = false;
-            tsmiPerson.AutoSize = false;
-            tsmiStatus.AutoSize = false;
+            tsmiCategory.AutoSize = false;
 
             tsmiDate.Width = cmsFilter.Width;
-            tsmiAmount.Width = cmsFilter.Width;
-            tsmiStatus.Width = cmsFilter.Width;
-            tsmiPerson.Width = cmsFilter.Width;
-            tsmiPayment.Width = cmsFilter.Width;
+            tsmiCategory.Width = cmsFilter.Width;
         }
         public void LoadBorrowData(int userID)
         {
@@ -173,7 +166,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                         }
 
                         AllBorrowData = dt;
-                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -198,7 +190,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 return false;
             }
             AllBorrowData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -221,7 +212,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 return false;
             }
             AllBorrowData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -244,7 +234,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 return false;
             }
             AllBorrowData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -356,7 +345,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
 
             dgvBorrowDataTable.DataSource = pageTable;
-            Common.CommonUiFunction.HighlightSearch(dgvBorrowDataTable, txtSearch);
+
+
+
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllBorrowData.Rows.Count;
@@ -564,9 +555,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         }
 
-      
-
-    
 
         private void dgvBorrowDataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -575,24 +563,44 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             DataGridViewRow row = dgvBorrowDataTable.Rows[e.RowIndex];
 
-            int personID = Convert.ToInt32(row.Cells["colPersonID"].Value);
+            int borrowId = 0;
 
-            //MessageBox.Show("PersonID = " + personID);
+            DataRowView drv = row.DataBoundItem as DataRowView;
+            if (drv != null && drv.Row.Table.Columns.Contains("BorrowID"))
+            {
+                borrowId = Convert.ToInt32(drv["BorrowID"]);
+            }
 
-            //PayBorrowReturnAmountControls frm = new PayBorrowReturnAmountControls();
+            string personName = Convert.ToString(row.Cells["colPersonName"].Value);
+            string totalAmount = Convert.ToString(row.Cells["colAmount"].Value);
+            string remainingAmount = Convert.ToString(row.Cells["colRemainingAmount"].Value);
+            string status = Convert.ToString(row.Cells["colStatus"].Value);
+            string paidAmount = Convert.ToString(row.Cells["colPaidAmount"].Value);
 
-            //frm.UserID = userID;
-            //frm.PersonID = personID;
+            using (PayBorrowPaidAmountControls frm = new PayBorrowPaidAmountControls())
+            {
+                frm.SetBorrowDetails(
+                    borrowId,
+                    personName,
+                    totalAmount,
+                    remainingAmount,
+                    status,
+                    paidAmount);
 
-            //frm.ShowDialog(this);
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+                    LoadBorrowData(userID);
+                }
+            }
         }
+
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
-            pnlAmountFilter.Visible = false;
-            pnlPaymentFilter.Visible = false;
-            pnlPersonFilter.Visible = false;
-            pnlStatusFilter.Visible = false;
+            pnlCategoryFilter.Visible = false;
+            pnlSearch.Visible = false;
+            //pnlFromDateCalenderShow.Visible = false;
         }
         private void HidePopupPanels()
         {
@@ -627,7 +635,24 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
 
 
+        private void ShowSearchPanel(Panel panel)
+        {
+            HideAllFilterPanels();
 
+            panel.Parent = this;
+
+
+            Point p = btnSerach.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Location = new Point(
+                p.X + btnSerach.Width + 10,
+                p.Y
+            );
+
+            panel.BringToFront();
+            panel.Visible = true;
+        }
        
 
         private void tsmiDate_Click_1(object sender, EventArgs e)
@@ -637,24 +662,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void tsmiCategory_Click_1(object sender, EventArgs e)
         {
-            ShowFilterPanel(pnlAmountFilter);
+            ShowFilterPanel(pnlCategoryFilter);
         }
 
-        private void tsmiPerson_Click(object sender, EventArgs e)
+        private void btnSerach_Click(object sender, EventArgs e)
         {
-            ShowFilterPanel(pnlPersonFilter);
+            ShowSearchPanel(pnlSearch);
         }
-
-        private void tsmiStatus_Click(object sender, EventArgs e)
-        {
-            ShowFilterPanel(pnlStatusFilter);
-        }
-
-        private void tsmiPayment_Click(object sender, EventArgs e)
-        {
-            ShowFilterPanel(pnlPaymentFilter);
-        }
-
 
         private void pnlCategoryFilter_Paint(object sender, PaintEventArgs e)
         {
@@ -673,7 +687,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btncategoryClose_Click(object sender, EventArgs e)
         {
-            pnlAmountFilter.Visible = false;
+            pnlCategoryFilter.Visible = false;
         }
 
         private void DesignContextMenu()
@@ -685,17 +699,17 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             tsmiDate.AutoSize = false;
             tsmiDate.Height = 30;
 
-            tsmiAmount.AutoSize = false;
-            tsmiAmount.Height = 30;
+            tsmiCategory.AutoSize = false;
+            tsmiCategory.Height = 30;
 
             tsmiDate.Image = Properties.Resources.calendar;
-            tsmiAmount.Image = Properties.Resources.shop;
+            tsmiCategory.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiCategory.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiCategory.ImageScaling = ToolStripItemImageScaling.None;
 
 
         }
@@ -821,20 +835,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlDateFilter.Visible = false;
         }
 
-        private void btnPersonClose_Click(object sender, EventArgs e)
-        {
-            pnlPersonFilter.Visible = false;
-        }
-
-        private void btnStatusClose_Click(object sender, EventArgs e)
-        {
-            pnlStatusFilter.Visible = false;
-        }
-
-        private void btnPaymentClose_Click(object sender, EventArgs e)
-        {
-            pnlPaymentFilter.Visible = false;
-        }
        
 
         private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
@@ -846,16 +846,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
         }
-
-        
-
-       
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
-            ShowCurrentPage();
-        }
-
     }
 }
+

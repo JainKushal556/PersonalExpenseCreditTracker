@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +28,8 @@ namespace BLLayer.Common
             DeadlineInvalid,
 
             DescriptionInvalid,
+            DescriptionTooShort,
+            DescriptionTooLong,
 
             EmailInvalid,
             PhoneInvalid,
@@ -45,7 +47,14 @@ namespace BLLayer.Common
             SubCategoryInvalid,
 
             StoreProcedureError,
-            TaskAlreadyUpdated
+            TaskAlreadyUpdated,
+
+            // Profile Validation
+            PhotoInvalid,
+            FullNameInvalid,
+            AddressInvalid,
+            DateOfBirthInvalid,
+            GenderInvalid
         }
 
         
@@ -199,20 +208,24 @@ namespace BLLayer.Common
 
         public static ValidationResult ValidateDescription(string description)
         {
-            if (!string.IsNullOrWhiteSpace(description))
+            if (string.IsNullOrWhiteSpace(description))
             {
-                description = description.Trim();
-
-                if (description.Length >= 5)
-                {
-                    if (description.Length <= 150)
-                    {
-                        return ValidationResult.Success;
-                    }
-                }
+                return ValidationResult.DescriptionInvalid;
             }
 
-            return ValidationResult.DescriptionInvalid;
+            description = description.Trim();
+
+            if (description.Length < 5)
+            {
+                return ValidationResult.DescriptionTooShort;
+            }
+
+            if (description.Length > 150)
+            {
+                return ValidationResult.DescriptionTooLong;
+            }
+
+            return ValidationResult.Success;
         }
 
         //Email Validation
@@ -328,6 +341,57 @@ namespace BLLayer.Common
             return ValidationResult.PriorityInvalid;
         }
 
+        //profile
+
+        public static ValidationResult ValidatePhotoData(byte[] photoData)
+        {
+            if (photoData == null)
+                return ValidationResult.PhotoInvalid;
+
+            if (photoData.Length > 2 * 1024 * 1024)
+                return ValidationResult.PhotoInvalid;
+
+            return ValidationResult.Success;
+        }
+
+        public static ValidationResult ValidateFullName(string fullName)
+        {
+            if (string.IsNullOrWhiteSpace(fullName))
+                return ValidationResult.FullNameInvalid;
+
+            if (fullName.Trim().Length > 100)
+                return ValidationResult.FullNameInvalid;
+
+            return ValidationResult.Success;
+        }
+        public static ValidationResult ValidateAddress(string address)
+        {
+            if (string.IsNullOrWhiteSpace(address))
+                return ValidationResult.AddressInvalid;
+
+            if (address.Trim().Length > 200)
+                return ValidationResult.AddressInvalid;
+
+            return ValidationResult.Success;
+        }
+       
+        public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth)
+        {
+            if (dateOfBirth > DateTime.Today)
+                return ValidationResult.DateOfBirthInvalid;
+
+            return ValidationResult.Success;
+        }
+        // Gender Validation
+        public static ValidationResult ValidateGender(int genderId)
+        {
+            if (genderId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.GenderInvalid;
+        }
 
         // Note Title Validation
         public static ValidationResult ValidateNoteTitle(string noteTitle)

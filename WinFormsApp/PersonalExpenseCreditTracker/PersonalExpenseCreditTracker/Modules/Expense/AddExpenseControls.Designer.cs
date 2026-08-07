@@ -90,7 +90,7 @@
             this.panelExpenseDetailsMainBody.Location = new System.Drawing.Point(0, 0);
             this.panelExpenseDetailsMainBody.Name = "panelExpenseDetailsMainBody";
             this.panelExpenseDetailsMainBody.Padding = new System.Windows.Forms.Padding(15);
-            this.panelExpenseDetailsMainBody.Size = new System.Drawing.Size(568, 579);
+            this.panelExpenseDetailsMainBody.Size = new System.Drawing.Size(568, 582);
             this.panelExpenseDetailsMainBody.TabIndex = 2;
             // 
             // label2
@@ -111,7 +111,8 @@
             this.txtAddExpenseDescription.Multiline = true;
             this.txtAddExpenseDescription.Name = "txtAddExpenseDescription";
             this.txtAddExpenseDescription.Size = new System.Drawing.Size(354, 150);
-            this.txtAddExpenseDescription.TabIndex = 31;
+            this.txtAddExpenseDescription.TabIndex = 4;
+            this.txtAddExpenseDescription.TextChanged += new System.EventHandler(this.txtAddExpenseDescription_TextChanged);
             this.txtAddExpenseDescription.Enter += new System.EventHandler(this.txtDescription_Enter);
             this.txtAddExpenseDescription.Leave += new System.EventHandler(this.txtDescription_Leave);
             // 
@@ -143,7 +144,7 @@
             this.panel3.Location = new System.Drawing.Point(186, 203);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(354, 31);
-            this.panel3.TabIndex = 25;
+            this.panel3.TabIndex = 2;
             // 
             // txtAddExpenseAmount
             // 
@@ -152,6 +153,7 @@
             this.txtAddExpenseAmount.Name = "txtAddExpenseAmount";
             this.txtAddExpenseAmount.Size = new System.Drawing.Size(304, 23);
             this.txtAddExpenseAmount.TabIndex = 1;
+            this.txtAddExpenseAmount.TextChanged += new System.EventHandler(this.txtAddExpenseAmount_TextChanged);
             this.txtAddExpenseAmount.Enter += new System.EventHandler(this.txtAmount_Enter);
             this.txtAddExpenseAmount.Leave += new System.EventHandler(this.txtAmount_Leave);
             // 
@@ -211,14 +213,12 @@
             this.cmbAddExpenseSubCategory.FormattingEnabled = true;
             this.cmbAddExpenseSubCategory.IntegralHeight = false;
             this.cmbAddExpenseSubCategory.ItemHeight = 23;
-            this.cmbAddExpenseSubCategory.Items.AddRange(new object[] {
-            "Select Sub Category",
-            "Momo"});
             this.cmbAddExpenseSubCategory.Location = new System.Drawing.Point(186, 136);
             this.cmbAddExpenseSubCategory.Name = "cmbAddExpenseSubCategory";
             this.cmbAddExpenseSubCategory.Size = new System.Drawing.Size(354, 31);
-            this.cmbAddExpenseSubCategory.TabIndex = 20;
+            this.cmbAddExpenseSubCategory.TabIndex = 1;
             this.cmbAddExpenseSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpenseSubCategory_SelectedIndexChanged);
+            this.cmbAddExpenseSubCategory.Click += new System.EventHandler(this.cmbAddExpenseSubCategory_Click);
             this.cmbAddExpenseSubCategory.Enter += new System.EventHandler(this.cmbAddExpenseSubCategory_Enter);
             this.cmbAddExpenseSubCategory.Leave += new System.EventHandler(this.cmbAddExpenseSubCategory_Leave);
             // 
@@ -254,7 +254,8 @@
             this.cmbAddExpensePaymentType.Location = new System.Drawing.Point(186, 270);
             this.cmbAddExpensePaymentType.Name = "cmbAddExpensePaymentType";
             this.cmbAddExpensePaymentType.Size = new System.Drawing.Size(354, 31);
-            this.cmbAddExpensePaymentType.TabIndex = 17;
+            this.cmbAddExpensePaymentType.TabIndex = 3;
+            this.cmbAddExpensePaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpensePaymentType_SelectedIndexChanged);
             this.cmbAddExpensePaymentType.Enter += new System.EventHandler(this.cmbAddExpensePaymentType_Enter);
             this.cmbAddExpensePaymentType.Leave += new System.EventHandler(this.cmbAddExpensePaymentType_Leave);
             // 
@@ -282,14 +283,12 @@
             this.cmbAddExpenseCategory.FormattingEnabled = true;
             this.cmbAddExpenseCategory.IntegralHeight = false;
             this.cmbAddExpenseCategory.ItemHeight = 23;
-            this.cmbAddExpenseCategory.Items.AddRange(new object[] {
-            "Select Category",
-            "Food"});
             this.cmbAddExpenseCategory.Location = new System.Drawing.Point(186, 73);
             this.cmbAddExpenseCategory.Name = "cmbAddExpenseCategory";
             this.cmbAddExpenseCategory.Size = new System.Drawing.Size(354, 31);
-            this.cmbAddExpenseCategory.TabIndex = 14;
+            this.cmbAddExpenseCategory.TabIndex = 0;
             this.cmbAddExpenseCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpenseCategory_SelectedIndexChanged);
+            this.cmbAddExpenseCategory.Click += new System.EventHandler(this.cmbAddExpenseCategory_Click);
             this.cmbAddExpenseCategory.Enter += new System.EventHandler(this.cmbAddExpenseCategory_Enter);
             this.cmbAddExpenseCategory.Leave += new System.EventHandler(this.cmbAddExpenseCategory_Leave);
             // 
@@ -301,12 +300,12 @@
             this.btnSaveExpense.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSaveExpense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveExpense.ForeColor = System.Drawing.Color.White;
-            this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
-            this.btnSaveExpense.Location = new System.Drawing.Point(366, 521);
+            this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnSaveExpense.Location = new System.Drawing.Point(351, 525);
             this.btnSaveExpense.Name = "btnSaveExpense";
-            this.btnSaveExpense.Size = new System.Drawing.Size(179, 41);
-            this.btnSaveExpense.TabIndex = 8;
-            this.btnSaveExpense.Text = "Add Expense";
+            this.btnSaveExpense.Size = new System.Drawing.Size(194, 41);
+            this.btnSaveExpense.TabIndex = 7;
+            this.btnSaveExpense.Text = "  Add  Expense";
             this.btnSaveExpense.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveExpense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveExpense.UseVisualStyleBackColor = false;
@@ -315,17 +314,18 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(90)))));
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
+            this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(42)))));
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(211, 521);
+            this.btnCancel.Location = new System.Drawing.Point(199, 525);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 41);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = " Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -339,10 +339,10 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClear.Location = new System.Drawing.Point(18, 521);
+            this.btnClear.Location = new System.Drawing.Point(18, 525);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(133, 41);
-            this.btnClear.TabIndex = 6;
+            this.btnClear.TabIndex = 5;
             this.btnClear.Text = "  Clear";
             this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClear.UseVisualStyleBackColor = false;
@@ -352,7 +352,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(19, 502);
+            this.panel2.Location = new System.Drawing.Point(19, 510);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(528, 1);
             this.panel2.TabIndex = 5;
@@ -373,7 +373,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 579);
+            this.ClientSize = new System.Drawing.Size(568, 582);
             this.Controls.Add(this.panelExpenseDetailsMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

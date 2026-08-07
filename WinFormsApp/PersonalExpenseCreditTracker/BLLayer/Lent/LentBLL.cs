@@ -18,7 +18,13 @@ namespace BLLayer.Lent
         public string amount { get; set; }
         public DateTime deadlineAt { get; set; }
         public string description { get; set; }
+
+        // Add these for Return Lent
+        public string returnAmount { get; set; }
+        public DateTime returnDate { get; set; }
+
         private LentDAL lentDal = new LentDAL();
+
         // Stores the validation result
         CommonValidator.ValidationResult result;
 
@@ -87,6 +93,56 @@ namespace BLLayer.Lent
                 return CommonValidator.ValidationResult.StoreProcedureError;
             }
             
+        }
+
+
+        // Validates all user input before returning the lent amount
+        public CommonValidator.ValidationResult DataValidatorIntoReturnLentBll()
+        {
+            // Return Amount Validation
+            result = CommonValidator.ValidateAmount(returnAmount);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            // Payment Validation
+            result = CommonValidator.ValidatePayment(paymentId);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            // Return Date Validation
+            result = CommonValidator.ValidateDeadline(returnDate);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            // Description Validation
+            result = CommonValidator.ValidateDescription(description);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            // Pass data to DAL
+            lentDal.userId = userId;
+            lentDal.lentId = lentId;
+            lentDal.paymentId = paymentId;
+            lentDal.returnAmount = returnAmount;
+            lentDal.returnDate = returnDate;
+            lentDal.description = description;
+
+            if (lentDal.ReturnLent())
+            {
+                return CommonValidator.ValidationResult.Success;
+            }
+            else
+            {
+                return CommonValidator.ValidationResult.StoreProcedureError;
+            }
         }
     }
 }

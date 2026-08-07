@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 namespace PersonalExpenseCreditTracker.Modules.Profile
 {
     public partial class EditProfileControls : Form
@@ -40,12 +41,21 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
         private void EditProfileControls_Load(object sender, EventArgs e)
         {
+            CommonUiFunction.LoadInComboBox("spGetGender", "Select Gender", cmbEditProfileGender);
             GetUserProfileDetails();
 
-            SetRadius(btnCancelEditProfile, 10);
-            SetRadius(btnUpdateProfile, 15);
+            SetRadius(pnlEditProfileMainBody, 20);
+            SetRadius(btnCancelEditProfile, 20);
+            SetRadius(btnUpdateProfile, 25);
+
+            pnlEditProfileMainBody.Resize += pnlEditProfileMainBody_Resize;
+            btnCancelEditProfile.Resize += btnCancelEditProfile_Resize;
+            btnUpdateProfile.Resize += btnUpdateProfile_Resize;
 
             this.ActiveControl = pnlEditProfileMainBody;
+
+            panelProfileCalenderShow.Visible = false;
+           
         }
 
         // Radius Corner of These Panels
@@ -71,7 +81,10 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
             DeleteObject(hrgn);
         }
-
+        private void pnlEditProfileMainBody_Resize(object sender, EventArgs e)
+        {
+            SetRadius(pnlEditProfileMainBody, 20);
+        }
         private void btnCancelEditProfile_Resize(object sender, EventArgs e)
         {
             SetRadius(btnCancelEditProfile, 20);
@@ -139,31 +152,59 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         }
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-            SetUserProfileDetails();
-            MessageBox.Show("Profile Updated Successfully");
-            this.Close();
-
+           
 
             ProfileUI profileUi = new ProfileUI();
 
-
             profileUi.userId = Session.LogedInUser.GetUserId();
-            profileUi.fullName = txtEditProfileFullName.Text;
-            profileUi.email = txtEditProfileEmailAddress.Text;
-            profileUi.phoneNumber = txtEditProfilePhoneNumber.Text;
-            profileUi.address = txtEditProfileEmailAddress.Text;
-            profileUi.dateOfBirth =Convert.ToDateTime( txtEditProfileDathOfBirth.Text);
+            profileUi.genderId = Convert.ToInt32(cmbEditProfileGender.SelectedValue);
+            profileUi.fullName = txtEditProfileFullName.Text.Trim();
+            profileUi.email = txtEditProfileEmailAddress.Text.Trim();
+            profileUi.phoneNumber = txtEditProfilePhoneNumber.Text.Trim();
+            profileUi.address = txtEditProfileAddress.Text.Trim();
+            profileUi.dateOfBirth = Convert.ToDateTime(txtEditProfileDathOfBirth.Text);
 
-            bool result = profileUi.UpdateUserProfileIntoProfUi();
-            if (result)
-            {
-                MessageBox.Show("Validation Success");
-            }
-            else
-            {
-                MessageBox.Show("Validation Failed");
-            }
+            CommonValidator.ValidationResult result = profileUi.UpdateUserProfileIntoProfUi();
 
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Profile updated successfully!");
+                    if (profileControls != null)
+                    {
+                     profileControls.LoadUserProfileData();
+                     }
+                     this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.FullNameInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfileFullName);
+                    break;
+
+                case CommonValidator.ValidationResult.EmailInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfileEmailAddress);
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfilePhoneNumber);
+                    break;
+
+                case CommonValidator.ValidationResult.DateOfBirthInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfileDathOfBirth);
+                    break;
+
+                case CommonValidator.ValidationResult.GenderInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbEditProfileGender);
+                    break;
+
+                case CommonValidator.ValidationResult.AddressInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfileAddress);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Profile updated unsuccessfully!");
+                    break;
+            }
         }
         private void btnCloseEditProfile_Click(object sender, EventArgs e)
         {
@@ -175,26 +216,70 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             txtEditProfileFullName.Text = profileControls.lblProfileInfoPersonFullName.Text;
             txtEditProfileDathOfBirth.Text = profileControls.lblProfileInfoPersonDathOfBirth.Text;
             txtEditProfileEmailAddress.Text = profileControls.lblProfileInfoPersonEmail.Text;
-            txtEditProfilePhoneNumber.Text = profileControls.lblProfileInfoPersonPhoneNumber.Text;
+
+            string phone = profileControls.lblProfileInfoPersonPhoneNumber.Text;
+            if (!string.IsNullOrWhiteSpace(phone))
+            {
+                phone = phone.Replace("+91", "").Trim();
+            }
+            txtEditProfilePhoneNumber.Text = phone;
+
             cmbEditProfileGender.Text = profileControls.lblProfileInfoPersonGender.Text;
             txtEditProfileAddress.Text = profileControls.lblProfileInfoPersonAddress.Text;
         }
-        private void SetUserProfileDetails()
+
+        private void ShowCalenderToDatePanel(Panel panel)
         {
-            profileControls.lblProfileInfoPersonFullName.Text = txtEditProfileFullName.Text;
-            profileControls.lblProfileInfoPersonDathOfBirth.Text = txtEditProfileDathOfBirth.Text;
-            profileControls.lblProfileInfoPersonEmail.Text = txtEditProfileEmailAddress.Text;
-            profileControls.lblProfileInfoPersonPhoneNumber.Text = txtEditProfilePhoneNumber.Text;
-            profileControls.lblProfileInfoPersonGender.Text = cmbEditProfileGender.Text;
-            profileControls.lblProfileInfoPersonAddress.Text = txtEditProfileAddress.Text;
+          
+            Point p = pnlEditProfileDathOfBirth.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
 
-            profileControls.lblProfileEmailvalue.Text = txtEditProfileEmailAddress.Text;
-            profileControls.lblProfilePhoneValue.Text = txtEditProfilePhoneNumber.Text;
-            profileControls.RichTextBoxUserProfileName.Text = txtEditProfileFullName.Text;
+          
+            panel.Parent = this;
 
-            profileControls.RichTextBoxUserProfileName.SelectAll();
-            profileControls.RichTextBoxUserProfileName.SelectionAlignment = HorizontalAlignment.Center;
-            profileControls.RichTextBoxUserProfileName.DeselectAll();
+           
+            panel.Location = new Point(
+                p.X + pnlEditProfileDathOfBirth.Width - panel.Width,
+                p.Y + pnlEditProfileDathOfBirth.Height + 2);
+
+           
+            panel.BringToFront();
+            panel.Visible = true;
         }
+
+        private void btnProfileCalendar_Click(object sender, EventArgs e)
+        {
+            if (panelProfileCalenderShow.Visible)
+            {
+                panelProfileCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderToDatePanel(panelProfileCalenderShow);
+            }
+        }
+
+        private void monthCalendarProfile_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtEditProfileDathOfBirth.Text = e.Start.ToString("dd-MM-yyyy");
+            txtEditProfileDathOfBirth.ForeColor = Color.Black;
+            panelProfileCalenderShow.Visible = false;
+        }
+
+        private void txtEditProfileDathOfBirth_Enter(object sender, EventArgs e)
+        {
+            panelProfileCalenderShow.Visible = true;
+        }
+
+        private void txtEditProfileDathOfBirth_Leave(object sender, EventArgs e)
+        {
+            //panelProfileCalenderShow.Visible = false;
+        }
+
+        private void txtEditProfileDathOfBirth_TextChanged(object sender, EventArgs e)
+        {
+            panelProfileCalenderShow.Visible = false;
+        }
+       
     }
 }

@@ -29,7 +29,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllTaskData = new DataTable();
-        private DataTable masterData = new DataTable();
 
         public int SelectedTaskID = 0;
         public string SelectedTaskTitle = "";
@@ -85,7 +84,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
 
             AllTaskData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
         }
@@ -103,7 +101,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return false;
             }
             AllTaskData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -126,7 +123,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return false;
             }
             AllTaskData = dataTable;
-            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -141,39 +137,39 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             //cmsTaskAction.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
 
             // Menu Item Height
-            tsmiEdit.AutoSize = false;
-            tsmiEdit.Height = 30;
+            toolStripMenuItem1.AutoSize = false;
+            toolStripMenuItem1.Height = 30;
 
 
-            tsmiUpdateStatus.AutoSize = false;
-            tsmiUpdateStatus.Height = 30;
+            toolStripMenuItem2.AutoSize = false;
+            toolStripMenuItem2.Height = 30;
 
-            tsmiDeleteTask.AutoSize = false;
-            tsmiDeleteTask.Height = 30;
+            toolStripMenuItem3.AutoSize = false;
+            toolStripMenuItem3.Height = 30;
 
-            tsmiCancel.AutoSize = false;
-            tsmiCancel.Height = 30;
+            toolStripMenuItem4.AutoSize = false;
+            toolStripMenuItem4.Height = 30;
 
             // Delete Color
-            tsmiDeleteTask.ForeColor = Color.Red;
+            toolStripMenuItem3.ForeColor = Color.Red;
 
             // Images
-            tsmiEdit.Image = Properties.Resources.pen;
-            tsmiUpdateStatus.Image = Properties.Resources.refresh1;
-            tsmiDeleteTask.Image = Properties.Resources.trash;
-            tsmiCancel.Image = Properties.Resources.delete;
+            toolStripMenuItem1.Image = Properties.Resources.pen;
+            toolStripMenuItem2.Image = Properties.Resources.refresh1;
+            toolStripMenuItem3.Image = Properties.Resources.trash;
+            toolStripMenuItem4.Image = Properties.Resources.delete;
 
             // Display Style
-            tsmiEdit.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiUpdateStatus.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiDeleteTask.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiCancel.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            toolStripMenuItem1.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            toolStripMenuItem2.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            toolStripMenuItem3.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            toolStripMenuItem4.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
 
             // Image Scaling
-            tsmiEdit.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiUpdateStatus.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiDeleteTask.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiCancel.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripMenuItem1.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripMenuItem2.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripMenuItem3.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripMenuItem4.ImageScaling = ToolStripItemImageScaling.None;
 
             //filter cms
             cmsFilter.ShowImageMargin = true;
@@ -187,11 +183,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             tsmiPriority.AutoSize = false;
             tsmiPriority.Height = 30;
 
-            tsmiStatus.Height = 30;
-
             tsmiDate.Image = Properties.Resources.calendar;
             tsmiPriority.Image = Properties.Resources.shop;
-           // tsmiStatus.Image= Properties.Resources.
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsmiPriority.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -203,10 +196,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             tsmiDate.AutoSize = false;
             tsmiPriority.AutoSize = false;
-            tsmiStatus.AutoSize = false;
+
             tsmiDate.Width = cmsFilter.Width;
             tsmiPriority.Width = cmsFilter.Width;
-            tsmiStatus.Width = cmsFilter.Width;
         }
         private void SetPanelRadius()
         {
@@ -294,14 +286,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void cmsTaskAction_Opening(object sender, CancelEventArgs e)
         {
-            tsmiEdit.AutoSize = false;
-            tsmiUpdateStatus.AutoSize = false;
-            tsmiDeleteTask.AutoSize = false;
-            tsmiCancel.AutoSize = false;
-            tsmiCancel.Width = cmsTaskAction.Width;
-            tsmiDeleteTask.Width = cmsTaskAction.Width;
-            tsmiUpdateStatus.Width = cmsTaskAction.Width;
-            tsmiEdit.Width = cmsTaskAction.Width;
+
         }
 
         private void TaskControls_Resize(object sender, EventArgs e)
@@ -584,7 +569,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             lblTaskEndingPageNumber.Text = end.ToString();
             lblTaskTotalPageNumber.Text = total.ToString();
             UpdateTaskSummaryCards();
-            Common.CommonUiFunction.HighlightSearch(dataGridViewTask, txtSearch);
         }
 
         private void UpdateTaskSummaryCards()
@@ -685,12 +669,13 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void tsmiPriority_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlPriorityFilter);
-            cmbPriority.DroppedDown = true;
         }
-        private void tsmiStatus_Click(object sender, EventArgs e)
+
+        private void btnSerach_Click(object sender, EventArgs e)
         {
-            ShowFilterPanel(pnlStatusFilter);
+            ShowSearchPanel(pnlSearch);
         }
+
         private void btnFilter_Click(object sender, EventArgs e)
         {
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
@@ -700,15 +685,12 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             pnlPriorityFilter.Visible = false;
         }
-        private void btnStatusClose_Click(object sender, EventArgs e)
-        {
-            pnlStatusFilter.Visible = false;
-        }
+
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlPriorityFilter.Visible = false;
-            pnlStatusFilter.Visible = false;
+            pnlSearch.Visible = false;
 
         }
         private void HidePopupPanels()
@@ -739,7 +721,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             panel.Parent = this;
 
-            
+            Point p = btnSerach.PointToScreen(Point.Empty);
+            p = this.PointToClient(p);
+
+            panel.Location = new Point(
+                p.X + btnSerach.Width + 10,
+                p.Y-8
+            );
+
             panel.BringToFront();
             panel.Visible = true;
         }
@@ -851,23 +840,5 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
         }
-
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
-
-        
-
-        
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            AllTaskData = Common.CommonUiFunction.SearchDataInTask(masterData, txtSearch);
-            ShowCurrentPage();
-        }
-
     }
 }

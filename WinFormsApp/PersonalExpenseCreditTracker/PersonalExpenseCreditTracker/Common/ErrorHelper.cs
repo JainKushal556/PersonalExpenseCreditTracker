@@ -1,239 +1,314 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using BLLayer.Common;
+
 namespace PersonalExpenseCreditTracker.Common
 {
-    // Helper class to display validation errors using ErrorProvider
+    // Helper class to display validation error text directly below controls (Without ErrorProvider icon)
     public class ErrorHelper
     {
         // Displays validation errors for ComboBox controls
         public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, ComboBox comboBox)
         {
-            errorProvider.SetIconAlignment(comboBox, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(comboBox, -30); 
-            //errorProvider.Clear();
-
+            string message = "";
             switch (result)
             {
-                // Person is not selected
                 case CommonValidator.ValidationResult.PersonInvalid:
-                    
-                    errorProvider.SetError(comboBox, "Please select a person.");
-                    comboBox.Focus();
+                    message = "* Please select a person.";
                     break;
 
-                // Payment type is not selected
                 case CommonValidator.ValidationResult.PaymentInvalid:
+                    message = "* Please select a payment type.";
+                    break;
 
-                    errorProvider.SetError(comboBox, "Please select payment type.");
-                    comboBox.Focus();
-                    break;
-                // Status is not selected
                 case CommonValidator.ValidationResult.StatusInvalid:
-                    errorProvider.SetError(comboBox, "Please select status.");
-                    comboBox.Focus();
+                    message = "* Please select a status.";
                     break;
+
                 case CommonValidator.ValidationResult.CategoryInvalid:
-                    errorProvider.SetError(comboBox, "Please select a category.");
+                    message = "* Please select a category.";
                     break;
 
                 case CommonValidator.ValidationResult.SubCategoryInvalid:
-                    errorProvider.SetError(comboBox, "Please select a sub category.");
+                    message = "* Please select a sub category.";
                     break;
 
                 case CommonValidator.ValidationResult.PriorityInvalid:
-                    errorProvider.SetError(comboBox, "Please select a priority.");
-                    comboBox.Focus();
+                    message = "* Please select a priority.";
                     break;
 
+                case CommonValidator.ValidationResult.GenderInvalid:
+                    message = "* Please select a gender.";
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ShowErrorBelowControl(comboBox, message);
+                comboBox.Focus();
             }
         }
 
         // Displays validation errors for TextBox controls
-        public static void ShowValidationError(CommonValidator.ValidationResult result,  ErrorProvider errorProvider,TextBox textBox)
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, TextBox textBox)
         {
-            errorProvider.SetIconAlignment(textBox, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(textBox, -30); 
+            string message = "";
             switch (result)
             {
-                // Amount field is empty
                 case CommonValidator.ValidationResult.AmountEmpty:
-                    errorProvider.SetError(textBox, "Amount is required.");
-                    textBox.Focus();
+                    message = "* Amount is required.";
                     break;
 
-                // Amount is not a valid number
                 case CommonValidator.ValidationResult.AmountInvalid:
-                    errorProvider.SetError(textBox, "Enter valid amount.");
-                    textBox.Focus();
+                    message = "* Enter a valid amount.";
                     break;
-                // Amount exceeds the allowed limit
+
                 case CommonValidator.ValidationResult.AmountTooLarge:
-                    errorProvider.SetError(textBox, "Amount is too large.");
-                    textBox.Focus();
+                    message = "* Amount is too large.";
                     break;
 
                 case CommonValidator.ValidationResult.MinimumAmountInvalid:
-                    errorProvider.SetError(textBox, "Minimum amount invalid.");
-                    textBox.Focus();
+                    message = "* Enter a valid minimum amount.";
                     break;
 
                 case CommonValidator.ValidationResult.MaximumAmountInvalid:
-                    errorProvider.SetError(textBox, "Maximum amount invalid.");
-                    textBox.Focus();
+                    message = "* Enter a valid maximum amount.";
                     break;
-                // Description is invalid
+
                 case CommonValidator.ValidationResult.DescriptionInvalid:
-                    errorProvider.SetError(textBox, "Description is invalid.");
-                    textBox.Focus();
+                    message = "* Description is required.";
                     break;
-                // Deadline is not selected or invalid
+
+                case CommonValidator.ValidationResult.DescriptionTooShort:
+                    message = "* Description must contain at least 5 characters.";
+                    break;
+
+                case CommonValidator.ValidationResult.DescriptionTooLong:
+                    message = "* Description cannot exceed 150 characters.";
+                    break;
+
                 case CommonValidator.ValidationResult.DeadlineInvalid:
-                    errorProvider.SetError(textBox, "Select valid deadline.");
-                    textBox.Focus();
+                    message = "* Please select a valid deadline.";
                     break;
 
                 case CommonValidator.ValidationResult.TaskTitleInvalid:
-                    errorProvider.SetError(textBox, "Please enter a valid task title.");
-                    textBox.Focus();
+                    message = "* Please enter a valid task title.";
+                    break;
+
+                case CommonValidator.ValidationResult.FullNameInvalid:
+                    message = "* Please enter a valid full name.";
+                    break;
+
+                case CommonValidator.ValidationResult.EmailInvalid:
+                    message = "* Please enter a valid email address.";
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneInvalid:
+                    message = "* Please enter a valid phone number.";
+                    break;
+
+                case CommonValidator.ValidationResult.AddressInvalid:
+                    message = "* Please enter a valid address.";
+                    break;
+
+                case CommonValidator.ValidationResult.DateOfBirthInvalid:
+                    message = "* Please enter a valid date of birth.";
                     break;
 
                 case CommonValidator.ValidationResult.NoteTitleInvalid:
-                    errorProvider.SetError(textBox, "Please enter a valid note title.");
-                    textBox.Focus();
+                    message = "* Please enter a valid note title.";
                     break;
 
-                // Phone Number Invalid
-                case CommonValidator.ValidationResult.PhoneInvalid:
-                    errorProvider.SetError(textBox, "Please enter a valid phone number.");
-                    textBox.Focus();
-                    break;
-
-                // Person Name Invalid
                 case CommonValidator.ValidationResult.PersonNameInvalid:
-                    errorProvider.SetError(textBox, "Please enter a valid person name");
-                    textBox.Focus();
+                    message = "* Please enter a valid person name.";
                     break;
 
-                // Duplicate Phone Number
-                case CommonValidator.ValidationResult.PhoneNumberAlreadyExists:
-                    errorProvider.SetError(textBox, "Phone number already exists");
-                    textBox.Focus();
-                    break;
-
-                // Amount field is empty
-                case CommonValidator.ValidationResult.PhoneNumberEmpty:
-                    errorProvider.SetError(textBox, "Phone number is required.");
-                    textBox.Focus();
-                    break;
-
-                // Amount field is empty
                 case CommonValidator.ValidationResult.PersonNameEmpty:
-                    errorProvider.SetError(textBox, "Person Name is required.");
-                    textBox.Focus();
+                    message = "* Person name is required.";
                     break;
 
-                // Phone Number Invalid
+                case CommonValidator.ValidationResult.PhoneNumberEmpty:
+                    message = "* Phone number is required.";
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneNumberAlreadyExists:
+                    message = "* Phone number already exists.";
+                    break;
+
                 case CommonValidator.ValidationResult.PersonInvalid:
-                    errorProvider.SetError(textBox, "Please enter a valid person.");
-                    textBox.Focus();
+                    message = "* Please enter a valid person.";
                     break;
             }
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ShowErrorBelowControl(textBox, message);
+                textBox.Focus();
+            }
         }
+
         // Displays validation errors for MonthCalendar controls
-        public static void ShowValidationError(CommonValidator.ValidationResult result,  ErrorProvider errorProvider, MonthCalendar monthCalendar)
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, MonthCalendar monthCalendar)
         {
-            //errorProvider.Clear();
-            errorProvider.SetIconAlignment(monthCalendar, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(monthCalendar, 10); 
+            string message = "";
             switch (result)
             {
                 case CommonValidator.ValidationResult.DeadlineInvalid:
-                    errorProvider.SetError(monthCalendar, "Select valid deadline.");
-                    monthCalendar.Focus();
+                    message = "* Select valid deadline.";
                     break;
-                
+            }
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ShowErrorBelowControl(monthCalendar, message);
+                monthCalendar.Focus();
             }
         }
 
-         // Displays validation errors for Date
-        public static void ShowValidationError(CommonValidator.ValidationResult result,ErrorProvider errorProvider,DateTimePicker dtp1, DateTimePicker dtp2)
+        // Displays validation errors for Date
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, DateTimePicker dtp1, DateTimePicker dtp2)
         {
-            errorProvider.SetIconAlignment(dtp1, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(dtp1, 10);
-
-            errorProvider.SetIconAlignment(dtp2, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(dtp2, 10);
-
             switch (result)
             {
                 case CommonValidator.ValidationResult.DateRangeInvalid:
-
-                    errorProvider.SetError(dtp1, "From Date cannot be greater than To Date.");
-                    errorProvider.SetError(dtp2, "To Date must be greater than or equal to From Date.");
-
+                    HideErrorForControl(dtp1);
+                    ShowErrorBelowControl(dtp2,"* From Date is greater than To Date.");
                     dtp1.Focus();
-                    dtp2.Focus();
                     break;
             }
         }
 
-        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider,TextBox textBox1, TextBox textBox2)
+
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, TextBox textBox1, TextBox textBox2)
         {
-            errorProvider.SetIconAlignment(textBox1, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(textBox1, 10);
-
-            errorProvider.SetIconAlignment(textBox2, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(textBox2, 10);
-
             switch (result)
             {
                 case CommonValidator.ValidationResult.AmountRangeInvalid:
-
-                    errorProvider.SetError(textBox2, "Invalid Maximum amount");
-                    textBox1.Focus();
-
+                    string msg = "* Minimum amount should be less than or equal to maximum amount.";
+                    ShowErrorBelowControl(textBox2, msg);
+                    textBox2.Focus();
                     break;
             }
         }
-        // Displays validation errors for Richtextbox controls
-        public static void ShowValidationError(CommonValidator.ValidationResult result,ErrorProvider errorProvider, RichTextBox richTextBox)
-        {
-            errorProvider.SetIconAlignment(richTextBox, ErrorIconAlignment.MiddleRight);
-            errorProvider.SetIconPadding(richTextBox, -30);
 
+        // Displays validation errors for RichTextBox controls
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, RichTextBox richTextBox)
+        {
+            string message = "";
             switch (result)
             {
                 case CommonValidator.ValidationResult.DescriptionInvalid:
-                    errorProvider.SetError(richTextBox, "Please enter a valid description.");
-                    richTextBox.Focus();
+                    message = "* Please enter a valid description.";
                     break;
+            }
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ShowErrorBelowControl(richTextBox, message);
+                richTextBox.Focus();
             }
         }
 
-        
-
-        // Displays validation errors for Color selection ans Priority selection
-
-        public static void ShowValidationError(CommonValidator.ValidationResult result,ErrorProvider errorProvider,Label label)
+        // Displays validation errors for Label controls (Color, Priority)
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, Label label)
         {
-            errorProvider.SetIconAlignment(label, ErrorIconAlignment.MiddleRight);
-
+            string message = "";
             switch (result)
             {
                 case CommonValidator.ValidationResult.ColorInvalid:
-                    errorProvider.SetIconPadding(label, 13);
-                    errorProvider.SetError(label, "Please select a color.");
+                    message = "* Please select a color.";
                     break;
 
                 case CommonValidator.ValidationResult.PriorityInvalid:
-                    errorProvider.SetIconPadding(label, 13);
-                    errorProvider.SetError(label, "Please select a priority.");
+                    message = "* Please select a priority.";
                     break;
             }
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ShowErrorBelowControl(label, message);
+            }
         }
+
+        public static void ShowErrorBelowControl(Control control, string message)
+        {
+            if (control == null) return;
+
+          
+            Control targetControl = control;
+            if (control.Parent != null && control.Parent.Height < 50 && !(control.Parent is Form))
+            {
+                targetControl = control.Parent;
+            }
+
+            Control parent = targetControl.Parent;
+            if (parent == null) return;
+
+            string labelName = "lblErr_" + control.Name;
+
+            Label errLabel = parent.Controls.Find(labelName, false).FirstOrDefault() as Label;
+
+            if (errLabel == null)
+            {
+                errLabel = new Label();
+                errLabel.Name = labelName;
+                errLabel.ForeColor = Color.Red;
+                errLabel.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular);
+                errLabel.AutoSize = true;
+                parent.Controls.Add(errLabel);
+            }
+
+       
+            errLabel.Location = new Point(targetControl.Left, targetControl.Bottom + 2);
+            errLabel.BringToFront();
+            errLabel.Text = message;
+            errLabel.Visible = true;
+        }
+
+ 
+        public static void HideErrorForControl(Control control)
+        {
+            if (control == null) return;
+
+            Control targetControl = control;
+            if (control.Parent != null && control.Parent.Height < 50 && !(control.Parent is Form))
+            {
+                targetControl = control.Parent;
+            }
+
+            Control parent = targetControl.Parent;
+            if (parent != null)
+            {
+                string labelName = "lblErr_" + control.Name;
+                Control errLabel = parent.Controls.Find(labelName, true).FirstOrDefault();
+                if (errLabel != null)
+                {
+                    errLabel.Visible = false;
+                }
+            }
+        }
+
+      
+        public static void ClearAllErrors(Control parent)
+        {
+            if (parent == null) return;
+            foreach (Control c in parent.Controls)
+            {
+                if (c.Name != null && c.Name.StartsWith("lblErr_"))
+                {
+                    c.Visible = false;
+                }
+                if (c.HasChildren)
+                {
+                    ClearAllErrors(c);
+                }
+            }
+        }
+
+
     }
 }
