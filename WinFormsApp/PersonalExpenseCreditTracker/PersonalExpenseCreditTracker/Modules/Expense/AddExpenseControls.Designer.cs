@@ -258,7 +258,6 @@
             this.cmbAddExpensePaymentType.TabIndex = 3;
             this.cmbAddExpensePaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbAddExpensePaymentType_SelectedIndexChanged);
             this.cmbAddExpensePaymentType.TextChanged += new System.EventHandler(this.cmbAddExpensePaymentType_TextChanged);
-            this.cmbAddExpensePaymentType.Click += new System.EventHandler(this.cmbAddExpensePaymentType_Click);
             this.cmbAddExpensePaymentType.Enter += new System.EventHandler(this.cmbAddExpensePaymentType_Enter);
             this.cmbAddExpensePaymentType.Leave += new System.EventHandler(this.cmbAddExpensePaymentType_Leave);
             // 
