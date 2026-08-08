@@ -208,7 +208,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlTaskFooter.Controls.Add(this.pnlFooterTask);
             this.pnlTaskFooter.Controls.Add(this.pnlControl);
             this.pnlTaskFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaskFooter.Location = new System.Drawing.Point(11, 491);
+            this.pnlTaskFooter.Location = new System.Drawing.Point(11, 511);
             this.pnlTaskFooter.Name = "pnlTaskFooter";
             this.pnlTaskFooter.Size = new System.Drawing.Size(1026, 48);
             this.pnlTaskFooter.TabIndex = 4;
@@ -497,7 +497,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTask.RowTemplate.Height = 24;
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewTask.Size = new System.Drawing.Size(1026, 427);
+            this.dataGridViewTask.Size = new System.Drawing.Size(1026, 447);
             this.dataGridViewTask.TabIndex = 1;
             this.dataGridViewTask.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
             // 
