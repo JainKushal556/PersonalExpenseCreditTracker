@@ -14,6 +14,25 @@
 
 -- ==========================================================
 
+-- SP: ✔️spGetUserCurrentPassword.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetUserCurrentPassword
+    @UserID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT Password
+    FROM tblUserAuthentication
+    WHERE UserID = @UserID
+      AND Active = 1;
+END;
+GO
+
+-- ==========================================================
+
 -- SP: ✔️spChangePassword.sql
 
 -- ==========================================================
