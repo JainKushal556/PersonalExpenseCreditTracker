@@ -610,7 +610,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // panelExportReport
             // 
             this.panelExportReport.BackColor = System.Drawing.Color.Transparent;
-            this.panelExportReport.Controls.Add(this.btnSerach);
+            this.panelExportReport.Controls.Add(this.pnlSearchFilter);
             this.panelExportReport.Controls.Add(this.pnlButtonControls);
             this.panelExportReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelExportReport.Location = new System.Drawing.Point(8, 5);
@@ -1424,7 +1424,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.Controls.Add(this.pnlStatusFilter);
             this.Controls.Add(this.pnlPaymentFilter);
             this.Controls.Add(this.pnlPersonFilter);
-            this.Controls.Add(this.pnlSearchFilter);
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlAmountFilter);
             this.Controls.Add(this.tableLayoutPanelMainData);

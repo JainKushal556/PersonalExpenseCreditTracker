@@ -184,7 +184,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // pnlTableHeader
             // 
             this.pnlTableHeader.BackColor = System.Drawing.Color.Transparent;
-            this.pnlTableHeader.Controls.Add(this.btnSerach);
+            this.pnlTableHeader.Controls.Add(this.pnlSearch);
             this.pnlTableHeader.Controls.Add(this.pnlButtonControls);
             this.pnlTableHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTableHeader.Location = new System.Drawing.Point(11, 7);
@@ -1158,7 +1158,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.ClientSize = new System.Drawing.Size(1251, 753);
             this.Controls.Add(this.pnlAmountFilter);
             this.Controls.Add(this.pnlSubCategoryFilter);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlCategoryFilter);
             this.Controls.Add(this.pnlCreditContent);
