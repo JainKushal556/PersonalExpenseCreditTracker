@@ -15,6 +15,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
     public partial class EditTaskControl : Form
     {
         private TaskControls taskControl;
+        private bool ignoreEvents = true;
 
         public EditTaskControl()
         {
@@ -76,17 +77,19 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtTaskTitle.Text = taskControl.SelectedTaskTitle;
             txtTaskTitle.ForeColor = Color.Black;
 
-         
             if (!string.IsNullOrEmpty(taskControl.selectDeadline))
             {
-                txtDeadline.Text = taskControl.selectDeadline;
-                txtDeadline.ForeColor = Color.Black;
-
-               
                 DateTime parsedDate;
                 if (DateTime.TryParse(taskControl.selectDeadline, out parsedDate))
                 {
+                    txtDeadline.Text = parsedDate.ToString("dd-MM-yyyy"); 
+                    txtDeadline.ForeColor = Color.Black;
                     monthCalendar1.SelectionStart = parsedDate;
+                }
+                else
+                {
+                    txtDeadline.Text = "DD-MM-YYYY";
+                    txtDeadline.ForeColor = Color.Gray;
                 }
             }
             else
@@ -95,10 +98,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtDeadline.ForeColor = Color.Gray;
             }
 
+
       
             CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select the Proiority", cmbPriority);
             CommonUiFunction.LoadInComboBox("spGetAllTaskStatus", "Select Status", cmbStatus);
 
+            cmbStatus.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+            
       
             if (!string.IsNullOrEmpty(taskControl.selectPriority))
             {
@@ -121,6 +128,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             btnCancel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnCancel.Width, btnCancel.Height, 6, 6));
             btnUpdateTask.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnUpdateTask.Width, btnUpdateTask.Height, 6, 6));
+
+            ignoreEvents = false;
         }
 
 
@@ -147,32 +156,49 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtDeadline.Text = e.Start.ToString("dd-MM-yyyy");
             txtDeadline.ForeColor = Color.Black;
             monthCalendar1.Visible = false;
+            ErrorHelper.HideErrorForControl(txtDeadline); 
         }
 
         private void btnUpdateTask_Click(object sender, EventArgs e)
         {
-            
-            // Clear all previous validation errors
+
             errorProvider1.Clear();
 
-            // Create a new object to store the user's input
             TaskUI taskUi = new TaskUI();
-            int currentTaskId = taskControl.SelectedTaskID;
-            taskUi.taskId = currentTaskId;
+            taskUi.taskId = taskControl.SelectedTaskID;
             taskUi.userId = Session.LogedInUser.GetUserId();
-            taskUi.taskTitle = (txtTaskTitle.Text == "Enter task title") ? "" : txtTaskTitle.Text;
+            taskUi.taskTitle = (txtTaskTitle.Text == "Enter task title") ? "" : txtTaskTitle.Text.Trim();
             taskUi.priorityId = Convert.ToInt32(cmbPriority.SelectedValue);
             taskUi.statusId = Convert.ToInt32(cmbStatus.SelectedValue);
 
-            // If no deadline is selected, assign DateTime.MinValue
-            // Otherwise, assign the selected date from the calendar
-            taskUi.deadline = (txtDeadline.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar1.SelectionStart;
+            if (!string.IsNullOrEmpty(taskControl.selectDeadline))
+            {
+                DateTime parsedDate;
+                if (DateTime.TryParse(taskControl.selectDeadline, out parsedDate))
+                {
+                   
+                    txtDeadline.Text = parsedDate.ToString("dd-MM-yyyy");
+                    txtDeadline.ForeColor = Color.Black;
+                    monthCalendar1.SelectionStart = parsedDate;
+                }
+                else
+                {
+                    txtDeadline.Text = "DD-MM-YYYY";
+                    txtDeadline.ForeColor = Color.Gray;
+                }
+            }
+            else
+            {
+                txtDeadline.Text = "DD-MM-YYYY";
+                txtDeadline.ForeColor = Color.Gray;
+            }
+
+
 
             CommonValidator.ValidationResult result = taskUi.UpdateDataIntoTaskUi();
-            // Perform action based on the validation result
+
             switch (result)
             {
-                // Data is valid and updated successfully
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Task updated successfully!");
                     this.Close();
@@ -195,11 +221,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    MessageBox.Show("Task updated unsuccessfully!");
+                    MessageBox.Show("Task update failed!");
                     break;
             }
-
         }
+
 
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {
@@ -268,11 +294,109 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void cmbPriority_Click(object sender, EventArgs e)
         {
             monthCalendar1.Visible = false;
+            cmbPriority.DroppedDown = true;
         }
 
         private void cmbStatus_Click(object sender, EventArgs e)
         {
             monthCalendar1.Visible = false;
+            cmbStatus.DroppedDown = true;
         }
+
+        private void txtTaskTitle_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTaskTitle.Text != "Enter task title" && !string.IsNullOrWhiteSpace(txtTaskTitle.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtTaskTitle);
+            }
+        }
+
+        private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPriority.SelectedIndex > 0)
+            {
+                ErrorHelper.HideErrorForControl(cmbPriority);
+            }
+            //cmbPriority.AutoCompleteMode = AutoCompleteMode.Append;
+            //cmbPriority.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbStatus.SelectedIndex > 0)
+            {
+                ErrorHelper.HideErrorForControl(cmbStatus);
+            }
+        }
+
+
+        private void cmbPriority_Enter(object sender, EventArgs e)
+        {
+            if (cmbPriority.Text == "Select the Proiority")
+                cmbPriority.ForeColor = Color.Black;
+        }
+
+        private void cmbPriority_Leave(object sender, EventArgs e)
+        {
+            if (cmbPriority.SelectedIndex <= 0 || string.IsNullOrWhiteSpace(cmbPriority.Text) || cmbPriority.Text == "Select the Proiority")
+            {
+                cmbPriority.SelectedIndex = 0;
+                cmbPriority.Text = "Select the Proiority";
+                cmbPriority.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbPriority.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbPriority_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+
+            if (cmbPriority.SelectedIndex > 0 ||
+               (!string.IsNullOrWhiteSpace(cmbPriority.Text) && cmbPriority.Text != "Select the Proiority"))
+            {
+                ErrorHelper.HideErrorForControl(cmbPriority);
+            }
+
+            
+        }
+
+        private void cmbStatus_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            if (cmbStatus.SelectedIndex > 0 ||
+               (!string.IsNullOrWhiteSpace(cmbStatus.Text) && cmbStatus.Text != "Select Status"))
+            {
+                ErrorHelper.HideErrorForControl(cmbStatus);
+            }
+            //cmbStatus.DroppedDown = true;
+        }
+
+        private void cmbStatus_Enter(object sender, EventArgs e)
+        {
+            if (cmbStatus.Text == "Select Status")
+                cmbStatus.ForeColor = Color.Black;
+        }
+
+        private void cmbStatus_Leave(object sender, EventArgs e)
+        {
+            if (cmbStatus.SelectedIndex <= 0 || string.IsNullOrWhiteSpace(cmbStatus.Text) || cmbStatus.Text == "Select Status")
+            {
+                cmbStatus.SelectedIndex = 0;
+                cmbStatus.Text = "Select Status";
+                cmbStatus.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbStatus.ForeColor = Color.Black;
+            }
+        }
+
+
+
+       
+
     }
 }

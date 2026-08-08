@@ -51,6 +51,17 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void CreditControl_Load(object sender, EventArgs e)
         {
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+            cmbCategory.Text = "Select Category";
+            cmbCategory.ForeColor = Color.Gray;
+            cmbCategorytxt.Text = "Enter Category";
+            cmbCategorytxt.ForeColor = Color.Gray;
+            cmbSubCategory.Text = "Enter SubCategory";
+            cmbSubCategory.ForeColor = Color.Gray;
+
             dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             ApplyRoundCorners();
             this.MouseDown += CreditControls_MouseDown;
@@ -61,6 +72,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             HideAllFilterPanels();
             DesignContextMenu();
             cmsFilter.Opening += cmsFilter_Opening;
+            RegisterMouseDown(this);
 
         }
 
@@ -537,15 +549,20 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
+            tsmiAmount.AutoSize = false;
+            tsmiAmount.Height = 30;
+
             tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiCategory.Image = Properties.Resources.shop;
+            tsmiAmount.Image = Properties.Resources.money;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsmiCategory.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
             tsmiCategory.ImageScaling = ToolStripItemImageScaling.None;
-
+            tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
 
         }
 
@@ -554,16 +571,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
-
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
-
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width - 300,
-                p.Y + 35);
-
+            Point p = txtFromdate.PointToScreen(
+                      new Point(0, txtFromdate.Height + 10));
+            p = this.PointToClient(p);
+            panel.Location = p;
             panel.BringToFront();
             panel.Visible = true;
         }
@@ -580,13 +592,25 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void CreditControls_MouseDown(object sender, MouseEventArgs e)
         {
             Point mousePos = this.PointToClient(Control.MousePosition);
-
             // From Date Calendar
             if (pnlFromDateCalenderShow.Visible)
             {
-                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle).Contains(Control.MousePosition) &&
-                    !txtFromdate.RectangleToScreen(txtFromdate.ClientRectangle).Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlFromDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderFromDate.RectangleToScreen(
+                        picCalenderFromDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtFromdate.RectangleToScreen(
+                        txtFromdate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlFromDateCalenderShow.Visible = false;
                 }
@@ -595,9 +619,22 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // To Date Calendar
             if (pnlToDateCalenderShow.Visible)
             {
-                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle).Contains(Control.MousePosition) &&
-                    !txtToDate.RectangleToScreen(txtToDate.ClientRectangle).Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlToDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderToDate.RectangleToScreen(
+                        picCalenderToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtToDate.RectangleToScreen(
+                        txtToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlToDateCalenderShow.Visible = false;
                 }
@@ -609,14 +646,14 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             HidePopupPanels();
 
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
 
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width - 70,
-                p.Y + 35);
+            Point p = txtToDate.PointToScreen(
+                new Point(0, txtToDate.Height + 10));
+
+            p = this.PointToClient(p);
+
+            panel.Location = p;
 
             panel.BringToFront();
             panel.Visible = true;
@@ -670,18 +707,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
             pnlToDateCalenderShow.Visible = false;
-        }
-
-                private void txtFromdate_Click(object sender, EventArgs e)
-        {
-            pnlToDateCalenderShow.Visible = false;
-            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
-        }
-
-        private void txtToDate_Click(object sender, EventArgs e)
-        {
-            pnlFromDateCalenderShow.Visible = false;
-            ShowCalenderToDatePanel(pnlToDateCalenderShow);
         }
 
         private void txtFromdate_Enter(object sender, EventArgs e)
@@ -748,5 +773,154 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             AllCreditData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
             ShowCurrentPage();
         }
+
+        private void pnlCategory_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnCategoryApply_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbCategory_Click(object sender, EventArgs e)
+        {
+            cmbCategory.DroppedDown = true;
+        }
+
+        private void cmbCategory_Enter(object sender, EventArgs e)
+        {
+            if (cmbCategory.Text == "Select Category")
+                cmbCategory.ForeColor = Color.Black;
+        }
+
+        private void cmbCategory_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbCategory.Text) || cmbCategory.Text == "Select Category")
+            {
+
+                cmbCategory.Text = "Select Category";
+                cmbCategory.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbCategory.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbCategorytxt_Enter(object sender, EventArgs e)
+        {
+            if (cmbCategorytxt.Text == "Select Category")
+                cmbCategorytxt.ForeColor = Color.Black;
+        }
+
+        private void cmbCategorytxt_Click(object sender, EventArgs e)
+        {
+            cmbCategorytxt.DroppedDown = true;
+        }
+
+        private void cmbCategorytxt_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbCategorytxt.Text) || cmbCategorytxt.Text == "Select Category")
+            {
+
+                cmbCategorytxt.Text = "Select Category";
+                cmbCategorytxt.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbCategorytxt.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbSubCategory_Click(object sender, EventArgs e)
+        {
+            cmbSubCategory.DroppedDown = true;
+        }
+
+        private void cmbSubCategory_Enter(object sender, EventArgs e)
+        {
+            if (cmbSubCategory.Text == "Select SubCategory")
+                cmbSubCategory.ForeColor = Color.Black;
+        }
+
+        private void cmbSubCategory_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbSubCategory.Text) || cmbSubCategory.Text == "Select SubCategory")
+            {
+
+                cmbSubCategory.Text = "Select SubCategory";
+                cmbSubCategory.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbSubCategory.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtFromdate_Click(object sender, EventArgs e)
+        {
+            if (pnlFromDateCalenderShow.Visible)
+            {
+                pnlFromDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+            }
+        }
+
+        private void txtToDate_Click(object sender, EventArgs e)
+        {
+            if (pnlToDateCalenderShow.Visible)
+            {
+                pnlToDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderToDatePanel(pnlToDateCalenderShow);
+            }
+        }
+
+        private void txtMinAmount_Enter(object sender, EventArgs e)
+        {
+            if (txtMinAmount.Text == "Enter Amount")
+            {
+                txtMinAmount.Text = "";
+                txtMinAmount.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtMinAmount_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMinAmount.Text))
+            {
+                txtMinAmount.Text = "Enter Amount";
+                txtMinAmount.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtMaxAmount_Enter(object sender, EventArgs e)
+        {
+            if (txtMaxAmount.Text == "Enter Amount")
+            {
+                txtMaxAmount.Text = "";
+                txtMaxAmount.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtMaxAmount_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMaxAmount.Text))
+            {
+                txtMaxAmount.Text = "Enter Amount";
+                txtMaxAmount.ForeColor = Color.Gray;
+            }
+        }
+
+        
+
+        
     }
 }

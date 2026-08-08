@@ -431,5 +431,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             comboBoxLentPaymentType.DroppedDown = true;
         }
 
+        private void comboBoxLentPaymentType_Click(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            comboBoxLentPaymentType.DroppedDown = true;
+        }
+
     }
 }

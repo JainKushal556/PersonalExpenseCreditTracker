@@ -127,9 +127,12 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
         }
 
-        private void pnlMain_Paint(object sender, PaintEventArgs e)
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (cmbStatus.SelectedIndex > 0)
+            {
+                ErrorHelper.HideErrorForControl(cmbStatus);
+            }
         }
 
         
