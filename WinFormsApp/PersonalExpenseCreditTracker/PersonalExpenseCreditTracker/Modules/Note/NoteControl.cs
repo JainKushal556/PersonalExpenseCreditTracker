@@ -52,6 +52,9 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     SetRadius(c, 20);
                 }
             }
+            cmbPriority.Text = "Select Priority";
+            cmbPriority.ForeColor = Color.Gray;
+
             DesignContextMenu();
             ResizeNoteCards();
             SetRoundedPanel(pnlTotalNotes, 20);
@@ -65,6 +68,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
             LoadNoteData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
+            RegisterMouseDown(this);
 
         }
 
@@ -509,10 +513,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void viewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NoteViewDetailsControl noteViewDetailsControl = new NoteViewDetailsControl();
+           NoteViewDetailsControl noteViewDetailsControl = new NoteViewDetailsControl();
             noteViewDetailsControl.Show();
-
-
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -736,7 +738,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
             panel.Location = new Point(
                 p.X - panel.Width - 10,
-                p.Y);
+                p.Y+5);
 
             panel.BringToFront();
             panel.Visible = true;
@@ -749,16 +751,11 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
-
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
-
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width - 300,
-                p.Y + 35);
-
+            Point p = txtFromdate.PointToScreen(
+                      new Point(0, txtFromdate.Height + 10));
+            p = this.PointToClient(p);
+            panel.Location = p;
             panel.BringToFront();
             panel.Visible = true;
         }
@@ -766,14 +763,14 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             HidePopupPanels();
 
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
 
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width - 70,
-                p.Y + 35);
+            Point p = txtToDate.PointToScreen(
+                new Point(0, txtToDate.Height + 10));
+
+            p = this.PointToClient(p);
+
+            panel.Location = p;
 
             panel.BringToFront();
             panel.Visible = true;
@@ -795,9 +792,22 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             // From Date Calendar
             if (pnlFromDateCalenderShow.Visible)
             {
-                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle).Contains(Control.MousePosition) &&
-                    !txtFromdate.RectangleToScreen(txtFromdate.ClientRectangle).Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlFromDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderFromDate.RectangleToScreen(
+                        picCalenderFromDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtFromdate.RectangleToScreen(
+                        txtFromdate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlFromDateCalenderShow.Visible = false;
                 }
@@ -806,9 +816,22 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             // To Date Calendar
             if (pnlToDateCalenderShow.Visible)
             {
-                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle).Contains(Control.MousePosition) &&
-                    !txtToDate.RectangleToScreen(txtToDate.ClientRectangle).Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlToDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderToDate.RectangleToScreen(
+                        picCalenderToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtToDate.RectangleToScreen(
+                        txtToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlToDateCalenderShow.Visible = false;
                 }
@@ -846,6 +869,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
+
 
         private void cmsNote_Opening(object sender, CancelEventArgs e)
         {
@@ -914,34 +938,35 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             ShowCurrentPage();
         }
 
+        private void cmbPriority_Click(object sender, EventArgs e)
+        {
+            cmbPriority.DroppedDown = true;
+        }
+
+        private void cmbPriority_Enter(object sender, EventArgs e)
+        {
+            if (cmbPriority.Text == "Select  Priority")
+                cmbPriority.ForeColor = Color.Black;
+        }
+
+        private void cmbPriority_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbPriority.Text) || cmbPriority.Text == "Select Priority")
+            {
+
+                cmbPriority.Text = "Select Priority";
+                cmbPriority.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbPriority.ForeColor = Color.Black;
+            }
+        }
+
         private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
             pnlToDateCalenderShow.Visible = false;
-        }
-
-                private void txtFromdate_Click(object sender, EventArgs e)
-        {
-            pnlToDateCalenderShow.Visible = false;
-            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
-        }
-
-        private void txtToDate_Click(object sender, EventArgs e)
-        {
-            pnlFromDateCalenderShow.Visible = false;
-            ShowCalenderToDatePanel(pnlToDateCalenderShow);
-        }
-
-        private void txtFromdate_Enter(object sender, EventArgs e)
-        {
-            pnlToDateCalenderShow.Visible = false;
-            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
-        }
-
-        private void txtToDate_Enter(object sender, EventArgs e)
-        {
-            pnlFromDateCalenderShow.Visible = false;
-            ShowCalenderToDatePanel(pnlToDateCalenderShow);
         }
 
         private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
@@ -950,10 +975,35 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             pnlFromDateCalenderShow.Visible = false;
         }
 
+        private void txtFromdate_Click(object sender, EventArgs e)
+        {
+            if (pnlFromDateCalenderShow.Visible)
+            {
+                pnlFromDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                pnlToDateCalenderShow.Visible = false;
+                ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+            }
+        }
+
+        private void txtToDate_Click(object sender, EventArgs e)
+        {
+            if (pnlToDateCalenderShow.Visible)
+            {
+                pnlToDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                pnlFromDateCalenderShow.Visible = false;
+                ShowCalenderToDatePanel(pnlToDateCalenderShow);
+            }
+        }
+
         private void pnlDateHeader_Click(object sender, EventArgs e)
         {
             HidePopupPanels();
         }
-
     }
 }
