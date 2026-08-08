@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -63,6 +63,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             //int userID = Session.LogedInUser.GetUserId();
             HideAllFilterPanels();
             DesignContextMenu();
+            this.MouseDown += NoteControls_MouseDown;
+            RegisterMouseDown(this);
 
             LoadNoteData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
@@ -599,7 +601,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             tsmiPriority.AutoSize = false;
             tsmiPriority.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiPriority.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -697,22 +699,14 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             cmbPriority.DroppedDown = true;
         }
 
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
-
         private void btnFilter_Click(object sender, EventArgs e)
         {
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
-        
-
-       
-
         private void btnDateClose_Click(object sender, EventArgs e)
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
         }
 
@@ -721,12 +715,11 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             pnlPriorityFilter.Visible = false;
         }
 
-       
         private void HideAllFilterPanels()
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
             pnlPriorityFilter.Visible = false;
-            pnlSearch.Visible = false;
 
         }
         private void HidePopupPanels()
@@ -753,24 +746,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
 
         private void ShowCalenderFromDatePanel(Panel panel)
         {
@@ -864,6 +840,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
         }
 
@@ -875,6 +852,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             }
             else
             {
+                pnlToDateCalenderShow.Visible = false;
                 ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
             }
         }
@@ -887,21 +865,11 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             }
             else
             {
+                pnlFromDateCalenderShow.Visible = false;
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
 
-        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
-        {
-            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-            pnlFromDateCalenderShow.Visible = false;
-        }
-
-        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
-        {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
-            pnlToDateCalenderShow.Visible = false;
-        }
 
         private void cmsNote_Opening(object sender, CancelEventArgs e)
         {
@@ -995,29 +963,47 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             }
         }
 
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
+        }
+
         private void txtFromdate_Click(object sender, EventArgs e)
         {
             if (pnlFromDateCalenderShow.Visible)
-             {
-                 pnlFromDateCalenderShow.Visible = false;
-             }
-             else
-             {
-                 ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
-             }
+            {
+                pnlFromDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                pnlToDateCalenderShow.Visible = false;
+                ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+            }
         }
 
         private void txtToDate_Click(object sender, EventArgs e)
         {
             if (pnlToDateCalenderShow.Visible)
-             {
-                 pnlToDateCalenderShow.Visible = false;
-             }
-             else
-             {
-                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
-             }
-         }
+            {
+                pnlToDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                pnlFromDateCalenderShow.Visible = false;
+                ShowCalenderToDatePanel(pnlToDateCalenderShow);
+            }
         }
 
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            HidePopupPanels();
+        }
     }
+}

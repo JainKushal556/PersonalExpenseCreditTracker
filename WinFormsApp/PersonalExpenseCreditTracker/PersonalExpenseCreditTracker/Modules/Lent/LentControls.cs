@@ -128,18 +128,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void LentControls_Load(object sender, EventArgs e)
         {
-            txtMinAmount.Text = "Enter Amount";
-            txtMinAmount.ForeColor = Color.Gray;
-            txtMaxAmount.Text = "Enter Amount";
-            txtMaxAmount.ForeColor = Color.Gray;
-            cmbPerson.Text = "Select Person";
-            cmbPerson.ForeColor = Color.Gray;
-            cmbPayment.Text = "Select Payment";
-            cmbPayment.ForeColor = Color.Gray;
-            cmbStatus.Text = "Select Status";
-            cmbStatus.ForeColor = Color.Gray;
-
             ApplyRoundCorners();
+            this.MouseDown += LentControls_MouseDown;
+            RegisterMouseDown(this);
             dgvLentDataTable.CellPainting += dgvLentDataTable_CellPainting;
             pageSize = GetRowsPerPage();
             int userID = Session.LogedInUser.GetUserId();
@@ -147,7 +138,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             HideAllFilterPanels();
             DesignContextMenu();
              cmsFilter.Opening += cmsFilter_Opening;
-             RegisterMouseDown(this);
+
         }
 
         private void cmsFilter_Opening(object sender, CancelEventArgs e)
@@ -634,15 +625,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             cmsFilter.Show(btnFilter, 0, btnFilter.Height);
         }
 
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearchFilter);
-        }
+
         private void HideAllFilterPanels()
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
             pnlAmountFilter.Visible = false;
-            pnlSearchFilter.Visible = false;
             pnlStatusFilter.Visible = false;
             pnlPaymentFilter.Visible = false;
             pnlPersonFilter.Visible = false;
@@ -672,24 +660,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
 
         private void DesignContextMenu()
         {
@@ -703,45 +674,30 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             tsmiAmount.AutoSize = false;
             tsmiAmount.Height = 30;
 
-            tsmiPerson.AutoSize = false;
-            tsmiPerson.Height = 30;
-
-            tsmiPayment.AutoSize = false;
-            tsmiPayment.Height = 30;
-
-            tsmiStatus.AutoSize = false;
-            tsmiStatus.Height = 30;
-
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiAmount.Image = Properties.Resources.shop;
-            tsmiPayment.Image = Properties.Resources.credit_card1;
-            tsmiPerson.Image = Properties.Resources.PersonIcon;
-            tsmiStatus.Image = Properties.Resources.loading;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiPerson.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiPayment.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            tsmiStatus.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
             tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiPerson.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiPayment.ImageScaling = ToolStripItemImageScaling.None;
-            tsmiStatus.ImageScaling = ToolStripItemImageScaling.None;
-            
 
 
         }
         private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
-            panel.Parent = this;
-            Point p = txtFromdate.PointToScreen(
-                      new Point(0, txtFromdate.Height + 10));
+
+            Point p = pnlDateFilter.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
-            panel.Location = p;
+
+            panel.Parent = this;
+
+            panel.Location = new Point(
+                p.X + pnlDateFilter.Width - panel.Width - 300,
+                p.Y + 35);
+
             panel.BringToFront();
             panel.Visible = true;
         }
@@ -758,25 +714,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void LentControls_MouseDown(object sender, MouseEventArgs e)
         {
             Point mousePos = this.PointToClient(Control.MousePosition);
+
             // From Date Calendar
             if (pnlFromDateCalenderShow.Visible)
             {
-                bool clickInsideCalendar =
-                    pnlFromDateCalenderShow.Bounds.Contains(mousePos);
-
-                bool clickOnCalendarIcon =
-                    picCalenderFromDate.RectangleToScreen(
-                        picCalenderFromDate.ClientRectangle)
-                        .Contains(Control.MousePosition);
-
-                bool clickOnTextBox =
-                    txtFromdate.RectangleToScreen(
-                        txtFromdate.ClientRectangle)
-                        .Contains(Control.MousePosition);
-
-                if (!clickInsideCalendar &&
-                    !clickOnCalendarIcon &&
-                    !clickOnTextBox)
+                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
+                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle).Contains(Control.MousePosition) &&
+                    !txtFromdate.RectangleToScreen(txtFromdate.ClientRectangle).Contains(Control.MousePosition))
                 {
                     pnlFromDateCalenderShow.Visible = false;
                 }
@@ -785,22 +729,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // To Date Calendar
             if (pnlToDateCalenderShow.Visible)
             {
-                bool clickInsideCalendar =
-                    pnlToDateCalenderShow.Bounds.Contains(mousePos);
-
-                bool clickOnCalendarIcon =
-                    picCalenderToDate.RectangleToScreen(
-                        picCalenderToDate.ClientRectangle)
-                        .Contains(Control.MousePosition);
-
-                bool clickOnTextBox =
-                    txtToDate.RectangleToScreen(
-                        txtToDate.ClientRectangle)
-                        .Contains(Control.MousePosition);
-
-                if (!clickInsideCalendar &&
-                    !clickOnCalendarIcon &&
-                    !clickOnTextBox)
+                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
+                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle).Contains(Control.MousePosition) &&
+                    !txtToDate.RectangleToScreen(txtToDate.ClientRectangle).Contains(Control.MousePosition))
                 {
                     pnlToDateCalenderShow.Visible = false;
                 }
@@ -810,14 +741,14 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             HidePopupPanels();
 
-            panel.Parent = this;
-
-            Point p = txtToDate.PointToScreen(
-                new Point(0, txtToDate.Height + 10));
-
+            Point p = pnlDateFilter.PointToScreen(Point.Empty);
             p = this.PointToClient(p);
 
-            panel.Location = p;
+            panel.Parent = this;
+
+            panel.Location = new Point(
+                p.X + pnlDateFilter.Width - panel.Width - 70,
+                p.Y + 35);
 
             panel.BringToFront();
             panel.Visible = true;
@@ -831,6 +762,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
             else
             {
+                pnlToDateCalenderShow.Visible = false;
                 ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
             }
         }
@@ -843,22 +775,55 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
             else
             {
+                pnlFromDateCalenderShow.Visible = false;
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
 
-        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
         }
 
-        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+                private void txtFromdate_Click(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+        }
+
+        private void txtToDate_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            ShowCalenderToDatePanel(pnlToDateCalenderShow);
+        }
+
+        private void txtFromdate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+        }
+
+        private void txtToDate_Enter(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            ShowCalenderToDatePanel(pnlToDateCalenderShow);
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            HidePopupPanels();
         }
 
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
         }
 
@@ -882,142 +847,5 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             AllLentData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
             ShowCurrentPage();
         }
-
-        private void cmbPerson_Click(object sender, EventArgs e)
-        {
-            cmbPerson.DroppedDown = true;
-        }
-
-        private void cmbPerson_Enter(object sender, EventArgs e)
-        {
-            if (cmbPerson.Text == "Select Person")
-                cmbPerson.ForeColor = Color.Black;
-        }
-
-        private void cmbPerson_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(cmbPerson.Text) || cmbPerson.Text == "Select Person")
-            {
-
-                cmbPerson.Text = "Select Person";
-                cmbPerson.ForeColor = Color.Gray;
-            }
-            else
-            {
-                cmbPerson.ForeColor = Color.Black;
-            }
-        }
-
-        private void cmbPayment_Click(object sender, EventArgs e)
-        {
-            cmbPayment.DroppedDown = true;
-        }
-
-        private void cmbPayment_Enter(object sender, EventArgs e)
-        {
-            if (cmbPayment.Text == "Select Payment")
-                cmbPayment.ForeColor = Color.Black;
-        }
-
-        private void cmbPayment_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(cmbPayment.Text) || cmbPayment.Text == "Select Payment")
-            {
-
-                cmbPayment.Text = "Select Payment";
-                cmbPayment.ForeColor = Color.Gray;
-            }
-            else
-            {
-                cmbPayment.ForeColor = Color.Black;
-            }
-        }
-
-        private void cmbStatus_Click(object sender, EventArgs e)
-        {
-            cmbStatus.DroppedDown = true;
-        }
-
-        private void cmbStatus_Enter(object sender, EventArgs e)
-        {
-            if (cmbStatus.Text == "Select Status")
-                cmbStatus.ForeColor = Color.Black;
-        }
-
-        private void cmbStatus_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(cmbStatus.Text) || cmbStatus.Text == "Select Status")
-            {
-
-                cmbStatus.Text = "Select Status";
-                cmbStatus.ForeColor = Color.Gray;
-            }
-            else
-            {
-                cmbStatus.ForeColor = Color.Black;
-            }
-        }
-
-        private void txtMinAmount_Enter(object sender, EventArgs e)
-        {
-            if (txtMinAmount.Text == "Enter Amount")
-            {
-                txtMinAmount.Text = "";
-                txtMinAmount.ForeColor = Color.Black;
-            }
-        }
-
-        private void txtMinAmount_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtMinAmount.Text))
-            {
-                txtMinAmount.Text = "Enter Amount";
-                txtMinAmount.ForeColor = Color.Gray;
-            }
-        }
-
-        private void txtMaxAmount_Enter(object sender, EventArgs e)
-        {
-            if (txtMaxAmount.Text == "Enter Amount")
-            {
-                txtMaxAmount.Text = "";
-                txtMaxAmount.ForeColor = Color.Black;
-            }
-        }
-
-        private void txtMaxAmount_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtMaxAmount.Text))
-            {
-                txtMaxAmount.Text = "Enter Amount";
-                txtMaxAmount.ForeColor = Color.Gray;
-            }
-        }
-
-        private void txtFromdate_Click(object sender, EventArgs e)
-        {
-            if (pnlFromDateCalenderShow.Visible)
-            {
-                pnlFromDateCalenderShow.Visible = false;
-            }
-            else
-            {
-                ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
-            }
-        }
-
-        private void txtToDate_Click(object sender, EventArgs e)
-        {
-            if (pnlToDateCalenderShow.Visible)
-            {
-                pnlToDateCalenderShow.Visible = false;
-            }
-            else
-            {
-                ShowCalenderToDatePanel(pnlToDateCalenderShow);
-            }
-        }
-
-        
       }
     }

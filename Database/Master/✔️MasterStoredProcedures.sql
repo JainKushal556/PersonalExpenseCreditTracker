@@ -14,6 +14,25 @@
 
 -- ==========================================================
 
+-- SP: ✔️spGetUserCurrentPassword.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetUserCurrentPassword
+    @UserID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT Password
+    FROM tblUserAuthentication
+    WHERE UserID = @UserID
+      AND Active = 1;
+END;
+GO
+
+-- ==========================================================
+
 -- SP: ✔️spChangePassword.sql
 
 -- ==========================================================
@@ -271,6 +290,41 @@ BEGIN
     LEFT JOIN tblGender G
         ON P.GenderID = G.GenderID
     WHERE U.UserID = @UserID;
+END;
+
+
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetUserCurrentPassword.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetUserCurrentPassword
+(
+   @UserID INT
+)
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UserAuthentication
+        WHERE UserAuthentication.UserID = @UserID
+        AND UserAuthentication.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
+    END
+
+    SELECT Password 
+    FROM tblUserAuthentication
+    WHERE UserID = @UserID;
 END;
 
 
@@ -3885,57 +3939,129 @@ GO
 
 CREATE OR ALTER PROCEDURE spInsertNewExpenseCategoryByUserID
 (
-   @UserID INT,
-   @CategoryName VARCHAR(MAX)
+    @UserID INT,
+    @ActiveStatus INT,
+    @CategoryName VARCHAR(MAX)
 )
 AS
 BEGIN
-    SET NOCOUNT OFF
-    
-    
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblUserAuthentication UserAuthentication
-        WHERE UserAuthentication.UserID = @UserID
-        AND UserAuthentication.Active = 1
-    )
-    BEGIN
-        SELECT 'Invalid or Inactive User' AS Message
-        RETURN
-    END
-    
-    
-    SET @CategoryName = LTRIM(RTRIM(@CategoryName))
-    
-    IF @CategoryName IS NULL
-    OR @CategoryName = ''
-    BEGIN
-        SELECT 'Category Name cannot be empty' AS Message
-        RETURN
-    END
-    
-    
-    IF EXISTS
-    (
-        SELECT 1
-        FROM tblExpenseCategory
-        WHERE CategoryName = @CategoryName
-        AND UserID = @UserID
-        AND IsActive = 1
-    )
-    BEGIN
-        SELECT 'Category Already Exists for this user' AS Message
-        RETURN
-    END
-    
-    
-    INSERT INTO tblExpenseCategory(UserID, CategoryName, IsDefault, IsActive)
-    VALUES(@UserID, @CategoryName, 0, 1)
-    
-    SELECT 'Expense Category Inserted Successfully' AS Message
+    SET NOCOUNT ON;
 
-END
+    DECLARE @IsDefault INT;
+    DECLARE @IsActive INT;
+
+    BEGIN TRY
+
+        -- Validate User
+        IF NOT EXISTS
+        (
+            SELECT 1
+            FROM tblUserAuthentication AS UserAuthentication
+            WHERE UserAuthentication.UserID = @UserID
+              AND UserAuthentication.Active = 1
+        )
+        BEGIN
+            SELECT 'Invalid or Inactive User' AS Message;
+            RETURN;
+        END;
+
+
+        -- Trim Category Name
+        SET @CategoryName = LTRIM(RTRIM(@CategoryName));
+
+
+        -- Validate Category Name
+        IF @CategoryName IS NULL
+           OR @CategoryName = ''
+        BEGIN
+            SELECT 'Category Name cannot be empty' AS Message;
+            RETURN;
+        END;
+
+
+        -- Validate Active Status
+        IF @ActiveStatus = 1
+        BEGIN
+            SET @IsActive = 1;
+            SET @IsDefault = 0;
+        END
+        ELSE IF @ActiveStatus = 0
+        BEGIN
+            SET @IsActive = 0;
+            SET @IsDefault = 0;
+        END
+        ELSE
+        BEGIN
+            SELECT 'Please Select Valid Input' AS Message;
+            RETURN;
+        END;
+
+
+        -- Transaction Starts
+        BEGIN TRANSACTION;
+
+
+        -- Check Duplicate Category
+        IF EXISTS
+        (
+            SELECT 1
+            FROM tblExpenseCategory
+            WHERE CategoryName = @CategoryName
+              AND UserID = @UserID
+              AND IsActive = 1
+        )
+        BEGIN
+            ROLLBACK TRANSACTION;
+
+            SELECT 'Category Already Exists for this user' AS Message;
+            RETURN;
+        END;
+
+
+        -- Insert Category
+        INSERT INTO tblExpenseCategory
+        (
+            UserID,
+            CategoryName,
+            IsDefault,
+            IsActive
+        )
+        VALUES
+        (
+            @UserID,
+            @CategoryName,
+            @IsDefault,
+            @IsActive
+        );
+
+
+        -- Commit Transaction
+        COMMIT TRANSACTION;
+
+
+        SELECT 'Expense Category Inserted Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        -- Rollback if transaction is active
+        IF @@TRANCOUNT > 0
+        BEGIN
+            ROLLBACK TRANSACTION;
+        END;
+
+
+        -- Return Error Information
+        SELECT
+            'Error occurred while inserting Expense Category' AS Message,
+            ERROR_MESSAGE() AS ErrorMessage,
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_LINE() AS ErrorLine;
+
+    END CATCH
+
+END;
 GO
 
 
@@ -3952,11 +4078,15 @@ CREATE OR ALTER PROCEDURE spInsertNewExpenseSubCategoryByUserID
 (
    @UserID INT,
    @CategoryID INT,
+   @ActiveStatus INT,
    @SubCategoryName VARCHAR(MAX)
 )
 AS
 BEGIN
-    SET NOCOUNT OFF
+    DECLARE @IsDefault INT;
+    DECLARE @IsActive INT;
+
+    SET NOCOUNT OFF;
     
     
     IF NOT EXISTS
@@ -3967,8 +4097,8 @@ BEGIN
         AND UserAuthentication.Active = 1
     )
     BEGIN
-        SELECT 'Invalid or Inactive User' AS Message
-        RETURN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
     END
     
     
@@ -3981,18 +4111,18 @@ BEGIN
         AND (UserID IS NULL OR UserID = @UserID)
     )
     BEGIN
-        SELECT 'Invalid or inactive category' AS Message
-        RETURN
+        SELECT 'Invalid or inactive category' AS Message;
+        RETURN;
     END
     
     
-    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))
+    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));
     
     IF @SubCategoryName IS NULL
     OR @SubCategoryName = ''
     BEGIN
-        SELECT 'SubCategory Name cannot be empty' AS Message
-        RETURN
+        SELECT 'SubCategory Name cannot be empty' AS Message;
+        RETURN;
     END
     
     
@@ -4006,17 +4136,32 @@ BEGIN
         AND IsActive = 1
     )
     BEGIN
-        SELECT 'SubCategory Already Exists for this user in this category' AS Message
-        RETURN
+        SELECT 'SubCategory Already Exists for this user in this category' AS Message;
+        RETURN;
     END
     
-    
-    INSERT INTO tblExpenseSubCategory(CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
-    VALUES(@CategoryID, @UserID, @SubCategoryName, 0, 1)
-    
-    SELECT 'Expense SubCategory Inserted Successfully' AS Message
+    IF @ActiveStatus = 1
+    BEGIN
+        SET @IsActive = 1;
+        SET @IsDefault = 0;
+    END
+    ELSE IF @ActiveStatus = 0
+    BEGIN
+        SET @IsDefault = 0;
+        SET @IsActive = 0;
+    END
+    ELSE
+    BEGIN
+        SELECT 'Please Select Valid Input' AS Message;
+        RETURN;
+    END
 
-END
+    INSERT INTO tblExpenseSubCategory(CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
+    VALUES(@CategoryID, @UserID, @SubCategoryName, @IsDefault, @IsActive);
+    
+    SELECT 'Expense SubCategory Inserted Successfully' AS Message;
+
+END;
 GO
 
 
