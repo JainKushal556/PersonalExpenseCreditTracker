@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +15,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
     public partial class AddTaskControl : Form
     {
+        private bool ignoreEvents = true;
+
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
@@ -75,6 +77,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtTaskTitle.ForeColor = Color.Gray;
 
             CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select the Proiority", cmbPriority);
+
+            ignoreEvents = false;
         }
 
         private void txtTaskTitle_Enter(object sender, EventArgs e)
@@ -128,7 +132,16 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             // If no deadline is selected, assign DateTime.MinValue
             // Otherwise, assign the selected date from the calendar
-            taskUi.deadline = (txtDeadline.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar1.SelectionStart;
+            DateTime selectedDeadline;
+            if (DateTime.TryParse(txtDeadline.Text, out selectedDeadline))
+            {
+                taskUi.deadline = selectedDeadline;
+            }
+            else
+            {
+                taskUi.deadline = DateTime.MinValue; 
+            }
+
 
             CommonValidator.ValidationResult result = taskUi.InsertDataIntoTaskUi();
 
@@ -164,7 +177,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtDeadline.Text = e.Start.ToString("dd-MM-yyyy");
             txtDeadline.ForeColor = Color.Black;
             pnlDeadlinePicker.Visible = false;
+            ErrorHelper.HideErrorForControl(txtDeadline); 
         }
+
 
         private void txtDeadline_Enter(object sender, EventArgs e)
         {
@@ -173,7 +188,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtDeadline.Text = "";
                 txtDeadline.ForeColor = Color.Black;
             }
-            pnlDeadlinePicker.Visible = true;
+            //pnlDeadlinePicker.Visible = true;
             //pnlDeadlinePicker.BringToFront();
         }
 
@@ -199,7 +214,13 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void txtDeadline_TextChanged(object sender, EventArgs e)
         {
             pnlDeadlinePicker.Visible = false;
+
+            if (txtDeadline.Text != "DD-MM-YYYY" && !string.IsNullOrWhiteSpace(txtDeadline.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtDeadline); 
+            }
         }
+
 
         private void pnlAddTask_Click(object sender, EventArgs e)
         {
@@ -209,6 +230,68 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void pnlBody_Click(object sender, EventArgs e)
         {
             pnlDeadlinePicker.Visible = false;
+        }
+
+        private void txtTaskTitle_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTaskTitle.Text != "Enter task title" && !string.IsNullOrWhiteSpace(txtTaskTitle.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtTaskTitle);
+            }
+        }
+
+        private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPriority.SelectedIndex > 0)
+            {
+                ErrorHelper.HideErrorForControl(cmbPriority);
+            }
+            cmbPriority.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbPriority.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void cmbPriority_Enter(object sender, EventArgs e)
+        {
+            if (cmbPriority.Text == "Select the Proiority")
+                cmbPriority.ForeColor = Color.Black;
+
+           
+        }
+
+        private void cmbPriority_Leave(object sender, EventArgs e)
+        {
+            if (cmbPriority.SelectedIndex <= 0 || string.IsNullOrWhiteSpace(cmbPriority.Text) || cmbPriority.Text == "Select the Proiority")
+            {
+                cmbPriority.SelectedIndex = 0;
+                cmbPriority.Text = "Select the Proiority";
+                cmbPriority.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbPriority.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbPriority_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+         
+            if (cmbPriority.SelectedIndex > 0 ||
+               (!string.IsNullOrWhiteSpace(cmbPriority.Text) && cmbPriority.Text != "Select the Proiority"))
+            {
+                ErrorHelper.HideErrorForControl(cmbPriority);
+            }
+            cmbPriority.DroppedDown = true;
+        }
+
+        private void cmbPriority_Click(object sender, EventArgs e)
+        {
+            cmbPriority.DroppedDown = true;
+        }
+
+        private void txtDeadline_Click(object sender, EventArgs e)
+        {
+            pnlDeadlinePicker.Visible = true;
         }
     }
 }
