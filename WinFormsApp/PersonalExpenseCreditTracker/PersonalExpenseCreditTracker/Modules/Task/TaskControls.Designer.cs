@@ -29,7 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTaskContent = new System.Windows.Forms.Panel();
             this.pnlTaskList = new System.Windows.Forms.Panel();
             this.tableLayoutPanelTask = new System.Windows.Forms.TableLayoutPanel();
@@ -484,9 +484,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.dataGridViewTask.Name = "dataGridViewTask";
             this.dataGridViewTask.ReadOnly = true;
             this.dataGridViewTask.RowHeadersVisible = false;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTask.RowTemplate.Height = 24;
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewTask.Size = new System.Drawing.Size(1131, 503);
@@ -830,7 +830,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlPriorityFilter.Controls.Add(this.pnlHeader);
             this.pnlPriorityFilter.Location = new System.Drawing.Point(245, 400);
             this.pnlPriorityFilter.Name = "pnlPriorityFilter";
-            this.pnlPriorityFilter.Size = new System.Drawing.Size(262, 42);
+            this.pnlPriorityFilter.Size = new System.Drawing.Size(282, 42);
             this.pnlPriorityFilter.TabIndex = 9;
             // 
             // pnlHeader
@@ -841,7 +841,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(262, 42);
+            this.pnlHeader.Size = new System.Drawing.Size(282, 42);
             this.pnlHeader.TabIndex = 4;
             // 
             // cmbPriority
@@ -851,7 +851,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.cmbPriority.FormattingEnabled = true;
             this.cmbPriority.Location = new System.Drawing.Point(75, 6);
             this.cmbPriority.Name = "cmbPriority";
-            this.cmbPriority.Size = new System.Drawing.Size(134, 31);
+            this.cmbPriority.Size = new System.Drawing.Size(159, 31);
             this.cmbPriority.TabIndex = 0;
             this.cmbPriority.Click += new System.EventHandler(this.cmbPriority_Click);
             this.cmbPriority.Enter += new System.EventHandler(this.cmbPriority_Enter);
@@ -874,7 +874,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnPriorityClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnPriorityClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPriorityClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnPriorityClose.Location = new System.Drawing.Point(212, 5);
+            this.btnPriorityClose.Location = new System.Drawing.Point(240, 5);
             this.btnPriorityClose.Name = "btnPriorityClose";
             this.btnPriorityClose.Size = new System.Drawing.Size(30, 30);
             this.btnPriorityClose.TabIndex = 1;
@@ -1097,9 +1097,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             // 
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(8, 0);
+            this.txtSearch.Location = new System.Drawing.Point(8, 1);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(173, 23);
+            this.txtSearch.Size = new System.Drawing.Size(163, 23);
             this.txtSearch.TabIndex = 6;
             // 
             // pnlStatusFilter
@@ -1109,7 +1109,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlStatusFilter.Controls.Add(this.btnStatusClose);
             this.pnlStatusFilter.Location = new System.Drawing.Point(288, 500);
             this.pnlStatusFilter.Name = "pnlStatusFilter";
-            this.pnlStatusFilter.Size = new System.Drawing.Size(256, 42);
+            this.pnlStatusFilter.Size = new System.Drawing.Size(282, 42);
             this.pnlStatusFilter.TabIndex = 12;
             // 
             // cmbStatus
@@ -1119,7 +1119,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Location = new System.Drawing.Point(66, 6);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(134, 31);
+            this.cmbStatus.Size = new System.Drawing.Size(159, 31);
             this.cmbStatus.TabIndex = 0;
             this.cmbStatus.Click += new System.EventHandler(this.cmbStatus_Click);
             this.cmbStatus.Enter += new System.EventHandler(this.cmbStatus_Enter);
@@ -1142,7 +1142,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnStatusClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnStatusClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStatusClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnStatusClose.Location = new System.Drawing.Point(203, 5);
+            this.btnStatusClose.Location = new System.Drawing.Point(240, 5);
             this.btnStatusClose.Name = "btnStatusClose";
             this.btnStatusClose.Size = new System.Drawing.Size(30, 30);
             this.btnStatusClose.TabIndex = 1;
