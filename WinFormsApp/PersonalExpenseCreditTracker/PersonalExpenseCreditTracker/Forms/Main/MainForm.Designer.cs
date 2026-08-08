@@ -637,8 +637,6 @@ namespace PersonalExpenseCreditTracker
             this.pnlScrollBar.Controls.Add(this.pnlThumb);
             this.pnlScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlScrollBar.Location = new System.Drawing.Point(380, 0);
-            this.pnlScrollBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlScrollBar.Name = "pnlScrollBar";
             this.pnlScrollBar.Size = new System.Drawing.Size(20, 854);
             this.pnlScrollBar.TabIndex = 5;
             this.pnlScrollBar.Visible = false;
@@ -843,8 +841,6 @@ namespace PersonalExpenseCreditTracker
             this.cmbSubCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubCategory.FormattingEnabled = true;
             this.cmbSubCategory.Location = new System.Drawing.Point(100, 96);
-            this.cmbSubCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbSubCategory.Name = "cmbSubCategory";
             this.cmbSubCategory.Size = new System.Drawing.Size(185, 24);
             this.cmbSubCategory.TabIndex = 3;
             this.cmbSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbSubCategory_SelectedIndexChanged);
@@ -854,7 +850,6 @@ namespace PersonalExpenseCreditTracker
             this.lblSubCategory.AutoSize = true;
             this.lblSubCategory.Font = new System.Drawing.Font("Segoe UI Emoji", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubCategory.Location = new System.Drawing.Point(100, 71);
-            this.lblSubCategory.Name = "lblSubCategory";
             this.lblSubCategory.Size = new System.Drawing.Size(98, 20);
             this.lblSubCategory.TabIndex = 2;
             this.lblSubCategory.Text = "Sub Category";
@@ -864,8 +859,6 @@ namespace PersonalExpenseCreditTracker
             this.ComboBoxCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxCategory.FormattingEnabled = true;
             this.ComboBoxCategory.Location = new System.Drawing.Point(100, 34);
-            this.ComboBoxCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ComboBoxCategory.Name = "ComboBoxCategory";
             this.ComboBoxCategory.Size = new System.Drawing.Size(185, 24);
             this.ComboBoxCategory.TabIndex = 1;
             this.ComboBoxCategory.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCategory_SelectedIndexChanged);

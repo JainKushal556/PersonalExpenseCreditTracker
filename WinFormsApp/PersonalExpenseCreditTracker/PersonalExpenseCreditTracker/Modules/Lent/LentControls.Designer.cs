@@ -1679,5 +1679,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Button btnStatusClose;
-    }
+            private System.Windows.Forms.Panel pnlCategoryFilter;
+        private System.Windows.Forms.Panel pnlSearch;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCategory;
+}
 }
