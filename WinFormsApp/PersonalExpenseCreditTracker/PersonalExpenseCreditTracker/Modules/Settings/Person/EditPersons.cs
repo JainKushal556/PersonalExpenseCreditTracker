@@ -15,7 +15,7 @@ using BLLayer.Common;
 using BLLayer.Settings.Persons;
 using PersonalExpenseCreditTracker.Common;
 using PersonalExpenseCreditTracker.Session;
-
+using PersonalExpenseCreditTracker.Modules.Settings.Person;
 namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 {
     public partial class EditPersons : Form
@@ -155,6 +155,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Person Details Updated Successfully");
+                    if (addPersonSControls != null)
+                    {
+                        addPersonSControls.LoadData();
+                    }
                     this.Close();
                     break;
 

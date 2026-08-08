@@ -4479,6 +4479,11 @@ namespace PersonalExpenseCreditTracker
 
         }
 
+        private void pnlBorrowPersonBody_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void btnExpenseApplyAmountFilter_Click(object sender, EventArgs e)
         {
             // 👇 ১. সমস্ত আগের লাল এরর মেসেজ ক্লিয়ার করা
@@ -4538,12 +4543,5 @@ namespace PersonalExpenseCreditTracker
                     break;
             }
         }
-
-
-       
-
-
-        
     }
 }
-

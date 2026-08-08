@@ -18,7 +18,7 @@
 
 -- ==========================================================
 
-CREATE PROCEDURE spChangePassword  
+CREATE OR ALTER PROCEDURE spChangePassword  
   
     @UserID INT,  
     @OldPassword VARCHAR(MAX),  
@@ -94,7 +94,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteUserProfilePhotoByUserId
+CREATE OR ALTER PROCEDURE spDeleteUserProfilePhotoByUserId
     @UserID INT
 AS
 BEGIN
@@ -153,7 +153,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spForgetPassword  
+CREATE OR ALTER PROCEDURE spForgetPassword  
     @Email VARCHAR(100),  
     @PhoneNumber VARCHAR(15),  
     @NewPassword VARCHAR(MAX)  
@@ -219,7 +219,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetActiveUserDetails
+CREATE OR ALTER PROCEDURE spGetActiveUserDetails
 (
     @UserID INT
 )
@@ -284,7 +284,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spLoginUser    
+CREATE OR ALTER PROCEDURE spLoginUser    
  
     @Email VARCHAR(100),    
     @Password VARCHAR(MAX)    
@@ -341,7 +341,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spLogoutUser
+CREATE OR ALTER PROCEDURE spLogoutUser
     @UserID INT
 AS
 BEGIN
@@ -376,7 +376,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spRegisterUser    
+CREATE OR ALTER PROCEDURE spRegisterUser    
 
     @UserName VARCHAR(100),    
     @Email VARCHAR(100),    
@@ -529,7 +529,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateProfilePhoto    
+CREATE OR ALTER PROCEDURE spUpdateProfilePhoto    
     
     @UserID INT,    
     @ProfilePhoto VARBINARY(MAX)    
@@ -584,7 +584,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateUserEmail  
+CREATE OR ALTER PROCEDURE spUpdateUserEmail  
     @UserID INT,  
     @Email VARCHAR(150)  
 AS
@@ -659,7 +659,7 @@ GO
 -- ==========================================================
 
 
-CREATE PROCEDURE spUpdateUserName  
+CREATE OR ALTER PROCEDURE spUpdateUserName  
     @UserID INT,  
     @Name VARCHAR(100)  
 AS  
@@ -762,7 +762,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateUserPhoneNumber
+CREATE OR ALTER PROCEDURE spUpdateUserPhoneNumber
     @UserID INT,
     @PhoneNumber VARCHAR(15)
 AS
@@ -843,7 +843,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateUserProfile
+CREATE OR ALTER PROCEDURE spUpdateUserProfile
     @UserID INT,
     @Name VARCHAR(100),
     @Email VARCHAR(150),
@@ -987,7 +987,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterCreditByAmountRange
+CREATE OR ALTER PROCEDURE spFilterCreditByAmountRange
 (
     @UserID INT,
     @MinAmount DECIMAL(10,2),
@@ -1055,7 +1055,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterCreditByCategory
+CREATE OR ALTER PROCEDURE spFilterCreditByCategory
 (
     @UserID INT,
     @CategoryID INT
@@ -1136,7 +1136,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterCreditByCategoryAndSubCategory
+CREATE OR ALTER PROCEDURE spFilterCreditByCategoryAndSubCategory
 (
     @UserID INT,
     @CategoryID INT,
@@ -1234,7 +1234,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterCreditByDateRange
+CREATE OR ALTER PROCEDURE spFilterCreditByDateRange
 (
   @UserID INT,
   @FromDate DATETIME,
@@ -1311,7 +1311,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetAllCreditCategory
+CREATE OR ALTER PROC spGetAllCreditCategory
 AS
 BEGIN
     BEGIN TRY
@@ -1339,7 +1339,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllCreditsByID
+CREATE OR ALTER PROCEDURE spGetAllCreditsByID
 (
     @UserID INT
 )
@@ -1406,7 +1406,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCategoryWiseCreditReport
+CREATE OR ALTER PROCEDURE spGetCategoryWiseCreditReport
 (
     @UserID INT
 )
@@ -1462,7 +1462,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetCreditSubCategoryByCategoryID
+CREATE OR ALTER PROC spGetCreditSubCategoryByCategoryID
 (
     @CategoryID INT
 )
@@ -1494,7 +1494,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetMonthlyCreditSummary
+CREATE OR ALTER PROCEDURE spGetMonthlyCreditSummary
 (
     @UserID INT
 )
@@ -1553,7 +1553,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTodayCredit
+CREATE OR ALTER PROCEDURE spGetTodayCredit
 (
     @UserID INT
 )
@@ -1622,7 +1622,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertCreditByUserID
+CREATE OR ALTER PROCEDURE spInsertCreditByUserID
 (
     @UserID INT,
     @CategoryID INT,
@@ -1731,7 +1731,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetUserDashboard
+CREATE OR ALTER PROCEDURE spGetUserDashboard
 
     @UserID INT
 
@@ -1813,7 +1813,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterExpenseByAmountRange
+CREATE OR ALTER PROCEDURE spFilterExpenseByAmountRange
 (
     @UserID INT,
     @MinAmount DECIMAL(10,2),
@@ -1881,7 +1881,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterExpenseByCategory
+CREATE OR ALTER PROCEDURE spFilterExpenseByCategory
 (
     @UserID INT,
     @CategoryID INT
@@ -1962,7 +1962,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterExpenseByCategoryAndSubCategory
+CREATE OR ALTER PROCEDURE spFilterExpenseByCategoryAndSubCategory
 (
     @UserID INT,
     @CategoryID INT,
@@ -2060,7 +2060,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterExpenseByDateRange
+CREATE OR ALTER PROCEDURE spFilterExpenseByDateRange
 (
   @UserID INT,
   @FromDate DATETIME,
@@ -2137,7 +2137,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllExpensesByID
+CREATE OR ALTER PROCEDURE spGetAllExpensesByID
 (
     @UserID INT
 )
@@ -2204,7 +2204,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCategoryWiseExpenseReport
+CREATE OR ALTER PROCEDURE spGetCategoryWiseExpenseReport
 (
     @UserID INT
 )
@@ -2261,7 +2261,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetMonthlyExpenseSummary
+CREATE OR ALTER PROCEDURE spGetMonthlyExpenseSummary
 (
     @UserID INT
 )
@@ -2319,7 +2319,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTodayExpense
+CREATE OR ALTER PROCEDURE spGetTodayExpense
 (
     @UserID INT
 )
@@ -2392,7 +2392,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetAllLent
+CREATE OR ALTER PROC spGetAllLent
 	@UserID INT
 AS
 BEGIN
@@ -2434,7 +2434,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetCompletedLentByStatusName
+CREATE OR ALTER PROC spGetCompletedLentByStatusName
 @UserID INT
 AS
 BEGIN
@@ -2474,7 +2474,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetLentPersonHistory
+CREATE OR ALTER PROC spGetLentPersonHistory
 @PersonID INT, @UserID INT
 AS
 BEGIN
@@ -2518,7 +2518,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE  spDeleteNote
+CREATE OR ALTER PROCEDURE  spDeleteNote
 (
 @UserID INT,
 @NoteID INT
@@ -2561,7 +2561,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE  spFilterNotesByPriority
+CREATE OR ALTER PROCEDURE  spFilterNotesByPriority
 
 @UserID INT,
 @PriorityID INT
@@ -2634,7 +2634,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllNotes
+CREATE OR ALTER PROCEDURE spGetAllNotes
 (
 @UserID INT
 )
@@ -2695,7 +2695,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE  spGetNotesBetweenDates
+CREATE OR ALTER PROCEDURE  spGetNotesBetweenDates
 
 @UserID INT,
 @FromDate DATE,
@@ -2768,7 +2768,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterNoteByDateRange
+CREATE OR ALTER PROCEDURE spFilterNoteByDateRange
     @UserID INT,
     @FromDate DATETIME,
     @ToDate DATETIME
@@ -2861,7 +2861,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNote
+CREATE OR ALTER PROCEDURE spInsertNote
 
 @UserID INT,
 @PriorityID INT,
@@ -2952,7 +2952,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateNote
+CREATE OR ALTER PROCEDURE spUpdateNote
 (
 @UserID INT,
 @NoteID INT,
@@ -3037,7 +3037,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE  spUpdateNotePriority
+CREATE OR ALTER PROCEDURE  spUpdateNotePriority
 (
 @UserID INT,
 @NoteID INT,
@@ -3092,7 +3092,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllNoteColors
+CREATE OR ALTER PROCEDURE spGetAllNoteColors
 AS
 BEGIN
     BEGIN TRY
@@ -3117,7 +3117,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateNoteColor
+CREATE OR ALTER PROCEDURE spUpdateNoteColor
 (
 @UserID INT,
 @NoteID INT,
@@ -3172,7 +3172,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterNotesByColor
+CREATE OR ALTER PROCEDURE spFilterNotesByColor
 
 @UserID INT,
 @NoteColorID INT
@@ -3245,7 +3245,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteCreditCategoryByUserID
+CREATE OR ALTER PROCEDURE spDeleteCreditCategoryByUserID
 (
  @UserID INT,
  @CategoryID INT
@@ -3309,7 +3309,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteCreditSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spDeleteCreditSubCategoryByUserID
 (
  @UserID INT,
  @SubCategoryID INT
@@ -3379,7 +3379,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteExpenseCategoryByUserID
+CREATE OR ALTER PROCEDURE spDeleteExpenseCategoryByUserID
 (
  @UserID INT,
  @CategoryID INT
@@ -3449,7 +3449,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteExpenseSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spDeleteExpenseSubCategoryByUserID
 (
  @UserID INT,
  @SubCategoryID INT
@@ -3519,7 +3519,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllPaymentTypes
+CREATE OR ALTER PROCEDURE spGetAllPaymentTypes
 AS
 BEGIN
 
@@ -3553,7 +3553,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCreditCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetCreditCategoriesByUserID
 (
     @UserID INT
 )
@@ -3598,7 +3598,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCreditSubCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetCreditSubCategoriesByUserID
 (
     @UserID INT
 )
@@ -3645,7 +3645,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetExpenseCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetExpenseCategoriesByUserID
 (
     @UserID INT
 )
@@ -3690,7 +3690,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetExpenseSubCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetExpenseSubCategoriesByUserID
 (
     @UserID INT
 )
@@ -3737,7 +3737,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNewCreditCategoryByUserID
+CREATE OR ALTER PROCEDURE spInsertNewCreditCategoryByUserID
 (
    @UserID INT,
    @CategoryName VARCHAR(MAX)
@@ -3802,7 +3802,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNewCreditSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spInsertNewCreditSubCategoryByUserID
 (
    @UserID INT,
    @CategoryID INT,
@@ -3883,7 +3883,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNewExpenseCategoryByUserID
+CREATE OR ALTER PROCEDURE spInsertNewExpenseCategoryByUserID
 (
    @UserID INT,
    @CategoryName VARCHAR(MAX)
@@ -3948,7 +3948,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNewExpenseSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spInsertNewExpenseSubCategoryByUserID
 (
    @UserID INT,
    @CategoryID INT,
@@ -4029,7 +4029,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateCreditCategoryByUserID
+CREATE OR ALTER PROCEDURE spUpdateCreditCategoryByUserID
 (
   @UserID INT,
   @CategoryID INT,
@@ -4126,7 +4126,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateCreditSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spUpdateCreditSubCategoryByUserID
 (
   @UserID INT,
   @SubCategoryID INT,
@@ -4223,7 +4223,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateExpenseCategoryByUserID
+CREATE OR ALTER PROCEDURE spUpdateExpenseCategoryByUserID
 (
   @UserID INT,
   @CategoryID INT,
@@ -4320,7 +4320,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateExpenseSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spUpdateExpenseSubCategoryByUserID
 (
   @UserID INT,
   @SubCategoryID INT,
@@ -4417,7 +4417,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteTask
+CREATE OR ALTER PROCEDURE spDeleteTask
     @TaskID INT
 AS
 BEGIN
@@ -4461,7 +4461,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterTasksByStatus
+CREATE OR ALTER PROCEDURE spFilterTasksByStatus
     @UserID INT,
     @TaskStatusID INT
 AS
@@ -4548,7 +4548,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterTasksByPriority
+CREATE OR ALTER PROCEDURE spFilterTasksByPriority
     @UserID INT,
     @PriorityID INT
 AS
@@ -4640,7 +4640,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllTasks  
+CREATE OR ALTER PROCEDURE spGetAllTasks  
     @UserID INT  
 AS  
 BEGIN  
@@ -4698,7 +4698,8 @@ BEGIN
         ON Task.TaskStatusID = TaskStatus.TaskStatusID  
   
     WHERE Task.UserID = @UserID  
-  
+    ORDER BY Task.CreatedAt DESC;
+
 END;
 
 
@@ -4713,7 +4714,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCompletedTasks
+CREATE OR ALTER PROCEDURE spGetCompletedTasks
     @UserID INT
 AS
 BEGIN
@@ -4785,7 +4786,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetPendingTasks
+CREATE OR ALTER PROCEDURE spGetPendingTasks
     @UserID INT
 AS
 BEGIN
@@ -4857,7 +4858,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTasksBetweenDates
+CREATE OR ALTER PROCEDURE spGetTasksBetweenDates
 (
     @UserID INT,
     @FromDate DATE,
@@ -4941,7 +4942,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTasksBetweenCreatedDates
+CREATE OR ALTER PROCEDURE spGetTasksBetweenCreatedDates
 (
     @UserID INT,
     @FromDate DATE,
@@ -5027,7 +5028,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetUpcomingTaskReminders
+CREATE OR ALTER PROCEDURE spGetUpcomingTaskReminders
 
     @UserID INT
 
@@ -5104,7 +5105,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertTask  
+CREATE OR ALTER PROCEDURE spInsertTask  
     @UserID INT,  
     @PriorityID INT,  
     @TaskTitle VARCHAR(150),  
@@ -5211,7 +5212,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateTask
+CREATE OR ALTER PROCEDURE spUpdateTask
     @UserID INT,
     @TaskID INT,
     @PriorityID INT,
@@ -5333,7 +5334,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateTaskStatus
+CREATE OR ALTER PROCEDURE spUpdateTaskStatus
     @TaskID INT,
     @TaskStatusID INT
 AS
@@ -5404,7 +5405,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetAllPersons
+CREATE OR ALTER PROC spGetAllPersons
 @UserID INT
 AS
 BEGIN
@@ -5442,7 +5443,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetPendingLentByStatusName
+CREATE OR ALTER PROC spGetPendingLentByStatusName
 @UserID INT
 AS
 BEGIN
@@ -5486,7 +5487,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetUpcomingLentReminders
+CREATE OR ALTER PROC spGetUpcomingLentReminders
     @UserID INT
 AS
 BEGIN
@@ -5578,7 +5579,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spInsertLent
+CREATE OR ALTER PROC spInsertLent
 	@UserID INT,
 	@PersonID INT,
 	@PaymentID INT,
@@ -5734,7 +5735,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spInsertPerson
+CREATE OR ALTER PROC spInsertPerson
 (
     @UserID INT,
     @PersonName VARCHAR(100),
@@ -5823,7 +5824,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spReturnLentByReturnAmount
+CREATE OR ALTER PROCEDURE spReturnLentByReturnAmount
 (
     @LentID INT,
     @PaymentID INT,
@@ -6011,7 +6012,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterLentByStatus
+CREATE OR ALTER PROCEDURE spFilterLentByStatus
     @UserID INT,
     @StatusID INT
 AS
@@ -6090,7 +6091,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spUpdatePerson
+CREATE OR ALTER PROC spUpdatePerson
 (
     @UserID INT,
     @PersonID INT,
@@ -6190,7 +6191,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetUpcomingBorrowReminders
+CREATE OR ALTER PROCEDURE spGetUpcomingBorrowReminders
 (
     @UserID INT
 )
@@ -6324,7 +6325,7 @@ GO
 -- SP: spGetOverduedBorrow
 -- From File: ??spGetOverduedBorrow.sql
 -- ==========================================================
-CREATE PROCEDURE spGetOverduedBorrow
+CREATE OR ALTER PROCEDURE spGetOverduedBorrow
 (
     @UserID INT
 )
@@ -6426,7 +6427,7 @@ GO
 -- SP: spGetPendingBorrow
 -- From File: ??spGetPendingBorrow.sql
 -- ==========================================================
-CREATE PROCEDURE spGetPendingBorrow
+CREATE OR ALTER PROCEDURE spGetPendingBorrow
 (
     @UserID INT,
     @PersonID INT = NULL,
@@ -6561,7 +6562,7 @@ GO
 -- SP: spInsertBorrow
 -- From File: ??spInsertBorrow.sql
 -- ==========================================================
-CREATE PROCEDURE spInsertBorrow
+CREATE OR ALTER PROCEDURE spInsertBorrow
 (
     @UserID INT,
     @PersonID INT,
@@ -6810,7 +6811,7 @@ GO
 -- SP: spUpdateOverdueStatus
 -- From File: ??spUpdateOverdueStatus.sql
 -- ==========================================================
-CREATE PROCEDURE spUpdateOverdueStatus
+CREATE OR ALTER PROCEDURE spUpdateOverdueStatus
 AS
 BEGIN
 
@@ -6859,7 +6860,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllBorrow
+CREATE OR ALTER PROCEDURE spGetAllBorrow
 (
     @UserID INT
 )
@@ -6938,7 +6939,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetBorrowPersonHistory
+CREATE OR ALTER PROCEDURE spGetBorrowPersonHistory
 (
     @PersonID INT,
     @UserID INT
@@ -7009,7 +7010,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCompletedBorrow
+CREATE OR ALTER PROCEDURE spGetCompletedBorrow
 (
     @UserID INT
 )
@@ -7112,7 +7113,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTotalBorrowByPerson
+CREATE OR ALTER PROCEDURE spGetTotalBorrowByPerson
 (
     @UserID INT,
     @PersonID INT
@@ -7217,7 +7218,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spPayBorrow
+CREATE OR ALTER PROCEDURE spPayBorrow
 (
     @BorrowID INT,
     @PaymentID INT,
@@ -7390,7 +7391,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllLentBorrowStatus
+CREATE OR ALTER PROCEDURE spGetAllLentBorrowStatus
 AS
 BEGIN
 	BEGIN TRY
@@ -7411,7 +7412,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterLentByAmountRange.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterLentByAmountRange
+CREATE OR ALTER PROCEDURE spFilterLentByAmountRange
     @UserID INT,
     @MinAmount DECIMAL(10,2),
     @MaxAmount DECIMAL(10,2)
@@ -7476,7 +7477,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterLentByDateRange.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterLentByDateRange
+CREATE OR ALTER PROCEDURE spFilterLentByDateRange
     @UserID INT,
     @FromDate DATETIME,
     @ToDate DATETIME
@@ -7543,7 +7544,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterLentByPerson.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterLentByPerson
+CREATE OR ALTER PROCEDURE spFilterLentByPerson
     @UserID INT,
     @PersonID INT
 AS
@@ -7613,7 +7614,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterLentByPaymentMethod.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterLentByPaymentMethod
+CREATE OR ALTER PROCEDURE spFilterLentByPaymentMethod
     @UserID INT,
     @PaymentID INT
 AS
@@ -7682,7 +7683,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByDateRange.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByDateRange
+CREATE OR ALTER PROCEDURE spFilterBorrowByDateRange
     @UserID INT,
     @FromDate DATETIME,
     @ToDate DATETIME
@@ -7742,7 +7743,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByAmountRange.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByAmountRange
+CREATE OR ALTER PROCEDURE spFilterBorrowByAmountRange
     @UserID INT,
     @MinAmount DECIMAL(10,2),
     @MaxAmount DECIMAL(10,2)
@@ -7805,7 +7806,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByPerson.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByPerson
+CREATE OR ALTER PROCEDURE spFilterBorrowByPerson
     @UserID INT,
     @PersonID INT
 AS
@@ -7865,7 +7866,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByStatus.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByStatus
+CREATE OR ALTER PROCEDURE spFilterBorrowByStatus
     @UserID INT,
     @StatusID INT
 AS
@@ -7924,7 +7925,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByPaymentMethod.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByPaymentMethod
+CREATE OR ALTER PROCEDURE spFilterBorrowByPaymentMethod
     @UserID INT,
     @PaymentID INT
 AS
@@ -7984,7 +7985,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spGetAllTaskPriorities.sql
 -- ==========================================================
-CREATE PROCEDURE spGetAllTaskPriorities
+CREATE OR ALTER PROCEDURE spGetAllTaskPriorities
 AS
 BEGIN
 
@@ -8012,7 +8013,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spGetExpenseSubCategoryByCategoryID.sql
 -- ==========================================================
-CREATE PROCEDURE spGetExpenseSubCategoryByCategoryID
+CREATE OR ALTER PROCEDURE spGetExpenseSubCategoryByCategoryID
 (
     @CategoryID INT
 )
@@ -8040,7 +8041,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spInsertExpenseByUserID.sql
 -- ==========================================================
-CREATE PROCEDURE spInsertExpenseByUserID
+CREATE OR ALTER PROCEDURE spInsertExpenseByUserID
 (
     @UserID INT,
     @CategoryID INT,
@@ -8148,7 +8149,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spGetAllTaskStatus.sql
 -- ==========================================================
-CREATE PROCEDURE spGetAllTaskStatus
+CREATE OR ALTER PROCEDURE spGetAllTaskStatus
 AS
 BEGIN
     SET NOCOUNT OFF;
@@ -8174,7 +8175,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spGetDuplicatePersonNumberByUserIDAndPhoneNumber.sql
 -- ==========================================================
-CREATE PROC spGetDuplicatePersonNumberByUserIDAndPhoneNumber
+CREATE OR ALTER PROC spGetDuplicatePersonNumberByUserIDAndPhoneNumber
 (
     @UserID INT,
     @PersonID INT,
@@ -8278,7 +8279,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetGender
+CREATE OR ALTER PROCEDURE spGetGender
 AS
 BEGIN
     SET NOCOUNT OFF;
@@ -8297,7 +8298,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateUserProfile
+CREATE OR ALTER PROCEDURE spUpdateUserProfile
     @UserID INT,
     @FullName VARCHAR(100),
     @Email VARCHAR(150),

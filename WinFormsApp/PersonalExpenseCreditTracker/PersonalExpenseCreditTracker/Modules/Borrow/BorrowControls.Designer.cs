@@ -1699,5 +1699,5 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.Panel pnlPerson;
         private System.Windows.Forms.ComboBox cmbPerson;
         private System.Windows.Forms.Button btnPersonClose;
-    }
+}
 }
