@@ -77,13 +77,12 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtTaskTitle.Text = taskControl.SelectedTaskTitle;
             txtTaskTitle.ForeColor = Color.Black;
 
-            // ✅ এটি লিখুন (শুধু dd-MM-yyyy ফরম্যাট আসবে):
             if (!string.IsNullOrEmpty(taskControl.selectDeadline))
             {
                 DateTime parsedDate;
                 if (DateTime.TryParse(taskControl.selectDeadline, out parsedDate))
                 {
-                    txtDeadline.Text = parsedDate.ToString("dd-MM-yyyy"); // ✅ শুধু দিন-মাস-বছর দেখাবে
+                    txtDeadline.Text = parsedDate.ToString("dd-MM-yyyy"); 
                     txtDeadline.ForeColor = Color.Black;
                     monthCalendar1.SelectionStart = parsedDate;
                 }
