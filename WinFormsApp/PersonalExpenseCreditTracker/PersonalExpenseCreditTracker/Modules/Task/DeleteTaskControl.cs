@@ -13,16 +13,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 {
     public partial class DeleteTask : Form
     {
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn(
-            int nLeftRect,
-            int nTopRect,
-            int nRightRect,
-            int nBottomRect,
-            int nWidthEllipse,
-            int nHeightEllipse);
-
-
         private TaskControls taskControl = null;
         public DeleteTask()
         {
@@ -38,14 +28,47 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.taskControl = taskControl;
         }
 
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse);
+
+        // Free GDI object
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        // All Border Cornar Radius
+        private void SetRadius(Control control, int radius)
+        {
+            if (control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(
+                0,
+                0,
+                control.Width + 1,
+                control.Height + 1,
+                radius,
+                radius);
+
+            Region region = Region.FromHrgn(hrgn);
+
+            if (control.Region != null)
+                control.Region.Dispose();
+
+            control.Region = region;
+
+            DeleteObject(hrgn);
+        }
+
         private void DeleteTaskControl_Load(object sender, EventArgs e)
         {
-           
-            btnCancel.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, btnCancel.Width, btnCancel.Height, 8, 8));
-
-            btnDeleteTask.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, btnDeleteTask.Width, btnDeleteTask.Height, 8, 8));
+            SetRadius(btnCancel, 5);
+            SetRadius(btnDeleteTask, 5);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

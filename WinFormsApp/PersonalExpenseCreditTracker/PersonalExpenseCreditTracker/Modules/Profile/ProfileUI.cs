@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BLLayer.Profile;
+using BLLayer.Common;
 namespace PersonalExpenseCreditTracker.Modules.Profile
 {
     public class ProfileUI
@@ -13,28 +14,35 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         public string phoneNumber { get; set; }
         public string address { get; set; }
         public DateTime dateOfBirth { get; set; }
+        public int genderId { get; set; }
         public byte[] photoData { get; set; }
-        //Update Profile
-        public bool UpdateUserProfileIntoProfUi()
-        {
-            ProfileBLL ProfBll = new ProfileBLL();
-            ProfBll.userId = userId;
-            ProfBll.fullName = fullName;
-            ProfBll.email = email;
-            ProfBll.phoneNumber = phoneNumber;
-            ProfBll.address = address;
-            ProfBll.dateOfBirth = dateOfBirth;
 
-            return ProfBll.UpdateUserProfileIntoProfBll();
+        private ProfileBLL profBLL = new ProfileBLL();
+
+        // Update Profile
+        public CommonValidator.ValidationResult UpdateUserProfileIntoProfUi()
+        {
+
+
+            profBLL.userId = userId;
+            profBLL.fullName = fullName;
+            profBLL.email = email;
+            profBLL.phoneNumber = phoneNumber;
+            profBLL.address = address;
+            profBLL.dateOfBirth = dateOfBirth;
+            profBLL.genderId = genderId;
+
+            return profBLL.UpdateUserProfileIntoProfBll();
         }
 
-        public bool UpdateProfilePhotoIntoProfUi()
+        // Update Profile Photo
+        public CommonValidator.ValidationResult UpdateProfilePhotoIntoProfUi()
         {
-            ProfileBLL ProfBll = new ProfileBLL();
-            ProfBll.userId = userId;
-            ProfBll.photoData = photoData;
+  
+            profBLL.userId = userId;
+            profBLL.photoData = photoData;
 
-            return ProfBll.UpdateProfilePhotoIntoProfBll();
+            return profBLL.UpdateProfilePhotoIntoProfBll();
         }
     }
 }

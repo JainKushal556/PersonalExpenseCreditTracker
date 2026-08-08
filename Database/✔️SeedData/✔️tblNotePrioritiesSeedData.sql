@@ -1,5 +1,7 @@
 INSERT INTO tblNotePriorities (NotePriorityName)
 VALUES
-('Normal'),
-('Important');
+('Low'),
+('Medium'),
+('High');
+
 

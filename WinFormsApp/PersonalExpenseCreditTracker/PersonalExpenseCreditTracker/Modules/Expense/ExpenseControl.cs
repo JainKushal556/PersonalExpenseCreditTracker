@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,8 +9,8 @@ using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
-
 using System.Windows.Forms;
+using PersonalExpenseCreditTracker.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Expense
 {
@@ -28,6 +28,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         );
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllExpenseData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
         public ExpenseControl()
@@ -52,14 +53,27 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void ExpenseControl_Load(object sender, EventArgs e)
         {
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+            cmbCategory.Text = "Select Category";
+            cmbCategory.ForeColor = Color.Gray;
+            cmbCategorytxt.Text = "Enter Category";
+            cmbCategorytxt.ForeColor = Color.Gray;
+            cmbSubCategory.Text = "Enter SubCategory";
+            cmbSubCategory.ForeColor = Color.Gray;
+
             dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
             ApplyRoundCorners();
             pageSize = GetRowsPerPage();
             HideAllFilterPanels();
             DesignContextMenu();
-            int userID = 11;
+            
+            int userID = Session.LogedInUser.GetUserId();
             LoadExpenseData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
+            RegisterMouseDown(this);
 
         }
 
@@ -67,9 +81,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             tsmiDate.AutoSize = false;
             tsmiCategory.AutoSize = false;
-
+            tsmiAmount.AutoSize = false;
+            tsmiSubCategory.AutoSize = false;
             tsmiDate.Width = cmsFilter.Width;
             tsmiCategory.Width = cmsFilter.Width;
+            tsmiSubCategory.Width = cmsFilter.Width;
+            tsmiAmount.Width = cmsFilter.Width;
         }
 
         private void StyleExpenseGrid()
@@ -210,7 +227,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             e.Handled = true;
         }
 
-        private void LoadExpenseData(int userID)
+        public void LoadExpenseData(int userID)
         {
             try
             {
@@ -239,8 +256,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                         }
 
                         AllExpenseData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
+                        UpdateExpenseSummaryCards();
                     }
                 }
             }
@@ -248,6 +267,145 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
+        {
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(
+                spName,
+                userId,
+                paramName1,
+                paramId1,
+                paramName2,
+                paramId2);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        {
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(
+                spName,
+                userId,
+                paramName1,
+                paramId1,
+                paramName2,
+                paramId2);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count == 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, string paramName, int paramValue, int filterId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(
+                spName,
+                userID,
+                paramName,
+                filterId);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        private void UpdateExpenseSummaryCards()
+        {
+            if (AllExpenseData == null || AllExpenseData.Rows.Count == 0)
+            {
+                lblExpenseAmount.Text = "₹ 0";
+                lblTransactionAmount.Text = "0";
+                return;
+            }
+
+            decimal totalExpense = 0;
+
+            foreach (DataRow row in AllExpenseData.Rows)
+            {
+                if (row["Amount"] != DBNull.Value)
+                {
+                    totalExpense += Convert.ToDecimal(row["Amount"]);
+                }
+            }
+
+            lblExpenseAmount.Text = "₹ " + totalExpense.ToString("#,##0");
+            lblTransactionAmount.Text = AllExpenseData.Rows.Count.ToString();
         }
 
         private void ShowCurrentPage()
@@ -265,6 +423,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
 
             dgvExpenseDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvExpenseDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllExpenseData.Rows.Count;
@@ -392,10 +551,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         }
 
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
@@ -405,8 +560,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
+            pnlAmountFilter.Visible = false;
+            pnlSubCategoryFilter.Visible = false;
             pnlSearch.Visible = false;
-           
         }
         private void HidePopupPanels()
         {
@@ -432,24 +588,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
 
         private void tsmiDate_Click(object sender, EventArgs e)
         {
@@ -459,6 +598,16 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
+            cmbCategory.DroppedDown = true;
+        }
+        private void tsmiSubCategory_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlSubCategoryFilter);
+        }
+
+        private void tsmiAmount_Click(object sender, EventArgs e)
+        {
+            ShowFilterPanel(pnlAmountFilter);
         }
 
         private void btnDateClose_Click(object sender, EventArgs e)
@@ -469,6 +618,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void btncategoryClose_Click(object sender, EventArgs e)
         {
             pnlCategoryFilter.Visible = false;
+        }
+
+        private void btnSubCategoryclose_Click(object sender, EventArgs e)
+        {
+            pnlSubCategoryFilter.Visible = false;
         }
         private void DesignContextMenu()
         {
@@ -482,14 +636,28 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
+            tsmiAmount.AutoSize = false;
+            tsmiAmount.Height = 30;
+            
+
+            tsmiSubCategory.AutoSize = false;
+            tsmiSubCategory.Height = 30;
+
+
             tsmiDate.Image = Properties.Resources.calendar;
             tsmiCategory.Image = Properties.Resources.shop;
+            tsmiSubCategory.Image = Properties.Resources.folder;
+            tsmiAmount.Image = Properties.Resources.money;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsmiCategory.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiSubCategory.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
             tsmiCategory.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiSubCategory.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
 
 
         }
@@ -513,16 +681,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
-
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
-
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width - 300,
-                p.Y + 35);
-
+            Point p = txtFromdate.PointToScreen(
+                      new Point(0, txtFromdate.Height + 10));
+            p = this.PointToClient(p);
+            panel.Location = p;
             panel.BringToFront();
             panel.Visible = true;
         }
@@ -543,9 +706,22 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // From Date Calendar
             if (pnlFromDateCalenderShow.Visible)
             {
-                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle)
-                        .Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlFromDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderFromDate.RectangleToScreen(
+                        picCalenderFromDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtFromdate.RectangleToScreen(
+                        txtFromdate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlFromDateCalenderShow.Visible = false;
                 }
@@ -554,9 +730,22 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // To Date Calendar
             if (pnlToDateCalenderShow.Visible)
             {
-                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle)
-                        .Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlToDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderToDate.RectangleToScreen(
+                        picCalenderToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtToDate.RectangleToScreen(
+                        txtToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlToDateCalenderShow.Visible = false;
                 }
@@ -572,14 +761,14 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             HidePopupPanels();
 
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
 
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width - 70,
-                p.Y + 35);
+            Point p = txtToDate.PointToScreen(
+                new Point(0, txtToDate.Height +10));
+
+            p = this.PointToClient(p);
+
+            panel.Location = p;
 
             panel.BringToFront();
             panel.Visible = true;
@@ -591,6 +780,210 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         }
 
         private void picCalenderToDate_Click(object sender, EventArgs e)
+        {
+            if (pnlToDateCalenderShow.Visible)
+            {
+                pnlToDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderToDatePanel(pnlToDateCalenderShow);
+            }
+            pnlAmountFilter.Visible = false;
+            pnlSubCategoryFilter.Visible = false;
+            pnlSearch.Visible = false;
+        }
+
+        private void btnAmountClose_Click(object sender, EventArgs e)
+        {
+            pnlAmountFilter.Visible = false;
+        }
+
+        private void pnlTableHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void dgvExpenseDataTable_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void tblSummary_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void txtToDate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderToDatePanel(pnlToDateCalenderShow);
+        }
+
+        private void txtFromdate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+        }
+
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllExpenseData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
+            ShowCurrentPage();
+        }
+
+        private void cmbCategory_Enter(object sender, EventArgs e)
+        {
+            if (cmbCategory.Text == "Select Category")
+                cmbCategory.ForeColor = Color.Black;
+        }
+
+        private void cmbCategory_Leave(object sender, EventArgs e)
+        {
+            if ( string.IsNullOrWhiteSpace(cmbCategory.Text) || cmbCategory.Text == "Select Category")
+            {
+                
+                cmbCategory.Text = "Select Category";
+                cmbCategory.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbCategory.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbCategory_Click(object sender, EventArgs e)
+        {
+            cmbCategory.DroppedDown = true;
+        }
+
+        private void txtMinAmount_Enter(object sender, EventArgs e)
+        {
+            if (txtMinAmount.Text == "Enter Amount")
+            {
+                txtMinAmount.Text = "";
+                txtMinAmount.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtMinAmount_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMinAmount.Text))
+            {
+                txtMinAmount.Text = "Enter Amount";
+                txtMinAmount.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtMaxAmount_Enter(object sender, EventArgs e)
+        {
+            if (txtMaxAmount.Text == "Enter Amount")
+            {
+                txtMaxAmount.Text = "";
+                txtMaxAmount.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtMaxAmount_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMaxAmount.Text))
+            {
+                txtMaxAmount.Text = "Enter Amount";
+                txtMaxAmount.ForeColor = Color.Gray;
+            }
+        }
+
+        private void cmbCategorytxt_Click(object sender, EventArgs e)
+        {
+            cmbCategorytxt.DroppedDown = true;
+        }
+
+        private void cmbCategorytxt_Enter(object sender, EventArgs e)
+        {
+            if (cmbCategorytxt.Text == "Select Category")
+                cmbCategorytxt.ForeColor = Color.Black;
+        }
+
+        private void cmbCategorytxt_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbCategorytxt.Text) || cmbCategorytxt.Text == "Select Category")
+            {
+
+                cmbCategorytxt.Text = "Select Category";
+                cmbCategorytxt.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbCategorytxt.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbSubCategory_Click(object sender, EventArgs e)
+        {
+            cmbSubCategory.DroppedDown = true;
+        }
+
+        private void cmbSubCategory_Enter(object sender, EventArgs e)
+        {
+            if (cmbSubCategory.Text == "Select SubCategory")
+                cmbSubCategory.ForeColor = Color.Black;
+        }
+
+        private void cmbSubCategory_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbSubCategory.Text) || cmbSubCategory.Text == "Select SubCategory")
+            {
+
+                cmbSubCategory.Text = "Select SubCategory";
+                cmbSubCategory.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbSubCategory.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtFromdate_Click(object sender, EventArgs e)
+        {
+
+            if (pnlFromDateCalenderShow.Visible)
+            {
+                pnlFromDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+            }
+        }
+
+        private void txtToDate_Click(object sender, EventArgs e)
         {
             if (pnlToDateCalenderShow.Visible)
             {

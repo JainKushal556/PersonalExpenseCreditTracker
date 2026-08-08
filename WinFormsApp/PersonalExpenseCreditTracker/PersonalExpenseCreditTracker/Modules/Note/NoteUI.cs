@@ -1,35 +1,39 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BLLayer.Note;
+using BLLayer.Common;
+using System.Data;
 
 namespace PersonalExpenseCreditTracker.Modules.Note
 {
-    class NoteUI
+    public class NoteUI
     {
-        // Properties
         public int userId { get; set; }
         public int noteId { get; set; }
-        public string title { get; set; }
-        public string content { get; set; }
+        public string noteTitle { get; set; }
+        public string description { get; set; }
         public int priorityId { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
+        public int colorId { get; set; }
+        // public string colorHexCode { get; set; }
 
+        // Create an object of the Business Logic Layer
         private NoteBLL noteBll = new NoteBLL();
 
-        public bool InsertDataToNoteUi(NoteUI noteUi)
+        // Pass the data from the UI layer to the Business Logic Layer
+        public CommonValidator.ValidationResult InsertDataIntoNoteUi()
         {
+            noteBll.userId = userId;
+            noteBll.noteId = noteId;
+            noteBll.noteTitle = noteTitle;
+            noteBll.priorityId = priorityId;
+            noteBll.colorId = colorId;
+            //noteBll.colorHexCode = colorHexCode;
+            noteBll.description = description;
 
-            noteBll.userId = noteUi.userId;
-            noteBll.noteId = noteUi.noteId;
-            noteBll.title = noteUi.title;
-            noteBll.content = noteUi.content;
-            noteBll.priorityId = noteUi.priorityId;
-            noteBll.startDate = noteUi.startDate;
-            noteBll.endDate = noteUi.endDate;
-            return noteBll.InsertDataToNoteBll();
+            // Call the BLL method for validation
+            return noteBll.DataValidatorIntoNoteBll();
         }
     }
 }

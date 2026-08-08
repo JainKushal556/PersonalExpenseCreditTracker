@@ -76,7 +76,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.txtAddCreditDescription.Multiline = true;
             this.txtAddCreditDescription.Name = "txtAddCreditDescription";
             this.txtAddCreditDescription.Size = new System.Drawing.Size(354, 150);
-            this.txtAddCreditDescription.TabIndex = 31;
+            this.txtAddCreditDescription.TabIndex = 4;
+            this.txtAddCreditDescription.TextChanged += new System.EventHandler(this.txtAddCreditDescription_TextChanged);
             this.txtAddCreditDescription.Enter += new System.EventHandler(this.txtDescription_Enter);
             this.txtAddCreditDescription.Leave += new System.EventHandler(this.txtDescription_Leave);
             // 
@@ -110,7 +111,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.panelCreditDetailsMainBody.Location = new System.Drawing.Point(0, 0);
             this.panelCreditDetailsMainBody.Name = "panelCreditDetailsMainBody";
             this.panelCreditDetailsMainBody.Padding = new System.Windows.Forms.Padding(15);
-            this.panelCreditDetailsMainBody.Size = new System.Drawing.Size(568, 579);
+            this.panelCreditDetailsMainBody.Size = new System.Drawing.Size(568, 582);
             this.panelCreditDetailsMainBody.TabIndex = 3;
             // 
             // label9
@@ -141,7 +142,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.panel3.Location = new System.Drawing.Point(186, 203);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(354, 32);
-            this.panel3.TabIndex = 25;
+            this.panel3.TabIndex = 2;
             // 
             // txtAddCreditAmount
             // 
@@ -150,6 +151,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.txtAddCreditAmount.Name = "txtAddCreditAmount";
             this.txtAddCreditAmount.Size = new System.Drawing.Size(304, 23);
             this.txtAddCreditAmount.TabIndex = 1;
+            this.txtAddCreditAmount.TextChanged += new System.EventHandler(this.txtAddCreditAmount_TextChanged);
             this.txtAddCreditAmount.Enter += new System.EventHandler(this.txtAmount_Enter);
             this.txtAddCreditAmount.Leave += new System.EventHandler(this.txtAmount_Leave);
             // 
@@ -212,7 +214,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditSubCategory.Location = new System.Drawing.Point(186, 138);
             this.cmbAddCreditSubCategory.Name = "cmbAddCreditSubCategory";
             this.cmbAddCreditSubCategory.Size = new System.Drawing.Size(354, 31);
-            this.cmbAddCreditSubCategory.TabIndex = 20;
+            this.cmbAddCreditSubCategory.TabIndex = 1;
+            this.cmbAddCreditSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditSubCategory_SelectedIndexChanged);
+            this.cmbAddCreditSubCategory.TextChanged += new System.EventHandler(this.cmbAddCreditSubCategory_TextChanged);
+            this.cmbAddCreditSubCategory.Click += new System.EventHandler(this.cmbAddCreditSubCategory_Click);
             this.cmbAddCreditSubCategory.Enter += new System.EventHandler(this.cmbAddCreditSubCategory_Enter);
             this.cmbAddCreditSubCategory.Leave += new System.EventHandler(this.cmbAddCreditSubCategory_Leave);
             // 
@@ -243,7 +248,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditPaymentType.Location = new System.Drawing.Point(186, 270);
             this.cmbAddCreditPaymentType.Name = "cmbAddCreditPaymentType";
             this.cmbAddCreditPaymentType.Size = new System.Drawing.Size(354, 31);
-            this.cmbAddCreditPaymentType.TabIndex = 17;
+            this.cmbAddCreditPaymentType.TabIndex = 3;
+            this.cmbAddCreditPaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditPaymentType_SelectedIndexChanged);
+            this.cmbAddCreditPaymentType.TextChanged += new System.EventHandler(this.cmbAddCreditPaymentType_TextChanged);
+            this.cmbAddCreditPaymentType.Click += new System.EventHandler(this.cmbAddCreditPaymentType_Click);
             this.cmbAddCreditPaymentType.Enter += new System.EventHandler(this.cmbAddCreditPaymentType_Enter);
             this.cmbAddCreditPaymentType.Leave += new System.EventHandler(this.cmbAddCreditPaymentType_Leave);
             // 
@@ -274,8 +282,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.cmbAddCreditCategory.Location = new System.Drawing.Point(186, 73);
             this.cmbAddCreditCategory.Name = "cmbAddCreditCategory";
             this.cmbAddCreditCategory.Size = new System.Drawing.Size(354, 31);
-            this.cmbAddCreditCategory.TabIndex = 14;
+            this.cmbAddCreditCategory.TabIndex = 0;
             this.cmbAddCreditCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCreditCategory_SelectedIndexChanged);
+            this.cmbAddCreditCategory.TextChanged += new System.EventHandler(this.cmbAddCreditCategory_TextChanged);
+            this.cmbAddCreditCategory.Click += new System.EventHandler(this.cmbAddCreditCategory_Click);
             this.cmbAddCreditCategory.Enter += new System.EventHandler(this.cmbAddCreditCategory_Enter);
             this.cmbAddCreditCategory.Leave += new System.EventHandler(this.cmbAddCreditCategory_Leave);
             // 
@@ -289,11 +299,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnSaveCredit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveCredit.ForeColor = System.Drawing.Color.White;
             this.btnSaveCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
-            this.btnSaveCredit.Location = new System.Drawing.Point(351, 521);
+            this.btnSaveCredit.Location = new System.Drawing.Point(351, 526);
             this.btnSaveCredit.Name = "btnSaveCredit";
             this.btnSaveCredit.Size = new System.Drawing.Size(194, 41);
-            this.btnSaveCredit.TabIndex = 8;
-            this.btnSaveCredit.Text = "  Save Credit";
+            this.btnSaveCredit.TabIndex = 7;
+            this.btnSaveCredit.Text = "  Add Credit";
             this.btnSaveCredit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveCredit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveCredit.UseVisualStyleBackColor = false;
@@ -310,10 +320,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(199, 521);
+            this.btnCancel.Location = new System.Drawing.Point(199, 526);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 41);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = " Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -328,10 +338,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClear.Location = new System.Drawing.Point(18, 521);
+            this.btnClear.Location = new System.Drawing.Point(18, 526);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(133, 41);
-            this.btnClear.TabIndex = 6;
+            this.btnClear.TabIndex = 5;
             this.btnClear.Text = "  Clear";
             this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClear.UseVisualStyleBackColor = false;
@@ -340,18 +350,18 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(19, 502);
+            this.panel2.Location = new System.Drawing.Point(19, 512);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(528, 1);
             this.panel2.TabIndex = 5;
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";
@@ -366,7 +376,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 579);
+            this.ClientSize = new System.Drawing.Size(568, 582);
             this.Controls.Add(this.panelCreditDetailsMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddCreditControls";

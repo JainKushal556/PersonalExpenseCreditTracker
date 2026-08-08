@@ -11,12 +11,22 @@ using System.Drawing.Drawing2D;
 using System.Data.SqlClient;
 using System.Configuration;
 using PersonalExpenseCreditTracker.Modules.Settings.Person;
-
+using BLLayer.Common;
+using BLLayer.Settings.Persons;
+using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Session;
+using PersonalExpenseCreditTracker.Modules.Settings.Person;
 namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 {
     public partial class EditPersons : Form
     {
         private AddPersonControls addPersonSControls;
+
+        public int personID;
+        public string PersonName;
+        public string PhoneNumber;
+        public string Address;
+
         public EditPersons()
         {
             InitializeComponent();
@@ -69,9 +79,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             //SetRadius(btnUpdatePersonDetails, 15);
             //SetRadius(btnCancelEditPersonDetails, 15);
-            txtEditPersonDetailsFullName.Text = addPersonSControls.txtAddPersonInputFullName.Text;
-            txtEditPersonDetailsPhoneNumber.Text = addPersonSControls.txtAddPersonInputPhoneNumber.Text;
-            txtEditPersonDetailsAddress.Text = addPersonSControls.txtAddPersonInputAddress.Text;
+            txtEditPersonDetailsFullName.Text = PersonName;
+            txtEditPersonDetailsPhoneNumber.Text = PhoneNumber;
+            txtEditPersonDetailsAddress.Text = Address;
         }
 
         //private void btnUpdatePersonDetails_Resize(object sender, System.EventArgs e)
@@ -124,12 +134,64 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         private void btnUpdatePersonDetails_Click(object sender, EventArgs e)
         {
-            addPersonSControls.txtAddPersonInputFullName.Text = txtEditPersonDetailsFullName.Text;
-            addPersonSControls.txtAddPersonInputPhoneNumber.Text = txtEditPersonDetailsPhoneNumber.Text;
-            addPersonSControls.txtAddPersonInputAddress.Text = txtEditPersonDetailsAddress.Text;
+            //addPersonSControls.txtAddPersonInputFullName.Text = txtEditPersonDetailsFullName.Text;
+            //addPersonSControls.txtAddPersonInputPhoneNumber.Text = txtEditPersonDetailsPhoneNumber.Text;
+            //addPersonSControls.txtAddPersonInputAddress.Text = txtEditPersonDetailsAddress.Text;
 
-            MessageBox.Show("Person Details Updated Successfully");
-            this.Close();
+            //Clear All Previous Validation
+            errorProvider1.Clear();
+
+            PersonUI personUI = new PersonUI();
+
+            personUI.userId = Session.LogedInUser.GetUserId();
+            personUI.personId = personID;
+            personUI.personName = (txtEditPersonDetailsFullName.Text == "Enter Full Name") ? "" : txtEditPersonDetailsFullName.Text;
+            personUI.personNumber = (txtEditPersonDetailsPhoneNumber.Text == "Enter Phone Number") ? "" : txtEditPersonDetailsPhoneNumber.Text;
+            personUI.address = (txtEditPersonDetailsAddress.Text == "Enter Address") ? "" : txtEditPersonDetailsAddress.Text;
+
+            CommonValidator.ValidationResult result = personUI.UpdateDataIntoPersonUi();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Person Details Updated Successfully");
+                    if (addPersonSControls != null)
+                    {
+                        addPersonSControls.LoadData();
+                    }
+                    this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.PersonInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsFullName);
+                    break;
+
+                case CommonValidator.ValidationResult.PersonNameEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsFullName);
+                    break;
+
+                case CommonValidator.ValidationResult.PersonNameInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsFullName);
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneNumberEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsPhoneNumber);
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsPhoneNumber);
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneNumberAlreadyExists:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsPhoneNumber);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Person Not Updated");
+                    this.Close();
+                    break;
+            }
+            
         }
 
         //private void btnCloseEditPersonDetails_MouseHover(object sender, EventArgs e)

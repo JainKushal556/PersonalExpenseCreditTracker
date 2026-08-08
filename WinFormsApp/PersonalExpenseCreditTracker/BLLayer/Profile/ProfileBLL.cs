@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DALayer.Profile;
 using System.Text.RegularExpressions;
+using BLLayer.Common;
 namespace BLLayer.Profile
 {
    public class ProfileBLL
@@ -14,100 +15,94 @@ namespace BLLayer.Profile
         public string phoneNumber { get; set; }
         public string address { get; set; }
         public DateTime dateOfBirth { get; set; }
+        public int genderId { get; set; }
         public byte[] photoData { get; set; }
-       //update profile
-        public bool UpdateUserProfileIntoProfBll()
-        {
-            if (ValidateFullName())
-            {
-                if (ValidateEmail())
-                {
-                    if (ValidatePhoneNumber())
-                    {
-                        if (ValidateAddress())
-                        {
-                            if (ValidateDateOfBirth())
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
-        }
 
-       //Update profile Photo
-        public bool UpdateProfilePhotoIntoProfBll()
-        {
-            if (ValidatePhotoData())
-            {
-                return true;
-            }
-            return false;
-        }
+      private  ProfileDAL profileDAL = new ProfileDAL();
 
-        private bool ValidatePhotoData()
-        {
-            if (photoData == null)
-            {
-                return false;
-            }
-            if (photoData.Length > 2 * 1024 * 1024)
-            {
-                return false;
-            }
-            return true;
-        }
-       private bool ValidateFullName()
-       {
-           if(string.IsNullOrWhiteSpace(fullName))
-           {
-               return false;
-           }
-           if(fullName.Length>100)
-           {
-               return false;
-           }
-           return true;
-       }
-        private bool ValidateEmail()
-        {
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                return false;
-            }
-            if (email.Length > 100)
-            {
-                return false;
-            }
+        //// Update Profile
+      public CommonValidator.ValidationResult UpdateUserProfileIntoProfBll()
+      {
+          CommonValidator.ValidationResult result;
 
-            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-        }
-        private bool ValidatePhoneNumber()
-        {
-            if (string.IsNullOrWhiteSpace(phoneNumber))
-            {
-                return false;
-            }
+          result = CommonValidator.ValidateFullName(fullName);
+          if (result != CommonValidator.ValidationResult.Success)
+          {
+              return result;
+          }
 
-            return Regex.IsMatch(phoneNumber, @"^\d{10}$");
-        }
-        private bool ValidateAddress()
+          result = CommonValidator.ValidateDateOfBirth(dateOfBirth);
+          if (result != CommonValidator.ValidationResult.Success)
+          {
+              return result;
+          }
+
+          result = CommonValidator.ValidateEmail(email);
+          if (result != CommonValidator.ValidationResult.Success)
+          {
+              return result;
+          }
+
+          result = CommonValidator.ValidatePhoneNumber(phoneNumber);
+          if (result != CommonValidator.ValidationResult.Success)
+          {
+              return result;
+          }
+
+          result = CommonValidator.ValidateGender(genderId);
+
+          if (result != CommonValidator.ValidationResult.Success)
+          {
+              return result;
+          }
+
+          result = CommonValidator.ValidateAddress(address);
+          if (result != CommonValidator.ValidationResult.Success)
+          {
+              return result;
+          }
+
+         
+
+          profileDAL.userId = userId;
+          profileDAL.fullName = fullName;
+          profileDAL.email = email;
+          profileDAL.phoneNumber = phoneNumber;
+          profileDAL.address = address;
+          profileDAL.dateOfBirth = dateOfBirth;
+          profileDAL.genderId = genderId;
+
+          if (profileDAL.UpdateUserProfileToDb())
+          {
+              return CommonValidator.ValidationResult.Success;
+          }
+          else
+          {
+
+              return CommonValidator.ValidationResult.StoreProcedureError;
+          }
+      }
+
+        // Update Profile Photo
+        public CommonValidator.ValidationResult UpdateProfilePhotoIntoProfBll()
         {
-            if (address.Length > 200)
-            {
-                return false;
-            }
-            return true;
+            CommonValidator.ValidationResult result;
+
+            result = CommonValidator.ValidatePhotoData(photoData);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+          
+
+            profileDAL.userId = userId;
+            profileDAL.photoData = photoData;
+
+            if (profileDAL.UpdateProfilePhotoToDb())
+                return CommonValidator.ValidationResult.Success;
+
+            return CommonValidator.ValidationResult.StoreProcedureError;
         }
-        private bool ValidateDateOfBirth()
-        {
-            if (dateOfBirth > DateTime.Today)
-            {
-                return false;
-            }
-            return true;
-        }
+       
+
     }
 }

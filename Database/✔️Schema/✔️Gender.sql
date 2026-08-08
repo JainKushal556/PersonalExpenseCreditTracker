@@ -1,0 +1,5 @@
+CREATE TABLE tblGender
+(
+    GenderID INT PRIMARY KEY IDENTITY(1,1),
+    GenderName VARCHAR(20) NOT NULL UNIQUE
+);

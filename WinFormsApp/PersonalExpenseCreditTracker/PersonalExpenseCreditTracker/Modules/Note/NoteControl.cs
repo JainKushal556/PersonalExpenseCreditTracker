@@ -7,15 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
-
 using System.Data.SqlClient;
 using System.Configuration;
+using PersonalExpenseCreditTracker.Session;
+using PersonalExpenseCreditTracker.Common;
+using System.Runtime.InteropServices;
+using PersonalExpenseCreditTracker.Forms.Main;
 
 namespace PersonalExpenseCreditTracker.Modules.Note
 {
     public partial class NoteControl : Form
     {
+        int userID = Session.LogedInUser.GetUserId();
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
@@ -26,6 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             int nHeightEllipse);
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllNoteData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize ;
 
@@ -40,7 +44,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void NoteControl_Load(object sender, EventArgs e)
         {
             
-            int UserID = 11;
             
             foreach (Control c in flpNotes.Controls)
             {
@@ -54,10 +57,11 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             SetRoundedPanel(pnlTotalNotes, 20);
             SetRoundedPanel(pnlImportant, 20);
             SetRoundedPanel(pnlThisMonth, 20);
+            //int userID = Session.LogedInUser.GetUserId();
             HideAllFilterPanels();
             DesignContextMenu();
 
-            LoadNoteData(UserID);
+            LoadNoteData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
 
         }
@@ -70,7 +74,73 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             tsmiDate.Width = cmsFilter.Width;
             tsmiPriority.Width = cmsFilter.Width;
         }
-        private void LoadNoteData(int userID)
+
+        
+
+        public Boolean LoadFilteredNoteData(string spName, string paramName, int filterId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(spName, userID, paramName, filterId);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            AllNoteData = dataTable;
+            masterData = dataTable.Copy();
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+
+        public Boolean LoadFilteredNoteData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllNoteData = dataTable;
+            masterData = dataTable.Copy();
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+        public Boolean LoadFilteredNoteData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllNoteData = dataTable;
+            masterData = dataTable.Copy();
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+        public void LoadNoteData(int userID)
         {
             try
             {
@@ -95,26 +165,89 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             }
         }
 
+        public Boolean LoadFilteredNotetData(string spName, string paramName, int filterId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(spName, userID, paramName, filterId);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            AllNoteData = dataTable;
+            masterData = dataTable.Copy();
+            currentPage = 1;
+            ShowCurrentPage();
+            return true;
+        }
+
+        private Color GetTextColor(Color backgroundColor)
+        {
+            double brightness =
+                (0.299 * backgroundColor.R) +
+                (0.587 * backgroundColor.G) +
+                (0.114 * backgroundColor.B);
+
+            if (brightness < 160)
+            {
+                return Color.White;
+            }
+
+            return Color.Black;
+        }
+
+        private Color GetSecondaryTextColor(Color backgroundColor)
+        {
+            double brightness =
+                (0.299 * backgroundColor.R) +
+                (0.587 * backgroundColor.G) +
+                (0.114 * backgroundColor.B);
+
+            if (brightness < 160)
+            {
+                return Color.FromArgb(250, 250, 250);
+            }
+
+            return Color.FromArgb(80, 80, 80);
+        }
         private void AddNoteCard(DataRow row)
         {
             Panel card = new Panel();
 
-            card.BackColor = Color.SeaShell;
+            string hexCode = row["ColorHexCode"].ToString();
+
+            if (!string.IsNullOrWhiteSpace(hexCode))
+            {
+                card.BackColor = ColorTranslator.FromHtml(hexCode);
+            }
+            else
+            {
+                card.BackColor = Color.White;
+            }
+
+            Color textColor = GetTextColor(card.BackColor);
+            Color secondaryTextColor = GetSecondaryTextColor(card.BackColor);
+
             card.Size = new Size(331, 170);
             card.Margin = new Padding(10);
             card.Padding = new Padding(10);
             Label title = new Label();
 
             title.Text = row["NoteTitle"].ToString();
-            title.Font = new Font("Segoe UI", 10.8f, FontStyle.Bold);
+            title.Font = new Font("Segoe UI", 11f, FontStyle.Bold);
+            title.ForeColor = textColor;
             title.Location = new Point(10, 10);
             title.AutoSize = true;
+
             Label description = new Label();
 
             description.Name = "lblNoteCardDescription";
             description.Text = row["Description"].ToString();
-            description.Font = new Font("Segoe UI", 9.5f);
-            description.ForeColor = Color.FromArgb(90, 90, 90);
+            description.Font = new Font("Segoe UI", 10f);
+            description.ForeColor = secondaryTextColor;
             description.Location = new Point(15, 45);
             description.AutoEllipsis = true;
             Panel footer = new Panel();
@@ -127,23 +260,25 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             date.Text = Convert.ToDateTime(row["CreatedAt"]) .ToString("dd MMM yyyy");
 
             date.Font = new Font("Segoe UI", 10F);
+            date.ForeColor = secondaryTextColor;
             date.AutoSize = true;
             date.Location = new Point(0, 8);
             Label priority = new Label();
 
-            priority.Text = row["NotePriorityName"].ToString();   
+            priority.Text = row["NotePriorityName"].ToString();
             priority.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
-            priority.ForeColor = Color.FromArgb(200, 80, 80);
+            priority.ForeColor = textColor;
             priority.AutoSize = true;
             priority.Location = new Point(150, 8);
             Button btnMore = new Button();
 
             btnMore.Size = new Size(30, 30);
             btnMore.Dock = DockStyle.Right;
+            
 
             btnMore.FlatStyle = FlatStyle.Flat;
             btnMore.FlatAppearance.BorderSize = 0;
-            btnMore.BackColor = Color.Transparent;
+            
             btnMore.Image = Properties.Resources.more2;
             btnMore.Cursor = Cursors.Hand;
             btnMore.Click += delegate(object sender, EventArgs e)
@@ -374,6 +509,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             NoteViewDetailsControl noteViewDetailsControl = new NoteViewDetailsControl();
             noteViewDetailsControl.Show();
+
+
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -555,6 +692,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void tsmiPriority_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlPriorityFilter);
+            cmbPriority.DroppedDown = true;
         }
 
         private void btnSerach_Click(object sender, EventArgs e)
@@ -739,5 +877,73 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
         }
+
+        private void cmsNote_Opening(object sender, CancelEventArgs e)
+        {
+            viewToolStripMenuItem.AutoSize = false;
+            editToolStripMenuItem.AutoSize = false;
+            deleteToolStripMenuItem.AutoSize = false;
+
+            viewToolStripMenuItem.Width = cmsNote.Width;
+            editToolStripMenuItem.Width = cmsNote.Width;
+            deleteToolStripMenuItem.Width = cmsNote.Width;
+        }
+
+        private void btnNoteMore_MouseHover(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+
+            if (btn != null && btn.Parent != null)
+            {
+                btn.BackColor = btn.Parent.BackColor;
+            }
+        }
+
+        private void btnNoteMore_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+
+            if (btn != null)
+            {
+                btn.BackColor = SystemColors.Control;
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            // Hide panels
+            HideAllFilterPanels();
+            HidePopupPanels();
+
+            // Reset page
+            currentPage = 1;
+
+            // Reload note data
+            LoadNoteData(userID);
+
+            // Refresh UI
+            this.Refresh();
+        }
+
+        private void lblNoteTotal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNoteTotal_TextChanged(object sender, EventArgs e)
+        {
+            lblNoteTotal.Text = lblNoteTotalPageNumber.Text;
+        }
+
+        
+
+       
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllNoteData = Common.CommonUiFunction.SearchDataInNote(masterData, txtSearch);
+            ShowCurrentPage();
+        }
+
     }
 }

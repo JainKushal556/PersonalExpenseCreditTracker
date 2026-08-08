@@ -29,6 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.txtLentStatus = new System.Windows.Forms.TextBox();
@@ -60,15 +61,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblLentDetails = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panelMainBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panelLentAddCalenderShow.SuspendLayout();
             this.panelLentAddDeadlineAt.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // panelMainBody
             // 
@@ -107,13 +111,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelMainBody.Size = new System.Drawing.Size(568, 675);
             this.panelMainBody.TabIndex = 0;
             this.panelMainBody.Click += new System.EventHandler(this.panelMainBody_Click);
-            this.panelMainBody.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMainBody_Paint);
             // 
             // pictureBox6
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
-            this.pictureBox6.Location = new System.Drawing.Point(500, 206);
+            this.pictureBox6.Location = new System.Drawing.Point(510, 206);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(25, 26);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -129,7 +132,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.txtLentStatus.Name = "txtLentStatus";
             this.txtLentStatus.ReadOnly = true;
             this.txtLentStatus.Size = new System.Drawing.Size(354, 30);
-            this.txtLentStatus.TabIndex = 33;
+            this.txtLentStatus.TabIndex = 2;
             this.txtLentStatus.Text = "  Pending";
             // 
             // panelLentAddCalenderShow
@@ -157,7 +160,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.textBoxLentAddDescription.Multiline = true;
             this.textBoxLentAddDescription.Name = "textBoxLentAddDescription";
             this.textBoxLentAddDescription.Size = new System.Drawing.Size(354, 178);
-            this.textBoxLentAddDescription.TabIndex = 31;
+            this.textBoxLentAddDescription.TabIndex = 5;
+            this.textBoxLentAddDescription.TextChanged += new System.EventHandler(this.textBoxLentAddDescription_TextChanged);
             this.textBoxLentAddDescription.Enter += new System.EventHandler(this.textBoxLentAddDescription_Enter);
             this.textBoxLentAddDescription.Leave += new System.EventHandler(this.textBoxLentAddDescription_Leave);
             // 
@@ -189,7 +193,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelLentAddDeadlineAt.Location = new System.Drawing.Point(186, 333);
             this.panelLentAddDeadlineAt.Name = "panelLentAddDeadlineAt";
             this.panelLentAddDeadlineAt.Size = new System.Drawing.Size(354, 31);
-            this.panelLentAddDeadlineAt.TabIndex = 28;
+            this.panelLentAddDeadlineAt.TabIndex = 4;
             // 
             // txtLentAddDeadlineDatePicker
             // 
@@ -199,6 +203,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.txtLentAddDeadlineDatePicker.Name = "txtLentAddDeadlineDatePicker";
             this.txtLentAddDeadlineDatePicker.Size = new System.Drawing.Size(267, 23);
             this.txtLentAddDeadlineDatePicker.TabIndex = 2;
+            this.txtLentAddDeadlineDatePicker.Click += new System.EventHandler(this.btnLentAddCalendar_Click);
             this.txtLentAddDeadlineDatePicker.TextChanged += new System.EventHandler(this.txtLentAddDeadlineDatePicker_TextChanged);
             this.txtLentAddDeadlineDatePicker.Enter += new System.EventHandler(this.txtLentAddDeadlineDatePicker_Enter);
             this.txtLentAddDeadlineDatePicker.Leave += new System.EventHandler(this.txtLentAddDeadlineDatePicker_Leave);
@@ -242,7 +247,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel3.Location = new System.Drawing.Point(186, 270);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(354, 32);
-            this.panel3.TabIndex = 25;
+            this.panel3.TabIndex = 3;
             this.panel3.Enter += new System.EventHandler(this.txtLentAddAmount_Enter);
             this.panel3.Leave += new System.EventHandler(this.txtLentAddAmount_Leave);
             // 
@@ -253,6 +258,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.txtLentAddAmount.Name = "txtLentAddAmount";
             this.txtLentAddAmount.Size = new System.Drawing.Size(306, 23);
             this.txtLentAddAmount.TabIndex = 1;
+            this.txtLentAddAmount.TextChanged += new System.EventHandler(this.txtLentAddAmount_TextChanged);
             this.txtLentAddAmount.Enter += new System.EventHandler(this.txtLentAddAmount_Enter);
             this.txtLentAddAmount.Leave += new System.EventHandler(this.txtLentAddAmount_Leave);
             // 
@@ -324,9 +330,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.comboBoxLentPaymentType.Location = new System.Drawing.Point(186, 138);
             this.comboBoxLentPaymentType.Name = "comboBoxLentPaymentType";
             this.comboBoxLentPaymentType.Size = new System.Drawing.Size(354, 31);
-            this.comboBoxLentPaymentType.TabIndex = 17;
+            this.comboBoxLentPaymentType.TabIndex = 1;
             this.comboBoxLentPaymentType.Text = "Select Payment Type";
             this.comboBoxLentPaymentType.SelectedIndexChanged += new System.EventHandler(this.comboBoxLentPaymentType_SelectedIndexChanged);
+            this.comboBoxLentPaymentType.TextChanged += new System.EventHandler(this.comboBoxLentPaymentType_TextChanged);
             this.comboBoxLentPaymentType.Enter += new System.EventHandler(this.comboBoxLentPaymentType_Enter);
             this.comboBoxLentPaymentType.Leave += new System.EventHandler(this.comboBoxLentPaymentType_Leave);
             // 
@@ -357,8 +364,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.comboBoxLentSelectPerson.Location = new System.Drawing.Point(186, 72);
             this.comboBoxLentSelectPerson.Name = "comboBoxLentSelectPerson";
             this.comboBoxLentSelectPerson.Size = new System.Drawing.Size(354, 31);
-            this.comboBoxLentSelectPerson.TabIndex = 14;
+            this.comboBoxLentSelectPerson.TabIndex = 0;
             this.comboBoxLentSelectPerson.SelectedIndexChanged += new System.EventHandler(this.comboBoxLentSelectPerson_SelectedIndexChanged);
+            this.comboBoxLentSelectPerson.TextChanged += new System.EventHandler(this.comboBoxLentSelectPerson_TextChanged);
             this.comboBoxLentSelectPerson.Enter += new System.EventHandler(this.comboBoxLentSelectPerson_Enter);
             this.comboBoxLentSelectPerson.Leave += new System.EventHandler(this.comboBoxLentSelectPerson_Leave);
             // 
@@ -371,13 +379,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnLentAddSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnLentAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentAddSave.ForeColor = System.Drawing.Color.White;
-            this.btnLentAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnLentAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnLentAddSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLentAddSave.Location = new System.Drawing.Point(370, 619);
+            this.btnLentAddSave.Location = new System.Drawing.Point(391, 621);
             this.btnLentAddSave.Name = "btnLentAddSave";
-            this.btnLentAddSave.Size = new System.Drawing.Size(177, 41);
+            this.btnLentAddSave.Size = new System.Drawing.Size(155, 41);
             this.btnLentAddSave.TabIndex = 8;
-            this.btnLentAddSave.Text = "  Save Lent";
+            this.btnLentAddSave.Text = "Add Lent";
             this.btnLentAddSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLentAddSave.UseVisualStyleBackColor = false;
             this.btnLentAddSave.Click += new System.EventHandler(this.btnLentAddSave_Click);
@@ -393,7 +401,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnLentAddCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentAddCancel.ForeColor = System.Drawing.Color.White;
             this.btnLentAddCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLentAddCancel.Location = new System.Drawing.Point(213, 619);
+            this.btnLentAddCancel.Location = new System.Drawing.Point(234, 621);
             this.btnLentAddCancel.Name = "btnLentAddCancel";
             this.btnLentAddCancel.Size = new System.Drawing.Size(140, 41);
             this.btnLentAddCancel.TabIndex = 7;
@@ -411,7 +419,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnLentAddClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLentAddClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
             this.btnLentAddClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLentAddClear.Location = new System.Drawing.Point(16, 619);
+            this.btnLentAddClear.Location = new System.Drawing.Point(16, 621);
             this.btnLentAddClear.Name = "btnLentAddClear";
             this.btnLentAddClear.Size = new System.Drawing.Size(133, 41);
             this.btnLentAddClear.TabIndex = 6;
@@ -423,8 +431,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 609);
             this.panel2.Name = "panel2";
@@ -433,8 +441,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";
@@ -450,10 +458,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.lblLentDetails.TabIndex = 0;
             this.lblLentDetails.Text = "Lent Details";
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // AddLentControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -466,6 +470,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddLentControls";
             this.Load += new System.EventHandler(this.AddLentControls_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panelMainBody.ResumeLayout(false);
             this.panelMainBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -475,7 +480,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLentRupee)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
