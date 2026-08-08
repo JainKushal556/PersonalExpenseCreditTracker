@@ -324,5 +324,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             if (ignoreEvents) return;
             cmbPaymentType.DroppedDown = true;
         }
+
+        private void cmbPaymentType_Click(object sender, EventArgs e)
+        {
+            cmbPaymentType.DroppedDown = true;
+        }
     }
 }

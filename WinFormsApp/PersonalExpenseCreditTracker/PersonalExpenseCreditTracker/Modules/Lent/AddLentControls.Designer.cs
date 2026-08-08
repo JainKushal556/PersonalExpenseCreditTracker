@@ -334,6 +334,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.comboBoxLentPaymentType.Text = "Select Payment Type";
             this.comboBoxLentPaymentType.SelectedIndexChanged += new System.EventHandler(this.comboBoxLentPaymentType_SelectedIndexChanged);
             this.comboBoxLentPaymentType.TextChanged += new System.EventHandler(this.comboBoxLentPaymentType_TextChanged);
+            this.comboBoxLentPaymentType.Click += new System.EventHandler(this.comboBoxLentPaymentType_Click);
             this.comboBoxLentPaymentType.Enter += new System.EventHandler(this.comboBoxLentPaymentType_Enter);
             this.comboBoxLentPaymentType.Leave += new System.EventHandler(this.comboBoxLentPaymentType_Leave);
             // 
