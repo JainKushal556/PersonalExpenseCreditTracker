@@ -50,7 +50,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnPreviousPage = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnSerach = new System.Windows.Forms.Button();
             this.lblBorrowEndingPageNumber = new System.Windows.Forms.Label();
             this.lblBorrowEntries = new System.Windows.Forms.Label();
             this.lblBorrowShowing = new System.Windows.Forms.Label();
@@ -63,6 +62,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.panel5 = new System.Windows.Forms.Panel();
             this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.pnlButton = new System.Windows.Forms.Panel();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.pnlSearchHeader = new System.Windows.Forms.Panel();
+            this.pnlSearchTxt = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlRepaidAmount = new System.Windows.Forms.Panel();
             this.lblBorrowRepaidAmount = new System.Windows.Forms.Label();
@@ -122,11 +126,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.picCalenderFromDate = new System.Windows.Forms.PictureBox();
             this.txtFromdate = new System.Windows.Forms.TextBox();
             this.lblToDate = new System.Windows.Forms.Label();
-            this.pnlSearch = new System.Windows.Forms.Panel();
-            this.pnlSearchHeader = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.pnlSearchTxt = new System.Windows.Forms.Panel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlPaymentFilter = new System.Windows.Forms.Panel();
             this.pnlPaymentHeader = new System.Windows.Forms.Panel();
             this.btnPaymentApply = new System.Windows.Forms.Button();
@@ -152,6 +151,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.panel5.SuspendLayout();
             this.pnlButtonControls.SuspendLayout();
             this.pnlButton.SuspendLayout();
+            this.pnlSearch.SuspendLayout();
+            this.pnlSearchHeader.SuspendLayout();
+            this.pnlSearchTxt.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlRepaidAmount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBorrowRepaidAmount)).BeginInit();
@@ -175,9 +178,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.pnlFromDateCalenderShow.SuspendLayout();
             this.pnlFromDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalenderFromDate)).BeginInit();
-            this.pnlSearch.SuspendLayout();
-            this.pnlSearchHeader.SuspendLayout();
-            this.pnlSearchTxt.SuspendLayout();
             this.pnlPaymentFilter.SuspendLayout();
             this.pnlPaymentHeader.SuspendLayout();
             this.pnlPayment.SuspendLayout();
@@ -206,6 +206,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnExport.BackColor = System.Drawing.Color.Transparent;
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.ForeColor = System.Drawing.Color.White;
@@ -223,6 +225,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnFilter.BackColor = System.Drawing.Color.Transparent;
             this.btnFilter.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnFilter.FlatAppearance.BorderSize = 0;
+            this.btnFilter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnFilter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFilter.ForeColor = System.Drawing.Color.White;
@@ -288,6 +292,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
@@ -299,19 +305,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
-            // 
-            // btnSerach
-            // 
-            this.btnSerach.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSerach.FlatAppearance.BorderSize = 0;
-            this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
-            this.btnSerach.Location = new System.Drawing.Point(0, 0);
-            this.btnSerach.Name = "btnSerach";
-            this.btnSerach.Size = new System.Drawing.Size(53, 50);
-            this.btnSerach.TabIndex = 1;
-            this.btnSerach.UseVisualStyleBackColor = true;
-            this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
             // 
             // lblBorrowEndingPageNumber
             // 
@@ -424,14 +417,15 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // pnlButtonControls
             // 
             this.pnlButtonControls.BackColor = System.Drawing.Color.Transparent;
-            this.pnlButtonControls.Controls.Add(this.btnSerach);
             this.pnlButtonControls.Controls.Add(this.pnlButton);
+            this.pnlButtonControls.Controls.Add(this.pnlSearch);
             this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlButtonControls.Location = new System.Drawing.Point(8, 5);
             this.pnlButtonControls.Margin = new System.Windows.Forms.Padding(0);
             this.pnlButtonControls.Name = "pnlButtonControls";
             this.pnlButtonControls.Size = new System.Drawing.Size(1137, 50);
             this.pnlButtonControls.TabIndex = 0;
+            this.pnlButtonControls.Click += new System.EventHandler(this.pnlButtonControls_Click);
             // 
             // pnlButton
             // 
@@ -444,6 +438,61 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.pnlButton.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.pnlButton.Size = new System.Drawing.Size(192, 50);
             this.pnlButton.TabIndex = 0;
+            // 
+            // pnlSearch
+            // 
+            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSearch.Controls.Add(this.pnlSearchHeader);
+            this.pnlSearch.Location = new System.Drawing.Point(2, 2);
+            this.pnlSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Size = new System.Drawing.Size(417, 46);
+            this.pnlSearch.TabIndex = 14;
+            // 
+            // pnlSearchHeader
+            // 
+            this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
+            this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlSearchHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlSearchHeader.Name = "pnlSearchHeader";
+            this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
+            this.pnlSearchHeader.Size = new System.Drawing.Size(417, 46);
+            this.pnlSearchHeader.TabIndex = 0;
+            // 
+            // pnlSearchTxt
+            // 
+            this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
+            this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSearchTxt.Controls.Add(this.pictureBox1);
+            this.pnlSearchTxt.Controls.Add(this.txtSearch);
+            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 4);
+            this.pnlSearchTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlSearchTxt.Name = "pnlSearchTxt";
+            this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
+            this.pnlSearchTxt.Size = new System.Drawing.Size(403, 36);
+            this.pnlSearchTxt.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.loupe__1_;
+            this.pictureBox1.Location = new System.Drawing.Point(4, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(28, 25);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(45, 5);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(347, 23);
+            this.txtSearch.TabIndex = 8;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -470,9 +519,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // pnlRepaidAmount
             // 
-            this.pnlRepaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlRepaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlRepaidAmount.BackColor = System.Drawing.Color.White;
             this.pnlRepaidAmount.Controls.Add(this.lblBorrowRepaidAmount);
             this.pnlRepaidAmount.Controls.Add(this.lblBorrowRepaidAmountText);
@@ -527,9 +576,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // pnlActiveBorrowings
             // 
-            this.pnlActiveBorrowings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlActiveBorrowings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlActiveBorrowings.BackColor = System.Drawing.Color.White;
             this.pnlActiveBorrowings.Controls.Add(this.lblBorrowActiveBorrowingsAmount);
             this.pnlActiveBorrowings.Controls.Add(this.lblBorrowActiveBorrowingsText);
@@ -584,9 +633,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // pnlPaidAmount
             // 
-            this.pnlPaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPaidAmount.BackColor = System.Drawing.Color.White;
             this.pnlPaidAmount.Controls.Add(this.lblBorrowPaidAmount);
             this.pnlPaidAmount.Controls.Add(this.lblBorrowPaidAmountText);
@@ -642,9 +691,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // pnlBorrowTotalBorrowed
             // 
-            this.pnlBorrowTotalBorrowed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBorrowTotalBorrowed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBorrowTotalBorrowed.BackColor = System.Drawing.Color.White;
             this.pnlBorrowTotalBorrowed.Controls.Add(this.lblBorrowTotalBorrowedAmount);
             this.pnlBorrowTotalBorrowed.Controls.Add(this.lblBorrowTotalBorrowedText);
@@ -868,9 +917,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // tableLayoutPanelMainData
             // 
-            this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanelMainData.ColumnCount = 1;
             this.tableLayoutPanelMainData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMainData.Controls.Add(this.panel2, 0, 2);
@@ -1204,61 +1253,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblToDate.TabIndex = 3;
             this.lblToDate.Text = "To";
             // 
-            // pnlSearch
-            // 
-            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSearch.Controls.Add(this.pnlSearchHeader);
-            this.pnlSearch.Location = new System.Drawing.Point(29, 300);
-            this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(349, 48);
-            this.pnlSearch.TabIndex = 10;
-            // 
-            // pnlSearchHeader
-            // 
-            this.pnlSearchHeader.Controls.Add(this.btnSearch);
-            this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
-            this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlSearchHeader.Name = "pnlSearchHeader";
-            this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
-            this.pnlSearchHeader.Size = new System.Drawing.Size(349, 48);
-            this.pnlSearchHeader.TabIndex = 0;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(243, 7);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(92, 32);
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            // 
-            // pnlSearchTxt
-            // 
-            this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
-            this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSearchTxt.Controls.Add(this.txtSearch);
-            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 8);
-            this.pnlSearchTxt.Name = "pnlSearchTxt";
-            this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.pnlSearchTxt.Size = new System.Drawing.Size(226, 32);
-            this.pnlSearchTxt.TabIndex = 1;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(8, 3);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(217, 23);
-            this.txtSearch.TabIndex = 6;
-            // 
             // pnlPaymentFilter
             // 
             this.pnlPaymentFilter.BackColor = System.Drawing.Color.Transparent;
@@ -1523,7 +1517,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.Controls.Add(this.pnlPersonFilter);
             this.Controls.Add(this.pnlStatusFilter);
             this.Controls.Add(this.pnlPaymentFilter);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlAmountFilter);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -1536,6 +1529,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.panel5.PerformLayout();
             this.pnlButtonControls.ResumeLayout(false);
             this.pnlButton.ResumeLayout(false);
+            this.pnlSearch.ResumeLayout(false);
+            this.pnlSearchHeader.ResumeLayout(false);
+            this.pnlSearchTxt.ResumeLayout(false);
+            this.pnlSearchTxt.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlRepaidAmount.ResumeLayout(false);
             this.pnlRepaidAmount.PerformLayout();
@@ -1567,10 +1565,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.pnlFromDate.ResumeLayout(false);
             this.pnlFromDate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalenderFromDate)).EndInit();
-            this.pnlSearch.ResumeLayout(false);
-            this.pnlSearchHeader.ResumeLayout(false);
-            this.pnlSearchTxt.ResumeLayout(false);
-            this.pnlSearchTxt.PerformLayout();
             this.pnlPaymentFilter.ResumeLayout(false);
             this.pnlPaymentHeader.ResumeLayout(false);
             this.pnlPaymentHeader.PerformLayout();
@@ -1642,7 +1636,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnFilter;
-        private System.Windows.Forms.Button btnSerach;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPersonID;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
@@ -1672,7 +1665,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.Label lblToDate;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Panel pnlSearchHeader;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel pnlSearchTxt;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ToolStripMenuItem tsmiPerson;
@@ -1699,5 +1691,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.Panel pnlPerson;
         private System.Windows.Forms.ComboBox cmbPerson;
         private System.Windows.Forms.Button btnPersonClose;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

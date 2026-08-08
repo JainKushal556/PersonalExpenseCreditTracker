@@ -120,6 +120,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void BorrowControls_Load(object sender, EventArgs e)
         {
             ApplyRoundCorners();
+            this.MouseDown += BorrowControls_MouseDown;
+            RegisterMouseDown(this);
             dgvBorrowDataTable.CellPainting += dgvBorrowDataTable_CellPainting;
             pageSize = GetRowsPerPage();
             int userID = Session.LogedInUser.GetUserId();
@@ -608,12 +610,12 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
         private void HideAllFilterPanels()
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
             pnlAmountFilter.Visible = false;
-            pnlSearch.Visible = false;
+            pnlStatusFilter.Visible = false;
             pnlPaymentFilter.Visible = false;
             pnlPersonFilter.Visible = false;
-            pnlStatusFilter.Visible = false;
         }
         private void HidePopupPanels()
         {
@@ -648,24 +650,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
        
 
         private void tsmiDate_Click_1(object sender, EventArgs e)
@@ -692,10 +677,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             ShowFilterPanel(pnlPaymentFilter);
         }
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
+
 
         private void pnlCategoryFilter_Paint(object sender, PaintEventArgs e)
         {
@@ -729,7 +711,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             tsmiAmount.AutoSize = false;
             tsmiAmount.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiAmount.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -841,6 +823,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
             else
             {
+                pnlToDateCalenderShow.Visible = false;
                 ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
             }
         }
@@ -853,12 +836,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
             else
             {
+                pnlFromDateCalenderShow.Visible = false;
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
 
         private void btnDateClose_Click(object sender, EventArgs e)
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
         }
 
@@ -881,17 +866,24 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
         }
 
          private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
          {
              txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+             pnlFromDateCalenderShow.Visible = false;
          }
 
          private void txtSearch_TextChanged(object sender, EventArgs e)
          {
              AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
              ShowCurrentPage();
+         }
+
+         private void pnlButtonControls_Click(object sender, EventArgs e)
+         {
+
          }
     }
 }

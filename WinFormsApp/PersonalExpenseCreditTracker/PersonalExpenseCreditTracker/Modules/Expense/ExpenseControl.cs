@@ -55,6 +55,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
             ApplyRoundCorners();
+            this.MouseDown += ExpenseControls_MouseDown;
+            RegisterMouseDown(this);
             pageSize = GetRowsPerPage();
             HideAllFilterPanels();
             DesignContextMenu();
@@ -545,6 +547,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         }
         private void HideAllFilterPanels()
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
             pnlAmountFilter.Visible = false;
@@ -598,6 +601,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnDateClose_Click(object sender, EventArgs e)
         {
+            HidePopupPanels();
             pnlDateFilter.Visible = false;
         }
 
@@ -617,7 +621,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiCategory.Image = Properties.Resources.shop;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -637,6 +641,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
             else
             {
+                pnlToDateCalenderShow.Visible = false;
                 ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
             }
         }
@@ -644,6 +649,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void monthCalendarFromDate_DateChanged(object sender, DateRangeEventArgs e)
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
         }
         private void ShowCalenderFromDatePanel(Panel panel)
         {
@@ -723,6 +729,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void monthCalendarToDate_DateChanged(object sender, DateRangeEventArgs e)
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
         }
 
         private void picCalenderToDate_Click(object sender, EventArgs e)
@@ -733,6 +740,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
             else
             {
+                pnlFromDateCalenderShow.Visible = false;
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
