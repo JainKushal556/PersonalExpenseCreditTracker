@@ -321,10 +321,5 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             cmbPaymentType.DroppedDown = true;
 
         }
-
-        private void cmbPaymentType_Click(object sender, EventArgs e)
-        {
-            cmbPaymentType.DroppedDown = true;
-        }
     }
 }
