@@ -329,6 +329,16 @@ namespace PersonalExpenseCreditTracker.Common
             }
         }
 
-
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, Panel dtp1, Panel dtp2)
+        {
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    HideErrorForControl(dtp1);
+                    ShowErrorBelowControl(dtp2, "* From Date is greater than To Date.");
+                    dtp1.Focus();
+                    break;
+            }
+        }
     }
 }

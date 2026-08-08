@@ -15,7 +15,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 {
     public partial class TaskControls : Form
     {
-        private EditTaskControl editTaskControl;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(

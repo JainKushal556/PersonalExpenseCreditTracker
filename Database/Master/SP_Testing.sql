@@ -602,6 +602,7 @@ GO
 EXEC spUpdateExpenseCategoryByUserID
     @UserID = '',
     @CategoryID = '',
+    @ActiveStatus = '',
     @CategoryName = ''
 
 GO

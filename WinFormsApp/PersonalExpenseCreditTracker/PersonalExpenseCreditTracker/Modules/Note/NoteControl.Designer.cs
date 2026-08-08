@@ -1160,7 +1160,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private System.Windows.Forms.Label lblto;
         private System.Windows.Forms.Label lblNoteStartingPageNumber;
         private System.Windows.Forms.Label lblShowing;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlControl;
         private System.Windows.Forms.Button btnLastPage;
         private System.Windows.Forms.Button btnNextpage;
