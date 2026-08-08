@@ -562,6 +562,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             pnlCategoryFilter.Visible = false;
             pnlAmountFilter.Visible = false;
             pnlSubCategoryFilter.Visible = false;
+            pnlSearch.Visible = false;
         }
         private void HidePopupPanels()
         {
@@ -617,6 +618,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void btncategoryClose_Click(object sender, EventArgs e)
         {
             pnlCategoryFilter.Visible = false;
+        }
+
+        private void btnSubCategoryclose_Click(object sender, EventArgs e)
+        {
+            pnlSubCategoryFilter.Visible = false;
         }
         private void DesignContextMenu()
         {
@@ -783,11 +789,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             {
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
+            pnlAmountFilter.Visible = false;
             pnlSubCategoryFilter.Visible = false;
+            pnlSearch.Visible = false;
         }
 
         private void btnAmountClose_Click(object sender, EventArgs e)
@@ -795,7 +799,59 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             pnlAmountFilter.Visible = false;
         }
 
-        
+        private void pnlTableHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void dgvExpenseDataTable_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void tblSummary_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void txtToDate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderToDatePanel(pnlToDateCalenderShow);
+        }
+
+        private void txtFromdate_Enter(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+        }
+
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
+        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -845,8 +901,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 txtMinAmount.ForeColor = Color.Gray;
             }
         }
-
-        
 
         private void txtMaxAmount_Enter(object sender, EventArgs e)
         {
@@ -940,9 +994,5 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
-
-       
-
-       
     }
 }

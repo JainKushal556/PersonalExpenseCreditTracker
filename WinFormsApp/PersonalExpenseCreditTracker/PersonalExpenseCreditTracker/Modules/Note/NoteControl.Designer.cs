@@ -830,8 +830,6 @@
             this.pnlPriority.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPriority.Controls.Add(this.cmbPriority);
             this.pnlPriority.Location = new System.Drawing.Point(103, 6);
-            this.pnlPriority.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlPriority.Name = "pnlPriority";
             this.pnlPriority.Size = new System.Drawing.Size(293, 34);
             this.pnlPriority.TabIndex = 3;
             // 
@@ -926,8 +924,6 @@
             this.pnlToDate.Controls.Add(this.picCalenderToDate);
             this.pnlToDate.Controls.Add(this.txtToDate);
             this.pnlToDate.Location = new System.Drawing.Point(400, 5);
-            this.pnlToDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlToDate.Name = "pnlToDate";
             this.pnlToDate.Size = new System.Drawing.Size(285, 36);
             this.pnlToDate.TabIndex = 5;
             // 
@@ -1262,5 +1258,5 @@
         private System.Windows.Forms.Panel pnlSearchTxt;
         private System.Windows.Forms.TextBox txtSearch;
         //private System.Windows.Forms.ContextMenuStrip cmsnote;
-    }
+}
 }

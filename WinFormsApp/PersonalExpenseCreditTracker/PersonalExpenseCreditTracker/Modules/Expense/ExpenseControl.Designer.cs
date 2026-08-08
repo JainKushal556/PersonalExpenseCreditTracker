@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Expense
+namespace PersonalExpenseCreditTracker.Modules.Expense
 {
     partial class ExpenseControl
     {
@@ -1093,7 +1093,7 @@
             this.btnSubCategoryclose.Size = new System.Drawing.Size(39, 41);
             this.btnSubCategoryclose.TabIndex = 1;
             this.btnSubCategoryclose.UseVisualStyleBackColor = true;
-            this.btnSubCategoryclose.Click += new System.EventHandler(this.button2_Click);
+            this.btnSubCategoryclose.Click += new System.EventHandler(this.btnSubCategoryclose_Click);
             // 
             // lblcategory
             // 

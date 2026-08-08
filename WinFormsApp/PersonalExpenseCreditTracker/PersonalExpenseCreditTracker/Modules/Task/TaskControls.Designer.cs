@@ -1381,6 +1381,5 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Button btnStatusClose;
-
     }
 }

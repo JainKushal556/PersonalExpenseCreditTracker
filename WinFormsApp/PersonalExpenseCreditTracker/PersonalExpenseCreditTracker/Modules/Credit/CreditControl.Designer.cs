@@ -1370,5 +1370,5 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private System.Windows.Forms.Button btnAmountClose;
         private System.Windows.Forms.ToolStripMenuItem tsmiSubCategory;
         private System.Windows.Forms.ToolStripMenuItem tsmiAmount;
-    }
+}
 }
