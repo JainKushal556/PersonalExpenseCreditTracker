@@ -78,13 +78,13 @@
             this.pnlEditTask.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEditTask.Location = new System.Drawing.Point(0, 0);
             this.pnlEditTask.Name = "pnlEditTask";
-            this.pnlEditTask.Size = new System.Drawing.Size(487, 410);
+            this.pnlEditTask.Size = new System.Drawing.Size(487, 371);
             this.pnlEditTask.TabIndex = 0;
             this.pnlEditTask.Click += new System.EventHandler(this.pnlEditTask_Click);
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(188, 54);
+            this.monthCalendar1.Location = new System.Drawing.Point(152, 37);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 10;
             this.monthCalendar1.Visible = false;
@@ -107,7 +107,7 @@
             this.pnlBody.Controls.Add(this.lblTaskTitle);
             this.pnlBody.Location = new System.Drawing.Point(19, 65);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(450, 260);
+            this.pnlBody.Size = new System.Drawing.Size(450, 226);
             this.pnlBody.TabIndex = 18;
             this.pnlBody.Click += new System.EventHandler(this.pnlBody_Click);
             // 
@@ -116,7 +116,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(83, 141);
+            this.label3.Location = new System.Drawing.Point(83, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(18, 23);
             this.label3.TabIndex = 17;
@@ -127,7 +127,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(107, 197);
+            this.label4.Location = new System.Drawing.Point(107, 170);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(18, 23);
             this.label4.TabIndex = 16;
@@ -138,7 +138,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(94, 83);
+            this.label2.Location = new System.Drawing.Point(94, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 23);
             this.label2.TabIndex = 14;
@@ -149,7 +149,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(109, 23);
+            this.label1.Location = new System.Drawing.Point(109, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 23);
             this.label1.TabIndex = 13;
@@ -162,7 +162,7 @@
             this.pnlDeadline.Controls.Add(this.btnCalendar);
             this.pnlDeadline.Controls.Add(this.txtDeadline);
             this.pnlDeadline.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pnlDeadline.Location = new System.Drawing.Point(139, 200);
+            this.pnlDeadline.Location = new System.Drawing.Point(139, 173);
             this.pnlDeadline.Name = "pnlDeadline";
             this.pnlDeadline.Size = new System.Drawing.Size(295, 31);
             this.pnlDeadline.TabIndex = 9;
@@ -197,7 +197,7 @@
             // 
             this.lblDeadline.AutoSize = true;
             this.lblDeadline.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeadline.Location = new System.Drawing.Point(13, 198);
+            this.lblDeadline.Location = new System.Drawing.Point(13, 171);
             this.lblDeadline.Name = "lblDeadline";
             this.lblDeadline.Size = new System.Drawing.Size(88, 25);
             this.lblDeadline.TabIndex = 8;
@@ -208,7 +208,7 @@
             this.pnlStatus.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlStatus.Controls.Add(this.cmbStatus);
-            this.pnlStatus.Location = new System.Drawing.Point(139, 141);
+            this.pnlStatus.Location = new System.Drawing.Point(139, 122);
             this.pnlStatus.Name = "pnlStatus";
             this.pnlStatus.Size = new System.Drawing.Size(295, 31);
             this.pnlStatus.TabIndex = 7;
@@ -223,17 +223,13 @@
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(290, 31);
             this.cmbStatus.TabIndex = 0;
-            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
-            this.cmbStatus.TextChanged += new System.EventHandler(this.cmbStatus_TextChanged);
             this.cmbStatus.Click += new System.EventHandler(this.cmbStatus_Click);
-            this.cmbStatus.Enter += new System.EventHandler(this.cmbStatus_Enter);
-            this.cmbStatus.Leave += new System.EventHandler(this.cmbStatus_Leave);
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(13, 142);
+            this.lblStatus.Location = new System.Drawing.Point(13, 123);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(64, 25);
             this.lblStatus.TabIndex = 6;
@@ -244,7 +240,7 @@
             this.pnlPriority.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlPriority.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPriority.Controls.Add(this.cmbPriority);
-            this.pnlPriority.Location = new System.Drawing.Point(139, 83);
+            this.pnlPriority.Location = new System.Drawing.Point(139, 71);
             this.pnlPriority.Name = "pnlPriority";
             this.pnlPriority.Size = new System.Drawing.Size(295, 31);
             this.pnlPriority.TabIndex = 5;
@@ -260,17 +256,13 @@
             this.cmbPriority.Name = "cmbPriority";
             this.cmbPriority.Size = new System.Drawing.Size(290, 31);
             this.cmbPriority.TabIndex = 0;
-            this.cmbPriority.SelectedIndexChanged += new System.EventHandler(this.cmbPriority_SelectedIndexChanged);
-            this.cmbPriority.TextChanged += new System.EventHandler(this.cmbPriority_TextChanged);
             this.cmbPriority.Click += new System.EventHandler(this.cmbPriority_Click);
-            this.cmbPriority.Enter += new System.EventHandler(this.cmbPriority_Enter);
-            this.cmbPriority.Leave += new System.EventHandler(this.cmbPriority_Leave);
             // 
             // lblPriority
             // 
             this.lblPriority.AutoSize = true;
             this.lblPriority.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPriority.Location = new System.Drawing.Point(13, 84);
+            this.lblPriority.Location = new System.Drawing.Point(13, 72);
             this.lblPriority.Name = "lblPriority";
             this.lblPriority.Size = new System.Drawing.Size(75, 25);
             this.lblPriority.TabIndex = 4;
@@ -281,7 +273,7 @@
             this.pnlTaskTitle.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlTaskTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTaskTitle.Controls.Add(this.txtTaskTitle);
-            this.pnlTaskTitle.Location = new System.Drawing.Point(139, 24);
+            this.pnlTaskTitle.Location = new System.Drawing.Point(139, 20);
             this.pnlTaskTitle.Name = "pnlTaskTitle";
             this.pnlTaskTitle.Size = new System.Drawing.Size(295, 31);
             this.pnlTaskTitle.TabIndex = 3;
@@ -295,7 +287,6 @@
             this.txtTaskTitle.Name = "txtTaskTitle";
             this.txtTaskTitle.Size = new System.Drawing.Size(286, 23);
             this.txtTaskTitle.TabIndex = 0;
-            this.txtTaskTitle.TextChanged += new System.EventHandler(this.txtTaskTitle_TextChanged);
             this.txtTaskTitle.Enter += new System.EventHandler(this.txtTaskTitle_Enter);
             this.txtTaskTitle.Leave += new System.EventHandler(this.txtTaskTitle_Leave);
             // 
@@ -303,7 +294,7 @@
             // 
             this.lblTaskTitle.AutoSize = true;
             this.lblTaskTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskTitle.Location = new System.Drawing.Point(13, 25);
+            this.lblTaskTitle.Location = new System.Drawing.Point(13, 21);
             this.lblTaskTitle.Name = "lblTaskTitle";
             this.lblTaskTitle.Size = new System.Drawing.Size(90, 25);
             this.lblTaskTitle.TabIndex = 2;
@@ -329,7 +320,7 @@
             this.btnUpdateTask.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateTask.ForeColor = System.Drawing.Color.White;
             this.btnUpdateTask.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update__4_;
-            this.btnUpdateTask.Location = new System.Drawing.Point(332, 342);
+            this.btnUpdateTask.Location = new System.Drawing.Point(332, 311);
             this.btnUpdateTask.Name = "btnUpdateTask";
             this.btnUpdateTask.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.btnUpdateTask.Size = new System.Drawing.Size(137, 41);
@@ -350,7 +341,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(198, 343);
+            this.btnCancel.Location = new System.Drawing.Point(198, 312);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 41);
             this.btnCancel.TabIndex = 11;
@@ -393,7 +384,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(487, 410);
+            this.ClientSize = new System.Drawing.Size(487, 371);
             this.Controls.Add(this.pnlEditTask);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditTaskControl";

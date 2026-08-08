@@ -1,23 +1,11 @@
 CREATE PROCEDURE spGetUserCurrentPassword
-(
-   @UserID INT
-)
+    @UserID INT
 AS
 BEGIN
+    SET NOCOUNT ON;
 
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblUserAuthentication UserAuthentication
-        WHERE UserAuthentication.UserID = @UserID
-        AND UserAuthentication.Active = 1
-    )
-    BEGIN
-        SELECT 'Invalid or Inactive User' AS Message;
-        RETURN;
-    END
-
-    SELECT Password 
+    SELECT Password
     FROM tblUserAuthentication
-    WHERE UserID = @UserID;
+    WHERE UserID = @UserID
+      AND Active = 1;
 END;
