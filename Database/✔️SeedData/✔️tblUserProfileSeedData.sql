@@ -1,4 +1,4 @@
-INSERT INTO tblUserProfile (UserID, Name, ProfilePhoto)
+INSERT INTO tblUserProfile (UserID, FullName, ProfilePhoto)
 VALUES
 (1, 'Sujit Kar', 0xFFD8FFE000104A46494600010101006000600000),
 (2, 'Kushal Jain', 0xFFD8FFE000104A46494600010101006000600001),

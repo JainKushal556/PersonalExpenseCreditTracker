@@ -215,8 +215,6 @@
             this.btnNoteMore.TabIndex = 1;
             this.btnNoteMore.UseVisualStyleBackColor = false;
             this.btnNoteMore.Click += new System.EventHandler(this.btnMore_Click);
-            this.btnNoteMore.MouseLeave += new System.EventHandler(this.btnNoteMore_MouseLeave);
-            this.btnNoteMore.MouseHover += new System.EventHandler(this.btnNoteMore_MouseHover);
             // 
             // lblPriorityName
             // 
@@ -492,8 +490,6 @@
             this.lblNoteTotal.Size = new System.Drawing.Size(43, 32);
             this.lblNoteTotal.TabIndex = 2;
             this.lblNoteTotal.Text = "21";
-            this.lblNoteTotal.TextChanged += new System.EventHandler(this.lblNoteTotal_TextChanged);
-            this.lblNoteTotal.Click += new System.EventHandler(this.lblNoteTotal_Click);
             // 
             // lblTotalTitle
             // 
@@ -728,7 +724,6 @@
             this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // cmsNote
             // 
@@ -737,27 +732,26 @@
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.cmsNote.Name = "cmsNote";
-            this.cmsNote.Size = new System.Drawing.Size(123, 76);
-            this.cmsNote.Opening += new System.ComponentModel.CancelEventHandler(this.cmsNote_Opening);
+            this.cmsNote.Size = new System.Drawing.Size(153, 98);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.viewToolStripMenuItem.Text = "View";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -790,7 +784,7 @@
             this.pnlPriorityFilter.Location = new System.Drawing.Point(317, 400);
             this.pnlPriorityFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPriorityFilter.Name = "pnlPriorityFilter";
-            this.pnlPriorityFilter.Size = new System.Drawing.Size(496, 48);
+            this.pnlPriorityFilter.Size = new System.Drawing.Size(567, 48);
             this.pnlPriorityFilter.TabIndex = 10;
             // 
             // pnlHeader
@@ -802,7 +796,7 @@
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(493, 46);
+            this.pnlHeader.Size = new System.Drawing.Size(565, 46);
             this.pnlHeader.TabIndex = 4;
             // 
             // btnPriorityApply
@@ -812,7 +806,7 @@
             this.btnPriorityApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPriorityApply.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPriorityApply.ForeColor = System.Drawing.Color.White;
-            this.btnPriorityApply.Location = new System.Drawing.Point(339, 5);
+            this.btnPriorityApply.Location = new System.Drawing.Point(411, 5);
             this.btnPriorityApply.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPriorityApply.Name = "btnPriorityApply";
             this.btnPriorityApply.Size = new System.Drawing.Size(92, 36);
@@ -835,10 +829,10 @@
             this.pnlPriority.BackColor = System.Drawing.Color.White;
             this.pnlPriority.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPriority.Controls.Add(this.cmbPriority);
-            this.pnlPriority.Location = new System.Drawing.Point(95, 6);
+            this.pnlPriority.Location = new System.Drawing.Point(103, 6);
             this.pnlPriority.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPriority.Name = "pnlPriority";
-            this.pnlPriority.Size = new System.Drawing.Size(226, 34);
+            this.pnlPriority.Size = new System.Drawing.Size(293, 34);
             this.pnlPriority.TabIndex = 3;
             // 
             // cmbPriority
@@ -860,7 +854,7 @@
             this.btnPriorityClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnPriorityClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPriorityClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnPriorityClose.Location = new System.Drawing.Point(447, 5);
+            this.btnPriorityClose.Location = new System.Drawing.Point(521, 5);
             this.btnPriorityClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPriorityClose.Name = "btnPriorityClose";
             this.btnPriorityClose.Size = new System.Drawing.Size(39, 38);
@@ -875,7 +869,7 @@
             this.pnlDateFilter.Location = new System.Drawing.Point(173, 290);
             this.pnlDateFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDateFilter.Name = "pnlDateFilter";
-            this.pnlDateFilter.Size = new System.Drawing.Size(756, 48);
+            this.pnlDateFilter.Size = new System.Drawing.Size(855, 48);
             this.pnlDateFilter.TabIndex = 11;
             // 
             // pnlDateHeader
@@ -891,7 +885,7 @@
             this.pnlDateHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlDateHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDateHeader.Name = "pnlDateHeader";
-            this.pnlDateHeader.Size = new System.Drawing.Size(756, 48);
+            this.pnlDateHeader.Size = new System.Drawing.Size(855, 48);
             this.pnlDateHeader.TabIndex = 7;
             // 
             // btnDateApply
@@ -901,7 +895,7 @@
             this.btnDateApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDateApply.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDateApply.ForeColor = System.Drawing.Color.White;
-            this.btnDateApply.Location = new System.Drawing.Point(600, 5);
+            this.btnDateApply.Location = new System.Drawing.Point(705, 5);
             this.btnDateApply.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDateApply.Name = "btnDateApply";
             this.btnDateApply.Size = new System.Drawing.Size(92, 36);
@@ -916,7 +910,7 @@
             this.btnDateClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnDateClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDateClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnDateClose.Location = new System.Drawing.Point(704, 2);
+            this.btnDateClose.Location = new System.Drawing.Point(809, 2);
             this.btnDateClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDateClose.Name = "btnDateClose";
             this.btnDateClose.Size = new System.Drawing.Size(39, 41);
@@ -931,10 +925,10 @@
             this.pnlToDate.Controls.Add(this.pnlToDateCalenderShow);
             this.pnlToDate.Controls.Add(this.picCalenderToDate);
             this.pnlToDate.Controls.Add(this.txtToDate);
-            this.pnlToDate.Location = new System.Drawing.Point(360, 5);
+            this.pnlToDate.Location = new System.Drawing.Point(400, 5);
             this.pnlToDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlToDate.Name = "pnlToDate";
-            this.pnlToDate.Size = new System.Drawing.Size(220, 36);
+            this.pnlToDate.Size = new System.Drawing.Size(285, 36);
             this.pnlToDate.TabIndex = 5;
             // 
             // pnlToDateCalenderShow
@@ -961,7 +955,7 @@
             // 
             this.picCalenderToDate.Dock = System.Windows.Forms.DockStyle.Right;
             this.picCalenderToDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
-            this.picCalenderToDate.Location = new System.Drawing.Point(185, 0);
+            this.picCalenderToDate.Location = new System.Drawing.Point(250, 0);
             this.picCalenderToDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picCalenderToDate.Name = "picCalenderToDate";
             this.picCalenderToDate.Size = new System.Drawing.Size(33, 34);
@@ -978,7 +972,7 @@
             this.txtToDate.Location = new System.Drawing.Point(4, 7);
             this.txtToDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtToDate.Name = "txtToDate";
-            this.txtToDate.Size = new System.Drawing.Size(210, 24);
+            this.txtToDate.Size = new System.Drawing.Size(239, 24);
             this.txtToDate.TabIndex = 1;
             // 
             // pnlFromDateCalenderShow
@@ -1021,14 +1015,14 @@
             this.pnlFromDate.Location = new System.Drawing.Point(75, 5);
             this.pnlFromDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlFromDate.Name = "pnlFromDate";
-            this.pnlFromDate.Size = new System.Drawing.Size(220, 36);
+            this.pnlFromDate.Size = new System.Drawing.Size(285, 36);
             this.pnlFromDate.TabIndex = 4;
             // 
             // picCalenderFromDate
             // 
             this.picCalenderFromDate.Dock = System.Windows.Forms.DockStyle.Right;
             this.picCalenderFromDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
-            this.picCalenderFromDate.Location = new System.Drawing.Point(185, 0);
+            this.picCalenderFromDate.Location = new System.Drawing.Point(250, 0);
             this.picCalenderFromDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picCalenderFromDate.Name = "picCalenderFromDate";
             this.picCalenderFromDate.Size = new System.Drawing.Size(33, 34);
@@ -1053,7 +1047,7 @@
             this.lblToDate.AutoSize = true;
             this.lblToDate.BackColor = System.Drawing.Color.Transparent;
             this.lblToDate.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToDate.Location = new System.Drawing.Point(312, 10);
+            this.lblToDate.Location = new System.Drawing.Point(363, 10);
             this.lblToDate.Name = "lblToDate";
             this.lblToDate.Size = new System.Drawing.Size(33, 25);
             this.lblToDate.TabIndex = 3;
@@ -1066,7 +1060,7 @@
             this.pnlSearch.Location = new System.Drawing.Point(364, 199);
             this.pnlSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(349, 48);
+            this.pnlSearch.Size = new System.Drawing.Size(475, 48);
             this.pnlSearch.TabIndex = 12;
             // 
             // pnlSearchHeader
@@ -1078,7 +1072,7 @@
             this.pnlSearchHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSearchHeader.Name = "pnlSearchHeader";
             this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
-            this.pnlSearchHeader.Size = new System.Drawing.Size(349, 48);
+            this.pnlSearchHeader.Size = new System.Drawing.Size(475, 48);
             this.pnlSearchHeader.TabIndex = 0;
             // 
             // btnSearch
@@ -1088,7 +1082,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(243, 7);
+            this.btnSearch.Location = new System.Drawing.Point(373, 7);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(92, 32);
@@ -1105,7 +1099,7 @@
             this.pnlSearchTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSearchTxt.Name = "pnlSearchTxt";
             this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.pnlSearchTxt.Size = new System.Drawing.Size(226, 32);
+            this.pnlSearchTxt.Size = new System.Drawing.Size(346, 32);
             this.pnlSearchTxt.TabIndex = 1;
             // 
             // txtSearch
@@ -1115,7 +1109,7 @@
             this.txtSearch.Location = new System.Drawing.Point(8, 4);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(213, 23);
+            this.txtSearch.Size = new System.Drawing.Size(333, 23);
             this.txtSearch.TabIndex = 6;
             // 
             // NoteControl

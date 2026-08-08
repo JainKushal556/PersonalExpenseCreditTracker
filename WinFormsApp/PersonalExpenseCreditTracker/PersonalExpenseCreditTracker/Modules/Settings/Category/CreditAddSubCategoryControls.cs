@@ -12,9 +12,20 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 {
     public partial class CreditAddSubCategoryControls : Form
     {
+        public string AddedSubCategoryName { get; private set; }
+        public int SelectedCategoryId { get; set; }
+        public string SelectedCategoryName { get; set; }
+
         public CreditAddSubCategoryControls()
         {
             InitializeComponent();
+        }
+
+        public CreditAddSubCategoryControls(int categoryId, string categoryName)
+        {
+            InitializeComponent();
+            SelectedCategoryId = categoryId;
+            SelectedCategoryName = categoryName;
         }
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -59,13 +70,18 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             txtSubCategory.Text = "  Enter Sub Category Name";
             txtSubCategory.ForeColor = Color.FromArgb(45, 45, 45);
 
+            if (!string.IsNullOrEmpty(SelectedCategoryName))
+            {
+                lblCategoryName.Text = SelectedCategoryName;
+            }
+
             SetRadius(pnlBody, 15);
             SetRadius(btnCancel, 5);
             SetRadius(btnSave, 5);
 
             rdActive.Checked = true;
-          
         }
+
         private void txtSubCategory_Enter(object sender, EventArgs e)
         {
             if (txtSubCategory.Text == "  Enter Sub Category Name")
@@ -83,19 +99,25 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+      
+    //Save Button
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Saved Credit Sub Category");
+          
+            AddedSubCategoryName = txtSubCategory.Text.Trim();
+            MessageBox.Show("Saved Expense SubCategory");
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void rbInactive_CheckedChanged(object sender, EventArgs e)

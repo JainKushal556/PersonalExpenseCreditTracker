@@ -19,9 +19,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllBorrowData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
-        private int userID = 11;
+        private int userID = Session.LogedInUser.GetUserId();
         public BorrowControls()
         {
             InitializeComponent();
@@ -121,7 +122,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             ApplyRoundCorners();
             dgvBorrowDataTable.CellPainting += dgvBorrowDataTable_CellPainting;
             pageSize = GetRowsPerPage();
-            int userID = 11;
+            int userID = Session.LogedInUser.GetUserId();
             LoadBorrowData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
@@ -172,6 +173,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                         }
 
                         AllBorrowData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -351,6 +353,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
 
             dgvBorrowDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvBorrowDataTable, txtSearch);
 
 
 
@@ -572,16 +575,36 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             DataGridViewRow row = dgvBorrowDataTable.Rows[e.RowIndex];
 
-            int personID = Convert.ToInt32(row.Cells["colPersonID"].Value);
+            int borrowId = 0;
 
-            //MessageBox.Show("PersonID = " + personID);
+            DataRowView drv = row.DataBoundItem as DataRowView;
+            if (drv != null && drv.Row.Table.Columns.Contains("BorrowID"))
+            {
+                borrowId = Convert.ToInt32(drv["BorrowID"]);
+            }
 
-            //PayBorrowReturnAmountControls frm = new PayBorrowReturnAmountControls();
+            string personName = Convert.ToString(row.Cells["colPersonName"].Value);
+            string totalAmount = Convert.ToString(row.Cells["colAmount"].Value);
+            string remainingAmount = Convert.ToString(row.Cells["colRemainingAmount"].Value);
+            string status = Convert.ToString(row.Cells["colStatus"].Value);
+            string paidAmount = Convert.ToString(row.Cells["colPaidAmount"].Value);
 
-            //frm.UserID = userID;
-            //frm.PersonID = personID;
+            using (PayBorrowPaidAmountControls frm = new PayBorrowPaidAmountControls())
+            {
+                frm.SetBorrowDetails(
+                    borrowId,
+                    personName,
+                    totalAmount,
+                    remainingAmount,
+                    status,
+                    paidAmount);
 
-            //frm.ShowDialog(this);
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+                    LoadBorrowData(userID);
+                }
+            }
         }
         private void HideAllFilterPanels()
         {
@@ -860,14 +883,15 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
         }
 
-        private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
-        {
-            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-        }
+         private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
+         {
+             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+         }
 
-        
-
-       
+         private void txtSearch_TextChanged(object sender, EventArgs e)
+         {
+             AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+             ShowCurrentPage();
+         }
     }
 }
-

@@ -167,6 +167,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 // Data is valid and inserted successfully
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Note added successfully!");
+                    
                     this.Close();
 
                     break;
@@ -228,6 +229,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             if (rbLow.Checked)
             {
+                rbMedium.Checked=false;
+                rbHigh.Checked=false;
                 selectedPriorityId = Convert.ToInt32(rbLow.Tag);
             }
         }
@@ -236,6 +239,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             if (rbMedium.Checked)
             {
+                rbLow.Checked = false;
+                rbHigh.Checked = false;
                 selectedPriorityId = Convert.ToInt32(rbMedium.Tag);
             }
         }
@@ -244,6 +249,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             if (rbHigh.Checked)
             {
+                rbLow.Checked = false;
+                rbMedium.Checked = false;
                 selectedPriorityId = Convert.ToInt32(rbHigh.Tag);
             }
         }

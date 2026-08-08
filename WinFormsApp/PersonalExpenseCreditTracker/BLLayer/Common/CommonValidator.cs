@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,8 @@ namespace BLLayer.Common
             Success,
 
             PersonInvalid,
+            PersonNameInvalid,
+            PersonNameEmpty,
             PaymentInvalid,
             StatusInvalid,
             PriorityInvalid,
@@ -26,9 +28,13 @@ namespace BLLayer.Common
             DeadlineInvalid,
 
             DescriptionInvalid,
+            DescriptionTooShort,
+            DescriptionTooLong,
 
             EmailInvalid,
             PhoneInvalid,
+            PhoneNumberEmpty,
+            PhoneNumberAlreadyExists,
 
             DateRangeInvalid,
             MinimumAmountInvalid,
@@ -41,9 +47,53 @@ namespace BLLayer.Common
             SubCategoryInvalid,
 
             StoreProcedureError,
-            TaskAlreadyUpdated
+            TaskAlreadyUpdated,
+
+            // Profile Validation
+            PhotoInvalid,
+            FullNameInvalid,
+            AddressInvalid,
+            DateOfBirthInvalid,
+            GenderInvalid,
+            CurrentAndNewPasswordSame,
+            CurrentPasswordEmpty,
+            NewPasswordEmpty,
+            ConfirmPasswordEmpty,
+            NotMatchPassword,
+            WeakPassword,
+            MediumPassword,
+            StrongPassword,
+            VeryStrongPassword
         }
 
+        // Validation Password
+        public static ValidationResult ValidatePassword(string CurrentPassword, string NewPassword, string ConfirmPassword)
+        {
+            if (string.IsNullOrWhiteSpace(CurrentPassword))
+            {
+                return ValidationResult.CurrentPasswordEmpty;
+            }
+            else if (string.IsNullOrWhiteSpace(NewPassword))
+            {
+                return ValidationResult.NewPasswordEmpty;
+            }
+            else if (string.IsNullOrWhiteSpace(ConfirmPassword))
+            {
+                return ValidationResult.ConfirmPasswordEmpty;
+            }
+            else if (NewPassword != ConfirmPassword)
+            {
+                return ValidationResult.NotMatchPassword;
+            }
+            else if (CurrentPassword == NewPassword)
+            {
+                return ValidationResult.CurrentAndNewPasswordSame;
+            }
+            else
+            {
+                return ValidationResult.Success;
+            }
+        }
         
         //Validation PersonID
         public static ValidationResult ValidatePerson(int personId)
@@ -54,6 +104,23 @@ namespace BLLayer.Common
             }
 
             return ValidationResult.PersonInvalid;
+        }
+
+        //PersonName Validation
+        public static ValidationResult ValidationPersonName(string personName)
+        {
+            if (string.IsNullOrWhiteSpace(personName))
+                return ValidationResult.PersonNameEmpty;
+
+            if (!Regex.IsMatch(personName, @"^[A-Za-z]+(?:[ '-][A-Za-z]+)*$"))
+                return ValidationResult.PersonNameInvalid;
+            
+            personName = personName.Trim();
+
+            if (personName.Length < 3)
+                return ValidationResult.PersonNameInvalid;
+
+            return ValidationResult.Success;
         }
 
         //Payment Validation
@@ -95,7 +162,7 @@ namespace BLLayer.Common
             return ValidationResult.Success;
         }
 
-        //ValidateMinimumAmount
+        //Validate MinimumAmount
         public static ValidationResult ValidateMinimumAmount(string minAmount)
         {
             decimal value;
@@ -117,7 +184,7 @@ namespace BLLayer.Common
             return ValidationResult.MinimumAmountInvalid;
         }
 
-        //ValidateMaximumAmount
+        //Validate MaximumAmount
         public static ValidationResult ValidateMaximumAmount(string maxAmount)
         {
             decimal value;
@@ -139,7 +206,7 @@ namespace BLLayer.Common
             return ValidationResult.MaximumAmountInvalid;
         }
 
-        //ValidateAmountRange
+        //Validate AmountRange
         public static ValidationResult ValidateAmountRange(decimal minAmount, decimal maxAmount)
         {
             if (minAmount <= maxAmount)
@@ -178,20 +245,24 @@ namespace BLLayer.Common
 
         public static ValidationResult ValidateDescription(string description)
         {
-            if (!string.IsNullOrWhiteSpace(description))
+            if (string.IsNullOrWhiteSpace(description))
             {
-                description = description.Trim();
-
-                if (description.Length >= 5)
-                {
-                    if (description.Length <= 150)
-                    {
-                        return ValidationResult.Success;
-                    }
-                }
+                return ValidationResult.DescriptionInvalid;
             }
 
-            return ValidationResult.DescriptionInvalid;
+            description = description.Trim();
+
+            if (description.Length < 5)
+            {
+                return ValidationResult.DescriptionTooShort;
+            }
+
+            if (description.Length > 150)
+            {
+                return ValidationResult.DescriptionTooLong;
+            }
+
+            return ValidationResult.Success;
         }
 
         //Email Validation
@@ -217,6 +288,11 @@ namespace BLLayer.Common
         // Phone Number Validation
         public static ValidationResult ValidatePhoneNumber(string phoneNumber)
         {
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                return ValidationResult.PhoneNumberEmpty;
+            }
+
             if (!string.IsNullOrWhiteSpace(phoneNumber))
             {
                 phoneNumber = phoneNumber.Trim();
@@ -302,6 +378,57 @@ namespace BLLayer.Common
             return ValidationResult.PriorityInvalid;
         }
 
+        //profile
+
+        public static ValidationResult ValidatePhotoData(byte[] photoData)
+        {
+            if (photoData == null)
+                return ValidationResult.PhotoInvalid;
+
+            if (photoData.Length > 2 * 1024 * 1024)
+                return ValidationResult.PhotoInvalid;
+
+            return ValidationResult.Success;
+        }
+
+        public static ValidationResult ValidateFullName(string fullName)
+        {
+            if (string.IsNullOrWhiteSpace(fullName))
+                return ValidationResult.FullNameInvalid;
+
+            if (fullName.Trim().Length > 100)
+                return ValidationResult.FullNameInvalid;
+
+            return ValidationResult.Success;
+        }
+        public static ValidationResult ValidateAddress(string address)
+        {
+            if (string.IsNullOrWhiteSpace(address))
+                return ValidationResult.AddressInvalid;
+
+            if (address.Trim().Length > 200)
+                return ValidationResult.AddressInvalid;
+
+            return ValidationResult.Success;
+        }
+       
+        public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth)
+        {
+            if (dateOfBirth == DateTime.MinValue || dateOfBirth > DateTime.Today)
+                return ValidationResult.DateOfBirthInvalid;
+
+            return ValidationResult.Success;
+        }
+        // Gender Validation
+        public static ValidationResult ValidateGender(int genderId)
+        {
+            if (genderId > 0)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.GenderInvalid;
+        }
 
         // Note Title Validation
         public static ValidationResult ValidateNoteTitle(string noteTitle)

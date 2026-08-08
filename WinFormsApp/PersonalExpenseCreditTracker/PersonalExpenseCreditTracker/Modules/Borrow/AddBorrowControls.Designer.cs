@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Borrow
+namespace PersonalExpenseCreditTracker.Modules.Borrow
 {
     partial class AddBorrowControls
     {
@@ -95,7 +95,8 @@
             this.txtBorrowAddDescription.Multiline = true;
             this.txtBorrowAddDescription.Name = "txtBorrowAddDescription";
             this.txtBorrowAddDescription.Size = new System.Drawing.Size(354, 178);
-            this.txtBorrowAddDescription.TabIndex = 31;
+            this.txtBorrowAddDescription.TabIndex = 5;
+            this.txtBorrowAddDescription.TextChanged += new System.EventHandler(this.txtBorrowAddDescription_TextChanged);
             this.txtBorrowAddDescription.Enter += new System.EventHandler(this.txtBorrowAddDescription_Enter);
             this.txtBorrowAddDescription.Leave += new System.EventHandler(this.txtBorrowAddDescription_Leave);
             // 
@@ -127,7 +128,7 @@
             this.panelBorrowAddDeadlineAt.Location = new System.Drawing.Point(186, 333);
             this.panelBorrowAddDeadlineAt.Name = "panelBorrowAddDeadlineAt";
             this.panelBorrowAddDeadlineAt.Size = new System.Drawing.Size(354, 31);
-            this.panelBorrowAddDeadlineAt.TabIndex = 28;
+            this.panelBorrowAddDeadlineAt.TabIndex = 4;
             // 
             // txtBorrowAddDeadlineDatePicker
             // 
@@ -137,6 +138,7 @@
             this.txtBorrowAddDeadlineDatePicker.Name = "txtBorrowAddDeadlineDatePicker";
             this.txtBorrowAddDeadlineDatePicker.Size = new System.Drawing.Size(283, 23);
             this.txtBorrowAddDeadlineDatePicker.TabIndex = 2;
+            this.txtBorrowAddDeadlineDatePicker.Click += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_Click);
             this.txtBorrowAddDeadlineDatePicker.TextChanged += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_TextChanged);
             this.txtBorrowAddDeadlineDatePicker.Enter += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_Enter);
             this.txtBorrowAddDeadlineDatePicker.Leave += new System.EventHandler(this.txtBorrowAddDeadlineDatePicker_Leave);
@@ -181,7 +183,7 @@
             this.panel3.Location = new System.Drawing.Point(186, 270);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(354, 32);
-            this.panel3.TabIndex = 25;
+            this.panel3.TabIndex = 3;
             // 
             // txtBorrowAddAmount
             // 
@@ -190,6 +192,7 @@
             this.txtBorrowAddAmount.Name = "txtBorrowAddAmount";
             this.txtBorrowAddAmount.Size = new System.Drawing.Size(310, 23);
             this.txtBorrowAddAmount.TabIndex = 1;
+            this.txtBorrowAddAmount.TextChanged += new System.EventHandler(this.txtBorrowAddAmount_TextChanged);
             this.txtBorrowAddAmount.Enter += new System.EventHandler(this.txtBorrowAddAmount_Enter);
             this.txtBorrowAddAmount.Leave += new System.EventHandler(this.txtBorrowAddAmount_Leave);
             // 
@@ -266,7 +269,9 @@
             this.cmbBorrowPaymentType.Location = new System.Drawing.Point(186, 138);
             this.cmbBorrowPaymentType.Name = "cmbBorrowPaymentType";
             this.cmbBorrowPaymentType.Size = new System.Drawing.Size(354, 31);
-            this.cmbBorrowPaymentType.TabIndex = 17;
+            this.cmbBorrowPaymentType.TabIndex = 1;
+            this.cmbBorrowPaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbBorrowPaymentType_SelectedIndexChanged);
+            this.cmbBorrowPaymentType.TextChanged += new System.EventHandler(this.cmbBorrowPaymentType_TextChanged);
             this.cmbBorrowPaymentType.Enter += new System.EventHandler(this.cmbBorrowPaymentType_Enter);
             this.cmbBorrowPaymentType.Leave += new System.EventHandler(this.cmbBorrowPaymentType_Leave);
             // 
@@ -304,7 +309,9 @@
             this.cmbBorrowSelectPerson.Location = new System.Drawing.Point(186, 72);
             this.cmbBorrowSelectPerson.Name = "cmbBorrowSelectPerson";
             this.cmbBorrowSelectPerson.Size = new System.Drawing.Size(354, 31);
-            this.cmbBorrowSelectPerson.TabIndex = 14;
+            this.cmbBorrowSelectPerson.TabIndex = 0;
+            this.cmbBorrowSelectPerson.SelectedIndexChanged += new System.EventHandler(this.cmbBorrowSelectPerson_SelectedIndexChanged);
+            this.cmbBorrowSelectPerson.TextChanged += new System.EventHandler(this.cmbBorrowSelectPerson_TextChanged);
             this.cmbBorrowSelectPerson.Enter += new System.EventHandler(this.cmbBorrowSelectPerson_Enter);
             this.cmbBorrowSelectPerson.Leave += new System.EventHandler(this.cmbBorrowSelectPerson_Leave);
             // 
@@ -317,13 +324,13 @@
             this.btnBorrowAddSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnBorrowAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorrowAddSave.ForeColor = System.Drawing.Color.White;
-            this.btnBorrowAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnBorrowAddSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnBorrowAddSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorrowAddSave.Location = new System.Drawing.Point(370, 616);
+            this.btnBorrowAddSave.Location = new System.Drawing.Point(367, 616);
             this.btnBorrowAddSave.Name = "btnBorrowAddSave";
-            this.btnBorrowAddSave.Size = new System.Drawing.Size(177, 41);
+            this.btnBorrowAddSave.Size = new System.Drawing.Size(180, 41);
             this.btnBorrowAddSave.TabIndex = 8;
-            this.btnBorrowAddSave.Text = "  Save Borrow";
+            this.btnBorrowAddSave.Text = "Add Borrow";
             this.btnBorrowAddSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBorrowAddSave.UseVisualStyleBackColor = false;
             this.btnBorrowAddSave.Click += new System.EventHandler(this.btnBorrowAddSave_Click);
@@ -385,12 +392,13 @@
             this.pnlAddBorrowMainBody.Size = new System.Drawing.Size(568, 675);
             this.pnlAddBorrowMainBody.TabIndex = 1;
             this.pnlAddBorrowMainBody.Click += new System.EventHandler(this.pnlAddBorrowMainBody_Click);
+            this.pnlAddBorrowMainBody.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddBorrowMainBody_Paint);
             // 
             // pictureBox6
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
-            this.pictureBox6.Location = new System.Drawing.Point(500, 206);
+            this.pictureBox6.Location = new System.Drawing.Point(510, 206);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(25, 26);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -406,7 +414,7 @@
             this.txtBorrowStatus.Name = "txtBorrowStatus";
             this.txtBorrowStatus.ReadOnly = true;
             this.txtBorrowStatus.Size = new System.Drawing.Size(354, 30);
-            this.txtBorrowStatus.TabIndex = 35;
+            this.txtBorrowStatus.TabIndex = 2;
             this.txtBorrowStatus.Text = "  Pending";
             // 
             // btnBorrowAddClear
@@ -428,8 +436,8 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 601);
             this.panel2.Name = "panel2";
@@ -438,8 +446,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";

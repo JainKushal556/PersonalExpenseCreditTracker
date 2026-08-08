@@ -91,13 +91,13 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnSave.Location = new System.Drawing.Point(250, 404);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(180, 41);
             this.btnSave.TabIndex = 1;
-            this.btnSave.Text = " Save Category";
+            this.btnSave.Text = " Add Category";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);

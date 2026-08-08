@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +17,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         private List<CreditCategory> categoryList = new List<CreditCategory>();
         private List<CreditSubCategory> subCategoryList = new List<CreditSubCategory>();
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-        private int UserID = 11;
+        private int UserID = Session.LogedInUser.GetUserId();
         private List<int> expandedCategories = new List<int>();
         public CreditCategoryControls()
         {

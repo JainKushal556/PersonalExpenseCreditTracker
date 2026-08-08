@@ -30,13 +30,13 @@ namespace BLLayer.Credit
             if (result != CommonValidator.ValidationResult.Success)
                 return result;
 
-            // Payment Validation
-            result = CommonValidator.ValidatePayment(paymentId);
+            // Amount Validation
+            result = CommonValidator.ValidateAmount(amount);
             if (result != CommonValidator.ValidationResult.Success)
                 return result;
 
-            // Amount Validation
-            result = CommonValidator.ValidateAmount(amount);
+            // Payment Validation
+            result = CommonValidator.ValidatePayment(paymentId);
             if (result != CommonValidator.ValidationResult.Success)
                 return result;
 

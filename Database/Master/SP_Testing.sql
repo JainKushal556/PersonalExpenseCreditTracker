@@ -390,6 +390,17 @@ EXEC spGetNotesBetweenDates
 GO
 
 -- ==========================================================
+-- SP: spFilterNoteByDateRange
+-- From File: ✔️spFilterNoteByDateRange.sql
+-- ==========================================================
+EXEC spFilterNoteByDateRange
+    @UserID = '',
+    @FromDate = '',
+    @ToDate = ''
+
+GO
+
+-- ==========================================================
 -- SP: spInsertNote
 -- From File: ✔️spInsertNote.sql
 -- ==========================================================
@@ -893,4 +904,77 @@ GO
 EXEC spGetAllTaskPriorities
 
 GO
+
+-- ==========================================================
+-- SP: spGetExpenseSubCategoryByCategoryID
+-- From File: ✔️spGetExpenseSubCategoryByCategoryID.sql
+-- ==========================================================
+EXEC spGetExpenseSubCategoryByCategoryID
+    @CategoryID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spInsertExpenseByUserID
+-- From File: ✔️spInsertExpenseByUserID.sql
+-- ==========================================================
+EXEC spInsertExpenseByUserID
+    @UserID = '',
+    @CategoryID = '',
+    @SubCategoryID = '',
+    @Amount = '',
+    @Description = '',
+    @PaymentID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetAllTaskStatus
+-- From File: ✔️spGetAllTaskStatus.sql
+-- ==========================================================
+EXEC spGetAllTaskStatus
+
+GO
+
+-- ==========================================================
+-- SP: spGetAllNoteColors
+-- From File: ✔️spGetAllNoteColors.sql
+-- ==========================================================
+EXEC spGetAllNoteColors
+
+GO
+
+-- ==========================================================
+-- SP: spUpdateNoteColor
+-- From File: ✔️spUpdateNoteColor.sql
+-- ==========================================================
+EXEC spUpdateNoteColor
+    @UserID = '',
+    @NoteID = '',
+    @NoteColorID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spFilterNotesByColor
+-- From File: ✔️spFilterNotesByColor.sql
+-- ==========================================================
+EXEC spFilterNotesByColor
+    @UserID = '',
+    @NoteColorID = ''
+
+GO
+
+-- ==========================================================
+-- SP: spGetDuplicatePersonNumberByUserIDAndPhoneNumber
+-- From File: ✔️spGetDuplicatePersonNumberByUserIDAndPhoneNumber.sql
+-- ==========================================================
+EXEC spGetDuplicatePersonNumberByUserIDAndPhoneNumber
+    @UserID = 1,
+    @PersonID = -1,
+    @PhoneNumber = '01700000000'
+
+GO
+
+
 

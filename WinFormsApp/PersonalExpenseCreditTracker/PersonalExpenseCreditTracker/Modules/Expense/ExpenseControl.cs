@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,8 +9,8 @@ using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
-
 using System.Windows.Forms;
+using PersonalExpenseCreditTracker.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Expense
 {
@@ -28,6 +28,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         );
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllExpenseData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
         public ExpenseControl()
@@ -57,7 +58,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             pageSize = GetRowsPerPage();
             HideAllFilterPanels();
             DesignContextMenu();
-            int userID = 11;
+            int userID = Session.LogedInUser.GetUserId();
             LoadExpenseData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
 
@@ -213,7 +214,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             e.Handled = true;
         }
 
-        private void LoadExpenseData(int userID)
+        public void LoadExpenseData(int userID)
         {
             try
             {
@@ -242,8 +243,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                         }
 
                         AllExpenseData = dt;
+                        masterData = dt.Copy();
                         currentPage = 1;
                         ShowCurrentPage();
+                        UpdateExpenseSummaryCards();
                     }
                 }
             }
@@ -251,6 +254,145 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(spName, userID, paramName1, paramId1, paramName2, paramId2);
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
+        {
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(
+                spName,
+                userId,
+                paramName1,
+                paramId1,
+                paramName2,
+                paramId2);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, int paramId1, string paramName2, int paramId2)
+        {
+            DataTable dataTable = CommonUiFunction.RetrieveDataByUserIdAndFilterId(
+                spName,
+                userId,
+                paramName1,
+                paramId1,
+                paramName2,
+                paramId2);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count == 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        public Boolean LoadFilteredExpenseData(string spName, string paramName, int paramValue, int filterId)
+        {
+            int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+
+            DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(
+                spName,
+                userID,
+                paramName,
+                filterId);
+
+            if (dataTable.Columns.Contains("Message"))
+            {
+                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (dataTable.Rows.Count <= 0)
+            {
+                return false;
+            }
+
+            AllExpenseData = dataTable;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
+            return true;
+        }
+
+        private void UpdateExpenseSummaryCards()
+        {
+            if (AllExpenseData == null || AllExpenseData.Rows.Count == 0)
+            {
+                lblExpenseAmount.Text = "₹ 0";
+                lblTransactionAmount.Text = "0";
+                return;
+            }
+
+            decimal totalExpense = 0;
+
+            foreach (DataRow row in AllExpenseData.Rows)
+            {
+                if (row["Amount"] != DBNull.Value)
+                {
+                    totalExpense += Convert.ToDecimal(row["Amount"]);
+                }
+            }
+
+            lblExpenseAmount.Text = "₹ " + totalExpense.ToString("#,##0");
+            lblTransactionAmount.Text = AllExpenseData.Rows.Count.ToString();
         }
 
         private void ShowCurrentPage()
@@ -268,6 +410,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
 
             dgvExpenseDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvExpenseDataTable, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllExpenseData.Rows.Count;
@@ -395,10 +538,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         }
 
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
@@ -408,7 +547,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
-            pnlSearch.Visible = false;
             pnlAmountFilter.Visible = false;
             pnlSubCategoryFilter.Visible = false;
         }
@@ -436,24 +574,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
 
         private void tsmiDate_Click(object sender, EventArgs e)
         {
@@ -463,6 +584,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
+            cmbCategory.DroppedDown = true;
         }
         private void tsmiSubCategory_Click(object sender, EventArgs e)
         {
@@ -626,5 +748,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         }
 
         
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllExpenseData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
+            ShowCurrentPage();
+        }
+
     }
 }

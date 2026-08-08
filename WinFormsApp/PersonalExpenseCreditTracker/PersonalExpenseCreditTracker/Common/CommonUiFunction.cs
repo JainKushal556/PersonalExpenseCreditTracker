@@ -1,15 +1,28 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using BLLayer.Common;
 using System.Data;
+using System.Drawing;
 
 namespace PersonalExpenseCreditTracker.Common
 {
     public class CommonUiFunction
     {
+        private static string[] NonHighlightableColumns =
+        {
+            "colDescription",
+            "colReturnedAmount",
+            "colRemainingAmount",
+            "colDeadline"
+        };
+        
+        private static string dateColumn = "";
+
+
+
         // Helper method to load a ComboBox with data (with UserID)
         public static void LoadInComboBox(string spName, int userId, string initialText, ComboBox comboBox)
         {
@@ -24,11 +37,74 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.ValueMember = dataTable.Columns[0].ColumnName;
             comboBox.SelectedIndex = 0;
         }
-
-        // Helper method to load a ComboBox with data (with UserID)
-        public static void LoadInComboBox(string spName, string initialText, ComboBox comboBox,string paramName,int paramValue)
+        //Person
+        public static void LoadInComboBox(string spName, int userId, string initialText, string addNewText, ComboBox comboBox)
         {
-            DataTable dataTable = RetrieveListForComboBox(spName, paramName,paramValue);
+            DataTable dataTable = RetrieveListForComboBox(spName, userId);
+
+            // Initial Row
+            DataRow headerRow = dataTable.NewRow();
+            headerRow[0] = 0;
+            headerRow[1] = initialText;
+            dataTable.Rows.InsertAt(headerRow, 0);
+
+            // Add New Row
+            DataRow addNewRow = dataTable.NewRow();
+            addNewRow[0] = -99;
+            addNewRow[1] = addNewText;
+            dataTable.Rows.Add(addNewRow);
+
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = dataTable.Columns[1].ColumnName;
+            comboBox.ValueMember = dataTable.Columns[0].ColumnName;
+            comboBox.SelectedIndex = 0;
+
+            comboBox.ForeColor = System.Drawing.Color.Gray; 
+        }
+        // Helper method to load a ComboBox with data (with UserID)
+        public static void LoadInComboBox(string spName, string initialText, ComboBox comboBox, string paramName, int paramValue)
+        {
+            DataTable dataTable = RetrieveListForComboBox(spName, paramName, paramValue);
+            DataRow dataRow = dataTable.NewRow();
+            dataRow[0] = 0;
+            dataRow[1] = initialText;
+            dataTable.Rows.InsertAt(dataRow, 0);
+
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = dataTable.Columns[1].ColumnName;
+            comboBox.ValueMember = dataTable.Columns[0].ColumnName;
+
+            comboBox.SelectedIndex = 0;
+        }
+
+
+        //SubCetegory last index add
+        public static void LoadInComboBox(string spName, string initialText, string addNewText, ComboBox comboBox, string paramName, int paramValue)
+        {
+            DataTable dataTable = RetrieveListForComboBox(spName, paramName, paramValue);
+
+           
+            DataRow headerRow = dataTable.NewRow();
+            headerRow[0] = 0;
+            headerRow[1] = initialText;
+            dataTable.Rows.InsertAt(headerRow, 0);
+
+       
+            DataRow addNewRow = dataTable.NewRow();
+            addNewRow[0] = -99;
+            addNewRow[1] = addNewText;
+            dataTable.Rows.Add(addNewRow);
+
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = dataTable.Columns[1].ColumnName;
+            comboBox.ValueMember = dataTable.Columns[0].ColumnName;
+            comboBox.SelectedIndex = 0;
+        }
+
+        // Helper method to load a ComboBox with data (without UserID)
+        public static void LoadInComboBox(string spName, string initialText, ComboBox comboBox)
+        {
+            DataTable dataTable = RetrieveListForComboBox(spName);
             DataRow dataRow = dataTable.NewRow();
             dataRow[0] = 0;
             dataRow[1] = initialText;
@@ -39,14 +115,21 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.ValueMember = dataTable.Columns[0].ColumnName;
             comboBox.SelectedIndex = 0;
         }
-        // Helper method to load a ComboBox with data (without UserID)
-        public static void LoadInComboBox(string spName, string initialText, ComboBox comboBox)
-        {            
+
+        // Helper method to load a ComboBox with data (with out UserID)
+        public static void LoadInComboBox(string spName, string initialText, string lastText, ComboBox comboBox)
+        {
             DataTable dataTable = RetrieveListForComboBox(spName);
             DataRow dataRow = dataTable.NewRow();
             dataRow[0] = 0;
             dataRow[1] = initialText;
             dataTable.Rows.InsertAt(dataRow, 0);
+
+            DataRow addNewRow = dataTable.NewRow();
+            addNewRow[0] = -99; 
+            addNewRow[1] = lastText; 
+            dataTable.Rows.Add(addNewRow);
+
 
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = dataTable.Columns[1].ColumnName;
@@ -73,7 +156,7 @@ namespace PersonalExpenseCreditTracker.Common
         public static DataTable RetrieveListForComboBox(string spName, string paramName, int paramValue)
         {
             DataTable dataTable = null;
-            dataTable = CommonBllFunction.RetrieveListForComboBox(spName,paramName,paramValue);
+            dataTable = CommonBllFunction.RetrieveListForComboBox(spName, paramName, paramValue);
             return dataTable;
         }
 
@@ -123,6 +206,145 @@ namespace PersonalExpenseCreditTracker.Common
             DataTable dataTable = new DataTable();
             dataTable = CommonBllFunction.RetrieveDataByUserIdAndFilterId(spName, userId, paramName1, paramId1, paramName2, paramId2);
             return dataTable;
+        }
+
+        public static DataTable SearchDataInLentOrBorrow(DataTable masterTable, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim().Replace("'", "''");
+            if (masterTable == null) return null;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+            if (masterTable.Columns.Contains("LentAt"))
+                dateColumn = "LentAt";
+            else
+                dateColumn = "BorrowAt";
+            masterTable.DefaultView.RowFilter = string.Format(
+               "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
+               "Convert({1}, 'System.String') LIKE '%{0}%' OR " +
+               "PersonName LIKE '%{0}%' OR " +
+               "PaymentName LIKE '%{0}%' OR " +
+               "StatusName LIKE '%{0}%'",
+               search, dateColumn);
+            DataTable filteredTable = masterTable.DefaultView.ToTable();
+            return filteredTable;
+        }
+
+        public static DataTable SearchDataInExpenseOrCredit(DataTable masterTable, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim().Replace("'", "''");
+
+            if (masterTable == null) return null;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+            if (masterTable.Columns.Contains("ExpenseAt"))
+                dateColumn = "ExpenseAt";
+            else
+                dateColumn = "CreditAt";
+
+            
+
+            masterTable.DefaultView.RowFilter = string.Format(
+              "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
+              "Convert({1}, 'System.String') LIKE '%{0}%' OR " +
+              "CategoryName LIKE '%{0}%' OR " +
+              "PaymentName LIKE '%{0}%' OR " +
+              "SubCategoryName LIKE '%{0}%'",
+               search, dateColumn);
+
+         
+            DataTable filteredTable = masterTable.DefaultView.ToTable();
+
+            
+            return filteredTable;
+        }
+
+        public static void HighlightSearch(DataGridView dgv, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim();
+
+            // সব cell reset
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    cell.Style.BackColor = Color.White;
+                    cell.Style.ForeColor = Color.Black;
+                }
+            }
+
+            // Search empty হলে কিছু করবে না
+            if (string.IsNullOrWhiteSpace(search))
+                return;
+
+            // Match হওয়া cell highlight
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell.Value != null &&
+                        cell.Value.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        cell.Style.BackColor = Color.FromArgb(232, 240, 253);
+                        cell.Style.ForeColor = Color.FromArgb(25, 103, 210);
+                    }
+                }
+                foreach (string NonHighlightableColumn in NonHighlightableColumns)
+                {
+                    if (dgv.Columns.Contains(NonHighlightableColumn))
+                    {
+                        row.Cells[NonHighlightableColumn].Style.BackColor = Color.White;
+                        row.Cells[NonHighlightableColumn].Style.ForeColor = Color.Black;
+                    }
+                }
+            }
+        }
+        public static DataTable SearchDataInNote(DataTable masterTable, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim().Replace("'", "''");
+
+            if (masterTable == null) return null;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+
+            masterTable.DefaultView.RowFilter = string.Format(
+                "NoteTitle LIKE '%{0}%' OR " +
+                "Description LIKE '%{0}%' OR " +
+                "NotePriorityName LIKE '%{0}%'",
+                search);
+
+            DataTable filteredTable = masterTable.DefaultView.ToTable();
+            return filteredTable;
+        }
+
+        public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim().Replace("'", "''");
+
+            if (masterTable == null) return null;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+
+            masterTable.DefaultView.RowFilter = string.Format(
+                "TaskTitle LIKE '%{0}%' OR " +
+                "Description LIKE '%{0}%' OR " +
+                "TaskStatusName LIKE '%{0}%' OR " +
+                "TaskPriorityName LIKE '%{0}%'",
+                search);
+
+            DataTable filteredTable = masterTable.DefaultView.ToTable();
+            return filteredTable;
         }
     }
 }

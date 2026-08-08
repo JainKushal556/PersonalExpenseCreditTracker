@@ -9,13 +9,18 @@ namespace BLLayer.Borrow
     public class BorrowBLL
     {
         public int userId { get; set; }
-        public int lentId { get; set; }
+        public int borrowId { get; set; }
         public int personId { get; set; }
         public int paymentId { get; set; }
         public int statusId { get; set; }
         public string amount { get; set; }
+        public string paidAmount { get; set; }
+        public string remainingAmount { get; set; }
         public DateTime deadlineAt { get; set; }
         public string description { get; set; }
+        public string returnAmount { get; set; }
+        public DateTime returnDate { get; set; }
+
         private BorrowDAL borrowDal = new BorrowDAL();
         // Stores the validation result
         CommonValidator.ValidationResult result;
@@ -68,7 +73,7 @@ namespace BLLayer.Borrow
 
 
             borrowDal.userId = userId;
-            borrowDal.lentId = lentId;
+            borrowDal.borrowId = borrowId;
             borrowDal.personId = personId;
             borrowDal.paymentId = paymentId;
             borrowDal.statusId = statusId;
@@ -85,6 +90,60 @@ namespace BLLayer.Borrow
                 return CommonValidator.ValidationResult.StoreProcedureError;
             }
 
+        }
+
+        public CommonValidator.ValidationResult DataValidatorIntoPayBorrowBll()
+        {
+            //// Borrow ID Validation
+            //result = CommonValidator.ValidateBorrowId(borrowId);
+            //if (result != CommonValidator.ValidationResult.Success)
+            //{
+            //    return result;
+            //}
+
+            // Return Amount Validation
+            result = CommonValidator.ValidateAmount(returnAmount);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+            //Payment Validation
+            result = CommonValidator.ValidatePayment(paymentId);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            // Return Date Validation
+            result = CommonValidator.ValidateDeadline(returnDate);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            // Description Validation
+            result = CommonValidator.ValidateDescription(description);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            // DAL Properties
+            borrowDal.userId = userId;
+            borrowDal.borrowId = borrowId;
+            borrowDal.returnAmount = returnAmount;
+            borrowDal.paymentId = paymentId;
+            borrowDal.returnDate = returnDate;
+            borrowDal.description = description;
+
+            if (borrowDal.PayBorrow())
+            {
+                return CommonValidator.ValidationResult.Success;
+            }
+            else
+            {
+                return CommonValidator.ValidationResult.StoreProcedureError;
+            }
         }
     }
 }

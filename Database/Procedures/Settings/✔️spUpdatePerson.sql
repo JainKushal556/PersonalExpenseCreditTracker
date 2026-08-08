@@ -70,7 +70,7 @@ BEGIN
             AND PersonID <> @PersonID
         )
         BEGIN
-            SELECT 'Phone Number Already Exists' AS Message;
+            --SELECT 'Phone Number Already Exists' AS Message;
             RETURN;
         END
 
@@ -81,7 +81,7 @@ BEGIN
             Address = @Address
         WHERE PersonID = @PersonID AND UserID = @UserID;
 
-        SELECT 'Person Details Updated Successfully' AS Message;
+        --SELECT 'Person Details Updated Successfully' AS Message;
 
     END TRY
 

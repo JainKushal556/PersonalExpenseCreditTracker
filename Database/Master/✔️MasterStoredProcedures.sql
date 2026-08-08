@@ -18,7 +18,7 @@
 
 -- ==========================================================
 
-CREATE PROCEDURE spChangePassword  
+CREATE OR ALTER PROCEDURE spChangePassword  
   
     @UserID INT,  
     @OldPassword VARCHAR(MAX),  
@@ -94,7 +94,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteUserProfilePhotoByUserId
+CREATE OR ALTER PROCEDURE spDeleteUserProfilePhotoByUserId
     @UserID INT
 AS
 BEGIN
@@ -153,7 +153,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spForgetPassword  
+CREATE OR ALTER PROCEDURE spForgetPassword  
     @Email VARCHAR(100),  
     @PhoneNumber VARCHAR(15),  
     @NewPassword VARCHAR(MAX)  
@@ -219,14 +219,14 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetActiveUserDetails
+CREATE OR ALTER PROCEDURE spGetActiveUserDetails
 (
     @UserID INT
 )
 AS
 BEGIN
+    SET NOCOUNT OFF;
 
-    -- User Exists Check
     IF NOT EXISTS
     (
         SELECT 1
@@ -236,41 +236,41 @@ BEGIN
     BEGIN
         SELECT 'Invalid UserID' AS Message;
         RETURN;
-    END
+    END;
 
-
-    -- Active User Check
     IF NOT EXISTS
     (
         SELECT 1
         FROM tblUserAuthentication
         WHERE UserID = @UserID
-        AND Active = 1
+          AND Active = 1
     )
     BEGIN
         SELECT 'User Is Not Active' AS Message;
         RETURN;
-    END
+    END;
 
-
-    -- Active User Details
     SELECT
         U.UserID,
-        U.UserName,
+        P.FullName,
         P.ProfilePhoto,
         C.Email,
         C.PhoneNumber,
-        U.CreatedAt
+        U.CreatedAt AS MemberSince,
+        A.Active AS AccountStatus,
+        P.DOB,
+        G.GenderName AS Gender,
+        P.Address
     FROM tblUsers U
-
     LEFT JOIN tblUserProfile P
         ON U.UserID = P.UserID
-
     LEFT JOIN tblUserContact C
         ON U.UserID = C.UserID
-
+    LEFT JOIN tblUserAuthentication A
+        ON U.UserID = A.UserID
+    LEFT JOIN tblGender G
+        ON P.GenderID = G.GenderID
     WHERE U.UserID = @UserID;
-
 END;
 
 
@@ -284,7 +284,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spLoginUser    
+CREATE OR ALTER PROCEDURE spLoginUser    
  
     @Email VARCHAR(100),    
     @Password VARCHAR(MAX)    
@@ -341,7 +341,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spLogoutUser
+CREATE OR ALTER PROCEDURE spLogoutUser
     @UserID INT
 AS
 BEGIN
@@ -376,7 +376,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spRegisterUser    
+CREATE OR ALTER PROCEDURE spRegisterUser    
 
     @UserName VARCHAR(100),    
     @Email VARCHAR(100),    
@@ -460,7 +460,7 @@ BEGIN
         INSERT INTO tblUserProfile
         (
             UserID,
-            Name
+            FullName
         )
         VALUES
         (
@@ -529,7 +529,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateProfilePhoto    
+CREATE OR ALTER PROCEDURE spUpdateProfilePhoto    
     
     @UserID INT,    
     @ProfilePhoto VARBINARY(MAX)    
@@ -584,7 +584,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateUserEmail  
+CREATE OR ALTER PROCEDURE spUpdateUserEmail  
     @UserID INT,  
     @Email VARCHAR(150)  
 AS
@@ -659,7 +659,7 @@ GO
 -- ==========================================================
 
 
-CREATE PROCEDURE spUpdateUserName  
+CREATE OR ALTER PROCEDURE spUpdateUserName  
     @UserID INT,  
     @Name VARCHAR(100)  
 AS  
@@ -726,7 +726,7 @@ BEGIN
   
 
         UPDATE tblUserProfile  
-        SET Name = @Name  
+        SET FullName = @Name  
         WHERE UserID = @UserID;  
   
 
@@ -762,7 +762,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateUserPhoneNumber
+CREATE OR ALTER PROCEDURE spUpdateUserPhoneNumber
     @UserID INT,
     @PhoneNumber VARCHAR(15)
 AS
@@ -843,7 +843,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateUserProfile
+CREATE OR ALTER PROCEDURE spUpdateUserProfile
     @UserID INT,
     @Name VARCHAR(100),
     @Email VARCHAR(150),
@@ -949,7 +949,7 @@ END
         WHERE UserID = @UserID;
 
         UPDATE tblUserProfile
-        SET Name = @Name,
+        SET FullName = @Name,
             ProfilePhoto = @ProfilePhoto
         WHERE UserID = @UserID;
 
@@ -987,7 +987,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterCreditByAmountRange
+CREATE OR ALTER PROCEDURE spFilterCreditByAmountRange
 (
     @UserID INT,
     @MinAmount DECIMAL(10,2),
@@ -1055,7 +1055,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterCreditByCategory
+CREATE OR ALTER PROCEDURE spFilterCreditByCategory
 (
     @UserID INT,
     @CategoryID INT
@@ -1136,7 +1136,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterCreditByCategoryAndSubCategory
+CREATE OR ALTER PROCEDURE spFilterCreditByCategoryAndSubCategory
 (
     @UserID INT,
     @CategoryID INT,
@@ -1234,7 +1234,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterCreditByDateRange
+CREATE OR ALTER PROCEDURE spFilterCreditByDateRange
 (
   @UserID INT,
   @FromDate DATETIME,
@@ -1311,7 +1311,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetAllCreditCategory
+CREATE OR ALTER PROC spGetAllCreditCategory
 AS
 BEGIN
     BEGIN TRY
@@ -1339,7 +1339,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllCreditsByID
+CREATE OR ALTER PROCEDURE spGetAllCreditsByID
 (
     @UserID INT
 )
@@ -1406,7 +1406,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCategoryWiseCreditReport
+CREATE OR ALTER PROCEDURE spGetCategoryWiseCreditReport
 (
     @UserID INT
 )
@@ -1462,7 +1462,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetCreditSubCategoryByCategoryID
+CREATE OR ALTER PROC spGetCreditSubCategoryByCategoryID
 (
     @CategoryID INT
 )
@@ -1494,7 +1494,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetMonthlyCreditSummary
+CREATE OR ALTER PROCEDURE spGetMonthlyCreditSummary
 (
     @UserID INT
 )
@@ -1553,7 +1553,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTodayCredit
+CREATE OR ALTER PROCEDURE spGetTodayCredit
 (
     @UserID INT
 )
@@ -1622,7 +1622,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertCreditByUserID
+CREATE OR ALTER PROCEDURE spInsertCreditByUserID
 (
     @UserID INT,
     @CategoryID INT,
@@ -1731,7 +1731,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetUserDashboard
+CREATE OR ALTER PROCEDURE spGetUserDashboard
 
     @UserID INT
 
@@ -1813,7 +1813,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterExpenseByAmountRange
+CREATE OR ALTER PROCEDURE spFilterExpenseByAmountRange
 (
     @UserID INT,
     @MinAmount DECIMAL(10,2),
@@ -1881,7 +1881,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterExpenseByCategory
+CREATE OR ALTER PROCEDURE spFilterExpenseByCategory
 (
     @UserID INT,
     @CategoryID INT
@@ -1962,7 +1962,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterExpenseByCategoryAndSubCategory
+CREATE OR ALTER PROCEDURE spFilterExpenseByCategoryAndSubCategory
 (
     @UserID INT,
     @CategoryID INT,
@@ -2060,7 +2060,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterExpenseByDateRange
+CREATE OR ALTER PROCEDURE spFilterExpenseByDateRange
 (
   @UserID INT,
   @FromDate DATETIME,
@@ -2137,7 +2137,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllExpensesByID
+CREATE OR ALTER PROCEDURE spGetAllExpensesByID
 (
     @UserID INT
 )
@@ -2204,7 +2204,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCategoryWiseExpenseReport
+CREATE OR ALTER PROCEDURE spGetCategoryWiseExpenseReport
 (
     @UserID INT
 )
@@ -2261,7 +2261,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetMonthlyExpenseSummary
+CREATE OR ALTER PROCEDURE spGetMonthlyExpenseSummary
 (
     @UserID INT
 )
@@ -2319,7 +2319,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTodayExpense
+CREATE OR ALTER PROCEDURE spGetTodayExpense
 (
     @UserID INT
 )
@@ -2382,121 +2382,6 @@ GO
 GO
 
 
--- ==========================================================
-
--- SP: ✔️spInsertExpenseByUserID.sql
-
--- ==========================================================
-
-CREATE PROCEDURE spInsertExpenseByUserID
-(
-    @UserID INT,
-    @CategoryID INT,
-    @SubCategoryID INT,
-    @Amount DECIMAL(10,2),
-    @Description VARCHAR(MAX),
-    @PaymentID INT,
-    @ExpenseAt DATETIME
-)
-AS
-BEGIN
-
-    SET NOCOUNT OFF
-
-      IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblUserAuthentication UserAuthentication
-        INNER JOIN tblUsers Users
-            ON UserAuthentication.UserID = Users.UserID
-        WHERE Users.UserID = @UserID
-        AND UserAuthentication.Active = 1
-    )
-    BEGIN
-        SELECT 'Invalid or Inactive User' AS Message
-        RETURN
-    END
-
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblExpenseCategory
-        WHERE CategoryID = @CategoryID
-    )
-    BEGIN
-        SELECT 'Invalid CategoryID' AS Message
-        RETURN
-    END
-
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblExpenseSubCategory
-        WHERE SubCategoryID = @SubCategoryID
-        AND CategoryID = @CategoryID
-    )
-    BEGIN
-        SELECT 'SubCategory does not belong to selected Category' AS Message
-        RETURN
-    END
-
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblPaymentType
-        WHERE PaymentID = @PaymentID
-    )
-    BEGIN
-        SELECT 'Invalid PaymentID' AS Message
-        RETURN
-    END
-
-    IF @Amount <= 0
-    BEGIN
-        SELECT 'Amount must be greater than zero' AS Message
-        RETURN
-    END
-
-    SET @Description = LTRIM(RTRIM(@Description))
-
-    IF @Description IS NULL
-       OR @Description = ''
-    BEGIN
-        SELECT 'Description cannot be empty' AS Message
-        RETURN
-    END
-
-    IF @ExpenseAt > GETDATE()
-    BEGIN
-        SELECT 'Future date is not allowed' AS Message
-        RETURN
-    END
-
-    INSERT INTO tblExpense
-    (
-        UserID,
-        CategoryID,
-        SubCategoryID,
-        Amount,
-        Description,
-        PaymentID,
-        ExpenseAt
-    )
-    VALUES
-    (
-        @UserID,
-        @CategoryID,
-        @SubCategoryID,
-        @Amount,
-        @Description,
-        @PaymentID,
-        @ExpenseAt
-    )
-
-    SELECT 'Expense inserted successfully' AS Message
-
-END
-GO
 
 GO
 
@@ -2507,7 +2392,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetAllLent
+CREATE OR ALTER PROC spGetAllLent
 	@UserID INT
 AS
 BEGIN
@@ -2549,7 +2434,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetCompletedLentByStatusName
+CREATE OR ALTER PROC spGetCompletedLentByStatusName
 @UserID INT
 AS
 BEGIN
@@ -2589,7 +2474,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetLentPersonHistory
+CREATE OR ALTER PROC spGetLentPersonHistory
 @PersonID INT, @UserID INT
 AS
 BEGIN
@@ -2633,7 +2518,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE  spDeleteNote
+CREATE OR ALTER PROCEDURE  spDeleteNote
 (
 @UserID INT,
 @NoteID INT
@@ -2676,7 +2561,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE  spFilterNotesByPriority
+CREATE OR ALTER PROCEDURE  spFilterNotesByPriority
 
 @UserID INT,
 @PriorityID INT
@@ -2749,7 +2634,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllNotes
+CREATE OR ALTER PROCEDURE spGetAllNotes
 (
 @UserID INT
 )
@@ -2810,7 +2695,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE  spGetNotesBetweenDates
+CREATE OR ALTER PROCEDURE  spGetNotesBetweenDates
 
 @UserID INT,
 @FromDate DATE,
@@ -2879,11 +2764,104 @@ GO
 
 -- ==========================================================
 
+-- SP: ✔️spFilterNoteByDateRange.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spFilterNoteByDateRange
+    @UserID INT,
+    @FromDate DATETIME,
+    @ToDate DATETIME
+AS
+BEGIN
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'UserID Does Not Exists' AS Message;
+        RETURN;
+    END;
+
+
+    IF @FromDate > @ToDate
+    BEGIN
+        SELECT 'FromDate Cannot Be Greater Than ToDate' AS Message;
+        RETURN;
+    END;
+
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblNote
+        WHERE UserID = @UserID
+          AND CAST(CreatedAt AS DATE)
+              BETWEEN CAST(@FromDate AS DATE)
+              AND CAST(@ToDate AS DATE)
+    )
+    BEGIN
+        SELECT 'No Notes Found For This Date Range' AS Message;
+        RETURN;
+    END;
+
+
+    BEGIN TRY
+
+        SELECT
+            tblNote.NoteID,
+            tblNote.NotePriorityID,
+            tblNote.NoteColorID,
+
+            tblNoteColor.ColorName,
+            tblNoteColor.ColorHexCode,
+
+            tblNote.NoteTitle,
+            tblNote.Description,
+
+            tblNotePriorities.NotePriorityName,
+
+            tblNote.CreatedAt
+
+        FROM tblNote
+
+        LEFT JOIN tblNotePriorities
+            ON tblNote.NotePriorityID =
+               tblNotePriorities.NotePriorityID
+
+        LEFT JOIN tblNoteColor
+            ON tblNote.NoteColorID =
+               tblNoteColor.NoteColorID
+
+        WHERE tblNote.UserID = @UserID
+          AND CAST(tblNote.CreatedAt AS DATE)
+              BETWEEN CAST(@FromDate AS DATE)
+              AND CAST(@ToDate AS DATE)
+
+        ORDER BY tblNote.CreatedAt DESC;
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+
+END
+GO
+
+
+-- ==========================================================
+
 -- SP: ✔️spInsertNote.sql
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNote
+CREATE OR ALTER PROCEDURE spInsertNote
 
 @UserID INT,
 @PriorityID INT,
@@ -2974,7 +2952,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateNote
+CREATE OR ALTER PROCEDURE spUpdateNote
 (
 @UserID INT,
 @NoteID INT,
@@ -3059,7 +3037,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE  spUpdateNotePriority
+CREATE OR ALTER PROCEDURE  spUpdateNotePriority
 (
 @UserID INT,
 @NoteID INT,
@@ -3114,7 +3092,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllNoteColors
+CREATE OR ALTER PROCEDURE spGetAllNoteColors
 AS
 BEGIN
     BEGIN TRY
@@ -3139,7 +3117,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateNoteColor
+CREATE OR ALTER PROCEDURE spUpdateNoteColor
 (
 @UserID INT,
 @NoteID INT,
@@ -3194,7 +3172,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterNotesByColor
+CREATE OR ALTER PROCEDURE spFilterNotesByColor
 
 @UserID INT,
 @NoteColorID INT
@@ -3267,7 +3245,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteCreditCategoryByUserID
+CREATE OR ALTER PROCEDURE spDeleteCreditCategoryByUserID
 (
  @UserID INT,
  @CategoryID INT
@@ -3331,7 +3309,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteCreditSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spDeleteCreditSubCategoryByUserID
 (
  @UserID INT,
  @SubCategoryID INT
@@ -3401,7 +3379,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteExpenseCategoryByUserID
+CREATE OR ALTER PROCEDURE spDeleteExpenseCategoryByUserID
 (
  @UserID INT,
  @CategoryID INT
@@ -3471,7 +3449,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteExpenseSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spDeleteExpenseSubCategoryByUserID
 (
  @UserID INT,
  @SubCategoryID INT
@@ -3541,7 +3519,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllPaymentTypes
+CREATE OR ALTER PROCEDURE spGetAllPaymentTypes
 AS
 BEGIN
 
@@ -3575,7 +3553,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCreditCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetCreditCategoriesByUserID
 (
     @UserID INT
 )
@@ -3599,7 +3577,6 @@ BEGIN
     
     SELECT 
         CategoryID,
-        UserID,
         CategoryName,
         IsDefault,
         IsActive
@@ -3621,7 +3598,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCreditSubCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetCreditSubCategoriesByUserID
 (
     @UserID INT
 )
@@ -3668,7 +3645,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetExpenseCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetExpenseCategoriesByUserID
 (
     @UserID INT
 )
@@ -3692,7 +3669,6 @@ BEGIN
     
     SELECT 
         CategoryID,
-        UserID,
         CategoryName,
         IsDefault,
         IsActive
@@ -3714,7 +3690,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetExpenseSubCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetExpenseSubCategoriesByUserID
 (
     @UserID INT
 )
@@ -3761,7 +3737,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNewCreditCategoryByUserID
+CREATE OR ALTER PROCEDURE spInsertNewCreditCategoryByUserID
 (
    @UserID INT,
    @CategoryName VARCHAR(MAX)
@@ -3826,7 +3802,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNewCreditSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spInsertNewCreditSubCategoryByUserID
 (
    @UserID INT,
    @CategoryID INT,
@@ -3907,7 +3883,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNewExpenseCategoryByUserID
+CREATE OR ALTER PROCEDURE spInsertNewExpenseCategoryByUserID
 (
    @UserID INT,
    @CategoryName VARCHAR(MAX)
@@ -3972,7 +3948,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertNewExpenseSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spInsertNewExpenseSubCategoryByUserID
 (
    @UserID INT,
    @CategoryID INT,
@@ -4053,7 +4029,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateCreditCategoryByUserID
+CREATE OR ALTER PROCEDURE spUpdateCreditCategoryByUserID
 (
   @UserID INT,
   @CategoryID INT,
@@ -4150,7 +4126,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateCreditSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spUpdateCreditSubCategoryByUserID
 (
   @UserID INT,
   @SubCategoryID INT,
@@ -4247,7 +4223,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateExpenseCategoryByUserID
+CREATE OR ALTER PROCEDURE spUpdateExpenseCategoryByUserID
 (
   @UserID INT,
   @CategoryID INT,
@@ -4344,7 +4320,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateExpenseSubCategoryByUserID
+CREATE OR ALTER PROCEDURE spUpdateExpenseSubCategoryByUserID
 (
   @UserID INT,
   @SubCategoryID INT,
@@ -4441,7 +4417,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spDeleteTask
+CREATE OR ALTER PROCEDURE spDeleteTask
     @TaskID INT
 AS
 BEGIN
@@ -4485,7 +4461,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterTasksByStatus
+CREATE OR ALTER PROCEDURE spFilterTasksByStatus
     @UserID INT,
     @TaskStatusID INT
 AS
@@ -4572,7 +4548,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterTasksByPriority
+CREATE OR ALTER PROCEDURE spFilterTasksByPriority
     @UserID INT,
     @PriorityID INT
 AS
@@ -4664,7 +4640,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllTasks  
+CREATE OR ALTER PROCEDURE spGetAllTasks  
     @UserID INT  
 AS  
 BEGIN  
@@ -4737,7 +4713,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCompletedTasks
+CREATE OR ALTER PROCEDURE spGetCompletedTasks
     @UserID INT
 AS
 BEGIN
@@ -4809,7 +4785,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetPendingTasks
+CREATE OR ALTER PROCEDURE spGetPendingTasks
     @UserID INT
 AS
 BEGIN
@@ -4881,7 +4857,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTasksBetweenDates
+CREATE OR ALTER PROCEDURE spGetTasksBetweenDates
 (
     @UserID INT,
     @FromDate DATE,
@@ -4965,7 +4941,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTasksBetweenCreatedDates
+CREATE OR ALTER PROCEDURE spGetTasksBetweenCreatedDates
 (
     @UserID INT,
     @FromDate DATE,
@@ -5051,7 +5027,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetUpcomingTaskReminders
+CREATE OR ALTER PROCEDURE spGetUpcomingTaskReminders
 
     @UserID INT
 
@@ -5128,7 +5104,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spInsertTask  
+CREATE OR ALTER PROCEDURE spInsertTask  
     @UserID INT,  
     @PriorityID INT,  
     @TaskTitle VARCHAR(150),  
@@ -5235,7 +5211,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateTask
+CREATE OR ALTER PROCEDURE spUpdateTask
     @UserID INT,
     @TaskID INT,
     @PriorityID INT,
@@ -5357,7 +5333,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spUpdateTaskStatus
+CREATE OR ALTER PROCEDURE spUpdateTaskStatus
     @TaskID INT,
     @TaskStatusID INT
 AS
@@ -5428,7 +5404,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetAllPersons
+CREATE OR ALTER PROC spGetAllPersons
 @UserID INT
 AS
 BEGIN
@@ -5466,7 +5442,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetPendingLentByStatusName
+CREATE OR ALTER PROC spGetPendingLentByStatusName
 @UserID INT
 AS
 BEGIN
@@ -5510,7 +5486,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spGetUpcomingLentReminders
+CREATE OR ALTER PROC spGetUpcomingLentReminders
     @UserID INT
 AS
 BEGIN
@@ -5602,7 +5578,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spInsertLent
+CREATE OR ALTER PROC spInsertLent
 	@UserID INT,
 	@PersonID INT,
 	@PaymentID INT,
@@ -5758,7 +5734,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spInsertPerson
+CREATE OR ALTER PROC spInsertPerson
 (
     @UserID INT,
     @PersonName VARCHAR(100),
@@ -5847,139 +5823,186 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spReturnLentByReturnAmount
-@LentID INT, @PaymentID INT, @ReturnedAmount DECIMAL(10,2), @Description VARCHAR(MAX)
+CREATE OR ALTER PROCEDURE spReturnLentByReturnAmount
+(
+    @LentID INT,
+    @PaymentID INT,
+    @ReturnedAmount DECIMAL(10,2),
+    @Description VARCHAR(MAX)
+)
 AS
 BEGIN
-	DECLARE @TotalAmount DECIMAL(10,2);
-	DECLARE @RemainingAmount DECIMAL(10,2);
-	DECLARE @NewRemainingAmount DECIMAL(10,2);
-	DECLARE @NewReturnedAmount DECIMAL(10,2);
-	DECLARE @OldReturnedAmount DECIMAL(10,2);
-	DECLARE @StatusID INT;
-	DECLARE @UserID INT;
-	DECLARE @CategoryID INT;
-	DECLARE @SubCategoryID INT;
+    DECLARE @TotalAmount DECIMAL(10,2);
+    DECLARE @RemainingAmount DECIMAL(10,2);
+    DECLARE @NewRemainingAmount DECIMAL(10,2);
+    DECLARE @NewReturnedAmount DECIMAL(10,2);
+    DECLARE @OldReturnedAmount DECIMAL(10,2);
+    DECLARE @StatusID INT;
+    DECLARE @UserID INT;
+    DECLARE @CategoryID INT;
+    DECLARE @SubCategoryID INT;
 
-	BEGIN TRY
-		BEGIN TRANSACTION
-			----------------------------All Validation-----------------------------------------
-			IF NOT EXISTS (SELECT 1 FROM tblLent WHERE LentID = @LentID)
-			BEGIN
-				SELECT 'Invalid LentID!!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+    BEGIN TRY
+        BEGIN TRANSACTION
 
-			IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID = @PaymentID)
-			BEGIN
-				SELECT 'Invalid PaymentID!!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+        -------------------------------------------------
+        -- Validation
+        -------------------------------------------------
 
-			IF @ReturnedAmount <= 0
-			BEGIN
-				SELECT 'Returned Amount Must Be Greater Than 0!' AS MESSAGE
-				ROLLBACK TRANSACTION
-				RETURN
-			END
+        IF NOT EXISTS (SELECT 1 FROM tblLent WHERE LentID=@LentID)
+        BEGIN
+            SELECT 'Invalid LentID' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			----------------------------All Validation-----------------------------------------
-			
+        IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID=@PaymentID)
+        BEGIN
+            SELECT 'Invalid PaymentID' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			--Get Amount & RemainingAmount
-			SELECT @TotalAmount = Amount,
-			@RemainingAmount = RemainingAmount,
-			@OldReturnedAmount = ReturnedAmount,
-			@UserID = UserID
-			FROM tblLent
-			WHERE LentID = @LentID;
+        IF @ReturnedAmount IS NULL OR @ReturnedAmount<=0
+        BEGIN
+            SELECT 'Returned Amount Must Be Greater Than 0' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			--IF RemainingAmount is NULL THEN @RemainingAmount = @TotalAmount
-			IF @RemainingAmount is NULL
-			BEGIN
-				SET @RemainingAmount = @TotalAmount;
-			END
+        IF @Description IS NULL
+            SET @Description='';
 
+        -------------------------------------------------
+        -- Get Lent Details
+        -------------------------------------------------
 
-			--Calculating  New RemainingAmount
-			SET @NewRemainingAmount = @RemainingAmount - @ReturnedAmount;
+        SELECT
+            @TotalAmount=Amount,
+            @RemainingAmount=RemainingAmount,
+            @OldReturnedAmount=ISNULL(ReturnedAmount,0),
+            @UserID=UserID
+        FROM tblLent
+        WHERE LentID=@LentID;
 
-			--Calculate Total Returned Amount
-			SET @NewReturnedAmount = @ReturnedAmount + @OldReturnedAmount;
+        IF @TotalAmount IS NULL
+        BEGIN
+            SELECT 'Amount Not Found' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			SELECT @SubCategoryID = SubCategoryID,
-			@CategoryID = CategoryID
-			FROM tblCreditSubCategory
-			WHERE SubCategoryName = 'Lent Returned';
-             
-            IF @CategoryID IS NULL OR @SubCategoryID IS NULL
-            BEGIN
-            SELECT 'Lent Returned Credit Category/SubCategory Not Found' AS Message
-            ROLLBACK TRANSACTION
-            RETURN
-            END
+        SET @RemainingAmount=ISNULL(@RemainingAmount,@TotalAmount);
 
-			IF @NewRemainingAmount = 0
-			BEGIN
-				--Get 'Complete' StatusName ID
-				SELECT @StatusID = StatusID FROM tblLentBorrowStatus
-				WHERE StatusName = 'Paid';
+        -------------------------------------------------
+        -- Calculate
+        -------------------------------------------------
 
-				--Update Lent Table Data
-				UPDATE tblLent
-				SET RemainingAmount = 0,
-				ReturnedAmount = @NewReturnedAmount,
-				StatusID = @StatusID
-				WHERE LentID = @LentID;
+        SET @NewRemainingAmount=@RemainingAmount-@ReturnedAmount;
+        SET @NewReturnedAmount=@OldReturnedAmount+@ReturnedAmount;
 
-			END
-			ELSE IF @NewRemainingAmount > 0
-			BEGIN
-				--Get 'Pending' StatusName ID
-				SELECT @StatusID = StatusID FROM tblLentBorrowStatus
-				WHERE StatusName = 'Pending';
+        IF @NewRemainingAmount<0
+        BEGIN
+            RAISERROR('Returned amount exceeds remaining amount.',16,1);
+        END
 
-				--Update Lent Table Data
-				UPDATE tblLent
-				SET RemainingAmount = @NewRemainingAmount,
-				ReturnedAmount = @NewReturnedAmount,
-				StatusID = @StatusID
-				WHERE LentID = @LentID;
+        -------------------------------------------------
+        -- Category Lookup
+        -------------------------------------------------
 
-			END
-			ELSE
-			BEGIN
-				RAISERROR('Returned amount exceeds remaining amount.',16,1);
-			END
+        SELECT
+            @CategoryID=CategoryID,
+            @SubCategoryID=SubCategoryID
+        FROM tblCreditSubCategory
+        WHERE SubCategoryName='Lent Returned';
 
-			--Data Insert On Credit Table
-				INSERT INTO tblCredit(
-					UserID,
-					CategoryID,
-					SubCategoryID,
-					PaymentID,
-					Amount,
-					Description
-					)
-				VALUES(
-					@UserID, 
-					@CategoryID,
-					@SubCategoryID,
-					@PaymentID,
-					@ReturnedAmount,
-					@Description
-					);
+        IF @CategoryID IS NULL OR @SubCategoryID IS NULL
+        BEGIN
+            SELECT 'Lent Returned Credit Category/SubCategory Not Found' AS Message;
+            ROLLBACK;
+            RETURN;
+        END
 
-			COMMIT TRANSACTION
-			SELECT 'Lent Returned Successfully' AS MESSAGE
-		END TRY
-		BEGIN CATCH
-			ROLLBACK TRANSACTION
-			SELECT
-				ERROR_MESSAGE() AS ErrorMessage
-		END CATCH
+        -------------------------------------------------
+        -- Status
+        -------------------------------------------------
+
+        IF @NewRemainingAmount=0
+        BEGIN
+            SELECT @StatusID=StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName='Paid';
+        END
+        ELSE
+        BEGIN
+            SELECT @StatusID=StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName='Partially Paid';
+        END
+
+        -------------------------------------------------
+        -- Update Lent
+        -------------------------------------------------
+
+        UPDATE tblLent
+        SET
+            RemainingAmount=@NewRemainingAmount,
+            ReturnedAmount=@NewReturnedAmount,
+            StatusID=@StatusID
+        WHERE LentID=@LentID;
+
+        IF @@ROWCOUNT=0
+        BEGIN
+            ROLLBACK;
+            RETURN;
+        END
+
+        -------------------------------------------------
+        -- Insert Credit
+        -------------------------------------------------
+
+        INSERT INTO tblCredit
+        (
+            UserID,
+            CategoryID,
+            SubCategoryID,
+            PaymentID,
+            Amount,
+            Description
+        )
+        VALUES
+        (
+            @UserID,
+            @CategoryID,
+            @SubCategoryID,
+            @PaymentID,
+            @ReturnedAmount,
+            @Description
+        );
+
+        IF @@ROWCOUNT=0
+        BEGIN
+            ROLLBACK;
+            RETURN;
+        END
+
+        COMMIT;
+
+        IF @NewRemainingAmount=0
+            SELECT 'Lent Fully Returned Successfully' AS Message;
+        ELSE
+            SELECT 'Lent Partially Returned Successfully' AS Message;
+
+    END TRY
+
+    BEGIN CATCH
+
+        IF @@TRANCOUNT>0
+            ROLLBACK;
+
+        SELECT ERROR_MESSAGE() AS ErrorMessage;
+
+    END CATCH
 END
 GO
 
@@ -5988,7 +6011,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spFilterLentByStatus
+CREATE OR ALTER PROCEDURE spFilterLentByStatus
     @UserID INT,
     @StatusID INT
 AS
@@ -6067,7 +6090,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROC spUpdatePerson
+CREATE OR ALTER PROC spUpdatePerson
 (
     @UserID INT,
     @PersonID INT,
@@ -6167,7 +6190,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetUpcomingBorrowReminders
+CREATE OR ALTER PROCEDURE spGetUpcomingBorrowReminders
 (
     @UserID INT
 )
@@ -6301,7 +6324,7 @@ GO
 -- SP: spGetOverduedBorrow
 -- From File: ??spGetOverduedBorrow.sql
 -- ==========================================================
-CREATE PROCEDURE spGetOverduedBorrow
+CREATE OR ALTER PROCEDURE spGetOverduedBorrow
 (
     @UserID INT
 )
@@ -6403,7 +6426,7 @@ GO
 -- SP: spGetPendingBorrow
 -- From File: ??spGetPendingBorrow.sql
 -- ==========================================================
-CREATE PROCEDURE spGetPendingBorrow
+CREATE OR ALTER PROCEDURE spGetPendingBorrow
 (
     @UserID INT,
     @PersonID INT = NULL,
@@ -6538,7 +6561,7 @@ GO
 -- SP: spInsertBorrow
 -- From File: ??spInsertBorrow.sql
 -- ==========================================================
-CREATE PROCEDURE spInsertBorrow
+CREATE OR ALTER PROCEDURE spInsertBorrow
 (
     @UserID INT,
     @PersonID INT,
@@ -6787,7 +6810,7 @@ GO
 -- SP: spUpdateOverdueStatus
 -- From File: ??spUpdateOverdueStatus.sql
 -- ==========================================================
-CREATE PROCEDURE spUpdateOverdueStatus
+CREATE OR ALTER PROCEDURE spUpdateOverdueStatus
 AS
 BEGIN
 
@@ -6836,7 +6859,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllBorrow
+CREATE OR ALTER PROCEDURE spGetAllBorrow
 (
     @UserID INT
 )
@@ -6915,7 +6938,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetBorrowPersonHistory
+CREATE OR ALTER PROCEDURE spGetBorrowPersonHistory
 (
     @PersonID INT,
     @UserID INT
@@ -6986,7 +7009,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetCompletedBorrow
+CREATE OR ALTER PROCEDURE spGetCompletedBorrow
 (
     @UserID INT
 )
@@ -7089,7 +7112,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetTotalBorrowByPerson
+CREATE OR ALTER PROCEDURE spGetTotalBorrowByPerson
 (
     @UserID INT,
     @PersonID INT
@@ -7194,58 +7217,50 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spPayBorrow
+CREATE OR ALTER PROCEDURE spPayBorrow
 (
     @BorrowID INT,
+    @PaymentID INT,
     @PaidAmount DECIMAL(10,2),
-    @PaymentName VARCHAR(100)
+    @Description VARCHAR(MAX)
 )
 AS
 BEGIN
+    DECLARE @UserID INT;
+    DECLARE @TotalAmount DECIMAL(10,2);
+    DECLARE @RemainingAmount DECIMAL(10,2);
+    DECLARE @OldPaidAmount DECIMAL(10,2);
+    DECLARE @NewPaidAmount DECIMAL(10,2);
+    DECLARE @NewRemainingAmount DECIMAL(10,2);
+    DECLARE @StatusID INT;
+    DECLARE @CategoryID INT;
+    DECLARE @SubCategoryID INT;
 
     BEGIN TRY
-
-        DECLARE @UserID INT;
-        DECLARE @RemainingAmount DECIMAL(10,2);
-        DECLARE @NewRemainingAmount DECIMAL(10,2);
-
-        DECLARE @PaymentID INT;
-        DECLARE @StatusID INT;
-        DECLARE @CategoryID INT;
-        DECLARE @SubCategoryID INT;
+        BEGIN TRANSACTION
 
         -------------------------------------------------
         -- Validation
         -------------------------------------------------
 
-        IF @BorrowID IS NULL OR @BorrowID <= 0
+        IF NOT EXISTS (SELECT 1 FROM tblBorrow WHERE BorrowID = @BorrowID)
         BEGIN
-            SELECT 'Invalid BorrowID' AS Message;
+            SELECT 'Invalid BorrowID!!' AS Message;
+            ROLLBACK TRANSACTION;
             RETURN;
         END
 
-        IF @PaidAmount IS NULL OR @PaidAmount <= 0
+        IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentID = @PaymentID)
         BEGIN
-            SELECT 'Invalid Paid Amount' AS Message;
+            SELECT 'Invalid PaymentID!!' AS Message;
+            ROLLBACK TRANSACTION;
             RETURN;
         END
 
-        IF @PaymentName IS NULL OR LTRIM(RTRIM(@PaymentName)) = ''
+        IF @PaidAmount <= 0
         BEGIN
-            SELECT 'Payment Name required' AS Message;
-            RETURN;
-        END
-
-        -------------------------------------------------
-        -- Borrow Exists Check
-        -------------------------------------------------
-
-        IF NOT EXISTS
-        (
-            SELECT 1 FROM tblBorrow WHERE BorrowID = @BorrowID
-        )
-        BEGIN
-            SELECT 'Borrow record not found' AS Message;
+            SELECT 'Paid Amount Must Be Greater Than 0!' AS Message;
+            ROLLBACK TRANSACTION;
             RETURN;
         END
 
@@ -7255,80 +7270,73 @@ BEGIN
 
         SELECT
             @UserID = UserID,
-            @RemainingAmount = RemainingAmount
+            @TotalAmount = Amount,
+            @RemainingAmount = RemainingAmount,
+            @OldPaidAmount = ISNULL(PaidAmount,0)
         FROM tblBorrow
         WHERE BorrowID = @BorrowID;
 
+        SET @RemainingAmount = ISNULL(@RemainingAmount, @TotalAmount);
+
         -------------------------------------------------
-        -- Over Payment Check
+        -- Calculate Amount
         -------------------------------------------------
 
-        IF @PaidAmount > @RemainingAmount
+        SET @NewRemainingAmount = @RemainingAmount - @PaidAmount;
+        SET @NewPaidAmount = @OldPaidAmount + @PaidAmount;
+
+        IF @NewRemainingAmount < 0
         BEGIN
-            SELECT 'Paid amount exceeds remaining balance' AS Message;
-            RETURN;
+            RAISERROR('Paid amount exceeds remaining amount.',16,1);
         END
 
         -------------------------------------------------
-        -- Payment Lookup
+        -- Category & SubCategory
         -------------------------------------------------
 
-        SELECT @PaymentID = PaymentID
-        FROM tblPaymentType
-        WHERE LTRIM(RTRIM(PaymentName)) = LTRIM(RTRIM(@PaymentName));
-
-        IF @PaymentID IS NULL
-        BEGIN
-            SELECT 'Invalid Payment Name' AS Message;
-            RETURN;
-        END
-
-        -------------------------------------------------
-        -- Status Lookup
-        -------------------------------------------------
-
-        SELECT @StatusID = StatusID
-        FROM tblLentBorrowStatus
-        WHERE StatusName =
-            CASE 
-                WHEN (@RemainingAmount - @PaidAmount) = 0 THEN 'Paid'
-                ELSE 'Partially Paid'
-            END;
-
-        IF @StatusID IS NULL
-        BEGIN
-            SELECT 'Status not found' AS Message;
-            RETURN;
-        END
-
-        -------------------------------------------------
-        -- Expense Category Lookup
-        -------------------------------------------------
-
-        SELECT @CategoryID = CategoryID
-        FROM tblExpenseCategory
-        WHERE CategoryName = 'Borrow';
-
-        SELECT @SubCategoryID = SubCategoryID
+        SELECT
+            @CategoryID = CategoryID,
+            @SubCategoryID = SubCategoryID
         FROM tblExpenseSubCategory
-        WHERE SubCategoryName = 'Borrow Returned'
-          AND CategoryID = @CategoryID;
+        WHERE SubCategoryName = 'Borrow Returned';
+
+        IF @CategoryID IS NULL OR @SubCategoryID IS NULL
+        BEGIN
+            SELECT 'Borrow Returned Expense Category/SubCategory Not Found' AS Message;
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
 
         -------------------------------------------------
-        -- Transaction Start
+        -- Status Update
         -------------------------------------------------
 
-        BEGIN TRANSACTION;
+        IF @NewRemainingAmount = @TotalAmount
+        BEGIN
+            SELECT @StatusID = StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName = 'Pending';
+        END
+        ELSE IF @NewRemainingAmount = 0
+        BEGIN
+            SELECT @StatusID = StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName = 'Paid';
+        END
+        ELSE
+        BEGIN
+            SELECT @StatusID = StatusID
+            FROM tblLentBorrowStatus
+            WHERE StatusName = 'Partially Paid';
+        END
 
         -------------------------------------------------
         -- Update Borrow
         -------------------------------------------------
 
-        SET @NewRemainingAmount = @RemainingAmount - @PaidAmount;
-
         UPDATE tblBorrow
         SET
-            PaidAmount = PaidAmount + @PaidAmount,
+            PaidAmount = @NewPaidAmount,
             RemainingAmount = @NewRemainingAmount,
             StatusID = @StatusID
         WHERE BorrowID = @BorrowID;
@@ -7354,24 +7362,13 @@ BEGIN
             @SubCategoryID,
             @PaymentID,
             @PaidAmount,
-            'Borrow repayment payment',
+            @Description,
             GETDATE()
         );
 
-        -------------------------------------------------
-        -- Commit
-        -------------------------------------------------
-
         COMMIT TRANSACTION;
 
-        -------------------------------------------------
-        -- Result Output (no RETURN)
-        -------------------------------------------------
-
-        IF @NewRemainingAmount = 0
-            SELECT 'Fully Paid' AS Message, 1 AS Result;
-        ELSE
-            SELECT 'Partially Paid' AS Message, 2 AS Result;
+        SELECT 'Borrow Paid Successfully' AS Message;
 
     END TRY
 
@@ -7380,12 +7377,10 @@ BEGIN
         IF @@TRANCOUNT > 0
             ROLLBACK TRANSACTION;
 
-        SELECT ERROR_MESSAGE() AS Message, 0 AS Result;
+        SELECT ERROR_MESSAGE() AS ErrorMessage;
 
     END CATCH
-
-END;
-
+END
 GO
 
 
@@ -7395,7 +7390,7 @@ GO
 
 -- ==========================================================
 
-CREATE PROCEDURE spGetAllLentBorrowStatus
+CREATE OR ALTER PROCEDURE spGetAllLentBorrowStatus
 AS
 BEGIN
 	BEGIN TRY
@@ -7416,7 +7411,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterLentByAmountRange.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterLentByAmountRange
+CREATE OR ALTER PROCEDURE spFilterLentByAmountRange
     @UserID INT,
     @MinAmount DECIMAL(10,2),
     @MaxAmount DECIMAL(10,2)
@@ -7481,7 +7476,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterLentByDateRange.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterLentByDateRange
+CREATE OR ALTER PROCEDURE spFilterLentByDateRange
     @UserID INT,
     @FromDate DATETIME,
     @ToDate DATETIME
@@ -7548,7 +7543,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterLentByPerson.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterLentByPerson
+CREATE OR ALTER PROCEDURE spFilterLentByPerson
     @UserID INT,
     @PersonID INT
 AS
@@ -7618,7 +7613,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterLentByPaymentMethod.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterLentByPaymentMethod
+CREATE OR ALTER PROCEDURE spFilterLentByPaymentMethod
     @UserID INT,
     @PaymentID INT
 AS
@@ -7687,7 +7682,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByDateRange.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByDateRange
+CREATE OR ALTER PROCEDURE spFilterBorrowByDateRange
     @UserID INT,
     @FromDate DATETIME,
     @ToDate DATETIME
@@ -7747,7 +7742,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByAmountRange.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByAmountRange
+CREATE OR ALTER PROCEDURE spFilterBorrowByAmountRange
     @UserID INT,
     @MinAmount DECIMAL(10,2),
     @MaxAmount DECIMAL(10,2)
@@ -7810,7 +7805,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByPerson.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByPerson
+CREATE OR ALTER PROCEDURE spFilterBorrowByPerson
     @UserID INT,
     @PersonID INT
 AS
@@ -7870,7 +7865,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByStatus.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByStatus
+CREATE OR ALTER PROCEDURE spFilterBorrowByStatus
     @UserID INT,
     @StatusID INT
 AS
@@ -7929,7 +7924,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spFilterBorrowByPaymentMethod.sql
 -- ==========================================================
-CREATE PROCEDURE spFilterBorrowByPaymentMethod
+CREATE OR ALTER PROCEDURE spFilterBorrowByPaymentMethod
     @UserID INT,
     @PaymentID INT
 AS
@@ -7989,7 +7984,7 @@ GO
 -- ==========================================================
 -- SP: ✔️spGetAllTaskPriorities.sql
 -- ==========================================================
-CREATE PROCEDURE spGetAllTaskPriorities
+CREATE OR ALTER PROCEDURE spGetAllTaskPriorities
 AS
 BEGIN
 
@@ -8013,5 +8008,444 @@ BEGIN
 
 END;
 GO
+
+-- ==========================================================
+-- SP: ✔️spGetExpenseSubCategoryByCategoryID.sql
+-- ==========================================================
+CREATE OR ALTER PROCEDURE spGetExpenseSubCategoryByCategoryID
+(
+    @CategoryID INT
+)
+AS
+BEGIN
+    BEGIN TRY
+
+        -- Get Expense Sub Categories by CategoryID
+        SELECT
+            SubCategoryID,
+            SubCategoryName
+        FROM tblExpenseSubCategory
+        WHERE CategoryID = @CategoryID
+        ORDER BY SubCategoryName ASC;
+
+    END TRY
+    BEGIN CATCH
+
+        SELECT ERROR_MESSAGE() AS Message;
+
+    END CATCH
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spInsertExpenseByUserID.sql
+-- ==========================================================
+CREATE OR ALTER PROCEDURE spInsertExpenseByUserID
+(
+    @UserID INT,
+    @CategoryID INT,
+    @SubCategoryID INT,
+    @Amount DECIMAL(10,2),
+    @Description VARCHAR(MAX),
+    @PaymentID INT
+)
+AS
+BEGIN
+    SET NOCOUNT OFF;
+
+    -- Check User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication UA
+        INNER JOIN tblUsers U
+            ON UA.UserID = U.UserID
+        WHERE U.UserID = @UserID
+          AND UA.Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
+    END
+
+    -- Check Category
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseCategory
+        WHERE CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'Invalid CategoryID' AS Message;
+        RETURN;
+    END
+
+    -- Check SubCategory
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpenseSubCategory
+        WHERE SubCategoryID = @SubCategoryID
+          AND CategoryID = @CategoryID
+    )
+    BEGIN
+        SELECT 'SubCategory does not belong to selected Category' AS Message;
+        RETURN;
+    END
+
+    -- Check Payment
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblPaymentType
+        WHERE PaymentID = @PaymentID
+    )
+    BEGIN
+        SELECT 'Invalid PaymentID' AS Message;
+        RETURN;
+    END
+
+    -- Check Amount
+    IF @Amount <= 0
+    BEGIN
+        SELECT 'Amount must be greater than zero' AS Message;
+        RETURN;
+    END
+
+    -- Check Description
+    SET @Description = LTRIM(RTRIM(@Description));
+
+    IF @Description IS NULL OR @Description = ''
+    BEGIN
+        SELECT 'Description cannot be empty' AS Message;
+        RETURN;
+    END
+
+    -- Insert
+    INSERT INTO tblExpense
+    (
+        UserID,
+        CategoryID,
+        SubCategoryID,
+        Amount,
+        Description,
+        PaymentID
+    )
+    VALUES
+    (
+        @UserID,
+        @CategoryID,
+        @SubCategoryID,
+        @Amount,
+        @Description,
+        @PaymentID
+    );
+
+    SELECT 'Expense inserted successfully' AS Message;
+END
+GO
+
+-- ==========================================================
+-- SP: ✔️spGetAllTaskStatus.sql
+-- ==========================================================
+CREATE OR ALTER PROCEDURE spGetAllTaskStatus
+AS
+BEGIN
+    SET NOCOUNT OFF;
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblTaskStatus
+    )
+    BEGIN
+        SELECT 'No Task Status Found' AS Message;
+        RETURN;
+    END
+
+    SELECT
+        TaskStatusID,
+        TaskStatusName
+    FROM tblTaskStatus
+    ORDER BY TaskStatusName ASC;
+END;
+GO
+
+-- ==========================================================
+-- SP: ✔️spGetDuplicatePersonNumberByUserIDAndPhoneNumber.sql
+-- ==========================================================
+CREATE OR ALTER PROC spGetDuplicatePersonNumberByUserIDAndPhoneNumber
+(
+    @UserID INT,
+    @PersonID INT,
+    @PhoneNumber VARCHAR(20)
+)
+AS
+BEGIN
+    SET NOCOUNT OFF;
+
+    BEGIN TRY
+
+        -- UserID Validation
+        IF @UserID IS NULL OR @UserID <= 0
+        BEGIN
+            SELECT
+                CAST(0 AS BIT) AS IsDuplicate,
+                'User ID is Invalid.' AS Message;
+            RETURN;
+        END
+
+        SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+
+        IF @PhoneNumber = '' OR @PhoneNumber IS NULL
+        BEGIN
+            SELECT
+                CAST(0 AS BIT) AS IsDuplicate,
+                'Phone Number is Null' AS Message;
+            RETURN;
+        END
+
+        -------------------------------------------------------
+        -- PersonID Validation (Only for Edit)
+        -------------------------------------------------------
+        IF @PersonID <> -1
+        BEGIN
+            IF @PersonID <= 0
+            BEGIN
+                SELECT
+                    CAST(0 AS BIT) AS IsDuplicate,
+                    'Invalid Person ID.' AS Message;
+                RETURN;
+            END
+
+            IF NOT EXISTS
+            (
+                SELECT 1
+                FROM tblPersons
+                WHERE PersonID = @PersonID
+                  AND UserID = @UserID
+            )
+            BEGIN
+                SELECT
+                    CAST(0 AS BIT) AS IsDuplicate,
+                    'Person Not Found.' AS Message;
+                RETURN;
+            END
+        END
+
+        -------------------------------------------------------
+        -- Duplicate Phone Number Check
+        -------------------------------------------------------
+        IF EXISTS
+        (
+            SELECT 1
+            FROM tblPersons
+            WHERE UserID = @UserID
+              AND PhoneNumber = @PhoneNumber
+              AND
+              (
+                    @PersonID = -1
+                    OR PersonID <> @PersonID
+              )
+        )
+        BEGIN
+            SELECT
+                CAST(1 AS BIT) AS IsDuplicate,
+                'Phone Number Already Exists.' AS Message;
+        END
+        ELSE
+        BEGIN
+            SELECT
+                CAST(0 AS BIT) AS IsDuplicate,
+                'Phone Number Available.' AS Message;
+        END
+
+    END TRY
+
+    BEGIN CATCH
+
+        SELECT
+            CAST(0 AS BIT) AS IsDuplicate,
+            ERROR_MESSAGE() AS Message;
+
+    END CATCH
+END
+GO
+
+-- ==========================================================
+
+-- SP: ✔️spGetGender.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetGender
+AS
+BEGIN
+    SET NOCOUNT OFF;
+
+    SELECT 
+        GenderID,
+        GenderName
+    FROM tblGender
+    ORDER BY GenderID;
+END
+GO
+
+-- ==========================================================
+
+-- SP: ✔️spUpdateUserProfile.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spUpdateUserProfile
+    @UserID INT,
+    @FullName VARCHAR(100),
+    @Email VARCHAR(150),
+    @PhoneNumber VARCHAR(15),
+    @Address VARCHAR(500),
+    @DOB DATE,
+    @GenderID INT
+AS
+BEGIN
+    SET NOCOUNT OFF;
+
+    SET @FullName = LTRIM(RTRIM(@FullName));
+    SET @Email = LTRIM(RTRIM(@Email));
+    SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+    SET @Address = LTRIM(RTRIM(@Address));
+
+    IF @FullName IS NULL OR @FullName = ''
+    BEGIN
+        SELECT 'Name Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF @Email IS NULL OR @Email = ''
+    BEGIN
+        SELECT 'Email Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF @PhoneNumber IS NULL OR @PhoneNumber = ''
+    BEGIN
+        SELECT 'Phone Number Cannot Be Empty' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+        AND Active = 1
+    )
+    BEGIN
+        SELECT 'User Account Is Not Active' AS Message;
+        RETURN;
+    END
+
+    -- Check if Email already belongs to another user
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE Email = @Email
+        AND UserID != @UserID
+    )
+    BEGIN
+        SELECT 'Email Already Exists' AS Message;
+        RETURN;
+    END
+
+    -- Check if PhoneNumber already belongs to another user
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserContact
+        WHERE PhoneNumber = @PhoneNumber
+        AND UserID != @UserID
+    )
+    BEGIN
+        SELECT 'Phone Number Already Exists' AS Message;
+        RETURN;
+    END
+
+    -- Check GenderID if provided
+    IF @GenderID IS NOT NULL AND @GenderID > 0 AND NOT EXISTS
+    (
+        SELECT 1
+        FROM tblGender
+        WHERE GenderID = @GenderID
+    )
+    BEGIN
+        SELECT 'Invalid Gender' AS Message;
+        RETURN;
+    END
+
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        UPDATE tblUsers
+        SET UserName = @FullName
+        WHERE UserID = @UserID;
+
+        IF EXISTS (SELECT 1 FROM tblUserProfile WHERE UserID = @UserID)
+        BEGIN
+            UPDATE tblUserProfile
+            SET FullName = @FullName,
+                DOB = @DOB,
+                GenderID = CASE WHEN @GenderID > 0 THEN @GenderID ELSE GenderID END,
+                Address = @Address
+            WHERE UserID = @UserID;
+        END
+        ELSE
+        BEGIN
+            INSERT INTO tblUserProfile (UserID, FullName, DOB, GenderID, Address)
+            VALUES (@UserID, @FullName, @DOB, CASE WHEN @GenderID > 0 THEN @GenderID ELSE NULL END, @Address);
+        END
+
+        IF EXISTS (SELECT 1 FROM tblUserContact WHERE UserID = @UserID)
+        BEGIN
+            UPDATE tblUserContact
+            SET Email = @Email,
+                PhoneNumber = @PhoneNumber
+            WHERE UserID = @UserID;
+        END
+        ELSE
+        BEGIN
+            INSERT INTO tblUserContact (UserID, Email, PhoneNumber)
+            VALUES (@UserID, @Email, @PhoneNumber);
+        END
+
+        COMMIT TRANSACTION;
+
+        SELECT 'User Profile Updated Successfully' AS Message;
+
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+
+        SELECT ERROR_MESSAGE() AS Message;
+    END CATCH
+END;
+GO
+
+
+
+
+
+
 
 

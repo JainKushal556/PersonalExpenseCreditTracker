@@ -17,6 +17,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
     {
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllLentData = new DataTable();
+        private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
 
@@ -168,6 +169,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
              }
 
             AllLentData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
         }
@@ -337,6 +339,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
 
             dgvLentDataTable.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dgvLentDataTable, txtSearch);
 
             int start = startIndex + 1;
             int end = endIndex;
@@ -542,10 +545,38 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             if (e.RowIndex < 0)
                 return;
 
-            PayLentReturnAmountControls frm = new PayLentReturnAmountControls();
+            DataGridViewRow row = dgvLentDataTable.Rows[e.RowIndex];
 
-            frm.StartPosition = FormStartPosition.CenterParent;
-            frm.ShowDialog(this);
+            int lentId = 0;
+
+            DataRowView drv = row.DataBoundItem as DataRowView;
+            if (drv != null && drv.Row.Table.Columns.Contains("LentID"))
+            {
+                lentId = Convert.ToInt32(drv["LentID"]);
+            }
+
+            string personName = Convert.ToString(row.Cells["colPersonName"].Value);
+            string totalAmount = Convert.ToString(row.Cells["colAmount"].Value);
+            string remainingAmount = Convert.ToString(row.Cells["colRemainingAmount"].Value);
+            string status = Convert.ToString(row.Cells["colStatus"].Value);
+            string returnAmount = Convert.ToString(row.Cells["colReturnedAmount"].Value);
+
+            using (PayLentReturnAmountControls frm = new PayLentReturnAmountControls())
+            {
+                frm.SetLentDetails(
+                    lentId,
+                    personName,
+                    totalAmount,
+                    remainingAmount,
+                    status,
+                    returnAmount);
+
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
+                    LoadLentData(userID);
+                }
+            }
         }
 
         private void btnExportReport_Click(object sender, EventArgs e)
@@ -790,11 +821,15 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             pnlPaymentFilter.Visible = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            pnlStatusFilter.Visible = false;
-        }
+         private void button3_Click(object sender, EventArgs e)
+         {
+             pnlStatusFilter.Visible = false;
+         }
 
-      
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllLentData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+            ShowCurrentPage();
+        }
       }
     }
