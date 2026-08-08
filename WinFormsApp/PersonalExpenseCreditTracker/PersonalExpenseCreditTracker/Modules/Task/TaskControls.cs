@@ -754,31 +754,22 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void ShowCalenderFromDatePanel(MonthCalendar monthCalendar)
         {
             HidePopupPanels();
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             monthCalendar.Parent = this;
-
-            monthCalendar.Location = new Point(
-                p.X + pnlDateFilter.Width - monthCalendar.Width - 300,
-                p.Y + 35);
-
+            Point p = txtFromdate.PointToScreen(
+                      new Point(0, txtFromdate.Height + 10));
+            p = this.PointToClient(p);
+            monthCalendar.Location = p;
             monthCalendar.BringToFront();
             monthCalendar.Visible = true;
         }
         private void ShowCalenderToDatePanel(MonthCalendar monthCalendar)
         {
             HidePopupPanels();
-
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             monthCalendar.Parent = this;
-
-            monthCalendar.Location = new Point(
-                p.X + pnlDateFilter.Width - monthCalendar.Width - 70,
-                p.Y + 35);
-
+            Point p = txtToDate.PointToScreen(
+                new Point(0, txtToDate.Height + 10));
+            p = this.PointToClient(p);
+            monthCalendar.Location = p;
             monthCalendar.BringToFront();
             monthCalendar.Visible = true;
         }
