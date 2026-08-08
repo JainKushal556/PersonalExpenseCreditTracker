@@ -33,7 +33,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pnlCreditContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
-            this.btnSerach = new System.Windows.Forms.Button();
+
             this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -192,20 +192,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pnlTableHeader.Name = "pnlTableHeader";
             this.pnlTableHeader.Size = new System.Drawing.Size(1223, 44);
             this.pnlTableHeader.TabIndex = 0;
-            // 
-            // btnSerach
-            // 
-            this.btnSerach.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSerach.FlatAppearance.BorderSize = 0;
-            this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
-            this.btnSerach.Location = new System.Drawing.Point(0, 0);
-            this.btnSerach.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSerach.Name = "btnSerach";
-            this.btnSerach.Size = new System.Drawing.Size(53, 44);
-            this.btnSerach.TabIndex = 3;
-            this.btnSerach.UseVisualStyleBackColor = true;
-            this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
+
             // 
             // pnlButtonControls
             // 
@@ -1237,7 +1224,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private System.Windows.Forms.Panel pnlFooter;
         private System.Windows.Forms.TableLayoutPanel tblTable;
         private System.Windows.Forms.Panel pnlTableHeader;
-        private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Panel pnlControl;
         private System.Windows.Forms.Button btnLastPage;
         private System.Windows.Forms.Button btnNextpage;
@@ -1268,7 +1254,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private System.Windows.Forms.Label lblCategoryFilter;
         private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.Button btncategoryClose;
-        private System.Windows.Forms.Button btnSerach;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel pnlDateFilter;

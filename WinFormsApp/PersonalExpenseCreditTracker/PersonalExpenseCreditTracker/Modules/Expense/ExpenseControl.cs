@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using PersonalExpenseCreditTracker.Common;
+using BLLayer.Expense;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Expense
 {
@@ -26,6 +28,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             int nWidthEllipse,
             int nHeightEllipse
         );
+        private DateTime fromDate { get; set; }
+        private DateTime toDate { get; set; }
+        private bool validFromDate { get; set; }
+        private bool validToDate { get; set; }
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllExpenseData = new DataTable();
         private DataTable masterData = new DataTable();
@@ -671,6 +677,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void monthCalendarFromDate_DateChanged(object sender, DateRangeEventArgs e)
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            fromDate = e.Start.Date;
         }
         private void ShowCalenderFromDatePanel(Panel panel)
         {
@@ -771,6 +778,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void monthCalendarToDate_DateChanged(object sender, DateRangeEventArgs e)
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            toDate = e.Start.Date;
         }
 
         private void picCalenderToDate_Click(object sender, EventArgs e)
@@ -802,6 +810,34 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             AllExpenseData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
             ShowCurrentPage();
         }
+
+        //private void txtFromdate_TextChanged(object sender, EventArgs e)
+        //{
+        //    errorProvider1.Clear();
+        //    ExpenseBLL expenseBll = new ExpenseBLL();
+        //    expenseBll.fromDate = this.fromDate;
+        //    if (this.toDate == DateTime.MinValue)
+        //    {
+        //        expenseBll.toDate = DateTime.Now;
+        //    }
+        //    else
+        //    {
+        //        expenseBll.toDate = this.toDate;
+        //    }
+
+        //    CommonValidator.ValidationResult result = expenseBll.DateValidatorIntoExpenseBll();
+
+        //    switch (result)
+        //    {
+        //        case CommonValidator.ValidationResult.Success:
+        //            validFromDate = true;
+        //            break;
+        //        case CommonValidator.ValidationResult.DateRangeInvalid:
+        //            validFromDate = false;
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+        //            break;
+        //    }
+        //}
 
         private void cmbCategory_Enter(object sender, EventArgs e)
         {

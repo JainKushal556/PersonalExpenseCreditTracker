@@ -69,7 +69,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnLastPage = new System.Windows.Forms.Button();
             this.panelExportReport = new System.Windows.Forms.Panel();
-            this.btnSerach = new System.Windows.Forms.Button();
             this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -619,20 +618,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelExportReport.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.panelExportReport.Size = new System.Drawing.Size(1137, 50);
             this.panelExportReport.TabIndex = 0;
-            // 
-            // btnSerach
-            // 
-            this.btnSerach.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSerach.FlatAppearance.BorderSize = 0;
-            this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
-            this.btnSerach.Location = new System.Drawing.Point(8, 5);
-            this.btnSerach.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSerach.Name = "btnSerach";
-            this.btnSerach.Size = new System.Drawing.Size(53, 40);
-            this.btnSerach.TabIndex = 4;
-            this.btnSerach.UseVisualStyleBackColor = true;
-            this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
+
             // 
             // pnlButtonControls
             // 
@@ -1515,7 +1501,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Label labelTotalTransactionNumber;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMainData;
         private System.Windows.Forms.Panel panelExportReport;
-        private System.Windows.Forms.Button btnExportReport;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblShowing;
         private System.Windows.Forms.Label lblStartingPageNumber;
@@ -1541,8 +1526,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemainingAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeadline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
         private System.Windows.Forms.ToolStripMenuItem tsmiAmount;
@@ -1550,7 +1533,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label lblMinAmountFilter;
         private System.Windows.Forms.Button btnAmountClose;
-        private System.Windows.Forms.Button btnSerach;
         private System.Windows.Forms.Panel pnlButtonControls;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnFilter;
@@ -1593,9 +1575,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Button btnStatusClose;
-            private System.Windows.Forms.Panel pnlCategoryFilter;
-        private System.Windows.Forms.Panel pnlSearch;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCategory;
         private System.Windows.Forms.Panel pnlMinAmountfilter;
         private System.Windows.Forms.TextBox txtMinAmount;
         private System.Windows.Forms.Label lblMaxAmountFilter;

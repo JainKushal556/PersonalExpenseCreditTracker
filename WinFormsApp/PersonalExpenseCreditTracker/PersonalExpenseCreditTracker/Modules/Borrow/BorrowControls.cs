@@ -27,6 +27,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             InitializeComponent();
             StyleBorrowGrid();
+
             dgvBorrowDataTable.AutoGenerateColumns = false;
             dgvBorrowDataTable.CellDoubleClick += dgvBorrowDataTable_CellDoubleClick;
 
@@ -136,6 +137,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             int userID = Session.LogedInUser.GetUserId();
             LoadBorrowData(userID);
             HideAllFilterPanels();
+           //ShowSearchPanel(pnlSearch);
+            pnlSearch.Visible = true;
             DesignContextMenu();
             cmsFilter.Opening += cmsFilter_Opening;
             RegisterMouseDown(this);
@@ -622,7 +625,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             pnlDateFilter.Visible = false;
             pnlAmountFilter.Visible = false;
-            pnlSearch.Visible = false;
+           
             pnlPaymentFilter.Visible = false;
             pnlPersonFilter.Visible = false;
             pnlStatusFilter.Visible = false;
@@ -660,24 +663,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
        
 
         private void tsmiDate_Click_1(object sender, EventArgs e)
@@ -704,25 +690,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             ShowFilterPanel(pnlPaymentFilter);
         }
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
 
-        private void pnlCategoryFilter_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            pnlSearch.Visible = false;
-        }
-
-        //private void btnDateClose_Click(object sender, EventArgs e)
-        //{
-        //    pnlDateFilter.Visible = false;
-        //}
 
         private void btncategoryClose_Click(object sender, EventArgs e)
         {

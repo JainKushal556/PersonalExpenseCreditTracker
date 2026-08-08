@@ -50,7 +50,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnPreviousPage = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnSerach = new System.Windows.Forms.Button();
             this.lblBorrowEndingPageNumber = new System.Windows.Forms.Label();
             this.lblBorrowEntries = new System.Windows.Forms.Label();
             this.lblBorrowShowing = new System.Windows.Forms.Label();
@@ -293,18 +292,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
             // 
-            // btnSerach
-            // 
-            this.btnSerach.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSerach.FlatAppearance.BorderSize = 0;
-            this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
-            this.btnSerach.Location = new System.Drawing.Point(0, 0);
-            this.btnSerach.Name = "btnSerach";
-            this.btnSerach.Size = new System.Drawing.Size(53, 50);
-            this.btnSerach.TabIndex = 1;
-            this.btnSerach.UseVisualStyleBackColor = true;
-            this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
+
             // 
             // lblBorrowEndingPageNumber
             // 
@@ -417,7 +405,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // pnlButtonControls
             // 
             this.pnlButtonControls.BackColor = System.Drawing.Color.Transparent;
-            this.pnlButtonControls.Controls.Add(this.btnSerach);
+            this.pnlButtonControls.Controls.Add(this.pnlSearch);
             this.pnlButtonControls.Controls.Add(this.pnlButton);
             this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlButtonControls.Location = new System.Drawing.Point(8, 5);
@@ -1447,7 +1435,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.Controls.Add(this.pnlPersonFilter);
             this.Controls.Add(this.pnlStatusFilter);
             this.Controls.Add(this.pnlPaymentFilter);
-            this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlAmountFilter);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -1533,8 +1520,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.Button btnPreviousPage;
         private System.Windows.Forms.Button btnNextPage;
         private System.Windows.Forms.Button btnLastPage;
-        private System.Windows.Forms.Panel pnlBorrowExportReport;
-        private System.Windows.Forms.Button btnBorrowExport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlRepaidAmount;
         private System.Windows.Forms.Label lblBorrowRepaidAmountText;
@@ -1563,7 +1548,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeadline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Label lblBorrowPaidAmount;
         private System.Windows.Forms.Label lblBorrowRepaidAmount;
         private System.Windows.Forms.Panel pnlButtonControls;
@@ -1571,7 +1555,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnFilter;
-        private System.Windows.Forms.Button btnSerach;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPersonID;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
