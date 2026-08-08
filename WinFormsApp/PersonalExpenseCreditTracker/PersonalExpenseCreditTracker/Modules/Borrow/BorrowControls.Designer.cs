@@ -120,7 +120,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblToDate = new System.Windows.Forms.Label();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.pnlSearchHeader = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlSearchTxt = new System.Windows.Forms.Panel();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlPaymentFilter = new System.Windows.Forms.Panel();
