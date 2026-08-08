@@ -710,7 +710,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // lblCategoryFilter
             // 
             this.lblCategoryFilter.AutoSize = true;
-            this.lblCategoryFilter.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategoryFilter.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCategoryFilter.Location = new System.Drawing.Point(3, 9);
             this.lblCategoryFilter.Name = "lblCategoryFilter";
             this.lblCategoryFilter.Size = new System.Drawing.Size(94, 25);
@@ -763,6 +763,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // 
             // pnlDateHeader
             // 
+            this.pnlDateHeader.Controls.Add(this.pnlToDateCalenderShow);
             this.pnlDateHeader.Controls.Add(this.btnDateApply);
             this.pnlDateHeader.Controls.Add(this.btnDateClose);
             this.pnlDateHeader.Controls.Add(this.pnlToDate);
@@ -833,7 +834,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.monthCalendarToDate.Location = new System.Drawing.Point(0, 0);
             this.monthCalendarToDate.Name = "monthCalendarToDate";
             this.monthCalendarToDate.TabIndex = 0;
-            this.monthCalendarToDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateChanged);
+            this.monthCalendarToDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateSelected);
             // 
             // picCalenderToDate
             // 
@@ -854,6 +855,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtToDate.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtToDate.Location = new System.Drawing.Point(4, 7);
             this.txtToDate.Name = "txtToDate";
+            this.txtToDate.Click += new System.EventHandler(this.txtToDate_Click);
+            this.txtToDate.Enter += new System.EventHandler(this.txtToDate_Enter);
             this.txtToDate.Size = new System.Drawing.Size(239, 24);
             this.txtToDate.TabIndex = 1;
             // 
@@ -874,13 +877,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.monthCalendarFromDate.Location = new System.Drawing.Point(0, 0);
             this.monthCalendarFromDate.Name = "monthCalendarFromDate";
             this.monthCalendarFromDate.TabIndex = 0;
-            this.monthCalendarFromDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarFromDate_DateChanged);
+            this.monthCalendarFromDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarFromDate_DateSelected);
             // 
             // lblFromDate
             // 
             this.lblFromDate.AutoSize = true;
             this.lblFromDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblFromDate.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFromDate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFromDate.Location = new System.Drawing.Point(3, 10);
             this.lblFromDate.Name = "lblFromDate";
             this.lblFromDate.Size = new System.Drawing.Size(59, 25);
@@ -919,13 +922,14 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtFromdate.Name = "txtFromdate";
             this.txtFromdate.Size = new System.Drawing.Size(179, 24);
             this.txtFromdate.TabIndex = 0;
-            this.txtFromdate.TextChanged += new System.EventHandler(this.txtFromdate_TextChanged);
+            this.txtFromdate.Click += new System.EventHandler(this.txtFromdate_Click);
+            this.txtFromdate.Enter += new System.EventHandler(this.txtFromdate_Enter);
             // 
             // lblToDate
             // 
             this.lblToDate.AutoSize = true;
             this.lblToDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblToDate.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblToDate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblToDate.Location = new System.Drawing.Point(312, 10);
             this.lblToDate.Name = "lblToDate";
             this.lblToDate.Size = new System.Drawing.Size(33, 25);
@@ -1008,7 +1012,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // lblAmountFilter
             // 
             this.lblAmountFilter.AutoSize = true;
-            this.lblAmountFilter.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmountFilter.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAmountFilter.Location = new System.Drawing.Point(3, 9);
             this.lblAmountFilter.Name = "lblAmountFilter";
             this.lblAmountFilter.Size = new System.Drawing.Size(85, 25);
@@ -1126,7 +1130,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // 
             this.lblcategory.AutoSize = true;
             this.lblcategory.BackColor = System.Drawing.Color.Transparent;
-            this.lblcategory.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblcategory.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblcategory.Location = new System.Drawing.Point(3, 10);
             this.lblcategory.Name = "lblcategory";
             this.lblcategory.Size = new System.Drawing.Size(94, 25);
@@ -1158,7 +1162,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // 
             this.lblSubcategory.AutoSize = true;
             this.lblSubcategory.BackColor = System.Drawing.Color.Transparent;
-            this.lblSubcategory.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubcategory.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubcategory.Location = new System.Drawing.Point(356, 10);
             this.lblSubcategory.Name = "lblSubcategory";
             this.lblSubcategory.Size = new System.Drawing.Size(129, 25);

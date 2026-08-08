@@ -796,8 +796,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             if (pnlFromDateCalenderShow.Visible)
             {
                 if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle)
-                        .Contains(Control.MousePosition))
+                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle).Contains(Control.MousePosition) &&
+                    !txtFromdate.RectangleToScreen(txtFromdate.ClientRectangle).Contains(Control.MousePosition))
                 {
                     pnlFromDateCalenderShow.Visible = false;
                 }
@@ -807,8 +807,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             if (pnlToDateCalenderShow.Visible)
             {
                 if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle)
-                        .Contains(Control.MousePosition))
+                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle).Contains(Control.MousePosition) &&
+                    !txtToDate.RectangleToScreen(txtToDate.ClientRectangle).Contains(Control.MousePosition))
                 {
                     pnlToDateCalenderShow.Visible = false;
                 }
@@ -920,6 +920,18 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             pnlToDateCalenderShow.Visible = false;
         }
 
+                private void txtFromdate_Click(object sender, EventArgs e)
+        {
+            pnlToDateCalenderShow.Visible = false;
+            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+        }
+
+        private void txtToDate_Click(object sender, EventArgs e)
+        {
+            pnlFromDateCalenderShow.Visible = false;
+            ShowCalenderToDatePanel(pnlToDateCalenderShow);
+        }
+
         private void txtFromdate_Enter(object sender, EventArgs e)
         {
             pnlToDateCalenderShow.Visible = false;
@@ -936,6 +948,11 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
             pnlFromDateCalenderShow.Visible = false;
+        }
+
+        private void pnlDateHeader_Click(object sender, EventArgs e)
+        {
+            HidePopupPanels();
         }
 
     }

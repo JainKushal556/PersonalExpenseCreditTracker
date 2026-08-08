@@ -789,24 +789,24 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             Point mousePos = this.PointToClient(Control.MousePosition);
 
             // From Date Calendar
-            if (pnlFromDateCalenderShow.Visible)
+            if (monthCalendarFromDate.Visible)
             {
-                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle)
-                        .Contains(Control.MousePosition))
+                if (!monthCalendarFromDate.Bounds.Contains(mousePos) &&
+                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle).Contains(Control.MousePosition) &&
+                    !txtFromdate.RectangleToScreen(txtFromdate.ClientRectangle).Contains(Control.MousePosition))
                 {
-                    pnlFromDateCalenderShow.Visible = false;
+                    monthCalendarFromDate.Visible = false;
                 }
             }
 
             // To Date Calendar
-            if (pnlToDateCalenderShow.Visible)
+            if (monthCalendarToDate.Visible)
             {
-                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle)
-                        .Contains(Control.MousePosition))
+                if (!monthCalendarToDate.Bounds.Contains(mousePos) &&
+                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle).Contains(Control.MousePosition) &&
+                    !txtToDate.RectangleToScreen(txtToDate.ClientRectangle).Contains(Control.MousePosition))
                 {
-                    pnlToDateCalenderShow.Visible = false;
+                    monthCalendarToDate.Visible = false;
                 }
             }
         }
@@ -843,13 +843,13 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
         }
 
-        private void monthCalendarFromDate_DateChanged(object sender, DateRangeEventArgs e)
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
         {
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
             monthCalendarFromDate.Visible = false;
         }
 
-        private void monthCalendarToDate_DateChanged(object sender, DateRangeEventArgs e)
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
         {
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
             monthCalendarToDate.Visible = false;
@@ -892,11 +892,25 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void txtToDate_Enter(object sender, EventArgs e)
         {
+            monthCalendarFromDate.Visible = false;
+            ShowCalenderToDatePanel(monthCalendarToDate);
+        }
+
+                private void txtFromdate_Click(object sender, EventArgs e)
+        {
+            monthCalendarToDate.Visible = false;
+            ShowCalenderFromDatePanel(monthCalendarFromDate);
+        }
+
+        private void txtToDate_Click(object sender, EventArgs e)
+        {
+            monthCalendarFromDate.Visible = false;
             ShowCalenderToDatePanel(monthCalendarToDate);
         }
 
         private void txtFromdate_Enter(object sender, EventArgs e)
         {
+            monthCalendarToDate.Visible = false;
             ShowCalenderFromDatePanel(monthCalendarFromDate);
         }
     }
