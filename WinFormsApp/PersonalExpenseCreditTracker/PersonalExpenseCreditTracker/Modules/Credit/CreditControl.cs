@@ -279,6 +279,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
             if (dataTable.Rows.Count <= 0)
             {
+                MessageBox.Show("No Record Found",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
                 return false;
             }
             AllCreditData = dataTable;

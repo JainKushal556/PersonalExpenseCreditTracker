@@ -1074,6 +1074,19 @@ BEGIN
         SELECT 'MinAmount cannot be greater than MaxAmount' AS MESSAGE
         RETURN
     END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+        AND Amount >= @MinAmount
+        AND Amount <= @MaxAmount
+    )
+    BEGIN
+        SELECT 'No Record Found' AS MESSAGE
+        RETURN
+    END
     
     SELECT 
         CR.CreditID,
@@ -1898,6 +1911,19 @@ BEGIN
     IF @MinAmount > @MaxAmount
     BEGIN
         SELECT 'MinAmount cannot be greater than MaxAmount' AS MESSAGE
+        RETURN
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblExpense
+        WHERE UserID = @UserID
+        AND Amount >= @MinAmount
+        AND Amount <= @MaxAmount
+    )
+    BEGIN
+        SELECT 'No Record Found' AS MESSAGE
         RETURN
     END
     
@@ -8136,6 +8162,18 @@ BEGIN
     IF @MinAmount > @MaxAmount
     BEGIN
         SELECT 'Minimum Amount cannot be greater than Maximum Amount' AS Message;
+        RETURN;
+    END;
+    -- Check if record exists
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLent
+        WHERE UserID = @UserID
+          AND Amount BETWEEN @MinAmount AND @MaxAmount
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message;
         RETURN;
     END;
     -- Filter Lent Records
