@@ -626,6 +626,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             ShowFilterPanel(pnlSubCategoryFilter);
             ignoreEvents = false;
+            Common.CommonUiFunction.LoadInComboBox("spGetExpenseCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategorytxt);
         }
 
         private void tsmiAmount_Click(object sender, EventArgs e)
@@ -888,6 +889,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     validFromDate = false;
                     ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
                     MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ignoreEvents = true;
+                    txtFromdate.Clear();
+                    txtToDate.Clear();
+                    ignoreEvents = false;
+                    this.fromDate = DateTime.MinValue;
+                    this.toDate = DateTime.MinValue;
+                    LoadExpenseData(Session.LogedInUser.GetUserId());
                     break;
             }
         }
@@ -967,6 +975,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     validFromDate = false;
                     ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
                     MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ignoreEvents = true;
+                    txtFromdate.Clear();
+                    txtToDate.Clear();
+                    ignoreEvents = false;
+                    this.fromDate = DateTime.MinValue;
+                    this.toDate = DateTime.MinValue;
+                    LoadExpenseData(Session.LogedInUser.GetUserId());
                     break;
             }
         }
@@ -1161,6 +1176,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 if (!decimal.TryParse(minStr, out minValue) || minValue < 0)
                 {
                     MessageBox.Show("Please enter a valid numeric Minimum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ResetAmountFilterInputsAndReloadData();
                     return;
                 }
             }
@@ -1170,6 +1186,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 if (!decimal.TryParse(maxStr, out maxValue) || maxValue < 0)
                 {
                     MessageBox.Show("Please enter a valid numeric Maximum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ResetAmountFilterInputsAndReloadData();
                     return;
                 }
             }
@@ -1177,6 +1194,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             if (minValue > maxValue)
             {
                 MessageBox.Show("Minimum Amount cannot be greater than Maximum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ResetAmountFilterInputsAndReloadData();
                 return;
             }
 
@@ -1185,6 +1203,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void cmbCategorytxt_Click(object sender, EventArgs e)
         {
+            if (cmbCategorytxt.Items.Count <= 1)
+            {
+                Common.CommonUiFunction.LoadInComboBox("spGetExpenseCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategorytxt);
+            }
             cmbCategorytxt.DroppedDown = true;
         }
 
@@ -1286,15 +1308,14 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
             if (categoryId == lastSelectedCategoryId) return;
 
-            if (!LoadFilteredExpenseData(
-                    "spFilterExpenseByCategory",
-                    "@CategoryID",
-                    categoryId,
-                    categoryId))
+            if (!LoadFilteredExpenseData("spFilterExpenseByCategory", "@CategoryID", categoryId, categoryId))
             {
                 ignoreEvents = true;
-                cmbCategory.SelectedIndex = 0;
+                if (cmbCategory.Items.Count > 0) cmbCategory.SelectedIndex = 0;
+                if (cmbCategorytxt.Items.Count > 0) cmbCategorytxt.SelectedIndex = 0;
+                if (cmbSubCategory.Items.Count > 0) cmbSubCategory.SelectedIndex = 0;
                 lastSelectedCategoryId = -1;
+                lastSelectedSubCategoryId = -1;
                 ignoreEvents = false;
 
                 pnlSubCategoryFilter.Visible = false;
@@ -1347,11 +1368,14 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 lastSelectedSubCategoryId = -1;
                 ignoreEvents = false;
 
-                LoadFilteredExpenseData(
-                    "spFilterExpenseByCategory",
-                    "@CategoryID",
-                    categoryId,
-                    categoryId);
+                if (!LoadFilteredExpenseData(
+                        "spFilterExpenseByCategory",
+                        "@CategoryID",
+                        categoryId,
+                        categoryId))
+                {
+                    LoadExpenseData(Session.LogedInUser.GetUserId());
+                }
                 return;
             }
 
@@ -1376,11 +1400,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     categoryId))
             {
                 ignoreEvents = true;
-                cmbCategorytxt.SelectedIndex = 0;
+                if (cmbCategorytxt.Items.Count > 0) cmbCategorytxt.SelectedIndex = 0;
+                if (cmbSubCategory.Items.Count > 0) cmbSubCategory.SelectedIndex = 0;
                 lastSelectedCategoryId = -1;
+                lastSelectedSubCategoryId = -1;
                 ignoreEvents = false;
 
-                //lSubCategoryFilter.Visible = false;
                 LoadExpenseData(Session.LogedInUser.GetUserId());
                 return;
             }
@@ -1400,13 +1425,20 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             if (!LoadFilteredExpenseData("spFilterExpenseByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", minvalue, "@MaxAmount", maxValue))
             {
-                txtMinAmount.Text = "Enter Amount";
-                txtMinAmount.ForeColor = Color.Gray;
-                txtMaxAmount.Text = "Enter Amount";
-                txtMaxAmount.ForeColor = Color.Gray;
-
-                LoadExpenseData(Session.LogedInUser.GetUserId());
+                ResetAmountFilterInputsAndReloadData();
             }
+        }
+
+        private void ResetAmountFilterInputsAndReloadData()
+        {
+            ignoreEvents = true;
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+            ignoreEvents = false;
+
+            LoadExpenseData(Session.LogedInUser.GetUserId());
         }
 
       
