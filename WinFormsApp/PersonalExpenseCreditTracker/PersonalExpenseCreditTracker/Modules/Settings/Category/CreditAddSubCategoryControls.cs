@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 {
@@ -103,11 +105,46 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
     //Save Button
         private void btnSave_Click(object sender, EventArgs e)
         {
-          
+            CategoryUI categoryUI = new CategoryUI();
+
             AddedSubCategoryName = txtSubCategory.Text.Trim();
-            MessageBox.Show("Saved Expense SubCategory");
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+
+            categoryUI.UserId = Session.LogedInUser.GetUserId();
+            categoryUI.CategoryID = SelectedCategoryId;
+            categoryUI.CategoryName = SelectedCategoryName;
+            categoryUI.SubCategory = (txtSubCategory.Text == "Enter Sub Category Name") ? "" : txtSubCategory.Text.Trim();
+
+            categoryUI.IsActive = Convert.ToInt32(rdActive.Checked);
+            categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
+
+            CommonValidator.ValidationResult result = categoryUI.AddCreditSubCategoryDataIntoCategoryUI();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Saved Expense Sub Category");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    ExpenseCategoryControls expenseCategoryControls = new ExpenseCategoryControls();
+                    expenseCategoryControls.LoadSubCategories();
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryNameEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.InvalidCategoryName:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Expense Sub Category Not Added.");
+                    break;
+            }
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {

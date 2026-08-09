@@ -75,5 +75,12 @@ namespace BLLayer.Common
             dataTable = SqlHelper.retriveDataByUserIdAndFilterIdAtDal(spName, userId, paramName1, paramId1, paramName2, paramId2);
             return dataTable;
         }
+
+        public static DataTable RetrieveErrorCategoryDataIntoCategory(string spName, int userId, int paramId1, int paramId2, string paramName, string paramName1, string paramName2, string paramName3)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = SqlHelper.GetErrorCategoryDataIntoCategoryDB(spName, userId, paramId1, paramId2, paramName, paramName1, paramName2, paramName3);
+            return dataTable;
+        }
     }
 }

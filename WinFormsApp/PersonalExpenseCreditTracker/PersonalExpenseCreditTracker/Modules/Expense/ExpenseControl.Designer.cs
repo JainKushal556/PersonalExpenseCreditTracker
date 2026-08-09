@@ -29,7 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
@@ -200,7 +200,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
             this.pnlSearch.Controls.Add(this.pnlSearchHeader);
             this.pnlSearch.Location = new System.Drawing.Point(-1, -1);
-            this.pnlSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(556, 57);
             this.pnlSearch.TabIndex = 9;
@@ -210,10 +210,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
             this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlSearchHeader.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSearchHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSearchHeader.Name = "pnlSearchHeader";
             this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(7, 18, 7, 12);
-            this.pnlSearchHeader.Size = new System.Drawing.Size(556, 57);
+            this.pnlSearchHeader.Size = new System.Drawing.Size(417, 46);
             this.pnlSearchHeader.TabIndex = 0;
             // 
             // pnlSearchTxt
@@ -222,18 +222,18 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSearchTxt.Controls.Add(this.pictureBox1);
             this.pnlSearchTxt.Controls.Add(this.txtSearch);
-            this.pnlSearchTxt.Location = new System.Drawing.Point(7, 5);
-            this.pnlSearchTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 4);
+            this.pnlSearchTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSearchTxt.Name = "pnlSearchTxt";
             this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.pnlSearchTxt.Size = new System.Drawing.Size(537, 44);
+            this.pnlSearchTxt.Size = new System.Drawing.Size(403, 36);
             this.pnlSearchTxt.TabIndex = 1;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.loupe__1_;
-            this.pictureBox1.Location = new System.Drawing.Point(5, 6);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(4, 5);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(37, 31);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -245,9 +245,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Location = new System.Drawing.Point(60, 6);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(463, 23);
+            this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -343,10 +343,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.dgvExpenseDataTable.Name = "dgvExpenseDataTable";
             this.dgvExpenseDataTable.ReadOnly = true;
             this.dgvExpenseDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvExpenseDataTable.RowTemplate.Height = 24;
             this.dgvExpenseDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvExpenseDataTable.Size = new System.Drawing.Size(1223, 525);
@@ -597,7 +597,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.pnlTotalExpense.Location = new System.Drawing.Point(11, 10);
             this.pnlTotalExpense.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTotalExpense.Name = "pnlTotalExpense";
-            this.pnlTotalExpense.Padding = new System.Windows.Forms.Padding(20);
+            this.pnlTotalExpense.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.pnlTotalExpense.Size = new System.Drawing.Size(600, 90);
             this.pnlTotalExpense.TabIndex = 0;
             this.pnlTotalExpense.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTotalExpense_Paint);
@@ -645,7 +645,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.pnlTransactionCard.Location = new System.Drawing.Point(633, 10);
             this.pnlTransactionCard.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.pnlTransactionCard.Name = "pnlTransactionCard";
-            this.pnlTransactionCard.Padding = new System.Windows.Forms.Padding(20);
+            this.pnlTransactionCard.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.pnlTransactionCard.Size = new System.Drawing.Size(601, 90);
             this.pnlTransactionCard.TabIndex = 1;
             this.pnlTransactionCard.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTransactionCard_Paint);

@@ -275,5 +275,32 @@ namespace DALayer.Common
                 }
             }
         }
+
+
+        public static DataTable GetErrorCategoryDataIntoCategoryDB(string spName, int userId, int paramId1, int paramId2, string paramName, string paramName1, string paramName2, string paramName3)
+        {
+            string connectionString = Common.SqlHelper.connectionString;
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(spName, sqlConnection))
+                {
+                    sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue("@UserID", userId);
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue(paramName1, paramId1);
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue(paramName2, paramId2);
+                    sqlDataAdapter.SelectCommand.Parameters.AddWithValue(paramName3, paramName);
+                    sqlDataAdapter.Fill(dataTable);
+
+                    return dataTable;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
