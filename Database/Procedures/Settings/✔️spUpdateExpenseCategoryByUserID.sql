@@ -7,7 +7,7 @@ CREATE OR ALTER PROCEDURE spUpdateExpenseCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     DECLARE @IsDefault INT;
     DECLARE @IsActive INT;

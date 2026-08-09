@@ -2,7 +2,7 @@ CREATE PROCEDURE spGetUserCurrentPassword
     @UserID INT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     SELECT Password
     FROM tblUserAuthentication
