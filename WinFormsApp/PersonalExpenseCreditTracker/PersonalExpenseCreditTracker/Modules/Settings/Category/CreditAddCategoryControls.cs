@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 {
@@ -104,12 +106,39 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            CategoryUI categoryUI = new CategoryUI();
+
             AddedCategoryName = txtCategory.Text.Trim();
 
-            MessageBox.Show("Saved Credit Category");
+            categoryUI.UserId = Session.LogedInUser.GetUserId();
+            categoryUI.CategoryName = (txtCategory.Text == "Enter Category Name") ? "" : txtCategory.Text.Trim();
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            categoryUI.IsActive = Convert.ToInt32(rdActive.Checked);
+            categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
+
+            CommonValidator.ValidationResult result = categoryUI.AddCreditCategoryDataIntoCategoryUI();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Saved Credit Category");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    creditCategoryControls.LoadCategories();
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryNameEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.InvalidCategoryName:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Credit Category Not Added.");
+                    break;
+            }
         }
 
         private void rbInactive_CheckedChanged(object sender, EventArgs e)

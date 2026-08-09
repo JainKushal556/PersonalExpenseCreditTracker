@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 {
     public partial class ExpenseAddCategoryControls : Form
     {
         ExpenseCategoryControls expenseCategoryControls;
-
         public string AddedCategoryName { get; private set; }
         public ExpenseAddCategoryControls()
         {
@@ -66,7 +67,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void ExpenseAddCategoryControls_Load(object sender, EventArgs e)
         {
-            txtCategory.Text = "  Enter Category Name";
+            txtCategory.Text = "Enter Category Name";
             txtCategory.ForeColor = Color.Gray;
             SetRadius(pnlBody, 15);
             SetRadius(btnCancel, 5);
@@ -76,7 +77,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         }
         private void txtCategory_Enter(object sender, EventArgs e)
         {
-            if (txtCategory.Text == "  Enter Category Name")
+            if (txtCategory.Text == "Enter Category Name")
             {
                 txtCategory.Text = "";
                 txtCategory.ForeColor = Color.Black;
@@ -86,20 +87,46 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             if (string.IsNullOrWhiteSpace(txtCategory.Text))
             {
-                txtCategory.Text = "  Enter Category Name";
+                txtCategory.Text = "Enter Category Name";
                 txtCategory.ForeColor = Color.Gray;
             }
         }
        
         private void btnSave_Click(object sender, EventArgs e)
         {
-           
+            CategoryUI categoryUI = new CategoryUI();
+
             AddedCategoryName = txtCategory.Text.Trim();
-          
-            MessageBox.Show("Saved Expense Category");
-         
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+
+            categoryUI.UserId = Session.LogedInUser.GetUserId();
+            categoryUI.CategoryName = (txtCategory.Text == "Enter Category Name") ? "" : txtCategory.Text.Trim();
+
+            categoryUI.IsActive = Convert.ToInt32(rdActive.Checked);
+            categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
+
+            CommonValidator.ValidationResult result = categoryUI.AddExpenseCategoryDataIntoCategoryUI();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Saved Expense Category");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    expenseCategoryControls.LoadCategories();
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryNameEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.InvalidCategoryName:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategory);
+                    break;
+                
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Expense Category Not Added.");
+                    break;
+            }
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -116,7 +143,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             if (rdInactive.Checked)
             {
-                rdInactive.Checked = false;
+                rdActive.Checked = false;
             }
         }
 
