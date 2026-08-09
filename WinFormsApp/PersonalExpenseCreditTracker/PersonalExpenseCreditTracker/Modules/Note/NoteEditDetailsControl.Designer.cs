@@ -28,7 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlEditNoteDetails = new System.Windows.Forms.Panel();
+            this.flpNoteColors = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlWhiteColor = new System.Windows.Forms.Panel();
+            this.pnlRedColor = new System.Windows.Forms.Panel();
+            this.pnlOrangeColor = new System.Windows.Forms.Panel();
+            this.pnlYellowColor = new System.Windows.Forms.Panel();
+            this.pnlGreenColor = new System.Windows.Forms.Panel();
+            this.pnlTealColor = new System.Windows.Forms.Panel();
+            this.pnlBlueColor = new System.Windows.Forms.Panel();
+            this.pnlPurpleColor = new System.Windows.Forms.Panel();
+            this.pnlPinkColor = new System.Windows.Forms.Panel();
+            this.pnlGrayColor = new System.Windows.Forms.Panel();
+            this.pnlLavenderColor = new System.Windows.Forms.Panel();
+            this.pnlCoralColor = new System.Windows.Forms.Panel();
+            this.pnlMintColor = new System.Windows.Forms.Panel();
+            this.pnlIndigoColor = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnUpdateNote = new System.Windows.Forms.Button();
             this.tblPriority = new System.Windows.Forms.TableLayoutPanel();
@@ -45,22 +61,6 @@
             this.btnCancelDialog = new System.Windows.Forms.Button();
             this.pnlDescription = new System.Windows.Forms.Panel();
             this.rtxtDescription = new System.Windows.Forms.RichTextBox();
-            this.flpNoteColors = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnlColorWhite = new System.Windows.Forms.Panel();
-            this.pnlColorCream = new System.Windows.Forms.Panel();
-            this.pnlColorYellow = new System.Windows.Forms.Panel();
-            this.pnlColorOrange = new System.Windows.Forms.Panel();
-            this.pnlColorPink = new System.Windows.Forms.Panel();
-            this.pnlColorLavender = new System.Windows.Forms.Panel();
-            this.pnlColorBlue = new System.Windows.Forms.Panel();
-            this.pnlColorGreen = new System.Windows.Forms.Panel();
-            this.pnlColorMint = new System.Windows.Forms.Panel();
-            this.pnlColorGray = new System.Windows.Forms.Panel();
-            this.pnlColorBlack = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.pnlColorRed = new System.Windows.Forms.Panel();
-            this.pnlColorPurple = new System.Windows.Forms.Panel();
-            this.pnlColorBrown = new System.Windows.Forms.Panel();
             this.lblNoteColor = new System.Windows.Forms.Label();
             this.lblPriority = new System.Windows.Forms.Label();
             this.lblDescriptionCount = new System.Windows.Forms.Label();
@@ -70,21 +70,23 @@
             this.lblNoteTitle = new System.Windows.Forms.Label();
             this.pnlAddNoteHeader = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlEditNoteDetails.SuspendLayout();
+            this.flpNoteColors.SuspendLayout();
             this.tblPriority.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlDescription.SuspendLayout();
-            this.flpNoteColors.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.pnlAddNoteHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlEditNoteDetails
             // 
             this.pnlEditNoteDetails.BackColor = System.Drawing.Color.Transparent;
             this.pnlEditNoteDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlEditNoteDetails.Controls.Add(this.flpNoteColors);
             this.pnlEditNoteDetails.Controls.Add(this.btnCancel);
             this.pnlEditNoteDetails.Controls.Add(this.btnUpdateNote);
             this.pnlEditNoteDetails.Controls.Add(this.tblPriority);
@@ -94,7 +96,6 @@
             this.pnlEditNoteDetails.Controls.Add(this.panel4);
             this.pnlEditNoteDetails.Controls.Add(this.btnCancelDialog);
             this.pnlEditNoteDetails.Controls.Add(this.pnlDescription);
-            this.pnlEditNoteDetails.Controls.Add(this.flpNoteColors);
             this.pnlEditNoteDetails.Controls.Add(this.lblNoteColor);
             this.pnlEditNoteDetails.Controls.Add(this.lblPriority);
             this.pnlEditNoteDetails.Controls.Add(this.lblDescriptionCount);
@@ -111,6 +112,169 @@
             this.pnlEditNoteDetails.Padding = new System.Windows.Forms.Padding(10);
             this.pnlEditNoteDetails.Size = new System.Drawing.Size(487, 538);
             this.pnlEditNoteDetails.TabIndex = 0;
+            // 
+            // flpNoteColors
+            // 
+            this.flpNoteColors.Controls.Add(this.pnlWhiteColor);
+            this.flpNoteColors.Controls.Add(this.pnlRedColor);
+            this.flpNoteColors.Controls.Add(this.pnlOrangeColor);
+            this.flpNoteColors.Controls.Add(this.pnlYellowColor);
+            this.flpNoteColors.Controls.Add(this.pnlGreenColor);
+            this.flpNoteColors.Controls.Add(this.pnlTealColor);
+            this.flpNoteColors.Controls.Add(this.pnlBlueColor);
+            this.flpNoteColors.Controls.Add(this.pnlPurpleColor);
+            this.flpNoteColors.Controls.Add(this.pnlPinkColor);
+            this.flpNoteColors.Controls.Add(this.pnlGrayColor);
+            this.flpNoteColors.Controls.Add(this.pnlLavenderColor);
+            this.flpNoteColors.Controls.Add(this.pnlCoralColor);
+            this.flpNoteColors.Controls.Add(this.pnlMintColor);
+            this.flpNoteColors.Controls.Add(this.pnlIndigoColor);
+            this.flpNoteColors.Location = new System.Drawing.Point(18, 415);
+            this.flpNoteColors.Margin = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.flpNoteColors.Name = "flpNoteColors";
+            this.flpNoteColors.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.flpNoteColors.Size = new System.Drawing.Size(443, 50);
+            this.flpNoteColors.TabIndex = 26;
+            // 
+            // pnlWhiteColor
+            // 
+            this.pnlWhiteColor.BackColor = System.Drawing.Color.White;
+            this.pnlWhiteColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlWhiteColor.Location = new System.Drawing.Point(3, 8);
+            this.pnlWhiteColor.Name = "pnlWhiteColor";
+            this.pnlWhiteColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlWhiteColor.TabIndex = 0;
+            this.pnlWhiteColor.Click += new System.EventHandler(this.pnlColorWhite_Click);
+            // 
+            // pnlRedColor
+            // 
+            this.pnlRedColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.pnlRedColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlRedColor.Location = new System.Drawing.Point(34, 8);
+            this.pnlRedColor.Name = "pnlRedColor";
+            this.pnlRedColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlRedColor.TabIndex = 1;
+            this.pnlRedColor.Click += new System.EventHandler(this.pnlColorRed_Click);
+            // 
+            // pnlOrangeColor
+            // 
+            this.pnlOrangeColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(183)))), ((int)(((byte)(77)))));
+            this.pnlOrangeColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOrangeColor.Location = new System.Drawing.Point(65, 8);
+            this.pnlOrangeColor.Name = "pnlOrangeColor";
+            this.pnlOrangeColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlOrangeColor.TabIndex = 2;
+            this.pnlOrangeColor.Click += new System.EventHandler(this.pnlColorOrange_Click);
+            // 
+            // pnlYellowColor
+            // 
+            this.pnlYellowColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(216)))), ((int)(((byte)(53)))));
+            this.pnlYellowColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlYellowColor.Location = new System.Drawing.Point(96, 8);
+            this.pnlYellowColor.Name = "pnlYellowColor";
+            this.pnlYellowColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlYellowColor.TabIndex = 3;
+            this.pnlYellowColor.Click += new System.EventHandler(this.pnlColorYellow_Click);
+            // 
+            // pnlGreenColor
+            // 
+            this.pnlGreenColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(199)))), ((int)(((byte)(132)))));
+            this.pnlGreenColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlGreenColor.Location = new System.Drawing.Point(127, 8);
+            this.pnlGreenColor.Name = "pnlGreenColor";
+            this.pnlGreenColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlGreenColor.TabIndex = 4;
+            this.pnlGreenColor.Click += new System.EventHandler(this.pnlColorGreen_Click);
+            // 
+            // pnlTealColor
+            // 
+            this.pnlTealColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(182)))), ((int)(((byte)(172)))));
+            this.pnlTealColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTealColor.Location = new System.Drawing.Point(158, 8);
+            this.pnlTealColor.Name = "pnlTealColor";
+            this.pnlTealColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlTealColor.TabIndex = 5;
+            this.pnlTealColor.Click += new System.EventHandler(this.pnlColorTeal_Click);
+            // 
+            // pnlBlueColor
+            // 
+            this.pnlBlueColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(181)))), ((int)(((byte)(246)))));
+            this.pnlBlueColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlBlueColor.Location = new System.Drawing.Point(189, 8);
+            this.pnlBlueColor.Name = "pnlBlueColor";
+            this.pnlBlueColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlBlueColor.TabIndex = 6;
+            this.pnlBlueColor.Click += new System.EventHandler(this.pnlColorBlue_Click);
+            // 
+            // pnlPurpleColor
+            // 
+            this.pnlPurpleColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(117)))), ((int)(((byte)(205)))));
+            this.pnlPurpleColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPurpleColor.Location = new System.Drawing.Point(220, 8);
+            this.pnlPurpleColor.Name = "pnlPurpleColor";
+            this.pnlPurpleColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlPurpleColor.TabIndex = 7;
+            this.pnlPurpleColor.Click += new System.EventHandler(this.pnlColorPurple_Click);
+            // 
+            // pnlPinkColor
+            // 
+            this.pnlPinkColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(98)))), ((int)(((byte)(146)))));
+            this.pnlPinkColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPinkColor.Location = new System.Drawing.Point(251, 8);
+            this.pnlPinkColor.Name = "pnlPinkColor";
+            this.pnlPinkColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlPinkColor.TabIndex = 8;
+            this.pnlPinkColor.Click += new System.EventHandler(this.pnlColorPink_Click);
+            // 
+            // pnlGrayColor
+            // 
+            this.pnlGrayColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(164)))), ((int)(((byte)(174)))));
+            this.pnlGrayColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlGrayColor.Location = new System.Drawing.Point(282, 8);
+            this.pnlGrayColor.Name = "pnlGrayColor";
+            this.pnlGrayColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlGrayColor.TabIndex = 9;
+            this.pnlGrayColor.Click += new System.EventHandler(this.pnlColorGray_Click);
+            // 
+            // pnlLavenderColor
+            // 
+            this.pnlLavenderColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(104)))), ((int)(((byte)(200)))));
+            this.pnlLavenderColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlLavenderColor.Location = new System.Drawing.Point(313, 8);
+            this.pnlLavenderColor.Name = "pnlLavenderColor";
+            this.pnlLavenderColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlLavenderColor.TabIndex = 10;
+            this.pnlLavenderColor.Click += new System.EventHandler(this.pnlColorLavender_Click);
+            // 
+            // pnlCoralColor
+            // 
+            this.pnlCoralColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(138)))), ((int)(((byte)(101)))));
+            this.pnlCoralColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCoralColor.Location = new System.Drawing.Point(344, 8);
+            this.pnlCoralColor.Name = "pnlCoralColor";
+            this.pnlCoralColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlCoralColor.TabIndex = 11;
+            this.pnlCoralColor.Click += new System.EventHandler(this.pnlColorCoral_Click);
+            // 
+            // pnlMintColor
+            // 
+            this.pnlMintColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(203)))), ((int)(((byte)(196)))));
+            this.pnlMintColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlMintColor.Location = new System.Drawing.Point(375, 8);
+            this.pnlMintColor.Name = "pnlMintColor";
+            this.pnlMintColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlMintColor.TabIndex = 12;
+            this.pnlMintColor.Click += new System.EventHandler(this.pnlColorMint_Click);
+            // 
+            // pnlIndigoColor
+            // 
+            this.pnlIndigoColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(134)))), ((int)(((byte)(203)))));
+            this.pnlIndigoColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlIndigoColor.Location = new System.Drawing.Point(406, 8);
+            this.pnlIndigoColor.Name = "pnlIndigoColor";
+            this.pnlIndigoColor.Size = new System.Drawing.Size(25, 25);
+            this.pnlIndigoColor.TabIndex = 13;
+            this.pnlIndigoColor.Click += new System.EventHandler(this.pnlColorIndigo_Click);
             // 
             // btnCancel
             // 
@@ -328,209 +492,8 @@
             this.rtxtDescription.TabIndex = 5;
             this.rtxtDescription.Text = "";
             this.rtxtDescription.TextChanged += new System.EventHandler(this.rtxtDescription_TextChanged);
-            // 
-            // flpNoteColors
-            // 
-            this.flpNoteColors.Controls.Add(this.pnlColorWhite);
-            this.flpNoteColors.Controls.Add(this.pnlColorCream);
-            this.flpNoteColors.Controls.Add(this.pnlColorYellow);
-            this.flpNoteColors.Controls.Add(this.pnlColorOrange);
-            this.flpNoteColors.Controls.Add(this.pnlColorPink);
-            this.flpNoteColors.Controls.Add(this.pnlColorLavender);
-            this.flpNoteColors.Controls.Add(this.pnlColorBlue);
-            this.flpNoteColors.Controls.Add(this.pnlColorGreen);
-            this.flpNoteColors.Controls.Add(this.pnlColorMint);
-            this.flpNoteColors.Controls.Add(this.pnlColorGray);
-            this.flpNoteColors.Controls.Add(this.pnlColorBlack);
-            this.flpNoteColors.Controls.Add(this.panel5);
-            this.flpNoteColors.Controls.Add(this.pnlColorPurple);
-            this.flpNoteColors.Controls.Add(this.pnlColorBrown);
-            this.flpNoteColors.Location = new System.Drawing.Point(18, 411);
-            this.flpNoteColors.Margin = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.flpNoteColors.Name = "flpNoteColors";
-            this.flpNoteColors.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.flpNoteColors.Size = new System.Drawing.Size(450, 42);
-            this.flpNoteColors.TabIndex = 10;
-            // 
-            // pnlColorWhite
-            // 
-            this.pnlColorWhite.BackColor = System.Drawing.Color.White;
-            this.pnlColorWhite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorWhite.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorWhite.Location = new System.Drawing.Point(5, 10);
-            this.pnlColorWhite.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorWhite.Name = "pnlColorWhite";
-            this.pnlColorWhite.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorWhite.TabIndex = 0;
-            this.pnlColorWhite.Click += new System.EventHandler(this.pnlColorWhite_Click);
-            // 
-            // pnlColorCream
-            // 
-            this.pnlColorCream.BackColor = System.Drawing.Color.Cornsilk;
-            this.pnlColorCream.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorCream.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorCream.Location = new System.Drawing.Point(35, 10);
-            this.pnlColorCream.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorCream.Name = "pnlColorCream";
-            this.pnlColorCream.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorCream.TabIndex = 1;
-            this.pnlColorCream.Click += new System.EventHandler(this.pnlColorCream_Click);
-            // 
-            // pnlColorYellow
-            // 
-            this.pnlColorYellow.BackColor = System.Drawing.Color.Khaki;
-            this.pnlColorYellow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorYellow.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorYellow.Location = new System.Drawing.Point(65, 10);
-            this.pnlColorYellow.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorYellow.Name = "pnlColorYellow";
-            this.pnlColorYellow.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorYellow.TabIndex = 2;
-            this.pnlColorYellow.Click += new System.EventHandler(this.pnlColorYellow_Click);
-            // 
-            // pnlColorOrange
-            // 
-            this.pnlColorOrange.BackColor = System.Drawing.Color.Moccasin;
-            this.pnlColorOrange.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorOrange.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorOrange.Location = new System.Drawing.Point(95, 10);
-            this.pnlColorOrange.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorOrange.Name = "pnlColorOrange";
-            this.pnlColorOrange.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorOrange.TabIndex = 3;
-            this.pnlColorOrange.Click += new System.EventHandler(this.pnlColorOrange_Click);
-            // 
-            // pnlColorPink
-            // 
-            this.pnlColorPink.BackColor = System.Drawing.Color.MistyRose;
-            this.pnlColorPink.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorPink.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorPink.Location = new System.Drawing.Point(125, 10);
-            this.pnlColorPink.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorPink.Name = "pnlColorPink";
-            this.pnlColorPink.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorPink.TabIndex = 4;
-            this.pnlColorPink.Click += new System.EventHandler(this.pnlColorPink_Click);
-            // 
-            // pnlColorLavender
-            // 
-            this.pnlColorLavender.BackColor = System.Drawing.Color.Lavender;
-            this.pnlColorLavender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorLavender.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorLavender.Location = new System.Drawing.Point(155, 10);
-            this.pnlColorLavender.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorLavender.Name = "pnlColorLavender";
-            this.pnlColorLavender.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorLavender.TabIndex = 5;
-            this.pnlColorLavender.Click += new System.EventHandler(this.pnlColorLavender_Click);
-            // 
-            // pnlColorBlue
-            // 
-            this.pnlColorBlue.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.pnlColorBlue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorBlue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorBlue.Location = new System.Drawing.Point(185, 10);
-            this.pnlColorBlue.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorBlue.Name = "pnlColorBlue";
-            this.pnlColorBlue.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorBlue.TabIndex = 6;
-            this.pnlColorBlue.Click += new System.EventHandler(this.pnlColorBlue_Click);
-            // 
-            // pnlColorGreen
-            // 
-            this.pnlColorGreen.BackColor = System.Drawing.Color.Honeydew;
-            this.pnlColorGreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorGreen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorGreen.Location = new System.Drawing.Point(215, 10);
-            this.pnlColorGreen.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorGreen.Name = "pnlColorGreen";
-            this.pnlColorGreen.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorGreen.TabIndex = 7;
-            this.pnlColorGreen.Click += new System.EventHandler(this.pnlColorGreen_Click);
-            // 
-            // pnlColorMint
-            // 
-            this.pnlColorMint.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.pnlColorMint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorMint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorMint.Location = new System.Drawing.Point(245, 10);
-            this.pnlColorMint.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorMint.Name = "pnlColorMint";
-            this.pnlColorMint.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorMint.TabIndex = 8;
-            this.pnlColorMint.Click += new System.EventHandler(this.pnlColorMint_Click);
-            // 
-            // pnlColorGray
-            // 
-            this.pnlColorGray.BackColor = System.Drawing.Color.Gainsboro;
-            this.pnlColorGray.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorGray.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorGray.Location = new System.Drawing.Point(275, 10);
-            this.pnlColorGray.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorGray.Name = "pnlColorGray";
-            this.pnlColorGray.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorGray.TabIndex = 9;
-            this.pnlColorGray.Click += new System.EventHandler(this.pnlColorGray_Click);
-            // 
-            // pnlColorBlack
-            // 
-            this.pnlColorBlack.BackColor = System.Drawing.Color.Black;
-            this.pnlColorBlack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorBlack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorBlack.Location = new System.Drawing.Point(305, 10);
-            this.pnlColorBlack.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorBlack.Name = "pnlColorBlack";
-            this.pnlColorBlack.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorBlack.TabIndex = 10;
-            this.pnlColorBlack.Click += new System.EventHandler(this.pnlColorBlack_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.pnlColorRed);
-            this.panel5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel5.Location = new System.Drawing.Point(335, 10);
-            this.panel5.Margin = new System.Windows.Forms.Padding(5);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(20, 20);
-            this.panel5.TabIndex = 11;
-            // 
-            // pnlColorRed
-            // 
-            this.pnlColorRed.BackColor = System.Drawing.Color.Red;
-            this.pnlColorRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorRed.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorRed.Location = new System.Drawing.Point(-1, -1);
-            this.pnlColorRed.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorRed.Name = "pnlColorRed";
-            this.pnlColorRed.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorRed.TabIndex = 10;
-            this.pnlColorRed.Click += new System.EventHandler(this.pnlColorRed_Click);
-            // 
-            // pnlColorPurple
-            // 
-            this.pnlColorPurple.BackColor = System.Drawing.Color.Purple;
-            this.pnlColorPurple.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorPurple.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorPurple.Location = new System.Drawing.Point(365, 10);
-            this.pnlColorPurple.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorPurple.Name = "pnlColorPurple";
-            this.pnlColorPurple.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorPurple.TabIndex = 12;
-            this.pnlColorPurple.Click += new System.EventHandler(this.pnlColorPurple_Click);
-            // 
-            // pnlColorBrown
-            // 
-            this.pnlColorBrown.BackColor = System.Drawing.Color.SaddleBrown;
-            this.pnlColorBrown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColorBrown.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlColorBrown.Location = new System.Drawing.Point(395, 10);
-            this.pnlColorBrown.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlColorBrown.Name = "pnlColorBrown";
-            this.pnlColorBrown.Size = new System.Drawing.Size(20, 20);
-            this.pnlColorBrown.TabIndex = 13;
-            this.pnlColorBrown.Click += new System.EventHandler(this.pnlColorBrown_Click);
+            this.rtxtDescription.Enter += new System.EventHandler(this.rtxtDescription_Enter);
+            this.rtxtDescription.Leave += new System.EventHandler(this.rtxtDescription_Leave);
             // 
             // lblNoteColor
             // 
@@ -598,6 +561,8 @@
             this.txtNoteTitle.Size = new System.Drawing.Size(450, 30);
             this.txtNoteTitle.TabIndex = 2;
             this.txtNoteTitle.TextChanged += new System.EventHandler(this.txtNoteTitle_TextChanged);
+            this.txtNoteTitle.Enter += new System.EventHandler(this.txtNoteTitle_Enter);
+            this.txtNoteTitle.Leave += new System.EventHandler(this.txtNoteTitle_Leave);
             // 
             // lblNoteTitle
             // 
@@ -627,6 +592,10 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Edit Note";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // NoteEditDetailsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -642,6 +611,7 @@
             this.Text = "NoteAddDetailsControl";
             this.pnlEditNoteDetails.ResumeLayout(false);
             this.pnlEditNoteDetails.PerformLayout();
+            this.flpNoteColors.ResumeLayout(false);
             this.tblPriority.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -650,10 +620,9 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnlDescription.ResumeLayout(false);
-            this.flpNoteColors.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.pnlAddNoteHeader.ResumeLayout(false);
             this.pnlAddNoteHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -672,24 +641,8 @@
         private System.Windows.Forms.Label lblDescriptionCount;
         private System.Windows.Forms.Button btnUpdateNote;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.FlowLayoutPanel flpNoteColors;
-        private System.Windows.Forms.Panel pnlColorWhite;
-        private System.Windows.Forms.Panel pnlColorCream;
-        private System.Windows.Forms.Panel pnlColorYellow;
-        private System.Windows.Forms.Panel pnlColorOrange;
-        private System.Windows.Forms.Panel pnlColorPink;
-        private System.Windows.Forms.Panel pnlColorLavender;
-        private System.Windows.Forms.Panel pnlColorBlue;
-        private System.Windows.Forms.Panel pnlColorGreen;
-        private System.Windows.Forms.Panel pnlColorMint;
-        private System.Windows.Forms.Panel pnlColorGray;
         private System.Windows.Forms.Label lblNoteColor;
         private System.Windows.Forms.Button btnCancelDialog;
-        private System.Windows.Forms.Panel pnlColorBlack;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel pnlColorRed;
-        private System.Windows.Forms.Panel pnlColorPurple;
-        private System.Windows.Forms.Panel pnlColorBrown;
         private System.Windows.Forms.Panel pnlDescription;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
@@ -702,5 +655,21 @@
         private System.Windows.Forms.RadioButton rbHigh;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton rbMedium;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.FlowLayoutPanel flpNoteColors;
+        private System.Windows.Forms.Panel pnlWhiteColor;
+        private System.Windows.Forms.Panel pnlRedColor;
+        private System.Windows.Forms.Panel pnlOrangeColor;
+        private System.Windows.Forms.Panel pnlYellowColor;
+        private System.Windows.Forms.Panel pnlGreenColor;
+        private System.Windows.Forms.Panel pnlTealColor;
+        private System.Windows.Forms.Panel pnlBlueColor;
+        private System.Windows.Forms.Panel pnlPurpleColor;
+        private System.Windows.Forms.Panel pnlPinkColor;
+        private System.Windows.Forms.Panel pnlGrayColor;
+        private System.Windows.Forms.Panel pnlLavenderColor;
+        private System.Windows.Forms.Panel pnlCoralColor;
+        private System.Windows.Forms.Panel pnlMintColor;
+        private System.Windows.Forms.Panel pnlIndigoColor;
     }
 }

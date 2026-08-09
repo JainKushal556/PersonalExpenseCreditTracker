@@ -28,7 +28,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteControl));
             this.pnlNoteMain = new System.Windows.Forms.Panel();
             this.flpNotes = new System.Windows.Forms.FlowLayoutPanel();
@@ -80,24 +79,22 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlSearchTxt = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.cmsNote = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPriority = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPriorityFilter = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lblPriorityFilter = new System.Windows.Forms.Label();
             this.cmbPriority = new System.Windows.Forms.ComboBox();
+            this.lblPriorityFilter = new System.Windows.Forms.Label();
             this.btnPriorityClose = new System.Windows.Forms.Button();
             this.pnlDateFilter = new System.Windows.Forms.Panel();
             this.pnlDateHeader = new System.Windows.Forms.Panel();
-            this.btnDateClose = new System.Windows.Forms.Button();
-            this.pnlToDate = new System.Windows.Forms.Panel();
             this.pnlToDateCalenderShow = new System.Windows.Forms.Panel();
             this.monthCalendarToDate = new System.Windows.Forms.MonthCalendar();
+            this.btnDateClose = new System.Windows.Forms.Button();
+            this.pnlToDate = new System.Windows.Forms.Panel();
             this.picCalenderToDate = new System.Windows.Forms.PictureBox();
             this.txtToDate = new System.Windows.Forms.TextBox();
             this.pnlFromDateCalenderShow = new System.Windows.Forms.Panel();
@@ -127,14 +124,12 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlSearchHeader.SuspendLayout();
             this.pnlSearchTxt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.cmsNote.SuspendLayout();
-            this.cmsFilter.SuspendLayout();
             this.pnlPriorityFilter.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.pnlDateFilter.SuspendLayout();
             this.pnlDateHeader.SuspendLayout();
-            this.pnlToDate.SuspendLayout();
             this.pnlToDateCalenderShow.SuspendLayout();
+            this.pnlToDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCalenderToDate)).BeginInit();
             this.pnlFromDateCalenderShow.SuspendLayout();
             this.pnlFromDate.SuspendLayout();
@@ -767,15 +762,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 6;
             // 
-            // cmsNote
-            // 
-            this.cmsNote.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.cmsNote.Name = "cmsNote";
-            this.cmsNote.Size = new System.Drawing.Size(123, 76);
-            // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
@@ -796,14 +782,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // cmsFilter
-            // 
-            this.cmsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDate,
-            this.tsmiPriority});
-            this.cmsFilter.Name = "cmsFilter";
-            this.cmsFilter.Size = new System.Drawing.Size(126, 52);
             // 
             // tsmiDate
             // 
@@ -841,16 +819,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlHeader.Size = new System.Drawing.Size(357, 48);
             this.pnlHeader.TabIndex = 4;
             // 
-            // lblPriorityFilter
-            // 
-            this.lblPriorityFilter.AutoSize = true;
-            this.lblPriorityFilter.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPriorityFilter.Location = new System.Drawing.Point(3, 11);
-            this.lblPriorityFilter.Name = "lblPriorityFilter";
-            this.lblPriorityFilter.Size = new System.Drawing.Size(79, 25);
-            this.lblPriorityFilter.TabIndex = 2;
-            this.lblPriorityFilter.Text = "Priority";
-            // 
             // cmbPriority
             // 
             this.cmbPriority.BackColor = System.Drawing.Color.White;
@@ -864,6 +832,16 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.cmbPriority.Click += new System.EventHandler(this.cmbPriority_Click);
             this.cmbPriority.Enter += new System.EventHandler(this.cmbPriority_Enter);
             this.cmbPriority.Leave += new System.EventHandler(this.cmbPriority_Leave);
+            // 
+            // lblPriorityFilter
+            // 
+            this.lblPriorityFilter.AutoSize = true;
+            this.lblPriorityFilter.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPriorityFilter.Location = new System.Drawing.Point(3, 11);
+            this.lblPriorityFilter.Name = "lblPriorityFilter";
+            this.lblPriorityFilter.Size = new System.Drawing.Size(79, 25);
+            this.lblPriorityFilter.TabIndex = 2;
+            this.lblPriorityFilter.Text = "Priority";
             // 
             // btnPriorityClose
             // 
@@ -907,6 +885,26 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlDateHeader.TabIndex = 7;
             this.pnlDateHeader.Click += new System.EventHandler(this.pnlDateHeader_Click);
             // 
+            // pnlToDateCalenderShow
+            // 
+            this.pnlToDateCalenderShow.BackColor = System.Drawing.Color.Transparent;
+            this.pnlToDateCalenderShow.Controls.Add(this.monthCalendarToDate);
+            this.pnlToDateCalenderShow.Location = new System.Drawing.Point(398, 32);
+            this.pnlToDateCalenderShow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlToDateCalenderShow.Name = "pnlToDateCalenderShow";
+            this.pnlToDateCalenderShow.Size = new System.Drawing.Size(301, 198);
+            this.pnlToDateCalenderShow.TabIndex = 7;
+            this.pnlToDateCalenderShow.Visible = false;
+            // 
+            // monthCalendarToDate
+            // 
+            this.monthCalendarToDate.BackColor = System.Drawing.Color.White;
+            this.monthCalendarToDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monthCalendarToDate.Location = new System.Drawing.Point(0, 0);
+            this.monthCalendarToDate.Name = "monthCalendarToDate";
+            this.monthCalendarToDate.TabIndex = 0;
+            this.monthCalendarToDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateSelected);
+            // 
             // btnDateClose
             // 
             this.btnDateClose.FlatAppearance.BorderSize = 0;
@@ -928,39 +926,19 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlToDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlToDate.Controls.Add(this.picCalenderToDate);
             this.pnlToDate.Controls.Add(this.txtToDate);
-            this.pnlToDate.Location = new System.Drawing.Point(327, 8);
+            this.pnlToDate.Location = new System.Drawing.Point(400, 5);
             this.pnlToDate.Name = "pnlToDate";
-            this.pnlToDate.Size = new System.Drawing.Size(208, 31);
+            this.pnlToDate.Size = new System.Drawing.Size(285, 36);
             this.pnlToDate.TabIndex = 5;
-            // 
-            // pnlToDateCalenderShow
-            // 
-            this.pnlToDateCalenderShow.BackColor = System.Drawing.Color.Transparent;
-            this.pnlToDateCalenderShow.Controls.Add(this.monthCalendarToDate);
-            this.pnlToDateCalenderShow.Location = new System.Drawing.Point(398, 32);
-            this.pnlToDateCalenderShow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlToDateCalenderShow.Name = "pnlToDateCalenderShow";
-            this.pnlToDateCalenderShow.Size = new System.Drawing.Size(301, 198);
-            this.pnlToDateCalenderShow.TabIndex = 7;
-            this.pnlToDateCalenderShow.Visible = false;
-            // 
-            // monthCalendarToDate
-            // 
-            this.monthCalendarToDate.BackColor = System.Drawing.Color.White;
-            this.monthCalendarToDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.monthCalendarToDate.Location = new System.Drawing.Point(0, 0);
-            this.monthCalendarToDate.Name = "monthCalendarToDate";
-            this.monthCalendarToDate.TabIndex = 0;
-            this.monthCalendarToDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateSelected);
             // 
             // picCalenderToDate
             // 
             this.picCalenderToDate.Dock = System.Windows.Forms.DockStyle.Right;
             this.picCalenderToDate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
-            this.picCalenderToDate.Location = new System.Drawing.Point(173, 0);
+            this.picCalenderToDate.Location = new System.Drawing.Point(250, 0);
             this.picCalenderToDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picCalenderToDate.Name = "picCalenderToDate";
-            this.picCalenderToDate.Size = new System.Drawing.Size(33, 29);
+            this.picCalenderToDate.Size = new System.Drawing.Size(33, 34);
             this.picCalenderToDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picCalenderToDate.TabIndex = 2;
             this.picCalenderToDate.TabStop = false;
@@ -1005,7 +983,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblFromDate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFromDate.Location = new System.Drawing.Point(3, 10);
             this.lblFromDate.Name = "lblFromDate";
-            this.lblFromDate.Size = new System.Drawing.Size(59, 25);
+            this.lblFromDate.Size = new System.Drawing.Size(50, 23);
             this.lblFromDate.TabIndex = 2;
             this.lblFromDate.Text = "From";
             // 
@@ -1099,17 +1077,15 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlSearchTxt.ResumeLayout(false);
             this.pnlSearchTxt.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.cmsNote.ResumeLayout(false);
-            this.cmsFilter.ResumeLayout(false);
             this.pnlPriorityFilter.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlDateFilter.ResumeLayout(false);
             this.pnlDateHeader.ResumeLayout(false);
             this.pnlDateHeader.PerformLayout();
+            this.pnlToDateCalenderShow.ResumeLayout(false);
             this.pnlToDate.ResumeLayout(false);
             this.pnlToDate.PerformLayout();
-            this.pnlToDateCalenderShow.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picCalenderToDate)).EndInit();
             this.pnlFromDateCalenderShow.ResumeLayout(false);
             this.pnlFromDate.ResumeLayout(false);

@@ -29,7 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
@@ -96,7 +96,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmsFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSubCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAmount = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlAmountFilter = new System.Windows.Forms.Panel();
             this.pnlAmountHeader = new System.Windows.Forms.Panel();
@@ -114,6 +113,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.btnSubCategoryclose = new System.Windows.Forms.Button();
             this.lblcategory = new System.Windows.Forms.Label();
             this.lblSubcategory = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
@@ -148,6 +148,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.pnlMinAmountfilter.SuspendLayout();
             this.pnlSubCategoryFilter.SuspendLayout();
             this.pnlSubCategoryHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlContent
@@ -342,10 +343,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.dgvExpenseDataTable.Name = "dgvExpenseDataTable";
             this.dgvExpenseDataTable.ReadOnly = true;
             this.dgvExpenseDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvExpenseDataTable.RowTemplate.Height = 24;
             this.dgvExpenseDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvExpenseDataTable.Size = new System.Drawing.Size(1223, 525);
@@ -716,6 +717,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(204, 31);
             this.cmbCategory.TabIndex = 0;
+            this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
             this.cmbCategory.Click += new System.EventHandler(this.cmbCategory_Click);
             this.cmbCategory.Enter += new System.EventHandler(this.cmbCategory_Enter);
             this.cmbCategory.Leave += new System.EventHandler(this.cmbCategory_Leave);
@@ -816,7 +818,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.monthCalendarToDate.Location = new System.Drawing.Point(0, 0);
             this.monthCalendarToDate.Name = "monthCalendarToDate";
             this.monthCalendarToDate.TabIndex = 0;
-            this.monthCalendarToDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateChanged);
+            this.monthCalendarToDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateSelected);
             // 
             // picCalenderToDate
             // 
@@ -842,6 +844,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtToDate.Size = new System.Drawing.Size(165, 24);
             this.txtToDate.TabIndex = 1;
             this.txtToDate.Click += new System.EventHandler(this.txtToDate_Click);
+            this.txtToDate.TextChanged += new System.EventHandler(this.txtToDate_TextChanged);
             // 
             // pnlFromDateCalenderShow
             // 
@@ -861,7 +864,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.monthCalendarFromDate.Location = new System.Drawing.Point(0, 0);
             this.monthCalendarFromDate.Name = "monthCalendarFromDate";
             this.monthCalendarFromDate.TabIndex = 0;
-            this.monthCalendarFromDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarFromDate_DateChanged);
+            this.monthCalendarFromDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarFromDate_DateSelected);
             // 
             // lblFromDate
             // 
@@ -930,7 +933,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDate,
             this.tsmiCategory,
-            this.tsmiSubCategory,
             this.tsmiAmount});
             this.cmsFilter.Name = "cmsFilter";
             this.cmsFilter.Size = new System.Drawing.Size(164, 100);
@@ -1009,7 +1011,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtMaxAmount.Size = new System.Drawing.Size(179, 30);
             this.txtMaxAmount.TabIndex = 0;
             this.txtMaxAmount.Enter += new System.EventHandler(this.txtMaxAmount_Enter);
+            this.txtMaxAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMaxAmount_KeyDown);
             this.txtMaxAmount.Leave += new System.EventHandler(this.txtMaxAmount_Leave);
+            this.txtMaxAmount.MouseLeave += new System.EventHandler(this.txtMaxAmount_Leave);
             // 
             // lblMaxAmountFilter
             // 
@@ -1052,8 +1056,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtMinAmount.Name = "txtMinAmount";
             this.txtMinAmount.Size = new System.Drawing.Size(179, 30);
             this.txtMinAmount.TabIndex = 0;
+            this.txtMinAmount.Click += new System.EventHandler(this.txtMinAmount_Click);
             this.txtMinAmount.Enter += new System.EventHandler(this.txtMinAmount_Enter);
+            this.txtMinAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMinAmount_KeyDown);
             this.txtMinAmount.Leave += new System.EventHandler(this.txtMinAmount_Leave);
+            this.txtMinAmount.MouseLeave += new System.EventHandler(this.txtMinAmount_Leave);
             // 
             // btnAmountClose
             // 
@@ -1105,6 +1112,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmbSubCategory.Name = "cmbSubCategory";
             this.cmbSubCategory.Size = new System.Drawing.Size(204, 31);
             this.cmbSubCategory.TabIndex = 1;
+            this.cmbSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbSubCategory_SelectedIndexChanged);
             this.cmbSubCategory.Click += new System.EventHandler(this.cmbSubCategory_Click);
             this.cmbSubCategory.Enter += new System.EventHandler(this.cmbSubCategory_Enter);
             this.cmbSubCategory.Leave += new System.EventHandler(this.cmbSubCategory_Leave);
@@ -1120,6 +1128,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmbCategorytxt.Name = "cmbCategorytxt";
             this.cmbCategorytxt.Size = new System.Drawing.Size(204, 31);
             this.cmbCategorytxt.TabIndex = 1;
+            this.cmbCategorytxt.SelectedIndexChanged += new System.EventHandler(this.cmbCategorytxt_SelectedIndexChanged);
             this.cmbCategorytxt.Click += new System.EventHandler(this.cmbCategorytxt_Click);
             this.cmbCategorytxt.Enter += new System.EventHandler(this.cmbCategorytxt_Enter);
             this.cmbCategorytxt.Leave += new System.EventHandler(this.cmbCategorytxt_Leave);
@@ -1160,6 +1169,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.lblSubcategory.Size = new System.Drawing.Size(129, 25);
             this.lblSubcategory.TabIndex = 3;
             this.lblSubcategory.Text = "SubCategory";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // ExpenseControl
             // 
@@ -1223,6 +1236,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.pnlSubCategoryFilter.ResumeLayout(false);
             this.pnlSubCategoryHeader.ResumeLayout(false);
             this.pnlSubCategoryHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1289,7 +1303,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private System.Windows.Forms.ToolStripMenuItem tsmiCategory;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dgvExpenseDataTable;
-        private System.Windows.Forms.ToolStripMenuItem tsmiSubCategory;
         private System.Windows.Forms.ToolStripMenuItem tsmiAmount;
         private System.Windows.Forms.Panel pnlAmountFilter;
         private System.Windows.Forms.Panel pnlAmountHeader;
@@ -1313,6 +1326,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMethod;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
 
 
      
