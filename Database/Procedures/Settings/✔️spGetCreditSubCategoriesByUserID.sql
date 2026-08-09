@@ -19,7 +19,7 @@ BEGIN
         RETURN;
     END;
     
-    -- Fetch all Credit SubCategories for the User (both Active and Inactive for Settings UI)
+    -- Fetch Active Credit SubCategories for the User
     SELECT 
         SubCategoryID,
         CategoryID,
@@ -28,7 +28,8 @@ BEGIN
         IsDefault,
         IsActive
     FROM tblCreditSubCategory
-    WHERE (UserID IS NULL OR UserID = @UserID)
+    WHERE IsActive = 1
+      AND (UserID IS NULL OR UserID = @UserID)
     ORDER BY IsDefault DESC, SubCategoryName ASC;
 
 END;

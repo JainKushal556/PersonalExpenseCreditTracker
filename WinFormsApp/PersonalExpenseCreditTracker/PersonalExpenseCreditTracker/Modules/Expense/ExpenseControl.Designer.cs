@@ -96,7 +96,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmsFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSubCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAmount = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlAmountFilter = new System.Windows.Forms.Panel();
             this.pnlAmountHeader = new System.Windows.Forms.Panel();
@@ -724,6 +723,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(154, 27);
             this.cmbCategory.TabIndex = 0;
+            this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
             this.cmbCategory.Click += new System.EventHandler(this.cmbCategory_Click);
             this.cmbCategory.Enter += new System.EventHandler(this.cmbCategory_Enter);
             this.cmbCategory.Leave += new System.EventHandler(this.cmbCategory_Leave);
@@ -826,7 +826,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.monthCalendarToDate.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendarToDate.Name = "monthCalendarToDate";
             this.monthCalendarToDate.TabIndex = 0;
-            this.monthCalendarToDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateChanged);
+            this.monthCalendarToDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarToDate_DateSelected);
             // 
             // picCalenderToDate
             // 
@@ -852,6 +852,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtToDate.Size = new System.Drawing.Size(124, 20);
             this.txtToDate.TabIndex = 1;
             this.txtToDate.Click += new System.EventHandler(this.txtToDate_Click);
+            this.txtToDate.TextChanged += new System.EventHandler(this.txtToDate_TextChanged);
             // 
             // pnlFromDateCalenderShow
             // 
@@ -943,36 +944,28 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDate,
             this.tsmiCategory,
-            this.tsmiSubCategory,
             this.tsmiAmount});
             this.cmsFilter.Name = "cmsFilter";
-            this.cmsFilter.Size = new System.Drawing.Size(143, 92);
+            this.cmsFilter.Size = new System.Drawing.Size(123, 70);
             // 
             // tsmiDate
             // 
             this.tsmiDate.Name = "tsmiDate";
-            this.tsmiDate.Size = new System.Drawing.Size(142, 22);
+            this.tsmiDate.Size = new System.Drawing.Size(122, 22);
             this.tsmiDate.Text = "Date";
             this.tsmiDate.Click += new System.EventHandler(this.tsmiDate_Click);
             // 
             // tsmiCategory
             // 
             this.tsmiCategory.Name = "tsmiCategory";
-            this.tsmiCategory.Size = new System.Drawing.Size(142, 22);
+            this.tsmiCategory.Size = new System.Drawing.Size(122, 22);
             this.tsmiCategory.Text = "Category";
             this.tsmiCategory.Click += new System.EventHandler(this.tsmiCategory_Click);
-            // 
-            // tsmiSubCategory
-            // 
-            this.tsmiSubCategory.Name = "tsmiSubCategory";
-            this.tsmiSubCategory.Size = new System.Drawing.Size(142, 22);
-            this.tsmiSubCategory.Text = "SubCategory";
-            this.tsmiSubCategory.Click += new System.EventHandler(this.tsmiSubCategory_Click);
             // 
             // tsmiAmount
             // 
             this.tsmiAmount.Name = "tsmiAmount";
-            this.tsmiAmount.Size = new System.Drawing.Size(142, 22);
+            this.tsmiAmount.Size = new System.Drawing.Size(122, 22);
             this.tsmiAmount.Text = "Amount";
             this.tsmiAmount.Click += new System.EventHandler(this.tsmiAmount_Click);
             // 
@@ -1022,6 +1015,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtMaxAmount.Size = new System.Drawing.Size(134, 26);
             this.txtMaxAmount.TabIndex = 0;
             this.txtMaxAmount.Enter += new System.EventHandler(this.txtMaxAmount_Enter);
+            this.txtMaxAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMaxAmount_KeyDown);
             this.txtMaxAmount.Leave += new System.EventHandler(this.txtMaxAmount_Leave);
             // 
             // lblMaxAmountFilter
@@ -1068,6 +1062,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtMinAmount.Size = new System.Drawing.Size(134, 26);
             this.txtMinAmount.TabIndex = 0;
             this.txtMinAmount.Enter += new System.EventHandler(this.txtMinAmount_Enter);
+            this.txtMinAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMinAmount_KeyDown);
             this.txtMinAmount.Leave += new System.EventHandler(this.txtMinAmount_Leave);
             // 
             // btnAmountClose
@@ -1120,6 +1115,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmbSubCategory.Name = "cmbSubCategory";
             this.cmbSubCategory.Size = new System.Drawing.Size(154, 27);
             this.cmbSubCategory.TabIndex = 1;
+            this.cmbSubCategory.SelectedIndexChanged += new System.EventHandler(this.cmbSubCategory_SelectedIndexChanged);
             this.cmbSubCategory.Click += new System.EventHandler(this.cmbSubCategory_Click);
             this.cmbSubCategory.Enter += new System.EventHandler(this.cmbSubCategory_Enter);
             this.cmbSubCategory.Leave += new System.EventHandler(this.cmbSubCategory_Leave);
@@ -1135,6 +1131,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.cmbCategorytxt.Name = "cmbCategorytxt";
             this.cmbCategorytxt.Size = new System.Drawing.Size(154, 27);
             this.cmbCategorytxt.TabIndex = 1;
+            this.cmbCategorytxt.SelectedIndexChanged += new System.EventHandler(this.cmbCategorytxt_SelectedIndexChanged);
             this.cmbCategorytxt.Click += new System.EventHandler(this.cmbCategorytxt_Click);
             this.cmbCategorytxt.Enter += new System.EventHandler(this.cmbCategorytxt_Enter);
             this.cmbCategorytxt.Leave += new System.EventHandler(this.cmbCategorytxt_Leave);
@@ -1311,7 +1308,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private System.Windows.Forms.ToolStripMenuItem tsmiCategory;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dgvExpenseDataTable;
-        private System.Windows.Forms.ToolStripMenuItem tsmiSubCategory;
         private System.Windows.Forms.ToolStripMenuItem tsmiAmount;
         private System.Windows.Forms.Panel pnlAmountFilter;
         private System.Windows.Forms.Panel pnlAmountHeader;

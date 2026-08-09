@@ -159,7 +159,8 @@ VALUES
 (NULL, 'Personal Care', 1, 1),
 (NULL, 'Lent', 1, 1),
 (NULL, 'Tuition', 1, 1),
-(NULL, 'Borrow', 1, 1);
+(NULL, 'Borrow', 1, 1),
+(NULL, 'Miscellaneous', 1, 1);
 GO
 
 -- Insert Default Credit Categories
@@ -176,7 +177,8 @@ VALUES
 (NULL,'Bonus',1,1),
 (NULL,'Refund',1,1),
 (NULL,'Borrow',1,1),
-(NULL,'Lent',1,1);
+(NULL,'Lent',1,1),
+(5,'Other Income',0,1);
 GO
 
 
@@ -268,7 +270,9 @@ VALUES
 (10,NULL,'Coaching Center',1,1),
 (10,NULL,'Online Tuition',1,1),
 -- Borrow
-(11,NULL,'Borrow Returned',1,1);
+(11,NULL,'Borrow Returned',1,1),
+-- Miscellaneous
+(12,NULL,'General',1,1);
 GO
 
 -- Insert Credit Sub Categories
@@ -327,27 +331,66 @@ VALUES
 (10,NULL,'Personal Loan',1,1),
 (10,NULL,'Borrow Received',1,1),
 -- Lent
-(11,NULL,'Lent Returned',1,1);
+(11,NULL,'Lent Returned',1,1),
+-- Other Income
+(12,5,'General',0,1);
 GO
 
 
 -- 5. TRANSACTION & OPERATIONAL TABLES (সবচেয়ে শেষে ইনসার্ট করা হচ্ছে)
 -- =========================================================================
 
--- Insert Expense Records
+-- Insert Expense Records (Original + Additional Realistic Transactions for User 5 & Others)
 INSERT INTO tblExpense
 (UserID, CategoryID, SubCategoryID, Amount, Description, PaymentID, ExpenseAt)
 VALUES
-(1,1,1,120.50,'Breakfast at restaurant',10,'20261204'),
-(2,2,8,850.00,'Train ticket',2,'20260425'),
-(3,3,16,1200.00,'Online shopping',3,'20260105'),
-(4,4,26,700.00,'Netflix Subscription',4,'20261105'),
-(5,5,31,1000.00,'Doctor checkup for fever',8,'20260529'),
-(1,6,39,11000.00,'College admission fees',2,'20260617'),
-(2,7,47,200.00,'Auto fare',1,'20260619'),
-(3,8,53,100.00,'Haircut',8,'20260627'),
-(4,9,60,1700.00,'Lent amount to Ram',5,'20260718'),
-(5,10,67,1000.00,'Predeep sir tuition fees',6,'20260718');
+-- Original Seed Records
+(1, 1, 1, 120.50, 'Breakfast at restaurant', 10, '20261204'),
+(2, 2, 8, 850.00, 'Train ticket', 2, '20260425'),
+(3, 3, 16, 1200.00, 'Online shopping', 3, '20260105'),
+(4, 4, 26, 700.00, 'Netflix Subscription', 4, '20261105'),
+(5, 5, 31, 1000.00, 'Doctor checkup for fever', 8, '20260529'),
+(1, 6, 39, 11000.00, 'College admission fees', 2, '20260617'),
+(2, 7, 47, 200.00, 'Auto fare', 1, '20260619'),
+(3, 8, 53, 100.00, 'Haircut', 8, '20260627'),
+(4, 9, 60, 1700.00, 'Lent amount to Ram', 5, '20260718'),
+(5, 10, 67, 1000.00, 'Predeep sir tuition fees', 6, '20260718'),
+
+-- Additional Realistic Records (User 5 - Sneha Roy Focus)
+(5, 1, 1, 150.00, 'Morning breakfast at South Indian tiffin center', 10, '20260115'),
+(5, 7, 45, 1200.00, 'Petrol fill-up for scooty', 2, '20260118'),
+(5, 3, 23, 2499.00, 'Wireless Bluetooth Earbuds from Amazon', 4, '20260122'),
+(5, 5, 32, 480.00, 'Monthly fever & cold medicines', 6, '20260205'),
+(5, 1, 5, 1850.00, 'Family dinner at Spice Garden restaurant', 9, '20260214'),
+(5, 8, 54, 1800.00, 'Facial & beauty salon treatment', 9, '20260303'),
+(5, 3, 17, 14500.00, 'Realme Smartphone purchase', 4, '20260310'),
+(5, 1, 7, 140.00, 'Cold coffee & smoothie at cafe', 10, '20260315'),
+(5, 7, 49, 120.00, 'Kolkata Metro Smart Card recharge', 8, '20260321'),
+(5, 10, 67, 3000.00, 'College semester tuition fees', 1, '20260328'),
+(5, 4, 26, 649.00, 'Disney+ Hotstar Annual Plan', 4, '20260405'),
+(5, 1, 4, 220.00, 'Evening snacks & momos', 10, '20260412'),
+(5, 3, 16, 2800.00, 'Kurti and jeans shopping', 5, '20260420'),
+(5, 2, 10, 450.00, 'Cab fare to office', 6, '20260428'),
+(5, 5, 36, 1200.00, 'Gym monthly membership fee', 9, '20260505'),
+(5, 1, 2, 350.00, 'Weekend buffet lunch with colleagues', 10, '20260512'),
+(5, 6, 41, 850.00, 'Notebooks and study stationary', 2, '20260522'),
+(5, 8, 55, 1250.00, 'Nykaa skincare & cosmetics', 4, '20260601'),
+(5, 1, 3, 580.00, 'Zomato Pizza order for dinner', 10, '20260608'),
+(5, 7, 45, 1000.00, 'Scooty petrol refilling', 2, '20260616'),
+(5, 2, 8, 780.00, 'Express train ticket to Durgapur', 1, '20260625'),
+(5, 5, 33, 1500.00, 'Routine health blood test', 6, '20260702'),
+(5, 3, 22, 1600.00, 'Birthday gift for best friend', 2, '20260710'),
+(5, 4, 24, 600.00, 'Movie tickets for weekend show', 8, '20260720'),
+(5, 1, 5, 1100.00, 'Dinner at Barbeque Nation', 9, '20260729'),
+(5, 7, 52, 950.00, 'Scooty servicing & oil change', 1, '20260805'),
+
+-- Additional Realistic Records for Other Users & Standalone Category
+(1, 7, 45, 1500.00, 'Car petrol fill-up', 2, '20260210'),
+(2, 2, 8, 920.00, 'Vande Bharat Express train ticket', 1, '20260220'),
+(3, 3, 16, 3500.00, 'Festival ethnic wear shopping', 5, '20260325'),
+(4, 4, 24, 750.00, 'PVR IMAX Movie tickets for 2', 8, '20260501'),
+(5, 12, 72, 500.00, 'Miscellaneous local festival donation', 2, '20260410'),
+(5, 12, 72, 300.00, 'Unplanned household miscellaneous repair expense', 10, '20260715');
 GO
 
 -- Insert Credit / Income Records
@@ -362,8 +405,27 @@ VALUES
 (2,6,22,15.00,'CashBack Reward on Utility Bill',4,'20260618'),
 (5,7,25,2000.00,'Semester Academic Merit Scholarship',7,'20260514'),
 (2,8,29,800.00,'Mid-Year Performance Bonus',6,'20260707'),
-(3,9,35,120.00,'Flight Ticket Cancellation Refund',9,'20260523'),
-(1,10,37,300.00,'Short-term Loan from Friend',4,'20260418');
+(1,10,37,300.00,'Short-term Loan from Friend',4,'20260418'),
+
+-- Real Credit Records for User 5 & Others
+(5,12,43,3500.00,'Freelance project consulting fee',10,'20260720'),
+(5,12,43,1200.00,'Sold old college textbooks & study notes',1,'20260801'),
+(5,1,1,22000.00,'Monthly Stipend & Research Allowance',2,'20260730'),
+(5,1,4,1500.00,'Project completion incentive bonus',10,'20260802'),
+(5,4,13,4500.00,'Frontend React project milestone payment',10,'20260805'),
+(5,4,14,2800.00,'Logo & Banner design for client',10,'20260712'),
+(5,4,16,3200.00,'YouTube video editing project',2,'20260725'),
+(5,3,11,4200.00,'Fixed deposit quarterly interest payout',2,'20260630'),
+(5,6,21,150.00,'Credit Card reward points cash convert',3,'20260705'),
+(5,6,23,75.00,'Google Pay Rewards Cashback',10,'20260802'),
+(5,8,30,2500.00,'Independence Day festival bonus',10,'20260808'),
+(5,9,34,890.00,'Amazon product return refund credited',4,'20260714'),
+(5,7,26,5000.00,'State Higher Education Support Grant',2,'20260615'),
+(5,2,6,3000.00,'Technical consultation service charge',10,'20260718'),
+
+(1,1,1,35000.00,'Software Engineer Monthly Salary',2,'20260731'),
+(2,2,5,14500.00,'Boutique store weekly sales revenue',1,'20260801'),
+(3,5,17,12500.00,'Residential flat monthly rent credit',2,'20260805');
 GO
 
 -- Insert Lent Transaction Records

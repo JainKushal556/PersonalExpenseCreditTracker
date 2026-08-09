@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE spGetExpenseCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetActiveAndDeactiveExpenseSubCategoriesByUserID
 (
     @UserID INT
 )
@@ -19,16 +19,17 @@ BEGIN
         RETURN;
     END;
     
-    -- Fetch Active Expense Categories for the User
+    -- Fetch both Active and Inactive Expense SubCategories for Settings UI
     SELECT 
+        SubCategoryID,
         CategoryID,
-        CategoryName,
+        UserID,
+        SubCategoryName,
         IsDefault,
         IsActive
-    FROM tblExpenseCategory
-    WHERE IsActive = 1
-      AND (UserID IS NULL OR UserID = @UserID)
-    ORDER BY IsDefault DESC, CategoryName ASC;
+    FROM tblExpenseSubCategory
+    WHERE (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, SubCategoryName ASC;
 
 END;
 GO
