@@ -177,7 +177,8 @@ VALUES
 (NULL,'Bonus',1,1),
 (NULL,'Refund',1,1),
 (NULL,'Borrow',1,1),
-(NULL,'Lent',1,1);
+(NULL,'Lent',1,1),
+(5,'Other Income',0,1);
 GO
 
 
@@ -330,7 +331,9 @@ VALUES
 (10,NULL,'Personal Loan',1,1),
 (10,NULL,'Borrow Received',1,1),
 -- Lent
-(11,NULL,'Lent Returned',1,1);
+(11,NULL,'Lent Returned',1,1),
+-- Other Income
+(12,5,'General',0,1);
 GO
 
 
@@ -402,8 +405,27 @@ VALUES
 (2,6,22,15.00,'CashBack Reward on Utility Bill',4,'20260618'),
 (5,7,25,2000.00,'Semester Academic Merit Scholarship',7,'20260514'),
 (2,8,29,800.00,'Mid-Year Performance Bonus',6,'20260707'),
-(3,9,35,120.00,'Flight Ticket Cancellation Refund',9,'20260523'),
-(1,10,37,300.00,'Short-term Loan from Friend',4,'20260418');
+(1,10,37,300.00,'Short-term Loan from Friend',4,'20260418'),
+
+-- Real Credit Records for User 5 & Others
+(5,12,43,3500.00,'Freelance project consulting fee',10,'20260720'),
+(5,12,43,1200.00,'Sold old college textbooks & study notes',1,'20260801'),
+(5,1,1,22000.00,'Monthly Stipend & Research Allowance',2,'20260730'),
+(5,1,4,1500.00,'Project completion incentive bonus',10,'20260802'),
+(5,4,13,4500.00,'Frontend React project milestone payment',10,'20260805'),
+(5,4,14,2800.00,'Logo & Banner design for client',10,'20260712'),
+(5,4,16,3200.00,'YouTube video editing project',2,'20260725'),
+(5,3,11,4200.00,'Fixed deposit quarterly interest payout',2,'20260630'),
+(5,6,21,150.00,'Credit Card reward points cash convert',3,'20260705'),
+(5,6,23,75.00,'Google Pay Rewards Cashback',10,'20260802'),
+(5,8,30,2500.00,'Independence Day festival bonus',10,'20260808'),
+(5,9,34,890.00,'Amazon product return refund credited',4,'20260714'),
+(5,7,26,5000.00,'State Higher Education Support Grant',2,'20260615'),
+(5,2,6,3000.00,'Technical consultation service charge',10,'20260718'),
+
+(1,1,1,35000.00,'Software Engineer Monthly Salary',2,'20260731'),
+(2,2,5,14500.00,'Boutique store weekly sales revenue',1,'20260801'),
+(3,5,17,12500.00,'Residential flat monthly rent credit',2,'20260805');
 GO
 
 -- Insert Lent Transaction Records
