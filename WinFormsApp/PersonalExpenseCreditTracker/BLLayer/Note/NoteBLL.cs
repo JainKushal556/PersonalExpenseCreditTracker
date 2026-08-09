@@ -47,12 +47,12 @@ namespace BLLayer.Note
                return result;
            }
 
-           //color Validation
-           result = CommonValidator.ValidateColor(colorId);
-           if (result != CommonValidator.ValidationResult.Success)
-           {
-               return result;
-           }
+           ////color Validation
+           //result = CommonValidator.ValidateColor(colorId);
+           //if (result != CommonValidator.ValidationResult.Success)
+           //{
+           //    return result;
+           //}
 
 
            noteDAL.userId = userId;
@@ -75,5 +75,53 @@ namespace BLLayer.Note
             
 
        }
+
+       public CommonValidator.ValidationResult UpdateDataIntoNoteBll()
+       {
+           result = CommonValidator.ValidateNoteTitle(noteTitle);
+           if (result != CommonValidator.ValidationResult.Success) return result;
+
+           result = CommonValidator.ValidateDescription(description);
+           if (result != CommonValidator.ValidationResult.Success) return result;
+
+           result = CommonValidator.ValidatePriority(priorityId);
+           if (result != CommonValidator.ValidationResult.Success) return result;
+
+           //result = CommonValidator.ValidateColor(colorId);
+           //if (result != CommonValidator.ValidationResult.Success) return result;
+
+           noteDAL.userId = userId;
+           noteDAL.noteId = noteId;
+           noteDAL.noteTitle = noteTitle;
+           noteDAL.description = description;
+           noteDAL.priorityId = priorityId;
+           noteDAL.colorId = colorId;
+
+           if (noteDAL.UpdateNoteToDb())
+           {
+               return CommonValidator.ValidationResult.Success;
+           }
+           else
+           {
+               return CommonValidator.ValidationResult.StoreProcedureError;
+           }
+       }
+
+       public CommonValidator.ValidationResult DeleteNoteIntoNoteBll()
+       {
+           noteDAL.userId = userId;
+           noteDAL.noteId = noteId;
+
+           if (noteDAL.DeleteNoteToDb())
+           {
+               return CommonValidator.ValidationResult.Success;
+           }
+           else
+           {
+               return CommonValidator.ValidationResult.StoreProcedureError;
+           }
+       }
+
+
     }
 }

@@ -437,7 +437,7 @@ namespace BLLayer.Common
             {
                 noteTitle = noteTitle.Trim();
 
-                if (noteTitle.Length >= 3)
+                if (noteTitle.Length >= 5)
                 {
                     if (noteTitle.Length <= 150)
                     {
@@ -450,15 +450,15 @@ namespace BLLayer.Common
         }
 
         // Color Validation
-        public static ValidationResult ValidateColor(int colorId)
-        {
-            if (colorId > 0)
-            {
-                return ValidationResult.Success;
-            }
+        //public static ValidationResult ValidateColor(int colorId)
+        //{
+        //    if (colorId > 0)
+        //    {
+        //        return ValidationResult.Success;
+        //    }
 
-            return ValidationResult.ColorInvalid;
-        }
+        //    return ValidationResult.ColorInvalid;
+        //}
         
     }
 }

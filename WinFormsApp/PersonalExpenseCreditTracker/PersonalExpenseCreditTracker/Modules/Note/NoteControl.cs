@@ -12,6 +12,7 @@ using System.Configuration;
 using PersonalExpenseCreditTracker.Session;
 using PersonalExpenseCreditTracker.Common;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
 using PersonalExpenseCreditTracker.Forms.Main;
 
 namespace PersonalExpenseCreditTracker.Modules.Note
@@ -19,6 +20,16 @@ namespace PersonalExpenseCreditTracker.Modules.Note
     public partial class NoteControl : Form
     {
         int userID = Session.LogedInUser.GetUserId();
+
+        public int SelectedNoteID = 0;
+        public string SelectedNoteTitle = "";
+        public string SelectedDescription = "";
+        public string SelectedPriority = "";
+        public string SelectedColorName = "";
+        public string SelectedColorHexCode = "";
+        public string SelectedCreatedAt = "";
+
+
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
@@ -295,6 +306,20 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
 
             flpNotes.Controls.Add(card);
+
+            btnMore.Click += delegate(object sender, EventArgs e)
+            {
+                SelectedNoteID = Convert.ToInt32(row["NoteID"]);
+                SelectedNoteTitle = row["NoteTitle"].ToString();
+                SelectedDescription = row["Description"].ToString();
+                SelectedPriority = row["NotePriorityName"].ToString();
+                SelectedColorName = row["ColorName"].ToString();
+                SelectedColorHexCode = row["ColorHexCode"].ToString();
+                SelectedCreatedAt = (row["CreatedAt"] != DBNull.Value)
+                    ? Convert.ToDateTime(row["CreatedAt"]).ToString("dd MMM yyyy")
+                    : "";
+                cmsNote.Show(btnMore, new Point(0, (btnMore.Height) - 10));
+            };
         }
 
         private void UpdatePageSize()
@@ -395,6 +420,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             cmsNote.Show(btnNoteMore, 0, btnNoteMore.Height);
 
+
         }
 
         private void NoteControl_Resize(object sender, EventArgs e)
@@ -457,7 +483,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                         description.Width = c.Width - 30;
 
 
-                        // Screen size অনুযায়ী description line
                         if (availableWidth < 500)
                         {
                             // Small screen
@@ -507,7 +532,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void viewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NoteViewDetailsControl noteViewDetailsControl = new NoteViewDetailsControl();
+            NoteViewDetailsControl noteViewDetailsControl = new NoteViewDetailsControl(this);
             noteViewDetailsControl.Show();
 
 
@@ -515,14 +540,45 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NoteEditDetailsControl noteEditDetailsControl = new NoteEditDetailsControl();
+            NoteEditDetailsControl noteEditDetailsControl = new NoteEditDetailsControl(this);
+            noteEditDetailsControl.FormClosed += delegate
+            {
+                LoadNoteData(userID); 
+            };
             noteEditDetailsControl.Show();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // ১. ইউজারকে কনফার্মেশন মেসেজ দেখানো
+            DialogResult dialogResult = MessageBox.Show(
+                "Are you sure you want to delete this note: \"" + SelectedNoteTitle + "\"?",
+                "Delete Note",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
+            if (dialogResult == DialogResult.Yes)
+            {
+                // ২. UI অবজেক্টে আইডি পাঠানো
+                NoteUI noteUi = new NoteUI();
+                noteUi.userId = userID;
+                noteUi.noteId = SelectedNoteID;
+
+                // ৩. ডিলিট মেথড কল করা
+                CommonValidator.ValidationResult result = noteUi.DeleteNoteIntoNoteUi();
+
+                if (result == CommonValidator.ValidationResult.Success)
+                {
+                    MessageBox.Show("Note deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadNoteData(userID); // ✅ সাথে সাথে নোট গ্রিড রিফ্রেশ হবে
+                }
+                else
+                {
+                    MessageBox.Show("Note deletion failed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+
 
         private void SetRadius(Control control, int radius)
         {
