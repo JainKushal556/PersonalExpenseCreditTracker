@@ -16,7 +16,8 @@ namespace BLLayer.Expense
         public string amount { get; set; }
         public string description { get; set; }
         public int paymentId { get; set; }
-
+        public DateTime fromDate { get; set; }
+        public DateTime toDate { get; set; }
         private ExpenseDAL expenseDal = new ExpenseDAL();
 
         CommonValidator.ValidationResult result;
@@ -67,6 +68,20 @@ namespace BLLayer.Expense
                 return CommonValidator.ValidationResult.StoreProcedureError;
             }
 
+        }
+
+        public CommonValidator.ValidationResult DateValidatorIntoExpenseBll()
+        {
+            //  Date Validation
+            result = CommonValidator.ValidateDateRange(fromDate, toDate);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+
+
+            return CommonValidator.ValidationResult.Success;
         }
     }
 }

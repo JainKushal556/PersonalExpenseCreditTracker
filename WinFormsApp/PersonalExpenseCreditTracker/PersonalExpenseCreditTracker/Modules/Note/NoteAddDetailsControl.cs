@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,9 +15,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 {
     public partial class NoteAddDetailsControl : Form
     {
-       
-        private int currentPage = 1;
-        private int pageSize = 0;
         private int selectedColorId = 0;
         private int selectedPriorityId = 0;
         

@@ -34,7 +34,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             InitializeComponent();
             StyleCreditGrid();
             ApplyRoundCorners();
-            //dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             this.Resize += CreditControl_Resize;
             txtSearch.TextChanged += txtSearch_TextChanged;
 
@@ -83,8 +82,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
             tsmiDate.Width = cmsFilter.Width;
             tsmiCategory.Width = cmsFilter.Width;
-            //tsmiSubCategory= cmsFilter.Width;
-            //tsmiAmount = cmsFilter.Width;
         }
 
         private void StyleCreditGrid()  
@@ -135,8 +132,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             dgvCreditDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
             dgvCreditDataTable.DefaultCellStyle.BackColor = Color.White;
             dgvCreditDataTable.DefaultCellStyle.ForeColor = Color.Black;
-            //dgvCreditDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dgvCreditDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
             dgvCreditDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvCreditDataTable.RowTemplate.Height = 40;
             dgvCreditDataTable.RowHeadersVisible = false;
@@ -503,15 +498,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             ShowFilterPanel(pnlAmountFilter);
         }
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
         private void HideAllFilterPanels()
         {
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
-            pnlSearch.Visible = false;
             pnlAmountFilter.Visible = false;
             pnlSubCategoryFilter.Visible = false;
         }
@@ -539,24 +529,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
       
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-            
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y                     
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
 
 
         private void DesignContextMenu()

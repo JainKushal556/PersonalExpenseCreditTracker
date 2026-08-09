@@ -69,7 +69,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnLastPage = new System.Windows.Forms.Button();
             this.panelExportReport = new System.Windows.Forms.Panel();
-            this.btnSerach = new System.Windows.Forms.Button();
             this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -117,7 +116,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.lblToDate = new System.Windows.Forms.Label();
             this.pnlSearchFilter = new System.Windows.Forms.Panel();
             this.pnlSearchHeader = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlSearchTxt = new System.Windows.Forms.Panel();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlPersonFilter = new System.Windows.Forms.Panel();
@@ -610,7 +609,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // panelExportReport
             // 
             this.panelExportReport.BackColor = System.Drawing.Color.Transparent;
-            this.panelExportReport.Controls.Add(this.btnSerach);
+            this.panelExportReport.Controls.Add(this.pnlSearchFilter);
             this.panelExportReport.Controls.Add(this.pnlButtonControls);
             this.panelExportReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelExportReport.Location = new System.Drawing.Point(8, 5);
@@ -619,20 +618,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panelExportReport.Padding = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.panelExportReport.Size = new System.Drawing.Size(1137, 50);
             this.panelExportReport.TabIndex = 0;
-            // 
-            // btnSerach
-            // 
-            this.btnSerach.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSerach.FlatAppearance.BorderSize = 0;
-            this.btnSerach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSerach.Image = global::PersonalExpenseCreditTracker.Properties.Resources.search;
-            this.btnSerach.Location = new System.Drawing.Point(8, 5);
-            this.btnSerach.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSerach.Name = "btnSerach";
-            this.btnSerach.Size = new System.Drawing.Size(53, 40);
-            this.btnSerach.TabIndex = 4;
-            this.btnSerach.UseVisualStyleBackColor = true;
-            this.btnSerach.Click += new System.EventHandler(this.btnSerach_Click);
+
             // 
             // pnlButtonControls
             // 
@@ -1181,59 +1167,54 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.pnlSearchFilter.BackColor = System.Drawing.Color.Transparent;
             this.pnlSearchFilter.Controls.Add(this.pnlSearchHeader);
-            this.pnlSearchFilter.Location = new System.Drawing.Point(400, 390);
+            this.pnlSearchFilter.Location = new System.Drawing.Point(-1, -1);
             this.pnlSearchFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSearchFilter.Name = "pnlSearchFilter";
-            this.pnlSearchFilter.Size = new System.Drawing.Size(349, 48);
+            this.pnlSearchFilter.Size = new System.Drawing.Size(417, 46);
             this.pnlSearchFilter.TabIndex = 11;
             // 
             // pnlSearchHeader
             // 
-            this.pnlSearchHeader.Controls.Add(this.btnSearch);
             this.pnlSearchHeader.Controls.Add(this.pnlSearchTxt);
             this.pnlSearchHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSearchHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlSearchHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSearchHeader.Name = "pnlSearchHeader";
             this.pnlSearchHeader.Padding = new System.Windows.Forms.Padding(5, 15, 5, 10);
-            this.pnlSearchHeader.Size = new System.Drawing.Size(349, 48);
+            this.pnlSearchHeader.Size = new System.Drawing.Size(417, 46);
             this.pnlSearchHeader.TabIndex = 0;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(243, 7);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(92, 32);
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
             // 
             // pnlSearchTxt
             // 
             this.pnlSearchTxt.BackColor = System.Drawing.Color.White;
             this.pnlSearchTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSearchTxt.Controls.Add(this.pictureBox1);
             this.pnlSearchTxt.Controls.Add(this.txtSearch);
-            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 7);
+            this.pnlSearchTxt.Location = new System.Drawing.Point(5, 4);
             this.pnlSearchTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSearchTxt.Name = "pnlSearchTxt";
             this.pnlSearchTxt.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.pnlSearchTxt.Size = new System.Drawing.Size(226, 32);
+            this.pnlSearchTxt.Size = new System.Drawing.Size(403, 36);
             this.pnlSearchTxt.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.loupe__1_;
+            this.pictureBox1.Location = new System.Drawing.Point(4, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(28, 25);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
             // 
             // txtSearch
             // 
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(8, 4);
+            this.txtSearch.Location = new System.Drawing.Point(45, 5);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(213, 23);
+            this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -1429,7 +1410,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.Controls.Add(this.pnlStatusFilter);
             this.Controls.Add(this.pnlPaymentFilter);
             this.Controls.Add(this.pnlPersonFilter);
-            this.Controls.Add(this.pnlSearchFilter);
             this.Controls.Add(this.pnlDateFilter);
             this.Controls.Add(this.pnlAmountFilter);
             this.Controls.Add(this.tableLayoutPanelMainData);
@@ -1456,6 +1436,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panelExportReport.ResumeLayout(false);
+            this.pnlSearchFilter.ResumeLayout(false);
+            this.pnlSearchHeader.ResumeLayout(false);
+            this.pnlSearchTxt.ResumeLayout(false);
+            this.pnlSearchTxt.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlButtonControls.ResumeLayout(false);
             this.pnlButtonControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLentDataTable)).EndInit();
@@ -1516,7 +1501,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Label labelTotalTransactionNumber;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMainData;
         private System.Windows.Forms.Panel panelExportReport;
-        private System.Windows.Forms.Button btnExportReport;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblShowing;
         private System.Windows.Forms.Label lblStartingPageNumber;
@@ -1542,8 +1526,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemainingAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeadline;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
         private System.Windows.Forms.ToolStripMenuItem tsmiAmount;
@@ -1551,7 +1533,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label lblMinAmountFilter;
         private System.Windows.Forms.Button btnAmountClose;
-        private System.Windows.Forms.Button btnSerach;
         private System.Windows.Forms.Panel pnlButtonControls;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnFilter;
@@ -1573,8 +1554,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Label lblToDate;
         private System.Windows.Forms.Panel pnlSearchFilter;
         private System.Windows.Forms.Panel pnlSearchHeader;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel pnlSearchTxt;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ToolStripMenuItem tsmiPerson;
         private System.Windows.Forms.ToolStripMenuItem tsmiStatus;
@@ -1594,9 +1575,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Button btnStatusClose;
-            private System.Windows.Forms.Panel pnlCategoryFilter;
-        private System.Windows.Forms.Panel pnlSearch;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCategory;
         private System.Windows.Forms.Panel pnlMinAmountfilter;
         private System.Windows.Forms.TextBox txtMinAmount;
         private System.Windows.Forms.Label lblMaxAmountFilter;
