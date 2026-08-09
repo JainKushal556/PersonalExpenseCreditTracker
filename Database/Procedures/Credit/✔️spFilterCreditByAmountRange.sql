@@ -31,6 +31,19 @@ BEGIN
         SELECT 'MinAmount cannot be greater than MaxAmount' AS MESSAGE
         RETURN
     END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblCredit
+        WHERE UserID = @UserID
+        AND Amount >= @MinAmount
+        AND Amount <= @MaxAmount
+    )
+    BEGIN
+        SELECT 'No Record Found' AS MESSAGE
+        RETURN
+    END
     
     SELECT 
         CR.CreditID,

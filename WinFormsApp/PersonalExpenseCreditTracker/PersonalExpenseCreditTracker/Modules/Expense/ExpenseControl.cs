@@ -336,6 +336,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
             if (dataTable.Rows.Count <= 0)
             {
+                MessageBox.Show("No Record Found",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
                 return false;
             }
 
