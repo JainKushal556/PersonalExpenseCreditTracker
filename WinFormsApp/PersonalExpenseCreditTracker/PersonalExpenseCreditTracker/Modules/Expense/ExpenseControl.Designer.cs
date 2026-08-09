@@ -1013,7 +1013,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtMaxAmount.Enter += new System.EventHandler(this.txtMaxAmount_Enter);
             this.txtMaxAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMaxAmount_KeyDown);
             this.txtMaxAmount.Leave += new System.EventHandler(this.txtMaxAmount_Leave);
-            this.txtMaxAmount.MouseLeave += new System.EventHandler(this.txtMaxAmount_Leave);
             // 
             // lblMaxAmountFilter
             // 
@@ -1056,11 +1055,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtMinAmount.Name = "txtMinAmount";
             this.txtMinAmount.Size = new System.Drawing.Size(179, 30);
             this.txtMinAmount.TabIndex = 0;
-            this.txtMinAmount.Click += new System.EventHandler(this.txtMinAmount_Click);
             this.txtMinAmount.Enter += new System.EventHandler(this.txtMinAmount_Enter);
             this.txtMinAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMinAmount_KeyDown);
             this.txtMinAmount.Leave += new System.EventHandler(this.txtMinAmount_Leave);
-            this.txtMinAmount.MouseLeave += new System.EventHandler(this.txtMinAmount_Leave);
             // 
             // btnAmountClose
             // 
