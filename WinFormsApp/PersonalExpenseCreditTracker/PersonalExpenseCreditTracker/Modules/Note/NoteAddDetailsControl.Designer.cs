@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Note
+namespace PersonalExpenseCreditTracker.Modules.Note
 {
     partial class NoteAddDetailsControl
     {
@@ -675,11 +675,7 @@
         private System.Windows.Forms.Panel pnlCoralColor;
         private System.Windows.Forms.Panel pnlMintColor;
         private System.Windows.Forms.Panel pnlIndigoColor;
-<<<<<<< HEAD
-            private System.Windows.Forms.Label label2;
-            private System.Windows.Forms.Label lblPriorityError;
-}
-=======
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblPriorityError;
     }
->>>>>>> origin/main
 }
