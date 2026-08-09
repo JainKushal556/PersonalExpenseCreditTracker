@@ -19,14 +19,15 @@ BEGIN
         RETURN;
     END;
     
-    -- Fetch all Credit Categories for the User (both Active and Inactive for Settings UI)
+    -- Fetch Active Credit Categories for the User
     SELECT 
         CategoryID,
         CategoryName,
         IsDefault,
         IsActive
     FROM tblCreditCategory
-    WHERE (UserID IS NULL OR UserID = @UserID)
+    WHERE IsActive = 1
+      AND (UserID IS NULL OR UserID = @UserID)
     ORDER BY IsDefault DESC, CategoryName ASC;
 
 END;

@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE spGetExpenseCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetActiveAndDeactiveCreditCategoriesByUserID
 (
     @UserID INT
 )
@@ -19,15 +19,14 @@ BEGIN
         RETURN;
     END;
     
-    -- Fetch Active Expense Categories for the User
+    -- Fetch both Active and Inactive Credit Categories for Settings UI
     SELECT 
         CategoryID,
         CategoryName,
         IsDefault,
         IsActive
-    FROM tblExpenseCategory
-    WHERE IsActive = 1
-      AND (UserID IS NULL OR UserID = @UserID)
+    FROM tblCreditCategory
+    WHERE (UserID IS NULL OR UserID = @UserID)
     ORDER BY IsDefault DESC, CategoryName ASC;
 
 END;

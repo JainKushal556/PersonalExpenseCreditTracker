@@ -3628,7 +3628,48 @@ BEGIN
         RETURN;
     END;
     
-    -- Fetch all Credit Categories for the User (both Active and Inactive for Settings UI)
+    -- Fetch Active Credit Categories for the User
+    SELECT 
+        CategoryID,
+        CategoryName,
+        IsDefault,
+        IsActive
+    FROM tblCreditCategory
+    WHERE IsActive = 1
+      AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, CategoryName ASC;
+
+END;
+GO
+
+-- ==========================================================
+
+-- SP: ✔️spGetActiveAndDeactiveCreditCategoriesByUserID.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetActiveAndDeactiveCreditCategoriesByUserID
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT OFF;
+    
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
+    END;
+    
+    -- Fetch both Active and Inactive Credit Categories for Settings UI
     SELECT 
         CategoryID,
         CategoryName,
@@ -3640,10 +3681,6 @@ BEGIN
 
 END;
 GO
-
-
-GO
-
 
 -- ==========================================================
 
@@ -3672,7 +3709,50 @@ BEGIN
         RETURN;
     END;
     
-    -- Fetch all Credit SubCategories for the User (both Active and Inactive for Settings UI)
+    -- Fetch Active Credit SubCategories for the User
+    SELECT 
+        SubCategoryID,
+        CategoryID,
+        UserID,
+        SubCategoryName,
+        IsDefault,
+        IsActive
+    FROM tblCreditSubCategory
+    WHERE IsActive = 1
+      AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, SubCategoryName ASC;
+
+END;
+GO
+
+-- ==========================================================
+
+-- SP: ✔️spGetActiveAndDeactiveCreditSubCategoriesByUserID.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetActiveAndDeactiveCreditSubCategoriesByUserID
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT OFF;
+    
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
+    END;
+    
+    -- Fetch both Active and Inactive Credit SubCategories for Settings UI
     SELECT 
         SubCategoryID,
         CategoryID,
@@ -3686,10 +3766,6 @@ BEGIN
 
 END;
 GO
-
-
-GO
-
 
 -- ==========================================================
 
@@ -3718,7 +3794,48 @@ BEGIN
         RETURN;
     END;
     
-    -- Fetch all Expense Categories for the User (both Active and Inactive for Settings UI)
+    -- Fetch Active Expense Categories for the User
+    SELECT 
+        CategoryID,
+        CategoryName,
+        IsDefault,
+        IsActive
+    FROM tblExpenseCategory
+    WHERE IsActive = 1
+      AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, CategoryName ASC;
+
+END;
+GO
+
+-- ==========================================================
+
+-- SP: ✔️spGetActiveAndDeactiveExpenseCategoriesByUserID.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetActiveAndDeactiveExpenseCategoriesByUserID
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT OFF;
+    
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
+    END;
+    
+    -- Fetch both Active and Inactive Expense Categories for Settings UI
     SELECT 
         CategoryID,
         CategoryName,
@@ -3730,10 +3847,6 @@ BEGIN
 
 END;
 GO
-
-
-GO
-
 
 -- ==========================================================
 
@@ -3762,7 +3875,50 @@ BEGIN
         RETURN;
     END;
     
-    -- Fetch all Expense SubCategories for the User (both Active and Inactive for Settings UI)
+    -- Fetch Active Expense SubCategories for the User
+    SELECT 
+        SubCategoryID,
+        CategoryID,
+        UserID,
+        SubCategoryName,
+        IsDefault,
+        IsActive
+    FROM tblExpenseSubCategory
+    WHERE IsActive = 1
+      AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, SubCategoryName ASC;
+
+END;
+GO
+
+-- ==========================================================
+
+-- SP: ✔️spGetActiveAndDeactiveExpenseSubCategoriesByUserID.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetActiveAndDeactiveExpenseSubCategoriesByUserID
+(
+    @UserID INT
+)
+AS
+BEGIN
+    SET NOCOUNT OFF;
+    
+    -- Validate User
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
+    END;
+    
+    -- Fetch both Active and Inactive Expense SubCategories for Settings UI
     SELECT 
         SubCategoryID,
         CategoryID,
@@ -3776,7 +3932,6 @@ BEGIN
 
 END;
 GO
-
 
 -- ==========================================================
 
