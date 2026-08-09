@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using WinFormsSortOrder = System.Windows.Forms.SortOrder;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Common;
 
@@ -29,6 +30,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
+        private string sortedColumn = "CreditAt";
+        private System.Windows.Forms.SortOrder currentSortOrder =System.Windows.Forms.SortOrder.Descending;
+
         public CreditControl() 
         {
             InitializeComponent();
@@ -187,6 +191,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
                         AllCreditData = dt;
                         masterData = dt.Copy();
+                        sortedColumn = "CreditAt";
+                        currentSortOrder = System.Windows.Forms.SortOrder.Descending;
                         currentPage = 1;
                         ShowCurrentPage();
                         UpdateCreditSummaryCards();
@@ -320,12 +326,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                     break;
             }
         }
+
         private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
         {
-            e.Paint(e.CellBounds,
-                DataGridViewPaintParts.Background |
-                DataGridViewPaintParts.Border);
-
+            e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
             int iconSize = 16;
             int spacing = 6;
 
@@ -334,23 +338,91 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             int totalWidth = iconSize + spacing + (int)textSize.Width;
 
             int startX = e.CellBounds.X + (e.CellBounds.Width - totalWidth) / 2;
+
             int iconY = e.CellBounds.Y + (e.CellBounds.Height - iconSize) / 2;
 
             e.Graphics.DrawImage(icon, startX, iconY, iconSize, iconSize);
 
-            using (Brush brush = new SolidBrush(Color.FromArgb(80, 60, 180)))
+            using (Brush brush =
+                new SolidBrush(Color.FromArgb(80, 60, 180)))
             {
-                e.Graphics.DrawString(
-                    text,
-                    e.CellStyle.Font,
-                    brush,
-                    startX + iconSize + spacing,
-                    e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2);
+                float textX = startX + iconSize + spacing;
+
+                float textY = e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2;
+
+                e.Graphics.DrawString(text, e.CellStyle.Font, brush, textX, textY);
             }
 
             e.Handled = true;
         }
 
+        private void dgvCreditDataTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            if (e.ColumnIndex < 0)
+                return;
+
+            DataGridViewColumn column = dgvCreditDataTable.Columns[e.ColumnIndex];
+
+            string columnName = column.DataPropertyName;
+
+            //  sortable columns
+            if (columnName != "CreditAt" &&
+                columnName != "Amount" &&
+                columnName != "CategoryName" &&
+                columnName != "SubCategoryName" &&
+                columnName != "PaymentName")
+            {
+                return;
+            }
+
+            // Same column click ASC <-> DESC
+            if (sortedColumn == columnName)
+            {
+                currentSortOrder =
+                    currentSortOrder == WinFormsSortOrder.Ascending
+                    ? WinFormsSortOrder.Descending
+                    : WinFormsSortOrder.Ascending;
+            }
+            else
+            {
+
+                sortedColumn = columnName;
+                currentSortOrder = WinFormsSortOrder.Ascending;
+            }
+
+            ApplyCreditSort();
+
+            currentPage = 1;
+
+            ShowCurrentPage();
+        }
+
+        private void ApplyCreditSort()
+        {
+            if (string.IsNullOrEmpty(sortedColumn) ||
+                currentSortOrder == WinFormsSortOrder.None)
+                return;
+
+            if (AllCreditData == null ||
+                AllCreditData.Rows.Count == 0)
+                return;
+
+            if (!AllCreditData.Columns.Contains(sortedColumn))
+                return;
+
+            DataView view = AllCreditData.DefaultView;
+
+            string direction =
+                currentSortOrder == WinFormsSortOrder.Ascending
+                ? "ASC"
+                : "DESC";
+
+            view.Sort =
+                "[" + sortedColumn + "] " + direction;
+
+            AllCreditData = view.ToTable();
+        }
         private void ShowCurrentPage()
         {
             DataTable pageTable = AllCreditData.Clone();
