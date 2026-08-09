@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +20,26 @@ namespace BLLayer.Borrow
         public string description { get; set; }
         public string returnAmount { get; set; }
         public DateTime returnDate { get; set; }
-
+        public DateTime fromDate { get; set; }
+        public DateTime toDate { get; set; }
         private BorrowDAL borrowDal = new BorrowDAL();
         // Stores the validation result
         CommonValidator.ValidationResult result;
 
+        public CommonValidator.ValidationResult DateValidatorIntoBorrowBll()
+        {
+            //  Date Validation
+            result = CommonValidator.ValidateDateRange(fromDate, toDate);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            return CommonValidator.ValidationResult.Success;
+        }
+
         // Validates all user input before saving the data
-        public CommonValidator.ValidationResult DataValidatorIntoLentBll()
+        public CommonValidator.ValidationResult DataValidatorIntoBorrowBll()
         {
             //  Person Validation
             result = CommonValidator.ValidatePerson(personId);
@@ -145,5 +158,6 @@ namespace BLLayer.Borrow
                 return CommonValidator.ValidationResult.StoreProcedureError;
             }
         }
+
     }
 }

@@ -441,7 +441,26 @@ VALUES
 (4,3,2,1,6000.00,0.00,6000.00,'20260405','20260901','Home renovation short-term loan'),
 (4,10,7,5,10000.00,4000.00,6000.00,'20260410','20260810','Small business start-up loan'),
 (5,5,1,2,15000.00,15000.00,0.00,'20260301','20260601','Security deposit assistance'),
-(5,9,9,3,3500.00,500.00,3000.00,'20260310','20260510','Personal emergency cash advance');
+(5,9,9,3,3500.00,500.00,3000.00,'20260310','20260510','Personal emergency cash advance'),
+
+-- Additional Realistic Lent Records (User 5 - 10 New Records)
+(5,5,10,1,2000.00,0.00,2000.00,'20260712','20260825','Lent for college semester textbook purchase'),
+(5,9,2,2,6000.00,6000.00,0.00,'20260605','20260710','Lent for urgent smartphone screen repair'),
+(5,5,10,5,10000.00,3000.00,7000.00,'20260515','20260905','Lent for hostel room advance deposit'),
+(5,9,8,3,2500.00,0.00,2500.00,'20260401','20260530','Lent for monthly coaching fee gap'),
+(5,5,1,2,400.00,400.00,0.00,'20260801','20260804','Lent cash for train ticket emergency'),
+(5,9,10,1,4500.00,0.00,4500.00,'20260720','20260910','Lent for web development workshop registration'),
+(5,5,2,5,18000.00,6000.00,12000.00,'20260610','20261015','Lent for small business equipment advance'),
+(5,9,7,2,1500.00,1500.00,0.00,'20260705','20260725','Lent for electricity bill payment advance'),
+(5,5,10,1,5000.00,0.00,5000.00,'20260728','20260901','Lent for semester project hardware components'),
+(5,9,6,2,3000.00,3000.00,0.00,'20260625','20260731','Lent for freelance design asset purchase'),
+
+-- Additional Lent Records for Other Users
+(1,1,2,1,12000.00,0.00,12000.00,'20260702','20260920','Lent for office laptop purchase advance'),
+(1,1,10,2,3500.00,3500.00,0.00,'20260615','20260715','Lent for bike service expense support'),
+(2,2,1,1,4500.00,0.00,4500.00,'20260710','20260820','Lent for raw material fabric purchase'),
+(2,6,10,5,8000.00,2000.00,6000.00,'20260520','20260910','Lent for photo studio flash lights purchase'),
+(3,4,2,2,5000.00,5000.00,0.00,'20260705','20260801','Lent for college fest event sponsorship');
 GO
 
 -- Insert Borrow Transaction Records
@@ -457,7 +476,31 @@ VALUES
 (4,3,1,1,8000.00,0.00,8000.00,'20260412','20260910','Borrowed for house repair expense'),
 (4,10,8,5,12000.00,5000.00,7000.00,'20260415','20260815','Borrowed for freelance setup gear'),
 (5,5,7,2,10000.00,10000.00,0.00,'20260305','20260605','Borrowed for vehicle maintenance cost'),
-(5,9,9,3,2500.00,500.00,2000.00,'20260315','20260515','Borrowed for urgent travel booking');
+(5,9,9,3,2500.00,500.00,2000.00,'20260315','20260515','Borrowed for urgent travel booking'),
+
+-- Additional Realistic Borrow Records (User 5 & Others)
+(5,5,10,1,1500.00,0.00,1500.00,'20260710','20260830','Borrowed for semester exam registration fee gap'),
+(5,9,2,2,8500.00,8500.00,0.00,'20260601','20260715','Borrowed for new smartphone emergency purchase'),
+(5,5,10,5,12000.00,4000.00,8000.00,'20260520','20260901','Borrowed for laptop RAM & SSD hardware upgrade'),
+(5,9,8,3,3000.00,0.00,3000.00,'20260405','20260605','Borrowed for hostel mess advance payment'),
+(5,5,1,2,500.00,500.00,0.00,'20260802','20260805','Borrowed cash for urgent cab fare'),
+(5,9,10,1,6500.00,0.00,6500.00,'20260725','20260915','Borrowed for online certification course fee'),
+(5,5,2,5,20000.00,5000.00,15000.00,'20260618','20261001','Borrowed for dental treatment & medical bill'),
+(5,9,7,2,1200.00,1200.00,0.00,'20260701','20260720','Borrowed for utility bill payment advance'),
+
+(1,1,2,1,15000.00,0.00,15000.00,'20260705','20260930','Borrowed for home interior paint work'),
+(1,1,10,2,4000.00,4000.00,0.00,'20260610','20260710','Borrowed for bike insurance renewal advance'),
+(1,1,6,5,25000.00,10000.00,15000.00,'20260512','20261015','Borrowed for family function travel booking'),
+
+(2,2,1,1,3500.00,0.00,3500.00,'20260715','20260825','Borrowed for boutique inventory stock advance'),
+(2,6,10,2,7000.00,7000.00,0.00,'20260620','20260725','Borrowed for DSLR camera lens rental'),
+(2,7,8,3,5500.00,0.00,5500.00,'20260420','20260630','Borrowed for emergency home plumbing repair'),
+
+(3,4,2,1,18000.00,0.00,18000.00,'20260701','20261001','Borrowed for apartment advance deposit gap'),
+(3,8,10,2,2200.00,2200.00,0.00,'20260718','20260805','Borrowed for conference registration fee'),
+
+(4,3,7,5,30000.00,12000.00,18000.00,'20260505','20261101','Borrowed for high-end graphic workstation setup'),
+(4,10,9,1,4500.00,0.00,4500.00,'20260728','20260905','Borrowed for freelance client server hosting bill');
 GO
 
 -- Insert Task Records
