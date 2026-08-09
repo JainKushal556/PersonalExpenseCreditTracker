@@ -795,6 +795,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.Size = new System.Drawing.Size(1131, 471);
             this.dgvLentDataTable.TabIndex = 3;
             this.dgvLentDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLentDataTable_CellContentClick);
+            this.dgvLentDataTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvLentDataTable_ColumnHeaderMouseClick);
             // 
             // colDate
             // 

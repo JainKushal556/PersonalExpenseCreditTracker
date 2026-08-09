@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WinFormsSortOrder = System.Windows.Forms.SortOrder;
 using System.Configuration;
 using System.Data.SqlClient;
 using PersonalExpenseCreditTracker.Common;
@@ -20,6 +21,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
+        private string sortedColumn = "LentAt";
+        private System.Windows.Forms.SortOrder currentSortOrder = System.Windows.Forms.SortOrder.Descending;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
@@ -181,8 +184,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             AllLentData = dataTable;
             masterData = dataTable.Copy();
+            sortedColumn = "LentAt";
+            currentSortOrder = System.Windows.Forms.SortOrder.Descending;
+            ApplyLentSort();
+
             currentPage = 1;
             ShowCurrentPage();
+            
         }
 
         public Boolean LoadFilteredLentData(string spName, string paramName, int filterId)
@@ -334,6 +342,80 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             colDeadline.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             colDescription.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
+        private void dgvLentDataTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex < 0)
+                return;
+
+            DataGridViewColumn column = dgvLentDataTable.Columns[e.ColumnIndex];
+
+            string columnName = column.DataPropertyName;
+
+            
+
+            //  sortable columns
+            if (columnName != "LentAt" &&
+                columnName != "PersonName" &&
+                columnName != "Amount" &&
+                columnName != "StatusName" &&
+                columnName != "PaymentName" &&
+                columnName != "ReturnedAmount" &&
+                columnName != "RemainingAmount" &&
+                columnName != "DeadlineAt" &&
+                columnName != "Description")
+            {
+                return;
+            }
+
+            // Same column click ASC <-> DESC
+            if (sortedColumn == columnName)
+            {
+                currentSortOrder =
+                    currentSortOrder == WinFormsSortOrder.Ascending
+                    ? WinFormsSortOrder.Descending
+                    : WinFormsSortOrder.Ascending;
+            }
+            else
+            {
+
+                sortedColumn = columnName;
+                currentSortOrder = WinFormsSortOrder.Ascending;
+            }
+
+            ApplyLentSort();
+
+            currentPage = 1;
+
+            ShowCurrentPage();
+        }
+
+
+
+        private void ApplyLentSort()
+        {
+            if (string.IsNullOrEmpty(sortedColumn) ||
+                currentSortOrder == WinFormsSortOrder.None)
+                return;
+
+            if (AllLentData == null ||
+                AllLentData.Rows.Count == 0)
+                return;
+
+            if (!AllLentData.Columns.Contains(sortedColumn))
+                return;
+
+            DataView view = AllLentData.DefaultView;
+
+            string direction =
+                currentSortOrder == WinFormsSortOrder.Ascending
+                ? "ASC"
+                : "DESC";
+
+            view.Sort =
+                "[" + sortedColumn + "] " + direction;
+
+            AllLentData = view.ToTable();
+        }
 
         private void ShowCurrentPage()
         {
@@ -404,30 +486,28 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
         {
-            e.Paint(e.CellBounds,
-                DataGridViewPaintParts.Background |
-                DataGridViewPaintParts.Border);
-
+            e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
             int iconSize = 16;
-            int spacing = 4;
+            int spacing = 6;
 
             SizeF textSize = e.Graphics.MeasureString(text, e.CellStyle.Font);
 
             int totalWidth = iconSize + spacing + (int)textSize.Width;
 
             int startX = e.CellBounds.X + (e.CellBounds.Width - totalWidth) / 2;
+
             int iconY = e.CellBounds.Y + (e.CellBounds.Height - iconSize) / 2;
 
             e.Graphics.DrawImage(icon, startX, iconY, iconSize, iconSize);
 
-            using (Brush brush = new SolidBrush(Color.FromArgb(80, 60, 180)))
+            using (Brush brush =
+                new SolidBrush(Color.FromArgb(80, 60, 180)))
             {
-                e.Graphics.DrawString(
-                    text,
-                    e.CellStyle.Font,
-                    brush,
-                    startX + iconSize + spacing,
-                    e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2);
+                float textX = startX + iconSize + spacing;
+
+                float textY = e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2;
+
+                e.Graphics.DrawString(text, e.CellStyle.Font, brush, textX, textY);
             }
 
             e.Handled = true;
@@ -994,6 +1074,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
+
+       
 
         
       }
