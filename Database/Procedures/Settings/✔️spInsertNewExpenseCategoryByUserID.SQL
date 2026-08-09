@@ -6,7 +6,7 @@ CREATE OR ALTER PROCEDURE spInsertNewExpenseCategoryByUserID
 )
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT OFF;
 
     DECLARE @IsDefault INT;
     DECLARE @IsActive INT;

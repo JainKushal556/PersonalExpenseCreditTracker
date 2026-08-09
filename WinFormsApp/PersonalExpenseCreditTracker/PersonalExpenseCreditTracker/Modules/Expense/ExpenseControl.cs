@@ -80,6 +80,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             LoadExpenseData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
             RegisterMouseDown(this);
+            txtFromdate.ReadOnly = true;
+            txtToDate.ReadOnly = true;
+            monthCalendarToDate.MaxDate = DateTime.Today;
 
         }
 
@@ -674,11 +677,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
         }
 
-        private void monthCalendarFromDate_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-            fromDate = e.Start.Date;
-        }
+        //private void monthCalendarFromDate_DateChanged(object sender, DateRangeEventArgs e)
+        //{
+        //    txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            
+        //}
         private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
@@ -756,6 +759,62 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void txtFromdate_TextChanged(object sender, EventArgs e)
         {
 
+            errorProvider1.Clear();
+            ExpenseBLL expenseBll = new ExpenseBLL();
+            this.fromDate = DateTime.ParseExact(
+        txtFromdate.Text.Trim(),
+        "dd-MM-yyyy",
+        System.Globalization.CultureInfo.InvariantCulture);
+            
+            expenseBll.fromDate = this.fromDate;
+            if (!string.IsNullOrWhiteSpace(txtToDate.Text) && txtToDate.Text != "Select Date")
+            {
+                this.toDate = DateTime.ParseExact(
+                    txtToDate.Text.Trim(),
+                    "dd-MM-yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture
+                );
+            }
+            else
+            {
+                this.toDate = DateTime.Now;
+            }
+            expenseBll.toDate = this.toDate;
+            CommonValidator.ValidationResult result = expenseBll.DateValidatorIntoExpenseBll();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    validFromDate = true;
+
+                    
+                        if (!LoadFilteredExpenseData(
+                                "spFilterExpenseByDateRange",
+                                Session.LogedInUser.GetUserId(),
+                                "@FromDate",
+                               fromDate,
+                                "@ToDate",
+                                 toDate))
+                        {
+                            LoadExpenseData(Session.LogedInUser.GetUserId());
+                            // MessageBox.Show("No Specific Record Exist!");
+                        }
+                        else
+                        {
+                            txtToDate.Text = DateTime.Today.Date.ToString("dd-MM-yyyy");
+                            MessageBox.Show("Apply successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    
+                   
+
+
+                    break;
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    validFromDate = false;
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("Error Occured");
+                    break;
+            }
         }
 
         private void ShowCalenderToDatePanel(Panel panel)
@@ -975,6 +1034,15 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             {
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
+        }
+
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            
+            fromDate = e.Start.Date;
+            // ইউজার দিন সিলেক্ট করার পর কেলেন্ডার পপআপ বন্ধ হয়ে যাবে
+            pnlFromDateCalenderShow.Visible = false; 
         }
 
        
