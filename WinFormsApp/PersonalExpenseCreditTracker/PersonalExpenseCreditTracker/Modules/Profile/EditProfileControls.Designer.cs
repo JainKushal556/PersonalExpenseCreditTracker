@@ -260,7 +260,7 @@
             this.lblProfileAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProfileAddress.AutoSize = true;
             this.lblProfileAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfileAddress.Location = new System.Drawing.Point(8, 18);
+            this.lblProfileAddress.Location = new System.Drawing.Point(8, 10);
             this.lblProfileAddress.Name = "lblProfileAddress";
             this.lblProfileAddress.Size = new System.Drawing.Size(85, 28);
             this.lblProfileAddress.TabIndex = 1;
@@ -271,7 +271,7 @@
             this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pin;
-            this.pictureBox7.Location = new System.Drawing.Point(11, 18);
+            this.pictureBox7.Location = new System.Drawing.Point(8, 10);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(42, 40);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -314,7 +314,7 @@
             this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gender;
-            this.pictureBox6.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox6.Location = new System.Drawing.Point(8, 4);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(42, 40);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -392,7 +392,7 @@
             this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox5.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone1;
-            this.pictureBox5.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox5.Location = new System.Drawing.Point(8, 6);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(42, 40);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -471,7 +471,7 @@
             this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox4.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail1;
-            this.pictureBox4.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox4.Location = new System.Drawing.Point(8, 6);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(42, 40);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -669,7 +669,7 @@
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__3_;
-            this.pictureBox2.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox2.Location = new System.Drawing.Point(8, 4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(42, 40);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -712,7 +712,7 @@
             this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox3.Image = global::PersonalExpenseCreditTracker.Properties.Resources.time_and_date1;
-            this.pictureBox3.Location = new System.Drawing.Point(11, 17);
+            this.pictureBox3.Location = new System.Drawing.Point(8, 5);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(42, 40);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

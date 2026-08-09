@@ -28,6 +28,18 @@ BEGIN
         SELECT 'Minimum Amount cannot be greater than Maximum Amount' AS Message;
         RETURN;
     END;
+    -- Check if record exists
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLent
+        WHERE UserID = @UserID
+          AND Amount BETWEEN @MinAmount AND @MaxAmount
+    )
+    BEGIN
+        SELECT 'No Record Found' AS Message;
+        RETURN;
+    END;
     -- Filter Lent Records
     SELECT
         L.LentID,
