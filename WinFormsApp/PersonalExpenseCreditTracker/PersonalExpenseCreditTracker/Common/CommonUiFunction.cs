@@ -18,7 +18,7 @@ namespace PersonalExpenseCreditTracker.Common
             "colRemainingAmount",
             "colDeadline"
         };
-        
+        public const decimal SqlAmountMax = 99999999.99m;
         private static string dateColumn = "";
 
 
@@ -275,13 +275,13 @@ namespace PersonalExpenseCreditTracker.Common
         {
             string search = txtBox.Text.Trim();
 
-            // সব cell reset
+            // সব cell reset (Revert to column default styles)
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 foreach (DataGridViewCell cell in row.Cells)
                 {
-                    cell.Style.BackColor = Color.White;
-                    cell.Style.ForeColor = Color.Black;
+                    cell.Style.BackColor = Color.Empty;
+                    cell.Style.ForeColor = Color.Empty;
                 }
             }
 
@@ -305,8 +305,8 @@ namespace PersonalExpenseCreditTracker.Common
                 {
                     if (dgv.Columns.Contains(NonHighlightableColumn))
                     {
-                        row.Cells[NonHighlightableColumn].Style.BackColor = Color.White;
-                        row.Cells[NonHighlightableColumn].Style.ForeColor = Color.Black;
+                        row.Cells[NonHighlightableColumn].Style.BackColor = Color.Empty;
+                        row.Cells[NonHighlightableColumn].Style.ForeColor = Color.Empty;
                     }
                 }
             }

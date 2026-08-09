@@ -58,5 +58,75 @@ namespace DALayer.Note
                 }
             }
         }
+
+        public Boolean UpdateNoteToDb()
+        {
+            string connectionstring = Common.SqlHelper.connectionString;
+            SqlConnection sqlConnection = null;
+            int rowsEffected = 0;
+            try
+            {
+                sqlConnection = new SqlConnection(connectionstring);
+                using (SqlCommand sqlCommand = new SqlCommand("spUpdateNote", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@UserID", userId);
+                    sqlCommand.Parameters.AddWithValue("@NoteID", noteId);
+                    sqlCommand.Parameters.AddWithValue("@PriorityID", priorityId);
+                    sqlCommand.Parameters.AddWithValue("@NoteColorID", colorId);
+                    sqlCommand.Parameters.AddWithValue("@NoteTitle", noteTitle);
+                    sqlCommand.Parameters.AddWithValue("@Description", description);
+
+                    sqlConnection.Open();
+                    rowsEffected = sqlCommand.ExecuteNonQuery();
+                    return ReturnBoolean(rowsEffected);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ReturnBoolean(rowsEffected);
+            }
+            finally
+            {
+                if (sqlConnection != null)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
+
+        public Boolean DeleteNoteToDb()
+        {
+            string connectionstring = Common.SqlHelper.connectionString;
+            SqlConnection sqlConnection = null;
+            int rowsEffected = 0;
+            try
+            {
+                sqlConnection = new SqlConnection(connectionstring);
+                using (SqlCommand sqlCommand = new SqlCommand("spDeleteNote", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@UserID", userId);
+                    sqlCommand.Parameters.AddWithValue("@NoteID", noteId);
+
+                    sqlConnection.Open();
+                    rowsEffected = sqlCommand.ExecuteNonQuery();
+                    return ReturnBoolean(rowsEffected);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ReturnBoolean(rowsEffected);
+            }
+            finally
+            {
+                if (sqlConnection != null)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
     }
 }

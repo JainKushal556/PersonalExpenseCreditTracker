@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Common;
+using BLLayer.Credit;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Credit
 {
@@ -29,12 +31,22 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
+
+        private bool ignoreEvents { get; set; }
+        private int lastSelectedCategoryId { get; set; }
+        private int lastSelectedSubCategoryId { get; set; }
+
+        private DateTime fromDate { get; set; }
+        private DateTime toDate { get; set; }
+        private bool validFromDate { get; set; }
+        private bool validToDate { get; set; }
+        private static readonly string[] DateFormats = { "dd-MM-yyyy", "d-M-yyyy", "dd/MM/yyyy", "d/M/yyyy", "yyyy-MM-dd" };
+        private ErrorProvider errorProvider1 = new ErrorProvider();
         public CreditControl() 
         {
             InitializeComponent();
             StyleCreditGrid();
             ApplyRoundCorners();
-            //dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             this.Resize += CreditControl_Resize;
             txtSearch.TextChanged += txtSearch_TextChanged;
 
@@ -51,30 +63,42 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void CreditControl_Load(object sender, EventArgs e)
         {
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+            cmbCategory.Text = "Select Category";
+            cmbCategory.ForeColor = Color.Gray;
+            cmbCategorytxt.Text = "Enter Category";
+            cmbCategorytxt.ForeColor = Color.Gray;
+            cmbSubCategory.Text = "Enter SubCategory";
+            cmbSubCategory.ForeColor = Color.Gray;
+
             dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             ApplyRoundCorners();
-            this.MouseDown += CreditControls_MouseDown;
-            RegisterMouseDown(this);
             pageSize = GetRowsPerPage();
             int userID = Session.LogedInUser.GetUserId(); 
             LoadCreditData(userID);
             HideAllFilterPanels();
             DesignContextMenu();
             cmsFilter.Opening += cmsFilter_Opening;
-
+            RegisterMouseDown(this);
+            txtFromdate.ReadOnly = true;
+            txtToDate.ReadOnly = true;
+            monthCalendarToDate.MaxDate = DateTime.Today;
+            monthCalendarFromDate.MaxDate = DateTime.Today;
+            ignoreEvents = false;
         }
 
         private void cmsFilter_Opening(object sender, CancelEventArgs e)
         {
             tsmiDate.AutoSize = false;
             tsmiCategory.AutoSize = false;
-            tsmiSubCategory.AutoSize = false;
+           
             tsmiAmount.AutoSize = false;
 
             tsmiDate.Width = cmsFilter.Width;
             tsmiCategory.Width = cmsFilter.Width;
-            //tsmiSubCategory= cmsFilter.Width;
-            //tsmiAmount = cmsFilter.Width;
         }
 
         private void StyleCreditGrid()  
@@ -125,8 +149,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             dgvCreditDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
             dgvCreditDataTable.DefaultCellStyle.BackColor = Color.White;
             dgvCreditDataTable.DefaultCellStyle.ForeColor = Color.Black;
-            //dgvCreditDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dgvCreditDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
             dgvCreditDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvCreditDataTable.RowTemplate.Height = 40;
             dgvCreditDataTable.RowHeadersVisible = false;
@@ -467,36 +489,55 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         }
 
-        private void btncategoryClose_Click(object sender, EventArgs e)
+        private void ResetCategoryAndSubCategoryFilters()
         {
+            ignoreEvents = true;
+            if (cmbCategory.Items.Count > 0) cmbCategory.SelectedIndex = 0;
+            if (cmbSubCategory.Items.Count > 0) cmbSubCategory.SelectedIndex = 0;
+            if (cmbCategorytxt.Items.Count > 0) cmbCategorytxt.SelectedIndex = 0;
+            lastSelectedCategoryId = -1;
+            lastSelectedSubCategoryId = -1;
+            ignoreEvents = false;
+
             pnlCategoryFilter.Visible = false;
+            pnlSubCategoryFilter.Visible = false;
+
+            LoadCreditData(Session.LogedInUser.GetUserId());
         }
 
-        
+        private void btncategoryClose_Click(object sender, EventArgs e)
+        {
+            ResetCategoryAndSubCategoryFilters();
+        }
 
         private void tsmiDate_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlDateFilter);
+            ignoreEvents = false;
         }
 
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
+            ignoreEvents = false;
+
+            Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategory);
         }
 
         private void tsmiSubCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlSubCategoryFilter);
+            ignoreEvents = false;
+            Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategorytxt);
         }
 
         private void tsmiAmount_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlAmountFilter);
+            ignoreEvents = false;
         }
-
         private void HideAllFilterPanels()
         {
-            HidePopupPanels();
             pnlDateFilter.Visible = false;
             pnlCategoryFilter.Visible = false;
             pnlAmountFilter.Visible = false;
@@ -524,6 +565,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             panel.Visible = true;
         }
 
+      
+
+
+
 
         private void DesignContextMenu()
         {
@@ -537,15 +582,20 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             tsmiCategory.AutoSize = false;
             tsmiCategory.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar__1_;
+            tsmiAmount.AutoSize = false;
+            tsmiAmount.Height = 30;
+
+            tsmiDate.Image = Properties.Resources.calendar;
             tsmiCategory.Image = Properties.Resources.shop;
+            tsmiAmount.Image = Properties.Resources.money;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsmiCategory.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
             tsmiCategory.ImageScaling = ToolStripItemImageScaling.None;
-
+            tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
 
         }
 
@@ -554,16 +604,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
-
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
-
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width - 300,
-                p.Y + 35);
-
+            Point p = txtFromdate.PointToScreen(
+                      new Point(0, txtFromdate.Height + 10));
+            p = this.PointToClient(p);
+            panel.Location = p;
             panel.BringToFront();
             panel.Visible = true;
         }
@@ -580,13 +625,25 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void CreditControls_MouseDown(object sender, MouseEventArgs e)
         {
             Point mousePos = this.PointToClient(Control.MousePosition);
-
             // From Date Calendar
             if (pnlFromDateCalenderShow.Visible)
             {
-                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle).Contains(Control.MousePosition) &&
-                    !txtFromdate.RectangleToScreen(txtFromdate.ClientRectangle).Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlFromDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderFromDate.RectangleToScreen(
+                        picCalenderFromDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtFromdate.RectangleToScreen(
+                        txtFromdate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlFromDateCalenderShow.Visible = false;
                 }
@@ -595,9 +652,22 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // To Date Calendar
             if (pnlToDateCalenderShow.Visible)
             {
-                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle).Contains(Control.MousePosition) &&
-                    !txtToDate.RectangleToScreen(txtToDate.ClientRectangle).Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlToDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderToDate.RectangleToScreen(
+                        picCalenderToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtToDate.RectangleToScreen(
+                        txtToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlToDateCalenderShow.Visible = false;
                 }
@@ -609,14 +679,14 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             HidePopupPanels();
 
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
 
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width - 70,
-                p.Y + 35);
+            Point p = txtToDate.PointToScreen(
+                new Point(0, txtToDate.Height + 10));
+
+            p = this.PointToClient(p);
+
+            panel.Location = p;
 
             panel.BringToFront();
             panel.Visible = true;
@@ -636,7 +706,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
             else
             {
-                pnlToDateCalenderShow.Visible = false;
                 ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
             }
         }
@@ -649,75 +718,51 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
             else
             {
-                pnlFromDateCalenderShow.Visible = false;
                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
             }
         }
 
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
-            HidePopupPanels();
+            ignoreEvents = true;
+
+            txtFromdate.Clear();
+            txtToDate.Clear();
+
+            this.fromDate = DateTime.MinValue;
+            this.toDate = DateTime.MinValue;
+            this.validFromDate = false;
+            this.validToDate = false;
+
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
             pnlDateFilter.Visible = false;
-        }
 
-        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-            pnlFromDateCalenderShow.Visible = false;
-        }
-
-        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
-            pnlToDateCalenderShow.Visible = false;
-        }
-
-                private void txtFromdate_Click(object sender, EventArgs e)
-        {
-            pnlToDateCalenderShow.Visible = false;
-            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
-        }
-
-        private void txtToDate_Click(object sender, EventArgs e)
-        {
-            pnlFromDateCalenderShow.Visible = false;
-            ShowCalenderToDatePanel(pnlToDateCalenderShow);
-        }
-
-        private void txtFromdate_Enter(object sender, EventArgs e)
-        {
-            pnlToDateCalenderShow.Visible = false;
-            ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
-        }
-
-        private void txtToDate_Enter(object sender, EventArgs e)
-        {
-            pnlFromDateCalenderShow.Visible = false;
-            ShowCalenderToDatePanel(pnlToDateCalenderShow);
-        }
-
-        private void pnlDateHeader_Click(object sender, EventArgs e)
-        {
-            HidePopupPanels();
-        }
-        private void picCredit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTransction_Click(object sender, EventArgs e)
-        {
-
+            ignoreEvents = false;
+            LoadCreditData(Session.LogedInUser.GetUserId());
         }
 
         private void btnSubCategoryclose_Click(object sender, EventArgs e)
         {
-            pnlSubCategoryFilter.Visible = false;
+            ResetCategoryAndSubCategoryFilters();
         }
 
         private void btnAmountClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+            ignoreEvents = false;
+
             pnlAmountFilter.Visible = false;
+
+            LoadCreditData(Session.LogedInUser.GetUserId());
         }
 
         private void UpdateCreditSummaryCards()
@@ -748,5 +793,568 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             AllCreditData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
             ShowCurrentPage();
         }
+
+        private void pnlCategory_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnCategoryApply_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbCategory_Click(object sender, EventArgs e)
+        {
+            cmbCategory.DroppedDown = true;
+        }
+
+        private void cmbCategory_Enter(object sender, EventArgs e)
+        {
+            if (cmbCategory.Text == "Select Category")
+                cmbCategory.ForeColor = Color.Black;
+        }
+
+        private void cmbCategory_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbCategory.Text) || cmbCategory.Text == "Select Category")
+            {
+
+                cmbCategory.Text = "Select Category";
+                cmbCategory.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbCategory.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbCategorytxt_Enter(object sender, EventArgs e)
+        {
+            if (cmbCategorytxt.Text == "Select Category")
+                cmbCategorytxt.ForeColor = Color.Black;
+        }
+
+        private void cmbCategorytxt_Click(object sender, EventArgs e)
+        {
+            if (cmbCategorytxt.Items.Count <= 1)
+            {
+                Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategorytxt);
+            }
+            cmbCategorytxt.DroppedDown = true;
+        }
+
+        private void cmbCategorytxt_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbCategorytxt.Text) || cmbCategorytxt.Text == "Select Category")
+            {
+
+                cmbCategorytxt.Text = "Select Category";
+                cmbCategorytxt.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbCategorytxt.ForeColor = Color.Black;
+            }
+        }
+
+        private void cmbSubCategory_Click(object sender, EventArgs e)
+        {
+            cmbSubCategory.DroppedDown = true;
+        }
+
+        private void cmbSubCategory_Enter(object sender, EventArgs e)
+        {
+            if (cmbSubCategory.Text == "Select SubCategory")
+                cmbSubCategory.ForeColor = Color.Black;
+        }
+
+        private void cmbSubCategory_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbSubCategory.Text) || cmbSubCategory.Text == "Select SubCategory")
+            {
+
+                cmbSubCategory.Text = "Select SubCategory";
+                cmbSubCategory.ForeColor = Color.Gray;
+            }
+            else
+            {
+                cmbSubCategory.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtFromdate_Click(object sender, EventArgs e)
+        {
+            if (pnlFromDateCalenderShow.Visible)
+            {
+                pnlFromDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+            }
+        }
+
+        private void txtToDate_Click(object sender, EventArgs e)
+        {
+            if (pnlToDateCalenderShow.Visible)
+            {
+                pnlToDateCalenderShow.Visible = false;
+            }
+            else
+            {
+                ShowCalenderToDatePanel(pnlToDateCalenderShow);
+            }
+        }
+
+        private void txtMinAmount_Enter(object sender, EventArgs e)
+        {
+            if (txtMinAmount.Text == "Enter Amount")
+            {
+                txtMinAmount.Text = "";
+                txtMinAmount.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtMinAmount_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMinAmount.Text))
+            {
+                txtMinAmount.Text = "Enter Amount";
+                txtMinAmount.ForeColor = Color.Gray;
+            }
+            ExecuteAmountFilter();
+        }
+
+        private void txtMaxAmount_Enter(object sender, EventArgs e)
+        {
+            if (txtMaxAmount.Text == "Enter Amount")
+            {
+                txtMaxAmount.Text = "";
+                txtMaxAmount.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtMaxAmount_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMaxAmount.Text))
+            {
+                txtMaxAmount.Text = "Enter Amount";
+                txtMaxAmount.ForeColor = Color.Gray;
+            }
+            ExecuteAmountFilter();
+        }
+
+        private void txtMinAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ExecuteAmountFilter();
+            }
+        }
+
+        private void txtMaxAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ExecuteAmountFilter();
+            }
+        }
+
+        private void ExecuteAmountFilter()
+        {
+            if (ignoreEvents) return;
+
+            string minStr = txtMinAmount.Text.Trim();
+            string maxStr = txtMaxAmount.Text.Trim();
+
+            bool isMinProvided = !string.IsNullOrWhiteSpace(minStr) && minStr != "Enter Amount";
+            bool isMaxProvided = !string.IsNullOrWhiteSpace(maxStr) && maxStr != "Enter Amount";
+
+            if (!isMinProvided && !isMaxProvided)
+            {
+                LoadCreditData(Session.LogedInUser.GetUserId());
+                return;
+            }
+
+            decimal minValue = 0m;
+            decimal maxValue = Common.CommonUiFunction.SqlAmountMax;
+
+            if (isMinProvided)
+            {
+                if (!decimal.TryParse(minStr, out minValue) || minValue < 0)
+                {
+                    MessageBox.Show("Please enter a valid numeric Minimum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ResetAmountFilterInputsAndReloadData();
+                    return;
+                }
+            }
+
+            if (isMaxProvided)
+            {
+                if (!decimal.TryParse(maxStr, out maxValue) || maxValue < 0)
+                {
+                    MessageBox.Show("Please enter a valid numeric Maximum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ResetAmountFilterInputsAndReloadData();
+                    return;
+                }
+            }
+
+            if (minValue > maxValue)
+            {
+                MessageBox.Show("Minimum Amount cannot be greater than Maximum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ResetAmountFilterInputsAndReloadData();
+                return;
+            }
+
+            ApplyAmountFilter(minValue, maxValue);
+        }
+
+        private void ApplyAmountFilter(decimal minValue, decimal maxValue)
+        {
+            if (!LoadFilteredCreditData("spFilterCreditByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", minValue, "@MaxAmount", maxValue))
+            {
+                ResetAmountFilterInputsAndReloadData();
+            }
+        }
+
+        private void ResetAmountFilterInputsAndReloadData()
+        {
+            ignoreEvents = true;
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+            ignoreEvents = false;
+
+            LoadCreditData(Session.LogedInUser.GetUserId());
+        }
+
+        private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            fromDate = e.Start.Date;
+            txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlFromDateCalenderShow.Visible = false;
+        }
+
+        private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            toDate = e.Start.Date;
+            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            pnlToDateCalenderShow.Visible = false;
+        }
+
+        private void txtFromdate_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
+            if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+            {
+                this.fromDate = DateTime.MinValue;
+                return;
+            }
+
+            DateTime parsedFromDate;
+            if (!DateTime.TryParseExact(
+                    txtFromdate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedFromDate))
+            {
+                return;
+            }
+
+            this.fromDate = parsedFromDate;
+
+            if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+            {
+                ignoreEvents = true;
+                txtToDate.Text = DateTime.Today.ToString("dd-MM-yyyy");
+                ignoreEvents = false;
+                this.toDate = DateTime.Today;
+            }
+            else
+            {
+                DateTime parsedToDate;
+                if (DateTime.TryParseExact(
+                        txtToDate.Text.Trim(),
+                        DateFormats,
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        System.Globalization.DateTimeStyles.None,
+                        out parsedToDate))
+                {
+                    this.toDate = parsedToDate;
+                }
+            }
+
+            CreditBLL creditBll = new CreditBLL();
+            creditBll.fromDate = this.fromDate;
+            creditBll.toDate = this.toDate;
+
+            CommonValidator.ValidationResult result = creditBll.DateValidatorIntoCreditBll();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    validFromDate = true;
+                    if (!LoadFilteredCreditData(
+                            "spFilterCreditByDateRange",
+                            Session.LogedInUser.GetUserId(),
+                            "@FromDate",
+                            this.fromDate,
+                            "@ToDate",
+                            this.toDate))
+                    {
+                        ignoreEvents = true;
+                        txtFromdate.Clear();
+                        txtToDate.Clear();
+                        ignoreEvents = false;
+                        this.fromDate = DateTime.MinValue;
+                        this.toDate = DateTime.MinValue;
+
+                        LoadCreditData(Session.LogedInUser.GetUserId());
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    validFromDate = false;
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ignoreEvents = true;
+                    txtFromdate.Clear();
+                    txtToDate.Clear();
+                    ignoreEvents = false;
+                    this.fromDate = DateTime.MinValue;
+                    this.toDate = DateTime.MinValue;
+                    LoadCreditData(Session.LogedInUser.GetUserId());
+                    break;
+            }
+        }
+
+        private void txtToDate_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
+            if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+            {
+                this.toDate = DateTime.MinValue;
+                return;
+            }
+
+            DateTime parsedToDate;
+            if (!DateTime.TryParseExact(
+                    txtToDate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedToDate))
+            {
+                return;
+            }
+
+            this.toDate = parsedToDate;
+
+            if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+            {
+                return;
+            }
+
+            DateTime parsedFromDate;
+            if (DateTime.TryParseExact(
+                    txtFromdate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedFromDate))
+            {
+                this.fromDate = parsedFromDate;
+            }
+
+            CreditBLL creditBll = new CreditBLL();
+            creditBll.fromDate = this.fromDate;
+            creditBll.toDate = this.toDate;
+
+            CommonValidator.ValidationResult result = creditBll.DateValidatorIntoCreditBll();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    validFromDate = true;
+                    if (!LoadFilteredCreditData(
+                            "spFilterCreditByDateRange",
+                            Session.LogedInUser.GetUserId(),
+                            "@FromDate",
+                            this.fromDate,
+                            "@ToDate",
+                            this.toDate))
+                    {
+                        ignoreEvents = true;
+                        txtFromdate.Clear();
+                        txtToDate.Clear();
+                        ignoreEvents = false;
+                        this.fromDate = DateTime.MinValue;
+                        this.toDate = DateTime.MinValue;
+
+                        LoadCreditData(Session.LogedInUser.GetUserId());
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    validFromDate = false;
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ignoreEvents = true;
+                    txtFromdate.Clear();
+                    txtToDate.Clear();
+                    ignoreEvents = false;
+                    this.fromDate = DateTime.MinValue;
+                    this.toDate = DateTime.MinValue;
+                    LoadCreditData(Session.LogedInUser.GetUserId());
+                    break;
+            }
+        }
+
+        private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            if (cmbCategory.SelectedIndex <= 0) return;
+            if (cmbCategory.SelectedValue == null) return;
+            if (cmbCategory.SelectedValue is DataRowView) return;
+
+            int categoryId = Convert.ToInt32(cmbCategory.SelectedValue);
+
+            if (categoryId == lastSelectedCategoryId) return;
+
+            if (!LoadFilteredCreditData(
+                    "spFilterCreditByCategory",
+                    "@CategoryID",
+                    categoryId,
+                    categoryId))
+            {
+                ignoreEvents = true;
+                if (cmbCategory.Items.Count > 0) cmbCategory.SelectedIndex = 0;
+                if (cmbCategorytxt.Items.Count > 0) cmbCategorytxt.SelectedIndex = 0;
+                if (cmbSubCategory.Items.Count > 0) cmbSubCategory.SelectedIndex = 0;
+                lastSelectedCategoryId = -1;
+                lastSelectedSubCategoryId = -1;
+                ignoreEvents = false;
+
+                pnlSubCategoryFilter.Visible = false;
+                LoadCreditData(Session.LogedInUser.GetUserId());
+                return;
+            }
+
+            lastSelectedCategoryId = categoryId;
+            lastSelectedSubCategoryId = -1;
+
+            CommonUiFunction.LoadInComboBox(
+                "spGetCreditSubCategoryByCategoryID",
+                "Select SubCategory",
+                cmbSubCategory,
+                "@CategoryID",
+                categoryId);
+
+            if (!(cmbSubCategory.Items.Count == 2 && cmbSubCategory.GetItemText(cmbSubCategory.Items[1]).Trim().Equals("General", StringComparison.OrdinalIgnoreCase)))
+            {
+                ignoreEvents = true;
+                Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategorytxt);
+                cmbCategorytxt.SelectedValue = categoryId;
+                cmbCategorytxt.ForeColor = Color.Black;
+                ignoreEvents = false;
+
+                ShowFilterPanel(pnlSubCategoryFilter);
+            }
+            else
+            {
+                pnlSubCategoryFilter.Visible = false;
+            }
+        }
+
+        private void cmbSubCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            if (cmbSubCategory.SelectedIndex <= 0) return;
+            if (cmbSubCategory.SelectedValue == null) return;
+            if (cmbSubCategory.SelectedValue is DataRowView) return;
+
+            int categoryId = Convert.ToInt32(cmbCategorytxt.SelectedValue);
+            int subCategoryId = Convert.ToInt32(cmbSubCategory.SelectedValue);
+
+            if (subCategoryId == lastSelectedSubCategoryId) return;
+
+            if (!LoadFilteredCreditData("spFilterCreditByCategoryAndSubCategory", Session.LogedInUser.GetUserId(), "@CategoryID", categoryId, "@SubCategoryID", subCategoryId))
+            {
+                ignoreEvents = true;
+                cmbSubCategory.SelectedIndex = 0;
+                lastSelectedSubCategoryId = -1;
+                ignoreEvents = false;
+
+                if (!LoadFilteredCreditData(
+                        "spFilterCreditByCategory",
+                        "@CategoryID",
+                        categoryId,
+                        categoryId))
+                {
+                    LoadCreditData(Session.LogedInUser.GetUserId());
+                }
+                return;
+            }
+
+            lastSelectedSubCategoryId = subCategoryId;
+        }
+
+        private void cmbCategorytxt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            if (cmbCategorytxt.SelectedIndex <= 0) return;
+            if (cmbCategorytxt.SelectedValue == null) return;
+            if (cmbCategorytxt.SelectedValue is DataRowView) return;
+
+            int categoryId = Convert.ToInt32(cmbCategorytxt.SelectedValue);
+            if (categoryId == lastSelectedCategoryId) return;
+
+            if (!LoadFilteredCreditData(
+                    "spFilterCreditByCategory",
+                    "@CategoryID",
+                    categoryId,
+                    categoryId))
+            {
+                ignoreEvents = true;
+                if (cmbCategorytxt.Items.Count > 0) cmbCategorytxt.SelectedIndex = 0;
+                if (cmbSubCategory.Items.Count > 0) cmbSubCategory.SelectedIndex = 0;
+                lastSelectedCategoryId = -1;
+                lastSelectedSubCategoryId = -1;
+                ignoreEvents = false;
+
+                LoadCreditData(Session.LogedInUser.GetUserId());
+                return;
+            }
+
+            lastSelectedCategoryId = categoryId;
+            lastSelectedSubCategoryId = -1;
+
+            CommonUiFunction.LoadInComboBox(
+                "spGetCreditSubCategoryByCategoryID",
+                "Select SubCategory",
+                cmbSubCategory,
+                "@CategoryID",
+                categoryId);
+
+            if (cmbSubCategory.Items.Count == 2 && cmbSubCategory.GetItemText(cmbSubCategory.Items[1]).Trim().Equals("General", StringComparison.OrdinalIgnoreCase))
+            {
+                pnlSubCategoryFilter.Visible = false;
+            }
+        }
+
+        
+
+        
     }
 }

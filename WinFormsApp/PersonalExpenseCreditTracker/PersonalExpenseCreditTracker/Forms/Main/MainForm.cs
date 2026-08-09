@@ -517,6 +517,7 @@ namespace PersonalExpenseCreditTracker
                      "Dashboard",
                     "Welcome back! Here's your financial overview.");
 
+       
             SetActiveMenu(pnlDashboard, true);
             CloseAllDropDown();
             RefreshSidebarScroll();
@@ -535,6 +536,7 @@ namespace PersonalExpenseCreditTracker
 
                 dashboardControl.Show();
             }
+
             dashboardControl.LoadDashboardSummary(Session.LogedInUser.GetUserId());
 
             ShowPage(pnlOverview);

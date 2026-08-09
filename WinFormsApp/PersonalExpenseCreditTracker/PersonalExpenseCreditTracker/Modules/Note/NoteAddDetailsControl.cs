@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,9 +15,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 {
     public partial class NoteAddDetailsControl : Form
     {
-       
-        private int currentPage = 1;
-        private int pageSize = 0;
         private int selectedColorId = 0;
         private int selectedPriorityId = 0;
         
@@ -47,6 +44,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             SetRadius(btnCancel, 5);
             SetRadius(btnSaveNote, 5);
+            selectedColorId = 1;
             
         }
 
@@ -76,6 +74,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void LoadFormData()
         {
+            lblPriorityError.Visible = false;
             txtNoteTitle.Text = "Enter title";
             txtNoteTitle.ForeColor = Color.Gray;
 
@@ -119,12 +118,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             }
         }
  
-
-        private void rtxtDescription_TextChanged(object sender, EventArgs e)
-        {
-            lblDescriptionCount.Text = rtxtDescription.TextLength + "/1000";
-        }
-
         private void btnCancelDialog_MouseEnter(object sender, EventArgs e)
         {
             btnCancelDialog.BackColor = Color.Red;
@@ -175,15 +168,24 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtNoteTitle);
                     break;
                 case CommonValidator.ValidationResult.DescriptionInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, rtxtDescription);
+                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description is required.");
                     break;
 
+                case CommonValidator.ValidationResult.DescriptionTooShort:
+                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description must contain at least 5 characters.");
+                    break;
+
+                case CommonValidator.ValidationResult.DescriptionTooLong:
+                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description cannot exceed 150 characters.");
+                    break;
+
+
                 case CommonValidator.ValidationResult.PriorityInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1,lblPriority);
+                    ErrorHelper.ShowValidationError(result, errorProvider1, lblPriorityError);
                     break;
-                case CommonValidator.ValidationResult.ColorInvalid:
-                    ErrorHelper.ShowValidationError( result, errorProvider1,lblNoteColor);
-                    break;
+                //case CommonValidator.ValidationResult.ColorInvalid:
+                //    ErrorHelper.ShowValidationError( result, errorProvider1,lblNoteColor);
+                //    break;
                   case CommonValidator.ValidationResult.StoreProcedureError:
 
                     MessageBox.Show("Note added unsuccessfully!");
@@ -198,7 +200,20 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         }
         private void txtNoteTitle_TextChanged(object sender, EventArgs e)
         {
-            lblTitleCount.Text = txtNoteTitle.TextLength + "/100";
+           
+            if (txtNoteTitle.Text != "Enter title")
+            {
+                lblTitleCount.Text = txtNoteTitle.TextLength + "/100";
+            }
+            else
+            {
+                lblTitleCount.Text = "0/100";
+            }
+           
+            if (txtNoteTitle.Text != "Enter title" && !string.IsNullOrWhiteSpace(txtNoteTitle.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtNoteTitle);
+            }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -229,9 +244,10 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             if (rbLow.Checked)
             {
-                rbMedium.Checked=false;
-                rbHigh.Checked=false;
+                rbMedium.Checked = false;
+                rbHigh.Checked = false;
                 selectedPriorityId = Convert.ToInt32(rbLow.Tag);
+                ErrorHelper.HideErrorForControl(lblPriorityError); 
             }
         }
 
@@ -242,6 +258,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 rbLow.Checked = false;
                 rbHigh.Checked = false;
                 selectedPriorityId = Convert.ToInt32(rbMedium.Tag);
+                ErrorHelper.HideErrorForControl(lblPriorityError); 
             }
         }
 
@@ -252,6 +269,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 rbLow.Checked = false;
                 rbMedium.Checked = false;
                 selectedPriorityId = Convert.ToInt32(rbHigh.Tag);
+                ErrorHelper.HideErrorForControl(lblPriorityError); 
             }
         }
 
@@ -446,6 +464,26 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     MessageBoxIcon.Error);
             }
         }
+
+        private void rtxtDescription_TextChanged(object sender, EventArgs e)
+        {
+            if (rtxtDescription.Text != "Enter description")
+            {
+                lblDescriptionCount.Text = rtxtDescription.TextLength + "/1000";
+            }
+            else
+            {
+                lblDescriptionCount.Text = "0/1000";
+            }
+
+
+            if (rtxtDescription.Text != "Enter description" && !string.IsNullOrWhiteSpace(rtxtDescription.Text))
+            {
+                ErrorHelper.HideErrorForControl(pnlDescription);
+            }
+        }
+
+
 
        
 
