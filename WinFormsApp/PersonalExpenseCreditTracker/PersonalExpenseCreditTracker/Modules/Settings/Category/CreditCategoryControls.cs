@@ -36,6 +36,16 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             LoadCategories();
             LoadSubCategories();
             FillGrid();
+
+            lblTotalCategoryNumber.Text = categoryList.Count.ToString();
+
+            lblTotalSubCategoryNumber.Text = subCategoryList.Count.ToString();
+
+            int totalActive = categoryList.Count(c => c.IsActive) + subCategoryList.Count(s => s.IsActive);
+            lblActiveNumber.Text = totalActive.ToString();
+
+            int totalInactive = categoryList.Count(c => !c.IsActive) + subCategoryList.Count(s => !s.IsActive);
+            lblInactiveNumber.Text = totalInactive.ToString();
         }
 
         private void CreateColumns()
@@ -186,17 +196,17 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             public bool IsActive { get; set; }
         }
 
-        private void LoadCategories()
+        public void LoadCategories()
         {
             categoryList.Clear();
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("spGetCreditCategoriesByUserID", con);
+                SqlCommand cmd = new SqlCommand("spGetActiveAndDeactiveCreditCategoriesByUserID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
-
+                int i = 0;
                 while (dr.Read())
                 {
                     CreditCategory c = new CreditCategory();
@@ -205,22 +215,25 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     c.IsDefault = Convert.ToBoolean(dr["IsDefault"]);
                     c.IsActive = Convert.ToBoolean(dr["IsActive"]);
                     categoryList.Add(c);
+                    i++;
                 }
+                lblTotalCategoryNumber.Text = Convert.ToString(i);
                 dr.Close();
             }
         }
 
-        private void LoadSubCategories()
+        public void LoadSubCategories()
         {
             subCategoryList.Clear();
 
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("spGetCreditSubCategoriesByUserID", con);
+                SqlCommand cmd = new SqlCommand("spGetActiveAndDeactiveCreditSubCategoriesByUserID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
+                int i = 0;
                 while (dr.Read())
                 {
                     CreditSubCategory s = new CreditSubCategory();
@@ -230,8 +243,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     s.IsDefault = Convert.ToBoolean(dr["IsDefault"]);
                     s.IsActive = Convert.ToBoolean(dr["IsActive"]);
                     subCategoryList.Add(s);
+                    i++;
                 }
-
+                lblTotalSubCategoryNumber.Text = Convert.ToString(i);
                 dr.Close();
             }
         }
@@ -246,7 +260,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
                 int row = dgvCategory.Rows.Add();
                 dgvCategory.Rows[row].Tag = cat.CategoryID;
-                dgvCategory.Rows[row].Cells["Expand"].Value = expanded ? "∨" : ">";
+                dgvCategory.Rows[row].Cells["Expand"].Value = expanded ? "↓" : "→";
                 dgvCategory.Rows[row].Cells["Name"].Value = cat.CategoryName;
                 dgvCategory.Rows[row].Cells["Type"].Value = "Category";
                 dgvCategory.Rows[row].Cells["Status"].Value = cat.IsActive ? "Active" : "Inactive";
@@ -277,35 +291,55 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void btnAddCategory_Click(object sender, EventArgs e)
         {
+
             CreditAddCategoryControls creditAddCategoryControls = new CreditAddCategoryControls(this);
-            creditAddCategoryControls.Show();
+            if (creditAddCategoryControls.ShowDialog() == DialogResult.OK)
+            {
+                LoadCategories();
+                LoadSubCategories();
+                FillGrid();
+            }
         }
 
         private void tsmiAddSubCategory_Click(object sender, EventArgs e)
         {
-            CreditAddSubCategoryControls creditAddSubCategoryControls = new CreditAddSubCategoryControls();
-            creditAddSubCategoryControls.Show();
+            DataGridViewRow row = cmsCategoryAction.Tag as DataGridViewRow;
+            if (row == null) return;
+
+            int categoryId = Convert.ToInt32(row.Tag);
+            string categoryName = row.Cells["Name"].Value.ToString();
+
+            CreditAddSubCategoryControls creditAddSubCategoryControls = new CreditAddSubCategoryControls(categoryId, categoryName);
+            if (creditAddSubCategoryControls.ShowDialog() == DialogResult.OK)
+            {
+                LoadCategories();
+                LoadSubCategories();
+                FillGrid();
+            }
         }
 
         private void tsmiEdit_Click(object sender, EventArgs e)
         {
-            CreditEditCategoryControls creditEditCategoryControls = new CreditEditCategoryControls();
-            creditEditCategoryControls.Show();
+            DataGridViewRow row = cmsCategoryAction.Tag as DataGridViewRow;
+            if (row == null) return;
+            int id = Convert.ToInt32(row.Tag); // CategoryID or SubCategoryID
+            string rawName = row.Cells["Name"].Value.ToString();
+
+
+            bool isSubCategory = row.Cells["Type"].Value.ToString() == "Sub Category";
+
+            string cleanName = isSubCategory ? rawName.Replace("└", "").Trim() : rawName.Trim();
+
+            CreditEditCategoryControls editForm = new CreditEditCategoryControls(id, cleanName, isSubCategory);
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                // Grid Reload/Refresh
+                LoadCategories();
+                LoadSubCategories();
+                FillGrid();
+            }
+
+
         }
-        //private void tsmiEdit_Click(object sender, EventArgs e)
-        //{
-        //    DataGridViewRow row = (DataGridViewRow)cmsCategoryAction.Tag;
-        //    MessageBox.Show("Edit");
-        //}
-        //private void tsmiAddSubCategory_Click(object sender, EventArgs e)
-        //{
-        //    DataGridViewRow row = (DataGridViewRow)cmsCategoryAction.Tag;
-        //    MessageBox.Show("Add Sub Category");
-        //}
-        //private void tsmiDelete_Click(object sender, EventArgs e)
-        //{
-        //    DataGridViewRow row = (DataGridViewRow)cmsCategoryAction.Tag;
-        //    MessageBox.Show("Delete");
-        //}
     }
 }

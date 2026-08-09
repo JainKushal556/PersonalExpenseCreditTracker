@@ -43,12 +43,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.dgvCreditDataTable = new System.Windows.Forms.DataGridView();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.pnlCreditFooter = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -113,6 +107,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.lblMaxAmountFilter = new System.Windows.Forms.Label();
             this.lblMinAmountFilter = new System.Windows.Forms.Label();
             this.btnAmountClose = new System.Windows.Forms.Button();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlCreditContent.SuspendLayout();
             this.tblTable.SuspendLayout();
             this.pnlTableHeader.SuspendLayout();
@@ -325,11 +325,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.dgvCreditDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCreditDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDate,
-            this.colDescription,
             this.colCategory,
             this.colSubCategory,
             this.colAmount,
-            this.colPaymentMethod});
+            this.colPaymentMethod,
+            this.colDescription});
             this.dgvCreditDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditDataTable.EnableHeadersVisualStyles = false;
             this.dgvCreditDataTable.GridColor = System.Drawing.Color.Gainsboro;
@@ -346,54 +346,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.dgvCreditDataTable.Size = new System.Drawing.Size(918, 425);
             this.dgvCreditDataTable.TabIndex = 1;
             this.dgvCreditDataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCreditDataTable_CellContentClick);
-            // 
-            // colDate
-            // 
-            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDate.FillWeight = 10F;
-            this.colDate.HeaderText = "Date";
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.FillWeight = 15F;
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCategory.FillWeight = 15F;
-            this.colCategory.HeaderText = "Category";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colSubCategory
-            // 
-            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSubCategory.FillWeight = 15F;
-            this.colSubCategory.HeaderText = "SubCategory";
-            this.colSubCategory.Name = "colSubCategory";
-            this.colSubCategory.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAmount.FillWeight = 10F;
-            this.colAmount.HeaderText = "Amount";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            // 
-            // colPaymentMethod
-            // 
-            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPaymentMethod.FillWeight = 15F;
-            this.colPaymentMethod.HeaderText = "Payment Method";
-            this.colPaymentMethod.Name = "colPaymentMethod";
-            this.colPaymentMethod.ReadOnly = true;
+            this.dgvCreditDataTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCreditDataTable_ColumnHeaderMouseClick);
             // 
             // pnlFooter
             // 
@@ -1167,6 +1120,54 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnAmountClose.UseVisualStyleBackColor = true;
             this.btnAmountClose.Click += new System.EventHandler(this.btnAmountClose_Click);
             // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.FillWeight = 10F;
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCategory.FillWeight = 15F;
+            this.colCategory.HeaderText = "Category";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            // 
+            // colSubCategory
+            // 
+            this.colSubCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSubCategory.FillWeight = 15F;
+            this.colSubCategory.HeaderText = "SubCategory";
+            this.colSubCategory.Name = "colSubCategory";
+            this.colSubCategory.ReadOnly = true;
+            // 
+            // colAmount
+            // 
+            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAmount.FillWeight = 10F;
+            this.colAmount.HeaderText = "Amount";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            // 
+            // colPaymentMethod
+            // 
+            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.FillWeight = 15F;
+            this.colPaymentMethod.HeaderText = "Payment Method";
+            this.colPaymentMethod.Name = "colPaymentMethod";
+            this.colPaymentMethod.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.FillWeight = 15F;
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            // 
             // CreditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1265,12 +1266,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblCreditStartingPageNumber;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMethod;
         private System.Windows.Forms.Panel pnlButtonControls;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
         private System.Windows.Forms.ToolStripMenuItem tsmiDate;
@@ -1319,5 +1314,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private System.Windows.Forms.TextBox txtMaxAmount;
         private System.Windows.Forms.Panel pnlMinAmountfilter;
         private System.Windows.Forms.TextBox txtMinAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSubCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMethod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
 }
 }

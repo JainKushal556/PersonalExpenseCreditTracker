@@ -147,13 +147,13 @@ namespace PersonalExpenseCreditTracker.Common
                 case CommonValidator.ValidationResult.CurrentPasswordEmpty:
                 case CommonValidator.ValidationResult.NewPasswordEmpty:
                 case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
-                    errorProvider.SetError(textBox, "Password is required.");
+                    errorProvider.SetError(textBox, "* Password is required.");
                     textBox.Focus();
                     break;
 
                 // CurrentPassword And NewPassword Same
                 case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
-                    errorProvider.SetError(textBox, "Your current password and new password are same.");
+                    errorProvider.SetError(textBox, "* Your current password and new password are same.");
                     textBox.Focus();
                     break;
 
@@ -161,6 +161,18 @@ namespace PersonalExpenseCreditTracker.Common
                 case CommonValidator.ValidationResult.NotMatchPassword:
                     errorProvider.SetError(textBox, "Password doesn't match.");
                     textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryNameEmpty:
+                    message = "* Category name is required.";
+                    break;
+
+                case CommonValidator.ValidationResult.InvalidCategoryName:
+                    message = "* Please enter a valid Category name.";
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryInvalid:
+                    message = "* Please select valid Category.";
                     break;
             }
 
