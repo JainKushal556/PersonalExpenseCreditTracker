@@ -41,9 +41,10 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
         private void EditProfileControls_Load(object sender, EventArgs e)
         {
+           
             CommonUiFunction.LoadInComboBox("spGetGender", "Select Gender", cmbEditProfileGender);
             GetUserProfileDetails();
-
+            monthCalendarProfile.MaxDate = DateTime.Today; 
             SetRadius(pnlEditProfileMainBody, 20);
             SetRadius(btnCancelEditProfile, 20);
             SetRadius(btnUpdateProfile, 25);
@@ -111,6 +112,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         private void txtEditProfileDathOfBirth_Click(object sender, EventArgs e)
         {
             pnlEditProfileDathOfBirth.BorderStyle = BorderStyle.FixedSingle;
+            ShowCalenderToDatePanel(panelProfileCalenderShow);
         }
         private void pnlEditProfileEmailAddress_Leave(object sender, EventArgs e)
         {
@@ -136,15 +138,11 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         {
             pnlEditProfileGender.BorderStyle = BorderStyle.FixedSingle;
         }
-        private void pnlEditProfileAddress_Leave(object sender, EventArgs e)
-        {
-            pnlEditProfileAddress.BorderStyle = BorderStyle.None;
-        }
+       
         private void txtEditProfileAddress_Click(object sender, EventArgs e)
         {
-            pnlEditProfileAddress.BorderStyle = BorderStyle.FixedSingle;
+            txtEditProfileAddress.BorderStyle = BorderStyle.FixedSingle;
         }
-        //
 
         private void btnCancelEditProfile_Click(object sender, EventArgs e)
         {
@@ -247,22 +245,20 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
         private void ShowCalenderToDatePanel(Panel panel)
         {
-          
-            Point p = pnlEditProfileDathOfBirth.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
+            panel.Parent = pnlEditProfileMainBody;
+            panel.BackColor = Color.White;
 
-          
-            panel.Parent = this;
+            Point screenPoint = pnlEditProfileDathOfBirth.PointToScreen(Point.Empty);
+            Point mainBodyPoint = pnlEditProfileMainBody.PointToClient(screenPoint);
 
-           
             panel.Location = new Point(
-                p.X + pnlEditProfileDathOfBirth.Width - panel.Width,
-                p.Y + pnlEditProfileDathOfBirth.Height + 2);
+                mainBodyPoint.X + pnlEditProfileDathOfBirth.Width - panel.Width,
+                mainBodyPoint.Y + pnlEditProfileDathOfBirth.Height + 2);
 
-           
             panel.BringToFront();
             panel.Visible = true;
         }
+
 
         private void btnProfileCalendar_Click(object sender, EventArgs e)
         {
@@ -278,25 +274,109 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
         private void monthCalendarProfile_DateSelected(object sender, DateRangeEventArgs e)
         {
+           
+            if (e.Start.Date > DateTime.Today)
+            {
+                return;
+            }
+
             txtEditProfileDathOfBirth.Text = e.Start.ToString("dd-MM-yyyy");
             txtEditProfileDathOfBirth.ForeColor = Color.Black;
+            ErrorHelper.HideErrorForControl(txtEditProfileDathOfBirth);
             panelProfileCalenderShow.Visible = false;
         }
 
         private void txtEditProfileDathOfBirth_Enter(object sender, EventArgs e)
         {
-            panelProfileCalenderShow.Visible = true;
+            pnlEditProfileDathOfBirth.BorderStyle = BorderStyle.FixedSingle;
         }
-
         private void txtEditProfileDathOfBirth_Leave(object sender, EventArgs e)
         {
-            //panelProfileCalenderShow.Visible = false;
+            pnlEditProfileDathOfBirth.BorderStyle = BorderStyle.None;
         }
 
         private void txtEditProfileDathOfBirth_TextChanged(object sender, EventArgs e)
         {
+            ErrorHelper.HideErrorForControl(txtEditProfileDathOfBirth);
             panelProfileCalenderShow.Visible = false;
         }
+
+
+        private void txtEditProfileFullName_Enter(object sender, EventArgs e)
+        {
+            pnlEditProfileFullName.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void txtEditProfileFullName_Leave(object sender, EventArgs e)
+        {
+            pnlEditProfileFullName.BorderStyle = BorderStyle.None;
+        }
+
+        private void txtEditProfileFullName_TextChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(txtEditProfileFullName);
+        }
+
+        private void txtEditProfileEmailAddress_Enter(object sender, EventArgs e)
+        {
+            pnlEditProfileEmailAddress.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void txtEditProfileEmailAddress_Leave(object sender, EventArgs e)
+        {
+            pnlEditProfileEmailAddress.BorderStyle = BorderStyle.None;
+        }
+
+        private void txtEditProfileEmailAddress_TextChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(txtEditProfileEmailAddress);
+        }
+
+        private void txtEditProfileEmailAddress_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+            if (e.KeyChar == ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtEditProfilePhoneNumber_Enter(object sender, EventArgs e)
+        {
+            pnlEditProfilePhoneNumber.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void txtEditProfilePhoneNumber_Leave(object sender, EventArgs e)
+        {
+            pnlEditProfilePhoneNumber.BorderStyle = BorderStyle.None;
+        }
+
+        private void txtEditProfilePhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(txtEditProfilePhoneNumber);
+        }
+
+        private void cmbEditProfileGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(cmbEditProfileGender);
+        }
+
+        private void txtEditProfileAddress_Enter(object sender, EventArgs e)
+        {
+            txtEditProfileAddress.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void txtEditProfileAddress_Leave(object sender, EventArgs e)
+        {
+            txtEditProfileAddress.BorderStyle = BorderStyle.None;
+        }
+
+        private void txtEditProfileAddress_TextChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(txtEditProfileAddress);
+        }
+
+       
        
     }
 }
