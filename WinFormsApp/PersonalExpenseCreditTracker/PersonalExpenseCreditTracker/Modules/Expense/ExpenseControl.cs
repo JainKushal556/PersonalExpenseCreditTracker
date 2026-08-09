@@ -10,6 +10,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using WinFormsSortOrder = System.Windows.Forms.SortOrder;
 using PersonalExpenseCreditTracker.Common;
 using BLLayer.Expense;
 using BLLayer.Common;
@@ -37,12 +38,17 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private DataTable masterData = new DataTable();
         private int currentPage = 1;
         private int pageSize = 0;
+        private string sortedColumn = "ExpenseAt";
+        private System.Windows.Forms.SortOrder currentSortOrder =
+            System.Windows.Forms.SortOrder.Descending;
+
         public ExpenseControl()
         {
             InitializeComponent();
             StyleExpenseGrid();
             ApplyRoundCorners();
             //dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
+            dgvExpenseDataTable.ColumnHeaderMouseClick +=dgvExpenseDataTable_ColumnHeaderMouseClick;
             this.Resize += ExpenseControl_Resize;
 
             typeof(DataGridView).InvokeMember(
@@ -202,32 +208,31 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         }
 
-        private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
-        {
-            e.Paint(e.CellBounds,
-                DataGridViewPaintParts.Background |
-                DataGridViewPaintParts.Border);
 
+        private void DrawHeader(DataGridViewCellPaintingEventArgs e,Image icon,string text)
+        {
+            e.Paint( e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
             int iconSize = 16;
             int spacing = 6;
 
-            SizeF textSize = e.Graphics.MeasureString(text, e.CellStyle.Font);
+            SizeF textSize =e.Graphics.MeasureString(text, e.CellStyle.Font);
 
-            int totalWidth = iconSize + spacing + (int)textSize.Width;
+            int totalWidth =iconSize +spacing +(int)textSize.Width;
 
-            int startX = e.CellBounds.X + (e.CellBounds.Width - totalWidth) / 2;
-            int iconY = e.CellBounds.Y + (e.CellBounds.Height - iconSize) / 2;
+            int startX =e.CellBounds.X +(e.CellBounds.Width - totalWidth) / 2;
 
-            e.Graphics.DrawImage(icon, startX, iconY, iconSize, iconSize);
+            int iconY = e.CellBounds.Y +(e.CellBounds.Height - iconSize) / 2;
 
-            using (Brush brush = new SolidBrush(Color.FromArgb(80, 60, 180)))
+            e.Graphics.DrawImage(icon, startX, iconY,iconSize,iconSize);
+
+            using (Brush brush =
+                new SolidBrush(Color.FromArgb(80, 60, 180)))
             {
-                e.Graphics.DrawString(
-                    text,
-                    e.CellStyle.Font,
-                    brush,
-                    startX + iconSize + spacing,
-                    e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2);
+                float textX =startX +iconSize +spacing;
+
+                float textY = e.CellBounds.Y +(e.CellBounds.Height - textSize.Height) / 2;
+
+                e.Graphics.DrawString(text, e.CellStyle.Font, brush, textX, textY);
             }
 
             e.Handled = true;
@@ -263,6 +268,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
                         AllExpenseData = dt;
                         masterData = dt.Copy();
+                        sortedColumn = "ExpenseAt";
+                        currentSortOrder = System.Windows.Forms.SortOrder.Descending;
+
+                        ApplyExpenseSort();
                         currentPage = 1;
                         ShowCurrentPage();
                         UpdateExpenseSummaryCards();
@@ -413,6 +422,79 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             lblExpenseAmount.Text = "₹ " + totalExpense.ToString("#,##0");
             lblTransactionAmount.Text = AllExpenseData.Rows.Count.ToString();
         }
+
+
+        private void dgvExpenseDataTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex < 0)
+                return;
+
+            DataGridViewColumn column =dgvExpenseDataTable.Columns[e.ColumnIndex];
+
+            string columnName = column.DataPropertyName;
+
+            //  sortable columns
+            if (columnName != "ExpenseAt" &&
+                columnName != "Amount" &&
+                columnName != "CategoryName" &&
+                columnName != "SubCategoryName" &&
+                columnName != "PaymentName")
+            {
+                return;
+            }
+
+            // Same column click ASC <-> DESC
+            if (sortedColumn == columnName)
+            {
+                currentSortOrder =
+                    currentSortOrder == WinFormsSortOrder.Ascending
+                    ? WinFormsSortOrder.Descending
+                    : WinFormsSortOrder.Ascending;
+            }
+            else
+            {
+                
+                sortedColumn = columnName;
+                currentSortOrder = WinFormsSortOrder.Ascending;
+            }
+
+            ApplyExpenseSort();
+
+            currentPage = 1;
+
+            ShowCurrentPage();
+        }
+
+
+
+        private void ApplyExpenseSort()
+        {
+            if (string.IsNullOrEmpty(sortedColumn) ||
+                currentSortOrder == WinFormsSortOrder.None)
+                return;
+
+            if (AllExpenseData == null ||
+                AllExpenseData.Rows.Count == 0)
+                return;
+
+            if (!AllExpenseData.Columns.Contains(sortedColumn))
+                return;
+
+            DataView view = AllExpenseData.DefaultView;
+
+            string direction =
+                currentSortOrder == WinFormsSortOrder.Ascending
+                ? "ASC"
+                : "DESC";
+
+            view.Sort =
+                "[" + sortedColumn + "] " + direction;
+
+            AllExpenseData = view.ToTable();
+        }
+
+
+
 
         private void ShowCurrentPage()
         {
@@ -590,11 +672,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             panel.BringToFront();
             panel.Visible = true;
         }
-
-
-
-
-
         private void tsmiDate_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlDateFilter);
@@ -808,6 +885,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             AllExpenseData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
+            ApplyExpenseSort();
+            currentPage = 1;
             ShowCurrentPage();
         }
 
