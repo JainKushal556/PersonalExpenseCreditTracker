@@ -851,6 +851,16 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblPriorityFilter.TabIndex = 2;
             this.lblPriorityFilter.Text = "Priority";
             // 
+            // pnlPriority
+            //// 
+            //this.pnlPriority.BackColor = System.Drawing.Color.White;
+            //this.pnlPriority.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            //this.pnlPriority.Controls.Add(this.cmbPriority);
+            //this.pnlPriority.Location = new System.Drawing.Point(103, 6);
+            //this.pnlPriority.Name = "pnlPriority";
+            //this.pnlPriority.Size = new System.Drawing.Size(293, 34);
+            //this.pnlPriority.TabIndex = 3;
+            // 
             // cmbPriority
             // 
             this.cmbPriority.BackColor = System.Drawing.Color.White;
@@ -928,9 +938,9 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlToDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlToDate.Controls.Add(this.picCalenderToDate);
             this.pnlToDate.Controls.Add(this.txtToDate);
-            this.pnlToDate.Location = new System.Drawing.Point(327, 8);
+            this.pnlToDate.Location = new System.Drawing.Point(400, 5);
             this.pnlToDate.Name = "pnlToDate";
-            this.pnlToDate.Size = new System.Drawing.Size(208, 31);
+            this.pnlToDate.Size = new System.Drawing.Size(285, 36);
             this.pnlToDate.TabIndex = 5;
             // 
             // pnlToDateCalenderShow

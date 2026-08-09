@@ -35,5 +35,24 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             // Call the BLL method for validation
             return noteBll.DataValidatorIntoNoteBll();
         }
+        public CommonValidator.ValidationResult UpdateDataIntoNoteUi()
+        {
+            noteBll.userId = userId;
+            noteBll.noteId = noteId;
+            noteBll.noteTitle = noteTitle;
+            noteBll.priorityId = priorityId;
+            noteBll.colorId = colorId;
+            noteBll.description = description;
+            return noteBll.UpdateDataIntoNoteBll();
+        }
+        //Delete Note
+        public CommonValidator.ValidationResult DeleteNoteIntoNoteUi()
+        {
+            noteBll.userId = userId;
+            noteBll.noteId = noteId;
+
+            return noteBll.DeleteNoteIntoNoteBll();
+        }
+
     }
 }
