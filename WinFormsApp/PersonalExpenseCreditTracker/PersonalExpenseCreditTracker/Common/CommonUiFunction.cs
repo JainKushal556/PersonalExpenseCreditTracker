@@ -200,6 +200,13 @@ namespace PersonalExpenseCreditTracker.Common
             return dataTable;
         }
 
+        public static DataTable RetrieveErrorCategoryDataIntoCategory(string spName, int userId, int paramId1, int paramId2, string paramName, string paramName1, string paramName2, string paramName3)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = CommonBllFunction.RetrieveErrorCategoryDataIntoCategory(spName, userId, paramId1, paramId2, paramName, paramName1, paramName2, paramName3);
+            return dataTable;
+        }
+
         // Retrieves filtered data by a date range from BLL layer
         public static DataTable RetrieveDataByUserIdAndFilterId(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
         {

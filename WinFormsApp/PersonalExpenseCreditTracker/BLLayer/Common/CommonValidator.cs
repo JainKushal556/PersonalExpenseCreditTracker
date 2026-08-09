@@ -55,6 +55,13 @@ namespace BLLayer.Common
             AddressInvalid,
             DateOfBirthInvalid,
             GenderInvalid,
+
+            //Category Validation
+            InvalidCategoryName,
+            CategoryNameEmpty,
+            CategoryError,
+
+            //Password Validation
             CurrentAndNewPasswordSame,
             CurrentPasswordEmpty,
             NewPasswordEmpty,
@@ -119,6 +126,23 @@ namespace BLLayer.Common
 
             if (personName.Length < 3)
                 return ValidationResult.PersonNameInvalid;
+
+            return ValidationResult.Success;
+        }
+
+        //CategoryName Validation
+        public static ValidationResult ValidationCategoryName(string CategoryName)
+        {
+            if (string.IsNullOrWhiteSpace(CategoryName))
+                return ValidationResult.CategoryNameEmpty;
+
+            if (!Regex.IsMatch(CategoryName, @"^[A-Za-z]+(?:[ &'/-][A-Za-z]+)*$"))
+                return ValidationResult.InvalidCategoryName;
+
+            CategoryName = CategoryName.Trim();
+
+            if (CategoryName.Length < 3)
+                return ValidationResult.InvalidCategoryName;
 
             return ValidationResult.Success;
         }
