@@ -610,6 +610,23 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void DesignContextMenu()
         {
+            if (cmsNote == null)
+            {
+                    cmsNote = new ContextMenuStrip();
+                    cmsNote.Items.AddRange(new ToolStripItem[] { 
+                viewToolStripMenuItem, 
+                editToolStripMenuItem, 
+                deleteToolStripMenuItem 
+                });
+            }
+            if (cmsFilter == null)
+            {
+                        cmsFilter = new ContextMenuStrip();
+                        cmsFilter.Items.AddRange(new ToolStripItem[] { 
+                    tsmiDate, 
+                    tsmiPriority 
+                });
+            }
             // Context Menu
             cmsNote.ShowImageMargin = true;
             cmsNote.ShowCheckMargin = false;
