@@ -653,6 +653,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             ErrorHelper.HideErrorForControl(pnlToDate);
 
             pnlDateFilter.Visible = false;
+
+            ignoreEvents = false;
+            LoadExpenseData(Session.LogedInUser.GetUserId());
         }
 
         private void ResetCategoryAndSubCategoryFilters()
@@ -884,6 +887,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 case CommonValidator.ValidationResult.DateRangeInvalid:
                     validFromDate = false;
                     ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
             }
         }
@@ -962,6 +966,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 case CommonValidator.ValidationResult.DateRangeInvalid:
                     validFromDate = false;
                     ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
             }
         }
@@ -1084,21 +1089,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 txtMinAmount.ForeColor = Color.Black;
             }
         }
-        private void txtMaxAmount_MouseLeave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtMaxAmount.Text))
-            {
-                txtMaxAmount.Text = "Enter Amount";
-                txtMaxAmount.ForeColor = Color.Gray;
-            }
-            if (txtMaxAmount.Text != "Enter Amount" && !string.IsNullOrWhiteSpace(txtMaxAmount.Text))
-            {
-                Decimal minValue = Convert.ToDecimal(txtMinAmount.Text);
-                Decimal maxValue = Convert.ToDecimal(txtMaxAmount.Text);
-                ApplyAmountFilter(minValue,maxValue);
-            }
 
-        }
         private void txtMinAmount_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMinAmount.Text))
@@ -1106,35 +1097,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 txtMinAmount.Text = "Enter Amount";
                 txtMinAmount.ForeColor = Color.Gray;
             }
-            if (txtMinAmount.Text != "Enter Amount" && !string.IsNullOrWhiteSpace(txtMinAmount.Text))
-            {
-                Decimal minValue = Convert.ToDecimal(txtMinAmount.Text);
-                ApplyAmountFilter(minValue,Common.CommonUiFunction.SqlAmountMax);
-            }
-
-        }
-        private void txtMinAmount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (txtMinAmount.Text != "Enter Amount" && !string.IsNullOrWhiteSpace(txtMinAmount.Text))
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    Decimal minValue = Convert.ToDecimal(txtMinAmount.Text);
-                    ApplyAmountFilter(minValue, Common.CommonUiFunction.SqlAmountMax);
-                }
-            }
-        }
-        private void txtMaxAmount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (txtMaxAmount.Text != "Enter Amount" && !string.IsNullOrWhiteSpace(txtMaxAmount.Text))
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    Decimal minValue = Convert.ToDecimal(txtMinAmount.Text);
-                    Decimal maxValue = Convert.ToDecimal(txtMaxAmount.Text);
-                    ApplyAmountFilter(minValue,maxValue);
-                }
-            }
+            ExecuteAmountFilter();
         }
 
         private void txtMaxAmount_Enter(object sender, EventArgs e)
@@ -1153,6 +1116,71 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 txtMaxAmount.Text = "Enter Amount";
                 txtMaxAmount.ForeColor = Color.Gray;
             }
+            ExecuteAmountFilter();
+        }
+
+        private void txtMinAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ExecuteAmountFilter();
+            }
+        }
+
+        private void txtMaxAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ExecuteAmountFilter();
+            }
+        }
+
+        private void ExecuteAmountFilter()
+        {
+            string minStr = txtMinAmount.Text.Trim();
+            string maxStr = txtMaxAmount.Text.Trim();
+
+            bool isMinProvided = minStr != "Enter Amount" && !string.IsNullOrWhiteSpace(minStr);
+            bool isMaxProvided = maxStr != "Enter Amount" && !string.IsNullOrWhiteSpace(maxStr);
+
+            if (!isMinProvided && !isMaxProvided)
+            {
+                txtMinAmount.Text = "Enter Amount";
+                txtMinAmount.ForeColor = Color.Gray;
+                txtMaxAmount.Text = "Enter Amount";
+                txtMaxAmount.ForeColor = Color.Gray;
+                LoadExpenseData(Session.LogedInUser.GetUserId());
+                return;
+            }
+
+            decimal minValue = 0m;
+            decimal maxValue = Common.CommonUiFunction.SqlAmountMax;
+
+            if (isMinProvided)
+            {
+                if (!decimal.TryParse(minStr, out minValue) || minValue < 0)
+                {
+                    MessageBox.Show("Please enter a valid numeric Minimum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            if (isMaxProvided)
+            {
+                if (!decimal.TryParse(maxStr, out maxValue) || maxValue < 0)
+                {
+                    MessageBox.Show("Please enter a valid numeric Maximum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            if (minValue > maxValue)
+            {
+                MessageBox.Show("Minimum Amount cannot be greater than Maximum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ApplyAmountFilter(minValue, maxValue);
         }
 
         private void cmbCategorytxt_Click(object sender, EventArgs e)
@@ -1379,11 +1407,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
                 LoadExpenseData(Session.LogedInUser.GetUserId());
             }
-        }
-
-        private void txtMinAmount_Click(object sender, EventArgs e)
-        {
-
         }
 
       
