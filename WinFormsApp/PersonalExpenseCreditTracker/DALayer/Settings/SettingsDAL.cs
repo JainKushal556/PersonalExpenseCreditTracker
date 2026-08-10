@@ -50,5 +50,37 @@ namespace DALayer.Settings
                 sqlConnection.Close();
             }
         }
+
+        public Boolean LogoutUserFromDb()
+        {
+            string connectionString = Common.SqlHelper.connectionString;
+            SqlConnection sqlConnection = null;
+            int rowEffected = 0;
+
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                using (SqlCommand sqlCommand = new SqlCommand("spLogoutUser", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
+                    sqlConnection.Open();
+                    rowEffected = sqlCommand.ExecuteNonQuery();
+                    return ReturnBoolean(rowEffected);
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                if (sqlConnection != null)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
     }
 }

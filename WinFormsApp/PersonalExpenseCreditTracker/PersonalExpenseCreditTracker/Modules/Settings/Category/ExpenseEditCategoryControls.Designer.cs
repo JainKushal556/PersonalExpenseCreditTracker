@@ -86,7 +86,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(90, 179);
+            this.label3.Location = new System.Drawing.Point(90, 183);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(18, 23);
             this.label3.TabIndex = 16;
@@ -153,7 +153,7 @@
             // 
             this.rdobtnInactive.AutoSize = true;
             this.rdobtnInactive.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdobtnInactive.Location = new System.Drawing.Point(133, 208);
+            this.rdobtnInactive.Location = new System.Drawing.Point(133, 212);
             this.rdobtnInactive.Name = "rdobtnInactive";
             this.rdobtnInactive.Size = new System.Drawing.Size(90, 27);
             this.rdobtnInactive.TabIndex = 9;
@@ -166,7 +166,7 @@
             // 
             this.rdobtnActive.AutoSize = true;
             this.rdobtnActive.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdobtnActive.Location = new System.Drawing.Point(37, 208);
+            this.rdobtnActive.Location = new System.Drawing.Point(37, 212);
             this.rdobtnActive.Name = "rdobtnActive";
             this.rdobtnActive.Size = new System.Drawing.Size(77, 27);
             this.rdobtnActive.TabIndex = 8;
@@ -179,7 +179,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(23, 177);
+            this.lblStatus.Location = new System.Drawing.Point(23, 181);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(64, 25);
             this.lblStatus.TabIndex = 7;
@@ -214,6 +214,7 @@
             this.txtCategoryName.Name = "txtCategoryName";
             this.txtCategoryName.Size = new System.Drawing.Size(486, 25);
             this.txtCategoryName.TabIndex = 0;
+            this.txtCategoryName.TextChanged += new System.EventHandler(this.txtCategoryName_TextChanged);
             // 
             // lblCategoryName
             // 

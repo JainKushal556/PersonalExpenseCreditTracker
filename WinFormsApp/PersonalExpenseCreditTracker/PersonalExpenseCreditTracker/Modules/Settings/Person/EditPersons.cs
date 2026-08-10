@@ -212,5 +212,29 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
 
         }
+
+        private void txtEditPersonDetailsFullName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtEditPersonDetailsFullName.Text != "Enter Full Name" && !string.IsNullOrWhiteSpace(txtEditPersonDetailsFullName.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtEditPersonDetailsFullName);
+            }
+        }
+
+        private void txtEditPersonDetailsPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (txtEditPersonDetailsPhoneNumber.Text != "Enter Phone Number" && !string.IsNullOrWhiteSpace(txtEditPersonDetailsPhoneNumber.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtEditPersonDetailsPhoneNumber);
+            }
+        }
+
+        private void txtEditPersonDetailsAddress_TextChanged(object sender, EventArgs e)
+        {
+            if (txtEditPersonDetailsAddress.Text != "Enter Address" && !string.IsNullOrWhiteSpace(txtEditPersonDetailsAddress.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtEditPersonDetailsAddress);
+            }
+        }
     }
 }

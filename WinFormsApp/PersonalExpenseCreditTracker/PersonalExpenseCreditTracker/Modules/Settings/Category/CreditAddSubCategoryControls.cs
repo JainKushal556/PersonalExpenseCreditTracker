@@ -69,7 +69,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void CreditAddSubCategoryControls_Load(object sender, EventArgs e)
         {
-            txtSubCategory.Text = "  Enter Sub Category Name";
+            txtSubCategory.Text = "Enter Sub Category Name";
             txtSubCategory.ForeColor = Color.FromArgb(45, 45, 45);
 
             if (!string.IsNullOrEmpty(SelectedCategoryName))
@@ -86,7 +86,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void txtSubCategory_Enter(object sender, EventArgs e)
         {
-            if (txtSubCategory.Text == "  Enter Sub Category Name")
+            if (txtSubCategory.Text == "Enter Sub Category Name")
             {
                 txtSubCategory.Text = "";
                 txtSubCategory.ForeColor = Color.FromArgb(45, 45, 45);
@@ -96,7 +96,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             if (string.IsNullOrWhiteSpace(txtSubCategory.Text))
             {
-                txtSubCategory.Text = "  Enter Sub Category Name";
+                txtSubCategory.Text = "Enter Sub Category Name";
                 txtSubCategory.ForeColor = Color.FromArgb(150, 150, 150);
             }
         }
@@ -122,7 +122,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Saved Expense Sub Category");
+                    MessageBox.Show("Saved Credit Sub Category");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     ExpenseCategoryControls expenseCategoryControls = new ExpenseCategoryControls();
@@ -142,7 +142,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    MessageBox.Show("Expense Sub Category Not Added.");
+                    MessageBox.Show("Credit Sub Category Not Added.");
                     break;
             }
         }
@@ -167,6 +167,14 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             if (rdActive.Checked)
                 rdInactive.Checked = false;
+        }
+
+        private void txtSubCategory_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSubCategory.Text != "Enter Sub Category Name" && !string.IsNullOrWhiteSpace(txtSubCategory.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtSubCategory);
+            }
         }
     }
 }

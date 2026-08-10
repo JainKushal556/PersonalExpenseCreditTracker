@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -143,25 +143,27 @@ namespace PersonalExpenseCreditTracker.Common
                     message = "* Please enter a valid person.";
                     break;
 
-                // Password field is empty
+                // 👉 Password ফিল্ডগুলোর জন্য নিচে লাল এরর মেসেজ সেট করা:
                 case CommonValidator.ValidationResult.CurrentPasswordEmpty:
+                    message = "* Current password is required.";
+                    break;
+
                 case CommonValidator.ValidationResult.NewPasswordEmpty:
+                    message = "* New password is required.";
+                    break;
+
                 case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
-                    errorProvider.SetError(textBox, "* Password is required.");
-                    textBox.Focus();
+                    message = "* Confirm password is required.";
                     break;
 
-                // CurrentPassword And NewPassword Same
                 case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
-                    errorProvider.SetError(textBox, "* Your current password and new password are same.");
-                    textBox.Focus();
+                    message = "* Your current password and new password are same.";
                     break;
 
-                // Not Match Password
                 case CommonValidator.ValidationResult.NotMatchPassword:
-                    errorProvider.SetError(textBox, "Password doesn't match.");
-                    textBox.Focus();
+                    message = "* Password doesn't match.";
                     break;
+
 
                 case CommonValidator.ValidationResult.CategoryNameEmpty:
                     message = "* Category name is required.";
