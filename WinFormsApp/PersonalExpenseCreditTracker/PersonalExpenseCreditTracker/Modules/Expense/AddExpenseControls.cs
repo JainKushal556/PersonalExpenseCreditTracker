@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -191,18 +191,31 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
             txtAddExpenseAmount.Text = "Enter Amount";
             txtAddExpenseAmount.ForeColor = Color.Gray;
             txtAddExpenseDescription.Text = "Enter Description";
             txtAddExpenseDescription.ForeColor = Color.Gray;
+
+            if (cmbAddExpenseCategory.Items.Count > 0)
+                cmbAddExpenseCategory.SelectedIndex = 0;
             cmbAddExpenseCategory.Text = "Select Category";
             cmbAddExpenseCategory.ForeColor = Color.Gray;
+
+            cmbAddExpenseSubCategory.DataSource = null;
+            cmbAddExpenseSubCategory.Items.Clear();
             cmbAddExpenseSubCategory.Text = "Select Sub Category";
             cmbAddExpenseSubCategory.ForeColor = Color.Gray;
+
+            if (cmbAddExpensePaymentType.Items.Count > 0)
+                cmbAddExpensePaymentType.SelectedIndex = 0;
             cmbAddExpensePaymentType.Text = "Select Payment Type";
             cmbAddExpensePaymentType.ForeColor = Color.Gray;
 
             ErrorHelper.ClearAllErrors(this);
+
+            ignoreEvents = false;
         }
 
         private void cmbAddExpenseCategory_Enter(object sender, EventArgs e)
@@ -295,6 +308,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void cmbAddExpenseSubCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ignoreEvents) return;
+
             ErrorHelper.HideErrorForControl(cmbAddExpenseSubCategory);
             cmbAddExpenseSubCategory.AutoCompleteMode = AutoCompleteMode.Append;
             cmbAddExpenseSubCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -337,9 +352,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     DialogResult result = addSubCatForm.ShowDialog();
                     this.Show();
 
+                    ignoreEvents = true;
+
                     if (result == DialogResult.OK)
                     {
-                      
                         CommonUiFunction.LoadInComboBox(
                             "spGetExpenseSubCategoryByCategoryID",
                             "Select Sub Category",
@@ -348,7 +364,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                             "@CategoryID",
                             currentCategoryId);
 
-                     
                         if (!string.IsNullOrEmpty(addSubCatForm.AddedSubCategoryName))
                         {
                             int index = cmbAddExpenseSubCategory.FindStringExact(addSubCatForm.AddedSubCategoryName);
@@ -372,8 +387,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     else
                     {
                         cmbAddExpenseSubCategory.SelectedIndex = 0;
-                        cmbAddExpenseSubCategory.ForeColor = Color.Black;
+                        cmbAddExpenseSubCategory.ForeColor = Color.Gray;
                     }
+
+                    ignoreEvents = false;
                 }
             }
 
@@ -382,22 +399,26 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void cmbAddExpenseCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ignoreEvents) return;
+
+            ignoreEvents = true; // Selection চলাকালীন সব ইভেন্ট ব্লক
+
             ErrorHelper.HideErrorForControl(cmbAddExpenseCategory);
             cmbAddExpenseCategory.AutoCompleteMode = AutoCompleteMode.Append;
             cmbAddExpenseCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            if (cmbAddExpenseCategory.SelectedValue == null)
-                return;
-
             int categoryId = 0;
-            DataRowView drv = cmbAddExpenseCategory.SelectedValue as DataRowView;
-            if (drv != null)
+            if (cmbAddExpenseCategory.SelectedValue != null)
             {
-                categoryId = Convert.ToInt32(drv[0]);
-            }
-            else
-            {
-                categoryId = Convert.ToInt32(cmbAddExpenseCategory.SelectedValue);
+                DataRowView drv = cmbAddExpenseCategory.SelectedValue as DataRowView;
+                if (drv != null)
+                {
+                    categoryId = Convert.ToInt32(drv[0]);
+                }
+                else
+                {
+                    categoryId = Convert.ToInt32(cmbAddExpenseCategory.SelectedValue);
+                }
             }
 
             if (categoryId == -99)
@@ -408,9 +429,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     DialogResult result = addCategoryForm.ShowDialog();
                     this.Show();
 
+                    int newSelectedCategoryId = 0;
+
                     if (result == DialogResult.OK)
                     {
-                       
                         Common.CommonUiFunction.LoadInComboBox(
                             "spGetExpenseCategoriesByUserID",
                             Session.LogedInUser.GetUserId(),
@@ -418,7 +440,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                             "+ Add New Cetegory",
                             cmbAddExpenseCategory);
 
-                   
                         if (!string.IsNullOrEmpty(addCategoryForm.AddedCategoryName))
                         {
                             int index = cmbAddExpenseCategory.FindStringExact(addCategoryForm.AddedCategoryName);
@@ -426,6 +447,16 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                             {
                                 cmbAddExpenseCategory.SelectedIndex = index;
                                 cmbAddExpenseCategory.ForeColor = Color.Black;
+
+                                DataRowView newlySelectedDrv = cmbAddExpenseCategory.SelectedValue as DataRowView;
+                                if (newlySelectedDrv != null)
+                                {
+                                    newSelectedCategoryId = Convert.ToInt32(newlySelectedDrv[0]);
+                                }
+                                else
+                                {
+                                    newSelectedCategoryId = Convert.ToInt32(cmbAddExpenseCategory.SelectedValue);
+                                }
                             }
                             else
                             {
@@ -442,7 +473,25 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     else
                     {
                         cmbAddExpenseCategory.SelectedIndex = 0;
-                        cmbAddExpenseCategory.ForeColor = Color.Black;
+                        cmbAddExpenseCategory.ForeColor = Color.Gray;
+                    }
+
+                    if (newSelectedCategoryId > 0)
+                    {
+                        CommonUiFunction.LoadInComboBox(
+                            "spGetExpenseSubCategoryByCategoryID",
+                            "Select Sub Category",
+                            "+ Add New Sub Category",
+                            cmbAddExpenseSubCategory,
+                            "@CategoryID",
+                            newSelectedCategoryId);
+                    }
+                    else
+                    {
+                        cmbAddExpenseSubCategory.DataSource = null;
+                        cmbAddExpenseSubCategory.Items.Clear();
+                        cmbAddExpenseSubCategory.Text = "Select Sub Category";
+                        cmbAddExpenseSubCategory.ForeColor = Color.Gray;
                     }
                 }
             }
@@ -465,11 +514,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 cmbAddExpenseSubCategory.Text = "Select Sub Category";
                 cmbAddExpenseSubCategory.ForeColor = Color.Gray;
             }
+
+            ignoreEvents = false; // কাজ শেষ, ইভেন্ট আবার চালু
         }
 
         private void cmbAddExpenseCategory_Click(object sender, EventArgs e)
         {
-            
             cmbAddExpenseCategory.DroppedDown = true;
         }
 
@@ -510,23 +560,21 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void cmbAddExpenseCategory_TextChanged(object sender, EventArgs e)
         {
             if (ignoreEvents) return;
+            if (cmbAddExpenseCategory.SelectedIndex > 0 || cmbAddExpenseCategory.Text == "Select Category") return;
             cmbAddExpenseCategory.DroppedDown = true;
         }
 
         private void cmbAddExpenseSubCategory_TextChanged(object sender, EventArgs e)
         {
             if (ignoreEvents) return;
-
-            if (cmbAddExpenseSubCategory.Text != "Select Sub Category")
-            {
-                cmbAddExpenseSubCategory.DroppedDown = true;
-            }
-
+            if (cmbAddExpenseSubCategory.SelectedIndex > 0 || cmbAddExpenseSubCategory.Text == "Select Sub Category") return;
+            cmbAddExpenseSubCategory.DroppedDown = true;
         }
 
         private void cmbAddExpensePaymentType_TextChanged(object sender, EventArgs e)
         {
             if (ignoreEvents) return;
+            if (cmbAddExpensePaymentType.SelectedIndex > 0 || cmbAddExpensePaymentType.Text == "Select Payment Type") return;
             cmbAddExpensePaymentType.DroppedDown = true;
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -140,6 +140,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void PayBorrowAmountControls_Load(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
             monthCalendar.MaxDate = DateTime.Today; 
 
             SetRadius(pnlInputField, 15);
@@ -152,18 +154,17 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             txtReturnDate.Text = "DD-MM-YYYY";
             txtDescription.Text = "Enter Description";
             cmbPaymentType.Text = "Select Payment Type";
-          
 
             txtAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
             cmbPaymentType.ForeColor = Color.Gray;
-         
 
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbPaymentType);
-              cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
-              txtReturnDate.Click += txtReturnDate_Click;
-              ignoreEvents = false;
+            cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
+            txtReturnDate.Click += txtReturnDate_Click;
+
+            ignoreEvents = false;
         }
 
         private void btnAddCancel_Click(object sender, EventArgs e)
@@ -172,18 +173,25 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
         private void btnAddClear_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
             txtAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
+
+            if (cmbPaymentType.Items.Count > 0)
+                cmbPaymentType.SelectedIndex = 0;
             cmbPaymentType.Text = "Select Payment Type";
-         
+            cmbPaymentType.ForeColor = Color.Gray;
+
             txtDescription.Text = "Enter Description";
             txtAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
-            cmbPaymentType.ForeColor = Color.Gray;
-         
+
             pnlCalenderShow.Visible = false;
             errorProvider1.Clear();
+
+            ignoreEvents = false;
         }
 
         private void txtAmount_Enter(object sender, EventArgs e)
@@ -330,6 +338,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void cmbPaymentType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ignoreEvents) return;
+
             ErrorHelper.HideErrorForControl(cmbPaymentType);
             cmbPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
             cmbPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -337,9 +347,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void cmbPaymentType_TextChanged(object sender, EventArgs e)
         {
-            if(ignoreEvents) return;
+            if (ignoreEvents) return;
+            if (cmbPaymentType.SelectedIndex > 0 || cmbPaymentType.Text == "Select Payment Type") return;
             cmbPaymentType.DroppedDown = true;
-
         }
     }
 }
