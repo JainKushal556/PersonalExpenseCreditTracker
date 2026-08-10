@@ -704,6 +704,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
 
             dataGridViewTask.DataSource = pageTable;
+            Common.CommonUiFunction.HighlightSearch(dataGridViewTask, txtSearch);
             int start = startIndex + 1;
             int end = endIndex;
             int total = AllTaskData.Rows.Count;
@@ -1380,6 +1381,30 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             HidePopupPanels();
         }
 
-        
+        //public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
+        //{
+        //    string search = txtBox.Text.Trim().Replace("'", "''");
+
+        //    if (masterTable == null) return null;
+        //    if (string.IsNullOrWhiteSpace(search))
+        //    {
+        //        masterTable.DefaultView.RowFilter = "";
+        //        return masterTable.DefaultView.ToTable();
+        //    }
+
+        //    masterTable.DefaultView.RowFilter = string.Format(
+        //          "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
+        //          "Convert({1}, 'System.String') LIKE '%{0}%' OR " +
+        //          "CategoryName LIKE '%{0}%' OR " +
+        //          "PaymentName LIKE '%{0}%' OR " +
+        //          "SubCategoryName LIKE '%{0}%'",
+        //           search, dateColumn);
+
+
+        //    DataTable filteredTable = masterTable.DefaultView.ToTable();
+
+
+        //    return filteredTable;
+        //}
     }
 }
