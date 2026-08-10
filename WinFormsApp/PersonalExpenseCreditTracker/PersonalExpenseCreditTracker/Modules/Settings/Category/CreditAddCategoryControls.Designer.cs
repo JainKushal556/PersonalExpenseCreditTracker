@@ -71,7 +71,7 @@
             this.pnlAddCreditCategory.Margin = new System.Windows.Forms.Padding(0);
             this.pnlAddCreditCategory.Name = "pnlAddCreditCategory";
             this.pnlAddCreditCategory.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlAddCreditCategory.Size = new System.Drawing.Size(455, 464);
+            this.pnlAddCreditCategory.Size = new System.Drawing.Size(455, 483);
             this.pnlAddCreditCategory.TabIndex = 0;
             // 
             // lblHeaderTitle
@@ -113,7 +113,7 @@
             this.pnlBody.Controls.Add(this.lblCategoryName);
             this.pnlBody.Location = new System.Drawing.Point(18, 80);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(417, 304);
+            this.pnlBody.Size = new System.Drawing.Size(417, 322);
             this.pnlBody.TabIndex = 10;
             // 
             // label2
@@ -121,7 +121,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(88, 95);
+            this.label2.Location = new System.Drawing.Point(88, 108);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 25);
             this.label2.TabIndex = 9;
@@ -143,7 +143,7 @@
             this.pnlInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.pnlInfo.Controls.Add(this.picInfo);
             this.pnlInfo.Controls.Add(this.lblDescription);
-            this.pnlInfo.Location = new System.Drawing.Point(15, 184);
+            this.pnlInfo.Location = new System.Drawing.Point(15, 197);
             this.pnlInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlInfo.Name = "pnlInfo";
             this.pnlInfo.Size = new System.Drawing.Size(388, 102);
@@ -180,7 +180,7 @@
             this.pnlStatus.Controls.Add(this.rdInactive);
             this.pnlStatus.Controls.Add(this.rdActive);
             this.pnlStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlStatus.Location = new System.Drawing.Point(19, 125);
+            this.pnlStatus.Location = new System.Drawing.Point(19, 138);
             this.pnlStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlStatus.Name = "pnlStatus";
             this.pnlStatus.Size = new System.Drawing.Size(378, 39);
@@ -219,7 +219,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(18, 95);
+            this.lblStatus.Location = new System.Drawing.Point(18, 108);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(64, 25);
             this.lblStatus.TabIndex = 3;
@@ -235,6 +235,7 @@
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(382, 30);
             this.txtCategory.TabIndex = 2;
+            this.txtCategory.TextChanged += new System.EventHandler(this.txtCategory_TextChanged);
             this.txtCategory.Enter += new System.EventHandler(this.txtCategory_Enter);
             this.txtCategory.Leave += new System.EventHandler(this.txtCategory_Leave);
             // 
@@ -259,12 +260,12 @@
             this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
-            this.btnSave.Location = new System.Drawing.Point(250, 404);
+            this.btnSave.Location = new System.Drawing.Point(250, 420);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(180, 41);
             this.btnSave.TabIndex = 1;
-            this.btnSave.Text = " Add Category";
+            this.btnSave.Text = "Add Category";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -287,7 +288,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(92, 404);
+            this.btnCancel.Location = new System.Drawing.Point(92, 420);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 41);
@@ -305,7 +306,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(455, 464);
+            this.ClientSize = new System.Drawing.Size(455, 483);
             this.Controls.Add(this.pnlAddCreditCategory);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -112,6 +112,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void txtNewPassword_TextChanged(object sender, EventArgs e)
         {
+            if (txtNewPassword.Text != "Enter New Password" && !string.IsNullOrWhiteSpace(txtNewPassword.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtNewPassword);
+            }
             SettingsBLL settingsBLL = new SettingsBLL();
 
             if (txtNewPassword.Text == "" || txtNewPassword.Text == "Enter New Password")
@@ -276,24 +280,31 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
         {
+
+            if (txtConfirmPassword.Text != "Enter New Password" && !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtConfirmPassword);
+            }
             if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Enter New Password")
             {
                 lblPasswordMatch.Text = "";
+            
             }
             else if (txtCurrentPassword.Text == txtNewPassword.Text)
             {
                 lblPasswordMatch.Text = "Your current password and new password are same..";
+
             }
             else if (_PasswordMatch)
             {
                 if (txtNewPassword.Text != txtConfirmPassword.Text)
                 {
-                    lblPasswordMatch.Text = "Password dosen't match";
+                    lblPasswordMatch.Text = "* Password dosen't match";
                     lblPasswordMatch.ForeColor = Color.Red;
                 }
                 else
                 {
-                    lblPasswordMatch.Text = "Password match";
+                    lblPasswordMatch.Text = "* Password match";
                     lblPasswordMatch.ForeColor = Color.Green;
                 }
             }
@@ -349,7 +360,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void btnChangePasswordUpdatePassword_Click(object sender, EventArgs e)
         {
-
             SettingsUi settingsUi = new SettingsUi();
 
             settingsUi.UserId = Session.LogedInUser.GetUserId();
@@ -358,8 +368,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
             settingsUi.ConfirmPassword = (txtConfirmPassword.Text == "Confirm New Password") ? "" : txtConfirmPassword.Text;
 
             CommonValidator.ValidationResult result = settingsUi.ChangePasswordDataIntoSettingsUi();
-            
-            
+
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
@@ -376,27 +385,32 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                     break;
 
                 case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
+                    lblPasswordMatch.Text = ""; 
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtConfirmPassword);
                     break;
 
+                case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtNewPassword);
+                    break;
+
+
+                case CommonValidator.ValidationResult.NotMatchPassword:
+                    ErrorHelper.HideErrorForControl(txtConfirmPassword);
+                    lblPasswordMatch.Text = "* Password doesn't match.";
+                    lblPasswordMatch.ForeColor = Color.Red;
+                    txtConfirmPassword.Focus();
+                    break;
+
                 case CommonValidator.ValidationResult.WeakPassword:
-                    MessageBox.Show("Password is weak please enter strong heard password.");
+                    MessageBox.Show("Password is weak please enter strong hard password.");
                     break;
 
                 case CommonValidator.ValidationResult.MediumPassword:
-                    MessageBox.Show("Password is medium please enter strong heard password.");
+                    MessageBox.Show("Password is medium please enter strong hard password.");
                     break;
 
                 case CommonValidator.ValidationResult.StrongPassword:
-                    MessageBox.Show("Password is Strong but not heard, please enter strong heard password.");
-                    break;
-
-                case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
-                    MessageBox.Show("Your current password and new password are same..");
-                    break;
-
-                case CommonValidator.ValidationResult.NotMatchPassword:
-                    MessageBox.Show("Password doesn't match");
+                    MessageBox.Show("Password is strong but not hard, please enter strong hard password.");
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
@@ -404,5 +418,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                     break;
             }
         }
+
+
     }
 }

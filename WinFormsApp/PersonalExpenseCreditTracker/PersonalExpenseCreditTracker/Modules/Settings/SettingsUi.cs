@@ -27,6 +27,11 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
             return settingsBLL.DataValidatorIntoChangePasswordBll();
         }
 
+        public CommonValidator.ValidationResult LogoutUserIntoSettingsUi()
+        {
+            settingsBLL.UserId = UserId;
+            return settingsBLL.LogoutUserIntoSettingsBll();
+        }
 
     }
 }

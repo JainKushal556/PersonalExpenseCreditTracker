@@ -83,5 +83,26 @@ namespace BLLayer.Settings
             else
                 return PasswordStrengthLevel.VeryStrong;
         }
+
+        // 👉 Logout BLL Logic
+        public CommonValidator.ValidationResult LogoutUserIntoSettingsBll()
+        {
+            if (UserId <= 0)
+            {
+                return CommonValidator.ValidationResult.StoreProcedureError;
+            }
+
+            settingsDAL.UserId = UserId;
+
+            if (settingsDAL.LogoutUserFromDb())
+            {
+                return CommonValidator.ValidationResult.Success;
+            }
+            else
+            {
+                return CommonValidator.ValidationResult.StoreProcedureError;
+            }
+        }
+
     }
 }
