@@ -29,13 +29,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTotalTransaction = new System.Windows.Forms.Panel();
             this.labelTotalTransactionNumber = new System.Windows.Forms.Label();
@@ -762,12 +762,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvLentDataTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvLentDataTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLentDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvLentDataTable.ColumnHeadersHeight = 35;
             this.dgvLentDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvLentDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -780,14 +780,14 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.colRemainingAmount,
             this.colDeadline,
             this.colDescription});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle20;
             this.dgvLentDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLentDataTable.EnableHeadersVisualStyles = false;
             this.dgvLentDataTable.GridColor = System.Drawing.Color.White;
@@ -798,10 +798,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvLentDataTable.RowHeadersVisible = false;
             this.dgvLentDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvLentDataTable.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvLentDataTable.RowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvLentDataTable.RowTemplate.Height = 30;
             this.dgvLentDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLentDataTable.Size = new System.Drawing.Size(849, 382);
@@ -813,8 +813,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDate.DataPropertyName = "LentAt";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colDate.DefaultCellStyle = dataGridViewCellStyle16;
             this.colDate.FillWeight = 80F;
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
@@ -824,8 +824,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colPersonName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colPersonName.DataPropertyName = "PersonName";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colPersonName.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colPersonName.DefaultCellStyle = dataGridViewCellStyle17;
             this.colPersonName.FillWeight = 120F;
             this.colPersonName.HeaderText = "Person Name";
             this.colPersonName.Name = "colPersonName";
@@ -835,10 +835,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colAmount.DataPropertyName = "Amount";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle18;
             this.colAmount.FillWeight = 70F;
             this.colAmount.HeaderText = "Amount";
             this.colAmount.Name = "colAmount";
@@ -856,8 +856,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colStatus.DataPropertyName = "StatusName";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colStatus.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colStatus.DefaultCellStyle = dataGridViewCellStyle19;
             this.colStatus.FillWeight = 70F;
             this.colStatus.HeaderText = "Status";
             this.colStatus.Name = "colStatus";
@@ -997,6 +997,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.txtMaxAmount.Size = new System.Drawing.Size(134, 26);
             this.txtMaxAmount.TabIndex = 0;
             this.txtMaxAmount.Enter += new System.EventHandler(this.txtMaxAmount_Enter);
+            this.txtMaxAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMaxAmount_KeyDown);
             this.txtMaxAmount.Leave += new System.EventHandler(this.txtMaxAmount_Leave);
             // 
             // lblMaxAmountFilter
@@ -1032,6 +1033,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.txtMinAmount.Size = new System.Drawing.Size(134, 26);
             this.txtMinAmount.TabIndex = 0;
             this.txtMinAmount.Enter += new System.EventHandler(this.txtMinAmount_Enter);
+            this.txtMinAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMinAmount_KeyDown);
             this.txtMinAmount.Leave += new System.EventHandler(this.txtMinAmount_Leave);
             // 
             // lblMinAmountFilter

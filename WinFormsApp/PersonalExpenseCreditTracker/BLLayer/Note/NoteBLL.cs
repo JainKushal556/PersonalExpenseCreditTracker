@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +17,24 @@ namespace BLLayer.Note
         public string description { get; set; }
         public int priorityId { get; set; }
         public int colorId { get; set; }
-       // public string colorHexCode { get; set; }
-       private NoteDAL noteDAL = new NoteDAL();
+        public DateTime fromDate { get; set; }
+        public DateTime toDate { get; set; }
 
-       // Stores the validation result
-       CommonValidator.ValidationResult result;
+        private NoteDAL noteDAL = new NoteDAL();
+
+        // Stores the validation result
+        CommonValidator.ValidationResult result;
+
+        public CommonValidator.ValidationResult DateValidatorIntoNoteBll()
+        {
+            result = CommonValidator.ValidateDateRange(fromDate, toDate);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            return CommonValidator.ValidationResult.Success;
+        }
 
         // Validates all user input before saving the data
        public CommonValidator.ValidationResult DataValidatorIntoNoteBll()
