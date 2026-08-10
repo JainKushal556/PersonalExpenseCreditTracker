@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 {
     public partial class PersonLogOutControls : Form
     {
+
         public PersonLogOutControls()
         {
             InitializeComponent();
@@ -41,7 +43,43 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to logout?",
+                "Logout",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
+            SettingsUi settingUi = new SettingsUi();
+
+            settingUi.UserId =
+                Session.LogedInUser.GetUserId();
+
+            CommonValidator.ValidationResult validationResult =
+                settingUi.LogoutUserIntoSettingsUi();
+
+            switch (validationResult)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    Application.Exit();
+                    this.Close();
+
+                    break;
+
+                default:
+
+                    MessageBox.Show(
+                        "Unable to logout. Please try again.",
+                        "Logout",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    break;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

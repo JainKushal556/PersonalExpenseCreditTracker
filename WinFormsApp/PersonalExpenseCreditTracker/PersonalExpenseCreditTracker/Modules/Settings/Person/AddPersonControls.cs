@@ -522,5 +522,29 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             //AllLentData = Common.CommonUiFunction.SearchDataInPersons(masterData, txtAddPersonSearchBar);
             //LoadData();
         }
+
+        private void txtAddPersonInputFullName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAddPersonInputFullName.Text != "Enter Full Name" && !string.IsNullOrWhiteSpace(txtAddPersonInputFullName.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtAddPersonInputFullName);
+            }
+        }
+
+        private void txtAddPersonInputPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAddPersonInputPhoneNumber.Text != "Enter Phone Number" && !string.IsNullOrWhiteSpace(txtAddPersonInputPhoneNumber.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtAddPersonInputPhoneNumber);
+            }
+        }
+
+        private void txtAddPersonInputAddress_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAddPersonInputAddress.Text != "Enter Address" && !string.IsNullOrWhiteSpace(txtAddPersonInputAddress.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtAddPersonInputAddress);
+            }
+        }
     }
 }
