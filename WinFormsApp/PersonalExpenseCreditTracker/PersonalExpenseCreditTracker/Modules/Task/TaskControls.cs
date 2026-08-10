@@ -12,6 +12,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Configuration;
 using PersonalExpenseCreditTracker.Common;
+using BLLayer.Common;
 namespace PersonalExpenseCreditTracker.Modules.Task
 {
     public partial class TaskControls : Form
@@ -41,6 +42,21 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private string sortedColumn = "CreatedAt";
         private System.Windows.Forms.SortOrder currentSortOrder = System.Windows.Forms.SortOrder.Descending;
 
+        private ErrorProvider errorProvider1 = new ErrorProvider();
+        private bool ignoreEvents { get; set; }
+        private DateTime fromDate { get; set; }
+        private DateTime toDate { get; set; }
+        private bool validFromDate { get; set; }
+        private bool validToDate { get; set; }
+        private static readonly string[] DateFormats = new[]
+        {
+            "yyyy-MM-dd",
+            "dd-MM-yyyy",
+            "MM/dd/yyyy",
+            "yyyy/MM/dd",
+            "dd/MM/yyyy"
+        };
+
         public TaskControls()
         {
             InitializeComponent();
@@ -50,13 +66,25 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void TaskControls_Load(object sender, EventArgs e)
         {
-            cmbStatus.Text = "Select Status";
-            cmbStatus.ForeColor = Color.Gray;
-            cmbPriority.Text = "Select Priority";
+            ignoreEvents = true;
+            CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select Priority", cmbPriority);
+            CommonUiFunction.LoadInComboBox("spGetAllTaskStatus", "Select Status", cmbStatus);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPriority);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbStatus);
             cmbPriority.ForeColor = Color.Gray;
+            cmbStatus.ForeColor = Color.Gray;
+            cmbPriority.SelectedIndexChanged += cmbPriority_SelectedIndexChanged;
+            cmbStatus.SelectedIndexChanged += cmbStatus_SelectedIndexChanged;
 
             pageSize = GetRowsPerPage();
             int userID = Session.LogedInUser.GetUserId();
+
+            txtFromdate.ReadOnly = true;
+            txtToDate.ReadOnly = true;
+            txtFromdate.TextChanged += txtFromdate_TextChanged;
+            txtToDate.TextChanged += txtToDate_TextChanged;
+            ignoreEvents = false;
+
             LoadTaskData(userID);
             SetPanelRadius();
             this.MouseDown += TaskControls_MouseDown;
@@ -64,7 +92,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             HideAllFilterPanels();
             DesignContextMenu();
             HidePopupPanels();
-
+            txtFromdate.ReadOnly = true;
+            txtToDate.ReadOnly = true;
+            monthCalendarToDate.MaxDate = DateTime.Today;
+            monthCalendarFromDate.MaxDate = DateTime.Today;
             this.Resize += TaskControls_Resize;
             dataGridViewTask.EnableHeadersVisualStyles = false;
             dataGridViewTask.CellPainting += dataGridViewTask_CellPainting;
@@ -79,6 +110,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             dataGridViewTask.Columns["colDeadline"].HeaderCell.Style.Padding = new Padding(17, 0, 0, 0);
             RegisterMouseDown(this);
+
+
 
         }
         //Applies  styling to the Task Context Menu.
@@ -116,6 +149,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                                 MessageBoxIcon.Information);
                 return false;
             }
+            if (dataTable.Rows.Count <= 0)
+            {
+                MessageBox.Show("No Record Found.",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
             AllTaskData = dataTable;
             currentPage = 1;
             ShowCurrentPage();
@@ -136,9 +177,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
             if (dataTable.Rows.Count <= 0)
             {
+                MessageBox.Show("No Record Found.",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
                 return false;
             }
             AllTaskData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -366,7 +412,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             colDate.DataPropertyName = "CreatedAt";
             colTask.DataPropertyName = "TaskTitle";
             colPriority.DataPropertyName = "PriorityName";
-            colStatus.DataPropertyName = "‎TaskStatusName";
+            colStatus.DataPropertyName = "TaskStatusName";
             colDeadline.DataPropertyName = "Deadline";
 
 
@@ -779,12 +825,20 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnPriorityClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+            cmbPriority.SelectedIndex = 0;
+            ignoreEvents = false;
             pnlPriorityFilter.Visible = false;
+            LoadTaskData(Session.LogedInUser.GetUserId());
         }
 
         private void btnStatusClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+            cmbStatus.SelectedIndex = 0;
+            ignoreEvents = false;
             pnlStatusFilter.Visible = false;
+            LoadTaskData(Session.LogedInUser.GetUserId());
         }
 
         private void HideAllFilterPanels()
@@ -910,8 +964,204 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
-            HidePopupPanels();
+            ignoreEvents = true;
+
+            txtFromdate.Clear();
+            txtToDate.Clear();
+
+            this.fromDate = DateTime.MinValue;
+            this.toDate = DateTime.MinValue;
+            this.validFromDate = false;
+            this.validToDate = false;
+
+            monthCalendarFromDate.Visible = false;
+            monthCalendarToDate.Visible = false;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
             pnlDateFilter.Visible = false;
+
+            ignoreEvents = false;
+            LoadTaskData(Session.LogedInUser.GetUserId());
+        }
+
+        private void txtFromdate_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
+            if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+            {
+                this.fromDate = DateTime.MinValue;
+                return;
+            }
+
+            DateTime parsedFromDate;
+            if (!DateTime.TryParseExact(
+                    txtFromdate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedFromDate))
+            {
+                return;
+            }
+
+            this.fromDate = parsedFromDate;
+
+            if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+            {
+                ignoreEvents = true;
+                DateTime defaultToDate = this.fromDate > DateTime.Today ? this.fromDate : DateTime.Today;
+                txtToDate.Text = defaultToDate.ToString("dd-MM-yyyy");
+                ignoreEvents = false;
+                this.toDate = defaultToDate;
+            }
+            else
+            {
+                DateTime parsedToDate;
+                if (DateTime.TryParseExact(
+                        txtToDate.Text.Trim(),
+                        DateFormats,
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        System.Globalization.DateTimeStyles.None,
+                        out parsedToDate))
+                {
+                    this.toDate = parsedToDate;
+                }
+            }
+
+            BLLayer.Task.TaskBLL taskBll = new BLLayer.Task.TaskBLL();
+            taskBll.fromDate = this.fromDate;
+            taskBll.toDate = this.toDate;
+
+            CommonValidator.ValidationResult result = taskBll.DateValidatorIntoTaskBll();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    validFromDate = true;
+                    if (!LoadFilteredTaskData(
+                            "spGetTasksBetweenDates",
+                            Session.LogedInUser.GetUserId(),
+                            "@FromDate",
+                            this.fromDate,
+                            "@ToDate",
+                            this.toDate))
+                    {
+                        ignoreEvents = true;
+                        txtFromdate.Clear();
+                        txtToDate.Clear();
+                        ignoreEvents = false;
+                        this.fromDate = DateTime.MinValue;
+                        this.toDate = DateTime.MinValue;
+
+                        LoadTaskData(Session.LogedInUser.GetUserId());
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    validFromDate = false;
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ignoreEvents = true;
+                    txtFromdate.Clear();
+                    txtToDate.Clear();
+                    ignoreEvents = false;
+                    this.fromDate = DateTime.MinValue;
+                    this.toDate = DateTime.MinValue;
+                    LoadTaskData(Session.LogedInUser.GetUserId());
+                    break;
+            }
+        }
+
+        private void txtToDate_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
+            if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+            {
+                this.toDate = DateTime.MinValue;
+                return;
+            }
+
+            DateTime parsedToDate;
+            if (!DateTime.TryParseExact(
+                    txtToDate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedToDate))
+            {
+                return;
+            }
+
+            this.toDate = parsedToDate;
+
+            if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+            {
+                return;
+            }
+
+            DateTime parsedFromDate;
+            if (DateTime.TryParseExact(
+                    txtFromdate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedFromDate))
+            {
+                this.fromDate = parsedFromDate;
+            }
+
+            BLLayer.Task.TaskBLL taskBll = new BLLayer.Task.TaskBLL();
+            taskBll.fromDate = this.fromDate;
+            taskBll.toDate = this.toDate;
+
+            CommonValidator.ValidationResult result = taskBll.DateValidatorIntoTaskBll();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    validFromDate = true;
+                    if (!LoadFilteredTaskData(
+                            "spGetTasksBetweenDates",
+                            Session.LogedInUser.GetUserId(),
+                            "@FromDate",
+                            this.fromDate,
+                            "@ToDate",
+                            this.toDate))
+                    {
+                        ignoreEvents = true;
+                        txtFromdate.Clear();
+                        txtToDate.Clear();
+                        ignoreEvents = false;
+                        this.fromDate = DateTime.MinValue;
+                        this.toDate = DateTime.MinValue;
+
+                        LoadTaskData(Session.LogedInUser.GetUserId());
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    validFromDate = false;
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ignoreEvents = true;
+                    txtFromdate.Clear();
+                    txtToDate.Clear();
+                    ignoreEvents = false;
+                    this.fromDate = DateTime.MinValue;
+                    this.toDate = DateTime.MinValue;
+                    LoadTaskData(Session.LogedInUser.GetUserId());
+                    break;
+            }
         }
 
         private void picCalenderFromDate_Click_1(object sender, EventArgs e)
@@ -935,19 +1185,21 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             }
             else
             {
-                pnlFromDateCalenderShow.Visible = false;
+                monthCalendarFromDate.Visible = false;
                 ShowCalenderToDatePanel(monthCalendarToDate);
             }
         }
 
         private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
         {
+            fromDate = e.Start.Date;
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
             monthCalendarFromDate.Visible = false;
         }
 
         private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
         {
+            toDate = e.Start.Date;
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
             monthCalendarToDate.Visible = false;
         }
@@ -964,15 +1216,16 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void cmbPriority_Enter(object sender, EventArgs e)
         {
-            if (cmbPriority.Text == "Select  Priority")
+            if (cmbPriority.Text != "Select Priority" && cmbPriority.SelectedIndex > 0)
                 cmbPriority.ForeColor = Color.Black;
+            else
+                cmbPriority.ForeColor = Color.Gray;
         }
 
         private void cmbPriority_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cmbPriority.Text) || cmbPriority.Text == "Select Priority")
+            if (string.IsNullOrWhiteSpace(cmbPriority.Text) || cmbPriority.Text == "Select Priority" || cmbPriority.SelectedIndex <= 0)
             {
-
                 cmbPriority.Text = "Select Priority";
                 cmbPriority.ForeColor = Color.Gray;
             }
@@ -989,15 +1242,16 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void cmbStatus_Enter(object sender, EventArgs e)
         {
-            if (cmbStatus.Text == "Select Status")
+            if (cmbStatus.Text != "Select Status" && cmbStatus.SelectedIndex > 0)
                 cmbStatus.ForeColor = Color.Black;
+            else
+                cmbStatus.ForeColor = Color.Gray;
         }
 
         private void cmbStatus_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cmbStatus.Text) || cmbStatus.Text == "Select Status")
+            if (string.IsNullOrWhiteSpace(cmbStatus.Text) || cmbStatus.Text == "Select Status" || cmbStatus.SelectedIndex <= 0)
             {
-
                 cmbStatus.Text = "Select Status";
                 cmbStatus.ForeColor = Color.Gray;
             }
@@ -1053,9 +1307,72 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             HidePopupPanels();
         }
 
+        private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            int priorityId;
+            if (cmbPriority.SelectedValue != null && int.TryParse(cmbPriority.SelectedValue.ToString(), out priorityId))
+            {
+                if (priorityId > 0)
+                {
+                    cmbPriority.ForeColor = Color.Black;
+                    if (!LoadFilteredTaskData("spFilterTasksByPriority", "@PriorityID", priorityId))
+                    {
+                        ignoreEvents = true;
+                        cmbPriority.SelectedIndex = 0;
+                        cmbPriority.ForeColor = Color.Gray;
+                        ignoreEvents = false;
+                        LoadTaskData(Session.LogedInUser.GetUserId());
+                    }
+                }
+                else
+                {
+                    cmbPriority.ForeColor = Color.Gray;
+                    LoadTaskData(Session.LogedInUser.GetUserId());
+                }
+            }
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            int statusId;
+            if (cmbStatus.SelectedValue != null && int.TryParse(cmbStatus.SelectedValue.ToString(), out statusId))
+            {
+                if (statusId > 0)
+                {
+                    cmbStatus.ForeColor = Color.Black;
+                    if (!LoadFilteredTaskData("spFilterTasksByStatus", "@TaskStatusID", statusId))
+                    {
+                        ignoreEvents = true;
+                        cmbStatus.SelectedIndex = 0;
+                        cmbStatus.ForeColor = Color.Gray;
+                        ignoreEvents = false;
+                        LoadTaskData(Session.LogedInUser.GetUserId());
+                    }
+                }
+                else
+                {
+                    cmbStatus.ForeColor = Color.Gray;
+                    LoadTaskData(Session.LogedInUser.GetUserId());
+                }
+            }
+        }
+
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            HideAllFilterPanels();
             HidePopupPanels();
+            ignoreEvents = true;
+            txtFromdate.Clear();
+            txtToDate.Clear();
+            if (cmbPriority.Items.Count > 0) cmbPriority.SelectedIndex = 0;
+            if (cmbStatus.Items.Count > 0) cmbStatus.SelectedIndex = 0;
+            txtSearch.Clear();
+            ignoreEvents = false;
+            currentPage = 1;
+            LoadTaskData(Session.LogedInUser.GetUserId());
+            this.Refresh();
         }
 
         private void button1_Click(object sender, EventArgs e)

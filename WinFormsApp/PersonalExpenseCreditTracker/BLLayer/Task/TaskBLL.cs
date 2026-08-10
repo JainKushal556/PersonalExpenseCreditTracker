@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,10 +14,23 @@ namespace BLLayer.Task
         public int statusId { get; set; }
         public string taskTitle { get; set; }
         public DateTime deadline { get; set; }
+        public DateTime fromDate { get; set; }
+        public DateTime toDate { get; set; }
 
         private TaskDAL taskDal = new TaskDAL();
         // Stores the validation result
         CommonValidator.ValidationResult result;
+
+        public CommonValidator.ValidationResult DateValidatorIntoTaskBll()
+        {
+            result = CommonValidator.ValidateDateRange(fromDate, toDate);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            return CommonValidator.ValidationResult.Success;
+        }
 
         // Validate all input and save to database
         public CommonValidator.ValidationResult DataValidatorIntoTaskBll()
