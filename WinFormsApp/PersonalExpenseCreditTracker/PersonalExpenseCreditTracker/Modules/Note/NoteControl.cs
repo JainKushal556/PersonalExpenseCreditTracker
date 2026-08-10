@@ -210,6 +210,14 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     da.Fill(AllNoteData);
                 }
 
+                if (AllNoteData.Columns.Contains("Message"))
+                {
+                    masterData = new DataTable();
+                    currentPage = 1;
+                    ShowCurrentPage();
+                    return;
+                }
+
                 masterData = AllNoteData.Copy();
                 currentPage = 1;
                 ShowCurrentPage();
@@ -1303,6 +1311,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             AllNoteData = Common.CommonUiFunction.SearchDataInNote(masterData, txtSearch);
+            currentPage = 1;
             ShowCurrentPage();
         }
 
