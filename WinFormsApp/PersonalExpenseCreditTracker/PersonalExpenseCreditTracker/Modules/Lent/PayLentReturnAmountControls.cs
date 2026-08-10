@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,6 +31,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void ReturnAmountControls_Load(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
+            monthCalendar.MaxDate = DateTime.Today; 
+
             SetRadius(pnlInputField, 15);
             SetRadius(pnlPersonDetails, 15);
             SetRadius(btnClear, 5);
@@ -51,6 +55,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbPaymentType);
             cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
             txtReturnDate.Click += txtReturnDate_Click;
+
             ignoreEvents = false;
         }
 
@@ -99,18 +104,25 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnAddClear_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
             txtReturnAmount.Text = "Enter Return Amount";
             txtReturnDate.Text = "DD-MM-YYYY";
+
+            if (cmbPaymentType.Items.Count > 0)
+                cmbPaymentType.SelectedIndex = 0;
             cmbPaymentType.Text = "Select Payment Type";
+            cmbPaymentType.ForeColor = Color.Gray;
 
             txtDescription.Text = "Enter Description";
             txtReturnAmount.ForeColor = Color.Gray;
             txtReturnDate.ForeColor = Color.Gray;
             txtDescription.ForeColor = Color.Gray;
-            cmbPaymentType.ForeColor = Color.Gray;
 
             pnlCalenderShow.Visible = false;
             errorProvider1.Clear();
+
+            ignoreEvents = false;
         }
 
         private void txtReturnAmount_Enter(object sender, EventArgs e)
@@ -251,10 +263,20 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             lentUi.returnAmount = (txtReturnAmount.Text == "Enter Return Amount" || txtReturnAmount.Text == "Select Amount") ? "" : txtReturnAmount.Text;
             lentUi.description = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
 
-            lentUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY")
-                ? DateTime.MinValue
-                : monthCalendar.SelectionStart;
+            //lentUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY")
+            //    ? DateTime.MinValue
+            //    : monthCalendar.SelectionStart;
 
+            DateTime returnDate = DateTime.MinValue;
+            if (!string.IsNullOrWhiteSpace(txtReturnDate.Text))
+            {
+                string[] formats = new string[] { "dd-MM-yyyy", "d-M-yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy", "dd MMM yyyy", "d MMM yyyy", "dd MMMM yyyy" };
+                if (!DateTime.TryParseExact(txtReturnDate.Text.Trim(), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out returnDate))
+                {
+                    DateTime.TryParse(txtReturnDate.Text.Trim(), out returnDate);
+                }
+            }
+            lentUi.returnDate = returnDate;
             CommonValidator.ValidationResult result = lentUi.InsertReturnLentIntoLentUi();
 
             switch (result)
@@ -276,6 +298,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
 
                 case CommonValidator.ValidationResult.DeadlineInvalid:
+                case CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnDate);
                     break;
 
@@ -314,6 +337,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void cmbPaymentType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ignoreEvents) return;
+
             ErrorHelper.HideErrorForControl(cmbPaymentType);
             cmbPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
             cmbPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -322,6 +347,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void cmbPaymentType_TextChanged(object sender, EventArgs e)
         {
             if (ignoreEvents) return;
+            if (cmbPaymentType.SelectedIndex > 0 || cmbPaymentType.Text == "Select Payment Type") return;
             cmbPaymentType.DroppedDown = true;
         }
     }

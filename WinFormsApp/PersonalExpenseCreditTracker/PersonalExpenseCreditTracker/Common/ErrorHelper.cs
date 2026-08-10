@@ -95,6 +95,10 @@ namespace PersonalExpenseCreditTracker.Common
                     message = "* Please select a valid deadline.";
                     break;
 
+                case CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier:
+                    message = "* Return amount deadline must be today or an earlier date.";
+                    break;
+
                 case CommonValidator.ValidationResult.TaskTitleInvalid:
                     message = "* Please enter a valid task title.";
                     break;
@@ -143,7 +147,7 @@ namespace PersonalExpenseCreditTracker.Common
                     message = "* Please enter a valid person.";
                     break;
 
-                // 👉 Password ফিল্ডগুলোর জন্য নিচে লাল এরর মেসেজ সেট করা:
+
                 case CommonValidator.ValidationResult.CurrentPasswordEmpty:
                     message = "* Current password is required.";
                     break;

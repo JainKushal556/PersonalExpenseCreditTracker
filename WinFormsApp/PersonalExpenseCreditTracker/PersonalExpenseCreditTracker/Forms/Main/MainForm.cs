@@ -151,8 +151,12 @@ namespace PersonalExpenseCreditTracker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+           
+            CommonBllFunction.UpdateOverdueStatus();
+
             flowSidebar.Location = new Point(0, 0);
             flowSidebar.Width = pnlSideBar.ClientSize.Width;
+
 
             LoadSidebarUserProfile();
             MakeCircularPictureBox(picUserProfile);

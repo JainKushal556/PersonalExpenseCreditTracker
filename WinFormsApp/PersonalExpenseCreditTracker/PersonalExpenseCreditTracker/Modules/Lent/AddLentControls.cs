@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -211,6 +211,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void AddLentControls_Load(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
             panelLentAddCalenderShow.Visible = false;
 
             comboBoxLentSelectPerson.Text = "Select Person";
@@ -236,6 +238,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // Mouse click dropdown handlers
             comboBoxLentSelectPerson.MouseClick += (s, ev) => { comboBoxLentSelectPerson.DroppedDown = true; };
             comboBoxLentPaymentType.MouseClick += (s, ev) => { comboBoxLentPaymentType.DroppedDown = true; };
+
+            ignoreEvents = false;
         }
 
 
@@ -246,10 +250,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnLentAddClear_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
+            if (comboBoxLentSelectPerson.Items.Count > 0)
+                comboBoxLentSelectPerson.SelectedIndex = 0;
             comboBoxLentSelectPerson.Text = "Select Person";
-            comboBoxLentPaymentType.Text = "Select Payment Type";
             comboBoxLentSelectPerson.ForeColor = Color.Gray;
+
+            if (comboBoxLentPaymentType.Items.Count > 0)
+                comboBoxLentPaymentType.SelectedIndex = 0;
+            comboBoxLentPaymentType.Text = "Select Payment Type";
             comboBoxLentPaymentType.ForeColor = Color.Gray;
+
             txtLentAddAmount.Text = "Select Amount";
             txtLentAddAmount.ForeColor = Color.Gray;
             textBoxLentAddDescription.Text = "Enter description";
@@ -258,6 +270,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             txtLentAddDeadlineDatePicker.ForeColor = Color.Gray;
             panelLentAddCalenderShow.Visible = false;
             errorProvider1.Clear();
+
+            ignoreEvents = false;
         }
 
         private void btnLentAddCancel_Click(object sender, EventArgs e)
@@ -322,22 +336,26 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void comboBoxLentSelectPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ignoreEvents) return;
+
+            ignoreEvents = true; // Selection চলাকালীন সব ইভেন্ট ব্লক
+
             ErrorHelper.HideErrorForControl(comboBoxLentSelectPerson);
             comboBoxLentSelectPerson.AutoCompleteMode = AutoCompleteMode.Append;
             comboBoxLentSelectPerson.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            if (comboBoxLentSelectPerson.SelectedValue == null)
-                return;
-
             int personId = 0;
-            DataRowView drv = comboBoxLentSelectPerson.SelectedValue as DataRowView;
-            if (drv != null)
+            if (comboBoxLentSelectPerson.SelectedValue != null)
             {
-                personId = Convert.ToInt32(drv[0]);
-            }
-            else
-            {
-                personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
+                DataRowView drv = comboBoxLentSelectPerson.SelectedValue as DataRowView;
+                if (drv != null)
+                {
+                    personId = Convert.ToInt32(drv[0]);
+                }
+                else
+                {
+                    personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
+                }
             }
 
             if (personId == -99)
@@ -347,21 +365,40 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 {
                     DialogResult result = addPersonForm.ShowDialog();
                     this.Show();
-                    if (result == DialogResult.OK)
+
+                    // ১. ComboBox-এ নতুন ডেটা রিলোড করুন
+                    CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", "+ Add New Person", comboBoxLentSelectPerson);
+                    // ২. নতুন Person Add হয়ে থাকলে তাকে ComboBox-এ সিলেক্ট করে দিন
+                    if (!string.IsNullOrEmpty(addPersonForm.LastAddedPersonName))
                     {
-                        CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", "+ Add New Person", comboBoxLentSelectPerson);
+                        int index = comboBoxLentSelectPerson.FindStringExact(addPersonForm.LastAddedPersonName);
+                        if (index != -1)
+                        {
+                            comboBoxLentSelectPerson.SelectedIndex = index;
+                            comboBoxLentSelectPerson.ForeColor = Color.Black; // টেক্সট কালার কালো দেখাবে
+                        }
+                        else
+                        {
+                            comboBoxLentSelectPerson.SelectedIndex = 0;
+                            comboBoxLentSelectPerson.ForeColor = Color.Gray;
+                        }
                     }
                     else
                     {
                         comboBoxLentSelectPerson.SelectedIndex = 0;
+                        comboBoxLentSelectPerson.ForeColor = Color.Gray;
                     }
                 }
             }
+
+            ignoreEvents = false; // কাজ শেষ, ইভেন্ট চালু
         }
 
 
         private void comboBoxLentPaymentType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ignoreEvents) return;
+
             ErrorHelper.HideErrorForControl(comboBoxLentPaymentType);
             comboBoxLentPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
             comboBoxLentPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -421,13 +458,14 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void comboBoxLentSelectPerson_TextChanged(object sender, EventArgs e)
         {
             if (ignoreEvents) return;
-
+            if (comboBoxLentSelectPerson.SelectedIndex > 0 || comboBoxLentSelectPerson.Text == "Select Person") return;
             comboBoxLentSelectPerson.DroppedDown = true;
         }
 
         private void comboBoxLentPaymentType_TextChanged(object sender, EventArgs e)
         {
             if (ignoreEvents) return;
+            if (comboBoxLentPaymentType.SelectedIndex > 0 || comboBoxLentPaymentType.Text == "Select Payment Type") return;
             comboBoxLentPaymentType.DroppedDown = true;
         }
 

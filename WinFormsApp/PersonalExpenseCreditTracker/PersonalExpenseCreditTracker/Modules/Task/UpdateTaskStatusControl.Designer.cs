@@ -36,6 +36,7 @@
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblUpdateStatus = new System.Windows.Forms.Label();
             this.pnlCurrentStatus = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblCurrentStatus = new System.Windows.Forms.Label();
             this.lblCurrentStatusTitle = new System.Windows.Forms.Label();
             this.pnlTaskTitle = new System.Windows.Forms.Panel();
@@ -52,6 +53,7 @@
             this.pnlBody.SuspendLayout();
             this.pnlStatus.SuspendLayout();
             this.pnlCurrentStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlTaskTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -71,9 +73,8 @@
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(548, 314);
+            this.pnlMain.Size = new System.Drawing.Size(548, 322);
             this.pnlMain.TabIndex = 0;
-            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             // 
             // pnlBody
             // 
@@ -87,7 +88,7 @@
             this.pnlBody.Controls.Add(this.lblTaskTitle);
             this.pnlBody.Location = new System.Drawing.Point(19, 65);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(508, 174);
+            this.pnlBody.Size = new System.Drawing.Size(508, 180);
             this.pnlBody.TabIndex = 14;
             // 
             // label2
@@ -95,7 +96,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(171, 122);
+            this.label2.Location = new System.Drawing.Point(171, 124);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 23);
@@ -107,7 +108,7 @@
             this.pnlStatus.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlStatus.Controls.Add(this.cmbStatus);
-            this.pnlStatus.Location = new System.Drawing.Point(195, 122);
+            this.pnlStatus.Location = new System.Drawing.Point(195, 124);
             this.pnlStatus.Name = "pnlStatus";
             this.pnlStatus.Size = new System.Drawing.Size(295, 31);
             this.pnlStatus.TabIndex = 8;
@@ -123,12 +124,14 @@
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(289, 31);
             this.cmbStatus.TabIndex = 7;
+            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
+            this.cmbStatus.Click += new System.EventHandler(this.cmbStatus_Click);
             // 
             // lblUpdateStatus
             // 
             this.lblUpdateStatus.AutoSize = true;
             this.lblUpdateStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpdateStatus.Location = new System.Drawing.Point(13, 123);
+            this.lblUpdateStatus.Location = new System.Drawing.Point(13, 125);
             this.lblUpdateStatus.Name = "lblUpdateStatus";
             this.lblUpdateStatus.Size = new System.Drawing.Size(155, 25);
             this.lblUpdateStatus.TabIndex = 6;
@@ -138,11 +141,22 @@
             // 
             this.pnlCurrentStatus.BackColor = System.Drawing.Color.Gainsboro;
             this.pnlCurrentStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCurrentStatus.Controls.Add(this.pictureBox1);
             this.pnlCurrentStatus.Controls.Add(this.lblCurrentStatus);
-            this.pnlCurrentStatus.Location = new System.Drawing.Point(195, 71);
+            this.pnlCurrentStatus.Location = new System.Drawing.Point(195, 72);
             this.pnlCurrentStatus.Name = "pnlCurrentStatus";
             this.pnlCurrentStatus.Size = new System.Drawing.Size(295, 31);
             this.pnlCurrentStatus.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__5_;
+            this.pictureBox1.Location = new System.Drawing.Point(260, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(25, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // lblCurrentStatus
             // 
@@ -159,7 +173,7 @@
             // 
             this.lblCurrentStatusTitle.AutoSize = true;
             this.lblCurrentStatusTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold);
-            this.lblCurrentStatusTitle.Location = new System.Drawing.Point(13, 72);
+            this.lblCurrentStatusTitle.Location = new System.Drawing.Point(13, 73);
             this.lblCurrentStatusTitle.Name = "lblCurrentStatusTitle";
             this.lblCurrentStatusTitle.Size = new System.Drawing.Size(134, 25);
             this.lblCurrentStatusTitle.TabIndex = 4;
@@ -225,7 +239,7 @@
             this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
             this.btnUpdate.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update__4_;
-            this.btnUpdate.Location = new System.Drawing.Point(390, 255);
+            this.btnUpdate.Location = new System.Drawing.Point(390, 264);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.btnUpdate.Size = new System.Drawing.Size(137, 41);
@@ -246,7 +260,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(259, 255);
+            this.btnCancel.Location = new System.Drawing.Point(259, 264);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 41);
             this.btnCancel.TabIndex = 9;
@@ -288,7 +302,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(548, 314);
+            this.ClientSize = new System.Drawing.Size(548, 322);
             this.Controls.Add(this.pnlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UpdateTaskStatus";
@@ -301,6 +315,7 @@
             this.pnlStatus.ResumeLayout(false);
             this.pnlCurrentStatus.ResumeLayout(false);
             this.pnlCurrentStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlTaskTitle.ResumeLayout(false);
             this.pnlTaskTitle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).EndInit();
@@ -330,5 +345,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.PictureBox piclock;
         private System.Windows.Forms.Panel pnlBody;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
