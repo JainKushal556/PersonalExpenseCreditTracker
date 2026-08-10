@@ -347,13 +347,26 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 {
                     DialogResult result = addPersonForm.ShowDialog();
                     this.Show();
-                    if (result == DialogResult.OK)
+                    // ১. ComboBox-এ নতুন ডেটা রিলোড করুন
+                    CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", "+ Add New Person", comboBoxLentSelectPerson);
+                    // ২. নতুন Person Add হয়ে থাকলে তাকে ComboBox-এ সিলেক্ট করে দিন
+                    if (!string.IsNullOrEmpty(addPersonForm.LastAddedPersonName))
                     {
-                        CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", "+ Add New Person", comboBoxLentSelectPerson);
+                        int index = comboBoxLentSelectPerson.FindStringExact(addPersonForm.LastAddedPersonName);
+                        if (index != -1)
+                        {
+                            comboBoxLentSelectPerson.SelectedIndex = index;
+                            comboBoxLentSelectPerson.ForeColor = Color.Black; // টেক্সট কালার কালো দেখাবে
+                        }
+                        else
+                        {
+                            comboBoxLentSelectPerson.SelectedIndex = 0;
+                        }
                     }
                     else
                     {
                         comboBoxLentSelectPerson.SelectedIndex = 0;
+                        comboBoxLentSelectPerson.ForeColor = Color.Gray;
                     }
                 }
             }

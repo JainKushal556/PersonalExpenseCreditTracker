@@ -127,13 +127,19 @@ namespace BLLayer.Lent
                 return result;
             }
 
-            // Return Date Validation
-            result = CommonValidator.ValidateDeadline(returnDate);
+            //// Return Date Validation
+            //result = CommonValidator.ValidateDeadline(returnDate);
+            //if (result != CommonValidator.ValidationResult.Success)
+            //{
+            //    return result;
+            //}
+            // Return Amount Date Validation
+            result = CommonValidator.ValidateDeadlineReturnAmount(returnDate);
+
             if (result != CommonValidator.ValidationResult.Success)
             {
                 return result;
             }
-
             // Description Validation
             result = CommonValidator.ValidateDescription(description);
             if (result != CommonValidator.ValidationResult.Success)

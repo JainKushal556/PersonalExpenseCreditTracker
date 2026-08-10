@@ -302,5 +302,20 @@ namespace DALayer.Common
                 throw;
             }
         }
+
+
+        public static void UpdateOverdueStatus()
+        {
+            using (SqlConnection sqlConnection =
+                   new SqlConnection(SqlHelper.connectionString))
+            using (SqlCommand sqlCommand =
+                   new SqlCommand("spUpdateOverdueStatus", sqlConnection))
+            {
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlConnection.Open();
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
     }
 }

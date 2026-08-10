@@ -411,21 +411,35 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
                     this.Show();
 
-                    if (result == DialogResult.OK)
+                    CommonUiFunction.LoadInComboBox(
+                        "spGetAllPersons",
+                        Session.LogedInUser.GetUserId(),
+                        "Select Person",
+                        "+ Add New Person",
+                        cmbBorrowSelectPerson);
+
+                   
+                    if (!string.IsNullOrEmpty(addPersonForm.LastAddedPersonName))
                     {
-                        CommonUiFunction.LoadInComboBox(
-                            "spGetAllPersons",
-                            Session.LogedInUser.GetUserId(),
-                            "Select Person",
-                            "+ Add New Person",
-                            cmbBorrowSelectPerson);
+                        int index = cmbBorrowSelectPerson.FindStringExact(addPersonForm.LastAddedPersonName);
+                        if (index != -1)
+                        {
+                            cmbBorrowSelectPerson.SelectedIndex = index;
+                            cmbBorrowSelectPerson.ForeColor = Color.Black; 
+                        }
+                        else
+                        {
+                            cmbBorrowSelectPerson.SelectedIndex = 0;
+                        }
                     }
                     else
                     {
                         cmbBorrowSelectPerson.SelectedIndex = 0;
+                        cmbBorrowSelectPerson.ForeColor = Color.Gray;
                     }
                 }
             }
+
         }
 
 

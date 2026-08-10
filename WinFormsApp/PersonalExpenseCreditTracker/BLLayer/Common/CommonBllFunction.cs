@@ -82,5 +82,11 @@ namespace BLLayer.Common
             dataTable = SqlHelper.GetErrorCategoryDataIntoCategoryDB(spName, userId, paramId1, paramId2, paramName, paramName1, paramName2, paramName3);
             return dataTable;
         }
+
+
+        public static void UpdateOverdueStatus()
+        {
+            SqlHelper.UpdateOverdueStatus();
+        }
     }
 }

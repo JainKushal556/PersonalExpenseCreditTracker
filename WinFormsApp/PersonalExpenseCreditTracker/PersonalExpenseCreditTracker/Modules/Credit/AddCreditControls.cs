@@ -147,8 +147,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             ErrorHelper.HideErrorForControl(cmbAddCreditCategory);
             cmbAddCreditCategory.AutoCompleteMode = AutoCompleteMode.Append;
             cmbAddCreditCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             if (cmbAddCreditCategory.SelectedValue == null)
                 return;
+
             int categoryId = 0;
             DataRowView drv = cmbAddCreditCategory.SelectedValue as DataRowView;
             if (drv != null)
@@ -159,6 +161,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             {
                 categoryId = Convert.ToInt32(cmbAddCreditCategory.SelectedValue);
             }
+
             if (categoryId == -99)
             {
                 this.Hide();
@@ -166,23 +169,42 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 {
                     DialogResult result = addCategoryForm.ShowDialog();
                     this.Show();
+
                     if (result == DialogResult.OK)
                     {
+
                         CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", "+ Add New Category", cmbAddCreditCategory);
-                        string newCategory = addCategoryForm.AddedCategoryName;
-                        if (!string.IsNullOrEmpty(newCategory))
+
+                        if (!string.IsNullOrEmpty(addCategoryForm.AddedCategoryName))
                         {
-                            cmbAddCreditCategory.Text = newCategory;
+                            int index = cmbAddCreditCategory.FindStringExact(addCategoryForm.AddedCategoryName);
+                            if (index != -1)
+                            {
+                                cmbAddCreditCategory.SelectedIndex = index;
+                                cmbAddCreditCategory.ForeColor = Color.Black;
+                            }
+                            else
+                            {
+                                cmbAddCreditCategory.SelectedIndex = 0;
+                                cmbAddCreditCategory.ForeColor = Color.Gray;
+                            }
+                        }
+                        else
+                        {
+                            cmbAddCreditCategory.SelectedIndex = 0;
+                            cmbAddCreditCategory.ForeColor = Color.Gray;
                         }
                     }
                     else
                     {
                         cmbAddCreditCategory.SelectedIndex = 0;
+                        cmbAddCreditCategory.ForeColor = Color.Black;
                     }
                 }
             }
             else if (categoryId > 0)
             {
+               
                 CommonUiFunction.LoadInComboBox(
                     "spGetCreditSubCategoryByCategoryID",
                     "Select Sub Category",
@@ -199,6 +221,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 cmbAddCreditSubCategory.ForeColor = Color.Gray;
             }
         }
+
 
         private void cmbAddCreditCategory_Enter(object sender, EventArgs e)
         {
@@ -389,6 +412,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
                     if (result == DialogResult.OK)
                     {
+
                         CommonUiFunction.LoadInComboBox(
                             "spGetCreditSubCategoryByCategoryID",
                             "Select Sub Category",
@@ -397,19 +421,36 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                             "@CategoryID",
                             currentCategoryId);
 
-                        string newSubCategory = addSubCatForm.AddedSubCategoryName;
-                        if (!string.IsNullOrEmpty(newSubCategory))
+
+                        if (!string.IsNullOrEmpty(addSubCatForm.AddedSubCategoryName))
                         {
-                            cmbAddCreditSubCategory.Text = newSubCategory;
+                            int index = cmbAddCreditSubCategory.FindStringExact(addSubCatForm.AddedSubCategoryName);
+                            if (index != -1)
+                            {
+                                cmbAddCreditSubCategory.SelectedIndex = index;
+                                cmbAddCreditSubCategory.ForeColor = Color.Black;
+                            }
+                            else
+                            {
+                                cmbAddCreditSubCategory.SelectedIndex = 0;
+                                cmbAddCreditSubCategory.ForeColor = Color.Gray;
+                            }
+                        }
+                        else
+                        {
+                            cmbAddCreditSubCategory.SelectedIndex = 0;
+                            cmbAddCreditSubCategory.ForeColor = Color.Gray;
                         }
                     }
                     else
                     {
                         cmbAddCreditSubCategory.SelectedIndex = 0;
+                        cmbAddCreditSubCategory.ForeColor = Color.Black;
                     }
                 }
             }
         }
+
 
         private void txtAddCreditAmount_TextChanged(object sender, EventArgs e)
         {

@@ -89,7 +89,21 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             // If no deadline is selected, assign DateTime.MinValue
             //    // Otherwise, assign the selected date from the calendar
-            borrowUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar.SelectionStart;
+            //borrowUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar.SelectionStart;
+
+
+            DateTime returnDate = DateTime.MinValue;
+            if (!string.IsNullOrWhiteSpace(txtReturnDate.Text))
+            {
+                string[] formats = new string[] { "dd-MM-yyyy", "d-M-yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy", "dd MMM yyyy", "d MMM yyyy", "dd MMMM yyyy" };
+                if (!DateTime.TryParseExact(txtReturnDate.Text.Trim(), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out returnDate))
+                {
+                    DateTime.TryParse(txtReturnDate.Text.Trim(), out returnDate);
+                }
+            }
+
+            borrowUi.returnDate = returnDate;
+
             CommonValidator.ValidationResult result = borrowUi.InsertPayBorrowIntoBorrowUi();
             switch (result)
             {
@@ -106,9 +120,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 case CommonValidator.ValidationResult.PaymentInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, cmbPaymentType);
                     break;
+
+
                 case CommonValidator.ValidationResult.DeadlineInvalid:
+                case CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnDate);
                     break;
+
                 case CommonValidator.ValidationResult.DescriptionInvalid:
                 case CommonValidator.ValidationResult.DescriptionTooShort:
                 case CommonValidator.ValidationResult.DescriptionTooLong:
@@ -122,6 +140,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void PayBorrowAmountControls_Load(object sender, EventArgs e)
         {
+            monthCalendar.MaxDate = DateTime.Today; 
+
             SetRadius(pnlInputField, 15);
             SetRadius(pnlPersonDetails, 15);
             SetRadius(btnClear, 5);

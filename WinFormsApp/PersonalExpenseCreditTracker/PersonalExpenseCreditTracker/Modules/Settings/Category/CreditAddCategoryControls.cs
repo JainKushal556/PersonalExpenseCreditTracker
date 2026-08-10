@@ -122,9 +122,14 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Saved Credit Category");
+
+                    if (creditCategoryControls != null)
+                    {
+                        creditCategoryControls.LoadCategories();
+                    }
                     this.DialogResult = DialogResult.OK;
                     this.Close();
-                    creditCategoryControls.LoadCategories();
+                    //creditCategoryControls.LoadCategories();
                     break;
 
                 case CommonValidator.ValidationResult.CategoryNameEmpty:

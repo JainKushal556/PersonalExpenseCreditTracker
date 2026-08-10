@@ -31,6 +31,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void ReturnAmountControls_Load(object sender, EventArgs e)
         {
+            monthCalendar.MaxDate = DateTime.Today; 
+
             SetRadius(pnlInputField, 15);
             SetRadius(pnlPersonDetails, 15);
             SetRadius(btnClear, 5);
@@ -251,10 +253,20 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             lentUi.returnAmount = (txtReturnAmount.Text == "Enter Return Amount" || txtReturnAmount.Text == "Select Amount") ? "" : txtReturnAmount.Text;
             lentUi.description = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
 
-            lentUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY")
-                ? DateTime.MinValue
-                : monthCalendar.SelectionStart;
+            //lentUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY")
+            //    ? DateTime.MinValue
+            //    : monthCalendar.SelectionStart;
 
+            DateTime returnDate = DateTime.MinValue;
+            if (!string.IsNullOrWhiteSpace(txtReturnDate.Text))
+            {
+                string[] formats = new string[] { "dd-MM-yyyy", "d-M-yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy", "dd MMM yyyy", "d MMM yyyy", "dd MMMM yyyy" };
+                if (!DateTime.TryParseExact(txtReturnDate.Text.Trim(), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out returnDate))
+                {
+                    DateTime.TryParse(txtReturnDate.Text.Trim(), out returnDate);
+                }
+            }
+            lentUi.returnDate = returnDate;
             CommonValidator.ValidationResult result = lentUi.InsertReturnLentIntoLentUi();
 
             switch (result)
@@ -276,6 +288,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
 
                 case CommonValidator.ValidationResult.DeadlineInvalid:
+                case CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnDate);
                     break;
 

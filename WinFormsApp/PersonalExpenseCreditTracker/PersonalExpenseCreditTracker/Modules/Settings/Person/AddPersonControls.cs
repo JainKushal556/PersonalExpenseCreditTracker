@@ -21,6 +21,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         private DataTable AllLentData = new DataTable();
         private DataTable masterData = new DataTable();
 
+        public string LastAddedPersonName { get; set; }
+
         public AddPersonControls()
         {
             InitializeComponent();
@@ -322,7 +324,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Person Details Save Successfully");
-                    LoadData();
+                    //LoadData();
+                     LastAddedPersonName = txtAddPersonInputFullName.Text.Trim();
+                    this.DialogResult = DialogResult.OK;
+    
+                     LoadData();
+                     this.Close();
                     break;
 
                 case CommonValidator.ValidationResult.PersonNameEmpty:
