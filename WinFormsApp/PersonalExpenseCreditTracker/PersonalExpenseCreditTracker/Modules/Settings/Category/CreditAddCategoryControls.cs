@@ -152,5 +152,13 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             if (rdActive.Checked)
                 rdInactive.Checked = false;
         }
+
+        private void txtCategory_TextChanged(object sender, EventArgs e)
+        {
+            if (txtCategory.Text != "Enter Category Name" && !string.IsNullOrWhiteSpace(txtCategory.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtCategory);
+            }
+        }
     }
 }

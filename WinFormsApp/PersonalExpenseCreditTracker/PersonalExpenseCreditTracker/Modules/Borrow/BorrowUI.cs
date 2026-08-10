@@ -37,7 +37,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             borrowBLL.description = description;
 
             // Call the BLL method for validation
-            return borrowBLL.DataValidatorIntoLentBll();
+            return borrowBLL.DataValidatorIntoBorrowBll();
         }
 
         public CommonValidator.ValidationResult InsertPayBorrowIntoBorrowUi()

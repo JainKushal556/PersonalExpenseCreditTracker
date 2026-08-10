@@ -188,5 +188,13 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             SetRadius(btnUpdateCategory, 5);
             rdobtnActive.Checked = true;
         }
+
+        private void txtCategoryName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtCategoryName.Text != "Edit Credit Sub Category" && !string.IsNullOrWhiteSpace(txtCategoryName.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtCategoryName);
+            }
+        }
     }
 }
