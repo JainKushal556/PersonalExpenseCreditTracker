@@ -324,8 +324,8 @@ namespace PersonalExpenseCreditTracker.Common
 
             masterTable.DefaultView.RowFilter = string.Format(
                 "NoteTitle LIKE '%{0}%' OR " +
-                "Description LIKE '%{0}%' OR " +
-                "NotePriorityName LIKE '%{0}%'",
+                "NotePriorityName LIKE '%{0}%' OR " +
+                "Convert(CreatedAt, 'System.String') LIKE '%{0}%'",
                 search);
 
             DataTable filteredTable = masterTable.DefaultView.ToTable();
@@ -345,20 +345,42 @@ namespace PersonalExpenseCreditTracker.Common
 
             masterTable.DefaultView.RowFilter = string.Format(
                 "TaskTitle LIKE '%{0}%' OR " +
-                "Description LIKE '%{0}%' OR " +
                 "TaskStatusName LIKE '%{0}%' OR " +
-                "TaskPriorityName LIKE '%{0}%'",
+                "PriorityName LIKE '%{0}%' OR " +
+                "Convert(CreatedAt, 'System.String') LIKE '%{0}%'",
                 search);
 
             DataTable filteredTable = masterTable.DefaultView.ToTable();
             return filteredTable;
         }
 
+        public static DataTable SearchDataInPersons(DataTable masterTable, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim().Replace("'", "''");
+
+            if (masterTable == null) return null;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+
+            masterTable.DefaultView.RowFilter = string.Format(
+                "PersonName LIKE '%{0}%' OR " +
+                "PhoneNumber LIKE '%{0}%'",
+                search);
+
+            DataTable filteredTable = masterTable.DefaultView.ToTable();
+            return filteredTable;
+        }
+
+
         public static void SetComboBoxHeightAndOwnerDraw(ComboBox comboBox)
         {
             comboBox.DrawMode = DrawMode.OwnerDrawFixed;
             comboBox.DrawItem += ComboBox_DrawItem;
         }
+
 
         private static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
