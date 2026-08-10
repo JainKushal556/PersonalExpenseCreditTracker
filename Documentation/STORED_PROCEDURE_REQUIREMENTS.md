@@ -1458,7 +1458,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Purpose:**
 
-- Automatically update borrow records that have passed their deadline to 'Overdue' status.
+- Automatically update lent and borrow records that have passed their deadline to 'Overdue' status.
 
 **Parameters:**
 
@@ -1466,7 +1466,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Expected Output:**
 
-- Overdue borrow statuses updated successfully.
+- Overdue lent and borrow statuses updated successfully.
 
 **When Used:**
 
@@ -1474,6 +1474,7 @@ The first version will include borrow return reminders, lent return reminders, a
 
 **Tables Used:**
 
+- `tblLent`
 - `tblBorrow`
 - `tblLentBorrowStatus`
 

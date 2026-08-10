@@ -77,6 +77,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             cmbSubCategory.Text = "Enter SubCategory";
             cmbSubCategory.ForeColor = Color.Gray;
 
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbCategory);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbCategorytxt);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbSubCategory);
+
             dgvCreditDataTable.CellPainting += dgvCreditDataTable_CellPainting;
             ApplyRoundCorners();
             pageSize = GetRowsPerPage();
@@ -597,6 +601,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             ignoreEvents = false;
 
             Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategory);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbCategory);
         }
 
         private void tsmiSubCategory_Click(object sender, EventArgs e)
@@ -604,6 +609,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             ShowFilterPanel(pnlSubCategoryFilter);
             ignoreEvents = false;
             Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategorytxt);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbCategorytxt);
         }
 
         private void tsmiAmount_Click(object sender, EventArgs e)
