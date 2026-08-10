@@ -82,6 +82,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             cmbSubCategory.Text = "Enter SubCategory";
             cmbSubCategory.ForeColor = Color.Gray;
 
+            Common.CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbCategory);
+            Common.CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbCategorytxt);
+            Common.CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbSubCategory);
+
             dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
             ApplyRoundCorners();
             pageSize = GetRowsPerPage();
@@ -747,18 +751,18 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void tsmiCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlCategoryFilter);
-            //cmbCategory.DroppedDown = true;
             ignoreEvents = false;
 
             Common.CommonUiFunction.LoadInComboBox("spGetExpenseCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategory);
-
-
+            Common.CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbCategory);
         }
+
         private void tsmiSubCategory_Click(object sender, EventArgs e)
         {
             ShowFilterPanel(pnlSubCategoryFilter);
             ignoreEvents = false;
             Common.CommonUiFunction.LoadInComboBox("spGetExpenseCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", cmbCategorytxt);
+            Common.CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbCategorytxt);
         }
 
         private void tsmiAmount_Click(object sender, EventArgs e)

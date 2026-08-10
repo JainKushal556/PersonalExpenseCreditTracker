@@ -1,575 +1,635 @@
 -- =========================================================================
 -- NEW MASTER SEED DATA SCRIPT (In Proper Dependency Order)
 -- Database: dbPersonalExpenseCreditTracker
+-- Last Updated: 2026-08-10
 -- =========================================================================
 
 USE dbPersonalExpenseCreditTracker;
 GO
 
--- 1. INDEPENDENT LOOKUP TABLES (কোনো ফরেন কি ডিপেন্ডেন্সি নেই)
+-- =========================================================================
+-- 1. INDEPENDENT LOOKUP TABLES
 -- =========================================================================
 
--- Insert Genders
-IF NOT EXISTS (SELECT 1 FROM tblGender WHERE GenderName = 'Male') INSERT INTO tblGender (GenderName) VALUES ('Male');
+-- Genders
+IF NOT EXISTS (SELECT 1 FROM tblGender WHERE GenderName = 'Male')   INSERT INTO tblGender (GenderName) VALUES ('Male');
 IF NOT EXISTS (SELECT 1 FROM tblGender WHERE GenderName = 'Female') INSERT INTO tblGender (GenderName) VALUES ('Female');
-IF NOT EXISTS (SELECT 1 FROM tblGender WHERE GenderName = 'Other') INSERT INTO tblGender (GenderName) VALUES ('Other');
+IF NOT EXISTS (SELECT 1 FROM tblGender WHERE GenderName = 'Other')  INSERT INTO tblGender (GenderName) VALUES ('Other');
 GO
 
--- Insert Payment Methods
+-- Payment Methods
 IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Bank Transfer') INSERT INTO tblPaymentType (PaymentName) VALUES ('Bank Transfer');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Cash') INSERT INTO tblPaymentType (PaymentName) VALUES ('Cash');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Cheque') INSERT INTO tblPaymentType (PaymentName) VALUES ('Cheque');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Credit Card') INSERT INTO tblPaymentType (PaymentName) VALUES ('Credit Card');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Debit Card') INSERT INTO tblPaymentType (PaymentName) VALUES ('Debit Card');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Google Pay') INSERT INTO tblPaymentType (PaymentName) VALUES ('Google Pay');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Net Banking') INSERT INTO tblPaymentType (PaymentName) VALUES ('Net Banking');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Paytm') INSERT INTO tblPaymentType (PaymentName) VALUES ('Paytm');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'PhonePe') INSERT INTO tblPaymentType (PaymentName) VALUES ('PhonePe');
-IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'UPI') INSERT INTO tblPaymentType (PaymentName) VALUES ('UPI');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Cash')          INSERT INTO tblPaymentType (PaymentName) VALUES ('Cash');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Cheque')        INSERT INTO tblPaymentType (PaymentName) VALUES ('Cheque');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Credit Card')   INSERT INTO tblPaymentType (PaymentName) VALUES ('Credit Card');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Debit Card')    INSERT INTO tblPaymentType (PaymentName) VALUES ('Debit Card');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Google Pay')    INSERT INTO tblPaymentType (PaymentName) VALUES ('Google Pay');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Net Banking')   INSERT INTO tblPaymentType (PaymentName) VALUES ('Net Banking');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'Paytm')         INSERT INTO tblPaymentType (PaymentName) VALUES ('Paytm');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'PhonePe')       INSERT INTO tblPaymentType (PaymentName) VALUES ('PhonePe');
+IF NOT EXISTS (SELECT 1 FROM tblPaymentType WHERE PaymentName = 'UPI')           INSERT INTO tblPaymentType (PaymentName) VALUES ('UPI');
 GO
 
--- Insert Lent and Borrow Status
-IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Pending') INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Pending');
-IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Paid') INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Paid');
-IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Overdue') INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Overdue');
-IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Cancelled') INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Cancelled');
-IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Partially Paid') INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Partially Paid');
+-- Lent & Borrow Status
+IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Pending')          INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Pending');
+IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Paid')             INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Paid');
+IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Overdue')          INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Overdue');
+IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Cancelled')        INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Cancelled');
+IF NOT EXISTS (SELECT 1 FROM tblLentBorrowStatus WHERE StatusName = 'Partially Paid')   INSERT INTO tblLentBorrowStatus (StatusName) VALUES ('Partially Paid');
 GO
 
--- Insert Task Priority Levels
-IF NOT EXISTS (SELECT 1 FROM tblTaskPriorities WHERE PriorityName = 'Low') INSERT INTO tblTaskPriorities (PriorityName) VALUES ('Low');
+-- Task Priorities
+IF NOT EXISTS (SELECT 1 FROM tblTaskPriorities WHERE PriorityName = 'Low')    INSERT INTO tblTaskPriorities (PriorityName) VALUES ('Low');
 IF NOT EXISTS (SELECT 1 FROM tblTaskPriorities WHERE PriorityName = 'Medium') INSERT INTO tblTaskPriorities (PriorityName) VALUES ('Medium');
-IF NOT EXISTS (SELECT 1 FROM tblTaskPriorities WHERE PriorityName = 'High') INSERT INTO tblTaskPriorities (PriorityName) VALUES ('High');
+IF NOT EXISTS (SELECT 1 FROM tblTaskPriorities WHERE PriorityName = 'High')   INSERT INTO tblTaskPriorities (PriorityName) VALUES ('High');
 GO
 
--- Insert Task Status Types
-IF NOT EXISTS (SELECT 1 FROM tblTaskStatus WHERE TaskStatusName = 'Pending') INSERT INTO tblTaskStatus (TaskStatusName) VALUES ('Pending');
+-- Task Status
+IF NOT EXISTS (SELECT 1 FROM tblTaskStatus WHERE TaskStatusName = 'Pending')            INSERT INTO tblTaskStatus (TaskStatusName) VALUES ('Pending');
 IF NOT EXISTS (SELECT 1 FROM tblTaskStatus WHERE TaskStatusName = 'Partially Complete') INSERT INTO tblTaskStatus (TaskStatusName) VALUES ('Partially Complete');
-IF NOT EXISTS (SELECT 1 FROM tblTaskStatus WHERE TaskStatusName = 'Complete') INSERT INTO tblTaskStatus (TaskStatusName) VALUES ('Complete');
+IF NOT EXISTS (SELECT 1 FROM tblTaskStatus WHERE TaskStatusName = 'Complete')           INSERT INTO tblTaskStatus (TaskStatusName) VALUES ('Complete');
 GO
 
--- Insert Note Priority Levels
-IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Normal') INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Normal');
+-- Note Priorities
+IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Normal')    INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Normal');
 IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Important') INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Important');
-IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Urgent') INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Urgent');
+IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Urgent')    INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Urgent');
 GO
 
--- Insert Note Colors
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'White') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('White', '#FFFFFF');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Red') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Red', '#FF6B6B');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Orange') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Orange', '#FFB74D');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Yellow') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Yellow', '#FDD835');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Green') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Green', '#81C784');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Teal') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Teal', '#4DB6AC');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Blue') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Blue', '#64B5F6');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Purple') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Purple', '#9575CD');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Pink') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Pink', '#F06292');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Grey') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Grey', '#90A4AE');
+-- Note Colors
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'White')    INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('White',    '#FFFFFF');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Red')      INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Red',      '#FF6B6B');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Orange')   INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Orange',   '#FFB74D');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Yellow')   INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Yellow',   '#FDD835');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Green')    INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Green',    '#81C784');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Teal')     INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Teal',     '#4DB6AC');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Blue')     INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Blue',     '#64B5F6');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Purple')   INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Purple',   '#9575CD');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Pink')     INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Pink',     '#F06292');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Grey')     INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Grey',     '#90A4AE');
 IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Lavender') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Lavender', '#BA68C8');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Coral') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Coral', '#FF8A65');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Mint') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Mint', '#80CBC4');
-IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Indigo') INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Indigo', '#7986CB');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Coral')    INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Coral',    '#FF8A65');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Mint')     INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Mint',     '#80CBC4');
+IF NOT EXISTS (SELECT 1 FROM tblNoteColor WHERE ColorName = 'Indigo')   INSERT INTO tblNoteColor (ColorName, ColorHexCode) VALUES ('Indigo',   '#7986CB');
 GO
 
--- 2. ROOT USERS TABLE (মেইন ইউজার টেবিল)
+-- =========================================================================
+-- 2. ROOT USERS TABLE
 -- =========================================================================
 
--- Insert User Details
 SET IDENTITY_INSERT tblUsers ON;
 
-INSERT INTO tblUsers (UserID, UserName, CreatedAt) 
+INSERT INTO tblUsers (UserID, UserName, CreatedAt)
 VALUES
-(1, 'Ram Das', '2026-01-12 00:00:00'),
-(2, 'Rahul Sharma', '2026-05-21 00:00:00'),
-(3, 'Priya Das', '2026-06-16 00:00:00'),
-(4, 'Ankit Verma', '2026-03-29 00:00:00'),
-(5, 'Sneha Roy', '2026-02-28 00:00:00');
+(1, 'Ram Das',       '2026-01-12 09:00:00'),
+(2, 'Rahul Sharma',  '2026-05-21 10:00:00'),
+(3, 'Priya Das',     '2026-06-16 11:00:00'),
+(4, 'Ankit Verma',   '2026-03-29 09:30:00'),
+(5, 'Sneha Roy',     '2026-02-28 08:45:00');
 
 SET IDENTITY_INSERT tblUsers OFF;
 GO
 
-
+-- =========================================================================
 -- 3. TABLES DIRECTLY DEPENDING ON USERS / LOOKUPS
 -- =========================================================================
 
--- Insert User Profile Information
+-- User Profile
 SET IDENTITY_INSERT tblUserProfile ON;
 
-INSERT INTO tblUserProfile 
-(ProfileID, UserID, FullName, ProfilePhoto)
+INSERT INTO tblUserProfile (ProfileID, UserID, FullName, ProfilePhoto)
 VALUES
-(1, 1, 'Ram Das', NULL),
+(1, 1, 'Ram Das',      NULL),
 (2, 2, 'Rahul Sharma', NULL),
-(3, 3, 'Priya Das', NULL),
-(4, 4, 'Ankit Verma', NULL),
-(5, 5, 'Sneha Roy', NULL);
+(3, 3, 'Priya Das',    NULL),
+(4, 4, 'Ankit Verma',  NULL),
+(5, 5, 'Sneha Roy',    NULL);
 
 SET IDENTITY_INSERT tblUserProfile OFF;
 GO
 
--- Insert User Contact Details
-INSERT INTO tblUserContact 
-(UserID, Email, PhoneNumber)
+-- User Contact
+INSERT INTO tblUserContact (UserID, Email, PhoneNumber)
 VALUES
-(1, 'ram143@gmail.com', '2568910296'),
-(2, 'sharmarahul123@gmail.com', '5555983670'),
-(3, 'priya4556@gmail.com', '8597658973'),
-(4, 'verma2005@gmail.com', '9025146832'),
-(5, 'sneharoy1@gmail.com', '8897581146');
+(1, 'ram143@gmail.com',          '9876543210'),
+(2, 'sharmarahul123@gmail.com',  '9823456789'),
+(3, 'priya4556@gmail.com',       '9712345678'),
+(4, 'verma2005@gmail.com',       '9634567890'),
+(5, 'sneharoy1@gmail.com',       '9587654321');
 GO
 
--- Insert User Login Credentials
-INSERT INTO tblUserAuthentication
-(UserID, Password, Active)
+-- User Authentication (User 5 Active for testing)
+INSERT INTO tblUserAuthentication (UserID, Password, Active)
 VALUES
-(1,'Ram342@',0),
-(2,'Rahul#126',0),
-(3,'Nibu@1234',0),
-(4,'Solo#3472',0),
-(5,'Roy#1678',1);
+(1, 'Ram342@',    0),
+(2, 'Rahul#126',  0),
+(3, 'Nibu@1234',  0),
+(4, 'Solo#3472',  0),
+(5, 'Roy#1678',   1);
 GO
 
--- Insert Person Contact List
-INSERT INTO tblPersons
-(UserID, PersonName, PhoneNumber, Address)
+-- =========================================================================
+-- Person Contact List (2 persons per user — proper realistic data)
+-- =========================================================================
+
+INSERT INTO tblPersons (UserID, PersonName, PhoneNumber, Address)
 VALUES
-(1,'Aarav Sharma','+91 98765 43210','Kharagpur'),
-(2,'Priya Sharma','+91 98765 43211','Durgapur'),
-(4,'Rohan Verma','+91 98123 45678','Panskura'),
-(3,'Ananya Iyer','+91 97654 32109','Kolkata'),
-(5,'Vikram Patel','+91 99887 76655','Howrah'),
-(2,'Sneha Reddy','+91 91234 56789','Durgapur'),
-(2,'Kabir Mehta','+91 93456 78901','Siliguri'),
-(3,'Diya Banerjee','+91 94567 89012','Asansol'),
-(5,'Siddharth Joshi','+91 95678 90123','Midnapore'),
-(4,'Neha Kapoor','+91 96789 01234','Malda');
+-- User 1: Ram Das
+(1, 'Aarav Sharma',    '9876543201', 'Salt Lake, Kolkata'),
+(1, 'Sourav Das',      '9845612300', 'Howrah, West Bengal'),
+
+-- User 2: Rahul Sharma
+(2, 'Priya Sharma',    '9123456780', 'Durgapur, West Bengal'),
+(2, 'Kabir Mehta',     '9934567812', 'Siliguri, West Bengal'),
+
+-- User 3: Priya Das
+(3, 'Ananya Iyer',     '9654321089', 'Ballygunge, Kolkata'),
+(3, 'Diya Banerjee',   '9743210987', 'Asansol, West Bengal'),
+
+-- User 4: Ankit Verma
+(4, 'Rohan Verma',     '9812345670', 'Panskura, West Bengal'),
+(4, 'Neha Kapoor',     '9678901234', 'Malda, West Bengal'),
+
+-- User 5: Sneha Roy
+(5, 'Vikram Patel',    '9887766554', 'Howrah, West Bengal'),
+(5, 'Siddharth Joshi', '9567890123', 'Midnapore, West Bengal');
 GO
 
--- Insert Default Expense Categories
-INSERT INTO tblExpenseCategory 
-(UserID, CategoryName, IsDefault, IsActive)
+-- =========================================================================
+-- 4. EXPENSE & CREDIT CATEGORIES
+-- =========================================================================
+
+-- Default Expense Categories
+INSERT INTO tblExpenseCategory (UserID, CategoryName, IsDefault, IsActive)
 VALUES
-(NULL, 'Food', 1, 1),
-(NULL, 'Travel', 1, 1),
-(NULL, 'Shopping', 1, 1),
+(NULL, 'Food',          1, 1),
+(NULL, 'Travel',        1, 1),
+(NULL, 'Shopping',      1, 1),
 (NULL, 'Entertainment', 1, 1),
-(NULL, 'Health', 1, 1),
-(NULL, 'Education', 1, 1),
-(NULL, 'Transportation', 1, 1),
+(NULL, 'Health',        1, 1),
+(NULL, 'Education',     1, 1),
+(NULL, 'Transportation',1, 1),
 (NULL, 'Personal Care', 1, 1),
-(NULL, 'Lent', 1, 1),
-(NULL, 'Tuition', 1, 1),
-(NULL, 'Borrow', 1, 1),
+(NULL, 'Lent',          1, 1),
+(NULL, 'Tuition',       1, 1),
+(NULL, 'Borrow',        1, 1),
 (NULL, 'Miscellaneous', 1, 1);
 GO
 
--- Insert Default Credit Categories
-INSERT INTO tblCreditCategory
-(UserID, CategoryName, IsDefault, IsActive)
+-- Default Credit Categories
+INSERT INTO tblCreditCategory (UserID, CategoryName, IsDefault, IsActive)
 VALUES
-(NULL,'Salary',1,1),
-(NULL,'Business',1,1),
-(NULL,'Investment',1,1),
-(NULL,'Freelancing',1,1),
-(NULL,'Rental',1,1),
-(NULL,'Cashback',1,1),
-(NULL,'Scholarship',1,1),
-(NULL,'Bonus',1,1),
-(NULL,'Refund',1,1),
-(NULL,'Borrow',1,1),
-(NULL,'Lent',1,1),
-(5,'Other Income',0,1);
+(NULL, 'Salary',      1, 1),
+(NULL, 'Business',    1, 1),
+(NULL, 'Investment',  1, 1),
+(NULL, 'Freelancing', 1, 1),
+(NULL, 'Rental',      1, 1),
+(NULL, 'Cashback',    1, 1),
+(NULL, 'Scholarship', 1, 1),
+(NULL, 'Bonus',       1, 1),
+(NULL, 'Refund',      1, 1),
+(NULL, 'Borrow',      1, 1),
+(NULL, 'Lent',        1, 1),
+(5,    'Other Income',0, 1);
 GO
 
-
--- 4. SUBCATEGORY TABLES (ক্যাটাগরির ওপর ডিপেন্ডেন্ট)
+-- =========================================================================
+-- 5. SUBCATEGORY TABLES
 -- =========================================================================
 
--- Insert Expense Sub Categories
-INSERT INTO tblExpenseSubCategory
-(CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
+-- Expense Sub Categories
+INSERT INTO tblExpenseSubCategory (CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
 VALUES
--- Food
-(1,NULL,'Breakfast',1,1),
-(1,NULL,'Lunch',1,1),
-(1,NULL,'Dinner',1,1),
-(1,NULL,'Snacks',1,1),
-(1,NULL,'Restaurant',1,1),
-(1,NULL,'Fast Food',1,1),
-(1,NULL,'Beverages',1,1),
--- Travel
-(2,NULL,'Train',1,1),
-(2,NULL,'Bus',1,1),
-(2,NULL,'Taxi',1,1),
-(2,NULL,'Hotel',1,1),
-(2,NULL,'Tour',1,1),
-(2,NULL,'Package',1,1),
-(2,NULL,'Fuel',1,1),
-(2,NULL,'Toll',1,1),
--- Shopping
-(3,NULL,'Clothing',1,1),
-(3,NULL,'Electronics',1,1),
-(3,NULL,'Footwear',1,1),
-(3,NULL,'Accessories',1,1),
-(3,NULL,'Home Appliances',1,1),
-(3,NULL,'Furniture',1,1),
-(3,NULL,'Gifts',1,1),
-(3,NULL,'Online Shopping',1,1),
--- Entertainment
-(4,NULL,'Movies',1,1),
-(4,NULL,'Games',1,1),
-(4,NULL,'OTT Subscription',1,1),
-(4,NULL,'Concert',1,1),
-(4,NULL,'Theme Park',1,1),
-(4,NULL,'Sports Event',1,1),
-(4,NULL,'Music',1,1),
--- Health
-(5,NULL,'Doctor',1,1),
-(5,NULL,'Medicines',1,1),
-(5,NULL,'Medical Tests',1,1),
-(5,NULL,'Hospital Bill',1,1),
-(5,NULL,'Health Insurance',1,1),
-(5,NULL,'Gym Membership',1,1),
-(5,NULL,'Pharmacy',1,1),
--- Education
-(6,NULL,'School Fees',1,1),
-(6,NULL,'College Fees',1,1),
-(6,NULL,'Tuition Fees',1,1),
-(6,NULL,'Books',1,1),
-(6,NULL,'Stationery',1,1),
-(6,NULL,'Online Course',1,1),
-(6,NULL,'Exam Fees',1,1),
--- Transportation
-(7,NULL,'Petrol',1,1),
-(7,NULL,'Diesel',1,1),
-(7,NULL,'Auto Rickshaw',1,1),
-(7,NULL,'Cab',1,1),
-(7,NULL,'Metro',1,1),
-(7,NULL,'Parking',1,1),
-(7,NULL,'Vehicle Service',1,1),
-(7,NULL,'Bike Maintenance',1,1),
--- Personal Care
-(8,NULL,'Haircut',1,1),
-(8,NULL,'Salon',1,1),
-(8,NULL,'Cosmetics',1,1),
-(8,NULL,'Skincare',1,1),
-(8,NULL,'Spa',1,1),
-(8,NULL,'Toiletries',1,1),
-(8,NULL,'Grooming',1,1),
--- Lent
-(9,NULL,'Lent to Friend',1,1),
-(9,NULL,'Lent to Family Member',1,1),
-(9,NULL,'Bank Loan EMI',1,1),
-(9,NULL,'Credit Card EMI',1,1),
-(9,NULL,'Personal Loan EMI',1,1),
-(9,NULL,'Lent Given',1,1),
--- Tuition
-(10,NULL,'School Tuition',1,1),
-(10,NULL,'College Tuition',1,1),
-(10,NULL,'Private Tutor',1,1),
-(10,NULL,'Coaching Center',1,1),
-(10,NULL,'Online Tuition',1,1),
--- Borrow
-(11,NULL,'Borrow Returned',1,1),
--- Miscellaneous
-(12,NULL,'General',1,1);
+-- Food (CategoryID=1)
+(1, NULL, 'Breakfast',     1, 1),
+(1, NULL, 'Lunch',         1, 1),
+(1, NULL, 'Dinner',        1, 1),
+(1, NULL, 'Snacks',        1, 1),
+(1, NULL, 'Restaurant',    1, 1),
+(1, NULL, 'Fast Food',     1, 1),
+(1, NULL, 'Beverages',     1, 1),
+-- Travel (CategoryID=2)
+(2, NULL, 'Train',         1, 1),
+(2, NULL, 'Bus',           1, 1),
+(2, NULL, 'Taxi',          1, 1),
+(2, NULL, 'Hotel',         1, 1),
+(2, NULL, 'Tour',          1, 1),
+(2, NULL, 'Package',       1, 1),
+(2, NULL, 'Fuel',          1, 1),
+(2, NULL, 'Toll',          1, 1),
+-- Shopping (CategoryID=3)
+(3, NULL, 'Clothing',         1, 1),
+(3, NULL, 'Electronics',      1, 1),
+(3, NULL, 'Footwear',         1, 1),
+(3, NULL, 'Accessories',      1, 1),
+(3, NULL, 'Home Appliances',  1, 1),
+(3, NULL, 'Furniture',        1, 1),
+(3, NULL, 'Gifts',            1, 1),
+(3, NULL, 'Online Shopping',  1, 1),
+-- Entertainment (CategoryID=4)
+(4, NULL, 'Movies',           1, 1),
+(4, NULL, 'Games',            1, 1),
+(4, NULL, 'OTT Subscription', 1, 1),
+(4, NULL, 'Concert',          1, 1),
+(4, NULL, 'Theme Park',       1, 1),
+(4, NULL, 'Sports Event',     1, 1),
+(4, NULL, 'Music',            1, 1),
+-- Health (CategoryID=5)
+(5, NULL, 'Doctor',           1, 1),
+(5, NULL, 'Medicines',        1, 1),
+(5, NULL, 'Medical Tests',    1, 1),
+(5, NULL, 'Hospital Bill',    1, 1),
+(5, NULL, 'Health Insurance', 1, 1),
+(5, NULL, 'Gym Membership',   1, 1),
+(5, NULL, 'Pharmacy',         1, 1),
+-- Education (CategoryID=6)
+(6, NULL, 'School Fees',      1, 1),
+(6, NULL, 'College Fees',     1, 1),
+(6, NULL, 'Tuition Fees',     1, 1),
+(6, NULL, 'Books',            1, 1),
+(6, NULL, 'Stationery',       1, 1),
+(6, NULL, 'Online Course',    1, 1),
+(6, NULL, 'Exam Fees',        1, 1),
+-- Transportation (CategoryID=7)
+(7, NULL, 'Petrol',           1, 1),
+(7, NULL, 'Diesel',           1, 1),
+(7, NULL, 'Auto Rickshaw',    1, 1),
+(7, NULL, 'Cab',              1, 1),
+(7, NULL, 'Metro',            1, 1),
+(7, NULL, 'Parking',          1, 1),
+(7, NULL, 'Vehicle Service',  1, 1),
+(7, NULL, 'Bike Maintenance', 1, 1),
+-- Personal Care (CategoryID=8)
+(8, NULL, 'Haircut',          1, 1),
+(8, NULL, 'Salon',            1, 1),
+(8, NULL, 'Cosmetics',        1, 1),
+(8, NULL, 'Skincare',         1, 1),
+(8, NULL, 'Spa',              1, 1),
+(8, NULL, 'Toiletries',       1, 1),
+(8, NULL, 'Grooming',         1, 1),
+-- Lent (CategoryID=9)
+(9, NULL, 'Lent to Friend',       1, 1),
+(9, NULL, 'Lent to Family Member',1, 1),
+(9, NULL, 'Bank Loan EMI',        1, 1),
+(9, NULL, 'Credit Card EMI',      1, 1),
+(9, NULL, 'Personal Loan EMI',    1, 1),
+(9, NULL, 'Lent Given',           1, 1),
+-- Tuition (CategoryID=10)
+(10, NULL, 'School Tuition',   1, 1),
+(10, NULL, 'College Tuition',  1, 1),
+(10, NULL, 'Private Tutor',    1, 1),
+(10, NULL, 'Coaching Center',  1, 1),
+(10, NULL, 'Online Tuition',   1, 1),
+-- Borrow (CategoryID=11)
+(11, NULL, 'Borrow Returned',  1, 1),
+-- Miscellaneous (CategoryID=12)
+(12, NULL, 'General',          1, 1);
 GO
 
--- Insert Credit Sub Categories
-INSERT INTO tblCreditSubCategory
-(CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
+-- Credit Sub Categories
+INSERT INTO tblCreditSubCategory (CategoryID, UserID, SubCategoryName, IsDefault, IsActive)
 VALUES
--- Salary
-(1,NULL,'Basic Salary',1,1),
-(1,NULL,'Overtime Pay',1,1),
-(1,NULL,'Allowances',1,1),
-(1,NULL,'Incentives',1,1),
--- Business
-(2,NULL,'Product Sales',1,1),
-(2,NULL,'Service Income',1,1),
-(2,NULL,'Commission',1,1),
-(2,NULL,'Franchise Income',1,1),
--- Investment
-(3,NULL,'Stock Dividend',1,1),
-(3,NULL,'Mutual Fund Returns',1,1),
-(3,NULL,'Fixed Deposit Interest',1,1),
-(3,NULL,'Gold Investment',1,1),
--- Freelancing
-(4,NULL,'Web Development',1,1),
-(4,NULL,'Graphic Design',1,1),
-(4,NULL,'Content Writing',1,1),
-(4,NULL,'Video Editing',1,1),
--- Rental
-(5,NULL,'House Rent',1,1),
-(5,NULL,'Shop Rent',1,1),
-(5,NULL,'Vehicle Rent',1,1),
-(5,NULL,'Equipment Rent',1,1),
--- Cashback
-(6,NULL,'Credit Card Cashback',1,1),
-(6,NULL,'UPI Cashback',1,1),
-(6,NULL,'Shopping Cashback',1,1),
-(6,NULL,'Wallet Cashback',1,1),
--- Scholarship
-(7,NULL,'Merit Scholarship',1,1),
-(7,NULL,'Government Scholarship',1,1),
-(7,NULL,'Private Scholarship',1,1),
-(7,NULL,'Research Scholarship',1,1),
--- Bonus
-(8,NULL,'Performance Bonus',1,1),
-(8,NULL,'Festival Bonus',1,1),
-(8,NULL,'Referral Bonus',1,1),
-(8,NULL,'Annual Bonus',1,1),
--- Refund
-(9,NULL,'Tax Refund',1,1),
-(9,NULL,'Product Return Refund',1,1),
-(9,NULL,'Ticket Cancellation Refund',1,1),
-(9,NULL,'Fee Refund',1,1),
--- Borrow
-(10,NULL,'Friend Loan',1,1),
-(10,NULL,'Family Loan',1,1),
-(10,NULL,'Bank Loan',1,1),
-(10,NULL,'Personal Loan',1,1),
-(10,NULL,'Borrow Received',1,1),
--- Lent
-(11,NULL,'Lent Returned',1,1),
--- Other Income
-(12,5,'General',0,1);
+-- Salary (CategoryID=1)
+(1, NULL, 'Basic Salary',    1, 1),
+(1, NULL, 'Overtime Pay',    1, 1),
+(1, NULL, 'Allowances',      1, 1),
+(1, NULL, 'Incentives',      1, 1),
+-- Business (CategoryID=2)
+(2, NULL, 'Product Sales',   1, 1),
+(2, NULL, 'Service Income',  1, 1),
+(2, NULL, 'Commission',      1, 1),
+(2, NULL, 'Franchise Income',1, 1),
+-- Investment (CategoryID=3)
+(3, NULL, 'Stock Dividend',        1, 1),
+(3, NULL, 'Mutual Fund Returns',   1, 1),
+(3, NULL, 'Fixed Deposit Interest',1, 1),
+(3, NULL, 'Gold Investment',       1, 1),
+-- Freelancing (CategoryID=4)
+(4, NULL, 'Web Development',  1, 1),
+(4, NULL, 'Graphic Design',   1, 1),
+(4, NULL, 'Content Writing',  1, 1),
+(4, NULL, 'Video Editing',    1, 1),
+-- Rental (CategoryID=5)
+(5, NULL, 'House Rent',       1, 1),
+(5, NULL, 'Shop Rent',        1, 1),
+(5, NULL, 'Vehicle Rent',     1, 1),
+(5, NULL, 'Equipment Rent',   1, 1),
+-- Cashback (CategoryID=6)
+(6, NULL, 'Credit Card Cashback', 1, 1),
+(6, NULL, 'UPI Cashback',         1, 1),
+(6, NULL, 'Shopping Cashback',    1, 1),
+(6, NULL, 'Wallet Cashback',      1, 1),
+-- Scholarship (CategoryID=7)
+(7, NULL, 'Merit Scholarship',    1, 1),
+(7, NULL, 'Government Scholarship',1,1),
+(7, NULL, 'Private Scholarship',  1, 1),
+(7, NULL, 'Research Scholarship', 1, 1),
+-- Bonus (CategoryID=8)
+(8, NULL, 'Performance Bonus', 1, 1),
+(8, NULL, 'Festival Bonus',    1, 1),
+(8, NULL, 'Referral Bonus',    1, 1),
+(8, NULL, 'Annual Bonus',      1, 1),
+-- Refund (CategoryID=9)
+(9, NULL, 'Tax Refund',                   1, 1),
+(9, NULL, 'Product Return Refund',        1, 1),
+(9, NULL, 'Ticket Cancellation Refund',   1, 1),
+(9, NULL, 'Fee Refund',                   1, 1),
+-- Borrow (CategoryID=10)
+(10, NULL, 'Friend Loan',      1, 1),
+(10, NULL, 'Family Loan',      1, 1),
+(10, NULL, 'Bank Loan',        1, 1),
+(10, NULL, 'Personal Loan',    1, 1),
+(10, NULL, 'Borrow Received',  1, 1),
+-- Lent (CategoryID=11)
+(11, NULL, 'Lent Returned',    1, 1),
+-- Other Income (CategoryID=12, User 5 custom)
+(12, 5, 'General',             0, 1);
 GO
 
-
--- 5. TRANSACTION & OPERATIONAL TABLES (সবচেয়ে শেষে ইনসার্ট করা হচ্ছে)
+-- =========================================================================
+-- 6. TRANSACTION & OPERATIONAL TABLES
 -- =========================================================================
 
--- Insert Expense Records (Original + Additional Realistic Transactions for User 5 & Others)
-INSERT INTO tblExpense
-(UserID, CategoryID, SubCategoryID, Amount, Description, PaymentID, ExpenseAt)
+-- Expense Records
+INSERT INTO tblExpense (UserID, CategoryID, SubCategoryID, Amount, Description, PaymentID, ExpenseAt)
 VALUES
--- Original Seed Records
-(1, 1, 1, 120.50, 'Breakfast at restaurant', 10, '20261204'),
-(2, 2, 8, 850.00, 'Train ticket', 2, '20260425'),
-(3, 3, 16, 1200.00, 'Online shopping', 3, '20260105'),
-(4, 4, 26, 700.00, 'Netflix Subscription', 4, '20261105'),
-(5, 5, 31, 1000.00, 'Doctor checkup for fever', 8, '20260529'),
-(1, 6, 39, 11000.00, 'College admission fees', 2, '20260617'),
-(2, 7, 47, 200.00, 'Auto fare', 1, '20260619'),
-(3, 8, 53, 100.00, 'Haircut', 8, '20260627'),
-(4, 9, 60, 1700.00, 'Lent amount to Ram', 5, '20260718'),
-(5, 10, 67, 1000.00, 'Predeep sir tuition fees', 6, '20260718'),
-
--- Additional Realistic Records (User 5 - Sneha Roy Focus)
-(5, 1, 1, 150.00, 'Morning breakfast at South Indian tiffin center', 10, '20260115'),
-(5, 7, 45, 1200.00, 'Petrol fill-up for scooty', 2, '20260118'),
-(5, 3, 23, 2499.00, 'Wireless Bluetooth Earbuds from Amazon', 4, '20260122'),
-(5, 5, 32, 480.00, 'Monthly fever & cold medicines', 6, '20260205'),
-(5, 1, 5, 1850.00, 'Family dinner at Spice Garden restaurant', 9, '20260214'),
-(5, 8, 54, 1800.00, 'Facial & beauty salon treatment', 9, '20260303'),
-(5, 3, 17, 14500.00, 'Realme Smartphone purchase', 4, '20260310'),
-(5, 1, 7, 140.00, 'Cold coffee & smoothie at cafe', 10, '20260315'),
-(5, 7, 49, 120.00, 'Kolkata Metro Smart Card recharge', 8, '20260321'),
-(5, 10, 67, 3000.00, 'College semester tuition fees', 1, '20260328'),
-(5, 4, 26, 649.00, 'Disney+ Hotstar Annual Plan', 4, '20260405'),
-(5, 1, 4, 220.00, 'Evening snacks & momos', 10, '20260412'),
-(5, 3, 16, 2800.00, 'Kurti and jeans shopping', 5, '20260420'),
-(5, 2, 10, 450.00, 'Cab fare to office', 6, '20260428'),
-(5, 5, 36, 1200.00, 'Gym monthly membership fee', 9, '20260505'),
-(5, 1, 2, 350.00, 'Weekend buffet lunch with colleagues', 10, '20260512'),
-(5, 6, 41, 850.00, 'Notebooks and study stationary', 2, '20260522'),
-(5, 8, 55, 1250.00, 'Nykaa skincare & cosmetics', 4, '20260601'),
-(5, 1, 3, 580.00, 'Zomato Pizza order for dinner', 10, '20260608'),
-(5, 7, 45, 1000.00, 'Scooty petrol refilling', 2, '20260616'),
-(5, 2, 8, 780.00, 'Express train ticket to Durgapur', 1, '20260625'),
-(5, 5, 33, 1500.00, 'Routine health blood test', 6, '20260702'),
-(5, 3, 22, 1600.00, 'Birthday gift for best friend', 2, '20260710'),
-(5, 4, 24, 600.00, 'Movie tickets for weekend show', 8, '20260720'),
-(5, 1, 5, 1100.00, 'Dinner at Barbeque Nation', 9, '20260729'),
-(5, 7, 52, 950.00, 'Scooty servicing & oil change', 1, '20260805'),
-
--- Additional Realistic Records for Other Users & Standalone Category
-(1, 7, 45, 1500.00, 'Car petrol fill-up', 2, '20260210'),
-(2, 2, 8, 920.00, 'Vande Bharat Express train ticket', 1, '20260220'),
-(3, 3, 16, 3500.00, 'Festival ethnic wear shopping', 5, '20260325'),
-(4, 4, 24, 750.00, 'PVR IMAX Movie tickets for 2', 8, '20260501'),
-(5, 12, 72, 500.00, 'Miscellaneous local festival donation', 2, '20260410'),
-(5, 12, 72, 300.00, 'Unplanned household miscellaneous repair expense', 10, '20260715');
+-- User 1
+(1, 1,  1,  120.50,   'Morning breakfast at cafe',             10, '2026-12-04'),
+(1, 6,  39, 11000.00, 'College admission fees payment',         2, '2026-06-17'),
+(1, 7,  45, 1500.00,  'Car petrol fill-up at pump',             2, '2026-02-10'),
+-- User 2
+(2, 2,  8,  850.00,   'Train ticket to Kolkata',                2, '2026-04-25'),
+(2, 7,  47, 200.00,   'Auto fare to office',                    1, '2026-06-19'),
+(2, 2,  8,  920.00,   'Vande Bharat Express ticket',            1, '2026-02-20'),
+-- User 3
+(3, 3,  16, 1200.00,  'Online shopping order',                  3, '2026-01-05'),
+(3, 8,  53, 100.00,   'Haircut at barber shop',                 8, '2026-06-27'),
+(3, 3,  16, 3500.00,  'Festival ethnic wear shopping',          5, '2026-03-25'),
+-- User 4
+(4, 4,  26, 700.00,   'Netflix Subscription monthly',           4, '2026-11-05'),
+(4, 9,  60, 1700.00,  'Lent amount to friend',                  5, '2026-07-18'),
+(4, 4,  24, 750.00,   'PVR IMAX Movie tickets for 2',           8, '2026-05-01'),
+-- User 5: Sneha Roy (realistic day-to-day expenses)
+(5, 5,  31, 1000.00,  'Doctor checkup for fever',               8, '2026-05-29'),
+(5, 10, 67, 1000.00,  'Tuition fees for semester',              6, '2026-07-18'),
+(5, 1,  1,  150.00,   'Morning breakfast at South Indian tiffin center', 10, '2026-01-15'),
+(5, 7,  45, 1200.00,  'Petrol fill-up for scooty',              2, '2026-01-18'),
+(5, 3,  23, 2499.00,  'Wireless Bluetooth Earbuds from Amazon', 4, '2026-01-22'),
+(5, 5,  32, 480.00,   'Monthly fever and cold medicines',       6, '2026-02-05'),
+(5, 1,  5,  1850.00,  'Family dinner at Spice Garden restaurant',9,'2026-02-14'),
+(5, 8,  54, 1800.00,  'Facial and beauty salon treatment',      9, '2026-03-03'),
+(5, 3,  17, 14500.00, 'Realme Smartphone purchase',             4, '2026-03-10'),
+(5, 1,  7,  140.00,   'Cold coffee and smoothie at cafe',       10,'2026-03-15'),
+(5, 7,  49, 120.00,   'Kolkata Metro Smart Card recharge',      8, '2026-03-21'),
+(5, 10, 67, 3000.00,  'College semester tuition fees',          1, '2026-03-28'),
+(5, 4,  26, 649.00,   'Disney+ Hotstar Annual Plan',            4, '2026-04-05'),
+(5, 1,  4,  220.00,   'Evening snacks and momos',               10,'2026-04-12'),
+(5, 3,  16, 2800.00,  'Kurti and jeans shopping',               5, '2026-04-20'),
+(5, 2,  10, 450.00,   'Cab fare to office',                     6, '2026-04-28'),
+(5, 5,  36, 1200.00,  'Gym monthly membership fee',             9, '2026-05-05'),
+(5, 1,  2,  350.00,   'Weekend buffet lunch with colleagues',   10,'2026-05-12'),
+(5, 6,  41, 850.00,   'Notebooks and study stationary',         2, '2026-05-22'),
+(5, 8,  55, 1250.00,  'Nykaa skincare and cosmetics',           4, '2026-06-01'),
+(5, 1,  3,  580.00,   'Zomato Pizza order for dinner',          10,'2026-06-08'),
+(5, 7,  45, 1000.00,  'Scooty petrol refilling',                2, '2026-06-16'),
+(5, 2,  8,  780.00,   'Express train ticket to Durgapur',       1, '2026-06-25'),
+(5, 5,  33, 1500.00,  'Routine health blood test',              6, '2026-07-02'),
+(5, 3,  22, 1600.00,  'Birthday gift for best friend',          2, '2026-07-10'),
+(5, 4,  24, 600.00,   'Movie tickets for weekend show',         8, '2026-07-20'),
+(5, 1,  5,  1100.00,  'Dinner at Barbeque Nation',              9, '2026-07-29'),
+(5, 7,  52, 950.00,   'Scooty servicing and oil change',        1, '2026-08-05'),
+(5, 12, 72, 500.00,   'Miscellaneous local festival donation',  2, '2026-04-10'),
+(5, 12, 72, 300.00,   'Unplanned household miscellaneous repair',10,'2026-07-15');
 GO
 
--- Insert Credit / Income Records
-INSERT INTO tblCredit
-(UserID, CategoryID, SubCategoryID, Amount, Description, PaymentID, CreditAt)
+-- Credit / Income Records
+INSERT INTO tblCredit (UserID, CategoryID, SubCategoryID, Amount, Description, PaymentID, CreditAt)
 VALUES
-(1,1,1,5000.00,'Monthly Basic Salary',1,'20260331'),
-(5,1,2,450.00,'Weekend Overtime Pay',10,'20260803'),
-(5,3,9,250.00,'Stock Dividend',2,'20261204'),
-(4,4,13,1200.00,'Landing Page Development',3,'20260329'),
-(3,5,17,1500.00,'Apartment Rent Received',1,'20260718'),
-(2,6,22,15.00,'CashBack Reward on Utility Bill',4,'20260618'),
-(5,7,25,2000.00,'Semester Academic Merit Scholarship',7,'20260514'),
-(2,8,29,800.00,'Mid-Year Performance Bonus',6,'20260707'),
-(1,10,37,300.00,'Short-term Loan from Friend',4,'20260418'),
-
--- Real Credit Records for User 5 & Others
-(5,12,43,3500.00,'Freelance project consulting fee',10,'20260720'),
-(5,12,43,1200.00,'Sold old college textbooks & study notes',1,'20260801'),
-(5,1,1,22000.00,'Monthly Stipend & Research Allowance',2,'20260730'),
-(5,1,4,1500.00,'Project completion incentive bonus',10,'20260802'),
-(5,4,13,4500.00,'Frontend React project milestone payment',10,'20260805'),
-(5,4,14,2800.00,'Logo & Banner design for client',10,'20260712'),
-(5,4,16,3200.00,'YouTube video editing project',2,'20260725'),
-(5,3,11,4200.00,'Fixed deposit quarterly interest payout',2,'20260630'),
-(5,6,21,150.00,'Credit Card reward points cash convert',3,'20260705'),
-(5,6,23,75.00,'Google Pay Rewards Cashback',10,'20260802'),
-(5,8,30,2500.00,'Independence Day festival bonus',10,'20260808'),
-(5,9,34,890.00,'Amazon product return refund credited',4,'20260714'),
-(5,7,26,5000.00,'State Higher Education Support Grant',2,'20260615'),
-(5,2,6,3000.00,'Technical consultation service charge',10,'20260718'),
-
-(1,1,1,35000.00,'Software Engineer Monthly Salary',2,'20260731'),
-(2,2,5,14500.00,'Boutique store weekly sales revenue',1,'20260801'),
-(3,5,17,12500.00,'Residential flat monthly rent credit',2,'20260805');
+-- User 1
+(1, 1,  1,  35000.00, 'Software Engineer Monthly Salary',          2, '2026-07-31'),
+(1, 1,  1,  5000.00,  'Monthly Basic Salary advance',              1, '2026-03-31'),
+(1, 10, 37, 300.00,   'Short-term Loan from Friend',               4, '2026-04-18'),
+-- User 2
+(2, 2,  5,  14500.00, 'Boutique store weekly sales revenue',       1, '2026-08-01'),
+(2, 6,  22, 15.00,    'Cashback Reward on Utility Bill',           4, '2026-06-18'),
+(2, 8,  29, 800.00,   'Mid-Year Performance Bonus',                6, '2026-07-07'),
+-- User 3
+(3, 5,  17, 12500.00, 'Residential flat monthly rent credit',      2, '2026-08-05'),
+(3, 5,  17, 1500.00,  'Apartment Rent Received',                   1, '2026-07-18'),
+-- User 4
+(4, 4,  13, 1200.00,  'Landing Page Development project fee',      3, '2026-03-29'),
+-- User 5: Sneha Roy
+(5, 1,  2,  450.00,   'Weekend Overtime Pay',                      10,'2026-08-03'),
+(5, 3,  9,  250.00,   'Stock Dividend credited',                   2, '2026-12-04'),
+(5, 7,  25, 2000.00,  'Semester Academic Merit Scholarship',       7, '2026-05-14'),
+(5, 12, 43, 3500.00,  'Freelance project consulting fee',          10,'2026-07-20'),
+(5, 12, 43, 1200.00,  'Sold old college textbooks',                1, '2026-08-01'),
+(5, 1,  1,  22000.00, 'Monthly Stipend and Research Allowance',    2, '2026-07-30'),
+(5, 1,  4,  1500.00,  'Project completion incentive bonus',        10,'2026-08-02'),
+(5, 4,  13, 4500.00,  'Frontend React project milestone payment',  10,'2026-08-05'),
+(5, 4,  14, 2800.00,  'Logo and Banner design for client',         10,'2026-07-12'),
+(5, 4,  16, 3200.00,  'YouTube video editing project',             2, '2026-07-25'),
+(5, 3,  11, 4200.00,  'Fixed deposit quarterly interest payout',   2, '2026-06-30'),
+(5, 6,  21, 150.00,   'Credit Card reward points cash convert',    3, '2026-07-05'),
+(5, 6,  23, 75.00,    'Google Pay Rewards Cashback',               10,'2026-08-02'),
+(5, 8,  30, 2500.00,  'Independence Day festival bonus',           10,'2026-08-08'),
+(5, 9,  34, 890.00,   'Amazon product return refund credited',     4, '2026-07-14'),
+(5, 7,  26, 5000.00,  'State Higher Education Support Grant',      2, '2026-06-15'),
+(5, 2,  6,  3000.00,  'Technical consultation service charge',     10,'2026-07-18');
 GO
 
--- Insert Lent Transaction Records
-INSERT INTO tblLent
-(UserID, PersonID, PaymentID, StatusID, Amount, ReturnedAmount, RemainingAmount, LentAt, DeadlineAt, Description)
+-- =========================================================================
+-- Lent Records (using subquery for PersonID — no hardcoded IDs)
+-- =========================================================================
+
+INSERT INTO tblLent (UserID, PersonID, PaymentID, StatusID, Amount, ReturnedAmount, RemainingAmount, LentAt, DeadlineAt, Description)
 VALUES
-(1,1,1,2,5000.00,5000.00,0.00,'20260115','20260215','Emergency medical expense loan'),
-(2,2,10,1,2500.00,0.00,2500.00,'20260601','20260815','Laptop repair assistance'),
-(2,6,9,5,4000.00,1500.00,2500.00,'20260525','20260830','Project equipment purchase'),
-(2,7,6,2,1200.00,1200.00,0.00,'20260610','20260710','Travel ticket booking advance'),
-(3,4,10,3,3000.00,0.00,3000.00,'20260620','20260720','Course registration fee loan'),
-(3,8,8,2,800.00,800.00,0.00,'20260625','20260715','Textbook purchase support'),
-(4,3,2,1,6000.00,0.00,6000.00,'20260405','20260901','Home renovation short-term loan'),
-(4,10,7,5,10000.00,4000.00,6000.00,'20260410','20260810','Small business start-up loan'),
-(5,5,1,2,15000.00,15000.00,0.00,'20260301','20260601','Security deposit assistance'),
-(5,9,9,3,3500.00,500.00,3000.00,'20260310','20260510','Personal emergency cash advance'),
+-- User 1
+(1, (SELECT PersonID FROM tblPersons WHERE UserID=1 AND PersonName='Aarav Sharma'),
+    2, 2, 5000.00, 5000.00, 0.00, '2026-01-15', '2026-02-15', 'Emergency medical expense loan'),
+(1, (SELECT PersonID FROM tblPersons WHERE UserID=1 AND PersonName='Sourav Das'),
+    10, 1, 3500.00, 0.00, 3500.00, '2026-07-02', '2026-09-20', 'Lent for laptop repair advance'),
 
--- Additional Realistic Lent Records (User 5 - 10 New Records)
-(5,5,10,1,2000.00,0.00,2000.00,'20260712','20260825','Lent for college semester textbook purchase'),
-(5,9,2,2,6000.00,6000.00,0.00,'20260605','20260710','Lent for urgent smartphone screen repair'),
-(5,5,10,5,10000.00,3000.00,7000.00,'20260515','20260905','Lent for hostel room advance deposit'),
-(5,9,8,3,2500.00,0.00,2500.00,'20260401','20260530','Lent for monthly coaching fee gap'),
-(5,5,1,2,400.00,400.00,0.00,'20260801','20260804','Lent cash for train ticket emergency'),
-(5,9,10,1,4500.00,0.00,4500.00,'20260720','20260910','Lent for web development workshop registration'),
-(5,5,2,5,18000.00,6000.00,12000.00,'20260610','20261015','Lent for small business equipment advance'),
-(5,9,7,2,1500.00,1500.00,0.00,'20260705','20260725','Lent for electricity bill payment advance'),
-(5,5,10,1,5000.00,0.00,5000.00,'20260728','20260901','Lent for semester project hardware components'),
-(5,9,6,2,3000.00,3000.00,0.00,'20260625','20260731','Lent for freelance design asset purchase'),
+-- User 2
+(2, (SELECT PersonID FROM tblPersons WHERE UserID=2 AND PersonName='Priya Sharma'),
+    10, 1, 2500.00, 0.00, 2500.00, '2026-06-01', '2026-08-15', 'Laptop repair assistance'),
+(2, (SELECT PersonID FROM tblPersons WHERE UserID=2 AND PersonName='Kabir Mehta'),
+    6, 2, 1200.00, 1200.00, 0.00, '2026-06-10', '2026-07-10', 'Travel ticket booking advance'),
 
--- Additional Lent Records for Other Users
-(1,1,2,1,12000.00,0.00,12000.00,'20260702','20260920','Lent for office laptop purchase advance'),
-(1,1,10,2,3500.00,3500.00,0.00,'20260615','20260715','Lent for bike service expense support'),
-(2,2,1,1,4500.00,0.00,4500.00,'20260710','20260820','Lent for raw material fabric purchase'),
-(2,6,10,5,8000.00,2000.00,6000.00,'20260520','20260910','Lent for photo studio flash lights purchase'),
-(3,4,2,2,5000.00,5000.00,0.00,'20260705','20260801','Lent for college fest event sponsorship');
+-- User 3
+(3, (SELECT PersonID FROM tblPersons WHERE UserID=3 AND PersonName='Ananya Iyer'),
+    10, 3, 3000.00, 0.00, 3000.00, '2026-06-20', '2026-07-20', 'Course registration fee loan'),
+(3, (SELECT PersonID FROM tblPersons WHERE UserID=3 AND PersonName='Diya Banerjee'),
+    2, 2, 5000.00, 5000.00, 0.00, '2026-07-05', '2026-08-01', 'College fest sponsorship lent'),
+
+-- User 4
+(4, (SELECT PersonID FROM tblPersons WHERE UserID=4 AND PersonName='Rohan Verma'),
+    2, 1, 6000.00, 0.00, 6000.00, '2026-04-05', '2026-09-01', 'Home renovation short-term loan'),
+(4, (SELECT PersonID FROM tblPersons WHERE UserID=4 AND PersonName='Neha Kapoor'),
+    7, 5, 10000.00, 4000.00, 6000.00, '2026-04-10', '2026-08-10', 'Small business start-up loan'),
+
+-- User 5: Sneha Roy
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Vikram Patel'),
+    1, 2, 15000.00, 15000.00, 0.00, '2026-03-01', '2026-06-01', 'Security deposit assistance'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Siddharth Joshi'),
+    9, 3, 3500.00, 500.00, 3000.00, '2026-03-10', '2026-05-10', 'Personal emergency cash advance'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Vikram Patel'),
+    10, 1, 2000.00, 0.00, 2000.00, '2026-07-12', '2026-08-25', 'Lent for college semester textbook purchase'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Siddharth Joshi'),
+    2, 2, 6000.00, 6000.00, 0.00, '2026-06-05', '2026-07-10', 'Lent for urgent smartphone screen repair'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Vikram Patel'),
+    10, 5, 10000.00, 3000.00, 7000.00, '2026-05-15', '2026-09-05', 'Lent for hostel room advance deposit'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Siddharth Joshi'),
+    8, 3, 2500.00, 0.00, 2500.00, '2026-04-01', '2026-05-30', 'Lent for monthly coaching fee gap');
 GO
 
--- Insert Borrow Transaction Records
-INSERT INTO tblBorrow
-(UserID, PersonID, PaymentID, StatusID, Amount, PaidAmount, RemainingAmount, BorrowAt, DeadlineAt, Description)
+-- =========================================================================
+-- Borrow Records (using subquery for PersonID — no hardcoded IDs)
+-- =========================================================================
+
+INSERT INTO tblBorrow (UserID, PersonID, PaymentID, StatusID, Amount, PaidAmount, RemainingAmount, BorrowAt, DeadlineAt, Description)
 VALUES
-(1,1,1,2,2000.00,2000.00,0.00,'20260120','20260220','Borrowed for college semester fee gap'),
-(2,2,10,1,1500.00,0.00,1500.00,'20260605','20260820','Borrowed for medical store bill'),
-(2,6,6,5,5000.00,2000.00,3000.00,'20260518','20260825','Borrowed for electronic gadget purchase'),
-(2,7,9,2,3500.00,3500.00,0.00,'20260612','20260715','Borrowed for festival shopping advance'),
-(3,4,10,3,4500.00,0.00,4500.00,'20260615','20260715','Borrowed for hostel mess advance'),
-(3,8,2,2,1000.00,1000.00,0.00,'20260628','20260720','Borrowed for reference book purchase'),
-(4,3,1,1,8000.00,0.00,8000.00,'20260412','20260910','Borrowed for house repair expense'),
-(4,10,8,5,12000.00,5000.00,7000.00,'20260415','20260815','Borrowed for freelance setup gear'),
-(5,5,7,2,10000.00,10000.00,0.00,'20260305','20260605','Borrowed for vehicle maintenance cost'),
-(5,9,9,3,2500.00,500.00,2000.00,'20260315','20260515','Borrowed for urgent travel booking'),
+-- User 1
+(1, (SELECT PersonID FROM tblPersons WHERE UserID=1 AND PersonName='Aarav Sharma'),
+    1, 2, 2000.00, 2000.00, 0.00, '2026-01-20', '2026-02-20', 'Borrowed for college semester fee gap'),
+(1, (SELECT PersonID FROM tblPersons WHERE UserID=1 AND PersonName='Sourav Das'),
+    10, 2, 4000.00, 4000.00, 0.00, '2026-06-10', '2026-07-10', 'Borrowed for bike insurance renewal'),
 
--- Additional Realistic Borrow Records (User 5 & Others)
-(5,5,10,1,1500.00,0.00,1500.00,'20260710','20260830','Borrowed for semester exam registration fee gap'),
-(5,9,2,2,8500.00,8500.00,0.00,'20260601','20260715','Borrowed for new smartphone emergency purchase'),
-(5,5,10,5,12000.00,4000.00,8000.00,'20260520','20260901','Borrowed for laptop RAM & SSD hardware upgrade'),
-(5,9,8,3,3000.00,0.00,3000.00,'20260405','20260605','Borrowed for hostel mess advance payment'),
-(5,5,1,2,500.00,500.00,0.00,'20260802','20260805','Borrowed cash for urgent cab fare'),
-(5,9,10,1,6500.00,0.00,6500.00,'20260725','20260915','Borrowed for online certification course fee'),
-(5,5,2,5,20000.00,5000.00,15000.00,'20260618','20261001','Borrowed for dental treatment & medical bill'),
-(5,9,7,2,1200.00,1200.00,0.00,'20260701','20260720','Borrowed for utility bill payment advance'),
+-- User 2
+(2, (SELECT PersonID FROM tblPersons WHERE UserID=2 AND PersonName='Priya Sharma'),
+    10, 1, 1500.00, 0.00, 1500.00, '2026-06-05', '2026-08-20', 'Borrowed for medical store bill'),
+(2, (SELECT PersonID FROM tblPersons WHERE UserID=2 AND PersonName='Kabir Mehta'),
+    9, 2, 3500.00, 3500.00, 0.00, '2026-06-12', '2026-07-15', 'Borrowed for festival shopping advance'),
 
-(1,1,2,1,15000.00,0.00,15000.00,'20260705','20260930','Borrowed for home interior paint work'),
-(1,1,10,2,4000.00,4000.00,0.00,'20260610','20260710','Borrowed for bike insurance renewal advance'),
-(1,1,6,5,25000.00,10000.00,15000.00,'20260512','20261015','Borrowed for family function travel booking'),
+-- User 3
+(3, (SELECT PersonID FROM tblPersons WHERE UserID=3 AND PersonName='Ananya Iyer'),
+    10, 3, 4500.00, 0.00, 4500.00, '2026-06-15', '2026-07-15', 'Borrowed for hostel mess advance'),
+(3, (SELECT PersonID FROM tblPersons WHERE UserID=3 AND PersonName='Diya Banerjee'),
+    10, 2, 2200.00, 2200.00, 0.00, '2026-07-18', '2026-08-05', 'Borrowed for conference registration fee'),
 
-(2,2,1,1,3500.00,0.00,3500.00,'20260715','20260825','Borrowed for boutique inventory stock advance'),
-(2,6,10,2,7000.00,7000.00,0.00,'20260620','20260725','Borrowed for DSLR camera lens rental'),
-(2,7,8,3,5500.00,0.00,5500.00,'20260420','20260630','Borrowed for emergency home plumbing repair'),
+-- User 4
+(4, (SELECT PersonID FROM tblPersons WHERE UserID=4 AND PersonName='Rohan Verma'),
+    1, 1, 8000.00, 0.00, 8000.00, '2026-04-12', '2026-09-10', 'Borrowed for house repair expense'),
+(4, (SELECT PersonID FROM tblPersons WHERE UserID=4 AND PersonName='Neha Kapoor'),
+    9, 5, 30000.00, 12000.00, 18000.00, '2026-05-05', '2026-11-01', 'Borrowed for high-end graphic workstation'),
 
-(3,4,2,1,18000.00,0.00,18000.00,'20260701','20261001','Borrowed for apartment advance deposit gap'),
-(3,8,10,2,2200.00,2200.00,0.00,'20260718','20260805','Borrowed for conference registration fee'),
-
-(4,3,7,5,30000.00,12000.00,18000.00,'20260505','20261101','Borrowed for high-end graphic workstation setup'),
-(4,10,9,1,4500.00,0.00,4500.00,'20260728','20260905','Borrowed for freelance client server hosting bill');
+-- User 5: Sneha Roy
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Vikram Patel'),
+    7, 2, 10000.00, 10000.00, 0.00, '2026-03-05', '2026-06-05', 'Borrowed for vehicle maintenance cost'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Siddharth Joshi'),
+    9, 3, 2500.00, 500.00, 2000.00, '2026-03-15', '2026-05-15', 'Borrowed for urgent travel booking'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Vikram Patel'),
+    10, 1, 1500.00, 0.00, 1500.00, '2026-07-10', '2026-08-30', 'Borrowed for semester exam registration fee gap'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Siddharth Joshi'),
+    2, 2, 8500.00, 8500.00, 0.00, '2026-06-01', '2026-07-15', 'Borrowed for new smartphone emergency purchase'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Vikram Patel'),
+    10, 5, 12000.00, 4000.00, 8000.00, '2026-05-20', '2026-09-01', 'Borrowed for laptop RAM and SSD upgrade'),
+(5, (SELECT PersonID FROM tblPersons WHERE UserID=5 AND PersonName='Siddharth Joshi'),
+    8, 3, 3000.00, 0.00, 3000.00, '2026-04-05', '2026-06-05', 'Borrowed for hostel mess advance payment');
 GO
 
--- Insert Task Records
-INSERT INTO tblTask
-(UserID, PriorityID, TaskStatusID, TaskTitle, Deadline, CreatedAt)
+-- =========================================================================
+-- Task Records
+-- =========================================================================
+
+INSERT INTO tblTask (UserID, PriorityID, TaskStatusID, TaskTitle, Deadline, CreatedAt)
 VALUES
-(1,3,3,'Complete Semester Project Report','20260125','20260112'),
-(1,2,2,'Review Computer Networks Notes','20260210','20260115'),
-(2,3,1,'Complete Computer Networks Practical Record','20260615','20260522'),
-(2,1,3,'Return Issued Reference Books to Central Library','20260530','20260525'),
-(3,2,2,'Design Course Evaluation Form UI','20260710','20260618'),
-(3,3,1,'Pay Upcoming Semester Examination and Tuition Fees','20260815','20260805'),
-(4,1,3,'Database Schema Backup and Migration','20260415','20260330'),
-(4,3,2,'Pay Upcoming Semester Examination and Tuition Fees','20260510','20260402'),
-(5,2,1,'Laptop Repair','20260320','20260301'),
-(5,1,3,'Review Mathematics III Linear Algebra Lectures','20260305','20260302');
+-- User 1
+(1, 3, 3, 'Complete Semester Project Report',              '2026-01-25', '2026-01-12 09:00:00'),
+(1, 2, 2, 'Review Computer Networks Notes',               '2026-02-10', '2026-01-15 10:00:00'),
+-- User 2
+(2, 3, 1, 'Complete Computer Networks Practical Record',   '2026-06-15', '2026-05-22 08:00:00'),
+(2, 1, 3, 'Return Issued Reference Books to Library',      '2026-05-30', '2026-05-25 09:00:00'),
+-- User 3
+(3, 2, 2, 'Design Course Evaluation Form UI',              '2026-07-10', '2026-06-18 11:00:00'),
+(3, 3, 1, 'Pay Upcoming Semester Examination Fees',        '2026-08-15', '2026-08-05 08:30:00'),
+-- User 4
+(4, 1, 3, 'Database Schema Backup and Migration',          '2026-04-15', '2026-03-30 09:00:00'),
+(4, 3, 2, 'Pay Upcoming Semester Tuition Fees',            '2026-05-10', '2026-04-02 10:00:00'),
+-- User 5: Sneha Roy
+(5, 2, 1, 'Laptop Repair',                                 '2026-03-20', '2026-03-01 08:00:00'),
+(5, 1, 3, 'Review Mathematics III Linear Algebra Lectures','2026-03-05', '2026-03-02 09:00:00'),
+(5, 1, 1, 'Setup Local Development Environment',           '2026-07-05', '2026-06-10 09:00:00'),
+(5, 2, 2, 'Design Database Schema',                        '2026-07-08', '2026-06-10 10:30:00'),
+(5, 3, 1, 'Submit Assignment to College Portal',           '2026-07-10', '2026-06-11 08:00:00'),
+(5, 1, 3, 'Read Chapter 4 - OS Concepts',                  '2026-07-12', '2026-06-11 11:00:00'),
+(5, 2, 1, 'Fix Login Page UI Bug',                         '2026-07-14', '2026-06-12 09:15:00'),
+(5, 3, 2, 'Prepare Presentation Slides',                   '2026-07-16', '2026-06-12 14:00:00'),
+(5, 1, 1, 'Call Internet Service Provider',                '2026-07-18', '2026-06-13 10:00:00'),
+(5, 2, 3, 'Push Code to GitHub',                           '2026-07-20', '2026-06-13 15:30:00'),
+(5, 3, 1, 'Complete React Project Module',                 '2026-07-22', '2026-06-14 09:00:00'),
+(5, 1, 2, 'Write Unit Tests for BLL Layer',                '2026-07-25', '2026-06-14 11:45:00'),
+(5, 2, 1, 'Review Pull Requests',                          '2026-07-28', '2026-06-15 13:00:00'),
+(5, 3, 2, 'Deploy App to Staging Server',                  '2026-07-30', '2026-06-15 16:00:00');
 GO
 
--- Insert Note Records
-INSERT INTO tblNote
-(UserID, NotePriorityID, NoteColorID, NoteTitle, Description, CreatedAt)
+-- =========================================================================
+-- Note Records (CreatedAt always provided — no missing datetime)
+-- =========================================================================
+
+INSERT INTO tblNote (UserID, NotePriorityID, NoteColorID, NoteTitle, Description, CreatedAt)
 VALUES
-(1,2,1,
-'Project Meeting Notes',
-'Discussed project architecture sprint milestones and deliverables.',
-'20260115'),
+-- User 1
+(1, 2, 1, 'Project Meeting Notes',
+ 'Discussed project architecture sprint milestones and deliverables.',
+ '2026-01-15 09:00:00'),
+(1, 1, 3, 'Shopping List',
+ 'Buy groceries fresh vegetables snacks and household essentials.',
+ '2026-01-18 10:00:00'),
 
-(1,1,1,
-'Shopping List',
-'Buy groceries fresh vegetables snacks and household essentials.',
-'20260118'),
+-- User 2
+(2, 3, 1, 'Exam Preparation',
+ 'Review key core syllabus concepts previous papers and practice problems.',
+ '2026-05-22 08:30:00'),
+(2, 1, 4, 'Workout Plan',
+ 'Morning cardio strength training routine and weekend core exercises.',
+ '2026-05-28 07:00:00'),
 
-(2,3,1,
-'Exam Preparation',
-'Review key core syllabus concepts previous papers and practice problems.',
-'20260522'),
+-- User 3
+(3, 2, 5, 'React Ideas',
+ 'Brainstorm UI components state management setup and custom hooks.',
+ '2026-06-18 11:00:00'),
+(3, 3, 2, 'Birthday Reminder',
+ 'Order custom cake organize gifts and plan surprise party gathering.',
+ '2026-06-20 12:00:00'),
 
-(2,1,1,
-'Workout Plan',
-'Morning cardio strength training routine and weekend core exercises.',
-'20260528'),
+-- User 4
+(4, 1, 6, 'Office Tasks',
+ 'Clear pending emails update task status board and complete documentation.',
+ '2026-03-30 09:00:00'),
+(4, 2, 7, 'Travel Plan',
+ 'Book flight tickets reserve hotel stays and prepare daily sightseeing itinerary.',
+ '2026-04-05 10:00:00'),
 
-(3,2,1,
-'React Ideas',
-'Brainstorm UI components state management setup and custom hooks.',
-'20260618'),
-
-(3,3,1,
-'Birthday Reminder',
-'Order custom cake organize gifts and plan surprise party gathering.',
-'20260620'),
-
-(4,1,1,
-'Office Tasks',
-'Clear pending emails update task status board and complete documentation.',
-'20260330'),
-
-(4,2,1,
-'Travel Plan',
-'Book flight tickets reserve hotel stays and prepare daily sightseeing itinerary.',
-'20260405'),
-
-(5,3,1,
-'Daily Goals',
-'Finish code refactoring complete 2 design tasks and read technical blogs.',
-'20260301'),
-
-(5,1,1,
-'Movie Watchlist',
-'Spider Man The New Arrival',
-'20260304');
+-- User 5: Sneha Roy
+(5, 3, 1, 'Daily Goals',
+ 'Finish code refactoring complete 2 design tasks and read technical blogs.',
+ '2026-03-01 08:00:00'),
+(5, 1, 8, 'Movie Watchlist',
+ 'Spider Man The New Arrival and Avengers sequel.',
+ '2026-03-04 20:00:00'),
+(5, 1, 1, 'API Integration Notes',
+ 'REST API endpoints for authentication and user management. Use JWT tokens for authorization.',
+ '2026-06-10 09:00:00'),
+(5, 2, 2, 'Bug Tracker Ideas',
+ 'Create a simple bug tracking system with priority levels, assign developers, and track resolution status.',
+ '2026-06-12 10:00:00'),
+(5, 1, 3, 'Weekly Study Plan',
+ 'Monday: OS, Tuesday: DBMS, Wednesday: CN, Thursday: SE, Friday: COA, Weekend: Revision.',
+ '2026-06-15 08:00:00'),
+(5, 3, 4, 'Grocery List This Week',
+ 'Milk, eggs, bread, butter, vegetables, fruits, rice, dal, cooking oil, spices.',
+ '2026-06-18 11:00:00'),
+(5, 2, 5, 'WinForms UI Tips',
+ 'Use owner-draw for comboboxes. Apply double buffering on DataGridView. Use TableLayoutPanel for responsive layouts.',
+ '2026-06-20 14:00:00'),
+(5, 1, 6, 'Interview Preparation',
+ 'Review data structures, sorting algorithms, SQL joins, normalization, and system design basics.',
+ '2026-07-01 09:00:00'),
+(5, 3, 7, 'Books to Read',
+ 'Clean Code by Robert Martin, The Pragmatic Programmer, Design Patterns by GoF, SICP.',
+ '2026-07-05 10:00:00'),
+(5, 2, 8, 'Project Deadline Reminders',
+ 'Semester project due: 30th July. Internship report due: 15th August. Viva date: TBD.',
+ '2026-07-08 08:30:00');
 GO

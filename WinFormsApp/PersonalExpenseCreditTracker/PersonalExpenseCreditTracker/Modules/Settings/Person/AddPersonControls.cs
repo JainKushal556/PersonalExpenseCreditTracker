@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +20,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
     {
         private DataTable AllLentData = new DataTable();
         private DataTable masterData = new DataTable();
+
+        public string LastAddedPersonName { get; set; }
 
         public AddPersonControls()
         {
@@ -81,6 +83,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
             if (dataTable != null)
             {
+                masterData = dataTable.Copy();
                 BindingSource bindingSource1 = new BindingSource();
                 bindingSource1.DataSource = dataTable;
                 dataGridViewAddPerson.DataSource = bindingSource1;
@@ -322,7 +325,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Person Details Save Successfully");
-                    LoadData();
+                    //LoadData();
+                     LastAddedPersonName = txtAddPersonInputFullName.Text.Trim();
+                    this.DialogResult = DialogResult.OK;
+    
+                     LoadData();
+                     this.Close();
                     break;
 
                 case CommonValidator.ValidationResult.PersonNameEmpty:
@@ -519,8 +527,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         private void txtAddPersonSearchBar_TextChanged(object sender, EventArgs e)
         {
-            //AllLentData = Common.CommonUiFunction.SearchDataInPersons(masterData, txtAddPersonSearchBar);
-            //LoadData();
+            if (txtAddPersonSearchBar.Text == "Search by name or phone number ...") return;
+            DataTable filtered = Common.CommonUiFunction.SearchDataInPersons(masterData, txtAddPersonSearchBar);
+            if (filtered != null)
+            {
+                BindingSource bs = new BindingSource();
+                bs.DataSource = filtered;
+                dataGridViewAddPerson.DataSource = bs;
+                Common.CommonUiFunction.HighlightSearch(dataGridViewAddPerson, txtAddPersonSearchBar);
+            }
         }
 
         private void txtAddPersonInputFullName_TextChanged(object sender, EventArgs e)

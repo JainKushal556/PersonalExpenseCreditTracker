@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +26,7 @@ namespace BLLayer.Common
             AmountTooLarge,
 
             DeadlineInvalid,
+            ReturnAmountDeadlineMustBeTodayOrEarlier,
 
             DescriptionInvalid,
             DescriptionTooShort,
@@ -263,6 +264,23 @@ namespace BLLayer.Common
             }
 
             return ValidationResult.DeadlineInvalid;
+        }
+
+        public static ValidationResult ValidateDeadlineReturnAmount(DateTime deadline)
+        {
+     
+            if (deadline == DateTime.MinValue)
+            {
+                return ValidationResult.DeadlineInvalid;
+            }
+
+         
+            if (deadline.Date <= DateTime.Today)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier;
         }
 
         //Description Validation

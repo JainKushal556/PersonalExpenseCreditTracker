@@ -110,7 +110,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 switch (result)
                 {
                     case CommonValidator.ValidationResult.Success:
-                        MessageBox.Show("Task deleted successfully!");
+                        
                         this.Close();
                         break;
 

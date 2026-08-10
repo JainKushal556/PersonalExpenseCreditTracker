@@ -44,6 +44,21 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private int currentPage = 1;
         private int pageSize ;
 
+        private ErrorProvider errorProvider1 = new ErrorProvider();
+        private bool ignoreEvents { get; set; }
+        private DateTime fromDate { get; set; }
+        private DateTime toDate { get; set; }
+        private bool validFromDate { get; set; }
+        private bool validToDate { get; set; }
+        private static readonly string[] DateFormats = new[]
+        {
+            "yyyy-MM-dd",
+            "dd-MM-yyyy",
+            "MM/dd/yyyy",
+            "yyyy/MM/dd",
+            "dd/MM/yyyy"
+        };
+
         [DllImport("gdi32.dll")]
         private static extern bool DeleteObject(IntPtr hObject);
         public NoteControl()
@@ -63,19 +78,29 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     SetRadius(c, 20);
                 }
             }
-            cmbPriority.Text = "Select Priority";
+            ignoreEvents = true;
+            CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select Priority", cmbPriority);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPriority);
             cmbPriority.ForeColor = Color.Gray;
+            cmbPriority.SelectedIndexChanged += cmbPriority_SelectedIndexChanged;
 
             DesignContextMenu();
             ResizeNoteCards();
             SetRoundedPanel(pnlTotalNotes, 20);
             SetRoundedPanel(pnlImportant, 20);
             SetRoundedPanel(pnlThisMonth, 20);
-            //int userID = Session.LogedInUser.GetUserId();
             HideAllFilterPanels();
             DesignContextMenu();
             this.MouseDown += NoteControls_MouseDown;
             RegisterMouseDown(this);
+
+            txtFromdate.ReadOnly = true;
+            txtToDate.ReadOnly = true;
+            monthCalendarToDate.MaxDate = DateTime.Today;
+            monthCalendarFromDate.MaxDate = DateTime.Today;
+            txtFromdate.TextChanged += txtFromdate_TextChanged;
+            txtToDate.TextChanged += txtToDate_TextChanged;
+            ignoreEvents = false;
 
             LoadNoteData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
@@ -106,6 +131,14 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                                 MessageBoxIcon.Information);
                 return false;
             }
+            if (dataTable.Rows.Count <= 0)
+            {
+                MessageBox.Show("No Record Found.",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
             AllNoteData = dataTable;
             masterData = dataTable.Copy();
             currentPage = 1;
@@ -127,6 +160,10 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             }
             if (dataTable.Rows.Count <= 0)
             {
+                MessageBox.Show("No Record Found.",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
                 return false;
             }
             AllNoteData = dataTable;
@@ -173,6 +210,15 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     da.Fill(AllNoteData);
                 }
 
+                if (AllNoteData.Columns.Contains("Message"))
+                {
+                    masterData = new DataTable();
+                    currentPage = 1;
+                    ShowCurrentPage();
+                    return;
+                }
+
+                masterData = AllNoteData.Copy();
                 currentPage = 1;
                 ShowCurrentPage();
             }
@@ -380,6 +426,63 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
             btnNextpage.Enabled = currentPage < totalPages;
             btnLastPage.Enabled = currentPage < totalPages;
+
+            if (AllNoteData != null)
+            {
+                lblNoteTotal.Text = AllNoteData.Rows.Count.ToString();
+
+                int importantCount = AllNoteData.AsEnumerable().Count(row =>
+                {
+                    string priority = Convert.ToString(row["NotePriorityName"]);
+                    return priority.Equals("High", StringComparison.OrdinalIgnoreCase) || priority.Equals("Important", StringComparison.OrdinalIgnoreCase);
+                });
+                lblNoteImportantNumber.Text = importantCount.ToString();
+
+                DateTime now = DateTime.Now;
+                int thisMonthCount = AllNoteData.AsEnumerable().Count(row =>
+                {
+                    if (row["CreatedAt"] != DBNull.Value)
+                    {
+                        DateTime dt = Convert.ToDateTime(row["CreatedAt"]);
+                        return dt.Year == now.Year && dt.Month == now.Month;
+                    }
+                    return false;
+                });
+                lblMonthNoteNumber.Text = thisMonthCount.ToString();
+            }
+        }
+
+        private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            int priorityId;
+            if (cmbPriority.SelectedValue != null && int.TryParse(cmbPriority.SelectedValue.ToString(), out priorityId))
+            {
+                if (priorityId > 0)
+                {
+                    cmbPriority.ForeColor = Color.Black;
+                    if (!LoadFilteredNoteData("spFilterNotesByPriority", "@PriorityID", priorityId))
+                    {
+                        ignoreEvents = true;
+                        cmbPriority.SelectedIndex = 0;
+                        cmbPriority.ForeColor = Color.Gray;
+                        ignoreEvents = false;
+                        LoadNoteData(userID);
+                    }
+                }
+                else
+                {
+                    cmbPriority.ForeColor = Color.Gray;
+                    LoadNoteData(userID);
+                }
+            }
+            else
+            {
+                if (cmbPriority.SelectedIndex <= 0)
+                {
+                    cmbPriority.ForeColor = Color.Gray;
+                }
+            }
         }
 
         private void lblNoteSubtitle_Click(object sender, EventArgs e)
@@ -785,7 +888,11 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void btnPriorityClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+            cmbPriority.SelectedIndex = 0;
+            ignoreEvents = false;
             pnlPriorityFilter.Visible = false;
+            LoadNoteData(userID);
         }
 
         private void HideAllFilterPanels()
@@ -913,8 +1020,204 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void btnDateClose_Click_1(object sender, EventArgs e)
         {
-            HidePopupPanels();
+            ignoreEvents = true;
+
+            txtFromdate.Clear();
+            txtToDate.Clear();
+
+            this.fromDate = DateTime.MinValue;
+            this.toDate = DateTime.MinValue;
+            this.validFromDate = false;
+            this.validToDate = false;
+
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
             pnlDateFilter.Visible = false;
+
+            ignoreEvents = false;
+            LoadNoteData(userID);
+        }
+
+        private void txtFromdate_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
+            if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+            {
+                this.fromDate = DateTime.MinValue;
+                return;
+            }
+
+            DateTime parsedFromDate;
+            if (!DateTime.TryParseExact(
+                    txtFromdate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedFromDate))
+            {
+                return;
+            }
+
+            this.fromDate = parsedFromDate;
+
+            if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+            {
+                ignoreEvents = true;
+                DateTime defaultToDate = this.fromDate > DateTime.Today ? this.fromDate : DateTime.Today;
+                txtToDate.Text = defaultToDate.ToString("dd-MM-yyyy");
+                ignoreEvents = false;
+                this.toDate = defaultToDate;
+            }
+            else
+            {
+                DateTime parsedToDate;
+                if (DateTime.TryParseExact(
+                        txtToDate.Text.Trim(),
+                        DateFormats,
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        System.Globalization.DateTimeStyles.None,
+                        out parsedToDate))
+                {
+                    this.toDate = parsedToDate;
+                }
+            }
+
+            BLLayer.Note.NoteBLL noteBll = new BLLayer.Note.NoteBLL();
+            noteBll.fromDate = this.fromDate;
+            noteBll.toDate = this.toDate;
+
+            CommonValidator.ValidationResult result = noteBll.DateValidatorIntoNoteBll();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    validFromDate = true;
+                    if (!LoadFilteredNoteData(
+                            "spFilterNoteByDateRange",
+                            Session.LogedInUser.GetUserId(),
+                            "@FromDate",
+                            this.fromDate,
+                            "@ToDate",
+                            this.toDate))
+                    {
+                        ignoreEvents = true;
+                        txtFromdate.Clear();
+                        txtToDate.Clear();
+                        ignoreEvents = false;
+                        this.fromDate = DateTime.MinValue;
+                        this.toDate = DateTime.MinValue;
+
+                        LoadNoteData(userID);
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    validFromDate = false;
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ignoreEvents = true;
+                    txtFromdate.Clear();
+                    txtToDate.Clear();
+                    ignoreEvents = false;
+                    this.fromDate = DateTime.MinValue;
+                    this.toDate = DateTime.MinValue;
+                    LoadNoteData(userID);
+                    break;
+            }
+        }
+
+        private void txtToDate_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
+            if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+            {
+                this.toDate = DateTime.MinValue;
+                return;
+            }
+
+            DateTime parsedToDate;
+            if (!DateTime.TryParseExact(
+                    txtToDate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedToDate))
+            {
+                return;
+            }
+
+            this.toDate = parsedToDate;
+
+            if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+            {
+                return;
+            }
+
+            DateTime parsedFromDate;
+            if (DateTime.TryParseExact(
+                    txtFromdate.Text.Trim(),
+                    DateFormats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out parsedFromDate))
+            {
+                this.fromDate = parsedFromDate;
+            }
+
+            BLLayer.Note.NoteBLL noteBll = new BLLayer.Note.NoteBLL();
+            noteBll.fromDate = this.fromDate;
+            noteBll.toDate = this.toDate;
+
+            CommonValidator.ValidationResult result = noteBll.DateValidatorIntoNoteBll();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    validFromDate = true;
+                    if (!LoadFilteredNoteData(
+                            "spFilterNoteByDateRange",
+                            Session.LogedInUser.GetUserId(),
+                            "@FromDate",
+                            this.fromDate,
+                            "@ToDate",
+                            this.toDate))
+                    {
+                        ignoreEvents = true;
+                        txtFromdate.Clear();
+                        txtToDate.Clear();
+                        ignoreEvents = false;
+                        this.fromDate = DateTime.MinValue;
+                        this.toDate = DateTime.MinValue;
+
+                        LoadNoteData(userID);
+                    }
+                    break;
+
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    validFromDate = false;
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ignoreEvents = true;
+                    txtFromdate.Clear();
+                    txtToDate.Clear();
+                    ignoreEvents = false;
+                    this.fromDate = DateTime.MinValue;
+                    this.toDate = DateTime.MinValue;
+                    LoadNoteData(userID);
+                    break;
+            }
         }
 
         private void picCalenderFromDate_Click_1(object sender, EventArgs e)
@@ -1008,6 +1311,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             AllNoteData = Common.CommonUiFunction.SearchDataInNote(masterData, txtSearch);
+            currentPage = 1;
             ShowCurrentPage();
         }
 
@@ -1018,15 +1322,16 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void cmbPriority_Enter(object sender, EventArgs e)
         {
-            if (cmbPriority.Text == "Select  Priority")
+            if (cmbPriority.Text != "Select Priority" && cmbPriority.SelectedIndex > 0)
                 cmbPriority.ForeColor = Color.Black;
+            else
+                cmbPriority.ForeColor = Color.Gray;
         }
 
         private void cmbPriority_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cmbPriority.Text) || cmbPriority.Text == "Select Priority")
+            if (string.IsNullOrWhiteSpace(cmbPriority.Text) || cmbPriority.Text == "Select Priority" || cmbPriority.SelectedIndex <= 0)
             {
-
                 cmbPriority.Text = "Select Priority";
                 cmbPriority.ForeColor = Color.Gray;
             }
@@ -1038,12 +1343,14 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
         {
+            toDate = e.Start.Date;
             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
             pnlToDateCalenderShow.Visible = false;
         }
 
         private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
         {
+            fromDate = e.Start.Date;
             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
             pnlFromDateCalenderShow.Visible = false;
         }

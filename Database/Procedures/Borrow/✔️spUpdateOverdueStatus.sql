@@ -28,6 +28,12 @@ BEGIN
     -- Update Overdue Records
     -------------------------------------------------
 
+    UPDATE tblLent
+    SET StatusID = @OverdueStatusID
+    WHERE RemainingAmount > 0
+      AND CAST(DeadlineAt AS DATE) < @Today
+      AND StatusID <> @OverdueStatusID;
+
     UPDATE tblBorrow
     SET StatusID = @OverdueStatusID
     WHERE RemainingAmount > 0

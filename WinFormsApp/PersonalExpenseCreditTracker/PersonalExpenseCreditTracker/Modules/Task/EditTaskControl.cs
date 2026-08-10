@@ -76,24 +76,28 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtTaskTitle.Text = taskControl.SelectedTaskTitle;
             txtTaskTitle.ForeColor = Color.Black;
 
-         
+
             if (!string.IsNullOrEmpty(taskControl.selectDeadline))
             {
-                txtDeadline.Text = taskControl.selectDeadline;
-                txtDeadline.ForeColor = Color.Black;
-
-               
                 DateTime parsedDate;
                 if (DateTime.TryParse(taskControl.selectDeadline, out parsedDate))
                 {
+                   
+                    txtDeadline.Text = parsedDate.ToString("dd-MM-yyyy");
                     monthCalendar1.SelectionStart = parsedDate;
                 }
+                else
+                {
+                    txtDeadline.Text = taskControl.selectDeadline;
+                }
+                txtDeadline.ForeColor = Color.Black;
             }
             else
             {
                 txtDeadline.Text = "DD-MM-YYYY";
                 txtDeadline.ForeColor = Color.Gray;
             }
+
 
       
             CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select the Proiority", cmbPriority);
@@ -151,30 +155,64 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnUpdateTask_Click(object sender, EventArgs e)
         {
-            
-            // Clear all previous validation errors
+
             errorProvider1.Clear();
 
-            // Create a new object to store the user's input
+
             TaskUI taskUi = new TaskUI();
-            int currentTaskId = taskControl.SelectedTaskID;
-            taskUi.taskId = currentTaskId;
+            taskUi.taskId = taskControl.SelectedTaskID;
             taskUi.userId = Session.LogedInUser.GetUserId();
             taskUi.taskTitle = (txtTaskTitle.Text == "Enter task title") ? "" : txtTaskTitle.Text;
-            taskUi.priorityId = Convert.ToInt32(cmbPriority.SelectedValue);
-            taskUi.statusId = Convert.ToInt32(cmbStatus.SelectedValue);
 
-            // If no deadline is selected, assign DateTime.MinValue
-            // Otherwise, assign the selected date from the calendar
-            taskUi.deadline = (txtDeadline.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar1.SelectionStart;
+            int priorityId = 0;
+            DataRowView drvPriority = cmbPriority.SelectedValue as DataRowView;
+            if (drvPriority != null)
+            {
+                priorityId = Convert.ToInt32(drvPriority[0]);
+            }
+            else if (cmbPriority.SelectedValue != null)
+            {
+                int.TryParse(cmbPriority.SelectedValue.ToString(), out priorityId);
+            }
+            taskUi.priorityId = priorityId;
+
+
+            int statusId = 0;
+            DataRowView drvStatus = cmbStatus.SelectedValue as DataRowView;
+            if (drvStatus != null)
+            {
+                statusId = Convert.ToInt32(drvStatus[0]);
+            }
+            else if (cmbStatus.SelectedValue != null)
+            {
+                int.TryParse(cmbStatus.SelectedValue.ToString(), out statusId);
+            }
+            taskUi.statusId = statusId;
+
+
+            DateTime parsedDate;
+            if (!string.IsNullOrWhiteSpace(txtDeadline.Text) &&
+                txtDeadline.Text != "DD-MM-YYYY" &&
+                DateTime.TryParseExact(txtDeadline.Text.Trim(), "dd-MM-yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None, out parsedDate))
+            {
+                taskUi.deadline = parsedDate;
+            }
+            else
+            {
+                taskUi.deadline = DateTime.MinValue;
+            }
+
 
             CommonValidator.ValidationResult result = taskUi.UpdateDataIntoTaskUi();
-            // Perform action based on the validation result
+
+
             switch (result)
             {
-                // Data is valid and updated successfully
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Task updated successfully!");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
@@ -198,8 +236,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                     MessageBox.Show("Task updated unsuccessfully!");
                     break;
             }
-
         }
+
 
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {
@@ -238,7 +276,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtDeadline.ForeColor = Color.Black;
             }
 
-            monthCalendar1.Visible = true;
         }
 
         private void txtDeadline_Leave(object sender, EventArgs e)
@@ -253,6 +290,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void txtDeadline_TextChanged(object sender, EventArgs e)
         {
             monthCalendar1.Visible = false;
+            if (txtDeadline.Text != "DD-MM-YYYY" && !string.IsNullOrWhiteSpace(txtDeadline.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtDeadline);
+            }
         }
 
         private void pnlBody_Click(object sender, EventArgs e)
@@ -273,6 +314,38 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void cmbStatus_Click(object sender, EventArgs e)
         {
             monthCalendar1.Visible = false;
+            cmbStatus.DroppedDown = true;
         }
+
+        private void txtTaskTitle_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTaskTitle.Text != "Enter task title" && !string.IsNullOrWhiteSpace(txtTaskTitle.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtTaskTitle);
+            }
+        }
+
+        private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(cmbPriority);
+          
+            cmbPriority.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbPriority.AutoCompleteMode = AutoCompleteMode.Append;
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ErrorHelper.HideErrorForControl(cmbStatus);
+            cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbStatus.AutoCompleteMode = AutoCompleteMode.Append;
+
+        }
+
+        private void txtDeadline_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+        }
+
+
     }
 }

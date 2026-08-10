@@ -59,8 +59,8 @@ BEGIN
             ON T.TaskStatusID = S.TaskStatusID
         WHERE
             T.UserID = @UserID
-            AND T.Deadline BETWEEN @FromDate AND @ToDate
-        ORDER BY T.Deadline
+            AND (CAST(T.Deadline AS DATE) BETWEEN @FromDate AND @ToDate OR CAST(T.CreatedAt AS DATE) BETWEEN @FromDate AND @ToDate)
+        ORDER BY T.Deadline ASC;
 
     END TRY
 
