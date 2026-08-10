@@ -14,6 +14,9 @@ using WinFormsSortOrder = System.Windows.Forms.SortOrder;
 using PersonalExpenseCreditTracker.Common;
 using BLLayer.Expense;
 using BLLayer.Common;
+using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace PersonalExpenseCreditTracker.Modules.Expense
 {
@@ -607,8 +610,56 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
 
+            // Clear search
+            txtSearch.Clear();
 
+            // Clear Date Filter
+            txtFromdate.Clear();
+            txtToDate.Clear();
+
+            fromDate = DateTime.MinValue;
+            toDate = DateTime.MinValue;
+
+            validFromDate = false;
+            validToDate = false;
+
+            // Reset Category
+            if (cmbCategory.Items.Count > 0)
+                cmbCategory.SelectedIndex = 0;
+
+            if (cmbCategorytxt.Items.Count > 0)
+                cmbCategorytxt.SelectedIndex = 0;
+
+            // Reset Sub Category
+            if (cmbSubCategory.Items.Count > 0)
+                cmbSubCategory.SelectedIndex = 0;
+
+            // Clear Amount Filter
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+
+            // Reset selected filter IDs
+            lastSelectedCategoryId = -1;
+            lastSelectedSubCategoryId = -1;
+
+            // Hide filter panels
+            HideAllFilterPanels();
+            HidePopupPanels();
+
+            // Clear validation
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
+            ignoreEvents = false;
+
+            // Load ALL original data again
+            LoadExpenseData(Session.LogedInUser.GetUserId());
         }
 
         
@@ -1524,16 +1575,198 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             LoadExpenseData(Session.LogedInUser.GetUserId());
         }
 
-      
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (AllExpenseData == null || AllExpenseData.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "There is no data to export.",
+                    "Export",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-        
+                return;
+            }
 
-        
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Title = "Save Expense Excel File";
+                saveDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
+                saveDialog.FileName =
+                    "Expense_" +
+                    DateTime.Now.ToString("ddMMyyyy_HHmmss") +
+                    ".xlsx";
 
-        
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
 
-       
+                try
+                {
+                    ExportExpenseToExcel(
+                        AllExpenseData,
+                        saveDialog.FileName);
 
+                    MessageBox.Show(
+                        "Expense data exported successfully.",
+                        "Export Successful",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Export failed.\n\n" + ex.Message,
+                        "Export Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ExportExpenseToExcel(DataTable dataTable, string filePath)
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook workbook = null;
+            Excel.Worksheet worksheet = null;
+
+            try
+            {
+                excelApp = new Excel.Application();
+                excelApp.Visible = false;
+                excelApp.DisplayAlerts = false;
+
+                workbook = excelApp.Workbooks.Add(
+                    Excel.XlWBATemplate.xlWBATWorksheet);
+
+                worksheet = (Excel.Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Expenses";
+
+                // Column Names
+                for (int col = 0;
+                     col < dataTable.Columns.Count;
+                     col++)
+                {
+                    worksheet.Cells[1, col + 1] =
+                        GetExpenseExportColumnName(
+                            dataTable.Columns[col].ColumnName);
+                }
+
+                // Data
+                for (int row = 0;
+                     row < dataTable.Rows.Count;
+                     row++)
+                {
+                    for (int col = 0;
+                         col < dataTable.Columns.Count;
+                         col++)
+                    {
+                        if (dataTable.Rows[row][col] != DBNull.Value)
+                        {
+                            worksheet.Cells[row + 2, col + 1] =
+                                dataTable.Rows[row][col].ToString();
+                        }
+                    }
+                }
+
+                // Header bold
+                Excel.Range headerRange =
+                    worksheet.Range[
+                        worksheet.Cells[1, 1],
+                        worksheet.Cells[
+                            1,
+                            dataTable.Columns.Count]];
+
+                headerRange.Font.Bold = true;
+
+                // Auto fit columns
+                worksheet.Columns.AutoFit();
+
+                // SAVE EXCEL FILE
+                workbook.SaveAs(
+                    filePath,
+                    Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+                // Close Excel without opening it
+                workbook.Close(false);
+                excelApp.Quit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Excel export failed.\n\n" + ex.Message,
+                    "Export Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                if (workbook != null)
+                {
+                    try
+                    {
+                        workbook.Close(false);
+                    }
+                    catch { }
+                }
+
+                if (excelApp != null)
+                {
+                    try
+                    {
+                        excelApp.Quit();
+                    }
+                    catch { }
+                }
+            }
+            finally
+            {
+                // Release COM objects
+                if (worksheet != null)
+                    Marshal.ReleaseComObject(worksheet);
+
+                if (workbook != null)
+                    Marshal.ReleaseComObject(workbook);
+
+                if (excelApp != null)
+                    Marshal.ReleaseComObject(excelApp);
+
+                worksheet = null;
+                workbook = null;
+                excelApp = null;
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
+        private string GetExpenseExportColumnName(string columnName)
+        {
+            switch (columnName)
+            {
+                case "ExpenseAt":
+                    return "Date";
+
+                case "Description":
+                    return "Description";
+
+                case "CategoryName":
+                    return "Category";
+
+                case "SubCategoryName":
+                    return "Sub Category";
+
+                case "Amount":
+                    return "Amount";
+
+                case "PaymentName":
+                    return "Payment Method";
+
+                default:
+                    return columnName;
+            }
+        }
+
+        private void pnlTableHeader_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
        
     }
 }
