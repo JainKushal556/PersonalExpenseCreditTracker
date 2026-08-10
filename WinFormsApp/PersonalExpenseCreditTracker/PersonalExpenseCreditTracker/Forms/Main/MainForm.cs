@@ -4066,6 +4066,11 @@ namespace PersonalExpenseCreditTracker
                     break;
                 case CommonValidator.ValidationResult.DateRangeInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, dtpLentFromDate, dtpLentToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (lentControl != null && !lentControl.IsDisposed)
+                    {
+                        lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                    }
                     break;
 
             }
@@ -4162,7 +4167,12 @@ namespace PersonalExpenseCreditTracker
 
                     break;
                 case CommonValidator.ValidationResult.DateRangeInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpLentFromDate, dtpLentToDate);
+                    ErrorHelper.ShowValidationError(result, errorProvider1, dtpBorrowFromDate, dtpBorrowToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (borrowControls != null && !borrowControls.IsDisposed)
+                    {
+                        borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                    }
                     break;
 
             }
@@ -4270,6 +4280,11 @@ namespace PersonalExpenseCreditTracker
                     break;
                 case CommonValidator.ValidationResult.DateRangeInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, dtpCreditFromDate, dtpCreditToDate);
+                    MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (creditControl != null && !creditControl.IsDisposed)
+                    {
+                        creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                    }
                     break;
 
             }

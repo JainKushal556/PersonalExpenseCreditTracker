@@ -919,9 +919,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
             {
                 ignoreEvents = true;
-                txtToDate.Text = DateTime.Today.ToString("dd-MM-yyyy");
+                DateTime defaultToDate = this.fromDate > DateTime.Today ? this.fromDate : DateTime.Today;
+                txtToDate.Text = defaultToDate.ToString("dd-MM-yyyy");
                 ignoreEvents = false;
-                this.toDate = DateTime.Today;
+                this.toDate = defaultToDate;
             }
             else
             {

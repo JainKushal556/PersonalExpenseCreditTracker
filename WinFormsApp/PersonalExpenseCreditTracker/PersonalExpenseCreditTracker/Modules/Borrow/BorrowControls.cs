@@ -11,6 +11,8 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Common;
+using BLLayer.Common;
+using BLLayer.Borrow;
 //using PersonalExpenseCreditTracker.Modules.Borrow.PayBorrowAmountControls;
 
 
@@ -26,6 +28,16 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private int userID = Session.LogedInUser.GetUserId();
         private string sortedColumn = "BorrowAt";
         private System.Windows.Forms.SortOrder currentSortOrder = System.Windows.Forms.SortOrder.Descending;
+
+        private bool ignoreEvents { get; set; }
+        private int lastSelectedCategoryId { get; set; }
+        private int lastSelectedSubCategoryId { get; set; }
+
+        private DateTime fromDate { get; set; }
+        private DateTime toDate { get; set; }
+        private bool validFromDate { get; set; }
+        private bool validToDate { get; set; }
+        private static readonly string[] DateFormats = { "dd-MM-yyyy", "d-M-yyyy", "dd/MM/yyyy", "d/M/yyyy", "yyyy-MM-dd" };
         public BorrowControls()
         {
             InitializeComponent();
@@ -145,7 +157,12 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             DesignContextMenu();
             cmsFilter.Opening += cmsFilter_Opening;
             RegisterMouseDown(this);
-
+            txtFromdate.ReadOnly = true;
+            txtToDate.ReadOnly = true;
+            monthCalendarToDate.MaxDate = DateTime.Today;
+            monthCalendarFromDate.MaxDate = DateTime.Today;
+            ignoreEvents = false;
+           
         }
 
         private void cmsFilter_Opening(object sender, CancelEventArgs e)
@@ -220,6 +237,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 return false;
             }
             AllBorrowData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -239,9 +257,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
             if (dataTable.Rows.Count <= 0)
             {
+                MessageBox.Show("No Record Found",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
                 return false;
             }
             AllBorrowData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -268,6 +291,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 return false;
             }
             AllBorrowData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -962,7 +986,26 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnDateClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
+            txtFromdate.Clear();
+            txtToDate.Clear();
+
+            this.fromDate = DateTime.MinValue;
+            this.toDate = DateTime.MinValue;
+            this.validFromDate = false;
+            this.validToDate = false;
+
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
             pnlDateFilter.Visible = false;
+
+            ignoreEvents = false;
+            LoadBorrowData(Session.LogedInUser.GetUserId());
         }
 
         private void btnPersonClose_Click(object sender, EventArgs e)
@@ -981,17 +1024,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
        
 
-        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
-        {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
-            pnlToDateCalenderShow.Visible = false;
-        }
+        
 
-         private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
-         {
-             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-             pnlFromDateCalenderShow.Visible = false;
-         }
+         
 
          private void txtSearch_TextChanged(object sender, EventArgs e)
          {
@@ -1131,6 +1166,202 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
              else
              {
                  ShowCalenderToDatePanel(pnlToDateCalenderShow);
+             }
+         }
+
+         private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+         {
+             toDate = e.Start.Date;
+             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+             pnlToDateCalenderShow.Visible = false;
+         }
+
+         private void txtToDate_TextChanged(object sender, EventArgs e)
+         {
+             if (ignoreEvents) return;
+            errorProvider1.Clear();
+             ErrorHelper.HideErrorForControl(pnlFromDate);
+             ErrorHelper.HideErrorForControl(pnlToDate);
+
+             if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+             {
+                 this.toDate = DateTime.MinValue;
+                 return;
+             }
+
+             DateTime parsedToDate;
+             if (!DateTime.TryParseExact(
+                     txtToDate.Text.Trim(),
+                     DateFormats,
+                     System.Globalization.CultureInfo.InvariantCulture,
+                     System.Globalization.DateTimeStyles.None,
+                     out parsedToDate))
+             {
+                 return;
+             }
+
+             this.toDate = parsedToDate;
+
+             if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+             {
+                 return;
+             }
+
+             DateTime parsedFromDate;
+             if (DateTime.TryParseExact(
+                     txtFromdate.Text.Trim(),
+                     DateFormats,
+                     System.Globalization.CultureInfo.InvariantCulture,
+                     System.Globalization.DateTimeStyles.None,
+                     out parsedFromDate))
+             {
+                 this.fromDate = parsedFromDate;
+             }
+
+             //CreditBLL creditBll = new CreditBLL();
+             //creditBll.fromDate = this.fromDate;
+             //creditBll.toDate = this.toDate;
+
+             BorrowBLL borrowBll = new BorrowBLL();
+             borrowBll.fromDate = this.fromDate;
+             borrowBll.toDate = this.toDate;
+
+             CommonValidator.ValidationResult result = borrowBll.DateValidatorIntoBorrowBll();
+
+             switch (result)
+             {
+                 case CommonValidator.ValidationResult.Success:
+                     validFromDate = true;
+                     if (!LoadFilteredBorrowData(
+                             "spFilterBorrowByDateRange",
+                             Session.LogedInUser.GetUserId(),
+                             "@FromDate",
+                             this.fromDate,
+                             "@ToDate",
+                             this.toDate))
+                     {
+                         ignoreEvents = true;
+                         txtFromdate.Clear();
+                         txtToDate.Clear();
+                         ignoreEvents = false;
+                         this.fromDate = DateTime.MinValue;
+                         this.toDate = DateTime.MinValue;
+
+                         LoadBorrowData(Session.LogedInUser.GetUserId());
+                     }
+                     break;
+
+                 case CommonValidator.ValidationResult.DateRangeInvalid:
+                     validFromDate = false;
+                     ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                     MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     ignoreEvents = true;
+                     txtFromdate.Clear();
+                     txtToDate.Clear();
+                     ignoreEvents = false;
+                     this.fromDate = DateTime.MinValue;
+                     this.toDate = DateTime.MinValue;
+                     LoadBorrowData(Session.LogedInUser.GetUserId());
+                     break;
+             }
+         }
+
+         private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+         {
+             fromDate = e.Start.Date;
+             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+             pnlFromDateCalenderShow.Visible = false;
+         }
+
+         private void txtFromdate_TextChanged(object sender, EventArgs e)
+         {
+             if (ignoreEvents) return;
+             errorProvider1.Clear();
+             ErrorHelper.HideErrorForControl(pnlFromDate);
+             ErrorHelper.HideErrorForControl(pnlToDate);
+
+             if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+             {
+                 this.fromDate = DateTime.MinValue;
+                 return;
+             }
+
+             DateTime parsedFromDate;
+             if (!DateTime.TryParseExact(
+                     txtFromdate.Text.Trim(),
+                     DateFormats,
+                     System.Globalization.CultureInfo.InvariantCulture,
+                     System.Globalization.DateTimeStyles.None,
+                     out parsedFromDate))
+             {
+                 return;
+             }
+
+             this.fromDate = parsedFromDate;
+
+             if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+             {
+                 ignoreEvents = true;
+                 DateTime defaultToDate = this.fromDate > DateTime.Today ? this.fromDate : DateTime.Today;
+                 txtToDate.Text = defaultToDate.ToString("dd-MM-yyyy");
+                 ignoreEvents = false;
+                 this.toDate = defaultToDate;
+             }
+             else
+             {
+                 DateTime parsedToDate;
+                 if (DateTime.TryParseExact(
+                         txtToDate.Text.Trim(),
+                         DateFormats,
+                         System.Globalization.CultureInfo.InvariantCulture,
+                         System.Globalization.DateTimeStyles.None,
+                         out parsedToDate))
+                 {
+                     this.toDate = parsedToDate;
+                 }
+             }
+
+             BorrowBLL borrowBll = new BorrowBLL();
+             borrowBll.fromDate = this.fromDate;
+             borrowBll.toDate = this.toDate;
+
+             CommonValidator.ValidationResult result = borrowBll.DateValidatorIntoBorrowBll();
+
+             switch (result)
+             {
+                 case CommonValidator.ValidationResult.Success:
+                     validFromDate = true;
+                     if (!LoadFilteredBorrowData(
+                             "spFilterBorrowByDateRange",
+                             Session.LogedInUser.GetUserId(),
+                             "@FromDate",
+                             this.fromDate,
+                             "@ToDate",
+                             this.toDate))
+                     {
+                         ignoreEvents = true;
+                         txtFromdate.Clear();
+                         txtToDate.Clear();
+                         ignoreEvents = false;
+                         this.fromDate = DateTime.MinValue;
+                         this.toDate = DateTime.MinValue;
+
+                         LoadBorrowData(Session.LogedInUser.GetUserId());
+                     }
+                     break;
+
+                 case CommonValidator.ValidationResult.DateRangeInvalid:
+                     validFromDate = false;
+                     ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                     MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     ignoreEvents = true;
+                     txtFromdate.Clear();
+                     txtToDate.Clear();
+                     ignoreEvents = false;
+                     this.fromDate = DateTime.MinValue;
+                     this.toDate = DateTime.MinValue;
+                     LoadBorrowData(Session.LogedInUser.GetUserId());
+                     break;
              }
          }
 
