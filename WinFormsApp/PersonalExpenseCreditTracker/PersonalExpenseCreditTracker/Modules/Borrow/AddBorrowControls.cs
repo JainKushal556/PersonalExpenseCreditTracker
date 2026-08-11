@@ -406,7 +406,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             if (ignoreEvents) return;
 
-            ignoreEvents = true; // Selection চলাকালীন সব ইভেন্ট ব্লক
+            ignoreEvents = true; 
 
             ErrorHelper.HideErrorForControl(cmbBorrowSelectPerson);
             cmbBorrowSelectPerson.AutoCompleteMode = AutoCompleteMode.Append;
@@ -460,7 +460,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     else
                     {
                         cmbBorrowSelectPerson.SelectedIndex = 0;
-                        cmbBorrowSelectPerson.ForeColor = Color.Gray;
+                        cmbBorrowSelectPerson.ForeColor = Color.Black;
                     }
                 }
             }

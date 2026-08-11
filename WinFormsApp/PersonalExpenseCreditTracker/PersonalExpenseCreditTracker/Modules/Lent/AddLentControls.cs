@@ -338,7 +338,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             if (ignoreEvents) return;
 
-            ignoreEvents = true; // Selection চলাকালীন সব ইভেন্ট ব্লক
+            ignoreEvents = true; 
 
             ErrorHelper.HideErrorForControl(comboBoxLentSelectPerson);
             comboBoxLentSelectPerson.AutoCompleteMode = AutoCompleteMode.Append;
@@ -366,16 +366,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     DialogResult result = addPersonForm.ShowDialog();
                     this.Show();
 
-                    // ১. ComboBox-এ নতুন ডেটা রিলোড করুন
+                  
                     CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", "+ Add New Person", comboBoxLentSelectPerson);
-                    // ২. নতুন Person Add হয়ে থাকলে তাকে ComboBox-এ সিলেক্ট করে দিন
+                   
                     if (!string.IsNullOrEmpty(addPersonForm.LastAddedPersonName))
                     {
                         int index = comboBoxLentSelectPerson.FindStringExact(addPersonForm.LastAddedPersonName);
                         if (index != -1)
                         {
                             comboBoxLentSelectPerson.SelectedIndex = index;
-                            comboBoxLentSelectPerson.ForeColor = Color.Black; // টেক্সট কালার কালো দেখাবে
+                            comboBoxLentSelectPerson.ForeColor = Color.Black; 
                         }
                         else
                         {
@@ -386,12 +386,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     else
                     {
                         comboBoxLentSelectPerson.SelectedIndex = 0;
-                        comboBoxLentSelectPerson.ForeColor = Color.Gray;
+                        comboBoxLentSelectPerson.ForeColor = Color.Black;
                     }
                 }
             }
 
-            ignoreEvents = false; // কাজ শেষ, ইভেন্ট চালু
+            ignoreEvents = false; 
         }
 
 

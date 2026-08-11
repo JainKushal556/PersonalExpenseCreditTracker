@@ -136,6 +136,7 @@
             this.pnlEditProfileMainBody.Padding = new System.Windows.Forms.Padding(10);
             this.pnlEditProfileMainBody.Size = new System.Drawing.Size(638, 736);
             this.pnlEditProfileMainBody.TabIndex = 0;
+            this.pnlEditProfileMainBody.Click += new System.EventHandler(this.pnlEditProfileMainBody_Click);
             // 
             // btnUpdateProfile
             // 
