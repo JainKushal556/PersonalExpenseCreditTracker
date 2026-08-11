@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Expense
+namespace PersonalExpenseCreditTracker.Modules.Expense
 {
     partial class AddExpenseControls
     {
@@ -361,7 +361,7 @@
             this.panel1.Size = new System.Drawing.Size(528, 1);
             this.panel1.TabIndex = 1;
             // 
-            // AddExpenseControl
+            // AddExpenseControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -369,7 +369,7 @@
             this.Controls.Add(this.panelExpenseDetailsMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "AddExpenseControl";
+            this.Name = "AddExpenseControls";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExpenseDetailsControl";
             this.Load += new System.EventHandler(this.ExpenseDetailsControl_Load);

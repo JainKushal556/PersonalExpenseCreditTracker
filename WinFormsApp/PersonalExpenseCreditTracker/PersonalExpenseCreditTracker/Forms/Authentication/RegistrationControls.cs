@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 namespace PersonalExpenseCreditTracker.Forms.Authentication
 {
     public partial class RegistrationControls : Form
@@ -73,12 +74,13 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             txtRegistrationEmail.Text = "Enter your email address";
             txtRegistrationCreatePassword.Text = "Create a password";
             txtRegistrationConfirmPassword.Text = "Confirm password";
+            txtRegistrationPhNumber.Text = "Enter your phone number";
 
             txtFullName.ForeColor = Color.Gray;
             txtRegistrationEmail.ForeColor = Color.Gray;
             txtRegistrationCreatePassword.ForeColor = Color.Gray;
             txtRegistrationConfirmPassword.ForeColor = Color.Gray;
-
+            txtRegistrationPhNumber.ForeColor=Color.Gray;
             //lblPasswordRestriction.Text = "At least 8 characters including uppercase, lowercase, number and special character";
         }
         
@@ -267,7 +269,87 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //this.Close();
+            // Clear all previous validation errors
+            errorProvider1.Clear();
+
+            // Create a new object to store the user's input
+            AuthUI authUi = new AuthUI();
+
+            authUi.userName = (txtFullName.Text == "Enter your full name") ? "" : txtFullName.Text;
+            authUi.email = (txtRegistrationEmail.Text == "Enter your email address") ? "" : txtRegistrationEmail.Text;
+            authUi.phoneNumber = (txtRegistrationPhNumber.Text == "Enter your phone number") ? "" : txtRegistrationPhNumber.Text;
+            authUi.password = (txtRegistrationCreatePassword.Text == "Create a password") ? "" : txtRegistrationCreatePassword.Text;
+            authUi.confirmPassword = (txtRegistrationConfirmPassword.Text == "Confirm password") ? "" : txtRegistrationConfirmPassword.Text;
+
+             CommonValidator.ValidationResult result = authUi.InsertDataIntoAuthUi();
+            // Perform action based on the validation result
+             switch (result)
+             {
+                 // Data is valid and inserted successfully
+                 case CommonValidator.ValidationResult.Success:
+                     MessageBox.Show("Account created successfully");
+
+                     //Go to Login Form
+                     LoginControls loginForm = new LoginControls();
+                     loginForm.ShowDialog();
+                     this.Hide();
+
+                     break;
+
+                 case CommonValidator.ValidationResult.UserNameInvalid:
+                     ErrorHelper.ShowValidationError(result, errorProvider1, txtFullName);
+                     break;
+                 case CommonValidator.ValidationResult.EmailInvalid:
+                     ErrorHelper.ShowValidationError(result,errorProvider1,txtRegistrationEmail);
+                     break;
+                  
+                 case CommonValidator.ValidationResult.PhoneInvalid:
+                     ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationPhNumber);
+                     break;
+
+                 case CommonValidator.ValidationResult.PasswordInvalid:
+                     ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationCreatePassword);
+                     break;
+                 case CommonValidator.ValidationResult.ConfirmPasswordInvalid:
+                 case CommonValidator.ValidationResult.PasswordNotMatched:
+                     ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationConfirmPassword);
+                     break;
+                 case CommonValidator.ValidationResult.StoreProcedureError:
+                     string errorMsg = string.IsNullOrWhiteSpace(authUi.message) ? "Account creation unsuccessful" : authUi.message;
+                     MessageBox.Show(errorMsg, "Registration Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                     break;
+
+             }
         }
+
+        private void txtRegistrationPhoneNumber_Enter(object sender, EventArgs e)
+        {
+
+            if (txtRegistrationPhNumber.Text == "Enter your phone number")
+            {
+                txtRegistrationPhNumber.Text = "";
+                txtRegistrationPhNumber.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtRegistrationPhoneNumber_Leave(object sender, EventArgs e)
+        {
+
+            if (txtRegistrationPhNumber.Text == "")
+            {
+                txtRegistrationPhNumber.Text = "Enter your phone number";
+                txtRegistrationPhNumber.ForeColor = Color.Gray;
+            }
+        }
+
+        private void lblCreateAccount_LinkClicked(object sender, EventArgs e)
+        {
+            LoginControls loginForm = new LoginControls();
+            loginForm.Show();
+            this.Hide();
+        }
+
+       
     }
 }

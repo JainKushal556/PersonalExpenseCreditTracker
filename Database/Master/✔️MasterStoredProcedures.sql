@@ -399,25 +399,25 @@ BEGIN
 	--empty and null checked
     IF @UserName IS NULL OR @UserName = ''
     BEGIN
-        SELECT 'User Name Cannot Be Empty' AS Message;
+        SELECT 0 AS Success, 'User Name Cannot Be Empty' AS Message;
         RETURN;
     END
 
     IF @Email IS NULL OR @Email = ''
     BEGIN
-        SELECT 'Email Cannot Be Empty' AS Message;
+        SELECT 0 AS Success, 'Email Cannot Be Empty' AS Message;
         RETURN;
     END
 
     IF @PhoneNumber IS NULL OR @PhoneNumber = ''
     BEGIN
-        SELECT 'Phone Number Cannot Be Empty' AS Message;
+        SELECT 0 AS Success, 'Phone Number Cannot Be Empty' AS Message;
         RETURN;
     END
 
     IF @Password IS NULL OR @Password = ''
     BEGIN
-        SELECT 'Password Cannot Be Empty' AS Message;
+        SELECT 0 AS Success, 'Password Cannot Be Empty' AS Message;
         RETURN;
     END
 
@@ -430,7 +430,7 @@ BEGIN
         WHERE Email = @Email
     )
     BEGIN
-        SELECT 'Email Already Exists' AS Message;
+        SELECT 0 AS Success, 'Email Already Exists' AS Message;
         RETURN;
     END
 
@@ -442,7 +442,7 @@ BEGIN
         WHERE PhoneNumber = @PhoneNumber
     )
     BEGIN
-        SELECT 'Phone Number Already Exists' AS Message;
+        SELECT 0 AS Success, 'Phone Number Already Exists' AS Message;
         RETURN;
     END
 
@@ -500,6 +500,7 @@ BEGIN
 
 
         SELECT 
+            1 AS Success,
             @UserID AS UserID,
             'User Inserted Successfully' AS Message;
 
@@ -510,7 +511,7 @@ BEGIN
             ROLLBACK TRANSACTION;
 
 
-        SELECT ERROR_MESSAGE() AS Message;
+        SELECT 0 AS Success, ERROR_MESSAGE() AS Message;
 
     END CATCH  
 

@@ -326,7 +326,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.comboBoxLentPaymentType.Size = new System.Drawing.Size(354, 31);
             this.comboBoxLentPaymentType.TabIndex = 17;
             this.comboBoxLentPaymentType.Text = "Select Payment Type";
-            this.comboBoxLentPaymentType.SelectedIndexChanged += new System.EventHandler(this.comboBoxLentPaymentType_SelectedIndexChanged);
             this.comboBoxLentPaymentType.Enter += new System.EventHandler(this.comboBoxLentPaymentType_Enter);
             this.comboBoxLentPaymentType.Leave += new System.EventHandler(this.comboBoxLentPaymentType_Leave);
             // 
@@ -423,8 +422,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 609);
             this.panel2.Name = "panel2";
@@ -433,8 +432,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";

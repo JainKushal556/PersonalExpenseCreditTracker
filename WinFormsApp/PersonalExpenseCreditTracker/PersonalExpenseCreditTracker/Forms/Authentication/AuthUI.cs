@@ -2,61 +2,56 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BLLayer.Common;
+using System.Data;
 using BLLayer.Authentication;
 namespace PersonalExpenseCreditTracker.Forms.Authentication
 {
     public class AuthUI
     {
-        public string userId { get; set; }
+        public int userId { get; set; }
         public string userName { get; set; }
         public string email { get; set; }
         public string phoneNumber { get; set; }
         public string password { get; set; }
         public string oldPassword { get; set; }
         public string newPassword { get; set; }
+        public string confirmPassword { get; set; }
+        public string message { get; set; }
 
+        // Create an object of the Business Logic Layer
         AuthBLL authBll = new AuthBLL();
-        //Register Page
-        public bool InsertDataIntoAuthUi()
+
+        // Pass the data from the UI layer to the Business Logic Layer
+        public CommonValidator.ValidationResult InsertDataIntoAuthUi()
         {
-            
             authBll.userName = userName;
             authBll.email = email;
             authBll.phoneNumber = phoneNumber;
             authBll.password = password;
-            return authBll.InsertDataIntoAuthBll();
+            authBll.confirmPassword = confirmPassword;
+
+            CommonValidator.ValidationResult result = authBll.DataValidatorIntoAuthBll();
+            this.userId = authBll.userId;
+            this.message = authBll.message;
+
+            return result;
         }
 
-        //login page
-        public bool LoginDataIntoAuthUi()
+        //Login Page
+        public CommonValidator.ValidationResult LoginUserIntoAuthUi()
         {
             authBll.email = email;
             authBll.password = password;
-            return authBll.LoginDataIntoAuthBll();
-        }
-        //Forget Password
-        public bool ForgetPasswordIntoAuthUi()
-        {
-            authBll.email = email;
-            return authBll.ForgetPasswordIntoAuthBll();
+
+            CommonValidator.ValidationResult result = authBll.LoginUserDataValidator();
+            //if(result==CommonValidator.ValidationResult.Success)
+            //{
+                this.userId=authBll.userId;
+                this.message=authBll.message;
+            //}
+            return result;
         }
 
-        public bool ChangePasswordIntoAuthUi()
-        {
-            authBll.userId = userId;
-            authBll.oldPassword = oldPassword;
-            authBll.newPassword = newPassword;
-            return authBll.ChangePasswordIntoAuthBll();
-        }
-
-        internal bool InsertDataIntoAuthUi(AuthUI authUi)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal bool LoginDataIntoAuthUi(AuthUI authUi)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

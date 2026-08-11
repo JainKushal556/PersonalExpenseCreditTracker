@@ -757,5 +757,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             pnlDateFilter.Visible = false;
         }
+
+      
       }
     }

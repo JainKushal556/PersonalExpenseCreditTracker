@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -51,6 +52,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlRegistrationDataInput = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.txtRegistrationPhNumber = new System.Windows.Forms.TextBox();
+            this.IblPhNumber = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -86,12 +91,15 @@
             this.label14 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlRegistrationDataInput.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.pnlConfirmPassword.SuspendLayout();
@@ -105,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -134,9 +143,9 @@
             this.panel1.Controls.Add(this.pictureBox3);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(48, 34);
+            this.panel1.Location = new System.Drawing.Point(31, 42);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1495, 872);
+            this.panel1.Size = new System.Drawing.Size(1495, 961);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -366,6 +375,8 @@
             // pnlRegistrationDataInput
             // 
             this.pnlRegistrationDataInput.BackColor = System.Drawing.Color.White;
+            this.pnlRegistrationDataInput.Controls.Add(this.panel7);
+            this.pnlRegistrationDataInput.Controls.Add(this.IblPhNumber);
             this.pnlRegistrationDataInput.Controls.Add(this.panel4);
             this.pnlRegistrationDataInput.Controls.Add(this.label23);
             this.pnlRegistrationDataInput.Controls.Add(this.pnlVeryStrong);
@@ -391,15 +402,55 @@
             this.pnlRegistrationDataInput.Controls.Add(this.label14);
             this.pnlRegistrationDataInput.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlRegistrationDataInput.ForeColor = System.Drawing.Color.Black;
-            this.pnlRegistrationDataInput.Location = new System.Drawing.Point(868, 36);
+            this.pnlRegistrationDataInput.Location = new System.Drawing.Point(868, 21);
             this.pnlRegistrationDataInput.Name = "pnlRegistrationDataInput";
-            this.pnlRegistrationDataInput.Size = new System.Drawing.Size(586, 800);
+            this.pnlRegistrationDataInput.Size = new System.Drawing.Size(586, 915);
             this.pnlRegistrationDataInput.TabIndex = 10;
+            // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.pictureBox11);
+            this.panel7.Controls.Add(this.txtRegistrationPhNumber);
+            this.panel7.Location = new System.Drawing.Point(30, 406);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(525, 50);
+            this.panel7.TabIndex = 46;
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = global::PersonalExpenseCreditTracker.Properties.Resources.call;
+            this.pictureBox11.Location = new System.Drawing.Point(6, 7);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(26, 34);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox11.TabIndex = 1;
+            this.pictureBox11.TabStop = false;
+            // 
+            // txtRegistrationPhNumber
+            // 
+            this.txtRegistrationPhNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtRegistrationPhNumber.Location = new System.Drawing.Point(39, 11);
+            this.txtRegistrationPhNumber.Name = "txtRegistrationPhNumber";
+            this.txtRegistrationPhNumber.Size = new System.Drawing.Size(470, 23);
+            this.txtRegistrationPhNumber.TabIndex = 0;
+            this.txtRegistrationPhNumber.Enter += new System.EventHandler(this.txtRegistrationPhoneNumber_Enter);
+            this.txtRegistrationPhNumber.Leave += new System.EventHandler(this.txtRegistrationPhoneNumber_Leave);
+            // 
+            // IblPhNumber
+            // 
+            this.IblPhNumber.AutoSize = true;
+            this.IblPhNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IblPhNumber.Location = new System.Drawing.Point(26, 378);
+            this.IblPhNumber.Name = "IblPhNumber";
+            this.IblPhNumber.Size = new System.Drawing.Size(142, 25);
+            this.IblPhNumber.TabIndex = 45;
+            this.IblPhNumber.Text = "Phone Number";
             // 
             // panel4
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.txtFullName);
             this.panel4.Controls.Add(this.pictureBox10);
@@ -431,8 +482,8 @@
             // 
             // label23
             // 
-            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.Location = new System.Drawing.Point(25, 180);
@@ -443,28 +494,28 @@
             // 
             // pnlVeryStrong
             // 
-            this.pnlVeryStrong.Location = new System.Drawing.Point(379, 619);
+            this.pnlVeryStrong.Location = new System.Drawing.Point(375, 718);
             this.pnlVeryStrong.Name = "pnlVeryStrong";
             this.pnlVeryStrong.Size = new System.Drawing.Size(107, 14);
             this.pnlVeryStrong.TabIndex = 25;
             // 
             // pnlStrong
             // 
-            this.pnlStrong.Location = new System.Drawing.Point(264, 619);
+            this.pnlStrong.Location = new System.Drawing.Point(262, 718);
             this.pnlStrong.Name = "pnlStrong";
             this.pnlStrong.Size = new System.Drawing.Size(107, 14);
             this.pnlStrong.TabIndex = 24;
             // 
             // pnlMedium
             // 
-            this.pnlMedium.Location = new System.Drawing.Point(149, 619);
+            this.pnlMedium.Location = new System.Drawing.Point(144, 718);
             this.pnlMedium.Name = "pnlMedium";
             this.pnlMedium.Size = new System.Drawing.Size(107, 14);
             this.pnlMedium.TabIndex = 23;
             // 
             // pnlWeak
             // 
-            this.pnlWeak.Location = new System.Drawing.Point(34, 619);
+            this.pnlWeak.Location = new System.Drawing.Point(31, 718);
             this.pnlWeak.Name = "pnlWeak";
             this.pnlWeak.Size = new System.Drawing.Size(107, 14);
             this.pnlWeak.TabIndex = 22;
@@ -473,7 +524,7 @@
             // 
             this.lblPasswordStrengthLevel.AutoSize = true;
             this.lblPasswordStrengthLevel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPasswordStrengthLevel.Location = new System.Drawing.Point(203, 585);
+            this.lblPasswordStrengthLevel.Location = new System.Drawing.Point(207, 673);
             this.lblPasswordStrengthLevel.Name = "lblPasswordStrengthLevel";
             this.lblPasswordStrengthLevel.Size = new System.Drawing.Size(53, 23);
             this.lblPasswordStrengthLevel.TabIndex = 21;
@@ -483,7 +534,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(30, 585);
+            this.label22.Location = new System.Drawing.Point(25, 673);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(162, 23);
             this.label22.TabIndex = 20;
@@ -491,14 +542,14 @@
             // 
             // pnlConfirmPassword
             // 
-            this.pnlConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlConfirmPassword.BackColor = System.Drawing.Color.White;
             this.pnlConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlConfirmPassword.Controls.Add(this.pictureBox6);
             this.pnlConfirmPassword.Controls.Add(this.picEye2);
             this.pnlConfirmPassword.Controls.Add(this.txtRegistrationConfirmPassword);
-            this.pnlConfirmPassword.Location = new System.Drawing.Point(29, 518);
+            this.pnlConfirmPassword.Location = new System.Drawing.Point(31, 602);
             this.pnlConfirmPassword.Name = "pnlConfirmPassword";
             this.pnlConfirmPassword.Size = new System.Drawing.Size(525, 50);
             this.pnlConfirmPassword.TabIndex = 18;
@@ -530,7 +581,7 @@
             this.txtRegistrationConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRegistrationConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRegistrationConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtRegistrationConfirmPassword.Location = new System.Drawing.Point(39, 11);
+            this.txtRegistrationConfirmPassword.Location = new System.Drawing.Point(39, 9);
             this.txtRegistrationConfirmPassword.Name = "txtRegistrationConfirmPassword";
             this.txtRegistrationConfirmPassword.Size = new System.Drawing.Size(439, 25);
             this.txtRegistrationConfirmPassword.TabIndex = 3;
@@ -539,26 +590,26 @@
             // 
             // lblConfirmPassword
             // 
-            this.lblConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblConfirmPassword.AutoSize = true;
-            this.lblConfirmPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfirmPassword.Location = new System.Drawing.Point(25, 486);
+            this.lblConfirmPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfirmPassword.Location = new System.Drawing.Point(28, 574);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
-            this.lblConfirmPassword.Size = new System.Drawing.Size(149, 23);
+            this.lblConfirmPassword.Size = new System.Drawing.Size(166, 25);
             this.lblConfirmPassword.TabIndex = 17;
             this.lblConfirmPassword.Text = "Confirm Password";
             // 
             // pnlNewPassword
             // 
-            this.pnlNewPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlNewPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlNewPassword.BackColor = System.Drawing.Color.White;
             this.pnlNewPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlNewPassword.Controls.Add(this.picEye1);
             this.pnlNewPassword.Controls.Add(this.txtRegistrationCreatePassword);
             this.pnlNewPassword.Controls.Add(this.pictureBox9);
-            this.pnlNewPassword.Location = new System.Drawing.Point(29, 414);
+            this.pnlNewPassword.Location = new System.Drawing.Point(31, 500);
             this.pnlNewPassword.Name = "pnlNewPassword";
             this.pnlNewPassword.Size = new System.Drawing.Size(525, 50);
             this.pnlNewPassword.TabIndex = 16;
@@ -600,20 +651,20 @@
             // 
             // lblNewPassword
             // 
-            this.lblNewPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNewPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNewPassword.AutoSize = true;
-            this.lblNewPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewPassword.Location = new System.Drawing.Point(25, 381);
+            this.lblNewPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNewPassword.Location = new System.Drawing.Point(31, 472);
             this.lblNewPassword.Name = "lblNewPassword";
-            this.lblNewPassword.Size = new System.Drawing.Size(122, 23);
+            this.lblNewPassword.Size = new System.Drawing.Size(135, 25);
             this.lblNewPassword.TabIndex = 15;
             this.lblNewPassword.Text = "New Password";
             // 
             // pictureBox8
             // 
             this.pictureBox8.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user__5_;
-            this.pictureBox8.Location = new System.Drawing.Point(242, 23);
+            this.pictureBox8.Location = new System.Drawing.Point(242, 15);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(78, 67);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -626,17 +677,18 @@
             this.lblCreateAccount.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblCreateAccount.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCreateAccount.ForeColor = System.Drawing.Color.Blue;
-            this.lblCreateAccount.Location = new System.Drawing.Point(365, 753);
+            this.lblCreateAccount.Location = new System.Drawing.Point(371, 868);
             this.lblCreateAccount.Name = "lblCreateAccount";
             this.lblCreateAccount.Size = new System.Drawing.Size(49, 21);
             this.lblCreateAccount.TabIndex = 13;
             this.lblCreateAccount.Text = "Login";
+            this.lblCreateAccount.Click += new System.EventHandler(this.lblCreateAccount_LinkClicked);
             // 
             // lblNotAccount
             // 
             this.lblNotAccount.AutoSize = true;
             this.lblNotAccount.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotAccount.Location = new System.Drawing.Point(161, 753);
+            this.lblNotAccount.Location = new System.Drawing.Point(161, 868);
             this.lblNotAccount.Name = "lblNotAccount";
             this.lblNotAccount.Size = new System.Drawing.Size(186, 21);
             this.lblNotAccount.TabIndex = 12;
@@ -645,7 +697,7 @@
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(323, 726);
+            this.panel6.Location = new System.Drawing.Point(325, 839);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(230, 1);
             this.panel6.TabIndex = 11;
@@ -654,7 +706,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(277, 718);
+            this.label17.Location = new System.Drawing.Point(276, 829);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(29, 20);
             this.label17.TabIndex = 10;
@@ -663,21 +715,21 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(29, 726);
+            this.panel5.Location = new System.Drawing.Point(30, 839);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(230, 1);
             this.panel5.TabIndex = 9;
             // 
             // btnCreateAccount
             // 
-            this.btnCreateAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(253)))));
             this.btnCreateAccount.FlatAppearance.BorderSize = 0;
             this.btnCreateAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateAccount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateAccount.ForeColor = System.Drawing.Color.White;
-            this.btnCreateAccount.Location = new System.Drawing.Point(29, 654);
+            this.btnCreateAccount.Location = new System.Drawing.Point(31, 765);
             this.btnCreateAccount.Name = "btnCreateAccount";
             this.btnCreateAccount.Size = new System.Drawing.Size(525, 49);
             this.btnCreateAccount.TabIndex = 8;
@@ -687,8 +739,8 @@
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.txtRegistrationEmail);
             this.panel3.Controls.Add(this.pictureBox5);
@@ -720,8 +772,8 @@
             // 
             // lblEmail
             // 
-            this.lblEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.Location = new System.Drawing.Point(25, 279);
@@ -734,7 +786,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label15.Location = new System.Drawing.Point(152, 143);
+            this.label15.Location = new System.Drawing.Point(161, 135);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(271, 23);
             this.label15.TabIndex = 1;
@@ -744,7 +796,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(102, 96);
+            this.label14.Location = new System.Drawing.Point(106, 85);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(365, 50);
             this.label14.TabIndex = 0;
@@ -763,19 +815,23 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gemini_Generated_Image_bup5imbup5imbup5;
-            this.pictureBox1.Location = new System.Drawing.Point(200, 39);
+            this.pictureBox1.Location = new System.Drawing.Point(200, 20);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(703, 800);
+            this.pictureBox1.Size = new System.Drawing.Size(703, 916);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // RegistrationControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1569, 918);
+            this.ClientSize = new System.Drawing.Size(1538, 1055);
             this.Controls.Add(this.panel1);
             this.Name = "RegistrationControls";
             this.Text = "RegistratationControls";
@@ -790,6 +846,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.pnlRegistrationDataInput.ResumeLayout(false);
             this.pnlRegistrationDataInput.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
@@ -807,6 +866,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -871,6 +931,11 @@
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.Label IblPhNumber;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.TextBox txtRegistrationPhNumber;
+        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
 
     }
 }

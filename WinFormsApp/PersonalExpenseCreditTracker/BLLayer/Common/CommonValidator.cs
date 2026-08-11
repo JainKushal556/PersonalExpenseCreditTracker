@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,14 @@ namespace BLLayer.Common
         public enum ValidationResult
         {
             Success,
+
+            LoginEmailInvalid,
+            LoginPasswordInvalid,
+
+            UserNameInvalid,
+            PasswordInvalid,
+            ConfirmPasswordInvalid,
+            PasswordNotMatched,
 
             PersonInvalid,
             PaymentInvalid,
@@ -40,6 +48,86 @@ namespace BLLayer.Common
             StoreProcedureError,
             TaskAlreadyUpdated
         }
+
+        //login Email Validation
+        public static ValidationResult ValidateLoginEmail(string email)
+        {
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                return ValidationResult.Success;
+            }
+            return ValidationResult.LoginEmailInvalid;
+        }
+
+        //login Password Validation
+        public static ValidationResult ValidateLoginPassword(string password)
+        {
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                return ValidationResult.Success;
+            }
+            return ValidationResult.LoginPasswordInvalid;
+        }
+
+        //Validation UserName
+        public static ValidationResult ValidateUserName(string userName)
+        {
+            if (!string.IsNullOrWhiteSpace(userName))
+            {
+                userName = userName.Trim();
+
+                if (userName.Length <= 50)
+                {
+                    string pattern=@"^[a-zA-Z0-9 ]+$";
+
+                    if (Regex.IsMatch(userName, pattern))
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
+            }
+           
+            return ValidationResult.UserNameInvalid ;
+
+        }
+
+        //Validation Password
+        public static ValidationResult ValidatePassword(string password)
+        { 
+             if (!string.IsNullOrWhiteSpace(password))
+            {
+                password=password.Trim();
+
+                 if (password.Length >= 6)
+                 {
+                      if(password.Length <=100)
+                      {
+                          string pattern=@"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$";
+
+                          if(Regex.IsMatch(password, pattern))
+                          {
+                             return ValidationResult.Success;
+                          }
+                      }
+                 }
+            }
+            return ValidationResult.PasswordInvalid;
+           
+        }
+
+        //Validation Confirm Password
+        public static ValidationResult ValidateConfirmPassword(string password, string confirmPassword)
+        {
+            if (!string.IsNullOrWhiteSpace(confirmPassword))
+            {
+                if (password == confirmPassword)
+                {
+                    return ValidationResult.Success;
+                }
+            }
+            return ValidationResult.PasswordNotMatched;
+        }
+        
 
         
         //Validation PersonID

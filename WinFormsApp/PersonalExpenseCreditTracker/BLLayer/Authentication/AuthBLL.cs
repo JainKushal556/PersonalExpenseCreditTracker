@@ -2,151 +2,125 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BLLayer.Common;
+using System.Data;
+using DALayer.Common;
 using DALayer.Authentication;
 using System.Text.RegularExpressions;
 namespace BLLayer.Authentication
 {
     public class AuthBLL
     {
-        public string userId { get; set; }
+        public int userId { get; set; }
         public string userName { get; set; }
         public string email { get; set; }
         public string phoneNumber { get; set; }
         public string password { get; set; }
         public string oldPassword { get; set; }
         public string newPassword {get;set;}
+        public string confirmPassword { get; set; }
+        public string message { get; set; }
 
-        AuthDAL authDAL = new AuthDAL();
+        private AuthDAL authDal=new AuthDAL();
 
-        private bool ValidUserName()
+
+        // Stores the validation result
+        CommonValidator.ValidationResult result;
+
+
+        // Validates all user input before saving the data
+        public CommonValidator.ValidationResult DataValidatorIntoAuthBll()
         {
-            if (string.IsNullOrWhiteSpace(userName))
+            //UserName Validation
+            result = CommonValidator.ValidateUserName(userName);
+            if (result != CommonValidator.ValidationResult.Success)
             {
-                return false;
+                return result;
             }
-            if (userName.Length > 50)
+
+            //Email Validation
+            result = CommonValidator.ValidateEmail(email);
+            if (result != CommonValidator.ValidationResult.Success)
             {
-                return false;
+                return result;
             }
-            return Regex.IsMatch(userName, @"^[a-zA-Z0-9]+$");
+
+            //Validation Phone Number
+            result = CommonValidator.ValidatePhoneNumber(phoneNumber);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+            //Validation Password
+            result = CommonValidator.ValidatePassword(password);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            //Validation Confirm Password
+            result = CommonValidator.ValidateConfirmPassword(password,confirmPassword);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            authDal.userName = userName;
+            authDal.email = email;
+            authDal.phoneNumber = phoneNumber;
+            authDal.password = password;
+
+            if (authDal.SaveRegisterToDb())
+            {
+                this.userId = authDal.userId;
+                this.message = authDal.message;
+                return CommonValidator.ValidationResult.Success;
+            }
+            else
+            {
+                this.userId = authDal.userId;
+                this.message = authDal.message;
+                return CommonValidator.ValidationResult.StoreProcedureError;
+            }
 
         }
-        private bool ValidEmail()
+
+        public CommonValidator.ValidationResult LoginUserDataValidator()
         {
-            if (string.IsNullOrWhiteSpace(email))
+            //Email Empty Validation
+            result = CommonValidator.ValidateLoginEmail(email);
+            if (result != CommonValidator.ValidationResult.Success)
             {
-                return false;
-            }
-            if (email.Length > 100)
-            {
-                return false;
+                return result;
             }
 
-            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            
+            //Password Empty Validation
+            result = CommonValidator.ValidateLoginPassword(password);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            authDal.email = email;
+            authDal.password = password;
+
+            //call Login Stored Procedure
+            if (authDal.LoginUserToDb())
+            {
+                this.userId = authDal.userId;
+                this.message = authDal.message;
+
+                return CommonValidator.ValidationResult.Success;
+            }
+            else
+            {
+                this.userId = authDal.userId;
+                this.message = authDal.message;
+                return CommonValidator.ValidationResult.StoreProcedureError;
+            }
         }
 
-        private bool ValidPhoneNumber()
-        {
-            if (string.IsNullOrWhiteSpace(phoneNumber))
-            {
-                return false;
-            }
-
-            return Regex.IsMatch(phoneNumber, @"^\d{10}$");
-        }
-
-        private bool ValidPassword()
-        {
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                return false;
-            }
-            if (password.Length < 6)
-            {
-                return false;
-            }
-            return Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$");
-        }
-
-        private bool ValidOldPassword()
-        {
-            if(string.IsNullOrWhiteSpace(oldPassword))
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private bool ValidNewPassword()
-        {
-            if(string.IsNullOrWhiteSpace(newPassword))
-            {
-                return false;
-            }
-            if(newPassword.Length<6)
-            {
-                return false;
-            }
-            if(newPassword==oldPassword)
-            {
-                return false;
-            }
-            return true;
-        }
-        //Register Page
-        public bool InsertDataIntoAuthBll()
-        {
-            if (ValidUserName())
-            {
-                if (ValidEmail())
-                {
-                    if (ValidPhoneNumber())
-                    {
-                        if (ValidPassword())
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        //Login Page
-        public bool LoginDataIntoAuthBll()
-        {
-            if (ValidEmail())
-            {
-                if (ValidPassword())
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        //Forget Password
-        public bool ForgetPasswordIntoAuthBll()
-        {
-            if (ValidEmail())
-            {
-                return true;
-            }
-            return false;
-        }
-
-        //Change Password
-        public bool ChangePasswordIntoAuthBll()
-        {
-            if (ValidOldPassword())
-            {
-                if (ValidNewPassword())
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
+    
     }
 }

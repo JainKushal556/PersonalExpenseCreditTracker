@@ -324,11 +324,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
         }
 
-        private void comboBoxLentPaymentType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void panelMainBody_Click(object sender, EventArgs e)
         {
             panelLentAddCalenderShow.Visible = false;
@@ -365,5 +361,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             txtLentAddDeadlineDatePicker.ForeColor = Color.Black;
             panelLentAddCalenderShow.Visible = false;
         }
+
+       
+
+        
     }
 }

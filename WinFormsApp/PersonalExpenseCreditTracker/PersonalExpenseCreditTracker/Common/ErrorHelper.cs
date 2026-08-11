@@ -59,6 +59,36 @@ namespace PersonalExpenseCreditTracker.Common
             errorProvider.SetIconPadding(textBox, -30); 
             switch (result)
             {
+                case CommonValidator.ValidationResult.UserNameInvalid:
+                    errorProvider.SetError(textBox, "Enter a valid user name");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.EmailInvalid:
+                    errorProvider.SetError(textBox, "Enter a valid email address");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneInvalid:
+                    errorProvider.SetError(textBox, "Enter a valid phone number");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.PasswordInvalid:
+                    errorProvider.SetError(textBox, "Enter a valid password");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.ConfirmPasswordInvalid:
+                    errorProvider.SetError(textBox, "Confirm password is required");
+                    textBox.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.PasswordNotMatched:
+                    errorProvider.SetError(textBox, "Password do not match");
+                    textBox.Focus();
+                    break;
+                    
                 // Amount field is empty
                 case CommonValidator.ValidationResult.AmountEmpty:
                     errorProvider.SetError(textBox, "Amount is required.");
@@ -98,6 +128,15 @@ namespace PersonalExpenseCreditTracker.Common
 
                 case CommonValidator.ValidationResult.TaskTitleInvalid:
                     errorProvider.SetError(textBox, "Please enter a valid task title.");
+                    textBox.Focus();
+                    break;
+              
+                case CommonValidator.ValidationResult.LoginEmailInvalid:
+                    errorProvider.SetError(textBox, "Enter Email Address.");
+                    textBox.Focus();
+                    break;
+                case CommonValidator.ValidationResult.LoginPasswordInvalid:
+                    errorProvider.SetError(textBox, "Enter Password.");
                     textBox.Focus();
                     break;
             }

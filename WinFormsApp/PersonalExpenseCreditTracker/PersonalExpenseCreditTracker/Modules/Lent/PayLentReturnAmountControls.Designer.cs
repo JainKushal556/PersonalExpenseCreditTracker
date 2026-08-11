@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PayLentReturnAmountControls));
             this.panel5 = new System.Windows.Forms.Panel();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.panelMainBody = new System.Windows.Forms.Panel();
@@ -137,7 +138,7 @@
             this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.Location = new System.Drawing.Point(420, 718);
             this.btnSave.Name = "btnSave";
@@ -172,7 +173,7 @@
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Image = global::PersonalExpenseCreditTracker.Properties.Resources.redownload;
+            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnClear.Location = new System.Drawing.Point(16, 718);
             this.btnClear.Name = "btnClear";
@@ -185,8 +186,8 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 708);
             this.panel2.Name = "panel2";
@@ -195,8 +196,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";
@@ -325,7 +326,7 @@
             // 
             this.btnAddCalendar.FlatAppearance.BorderSize = 0;
             this.btnAddCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
+            this.btnAddCalendar.Image = ((System.Drawing.Image)(resources.GetObject("btnAddCalendar.Image")));
             this.btnAddCalendar.Location = new System.Drawing.Point(314, -1);
             this.btnAddCalendar.Name = "btnAddCalendar";
             this.btnAddCalendar.Size = new System.Drawing.Size(37, 31);
@@ -378,8 +379,8 @@
             // pictureBoxRupee
             // 
             this.pictureBoxRupee.BackColor = System.Drawing.Color.Gainsboro;
-            this.pictureBoxRupee.ErrorImage = global::PersonalExpenseCreditTracker.Properties.Resources.rupee;
-            this.pictureBoxRupee.Image = global::PersonalExpenseCreditTracker.Properties.Resources.rupee;
+            this.pictureBoxRupee.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxRupee.ErrorImage")));
+            this.pictureBoxRupee.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxRupee.Image")));
             this.pictureBoxRupee.Location = new System.Drawing.Point(-1, -1);
             this.pictureBoxRupee.Name = "pictureBoxRupee";
             this.pictureBoxRupee.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
