@@ -15,7 +15,6 @@ using BLLayer.Common;
 using BLLayer.Settings.Persons;
 using PersonalExpenseCreditTracker.Common;
 using PersonalExpenseCreditTracker.Session;
-using PersonalExpenseCreditTracker.Modules.Settings.Person;
 namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 {
     public partial class EditPersons : Form
@@ -212,6 +211,30 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         private void pnlEditPersonDetailsMainBody_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void txtEditPersonDetailsFullName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtEditPersonDetailsFullName.Text != "Enter Full Name" && !string.IsNullOrWhiteSpace(txtEditPersonDetailsFullName.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtEditPersonDetailsFullName);
+            }
+        }
+
+        private void txtEditPersonDetailsPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (txtEditPersonDetailsPhoneNumber.Text != "Enter Phone Number" && !string.IsNullOrWhiteSpace(txtEditPersonDetailsPhoneNumber.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtEditPersonDetailsPhoneNumber);
+            }
+        }
+
+        private void txtEditPersonDetailsAddress_TextChanged(object sender, EventArgs e)
+        {
+            if (txtEditPersonDetailsAddress.Text != "Enter Address" && !string.IsNullOrWhiteSpace(txtEditPersonDetailsAddress.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtEditPersonDetailsAddress);
+            }
         }
     }
 }

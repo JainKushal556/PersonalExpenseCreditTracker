@@ -31,6 +31,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.components = new System.ComponentModel.Container();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlAddNoteDetails = new System.Windows.Forms.Panel();
+            this.lblPriorityError = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSaveNote = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -90,6 +91,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             // 
             this.pnlAddNoteDetails.BackColor = System.Drawing.Color.Transparent;
             this.pnlAddNoteDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAddNoteDetails.Controls.Add(this.lblPriorityError);
             this.pnlAddNoteDetails.Controls.Add(this.btnCancel);
             this.pnlAddNoteDetails.Controls.Add(this.btnSaveNote);
             this.pnlAddNoteDetails.Controls.Add(this.panel4);
@@ -114,9 +116,18 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlAddNoteDetails.Margin = new System.Windows.Forms.Padding(0);
             this.pnlAddNoteDetails.Name = "pnlAddNoteDetails";
             this.pnlAddNoteDetails.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlAddNoteDetails.Size = new System.Drawing.Size(487, 538);
+            this.pnlAddNoteDetails.Size = new System.Drawing.Size(487, 578);
             this.pnlAddNoteDetails.TabIndex = 0;
             this.pnlAddNoteDetails.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAddNoteDetails_Paint);
+            // 
+            // lblPriorityError
+            // 
+            this.lblPriorityError.AutoSize = true;
+            this.lblPriorityError.Location = new System.Drawing.Point(25, 355);
+            this.lblPriorityError.Name = "lblPriorityError";
+            this.lblPriorityError.Size = new System.Drawing.Size(50, 20);
+            this.lblPriorityError.TabIndex = 21;
+            this.lblPriorityError.Text = "label3";
             // 
             // btnCancel
             // 
@@ -127,10 +138,10 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(163, 482);
+            this.btnCancel.Location = new System.Drawing.Point(163, 519);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 41);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -146,11 +157,11 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.btnSaveNote.ForeColor = System.Drawing.Color.White;
             this.btnSaveNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.floppy_disk__3_;
             this.btnSaveNote.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveNote.Location = new System.Drawing.Point(299, 482);
+            this.btnSaveNote.Location = new System.Drawing.Point(299, 519);
             this.btnSaveNote.Name = "btnSaveNote";
             this.btnSaveNote.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSaveNote.Size = new System.Drawing.Size(162, 41);
-            this.btnSaveNote.TabIndex = 1;
+            this.btnSaveNote.TabIndex = 4;
             this.btnSaveNote.Text = " Save Note";
             this.btnSaveNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveNote.UseVisualStyleBackColor = false;
@@ -202,7 +213,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.btnCancelDialog.Location = new System.Drawing.Point(435, 10);
             this.btnCancelDialog.Name = "btnCancelDialog";
             this.btnCancelDialog.Size = new System.Drawing.Size(39, 35);
-            this.btnCancelDialog.TabIndex = 1;
+            this.btnCancelDialog.TabIndex = 5;
             this.btnCancelDialog.UseVisualStyleBackColor = true;
             this.btnCancelDialog.Click += new System.EventHandler(this.btnCancelDialog_Click);
             this.btnCancelDialog.MouseEnter += new System.EventHandler(this.btnCancelDialog_MouseEnter);
@@ -215,7 +226,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlDescription.Location = new System.Drawing.Point(18, 184);
             this.pnlDescription.Name = "pnlDescription";
             this.pnlDescription.Size = new System.Drawing.Size(450, 96);
-            this.pnlDescription.TabIndex = 12;
+            this.pnlDescription.TabIndex = 1;
             // 
             // rtxtDescription
             // 
@@ -226,6 +237,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.rtxtDescription.Name = "rtxtDescription";
             this.rtxtDescription.Size = new System.Drawing.Size(448, 94);
             this.rtxtDescription.TabIndex = 0;
+            this.rtxtDescription.TextChanged += new System.EventHandler(this.rtxtDescription_TextChanged);
             this.rtxtDescription.Enter += new System.EventHandler(this.rtxtDescription_Enter);
             this.rtxtDescription.Leave += new System.EventHandler(this.rtxtDescription_Leave);
             // 
@@ -245,7 +257,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.flpNoteColors.Controls.Add(this.pnlCoralColor);
             this.flpNoteColors.Controls.Add(this.pnlMintColor);
             this.flpNoteColors.Controls.Add(this.pnlIndigoColor);
-            this.flpNoteColors.Location = new System.Drawing.Point(18, 411);
+            this.flpNoteColors.Location = new System.Drawing.Point(18, 421);
             this.flpNoteColors.Margin = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.flpNoteColors.Name = "flpNoteColors";
             this.flpNoteColors.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -396,7 +408,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             // 
             this.lblNoteColor.AutoSize = true;
             this.lblNoteColor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteColor.Location = new System.Drawing.Point(16, 387);
+            this.lblNoteColor.Location = new System.Drawing.Point(16, 397);
             this.lblNoteColor.Name = "lblNoteColor";
             this.lblNoteColor.Size = new System.Drawing.Size(85, 20);
             this.lblNoteColor.TabIndex = 9;
@@ -417,7 +429,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.tblPriority.RowCount = 1;
             this.tblPriority.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblPriority.Size = new System.Drawing.Size(450, 45);
-            this.tblPriority.TabIndex = 8;
+            this.tblPriority.TabIndex = 2;
             // 
             // panel3
             // 
@@ -495,7 +507,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.rbHigh.Location = new System.Drawing.Point(25, 5);
             this.rbHigh.Name = "rbHigh";
             this.rbHigh.Size = new System.Drawing.Size(62, 24);
-            this.rbHigh.TabIndex = 1;
+            this.rbHigh.TabIndex = 2;
             this.rbHigh.TabStop = true;
             this.rbHigh.Text = "High";
             this.rbHigh.UseVisualStyleBackColor = true;
@@ -553,7 +565,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.txtNoteTitle.MaxLength = 100;
             this.txtNoteTitle.Name = "txtNoteTitle";
             this.txtNoteTitle.Size = new System.Drawing.Size(450, 30);
-            this.txtNoteTitle.TabIndex = 2;
+            this.txtNoteTitle.TabIndex = 0;
             this.txtNoteTitle.TextChanged += new System.EventHandler(this.txtNoteTitle_TextChanged);
             this.txtNoteTitle.Enter += new System.EventHandler(this.txtNoteTitle_Enter);
             this.txtNoteTitle.Leave += new System.EventHandler(this.txtNoteTitle_Leave);
@@ -591,7 +603,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(487, 538);
+            this.ClientSize = new System.Drawing.Size(487, 578);
             this.Controls.Add(this.pnlAddNoteDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "NoteAddDetailsControl";
@@ -663,6 +675,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private System.Windows.Forms.Panel pnlCoralColor;
         private System.Windows.Forms.Panel pnlMintColor;
         private System.Windows.Forms.Panel pnlIndigoColor;
-            private System.Windows.Forms.Label label2;
-}
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblPriorityError;
+    }
 }

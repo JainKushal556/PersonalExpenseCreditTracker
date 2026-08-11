@@ -22,11 +22,25 @@ namespace BLLayer.Lent
         // Add these for Return Lent
         public string returnAmount { get; set; }
         public DateTime returnDate { get; set; }
+        public DateTime fromDate { get; set; }
+        public DateTime toDate { get; set; }
 
         private LentDAL lentDal = new LentDAL();
 
         // Stores the validation result
         CommonValidator.ValidationResult result;
+
+        public CommonValidator.ValidationResult DateValidatorIntoLentBll()
+        {
+            //  Date Validation
+            result = CommonValidator.ValidateDateRange(fromDate, toDate);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            return CommonValidator.ValidationResult.Success;
+        }
 
         // Validates all user input before saving the data
         public CommonValidator.ValidationResult DataValidatorIntoLentBll()
@@ -113,13 +127,19 @@ namespace BLLayer.Lent
                 return result;
             }
 
-            // Return Date Validation
-            result = CommonValidator.ValidateDeadline(returnDate);
+            //// Return Date Validation
+            //result = CommonValidator.ValidateDeadline(returnDate);
+            //if (result != CommonValidator.ValidationResult.Success)
+            //{
+            //    return result;
+            //}
+            // Return Amount Date Validation
+            result = CommonValidator.ValidateDeadlineReturnAmount(returnDate);
+
             if (result != CommonValidator.ValidationResult.Success)
             {
                 return result;
             }
-
             // Description Validation
             result = CommonValidator.ValidateDescription(description);
             if (result != CommonValidator.ValidationResult.Success)

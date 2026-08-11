@@ -156,13 +156,10 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 13);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.5022F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.12775F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.12775F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.24229F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(698, 326);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -170,9 +167,9 @@
             // 
             this.panel15.Controls.Add(this.pnlEditPersonDetailsAddress);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel15.Location = new System.Drawing.Point(282, 198);
+            this.panel15.Location = new System.Drawing.Point(282, 213);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(413, 125);
+            this.panel15.Size = new System.Drawing.Size(413, 110);
             this.panel15.TabIndex = 13;
             // 
             // pnlEditPersonDetailsAddress
@@ -180,9 +177,9 @@
             this.pnlEditPersonDetailsAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlEditPersonDetailsAddress.BackColor = System.Drawing.Color.White;
             this.pnlEditPersonDetailsAddress.Controls.Add(this.txtEditPersonDetailsAddress);
-            this.pnlEditPersonDetailsAddress.Location = new System.Drawing.Point(1, 3);
+            this.pnlEditPersonDetailsAddress.Location = new System.Drawing.Point(1, 0);
             this.pnlEditPersonDetailsAddress.Name = "pnlEditPersonDetailsAddress";
-            this.pnlEditPersonDetailsAddress.Size = new System.Drawing.Size(410, 119);
+            this.pnlEditPersonDetailsAddress.Size = new System.Drawing.Size(410, 110);
             this.pnlEditPersonDetailsAddress.TabIndex = 1;
             this.pnlEditPersonDetailsAddress.Leave += new System.EventHandler(this.pnlEditPersonDetailsAddress_Leave);
             // 
@@ -192,21 +189,22 @@
             this.txtEditPersonDetailsAddress.BackColor = System.Drawing.Color.White;
             this.txtEditPersonDetailsAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtEditPersonDetailsAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEditPersonDetailsAddress.Location = new System.Drawing.Point(6, 4);
+            this.txtEditPersonDetailsAddress.Location = new System.Drawing.Point(6, 0);
             this.txtEditPersonDetailsAddress.Multiline = true;
             this.txtEditPersonDetailsAddress.Name = "txtEditPersonDetailsAddress";
-            this.txtEditPersonDetailsAddress.Size = new System.Drawing.Size(401, 111);
+            this.txtEditPersonDetailsAddress.Size = new System.Drawing.Size(401, 107);
             this.txtEditPersonDetailsAddress.TabIndex = 0;
             this.txtEditPersonDetailsAddress.Click += new System.EventHandler(this.txtEditPersonDetailsAddress_Click);
+            this.txtEditPersonDetailsAddress.TextChanged += new System.EventHandler(this.txtEditPersonDetailsAddress_TextChanged);
             // 
             // panel14
             // 
             this.panel14.Controls.Add(this.panel40);
             this.panel14.Controls.Add(this.pictureBox7);
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(3, 198);
+            this.panel14.Location = new System.Drawing.Point(3, 213);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(273, 125);
+            this.panel14.Size = new System.Drawing.Size(273, 110);
             this.panel14.TabIndex = 12;
             // 
             // panel40
@@ -214,9 +212,9 @@
             this.panel40.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel40.Controls.Add(this.lblEditPersonDetailsAddress);
-            this.panel40.Location = new System.Drawing.Point(65, 7);
+            this.panel40.Location = new System.Drawing.Point(65, 1);
             this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(205, 31);
+            this.panel40.Size = new System.Drawing.Size(205, 56);
             this.panel40.TabIndex = 8;
             // 
             // lblEditPersonDetailsAddress
@@ -224,7 +222,7 @@
             this.lblEditPersonDetailsAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEditPersonDetailsAddress.AutoSize = true;
             this.lblEditPersonDetailsAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditPersonDetailsAddress.Location = new System.Drawing.Point(8, 2);
+            this.lblEditPersonDetailsAddress.Location = new System.Drawing.Point(8, 8);
             this.lblEditPersonDetailsAddress.Name = "lblEditPersonDetailsAddress";
             this.lblEditPersonDetailsAddress.Size = new System.Drawing.Size(183, 28);
             this.lblEditPersonDetailsAddress.TabIndex = 1;
@@ -235,7 +233,7 @@
             this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pin;
-            this.pictureBox7.Location = new System.Drawing.Point(11, 2);
+            this.pictureBox7.Location = new System.Drawing.Point(11, 0);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(42, 40);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -246,9 +244,9 @@
             // 
             this.panel5.Controls.Add(this.pnlEditPersonDetailsFullName);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(282, 68);
+            this.panel5.Location = new System.Drawing.Point(282, 63);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(413, 59);
+            this.panel5.Size = new System.Drawing.Size(413, 69);
             this.panel5.TabIndex = 4;
             // 
             // pnlEditPersonDetailsFullName
@@ -256,7 +254,7 @@
             this.pnlEditPersonDetailsFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlEditPersonDetailsFullName.BackColor = System.Drawing.Color.White;
             this.pnlEditPersonDetailsFullName.Controls.Add(this.txtEditPersonDetailsFullName);
-            this.pnlEditPersonDetailsFullName.Location = new System.Drawing.Point(1, 8);
+            this.pnlEditPersonDetailsFullName.Location = new System.Drawing.Point(1, 4);
             this.pnlEditPersonDetailsFullName.Name = "pnlEditPersonDetailsFullName";
             this.pnlEditPersonDetailsFullName.Size = new System.Drawing.Size(410, 45);
             this.pnlEditPersonDetailsFullName.TabIndex = 0;
@@ -273,6 +271,7 @@
             this.txtEditPersonDetailsFullName.Size = new System.Drawing.Size(401, 27);
             this.txtEditPersonDetailsFullName.TabIndex = 0;
             this.txtEditPersonDetailsFullName.Click += new System.EventHandler(this.txtEditPersonDetailsFullName_Click);
+            this.txtEditPersonDetailsFullName.TextChanged += new System.EventHandler(this.txtEditPersonDetailsFullName_TextChanged);
             // 
             // panel1
             // 
@@ -282,7 +281,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(279, 65);
+            this.panel1.Size = new System.Drawing.Size(279, 60);
             this.panel1.TabIndex = 0;
             // 
             // panel6
@@ -300,7 +299,7 @@
             this.panel16.Controls.Add(this.lblEditProfile);
             this.panel16.Location = new System.Drawing.Point(5, 3);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(230, 59);
+            this.panel16.Size = new System.Drawing.Size(230, 54);
             this.panel16.TabIndex = 9;
             // 
             // lblEditProfile
@@ -308,7 +307,7 @@
             this.lblEditProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEditProfile.AutoSize = true;
             this.lblEditProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditProfile.Location = new System.Drawing.Point(6, 13);
+            this.lblEditProfile.Location = new System.Drawing.Point(6, 11);
             this.lblEditProfile.Name = "lblEditProfile";
             this.lblEditProfile.Size = new System.Drawing.Size(217, 32);
             this.lblEditProfile.TabIndex = 1;
@@ -319,9 +318,9 @@
             this.panel2.Controls.Add(this.panel12);
             this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 68);
+            this.panel2.Location = new System.Drawing.Point(3, 63);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(273, 59);
+            this.panel2.Size = new System.Drawing.Size(273, 69);
             this.panel2.TabIndex = 1;
             // 
             // panel12
@@ -329,9 +328,9 @@
             this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel12.Controls.Add(this.lblEditPersonDetailsFullName);
-            this.panel12.Location = new System.Drawing.Point(65, 7);
+            this.panel12.Location = new System.Drawing.Point(65, 1);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(178, 46);
+            this.panel12.Size = new System.Drawing.Size(178, 56);
             this.panel12.TabIndex = 8;
             // 
             // lblEditPersonDetailsFullName
@@ -339,7 +338,7 @@
             this.lblEditPersonDetailsFullName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEditPersonDetailsFullName.AutoSize = true;
             this.lblEditPersonDetailsFullName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditPersonDetailsFullName.Location = new System.Drawing.Point(8, 10);
+            this.lblEditPersonDetailsFullName.Location = new System.Drawing.Point(8, 8);
             this.lblEditPersonDetailsFullName.Name = "lblEditPersonDetailsFullName";
             this.lblEditPersonDetailsFullName.Size = new System.Drawing.Size(104, 28);
             this.lblEditPersonDetailsFullName.TabIndex = 1;
@@ -350,7 +349,7 @@
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__3_;
-            this.pictureBox2.Location = new System.Drawing.Point(11, 9);
+            this.pictureBox2.Location = new System.Drawing.Point(11, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(42, 40);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -362,9 +361,9 @@
             this.panel3.Controls.Add(this.panel30);
             this.panel3.Controls.Add(this.pictureBox5);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 133);
+            this.panel3.Location = new System.Drawing.Point(3, 138);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(273, 59);
+            this.panel3.Size = new System.Drawing.Size(273, 69);
             this.panel3.TabIndex = 14;
             // 
             // panel30
@@ -372,9 +371,9 @@
             this.panel30.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel30.Controls.Add(this.lblEditPersonDetailsPhoneNumber);
-            this.panel30.Location = new System.Drawing.Point(65, 7);
+            this.panel30.Location = new System.Drawing.Point(65, 1);
             this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(178, 46);
+            this.panel30.Size = new System.Drawing.Size(178, 56);
             this.panel30.TabIndex = 10;
             // 
             // lblEditPersonDetailsPhoneNumber
@@ -382,7 +381,7 @@
             this.lblEditPersonDetailsPhoneNumber.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEditPersonDetailsPhoneNumber.AutoSize = true;
             this.lblEditPersonDetailsPhoneNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditPersonDetailsPhoneNumber.Location = new System.Drawing.Point(8, 10);
+            this.lblEditPersonDetailsPhoneNumber.Location = new System.Drawing.Point(8, 8);
             this.lblEditPersonDetailsPhoneNumber.Name = "lblEditPersonDetailsPhoneNumber";
             this.lblEditPersonDetailsPhoneNumber.Size = new System.Drawing.Size(152, 28);
             this.lblEditPersonDetailsPhoneNumber.TabIndex = 1;
@@ -393,7 +392,7 @@
             this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox5.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone1;
-            this.pictureBox5.Location = new System.Drawing.Point(11, 9);
+            this.pictureBox5.Location = new System.Drawing.Point(11, 0);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(42, 40);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -404,9 +403,9 @@
             // 
             this.panel10.Controls.Add(this.pnlEditPersonDetailsPhoneNumber);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(282, 133);
+            this.panel10.Location = new System.Drawing.Point(282, 138);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(413, 59);
+            this.panel10.Size = new System.Drawing.Size(413, 69);
             this.panel10.TabIndex = 9;
             // 
             // pnlEditPersonDetailsPhoneNumber
@@ -414,7 +413,7 @@
             this.pnlEditPersonDetailsPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlEditPersonDetailsPhoneNumber.BackColor = System.Drawing.Color.White;
             this.pnlEditPersonDetailsPhoneNumber.Controls.Add(this.txtEditPersonDetailsPhoneNumber);
-            this.pnlEditPersonDetailsPhoneNumber.Location = new System.Drawing.Point(1, 7);
+            this.pnlEditPersonDetailsPhoneNumber.Location = new System.Drawing.Point(1, 3);
             this.pnlEditPersonDetailsPhoneNumber.Name = "pnlEditPersonDetailsPhoneNumber";
             this.pnlEditPersonDetailsPhoneNumber.Size = new System.Drawing.Size(410, 45);
             this.pnlEditPersonDetailsPhoneNumber.TabIndex = 1;
@@ -431,6 +430,7 @@
             this.txtEditPersonDetailsPhoneNumber.Size = new System.Drawing.Size(401, 27);
             this.txtEditPersonDetailsPhoneNumber.TabIndex = 0;
             this.txtEditPersonDetailsPhoneNumber.Click += new System.EventHandler(this.txtEditPersonDetailsPhoneNumber_Click);
+            this.txtEditPersonDetailsPhoneNumber.TextChanged += new System.EventHandler(this.txtEditPersonDetailsPhoneNumber_TextChanged);
             // 
             // panel4
             // 
@@ -440,7 +440,7 @@
             this.panel4.Location = new System.Drawing.Point(279, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(419, 65);
+            this.panel4.Size = new System.Drawing.Size(419, 60);
             this.panel4.TabIndex = 3;
             // 
             // panel7
@@ -465,7 +465,7 @@
             this.btnCloseEditPersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
             this.btnCloseEditPersonDetails.Location = new System.Drawing.Point(375, 3);
             this.btnCloseEditPersonDetails.Name = "btnCloseEditPersonDetails";
-            this.btnCloseEditPersonDetails.Size = new System.Drawing.Size(39, 41);
+            this.btnCloseEditPersonDetails.Size = new System.Drawing.Size(39, 36);
             this.btnCloseEditPersonDetails.TabIndex = 0;
             this.btnCloseEditPersonDetails.TabStop = false;
             this.btnCloseEditPersonDetails.UseVisualStyleBackColor = false;

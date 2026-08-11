@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlBody = new System.Windows.Forms.Panel();
@@ -51,6 +52,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlContent.SuspendLayout();
             this.pnlBody.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -59,6 +61,7 @@
             this.pnlInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picInfo)).BeginInit();
             this.pnlStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlContent
@@ -76,7 +79,7 @@
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlContent.Size = new System.Drawing.Size(482, 507);
+            this.pnlContent.Size = new System.Drawing.Size(482, 528);
             this.pnlContent.TabIndex = 0;
             // 
             // lblTitle
@@ -103,7 +106,7 @@
             this.pnlBody.Controls.Add(this.lblCategory);
             this.pnlBody.Location = new System.Drawing.Point(22, 68);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(435, 365);
+            this.pnlBody.Size = new System.Drawing.Size(435, 382);
             this.pnlBody.TabIndex = 14;
             // 
             // label3
@@ -111,7 +114,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(83, 176);
+            this.label3.Location = new System.Drawing.Point(83, 191);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(21, 25);
             this.label3.TabIndex = 14;
@@ -137,6 +140,7 @@
             this.txtSubCategory.Size = new System.Drawing.Size(398, 23);
             this.txtSubCategory.TabIndex = 4;
             this.txtSubCategory.Text = "\r\n";
+            this.txtSubCategory.TextChanged += new System.EventHandler(this.txtSubCategory_TextChanged);
             this.txtSubCategory.Enter += new System.EventHandler(this.txtSubCategory_Enter);
             this.txtSubCategory.Leave += new System.EventHandler(this.txtSubCategory_Leave);
             // 
@@ -190,7 +194,7 @@
             this.pnlInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.pnlInfo.Controls.Add(this.lblInfo);
             this.pnlInfo.Controls.Add(this.picInfo);
-            this.pnlInfo.Location = new System.Drawing.Point(17, 271);
+            this.pnlInfo.Location = new System.Drawing.Point(17, 286);
             this.pnlInfo.Name = "pnlInfo";
             this.pnlInfo.Size = new System.Drawing.Size(400, 76);
             this.pnlInfo.TabIndex = 7;
@@ -220,7 +224,7 @@
             // 
             this.pnlStatus.Controls.Add(this.rdInactive);
             this.pnlStatus.Controls.Add(this.rdActive);
-            this.pnlStatus.Location = new System.Drawing.Point(17, 212);
+            this.pnlStatus.Location = new System.Drawing.Point(17, 227);
             this.pnlStatus.Name = "pnlStatus";
             this.pnlStatus.Size = new System.Drawing.Size(302, 42);
             this.pnlStatus.TabIndex = 6;
@@ -256,7 +260,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(13, 176);
+            this.lblStatus.Location = new System.Drawing.Point(13, 191);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(64, 25);
             this.lblStatus.TabIndex = 5;
@@ -292,7 +296,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(113, 448);
+            this.btnCancel.Location = new System.Drawing.Point(113, 467);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(140, 41);
             this.btnCancel.TabIndex = 0;
@@ -311,7 +315,7 @@
             this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save;
-            this.btnSave.Location = new System.Drawing.Point(266, 448);
+            this.btnSave.Location = new System.Drawing.Point(266, 467);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(188, 41);
             this.btnSave.TabIndex = 1;
@@ -342,12 +346,16 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // CreditAddSubCategoryControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(482, 507);
+            this.ClientSize = new System.Drawing.Size(482, 528);
             this.Controls.Add(this.pnlContent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CreditAddSubCategoryControls";
@@ -368,6 +376,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picInfo)).EndInit();
             this.pnlStatus.ResumeLayout(false);
             this.pnlStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -397,5 +406,6 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblSubCategory;
         private System.Windows.Forms.Label lblCategory;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

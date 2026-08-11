@@ -56,5 +56,6 @@ BEGIN
         ON Task.TaskStatusID = TaskStatus.TaskStatusID  
   
     WHERE Task.UserID = @UserID  
-  
+    ORDER BY Task.CreatedAt DESC;
+
 END;

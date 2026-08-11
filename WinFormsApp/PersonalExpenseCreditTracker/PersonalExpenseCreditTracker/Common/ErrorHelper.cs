@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -95,6 +95,10 @@ namespace PersonalExpenseCreditTracker.Common
                     message = "* Please select a valid deadline.";
                     break;
 
+                case CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier:
+                    message = "* Return amount deadline must be today or an earlier date.";
+                    break;
+
                 case CommonValidator.ValidationResult.TaskTitleInvalid:
                     message = "* Please enter a valid task title.";
                     break;
@@ -143,24 +147,38 @@ namespace PersonalExpenseCreditTracker.Common
                     message = "* Please enter a valid person.";
                     break;
 
-                // Password field is empty
+
                 case CommonValidator.ValidationResult.CurrentPasswordEmpty:
+                    message = "* Current password is required.";
+                    break;
+
                 case CommonValidator.ValidationResult.NewPasswordEmpty:
+                    message = "* New password is required.";
+                    break;
+
                 case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
-                    errorProvider.SetError(textBox, "Password is required.");
-                    textBox.Focus();
+                    message = "* Confirm password is required.";
                     break;
 
-                // CurrentPassword And NewPassword Same
                 case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
-                    errorProvider.SetError(textBox, "Your current password and new password are same.");
-                    textBox.Focus();
+                    message = "* Your current password and new password are same.";
                     break;
 
-                // Not Match Password
                 case CommonValidator.ValidationResult.NotMatchPassword:
-                    errorProvider.SetError(textBox, "Password doesn't match.");
-                    textBox.Focus();
+                    message = "* Password doesn't match.";
+                    break;
+
+
+                case CommonValidator.ValidationResult.CategoryNameEmpty:
+                    message = "* Category name is required.";
+                    break;
+
+                case CommonValidator.ValidationResult.InvalidCategoryName:
+                    message = "* Please enter a valid Category name.";
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryInvalid:
+                    message = "* Please select valid Category.";
                     break;
             }
 
@@ -329,6 +347,16 @@ namespace PersonalExpenseCreditTracker.Common
             }
         }
 
-
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, Panel dtp1, Panel dtp2)
+        {
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.DateRangeInvalid:
+                    HideErrorForControl(dtp1);
+                    ShowErrorBelowControl(dtp2, "* From Date is greater than To Date.");
+                    dtp1.Focus();
+                    break;
+            }
+        }
     }
 }

@@ -24,6 +24,15 @@ EXEC spDeleteUserProfilePhotoByUserId
 GO
 
 -- ==========================================================
+-- SP: spGetUserCurrentPassword
+-- From File: ✔️spGetUserCurrentPassword.sql
+-- ==========================================================
+EXEC spGetUserCurrentPassword
+    @UserID = ''
+
+GO
+
+-- ==========================================================
 -- SP: spForgetPassword
 -- From File: ✔️spForgetPassword.sql
 -- ==========================================================
@@ -547,6 +556,7 @@ GO
 -- ==========================================================
 EXEC spInsertNewExpenseCategoryByUserID
     @UserID = '',
+    @ActiveStatus = '',
     @CategoryName = ''
 
 GO
@@ -558,6 +568,7 @@ GO
 EXEC spInsertNewExpenseSubCategoryByUserID
     @UserID = '',
     @CategoryID = '',
+    @ActiveStatus = '',
     @SubCategoryName = ''
 
 GO
@@ -591,6 +602,7 @@ GO
 EXEC spUpdateExpenseCategoryByUserID
     @UserID = '',
     @CategoryID = '',
+    @ActiveStatus = '',
     @CategoryName = ''
 
 GO

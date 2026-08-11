@@ -1,25 +1,25 @@
-CREATE PROCEDURE spGetExpenseSubCategoriesByUserID
+CREATE OR ALTER PROCEDURE spGetExpenseSubCategoriesByUserID
 (
     @UserID INT
 )
 AS
 BEGIN
-    SET NOCOUNT OFF
+    SET NOCOUNT OFF;
     
-    
+    -- Validate User
     IF NOT EXISTS
     (
         SELECT 1
         FROM tblUserAuthentication
         WHERE UserID = @UserID
-        AND Active = 1
+          AND Active = 1
     )
     BEGIN
-        SELECT 'Invalid or Inactive User' AS MESSAGE
-        RETURN
-    END
+        SELECT 'Invalid or Inactive User' AS Message;
+        RETURN;
+    END;
     
-    
+    -- Fetch Active Expense SubCategories for the User
     SELECT 
         SubCategoryID,
         CategoryID,
@@ -29,8 +29,8 @@ BEGIN
         IsActive
     FROM tblExpenseSubCategory
     WHERE IsActive = 1
-    AND (UserID IS NULL OR UserID = @UserID)
-    ORDER BY IsDefault DESC, SubCategoryName ASC
+      AND (UserID IS NULL OR UserID = @UserID)
+    ORDER BY IsDefault DESC, SubCategoryName ASC;
 
-END
+END;
 GO

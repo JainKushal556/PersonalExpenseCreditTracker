@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 {
@@ -65,9 +67,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void ExpenseAddSubCategoryControls_Load(object sender, EventArgs e)
         {
-            txtSubCategory.Text = "  Enter Sub Category Name";
+            txtSubCategory.Text = "Enter Sub Category Name";
             txtSubCategory.ForeColor = Color.Gray;
-            // ২. পাস করা Category Name-টি 'lblCategoryName' লেবেলে দেখানো
+
             if (!string.IsNullOrEmpty(SelectedCategoryName))
             {
                 lblCategoryName.Text = SelectedCategoryName;
@@ -79,7 +81,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         }
         private void txtSubCategory_Enter(object sender, EventArgs e)
         {
-            if (txtSubCategory.Text == "  Enter Sub Category Name")
+            if (txtSubCategory.Text == "Enter Sub Category Name")
             {
                 txtSubCategory.Text = "";
                 txtSubCategory.ForeColor = Color.Black;
@@ -89,7 +91,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             if (string.IsNullOrWhiteSpace(txtSubCategory.Text))
             {
-                txtSubCategory.Text = "  Enter Sub Category Name";
+                txtSubCategory.Text = "Enter Sub Category Name";
                 txtSubCategory.ForeColor = Color.Gray;
             }
         }
@@ -97,10 +99,46 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         //Save Button
         private void btnSave_Click(object sender, EventArgs e)
         {
+            CategoryUI categoryUI = new CategoryUI();
+
             AddedSubCategoryName = txtSubCategory.Text.Trim();
-            MessageBox.Show("Saved Expense SubCategory");
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+
+            categoryUI.UserId = Session.LogedInUser.GetUserId();
+            categoryUI.CategoryID = SelectedCategoryId;
+            categoryUI.CategoryName = SelectedCategoryName;
+            categoryUI.SubCategory = (txtSubCategory.Text == "Enter Sub Category Name") ? "" : txtSubCategory.Text.Trim();
+
+            categoryUI.IsActive = Convert.ToInt32(rdActive.Checked);
+            categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
+
+            CommonValidator.ValidationResult result = categoryUI.AddExpenseSubCategoryDataIntoCategoryUI();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Saved Expense Sub Category");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    ExpenseCategoryControls expenseCategoryControls = new ExpenseCategoryControls();
+                    expenseCategoryControls.LoadSubCategories();
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryNameEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.InvalidCategoryName:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    MessageBox.Show("Expense Sub Category Not Added.");
+                    break;
+            }
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -123,6 +161,14 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             if (rdActive.Checked)
                 rdInactive.Checked = false;
+        }
+
+        private void txtSubCategory_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSubCategory.Text != "Enter Sub Category Name" && !string.IsNullOrWhiteSpace(txtSubCategory.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtSubCategory);
+            }
         }
     }
 }

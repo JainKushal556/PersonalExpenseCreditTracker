@@ -7,14 +7,42 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Common;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 {
     public partial class CreditEditCategoryControls : Form
     {
-        public CreditEditCategoryControls()
+        public int SelectedCategoryId { get; set; }
+        public string SelectedCategoryName { get; set; }
+        bool isSubCategory1;
+
+        public CreditEditCategoryControls(int categoryId, string categoryName) : this(categoryId, categoryName, false)
+        {
+        }
+
+        public CreditEditCategoryControls(int categoryId, string categoryName, bool isSubCategory)
         {
             InitializeComponent();
+            SelectedCategoryId = categoryId;
+            SelectedCategoryName = categoryName;
+            isSubCategory1 = isSubCategory;
+
+            if (isSubCategory)
+            {
+                label1.Text = "Edit Credit Sub Category";
+                label2.Text = "Update the details of the selected credit sub category.";
+                lblCategoryName.Text = "Sub Category Name";
+                label4.Location = new System.Drawing.Point(162, 75);
+            }
+            else
+            {
+                label1.Text = "Edit Credit Category";
+                label2.Text = "Update the details of the selected credit category.";
+                lblCategoryName.Text = "Category Name";
+                label4.Location = new System.Drawing.Point(130, 75);
+            }
         }
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -56,8 +84,68 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void btnUpdateCategory_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Category Update Successfully");
-            this.Close();
+            CategoryUI categoryUI = new CategoryUI();
+
+            categoryUI.UserId = Session.LogedInUser.GetUserId();
+            categoryUI.CategoryID = SelectedCategoryId;
+            categoryUI.CategoryName = txtCategoryName.Text;
+
+            categoryUI.IsActive = Convert.ToInt32(rdobtnActive.Checked);
+            categoryUI.Inactive = Convert.ToInt32(rdobtnInactive.Checked);
+
+            CommonValidator.ValidationResult result;
+            string ErrorMsg;
+            if (isSubCategory1)
+            {
+                result = categoryUI.UpdateCreditSubCategoryDataIntoCategoryUI();
+                ErrorMsg = categoryUI.GetErrorMsg("spUpdateCreditSubCategoryByUserID", "@SubCategoryID", "@AvtiveStatus", "@SubCategoryName");
+            }
+            else
+            {
+                result = categoryUI.UpdateCreditCategoryDataIntoCategoryUI();
+                ErrorMsg = categoryUI.GetErrorMsg("spUpdateCreditCategoryByUserID", "@CategoryID", "@AvtiveStatus", "@CategoryName");
+            }
+            
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    if (isSubCategory1)
+                    {
+                        MessageBox.Show("Sub Category Update Successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Category Update Successfully");
+                    }
+                    
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
+                    break;
+
+                case CommonValidator.ValidationResult.CategoryNameEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
+                    break;
+
+                case CommonValidator.ValidationResult.InvalidCategoryName:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    if (!string.IsNullOrWhiteSpace(ErrorMsg))
+                        MessageBox.Show(ErrorMsg);
+                    else
+                        MessageBox.Show(
+                    isSubCategory1
+                        ? "Sub Category Not Updated."
+                        : "Category Not Updated."
+                        );
+                    break;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -94,9 +182,19 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void CreditEditCategoryControls_Load(object sender, EventArgs e)
         {
+            txtCategoryName.Text = SelectedCategoryName;
             rdobtnActive.Checked = true;
             SetRadius(btnCancel, 5);
             SetRadius(btnUpdateCategory, 5);
+            rdobtnActive.Checked = true;
+        }
+
+        private void txtCategoryName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtCategoryName.Text != "Edit Credit Sub Category" && !string.IsNullOrWhiteSpace(txtCategoryName.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtCategoryName);
+            }
         }
     }
 }

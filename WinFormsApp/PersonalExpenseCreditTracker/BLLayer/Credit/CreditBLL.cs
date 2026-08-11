@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DALayer.Credit;
 using BLLayer.Common;
 
@@ -13,6 +13,9 @@ namespace BLLayer.Credit
         public string amount { get; set; }
         public string description { get; set; }
         public int paymentId { get; set; }
+
+        public DateTime fromDate { get; set; }
+        public DateTime toDate { get; set; }
 
         private CreditDAL creditDal = new CreditDAL();
 
@@ -65,6 +68,18 @@ namespace BLLayer.Credit
             }
 
      
+        }
+
+        public CommonValidator.ValidationResult DateValidatorIntoCreditBll()
+        {
+            // Date Validation
+            result = CommonValidator.ValidateDateRange(fromDate, toDate);
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                return result;
+            }
+
+            return CommonValidator.ValidationResult.Success;
         }
     }
 }

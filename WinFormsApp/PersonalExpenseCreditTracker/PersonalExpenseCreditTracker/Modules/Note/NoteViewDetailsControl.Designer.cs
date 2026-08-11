@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlViewNoteDetails = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.pnlViewHeader = new System.Windows.Forms.Panel();
@@ -36,9 +37,6 @@
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlColor = new System.Windows.Forms.Panel();
             this.lblPriority = new System.Windows.Forms.Label();
-            this.pnlseparator5 = new System.Windows.Forms.Panel();
-            this.lblUpdatedDate = new System.Windows.Forms.Label();
-            this.lblUpdatedCaption = new System.Windows.Forms.Label();
             this.pnlseparator4 = new System.Windows.Forms.Panel();
             this.lblCreatedDate = new System.Windows.Forms.Label();
             this.lblCreatedCaption = new System.Windows.Forms.Label();
@@ -53,7 +51,6 @@
             this.pnlSeperator1 = new System.Windows.Forms.Panel();
             this.lblNoteTitle = new System.Windows.Forms.Label();
             this.lblTitleCaption = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlViewNoteDetails.SuspendLayout();
             this.pnlViewHeader.SuspendLayout();
             this.pnlBody.SuspendLayout();
@@ -74,8 +71,16 @@
             this.pnlViewNoteDetails.Margin = new System.Windows.Forms.Padding(0);
             this.pnlViewNoteDetails.Name = "pnlViewNoteDetails";
             this.pnlViewNoteDetails.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlViewNoteDetails.Size = new System.Drawing.Size(503, 595);
+            this.pnlViewNoteDetails.Size = new System.Drawing.Size(503, 546);
             this.pnlViewNoteDetails.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Location = new System.Drawing.Point(13, 54);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(475, 1);
+            this.panel1.TabIndex = 23;
             // 
             // btnClose
             // 
@@ -85,7 +90,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(367, 540);
+            this.btnClose.Location = new System.Drawing.Point(364, 490);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(120, 41);
             this.btnClose.TabIndex = 0;
@@ -130,9 +135,6 @@
             this.pnlBody.BackColor = System.Drawing.Color.White;
             this.pnlBody.Controls.Add(this.pnlColor);
             this.pnlBody.Controls.Add(this.lblPriority);
-            this.pnlBody.Controls.Add(this.pnlseparator5);
-            this.pnlBody.Controls.Add(this.lblUpdatedDate);
-            this.pnlBody.Controls.Add(this.lblUpdatedCaption);
             this.pnlBody.Controls.Add(this.pnlseparator4);
             this.pnlBody.Controls.Add(this.lblCreatedDate);
             this.pnlBody.Controls.Add(this.lblCreatedCaption);
@@ -149,11 +151,12 @@
             this.pnlBody.Controls.Add(this.lblTitleCaption);
             this.pnlBody.Location = new System.Drawing.Point(15, 68);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(471, 459);
+            this.pnlBody.Size = new System.Drawing.Size(471, 398);
             this.pnlBody.TabIndex = 22;
             // 
             // pnlColor
             // 
+            this.pnlColor.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pnlColor.BackColor = System.Drawing.Color.Orange;
             this.pnlColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlColor.Location = new System.Drawing.Point(24, 205);
@@ -163,49 +166,19 @@
             // 
             // lblPriority
             // 
-            this.lblPriority.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPriority.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblPriority.AutoSize = true;
             this.lblPriority.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPriority.ForeColor = System.Drawing.Color.Orange;
-            this.lblPriority.Location = new System.Drawing.Point(48, 204);
+            this.lblPriority.Location = new System.Drawing.Point(48, 203);
             this.lblPriority.Name = "lblPriority";
             this.lblPriority.Size = new System.Drawing.Size(67, 20);
             this.lblPriority.TabIndex = 20;
             this.lblPriority.Text = "Medium";
             // 
-            // pnlseparator5
-            // 
-            this.pnlseparator5.BackColor = System.Drawing.Color.Gainsboro;
-            this.pnlseparator5.Location = new System.Drawing.Point(13, 384);
-            this.pnlseparator5.Name = "pnlseparator5";
-            this.pnlseparator5.Size = new System.Drawing.Size(446, 1);
-            this.pnlseparator5.TabIndex = 15;
-            // 
-            // lblUpdatedDate
-            // 
-            this.lblUpdatedDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblUpdatedDate.AutoSize = true;
-            this.lblUpdatedDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpdatedDate.ForeColor = System.Drawing.Color.Blue;
-            this.lblUpdatedDate.Location = new System.Drawing.Point(25, 423);
-            this.lblUpdatedDate.Name = "lblUpdatedDate";
-            this.lblUpdatedDate.Size = new System.Drawing.Size(188, 20);
-            this.lblUpdatedDate.TabIndex = 17;
-            this.lblUpdatedDate.Text = "May 31, 2024   •   10:30 AM";
-            // 
-            // lblUpdatedCaption
-            // 
-            this.lblUpdatedCaption.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblUpdatedCaption.AutoSize = true;
-            this.lblUpdatedCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpdatedCaption.Location = new System.Drawing.Point(14, 393);
-            this.lblUpdatedCaption.Name = "lblUpdatedCaption";
-            this.lblUpdatedCaption.Size = new System.Drawing.Size(111, 23);
-            this.lblUpdatedCaption.TabIndex = 16;
-            this.lblUpdatedCaption.Text = "Last Updated";
-            // 
             // pnlseparator4
             // 
+            this.pnlseparator4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pnlseparator4.BackColor = System.Drawing.Color.Gainsboro;
             this.pnlseparator4.Location = new System.Drawing.Point(13, 307);
             this.pnlseparator4.Name = "pnlseparator4";
@@ -214,11 +187,11 @@
             // 
             // lblCreatedDate
             // 
-            this.lblCreatedDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCreatedDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblCreatedDate.AutoSize = true;
             this.lblCreatedDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreatedDate.ForeColor = System.Drawing.Color.Blue;
-            this.lblCreatedDate.Location = new System.Drawing.Point(20, 348);
+            this.lblCreatedDate.ForeColor = System.Drawing.Color.Black;
+            this.lblCreatedDate.Location = new System.Drawing.Point(20, 343);
             this.lblCreatedDate.Name = "lblCreatedDate";
             this.lblCreatedDate.Size = new System.Drawing.Size(192, 20);
             this.lblCreatedDate.TabIndex = 14;
@@ -226,10 +199,10 @@
             // 
             // lblCreatedCaption
             // 
-            this.lblCreatedCaption.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCreatedCaption.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblCreatedCaption.AutoSize = true;
             this.lblCreatedCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreatedCaption.Location = new System.Drawing.Point(14, 317);
+            this.lblCreatedCaption.Location = new System.Drawing.Point(14, 312);
             this.lblCreatedCaption.Name = "lblCreatedCaption";
             this.lblCreatedCaption.Size = new System.Drawing.Size(111, 23);
             this.lblCreatedCaption.TabIndex = 13;
@@ -237,6 +210,7 @@
             // 
             // pnlseparator3
             // 
+            this.pnlseparator3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pnlseparator3.BackColor = System.Drawing.Color.Gainsboro;
             this.pnlseparator3.Location = new System.Drawing.Point(13, 236);
             this.pnlseparator3.Name = "pnlseparator3";
@@ -245,11 +219,11 @@
             // 
             // lblColorName
             // 
-            this.lblColorName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblColorName.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblColorName.AutoSize = true;
             this.lblColorName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblColorName.ForeColor = System.Drawing.Color.Red;
-            this.lblColorName.Location = new System.Drawing.Point(50, 271);
+            this.lblColorName.ForeColor = System.Drawing.Color.Black;
+            this.lblColorName.Location = new System.Drawing.Point(50, 272);
             this.lblColorName.Name = "lblColorName";
             this.lblColorName.Size = new System.Drawing.Size(36, 20);
             this.lblColorName.TabIndex = 11;
@@ -257,10 +231,10 @@
             // 
             // lblDescriptionCaption
             // 
-            this.lblDescriptionCaption.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblDescriptionCaption.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblDescriptionCaption.AutoSize = true;
             this.lblDescriptionCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescriptionCaption.Location = new System.Drawing.Point(14, 86);
+            this.lblDescriptionCaption.Location = new System.Drawing.Point(14, 81);
             this.lblDescriptionCaption.Name = "lblDescriptionCaption";
             this.lblDescriptionCaption.Size = new System.Drawing.Size(96, 23);
             this.lblDescriptionCaption.TabIndex = 4;
@@ -268,6 +242,7 @@
             // 
             // pnlColorPreview
             // 
+            this.pnlColorPreview.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pnlColorPreview.BackColor = System.Drawing.Color.Red;
             this.pnlColorPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlColorPreview.Location = new System.Drawing.Point(24, 272);
@@ -277,10 +252,10 @@
             // 
             // lblColorCaption
             // 
-            this.lblColorCaption.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblColorCaption.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblColorCaption.AutoSize = true;
             this.lblColorCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblColorCaption.Location = new System.Drawing.Point(14, 242);
+            this.lblColorCaption.Location = new System.Drawing.Point(14, 237);
             this.lblColorCaption.Name = "lblColorCaption";
             this.lblColorCaption.Size = new System.Drawing.Size(94, 23);
             this.lblColorCaption.TabIndex = 9;
@@ -288,6 +263,7 @@
             // 
             // pnlseparator2
             // 
+            this.pnlseparator2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pnlseparator2.BackColor = System.Drawing.Color.Gainsboro;
             this.pnlseparator2.Location = new System.Drawing.Point(13, 167);
             this.pnlseparator2.Name = "pnlseparator2";
@@ -296,10 +272,10 @@
             // 
             // lblPriorityCaption
             // 
-            this.lblPriorityCaption.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPriorityCaption.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblPriorityCaption.AutoSize = true;
             this.lblPriorityCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPriorityCaption.Location = new System.Drawing.Point(14, 173);
+            this.lblPriorityCaption.Location = new System.Drawing.Point(14, 168);
             this.lblPriorityCaption.Name = "lblPriorityCaption";
             this.lblPriorityCaption.Size = new System.Drawing.Size(65, 23);
             this.lblPriorityCaption.TabIndex = 7;
@@ -307,11 +283,11 @@
             // 
             // lblDescription
             // 
-            this.lblDescription.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblDescription.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescription.ForeColor = System.Drawing.Color.Black;
-            this.lblDescription.Location = new System.Drawing.Point(24, 119);
+            this.lblDescription.Location = new System.Drawing.Point(24, 113);
             this.lblDescription.MaximumSize = new System.Drawing.Size(420, 0);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(419, 40);
@@ -321,6 +297,7 @@
             // 
             // pnlSeperator1
             // 
+            this.pnlSeperator1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pnlSeperator1.BackColor = System.Drawing.Color.Gainsboro;
             this.pnlSeperator1.Location = new System.Drawing.Point(13, 77);
             this.pnlSeperator1.Name = "pnlSeperator1";
@@ -329,11 +306,11 @@
             // 
             // lblNoteTitle
             // 
-            this.lblNoteTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblNoteTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblNoteTitle.AutoSize = true;
-            this.lblNoteTitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteTitle.ForeColor = System.Drawing.Color.Blue;
-            this.lblNoteTitle.Location = new System.Drawing.Point(22, 45);
+            this.lblNoteTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoteTitle.ForeColor = System.Drawing.Color.Black;
+            this.lblNoteTitle.Location = new System.Drawing.Point(22, 40);
             this.lblNoteTitle.Name = "lblNoteTitle";
             this.lblNoteTitle.Size = new System.Drawing.Size(85, 23);
             this.lblNoteTitle.TabIndex = 2;
@@ -341,29 +318,21 @@
             // 
             // lblTitleCaption
             // 
-            this.lblTitleCaption.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblTitleCaption.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitleCaption.AutoSize = true;
-            this.lblTitleCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitleCaption.Location = new System.Drawing.Point(14, 15);
+            this.lblTitleCaption.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitleCaption.Location = new System.Drawing.Point(14, 10);
             this.lblTitleCaption.Name = "lblTitleCaption";
-            this.lblTitleCaption.Size = new System.Drawing.Size(85, 23);
+            this.lblTitleCaption.Size = new System.Drawing.Size(90, 23);
             this.lblTitleCaption.TabIndex = 1;
             this.lblTitleCaption.Text = "Note Title";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(13, 54);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(475, 1);
-            this.panel1.TabIndex = 23;
             // 
             // NoteViewDetailsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(503, 595);
+            this.ClientSize = new System.Drawing.Size(503, 546);
             this.Controls.Add(this.pnlViewNoteDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimizeBox = false;
@@ -390,9 +359,6 @@
         private System.Windows.Forms.Label lblNoteTitle;
         private System.Windows.Forms.Panel pnlSeperator1;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label lblUpdatedDate;
-        private System.Windows.Forms.Label lblUpdatedCaption;
-        private System.Windows.Forms.Panel pnlseparator5;
         private System.Windows.Forms.Label lblCreatedDate;
         private System.Windows.Forms.Label lblCreatedCaption;
         private System.Windows.Forms.Panel pnlseparator4;

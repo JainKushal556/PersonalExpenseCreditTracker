@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,7 @@ namespace PersonalExpenseCreditTracker.Common
             "colRemainingAmount",
             "colDeadline"
         };
-        
+        public const decimal SqlAmountMax = 99999999.99m;
         private static string dateColumn = "";
 
 
@@ -200,6 +200,13 @@ namespace PersonalExpenseCreditTracker.Common
             return dataTable;
         }
 
+        public static DataTable RetrieveErrorCategoryDataIntoCategory(string spName, int userId, int paramId1, int paramId2, string paramName, string paramName1, string paramName2, string paramName3)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = CommonBllFunction.RetrieveErrorCategoryDataIntoCategory(spName, userId, paramId1, paramId2, paramName, paramName1, paramName2, paramName3);
+            return dataTable;
+        }
+
         // Retrieves filtered data by a date range from BLL layer
         public static DataTable RetrieveDataByUserIdAndFilterId(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
         {
@@ -268,13 +275,13 @@ namespace PersonalExpenseCreditTracker.Common
         {
             string search = txtBox.Text.Trim();
 
-            // সব cell reset
+            // সব cell reset (Revert to column default styles)
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 foreach (DataGridViewCell cell in row.Cells)
                 {
-                    cell.Style.BackColor = Color.White;
-                    cell.Style.ForeColor = Color.Black;
+                    cell.Style.BackColor = Color.Empty;
+                    cell.Style.ForeColor = Color.Empty;
                 }
             }
 
@@ -298,8 +305,8 @@ namespace PersonalExpenseCreditTracker.Common
                 {
                     if (dgv.Columns.Contains(NonHighlightableColumn))
                     {
-                        row.Cells[NonHighlightableColumn].Style.BackColor = Color.White;
-                        row.Cells[NonHighlightableColumn].Style.ForeColor = Color.Black;
+                        row.Cells[NonHighlightableColumn].Style.BackColor = Color.Empty;
+                        row.Cells[NonHighlightableColumn].Style.ForeColor = Color.Empty;
                     }
                 }
             }
@@ -317,8 +324,8 @@ namespace PersonalExpenseCreditTracker.Common
 
             masterTable.DefaultView.RowFilter = string.Format(
                 "NoteTitle LIKE '%{0}%' OR " +
-                "Description LIKE '%{0}%' OR " +
-                "NotePriorityName LIKE '%{0}%'",
+                "NotePriorityName LIKE '%{0}%' OR " +
+                "Convert(CreatedAt, 'System.String') LIKE '%{0}%'",
                 search);
 
             DataTable filteredTable = masterTable.DefaultView.ToTable();
@@ -338,13 +345,74 @@ namespace PersonalExpenseCreditTracker.Common
 
             masterTable.DefaultView.RowFilter = string.Format(
                 "TaskTitle LIKE '%{0}%' OR " +
-                "Description LIKE '%{0}%' OR " +
                 "TaskStatusName LIKE '%{0}%' OR " +
-                "TaskPriorityName LIKE '%{0}%'",
+                "PriorityName LIKE '%{0}%' OR " +
+                "Convert(CreatedAt, 'System.String') LIKE '%{0}%'",
                 search);
 
             DataTable filteredTable = masterTable.DefaultView.ToTable();
             return filteredTable;
+        }
+
+        public static DataTable SearchDataInPersons(DataTable masterTable, TextBox txtBox)
+        {
+            string search = txtBox.Text.Trim().Replace("'", "''");
+
+            if (masterTable == null) return null;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+
+            masterTable.DefaultView.RowFilter = string.Format(
+                "PersonName LIKE '%{0}%' OR " +
+                "PhoneNumber LIKE '%{0}%'",
+                search);
+
+            DataTable filteredTable = masterTable.DefaultView.ToTable();
+            return filteredTable;
+        }
+
+
+        public static void SetComboBoxHeightAndOwnerDraw(ComboBox comboBox)
+        {
+            comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBox.DrawItem += ComboBox_DrawItem;
+        }
+
+
+        private static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            ComboBox combo = sender as ComboBox;
+            if (combo == null) return;
+
+            e.DrawBackground();
+
+            Color textColor = Color.Black;
+            if (e.Index == 0)
+            {
+                textColor = Color.Gray;
+            }
+
+            Brush textBrush = new SolidBrush(textColor);
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textBrush = SystemBrushes.HighlightText;
+            }
+
+            string text = combo.GetItemText(combo.Items[e.Index]);
+            
+            using (StringFormat sf = new StringFormat())
+            {
+                sf.LineAlignment = StringAlignment.Center;
+                sf.Alignment = StringAlignment.Near;
+                Rectangle rect = new Rectangle(e.Bounds.X + 2, e.Bounds.Y, e.Bounds.Width - 2, e.Bounds.Height);
+                e.Graphics.DrawString(text, combo.Font, textBrush, rect, sf);
+            }
+
+            e.DrawFocusRectangle();
         }
     }
 }

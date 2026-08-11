@@ -6,10 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WinFormsSortOrder = System.Windows.Forms.SortOrder;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Common;
+using BLLayer.Common;
+using BLLayer.Borrow;
 //using PersonalExpenseCreditTracker.Modules.Borrow.PayBorrowAmountControls;
 
 
@@ -23,10 +26,23 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private int currentPage = 1;
         private int pageSize = 0;
         private int userID = Session.LogedInUser.GetUserId();
+        private string sortedColumn = "BorrowAt";
+        private System.Windows.Forms.SortOrder currentSortOrder = System.Windows.Forms.SortOrder.Descending;
+
+        private bool ignoreEvents { get; set; }
+        private int lastSelectedCategoryId { get; set; }
+        private int lastSelectedSubCategoryId { get; set; }
+
+        private DateTime fromDate { get; set; }
+        private DateTime toDate { get; set; }
+        private bool validFromDate { get; set; }
+        private bool validToDate { get; set; }
+        private static readonly string[] DateFormats = { "dd-MM-yyyy", "d-M-yyyy", "dd/MM/yyyy", "d/M/yyyy", "yyyy-MM-dd" };
         public BorrowControls()
         {
             InitializeComponent();
             StyleBorrowGrid();
+
             dgvBorrowDataTable.AutoGenerateColumns = false;
             dgvBorrowDataTable.CellDoubleClick += dgvBorrowDataTable_CellDoubleClick;
 
@@ -119,15 +135,46 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void BorrowControls_Load(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+
+            CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", cmbPerson);
+            CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbPayment);
+            CommonUiFunction.LoadInComboBox("spGetAllLentBorrowStatus", "Select Status", cmbStatus);
+
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPerson);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPayment);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbStatus);
+
+            cmbPerson.ForeColor = Color.Gray;
+            cmbPayment.ForeColor = Color.Gray;
+            cmbStatus.ForeColor = Color.Gray;
+
+            cmbPerson.SelectedIndexChanged += cmbPerson_SelectedIndexChanged;
+            cmbPayment.SelectedIndexChanged += cmbPayment_SelectedIndexChanged;
+            cmbStatus.SelectedIndexChanged += cmbStatus_SelectedIndexChanged;
+
+            btnRefresh.Click += btnRefresh_Click;
+
             ApplyRoundCorners();
             dgvBorrowDataTable.CellPainting += dgvBorrowDataTable_CellPainting;
             pageSize = GetRowsPerPage();
             int userID = Session.LogedInUser.GetUserId();
             LoadBorrowData(userID);
             HideAllFilterPanels();
+           //ShowSearchPanel(pnlSearch);
+            pnlSearch.Visible = true;
             DesignContextMenu();
             cmsFilter.Opening += cmsFilter_Opening;
-
+            RegisterMouseDown(this);
+            txtFromdate.ReadOnly = true;
+            txtToDate.ReadOnly = true;
+            monthCalendarToDate.MaxDate = DateTime.Today;
+            monthCalendarFromDate.MaxDate = DateTime.Today;
+            ignoreEvents = false;
         }
 
         private void cmsFilter_Opening(object sender, CancelEventArgs e)
@@ -174,6 +221,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
                         AllBorrowData = dt;
                         masterData = dt.Copy();
+                        sortedColumn = "BorrowAt";
+                        currentSortOrder = System.Windows.Forms.SortOrder.Descending;
+                        ApplyBorrowSort();
+
                         currentPage = 1;
                         ShowCurrentPage();
                     }
@@ -197,7 +248,16 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                                 MessageBoxIcon.Information);
                 return false;
             }
+            if (dataTable.Rows.Count <= 0)
+            {
+                MessageBox.Show("No Record Found",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
             AllBorrowData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -217,9 +277,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
             if (dataTable.Rows.Count <= 0)
             {
+                MessageBox.Show("No Record Found",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
                 return false;
             }
             AllBorrowData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -239,9 +304,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             }
             if (dataTable.Rows.Count <= 0)
             {
+                MessageBox.Show("No Record Found",
+                                "Information",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
                 return false;
             }
             AllBorrowData = dataTable;
+            masterData = dataTable.Copy();
             currentPage = 1;
             ShowCurrentPage();
             return true;
@@ -338,6 +408,80 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             colDescription.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
+        private void dgvBorrowDataTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            if (e.ColumnIndex < 0)
+                return;
+
+            DataGridViewColumn column = dgvBorrowDataTable.Columns[e.ColumnIndex];
+
+            string columnName = column.DataPropertyName;
+
+            //  sortable columns
+            if (columnName != "BorrowAt" &&
+                columnName != "PersonID" &&
+                columnName != "PersonName" &&
+                columnName != "PaymentName" &&
+                columnName != "StatusName" &&
+                columnName != "Amount" &&
+                columnName != "PaidAmount" &&
+                columnName != "RemainingAmount" &&
+                columnName != "DeadlineAt" &&
+                columnName != "Description")
+            {
+                return;
+            }
+
+            // Same column click ASC <-> DESC
+            if (sortedColumn == columnName)
+            {
+                currentSortOrder =
+                    currentSortOrder == WinFormsSortOrder.Ascending
+                    ? WinFormsSortOrder.Descending
+                    : WinFormsSortOrder.Ascending;
+            }
+            else
+            {
+
+                sortedColumn = columnName;
+                currentSortOrder = WinFormsSortOrder.Ascending;
+            }
+
+            ApplyBorrowSort();
+
+            currentPage = 1;
+
+            ShowCurrentPage();
+        }
+
+
+
+        private void ApplyBorrowSort()
+        {
+            if (string.IsNullOrEmpty(sortedColumn) ||
+                currentSortOrder == WinFormsSortOrder.None)
+                return;
+
+            if (AllBorrowData == null ||
+                AllBorrowData.Rows.Count == 0)
+                return;
+
+            if (!AllBorrowData.Columns.Contains(sortedColumn))
+                return;
+
+            DataView view = AllBorrowData.DefaultView;
+
+            string direction =
+                currentSortOrder == WinFormsSortOrder.Ascending
+                ? "ASC"
+                : "DESC";
+
+            view.Sort =
+                "[" + sortedColumn + "] " + direction;
+
+            AllBorrowData = view.ToTable();
+        }
         private void ShowCurrentPage()
         {
             DataTable pageTable = AllBorrowData.Clone();
@@ -445,30 +589,28 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
         {
-            e.Paint(e.CellBounds,
-                DataGridViewPaintParts.Background |
-                DataGridViewPaintParts.Border);
-
+            e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
             int iconSize = 16;
-            int spacing = 4;
+            int spacing = 6;
 
             SizeF textSize = e.Graphics.MeasureString(text, e.CellStyle.Font);
 
             int totalWidth = iconSize + spacing + (int)textSize.Width;
 
             int startX = e.CellBounds.X + (e.CellBounds.Width - totalWidth) / 2;
+
             int iconY = e.CellBounds.Y + (e.CellBounds.Height - iconSize) / 2;
 
             e.Graphics.DrawImage(icon, startX, iconY, iconSize, iconSize);
 
-            using (Brush brush = new SolidBrush(Color.FromArgb(80, 60, 180)))
+            using (Brush brush =
+                new SolidBrush(Color.FromArgb(80, 60, 180)))
             {
-                e.Graphics.DrawString(
-                    text,
-                    e.CellStyle.Font,
-                    brush,
-                    startX + iconSize + spacing,
-                    e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2);
+                float textX = startX + iconSize + spacing;
+
+                float textY = e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2;
+
+                e.Graphics.DrawString(text, e.CellStyle.Font, brush, textX, textY);
             }
 
             e.Handled = true;
@@ -610,7 +752,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             pnlDateFilter.Visible = false;
             pnlAmountFilter.Visible = false;
-            pnlSearch.Visible = false;
+           
             pnlPaymentFilter.Visible = false;
             pnlPersonFilter.Visible = false;
             pnlStatusFilter.Visible = false;
@@ -648,24 +790,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
 
 
-        private void ShowSearchPanel(Panel panel)
-        {
-            HideAllFilterPanels();
 
-            panel.Parent = this;
-
-
-            Point p = btnSerach.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
-            panel.Location = new Point(
-                p.X + btnSerach.Width + 10,
-                p.Y
-            );
-
-            panel.BringToFront();
-            panel.Visible = true;
-        }
        
 
         private void tsmiDate_Click_1(object sender, EventArgs e)
@@ -692,29 +817,21 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             ShowFilterPanel(pnlPaymentFilter);
         }
-        private void btnSerach_Click(object sender, EventArgs e)
-        {
-            ShowSearchPanel(pnlSearch);
-        }
 
-        private void pnlCategoryFilter_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            pnlSearch.Visible = false;
-        }
-
-        //private void btnDateClose_Click(object sender, EventArgs e)
-        //{
-        //    pnlDateFilter.Visible = false;
-        //}
 
         private void btncategoryClose_Click(object sender, EventArgs e)
         {
             pnlAmountFilter.Visible = false;
+            ignoreEvents = true;
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+            ignoreEvents = false;
+
+            pnlAmountFilter.Visible = false;
+
+            LoadBorrowData(Session.LogedInUser.GetUserId());
         }
 
         private void DesignContextMenu()
@@ -729,14 +846,33 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             tsmiAmount.AutoSize = false;
             tsmiAmount.Height = 30;
 
+            tsmiPerson.AutoSize = false;
+            tsmiPerson.Height = 30;
+
+            tsmiPayment.AutoSize = false;
+            tsmiPayment.Height = 30;
+
+            tsmiStatus.AutoSize = false;
+            tsmiStatus.Height = 30;
+
             tsmiDate.Image = Properties.Resources.calendar;
             tsmiAmount.Image = Properties.Resources.shop;
+            tsmiPayment.Image = Properties.Resources.credit_card1;
+            tsmiPerson.Image = Properties.Resources.PersonIcon;
+            tsmiStatus.Image = Properties.Resources.loading;
 
             tsmiDate.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
             tsmiAmount.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiPerson.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiPayment.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            tsmiStatus.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+
 
             tsmiDate.ImageScaling = ToolStripItemImageScaling.None;
             tsmiAmount.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiPerson.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiPayment.ImageScaling = ToolStripItemImageScaling.None;
+            tsmiStatus.ImageScaling = ToolStripItemImageScaling.None;
 
 
         }
@@ -748,16 +884,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void ShowCalenderFromDatePanel(Panel panel)
         {
             HidePopupPanels();
-
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
-
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width-300 ,
-                p.Y +35);
-
+            Point p = txtFromdate.PointToScreen(
+                      new Point(0, txtFromdate.Height + 10));
+            p = this.PointToClient(p);
+            panel.Location = p;
             panel.BringToFront();
             panel.Visible = true;
         }
@@ -778,9 +909,22 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // From Date Calendar
             if (pnlFromDateCalenderShow.Visible)
             {
-                if (!pnlFromDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderFromDate.RectangleToScreen(picCalenderFromDate.ClientRectangle)
-                        .Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlFromDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderFromDate.RectangleToScreen(
+                        picCalenderFromDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtFromdate.RectangleToScreen(
+                        txtFromdate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlFromDateCalenderShow.Visible = false;
                 }
@@ -789,9 +933,22 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // To Date Calendar
             if (pnlToDateCalenderShow.Visible)
             {
-                if (!pnlToDateCalenderShow.Bounds.Contains(mousePos) &&
-                    !picCalenderToDate.RectangleToScreen(picCalenderToDate.ClientRectangle)
-                        .Contains(Control.MousePosition))
+                bool clickInsideCalendar =
+                    pnlToDateCalenderShow.Bounds.Contains(mousePos);
+
+                bool clickOnCalendarIcon =
+                    picCalenderToDate.RectangleToScreen(
+                        picCalenderToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                bool clickOnTextBox =
+                    txtToDate.RectangleToScreen(
+                        txtToDate.ClientRectangle)
+                        .Contains(Control.MousePosition);
+
+                if (!clickInsideCalendar &&
+                    !clickOnCalendarIcon &&
+                    !clickOnTextBox)
                 {
                     pnlToDateCalenderShow.Visible = false;
                 }
@@ -812,14 +969,14 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             HidePopupPanels();
 
-            Point p = pnlDateFilter.PointToScreen(Point.Empty);
-            p = this.PointToClient(p);
-
             panel.Parent = this;
 
-            panel.Location = new Point(
-                p.X + pnlDateFilter.Width - panel.Width-70,
-                p.Y +35);
+            Point p = txtToDate.PointToScreen(
+                new Point(0, txtToDate.Height + 10));
+
+            p = this.PointToClient(p);
+
+            panel.Location = p;
 
             panel.BringToFront();
             panel.Visible = true;
@@ -859,39 +1016,585 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnDateClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+
+            txtFromdate.Clear();
+            txtToDate.Clear();
+
+            this.fromDate = DateTime.MinValue;
+            this.toDate = DateTime.MinValue;
+            this.validFromDate = false;
+            this.validToDate = false;
+
+            pnlFromDateCalenderShow.Visible = false;
+            pnlToDateCalenderShow.Visible = false;
+            errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlFromDate);
+            ErrorHelper.HideErrorForControl(pnlToDate);
+
             pnlDateFilter.Visible = false;
+
+            ignoreEvents = false;
+            LoadBorrowData(Session.LogedInUser.GetUserId());
         }
 
         private void btnPersonClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+            cmbPerson.SelectedIndex = 0;
+            cmbPerson.ForeColor = Color.Gray;
+            ignoreEvents = false;
             pnlPersonFilter.Visible = false;
+            LoadBorrowData(Session.LogedInUser.GetUserId());
         }
 
         private void btnStatusClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+            cmbStatus.SelectedIndex = 0;
+            cmbStatus.ForeColor = Color.Gray;
+            ignoreEvents = false;
             pnlStatusFilter.Visible = false;
+            LoadBorrowData(Session.LogedInUser.GetUserId());
         }
 
         private void btnPaymentClose_Click(object sender, EventArgs e)
         {
+            ignoreEvents = true;
+            cmbPayment.SelectedIndex = 0;
+            cmbPayment.ForeColor = Color.Gray;
+            ignoreEvents = false;
             pnlPaymentFilter.Visible = false;
+            LoadBorrowData(Session.LogedInUser.GetUserId());
         }
-       
 
-        private void monthCalendarToDate_DateChanged_1(object sender, DateRangeEventArgs e)
+        private void cmbPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+            if (ignoreEvents) return;
+            int personId;
+            if (cmbPerson.SelectedValue != null && int.TryParse(cmbPerson.SelectedValue.ToString(), out personId))
+            {
+                if (personId > 0)
+                {
+                    cmbPerson.ForeColor = Color.Black;
+                    if (!LoadFilteredBorrowtData("spFilterBorrowByPerson", "@PersonID", personId))
+                    {
+                        ignoreEvents = true;
+                        cmbPerson.SelectedIndex = 0;
+                        cmbPerson.ForeColor = Color.Gray;
+                        ignoreEvents = false;
+                        LoadBorrowData(Session.LogedInUser.GetUserId());
+                    }
+                }
+                else
+                {
+                    cmbPerson.ForeColor = Color.Gray;
+                    LoadBorrowData(Session.LogedInUser.GetUserId());
+                }
+            }
         }
 
-         private void monthCalendarFromDate_DateChanged_1(object sender, DateRangeEventArgs e)
-         {
-             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
-         }
+        private void cmbPayment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            int paymentId;
+            if (cmbPayment.SelectedValue != null && int.TryParse(cmbPayment.SelectedValue.ToString(), out paymentId))
+            {
+                if (paymentId > 0)
+                {
+                    cmbPayment.ForeColor = Color.Black;
+                    if (!LoadFilteredBorrowtData("spFilterBorrowByPaymentMethod", "@PaymentID", paymentId))
+                    {
+                        ignoreEvents = true;
+                        cmbPayment.SelectedIndex = 0;
+                        cmbPayment.ForeColor = Color.Gray;
+                        ignoreEvents = false;
+                        LoadBorrowData(Session.LogedInUser.GetUserId());
+                    }
+                }
+                else
+                {
+                    cmbPayment.ForeColor = Color.Gray;
+                    LoadBorrowData(Session.LogedInUser.GetUserId());
+                }
+            }
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreEvents) return;
+            int statusId;
+            if (cmbStatus.SelectedValue != null && int.TryParse(cmbStatus.SelectedValue.ToString(), out statusId))
+            {
+                if (statusId > 0)
+                {
+                    cmbStatus.ForeColor = Color.Black;
+                    if (!LoadFilteredBorrowtData("spFilterBorrowByStatus", "@StatusID", statusId))
+                    {
+                        ignoreEvents = true;
+                        cmbStatus.SelectedIndex = 0;
+                        cmbStatus.ForeColor = Color.Gray;
+                        ignoreEvents = false;
+                        LoadBorrowData(Session.LogedInUser.GetUserId());
+                    }
+                }
+                else
+                {
+                    cmbStatus.ForeColor = Color.Gray;
+                    LoadBorrowData(Session.LogedInUser.GetUserId());
+                }
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            HideAllFilterPanels();
+            HidePopupPanels();
+            ignoreEvents = true;
+            txtFromdate.Clear();
+            txtToDate.Clear();
+            txtMinAmount.Text = "Enter Amount";
+            txtMinAmount.ForeColor = Color.Gray;
+            txtMaxAmount.Text = "Enter Amount";
+            txtMaxAmount.ForeColor = Color.Gray;
+            if (cmbPerson.Items.Count > 0)
+            {
+                cmbPerson.SelectedIndex = 0;
+                cmbPerson.ForeColor = Color.Gray;
+            }
+            if (cmbPayment.Items.Count > 0)
+            {
+                cmbPayment.SelectedIndex = 0;
+                cmbPayment.ForeColor = Color.Gray;
+            }
+            if (cmbStatus.Items.Count > 0)
+            {
+                cmbStatus.SelectedIndex = 0;
+                cmbStatus.ForeColor = Color.Gray;
+            }
+            txtSearch.Clear();
+            ignoreEvents = false;
+            currentPage = 1;
+            LoadBorrowData(Session.LogedInUser.GetUserId());
+            this.Refresh();
+        }
 
          private void txtSearch_TextChanged(object sender, EventArgs e)
          {
              AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
              ShowCurrentPage();
          }
+
+         private void cmbPayment_Click(object sender, EventArgs e)
+         {
+             cmbPayment.DroppedDown = true;
+         }
+
+         private void cmbPayment_Enter(object sender, EventArgs e)
+         {
+             if (cmbPayment.SelectedIndex <= 0)
+                 cmbPayment.ForeColor = Color.Black;
+         }
+
+         private void cmbPayment_Leave(object sender, EventArgs e)
+         {
+             if (cmbPayment.SelectedIndex <= 0)
+             {
+                 cmbPayment.ForeColor = Color.Gray;
+             }
+             else
+             {
+                 cmbPayment.ForeColor = Color.Black;
+             }
+         }
+
+         private void cmbStatus_Click(object sender, EventArgs e)
+         {
+             cmbStatus.DroppedDown = true;
+         }
+
+         private void cmbStatus_Enter(object sender, EventArgs e)
+         {
+             if (cmbStatus.SelectedIndex <= 0)
+                 cmbStatus.ForeColor = Color.Black;
+         }
+
+         private void cmbStatus_Leave(object sender, EventArgs e)
+         {
+             if (cmbStatus.SelectedIndex <= 0)
+             {
+                 cmbStatus.ForeColor = Color.Gray;
+             }
+             else
+             {
+                 cmbStatus.ForeColor = Color.Black;
+             }
+         }
+
+         private void cmbPerson_Click(object sender, EventArgs e)
+         {
+             cmbPerson.DroppedDown = true;
+         }
+
+         private void cmbPerson_Enter(object sender, EventArgs e)
+         {
+             if (cmbPerson.SelectedIndex <= 0)
+                 cmbPerson.ForeColor = Color.Black;
+         }
+
+         private void cmbPerson_Leave(object sender, EventArgs e)
+         {
+             if (cmbPerson.SelectedIndex <= 0)
+             {
+                 cmbPerson.ForeColor = Color.Gray;
+             }
+             else
+             {
+                 cmbPerson.ForeColor = Color.Black;
+             }
+         }
+
+         private void txtMinAmount_Enter(object sender, EventArgs e)
+         {
+             if (txtMinAmount.Text == "Enter Amount")
+             {
+                 txtMinAmount.Text = "";
+                 txtMinAmount.ForeColor = Color.Black;
+
+             }
+         }
+
+         private void txtMinAmount_Leave(object sender, EventArgs e)
+         {
+             if (string.IsNullOrWhiteSpace(txtMinAmount.Text))
+             {
+                 txtMinAmount.Text = "Enter Amount";
+                 txtMinAmount.ForeColor = Color.Gray;
+             }
+             ExecuteAmountFilter();
+         }
+         private void ExecuteAmountFilter()
+         {
+             if (ignoreEvents) return;
+
+             string minStr = txtMinAmount.Text.Trim();
+             string maxStr = txtMaxAmount.Text.Trim();
+
+             bool isMinProvided = !string.IsNullOrWhiteSpace(minStr) && minStr != "Enter Amount";
+             bool isMaxProvided = !string.IsNullOrWhiteSpace(maxStr) && maxStr != "Enter Amount";
+
+             if (!isMinProvided && !isMaxProvided)
+             {
+                 LoadBorrowData(Session.LogedInUser.GetUserId());
+                 return;
+             }
+
+             decimal minValue = 0m;
+             decimal maxValue = Common.CommonUiFunction.SqlAmountMax;
+
+             if (isMinProvided)
+             {
+                 if (!decimal.TryParse(minStr, out minValue) || minValue < 0)
+                 {
+                     MessageBox.Show("Please enter a valid numeric Minimum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     ResetAmountFilterInputsAndReloadData();
+                     return;
+                 }
+             }
+
+             if (isMaxProvided)
+             {
+                 if (!decimal.TryParse(maxStr, out maxValue) || maxValue < 0)
+                 {
+                     MessageBox.Show("Please enter a valid numeric Maximum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     ResetAmountFilterInputsAndReloadData();
+                     return;
+                 }
+             }
+
+             if (minValue > maxValue)
+             {
+                 MessageBox.Show("Minimum Amount cannot be greater than Maximum Amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                 ResetAmountFilterInputsAndReloadData();
+                 return;
+             }
+
+             ApplyAmountFilter(minValue, maxValue);
+         }
+         private void ApplyAmountFilter(decimal minValue, decimal maxValue)
+         {
+             //if (!LoadFilteredBorrowData("spFilterCreditByAmountRange", Session.LogedInUser.GetUserId(), "@MinAmount", minValue, "@MaxAmount", maxValue))
+             if(!LoadFilteredBorowData("spFilterBorrowByAmountRange",Session.LogedInUser.GetUserId(),"@MinAmount",minValue,"@MaxAmount",maxValue))
+             {
+                 ResetAmountFilterInputsAndReloadData();
+             }
+         }
+
+         private void ResetAmountFilterInputsAndReloadData()
+         {
+             ignoreEvents = true;
+             txtMinAmount.Text = "Enter Amount";
+             txtMinAmount.ForeColor = Color.Gray;
+             txtMaxAmount.Text = "Enter Amount";
+             txtMaxAmount.ForeColor = Color.Gray;
+             ignoreEvents = false;
+
+             LoadBorrowData(Session.LogedInUser.GetUserId());
+             
+         }
+         private void txtMaxAmount_Enter(object sender, EventArgs e)
+         {
+             if (txtMaxAmount.Text == "Enter Amount")
+             {
+                 txtMaxAmount.Text = "";
+                 txtMaxAmount.ForeColor = Color.Black;
+             }
+         }
+
+         private void txtMaxAmount_Leave(object sender, EventArgs e)
+         {
+             if (string.IsNullOrWhiteSpace(txtMaxAmount.Text))
+             {
+                 txtMaxAmount.Text = "Enter Amount";
+                 txtMaxAmount.ForeColor = Color.Gray;
+             }
+         }
+
+         private void txtFromdate_Click(object sender, EventArgs e)
+         {
+             if (pnlFromDateCalenderShow.Visible)
+             {
+                 pnlFromDateCalenderShow.Visible = false;
+             }
+             else
+             {
+                 ShowCalenderFromDatePanel(pnlFromDateCalenderShow);
+             }
+         }
+
+         private void txtToDate_Click(object sender, EventArgs e)
+         {
+             if (pnlToDateCalenderShow.Visible)
+             {
+                 pnlToDateCalenderShow.Visible = false;
+             }
+             else
+             {
+                 ShowCalenderToDatePanel(pnlToDateCalenderShow);
+             }
+         }
+
+         private void monthCalendarToDate_DateSelected(object sender, DateRangeEventArgs e)
+         {
+             toDate = e.Start.Date;
+             txtToDate.Text = e.Start.ToString("dd-MM-yyyy");
+             pnlToDateCalenderShow.Visible = false;
+         }
+
+         private void txtToDate_TextChanged(object sender, EventArgs e)
+         {
+             if (ignoreEvents) return;
+            errorProvider1.Clear();
+             ErrorHelper.HideErrorForControl(pnlFromDate);
+             ErrorHelper.HideErrorForControl(pnlToDate);
+
+             if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+             {
+                 this.toDate = DateTime.MinValue;
+                 return;
+             }
+
+             DateTime parsedToDate;
+             if (!DateTime.TryParseExact(
+                     txtToDate.Text.Trim(),
+                     DateFormats,
+                     System.Globalization.CultureInfo.InvariantCulture,
+                     System.Globalization.DateTimeStyles.None,
+                     out parsedToDate))
+             {
+                 return;
+             }
+
+             this.toDate = parsedToDate;
+
+             if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+             {
+                 return;
+             }
+
+             DateTime parsedFromDate;
+             if (DateTime.TryParseExact(
+                     txtFromdate.Text.Trim(),
+                     DateFormats,
+                     System.Globalization.CultureInfo.InvariantCulture,
+                     System.Globalization.DateTimeStyles.None,
+                     out parsedFromDate))
+             {
+                 this.fromDate = parsedFromDate;
+             }
+
+             //CreditBLL creditBll = new CreditBLL();
+             //creditBll.fromDate = this.fromDate;
+             //creditBll.toDate = this.toDate;
+
+             BorrowBLL borrowBll = new BorrowBLL();
+             borrowBll.fromDate = this.fromDate;
+             borrowBll.toDate = this.toDate;
+
+             CommonValidator.ValidationResult result = borrowBll.DateValidatorIntoBorrowBll();
+
+             switch (result)
+             {
+                 case CommonValidator.ValidationResult.Success:
+                     validFromDate = true;
+                     if (!LoadFilteredBorrowData(
+                             "spFilterBorrowByDateRange",
+                             Session.LogedInUser.GetUserId(),
+                             "@FromDate",
+                             this.fromDate,
+                             "@ToDate",
+                             this.toDate))
+                     {
+                         ignoreEvents = true;
+                         txtFromdate.Clear();
+                         txtToDate.Clear();
+                         ignoreEvents = false;
+                         this.fromDate = DateTime.MinValue;
+                         this.toDate = DateTime.MinValue;
+
+                         LoadBorrowData(Session.LogedInUser.GetUserId());
+                     }
+                     break;
+
+                 case CommonValidator.ValidationResult.DateRangeInvalid:
+                     validFromDate = false;
+                     ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                     MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     ignoreEvents = true;
+                     txtFromdate.Clear();
+                     txtToDate.Clear();
+                     ignoreEvents = false;
+                     this.fromDate = DateTime.MinValue;
+                     this.toDate = DateTime.MinValue;
+                     LoadBorrowData(Session.LogedInUser.GetUserId());
+                     break;
+             }
+         }
+
+         private void monthCalendarFromDate_DateSelected(object sender, DateRangeEventArgs e)
+         {
+             fromDate = e.Start.Date;
+             txtFromdate.Text = e.Start.ToString("dd-MM-yyyy");
+             pnlFromDateCalenderShow.Visible = false;
+         }
+
+         private void txtFromdate_TextChanged(object sender, EventArgs e)
+         {
+             if (ignoreEvents) return;
+             errorProvider1.Clear();
+             ErrorHelper.HideErrorForControl(pnlFromDate);
+             ErrorHelper.HideErrorForControl(pnlToDate);
+
+             if (string.IsNullOrWhiteSpace(txtFromdate.Text) || txtFromdate.Text == "Select Date")
+             {
+                 this.fromDate = DateTime.MinValue;
+                 return;
+             }
+
+             DateTime parsedFromDate;
+             if (!DateTime.TryParseExact(
+                     txtFromdate.Text.Trim(),
+                     DateFormats,
+                     System.Globalization.CultureInfo.InvariantCulture,
+                     System.Globalization.DateTimeStyles.None,
+                     out parsedFromDate))
+             {
+                 return;
+             }
+
+             this.fromDate = parsedFromDate;
+
+             if (string.IsNullOrWhiteSpace(txtToDate.Text) || txtToDate.Text == "Select Date")
+             {
+                 ignoreEvents = true;
+                 DateTime defaultToDate = this.fromDate > DateTime.Today ? this.fromDate : DateTime.Today;
+                 txtToDate.Text = defaultToDate.ToString("dd-MM-yyyy");
+                 ignoreEvents = false;
+                 this.toDate = defaultToDate;
+             }
+             else
+             {
+                 DateTime parsedToDate;
+                 if (DateTime.TryParseExact(
+                         txtToDate.Text.Trim(),
+                         DateFormats,
+                         System.Globalization.CultureInfo.InvariantCulture,
+                         System.Globalization.DateTimeStyles.None,
+                         out parsedToDate))
+                 {
+                     this.toDate = parsedToDate;
+                 }
+             }
+
+             BorrowBLL borrowBll = new BorrowBLL();
+             borrowBll.fromDate = this.fromDate;
+             borrowBll.toDate = this.toDate;
+
+             CommonValidator.ValidationResult result = borrowBll.DateValidatorIntoBorrowBll();
+
+             switch (result)
+             {
+                 case CommonValidator.ValidationResult.Success:
+                     validFromDate = true;
+                     if (!LoadFilteredBorrowData(
+                             "spFilterBorrowByDateRange",
+                             Session.LogedInUser.GetUserId(),
+                             "@FromDate",
+                             this.fromDate,
+                             "@ToDate",
+                             this.toDate))
+                     {
+                         ignoreEvents = true;
+                         txtFromdate.Clear();
+                         txtToDate.Clear();
+                         ignoreEvents = false;
+                         this.fromDate = DateTime.MinValue;
+                         this.toDate = DateTime.MinValue;
+
+                         LoadBorrowData(Session.LogedInUser.GetUserId());
+                     }
+                     break;
+
+                 case CommonValidator.ValidationResult.DateRangeInvalid:
+                     validFromDate = false;
+                     ErrorHelper.ShowValidationError(result, errorProvider1, pnlFromDate, pnlToDate);
+                     MessageBox.Show("From Date cannot be greater than To Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     ignoreEvents = true;
+                     txtFromdate.Clear();
+                     txtToDate.Clear();
+                     ignoreEvents = false;
+                     this.fromDate = DateTime.MinValue;
+                     this.toDate = DateTime.MinValue;
+                     LoadBorrowData(Session.LogedInUser.GetUserId());
+                     break;
+             }
+         }
+
+         private void txtMinAmount_KeyDown(object sender, KeyEventArgs e)
+         {
+             if (e.KeyCode == Keys.Enter)
+             {
+                 ExecuteAmountFilter();
+             }
+         }
+
+         private void txtMaxAmount_KeyDown(object sender, KeyEventArgs e)
+         {
+             if (e.KeyCode == Keys.Enter)
+             {
+                 ExecuteAmountFilter();
+             }
+         }
+
     }
 }

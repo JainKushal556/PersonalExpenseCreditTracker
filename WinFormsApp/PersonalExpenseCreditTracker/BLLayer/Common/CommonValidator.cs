@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +26,7 @@ namespace BLLayer.Common
             AmountTooLarge,
 
             DeadlineInvalid,
+            ReturnAmountDeadlineMustBeTodayOrEarlier,
 
             DescriptionInvalid,
             DescriptionTooShort,
@@ -55,6 +56,13 @@ namespace BLLayer.Common
             AddressInvalid,
             DateOfBirthInvalid,
             GenderInvalid,
+
+            //Category Validation
+            InvalidCategoryName,
+            CategoryNameEmpty,
+            CategoryError,
+
+            //Password Validation
             CurrentAndNewPasswordSame,
             CurrentPasswordEmpty,
             NewPasswordEmpty,
@@ -119,6 +127,23 @@ namespace BLLayer.Common
 
             if (personName.Length < 3)
                 return ValidationResult.PersonNameInvalid;
+
+            return ValidationResult.Success;
+        }
+
+        //CategoryName Validation
+        public static ValidationResult ValidationCategoryName(string CategoryName)
+        {
+            if (string.IsNullOrWhiteSpace(CategoryName))
+                return ValidationResult.CategoryNameEmpty;
+
+            if (!Regex.IsMatch(CategoryName, @"^[A-Za-z]+(?:[ &'/-][A-Za-z]+)*$"))
+                return ValidationResult.InvalidCategoryName;
+
+            CategoryName = CategoryName.Trim();
+
+            if (CategoryName.Length < 3)
+                return ValidationResult.InvalidCategoryName;
 
             return ValidationResult.Success;
         }
@@ -239,6 +264,23 @@ namespace BLLayer.Common
             }
 
             return ValidationResult.DeadlineInvalid;
+        }
+
+        public static ValidationResult ValidateDeadlineReturnAmount(DateTime deadline)
+        {
+     
+            if (deadline == DateTime.MinValue)
+            {
+                return ValidationResult.DeadlineInvalid;
+            }
+
+         
+            if (deadline.Date <= DateTime.Today)
+            {
+                return ValidationResult.Success;
+            }
+
+            return ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier;
         }
 
         //Description Validation
@@ -437,7 +479,7 @@ namespace BLLayer.Common
             {
                 noteTitle = noteTitle.Trim();
 
-                if (noteTitle.Length >= 3)
+                if (noteTitle.Length >= 5)
                 {
                     if (noteTitle.Length <= 150)
                     {
@@ -450,15 +492,15 @@ namespace BLLayer.Common
         }
 
         // Color Validation
-        public static ValidationResult ValidateColor(int colorId)
-        {
-            if (colorId > 0)
-            {
-                return ValidationResult.Success;
-            }
+        //public static ValidationResult ValidateColor(int colorId)
+        //{
+        //    if (colorId > 0)
+        //    {
+        //        return ValidationResult.Success;
+        //    }
 
-            return ValidationResult.ColorInvalid;
-        }
+        //    return ValidationResult.ColorInvalid;
+        //}
         
     }
 }
