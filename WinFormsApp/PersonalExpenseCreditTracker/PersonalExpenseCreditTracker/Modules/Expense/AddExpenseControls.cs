@@ -387,7 +387,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     else
                     {
                         cmbAddExpenseSubCategory.SelectedIndex = 0;
-                        cmbAddExpenseSubCategory.ForeColor = Color.Gray;
+                        cmbAddExpenseSubCategory.ForeColor = Color.Black;
                     }
 
                     ignoreEvents = false;
@@ -467,13 +467,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                         else
                         {
                             cmbAddExpenseCategory.SelectedIndex = 0;
-                            cmbAddExpenseCategory.ForeColor = Color.Gray;
+                            cmbAddExpenseCategory.ForeColor = Color.Black;
                         }
                     }
                     else
                     {
                         cmbAddExpenseCategory.SelectedIndex = 0;
-                        cmbAddExpenseCategory.ForeColor = Color.Gray;
+                        cmbAddExpenseCategory.ForeColor = Color.Black;
                     }
 
                     if (newSelectedCategoryId > 0)
