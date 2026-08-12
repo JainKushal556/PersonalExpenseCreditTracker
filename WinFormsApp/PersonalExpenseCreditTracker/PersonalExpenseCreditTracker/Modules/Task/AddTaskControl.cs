@@ -75,6 +75,48 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtTaskTitle.ForeColor = Color.Gray;
 
             CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select the Proiority", cmbPriority);
+
+            cmbPriority.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbPriority.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+             
+                if (cmbPriority.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbPriority);
+                    return true; 
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void SelectComboBoxSuggestion(ComboBox cmb)
+        {
+            if (!string.IsNullOrWhiteSpace(cmb.Text))
+            {
+               
+                int index = cmb.FindStringExact(cmb.Text);
+
+                if (index == -1)
+                {
+                    index = cmb.FindString(cmb.Text);
+                }
+
+             
+                if (index != -1)
+                {
+                    cmb.SelectedIndex = index;
+                    cmb.SelectionStart = cmb.Text.Length;
+                }
+            }
+
+            cmb.DroppedDown = false;
         }
 
         private void txtTaskTitle_Enter(object sender, EventArgs e)
