@@ -30,6 +30,10 @@ namespace PersonalExpenseCreditTracker
     {
         private Panel lastOpenedPage = null;
 
+        //private Panel activeSettingSubMenu = null;
+        private Panel previousSettingSubMenu = null; // <-- এই লাইনটি যোগ করুন
+
+
         // Sidebar Smooth Scroll er Target Position
         private int targetTop = 0;
 
@@ -530,8 +534,12 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlDashboard_MouseEnter(object sender, EventArgs e)
         {
-            pnlDashboard.BackColor = Color.FromArgb(59, 130, 246);
-            picDashboard.Image = Properties.Resources.home_white;
+            //pnlDashboard.BackColor = Color.FromArgb(59, 130, 246);
+            if (activePanel != pnlDashboard)
+            {
+                pnlDashboard.BackColor = Color.FromArgb(30, 41, 59);
+                picDashboard.Image = Properties.Resources.home_white;
+            }
 
         }
 
@@ -545,17 +553,22 @@ namespace PersonalExpenseCreditTracker
         }
 
 
-        //pnlExpense Function
         private void pnlExpense_MouseEnter(object sender, EventArgs e)
         {
-            pnlExpense.BackColor = Color.FromArgb(59, 130, 246);
-            picExpense.Image = Properties.Resources.wallet_filled_money_tool;
+            if (activePanel != pnlExpense || expenseOpen)
+            {
+                pnlExpense.BackColor = Color.FromArgb(30, 41, 59);
+                picExpense.Image = Properties.Resources.wallet_filled_money_tool;
+            }
         }
 
         private void pnlExpense_MouseLeave(object sender, EventArgs e)
         {
-            pnlExpense.BackColor = Color.FromArgb(15, 23, 42);
-            picExpense.Image = Properties.Resources.wallet_filled_money_tool1;
+            if (activePanel != pnlExpense || expenseOpen)
+            {
+                pnlExpense.BackColor = Color.FromArgb(15, 23, 42);
+                picExpense.Image = Properties.Resources.wallet_filled_money_tool1;
+            }
         }
 
         private void pnlExpense_Click(object sender, EventArgs e)
@@ -581,17 +594,19 @@ namespace PersonalExpenseCreditTracker
             {
                 expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
             }
-          
 
             ShowPage(pnlExpensePage);
 
+            
             SetActiveMenu(pnlExpense, false);
+
             bool wasOpen = expenseOpen;
 
             CloseAllDropDown();
 
             if (!wasOpen)
             {
+              
                 pnlExpenseDropDown.Visible = true;
                 picExpenseArrow.Image = Properties.Resources.arrowhead_up;
                 pnlTop.Visible = true;
@@ -601,17 +616,20 @@ namespace PersonalExpenseCreditTracker
             }
             else
             {
+              
                 pnlExpenseDropDown.Visible = false;
                 picExpenseArrow.Image = Properties.Resources.down;
                 expenseOpen = false;
+
+                SetActiveMenu(pnlExpense, true);
             }
+
             RefreshSidebarScroll();
             ExpandSidebar();
             dateOpen = false;
             amountOpen = false;
-            categoryOpen = false;
-
         }
+
 
         public void OpenExpenseCategorySettings()
         {
@@ -623,15 +641,22 @@ namespace PersonalExpenseCreditTracker
         //pnlCredit all Function
         private void pnlCredit_MouseEnter(object sender, EventArgs e)
         {
-            pnlCredit.BackColor = Color.FromArgb(59, 130, 246);
-            picCredit.Image = Properties.Resources.credit_card_white;
+            if (activePanel != pnlCredit || creditOpen)
+            {
+                pnlCredit.BackColor = Color.FromArgb(30, 41, 59);
+                picCredit.Image = Properties.Resources.credit_card_white;
+            }
         }
 
         private void pnlCredit_MouseLeave(object sender, EventArgs e)
         {
-            pnlCredit.BackColor = Color.FromArgb(15, 23, 42);
-            picCredit.Image = Properties.Resources.credit_card;
+            if (activePanel != pnlCredit || creditOpen)
+            {
+                pnlCredit.BackColor = Color.FromArgb(15, 23, 42);
+                picCredit.Image = Properties.Resources.credit_card;
+            }
         }
+
 
         private void pnlCredit_Click(object sender, EventArgs e)
         {
@@ -660,8 +685,6 @@ namespace PersonalExpenseCreditTracker
             ShowPage(pnlCreditPage);
 
           
-
-
             SetActiveMenu(pnlCredit, false);
 
             bool wasOpen = creditOpen;
@@ -670,6 +693,7 @@ namespace PersonalExpenseCreditTracker
 
             if (!wasOpen)
             {
+                
                 pnlCreditDropDown.Visible = true;
                 picCreditArrow.Image = Properties.Resources.arrowhead_up;
                 pnlTop.Visible = true;
@@ -679,10 +703,14 @@ namespace PersonalExpenseCreditTracker
             }
             else
             {
+                
                 pnlCreditDropDown.Visible = false;
                 picCreditArrow.Image = Properties.Resources.down;
                 creditOpen = false;
+
+                SetActiveMenu(pnlCredit, true); 
             }
+
             RefreshSidebarScroll();
             ExpandSidebar();
 
@@ -691,22 +719,29 @@ namespace PersonalExpenseCreditTracker
             creditCategoryOpen = false;
 
             pnlCreditFilterContant.Visible = true;
-
         }
+
 
         //pnlLent all Function
 
         private void pnlLent_MouseEnter(object sender, EventArgs e)
         {
-            pnlLent.BackColor = Color.FromArgb(59, 130, 246);
-            picLent.Image = Properties.Resources.payment_white;
+            if (activePanel != pnlLent || lentOpen)
+            {
+                pnlLent.BackColor = Color.FromArgb(30, 41, 59);
+                picLent.Image = Properties.Resources.payment_white;
+            }
         }
 
         private void pnlLent_MouseLeave(object sender, EventArgs e)
         {
-            pnlLent.BackColor = Color.FromArgb(15, 23, 42);
-            picLent.Image = Properties.Resources.payment_lent1;
+            if (activePanel != pnlLent || lentOpen)
+            {
+                pnlLent.BackColor = Color.FromArgb(15, 23, 42);
+                picLent.Image = Properties.Resources.payment_lent1;
+            }
         }
+
 
         private void pnlLent_Click(object sender, EventArgs e)
         {
@@ -732,11 +767,12 @@ namespace PersonalExpenseCreditTracker
 
             bool wasOpen = lentOpen;
 
+            SetActiveMenu(pnlLent, false); 
             CloseAllDropDown();
-            SetActiveMenu(pnlLent, false);
 
             if (!wasOpen)
             {
+                
                 pnlLentDropDown.Visible = true;
                 lentOpen = true;
                 picLentArrow.Image = Properties.Resources.arrowhead_up;
@@ -746,9 +782,12 @@ namespace PersonalExpenseCreditTracker
             }
             else
             {
+               
                 pnlLentDropDown.Visible = false;
                 lentOpen = false;
                 picLentArrow.Image = Properties.Resources.down;
+
+                SetActiveMenu(pnlLent, true); 
             }
 
             RefreshSidebarScroll();
@@ -759,29 +798,34 @@ namespace PersonalExpenseCreditTracker
             lentPersonOpen = false;
             lentStatusOpen = false;
             lentPaymentOpen = false;
-
-            pnlLentFilterContant.Visible = true;
-          
         }
+
 
         //pnlBorrow Function
         private void pnlBorrow_MouseEnter(object sender, EventArgs e)
         {
-            pnlBorrow.BackColor = Color.FromArgb(59, 130, 246);
-            picBorrow.Image = Properties.Resources.borrowing_white;
+            if (activePanel != pnlBorrow || borrowOpen)
+            {
+                pnlBorrow.BackColor = Color.FromArgb(30, 41, 59);
+                picBorrow.Image = Properties.Resources.borrowing_white;
+            }
         }
 
         private void pnlBorrow_MouseLeave(object sender, EventArgs e)
         {
-            pnlBorrow.BackColor = Color.FromArgb(15, 23, 42);
-            picBorrow.Image = Properties.Resources.borrowing;
+            if (activePanel != pnlBorrow || borrowOpen)
+            {
+                pnlBorrow.BackColor = Color.FromArgb(15, 23, 42);
+                picBorrow.Image = Properties.Resources.borrowing;
+            }
         }
+
 
         private void pnlBorrow_Click(object sender, EventArgs e)
         {
             UpdateHeader(
              "Borrow",
-               "Track and manage money you have borrowed from others");
+                "Track and manage money you have borrowed from others");
 
             if (borrowControls == null || borrowControls.IsDisposed)
             {
@@ -795,17 +839,20 @@ namespace PersonalExpenseCreditTracker
                 pnlBorrowPage.Controls.Add(borrowControls);
 
                 borrowControls.Show();
-
             }
 
             ShowPage(pnlBorrowPage);
+
+            // ১. আগের মেনুর ব্লু হাইলাইট ক্লিয়ার করবে
             SetActiveMenu(pnlBorrow, false);
+
             bool wasOpen = borrowOpen;
 
             CloseAllDropDown();
 
             if (!wasOpen)
             {
+                
                 pnlBorrowDropDown.Visible = true;
                 picBorrowArrow.Image = Properties.Resources.arrowhead_up;
                 pnlTop.Visible = true;
@@ -815,48 +862,50 @@ namespace PersonalExpenseCreditTracker
             }
             else
             {
+               
                 pnlBorrowDropDown.Visible = false;
                 picBorrowArrow.Image = Properties.Resources.down;
                 borrowOpen = false;
+
+                SetActiveMenu(pnlBorrow, true); 
             }
 
             RefreshSidebarScroll();
             ExpandSidebar();
-
 
             borrowDateOpen = false;
             borrowAmountOpen = false;
             borrowPersonOpen = false;
             borrowStatusOpen = false;
             borrowPaymentOpen = false;
-
-          
-            pnlBorrowFilterContant.Visible = true;
-
-
         }
+
 
         // pnlTasks all Function
         private void pnlTasks_MouseEnter(object sender, EventArgs e)
         {
-            pnlTasks.BackColor = Color.FromArgb(59, 130, 246);
-            picTasks.Image = Properties.Resources.task__white;
+            if (activePanel != pnlTasks || taskOpen)
+            {
+                pnlTasks.BackColor = Color.FromArgb(30, 41, 59);
+                picTasks.Image = Properties.Resources.task__white;
+            }
         }
 
         private void pnlTasks_MouseLeave(object sender, EventArgs e)
         {
-            pnlTasks.BackColor = Color.FromArgb(15, 23, 42);
-            picTasks.Image = Properties.Resources.task;
+            if (activePanel != pnlTasks || taskOpen)
+            {
+                pnlTasks.BackColor = Color.FromArgb(15, 23, 42);
+                picTasks.Image = Properties.Resources.task;
+            }
         }
+
 
         private void pnlTasks_Click(object sender, EventArgs e)
         {
-
             UpdateHeader(
                  "Tasks",
                  "Organize and track your tasks efficiently");
-
-            SetActiveMenu(pnlTasks, false);
 
             if (taskControl == null || taskControl.IsDisposed)
             {
@@ -873,26 +922,34 @@ namespace PersonalExpenseCreditTracker
                 taskControl.Show();
             }
 
+            ShowPage(pnlTaskPage);
+
+            // ১. আগের মেনুর ব্লু হাইলাইট ক্লিয়ার করবে
+            SetActiveMenu(pnlTasks, false);
+
             bool wasOpen = taskOpen;
 
             CloseAllDropDown();
 
             if (!wasOpen)
             {
+                
                 pnlTaskDropDown.Visible = true;
                 picTasksArrow.Image = Properties.Resources.arrowhead_up;
                 pnlTop.Visible = true;
                 taskOpen = true;
+
                 SetActiveTaskSubMenu(pnlAllTask);
             }
             else
             {
+                
                 pnlTaskDropDown.Visible = false;
                 picTasksArrow.Image = Properties.Resources.down;
                 taskOpen = false;
-            }
 
-            ShowPage(pnlTaskPage);
+                SetActiveMenu(pnlTasks, true); 
+            }
 
             RefreshSidebarScroll();
             ExpandSidebar();
@@ -902,28 +959,35 @@ namespace PersonalExpenseCreditTracker
             taskPriorityOpen = false;
 
             pnlTaskFilterContant.Visible = true;
-
         }
+
 
 
         //Notes Function 
         private void pnlNotes_MouseEnter(object sender, EventArgs e)
         {
-            pnlNotes.BackColor = Color.FromArgb(59, 130, 246);
-            picNotes.Image = Properties.Resources.pencil__2_;
+            if (activePanel != pnlNotes || notesOpen)
+            {
+                pnlNotes.BackColor = Color.FromArgb(30, 41, 59);
+                picNotes.Image = Properties.Resources.pencil__2_;
+            }
         }
 
         private void pnlNotes_MouseLeave(object sender, EventArgs e)
         {
-            pnlNotes.BackColor = Color.FromArgb(15, 23, 42);
-            picNotes.Image = Properties.Resources.pencil;
+            if (activePanel != pnlNotes || notesOpen)
+            {
+                pnlNotes.BackColor = Color.FromArgb(15, 23, 42);
+                picNotes.Image = Properties.Resources.pencil;
+            }
         }
+
 
         private void pnlNotes_Click(object sender, EventArgs e)
         {
             UpdateHeader(
-     "Notes",
-     "Capture your thoughts and keep everything organized");
+                "Notes",
+                "Capture your thoughts and keep everything organized");
 
             if (noteControl == null || noteControl.IsDisposed)
             {
@@ -944,25 +1008,18 @@ namespace PersonalExpenseCreditTracker
                 noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
             }
 
-            pnlOverview.Visible = false;
-            pnlExpensePage.Visible = false;
-            pnlCreditPage.Visible = false;
-            pnlLentPage.Visible = false;
-            pnlBorrowPage.Visible = false;
-            pnlTaskPage.Visible = false;
-            pnlNotesPage.Visible = true;
-            pnlSettingPage.Visible = false;
-            pnlProfilePage.Visible = false;
+            ShowPage(pnlNotesPage);
 
+           
             SetActiveMenu(pnlNotes, false);
+
             bool wasOpen = notesOpen;
 
             CloseAllDropDown();
 
-
-
             if (!wasOpen)
             {
+                
                 pnlNotesDropDown.Visible = true;
                 picNotesArrow.Image = Properties.Resources.arrowhead_up;
                 pnlTop.Visible = true;
@@ -972,12 +1029,13 @@ namespace PersonalExpenseCreditTracker
             }
             else
             {
+                
                 pnlNotesDropDown.Visible = false;
                 picNotesArrow.Image = Properties.Resources.down;
                 notesOpen = false;
-            }
 
-            ShowPage(pnlNotesPage);
+                SetActiveMenu(pnlNotes, true); 
+            }
 
             RefreshSidebarScroll();
             ExpandSidebar();
@@ -987,15 +1045,20 @@ namespace PersonalExpenseCreditTracker
             notePriorityOpen = false;
 
             pnlNoteFilterContant.Visible = true;
-
         }
+
         //Setting Function
 
 
         private void pnlSettings_MouseEnter(object sender, EventArgs e)
         {
-            pnlSettings.BackColor = Color.FromArgb(59, 130, 246);
-            picSettings.Image = Properties.Resources.cogwheel__1_;
+
+
+            if (activePanel != pnlSettings)
+            {
+                pnlSettings.BackColor = Color.FromArgb(30, 41, 59);
+                picSettings.Image = Properties.Resources.cogwheel__1_;
+            }
         }
 
         private void pnlSettings_MouseLeave(object sender, EventArgs e)
@@ -1765,7 +1828,7 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlSettingExpenseCategories_Click(object sender, EventArgs e)
         {
-
+            
 
             UpdateHeader(
                 "Expense Category",
@@ -1863,18 +1926,35 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlLogout_Click(object sender, EventArgs e)
         {
+            
+            previousSettingSubMenu = activeSettingSubMenu;
+
             SetActiveSettingSubMenu(pnlLogout);
             pnlTop.Visible = false;
 
-
             PersonLogOutControls personLogOutControls = new PersonLogOutControls();
+
+            personLogOutControls.FormClosed += Logout_FormClosed;
+
             personLogOutControls.Show();
 
             RefreshSidebarScroll();
             ExpandSidebar();
-
-
         }
+
+        private void Logout_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           
+            if (previousSettingSubMenu != null)
+            {
+                SetActiveSettingSubMenu(previousSettingSubMenu);
+            }
+            else
+            {
+                SetActiveSettingSubMenu(pnlSettingExpenseCategories);
+            }
+        }
+
 
         private void pnlLogout_MouseEnter(object sender, EventArgs e)
         {
@@ -1901,13 +1981,28 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlSettingChangesPassword_Click(object sender, EventArgs e)
         {
+            previousSettingSubMenu = activeSettingSubMenu;
             SetActiveSettingSubMenu(pnlSettingChangesPassword);
 
             ChangePasswordControls changePasswordControls = new ChangePasswordControls();
+            changePasswordControls.FormClosed += ChangePassword_FormClosed; 
             changePasswordControls.Show();
             RefreshSidebarScroll();
             ExpandSidebar();
         }
+
+        private void ChangePassword_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (previousSettingSubMenu != null)
+            {
+                SetActiveSettingSubMenu(previousSettingSubMenu);
+            }
+            else
+            {
+                SetActiveSettingSubMenu(pnlSettingExpenseCategories);
+            }
+        }
+
 
         private void pnlSettingChangesPassword_MouseEnter(object sender, EventArgs e)
         {
@@ -1974,6 +2069,8 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveLentSubMenu(pnlAllLent);
         }
+
+      
 
        
     }

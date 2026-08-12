@@ -380,8 +380,7 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.DrawMode = DrawMode.OwnerDrawFixed;
             comboBox.DrawItem += ComboBox_DrawItem;
         }
-
-
+       
         private static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
@@ -414,5 +413,47 @@ namespace PersonalExpenseCreditTracker.Common
 
             e.DrawFocusRectangle();
         }
+
+        public static void SetComboBoxHeightAndOwnerDraw1(ComboBox comboBox)
+        {
+            comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBox.DrawItem -= ComboBox_DrawItem1;
+            comboBox.DrawItem += ComboBox_DrawItem1;
+        }
+
+        private static void ComboBox_DrawItem1(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            ComboBox combo = sender as ComboBox;
+            if (combo == null) return;
+
+            e.DrawBackground();
+
+            string text = combo.GetItemText(combo.Items[e.Index]);
+
+            Color textColor = (e.Index == 0) ? Color.Gray : Color.Black;
+
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                textColor = SystemColors.HighlightText;
+            }
+
+
+            Rectangle rect = new Rectangle(e.Bounds.X + 4, e.Bounds.Y, e.Bounds.Width - 4, e.Bounds.Height);
+            TextRenderer.DrawText(
+                e.Graphics,
+                text,
+                combo.Font,
+                rect,
+                textColor,
+                TextFormatFlags.Left | TextFormatFlags.VerticalCenter
+            );
+
+            e.DrawFocusRectangle();
+        }
+
+
     }
 }
