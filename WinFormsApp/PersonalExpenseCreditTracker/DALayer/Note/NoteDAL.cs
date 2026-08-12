@@ -128,5 +128,39 @@ namespace DALayer.Note
             }
         }
 
+
+        public Boolean FindDuplicateNoteTitleIntoDB()
+        {
+            string connectionString = Common.SqlHelper.connectionString;
+            SqlConnection sqlConnection = null;
+            bool isDuplicate = false;
+
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                using (SqlCommand sqlCommand = new SqlCommand("spCheckDuplicateNoteTitle", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@UserID", this.userId);
+                    sqlCommand.Parameters.AddWithValue("@NoteID", this.noteId);
+                    sqlCommand.Parameters.AddWithValue("@NoteTitle", this.noteTitle);
+
+                    sqlConnection.Open();
+                    isDuplicate = Convert.ToBoolean(sqlCommand.ExecuteScalar());
+                    return isDuplicate;
+                }
+            }
+            catch (Exception)
+            {
+                return isDuplicate;
+            }
+            finally
+            {
+                if (sqlConnection != null)
+                    sqlConnection.Close();
+            }
+        }
+
+
     }
 }

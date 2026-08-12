@@ -201,6 +201,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                     this.Close();
                     break;
 
+                case CommonValidator.ValidationResult.TaskTitleAlreadyExists:
+                    ErrorHelper.ShowErrorBelowControl(txtTaskTitle, "* Task with this title already exists.");
+                    break;
                 case CommonValidator.ValidationResult.TaskTitleInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtTaskTitle);
                     break;

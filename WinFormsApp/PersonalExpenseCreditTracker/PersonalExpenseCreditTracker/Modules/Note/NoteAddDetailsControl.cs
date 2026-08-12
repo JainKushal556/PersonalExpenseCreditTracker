@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -146,7 +146,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             noteUi.noteId = -1;
 
             // If the placeholder text is still present, pass an empty string
-            noteUi.noteTitle = (txtNoteTitle.Text == "Enter title") ? "" : txtNoteTitle.Text;
+            noteUi.noteTitle = (txtNoteTitle.Text == "Enter title") ? "" : txtNoteTitle.Text.Trim();
             noteUi.description = (rtxtDescription.Text == "Enter description") ? "" : rtxtDescription.Text;
             noteUi.priorityId = selectedPriorityId;
             noteUi.colorId = selectedColorId;
@@ -167,6 +167,10 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 case CommonValidator.ValidationResult.NoteTitleInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtNoteTitle);
                     break;
+                case CommonValidator.ValidationResult.NoteTitleAlreadyExists:
+                    ErrorHelper.ShowErrorBelowControl(txtNoteTitle, "* Note with this title already exists.");
+                    break;
+
                 case CommonValidator.ValidationResult.DescriptionInvalid:
                     ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description is required.");
                     break;
