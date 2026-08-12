@@ -51,11 +51,65 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", "+ Add New Cetegory", cmbAddCreditCategory);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddCreditPaymentType);
             cmbAddCreditPaymentType.MouseClick += (s, ev) => { cmbAddCreditPaymentType.DroppedDown = true; };
+
+            cmbAddCreditCategory.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbAddCreditCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbAddCreditSubCategory.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbAddCreditSubCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbAddCreditPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbAddCreditPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(cmbAddCreditCategory);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(cmbAddCreditSubCategory);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(cmbAddCreditPaymentType);
+
             ignoreEvents = false;
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (cmbAddCreditCategory.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbAddCreditCategory);
+                    return true;
+                }
+                else if (cmbAddCreditSubCategory.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbAddCreditSubCategory);
+                    return true;
+                }
+                else if (cmbAddCreditPaymentType.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbAddCreditPaymentType);
+                    return true;
+                }
+            }
 
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
-        // All Border Cornar Radius
+        private void SelectComboBoxSuggestion(ComboBox cmb)
+        {
+            if (!string.IsNullOrWhiteSpace(cmb.Text))
+            {
+                int index = cmb.FindStringExact(cmb.Text);
+                if (index == -1)
+                {
+                    index = cmb.FindString(cmb.Text);
+                }
+
+                if (index != -1)
+                {
+                    cmb.SelectedIndex = index;
+                    cmb.SelectionStart = cmb.Text.Length;
+                }
+            }
+
+            cmb.DroppedDown = false;
+        }
+
         private void SetRadius(Control control, int radius)
         {
             if (control.Width <= 0 || control.Height <= 0)
