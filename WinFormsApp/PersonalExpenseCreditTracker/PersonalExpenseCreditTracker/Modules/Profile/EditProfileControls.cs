@@ -104,6 +104,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         private void txtEditProfileFullName_Click(object sender, EventArgs e)
         {
             pnlEditProfileFullName.BorderStyle = BorderStyle.FixedSingle;
+            panelProfileCalenderShow.Visible = false;
         }
         private void pnlEditProfileDathOfBirth_Leave(object sender, EventArgs e)
         {
@@ -121,6 +122,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         private void txtEditProfileEmailAddress_Click(object sender, EventArgs e)
         {
             pnlEditProfileEmailAddress.BorderStyle = BorderStyle.FixedSingle;
+            panelProfileCalenderShow.Visible = false;
         }
         private void pnlEditProfilePhoneNumber_Leave(object sender, EventArgs e)
         {
@@ -129,6 +131,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         private void txtEditProfilePhoneNumber_Click(object sender, EventArgs e)
         {
             pnlEditProfilePhoneNumber.BorderStyle = BorderStyle.FixedSingle;
+            panelProfileCalenderShow.Visible = false;
         }
         private void cmbEditProfileGender_Leave(object sender, EventArgs e)
         {
@@ -137,11 +140,13 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         private void cmbEditProfileGender_Enter(object sender, EventArgs e)
         {
             pnlEditProfileGender.BorderStyle = BorderStyle.FixedSingle;
+            panelProfileCalenderShow.Visible = false;
         }
        
         private void txtEditProfileAddress_Click(object sender, EventArgs e)
         {
             txtEditProfileAddress.BorderStyle = BorderStyle.FixedSingle;
+            panelProfileCalenderShow.Visible = false;
         }
 
         private void btnCancelEditProfile_Click(object sender, EventArgs e)
@@ -150,7 +155,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         }
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-           
+            panelProfileCalenderShow.Visible = false;
 
             ProfileUI profileUi = new ProfileUI();
 
@@ -293,6 +298,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         private void txtEditProfileDathOfBirth_Leave(object sender, EventArgs e)
         {
             pnlEditProfileDathOfBirth.BorderStyle = BorderStyle.None;
+            panelProfileCalenderShow.Visible = false;
         }
 
         private void txtEditProfileDathOfBirth_TextChanged(object sender, EventArgs e)
@@ -375,6 +381,13 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         {
             ErrorHelper.HideErrorForControl(txtEditProfileAddress);
         }
+
+        private void pnlEditProfileMainBody_Click(object sender, EventArgs e)
+        {
+            panelProfileCalenderShow.Visible = false;
+        }
+
+      
 
        
        

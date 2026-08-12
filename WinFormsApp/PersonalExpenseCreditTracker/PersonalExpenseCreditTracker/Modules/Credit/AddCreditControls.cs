@@ -232,7 +232,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                     else
                     {
                         cmbAddCreditCategory.SelectedIndex = 0;
-                        cmbAddCreditCategory.ForeColor = Color.Gray;
+                        cmbAddCreditCategory.ForeColor = Color.Black;
                     }
 
                     if (newSelectedCategoryId > 0)
@@ -502,7 +502,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                     else
                     {
                         cmbAddCreditSubCategory.SelectedIndex = 0;
-                        cmbAddCreditSubCategory.ForeColor = Color.Gray;
+                        cmbAddCreditSubCategory.ForeColor = Color.Black;
                     }
 
                     ignoreEvents = false;
