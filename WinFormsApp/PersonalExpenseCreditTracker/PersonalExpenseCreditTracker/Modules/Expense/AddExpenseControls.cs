@@ -36,6 +36,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void ExpenseDetailsControl_Load(object sender, EventArgs e)
         {
+           
+
             txtAddExpenseAmount.Text = "Enter Amount";
             txtAddExpenseAmount.ForeColor = Color.Gray;
             txtAddExpenseDescription.Text = "Enter Description";
@@ -51,6 +53,21 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             Common.CommonUiFunction.LoadInComboBox("spGetExpenseCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", "+ Add New Cetegory", cmbAddExpenseCategory);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddExpensePaymentType);
             cmbAddExpensePaymentType.MouseClick += (s, ev) => { cmbAddExpensePaymentType.DroppedDown = true; };
+
+            cmbAddExpenseCategory.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbAddExpenseCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbAddExpenseSubCategory.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbAddExpenseSubCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbAddExpensePaymentType.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbAddExpensePaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(cmbAddExpenseCategory);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(cmbAddExpenseSubCategory);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(cmbAddExpensePaymentType);
+
+
+
+
             ignoreEvents = false;
         }
 
@@ -188,6 +205,62 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
 
         }
+
+        // Enter কি প্রেস করলে সাজেশন সিলেক্ট করার জন্য
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                // Category ComboBox এ ফোকাস থাকলে
+                if (cmbAddExpenseCategory.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbAddExpenseCategory);
+                    return true; // Enter এর কাজ শেষ, ফর্ম সাবমিট বা শব্দ হবে না
+                }
+                // Sub Category ComboBox এ ফোকাস থাকলে
+                else if (cmbAddExpenseSubCategory.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbAddExpenseSubCategory);
+                    return true;
+                }
+                // Payment Type ComboBox এ ফোকাস থাকলে
+                else if (cmbAddExpensePaymentType.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbAddExpensePaymentType);
+                    return true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        // টেক্সট অনুযায়ী আইটেম খুঁজে বের করে সিলেক্ট করার হেল্পার মেথড
+        private void SelectComboBoxSuggestion(ComboBox cmb)
+        {
+            if (!string.IsNullOrWhiteSpace(cmb.Text))
+            {
+                // ১. পুরো নামের সাথে মিল খুঁজবে
+                int index = cmb.FindStringExact(cmb.Text);
+
+                // ২. না পেলে শুরুর অক্ষরের মিল খুঁজবে
+                if (index == -1)
+                {
+                    index = cmb.FindString(cmb.Text);
+                }
+
+                // ৩. আইটেম পেলে তা সিলেক্ট করবে
+                if (index != -1)
+                {
+                    cmb.SelectedIndex = index;
+                    cmb.SelectionStart = cmb.Text.Length;
+                }
+            }
+
+            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            cmb.DroppedDown = false;
+        }
+
+
 
         private void btnClear_Click(object sender, EventArgs e)
         {
