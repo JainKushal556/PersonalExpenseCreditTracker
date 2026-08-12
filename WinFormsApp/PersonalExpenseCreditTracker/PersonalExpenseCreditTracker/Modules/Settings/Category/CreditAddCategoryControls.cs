@@ -115,13 +115,18 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
             categoryUI.IsActive = Convert.ToInt32(rdActive.Checked);
             categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
+            string ErrorMsg;
 
+
+            ErrorMsg = categoryUI.GetErrorMsg("spInsertNewCreditCategoryByUserID", "@ActiveStatus", "@CategoryName");
             CommonValidator.ValidationResult result = categoryUI.AddCreditCategoryDataIntoCategoryUI();
+            
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Saved Credit Category");
+                    if (!string.IsNullOrWhiteSpace(ErrorMsg))
+                        MessageBox.Show(ErrorMsg);
 
                     if (creditCategoryControls != null)
                     {
@@ -129,7 +134,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     }
                     this.DialogResult = DialogResult.OK;
                     this.Close();
-                    //creditCategoryControls.LoadCategories();
+
                     break;
 
                 case CommonValidator.ValidationResult.CategoryNameEmpty:
@@ -141,7 +146,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    MessageBox.Show("Credit Category Not Added.");
+                    if (!string.IsNullOrWhiteSpace(ErrorMsg))
+                        MessageBox.Show(ErrorMsg);
+
+                    this.Close();
                     break;
             }
         }

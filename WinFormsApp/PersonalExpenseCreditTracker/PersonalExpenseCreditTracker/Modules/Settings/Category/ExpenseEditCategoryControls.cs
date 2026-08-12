@@ -87,7 +87,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
             categoryUI.UserId = Session.LogedInUser.GetUserId();
             categoryUI.CategoryID = SelectedCategoryId;
-            categoryUI.CategoryName = txtCategoryName.Text;
+            categoryUI.CategoryName = txtCategoryName.Text.Trim();
 
             categoryUI.IsActive = Convert.ToInt32(rdobtnActive.Checked);
             categoryUI.Inactive = Convert.ToInt32(rdobtnInactive.Checked);
@@ -96,23 +96,22 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             string ErrorMsg;
             if (isSubCategory1)
             {
+                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseSubCategoryByUserID", "@SubCategoryID", "@ActiveStatus", "@SubCategoryName");
                 result = categoryUI.UpdateExpenseSubCategoryDataIntoCategoryUI();
-                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseSubCategoryByUserID", "@SubCategoryID", "@AvtiveStatus", "@SubCategoryName");
+                
             }
             else
             {
+                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseCategoryByUserID", "@CategoryID", "@ActiveStatus", "@CategoryName");
                 result = categoryUI.UpdateExpenseCategoryDataIntoCategoryUI();
-                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseCategoryByUserID", "@CategoryID", "@AvtiveStatus", "@CategoryName");
+                
             }
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show(
-                    isSubCategory1
-                        ? "Sub Category Update Successfully"
-                        : "Category Update Successfully"
-                        );
+                    if (!string.IsNullOrWhiteSpace(ErrorMsg))
+                        MessageBox.Show(ErrorMsg);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
