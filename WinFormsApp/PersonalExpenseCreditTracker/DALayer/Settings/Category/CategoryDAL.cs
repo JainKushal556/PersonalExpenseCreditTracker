@@ -34,7 +34,7 @@ namespace DALayer.Settings.Category
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
-                    sqlCommand.Parameters.AddWithValue("@AvtiveStatus", this.status);
+                    sqlCommand.Parameters.AddWithValue("@ActiveStatus", this.status);
                     sqlCommand.Parameters.AddWithValue("@CategoryName", this.CategoryName);
                     sqlConnection.Open();
                     rowEffected = sqlCommand.ExecuteNonQuery();
@@ -65,7 +65,7 @@ namespace DALayer.Settings.Category
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
                     sqlCommand.Parameters.AddWithValue("@CategoryID", this.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@AvtiveStatus", this.status);
+                    sqlCommand.Parameters.AddWithValue("@ActiveStatus", this.status);
                     sqlCommand.Parameters.AddWithValue("@SubCategoryName", this.SubCategory);
                     sqlConnection.Open();
                     rowEffected = sqlCommand.ExecuteNonQuery();
@@ -97,7 +97,7 @@ namespace DALayer.Settings.Category
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
-                    sqlCommand.Parameters.AddWithValue("@AvtiveStatus", this.status);
+                    sqlCommand.Parameters.AddWithValue("@ActiveStatus", this.status);
                     sqlCommand.Parameters.AddWithValue("@CategoryName", this.CategoryName);
                     sqlConnection.Open();
                     rowEffected = sqlCommand.ExecuteNonQuery();
@@ -128,7 +128,7 @@ namespace DALayer.Settings.Category
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
                     sqlCommand.Parameters.AddWithValue("@CategoryID", this.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@AvtiveStatus", this.status);
+                    sqlCommand.Parameters.AddWithValue("@ActiveStatus", this.status);
                     sqlCommand.Parameters.AddWithValue("@SubCategoryName", this.SubCategory);
                     sqlConnection.Open();
                     rowEffected = sqlCommand.ExecuteNonQuery();
@@ -159,7 +159,7 @@ namespace DALayer.Settings.Category
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
                     sqlCommand.Parameters.AddWithValue("@CategoryID", this.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@AvtiveStatus", this.status);
+                    sqlCommand.Parameters.AddWithValue("@ActiveStatus", this.status);
                     sqlCommand.Parameters.AddWithValue("@CategoryName", this.CategoryName);
                     sqlConnection.Open();
                     rowEffected = sqlCommand.ExecuteNonQuery();
@@ -190,7 +190,7 @@ namespace DALayer.Settings.Category
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
                     sqlCommand.Parameters.AddWithValue("@CategoryID", this.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@AvtiveStatus", this.status);
+                    sqlCommand.Parameters.AddWithValue("@ActiveStatus", this.status);
                     sqlCommand.Parameters.AddWithValue("@CategoryName", this.CategoryName);
                     sqlConnection.Open();
                     rowEffected = sqlCommand.ExecuteNonQuery();
@@ -221,7 +221,7 @@ namespace DALayer.Settings.Category
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
                     sqlCommand.Parameters.AddWithValue("@SubCategoryID", this.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@AvtiveStatus", this.status);
+                    sqlCommand.Parameters.AddWithValue("@ActiveStatus", this.status);
                     sqlCommand.Parameters.AddWithValue("@SubCategoryName", this.CategoryName);
                     sqlConnection.Open();
                     rowEffected = sqlCommand.ExecuteNonQuery();
@@ -253,7 +253,7 @@ namespace DALayer.Settings.Category
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@UserID", this.UserId);
                     sqlCommand.Parameters.AddWithValue("@SubCategoryID", this.CategoryID);
-                    sqlCommand.Parameters.AddWithValue("@AvtiveStatus", this.status);
+                    sqlCommand.Parameters.AddWithValue("@ActiveStatus", this.status);
                     sqlCommand.Parameters.AddWithValue("@SubCategoryName", this.CategoryName);
                     sqlConnection.Open();
                     rowEffected = sqlCommand.ExecuteNonQuery();

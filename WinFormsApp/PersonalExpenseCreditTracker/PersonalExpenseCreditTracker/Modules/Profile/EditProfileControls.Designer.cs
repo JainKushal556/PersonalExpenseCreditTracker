@@ -704,9 +704,9 @@
             this.lblProfileDathOfBirth.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileDathOfBirth.Location = new System.Drawing.Point(8, 10);
             this.lblProfileDathOfBirth.Name = "lblProfileDathOfBirth";
-            this.lblProfileDathOfBirth.Size = new System.Drawing.Size(133, 28);
+            this.lblProfileDathOfBirth.Size = new System.Drawing.Size(132, 28);
             this.lblProfileDathOfBirth.TabIndex = 1;
-            this.lblProfileDathOfBirth.Text = "Dath Of Birth";
+            this.lblProfileDathOfBirth.Text = "Date Of Birth";
             // 
             // pictureBox3
             // 
