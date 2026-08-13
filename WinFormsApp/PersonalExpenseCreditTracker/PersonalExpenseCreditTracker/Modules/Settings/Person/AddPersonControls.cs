@@ -315,8 +315,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
             personUI.userId = Session.LogedInUser.GetUserId();
             personUI.personId = -1;
-            personUI.personName = (txtAddPersonInputFullName.Text == "Enter Full Name")? "" : txtAddPersonInputFullName.Text;
-            personUI.personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text;
+            personUI.personName = (txtAddPersonInputFullName.Text == "Enter Full Name")? "" : txtAddPersonInputFullName.Text.Trim();
+            personUI.personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text.Trim();
             personUI.address = (txtAddPersonInputAddress.Text == "Enter Address") ? "" : txtAddPersonInputAddress.Text;
 
             CommonValidator.ValidationResult result = personUI.InsertDataIntoPersonUi();
