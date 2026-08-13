@@ -164,7 +164,54 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
             txtReturnDate.Click += txtReturnDate_Click;
 
+            cmbPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(cmbPaymentType);
+
             ignoreEvents = false;
+        }
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+
+                if (cmbPaymentType.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbPaymentType);
+                    return true; 
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
+        private void SelectComboBoxSuggestion(ComboBox cmb)
+        {
+            if (!string.IsNullOrWhiteSpace(cmb.Text))
+            {
+
+                int index = cmb.FindStringExact(cmb.Text);
+
+
+                if (index == -1)
+                {
+                    index = cmb.FindString(cmb.Text);
+                }
+
+
+                if (index != -1)
+                {
+                    cmb.SelectedIndex = index;
+                    cmb.SelectionStart = cmb.Text.Length;
+                }
+            }
+
+
+            cmb.DroppedDown = false;
         }
 
         private void btnAddCancel_Click(object sender, EventArgs e)

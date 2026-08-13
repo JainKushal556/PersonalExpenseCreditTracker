@@ -19,7 +19,9 @@ namespace BLLayer.Common
             StatusInvalid,
             PriorityInvalid,
             TaskTitleInvalid,
+            TaskTitleAlreadyExists,
             NoteTitleInvalid,
+            NoteTitleAlreadyExists,
 
             AmountEmpty,
             AmountInvalid,
@@ -438,7 +440,12 @@ namespace BLLayer.Common
             if (string.IsNullOrWhiteSpace(fullName))
                 return ValidationResult.FullNameInvalid;
 
-            if (fullName.Trim().Length > 100)
+            fullName = fullName.Trim();
+
+            if (fullName.Length < 3 || fullName.Length > 100)
+                return ValidationResult.FullNameInvalid;
+
+            if (!Regex.IsMatch(fullName, @"^[A-Za-z]+(?:[ '-][A-Za-z]+)*$"))
                 return ValidationResult.FullNameInvalid;
 
             return ValidationResult.Success;
@@ -491,16 +498,7 @@ namespace BLLayer.Common
             return ValidationResult.NoteTitleInvalid;
         }
 
-        // Color Validation
-        //public static ValidationResult ValidateColor(int colorId)
-        //{
-        //    if (colorId > 0)
-        //    {
-        //        return ValidationResult.Success;
-        //    }
-
-        //    return ValidationResult.ColorInvalid;
-        //}
+      
         
     }
 }
