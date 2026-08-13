@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -84,14 +84,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             if (dataTable != null)
             {
                 masterData = dataTable.Copy();
-
-                // Newest person first
-                if (dataTable.Columns.Contains("PersonID"))
-                {
-                    dataTable.DefaultView.Sort = "PersonID DESC";
-                    dataTable = dataTable.DefaultView.ToTable();
-                }
-
                 BindingSource bindingSource1 = new BindingSource();
                 bindingSource1.DataSource = dataTable;
                 dataGridViewAddPerson.DataSource = bindingSource1;
@@ -212,10 +204,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             }
             pnlAddPersonSearchBar.BorderStyle = BorderStyle.None;
         }
+        
 
         private void dataGridViewAddPerson_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // ১. কলামের হেডার পেইন্টিং
+
+            // Header
             if (e.RowIndex == -1)
             {
                 switch (dataGridViewAddPerson.Columns[e.ColumnIndex].Name)
@@ -223,12 +217,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                     case "colName":
                         DrawHeader(e, Properties.Resources.PersonIcon__2_, "Name");
                         break;
+
                     case "colPhoneNumber":
                         DrawHeader(e, Properties.Resources.phone, "Phone");
                         break;
+
                     case "colAddress":
                         DrawHeader(e, Properties.Resources.address_location, "Address");
                         break;
+
                     case "colAction":
                         DrawHeader(e, Properties.Resources.Action, "Action");
                         break;
@@ -236,6 +233,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                         DrawHeader(e, Properties.Resources.SL, "SL");
                         break;
                 }
+
+
                 return;
             }
 
@@ -253,9 +252,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                     int x = e.CellBounds.Left + (e.CellBounds.Width - iconSize) / 2;
                     int y = e.CellBounds.Top + (e.CellBounds.Height - iconSize) / 2;
 
-                    e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                int x = e.CellBounds.Left + (e.CellBounds.Width - 20) / 2;
+                int y = e.CellBounds.Top + (e.CellBounds.Height - 20) / 2;
 
                     e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
                 }
@@ -277,69 +275,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
                 e.Handled = true;
             }
+            
         }
-
-
-        //private void dataGridViewAddPerson_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        //{
-        //    // Header Paint
-        //    if (e.RowIndex == -1)
-        //    {
-        //        switch (dataGridViewAddPerson.Columns[e.ColumnIndex].Name)
-        //        {
-        //            case "colName":
-        //                DrawHeader(e, Properties.Resources.PersonIcon__2_, "Name");
-        //                break;
-        //            case "colPhoneNumber":
-        //                DrawHeader(e, Properties.Resources.phone, "Phone");
-        //                break;
-        //            case "colAddress":
-        //                DrawHeader(e, Properties.Resources.address_location, "Address");
-        //                break;
-        //            case "colAction":
-        //                DrawHeader(e, Properties.Resources.Action, "Action");
-        //                break;
-        //            case "colSL":
-        //                DrawHeader(e, Properties.Resources.SL, "SL");
-        //                break;
-        //        }
-        //        return;
-        //    }
-
-           
-        //    if (e.RowIndex >= 0)
-        //    {
-        //        e.Paint(e.CellBounds, e.PaintParts & ~DataGridViewPaintParts.Focus);
-
-        //        using (Pen pen = new Pen(Color.Gainsboro, 1))
-        //        {
-        //            e.Graphics.DrawLine(pen,
-        //                e.CellBounds.Left,
-        //                e.CellBounds.Bottom - 1,
-        //                e.CellBounds.Right,
-        //                e.CellBounds.Bottom-1);
-        //        }
-
-
-
-        //        if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewAddPerson.Columns["colAction"].Index)
-        //        {
-                    
-        //            e.PaintBackground(e.CellBounds, true);
-        //            Image img = Properties.Resources.pen__1_;
-        //            int iconSize = 23;
-        //            int x = e.CellBounds.Left + (e.CellBounds.Width - iconSize) / 2;
-        //            int y = e.CellBounds.Top + (e.CellBounds.Height - iconSize) / 2;
-        //            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        //            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-        //            e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
-        //            e.Handled = true;
-        //        }
-        //    }
-        //}
-
-
-
         private void dataGridViewAddPerson_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             // SL Number
@@ -351,16 +288,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             lblDataGridViewTotalPersonsNumber.Text = 
                 dataGridViewAddPerson.Rows.Count.ToString();
 
-            //first row selected
-            if (dataGridViewAddPerson.Rows.Count > 0)
-            {
-                dataGridViewAddPerson.ClearSelection();
-                dataGridViewAddPerson.CurrentCell =
-                    dataGridViewAddPerson.Rows[0].Cells["colName"];
-                dataGridViewAddPerson.Rows[0].Selected = true;
-            }
-
-            
+            // Remove selection
+            dataGridViewAddPerson.ClearSelection();
+            dataGridViewAddPerson.CurrentCell = null;
         }
 
         private void dataGridViewAddPerson_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -402,8 +332,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
             personUI.userId = Session.LogedInUser.GetUserId();
             personUI.personId = -1;
-            personUI.personName = (txtAddPersonInputFullName.Text == "Enter Full Name")? "" : txtAddPersonInputFullName.Text;
-            personUI.personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text;
+            personUI.personName = (txtAddPersonInputFullName.Text == "Enter Full Name")? "" : txtAddPersonInputFullName.Text.Trim();
+            personUI.personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text.Trim();
             personUI.address = (txtAddPersonInputAddress.Text == "Enter Address") ? "" : txtAddPersonInputAddress.Text;
 
             CommonValidator.ValidationResult result = personUI.InsertDataIntoPersonUi();
@@ -412,12 +342,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Person Details Save Successfully");
-                    //LoadData();
                      LastAddedPersonName = txtAddPersonInputFullName.Text.Trim();
                     this.DialogResult = DialogResult.OK;
-    
                      LoadData();
-                     
                     break;
 
                 case CommonValidator.ValidationResult.PersonNameEmpty:
@@ -493,7 +420,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             //dataGridViewAddPerson.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
             //dataGridViewAddPerson.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 231, 255);
             //dataGridViewAddPerson.DefaultCellStyle.SelectionForeColor = Color.FromArgb(15, 23, 42);
-            dataGridViewAddPerson.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewAddPerson.RowTemplate.Height = 40;
             dataGridViewAddPerson.RowHeadersVisible = false;
             dataGridViewAddPerson.MultiSelect = false;
@@ -502,9 +428,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
             //Border style
             dataGridViewAddPerson.BorderStyle = BorderStyle.None;
-           dataGridViewAddPerson.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-           dataGridViewAddPerson.GridColor = Color.FromArgb(230, 230, 230);
-          
+            dataGridViewAddPerson.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewAddPerson.GridColor = Color.FromArgb(230, 230, 230);
 
             //cell Alignment
             colAction.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

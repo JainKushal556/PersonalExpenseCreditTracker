@@ -97,12 +97,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             if (isSubCategory1)
             {
                 result = categoryUI.UpdateExpenseSubCategoryDataIntoCategoryUI();
-                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseSubCategoryByUserID", "@SubCategoryID", "@AvtiveStatus", "@SubCategoryName");
+                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseSubCategoryByUserID", "@SubCategoryID", "@ACtiveStatus", "@SubCategoryName");
             }
             else
             {
                 result = categoryUI.UpdateExpenseCategoryDataIntoCategoryUI();
-                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseCategoryByUserID", "@CategoryID", "@AvtiveStatus", "@CategoryName");
+                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseCategoryByUserID", "@CategoryID", "@ACtiveStatus", "@CategoryName");
             }
 
             switch (result)
