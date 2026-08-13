@@ -215,7 +215,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         private void dataGridViewAddPerson_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // Header Paint
+            // ১. কলামের হেডার পেইন্টিং
             if (e.RowIndex == -1)
             {
                 switch (dataGridViewAddPerson.Columns[e.ColumnIndex].Name)
@@ -239,24 +239,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 return;
             }
 
-           
+            // ২. ডেটা রো পেইন্টিং
             if (e.RowIndex >= 0)
             {
-                e.Paint(e.CellBounds, e.PaintParts & ~DataGridViewPaintParts.Focus);
-
-                
-                using (Pen pen = new Pen(Color.Gainsboro, 1))
-                {
-                    e.Graphics.DrawLine(pen,
-                        e.CellBounds.Left,
-                        e.CellBounds.Bottom - 1,
-                        e.CellBounds.Right,
-                        e.CellBounds.Bottom-1);
-                }
-
-                
+                // Action (Pen Icon) কলামের জন্য কাস্টম আঁকা
                 if (e.ColumnIndex == dataGridViewAddPerson.Columns["colAction"].Index)
                 {
+                    // ডিফল্ট বাটন ব্যাকগ্রাউন্ড/বর্ডার না এঁকে শুধুমাত্র সেল ব্যাকগ্রাউন্ড আঁকা
+                    e.PaintBackground(e.CellBounds, true);
+
                     Image img = Properties.Resources.pen__1_;
                     int iconSize = 23;
                     int x = e.CellBounds.Left + (e.CellBounds.Width - iconSize) / 2;
@@ -268,10 +259,84 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
                     e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
                 }
+                else
+                {
+                    e.Paint(e.CellBounds, e.PaintParts & ~DataGridViewPaintParts.Focus);
+                }
+
+
+                int lineY = e.CellBounds.Y + e.CellBounds.Height - 1;
+                using (Pen pen = new Pen(Color.FromArgb(230, 230, 230), 1))
+                {
+                    e.Graphics.DrawLine(pen,
+                        e.CellBounds.Left,
+                        lineY,
+                        e.CellBounds.Right,
+                        lineY);
+                }
 
                 e.Handled = true;
             }
         }
+
+
+        //private void dataGridViewAddPerson_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        //{
+        //    // Header Paint
+        //    if (e.RowIndex == -1)
+        //    {
+        //        switch (dataGridViewAddPerson.Columns[e.ColumnIndex].Name)
+        //        {
+        //            case "colName":
+        //                DrawHeader(e, Properties.Resources.PersonIcon__2_, "Name");
+        //                break;
+        //            case "colPhoneNumber":
+        //                DrawHeader(e, Properties.Resources.phone, "Phone");
+        //                break;
+        //            case "colAddress":
+        //                DrawHeader(e, Properties.Resources.address_location, "Address");
+        //                break;
+        //            case "colAction":
+        //                DrawHeader(e, Properties.Resources.Action, "Action");
+        //                break;
+        //            case "colSL":
+        //                DrawHeader(e, Properties.Resources.SL, "SL");
+        //                break;
+        //        }
+        //        return;
+        //    }
+
+           
+        //    if (e.RowIndex >= 0)
+        //    {
+        //        e.Paint(e.CellBounds, e.PaintParts & ~DataGridViewPaintParts.Focus);
+
+        //        using (Pen pen = new Pen(Color.Gainsboro, 1))
+        //        {
+        //            e.Graphics.DrawLine(pen,
+        //                e.CellBounds.Left,
+        //                e.CellBounds.Bottom - 1,
+        //                e.CellBounds.Right,
+        //                e.CellBounds.Bottom-1);
+        //        }
+
+
+
+        //        if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewAddPerson.Columns["colAction"].Index)
+        //        {
+                    
+        //            e.PaintBackground(e.CellBounds, true);
+        //            Image img = Properties.Resources.pen__1_;
+        //            int iconSize = 23;
+        //            int x = e.CellBounds.Left + (e.CellBounds.Width - iconSize) / 2;
+        //            int y = e.CellBounds.Top + (e.CellBounds.Height - iconSize) / 2;
+        //            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+        //            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+        //            e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
+        //            e.Handled = true;
+        //        }
+        //    }
+        //}
 
 
 
@@ -452,6 +517,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             colSL.Resizable = DataGridViewTriState.False;
             colAction.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colAction.Resizable = DataGridViewTriState.False;
+
+
 
             
         }

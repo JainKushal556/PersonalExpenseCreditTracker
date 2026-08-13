@@ -32,11 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -47,6 +42,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlAddPersonInput = new System.Windows.Forms.Panel();
@@ -85,12 +85,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.dataGridViewAddPerson = new System.Windows.Forms.DataGridView();
-            this.colPersonID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAction = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel12 = new System.Windows.Forms.Panel();
             this.lblDataGridViewTotalPersonsNumber = new System.Windows.Forms.Label();
             this.lblDataGridViewTotalPersons = new System.Windows.Forms.Label();
@@ -111,6 +105,12 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewButtonColumn2 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.colPersonID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAction = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlAddPersonInput.SuspendLayout();
@@ -673,8 +673,8 @@
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.ColorTranslator.FromHtml("#D3D8DE");
+            this.dataGridViewAddPerson.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.ColorTranslator.FromHtml("#23262A");
             this.dataGridViewAddPerson.RowTemplate.Height = 39;
             this.dataGridViewAddPerson.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewAddPerson.Size = new System.Drawing.Size(1073, 361);
@@ -682,75 +682,6 @@
             this.dataGridViewAddPerson.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAddPerson_CellClick);
             this.dataGridViewAddPerson.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewAddPerson_CellPainting);
             this.dataGridViewAddPerson.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewAddPerson_DataBindingComplete);
-            // 
-            // colPersonID
-            // 
-            this.colPersonID.DataPropertyName = "PersonID";
-            this.colPersonID.HeaderText = "PersonID";
-            this.colPersonID.Name = "colPersonID";
-            this.colPersonID.ReadOnly = true;
-            this.colPersonID.Visible = false;
-            // 
-            // colSL
-            // 
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            this.colSL.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colSL.FillWeight = 60F;
-            this.colSL.HeaderText = "SL";
-            this.colSL.Name = "colSL";
-            this.colSL.ReadOnly = true;
-            this.colSL.Width = 60;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "PersonName";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.colName.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colName.FillWeight = 100.25F;
-            this.colName.HeaderText = "Name";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colPhoneNumber
-            // 
-            this.colPhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPhoneNumber.DataPropertyName = "PhoneNumber";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = null;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.colPhoneNumber.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colPhoneNumber.FillWeight = 76.38889F;
-            this.colPhoneNumber.HeaderText = "Phone Number";
-            this.colPhoneNumber.Name = "colPhoneNumber";
-            this.colPhoneNumber.ReadOnly = true;
-            // 
-            // colAddress
-            // 
-            this.colAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAddress.DataPropertyName = "Address";
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.colAddress.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colAddress.HeaderText = "Address";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.ReadOnly = true;
-            // 
-            // colAction
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            this.colAction.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colAction.FillWeight = 65F;
-            this.colAction.HeaderText = "Action";
-            this.colAction.Name = "colAction";
-            this.colAction.ReadOnly = true;
-            this.colAction.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colAction.Width = 65;
             // 
             // panel12
             // 
@@ -950,6 +881,75 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // colPersonID
+            // 
+            this.colPersonID.DataPropertyName = "PersonID";
+            this.colPersonID.HeaderText = "PersonID";
+            this.colPersonID.Name = "colPersonID";
+            this.colPersonID.ReadOnly = true;
+            this.colPersonID.Visible = false;
+            // 
+            // colSL
+            // 
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.colSL.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colSL.FillWeight = 60F;
+            this.colSL.HeaderText = "SL";
+            this.colSL.Name = "colSL";
+            this.colSL.ReadOnly = true;
+            this.colSL.Width = 60;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "PersonName";
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.colName.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colName.FillWeight = 100.25F;
+            this.colName.HeaderText = "Name";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colPhoneNumber
+            // 
+            this.colPhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPhoneNumber.DataPropertyName = "PhoneNumber";
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.colPhoneNumber.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colPhoneNumber.FillWeight = 76.38889F;
+            this.colPhoneNumber.HeaderText = "Phone Number";
+            this.colPhoneNumber.Name = "colPhoneNumber";
+            this.colPhoneNumber.ReadOnly = true;
+            // 
+            // colAddress
+            // 
+            this.colAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAddress.DataPropertyName = "Address";
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.colAddress.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colAddress.HeaderText = "Address";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.ReadOnly = true;
+            // 
+            // colAction
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            this.colAction.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colAction.FillWeight = 50F;
+            this.colAction.HeaderText = "Action";
+            this.colAction.Name = "colAction";
+            this.colAction.ReadOnly = true;
+            this.colAction.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colAction.Width = 50;
+            // 
             // AddPersonControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1061,16 +1061,16 @@
         private System.Windows.Forms.Panel pnlIdia;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.TextBox txtAddPersonInputAddress;
+        private System.Windows.Forms.TextBox txtAddPersonInputPhoneNumber;
+        private System.Windows.Forms.TextBox txtAddPersonInputFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPersonID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSL;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhoneNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewButtonColumn colAction;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox txtAddPersonInputAddress;
-        private System.Windows.Forms.TextBox txtAddPersonInputPhoneNumber;
-        private System.Windows.Forms.TextBox txtAddPersonInputFullName;
 
     }
 }
