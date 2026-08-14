@@ -96,13 +96,13 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             string ErrorMsg;
             if (isSubCategory1)
             {
-                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseSubCategoryByUserID", "@SubCategoryID", "@ActiveStatus", "@SubCategoryName");
+                
                 result = categoryUI.UpdateExpenseSubCategoryDataIntoCategoryUI();
                 
             }
             else
             {
-                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseCategoryByUserID", "@CategoryID", "@ActiveStatus", "@CategoryName");
+                
                 result = categoryUI.UpdateExpenseCategoryDataIntoCategoryUI();
                 
             }
@@ -110,8 +110,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    if (!string.IsNullOrWhiteSpace(ErrorMsg))
-                        MessageBox.Show(ErrorMsg);
+
+                    MessageBox.Show(
+                        isSubCategory1
+                            ? "Sub Category updated successfully."
+                            : "Category updated successfully."
+                        );
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
@@ -129,14 +133,20 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
+                    if (isSubCategory1)
+                    {
+                        ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseSubCategoryByUserID", "@SubCategoryID", "@ActiveStatus", "@SubCategoryName");
+
+
+                    }
+                    else
+                    {
+                        ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseCategoryByUserID", "@CategoryID", "@ActiveStatus", "@CategoryName");
+
+
+                    }
                     if (!string.IsNullOrWhiteSpace(ErrorMsg))
                         MessageBox.Show(ErrorMsg);
-                    else
-                        MessageBox.Show(
-                    isSubCategory1
-                        ? "Sub Category Not Updated."
-                        : "Category Not Updated."
-                        );
                     break;
             }
         }

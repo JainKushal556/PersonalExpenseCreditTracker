@@ -118,16 +118,14 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             string ErrorMsg;
 
 
-            ErrorMsg = categoryUI.GetErrorMsg("spInsertNewCreditCategoryByUserID", "@ActiveStatus", "@CategoryName");
+            
             CommonValidator.ValidationResult result = categoryUI.AddCreditCategoryDataIntoCategoryUI();
             
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    if (!string.IsNullOrWhiteSpace(ErrorMsg))
-                        MessageBox.Show(ErrorMsg);
-
+                    MessageBox.Show("Inserted successfully.");
                     if (creditCategoryControls != null)
                     {
                         creditCategoryControls.LoadCategories();
@@ -146,6 +144,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
+                    ErrorMsg = categoryUI.GetErrorMsg("spInsertNewCreditCategoryByUserID", "@ActiveStatus", "@CategoryName");
                     if (!string.IsNullOrWhiteSpace(ErrorMsg))
                         MessageBox.Show(ErrorMsg);
 
