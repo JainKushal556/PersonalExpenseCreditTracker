@@ -116,5 +116,26 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
             return categoryBLL.GetErrorMsg(spName, paramName1, paramName2, paramName3);
         }
+
+        public string GetErrorMsgforSub(string spName, string paramName1, string paramName2, string paramName3)
+        {
+            categoryBLL.UserId = UserId;
+            categoryBLL.CategoryID = CategoryID;
+            categoryBLL.CategoryName = SubCategory;
+            categoryBLL.Inactive = Inactive;
+            categoryBLL.IsActive = IsActive;
+
+            return categoryBLL.GetErrorMsg(spName, paramName1, paramName2, paramName3);
+        }
+
+        public string GetErrorMsg(string spName, string paramName1, string paramName2)
+        {
+            categoryBLL.UserId = UserId;
+            categoryBLL.CategoryName = CategoryName;
+            categoryBLL.Inactive = Inactive;
+            categoryBLL.IsActive = IsActive;
+
+            return categoryBLL.GetErrorMsg(spName, paramName1, paramName2);
+        }
     }
 }

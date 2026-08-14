@@ -11,7 +11,7 @@ namespace PersonalExpenseCreditTracker.Session
 
        public static int GetUserId()
        {
-           return userId=5;
+           return userId=1;
        }
     }
 }
