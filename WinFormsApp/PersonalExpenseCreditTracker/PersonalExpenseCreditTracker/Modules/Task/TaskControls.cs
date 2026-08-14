@@ -13,7 +13,9 @@ using System.Data.SqlClient;
 using System.Configuration;
 using PersonalExpenseCreditTracker.Common;
 using BLLayer.Common;
+using Excel = Microsoft.Office.Interop.Excel;
 namespace PersonalExpenseCreditTracker.Modules.Task
+
 {
     public partial class TaskControls : Form
     {
@@ -1381,6 +1383,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             HidePopupPanels();
         }
 
+        
+
         //public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
         //{
         //    string search = txtBox.Text.Trim().Replace("'", "''");
@@ -1406,5 +1410,197 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         //    return filteredTable;
         //}
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (AllTaskData == null || AllTaskData.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "There is no data to export.",
+                    "Export",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Title = "Save Task Excel File";
+                saveDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
+                saveDialog.FileName =
+                    "Task_" +
+                    DateTime.Now.ToString("ddMMyyyy_HHmmss") +
+                    ".xlsx";
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    ExportTaskToExcel(
+                        AllTaskData,
+                        saveDialog.FileName);
+
+                    MessageBox.Show(
+                        "Task data exported successfully.",
+                        "Export Successful",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Export failed.\n\n" + ex.Message,
+                        "Export Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void ExportTaskToExcel(DataTable dataTable, string filePath)
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook workbook = null;
+            Excel.Worksheet worksheet = null;
+
+            try
+            {
+                excelApp = new Excel.Application();
+                excelApp.Visible = false;
+                excelApp.DisplayAlerts = false;
+
+                workbook = excelApp.Workbooks.Add(
+                    Excel.XlWBATemplate.xlWBATWorksheet);
+
+                worksheet = (Excel.Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Task";
+
+                // Column Names
+                for (int col = 0;
+                     col < dataTable.Columns.Count;
+                     col++)
+                {
+                    worksheet.Cells[1, col + 1] =
+                        GetTaskExportColumnName(
+                            dataTable.Columns[col].ColumnName);
+                }
+
+                // Data
+                for (int row = 0;
+                     row < dataTable.Rows.Count;
+                     row++)
+                {
+                    for (int col = 0;
+                         col < dataTable.Columns.Count;
+                         col++)
+                    {
+                        if (dataTable.Rows[row][col] != DBNull.Value)
+                        {
+                            worksheet.Cells[row + 2, col + 1] =
+                                dataTable.Rows[row][col].ToString();
+                        }
+                    }
+                }
+
+                // Header bold
+                Excel.Range headerRange =
+                    worksheet.Range[
+                        worksheet.Cells[1, 1],
+                        worksheet.Cells[
+                            1,
+                            dataTable.Columns.Count]];
+
+                headerRange.Font.Bold = true;
+
+                // Auto fit columns
+                worksheet.Columns.AutoFit();
+
+                // SAVE EXCEL FILE
+                workbook.SaveAs(
+                    filePath,
+                    Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+                // Close Excel without opening it
+                workbook.Close(false);
+                excelApp.Quit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Excel export failed.\n\n" + ex.Message,
+                    "Export Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                if (workbook != null)
+                {
+                    try
+                    {
+                        workbook.Close(false);
+                    }
+                    catch { }
+                }
+
+                if (excelApp != null)
+                {
+                    try
+                    {
+                        excelApp.Quit();
+                    }
+                    catch { }
+                }
+            }
+            finally
+            {
+                // Release COM objects
+                if (worksheet != null)
+                    Marshal.ReleaseComObject(worksheet);
+
+                if (workbook != null)
+                    Marshal.ReleaseComObject(workbook);
+
+                if (excelApp != null)
+                    Marshal.ReleaseComObject(excelApp);
+
+                worksheet = null;
+                workbook = null;
+                excelApp = null;
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
+        private string GetTaskExportColumnName(string columnName)
+        {
+            switch (columnName)
+            {
+
+            
+
+                case "CreatedAt":
+                    return "Date";
+
+                case "TaskTitle":
+                    return "Task Title";
+
+                case "PriorityName":
+                    return "Priority Name";
+
+                case "TaskStatusName":
+                    return "Status Name";
+
+                case "StatusName":
+                    return "Status";
+                    
+
+                case "Deadline":
+                    return "Deadline";
+
+                default:
+                    return columnName;
+            }
+        }
+
     }
 }
