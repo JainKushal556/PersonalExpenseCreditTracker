@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +13,7 @@ using BLLayer.Settings;
 using BLLayer.Common;
 using PersonalExpenseCreditTracker.Common;
 using PersonalExpenseCreditTracker.Session;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 {
@@ -84,6 +85,14 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             if (dataTable != null)
             {
                 masterData = dataTable.Copy();
+
+                // Newest person first
+                if (dataTable.Columns.Contains("PersonID"))
+                {
+                    dataTable.DefaultView.Sort = "PersonID DESC";
+                    dataTable = dataTable.DefaultView.ToTable();
+                }
+
                 BindingSource bindingSource1 = new BindingSource();
                 bindingSource1.DataSource = dataTable;
                 dataGridViewAddPerson.DataSource = bindingSource1;
@@ -204,12 +213,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             }
             pnlAddPersonSearchBar.BorderStyle = BorderStyle.None;
         }
-        
 
         private void dataGridViewAddPerson_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-
-            // Header
+           
             if (e.RowIndex == -1)
             {
                 switch (dataGridViewAddPerson.Columns[e.ColumnIndex].Name)
@@ -217,15 +224,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                     case "colName":
                         DrawHeader(e, Properties.Resources.PersonIcon__2_, "Name");
                         break;
-
                     case "colPhoneNumber":
                         DrawHeader(e, Properties.Resources.phone, "Phone");
                         break;
-
                     case "colAddress":
                         DrawHeader(e, Properties.Resources.address_location, "Address");
                         break;
-
                     case "colAction":
                         DrawHeader(e, Properties.Resources.Action, "Action");
                         break;
@@ -233,18 +237,14 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                         DrawHeader(e, Properties.Resources.SL, "SL");
                         break;
                 }
-
-
                 return;
             }
 
-            // ২. ডেটা রো পেইন্টিং
             if (e.RowIndex >= 0)
             {
-                // Action (Pen Icon) কলামের জন্য কাস্টম আঁকা
+               
                 if (e.ColumnIndex == dataGridViewAddPerson.Columns["colAction"].Index)
                 {
-                    // ডিফল্ট বাটন ব্যাকগ্রাউন্ড/বর্ডার না এঁকে শুধুমাত্র সেল ব্যাকগ্রাউন্ড আঁকা
                     e.PaintBackground(e.CellBounds, true);
 
                     Image img = Properties.Resources.pen__1_;
@@ -252,8 +252,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                     int x = e.CellBounds.Left + (e.CellBounds.Width - iconSize) / 2;
                     int y = e.CellBounds.Top + (e.CellBounds.Height - iconSize) / 2;
 
-                int x = e.CellBounds.Left + (e.CellBounds.Width - 20) / 2;
-                int y = e.CellBounds.Top + (e.CellBounds.Height - 20) / 2;
+                    e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
                     e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
                 }
@@ -275,8 +276,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
                 e.Handled = true;
             }
-            
         }
+
         private void dataGridViewAddPerson_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             // SL Number
@@ -288,9 +289,16 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             lblDataGridViewTotalPersonsNumber.Text = 
                 dataGridViewAddPerson.Rows.Count.ToString();
 
-            // Remove selection
-            dataGridViewAddPerson.ClearSelection();
-            dataGridViewAddPerson.CurrentCell = null;
+            //first row selected
+            if (dataGridViewAddPerson.Rows.Count > 0)
+            {
+                dataGridViewAddPerson.ClearSelection();
+                dataGridViewAddPerson.CurrentCell =
+                    dataGridViewAddPerson.Rows[0].Cells["colName"];
+                dataGridViewAddPerson.Rows[0].Selected = true;
+            }
+
+            
         }
 
         private void dataGridViewAddPerson_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -332,8 +340,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
             personUI.userId = Session.LogedInUser.GetUserId();
             personUI.personId = -1;
-            personUI.personName = (txtAddPersonInputFullName.Text == "Enter Full Name")? "" : txtAddPersonInputFullName.Text.Trim();
-            personUI.personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text.Trim();
+            personUI.personName = (txtAddPersonInputFullName.Text == "Enter Full Name")? "" : txtAddPersonInputFullName.Text;
+            personUI.personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text;
             personUI.address = (txtAddPersonInputAddress.Text == "Enter Address") ? "" : txtAddPersonInputAddress.Text;
 
             CommonValidator.ValidationResult result = personUI.InsertDataIntoPersonUi();
@@ -342,9 +350,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Person Details Save Successfully");
+                    //LoadData();
                      LastAddedPersonName = txtAddPersonInputFullName.Text.Trim();
                     this.DialogResult = DialogResult.OK;
+    
                      LoadData();
+                     
                     break;
 
                 case CommonValidator.ValidationResult.PersonNameEmpty:
@@ -420,6 +431,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             //dataGridViewAddPerson.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
             //dataGridViewAddPerson.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 231, 255);
             //dataGridViewAddPerson.DefaultCellStyle.SelectionForeColor = Color.FromArgb(15, 23, 42);
+            dataGridViewAddPerson.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewAddPerson.RowTemplate.Height = 40;
             dataGridViewAddPerson.RowHeadersVisible = false;
             dataGridViewAddPerson.MultiSelect = false;
@@ -428,8 +440,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
             //Border style
             dataGridViewAddPerson.BorderStyle = BorderStyle.None;
-            dataGridViewAddPerson.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewAddPerson.GridColor = Color.FromArgb(230, 230, 230);
+           dataGridViewAddPerson.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+           dataGridViewAddPerson.GridColor = Color.FromArgb(230, 230, 230);
+          
 
             //cell Alignment
             colAction.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -442,10 +455,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             colSL.Resizable = DataGridViewTriState.False;
             colAction.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colAction.Resizable = DataGridViewTriState.False;
-
-
-
-            
         }
 
         private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
@@ -487,7 +496,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
         }
-
         private void pnlAddPersonInputPhoneNumber_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(
@@ -496,7 +504,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
         }
-
         private void pnlAddPersonInputAddress_Paint(object sender, PaintEventArgs e)
         {
 
@@ -506,7 +513,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 ColorTranslator.FromHtml("#E7ECF3"),
                 ButtonBorderStyle.Solid);
         }
-
         private void pnlAddPersonSearchBar_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(
@@ -520,12 +526,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             SetRadius(btnAddPersonInputClear, 5);
         }
-
         private void btnAddPersonInputSavePerson_Resize(object sender, EventArgs e)
         {
             SetRadius(btnAddPersonInputSavePerson, 5);
         }
-
         private void AddPersonControls_Click(object sender, EventArgs e)
         {
             this.ActiveControl = null;
@@ -534,11 +538,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         private void panel1_Click(object sender, EventArgs e)
         {
             this.ActiveControl = null;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LoadData();
         }
 
         private void txtAddPersonSearchBar_TextChanged(object sender, EventArgs e)
@@ -553,7 +552,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 Common.CommonUiFunction.HighlightSearch(dataGridViewAddPerson, txtAddPersonSearchBar);
             }
         }
-
         private void txtAddPersonInputFullName_TextChanged(object sender, EventArgs e)
         {
             if (txtAddPersonInputFullName.Text != "Enter Full Name" && !string.IsNullOrWhiteSpace(txtAddPersonInputFullName.Text))
@@ -561,7 +559,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 ErrorHelper.HideErrorForControl(txtAddPersonInputFullName);
             }
         }
-
         private void txtAddPersonInputPhoneNumber_TextChanged(object sender, EventArgs e)
         {
             if (txtAddPersonInputPhoneNumber.Text != "Enter Phone Number" && !string.IsNullOrWhiteSpace(txtAddPersonInputPhoneNumber.Text))
@@ -569,7 +566,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 ErrorHelper.HideErrorForControl(txtAddPersonInputPhoneNumber);
             }
         }
-
         private void txtAddPersonInputAddress_TextChanged(object sender, EventArgs e)
         {
             if (txtAddPersonInputAddress.Text != "Enter Address" && !string.IsNullOrWhiteSpace(txtAddPersonInputAddress.Text))
@@ -577,5 +573,193 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 ErrorHelper.HideErrorForControl(txtAddPersonInputAddress);
             }
         }
+
+        private void brnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (masterData == null || masterData.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "There is no data to export.",
+                    "Export",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Title = "Save Person Excel File";
+                saveDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
+                saveDialog.FileName =
+                    "Person_" +
+                    DateTime.Now.ToString("ddMMyyyy_HHmmss") +
+                    ".xlsx";
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    ExportPersonToExcel(
+                        masterData,
+                        saveDialog.FileName);
+
+                    MessageBox.Show(
+                        "Perosn data exported successfully.",
+                        "Export Successful",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Export failed.\n\n" + ex.Message,
+                        "Export Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void ExportPersonToExcel(DataTable dataTable, string filePath)
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook workbook = null;
+            Excel.Worksheet worksheet = null;
+
+            try
+            {
+                excelApp = new Excel.Application();
+                excelApp.Visible = false;
+                excelApp.DisplayAlerts = false;
+
+                workbook = excelApp.Workbooks.Add(
+                    Excel.XlWBATemplate.xlWBATWorksheet);
+
+                worksheet = (Excel.Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Persons";
+
+                // Column Names
+                for (int col = 0;
+                     col < dataTable.Columns.Count;
+                     col++)
+                {
+                    worksheet.Cells[1, col + 1] =
+                        GetPersonExportColumnName(
+                            dataTable.Columns[col].ColumnName);
+                }
+
+                // Data
+                for (int row = 0;
+                     row < dataTable.Rows.Count;
+                     row++)
+                {
+                    for (int col = 0;
+                         col < dataTable.Columns.Count;
+                         col++)
+                    {
+                        if (dataTable.Rows[row][col] != DBNull.Value)
+                        {
+                            worksheet.Cells[row + 2, col + 1] =
+                                dataTable.Rows[row][col].ToString();
+                        }
+                    }
+                }
+
+                // Header bold
+                Excel.Range headerRange =
+                    worksheet.Range[
+                        worksheet.Cells[1, 1],
+                        worksheet.Cells[
+                            1,
+                            dataTable.Columns.Count]];
+
+                headerRange.Font.Bold = true;
+
+                // Auto fit columns
+                worksheet.Columns.AutoFit();
+
+                // SAVE EXCEL FILE
+                workbook.SaveAs(
+                    filePath,
+                    Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+                // Close Excel without opening it
+                workbook.Close(false);
+                excelApp.Quit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Excel export failed.\n\n" + ex.Message,
+                    "Export Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                if (workbook != null)
+                {
+                    try
+                    {
+                        workbook.Close(false);
+                    }
+                    catch { }
+                }
+
+                if (excelApp != null)
+                {
+                    try
+                    {
+                        excelApp.Quit();
+                    }
+                    catch { }
+                }
+            }
+            finally
+            {
+                // Release COM objects
+                if (worksheet != null)
+                    Marshal.ReleaseComObject(worksheet);
+
+                if (workbook != null)
+                    Marshal.ReleaseComObject(workbook);
+
+                if (excelApp != null)
+                    Marshal.ReleaseComObject(excelApp);
+
+                worksheet = null;
+                workbook = null;
+                excelApp = null;
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
+        private string GetPersonExportColumnName(string columnName)
+        {
+            switch (columnName)
+            {
+            
+                case "PersonID":
+                    return "SL";
+
+                case "PersonName":
+                    return "Person Name";
+
+                case "PhoneNumber":
+                    return "Phone Number";
+
+                case "Address":
+                    return "Address";
+
+                default:
+                    return columnName;
+            }
+        }
+
+        
     }
 }
