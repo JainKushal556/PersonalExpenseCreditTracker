@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +41,15 @@ namespace BLLayer.Task
             {
                 return result;
             }
+
+            taskDal.userId = userId;
+            taskDal.taskId = taskId;
+            taskDal.taskTitle = taskTitle;
+            if (taskDal.FindDuplicateTaskTitleIntoDB())
+            {
+                return CommonValidator.ValidationResult.TaskTitleAlreadyExists;
+            }
+
             // Priority Validation
             result = CommonValidator.ValidatePriority(priorityId);
             if (result != CommonValidator.ValidationResult.Success)
@@ -55,10 +64,7 @@ namespace BLLayer.Task
                 return result;
             }
 
-            // Pass data to DAL
-            taskDal.userId = userId;
             taskDal.priorityId = priorityId;
-            taskDal.taskTitle = taskTitle;
             taskDal.deadline = deadline;
             taskDal.statusId = statusId;
 
@@ -71,8 +77,8 @@ namespace BLLayer.Task
             {
                 return CommonValidator.ValidationResult.StoreProcedureError;
             }
-
         }
+
       // Edit Task
         public CommonValidator.ValidationResult EditTaskValidator()
         {
@@ -160,6 +166,9 @@ namespace BLLayer.Task
                 return CommonValidator.ValidationResult.StoreProcedureError;
             }
         }
+
+
+
 
 
     }

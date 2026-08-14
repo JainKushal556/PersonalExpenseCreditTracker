@@ -202,5 +202,39 @@ namespace DALayer.Task
                 }
             }
         }
+
+
+        public Boolean FindDuplicateTaskTitleIntoDB()
+        {
+            string connectionString = Common.SqlHelper.connectionString;
+            SqlConnection sqlConnection = null;
+            bool isDuplicate = false;
+
+            try
+            {
+                sqlConnection = new SqlConnection(connectionString);
+                using (SqlCommand sqlCommand = new SqlCommand("spCheckDuplicateTaskTitle", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@UserID", this.userId);
+                    sqlCommand.Parameters.AddWithValue("@TaskID", this.taskId);
+                    sqlCommand.Parameters.AddWithValue("@TaskTitle", this.taskTitle);
+
+                    sqlConnection.Open();
+                    isDuplicate = Convert.ToBoolean(sqlCommand.ExecuteScalar());
+                    return isDuplicate;
+                }
+            }
+            catch (Exception)
+            {
+                return isDuplicate;
+            }
+            finally
+            {
+                if (sqlConnection != null)
+                    sqlConnection.Close();
+            }
+        }
+
     }
 }

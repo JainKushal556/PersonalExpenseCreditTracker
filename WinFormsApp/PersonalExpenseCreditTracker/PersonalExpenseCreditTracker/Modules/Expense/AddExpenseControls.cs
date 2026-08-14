@@ -44,8 +44,16 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             txtAddExpenseDescription.ForeColor = Color.Gray;
             cmbAddExpenseCategory.Text = "Select Category";
             cmbAddExpenseCategory.ForeColor = Color.Gray;
-            cmbAddExpenseSubCategory.Text = "Select Sub Category";
+
+            //cmbAddExpenseSubCategory.Text = "Select Sub Category";
+            //cmbAddExpenseSubCategory.ForeColor = Color.Gray;
+
+            cmbAddExpenseSubCategory.DataSource = null;
+            cmbAddExpenseSubCategory.Items.Clear();
+            cmbAddExpenseSubCategory.Items.Add("Please Select a Category First");
+            cmbAddExpenseSubCategory.SelectedIndex = 0;
             cmbAddExpenseSubCategory.ForeColor = Color.Gray;
+
             cmbAddExpensePaymentType.Text = "Select Payment Type";
             cmbAddExpensePaymentType.ForeColor = Color.Gray;
 
@@ -474,7 +482,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             if (ignoreEvents) return;
 
-            ignoreEvents = true; // Selection চলাকালীন সব ইভেন্ট ব্লক
+            ignoreEvents = true; 
 
             ErrorHelper.HideErrorForControl(cmbAddExpenseCategory);
             cmbAddExpenseCategory.AutoCompleteMode = AutoCompleteMode.Append;
@@ -563,14 +571,15 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     {
                         cmbAddExpenseSubCategory.DataSource = null;
                         cmbAddExpenseSubCategory.Items.Clear();
-                        cmbAddExpenseSubCategory.Text = "Select Sub Category";
+                        cmbAddExpenseSubCategory.Items.Add("Please Select a Category First");
+                        cmbAddExpenseSubCategory.SelectedIndex = 0;
                         cmbAddExpenseSubCategory.ForeColor = Color.Gray;
                     }
                 }
             }
             else if (categoryId > 0)
             {
-                // Category সিলেক্ট হলে তার অধীনে SubCategory গুলো লোড হবে
+               
                 CommonUiFunction.LoadInComboBox(
                     "spGetExpenseSubCategoryByCategoryID",
                     "Select Sub Category",
@@ -581,14 +590,20 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             }
             else
             {
-                // "Select Category" থাকলে SubCategory ক্লিয়ার থাকবে
+               
+                //cmbAddExpenseSubCategory.DataSource = null;
+                //cmbAddExpenseSubCategory.Items.Clear();
+                //cmbAddExpenseSubCategory.Text = "Select Sub Category";
+                //cmbAddExpenseSubCategory.ForeColor = Color.Gray;
+
                 cmbAddExpenseSubCategory.DataSource = null;
                 cmbAddExpenseSubCategory.Items.Clear();
-                cmbAddExpenseSubCategory.Text = "Select Sub Category";
+                cmbAddExpenseSubCategory.Items.Add("Please Select a Category First");
+                cmbAddExpenseSubCategory.SelectedIndex = 0;
                 cmbAddExpenseSubCategory.ForeColor = Color.Gray;
             }
 
-            ignoreEvents = false; // কাজ শেষ, ইভেন্ট আবার চালু
+            ignoreEvents = false; 
         }
 
         private void cmbAddExpenseCategory_Click(object sender, EventArgs e)

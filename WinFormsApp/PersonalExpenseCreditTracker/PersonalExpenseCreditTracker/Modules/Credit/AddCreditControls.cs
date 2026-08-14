@@ -42,8 +42,16 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             txtAddCreditDescription.ForeColor = Color.Gray;
             cmbAddCreditCategory.Text = "Select Category";
             cmbAddCreditCategory.ForeColor = Color.Gray;
-            cmbAddCreditSubCategory.Text = "Select Sub Category";
+
+            //cmbAddCreditSubCategory.Text = "Select Sub Category";
+            //cmbAddCreditSubCategory.ForeColor = Color.Gray;
+
+            cmbAddCreditSubCategory.DataSource = null;
+            cmbAddCreditSubCategory.Items.Clear();
+            cmbAddCreditSubCategory.Items.Add("Please Select a Category First");
+            cmbAddCreditSubCategory.SelectedIndex = 0;
             cmbAddCreditSubCategory.ForeColor = Color.Gray;
+
             cmbAddCreditPaymentType.Text = "Select Payment Type";
             cmbAddCreditPaymentType.ForeColor = Color.Gray;
 
@@ -303,7 +311,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                     {
                         cmbAddCreditSubCategory.DataSource = null;
                         cmbAddCreditSubCategory.Items.Clear();
-                        cmbAddCreditSubCategory.Text = "Select Sub Category";
+                        cmbAddCreditSubCategory.Items.Add("Please Select a Category First");
+                        cmbAddCreditSubCategory.SelectedIndex = 0;
                         cmbAddCreditSubCategory.ForeColor = Color.Gray;
                     }
                 }
@@ -321,14 +330,14 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
             else
             {
-                // "Select Category" থাকলে SubCategory ক্লিয়ার থাকবে
                 cmbAddCreditSubCategory.DataSource = null;
                 cmbAddCreditSubCategory.Items.Clear();
-                cmbAddCreditSubCategory.Text = "Select Sub Category";
+                cmbAddCreditSubCategory.Items.Add("Please Select a Category First");
+                cmbAddCreditSubCategory.SelectedIndex = 0;
                 cmbAddCreditSubCategory.ForeColor = Color.Gray;
             }
 
-            ignoreEvents = false; // কাজ শেষ, ইভেন্ট আবার চালু
+            ignoreEvents = false; 
         }
 
 
