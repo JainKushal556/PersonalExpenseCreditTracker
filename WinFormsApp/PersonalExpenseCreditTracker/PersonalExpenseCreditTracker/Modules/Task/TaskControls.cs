@@ -64,6 +64,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             InitializeComponent();
             StyleTaskGrid();
             this.Resize += TaskControls_Resize;
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Tasks");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Tasks");
         }
 
         private void TaskControls_Load(object sender, EventArgs e)
@@ -73,6 +78,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             CommonUiFunction.LoadInComboBox("spGetAllTaskStatus", "Select Status", cmbStatus);
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPriority);
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbStatus);
+
+            txtSearch.Text = "Search...";
+            txtSearch.ForeColor = Color.Gray;
             cmbPriority.ForeColor = Color.Gray;
             cmbStatus.ForeColor = Color.Gray;
             cmbPriority.SelectedIndexChanged += cmbPriority_SelectedIndexChanged;
@@ -451,16 +459,45 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             //Row Style
             dataGridViewTask.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
-            dataGridViewTask.DefaultCellStyle.ForeColor = Color.Black;
-            //dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
-            dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewTask.RowTemplate.Height = 40;
             dataGridViewTask.RowHeadersVisible = false;
             dataGridViewTask.MultiSelect = false;
             dataGridViewTask.ReadOnly = true;
             dataGridViewTask.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            //// Zigzag
+
+            //Normal Row
+            dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
+            dataGridViewTask.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //  Alternating Row (Zigzag - Soft Slate Tint)
+            dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
+            dataGridViewTask.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            //  Selection Color (একই সিলেকশন কালার)
+            dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247); // Royal Blue
+            dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247);
+            dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+
+            ////// Zigzag
+            ////Normal Row
+            //dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
+            //dataGridViewTask.DefaultCellStyle.ForeColor = Color.Black;
+
+            //// Alternating Row Style 
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 253, 244);
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            //// Selected Row Style 
+            //dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(5, 150, 105);
+            //dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(5, 150, 105);
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.White;
+
 
             //Border style
             dataGridViewTask.BorderStyle = BorderStyle.None;
@@ -1372,6 +1409,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             if (cmbPriority.Items.Count > 0) cmbPriority.SelectedIndex = 0;
             if (cmbStatus.Items.Count > 0) cmbStatus.SelectedIndex = 0;
             txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
             ignoreEvents = false;
             currentPage = 1;
             LoadTaskData(Session.LogedInUser.GetUserId());
@@ -1599,6 +1637,24 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
                 default:
                     return columnName;
+            }
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search...")
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search...";
+                txtSearch.ForeColor = Color.Gray;
             }
         }
 

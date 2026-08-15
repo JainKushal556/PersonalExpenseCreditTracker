@@ -29,7 +29,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTaskContent = new System.Windows.Forms.Panel();
             this.pnlTaskList = new System.Windows.Forms.Panel();
             this.tableLayoutPanelTask = new System.Windows.Forms.TableLayoutPanel();
@@ -425,6 +424,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.txtSearch.Size = new System.Drawing.Size(250, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // pnlButtonControls
             // 
@@ -432,10 +433,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlButtonControls.Controls.Add(this.btnRefresh);
             this.pnlButtonControls.Controls.Add(this.btnExport);
             this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonControls.Location = new System.Drawing.Point(1024, 0);
+            this.pnlButtonControls.Location = new System.Drawing.Point(1012, 0);
             this.pnlButtonControls.Name = "pnlButtonControls";
             this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 5, 10, 5);
-            this.pnlButtonControls.Size = new System.Drawing.Size(107, 39);
+            this.pnlButtonControls.Size = new System.Drawing.Size(119, 39);
             this.pnlButtonControls.TabIndex = 3;
             // 
             // btnFilter
@@ -469,7 +470,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
             this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.sync1;
-            this.btnRefresh.Location = new System.Drawing.Point(34, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(39, 5);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(30, 30);
             this.btnRefresh.TabIndex = 9;
@@ -489,7 +490,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.ForeColor = System.Drawing.Color.White;
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
-            this.btnExport.Location = new System.Drawing.Point(68, 5);
+            this.btnExport.Location = new System.Drawing.Point(80, 5);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(29, 29);
             this.btnExport.TabIndex = 8;
@@ -520,9 +521,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.dataGridViewTask.Name = "dataGridViewTask";
             this.dataGridViewTask.ReadOnly = true;
             this.dataGridViewTask.RowHeadersVisible = false;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTask.RowTemplate.Height = 24;
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewTask.Size = new System.Drawing.Size(1131, 503);
