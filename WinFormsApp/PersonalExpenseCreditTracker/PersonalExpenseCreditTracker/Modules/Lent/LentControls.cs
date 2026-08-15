@@ -58,6 +58,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             InitializeComponent();
 
             StyleLentGrid();
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Lent");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Lent");
+
             dgvLentDataTable.CellDoubleClick += dgvLentDataTable_CellDoubleClick;
 
             dgvLentDataTable.AutoGenerateColumns = false;
@@ -137,6 +143,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void LentControls_Load(object sender, EventArgs e)
         {
             ignoreEvents = true;
+            txtSearch.Text = "Search...";
+            txtSearch.ForeColor = Color.Gray;
             txtMinAmount.Text = "Enter Amount";
             txtMinAmount.ForeColor = Color.Gray;
             txtMaxAmount.Text = "Enter Amount";
@@ -314,17 +322,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dgvLentDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvLentDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            //Column Background Color
-            colDate.DefaultCellStyle.BackColor = Color.White;
-            colPersonName.DefaultCellStyle.BackColor = Color.White;
-            colAmount.DefaultCellStyle.BackColor = Color.White;
-            colPaymentType.DefaultCellStyle.BackColor = Color.White;
-            colStatus.DefaultCellStyle.BackColor = Color.White;
-            colReturnedAmount.DefaultCellStyle.BackColor = Color.White;
-            colRemainingAmount.DefaultCellStyle.BackColor = Color.White;
-            colDeadline.DefaultCellStyle.BackColor = Color.White;
-            colDescription.DefaultCellStyle.BackColor = Color.White;
-
             //Column FontStyle
             colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
             colPersonName.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -338,16 +335,39 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             //Row Style
             dgvLentDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            dgvLentDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvLentDataTable.DefaultCellStyle.ForeColor = Color.Black;
-            //dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dgvLentDataTable.DefaultCellStyle.SelectionBackColor = Color.Red;
-            dgvLentDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvLentDataTable.RowTemplate.Height = 40;
             dgvLentDataTable.RowHeadersVisible = false;
             dgvLentDataTable.MultiSelect = false;
             dgvLentDataTable.ReadOnly = true;
             dgvLentDataTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Zigzag
+
+            Color selectedRowColor = Color.FromArgb(174, 205, 247);
+            // Normal Row
+            dgvLentDataTable.DefaultCellStyle.BackColor = Color.White;
+            dgvLentDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Alternating Row
+            dgvLentDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
+            dgvLentDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Selection
+            dgvLentDataTable.DefaultCellStyle.SelectionBackColor = selectedRowColor;
+            dgvLentDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dgvLentDataTable.AlternatingRowsDefaultCellStyle.SelectionBackColor = selectedRowColor;
+            dgvLentDataTable.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Force every column to use the same selection color
+            foreach (DataGridViewColumn column in dgvLentDataTable.Columns)
+            {
+                column.DefaultCellStyle.SelectionBackColor =
+                    selectedRowColor;
+
+                column.DefaultCellStyle.SelectionForeColor =
+                    Color.Black;
+            }
 
             //Border style
             dgvLentDataTable.BorderStyle = BorderStyle.None;
@@ -1293,6 +1313,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 cmbStatus.ForeColor = Color.Gray;
             }
             txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
             ignoreEvents = false;
             currentPage = 1;
             LoadLentData(Session.LogedInUser.GetUserId());
@@ -1712,6 +1733,26 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     return columnName;
             }
         }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search...")
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search...";
+                txtSearch.ForeColor = Color.Gray;
+            }
+        }
+
+        
        
 
         
