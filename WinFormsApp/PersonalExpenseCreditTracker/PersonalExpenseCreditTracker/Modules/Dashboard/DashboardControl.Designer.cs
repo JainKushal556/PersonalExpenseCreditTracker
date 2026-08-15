@@ -28,12 +28,12 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label2 = new System.Windows.Forms.Label();
             this.tblCard = new System.Windows.Forms.TableLayoutPanel();
             this.pnlExpenseCard = new System.Windows.Forms.Panel();
@@ -553,7 +553,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.31903F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.68097F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.tableLayoutPanel1.Controls.Add(this.lblEnterPercentt, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.lblEnterAmount, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 0, 4);
@@ -588,10 +588,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblEnterPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblEnterPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnterPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblEnterPercentt.Location = new System.Drawing.Point(267, 134);
+            this.lblEnterPercentt.Location = new System.Drawing.Point(265, 134);
             this.lblEnterPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblEnterPercentt.Name = "lblEnterPercentt";
-            this.lblEnterPercentt.Size = new System.Drawing.Size(88, 20);
+            this.lblEnterPercentt.Size = new System.Drawing.Size(90, 20);
             this.lblEnterPercentt.TabIndex = 14;
             this.lblEnterPercentt.Text = "0%";
             this.lblEnterPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -603,10 +603,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblEnterAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnterAmount.ForeColor = System.Drawing.Color.Black;
             this.lblEnterAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblEnterAmount.Location = new System.Drawing.Point(161, 131);
+            this.lblEnterAmount.Location = new System.Drawing.Point(160, 131);
             this.lblEnterAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblEnterAmount.Name = "lblEnterAmount";
-            this.lblEnterAmount.Size = new System.Drawing.Size(101, 23);
+            this.lblEnterAmount.Size = new System.Drawing.Size(104, 23);
             this.lblEnterAmount.TabIndex = 13;
             this.lblEnterAmount.Text = " ₹0";
             // 
@@ -619,7 +619,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(159, 31);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(158, 31);
             this.flowLayoutPanel3.TabIndex = 12;
             this.flowLayoutPanel3.WrapContents = false;
             // 
@@ -650,10 +650,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblBillPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblBillPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBillPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblBillPercentt.Location = new System.Drawing.Point(267, 102);
+            this.lblBillPercentt.Location = new System.Drawing.Point(265, 102);
             this.lblBillPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblBillPercentt.Name = "lblBillPercentt";
-            this.lblBillPercentt.Size = new System.Drawing.Size(88, 20);
+            this.lblBillPercentt.Size = new System.Drawing.Size(90, 20);
             this.lblBillPercentt.TabIndex = 11;
             this.lblBillPercentt.Text = "0%";
             this.lblBillPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -665,10 +665,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblBillAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBillAmount.ForeColor = System.Drawing.Color.Black;
             this.lblBillAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblBillAmount.Location = new System.Drawing.Point(161, 99);
+            this.lblBillAmount.Location = new System.Drawing.Point(160, 99);
             this.lblBillAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblBillAmount.Name = "lblBillAmount";
-            this.lblBillAmount.Size = new System.Drawing.Size(101, 23);
+            this.lblBillAmount.Size = new System.Drawing.Size(104, 23);
             this.lblBillAmount.TabIndex = 10;
             this.lblBillAmount.Text = " ₹0";
             // 
@@ -681,7 +681,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(159, 31);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(158, 31);
             this.flowLayoutPanel2.TabIndex = 9;
             this.flowLayoutPanel2.WrapContents = false;
             // 
@@ -712,10 +712,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblTransportPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTransportPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTransportPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblTransportPercentt.Location = new System.Drawing.Point(267, 70);
+            this.lblTransportPercentt.Location = new System.Drawing.Point(265, 70);
             this.lblTransportPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblTransportPercentt.Name = "lblTransportPercentt";
-            this.lblTransportPercentt.Size = new System.Drawing.Size(88, 20);
+            this.lblTransportPercentt.Size = new System.Drawing.Size(90, 20);
             this.lblTransportPercentt.TabIndex = 8;
             this.lblTransportPercentt.Text = "0%";
             this.lblTransportPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -727,10 +727,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblTransportAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTransportAmount.ForeColor = System.Drawing.Color.Black;
             this.lblTransportAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTransportAmount.Location = new System.Drawing.Point(161, 67);
+            this.lblTransportAmount.Location = new System.Drawing.Point(160, 67);
             this.lblTransportAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblTransportAmount.Name = "lblTransportAmount";
-            this.lblTransportAmount.Size = new System.Drawing.Size(101, 23);
+            this.lblTransportAmount.Size = new System.Drawing.Size(104, 23);
             this.lblTransportAmount.TabIndex = 7;
             this.lblTransportAmount.Text = " ₹0";
             // 
@@ -743,7 +743,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(159, 31);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(158, 31);
             this.flowLayoutPanel1.TabIndex = 6;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -774,10 +774,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblShopingPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblShopingPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblShopingPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblShopingPercentt.Location = new System.Drawing.Point(267, 38);
+            this.lblShopingPercentt.Location = new System.Drawing.Point(265, 38);
             this.lblShopingPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblShopingPercentt.Name = "lblShopingPercentt";
-            this.lblShopingPercentt.Size = new System.Drawing.Size(88, 20);
+            this.lblShopingPercentt.Size = new System.Drawing.Size(90, 20);
             this.lblShopingPercentt.TabIndex = 5;
             this.lblShopingPercentt.Text = "0%";
             this.lblShopingPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -789,10 +789,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblShopingAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblShopingAmount.ForeColor = System.Drawing.Color.Black;
             this.lblShopingAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblShopingAmount.Location = new System.Drawing.Point(161, 35);
+            this.lblShopingAmount.Location = new System.Drawing.Point(160, 35);
             this.lblShopingAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblShopingAmount.Name = "lblShopingAmount";
-            this.lblShopingAmount.Size = new System.Drawing.Size(101, 23);
+            this.lblShopingAmount.Size = new System.Drawing.Size(104, 23);
             this.lblShopingAmount.TabIndex = 4;
             this.lblShopingAmount.Text = " ₹0";
             // 
@@ -805,7 +805,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.flpShopping.Margin = new System.Windows.Forms.Padding(0);
             this.flpShopping.Name = "flpShopping";
             this.flpShopping.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flpShopping.Size = new System.Drawing.Size(159, 31);
+            this.flpShopping.Size = new System.Drawing.Size(158, 31);
             this.flpShopping.TabIndex = 3;
             this.flpShopping.WrapContents = false;
             // 
@@ -839,7 +839,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.flpFood.Margin = new System.Windows.Forms.Padding(0);
             this.flpFood.Name = "flpFood";
             this.flpFood.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flpFood.Size = new System.Drawing.Size(159, 31);
+            this.flpFood.Size = new System.Drawing.Size(158, 31);
             this.flpFood.TabIndex = 0;
             this.flpFood.WrapContents = false;
             // 
@@ -870,10 +870,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblFoodPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblFoodPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFoodPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblFoodPercentt.Location = new System.Drawing.Point(267, 6);
+            this.lblFoodPercentt.Location = new System.Drawing.Point(265, 6);
             this.lblFoodPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblFoodPercentt.Name = "lblFoodPercentt";
-            this.lblFoodPercentt.Size = new System.Drawing.Size(88, 20);
+            this.lblFoodPercentt.Size = new System.Drawing.Size(90, 20);
             this.lblFoodPercentt.TabIndex = 2;
             this.lblFoodPercentt.Text = "0%";
             this.lblFoodPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -885,10 +885,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.lblFoodAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFoodAmount.ForeColor = System.Drawing.Color.Black;
             this.lblFoodAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblFoodAmount.Location = new System.Drawing.Point(161, 3);
+            this.lblFoodAmount.Location = new System.Drawing.Point(160, 3);
             this.lblFoodAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblFoodAmount.Name = "lblFoodAmount";
-            this.lblFoodAmount.Size = new System.Drawing.Size(101, 23);
+            this.lblFoodAmount.Size = new System.Drawing.Size(104, 23);
             this.lblFoodAmount.TabIndex = 1;
             this.lblFoodAmount.Text = " ₹0";
             // 
@@ -906,20 +906,20 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             // chartExpenseCategory
             // 
             this.chartExpenseCategory.BackColor = System.Drawing.Color.Transparent;
-            chartArea1.Name = "ChartArea1";
-            this.chartExpenseCategory.ChartAreas.Add(chartArea1);
+            chartArea3.Name = "ChartArea1";
+            this.chartExpenseCategory.ChartAreas.Add(chartArea3);
             this.chartExpenseCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Alignment = System.Drawing.StringAlignment.Center;
-            legend1.Name = "Legend1";
-            this.chartExpenseCategory.Legends.Add(legend1);
+            legend3.Alignment = System.Drawing.StringAlignment.Center;
+            legend3.Name = "Legend1";
+            this.chartExpenseCategory.Legends.Add(legend3);
             this.chartExpenseCategory.Location = new System.Drawing.Point(0, 0);
             this.chartExpenseCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartExpenseCategory.Name = "chartExpenseCategory";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartExpenseCategory.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartExpenseCategory.Series.Add(series3);
             this.chartExpenseCategory.Size = new System.Drawing.Size(360, 312);
             this.chartExpenseCategory.TabIndex = 6;
             this.chartExpenseCategory.Text = "chart1";
@@ -1022,19 +1022,19 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             // 
             // chartSecond
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartSecond.ChartAreas.Add(chartArea2);
+            chartArea4.Name = "ChartArea1";
+            this.chartSecond.ChartAreas.Add(chartArea4);
             this.chartSecond.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartSecond.Legends.Add(legend2);
+            legend4.Name = "Legend1";
+            this.chartSecond.Legends.Add(legend4);
             this.chartSecond.Location = new System.Drawing.Point(11, 56);
             this.chartSecond.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.chartSecond.Name = "chartSecond";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartSecond.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartSecond.Series.Add(series4);
             this.chartSecond.Size = new System.Drawing.Size(357, 467);
             this.chartSecond.TabIndex = 1;
             this.chartSecond.Text = "chart1";
@@ -1405,19 +1405,17 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             this.pnlNotification.Controls.Add(this.panel11);
             this.pnlNotification.Location = new System.Drawing.Point(721, 0);
             this.pnlNotification.Name = "pnlNotification";
-            this.pnlNotification.Size = new System.Drawing.Size(516, 675);
+            this.pnlNotification.Size = new System.Drawing.Size(516, 666);
             this.pnlNotification.TabIndex = 1;
             // 
             // flowLayoutPanel5
             // 
-            this.flowLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel5.AutoScroll = true;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(0, 41);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(516, 632);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(514, 664);
             this.flowLayoutPanel5.TabIndex = 1;
             // 
             // panel11
