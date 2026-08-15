@@ -268,29 +268,93 @@ namespace PersonalExpenseCreditTracker.Common
             return dataTable;
         }
 
+
         public static DataTable SearchDataInLentOrBorrow(DataTable masterTable, TextBox txtBox)
         {
-            string search = txtBox.Text.Trim().Replace("'", "''");
-            if (masterTable == null) return null;
-            if (string.IsNullOrWhiteSpace(search))
+            if (masterTable == null)
+                return null;
+
+            string search = txtBox.Text.Trim();
+
+           
+            if (string.IsNullOrWhiteSpace(search) || search == "Search...")
             {
                 masterTable.DefaultView.RowFilter = "";
                 return masterTable.DefaultView.ToTable();
             }
+
+            search = search.Replace("'", "''");
+
+            List<string> filters = new List<string>();
+
+            if (masterTable.Columns.Contains("Amount"))
+                filters.Add(
+                    "Convert(Amount, 'System.String') LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("ReturnedAmount"))
+                filters.Add(
+                    "Convert(ReturnedAmount, 'System.String') LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("RemainingAmount"))
+                filters.Add(
+                    "Convert(RemainingAmount, 'System.String') LIKE '%" + search + "%'");
+
             if (masterTable.Columns.Contains("LentAt"))
-                dateColumn = "LentAt";
-            else
-                dateColumn = "BorrowAt";
-            masterTable.DefaultView.RowFilter = string.Format(
-               "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
-               "Convert({1}, 'System.String') LIKE '%{0}%' OR " +
-               "PersonName LIKE '%{0}%' OR " +
-               "PaymentName LIKE '%{0}%' OR " +
-               "StatusName LIKE '%{0}%'",
-               search, dateColumn);
-            DataTable filteredTable = masterTable.DefaultView.ToTable();
-            return filteredTable;
+                filters.Add(
+                    "Convert(LentAt, 'System.String') LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("BorrowAt"))
+                filters.Add(
+                    "Convert(BorrowAt, 'System.String') LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("DeadlineAt"))
+                filters.Add(
+                    "Convert(DeadlineAt, 'System.String') LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("PersonName"))
+                filters.Add(
+                    "PersonName LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("PaymentName"))
+                filters.Add(
+                    "PaymentName LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("StatusName"))
+                filters.Add(
+                    "StatusName LIKE '%" + search + "%'");
+
+            if (filters.Count == 0)
+                return masterTable.Clone();
+
+            masterTable.DefaultView.RowFilter =
+                string.Join(" OR ", filters.ToArray());
+
+            return masterTable.DefaultView.ToTable();
         }
+
+        //public static DataTable SearchDataInLentOrBorrow(DataTable masterTable, TextBox txtBox)
+        //{
+        //    string search = txtBox.Text.Trim().Replace("'", "''");
+        //    if (masterTable == null) return null;
+        //    if (string.IsNullOrWhiteSpace(search))
+        //    {
+        //        masterTable.DefaultView.RowFilter = "";
+        //        return masterTable.DefaultView.ToTable();
+        //    }
+        //    if (masterTable.Columns.Contains("LentAt"))
+        //        dateColumn = "LentAt";
+        //    else
+        //        dateColumn = "BorrowAt";
+        //    masterTable.DefaultView.RowFilter = string.Format(
+        //       "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
+        //       "Convert({1}, 'System.String') LIKE '%{0}%' OR " +
+        //       "PersonName LIKE '%{0}%' OR " +
+        //       "PaymentName LIKE '%{0}%' OR " +
+        //       "StatusName LIKE '%{0}%'",
+        //       search, dateColumn);
+        //    DataTable filteredTable = masterTable.DefaultView.ToTable();
+        //    return filteredTable;
+        //}
 
         public static DataTable SearchDataInExpenseOrCredit(DataTable masterTable, TextBox txtBox)
         {
@@ -385,27 +449,73 @@ namespace PersonalExpenseCreditTracker.Common
             return filteredTable;
         }
 
+
         public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
         {
-            string search = txtBox.Text.Trim().Replace("'", "''");
+            if (masterTable == null)
+                return null;
 
-            if (masterTable == null) return null;
-            if (string.IsNullOrWhiteSpace(search))
+            string search = txtBox.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(search) || search == "Search...")
             {
                 masterTable.DefaultView.RowFilter = "";
                 return masterTable.DefaultView.ToTable();
             }
 
-            masterTable.DefaultView.RowFilter = string.Format(
-                "TaskTitle LIKE '%{0}%' OR " +
-                "TaskStatusName LIKE '%{0}%' OR " +
-                "PriorityName LIKE '%{0}%' OR " +
-                "Convert(CreatedAt, 'System.String') LIKE '%{0}%'",
-                search);
+            search = search.Replace("'", "''");
 
-            DataTable filteredTable = masterTable.DefaultView.ToTable();
-            return filteredTable;
+            List<string> filters = new List<string>();
+
+            if (masterTable.Columns.Contains("TaskTitle"))
+                filters.Add("TaskTitle LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("PriorityName"))
+                filters.Add("PriorityName LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("TaskStatusName"))
+                filters.Add("TaskStatusName LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("CreatedAt"))
+                filters.Add(
+                    "Convert(CreatedAt, 'System.String') LIKE '%" +
+                    search + "%'"
+                );
+
+            if (masterTable.Columns.Contains("Deadline"))
+                filters.Add(
+                    "Convert(Deadline, 'System.String') LIKE '%" +
+                    search + "%'"
+                );
+
+            if (filters.Count == 0)
+                return masterTable.Clone();
+
+            masterTable.DefaultView.RowFilter =string.Join(" OR ", filters.ToArray());
+
+            return masterTable.DefaultView.ToTable();
         }
+        //public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
+        //{
+        //    string search = txtBox.Text.Trim().Replace("'", "''");
+
+        //    if (masterTable == null) return null;
+        //    if (string.IsNullOrWhiteSpace(search))
+        //    {
+        //        masterTable.DefaultView.RowFilter = "";
+        //        return masterTable.DefaultView.ToTable();
+        //    }
+
+        //    masterTable.DefaultView.RowFilter = string.Format(
+        //        "TaskTitle LIKE '%{0}%' OR " +
+        //        "TaskStatusName LIKE '%{0}%' OR " +
+        //        "PriorityName LIKE '%{0}%' OR " +
+        //        "Convert(CreatedAt, 'System.String') LIKE '%{0}%'",
+        //        search);
+
+        //    DataTable filteredTable = masterTable.DefaultView.ToTable();
+        //    return filteredTable;
+        //}
 
         public static DataTable SearchDataInPersons(DataTable masterTable, TextBox txtBox)
         {

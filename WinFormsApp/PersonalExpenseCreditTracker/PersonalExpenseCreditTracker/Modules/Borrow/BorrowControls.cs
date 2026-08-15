@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Common;
 using BLLayer.Common;
 using BLLayer.Borrow;
+using Excel = Microsoft.Office.Interop.Excel;
 //using PersonalExpenseCreditTracker.Modules.Borrow.PayBorrowAmountControls;
 
 
@@ -42,6 +43,12 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         {
             InitializeComponent();
             StyleBorrowGrid();
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Borrow");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Borrow");
+            toolTip.SetToolTip(txtSearch, "Search by Person Name,Amount,Date,Payment Type or Status");
 
             dgvBorrowDataTable.AutoGenerateColumns = false;
             dgvBorrowDataTable.CellDoubleClick += dgvBorrowDataTable_CellDoubleClick;
@@ -136,6 +143,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void BorrowControls_Load(object sender, EventArgs e)
         {
             ignoreEvents = true;
+            txtSearch.Text = "Search records...";
+            txtSearch.ForeColor = Color.Gray;
             txtMinAmount.Text = "Enter Amount";
             txtMinAmount.ForeColor = Color.Gray;
             txtMaxAmount.Text = "Enter Amount";
@@ -321,6 +330,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.AllowUserToOrderColumns = false;
             dgvBorrowDataTable.AutoGenerateColumns = false;
             dgvBorrowDataTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBorrowDataTable.AllowUserToResizeColumns = true;
 
             //Column HeaderStyle
             dgvBorrowDataTable.EnableHeadersVisualStyles = false;
@@ -331,17 +341,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 255);
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            //Column Background Color
-            colDate.DefaultCellStyle.BackColor = Color.White;
-            colPersonName.DefaultCellStyle.BackColor = Color.White;
-            colPaymentType.DefaultCellStyle.BackColor = Color.White;
-            colStatus.DefaultCellStyle.BackColor = Color.White;
-            colAmount.DefaultCellStyle.BackColor = Color.White;
-            colPaidAmount.DefaultCellStyle.BackColor = Color.White;
-            colRemainingAmount.DefaultCellStyle.BackColor = Color.White;
-            colDeadline.DefaultCellStyle.BackColor = Color.White;
-            colDescription.DefaultCellStyle.BackColor = Color.White;
 
             //Column FontStyle
             colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -356,13 +355,43 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             //Row Style
             dgvBorrowDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            dgvBorrowDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvBorrowDataTable.DefaultCellStyle.ForeColor = Color.Black;
             dgvBorrowDataTable.RowTemplate.Height = 40;
             dgvBorrowDataTable.RowHeadersVisible = false;
             dgvBorrowDataTable.MultiSelect = false;
             dgvBorrowDataTable.ReadOnly = true;
             dgvBorrowDataTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Zigzag
+
+            Color selectedRowColor = Color.FromArgb(174, 205, 247);
+            // Normal Row
+            dgvBorrowDataTable.DefaultCellStyle.BackColor = Color.White;
+            dgvBorrowDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Alternating Row
+            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.BackColor =  Color.FromArgb(244, 247, 250);
+
+            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Selection
+            dgvBorrowDataTable.DefaultCellStyle.SelectionBackColor = selectedRowColor;
+
+            dgvBorrowDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.SelectionBackColor =  selectedRowColor;
+
+            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Force every column to use the same selection color
+            foreach (DataGridViewColumn column in dgvBorrowDataTable.Columns)
+            {
+                column.DefaultCellStyle.SelectionBackColor =
+                    selectedRowColor;
+
+                column.DefaultCellStyle.SelectionForeColor =
+                    Color.Black;
+            }
+
 
             // Border Style
             dgvBorrowDataTable.BorderStyle = BorderStyle.None;
@@ -1156,6 +1185,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 cmbStatus.ForeColor = Color.Gray;
             }
             txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
             ignoreEvents = false;
             currentPage = 1;
             LoadBorrowData(Session.LogedInUser.GetUserId());
@@ -1576,6 +1606,221 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
              if (e.KeyCode == Keys.Enter)
              {
                  ExecuteAmountFilter();
+             }
+         }
+
+         private void btnExport_Click(object sender, EventArgs e)
+         {
+             if (AllBorrowData == null || AllBorrowData.Rows.Count == 0)
+             {
+                 MessageBox.Show(
+                     "There is no data to export.",
+                     "Export",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Information);
+
+                 return;
+             }
+
+             using (SaveFileDialog saveDialog = new SaveFileDialog())
+             {
+                 saveDialog.Title = "Save Borrow Excel File";
+                 saveDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
+                 saveDialog.FileName =
+                     "Borrow_" +
+                     DateTime.Now.ToString("ddMMyyyy_HHmmss") +
+                     ".xlsx";
+
+                 if (saveDialog.ShowDialog() != DialogResult.OK)
+                     return;
+
+                 try
+                 {
+                     ExportBorrowToExcel(
+                         AllBorrowData,
+                         saveDialog.FileName);
+
+                     MessageBox.Show(
+                         "Borrow data exported successfully.",
+                         "Export Successful",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information);
+                 }
+                 catch (Exception ex)
+                 {
+                     MessageBox.Show(
+                         "Export failed.\n\n" + ex.Message,
+                         "Export Error",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Error);
+                 }
+             }
+         }
+         private void ExportBorrowToExcel(DataTable dataTable, string filePath)
+         {
+             Excel.Application excelApp = null;
+             Excel.Workbook workbook = null;
+             Excel.Worksheet worksheet = null;
+
+             try
+             {
+                 excelApp = new Excel.Application();
+                 excelApp.Visible = false;
+                 excelApp.DisplayAlerts = false;
+
+                 workbook = excelApp.Workbooks.Add(
+                     Excel.XlWBATemplate.xlWBATWorksheet);
+
+                 worksheet = (Excel.Worksheet)workbook.Worksheets[1];
+                 worksheet.Name = "Borrow";
+
+                 // Column Names
+                 for (int col = 0;
+                      col < dataTable.Columns.Count;
+                      col++)
+                 {
+                     worksheet.Cells[1, col + 1] =
+                         GetBorrowExportColumnName(
+                             dataTable.Columns[col].ColumnName);
+                 }
+
+                 // Data
+                 for (int row = 0;
+                      row < dataTable.Rows.Count;
+                      row++)
+                 {
+                     for (int col = 0;
+                          col < dataTable.Columns.Count;
+                          col++)
+                     {
+                         if (dataTable.Rows[row][col] != DBNull.Value)
+                         {
+                             worksheet.Cells[row + 2, col + 1] =
+                                 dataTable.Rows[row][col].ToString();
+                         }
+                     }
+                 }
+
+                 // Header bold
+                 Excel.Range headerRange =
+                     worksheet.Range[
+                         worksheet.Cells[1, 1],
+                         worksheet.Cells[
+                             1,
+                             dataTable.Columns.Count]];
+
+                 headerRange.Font.Bold = true;
+
+                 // Auto fit columns
+                 worksheet.Columns.AutoFit();
+
+                 // SAVE EXCEL FILE
+                 workbook.SaveAs(
+                     filePath,
+                     Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+                 // Close Excel without opening it
+                 workbook.Close(false);
+                 excelApp.Quit();
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show(
+                     "Excel export failed.\n\n" + ex.Message,
+                     "Export Error",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Error);
+
+                 if (workbook != null)
+                 {
+                     try
+                     {
+                         workbook.Close(false);
+                     }
+                     catch { }
+                 }
+
+                 if (excelApp != null)
+                 {
+                     try
+                     {
+                         excelApp.Quit();
+                     }
+                     catch { }
+                 }
+             }
+             finally
+             {
+                 // Release COM objects
+                 if (worksheet != null)
+                     Marshal.ReleaseComObject(worksheet);
+
+                 if (workbook != null)
+                     Marshal.ReleaseComObject(workbook);
+
+                 if (excelApp != null)
+                     Marshal.ReleaseComObject(excelApp);
+
+                 worksheet = null;
+                 workbook = null;
+                 excelApp = null;
+
+                 GC.Collect();
+                 GC.WaitForPendingFinalizers();
+             }
+         }
+         private string GetBorrowExportColumnName(string columnName)
+         {
+             switch (columnName)
+             {
+
+                 case "BorrowAt":
+                     return "Date";
+
+                 case "Description":
+                     return "Description";
+
+                 case "PersonName":
+                     return "Person";
+
+                 case "Amount":
+                     return "Amount";
+
+                 case "StatusName":
+                     return "Status";
+
+                 case "PaymentName":
+                     return "Payment Method";
+
+                 case "PaidAmount":
+                     return "Paid Amount";
+
+                 case "RemainingAmount":
+                     return "Remaining Amount";
+
+                 case "DeadlineAt":
+                     return "Deadline";
+
+                 default:
+                     return columnName;
+             }
+         }
+
+         private void txtSearch_Enter(object sender, EventArgs e)
+         {
+             if (txtSearch.Text == "Search records...")
+             {
+                 txtSearch.Text = "";
+                 txtSearch.ForeColor = Color.Black;
+             }
+         }
+
+         private void txtSearch_Leave(object sender, EventArgs e)
+         {
+             if (string.IsNullOrWhiteSpace(txtSearch.Text))
+             {
+                 txtSearch.Text = "Search records...";
+                 txtSearch.ForeColor = Color.Gray;
              }
          }
 
