@@ -13,6 +13,7 @@ using PersonalExpenseCreditTracker.Common;
 using System.Runtime.InteropServices;
 using BLLayer.Lent;
 using BLLayer.Common;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
@@ -57,6 +58,12 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             InitializeComponent();
 
             StyleLentGrid();
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Lent");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Lent");
+
             dgvLentDataTable.CellDoubleClick += dgvLentDataTable_CellDoubleClick;
 
             dgvLentDataTable.AutoGenerateColumns = false;
@@ -94,7 +101,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 ShowCurrentPage();
             }
         }
-
         private void ApplyRoundCorners()
         {
             panelTotalLent.Region = Region.FromHrgn(
@@ -134,22 +140,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     15));
 
         }
-
-      
-
-        //private void btnExportReport_MouseEnter(object sender, EventArgs e)
-        //{
-        //    btnPrint.BackColor = Color.FromArgb(0, 0, 240);
-        //}
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void LentControls_Load(object sender, EventArgs e)
         {
             ignoreEvents = true;
+            txtSearch.Text = "Search...";
+            txtSearch.ForeColor = Color.Gray;
             txtMinAmount.Text = "Enter Amount";
             txtMinAmount.ForeColor = Color.Gray;
             txtMaxAmount.Text = "Enter Amount";
@@ -244,7 +239,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             ShowCurrentPage();
             return true;
         }
-
         public Boolean LoadFilteredLentData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
@@ -271,7 +265,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             ShowCurrentPage();
             return true;
         }
-        //
         public Boolean LoadFilteredLentData(string spName, int userId, string paramName1, Decimal paramId1, string paramName2, Decimal paramId2)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
@@ -326,17 +319,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dgvLentDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvLentDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            //Column Background Color
-            colDate.DefaultCellStyle.BackColor = Color.White;
-            colPersonName.DefaultCellStyle.BackColor = Color.White;
-            colAmount.DefaultCellStyle.BackColor = Color.White;
-            colPaymentType.DefaultCellStyle.BackColor = Color.White;
-            colStatus.DefaultCellStyle.BackColor = Color.White;
-            colReturnedAmount.DefaultCellStyle.BackColor = Color.White;
-            colRemainingAmount.DefaultCellStyle.BackColor = Color.White;
-            colDeadline.DefaultCellStyle.BackColor = Color.White;
-            colDescription.DefaultCellStyle.BackColor = Color.White;
-
             //Column FontStyle
             colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
             colPersonName.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -350,16 +332,39 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             //Row Style
             dgvLentDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            dgvLentDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvLentDataTable.DefaultCellStyle.ForeColor = Color.Black;
-            //dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dgvLentDataTable.DefaultCellStyle.SelectionBackColor = Color.Red;
-            dgvLentDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvLentDataTable.RowTemplate.Height = 40;
             dgvLentDataTable.RowHeadersVisible = false;
             dgvLentDataTable.MultiSelect = false;
             dgvLentDataTable.ReadOnly = true;
             dgvLentDataTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Zigzag
+
+            Color selectedRowColor = Color.FromArgb(174, 205, 247);
+            // Normal Row
+            dgvLentDataTable.DefaultCellStyle.BackColor = Color.White;
+            dgvLentDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Alternating Row
+            dgvLentDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
+            dgvLentDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Selection
+            dgvLentDataTable.DefaultCellStyle.SelectionBackColor = selectedRowColor;
+            dgvLentDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dgvLentDataTable.AlternatingRowsDefaultCellStyle.SelectionBackColor = selectedRowColor;
+            dgvLentDataTable.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Force every column to use the same selection color
+            foreach (DataGridViewColumn column in dgvLentDataTable.Columns)
+            {
+                column.DefaultCellStyle.SelectionBackColor =
+                    selectedRowColor;
+
+                column.DefaultCellStyle.SelectionForeColor =
+                    Color.Black;
+            }
 
             //Border style
             dgvLentDataTable.BorderStyle = BorderStyle.None;
@@ -432,9 +437,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             ShowCurrentPage();
         }
-
-
-
         private void ApplyLentSort()
         {
             if (string.IsNullOrEmpty(sortedColumn) ||
@@ -515,7 +517,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
 
         }
-
         private int GetRowsPerPage()
         {
             Rectangle display = dgvLentDataTable.DisplayRectangle;
@@ -1309,6 +1310,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 cmbStatus.ForeColor = Color.Gray;
             }
             txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
             ignoreEvents = false;
             currentPage = 1;
             LoadLentData(Session.LogedInUser.GetUserId());
@@ -1524,7 +1526,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 ExecuteAmountFilter();
             }
         }
-
         private void txtMaxAmount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1533,6 +1534,222 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (AllLentData == null || AllLentData.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "There is no data to export.",
+                    "Export",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Title = "Save Lent Excel File";
+                saveDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
+                saveDialog.FileName =
+                    "Lent_" +
+                    DateTime.Now.ToString("ddMMyyyy_HHmmss") +
+                    ".xlsx";
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    ExportLentToExcel(
+                        AllLentData,
+                        saveDialog.FileName);
+
+                    MessageBox.Show(
+                        "Lent data exported successfully.",
+                        "Export Successful",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Export failed.\n\n" + ex.Message,
+                        "Export Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void ExportLentToExcel(DataTable dataTable, string filePath)
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook workbook = null;
+            Excel.Worksheet worksheet = null;
+
+            try
+            {
+                excelApp = new Excel.Application();
+                excelApp.Visible = false;
+                excelApp.DisplayAlerts = false;
+
+                workbook = excelApp.Workbooks.Add(
+                    Excel.XlWBATemplate.xlWBATWorksheet);
+
+                worksheet = (Excel.Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Lent";
+
+                // Column Names
+                for (int col = 0;
+                     col < dataTable.Columns.Count;
+                     col++)
+                {
+                    worksheet.Cells[1, col + 1] =
+                        GetLentExportColumnName(
+                            dataTable.Columns[col].ColumnName);
+                }
+
+                // Data
+                for (int row = 0;
+                     row < dataTable.Rows.Count;
+                     row++)
+                {
+                    for (int col = 0;
+                         col < dataTable.Columns.Count;
+                         col++)
+                    {
+                        if (dataTable.Rows[row][col] != DBNull.Value)
+                        {
+                            worksheet.Cells[row + 2, col + 1] =
+                                dataTable.Rows[row][col].ToString();
+                        }
+                    }
+                }
+
+                // Header bold
+                Excel.Range headerRange =
+                    worksheet.Range[
+                        worksheet.Cells[1, 1],
+                        worksheet.Cells[
+                            1,
+                            dataTable.Columns.Count]];
+
+                headerRange.Font.Bold = true;
+
+                // Auto fit columns
+                worksheet.Columns.AutoFit();
+
+                // SAVE EXCEL FILE
+                workbook.SaveAs(
+                    filePath,
+                    Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+                // Close Excel without opening it
+                workbook.Close(false);
+                excelApp.Quit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Excel export failed.\n\n" + ex.Message,
+                    "Export Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                if (workbook != null)
+                {
+                    try
+                    {
+                        workbook.Close(false);
+                    }
+                    catch { }
+                }
+
+                if (excelApp != null)
+                {
+                    try
+                    {
+                        excelApp.Quit();
+                    }
+                    catch { }
+                }
+            }
+            finally
+            {
+                // Release COM objects
+                if (worksheet != null)
+                    Marshal.ReleaseComObject(worksheet);
+
+                if (workbook != null)
+                    Marshal.ReleaseComObject(workbook);
+
+                if (excelApp != null)
+                    Marshal.ReleaseComObject(excelApp);
+
+                worksheet = null;
+                workbook = null;
+                excelApp = null;
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
+        private string GetLentExportColumnName(string columnName)
+        {
+            switch (columnName)
+            {
+
+                case "LentAt":
+                    return "Date";
+
+                case "Description":
+                    return "Description";
+
+                case "PersonName":
+                    return "Person";
+
+                case "Amount":
+                    return "Amount";
+
+                case "StatusName":
+                    return "Status";
+
+                case "PaymentName":
+                    return "Payment Method";
+
+                case "ReturnedAmount":
+                    return "Returned Amount";
+
+                case "RemainingAmount":
+                    return "Remaining Amount";
+
+                case "DeadlineAt":
+                    return "Deadline";
+
+                default:
+                    return columnName;
+            }
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search...")
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search...";
+                txtSearch.ForeColor = Color.Gray;
+            }
+        }
+
+        
        
 
         

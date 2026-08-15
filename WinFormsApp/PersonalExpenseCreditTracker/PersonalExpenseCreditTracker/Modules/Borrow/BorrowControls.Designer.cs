@@ -205,14 +205,15 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.ForeColor = System.Drawing.Color.White;
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
-            this.btnExport.Location = new System.Drawing.Point(128, 0);
+            this.btnExport.Location = new System.Drawing.Point(101, 0);
             this.btnExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(53, 50);
+            this.btnExport.Size = new System.Drawing.Size(40, 50);
             this.btnExport.TabIndex = 0;
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnFilter
             // 
@@ -226,7 +227,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnFilter.Location = new System.Drawing.Point(0, 0);
             this.btnFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(53, 50);
+            this.btnFilter.Size = new System.Drawing.Size(40, 50);
             this.btnFilter.TabIndex = 2;
             this.btnFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -289,14 +290,15 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
             this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.sync1;
-            this.btnRefresh.Location = new System.Drawing.Point(63, 0);
+            this.btnRefresh.Location = new System.Drawing.Point(50, 0);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(53, 50);
+            this.btnRefresh.Size = new System.Drawing.Size(43, 50);
             this.btnRefresh.TabIndex = 1;
             this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // lblBorrowEndingPageNumber
             // 
@@ -474,6 +476,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // pnlButton
             // 
@@ -481,11 +485,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.pnlButton.Controls.Add(this.btnRefresh);
             this.pnlButton.Controls.Add(this.btnExport);
             this.pnlButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButton.Location = new System.Drawing.Point(945, 0);
-            this.pnlButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlButton.Location = new System.Drawing.Point(985, 0);
+            this.pnlButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 2);
             this.pnlButton.Name = "pnlButton";
             this.pnlButton.Padding = new System.Windows.Forms.Padding(0, 0, 11, 0);
-            this.pnlButton.Size = new System.Drawing.Size(192, 50);
+            this.pnlButton.Size = new System.Drawing.Size(152, 50);
             this.pnlButton.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -507,7 +511,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 116F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 117F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1153, 121);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
@@ -536,7 +540,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblBorrowRepaidAmount.Location = new System.Drawing.Point(93, 48);
             this.lblBorrowRepaidAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowRepaidAmount.Name = "lblBorrowRepaidAmount";
-            this.lblBorrowRepaidAmount.Size = new System.Drawing.Size(43, 32);
+            this.lblBorrowRepaidAmount.Size = new System.Drawing.Size(92, 32);
             this.lblBorrowRepaidAmount.TabIndex = 3;
             this.lblBorrowRepaidAmount.Text = "₹0";
             this.lblBorrowRepaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -594,7 +598,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblBorrowActiveBorrowingsAmount.Location = new System.Drawing.Point(93, 48);
             this.lblBorrowActiveBorrowingsAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowActiveBorrowingsAmount.Name = "lblBorrowActiveBorrowingsAmount";
-            this.lblBorrowActiveBorrowingsAmount.Size = new System.Drawing.Size(43, 32);
+            this.lblBorrowActiveBorrowingsAmount.Size = new System.Drawing.Size(92, 32);
             this.lblBorrowActiveBorrowingsAmount.TabIndex = 3;
             this.lblBorrowActiveBorrowingsAmount.Text = "₹0";
             this.lblBorrowActiveBorrowingsAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -653,7 +657,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblBorrowPaidAmount.Location = new System.Drawing.Point(93, 48);
             this.lblBorrowPaidAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowPaidAmount.Name = "lblBorrowPaidAmount";
-            this.lblBorrowPaidAmount.Size = new System.Drawing.Size(43, 32);
+            this.lblBorrowPaidAmount.Size = new System.Drawing.Size(92, 32);
             this.lblBorrowPaidAmount.TabIndex = 3;
             this.lblBorrowPaidAmount.Text = "₹0";
             this.lblBorrowPaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -711,7 +715,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblBorrowTotalBorrowedAmount.Location = new System.Drawing.Point(93, 48);
             this.lblBorrowTotalBorrowedAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowTotalBorrowedAmount.Name = "lblBorrowTotalBorrowedAmount";
-            this.lblBorrowTotalBorrowedAmount.Size = new System.Drawing.Size(43, 32);
+            this.lblBorrowTotalBorrowedAmount.Size = new System.Drawing.Size(106, 32);
             this.lblBorrowTotalBorrowedAmount.TabIndex = 3;
             this.lblBorrowTotalBorrowedAmount.Text = "₹0";
             this.lblBorrowTotalBorrowedAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

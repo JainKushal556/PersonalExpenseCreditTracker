@@ -13,7 +13,9 @@ using System.Data.SqlClient;
 using System.Configuration;
 using PersonalExpenseCreditTracker.Common;
 using BLLayer.Common;
+using Excel = Microsoft.Office.Interop.Excel;
 namespace PersonalExpenseCreditTracker.Modules.Task
+
 {
     public partial class TaskControls : Form
     {
@@ -62,6 +64,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             InitializeComponent();
             StyleTaskGrid();
             this.Resize += TaskControls_Resize;
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Tasks");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Tasks");
         }
 
         private void TaskControls_Load(object sender, EventArgs e)
@@ -71,6 +78,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             CommonUiFunction.LoadInComboBox("spGetAllTaskStatus", "Select Status", cmbStatus);
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPriority);
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbStatus);
+
+            txtSearch.Text = "Search...";
+            txtSearch.ForeColor = Color.Gray;
             cmbPriority.ForeColor = Color.Gray;
             cmbStatus.ForeColor = Color.Gray;
             cmbPriority.SelectedIndexChanged += cmbPriority_SelectedIndexChanged;
@@ -452,16 +462,45 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             //Row Style
             dataGridViewTask.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
-            dataGridViewTask.DefaultCellStyle.ForeColor = Color.Black;
-            //dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
-            dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewTask.RowTemplate.Height = 40;
             dataGridViewTask.RowHeadersVisible = false;
             dataGridViewTask.MultiSelect = false;
             dataGridViewTask.ReadOnly = true;
             dataGridViewTask.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            //// Zigzag
+
+            //Normal Row
+            dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
+            dataGridViewTask.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //  Alternating Row (Zigzag - Soft Slate Tint)
+            dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
+            dataGridViewTask.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            //  Selection Color (একই সিলেকশন কালার)
+            dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247); // Royal Blue
+            dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247);
+            dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+
+            ////// Zigzag
+            ////Normal Row
+            //dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
+            //dataGridViewTask.DefaultCellStyle.ForeColor = Color.Black;
+
+            //// Alternating Row Style 
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 253, 244);
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            //// Selected Row Style 
+            //dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(5, 150, 105);
+            //dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(5, 150, 105);
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.White;
+
 
             //Border style
             dataGridViewTask.BorderStyle = BorderStyle.None;
@@ -1373,6 +1412,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             if (cmbPriority.Items.Count > 0) cmbPriority.SelectedIndex = 0;
             if (cmbStatus.Items.Count > 0) cmbStatus.SelectedIndex = 0;
             txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
             ignoreEvents = false;
             currentPage = 1;
             LoadTaskData(Session.LogedInUser.GetUserId());
@@ -1383,6 +1423,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             HidePopupPanels();
         }
+
+        
 
         //public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
         //{
@@ -1409,5 +1451,215 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         //    return filteredTable;
         //}
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (AllTaskData == null || AllTaskData.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "There is no data to export.",
+                    "Export",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Title = "Save Task Excel File";
+                saveDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
+                saveDialog.FileName =
+                    "Task_" +
+                    DateTime.Now.ToString("ddMMyyyy_HHmmss") +
+                    ".xlsx";
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    ExportTaskToExcel(
+                        AllTaskData,
+                        saveDialog.FileName);
+
+                    MessageBox.Show(
+                        "Task data exported successfully.",
+                        "Export Successful",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Export failed.\n\n" + ex.Message,
+                        "Export Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void ExportTaskToExcel(DataTable dataTable, string filePath)
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook workbook = null;
+            Excel.Worksheet worksheet = null;
+
+            try
+            {
+                excelApp = new Excel.Application();
+                excelApp.Visible = false;
+                excelApp.DisplayAlerts = false;
+
+                workbook = excelApp.Workbooks.Add(
+                    Excel.XlWBATemplate.xlWBATWorksheet);
+
+                worksheet = (Excel.Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Task";
+
+                // Column Names
+                for (int col = 0;
+                     col < dataTable.Columns.Count;
+                     col++)
+                {
+                    worksheet.Cells[1, col + 1] =
+                        GetTaskExportColumnName(
+                            dataTable.Columns[col].ColumnName);
+                }
+
+                // Data
+                for (int row = 0;
+                     row < dataTable.Rows.Count;
+                     row++)
+                {
+                    for (int col = 0;
+                         col < dataTable.Columns.Count;
+                         col++)
+                    {
+                        if (dataTable.Rows[row][col] != DBNull.Value)
+                        {
+                            worksheet.Cells[row + 2, col + 1] =
+                                dataTable.Rows[row][col].ToString();
+                        }
+                    }
+                }
+
+                // Header bold
+                Excel.Range headerRange =
+                    worksheet.Range[
+                        worksheet.Cells[1, 1],
+                        worksheet.Cells[
+                            1,
+                            dataTable.Columns.Count]];
+
+                headerRange.Font.Bold = true;
+
+                // Auto fit columns
+                worksheet.Columns.AutoFit();
+
+                // SAVE EXCEL FILE
+                workbook.SaveAs(
+                    filePath,
+                    Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+                // Close Excel without opening it
+                workbook.Close(false);
+                excelApp.Quit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Excel export failed.\n\n" + ex.Message,
+                    "Export Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                if (workbook != null)
+                {
+                    try
+                    {
+                        workbook.Close(false);
+                    }
+                    catch { }
+                }
+
+                if (excelApp != null)
+                {
+                    try
+                    {
+                        excelApp.Quit();
+                    }
+                    catch { }
+                }
+            }
+            finally
+            {
+                // Release COM objects
+                if (worksheet != null)
+                    Marshal.ReleaseComObject(worksheet);
+
+                if (workbook != null)
+                    Marshal.ReleaseComObject(workbook);
+
+                if (excelApp != null)
+                    Marshal.ReleaseComObject(excelApp);
+
+                worksheet = null;
+                workbook = null;
+                excelApp = null;
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
+        private string GetTaskExportColumnName(string columnName)
+        {
+            switch (columnName)
+            {
+
+            
+
+                case "CreatedAt":
+                    return "Date";
+
+                case "TaskTitle":
+                    return "Task Title";
+
+                case "PriorityName":
+                    return "Priority Name";
+
+                case "TaskStatusName":
+                    return "Status Name";
+
+                case "StatusName":
+                    return "Status";
+                    
+
+                case "Deadline":
+                    return "Deadline";
+
+                default:
+                    return columnName;
+            }
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search...")
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search...";
+                txtSearch.ForeColor = Color.Gray;
+            }
+        }
+
     }
 }

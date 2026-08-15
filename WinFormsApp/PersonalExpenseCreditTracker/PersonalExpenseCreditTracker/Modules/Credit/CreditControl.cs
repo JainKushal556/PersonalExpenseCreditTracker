@@ -1467,11 +1467,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // Load ALL original data again
             LoadCreditData(Session.LogedInUser.GetUserId());
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnExport_Click(object sender, EventArgs e)
         {
-
-
             if (AllCreditData == null || AllCreditData.Rows.Count == 0)
             {
                 MessageBox.Show(
@@ -1485,7 +1482,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
             using (SaveFileDialog saveDialog = new SaveFileDialog())
             {
-                saveDialog.Title = "Save Expense Excel File";
+                saveDialog.Title = "Save Credit Excel File";
                 saveDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
                 saveDialog.FileName =
                     "Credit_" +
@@ -1502,7 +1499,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                         saveDialog.FileName);
 
                     MessageBox.Show(
-                        "Expense data exported successfully.",
+                        "Credit data exported successfully.",
                         "Export Successful",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -1658,6 +1655,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                     return columnName;
             }
         }
+
 
         
 
