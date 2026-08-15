@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Common\CommonUiFunction.cs" />
     <Compile Include="Common\ErrorHelper.cs" />
+    <Compile Include="Common\GlobalColors.cs" />
     <Compile Include="Forms\Authentication\AuthUI.cs" />
     <Compile Include="Forms\Authentication\ForgotPasswordControls.cs">
       <SubType>Form</SubType>

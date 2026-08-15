@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -235,9 +235,19 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", "+ Add New Person", comboBoxLentSelectPerson);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", comboBoxLentPaymentType);
 
+            comboBoxLentSelectPerson.AutoCompleteMode = AutoCompleteMode.Append;
+            comboBoxLentSelectPerson.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxLentPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
+            comboBoxLentPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
             // Mouse click dropdown handlers
             comboBoxLentSelectPerson.MouseClick += (s, ev) => { comboBoxLentSelectPerson.DroppedDown = true; };
             comboBoxLentPaymentType.MouseClick += (s, ev) => { comboBoxLentPaymentType.DroppedDown = true; };
+
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(comboBoxLentSelectPerson);
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(comboBoxLentPaymentType);
+
 
             ignoreEvents = false;
         }
@@ -331,6 +341,55 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     MessageBox.Show("Lent added unsuccessfully!");
                     break;
             }
+        }
+
+
+        // Enter কি প্রেস করলে সাজেশন সিলেক্ট করার জন্য
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                // Select Person ComboBox এ ফোকাস থাকলে
+                if (comboBoxLentSelectPerson.Focused)
+                {
+                    SelectComboBoxSuggestion(comboBoxLentSelectPerson);
+                    return true; // Enter এর কাজ শেষ, ফর্ম সাবমিট বা শব্দ হবে না
+                }
+                // Payment Type ComboBox এ ফোকাস থাকলে
+                else if (comboBoxLentPaymentType.Focused)
+                {
+                    SelectComboBoxSuggestion(comboBoxLentPaymentType);
+                    return true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        // টেক্সট অনুযায়ী আইটেম খুঁজে বের করে সিলেক্ট করার হেল্পার মেথড
+        private void SelectComboBoxSuggestion(ComboBox cmb)
+        {
+            if (!string.IsNullOrWhiteSpace(cmb.Text))
+            {
+                // ১. পুরো নামের সাথে মিল খুঁজবে
+                int index = cmb.FindStringExact(cmb.Text);
+
+                // ২. না পেলে শুরুর অক্ষরের মিল খুঁজবে
+                if (index == -1)
+                {
+                    index = cmb.FindString(cmb.Text);
+                }
+
+                // ৩. আইটেম পেলে তা সিলেক্ট করবে
+                if (index != -1)
+                {
+                    cmb.SelectedIndex = index;
+                    cmb.SelectionStart = cmb.Text.Length;
+                }
+            }
+
+            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            cmb.DroppedDown = false;
         }
 
 
@@ -468,6 +527,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             if (comboBoxLentPaymentType.SelectedIndex > 0 || comboBoxLentPaymentType.Text == "Select Payment Type") return;
             comboBoxLentPaymentType.DroppedDown = true;
         }
+
+      
 
     }
 }

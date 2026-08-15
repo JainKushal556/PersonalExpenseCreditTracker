@@ -253,6 +253,20 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             panel.Parent = pnlEditProfileMainBody;
             panel.BackColor = Color.White;
 
+
+            DateTime parsedDate;
+            if (!string.IsNullOrWhiteSpace(txtEditProfileDathOfBirth.Text) &&
+                DateTime.TryParseExact(txtEditProfileDathOfBirth.Text.Trim(), "dd-MM-yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None, out parsedDate))
+            {
+                if (parsedDate <= DateTime.Today && parsedDate >= monthCalendarProfile.MinDate)
+                {
+                    monthCalendarProfile.SelectionStart = parsedDate;
+                    monthCalendarProfile.SelectionEnd = parsedDate;
+                }
+            }
+
             Point screenPoint = pnlEditProfileDathOfBirth.PointToScreen(Point.Empty);
             Point mainBodyPoint = pnlEditProfileMainBody.PointToClient(screenPoint);
 
@@ -263,6 +277,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             panel.BringToFront();
             panel.Visible = true;
         }
+
 
 
         private void btnProfileCalendar_Click(object sender, EventArgs e)
@@ -298,13 +313,13 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         private void txtEditProfileDathOfBirth_Leave(object sender, EventArgs e)
         {
             pnlEditProfileDathOfBirth.BorderStyle = BorderStyle.None;
-            panelProfileCalenderShow.Visible = false;
+           
         }
 
         private void txtEditProfileDathOfBirth_TextChanged(object sender, EventArgs e)
         {
             ErrorHelper.HideErrorForControl(txtEditProfileDathOfBirth);
-            panelProfileCalenderShow.Visible = false;
+          
         }
 
 

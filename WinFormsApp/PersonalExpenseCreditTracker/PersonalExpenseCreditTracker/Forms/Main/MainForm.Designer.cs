@@ -156,17 +156,17 @@ namespace PersonalExpenseCreditTracker
             this.lblSubtitle = new System.Windows.Forms.Label();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pnlDate = new System.Windows.Forms.Panel();
             this.picCalendar = new System.Windows.Forms.PictureBox();
-            this.lblDate = new System.Windows.Forms.Label();
+            this.lblDateTime = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlProfilePage = new System.Windows.Forms.Panel();
             this.tmSidebar = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.process1 = new System.Diagnostics.Process();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pnlMainSideBarSection.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             this.pnlScrollBar.SuspendLayout();
@@ -264,7 +264,6 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlSideBar
             // 
-            this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlSideBar.Controls.Add(this.pnlScrollBar);
             this.pnlSideBar.Controls.Add(this.flowSidebar);
@@ -281,10 +280,10 @@ namespace PersonalExpenseCreditTracker
             this.pnlScrollBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlScrollBar.Controls.Add(this.pnlThumb);
             this.pnlScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlScrollBar.Location = new System.Drawing.Point(400, 0);
+            this.pnlScrollBar.Location = new System.Drawing.Point(380, 0);
             this.pnlScrollBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlScrollBar.Name = "pnlScrollBar";
-            this.pnlScrollBar.Size = new System.Drawing.Size(20, 5542);
+            this.pnlScrollBar.Size = new System.Drawing.Size(20, 854);
             this.pnlScrollBar.TabIndex = 5;
             this.pnlScrollBar.Visible = false;
             // 
@@ -1945,88 +1944,76 @@ namespace PersonalExpenseCreditTracker
             this.pnlRight.Controls.Add(this.panel5);
             this.pnlRight.Controls.Add(this.pnlDate);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(936, 15);
+            this.pnlRight.Location = new System.Drawing.Point(911, 15);
             this.pnlRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(345, 48);
+            this.pnlRight.Size = new System.Drawing.Size(370, 48);
             this.pnlRight.TabIndex = 1;
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.button2);
             this.panel5.Controls.Add(this.button1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(260, 0);
+            this.panel5.Location = new System.Drawing.Point(312, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(85, 48);
+            this.panel5.Size = new System.Drawing.Size(58, 48);
             this.panel5.TabIndex = 1;
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.night_mode;
-            this.button2.Location = new System.Drawing.Point(44, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(41, 48);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.bell;
-            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Location = new System.Drawing.Point(4, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 48);
+            this.button1.Size = new System.Drawing.Size(54, 48);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pnlDate
             // 
+            this.pnlDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDate.Controls.Add(this.picCalendar);
-            this.pnlDate.Controls.Add(this.lblDate);
-            this.pnlDate.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlDate.Location = new System.Drawing.Point(0, 0);
+            this.pnlDate.Controls.Add(this.lblDateTime);
+            this.pnlDate.Location = new System.Drawing.Point(0, 2);
             this.pnlDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDate.Name = "pnlDate";
-            this.pnlDate.Size = new System.Drawing.Size(250, 48);
+            this.pnlDate.Size = new System.Drawing.Size(303, 43);
             this.pnlDate.TabIndex = 0;
             // 
             // picCalendar
             // 
             this.picCalendar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar;
+            this.picCalendar.Image = global::PersonalExpenseCreditTracker.Properties.Resources.calendar__1_;
             this.picCalendar.Location = new System.Drawing.Point(0, 0);
             this.picCalendar.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.picCalendar.Name = "picCalendar";
             this.picCalendar.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-            this.picCalendar.Size = new System.Drawing.Size(37, 46);
+            this.picCalendar.Size = new System.Drawing.Size(46, 41);
             this.picCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picCalendar.TabIndex = 0;
             this.picCalendar.TabStop = false;
             // 
-            // lblDate
+            // lblDateTime
             // 
-            this.lblDate.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
-            this.lblDate.Location = new System.Drawing.Point(43, 0);
-            this.lblDate.Margin = new System.Windows.Forms.Padding(0);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.lblDate.Size = new System.Drawing.Size(205, 46);
-            this.lblDate.TabIndex = 1;
-            this.lblDate.Text = "May 1, 2023 – May 31, 2024";
-            this.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDateTime.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+            this.lblDateTime.Location = new System.Drawing.Point(45, -4);
+            this.lblDateTime.Margin = new System.Windows.Forms.Padding(0);
+            this.lblDateTime.Name = "lblDateTime";
+            this.lblDateTime.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.lblDateTime.Size = new System.Drawing.Size(246, 46);
+            this.lblDateTime.TabIndex = 1;
+            this.lblDateTime.Text = "May 1, 2023 – May 31, 2024";
+            this.lblDateTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel3
             // 
@@ -2080,6 +2067,10 @@ namespace PersonalExpenseCreditTracker
             this.process1.StartInfo.StandardOutputEncoding = null;
             this.process1.StartInfo.UserName = "";
             this.process1.SynchronizingObject = this;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // MainForm
             // 
@@ -2245,11 +2236,10 @@ namespace PersonalExpenseCreditTracker
         private System.Windows.Forms.Label lblSubtitle;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.PictureBox picCalendar;
-        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Label lblDateTime;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel pnlRight;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel pnlDate;
         private System.Windows.Forms.Panel pnlSettingPage;
@@ -2358,6 +2348,7 @@ namespace PersonalExpenseCreditTracker
         private System.Windows.Forms.Panel pnlPersonAddPage;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Diagnostics.Process process1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

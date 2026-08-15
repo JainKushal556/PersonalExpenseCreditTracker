@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -56,6 +56,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             cmbPaymentType.MouseClick += (s, ev) => { cmbPaymentType.DroppedDown = true; };
             txtReturnDate.Click += txtReturnDate_Click;
 
+            cmbPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            CommonUiFunction.SetComboBoxHeightAndOwnerDraw1(cmbPaymentType);
+            
             ignoreEvents = false;
         }
 
@@ -95,6 +100,49 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             control.Region = region;
 
             DeleteObject(hrgn);
+        }
+
+
+        // Enter কি প্রেস করলে সাজেশন সিলেক্ট করার জন্য
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                // Payment Type ComboBox এ ফোকাস থাকলে
+                if (cmbPaymentType.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbPaymentType);
+                    return true; // Enter এর কাজ শেষ, ফর্ম সাবমিট বা শব্দ হবে না
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        // টেক্সট অনুযায়ী আইটেম খুঁজে বের করে সিলেক্ট করার হেল্পার মেথড
+        private void SelectComboBoxSuggestion(ComboBox cmb)
+        {
+            if (!string.IsNullOrWhiteSpace(cmb.Text))
+            {
+                // ১. পুরো নামের সাথে মিল খুঁজবে
+                int index = cmb.FindStringExact(cmb.Text);
+
+                // ২. না পেলে শুরুর অক্ষরের মিল খুঁজবে
+                if (index == -1)
+                {
+                    index = cmb.FindString(cmb.Text);
+                }
+
+                // ৩. আইটেম পেলে তা সিলেক্ট করবে
+                if (index != -1)
+                {
+                    cmb.SelectedIndex = index;
+                    cmb.SelectionStart = cmb.Text.Length;
+                }
+            }
+
+            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            cmb.DroppedDown = false;
         }
 
         private void btnAddCancel_Click(object sender, EventArgs e)

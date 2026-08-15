@@ -3319,6 +3319,38 @@ END
 GO
 
 
+
+-- ==========================================================
+
+-- SP: ✔️spCheckDuplicateNoteTitle.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spCheckDuplicateNoteTitle
+    @UserID INT,
+    @NoteID INT,
+    @NoteTitle NVARCHAR(150)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    
+    IF EXISTS (
+        SELECT 1 
+        FROM tblNote 
+        WHERE UserID = @UserID 
+          AND LOWER(TRIM(NoteTitle)) = LOWER(TRIM(@NoteTitle))
+          AND (@NoteID = -1 OR NoteID <> @NoteID)
+    )
+        SELECT 1; 
+    ELSE
+        SELECT 0; 
+END
+
+GO
+
+
+
 -- ==========================================================
 
 -- SP: ✔️spDeleteCreditCategoryByUserID.sql
@@ -3965,142 +3997,129 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spInsertNewCreditCategoryByUserID
-(
-    @UserID INT,
-    @ActiveStatus INT,
-    @CategoryName VARCHAR(MAX)
-)
-AS
-BEGIN
-    SET NOCOUNT OFF;
-
-    DECLARE @IsDefault INT;
-    DECLARE @IsActive INT;
-
-    BEGIN TRY
-
-        -- Validate User
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblUserAuthentication AS UserAuthentication
-            WHERE UserAuthentication.UserID = @UserID
-              AND UserAuthentication.Active = 1
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive User' AS Message;
-            RETURN;
-        END;
-
-
-        -- Trim Category Name
-        SET @CategoryName = LTRIM(RTRIM(@CategoryName));
-
-
-        -- Validate Category Name
-        IF @CategoryName IS NULL
-           OR @CategoryName = ''
-        BEGIN
-            SELECT 'Category Name cannot be empty' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Active Status
-        IF @ActiveStatus = 1
-        BEGIN
-            SET @IsActive = 1;
-            SET @IsDefault = 0;
-        END
-        ELSE IF @ActiveStatus = 0
-        BEGIN
-            SET @IsActive = 0;
-            SET @IsDefault = 0;
-        END
-        ELSE
-        BEGIN
-            SELECT 'Please Select Valid Input' AS Message;
-            RETURN;
-        END;
-
-
-        -- Transaction Starts
-        BEGIN TRANSACTION;
-
-
-        -- Check Duplicate Category
-        IF EXISTS
-        (
-            SELECT 1
-            FROM tblCreditCategory
-            WHERE CategoryName = @CategoryName
-              AND UserID = @UserID
-              AND IsActive = 1
-        )
-        BEGIN
-            ROLLBACK TRANSACTION;
-
-            SELECT 'Category Already Exists for this user' AS Message;
-            RETURN;
-        END;
-
-
-        -- Insert Category
-        INSERT INTO tblCreditCategory
-        (
-            UserID,
-            CategoryName,
-            IsDefault,
-            IsActive
-        )
-        VALUES
-        (
-            @UserID,
-            @CategoryName,
-            @IsDefault,
-            @IsActive
-        );
-
-
-        -- Commit Transaction
-        COMMIT TRANSACTION;
-
-
-        SELECT 'Credit Category Inserted Successfully' AS Message;
-
-    END TRY
-
-    BEGIN CATCH
-
-        -- Rollback if transaction is active
-        IF @@TRANCOUNT > 0
-        BEGIN
-            ROLLBACK TRANSACTION;
-        END;
-
-
-        -- Return Error Information
-        SELECT
-            'Error occurred while inserting Credit Category' AS Message,
-            ERROR_MESSAGE() AS ErrorMessage,
-            ERROR_NUMBER() AS ErrorNumber,
-            ERROR_LINE() AS ErrorLine;
-
-    END CATCH
-
+CREATE OR ALTER PROCEDURE spInsertNewCreditCategoryByUserID  
+(  
+    @UserID INT,  
+    @ActiveStatus INT,  
+    @CategoryName VARCHAR(MAX)  
+)  
+AS  
+BEGIN  
+    DECLARE @IsDefault INT;  
+    DECLARE @IsActive INT;  
+  
+    BEGIN TRY  
+  
+        -- Validate User  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+            FROM tblUserAuthentication AS UserAuthentication  
+            WHERE UserAuthentication.UserID = @UserID  
+              AND UserAuthentication.Active = 1  
+        )  
+        BEGIN  
+            SELECT 'Invalid or Inactive User' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Trim Category Name  
+        SET @CategoryName = LTRIM(RTRIM(@CategoryName));  
+  
+  
+        -- Validate Category Name  
+        IF @CategoryName IS NULL  
+           OR @CategoryName = ''  
+        BEGIN  
+            SELECT 'Category Name cannot be empty' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Validate Active Status  
+        IF @ActiveStatus = 1  
+        BEGIN  
+            SET @IsActive = 1;  
+            SET @IsDefault = 0;  
+        END  
+        ELSE IF @ActiveStatus = 0  
+        BEGIN  
+            SET @IsActive = 0;  
+            SET @IsDefault = 0;  
+        END  
+        ELSE  
+        BEGIN  
+            SELECT 'Please Select Valid Input' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Transaction Starts  
+        BEGIN TRANSACTION;  
+  
+  
+        -- Check Duplicate Category  
+        IF EXISTS  
+        (  
+            SELECT 1  
+   FROM tblCreditCategory  
+   WHERE CategoryName = @CategoryName  
+   AND UserID = @UserID  
+   AND IsActive = 1  
+        )  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+  
+            SELECT 'Category Already Exists for this user' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Insert Category  
+        INSERT INTO tblCreditCategory  
+        (  
+            UserID,  
+            CategoryName,  
+            IsDefault,  
+            IsActive  
+        )  
+        VALUES  
+        (  
+            @UserID,  
+            @CategoryName,  
+            @IsDefault,  
+            @IsActive  
+        );  
+  
+  
+        -- Commit Transaction  
+        COMMIT TRANSACTION;  
+  
+  
+        SELECT 'Credit Category Inserted Successfully' AS Message;  
+  
+    END TRY  
+  
+    BEGIN CATCH  
+  
+        -- Rollback if transaction is active  
+        IF @@TRANCOUNT > 0  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+        END;  
+  
+  
+        -- Return Error Information  
+        SELECT  
+            'Error occurred while inserting Expense Category' AS Message,  
+            ERROR_MESSAGE() AS ErrorMessage,  
+            ERROR_NUMBER() AS ErrorNumber,  
+            ERROR_LINE() AS ErrorLine;  
+  
+    END CATCH  
+  
 END;
-GOessage
-        RETURN
-    END
-    
-    
-    INSERT INTO tblCreditCategory(UserID, CategoryName, IsDefault, IsActive)
-    VALUES(@UserID, @CategoryName, 0, 1)
-    
-    SELECT 'Credit Category Inserted Successfully' AS Message
-
-END
 GO
 
 
@@ -4113,149 +4132,131 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spInsertNewCreditSubCategoryByUserID
-(
-    @UserID INT,
-    @CategoryID INT,
-    @ActiveStatus INT,
-    @SubCategoryName VARCHAR(MAX)
-)
-AS
-BEGIN
-    SET NOCOUNT OFF;
-
-    DECLARE @IsDefault INT;
-    DECLARE @IsActive INT;
-
-    BEGIN TRY
-
-        -- Validate User
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblUserAuthentication AS UserAuthentication
-            WHERE UserAuthentication.UserID = @UserID
-              AND UserAuthentication.Active = 1
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive User' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Credit Category
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblCreditCategory
-            WHERE CategoryID = @CategoryID
-              AND IsActive = 1
-              AND (UserID IS NULL OR UserID = @UserID)
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive Category' AS Message;
-            RETURN;
-        END;
-
-
-        -- Trim SubCategory Name
-        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));
-
-
-        -- Validate SubCategory Name
-        IF @SubCategoryName IS NULL
-           OR @SubCategoryName = ''
-        BEGIN
-            SELECT 'SubCategory Name cannot be empty' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Active Status
-        IF @ActiveStatus = 1
-        BEGIN
-            SET @IsActive = 1;
-            SET @IsDefault = 0;
-        END
-        ELSE IF @ActiveStatus = 0
-        BEGIN
-            SET @IsActive = 0;
-            SET @IsDefault = 0;
-        END
-        ELSE
-        BEGIN
-            SELECT 'Please Select Valid Input' AS Message;
-            RETURN;
-        END;
-
-
-        -- Transaction Starts
-        BEGIN TRANSACTION;
-
-
-        -- Check Duplicate SubCategory
-        IF EXISTS
-        (
-            SELECT 1
-            FROM tblCreditSubCategory
-            WHERE SubCategoryName = @SubCategoryName
-              AND CategoryID = @CategoryID
-              AND UserID = @UserID
-              AND IsActive = 1
-        )
-        BEGIN
-            ROLLBACK TRANSACTION;
-
-            SELECT 'SubCategory Already Exists for this user in this category' AS Message;
-            RETURN;
-        END;
-
-
-        -- Insert SubCategory
-        INSERT INTO tblCreditSubCategory
-        (
-            CategoryID,
-            UserID,
-            SubCategoryName,
-            IsDefault,
-            IsActive
-        )
-        VALUES
-        (
-            @CategoryID,
-            @UserID,
-            @SubCategoryName,
-            @IsDefault,
-            @IsActive
-        );
-
-
-        -- Commit Transaction
-        COMMIT TRANSACTION;
-
-
-        SELECT 'Credit SubCategory Inserted Successfully' AS Message;
-
-    END TRY
-
-    BEGIN CATCH
-
-        -- Rollback if transaction is active
-        IF @@TRANCOUNT > 0
-        BEGIN
-            ROLLBACK TRANSACTION;
-        END;
-
-
-        -- Return Error Information
-        SELECT
-            'Error occurred while inserting Credit SubCategory' AS Message,
-            ERROR_MESSAGE() AS ErrorMessage,
-            ERROR_NUMBER() AS ErrorNumber,
-            ERROR_LINE() AS ErrorLine;
-
-    END CATCH
-
+CREATE or ALTER  PROCEDURE spInsertNewCreditSubCategoryByUserID  
+(  
+   @UserID INT,  
+   @CategoryID INT,  
+   @ActiveStatus INT,  
+   @SubCategoryName VARCHAR(MAX)  
+)  
+AS  
+BEGIN  
+    DECLARE @IsDefault INT;  
+    DECLARE @IsActive INT;  
+  
+    BEGIN TRY  
+  
+        -- Validate User  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+            FROM tblUserAuthentication AS UserAuthentication  
+            WHERE UserAuthentication.UserID = @UserID  
+              AND UserAuthentication.Active = 1  
+        )  
+        BEGIN  
+            SELECT 'Invalid or Inactive User' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Trim Category Name  
+        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));  
+  
+  
+        -- Validate Category Name  
+        IF @SubCategoryName IS NULL  
+           OR @SubCategoryName = ''  
+        BEGIN  
+            SELECT 'Category Name cannot be empty' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Validate Active Status  
+        IF @ActiveStatus = 1  
+        BEGIN  
+            SET @IsActive = 1;  
+            SET @IsDefault = 0;  
+        END  
+        ELSE IF @ActiveStatus = 0  
+        BEGIN  
+            SET @IsActive = 0;  
+            SET @IsDefault = 0;  
+        END  
+        ELSE  
+        BEGIN  
+            SELECT 'Please Select Valid Input' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Transaction Starts  
+        BEGIN TRANSACTION;  
+  
+  
+        -- Check Duplicate Category  
+        IF EXISTS  
+        (  
+            SELECT 1  
+            FROM tblCreditSubCategory  
+            WHERE SubCategoryName = @SubCategoryName  
+              AND UserID = @UserID  
+              AND IsActive = 1  
+        )  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+  
+            SELECT 'Category Already Exists for this user' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Insert Category  
+         INSERT INTO tblCreditSubCategory  
+   (  
+       CategoryID,   
+    UserID,   
+    SubCategoryName,   
+    IsDefault,   
+    IsActive  
+   )  
+   VALUES  
+   (  
+       @CategoryID,   
+    @UserID,   
+    @SubCategoryName,   
+    @IsDefault,   
+    @IsActive  
+   )  
+  
+  
+        -- Commit Transaction  
+        COMMIT TRANSACTION;  
+  
+  
+        SELECT 'Credit Sub Category Inserted Successfully' AS Message;  
+  
+    END TRY  
+  
+    BEGIN CATCH  
+  
+        -- Rollback if transaction is active  
+        IF @@TRANCOUNT > 0  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+        END;  
+  
+  
+        -- Return Error Information  
+        SELECT  
+            'Error occurred while inserting Expense Category' AS Message,  
+            ERROR_MESSAGE() AS ErrorMessage,  
+            ERROR_NUMBER() AS ErrorNumber,  
+            ERROR_LINE() AS ErrorLine;  
+  
+    END CATCH  
+  
 END;
 GO
 
@@ -4269,130 +4270,128 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spInsertNewExpenseCategoryByUserID
-(
-    @UserID INT,
-    @ActiveStatus INT,
-    @CategoryName VARCHAR(MAX)
-)
-AS
-BEGIN
-    SET NOCOUNT OFF;
-
-    DECLARE @IsDefault INT;
-    DECLARE @IsActive INT;
-
-    BEGIN TRY
-
-        -- Validate User
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblUserAuthentication AS UserAuthentication
-            WHERE UserAuthentication.UserID = @UserID
-              AND UserAuthentication.Active = 1
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive User' AS Message;
-            RETURN;
-        END;
-
-
-        -- Trim Category Name
-        SET @CategoryName = LTRIM(RTRIM(@CategoryName));
-
-
-        -- Validate Category Name
-        IF @CategoryName IS NULL
-           OR @CategoryName = ''
-        BEGIN
-            SELECT 'Category Name cannot be empty' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Active Status
-        IF @ActiveStatus = 1
-        BEGIN
-            SET @IsActive = 1;
-            SET @IsDefault = 0;
-        END
-        ELSE IF @ActiveStatus = 0
-        BEGIN
-            SET @IsActive = 0;
-            SET @IsDefault = 0;
-        END
-        ELSE
-        BEGIN
-            SELECT 'Please Select Valid Input' AS Message;
-            RETURN;
-        END;
-
-
-        -- Transaction Starts
-        BEGIN TRANSACTION;
-
-
-        -- Check Duplicate Category
-        IF EXISTS
-        (
-            SELECT 1
-            FROM tblExpenseCategory
-            WHERE CategoryName = @CategoryName
-              AND UserID = @UserID
-              AND IsActive = 1
-        )
-        BEGIN
-            ROLLBACK TRANSACTION;
-
-            SELECT 'Category Already Exists for this user' AS Message;
-            RETURN;
-        END;
-
-
-        -- Insert Category
-        INSERT INTO tblExpenseCategory
-        (
-            UserID,
-            CategoryName,
-            IsDefault,
-            IsActive
-        )
-        VALUES
-        (
-            @UserID,
-            @CategoryName,
-            @IsDefault,
-            @IsActive
-        );
-
-
-        -- Commit Transaction
-        COMMIT TRANSACTION;
-
-
-        SELECT 'Expense Category Inserted Successfully' AS Message;
-
-    END TRY
-
-    BEGIN CATCH
-
-        -- Rollback if transaction is active
-        IF @@TRANCOUNT > 0
-        BEGIN
-            ROLLBACK TRANSACTION;
-        END;
-
-
-        -- Return Error Information
-        SELECT
-            'Error occurred while inserting Expense Category' AS Message,
-            ERROR_MESSAGE() AS ErrorMessage,
-            ERROR_NUMBER() AS ErrorNumber,
-            ERROR_LINE() AS ErrorLine;
-
-    END CATCH
-
+CREATE or ALTER   PROCEDURE spInsertNewExpenseCategoryByUserID    
+(    
+    @UserID INT,    
+    @ActiveStatus INT,    
+    @CategoryName VARCHAR(MAX)    
+)    
+AS    
+BEGIN    
+    DECLARE @IsDefault INT;    
+    DECLARE @IsActive INT;    
+    
+    BEGIN TRY    
+    
+        -- Validate User    
+        IF NOT EXISTS    
+        (    
+            SELECT 1    
+            FROM tblUserAuthentication AS UserAuthentication    
+            WHERE UserAuthentication.UserID = @UserID    
+              AND UserAuthentication.Active = 1    
+        )    
+        BEGIN    
+            SELECT 'Invalid or Inactive User' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Trim Category Name    
+        SET @CategoryName = LTRIM(RTRIM(@CategoryName));    
+    
+    
+        -- Validate Category Name    
+        IF @CategoryName IS NULL    
+           OR @CategoryName = ''    
+        BEGIN    
+            SELECT 'Category Name cannot be empty' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Validate Active Status    
+        IF @ActiveStatus = 1    
+        BEGIN    
+            SET @IsActive = 1;    
+            SET @IsDefault = 0;    
+        END    
+        ELSE IF @ActiveStatus = 0    
+        BEGIN    
+            SET @IsActive = 0;    
+            SET @IsDefault = 0;    
+        END    
+        ELSE    
+        BEGIN    
+            SELECT 'Please Select Valid Input' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Transaction Starts    
+        BEGIN TRANSACTION;    
+    
+    
+        -- Check Duplicate Category    
+        IF EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseCategory    
+            WHERE CategoryName = @CategoryName    
+              AND UserID = @UserID    
+              AND IsActive = 1    
+        )    
+        BEGIN    
+            ROLLBACK TRANSACTION;    
+    
+            SELECT 'Category Already Exists for this user' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Insert Category    
+        INSERT INTO tblExpenseCategory    
+        (    
+            UserID,    
+            CategoryName,    
+            IsDefault,    
+            IsActive    
+        )    
+        VALUES    
+        (    
+            @UserID,    
+            @CategoryName,    
+            @IsDefault,    
+            @IsActive    
+        );    
+    
+    
+        -- Commit Transaction    
+        COMMIT TRANSACTION;    
+    
+    
+        SELECT 'Expense Category Inserted Successfully' AS Message;    
+    
+    END TRY    
+    
+    BEGIN CATCH    
+    
+        -- Rollback if transaction is active    
+        IF @@TRANCOUNT > 0    
+        BEGIN    
+            ROLLBACK TRANSACTION;    
+        END;    
+    
+    
+        -- Return Error Information    
+        SELECT    
+            'Error occurred while inserting Expense Category' AS Message,    
+            ERROR_MESSAGE() AS ErrorMessage,    
+            ERROR_NUMBER() AS ErrorNumber,    
+            ERROR_LINE() AS ErrorLine;    
+    
+    END CATCH    
+    
 END;
 GO
 
@@ -4406,149 +4405,131 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spInsertNewExpenseSubCategoryByUserID
-(
-    @UserID INT,
-    @CategoryID INT,
-    @ActiveStatus INT,
-    @SubCategoryName VARCHAR(MAX)
-)
-AS
-BEGIN
-    SET NOCOUNT OFF;
-
-    DECLARE @IsDefault INT;
-    DECLARE @IsActive INT;
-
-    BEGIN TRY
-
-        -- Validate User
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblUserAuthentication AS UserAuthentication
-            WHERE UserAuthentication.UserID = @UserID
-              AND UserAuthentication.Active = 1
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive User' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Expense Category
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblExpenseCategory
-            WHERE CategoryID = @CategoryID
-              AND IsActive = 1
-              AND (UserID IS NULL OR UserID = @UserID)
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive Category' AS Message;
-            RETURN;
-        END;
-
-
-        -- Trim SubCategory Name
-        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));
-
-
-        -- Validate SubCategory Name
-        IF @SubCategoryName IS NULL
-           OR @SubCategoryName = ''
-        BEGIN
-            SELECT 'SubCategory Name cannot be empty' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Active Status
-        IF @ActiveStatus = 1
-        BEGIN
-            SET @IsActive = 1;
-            SET @IsDefault = 0;
-        END
-        ELSE IF @ActiveStatus = 0
-        BEGIN
-            SET @IsActive = 0;
-            SET @IsDefault = 0;
-        END
-        ELSE
-        BEGIN
-            SELECT 'Please Select Valid Input' AS Message;
-            RETURN;
-        END;
-
-
-        -- Transaction Starts
-        BEGIN TRANSACTION;
-
-
-        -- Check Duplicate SubCategory
-        IF EXISTS
-        (
-            SELECT 1
-            FROM tblExpenseSubCategory
-            WHERE SubCategoryName = @SubCategoryName
-              AND CategoryID = @CategoryID
-              AND UserID = @UserID
-              AND IsActive = 1
-        )
-        BEGIN
-            ROLLBACK TRANSACTION;
-
-            SELECT 'SubCategory Already Exists for this user in this category' AS Message;
-            RETURN;
-        END;
-
-
-        -- Insert SubCategory
-        INSERT INTO tblExpenseSubCategory
-        (
-            CategoryID,
-            UserID,
-            SubCategoryName,
-            IsDefault,
-            IsActive
-        )
-        VALUES
-        (
-            @CategoryID,
-            @UserID,
-            @SubCategoryName,
-            @IsDefault,
-            @IsActive
-        );
-
-
-        -- Commit Transaction
-        COMMIT TRANSACTION;
-
-
-        SELECT 'Expense SubCategory Inserted Successfully' AS Message;
-
-    END TRY
-
-    BEGIN CATCH
-
-        -- Rollback if transaction is active
-        IF @@TRANCOUNT > 0
-        BEGIN
-            ROLLBACK TRANSACTION;
-        END;
-
-
-        -- Return Error Information
-        SELECT
-            'Error occurred while inserting Expense SubCategory' AS Message,
-            ERROR_MESSAGE() AS ErrorMessage,
-            ERROR_NUMBER() AS ErrorNumber,
-            ERROR_LINE() AS ErrorLine;
-
-    END CATCH
-
+CREATE  or ALTER   PROCEDURE spInsertNewExpenseSubCategoryByUserID    
+(    
+   @UserID INT,    
+   @CategoryID INT,    
+   @ActiveStatus INT,    
+   @SubCategoryName VARCHAR(MAX)    
+)    
+AS    
+BEGIN    
+    DECLARE @IsDefault INT;    
+    DECLARE @IsActive INT;    
+    
+    BEGIN TRY    
+    
+        -- Validate User    
+        IF NOT EXISTS    
+        (    
+            SELECT 1    
+            FROM tblUserAuthentication AS UserAuthentication    
+            WHERE UserAuthentication.UserID = @UserID    
+              AND UserAuthentication.Active = 1    
+        )    
+        BEGIN    
+            SELECT 'Invalid or Inactive User' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Trim Category Name    
+        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));    
+    
+    
+        -- Validate Category Name    
+        IF @SubCategoryName IS NULL    
+           OR @SubCategoryName = ''    
+        BEGIN    
+            SELECT 'Category Name cannot be empty' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Validate Active Status    
+        IF @ActiveStatus = 1    
+        BEGIN    
+            SET @IsActive = 1;    
+            SET @IsDefault = 0;    
+        END    
+        ELSE IF @ActiveStatus = 0    
+        BEGIN    
+            SET @IsActive = 0;    
+            SET @IsDefault = 0;    
+        END    
+        ELSE    
+        BEGIN    
+            SELECT 'Please Select Valid Input' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Transaction Starts    
+        BEGIN TRANSACTION;    
+    
+    
+        -- Check Duplicate Category    
+        IF EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseSubCategory    
+            WHERE SubCategoryName = @SubCategoryName    
+              AND UserID = @UserID    
+              AND IsActive = 1    
+        )    
+        BEGIN    
+            ROLLBACK TRANSACTION;    
+    
+            SELECT 'Category Already Exists for this user' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Insert Category    
+         INSERT INTO tblExpenseSubCategory    
+   (    
+       CategoryID,     
+    UserID,     
+    SubCategoryName,     
+    IsDefault,     
+    IsActive    
+   )    
+   VALUES    
+   (    
+       @CategoryID,     
+    @UserID,     
+    @SubCategoryName,     
+    @IsDefault,     
+    @IsActive    
+   )    
+    
+    
+        -- Commit Transaction    
+        COMMIT TRANSACTION;    
+    
+    
+        SELECT 'Expense Sub Category Inserted Successfully' AS Message;    
+    
+    END TRY    
+    
+    BEGIN CATCH    
+    
+        -- Rollback if transaction is active    
+        IF @@TRANCOUNT > 0    
+        BEGIN    
+            ROLLBACK TRANSACTION;    
+        END;    
+    
+    
+        -- Return Error Information    
+        SELECT    
+            'Error occurred while inserting Expense Category' AS Message,    
+            ERROR_MESSAGE() AS ErrorMessage,    
+            ERROR_NUMBER() AS ErrorNumber,    
+            ERROR_LINE() AS ErrorLine;    
+    
+    END CATCH    
+    
 END;
 GO
 
@@ -4562,153 +4543,150 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spUpdateCreditCategoryByUserID
-(
-    @UserID INT,
-    @CategoryID INT,
-    @ActiveStatus INT,
-    @CategoryName VARCHAR(MAX)
-)
-AS
-BEGIN
-    SET NOCOUNT OFF;
-
-    DECLARE @IsDefault INT;
-    DECLARE @IsActive INT;
-
-    BEGIN TRY
-
-        -- Validate User
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblUserAuthentication AS UserAuthentication
-            WHERE UserAuthentication.UserID = @UserID
-              AND UserAuthentication.Active = 1
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive User' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate CategoryID
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblCreditCategory
-            WHERE CategoryID = @CategoryID
-        )
-        BEGIN
-            SELECT 'Invalid CategoryID' AS Message;
-            RETURN;
-        END;
-
-
-        -- Check Category Ownership and Default Status
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblCreditCategory
-            WHERE CategoryID = @CategoryID
-              AND UserID = @UserID
-              AND IsDefault = 0
-        )
-        BEGIN
-            SELECT 'Cannot update default categories or categories owned by other users' AS Message;
-            RETURN;
-        END;
-
-
-        -- Trim Category Name
-        SET @CategoryName = LTRIM(RTRIM(@CategoryName));
-
-
-        -- Validate Category Name
-        IF @CategoryName IS NULL
-           OR @CategoryName = ''
-        BEGIN
-            SELECT 'Category Name Cannot Be Empty' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Active Status
-        IF @ActiveStatus = 1
-        BEGIN
-            SET @IsActive = 1;
-            SET @IsDefault = 0;
-        END
-        ELSE IF @ActiveStatus = 0
-        BEGIN
-            SET @IsActive = 0;
-            SET @IsDefault = 0;
-        END
-        ELSE
-        BEGIN
-            SELECT 'Please Select Valid Input' AS Message;
-            RETURN;
-        END;
-
-
-        -- Start Transaction
-        BEGIN TRANSACTION;
-
-
-        -- Check Duplicate Category Name
-        IF EXISTS
-        (
-            SELECT 1
-            FROM tblCreditCategory
-            WHERE CategoryName = @CategoryName
-              AND CategoryID <> @CategoryID
-              AND UserID = @UserID
-              AND IsActive = 1
-        )
-        BEGIN
-            ROLLBACK TRANSACTION;
-
-            SELECT 'Category Name Already Exists for this user' AS Message;
-            RETURN;
-        END;
-
-
-        -- Update Category
-        UPDATE tblCreditCategory
-        SET
-            CategoryName = @CategoryName,
-            IsActive = @IsActive
-        WHERE CategoryID = @CategoryID
-          AND UserID = @UserID
-          AND IsDefault = 0;
-
-
-        -- Commit Transaction
-        COMMIT TRANSACTION;
-
-
-        SELECT 'Credit Category Updated Successfully' AS Message;
-
-    END TRY
-
-    BEGIN CATCH
-
-        -- Rollback Transaction if Active
-        IF @@TRANCOUNT > 0
-        BEGIN
-            ROLLBACK TRANSACTION;
-        END;
-
-
-        -- Return Error Details
-        SELECT
-            'Error occurred while updating Credit Category' AS Message,
-            ERROR_MESSAGE() AS ErrorMessage,
-            ERROR_NUMBER() AS ErrorNumber,
-            ERROR_LINE() AS ErrorLine;
-
-    END CATCH
-
+CREATE OR ALTER PROCEDURE spUpdateCreditCategoryByUserID  
+(  
+    @UserID INT,  
+    @CategoryID INT,  
+    @ActiveStatus INT,  
+    @CategoryName VARCHAR(MAX)  
+)  
+AS  
+BEGIN  
+  
+    DECLARE @IsDefault INT;  
+    DECLARE @IsActive INT;  
+  
+    BEGIN TRY  
+  
+        -- Validate User  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+            FROM tblUserAuthentication AS UserAuthentication  
+            WHERE UserAuthentication.UserID = @UserID  
+              AND UserAuthentication.Active = 1  
+        )  
+        BEGIN  
+            SELECT 'Invalid or Inactive User' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Validate CategoryID  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+            FROM tblCreditCategory  
+            WHERE CategoryID = @CategoryID  
+        )  
+        BEGIN  
+            SELECT 'Invalid CategoryID' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Check Category Ownership and Default Status  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+            FROM tblCreditCategory  
+            WHERE CategoryID = @CategoryID  
+              AND UserID = @UserID  
+              AND IsDefault = 0  
+        )  
+        BEGIN  
+            SELECT 'Cannot update default categories or categories owned by other users' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Trim Category Name  
+        SET @CategoryName = LTRIM(RTRIM(@CategoryName));  
+  
+  
+        -- Validate Category Name  
+        IF @CategoryName IS NULL  
+           OR @CategoryName = ''  
+        BEGIN  
+            SELECT 'Category Name Cannot Be Empty' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Validate Active Status  
+        IF @ActiveStatus = 1  
+        BEGIN  
+            SET @IsActive = 1;  
+            SET @IsDefault = 0;  
+        END  
+        ELSE IF @ActiveStatus = 0  
+        BEGIN  
+            SET @IsActive = 0;  
+            SET @IsDefault = 0;  
+        END  
+        ELSE  
+        BEGIN  
+            SELECT 'Please Select Valid Input' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Start Transaction  
+        BEGIN TRANSACTION;  
+  
+  
+        -- Check Duplicate Category Name  
+        IF EXISTS  
+        (  
+            SELECT 1  
+            FROM tblCreditCategory  
+            WHERE CategoryName = @CategoryName  
+              AND CategoryID <> @CategoryID  
+              AND UserID = @UserID  
+              AND IsActive = 1  
+        )  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+  
+            SELECT 'Category Name Already Exists for this user' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Update Category  
+        UPDATE tblCreditCategory  
+  SET CategoryName = @CategoryName  
+  WHERE CategoryID = @CategoryID  
+  AND UserID = @UserID  
+  AND IsDefault = 0  
+  
+  
+        -- Commit Transaction  
+        COMMIT TRANSACTION;  
+  
+  
+        SELECT 'Expense Category Updated Successfully' AS Message;  
+  
+    END TRY  
+  
+    BEGIN CATCH  
+  
+        -- Rollback Transaction if Active  
+        IF @@TRANCOUNT > 0  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+        END;  
+  
+  
+        -- Return Error Details  
+        SELECT  
+            'Error occurred while updating Expense Category' AS Message,  
+            ERROR_MESSAGE() AS ErrorMessage,  
+            ERROR_NUMBER() AS ErrorNumber,  
+            ERROR_LINE() AS ErrorLine;  
+  
+    END CATCH  
+  
 END;
 GO
 
@@ -4722,153 +4700,148 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spUpdateCreditSubCategoryByUserID
-(
-    @UserID INT,
-    @ActiveStatus INT,
-    @SubCategoryID INT,
-    @SubCategoryName VARCHAR(MAX)
-)
-AS
-BEGIN
-    SET NOCOUNT OFF;
-
-    DECLARE @IsDefault INT;
-    DECLARE @IsActive INT;
-
-    BEGIN TRY
-
-        -- Validate User
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblUserAuthentication AS UserAuthentication
-            WHERE UserAuthentication.UserID = @UserID
-              AND UserAuthentication.Active = 1
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive User' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate SubCategoryID
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblCreditSubCategory
-            WHERE SubCategoryID = @SubCategoryID
-        )
-        BEGIN
-            SELECT 'Invalid SubCategoryID' AS Message;
-            RETURN;
-        END;
-
-
-        -- Check SubCategory Ownership and Default Status
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblCreditSubCategory
-            WHERE SubCategoryID = @SubCategoryID
-              AND UserID = @UserID
-              AND IsDefault = 0
-        )
-        BEGIN
-            SELECT 'Cannot update default categories or categories owned by other users' AS Message;
-            RETURN;
-        END;
-
-
-        -- Trim SubCategory Name
-        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));
-
-
-        -- Validate SubCategory Name
-        IF @SubCategoryName IS NULL
-           OR @SubCategoryName = ''
-        BEGIN
-            SELECT 'SubCategory Name Cannot Be Empty' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Active Status
-        IF @ActiveStatus = 1
-        BEGIN
-            SET @IsActive = 1;
-            SET @IsDefault = 0;
-        END
-        ELSE IF @ActiveStatus = 0
-        BEGIN
-            SET @IsActive = 0;
-            SET @IsDefault = 0;
-        END
-        ELSE
-        BEGIN
-            SELECT 'Please Select Valid Input' AS Message;
-            RETURN;
-        END;
-
-
-        -- Start Transaction
-        BEGIN TRANSACTION;
-
-
-        -- Check Duplicate SubCategory Name
-        IF EXISTS
-        (
-            SELECT 1
-            FROM tblCreditSubCategory
-            WHERE SubCategoryName = @SubCategoryName
-              AND SubCategoryID <> @SubCategoryID
-              AND UserID = @UserID
-              AND IsActive = 1
-        )
-        BEGIN
-            ROLLBACK TRANSACTION;
-
-            SELECT 'SubCategory Name Already Exists for this user' AS Message;
-            RETURN;
-        END;
-
-
-        -- Update SubCategory
-        UPDATE tblCreditSubCategory
-        SET
-            SubCategoryName = @SubCategoryName,
-            IsActive = @IsActive
-        WHERE SubCategoryID = @SubCategoryID
-          AND UserID = @UserID
-          AND IsDefault = 0;
-
-
-        -- Commit Transaction
-        COMMIT TRANSACTION;
-
-
-        SELECT 'Credit SubCategory Updated Successfully' AS Message;
-
-    END TRY
-
-    BEGIN CATCH
-
-        -- Rollback Transaction if Active
-        IF @@TRANCOUNT > 0
-        BEGIN
-            ROLLBACK TRANSACTION;
-        END;
-
-
-        -- Return Error Details
-        SELECT
-            'Error occurred while updating Credit SubCategory' AS Message,
-            ERROR_MESSAGE() AS ErrorMessage,
-            ERROR_NUMBER() AS ErrorNumber,
-            ERROR_LINE() AS ErrorLine;
-
-    END CATCH
-
+CREATE or ALTER	 PROCEDURE [dbo].[spUpdateCreditSubCategoryByUserID]  
+(  
+    @UserID INT,  
+    @SubCategoryID INT,  
+    @ActiveStatus INT,  
+    @SubCategoryName VARCHAR(MAX)  
+)  
+AS  
+BEGIN  
+  
+    DECLARE @IsDefault INT;  
+    DECLARE @IsActive INT;  
+  
+    BEGIN TRY  
+  
+        -- Validate User  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+            FROM tblUserAuthentication AS UserAuthentication  
+            WHERE UserAuthentication.UserID = @UserID  
+              AND UserAuthentication.Active = 1  
+        )  
+        BEGIN  
+            SELECT 'Invalid or Inactive User' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Validate CategoryID  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+        FROM tblCreditSubCategory   
+        WHERE SubCategoryID = @SubCategoryID  
+        )  
+        BEGIN  
+            SELECT 'Invalid CategoryID' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Check Category Ownership and Default Status  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+        FROM tblCreditSubCategory  
+        WHERE SubCategoryID = @SubCategoryID  
+        AND UserID = @UserID  
+        AND IsDefault = 0  
+        )  
+        BEGIN  
+            SELECT 'Cannot update default sub categories or categories owned by other users' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Trim Category Name  
+        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))  
+  
+    IF @SubCategoryName IS NULL  
+    OR @SubCategoryName = ''  
+    BEGIN  
+        SELECT 'SubCategory Name Cannot Be Empty' AS MESSAGE  
+        RETURN  
+ END  
+  
+  
+        -- Validate Active Status  
+        IF @ActiveStatus = 1  
+        BEGIN  
+            SET @IsActive = 1;  
+            SET @IsDefault = 0;  
+        END  
+        ELSE IF @ActiveStatus = 0  
+        BEGIN  
+            SET @IsActive = 0;  
+            SET @IsDefault = 0;  
+        END  
+        ELSE  
+        BEGIN  
+            SELECT 'Please Select Valid Input' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Start Transaction  
+        BEGIN TRANSACTION;  
+  
+  
+        -- Check Duplicate Category Name  
+        IF EXISTS  
+        (  
+            SELECT 1  
+        FROM tblCreditSubCategory  
+        WHERE SubCategoryName = @SubCategoryName  
+        AND SubCategoryID != @SubCategoryID  
+        AND UserID = @UserID  
+        AND IsActive = 1  
+        )  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+  
+            SELECT 'Sub Category Name Already Exists for this user' AS Message;  
+            RETURN;  
+        END;  
+  
+  
+        -- Update Category  
+       UPDATE tblCreditSubCategory  
+    SET SubCategoryName = @SubCategoryName  
+    WHERE SubCategoryID = @SubCategoryID  
+    AND UserID = @UserID  
+    AND IsDefault = 0  
+  
+  
+        -- Commit Transaction  
+        COMMIT TRANSACTION;  
+  
+  
+        SELECT 'Credit Sub Category Updated Successfully' AS Message;  
+  
+    END TRY  
+  
+    BEGIN CATCH  
+  
+        -- Rollback Transaction if Active  
+        IF @@TRANCOUNT > 0  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+        END;  
+  
+  
+        -- Return Error Details  
+        SELECT  
+            'Error occurred while updating Expense Category' AS Message,  
+            ERROR_MESSAGE() AS ErrorMessage,  
+            ERROR_NUMBER() AS ErrorNumber,  
+            ERROR_LINE() AS ErrorLine;  
+  
+    END CATCH  
+  
 END;
 GO
 
@@ -4882,153 +4855,152 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spUpdateExpenseCategoryByUserID
-(
-    @UserID INT,
-    @CategoryID INT,
-    @ActiveStatus INT,
-    @CategoryName VARCHAR(MAX)
-)
-AS
-BEGIN
-    SET NOCOUNT OFF;
-
-    DECLARE @IsDefault INT;
-    DECLARE @IsActive INT;
-
-    BEGIN TRY
-
-        -- Validate User
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblUserAuthentication AS UserAuthentication
-            WHERE UserAuthentication.UserID = @UserID
-              AND UserAuthentication.Active = 1
-        )
-        BEGIN
-            SELECT 'Invalid or Inactive User' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate CategoryID
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblExpenseCategory
-            WHERE CategoryID = @CategoryID
-        )
-        BEGIN
-            SELECT 'Invalid CategoryID' AS Message;
-            RETURN;
-        END;
-
-
-        -- Check Category Ownership and Default Status
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblExpenseCategory
-            WHERE CategoryID = @CategoryID
-              AND UserID = @UserID
-              AND IsDefault = 0
-        )
-        BEGIN
-            SELECT 'Cannot update default categories or categories owned by other users' AS Message;
-            RETURN;
-        END;
-
-
-        -- Trim Category Name
-        SET @CategoryName = LTRIM(RTRIM(@CategoryName));
-
-
-        -- Validate Category Name
-        IF @CategoryName IS NULL
-           OR @CategoryName = ''
-        BEGIN
-            SELECT 'Category Name Cannot Be Empty' AS Message;
-            RETURN;
-        END;
-
-
-        -- Validate Active Status
-        IF @ActiveStatus = 1
-        BEGIN
-            SET @IsActive = 1;
-            SET @IsDefault = 0;
-        END
-        ELSE IF @ActiveStatus = 0
-        BEGIN
-            SET @IsActive = 0;
-            SET @IsDefault = 0;
-        END
-        ELSE
-        BEGIN
-            SELECT 'Please Select Valid Input' AS Message;
-            RETURN;
-        END;
-
-
-        -- Start Transaction
-        BEGIN TRANSACTION;
-
-
-        -- Check Duplicate Category Name
-        IF EXISTS
-        (
-            SELECT 1
-            FROM tblExpenseCategory
-            WHERE CategoryName = @CategoryName
-              AND CategoryID <> @CategoryID
-              AND UserID = @UserID
-              AND IsActive = 1
-        )
-        BEGIN
-            ROLLBACK TRANSACTION;
-
-            SELECT 'Category Name Already Exists for this user' AS Message;
-            RETURN;
-        END;
-
-
-        -- Update Category
-        UPDATE tblExpenseCategory
-        SET
-            CategoryName = @CategoryName,
-            IsActive = @IsActive
-        WHERE CategoryID = @CategoryID
-          AND UserID = @UserID
-          AND IsDefault = 0;
-
-
-        -- Commit Transaction
-        COMMIT TRANSACTION;
-
-
-        SELECT 'Expense Category Updated Successfully' AS Message;
-
-    END TRY
-
-    BEGIN CATCH
-
-        -- Rollback Transaction if Active
-        IF @@TRANCOUNT > 0
-        BEGIN
-            ROLLBACK TRANSACTION;
-        END;
-
-
-        -- Return Error Details
-        SELECT
-            'Error occurred while updating Expense Category' AS Message,
-            ERROR_MESSAGE() AS ErrorMessage,
-            ERROR_NUMBER() AS ErrorNumber,
-            ERROR_LINE() AS ErrorLine;
-
-    END CATCH
-
+CREATE OR ALTER  PROCEDURE spUpdateExpenseCategoryByUserID    
+(    
+    @UserID INT,    
+    @CategoryID INT,    
+    @ActiveStatus INT,    
+    @CategoryName VARCHAR(MAX)    
+)    
+AS    
+BEGIN    
+    
+    DECLARE @IsDefault INT;    
+    DECLARE @IsActive INT;    
+    
+    BEGIN TRY    
+    
+        -- Validate User    
+        IF NOT EXISTS    
+        (    
+            SELECT 1    
+            FROM tblUserAuthentication AS UserAuthentication    
+            WHERE UserAuthentication.UserID = @UserID    
+              AND UserAuthentication.Active = 1    
+        )    
+        BEGIN    
+            SELECT 'Invalid or Inactive User' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Validate CategoryID    
+        IF NOT EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseCategory    
+            WHERE CategoryID = @CategoryID    
+        )    
+        BEGIN    
+            SELECT 'Invalid CategoryID' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Check Category Ownership and Default Status    
+        IF NOT EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseCategory    
+            WHERE CategoryID = @CategoryID    
+              AND UserID = @UserID    
+              AND IsDefault = 0    
+        )    
+        BEGIN    
+            SELECT 'Cannot update default categories or categories owned by other users' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Trim Category Name    
+        SET @CategoryName = LTRIM(RTRIM(@CategoryName));    
+    
+    
+        -- Validate Category Name    
+        IF @CategoryName IS NULL    
+           OR @CategoryName = ''    
+        BEGIN    
+            SELECT 'Category Name Cannot Be Empty' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Validate Active Status    
+        IF @ActiveStatus = 1    
+        BEGIN    
+            SET @IsActive = 1;    
+            SET @IsDefault = 0;    
+        END    
+        ELSE IF @ActiveStatus = 0    
+        BEGIN    
+            SET @IsActive = 0;    
+            SET @IsDefault = 0;    
+        END    
+        ELSE    
+        BEGIN    
+            SELECT 'Please Select Valid Input' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Start Transaction    
+        BEGIN TRANSACTION;    
+    
+    
+        -- Check Duplicate Category Name    
+        IF EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseCategory    
+            WHERE CategoryName = @CategoryName    
+              AND CategoryID <> @CategoryID    
+              AND UserID = @UserID    
+              AND IsActive = 1    
+        )    
+        BEGIN    
+            ROLLBACK TRANSACTION;    
+    
+            SELECT 'Category Name Already Exists for this user' AS Message;    
+            RETURN;    
+        END;    
+    
+    
+        -- Update Category    
+        UPDATE tblExpenseCategory    
+        SET    
+            CategoryName = @CategoryName,    
+            IsActive = @IsActive    
+        WHERE CategoryID = @CategoryID    
+          AND UserID = @UserID    
+          AND IsDefault = 0;    
+    
+    
+        -- Commit Transaction    
+        COMMIT TRANSACTION;    
+    
+    
+        SELECT 'Expense Category Updated Successfully' AS Message;    
+    
+    END TRY    
+    
+    BEGIN CATCH    
+    
+        -- Rollback Transaction if Active    
+        IF @@TRANCOUNT > 0    
+        BEGIN    
+            ROLLBACK TRANSACTION;    
+        END;    
+    
+    
+        -- Return Error Details    
+        SELECT    
+            'Error occurred while updating Expense Category' AS Message,    
+            ERROR_MESSAGE() AS ErrorMessage,    
+            ERROR_NUMBER() AS ErrorNumber,    
+            ERROR_LINE() AS ErrorLine;    
+    
+    END CATCH    
+    
 END;
 GO
 
@@ -5042,90 +5014,91 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spUpdateExpenseSubCategoryByUserID
-(
-  @UserID INT,
-  @SubCategoryID INT,
-  @SubCategoryName VARCHAR(MAX)
-)
-AS
-BEGIN
+CREATE  OR ALTER   PROCEDURE spUpdateExpenseSubCategoryByUserID    
+(    
+    @UserID INT,    
+    @SubCategoryID INT,    
+    @ActiveStatus INT,    
+    @SubCategoryName VARCHAR(MAX)    
+)    
+AS    
+BEGIN    
+        
+    SET NOCOUNT OFF    
+        
+        
+    IF NOT EXISTS    
+    (    
+        SELECT 1    
+        FROM tblUserAuthentication UserAuthentication    
+        WHERE UserAuthentication.UserID = @UserID    
+        AND UserAuthentication.Active = 1    
+    )    
+    BEGIN    
+        SELECT 'Invalid or Inactive User' AS MESSAGE    
+        RETURN    
+    END    
     
-    SET NOCOUNT OFF
+        
+    IF NOT EXISTS    
+    (    
+        SELECT 1    
+        FROM tblExpenseSubCategory     
+        WHERE SubCategoryID = @SubCategoryID    
+    )    
+    BEGIN    
+        SELECT 'Invalid SubCategoryID' AS MESSAGE    
+        RETURN     
+    END    
+        
+        
+    IF NOT EXISTS    
+    (    
+        SELECT 1    
+        FROM tblExpenseSubCategory    
+        WHERE SubCategoryID = @SubCategoryID    
+        AND UserID = @UserID    
+        AND IsDefault = 0    
+    )    
+    BEGIN    
+        SELECT 'Cannot update default sub categories or subcategories owned by other users' AS MESSAGE    
+        RETURN    
+    END    
     
+        
+    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))    
     
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblUserAuthentication UserAuthentication
-        WHERE UserAuthentication.UserID = @UserID
-        AND UserAuthentication.Active = 1
-    )
-    BEGIN
-        SELECT 'Invalid or Inactive User' AS MESSAGE
-        RETURN
-    END
-
+    IF @SubCategoryName IS NULL    
+    OR @SubCategoryName = ''    
+    BEGIN    
+        SELECT 'SubCategory Name Cannot Be Empty' AS MESSAGE    
+        RETURN    
+    END    
     
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblExpenseSubCategory 
-        WHERE SubCategoryID = @SubCategoryID
-    )
-    BEGIN
-        SELECT 'Invalid SubCategoryID' AS MESSAGE
-        RETURN 
-    END
+        
+    IF EXISTS    
+    (    
+        SELECT 1    
+        FROM tblExpenseSubCategory    
+        WHERE SubCategoryName = @SubCategoryName    
+        AND SubCategoryID != @SubCategoryID    
+        AND UserID = @UserID    
+        AND IsActive = 1    
+    )    
+    BEGIN    
+        SELECT 'SubCategory Name Already Exists for this user' AS MESSAGE    
+        RETURN    
+    END    
     
+        
+    UPDATE tblExpenseSubCategory    
+    SET SubCategoryName = @SubCategoryName    
+    WHERE SubCategoryID = @SubCategoryID    
+    AND UserID = @UserID    
+    AND IsDefault = 0    
     
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM tblExpenseSubCategory
-        WHERE SubCategoryID = @SubCategoryID
-        AND UserID = @UserID
-        AND IsDefault = 0
-    )
-    BEGIN
-        SELECT 'Cannot update default subcategories or subcategories owned by other users' AS MESSAGE
-        RETURN
-    END
-
+    SELECT 'Expense SubCategory Updated Successfully' AS MESSAGE    
     
-    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))
-
-    IF @SubCategoryName IS NULL
-    OR @SubCategoryName = ''
-    BEGIN
-        SELECT 'SubCategory Name Cannot Be Empty' AS MESSAGE
-        RETURN
-    END
-
-    
-    IF EXISTS
-    (
-        SELECT 1
-        FROM tblExpenseSubCategory
-        WHERE SubCategoryName = @SubCategoryName
-        AND SubCategoryID != @SubCategoryID
-        AND UserID = @UserID
-        AND IsActive = 1
-    )
-    BEGIN
-        SELECT 'SubCategory Name Already Exists for this user' AS MESSAGE
-        RETURN
-    END
-
-    
-    UPDATE tblExpenseSubCategory
-    SET SubCategoryName = @SubCategoryName
-    WHERE SubCategoryID = @SubCategoryID
-    AND UserID = @UserID
-    AND IsDefault = 0
-
-    SELECT 'Expense SubCategory Updated Successfully' AS MESSAGE
-
 END
 GO
 
@@ -6118,6 +6091,35 @@ END;
 
 GO
 
+
+
+-- ==========================================================
+
+-- SP: ✔️spCheckDuplicateTaskTitle.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spCheckDuplicateTaskTitle
+    @UserID INT,
+    @TaskID INT,
+    @TaskTitle NVARCHAR(150)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    IF EXISTS (
+        SELECT 1 
+        FROM tblTask 
+        WHERE UserID = @UserID 
+          AND LOWER(TRIM(TaskTitle)) = LOWER(TRIM(@TaskTitle))
+          AND (@TaskID = -1 OR TaskID <> @TaskID)
+    )
+        SELECT 1; 
+    ELSE
+        SELECT 0; 
+END
+
+GO
 
 
 

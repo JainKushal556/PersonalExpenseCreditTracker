@@ -292,6 +292,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void FillGrid()
         {
+            int scrollIndex = dgvCategory.FirstDisplayedScrollingRowIndex;
             dgvCategory.Rows.Clear();
 
             foreach (ExpenseCategory cat in categoryList)
@@ -323,6 +324,13 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                         dgvCategory.Rows[subRow].Visible = expanded;
                     }
                 }
+
+                
+            }
+
+            if (scrollIndex >= 0 && scrollIndex < dgvCategory.Rows.Count)
+            {
+                dgvCategory.FirstDisplayedScrollingRowIndex = scrollIndex;
             }
         }
 

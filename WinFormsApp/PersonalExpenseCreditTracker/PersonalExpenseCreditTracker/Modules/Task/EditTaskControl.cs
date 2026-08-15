@@ -103,6 +103,13 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select the Proiority", cmbPriority);
             CommonUiFunction.LoadInComboBox("spGetAllTaskStatus", "Select Status", cmbStatus);
 
+            cmbPriority.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbPriority.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            cmbStatus.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
       
             if (!string.IsNullOrEmpty(taskControl.selectPriority))
             {
@@ -125,6 +132,52 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             btnCancel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnCancel.Width, btnCancel.Height, 6, 6));
             btnUpdateTask.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnUpdateTask.Width, btnUpdateTask.Height, 6, 6));
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+
+                if (cmbPriority.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbPriority);
+                    return true; 
+                }
+
+                else if (cmbStatus.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbStatus);
+                    return true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
+        private void SelectComboBoxSuggestion(ComboBox cmb)
+        {
+            if (!string.IsNullOrWhiteSpace(cmb.Text))
+            {
+
+                int index = cmb.FindStringExact(cmb.Text);
+
+                if (index == -1)
+                {
+                    index = cmb.FindString(cmb.Text);
+                }
+
+  
+                if (index != -1)
+                {
+                    cmb.SelectedIndex = index;
+                    cmb.SelectionStart = cmb.Text.Length;
+                }
+            }
+
+ 
+            cmb.DroppedDown = false;
         }
 
 

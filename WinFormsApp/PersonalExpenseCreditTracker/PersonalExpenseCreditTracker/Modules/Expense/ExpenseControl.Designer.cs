@@ -610,9 +610,9 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.lblExpenseAmount.ForeColor = System.Drawing.Color.Black;
             this.lblExpenseAmount.Location = new System.Drawing.Point(85, 42);
             this.lblExpenseAmount.Name = "lblExpenseAmount";
-            this.lblExpenseAmount.Size = new System.Drawing.Size(106, 32);
+            this.lblExpenseAmount.Size = new System.Drawing.Size(43, 32);
             this.lblExpenseAmount.TabIndex = 2;
-            this.lblExpenseAmount.Text = "₹25,000";
+            this.lblExpenseAmount.Text = "₹0";
             // 
             // picExpense
             // 

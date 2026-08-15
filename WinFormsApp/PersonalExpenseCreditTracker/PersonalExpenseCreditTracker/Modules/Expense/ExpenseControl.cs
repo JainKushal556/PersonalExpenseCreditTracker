@@ -254,49 +254,29 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         public void LoadExpenseData(int userID)
         {
-            try
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllExpensesByID", userID);
+            if (dataTable == null || dataTable.Columns.Contains("Message") || dataTable.Rows.Count == 0)
             {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spGetAllExpensesByID", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserID", userID);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-
-                        da.Fill(dt);
-
-
-                        if (dt.Columns.Contains("Message"))
-                        {
-                            MessageBox.Show(dt.Rows[0]["Message"].ToString(),
-                                            "Information",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Information);
-
-                            dgvExpenseDataTable.DataSource = null;
-                            return;
-                        }
-
-                        AllExpenseData = dt;
-                        masterData = dt.Copy();
-                        sortedColumn = "ExpenseAt";
-                        currentSortOrder = System.Windows.Forms.SortOrder.Descending;
-
-                        ApplyExpenseSort();
-                        currentPage = 1;
-                        ShowCurrentPage();
-                        UpdateExpenseSummaryCards();
-                    }
-                }
+                dgvExpenseDataTable.DataSource = null;
+                lblExpenseStartingPageNumber.Text = "0";
+                lblExpenseEndingPageNumber.Text = "0";
+                lblExpenseTotalPageNumber.Text = "0";
+                lblExpenseAmount.Text = "₹ 0";
+                lblTransactionAmount.Text = "0";
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            AllExpenseData = dataTable;
+            masterData = dataTable.Copy();
+            sortedColumn = "ExpenseAt";
+            currentSortOrder = System.Windows.Forms.SortOrder.Descending;
+
+            ApplyExpenseSort();
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateExpenseSummaryCards();
         }
+
 
         public Boolean LoadFilteredExpenseData(string spName, int userId, string paramName1, DateTime paramId1, string paramName2, DateTime paramId2)
         {

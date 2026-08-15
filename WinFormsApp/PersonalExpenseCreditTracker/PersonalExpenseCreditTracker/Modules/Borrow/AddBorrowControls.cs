@@ -260,12 +260,65 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             LoadFormData();
 
+            cmbBorrowSelectPerson.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbBorrowSelectPerson.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            cmbBorrowPaymentType.AutoCompleteMode = AutoCompleteMode.Append;
+            cmbBorrowPaymentType.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
             cmbBorrowSelectPerson.MouseClick += (s, ev) => { cmbBorrowSelectPerson.DroppedDown = true; };
             cmbBorrowPaymentType.MouseClick += (s, ev) => { cmbBorrowPaymentType.DroppedDown = true; };
             txtBorrowAddDeadlineDatePicker.Click += txtBorrowAddDeadlineDatePicker_Click;
 
             ignoreEvents = false;
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+
+                if (cmbBorrowSelectPerson.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbBorrowSelectPerson);
+                    return true; 
+                }
+
+                else if (cmbBorrowPaymentType.Focused)
+                {
+                    SelectComboBoxSuggestion(cmbBorrowPaymentType);
+                    return true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
+        private void SelectComboBoxSuggestion(ComboBox cmb)
+        {
+            if (!string.IsNullOrWhiteSpace(cmb.Text))
+            {
+
+                int index = cmb.FindStringExact(cmb.Text);
+
+                if (index == -1)
+                {
+                    index = cmb.FindString(cmb.Text);
+                }
+
+                if (index != -1)
+                {
+                    cmb.SelectedIndex = index;
+                    cmb.SelectionStart = cmb.Text.Length;
+                }
+            }
+
+            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            cmb.DroppedDown = false;
+        }
+
 
         private void AddBorrowControls_Click(object sender, EventArgs e)
         {
