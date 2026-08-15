@@ -252,8 +252,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                     int x = e.CellBounds.Left + (e.CellBounds.Width - iconSize) / 2;
                     int y = e.CellBounds.Top + (e.CellBounds.Height - iconSize) / 2;
 
-                int x = e.CellBounds.Left + (e.CellBounds.Width - 20) / 2;
-                int y = e.CellBounds.Top + (e.CellBounds.Height - 20) / 2;
+                //int x = e.CellBounds.Left + (e.CellBounds.Width - 20) / 2;
+                //int y = e.CellBounds.Top + (e.CellBounds.Height - 20) / 2;
 
                     e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
                 }
