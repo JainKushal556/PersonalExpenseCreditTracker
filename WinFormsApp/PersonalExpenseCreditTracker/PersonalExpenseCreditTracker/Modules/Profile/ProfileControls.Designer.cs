@@ -40,6 +40,7 @@
             this.panel39 = new System.Windows.Forms.Panel();
             this.panel40 = new System.Windows.Forms.Panel();
             this.lblProfileAddress = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.panel41 = new System.Windows.Forms.Panel();
             this.lblProfileInfoPersonAddress = new System.Windows.Forms.Label();
             this.panel19 = new System.Windows.Forms.Panel();
@@ -49,6 +50,7 @@
             this.panel34 = new System.Windows.Forms.Panel();
             this.panel35 = new System.Windows.Forms.Panel();
             this.lblProfileGender = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.panel36 = new System.Windows.Forms.Panel();
             this.lblProfileInfoPersonGender = new System.Windows.Forms.Label();
             this.panel18 = new System.Windows.Forms.Panel();
@@ -58,12 +60,15 @@
             this.panel29 = new System.Windows.Forms.Panel();
             this.panel30 = new System.Windows.Forms.Panel();
             this.lblProfilePhoneNumber = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel31 = new System.Windows.Forms.Panel();
             this.lblProfileInfoPersonPhoneNumber = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnProfileEditButton = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lblProfilePersonalInformation = new System.Windows.Forms.Label();
+            this.picProfileFullName = new System.Windows.Forms.PictureBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -72,6 +77,7 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.lblProfileFullName = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel37 = new System.Windows.Forms.Panel();
             this.lblProfileInfoPersonFullName = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
@@ -81,6 +87,7 @@
             this.panel16 = new System.Windows.Forms.Panel();
             this.panel17 = new System.Windows.Forms.Panel();
             this.lblProfileDathOfBirth = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel22 = new System.Windows.Forms.Panel();
             this.lblProfileInfoPersonDathOfBirth = new System.Windows.Forms.Label();
             this.panel23 = new System.Windows.Forms.Panel();
@@ -90,6 +97,7 @@
             this.panel26 = new System.Windows.Forms.Panel();
             this.panel38 = new System.Windows.Forms.Panel();
             this.lblProfileEmailAddress = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel42 = new System.Windows.Forms.Panel();
             this.lblProfileInfoPersonEmail = new System.Windows.Forms.Label();
             this.pnlProfileStatus = new System.Windows.Forms.Panel();
@@ -99,37 +107,29 @@
             this.panel54 = new System.Windows.Forms.Panel();
             this.lblProfilePhoneValue = new System.Windows.Forms.Label();
             this.lblProfilePhone = new System.Windows.Forms.Label();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.panel51 = new System.Windows.Forms.Panel();
             this.panel52 = new System.Windows.Forms.Panel();
             this.lblProfileEmailvalue = new System.Windows.Forms.Label();
             this.lblProfileEmail = new System.Windows.Forms.Label();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.panel49 = new System.Windows.Forms.Panel();
             this.panel50 = new System.Windows.Forms.Panel();
             this.lblProfileAccountStatusValue = new System.Windows.Forms.Label();
             this.lblProfileAccountStatusText = new System.Windows.Forms.Label();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.panel47 = new System.Windows.Forms.Panel();
             this.panel48 = new System.Windows.Forms.Panel();
             this.lblProfileUserSinceValue = new System.Windows.Forms.Label();
             this.lblProfileUserSince = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel44 = new System.Windows.Forms.Panel();
             this.panel46 = new System.Windows.Forms.Panel();
             this.panel45 = new System.Windows.Forms.Panel();
-            this.panel55 = new System.Windows.Forms.Panel();
-            this.RichTextBoxUserProfileName = new System.Windows.Forms.RichTextBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.btnProfileEditButton = new System.Windows.Forms.Button();
-            this.picProfileFullName = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picProfileImageEditButton = new System.Windows.Forms.PictureBox();
             this.picProfileUserPhoto = new System.Windows.Forms.PictureBox();
+            this.panel55 = new System.Windows.Forms.Panel();
+            this.RichTextBoxUserProfileName = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -139,68 +139,68 @@
             this.tableLayoutPanel8.SuspendLayout();
             this.panel39.SuspendLayout();
             this.panel40.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.panel41.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel32.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.panel34.SuspendLayout();
             this.panel35.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panel36.SuspendLayout();
             this.panel18.SuspendLayout();
             this.panel27.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.panel29.SuspendLayout();
             this.panel30.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel31.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfileFullName)).BeginInit();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel37.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel14.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel17.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel22.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel24.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panel26.SuspendLayout();
             this.panel38.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel42.SuspendLayout();
             this.pnlProfileStatus.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.panel53.SuspendLayout();
             this.panel54.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.panel51.SuspendLayout();
             this.panel52.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.panel49.SuspendLayout();
             this.panel50.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.panel47.SuspendLayout();
             this.panel48.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel44.SuspendLayout();
             this.panel45.SuspendLayout();
-            this.panel55.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picProfileFullName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfileImageEditButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfileUserPhoto)).BeginInit();
+            this.panel55.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -355,6 +355,18 @@
             this.lblProfileAddress.TabIndex = 1;
             this.lblProfileAddress.Text = "Address";
             // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pin;
+            this.pictureBox7.Location = new System.Drawing.Point(10, 9);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 4;
+            this.pictureBox7.TabStop = false;
+            // 
             // panel41
             // 
             this.panel41.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -375,7 +387,6 @@
             this.lblProfileInfoPersonAddress.Padding = new System.Windows.Forms.Padding(30, 10, 0, 0);
             this.lblProfileInfoPersonAddress.Size = new System.Drawing.Size(413, 72);
             this.lblProfileInfoPersonAddress.TabIndex = 0;
-            this.lblProfileInfoPersonAddress.Text = "Panskura, Purba Medinipur, West Bengal, India - 721152";
             // 
             // panel19
             // 
@@ -454,6 +465,18 @@
             this.lblProfileGender.TabIndex = 1;
             this.lblProfileGender.Text = "Gender";
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__4_;
+            this.pictureBox6.Location = new System.Drawing.Point(10, 9);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 4;
+            this.pictureBox6.TabStop = false;
+            // 
             // panel36
             // 
             this.panel36.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -471,9 +494,8 @@
             this.lblProfileInfoPersonGender.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileInfoPersonGender.Location = new System.Drawing.Point(30, 14);
             this.lblProfileInfoPersonGender.Name = "lblProfileInfoPersonGender";
-            this.lblProfileInfoPersonGender.Size = new System.Drawing.Size(55, 28);
+            this.lblProfileInfoPersonGender.Size = new System.Drawing.Size(0, 28);
             this.lblProfileInfoPersonGender.TabIndex = 0;
-            this.lblProfileInfoPersonGender.Text = "Male";
             // 
             // panel18
             // 
@@ -552,6 +574,18 @@
             this.lblProfilePhoneNumber.TabIndex = 1;
             this.lblProfilePhoneNumber.Text = "Phone Number";
             // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox5.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone;
+            this.pictureBox5.Location = new System.Drawing.Point(10, 9);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 4;
+            this.pictureBox5.TabStop = false;
+            // 
             // panel31
             // 
             this.panel31.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -569,9 +603,8 @@
             this.lblProfileInfoPersonPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileInfoPersonPhoneNumber.Location = new System.Drawing.Point(30, 14);
             this.lblProfileInfoPersonPhoneNumber.Name = "lblProfileInfoPersonPhoneNumber";
-            this.lblProfileInfoPersonPhoneNumber.Size = new System.Drawing.Size(127, 28);
+            this.lblProfileInfoPersonPhoneNumber.Size = new System.Drawing.Size(0, 28);
             this.lblProfileInfoPersonPhoneNumber.TabIndex = 0;
-            this.lblProfileInfoPersonPhoneNumber.Text = "98765 43210";
             // 
             // panel4
             // 
@@ -594,6 +627,16 @@
             this.panel5.Size = new System.Drawing.Size(81, 84);
             this.panel5.TabIndex = 6;
             // 
+            // btnProfileEditButton
+            // 
+            this.btnProfileEditButton.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pen__1_;
+            this.btnProfileEditButton.Location = new System.Drawing.Point(12, 19);
+            this.btnProfileEditButton.Name = "btnProfileEditButton";
+            this.btnProfileEditButton.Size = new System.Drawing.Size(58, 47);
+            this.btnProfileEditButton.TabIndex = 7;
+            this.btnProfileEditButton.UseVisualStyleBackColor = true;
+            this.btnProfileEditButton.Click += new System.EventHandler(this.btnProfileEditButton_Click);
+            // 
             // panel6
             // 
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -614,6 +657,18 @@
             this.lblProfilePersonalInformation.Size = new System.Drawing.Size(203, 28);
             this.lblProfilePersonalInformation.TabIndex = 1;
             this.lblProfilePersonalInformation.Text = "Personal Information";
+            // 
+            // picProfileFullName
+            // 
+            this.picProfileFullName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.picProfileFullName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picProfileFullName.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user__5_;
+            this.picProfileFullName.Location = new System.Drawing.Point(10, 17);
+            this.picProfileFullName.Name = "picProfileFullName";
+            this.picProfileFullName.Size = new System.Drawing.Size(50, 48);
+            this.picProfileFullName.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picProfileFullName.TabIndex = 4;
+            this.picProfileFullName.TabStop = false;
             // 
             // panel7
             // 
@@ -702,6 +757,18 @@
             this.lblProfileFullName.TabIndex = 1;
             this.lblProfileFullName.Text = "Full Name";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__3_;
+            this.pictureBox2.Location = new System.Drawing.Point(10, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
+            // 
             // panel37
             // 
             this.panel37.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -719,9 +786,8 @@
             this.lblProfileInfoPersonFullName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileInfoPersonFullName.Location = new System.Drawing.Point(30, 17);
             this.lblProfileInfoPersonFullName.Name = "lblProfileInfoPersonFullName";
-            this.lblProfileInfoPersonFullName.Size = new System.Drawing.Size(85, 28);
+            this.lblProfileInfoPersonFullName.Size = new System.Drawing.Size(0, 28);
             this.lblProfileInfoPersonFullName.TabIndex = 0;
-            this.lblProfileInfoPersonFullName.Text = "Sujit Kar";
             // 
             // panel13
             // 
@@ -796,9 +862,21 @@
             this.lblProfileDathOfBirth.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileDathOfBirth.Location = new System.Drawing.Point(8, 11);
             this.lblProfileDathOfBirth.Name = "lblProfileDathOfBirth";
-            this.lblProfileDathOfBirth.Size = new System.Drawing.Size(133, 28);
+            this.lblProfileDathOfBirth.Size = new System.Drawing.Size(132, 28);
             this.lblProfileDathOfBirth.TabIndex = 1;
-            this.lblProfileDathOfBirth.Text = "Dath Of Birth";
+            this.lblProfileDathOfBirth.Text = "Date Of Birth";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox3.Image = global::PersonalExpenseCreditTracker.Properties.Resources.time_and_date;
+            this.pictureBox3.Location = new System.Drawing.Point(10, 9);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 4;
+            this.pictureBox3.TabStop = false;
             // 
             // panel22
             // 
@@ -817,9 +895,8 @@
             this.lblProfileInfoPersonDathOfBirth.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileInfoPersonDathOfBirth.Location = new System.Drawing.Point(30, 14);
             this.lblProfileInfoPersonDathOfBirth.Name = "lblProfileInfoPersonDathOfBirth";
-            this.lblProfileInfoPersonDathOfBirth.Size = new System.Drawing.Size(121, 28);
+            this.lblProfileInfoPersonDathOfBirth.Size = new System.Drawing.Size(0, 28);
             this.lblProfileInfoPersonDathOfBirth.TabIndex = 0;
-            this.lblProfileInfoPersonDathOfBirth.Text = "10 July 2005";
             // 
             // panel23
             // 
@@ -898,6 +975,18 @@
             this.lblProfileEmailAddress.TabIndex = 1;
             this.lblProfileEmailAddress.Text = "Email Address";
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox4.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail;
+            this.pictureBox4.Location = new System.Drawing.Point(10, 9);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 4;
+            this.pictureBox4.TabStop = false;
+            // 
             // panel42
             // 
             this.panel42.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -915,9 +1004,8 @@
             this.lblProfileInfoPersonEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileInfoPersonEmail.Location = new System.Drawing.Point(30, 14);
             this.lblProfileInfoPersonEmail.Name = "lblProfileInfoPersonEmail";
-            this.lblProfileInfoPersonEmail.Size = new System.Drawing.Size(158, 28);
+            this.lblProfileInfoPersonEmail.Size = new System.Drawing.Size(0, 28);
             this.lblProfileInfoPersonEmail.TabIndex = 0;
-            this.lblProfileInfoPersonEmail.Text = "sujit@gmail.com";
             // 
             // pnlProfileStatus
             // 
@@ -992,9 +1080,8 @@
             this.lblProfilePhoneValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfilePhoneValue.Location = new System.Drawing.Point(4, 29);
             this.lblProfilePhoneValue.Name = "lblProfilePhoneValue";
-            this.lblProfilePhoneValue.Size = new System.Drawing.Size(140, 23);
+            this.lblProfilePhoneValue.Size = new System.Drawing.Size(0, 23);
             this.lblProfilePhoneValue.TabIndex = 1;
-            this.lblProfilePhoneValue.Text = "+91 98765 43210";
             // 
             // lblProfilePhone
             // 
@@ -1005,6 +1092,18 @@
             this.lblProfilePhone.Size = new System.Drawing.Size(66, 25);
             this.lblProfilePhone.TabIndex = 0;
             this.lblProfilePhone.Text = "Phone";
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox11.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone__2_;
+            this.pictureBox11.Location = new System.Drawing.Point(13, 12);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox11.TabIndex = 5;
+            this.pictureBox11.TabStop = false;
             // 
             // panel51
             // 
@@ -1033,9 +1132,8 @@
             this.lblProfileEmailvalue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileEmailvalue.Location = new System.Drawing.Point(4, 29);
             this.lblProfileEmailvalue.Name = "lblProfileEmailvalue";
-            this.lblProfileEmailvalue.Size = new System.Drawing.Size(136, 23);
+            this.lblProfileEmailvalue.Size = new System.Drawing.Size(0, 23);
             this.lblProfileEmailvalue.TabIndex = 1;
-            this.lblProfileEmailvalue.Text = "sujit@gmail.com";
             // 
             // lblProfileEmail
             // 
@@ -1046,6 +1144,18 @@
             this.lblProfileEmail.Size = new System.Drawing.Size(59, 25);
             this.lblProfileEmail.TabIndex = 0;
             this.lblProfileEmail.Text = "Email";
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox10.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail__2_;
+            this.pictureBox10.Location = new System.Drawing.Point(13, 12);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox10.TabIndex = 5;
+            this.pictureBox10.TabStop = false;
             // 
             // panel49
             // 
@@ -1089,6 +1199,18 @@
             this.lblProfileAccountStatusText.TabIndex = 0;
             this.lblProfileAccountStatusText.Text = "Account Status";
             // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox9.Image = global::PersonalExpenseCreditTracker.Properties.Resources.verified__1_;
+            this.pictureBox9.Location = new System.Drawing.Point(13, 12);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 5;
+            this.pictureBox9.TabStop = false;
+            // 
             // panel47
             // 
             this.panel47.Controls.Add(this.panel48);
@@ -1116,9 +1238,8 @@
             this.lblProfileUserSinceValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileUserSinceValue.Location = new System.Drawing.Point(4, 29);
             this.lblProfileUserSinceValue.Name = "lblProfileUserSinceValue";
-            this.lblProfileUserSinceValue.Size = new System.Drawing.Size(106, 23);
+            this.lblProfileUserSinceValue.Size = new System.Drawing.Size(0, 23);
             this.lblProfileUserSinceValue.TabIndex = 1;
-            this.lblProfileUserSinceValue.Text = "12 May 2023";
             // 
             // lblProfileUserSince
             // 
@@ -1129,6 +1250,18 @@
             this.lblProfileUserSince.Size = new System.Drawing.Size(135, 25);
             this.lblProfileUserSince.TabIndex = 0;
             this.lblProfileUserSince.Text = "Member Since";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.time_and_date__2_;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(48, 45);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
             // panel44
             // 
@@ -1164,172 +1297,6 @@
             this.panel45.Size = new System.Drawing.Size(250, 220);
             this.panel45.TabIndex = 3;
             // 
-            // panel55
-            // 
-            this.panel55.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel55.AutoSize = true;
-            this.panel55.Controls.Add(this.RichTextBoxUserProfileName);
-            this.panel55.Location = new System.Drawing.Point(3, 291);
-            this.panel55.Name = "panel55";
-            this.panel55.Size = new System.Drawing.Size(256, 50);
-            this.panel55.TabIndex = 2;
-            // 
-            // RichTextBoxUserProfileName
-            // 
-            this.RichTextBoxUserProfileName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.RichTextBoxUserProfileName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.RichTextBoxUserProfileName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RichTextBoxUserProfileName.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RichTextBoxUserProfileName.Location = new System.Drawing.Point(0, 0);
-            this.RichTextBoxUserProfileName.Name = "RichTextBoxUserProfileName";
-            this.RichTextBoxUserProfileName.ReadOnly = true;
-            this.RichTextBoxUserProfileName.Size = new System.Drawing.Size(256, 50);
-            this.RichTextBoxUserProfileName.TabIndex = 0;
-            this.RichTextBoxUserProfileName.Text = "Sujit Kar";
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pin;
-            this.pictureBox7.Location = new System.Drawing.Point(10, 9);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 4;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__4_;
-            this.pictureBox6.Location = new System.Drawing.Point(10, 9);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 4;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox5.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone;
-            this.pictureBox5.Location = new System.Drawing.Point(10, 9);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 4;
-            this.pictureBox5.TabStop = false;
-            // 
-            // btnProfileEditButton
-            // 
-            this.btnProfileEditButton.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pen__1_;
-            this.btnProfileEditButton.Location = new System.Drawing.Point(12, 19);
-            this.btnProfileEditButton.Name = "btnProfileEditButton";
-            this.btnProfileEditButton.Size = new System.Drawing.Size(58, 47);
-            this.btnProfileEditButton.TabIndex = 7;
-            this.btnProfileEditButton.UseVisualStyleBackColor = true;
-            this.btnProfileEditButton.Click += new System.EventHandler(this.btnProfileEditButton_Click);
-            // 
-            // picProfileFullName
-            // 
-            this.picProfileFullName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.picProfileFullName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.picProfileFullName.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user__5_;
-            this.picProfileFullName.Location = new System.Drawing.Point(10, 17);
-            this.picProfileFullName.Name = "picProfileFullName";
-            this.picProfileFullName.Size = new System.Drawing.Size(50, 48);
-            this.picProfileFullName.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picProfileFullName.TabIndex = 4;
-            this.picProfileFullName.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__3_;
-            this.pictureBox2.Location = new System.Drawing.Point(10, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Image = global::PersonalExpenseCreditTracker.Properties.Resources.time_and_date;
-            this.pictureBox3.Location = new System.Drawing.Point(10, 9);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 4;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox4.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail;
-            this.pictureBox4.Location = new System.Drawing.Point(10, 9);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 4;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox11.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone__2_;
-            this.pictureBox11.Location = new System.Drawing.Point(13, 12);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox11.TabIndex = 5;
-            this.pictureBox11.TabStop = false;
-            // 
-            // pictureBox10
-            // 
-            this.pictureBox10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox10.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail__2_;
-            this.pictureBox10.Location = new System.Drawing.Point(13, 12);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox10.TabIndex = 5;
-            this.pictureBox10.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox9.Image = global::PersonalExpenseCreditTracker.Properties.Resources.verified__1_;
-            this.pictureBox9.Location = new System.Drawing.Point(13, 12);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 5;
-            this.pictureBox9.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.time_and_date__2_;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 45);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
             // picProfileImageEditButton
             // 
             this.picProfileImageEditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1352,6 +1319,30 @@
             this.picProfileUserPhoto.TabIndex = 1;
             this.picProfileUserPhoto.TabStop = false;
             this.picProfileUserPhoto.Paint += new System.Windows.Forms.PaintEventHandler(this.picProfileUserPhoto_Paint);
+            // 
+            // panel55
+            // 
+            this.panel55.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel55.AutoSize = true;
+            this.panel55.Controls.Add(this.RichTextBoxUserProfileName);
+            this.panel55.Location = new System.Drawing.Point(3, 291);
+            this.panel55.Name = "panel55";
+            this.panel55.Size = new System.Drawing.Size(256, 50);
+            this.panel55.TabIndex = 2;
+            // 
+            // RichTextBoxUserProfileName
+            // 
+            this.RichTextBoxUserProfileName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.RichTextBoxUserProfileName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.RichTextBoxUserProfileName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RichTextBoxUserProfileName.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RichTextBoxUserProfileName.Location = new System.Drawing.Point(0, 0);
+            this.RichTextBoxUserProfileName.Name = "RichTextBoxUserProfileName";
+            this.RichTextBoxUserProfileName.ReadOnly = true;
+            this.RichTextBoxUserProfileName.Size = new System.Drawing.Size(256, 50);
+            this.RichTextBoxUserProfileName.TabIndex = 0;
+            this.RichTextBoxUserProfileName.Text = "";
             // 
             // ProfileControls
             // 
@@ -1378,6 +1369,7 @@
             this.panel39.ResumeLayout(false);
             this.panel40.ResumeLayout(false);
             this.panel40.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.panel41.ResumeLayout(false);
             this.panel19.ResumeLayout(false);
             this.panel32.ResumeLayout(false);
@@ -1385,6 +1377,7 @@
             this.panel34.ResumeLayout(false);
             this.panel35.ResumeLayout(false);
             this.panel35.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panel36.ResumeLayout(false);
             this.panel36.PerformLayout();
             this.panel18.ResumeLayout(false);
@@ -1393,12 +1386,14 @@
             this.panel29.ResumeLayout(false);
             this.panel30.ResumeLayout(false);
             this.panel30.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel31.ResumeLayout(false);
             this.panel31.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfileFullName)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
@@ -1406,6 +1401,7 @@
             this.panel11.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel37.ResumeLayout(false);
             this.panel37.PerformLayout();
             this.panel13.ResumeLayout(false);
@@ -1414,6 +1410,7 @@
             this.panel16.ResumeLayout(false);
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel22.ResumeLayout(false);
             this.panel22.PerformLayout();
             this.panel23.ResumeLayout(false);
@@ -1422,6 +1419,7 @@
             this.panel26.ResumeLayout(false);
             this.panel38.ResumeLayout(false);
             this.panel38.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel42.ResumeLayout(false);
             this.panel42.PerformLayout();
             this.pnlProfileStatus.ResumeLayout(false);
@@ -1430,32 +1428,25 @@
             this.panel53.ResumeLayout(false);
             this.panel54.ResumeLayout(false);
             this.panel54.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.panel51.ResumeLayout(false);
             this.panel52.ResumeLayout(false);
             this.panel52.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.panel49.ResumeLayout(false);
             this.panel50.ResumeLayout(false);
             this.panel50.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.panel47.ResumeLayout(false);
             this.panel48.ResumeLayout(false);
             this.panel48.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel44.ResumeLayout(false);
             this.panel44.PerformLayout();
             this.panel45.ResumeLayout(false);
-            this.panel55.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picProfileFullName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfileImageEditButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProfileUserPhoto)).EndInit();
+            this.panel55.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

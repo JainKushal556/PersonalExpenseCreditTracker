@@ -205,18 +205,15 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         }
         public void LoadLentData(int userID)
         {
-
             DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllLent", userID);
-            if (dataTable.Columns.Contains("Message"))
-             {
-                 MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
-                                 "Information",
-                                 MessageBoxButtons.OK,
-                                 MessageBoxIcon.Information);
-                 
-                 dgvLentDataTable.DataSource = null;
-                 return;
-             }
+            if (dataTable == null || dataTable.Columns.Contains("Message") || dataTable.Rows.Count == 0)
+            {
+                dgvLentDataTable.DataSource = null;
+                lblStartingPageNumber.Text = "0";
+                lblEndingPageNumber.Text = "0";
+                lblTotalPageNumber.Text = "0";
+                return;
+            }
 
             AllLentData = dataTable;
             masterData = dataTable.Copy();
@@ -226,8 +223,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             currentPage = 1;
             ShowCurrentPage();
-            
         }
+
 
         public Boolean LoadFilteredLentData(string spName, string paramName, int filterId)
         {

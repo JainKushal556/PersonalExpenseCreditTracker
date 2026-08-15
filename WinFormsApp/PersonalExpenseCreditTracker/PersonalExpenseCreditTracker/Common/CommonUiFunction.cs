@@ -22,11 +22,19 @@ namespace PersonalExpenseCreditTracker.Common
         private static string dateColumn = "";
 
 
-
         // Helper method to load a ComboBox with data (with UserID)
         public static void LoadInComboBox(string spName, int userId, string initialText, ComboBox comboBox)
         {
             DataTable dataTable = RetrieveListForComboBox(spName, userId);
+
+
+            if (dataTable == null || dataTable.Columns.Count < 2)
+            {
+                dataTable = new DataTable();
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Name", typeof(string));
+            }
+
             DataRow dataRow = dataTable.NewRow();
             dataRow[0] = 0;
             dataRow[1] = initialText;
@@ -37,10 +45,20 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.ValueMember = dataTable.Columns[0].ColumnName;
             comboBox.SelectedIndex = 0;
         }
-        //Person
+
+
+        // Person
         public static void LoadInComboBox(string spName, int userId, string initialText, string addNewText, ComboBox comboBox)
         {
             DataTable dataTable = RetrieveListForComboBox(spName, userId);
+
+
+            if (dataTable == null || dataTable.Columns.Count < 2)
+            {
+                dataTable = new DataTable();
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Name", typeof(string));
+            }
 
             // Initial Row
             DataRow headerRow = dataTable.NewRow();
@@ -59,12 +77,22 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.ValueMember = dataTable.Columns[0].ColumnName;
             comboBox.SelectedIndex = 0;
 
-            comboBox.ForeColor = System.Drawing.Color.Gray; 
+            comboBox.ForeColor = System.Drawing.Color.Gray;
         }
+
+
         // Helper method to load a ComboBox with data (with UserID)
         public static void LoadInComboBox(string spName, string initialText, ComboBox comboBox, string paramName, int paramValue)
         {
             DataTable dataTable = RetrieveListForComboBox(spName, paramName, paramValue);
+
+            if (dataTable == null || dataTable.Columns.Count < 2)
+            {
+                dataTable = new DataTable();
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Name", typeof(string));
+            }
+
             DataRow dataRow = dataTable.NewRow();
             dataRow[0] = 0;
             dataRow[1] = initialText;
@@ -78,18 +106,24 @@ namespace PersonalExpenseCreditTracker.Common
         }
 
 
-        //SubCetegory last index add
+
+        // SubCategory last index add
         public static void LoadInComboBox(string spName, string initialText, string addNewText, ComboBox comboBox, string paramName, int paramValue)
         {
             DataTable dataTable = RetrieveListForComboBox(spName, paramName, paramValue);
 
-           
+            if (dataTable == null || dataTable.Columns.Count < 2)
+            {
+                dataTable = new DataTable();
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Name", typeof(string));
+            }
+
             DataRow headerRow = dataTable.NewRow();
             headerRow[0] = 0;
             headerRow[1] = initialText;
             dataTable.Rows.InsertAt(headerRow, 0);
 
-       
             DataRow addNewRow = dataTable.NewRow();
             addNewRow[0] = -99;
             addNewRow[1] = addNewText;
@@ -101,10 +135,20 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.SelectedIndex = 0;
         }
 
+
+
         // Helper method to load a ComboBox with data (without UserID)
         public static void LoadInComboBox(string spName, string initialText, ComboBox comboBox)
         {
             DataTable dataTable = RetrieveListForComboBox(spName);
+
+            if (dataTable == null || dataTable.Columns.Count < 2)
+            {
+                dataTable = new DataTable();
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Name", typeof(string));
+            }
+
             DataRow dataRow = dataTable.NewRow();
             dataRow[0] = 0;
             dataRow[1] = initialText;
@@ -116,26 +160,35 @@ namespace PersonalExpenseCreditTracker.Common
             comboBox.SelectedIndex = 0;
         }
 
-        // Helper method to load a ComboBox with data (with out UserID)
+        // Helper method to load a ComboBox with data (without UserID)
         public static void LoadInComboBox(string spName, string initialText, string lastText, ComboBox comboBox)
         {
             DataTable dataTable = RetrieveListForComboBox(spName);
+
+            // 🟢 এখানে যোগ করবেন:
+            if (dataTable == null || dataTable.Columns.Count < 2)
+            {
+                dataTable = new DataTable();
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Name", typeof(string));
+            }
+
             DataRow dataRow = dataTable.NewRow();
             dataRow[0] = 0;
             dataRow[1] = initialText;
             dataTable.Rows.InsertAt(dataRow, 0);
 
             DataRow addNewRow = dataTable.NewRow();
-            addNewRow[0] = -99; 
-            addNewRow[1] = lastText; 
+            addNewRow[0] = -99;
+            addNewRow[1] = lastText;
             dataTable.Rows.Add(addNewRow);
-
 
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = dataTable.Columns[1].ColumnName;
             comboBox.ValueMember = dataTable.Columns[0].ColumnName;
             comboBox.SelectedIndex = 0;
         }
+
 
         // Retrieves list data for ComboBoxes from BLL layer (with UserID)
         public static DataTable RetrieveListForComboBox(string spName, int userId)
