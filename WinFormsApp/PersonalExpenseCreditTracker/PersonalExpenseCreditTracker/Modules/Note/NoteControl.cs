@@ -14,6 +14,7 @@ using PersonalExpenseCreditTracker.Common;
 using System.Runtime.InteropServices;
 using BLLayer.Common;
 using PersonalExpenseCreditTracker.Forms.Main;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PersonalExpenseCreditTracker.Modules.Note
 {
@@ -29,6 +30,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         public string SelectedColorHexCode = "";
         public string SelectedCreatedAt = "";
 
+        
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
@@ -61,10 +63,19 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         [DllImport("gdi32.dll")]
         private static extern bool DeleteObject(IntPtr hObject);
+
+
         public NoteControl()
         {
             InitializeComponent();
             Resize += NoteControl_Resize;
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Notes");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Notes");
+            toolTip.SetToolTip(txtSearch,"Search by Note Title, Priority or Date");
+
         }
 
         private void NoteControl_Load(object sender, EventArgs e)
@@ -83,6 +94,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPriority);
             cmbPriority.ForeColor = Color.Gray;
             cmbPriority.SelectedIndexChanged += cmbPriority_SelectedIndexChanged;
+            txtSearch.Text = "Search records...";
+            txtSearch.ForeColor = Color.Gray;
 
             DesignContextMenu();
             ResizeNoteCards();
@@ -105,6 +118,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             LoadNoteData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
             RegisterMouseDown(this);
+
+            
 
         }
 
@@ -196,37 +211,27 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         }
         public void LoadNoteData(int userID)
         {
-            try
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllNotes", userID);
+            if (dataTable == null || dataTable.Columns.Contains("Message") || dataTable.Rows.Count == 0)
             {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("spGetAllNotes", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = userID;
-
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-                    AllNoteData.Clear();
-                    da.Fill(AllNoteData);
-                }
-
-                if (AllNoteData.Columns.Contains("Message"))
-                {
-                    masterData = new DataTable();
-                    currentPage = 1;
-                    ShowCurrentPage();
-                    return;
-                }
-
-                masterData = AllNoteData.Copy();
-                currentPage = 1;
-                ShowCurrentPage();
+                AllNoteData = new DataTable();
+                masterData = new DataTable();
+                flpNotes.Controls.Clear();
+                lblNoteStartingPageNumber.Text = "0";
+                lblNoteEndingPageNumber.Text = "0";
+                lblNoteTotalPageNumber.Text = "0";
+                lblNoteTotal.Text = "0";
+                lblNoteImportantNumber.Text = "0";
+                lblMonthNoteNumber.Text = "0";
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            AllNoteData = dataTable;
+            masterData = dataTable.Copy();
+            currentPage = 1;
+            ShowCurrentPage();
         }
+
 
         public Boolean LoadFilteredNotetData(string spName, string paramName, int filterId)
         {
@@ -354,6 +359,26 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             card.Controls.Add(title);
             card.Controls.Add(description);
             card.Controls.Add(footer);
+
+            card.MouseDoubleClick += delegate(object sender, MouseEventArgs e)
+            {
+                SelectedNoteID = Convert.ToInt32(row["NoteID"]);
+                SelectedNoteTitle = row["NoteTitle"].ToString();
+                SelectedDescription = row["Description"].ToString();
+                SelectedPriority = row["NotePriorityName"].ToString();
+                SelectedColorName = row["ColorName"].ToString();
+                SelectedColorHexCode = row["ColorHexCode"].ToString();
+
+                SelectedCreatedAt = row["CreatedAt"] != DBNull.Value
+                    ? Convert.ToDateTime(row["CreatedAt"]).ToString("dd MMM yyyy")
+                    : "";
+
+                NoteViewDetailsControl view =
+                    new NoteViewDetailsControl(this);
+
+                view.Show();
+            };
+
             SetRadius(card, 20);
 
 
@@ -397,7 +422,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void ShowCurrentPage()
         {
-            UpdatePageSize();
+           
             flpNotes.SuspendLayout();
             flpNotes.Controls.Clear();
 
@@ -409,9 +434,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 AddNoteCard(AllNoteData.Rows[i]);
             }
 
-            flpNotes.ResumeLayout();
-
             ResizeNoteCards();
+            flpNotes.ResumeLayout();
 
             lblNoteStartingPageNumber.Text = (AllNoteData.Rows.Count == 0) ? "0" : (start + 1).ToString();
             lblNoteEndingPageNumber.Text = end.ToString();
@@ -545,7 +569,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             if (currentPage < 1)
                 currentPage = 1;
 
-            ShowCurrentPage();
+           
             SetRoundedPanel(pnlTotalNotes, 15);
             SetRoundedPanel(pnlImportant, 15);
             SetRoundedPanel(pnlThisMonth, 15);
@@ -1385,5 +1409,226 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             HidePopupPanels();
         }
+
+        private void btnRefresh_Click_1(object sender, EventArgs e)
+        {
+            HideAllFilterPanels();
+            HidePopupPanels();
+            ignoreEvents = true;
+            txtFromdate.Clear();
+            txtToDate.Clear();
+            if (cmbPriority.Items.Count > 0) cmbPriority.SelectedIndex = 0;
+            txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
+            ignoreEvents = false;
+            currentPage = 1;
+            LoadNoteData(Session.LogedInUser.GetUserId());
+            this.Refresh();
+        }
+
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (AllNoteData == null || AllNoteData.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "There is no data to export.",
+                    "Export",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Title = "Save Note Excel File";
+                saveDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
+                saveDialog.FileName =
+                    "Note_" +
+                    DateTime.Now.ToString("ddMMyyyy_HHmmss") +
+                    ".xlsx";
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    ExportNoteToExcel(
+                        AllNoteData,
+                        saveDialog.FileName);
+
+                    MessageBox.Show(
+                        "Note data exported successfully.",
+                        "Export Successful",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Export failed.\n\n" + ex.Message,
+                        "Export Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void ExportNoteToExcel(DataTable dataTable, string filePath)
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook workbook = null;
+            Excel.Worksheet worksheet = null;
+
+            try
+            {
+                excelApp = new Excel.Application();
+                excelApp.Visible = false;
+                excelApp.DisplayAlerts = false;
+
+                workbook = excelApp.Workbooks.Add(
+                    Excel.XlWBATemplate.xlWBATWorksheet);
+
+                worksheet = (Excel.Worksheet)workbook.Worksheets[1];
+                worksheet.Name = "Note";
+
+                // Only export these columns
+                string[] exportColumns =
+                                  {
+                                   "NoteTitle",
+                                    "CreatedAt",
+                                    "Description",
+                                    "NotePriorityName",
+                                     "ColorName"
+                                    };
+       
+
+                string[] exportHeaders =
+                                  {
+                                      "Title",
+                                      "Date",
+                                      "Description",
+                                      "Priority",
+                                      "Color"
+                                  };
+
+                // Header
+                for (int col = 0; col < exportColumns.Length; col++)
+                {
+                    worksheet.Cells[1, col + 1] = exportHeaders[col];
+                }
+
+                // Data
+                for (int row = 0; row < dataTable.Rows.Count; row++)
+                {
+                    for (int col = 0; col < exportColumns.Length; col++)
+                    {
+                        string columnName = exportColumns[col];
+
+                        if (dataTable.Columns.Contains(columnName) &&
+                            dataTable.Rows[row][columnName] != DBNull.Value)
+                        {
+                            string value =
+                                dataTable.Rows[row][columnName].ToString();
+
+                            // Date formatting
+                            if (columnName == "CreatedAt")
+                            {
+                                DateTime date =
+                                    Convert.ToDateTime(
+                                        dataTable.Rows[row][columnName]);
+
+                                value = date.ToString("dd MMM yyyy");
+                            }
+
+                            worksheet.Cells[row + 2, col + 1] = value;
+                        }
+                    }
+                }
+
+                // Header bold
+                Excel.Range headerRange =
+                    worksheet.Range[
+                        worksheet.Cells[1, 1],
+                        worksheet.Cells[1, exportColumns.Length]];
+
+                headerRange.Font.Bold = true;
+
+                // Auto fit
+                worksheet.Columns.AutoFit();
+
+                // Save
+                workbook.SaveAs(
+                    filePath,
+                    Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+                workbook.Close(false);
+                excelApp.Quit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Excel export failed.\n\n" + ex.Message,
+                    "Export Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                if (workbook != null)
+                {
+                    try
+                    {
+                        workbook.Close(false);
+                    }
+                    catch { }
+                }
+
+                if (excelApp != null)
+                {
+                    try
+                    {
+                        excelApp.Quit();
+                    }
+                    catch { }
+                }
+            }
+            finally
+            {
+                if (worksheet != null)
+                    Marshal.ReleaseComObject(worksheet);
+
+                if (workbook != null)
+                    Marshal.ReleaseComObject(workbook);
+
+                if (excelApp != null)
+                    Marshal.ReleaseComObject(excelApp);
+
+                worksheet = null;
+                workbook = null;
+                excelApp = null;
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search records...")
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search records...";
+                txtSearch.ForeColor = Color.Gray;
+            }
+        }
+
+        
     }
 }

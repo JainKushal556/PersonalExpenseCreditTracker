@@ -74,7 +74,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtTaskTitle.Text = "Enter task title";
             txtTaskTitle.ForeColor = Color.Gray;
 
-            CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select the Proiority", cmbPriority);
+            CommonUiFunction.LoadInComboBox("spGetAllTaskPriorities", "Select the Priority", cmbPriority);
 
             cmbPriority.AutoCompleteMode = AutoCompleteMode.Append;
             cmbPriority.AutoCompleteSource = AutoCompleteSource.ListItems;

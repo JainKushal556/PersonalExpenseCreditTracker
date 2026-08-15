@@ -29,7 +29,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTaskContent = new System.Windows.Forms.Panel();
             this.pnlTaskList = new System.Windows.Forms.Panel();
             this.tableLayoutPanelTask = new System.Windows.Forms.TableLayoutPanel();
@@ -58,8 +57,14 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.pnlButtonControls = new System.Windows.Forms.Panel();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.dataGridViewTask = new System.Windows.Forms.DataGridView();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblCardContant = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTotalTask = new System.Windows.Forms.Panel();
             this.lblTotalTaskCount = new System.Windows.Forms.Label();
@@ -110,12 +115,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnStatusClose = new System.Windows.Forms.Button();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTaskContent.SuspendLayout();
             this.pnlTaskList.SuspendLayout();
             this.tableLayoutPanelTask.SuspendLayout();
@@ -425,17 +424,19 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.txtSearch.Size = new System.Drawing.Size(250, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // pnlButtonControls
             // 
             this.pnlButtonControls.Controls.Add(this.btnFilter);
             this.pnlButtonControls.Controls.Add(this.btnRefresh);
-            this.pnlButtonControls.Controls.Add(this.button1);
+            this.pnlButtonControls.Controls.Add(this.btnExport);
             this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonControls.Location = new System.Drawing.Point(949, 0);
+            this.pnlButtonControls.Location = new System.Drawing.Point(1012, 0);
             this.pnlButtonControls.Name = "pnlButtonControls";
             this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 5, 10, 5);
-            this.pnlButtonControls.Size = new System.Drawing.Size(182, 39);
+            this.pnlButtonControls.Size = new System.Drawing.Size(119, 39);
             this.pnlButtonControls.TabIndex = 3;
             // 
             // btnFilter
@@ -451,7 +452,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnFilter.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter1;
             this.btnFilter.Location = new System.Drawing.Point(0, 5);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(53, 29);
+            this.btnFilter.Size = new System.Drawing.Size(29, 29);
             this.btnFilter.TabIndex = 10;
             this.btnFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -469,34 +470,34 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
             this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.sync1;
-            this.btnRefresh.Location = new System.Drawing.Point(59, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(39, 5);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(53, 40);
+            this.btnRefresh.Size = new System.Drawing.Size(30, 30);
             this.btnRefresh.TabIndex = 9;
             this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // button1
+            // btnExport
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
-            this.button1.Location = new System.Drawing.Point(119, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(53, 29);
-            this.button1.TabIndex = 8;
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnExport.BackColor = System.Drawing.Color.Transparent;
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
+            this.btnExport.Location = new System.Drawing.Point(80, 5);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(29, 29);
+            this.btnExport.TabIndex = 8;
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // dataGridViewTask
             // 
@@ -520,9 +521,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.dataGridViewTask.Name = "dataGridViewTask";
             this.dataGridViewTask.ReadOnly = true;
             this.dataGridViewTask.RowHeadersVisible = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dataGridViewTask.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTask.RowTemplate.Height = 24;
             this.dataGridViewTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewTask.Size = new System.Drawing.Size(1131, 503);
@@ -530,6 +528,57 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.dataGridViewTask.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTask_CellContentClick);
             this.dataGridViewTask.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewTask_ColumnHeaderMouseClick);
             this.dataGridViewTask.Click += new System.EventHandler(this.dataGridViewTask_Click);
+            // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.FillWeight = 120F;
+            this.colDate.HeaderText = "Date";
+            this.colDate.MinimumWidth = 80;
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colTask
+            // 
+            this.colTask.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTask.FillWeight = 150F;
+            this.colTask.HeaderText = "Task Title";
+            this.colTask.MinimumWidth = 200;
+            this.colTask.Name = "colTask";
+            this.colTask.ReadOnly = true;
+            // 
+            // colPriority
+            // 
+            this.colPriority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPriority.HeaderText = "Priority";
+            this.colPriority.MinimumWidth = 100;
+            this.colPriority.Name = "colPriority";
+            this.colPriority.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.MinimumWidth = 100;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
+            // colDeadline
+            // 
+            this.colDeadline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDeadline.HeaderText = "Deadline";
+            this.colDeadline.MinimumWidth = 100;
+            this.colDeadline.Name = "colDeadline";
+            this.colDeadline.ReadOnly = true;
+            // 
+            // colAction
+            // 
+            this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAction.FillWeight = 50F;
+            this.colAction.HeaderText = "Action";
+            this.colAction.MinimumWidth = 90;
+            this.colAction.Name = "colAction";
+            this.colAction.ReadOnly = true;
             // 
             // tblCardContant
             // 
@@ -575,9 +624,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTotalTaskCount.ForeColor = System.Drawing.Color.Black;
             this.lblTotalTaskCount.Location = new System.Drawing.Point(71, 38);
             this.lblTotalTaskCount.Name = "lblTotalTaskCount";
-            this.lblTotalTaskCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTotalTaskCount.Size = new System.Drawing.Size(29, 32);
             this.lblTotalTaskCount.TabIndex = 2;
-            this.lblTotalTaskCount.Text = "20";
+            this.lblTotalTaskCount.Text = "0";
             // 
             // lblTotalTask
             // 
@@ -622,9 +671,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTaskCompleteCount.ForeColor = System.Drawing.Color.Black;
             this.lblTaskCompleteCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskCompleteCount.Name = "lblTaskCompleteCount";
-            this.lblTaskCompleteCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTaskCompleteCount.Size = new System.Drawing.Size(29, 32);
             this.lblTaskCompleteCount.TabIndex = 2;
-            this.lblTaskCompleteCount.Text = "10";
+            this.lblTaskCompleteCount.Text = "0";
             // 
             // lblTaskComplete
             // 
@@ -669,9 +718,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTaskPandingCount.ForeColor = System.Drawing.Color.Black;
             this.lblTaskPandingCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskPandingCount.Name = "lblTaskPandingCount";
-            this.lblTaskPandingCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTaskPandingCount.Size = new System.Drawing.Size(29, 32);
             this.lblTaskPandingCount.TabIndex = 2;
-            this.lblTaskPandingCount.Text = "15";
+            this.lblTaskPandingCount.Text = "0";
             // 
             // lblTaskPanding
             // 
@@ -717,9 +766,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblLentAmount.ForeColor = System.Drawing.Color.Black;
             this.lblLentAmount.Location = new System.Drawing.Point(71, 38);
             this.lblLentAmount.Name = "lblLentAmount";
-            this.lblLentAmount.Size = new System.Drawing.Size(43, 32);
+            this.lblLentAmount.Size = new System.Drawing.Size(29, 32);
             this.lblLentAmount.TabIndex = 2;
-            this.lblLentAmount.Text = "10";
+            this.lblLentAmount.Text = "0";
             // 
             // lblDue
             // 
@@ -1079,57 +1128,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnStatusClose.UseVisualStyleBackColor = true;
             this.btnStatusClose.Click += new System.EventHandler(this.btnStatusClose_Click);
             // 
-            // colDate
-            // 
-            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDate.FillWeight = 120F;
-            this.colDate.HeaderText = "Date";
-            this.colDate.MinimumWidth = 80;
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            // 
-            // colTask
-            // 
-            this.colTask.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTask.FillWeight = 150F;
-            this.colTask.HeaderText = "Task Title";
-            this.colTask.MinimumWidth = 200;
-            this.colTask.Name = "colTask";
-            this.colTask.ReadOnly = true;
-            // 
-            // colPriority
-            // 
-            this.colPriority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPriority.HeaderText = "Priority";
-            this.colPriority.MinimumWidth = 100;
-            this.colPriority.Name = "colPriority";
-            this.colPriority.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.MinimumWidth = 100;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
-            // colDeadline
-            // 
-            this.colDeadline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDeadline.HeaderText = "Deadline";
-            this.colDeadline.MinimumWidth = 100;
-            this.colDeadline.Name = "colDeadline";
-            this.colDeadline.ReadOnly = true;
-            // 
-            // colAction
-            // 
-            this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAction.FillWeight = 50F;
-            this.colAction.HeaderText = "Action";
-            this.colAction.MinimumWidth = 90;
-            this.colAction.Name = "colAction";
-            this.colAction.ReadOnly = true;
-            // 
             // TaskControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1242,7 +1240,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private System.Windows.Forms.Button btnPreviousPage;
         private System.Windows.Forms.Button btnFirstpage;
         private System.Windows.Forms.Panel pnlButtonControls;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.ContextMenuStrip cmsFilter;
