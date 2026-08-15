@@ -28,7 +28,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteControl));
             this.pnlNoteMain = new System.Windows.Forms.Panel();
             this.flpNotes = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlNoteCard = new System.Windows.Forms.Panel();
@@ -213,9 +212,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblPriorityName.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPriorityName.Location = new System.Drawing.Point(135, 10);
             this.lblPriorityName.Name = "lblPriorityName";
-            this.lblPriorityName.Size = new System.Drawing.Size(73, 23);
+            this.lblPriorityName.Size = new System.Drawing.Size(0, 23);
             this.lblPriorityName.TabIndex = 2;
-            this.lblPriorityName.Text = "Medium";
             // 
             // lblNoteCardDate
             // 
@@ -223,9 +221,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblNoteCardDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoteCardDate.Location = new System.Drawing.Point(4, 10);
             this.lblNoteCardDate.Name = "lblNoteCardDate";
-            this.lblNoteCardDate.Size = new System.Drawing.Size(82, 20);
+            this.lblNoteCardDate.Size = new System.Drawing.Size(0, 20);
             this.lblNoteCardDate.TabIndex = 0;
-            this.lblNoteCardDate.Text = "12 Jul 2026";
             // 
             // lblNoteCardDescription
             // 
@@ -237,7 +234,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblNoteCardDescription.Name = "lblNoteCardDescription";
             this.lblNoteCardDescription.Size = new System.Drawing.Size(309, 60);
             this.lblNoteCardDescription.TabIndex = 1;
-            this.lblNoteCardDescription.Text = resources.GetString("lblNoteCardDescription.Text");
             this.lblNoteCardDescription.Click += new System.EventHandler(this.lblNoteCardDescription_Click);
             // 
             // lblNoteCardTitle
@@ -246,9 +242,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblNoteCardTitle.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoteCardTitle.Location = new System.Drawing.Point(11, 10);
             this.lblNoteCardTitle.Name = "lblNoteCardTitle";
-            this.lblNoteCardTitle.Size = new System.Drawing.Size(113, 25);
+            this.lblNoteCardTitle.Size = new System.Drawing.Size(0, 25);
             this.lblNoteCardTitle.TabIndex = 0;
-            this.lblNoteCardTitle.Text = "Daily Notes";
             this.lblNoteCardTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlFooter
@@ -478,9 +473,9 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblNoteTotal.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoteTotal.Location = new System.Drawing.Point(77, 34);
             this.lblNoteTotal.Name = "lblNoteTotal";
-            this.lblNoteTotal.Size = new System.Drawing.Size(43, 32);
+            this.lblNoteTotal.Size = new System.Drawing.Size(29, 32);
             this.lblNoteTotal.TabIndex = 2;
-            this.lblNoteTotal.Text = "21";
+            this.lblNoteTotal.Text = "0";
             // 
             // lblTotalTitle
             // 
@@ -539,7 +534,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblNoteImportantNumber.Name = "lblNoteImportantNumber";
             this.lblNoteImportantNumber.Size = new System.Drawing.Size(29, 32);
             this.lblNoteImportantNumber.TabIndex = 2;
-            this.lblNoteImportantNumber.Text = "8";
+            this.lblNoteImportantNumber.Text = "0";
             // 
             // lblNoteImportant
             // 
@@ -597,9 +592,9 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.lblMonthNoteNumber.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMonthNoteNumber.Location = new System.Drawing.Point(71, 38);
             this.lblMonthNoteNumber.Name = "lblMonthNoteNumber";
-            this.lblMonthNoteNumber.Size = new System.Drawing.Size(43, 32);
+            this.lblMonthNoteNumber.Size = new System.Drawing.Size(29, 32);
             this.lblMonthNoteNumber.TabIndex = 2;
-            this.lblMonthNoteNumber.Text = "12";
+            this.lblMonthNoteNumber.Text = "0";
             // 
             // lblMothTitle
             // 

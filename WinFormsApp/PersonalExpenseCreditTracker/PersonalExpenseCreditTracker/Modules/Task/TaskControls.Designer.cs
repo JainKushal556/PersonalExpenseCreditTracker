@@ -60,6 +60,12 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnRefresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridViewTask = new System.Windows.Forms.DataGridView();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblCardContant = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTotalTask = new System.Windows.Forms.Panel();
             this.lblTotalTaskCount = new System.Windows.Forms.Label();
@@ -110,12 +116,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnStatusClose = new System.Windows.Forms.Button();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeadline = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTaskContent.SuspendLayout();
             this.pnlTaskList.SuspendLayout();
             this.tableLayoutPanelTask.SuspendLayout();
@@ -531,6 +531,57 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.dataGridViewTask.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewTask_ColumnHeaderMouseClick);
             this.dataGridViewTask.Click += new System.EventHandler(this.dataGridViewTask_Click);
             // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.FillWeight = 120F;
+            this.colDate.HeaderText = "Date";
+            this.colDate.MinimumWidth = 80;
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colTask
+            // 
+            this.colTask.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTask.FillWeight = 150F;
+            this.colTask.HeaderText = "Task Title";
+            this.colTask.MinimumWidth = 200;
+            this.colTask.Name = "colTask";
+            this.colTask.ReadOnly = true;
+            // 
+            // colPriority
+            // 
+            this.colPriority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPriority.HeaderText = "Priority";
+            this.colPriority.MinimumWidth = 100;
+            this.colPriority.Name = "colPriority";
+            this.colPriority.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.MinimumWidth = 100;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
+            // colDeadline
+            // 
+            this.colDeadline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDeadline.HeaderText = "Deadline";
+            this.colDeadline.MinimumWidth = 100;
+            this.colDeadline.Name = "colDeadline";
+            this.colDeadline.ReadOnly = true;
+            // 
+            // colAction
+            // 
+            this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAction.FillWeight = 50F;
+            this.colAction.HeaderText = "Action";
+            this.colAction.MinimumWidth = 90;
+            this.colAction.Name = "colAction";
+            this.colAction.ReadOnly = true;
+            // 
             // tblCardContant
             // 
             this.tblCardContant.BackColor = System.Drawing.Color.Transparent;
@@ -575,9 +626,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTotalTaskCount.ForeColor = System.Drawing.Color.Black;
             this.lblTotalTaskCount.Location = new System.Drawing.Point(71, 38);
             this.lblTotalTaskCount.Name = "lblTotalTaskCount";
-            this.lblTotalTaskCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTotalTaskCount.Size = new System.Drawing.Size(29, 32);
             this.lblTotalTaskCount.TabIndex = 2;
-            this.lblTotalTaskCount.Text = "20";
+            this.lblTotalTaskCount.Text = "0";
             // 
             // lblTotalTask
             // 
@@ -622,9 +673,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTaskCompleteCount.ForeColor = System.Drawing.Color.Black;
             this.lblTaskCompleteCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskCompleteCount.Name = "lblTaskCompleteCount";
-            this.lblTaskCompleteCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTaskCompleteCount.Size = new System.Drawing.Size(29, 32);
             this.lblTaskCompleteCount.TabIndex = 2;
-            this.lblTaskCompleteCount.Text = "10";
+            this.lblTaskCompleteCount.Text = "0";
             // 
             // lblTaskComplete
             // 
@@ -669,9 +720,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTaskPandingCount.ForeColor = System.Drawing.Color.Black;
             this.lblTaskPandingCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskPandingCount.Name = "lblTaskPandingCount";
-            this.lblTaskPandingCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTaskPandingCount.Size = new System.Drawing.Size(29, 32);
             this.lblTaskPandingCount.TabIndex = 2;
-            this.lblTaskPandingCount.Text = "15";
+            this.lblTaskPandingCount.Text = "0";
             // 
             // lblTaskPanding
             // 
@@ -717,9 +768,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblLentAmount.ForeColor = System.Drawing.Color.Black;
             this.lblLentAmount.Location = new System.Drawing.Point(71, 38);
             this.lblLentAmount.Name = "lblLentAmount";
-            this.lblLentAmount.Size = new System.Drawing.Size(43, 32);
+            this.lblLentAmount.Size = new System.Drawing.Size(29, 32);
             this.lblLentAmount.TabIndex = 2;
-            this.lblLentAmount.Text = "10";
+            this.lblLentAmount.Text = "0";
             // 
             // lblDue
             // 
@@ -1078,57 +1129,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.btnStatusClose.TabIndex = 1;
             this.btnStatusClose.UseVisualStyleBackColor = true;
             this.btnStatusClose.Click += new System.EventHandler(this.btnStatusClose_Click);
-            // 
-            // colDate
-            // 
-            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDate.FillWeight = 120F;
-            this.colDate.HeaderText = "Date";
-            this.colDate.MinimumWidth = 80;
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            // 
-            // colTask
-            // 
-            this.colTask.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTask.FillWeight = 150F;
-            this.colTask.HeaderText = "Task Title";
-            this.colTask.MinimumWidth = 200;
-            this.colTask.Name = "colTask";
-            this.colTask.ReadOnly = true;
-            // 
-            // colPriority
-            // 
-            this.colPriority.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPriority.HeaderText = "Priority";
-            this.colPriority.MinimumWidth = 100;
-            this.colPriority.Name = "colPriority";
-            this.colPriority.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.MinimumWidth = 100;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
-            // colDeadline
-            // 
-            this.colDeadline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDeadline.HeaderText = "Deadline";
-            this.colDeadline.MinimumWidth = 100;
-            this.colDeadline.Name = "colDeadline";
-            this.colDeadline.ReadOnly = true;
-            // 
-            // colAction
-            // 
-            this.colAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAction.FillWeight = 50F;
-            this.colAction.HeaderText = "Action";
-            this.colAction.MinimumWidth = 90;
-            this.colAction.Name = "colAction";
-            this.colAction.ReadOnly = true;
             // 
             // TaskControls
             // 

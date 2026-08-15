@@ -595,7 +595,7 @@ namespace PersonalExpenseCreditTracker
 
                 expenseControl.Show();
             }
-            if (expenseControl != null && !expenseControl.IsDisposed)
+            else if (expenseControl != null && !expenseControl.IsDisposed)
             {
                 expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
             }
@@ -682,8 +682,7 @@ namespace PersonalExpenseCreditTracker
 
                 creditControl.Show();
             }
-
-            if (creditControl != null && !creditControl.IsDisposed)
+            else if(creditControl != null && !creditControl.IsDisposed)
             {
                 creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
             }
