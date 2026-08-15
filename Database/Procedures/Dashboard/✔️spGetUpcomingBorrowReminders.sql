@@ -44,7 +44,7 @@ BEGIN
         AND
         (
            DeadlineAt < @Today
-           OR DATEDIFF(DAY,@Today,CAST(DeadlineAt AS DATE)) IN (0,1,3,7)
+           OR DATEDIFF(DAY, @Today, CAST(DeadlineAt AS DATE)) BETWEEN 0 AND 7
         )
     )
     BEGIN
@@ -116,9 +116,10 @@ BEGIN
       AND b.RemainingAmount > 0
       AND (
             b.DeadlineAt < @Today
-            OR DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) IN (7, 3, 1, 0)
+            OR DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) BETWEEN 0 AND 7
           )
 
     ORDER BY b.DeadlineAt ASC;
 
 END
+GO
