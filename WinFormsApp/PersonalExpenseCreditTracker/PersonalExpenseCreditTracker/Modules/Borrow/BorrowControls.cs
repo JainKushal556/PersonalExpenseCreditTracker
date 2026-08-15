@@ -44,6 +44,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             InitializeComponent();
             StyleBorrowGrid();
 
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Borrow");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Borrow");
+
             dgvBorrowDataTable.AutoGenerateColumns = false;
             dgvBorrowDataTable.CellDoubleClick += dgvBorrowDataTable_CellDoubleClick;
 
@@ -137,6 +142,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void BorrowControls_Load(object sender, EventArgs e)
         {
             ignoreEvents = true;
+            txtSearch.Text = "Search...";
+            txtSearch.ForeColor = Color.Gray;
             txtMinAmount.Text = "Enter Amount";
             txtMinAmount.ForeColor = Color.Gray;
             txtMaxAmount.Text = "Enter Amount";
@@ -350,16 +357,16 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            //Column Background Color
-            colDate.DefaultCellStyle.BackColor = Color.White;
-            colPersonName.DefaultCellStyle.BackColor = Color.White;
-            colPaymentType.DefaultCellStyle.BackColor = Color.White;
-            colStatus.DefaultCellStyle.BackColor = Color.White;
-            colAmount.DefaultCellStyle.BackColor = Color.White;
-            colPaidAmount.DefaultCellStyle.BackColor = Color.White;
-            colRemainingAmount.DefaultCellStyle.BackColor = Color.White;
-            colDeadline.DefaultCellStyle.BackColor = Color.White;
-            colDescription.DefaultCellStyle.BackColor = Color.White;
+            ////Column Background Color
+            //colDate.DefaultCellStyle.BackColor = Color.White;
+            //colPersonName.DefaultCellStyle.BackColor = Color.White;
+            //colPaymentType.DefaultCellStyle.BackColor = Color.White;
+            //colStatus.DefaultCellStyle.BackColor = Color.White;
+            //colAmount.DefaultCellStyle.BackColor = Color.White;
+            //colPaidAmount.DefaultCellStyle.BackColor = Color.White;
+            //colRemainingAmount.DefaultCellStyle.BackColor = Color.White;
+            //colDeadline.DefaultCellStyle.BackColor = Color.White;
+            //colDescription.DefaultCellStyle.BackColor = Color.White;
 
             //Column FontStyle
             colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -374,13 +381,43 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             //Row Style
             dgvBorrowDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            dgvBorrowDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvBorrowDataTable.DefaultCellStyle.ForeColor = Color.Black;
             dgvBorrowDataTable.RowTemplate.Height = 40;
             dgvBorrowDataTable.RowHeadersVisible = false;
             dgvBorrowDataTable.MultiSelect = false;
             dgvBorrowDataTable.ReadOnly = true;
             dgvBorrowDataTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Zigzag
+
+            Color selectedRowColor = Color.FromArgb(174, 205, 247);
+            // Normal Row
+            dgvBorrowDataTable.DefaultCellStyle.BackColor = Color.White;
+            dgvBorrowDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Alternating Row
+            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.BackColor =  Color.FromArgb(244, 247, 250);
+
+            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Selection
+            dgvBorrowDataTable.DefaultCellStyle.SelectionBackColor = selectedRowColor;
+
+            dgvBorrowDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.SelectionBackColor =  selectedRowColor;
+
+            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Force every column to use the same selection color
+            foreach (DataGridViewColumn column in dgvBorrowDataTable.Columns)
+            {
+                column.DefaultCellStyle.SelectionBackColor =
+                    selectedRowColor;
+
+                column.DefaultCellStyle.SelectionForeColor =
+                    Color.Black;
+            }
+
 
             // Border Style
             dgvBorrowDataTable.BorderStyle = BorderStyle.None;
@@ -1174,6 +1211,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 cmbStatus.ForeColor = Color.Gray;
             }
             txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
             ignoreEvents = false;
             currentPage = 1;
             LoadBorrowData(Session.LogedInUser.GetUserId());
@@ -1791,6 +1829,24 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
                  default:
                      return columnName;
+             }
+         }
+
+         private void txtSearch_Enter(object sender, EventArgs e)
+         {
+             if (txtSearch.Text == "Search...")
+             {
+                 txtSearch.Text = "";
+                 txtSearch.ForeColor = Color.Black;
+             }
+         }
+
+         private void txtSearch_Leave(object sender, EventArgs e)
+         {
+             if (string.IsNullOrWhiteSpace(txtSearch.Text))
+             {
+                 txtSearch.Text = "Search...";
+                 txtSearch.ForeColor = Color.Gray;
              }
          }
 
