@@ -158,7 +158,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.flpNotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpNotes.Location = new System.Drawing.Point(0, 182);
             this.flpNotes.Name = "flpNotes";
-            this.flpNotes.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.flpNotes.Padding = new System.Windows.Forms.Padding(3, 5, 3, 2);
             this.flpNotes.Size = new System.Drawing.Size(1203, 396);
             this.flpNotes.TabIndex = 3;
             this.flpNotes.Paint += new System.Windows.Forms.PaintEventHandler(this.flpNotes_Paint);
@@ -170,7 +170,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlNoteCard.Controls.Add(this.lblNoteCardDescription);
             this.pnlNoteCard.Controls.Add(this.lblNoteCardTitle);
             this.pnlNoteCard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnlNoteCard.Location = new System.Drawing.Point(14, 7);
+            this.pnlNoteCard.Location = new System.Drawing.Point(14, 10);
             this.pnlNoteCard.Margin = new System.Windows.Forms.Padding(11, 5, 11, 10);
             this.pnlNoteCard.Name = "pnlNoteCard";
             this.pnlNoteCard.Padding = new System.Windows.Forms.Padding(11, 10, 11, 10);
@@ -637,11 +637,11 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlButtonControls.Controls.Add(this.btnExport);
             this.pnlButtonControls.Controls.Add(this.btnRefresh);
             this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonControls.Location = new System.Drawing.Point(1036, 0);
+            this.pnlButtonControls.Location = new System.Drawing.Point(1022, 0);
             this.pnlButtonControls.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlButtonControls.Name = "pnlButtonControls";
             this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 5, 11, 5);
-            this.pnlButtonControls.Size = new System.Drawing.Size(139, 50);
+            this.pnlButtonControls.Size = new System.Drawing.Size(153, 50);
             this.pnlButtonControls.TabIndex = 1;
             // 
             // btnFilter
@@ -676,7 +676,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.ForeColor = System.Drawing.Color.White;
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
-            this.btnExport.Location = new System.Drawing.Point(88, 5);
+            this.btnExport.Location = new System.Drawing.Point(102, 5);
             this.btnExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(40, 40);
@@ -697,10 +697,10 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
             this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.sync1;
-            this.btnRefresh.Location = new System.Drawing.Point(44, 2);
+            this.btnRefresh.Location = new System.Drawing.Point(50, 5);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(40, 46);
+            this.btnRefresh.Size = new System.Drawing.Size(40, 40);
             this.btnRefresh.TabIndex = 9;
             this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

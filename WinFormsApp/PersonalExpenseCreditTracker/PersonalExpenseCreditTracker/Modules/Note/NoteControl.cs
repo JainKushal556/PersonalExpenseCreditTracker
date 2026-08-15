@@ -30,6 +30,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         public string SelectedColorHexCode = "";
         public string SelectedCreatedAt = "";
 
+        
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
@@ -62,10 +63,18 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         [DllImport("gdi32.dll")]
         private static extern bool DeleteObject(IntPtr hObject);
+
+
         public NoteControl()
         {
             InitializeComponent();
             Resize += NoteControl_Resize;
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Notes");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Notes");
+
         }
 
         private void NoteControl_Load(object sender, EventArgs e)
@@ -106,6 +115,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             LoadNoteData(userID);
             cmsFilter.Opening += cmsFilter_Opening;
             RegisterMouseDown(this);
+
+            
 
         }
 
@@ -1607,6 +1618,5 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         }
 
         
-
     }
 }
