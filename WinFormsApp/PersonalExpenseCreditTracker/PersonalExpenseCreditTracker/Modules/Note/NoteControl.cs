@@ -74,6 +74,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             toolTip.SetToolTip(btnFilter, "Filter Notes");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Notes");
+            toolTip.SetToolTip(txtSearch,"Search by Note Title, Priority or Date");
 
         }
 
@@ -93,7 +94,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPriority);
             cmbPriority.ForeColor = Color.Gray;
             cmbPriority.SelectedIndexChanged += cmbPriority_SelectedIndexChanged;
-            txtSearch.Text = "Search...";
+            txtSearch.Text = "Search records...";
             txtSearch.ForeColor = Color.Gray;
 
             DesignContextMenu();
@@ -1612,7 +1613,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void txtSearch_Enter(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Search...")
+            if (txtSearch.Text == "Search records...")
             {
                 txtSearch.Text = "";
                 txtSearch.ForeColor = Color.Black;
@@ -1623,7 +1624,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
             {
-                txtSearch.Text = "Search...";
+                txtSearch.Text = "Search records...";
                 txtSearch.ForeColor = Color.Gray;
             }
         }
