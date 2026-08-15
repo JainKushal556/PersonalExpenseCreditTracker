@@ -1,44 +1,46 @@
-CREATE PROCEDURE spUpdateOverdueStatus
+CREATE OR ALTER PROCEDURE spUpdateOverdueStatus
 AS
 BEGIN
 
     SET NOCOUNT OFF;
 
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
-    DECLARE @OverdueStatusID INT;
+    DECLARE @LentBorrowOverdueID INT;
+    DECLARE @TaskOverdueID INT;
 
-    -------------------------------------------------
-    -- Get Overdue Status ID
-    -------------------------------------------------
-
-    SELECT @OverdueStatusID = StatusID
+    -- 1. Get Overdue Status ID for Lent & Borrow
+    SELECT @LentBorrowOverdueID = StatusID
     FROM tblLentBorrowStatus
     WHERE StatusName = 'Overdue';
 
-	-------------------------------------------------
-    -- Check OverdueStatusID is NULL
-    -------------------------------------------------
+    -- 2. Get Overdue Status ID for Tasks
+    SELECT @TaskOverdueID = TaskStatusID
+    FROM tblTaskStatus
+    WHERE TaskStatusName = 'Overdue';
 
-	IF @OverdueStatusID IS NULL
-	BEGIN
-		SELECT 'Overdue Status Not Found!' AS Message;
-		RETURN
-	END
-    -------------------------------------------------
-    -- Update Overdue Records
-    -------------------------------------------------
+    -- 3. Update Lent & Borrow Overdue Records
+    IF @LentBorrowOverdueID IS NOT NULL
+    BEGIN
+        UPDATE tblLent
+        SET StatusID = @LentBorrowOverdueID
+        WHERE RemainingAmount > 0
+          AND CAST(DeadlineAt AS DATE) < @Today
+          AND StatusID <> @LentBorrowOverdueID;
 
-    UPDATE tblLent
-    SET StatusID = @OverdueStatusID
-    WHERE RemainingAmount > 0
-      AND CAST(DeadlineAt AS DATE) < @Today
-      AND StatusID <> @OverdueStatusID;
+        UPDATE tblBorrow
+        SET StatusID = @LentBorrowOverdueID
+        WHERE RemainingAmount > 0
+          AND CAST(DeadlineAt AS DATE) < @Today
+          AND StatusID <> @LentBorrowOverdueID;
+    END
 
-    UPDATE tblBorrow
-    SET StatusID = @OverdueStatusID
-    WHERE RemainingAmount > 0
-      AND CAST(DeadlineAt AS DATE) < @Today
-      AND StatusID <> @OverdueStatusID;
-
+    -- 4. Update Task Overdue Records
+    IF @TaskOverdueID IS NOT NULL
+    BEGIN
+        UPDATE tblTask
+        SET TaskStatusID = @TaskOverdueID
+        WHERE CAST(Deadline AS DATE) < @Today
+          AND TaskStatusID <> @TaskOverdueID;
+    END
 END
- 
+GO
