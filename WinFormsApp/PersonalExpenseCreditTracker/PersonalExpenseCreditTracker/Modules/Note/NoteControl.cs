@@ -93,6 +93,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPriority);
             cmbPriority.ForeColor = Color.Gray;
             cmbPriority.SelectedIndexChanged += cmbPriority_SelectedIndexChanged;
+            txtSearch.Text = "Search...";
+            txtSearch.ForeColor = Color.Gray;
 
             DesignContextMenu();
             ResizeNoteCards();
@@ -1426,6 +1428,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             txtToDate.Clear();
             if (cmbPriority.Items.Count > 0) cmbPriority.SelectedIndex = 0;
             txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
             ignoreEvents = false;
             currentPage = 1;
             LoadNoteData(Session.LogedInUser.GetUserId());
@@ -1614,6 +1617,24 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
+            }
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search...")
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search...";
+                txtSearch.ForeColor = Color.Gray;
             }
         }
 

@@ -762,6 +762,8 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // viewToolStripMenuItem
             // 
