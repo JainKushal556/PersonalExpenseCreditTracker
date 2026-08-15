@@ -210,37 +210,27 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         }
         public void LoadNoteData(int userID)
         {
-            try
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllNotes", userID);
+            if (dataTable == null || dataTable.Columns.Contains("Message") || dataTable.Rows.Count == 0)
             {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("spGetAllNotes", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = userID;
-
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-                    AllNoteData.Clear();
-                    da.Fill(AllNoteData);
-                }
-
-                if (AllNoteData.Columns.Contains("Message"))
-                {
-                    masterData = new DataTable();
-                    currentPage = 1;
-                    ShowCurrentPage();
-                    return;
-                }
-
-                masterData = AllNoteData.Copy();
-                currentPage = 1;
-                ShowCurrentPage();
+                AllNoteData = new DataTable();
+                masterData = new DataTable();
+                flpNotes.Controls.Clear();
+                lblNoteStartingPageNumber.Text = "0";
+                lblNoteEndingPageNumber.Text = "0";
+                lblNoteTotalPageNumber.Text = "0";
+                lblNoteTotal.Text = "0";
+                lblNoteImportantNumber.Text = "0";
+                lblMonthNoteNumber.Text = "0";
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            AllNoteData = dataTable;
+            masterData = dataTable.Copy();
+            currentPage = 1;
+            ShowCurrentPage();
         }
+
 
         public Boolean LoadFilteredNotetData(string spName, string paramName, int filterId)
         {

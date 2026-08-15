@@ -201,49 +201,32 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         }
         public void LoadBorrowData(int userID)
         {
-            try
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllBorrow", userID);
+            if (dataTable == null || dataTable.Columns.Contains("Message") || dataTable.Rows.Count == 0)
             {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spGetAllBorrow", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserID", userID);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-
-                        da.Fill(dt);
-
-
-                        if (dt.Columns.Contains("Message"))
-                        {
-                            MessageBox.Show(dt.Rows[0]["Message"].ToString(),
-                                            "Information",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Information);
-
-                            dgvBorrowDataTable.DataSource = null;
-                            return;
-                        }
-
-                        AllBorrowData = dt;
-                        masterData = dt.Copy();
-                        sortedColumn = "BorrowAt";
-                        currentSortOrder = System.Windows.Forms.SortOrder.Descending;
-                        ApplyBorrowSort();
-
-                        currentPage = 1;
-                        ShowCurrentPage();
-                    }
-                }
+                dgvBorrowDataTable.DataSource = null;
+                lblBorrowStartingPageNumber.Text = "0";
+                lblBorrowEndingPageNumber.Text = "0";
+                lblBorrowTotalPageNumber.Text = "0";
+                lblBorrowTotalBorrowedAmount.Text = "₹ 0";
+                lblBorrowPaidAmount.Text = "₹ 0";
+                lblBorrowActiveBorrowingsAmount.Text = "₹ 0";
+                lblBorrowRepaidAmount.Text = "0";
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            AllBorrowData = dataTable;
+            masterData = dataTable.Copy();
+            sortedColumn = "BorrowAt";
+            currentSortOrder = System.Windows.Forms.SortOrder.Descending;
+            ApplyBorrowSort();
+
+            currentPage = 1;
+            ShowCurrentPage();
         }
 
+
+       
         public Boolean LoadFilteredBorrowtData(string spName, string paramName, int filterId)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();

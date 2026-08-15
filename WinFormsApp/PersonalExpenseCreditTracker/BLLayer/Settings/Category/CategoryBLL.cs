@@ -246,7 +246,24 @@ namespace BLLayer.Settings.Category
 
             if (dataTable.Rows.Count > 0)
             {
-                ErrorMsg = dataTable.Rows[0]["MESSAGE"].ToString();
+                ErrorMsg = dataTable.Rows[0]["Message"].ToString();
+            }
+            return ErrorMsg;
+        }
+
+        public string GetErrorMsg(string spName, string paramName1, string paramName2)
+        {
+            if (IsActive == 1)
+                status = 1;
+            else
+                status = 0;
+
+            DataTable dataTable = null;
+            dataTable = CommonBllFunction.RetrieveErrorCategoryDataIntoCategory(spName, UserId, status, CategoryName, paramName1, paramName2);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                ErrorMsg = dataTable.Rows[0]["Message"].ToString();
             }
             return ErrorMsg;
         }

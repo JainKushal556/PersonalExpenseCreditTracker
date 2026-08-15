@@ -1,4 +1,4 @@
-﻿namespace PersonalExpenseCreditTracker.Modules.Dashboard
+namespace PersonalExpenseCreditTracker.Modules.Dashboard
 {
     partial class DashboardControl
     {
@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label2 = new System.Windows.Forms.Label();
             this.tblCard = new System.Windows.Forms.TableLayoutPanel();
             this.pnlExpenseCard = new System.Windows.Forms.Panel();
@@ -110,6 +110,10 @@
             this.lblSummaryTitle = new System.Windows.Forms.Label();
             this.pnlDivider = new System.Windows.Forms.Panel();
             this.pnlExtra = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.lblNotification = new System.Windows.Forms.Label();
+            this.flpNotifications = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblIncomeText = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -123,6 +127,11 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblNetBalance = new System.Windows.Forms.Label();
             this.pnlDashboardMain = new System.Windows.Forms.Panel();
+            this.pnlNotification = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.tblCard.SuspendLayout();
             this.pnlExpenseCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCardExpense)).BeginInit();
@@ -158,6 +167,8 @@
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.pnlExtra.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -165,6 +176,8 @@
             this.panel5.SuspendLayout();
             this.panel9.SuspendLayout();
             this.pnlDashboardMain.SuspendLayout();
+            this.pnlNotification.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -221,9 +234,9 @@
             this.lblExpenseAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(41)))), ((int)(((byte)(59)))));
             this.lblExpenseAmount.Location = new System.Drawing.Point(78, 42);
             this.lblExpenseAmount.Name = "lblExpenseAmount";
-            this.lblExpenseAmount.Size = new System.Drawing.Size(106, 32);
+            this.lblExpenseAmount.Size = new System.Drawing.Size(43, 32);
             this.lblExpenseAmount.TabIndex = 2;
-            this.lblExpenseAmount.Text = "₹24,850";
+            this.lblExpenseAmount.Text = "₹0";
             this.lblExpenseAmount.Click += new System.EventHandler(this.lblExpenseAmount_Click);
             // 
             // lblCardExpenseTitle
@@ -270,9 +283,9 @@
             this.lblCreditAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(41)))), ((int)(((byte)(59)))));
             this.lblCreditAmount.Location = new System.Drawing.Point(78, 42);
             this.lblCreditAmount.Name = "lblCreditAmount";
-            this.lblCreditAmount.Size = new System.Drawing.Size(106, 32);
+            this.lblCreditAmount.Size = new System.Drawing.Size(43, 32);
             this.lblCreditAmount.TabIndex = 2;
-            this.lblCreditAmount.Text = "₹15,300";
+            this.lblCreditAmount.Text = "₹0";
             // 
             // lblCardCreditTitle
             // 
@@ -318,9 +331,9 @@
             this.lblBorrowAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(41)))), ((int)(((byte)(59)))));
             this.lblBorrowAmount.Location = new System.Drawing.Point(78, 42);
             this.lblBorrowAmount.Name = "lblBorrowAmount";
-            this.lblBorrowAmount.Size = new System.Drawing.Size(87, 32);
+            this.lblBorrowAmount.Size = new System.Drawing.Size(41, 32);
             this.lblBorrowAmount.TabIndex = 2;
-            this.lblBorrowAmount.Text = "₹8,450";
+            this.lblBorrowAmount.Text = "₹0";
             // 
             // lblCardBorrowTitle
             // 
@@ -367,9 +380,9 @@
             this.lblLentAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(41)))), ((int)(((byte)(59)))));
             this.lblLentAmount.Location = new System.Drawing.Point(78, 42);
             this.lblLentAmount.Name = "lblLentAmount";
-            this.lblLentAmount.Size = new System.Drawing.Size(86, 32);
+            this.lblLentAmount.Size = new System.Drawing.Size(41, 32);
             this.lblLentAmount.TabIndex = 2;
-            this.lblLentAmount.Text = "₹6,700";
+            this.lblLentAmount.Text = "₹0";
             // 
             // lblCardLentTitle
             // 
@@ -479,8 +492,8 @@
             // tblExpenseHeader
             // 
             this.tblExpenseHeader.ColumnCount = 2;
-            this.tblExpenseHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tblExpenseHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblExpenseHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.31148F));
+            this.tblExpenseHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.68852F));
             this.tblExpenseHeader.Controls.Add(this.lblExpenseTitle, 0, 0);
             this.tblExpenseHeader.Controls.Add(this.cmbExpenseFilter, 1, 0);
             this.tblExpenseHeader.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -501,7 +514,7 @@
             this.lblExpenseTitle.Location = new System.Drawing.Point(0, 0);
             this.lblExpenseTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lblExpenseTitle.Name = "lblExpenseTitle";
-            this.lblExpenseTitle.Size = new System.Drawing.Size(274, 28);
+            this.lblExpenseTitle.Size = new System.Drawing.Size(261, 28);
             this.lblExpenseTitle.TabIndex = 0;
             this.lblExpenseTitle.Text = "Expenses by Category";
             this.lblExpenseTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -509,17 +522,18 @@
             // cmbExpenseFilter
             // 
             this.cmbExpenseFilter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cmbExpenseFilter.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbExpenseFilter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbExpenseFilter.FormattingEnabled = true;
             this.cmbExpenseFilter.Items.AddRange(new object[] {
             "This Month",
             "Last Month",
             "This Year"});
-            this.cmbExpenseFilter.Location = new System.Drawing.Point(274, 0);
+            this.cmbExpenseFilter.Location = new System.Drawing.Point(261, 0);
             this.cmbExpenseFilter.Margin = new System.Windows.Forms.Padding(0);
             this.cmbExpenseFilter.Name = "cmbExpenseFilter";
-            this.cmbExpenseFilter.Size = new System.Drawing.Size(92, 25);
+            this.cmbExpenseFilter.Size = new System.Drawing.Size(105, 28);
             this.cmbExpenseFilter.TabIndex = 2;
+            this.cmbExpenseFilter.TabStop = false;
             this.cmbExpenseFilter.SelectedIndexChanged += new System.EventHandler(this.cmbExpenseFilter_SelectedIndexChanged);
             // 
             // pnlLegend
@@ -539,7 +553,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.31903F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.68097F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.tableLayoutPanel1.Controls.Add(this.lblEnterPercentt, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.lblEnterAmount, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 0, 4);
@@ -574,12 +588,12 @@
             this.lblEnterPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblEnterPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnterPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblEnterPercentt.Location = new System.Drawing.Point(269, 134);
+            this.lblEnterPercentt.Location = new System.Drawing.Point(267, 134);
             this.lblEnterPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblEnterPercentt.Name = "lblEnterPercentt";
-            this.lblEnterPercentt.Size = new System.Drawing.Size(86, 20);
+            this.lblEnterPercentt.Size = new System.Drawing.Size(88, 20);
             this.lblEnterPercentt.TabIndex = 14;
-            this.lblEnterPercentt.Text = "20%";
+            this.lblEnterPercentt.Text = "0%";
             this.lblEnterPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblEnterAmount
@@ -589,12 +603,12 @@
             this.lblEnterAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnterAmount.ForeColor = System.Drawing.Color.Black;
             this.lblEnterAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblEnterAmount.Location = new System.Drawing.Point(163, 131);
+            this.lblEnterAmount.Location = new System.Drawing.Point(161, 131);
             this.lblEnterAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblEnterAmount.Name = "lblEnterAmount";
-            this.lblEnterAmount.Size = new System.Drawing.Size(105, 23);
+            this.lblEnterAmount.Size = new System.Drawing.Size(101, 23);
             this.lblEnterAmount.TabIndex = 13;
-            this.lblEnterAmount.Text = " ₹6,690";
+            this.lblEnterAmount.Text = " ₹0";
             // 
             // flowLayoutPanel3
             // 
@@ -605,7 +619,7 @@
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(161, 31);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(159, 31);
             this.flowLayoutPanel3.TabIndex = 12;
             this.flowLayoutPanel3.WrapContents = false;
             // 
@@ -636,12 +650,12 @@
             this.lblBillPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblBillPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBillPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblBillPercentt.Location = new System.Drawing.Point(269, 102);
+            this.lblBillPercentt.Location = new System.Drawing.Point(267, 102);
             this.lblBillPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblBillPercentt.Name = "lblBillPercentt";
-            this.lblBillPercentt.Size = new System.Drawing.Size(86, 20);
+            this.lblBillPercentt.Size = new System.Drawing.Size(88, 20);
             this.lblBillPercentt.TabIndex = 11;
-            this.lblBillPercentt.Text = "20%";
+            this.lblBillPercentt.Text = "0%";
             this.lblBillPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblBillAmount
@@ -651,12 +665,12 @@
             this.lblBillAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBillAmount.ForeColor = System.Drawing.Color.Black;
             this.lblBillAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblBillAmount.Location = new System.Drawing.Point(163, 99);
+            this.lblBillAmount.Location = new System.Drawing.Point(161, 99);
             this.lblBillAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblBillAmount.Name = "lblBillAmount";
-            this.lblBillAmount.Size = new System.Drawing.Size(105, 23);
+            this.lblBillAmount.Size = new System.Drawing.Size(101, 23);
             this.lblBillAmount.TabIndex = 10;
-            this.lblBillAmount.Text = " ₹5,690";
+            this.lblBillAmount.Text = " ₹0";
             // 
             // flowLayoutPanel2
             // 
@@ -667,7 +681,7 @@
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(161, 31);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(159, 31);
             this.flowLayoutPanel2.TabIndex = 9;
             this.flowLayoutPanel2.WrapContents = false;
             // 
@@ -698,12 +712,12 @@
             this.lblTransportPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTransportPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTransportPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblTransportPercentt.Location = new System.Drawing.Point(269, 70);
+            this.lblTransportPercentt.Location = new System.Drawing.Point(267, 70);
             this.lblTransportPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblTransportPercentt.Name = "lblTransportPercentt";
-            this.lblTransportPercentt.Size = new System.Drawing.Size(86, 20);
+            this.lblTransportPercentt.Size = new System.Drawing.Size(88, 20);
             this.lblTransportPercentt.TabIndex = 8;
-            this.lblTransportPercentt.Text = "20%";
+            this.lblTransportPercentt.Text = "0%";
             this.lblTransportPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblTransportAmount
@@ -713,12 +727,12 @@
             this.lblTransportAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTransportAmount.ForeColor = System.Drawing.Color.Black;
             this.lblTransportAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTransportAmount.Location = new System.Drawing.Point(163, 67);
+            this.lblTransportAmount.Location = new System.Drawing.Point(161, 67);
             this.lblTransportAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblTransportAmount.Name = "lblTransportAmount";
-            this.lblTransportAmount.Size = new System.Drawing.Size(105, 23);
+            this.lblTransportAmount.Size = new System.Drawing.Size(101, 23);
             this.lblTransportAmount.TabIndex = 7;
-            this.lblTransportAmount.Text = " ₹6,690";
+            this.lblTransportAmount.Text = " ₹0";
             // 
             // flowLayoutPanel1
             // 
@@ -729,7 +743,7 @@
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(161, 31);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(159, 31);
             this.flowLayoutPanel1.TabIndex = 6;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -760,12 +774,12 @@
             this.lblShopingPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblShopingPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblShopingPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblShopingPercentt.Location = new System.Drawing.Point(269, 38);
+            this.lblShopingPercentt.Location = new System.Drawing.Point(267, 38);
             this.lblShopingPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblShopingPercentt.Name = "lblShopingPercentt";
-            this.lblShopingPercentt.Size = new System.Drawing.Size(86, 20);
+            this.lblShopingPercentt.Size = new System.Drawing.Size(88, 20);
             this.lblShopingPercentt.TabIndex = 5;
-            this.lblShopingPercentt.Text = "25%";
+            this.lblShopingPercentt.Text = "0%";
             this.lblShopingPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblShopingAmount
@@ -775,12 +789,12 @@
             this.lblShopingAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblShopingAmount.ForeColor = System.Drawing.Color.Black;
             this.lblShopingAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblShopingAmount.Location = new System.Drawing.Point(163, 35);
+            this.lblShopingAmount.Location = new System.Drawing.Point(161, 35);
             this.lblShopingAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblShopingAmount.Name = "lblShopingAmount";
-            this.lblShopingAmount.Size = new System.Drawing.Size(105, 23);
+            this.lblShopingAmount.Size = new System.Drawing.Size(101, 23);
             this.lblShopingAmount.TabIndex = 4;
-            this.lblShopingAmount.Text = " ₹7,690";
+            this.lblShopingAmount.Text = " ₹0";
             // 
             // flpShopping
             // 
@@ -791,7 +805,7 @@
             this.flpShopping.Margin = new System.Windows.Forms.Padding(0);
             this.flpShopping.Name = "flpShopping";
             this.flpShopping.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flpShopping.Size = new System.Drawing.Size(161, 31);
+            this.flpShopping.Size = new System.Drawing.Size(159, 31);
             this.flpShopping.TabIndex = 3;
             this.flpShopping.WrapContents = false;
             // 
@@ -825,7 +839,7 @@
             this.flpFood.Margin = new System.Windows.Forms.Padding(0);
             this.flpFood.Name = "flpFood";
             this.flpFood.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.flpFood.Size = new System.Drawing.Size(161, 31);
+            this.flpFood.Size = new System.Drawing.Size(159, 31);
             this.flpFood.TabIndex = 0;
             this.flpFood.WrapContents = false;
             // 
@@ -856,12 +870,12 @@
             this.lblFoodPercentt.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblFoodPercentt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFoodPercentt.ForeColor = System.Drawing.Color.Black;
-            this.lblFoodPercentt.Location = new System.Drawing.Point(269, 6);
+            this.lblFoodPercentt.Location = new System.Drawing.Point(267, 6);
             this.lblFoodPercentt.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lblFoodPercentt.Name = "lblFoodPercentt";
-            this.lblFoodPercentt.Size = new System.Drawing.Size(86, 20);
+            this.lblFoodPercentt.Size = new System.Drawing.Size(88, 20);
             this.lblFoodPercentt.TabIndex = 2;
-            this.lblFoodPercentt.Text = "35%";
+            this.lblFoodPercentt.Text = "0%";
             this.lblFoodPercentt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblFoodAmount
@@ -871,12 +885,12 @@
             this.lblFoodAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFoodAmount.ForeColor = System.Drawing.Color.Black;
             this.lblFoodAmount.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblFoodAmount.Location = new System.Drawing.Point(163, 3);
+            this.lblFoodAmount.Location = new System.Drawing.Point(161, 3);
             this.lblFoodAmount.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.lblFoodAmount.Name = "lblFoodAmount";
-            this.lblFoodAmount.Size = new System.Drawing.Size(105, 23);
+            this.lblFoodAmount.Size = new System.Drawing.Size(101, 23);
             this.lblFoodAmount.TabIndex = 1;
-            this.lblFoodAmount.Text = " ₹8,690";
+            this.lblFoodAmount.Text = " ₹0";
             // 
             // pnlDonut
             // 
@@ -892,20 +906,20 @@
             // chartExpenseCategory
             // 
             this.chartExpenseCategory.BackColor = System.Drawing.Color.Transparent;
-            chartArea3.Name = "ChartArea1";
-            this.chartExpenseCategory.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.chartExpenseCategory.ChartAreas.Add(chartArea1);
             this.chartExpenseCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Alignment = System.Drawing.StringAlignment.Center;
-            legend3.Name = "Legend1";
-            this.chartExpenseCategory.Legends.Add(legend3);
+            legend1.Alignment = System.Drawing.StringAlignment.Center;
+            legend1.Name = "Legend1";
+            this.chartExpenseCategory.Legends.Add(legend1);
             this.chartExpenseCategory.Location = new System.Drawing.Point(0, 0);
             this.chartExpenseCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartExpenseCategory.Name = "chartExpenseCategory";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartExpenseCategory.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartExpenseCategory.Series.Add(series1);
             this.chartExpenseCategory.Size = new System.Drawing.Size(360, 312);
             this.chartExpenseCategory.TabIndex = 6;
             this.chartExpenseCategory.Text = "chart1";
@@ -964,8 +978,8 @@
             // tblSecondHeader
             // 
             this.tblSecondHeader.ColumnCount = 2;
-            this.tblSecondHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tblSecondHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblSecondHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.7124F));
+            this.tblSecondHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.2876F));
             this.tblSecondHeader.Controls.Add(this.lblSecondHeaderText, 0, 0);
             this.tblSecondHeader.Controls.Add(this.cmbSecondHeader, 1, 0);
             this.tblSecondHeader.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -985,41 +999,42 @@
             this.lblSecondHeaderText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
             this.lblSecondHeaderText.Location = new System.Drawing.Point(3, 0);
             this.lblSecondHeaderText.Name = "lblSecondHeaderText";
-            this.lblSecondHeaderText.Size = new System.Drawing.Size(278, 28);
+            this.lblSecondHeaderText.Size = new System.Drawing.Size(262, 28);
             this.lblSecondHeaderText.TabIndex = 0;
             this.lblSecondHeaderText.Text = "Income Overview";
             // 
             // cmbSecondHeader
             // 
             this.cmbSecondHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cmbSecondHeader.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSecondHeader.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSecondHeader.FormattingEnabled = true;
             this.cmbSecondHeader.Items.AddRange(new object[] {
             "This Month",
             "Last Month",
             "This Year"});
-            this.cmbSecondHeader.Location = new System.Drawing.Point(287, 2);
+            this.cmbSecondHeader.Location = new System.Drawing.Point(271, 2);
             this.cmbSecondHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbSecondHeader.Name = "cmbSecondHeader";
-            this.cmbSecondHeader.Size = new System.Drawing.Size(89, 25);
+            this.cmbSecondHeader.Size = new System.Drawing.Size(105, 28);
             this.cmbSecondHeader.TabIndex = 1;
+            this.cmbSecondHeader.TabStop = false;
             this.cmbSecondHeader.SelectedIndexChanged += new System.EventHandler(this.cmbSecondHeader_SelectedIndexChanged);
             // 
             // chartSecond
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartSecond.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.chartSecond.ChartAreas.Add(chartArea2);
             this.chartSecond.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Name = "Legend1";
-            this.chartSecond.Legends.Add(legend4);
+            legend2.Name = "Legend1";
+            this.chartSecond.Legends.Add(legend2);
             this.chartSecond.Location = new System.Drawing.Point(11, 56);
             this.chartSecond.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.chartSecond.Name = "chartSecond";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartSecond.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartSecond.Series.Add(series2);
             this.chartSecond.Size = new System.Drawing.Size(357, 467);
             this.chartSecond.TabIndex = 1;
             this.chartSecond.Text = "chart1";
@@ -1086,9 +1101,9 @@
             this.lblNetBalanceValue.ForeColor = System.Drawing.Color.Black;
             this.lblNetBalanceValue.Location = new System.Drawing.Point(23, 3);
             this.lblNetBalanceValue.Name = "lblNetBalanceValue";
-            this.lblNetBalanceValue.Size = new System.Drawing.Size(72, 23);
+            this.lblNetBalanceValue.Size = new System.Drawing.Size(30, 23);
             this.lblNetBalanceValue.TabIndex = 12;
-            this.lblNetBalanceValue.Text = "-₹3,800";
+            this.lblNetBalanceValue.Text = "₹0";
             this.lblNetBalanceValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel8
@@ -1107,9 +1122,9 @@
             this.lblBorrowValue.ForeColor = System.Drawing.Color.Black;
             this.lblBorrowValue.Location = new System.Drawing.Point(23, 3);
             this.lblBorrowValue.Name = "lblBorrowValue";
-            this.lblBorrowValue.Size = new System.Drawing.Size(59, 23);
+            this.lblBorrowValue.Size = new System.Drawing.Size(28, 23);
             this.lblBorrowValue.TabIndex = 8;
-            this.lblBorrowValue.Text = "₹8,450";
+            this.lblBorrowValue.Text = "₹0";
             this.lblBorrowValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel7
@@ -1149,9 +1164,9 @@
             this.lblLentValue.ForeColor = System.Drawing.Color.Black;
             this.lblLentValue.Location = new System.Drawing.Point(23, 3);
             this.lblLentValue.Name = "lblLentValue";
-            this.lblLentValue.Size = new System.Drawing.Size(59, 23);
+            this.lblLentValue.Size = new System.Drawing.Size(28, 23);
             this.lblLentValue.TabIndex = 6;
-            this.lblLentValue.Text = "₹6,700";
+            this.lblLentValue.Text = "₹0";
             this.lblLentValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblSummaryTitle
@@ -1181,14 +1196,59 @@
             // 
             // pnlExtra
             // 
-            this.pnlExtra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tblSummary.SetColumnSpan(this.pnlExtra, 2);
+            this.pnlExtra.Controls.Add(this.panel12);
+            this.pnlExtra.Controls.Add(this.flpNotifications);
             this.pnlExtra.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlExtra.Location = new System.Drawing.Point(18, 261);
             this.pnlExtra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlExtra.Name = "pnlExtra";
             this.pnlExtra.Size = new System.Drawing.Size(355, 275);
             this.pnlExtra.TabIndex = 13;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.panel13);
+            this.panel12.Controls.Add(this.lblNotification);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(355, 45);
+            this.panel12.TabIndex = 1;
+            // 
+            // panel13
+            // 
+            this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel13.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel13.Location = new System.Drawing.Point(1, 44);
+            this.panel13.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(351, 1);
+            this.panel13.TabIndex = 11;
+            // 
+            // lblNotification
+            // 
+            this.lblNotification.AutoSize = true;
+            this.lblNotification.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotification.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(41)))), ((int)(((byte)(59)))));
+            this.lblNotification.Location = new System.Drawing.Point(8, 9);
+            this.lblNotification.Name = "lblNotification";
+            this.lblNotification.Size = new System.Drawing.Size(0, 25);
+            this.lblNotification.TabIndex = 0;
+            // 
+            // flpNotifications
+            // 
+            this.flpNotifications.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpNotifications.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpNotifications.Location = new System.Drawing.Point(0, 43);
+            this.flpNotifications.Name = "flpNotifications";
+            this.flpNotifications.Padding = new System.Windows.Forms.Padding(5);
+            this.flpNotifications.Size = new System.Drawing.Size(355, 232);
+            this.flpNotifications.TabIndex = 2;
+            this.flpNotifications.WrapContents = false;
             // 
             // panel1
             // 
@@ -1229,9 +1289,9 @@
             this.lblIncomeValue.Location = new System.Drawing.Point(23, 3);
             this.lblIncomeValue.Margin = new System.Windows.Forms.Padding(0);
             this.lblIncomeValue.Name = "lblIncomeValue";
-            this.lblIncomeValue.Size = new System.Drawing.Size(68, 23);
+            this.lblIncomeValue.Size = new System.Drawing.Size(28, 23);
             this.lblIncomeValue.TabIndex = 2;
-            this.lblIncomeValue.Text = "₹15,300";
+            this.lblIncomeValue.Text = "₹0";
             this.lblIncomeValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel3
@@ -1273,9 +1333,9 @@
             this.lblExpenseValue.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblExpenseValue.Location = new System.Drawing.Point(23, 3);
             this.lblExpenseValue.Name = "lblExpenseValue";
-            this.lblExpenseValue.Size = new System.Drawing.Size(68, 23);
+            this.lblExpenseValue.Size = new System.Drawing.Size(28, 23);
             this.lblExpenseValue.TabIndex = 4;
-            this.lblExpenseValue.Text = "₹24,850";
+            this.lblExpenseValue.Text = "₹0";
             this.lblExpenseValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel5
@@ -1324,6 +1384,7 @@
             // pnlDashboardMain
             // 
             this.pnlDashboardMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(253)))));
+            this.pnlDashboardMain.Controls.Add(this.pnlNotification);
             this.pnlDashboardMain.Controls.Add(this.pnlDashboardContent);
             this.pnlDashboardMain.Controls.Add(this.tblCard);
             this.pnlDashboardMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1333,6 +1394,67 @@
             this.pnlDashboardMain.Name = "pnlDashboardMain";
             this.pnlDashboardMain.Size = new System.Drawing.Size(1252, 705);
             this.pnlDashboardMain.TabIndex = 0;
+            // 
+            // pnlNotification
+            // 
+            this.pnlNotification.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlNotification.BackColor = System.Drawing.Color.White;
+            this.pnlNotification.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlNotification.Controls.Add(this.flowLayoutPanel5);
+            this.pnlNotification.Controls.Add(this.panel11);
+            this.pnlNotification.Location = new System.Drawing.Point(721, 0);
+            this.pnlNotification.Name = "pnlNotification";
+            this.pnlNotification.Size = new System.Drawing.Size(516, 675);
+            this.pnlNotification.TabIndex = 1;
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel5.AutoScroll = true;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(0, 41);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(516, 632);
+            this.flowLayoutPanel5.TabIndex = 1;
+            // 
+            // panel11
+            // 
+            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel11.Controls.Add(this.btnClose);
+            this.panel11.Controls.Add(this.lblTitle);
+            this.panel11.Location = new System.Drawing.Point(0, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(515, 40);
+            this.panel11.TabIndex = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.ForeColor = System.Drawing.Color.Black;
+            this.btnClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close__2_;
+            this.btnClose.Location = new System.Drawing.Point(475, 6);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(35, 30);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(41)))), ((int)(((byte)(59)))));
+            this.lblTitle.Location = new System.Drawing.Point(8, 6);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(0, 25);
+            this.lblTitle.TabIndex = 0;
             // 
             // DashboardControl
             // 
@@ -1397,6 +1519,9 @@
             this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.pnlExtra.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -1410,6 +1535,9 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.pnlDashboardMain.ResumeLayout(false);
+            this.pnlNotification.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1494,7 +1622,6 @@
         private System.Windows.Forms.Panel pnlDonut;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartExpenseCategory;
-        private System.Windows.Forms.Panel pnlExtra;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel6;
@@ -1505,6 +1632,16 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel9;
+        protected internal System.Windows.Forms.Panel pnlExtra;
+        private System.Windows.Forms.FlowLayoutPanel flpNotifications;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label lblNotification;
+        protected internal System.Windows.Forms.Panel pnlNotification;
+        protected internal System.Windows.Forms.Panel panel11;
+        protected internal System.Windows.Forms.Label lblTitle;
+        protected internal System.Windows.Forms.Button btnClose;
+        protected internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.Panel panel13;
 
     }
 }

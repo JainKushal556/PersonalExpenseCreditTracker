@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblNoteCardDescription.Text" xml:space="preserve">
-    <value>Finish the project proposal, review team updates, prepare for tomorrow's meeting, organize all project documents, call the client, review pending tasks, update the presentation, send the weekly report and discuss the new feature implementation with the development team.</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>61</value>
   </metadata>

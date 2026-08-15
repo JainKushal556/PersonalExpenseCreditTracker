@@ -185,49 +185,27 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         public void LoadCreditData(int userID)
         {
-            try
+            DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllCreditsByID", userID);
+            if (dataTable == null || dataTable.Columns.Contains("Message") || dataTable.Rows.Count == 0)
             {
-                using (SqlConnection con = new SqlConnection(ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spGetAllCreditsByID", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserID", userID);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-
-                        da.Fill(dt);
-
-                        if (dt.Columns.Contains("Message"))
-                        {
-                            MessageBox.Show(dt.Rows[0]["Message"].ToString(),
-                                "Information",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-
-                            dgvCreditDataTable.DataSource = null;
-                            return;
-                        }
-
-                        AllCreditData = dt;
-                        masterData = dt.Copy();
-                        sortedColumn = "CreditAt";
-                        currentSortOrder = System.Windows.Forms.SortOrder.Descending;
-                        currentPage = 1;
-                        ShowCurrentPage();
-                        UpdateCreditSummaryCards();
-                    }
-                }
+                dgvCreditDataTable.DataSource = null;
+                lblCreditStartingPageNumber.Text = "0";
+                lblCreditEndingPageNumber.Text = "0";
+                lblCreditTotalPageNumber.Text = "0";
+                lblCreditAmount.Text = "₹ 0";
+                lblTransactionAmount.Text = "0";
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message,
-                                "Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-            }
+
+            AllCreditData = dataTable;
+            masterData = dataTable.Copy();
+            sortedColumn = "CreditAt";
+            currentSortOrder = System.Windows.Forms.SortOrder.Descending;
+            currentPage = 1;
+            ShowCurrentPage();
+            UpdateCreditSummaryCards();
         }
+
         public Boolean LoadFilteredCreditData(string spName, string paramName,int paramValue,int filterId)
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();

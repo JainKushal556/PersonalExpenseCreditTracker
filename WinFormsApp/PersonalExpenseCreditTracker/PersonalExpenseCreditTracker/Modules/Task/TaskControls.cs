@@ -128,13 +128,16 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         public void LoadTaskData(int userID)
         {
             DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllTasks", userID);
-            if (dataTable.Columns.Contains("Message"))
+            if (dataTable == null || dataTable.Columns.Contains("Message") || dataTable.Rows.Count == 0)
             {
-                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
-                                "Information",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
                 dataGridViewTask.DataSource = null;
+                lblTaskStartingPageNumber.Text = "0";
+                lblTaskEndingPageNumber.Text = "0";
+                lblTaskTotalPageNumber.Text = "0";
+                lblTotalTaskCount.Text = "0";
+                lblTaskCompleteCount.Text = "0";
+                lblTaskPandingCount.Text = "0";
+                lblLentAmount.Text = "0";
                 return;
             }
 

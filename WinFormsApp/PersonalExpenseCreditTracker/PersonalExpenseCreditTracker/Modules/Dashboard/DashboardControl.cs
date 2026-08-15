@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms.DataVisualization.Charting;
 using PersonalExpenseCreditTracker.Common;
 using PersonalExpenseCreditTracker.Session;
+using System.Threading.Tasks;
+
 
 namespace PersonalExpenseCreditTracker.Modules.Dashboard
 {
@@ -27,6 +29,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
         public DashboardControl()
         {
             InitializeComponent();
+            cmbSecondHeader.TabStop = false;
+            cmbExpenseFilter.TabStop = false;
+            cmbSecondHeader.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbExpenseFilter.DropDownStyle = ComboBoxStyle.DropDownList;
             ApplyRoundCorners();
             this.Resize += DashboardControl_Resize;
 
@@ -42,10 +48,17 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
         private void DashboardControl_Load(object sender, EventArgs e)
         {
+            pnlNotification.Visible = false;
             ApplyRoundCorners();
 
             int userID = LogedInUser.GetUserId();
             LoadDashboardSummary(userID);
+
+            lblNotification.Text = "🔔  Notifications";
+            lblTitle.Text = "🔔  Notifications";
+            LoadNotifications(userID, pnlExtra,flpNotifications);
+
+
 
             // Income Overview ComboBox 
             if (cmbSecondHeader.Items.Contains("This Year"))
@@ -86,7 +99,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             cmbExpenseFilter.SelectedIndexChanged += cmbExpenseFilter_SelectedIndexChanged;
             LoadExpenseCategoryChart(userID, "This Year");
             this.BeginInvoke((MethodInvoker)(() => CenterDonutLabel()));
+
+            //lblViewAll.Click += lblViewAll_Click;
         }
+
 
 
         private void LoadIncomeOverviewChart(int userID, string filter = "This Year")
@@ -993,6 +1009,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
           
             LoadIncomeOverviewChart(userID, filter);
+            //this.BeginInvoke((MethodInvoker)(() => this.ActiveControl = null;));
         }
 
         private void cmbExpenseFilter_SelectedIndexChanged(object sender, EventArgs e)
@@ -1014,10 +1031,433 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             }
 
             LoadExpenseCategoryChart(userID, filter);
+            //this.BeginInvoke((MethodInvoker)(() => this.ActiveControl = null;));
+        }
+
+        internal protected void LoadNotifications(int userID, Panel pnl, FlowLayoutPanel flpNotifications)
+        {
+            if (pnl == null || flpNotifications == null) return;
+
+            
+            string cleanExpense = lblExpenseAmount.Text.Replace("₹", "").Replace(",", "").Trim();
+            string cleanCredit = lblCreditAmount.Text.Replace("₹", "").Replace(",", "").Trim();
+
+            System.Threading.ThreadPool.QueueUserWorkItem(state =>
+            {
+                List<NotificationItem> notifList = new List<NotificationItem>();
+                try
+                {
+                    decimal totalExpenseAmount = 0m;
+                    decimal totalCreditAmount = 0m;
+
+                    decimal.TryParse(cleanExpense, out totalExpenseAmount);
+                    decimal.TryParse(cleanCredit, out totalCreditAmount);
+
+                    if (totalCreditAmount > 0)
+                    {
+                        int usedPercentage = (int)Math.Round((totalExpenseAmount / totalCreditAmount) * 100m);
+
+                        if (usedPercentage >= 80)
+                        {
+                            notifList.Add(new NotificationItem
+                            {
+                                Title = "Budget Alert",
+                                Description = "You've used " + usedPercentage + "% of your monthly income/budget.",
+                                TimeText = "This Month",
+                                ThemeColor = Color.FromArgb(168, 85, 247),
+                                BgColor = Color.FromArgb(250, 245, 255),
+                                IconSymbol = "📊",
+                                TargetModule = "Expense"
+                            });
+                        }
+                    }
+
+                    
+                    DataTable dtBorrow = CommonUiFunction.RetrieveDataForGridView("spGetUpcomingBorrowReminders", userID);
+                    DataTable dtLent = CommonUiFunction.RetrieveDataForGridView("spGetUpcomingLentReminders", userID);
+                    DataTable dtTask = CommonUiFunction.RetrieveDataForGridView("spGetUpcomingTaskReminders", userID);
+
+                    FindOverdueAndDeadlineReminder(dtBorrow, notifList, "Borrow", false);
+                    FindOverdueAndDeadlineReminder(dtLent, notifList, "Lent", false);
+                    FindOverdueAndDeadlineReminder(dtTask, notifList, "Task", true);
+                }
+                catch { }
+
+               
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    flpNotifications.SuspendLayout();
+                    try
+                    {
+                        flpNotifications.Controls.Clear();
+
+                        int cardWidth = 360;
+                        foreach (var item in notifList)
+                        {
+                            Panel card = CreateNotificationCardItem(item, cardWidth);
+                            flpNotifications.Controls.Add(card);
+                        }
+
+              
+                        MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+                        if (mainForm != null)
+                        {
+                            mainForm.UpdateNotificationBadge(notifList.Count);
+                        }
+
+                        if (panel12 != null) panel12.BringToFront();
+                        if (flpNotifications != null) flpNotifications.SendToBack();
+
+                    }
+                    finally
+                    {
+                        flpNotifications.ResumeLayout(true);
+                    }
+                });
+            });
+        }
+
+        //public static string GetRelativeDayText(DateTime targetDate)
+        //{
+        //    DateTime today = DateTime.Today;
+        //    TimeSpan diff = targetDate.Date - today;
+
+        //    switch (diff.Days)
+        //    {
+        //        case 0:
+        //            return "Today";
+
+        //        case 1:
+        //            return "Tomorrow";
+
+        //        case -1:
+        //            return "Yesterday";
+
+        //        default:
+        //            int day = diff.Days * -2;
+        //            if (diff.Days > 1)
+        //            {
+                        
+        //                return day + "days left";
+        //            }
+
+        //            return day + "days left";
+        //    }
+        //}
+
+        private static string GetDaysLeft(DateTime deadline)
+        {
+            DateTime today = DateTime.Today;
+
+            TimeSpan difference = deadline.Date - today.Date;
+            int daysLeft = difference.Days;
+
+            if (daysLeft == 1)
+            {
+                return "Due tomorrow";
+            }
+            else if (daysLeft > 0)
+            {
+                return string.Format("{0} day{1} left", daysLeft, daysLeft == 1 ? "" : "s");
+            }
+            else if (daysLeft == 0)
+            {
+                return "Due today";
+            }
+            
+            else
+            {
+                int daysOverdue = Math.Abs(daysLeft);
+                return string.Format("{0} day{1}", daysOverdue, daysOverdue == 1 ? "" : "s");
+            }
+        }
+
+        private void FindOverdueAndDeadlineReminder(DataTable dt, List<NotificationItem> notifList, string targetModule, bool check)
+        {
+            if (!check)
+            {
+                if (dt != null && dt.Rows.Count > 0 && !dt.Columns.Contains("Message"))
+                {
+                    foreach (DataRow r in dt.Rows)
+                    {
+                        if (!dt.Columns.Contains("StatusName") || r["StatusName"] == DBNull.Value || r["StatusName"].ToString() != "Overdue")
+                        {
+                            continue;
+                        }
+
+                        string person = r["PersonName"] != DBNull.Value ? r["PersonName"].ToString() : "Person";
+                        string amt = r["Amount"] != DBNull.Value ? Convert.ToDecimal(r["Amount"]).ToString("#,##0") : "0";
+                        
+                        notifList.Add(new NotificationItem
+                        {
+                            Title = "Payment Overdue",
+                            Description = person + "'s payment of ₹" + amt + " is overdue.",
+                            TimeText = "",
+                            ThemeColor = Color.FromArgb(239, 68, 68),
+                            BgColor = Color.FromArgb(254, 242, 242),
+                            IconSymbol = "📌",
+                            TargetModule = targetModule
+                        });
+                    }
+                }
+
+                if (dt != null && dt.Rows.Count > 0 && !dt.Columns.Contains("Message"))
+                {
+                    foreach (DataRow r in dt.Rows)
+                    {
+                        if (!dt.Columns.Contains("StatusName") || r["StatusName"] == DBNull.Value || r["StatusName"].ToString() != "Pending" || r["StatusName"].ToString() != "Pending")
+                        {
+                            continue;
+                        }
+
+                        string person = r["PersonName"] != DBNull.Value ? r["PersonName"].ToString() : "Person";
+                        string amt = r["Amount"] != DBNull.Value ? Convert.ToDecimal(r["Amount"]).ToString("#,##0") : "0";
+                        DateTime deadlineDate = r["DeadlineAt"] != DBNull.Value ? Convert.ToDateTime(r["DeadlineAt"]) : DateTime.Today;
+                        notifList.Add(new NotificationItem
+                        {
+                            Title = "Deadline Approaching",
+                            Description = person + "'s " + targetModule.ToLower() + " payment deadline is coming.",
+                            TimeText = GetDaysLeft(deadlineDate),
+                            ThemeColor = Color.FromArgb(249, 115, 22),
+                            BgColor = Color.FromArgb(255, 247, 237),
+                            IconSymbol = "⏰",
+                            TargetModule = targetModule
+                        });
+                    }
+                }
+            }
+            else
+            {
+                if (dt != null && dt.Rows.Count > 0 && !dt.Columns.Contains("Message"))
+                {
+                    foreach (DataRow r in dt.Rows)
+                    {
+                        if (!dt.Columns.Contains("TaskStatusName") || r["TaskStatusName"] == DBNull.Value || r["TaskStatusName"].ToString() != "Overdue")
+                        {
+                            continue;
+                        }
+
+                        string taskTitle = r["TaskTitle"] != DBNull.Value ? r["TaskTitle"].ToString() : "Task";
+                        string priority = dt.Columns.Contains("PriorityName") && r["PriorityName"] != DBNull.Value ? r["PriorityName"].ToString() : "Normal";
+                        notifList.Add(new NotificationItem
+                        {
+                            Title = "Task Deadline",
+                            Description = "Task: '" + taskTitle + "' (" + priority + ") deadline is due.",
+                            TimeText = "",
+                            ThemeColor = Color.FromArgb(59, 130, 246),
+                            BgColor = Color.FromArgb(239, 246, 255),
+                            IconSymbol = "📝",
+                            TargetModule = targetModule
+                        });
+                    }
+                }
+
+                if (dt != null && dt.Rows.Count > 0 && !dt.Columns.Contains("Message"))
+                {
+                    foreach (DataRow r in dt.Rows)
+                    {
+                        if (!dt.Columns.Contains("TaskStatusName") || r["TaskStatusName"] == DBNull.Value || r["TaskStatusName"].ToString() != "Pending" || r["TaskStatusName"].ToString() != "Pending")
+                        {
+                            continue;
+                        }
+
+                        string taskTitle = r["TaskTitle"] != DBNull.Value ? r["TaskTitle"].ToString() : "Task";
+                        DateTime deadlineDate = r["Deadline"] != DBNull.Value ? Convert.ToDateTime(r["Deadline"]) : DateTime.Today;
+
+                        notifList.Add(new NotificationItem
+                        {
+                            Title = "Deadline Approaching",
+                            Description = "Task: '" + taskTitle + "' deadline is coming soon.",
+                            TimeText = GetDaysLeft(deadlineDate),
+                            ThemeColor = Color.FromArgb(249, 115, 22),
+                            BgColor = Color.FromArgb(255, 247, 237),
+                            IconSymbol = "⏰",
+                            TargetModule = targetModule
+                        });
+                    }
+                }
+            }
         }
 
 
+        private Panel CreateNotificationCardItem(NotificationItem item, int width)
+        {
+            Panel card = new Panel
+            {
+                Size = new Size(width, 70),
+                Margin = new Padding(0, 4, 0, 4),
+                BackColor = Color.White
+            };
 
+            // Left vertical accent bar
+            Panel pnlLeftAccent = new Panel
+            {
+                Size = new Size(3, 62),
+                Location = new Point(0, 4),
+                BackColor = item.ThemeColor
+            };
+            card.Controls.Add(pnlLeftAccent);
+
+            // Icon Circle
+            Label lblIconCircle = new Label
+            {
+                Text = item.IconSymbol,
+                Font = new Font("Segoe UI", 11F, FontStyle.Regular),
+                ForeColor = item.ThemeColor,
+                BackColor = item.BgColor,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Size = new Size(38, 38),
+                Location = new Point(12, 16)
+            };
+            try
+            {
+                System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+                path.AddEllipse(0, 0, lblIconCircle.Width, lblIconCircle.Height);
+                lblIconCircle.Region = new Region(path);
+            }
+            catch { }
+            card.Controls.Add(lblIconCircle);
+
+            // Title
+            Label lblTitle = new Label
+            {
+                Text = item.Title,
+                Font = new Font("Segoe UI", 9.5F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(30, 41, 59),
+                AutoSize = true,
+                Location = new Point(58, 12)
+            };
+            card.Controls.Add(lblTitle);
+
+            // Time / Timestamp (Right-aligned)
+            Label lblTime = new Label
+            {
+                Text = item.TimeText,
+                Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
+                ForeColor = item.ThemeColor,
+                AutoSize = true,
+                Location = new Point(width - 90, 13),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
+            };
+            card.Controls.Add(lblTime);
+
+            // Description
+            Label lblDesc = new Label
+            {
+                Text = item.Description,
+                Font = new Font("Segoe UI", 8.5F, FontStyle.Regular),
+                ForeColor = Color.FromArgb(100, 116, 139),
+                Size = new Size(width - 70, 32),
+                Location = new Point(58, 33)
+            };
+            card.Controls.Add(lblDesc);
+
+            // Thin Bottom Divider Line
+            Panel pnlLine = new Panel
+            {
+                Height = 1,
+                Dock = DockStyle.Bottom,
+                BackColor = Color.FromArgb(241, 245, 249)
+            };
+            card.Controls.Add(pnlLine);
+
+            // Make entire card interactive & clickable
+            card.Cursor = Cursors.Hand;
+            lblIconCircle.Cursor = Cursors.Hand;
+            lblTitle.Cursor = Cursors.Hand;
+            lblTime.Cursor = Cursors.Hand;
+            lblDesc.Cursor = Cursors.Hand;
+            pnlLeftAccent.Cursor = Cursors.Hand;
+
+            // Hover effect
+            EventHandler onHover = (s, e) => card.BackColor = Color.FromArgb(248, 250, 252);
+            EventHandler onLeave = (s, e) => card.BackColor = Color.White;
+
+            card.MouseEnter += onHover;
+            lblIconCircle.MouseEnter += onHover;
+            lblTitle.MouseEnter += onHover;
+            lblTime.MouseEnter += onHover;
+            lblDesc.MouseEnter += onHover;
+
+            card.MouseLeave += onLeave;
+            lblIconCircle.MouseLeave += onLeave;
+            lblTitle.MouseLeave += onLeave;
+            lblTime.MouseLeave += onLeave;
+            lblDesc.MouseLeave += onLeave;
+
+            // Click handler for card and all subcontrols
+            EventHandler onClick = (s, e) => OnNotificationCardClick(item);
+            card.Click += onClick;
+            lblIconCircle.Click += onClick;
+            lblTitle.Click += onClick;
+            lblTime.Click += onClick;
+            lblDesc.Click += onClick;
+            pnlLeftAccent.Click += onClick;
+
+            return card;
+        }
+
+        private void OnNotificationCardClick(NotificationItem item)
+        {
+            if (item == null) return;
+
+            MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+            if (mainForm == null) return;
+
+            string target = item.TargetModule ?? "";
+
+            if (target == "Borrow" || item.Title.Contains("Borrow"))
+            {
+                var method = mainForm.GetType().GetMethod("pnlBorrow_Click", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (method != null) method.Invoke(mainForm, new object[] { null, null });
+            }
+            else if (target == "Lent" || item.Title.Contains("Lent"))
+            {
+                var method = mainForm.GetType().GetMethod("pnlLent_Click", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (method != null) method.Invoke(mainForm, new object[] { null, null });
+            }
+            else if (target == "Task" || item.Title.Contains("Task"))
+            {
+                var method = mainForm.GetType().GetMethod("pnlTasks_Click", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (method != null) method.Invoke(mainForm, new object[] { null, null });
+            }
+            else if (target == "Credit" || item.Title.Contains("Credit") || item.Title.Contains("Received"))
+            {
+                var method = mainForm.GetType().GetMethod("pnlCredit_Click", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (method != null) method.Invoke(mainForm, new object[] { null, null });
+            }
+            else if (target == "Expense" || item.Title.Contains("Expense") || item.Title.Contains("Budget"))
+            {
+                var method = mainForm.GetType().GetMethod("pnlExpense_Click", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (method != null) method.Invoke(mainForm, new object[] { null, null });
+            }
+        }
+
+
+        private class NotificationItem
+        {
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public string TimeText { get; set; }
+            public Color ThemeColor { get; set; }
+            public Color BgColor { get; set; }
+            public string IconSymbol { get; set; }
+
+            public string TargetModule { get; set; }
+        }
+
+        
+
+
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            //this.Close();
+
+            pnlNotification.Visible = false;
+        }
 
     }
 }
+
+

@@ -624,9 +624,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTotalTaskCount.ForeColor = System.Drawing.Color.Black;
             this.lblTotalTaskCount.Location = new System.Drawing.Point(71, 38);
             this.lblTotalTaskCount.Name = "lblTotalTaskCount";
-            this.lblTotalTaskCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTotalTaskCount.Size = new System.Drawing.Size(29, 32);
             this.lblTotalTaskCount.TabIndex = 2;
-            this.lblTotalTaskCount.Text = "20";
+            this.lblTotalTaskCount.Text = "0";
             // 
             // lblTotalTask
             // 
@@ -671,9 +671,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTaskCompleteCount.ForeColor = System.Drawing.Color.Black;
             this.lblTaskCompleteCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskCompleteCount.Name = "lblTaskCompleteCount";
-            this.lblTaskCompleteCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTaskCompleteCount.Size = new System.Drawing.Size(29, 32);
             this.lblTaskCompleteCount.TabIndex = 2;
-            this.lblTaskCompleteCount.Text = "10";
+            this.lblTaskCompleteCount.Text = "0";
             // 
             // lblTaskComplete
             // 
@@ -718,9 +718,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblTaskPandingCount.ForeColor = System.Drawing.Color.Black;
             this.lblTaskPandingCount.Location = new System.Drawing.Point(71, 38);
             this.lblTaskPandingCount.Name = "lblTaskPandingCount";
-            this.lblTaskPandingCount.Size = new System.Drawing.Size(43, 32);
+            this.lblTaskPandingCount.Size = new System.Drawing.Size(29, 32);
             this.lblTaskPandingCount.TabIndex = 2;
-            this.lblTaskPandingCount.Text = "15";
+            this.lblTaskPandingCount.Text = "0";
             // 
             // lblTaskPanding
             // 
@@ -766,9 +766,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.lblLentAmount.ForeColor = System.Drawing.Color.Black;
             this.lblLentAmount.Location = new System.Drawing.Point(71, 38);
             this.lblLentAmount.Name = "lblLentAmount";
-            this.lblLentAmount.Size = new System.Drawing.Size(43, 32);
+            this.lblLentAmount.Size = new System.Drawing.Size(29, 32);
             this.lblLentAmount.TabIndex = 2;
-            this.lblLentAmount.Text = "10";
+            this.lblLentAmount.Text = "0";
             // 
             // lblDue
             // 
