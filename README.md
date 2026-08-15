@@ -138,6 +138,8 @@ All stored procedures are version-controlled and deployable via a single PowerSh
 
 ## 🚀 Getting Started
 
+> **📌 Note:** The current version requires a manual database setup (steps below). We are working on a future release that will include a **one-click `.exe` installer** — no SQL Server, no scripts, no extra configuration needed. Stay tuned!
+
 ### Prerequisites
 
 Before running the application, ensure you have the following installed:
@@ -351,51 +353,50 @@ PersonalExpenseCreditTracker/
 
 ---
 
-## 👥 Team
+## 👥 Meet the Team
 
-This project was collaboratively built by a cross-functional team, each owning a specific module:
+We are a group of **CS students** who built this project as a hands-on learning experience — designing a real-world application from scratch, working with databases, writing stored procedures, and building a full desktop UI. It was challenging, but we learned a lot along the way.
+
+---
 
 ### 🔴 Project Manager
 
 | Name | Role |
 |------|------|
-| **Kushal Jain** | Project Manager — DB Architecture, Master Schema, GitHub Management, Integration & Final Review |
+| **Kushal Jain** | Project Manager |
+
+Kushal led the project end-to-end — from database architecture and schema design to UI, business logic, stored procedures, GitHub management, team coordination, and final integration. Every part of this project was touched, reviewed, or built by him.
 
 ---
 
-### 🟣 Team A — User & Task Module
+### 🌟 Special Mentions
+
+> A big shoutout to these three for their effort and dedication. They contributed across UI, logic, and more — and made a real difference in this project.
+
+| Name | Role | Contribution |
+|------|------|--------------|
+| **Sujit** | Developer | Contributed across multiple areas — UI, business logic, and data layer. Also helped coordinate the team whenever needed. |
+| **Arpita** | Developer | Worked consistently and delivered solid contributions in both UI and application logic. |
+| **Akhmal** | Developer | Put in good work on UI design and backend implementation throughout the project. |
+
+---
+
+### 💻 Developer
 
 | Name | Role |
 |------|------|
-| **Sujit** | Team Lead |
-| **Sampriti** | Member |
-
-📌 *Modules: Users, User Profile, Authentication, Task, Note*
+| **Sampriti** | Developer |
 
 ---
 
-### 🟢 Team B — Expense & Credit Module
+### 🧪 Tester
 
 | Name | Role |
 |------|------|
-| **Arpita** | Team Lead |
-| **Aniket** | Member |
-| **Bidisha** | Member |
-
-📌 *Modules: Expense, Credit, Category & Sub-category management, Payment Types*
+| **Debo** | Tester |
 
 ---
 
-### 🟠 Team C — Lent & Borrow Module
-
-| Name | Role |
-|------|------|
-| **Debo** | Team Lead |
-| **Akhmal** | Member |
-
-📌 *Modules: Lent, Borrow, Unified Person Directory, Status Management*
-
----
 
 ## 🤝 Contributing
 
@@ -417,6 +418,25 @@ Contributions are welcome! Please follow the team conventions:
 5. Open a **Pull Request** and request a review
 
 > ⚠️ **Important:** All database changes must be reflected in **both** the individual `.sql` file under `Database/Procedures/` **and** `Database/Master/✔️MasterStoredProcedures.sql`. Never make manual database changes without updating the corresponding scripts.
+
+---
+
+## 🗺️ Roadmap
+
+This is an actively evolving student project. Here's what's planned:
+
+### ✅ Version 1.0 — Current Release
+- Full expense, credit, lent, borrow, task, and note management
+- Dashboard with summaries and smart reminders
+- Manual database setup via SQL scripts or PowerShell
+
+### 🔜 Version 2.0 — Coming Soon
+- [ ] **One-click `.exe` Installer** — Download, install, and launch. No SQL Server installation, no scripts, no manual steps. The database will be bundled and configured automatically.
+- [ ] Edit existing expense, credit, lent, and borrow records
+- [ ] Monthly financial reports and export to PDF
+- [ ] Advanced notification system
+
+> 💡 The goal is to make this app accessible to anyone — just download and run.
 
 ---
 
