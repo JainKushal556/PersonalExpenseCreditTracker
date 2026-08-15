@@ -238,23 +238,40 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 return;
             }
 
-            // Action column
-            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewAddPerson.Columns["colAction"].Index)
+            // ২. ডেটা রো পেইন্টিং
+            if (e.RowIndex >= 0)
             {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                // Action (Pen Icon) কলামের জন্য কাস্টম আঁকা
+                if (e.ColumnIndex == dataGridViewAddPerson.Columns["colAction"].Index)
+                {
+                    // ডিফল্ট বাটন ব্যাকগ্রাউন্ড/বর্ডার না এঁকে শুধুমাত্র সেল ব্যাকগ্রাউন্ড আঁকা
+                    e.PaintBackground(e.CellBounds, true);
 
-                Image img = Properties.Resources.pen__1_;
-
-                int iconSize = 23;
+                    Image img = Properties.Resources.pen__1_;
+                    int iconSize = 23;
+                    int x = e.CellBounds.Left + (e.CellBounds.Width - iconSize) / 2;
+                    int y = e.CellBounds.Top + (e.CellBounds.Height - iconSize) / 2;
 
                 int x = e.CellBounds.Left + (e.CellBounds.Width - 20) / 2;
                 int y = e.CellBounds.Top + (e.CellBounds.Height - 20) / 2;
 
-                e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
+                }
+                else
+                {
+                    e.Paint(e.CellBounds, e.PaintParts & ~DataGridViewPaintParts.Focus);
+                }
 
-                e.Graphics.DrawImage(img, new Rectangle(x, y, iconSize, iconSize));
+
+                int lineY = e.CellBounds.Y + e.CellBounds.Height - 1;
+                using (Pen pen = new Pen(Color.FromArgb(230, 230, 230), 1))
+                {
+                    e.Graphics.DrawLine(pen,
+                        e.CellBounds.Left,
+                        lineY,
+                        e.CellBounds.Right,
+                        lineY);
+                }
 
                 e.Handled = true;
             }
@@ -425,6 +442,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             colSL.Resizable = DataGridViewTriState.False;
             colAction.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             colAction.Resizable = DataGridViewTriState.False;
+
+
 
             
         }

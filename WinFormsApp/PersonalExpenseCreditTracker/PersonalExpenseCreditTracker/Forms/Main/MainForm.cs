@@ -139,7 +139,12 @@ namespace PersonalExpenseCreditTracker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-           
+            timer1.Interval = 1000; // 1 second
+            timer1.Start();
+
+            ShowCurrentDateTime();
+
+            //lblDateTime.Text = DateTime.Now.ToString("dd MMM yyyy | hh:mm tt");
             CommonBllFunction.UpdateOverdueStatus();
 
             flowSidebar.Location = new Point(0, 0);
@@ -2068,6 +2073,84 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveLentSubMenu(pnlAllLent);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+            {
+                if (dashboardControl != null && !dashboardControl.IsDisposed)
+                {
+                    dashboardControl.pnlNotification.Visible = true;
+                    dashboardControl.pnlNotification.BringToFront();
+
+                    
+                    if (dashboardControl.flowLayoutPanel5.Controls.Count == 0)
+                    {
+                        dashboardControl.LoadNotifications(Session.LogedInUser.GetUserId(), dashboardControl.pnlNotification, dashboardControl.flowLayoutPanel5);
+                    }
+                }
+            }
+
+        private Label lblHeaderBadge;
+
+        public void UpdateNotificationBadge(int count)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke((MethodInvoker)delegate { UpdateNotificationBadge(count); });
+                return;
+            }
+
+            if (lblHeaderBadge == null)
+            {
+                lblHeaderBadge = new Label
+                {
+                    AutoSize = false,
+                    Size = new Size(18, 18),
+                    BackColor = Color.FromArgb(239, 68, 68), // Bright Red Badge
+                    ForeColor = Color.White,
+                    Font = new Font("Segoe UI", 7.5F, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Visible = false,
+                    Cursor = Cursors.Hand
+                };
+
+                
+                try
+                {
+                    System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+                    path.AddEllipse(0, 0, lblHeaderBadge.Width, lblHeaderBadge.Height);
+                    lblHeaderBadge.Region = new Region(path);
+                }
+                catch { }
+
+                panel5.Controls.Add(lblHeaderBadge);
+                lblHeaderBadge.Location = new Point(button1.Right - 18, 4);
+                lblHeaderBadge.Click += button1_Click;
+            }
+
+            if (count > 0)
+            {
+                lblHeaderBadge.Text = count > 99 ? "99+" : count.ToString();
+                lblHeaderBadge.Visible = true;
+                lblHeaderBadge.BringToFront();
+            }
+            else
+            {
+                lblHeaderBadge.Visible = false;
+            }
+        }
+
+
+        private void ShowCurrentDateTime()
+        {
+            lblDateTime.Text = DateTime.Now.ToString("dd MMM yyyy | hh:mm:ss tt");
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            ShowCurrentDateTime();
+        }
+
+
 
       
 
