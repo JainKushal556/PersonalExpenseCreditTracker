@@ -63,6 +63,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             toolTip.SetToolTip(btnFilter, "Filter Lent");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Lent");
+            toolTip.SetToolTip(txtSearch, "Search by Person Name,Amount,Date,Payment Type or Status");
 
             dgvLentDataTable.CellDoubleClick += dgvLentDataTable_CellDoubleClick;
 
@@ -143,7 +144,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void LentControls_Load(object sender, EventArgs e)
         {
             ignoreEvents = true;
-            txtSearch.Text = "Search...";
+            txtSearch.Text = "Search records...";
             txtSearch.ForeColor = Color.Gray;
             txtMinAmount.Text = "Enter Amount";
             txtMinAmount.ForeColor = Color.Gray;
@@ -308,6 +309,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dgvLentDataTable.AllowUserToOrderColumns = false;
             dgvLentDataTable.AutoGenerateColumns = false;
             dgvLentDataTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLentDataTable.AllowUserToResizeColumns = true;
 
             //Column HeaderStyle
             dgvLentDataTable.EnableHeadersVisualStyles = false;
@@ -1733,7 +1735,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void txtSearch_Enter(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Search...")
+            if (txtSearch.Text == "Search records...")
             {
                 txtSearch.Text = "";
                 txtSearch.ForeColor = Color.Black;
@@ -1744,7 +1746,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
             {
-                txtSearch.Text = "Search...";
+                txtSearch.Text = "Search records...";
                 txtSearch.ForeColor = Color.Gray;
             }
         }

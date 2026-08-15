@@ -777,7 +777,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-           
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvLentDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -791,7 +792,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.RowHeadersVisible = false;
             this.dgvLentDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            
             this.dgvLentDataTable.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvLentDataTable.RowTemplate.Height = 30;
             this.dgvLentDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
