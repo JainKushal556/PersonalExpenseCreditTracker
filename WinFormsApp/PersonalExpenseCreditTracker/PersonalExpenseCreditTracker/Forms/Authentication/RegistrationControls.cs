@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using PersonalExpenseCreditTracker.Common;
+using BLLayer.Authentication;
+using BLLayer.Common;
 
 namespace PersonalExpenseCreditTracker.Forms.Authentication
 {
@@ -178,8 +181,17 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void txtNewPassword_TextChanged(object sender, EventArgs e)
         {
+            if (txtRegistrationCreatePassword.Text != "Create a password" && !string.IsNullOrWhiteSpace(txtRegistrationCreatePassword.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtRegistrationCreatePassword);
+            }
+
+            AuthBLL authBll = new AuthBLL();
+
             if (txtRegistrationCreatePassword.Text == "" || txtRegistrationCreatePassword.Text == "Create a password")
             {
+                lblPasswordStrengthLevel.Text = "";
+
                 pnlWeak.BackColor = Color.FromArgb(234, 235, 239);
                 pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
                 pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
@@ -188,44 +200,113 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 return;
             }
 
-            int score = CheckPasswordStrengthLevel(txtRegistrationCreatePassword.Text);
+            AuthBLL.PasswordStrengthLevel strength = authBll.GetPasswordStrength(txtRegistrationCreatePassword.Text);
 
-            if (score <= 2)
+            switch (strength)
             {
-                lblPasswordStrengthLevel.Text = "Weak";
-                lblPasswordStrengthLevel.ForeColor = Color.Red;
-                pnlWeak.BackColor = Color.Red;
-                pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
-                pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
-                pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+                case AuthBLL.PasswordStrengthLevel.Weak:
+
+                    lblPasswordStrengthLevel.Text = "Weak";
+                    lblPasswordStrengthLevel.ForeColor = Color.Red;
+
+                    pnlWeak.BackColor = Color.Red;
+                    pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
+                    pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    break;
+
+                case AuthBLL.PasswordStrengthLevel.Medium:
+
+                    lblPasswordStrengthLevel.Text = "Medium";
+                    lblPasswordStrengthLevel.ForeColor = Color.Orange;
+
+                    pnlWeak.BackColor = Color.Orange;
+                    pnlMedium.BackColor = Color.Orange;
+                    pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    break;
+
+                case AuthBLL.PasswordStrengthLevel.Strong:
+
+                    lblPasswordStrengthLevel.Text = "Strong";
+                    lblPasswordStrengthLevel.ForeColor = Color.YellowGreen;
+
+                    pnlWeak.BackColor = Color.YellowGreen;
+                    pnlMedium.BackColor = Color.YellowGreen;
+                    pnlStrong.BackColor = Color.YellowGreen;
+                    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    break;
+
+                case AuthBLL.PasswordStrengthLevel.VeryStrong:
+
+                    lblPasswordStrengthLevel.Text = "Very Strong";
+                    lblPasswordStrengthLevel.ForeColor = Color.Green;
+
+                    pnlWeak.BackColor = Color.Green;
+                    pnlMedium.BackColor = Color.Green;
+                    pnlStrong.BackColor = Color.Green;
+                    pnlVeryStrong.BackColor = Color.Green;
+                    break;
             }
-            else if (score == 3)
-            {
-                lblPasswordStrengthLevel.Text = "Medium";
-                lblPasswordStrengthLevel.ForeColor = Color.Orange;
-                pnlWeak.BackColor = Color.Orange;
-                pnlMedium.BackColor = Color.Orange;
-                pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
-                pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
-            }
-            else if (score == 4)
-            {
-                lblPasswordStrengthLevel.Text = "Strong";
-                lblPasswordStrengthLevel.ForeColor = Color.YellowGreen;
-                pnlWeak.BackColor = Color.YellowGreen;
-                pnlMedium.BackColor = Color.YellowGreen;
-                pnlStrong.BackColor = Color.YellowGreen;
-                pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
-            }
-            else
-            {
-                lblPasswordStrengthLevel.Text = "Very Strong";
-                lblPasswordStrengthLevel.ForeColor = Color.Green;
-                pnlWeak.BackColor = Color.Green;
-                pnlMedium.BackColor = Color.Green;
-                pnlStrong.BackColor = Color.Green;
-                pnlVeryStrong.BackColor = Color.Green;
-            }
+
+            //if (txtCurrentPassword.Text == txtRegistrationCreatePassword.Text)
+            //{
+            //    lblPasswordMatch.Text = "Your current password and new password are same..";
+            //    lblPasswordMatch.ForeColor = Color.Red;
+            //}
+            //else
+            //{
+            //    lblPasswordMatch.Text = "";
+            //}
+
+            //if (txtRegistrationCreatePassword.Text == "" || txtRegistrationCreatePassword.Text == "Create a password")
+            //{
+            //    pnlWeak.BackColor = Color.FromArgb(234, 235, 239);
+            //    pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
+            //    pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
+            //    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+
+            //    return;
+            //}
+
+            //int score = CheckPasswordStrengthLevel(txtRegistrationCreatePassword.Text);
+
+            //if (score <= 2)
+            //{
+            //    lblPasswordStrengthLevel.Text = "Weak";
+            //    lblPasswordStrengthLevel.ForeColor = Color.Red;
+            //    pnlWeak.BackColor = Color.Red;
+            //    pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
+            //    pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
+            //    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+            //}
+            //else if (score == 3)
+            //{
+            //    lblPasswordStrengthLevel.Text = "Medium";
+            //    lblPasswordStrengthLevel.ForeColor = Color.Orange;
+            //    pnlWeak.BackColor = Color.Orange;
+            //    pnlMedium.BackColor = Color.Orange;
+            //    pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
+            //    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+            //}
+            //else if (score == 4)
+            //{
+            //    lblPasswordStrengthLevel.Text = "Strong";
+            //    lblPasswordStrengthLevel.ForeColor = Color.YellowGreen;
+            //    pnlWeak.BackColor = Color.YellowGreen;
+            //    pnlMedium.BackColor = Color.YellowGreen;
+            //    pnlStrong.BackColor = Color.YellowGreen;
+            //    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+            //}
+            //else
+            //{
+            //    lblPasswordStrengthLevel.Text = "Very Strong";
+            //    lblPasswordStrengthLevel.ForeColor = Color.Green;
+            //    pnlWeak.BackColor = Color.Green;
+            //    pnlMedium.BackColor = Color.Green;
+            //    pnlStrong.BackColor = Color.Green;
+            //    pnlVeryStrong.BackColor = Color.Green;
+            //}
         }
 
         private void picEye1_Click(object sender, EventArgs e)
@@ -267,7 +348,88 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
         {
-            this.Close();
+            AuthUI authUI = new AuthUI();
+            string ErroeMsg;
+
+            authUI.userName = (txtFullName.Text == "Enter your full name") ? "" : txtFullName.Text;
+            authUI.email = (txtRegistrationEmail.Text == "Enter your email address") ? "" : txtRegistrationEmail.Text;
+            authUI.phoneNumber = txtRegistrationPhoneNumber.Text;
+            authUI.newPassword = (txtRegistrationCreatePassword.Text == "Create a password") ? "" : txtRegistrationCreatePassword.Text;
+            authUI.confirmPassword = (txtRegistrationConfirmPassword.Text == "Confirm password") ? "" : txtRegistrationConfirmPassword.Text;
+
+            CommonValidator.ValidationResult result = authUI.RegistrationFormDataIntoAuthUI();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Registration Successfully");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.PersonNameEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtFullName);
+                    break;
+
+                case CommonValidator.ValidationResult.PersonNameInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtFullName);
+                    break;
+
+                case CommonValidator.ValidationResult.EmailInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationEmail);
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneNumberEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationPhoneNumber);
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationPhoneNumber);
+                    break;
+
+                case CommonValidator.ValidationResult.NewPasswordEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationCreatePassword);
+                    break;
+
+                case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
+                    //lblPasswordMatch.Text = "";
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationConfirmPassword);
+                    break;
+
+                case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegistrationCreatePassword);
+                    break;
+
+                case CommonValidator.ValidationResult.NotMatchPassword:
+                    MessageBox.Show("Password Doesn't Match");
+
+                    //ErrorHelper.HideErrorForControl(txtConfirmPassword);
+                    //lblPasswordMatch.Text = "* Password doesn't match.";
+                    //lblPasswordMatch.ForeColor = Color.Red;
+                    //txtConfirmPassword.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.WeakPassword:
+                    MessageBox.Show("Password is weak please enter strong hard password.");
+                    break;
+
+                case CommonValidator.ValidationResult.MediumPassword:
+                    MessageBox.Show("Password is medium please enter strong hard password.");
+                    break;
+
+                case CommonValidator.ValidationResult.StrongPassword:
+                    MessageBox.Show("Password is strong but not hard, please enter strong hard password.");
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    ErroeMsg = authUI.GetErrorMsg();
+                    MessageBox.Show(ErroeMsg);
+                    break;
+            }
+        }
+
+        private void txtRegistrationConfirmPassword_TextChanged(object sender, EventArgs e)
+        {
         }
     }
 }

@@ -281,11 +281,11 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
         {
 
-            if (txtConfirmPassword.Text != "Enter New Password" && !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
+            if (txtConfirmPassword.Text != "Confirm New Password" && !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
             {
                 ErrorHelper.HideErrorForControl(txtConfirmPassword);
             }
-            if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Enter New Password")
+            if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Confirm New Password")
             {
                 lblPasswordMatch.Text = "";
             

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -86,6 +87,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtRegistrationPhoneNumber = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -105,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -366,6 +370,7 @@
             // pnlRegistrationDataInput
             // 
             this.pnlRegistrationDataInput.BackColor = System.Drawing.Color.White;
+            this.pnlRegistrationDataInput.Controls.Add(this.txtRegistrationPhoneNumber);
             this.pnlRegistrationDataInput.Controls.Add(this.panel4);
             this.pnlRegistrationDataInput.Controls.Add(this.label23);
             this.pnlRegistrationDataInput.Controls.Add(this.pnlVeryStrong);
@@ -534,6 +539,7 @@
             this.txtRegistrationConfirmPassword.Name = "txtRegistrationConfirmPassword";
             this.txtRegistrationConfirmPassword.Size = new System.Drawing.Size(439, 25);
             this.txtRegistrationConfirmPassword.TabIndex = 3;
+            this.txtRegistrationConfirmPassword.TextChanged += new System.EventHandler(this.txtRegistrationConfirmPassword_TextChanged);
             this.txtRegistrationConfirmPassword.Enter += new System.EventHandler(this.txtRegistrationConfirmPassword_Enter);
             this.txtRegistrationConfirmPassword.Leave += new System.EventHandler(this.txtRegistrationConfirmPassword_Leave);
             // 
@@ -606,9 +612,9 @@
             this.lblNewPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNewPassword.Location = new System.Drawing.Point(25, 381);
             this.lblNewPassword.Name = "lblNewPassword";
-            this.lblNewPassword.Size = new System.Drawing.Size(122, 23);
+            this.lblNewPassword.Size = new System.Drawing.Size(82, 23);
             this.lblNewPassword.TabIndex = 15;
-            this.lblNewPassword.Text = "New Password";
+            this.lblNewPassword.Text = "Password";
             // 
             // pictureBox8
             // 
@@ -770,6 +776,17 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // txtRegistrationPhoneNumber
+            // 
+            this.txtRegistrationPhoneNumber.Location = new System.Drawing.Point(29, 25);
+            this.txtRegistrationPhoneNumber.Name = "txtRegistrationPhoneNumber";
+            this.txtRegistrationPhoneNumber.Size = new System.Drawing.Size(203, 30);
+            this.txtRegistrationPhoneNumber.TabIndex = 45;
+            // 
             // RegistrationControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -778,6 +795,7 @@
             this.ClientSize = new System.Drawing.Size(1569, 918);
             this.Controls.Add(this.panel1);
             this.Name = "RegistrationControls";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegistratationControls";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.RegistrationControls_Load);
@@ -807,6 +825,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -871,6 +890,8 @@
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.TextBox txtRegistrationPhoneNumber;
 
     }
 }
