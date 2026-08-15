@@ -340,17 +340,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            ////Column Background Color
-            //colDate.DefaultCellStyle.BackColor = Color.White;
-            //colPersonName.DefaultCellStyle.BackColor = Color.White;
-            //colPaymentType.DefaultCellStyle.BackColor = Color.White;
-            //colStatus.DefaultCellStyle.BackColor = Color.White;
-            //colAmount.DefaultCellStyle.BackColor = Color.White;
-            //colPaidAmount.DefaultCellStyle.BackColor = Color.White;
-            //colRemainingAmount.DefaultCellStyle.BackColor = Color.White;
-            //colDeadline.DefaultCellStyle.BackColor = Color.White;
-            //colDescription.DefaultCellStyle.BackColor = Color.White;
-
             //Column FontStyle
             colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
             colPersonName.DefaultCellStyle.Font = new Font("Segoe UI", 10);

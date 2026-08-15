@@ -32,7 +32,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -517,9 +516,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // pnlRepaidAmount
             // 
-            this.pnlRepaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlRepaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlRepaidAmount.BackColor = System.Drawing.Color.White;
             this.pnlRepaidAmount.Controls.Add(this.lblBorrowRepaidAmount);
             this.pnlRepaidAmount.Controls.Add(this.lblBorrowRepaidAmountText);
@@ -540,7 +539,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblBorrowRepaidAmount.Location = new System.Drawing.Point(93, 48);
             this.lblBorrowRepaidAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowRepaidAmount.Name = "lblBorrowRepaidAmount";
-            this.lblBorrowRepaidAmount.Size = new System.Drawing.Size(92, 32);
+            this.lblBorrowRepaidAmount.Size = new System.Drawing.Size(43, 32);
             this.lblBorrowRepaidAmount.TabIndex = 3;
             this.lblBorrowRepaidAmount.Text = "₹0";
             this.lblBorrowRepaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -575,9 +574,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // pnlActiveBorrowings
             // 
-            this.pnlActiveBorrowings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlActiveBorrowings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlActiveBorrowings.BackColor = System.Drawing.Color.White;
             this.pnlActiveBorrowings.Controls.Add(this.lblBorrowActiveBorrowingsAmount);
             this.pnlActiveBorrowings.Controls.Add(this.lblBorrowActiveBorrowingsText);
@@ -598,7 +597,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblBorrowActiveBorrowingsAmount.Location = new System.Drawing.Point(93, 48);
             this.lblBorrowActiveBorrowingsAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowActiveBorrowingsAmount.Name = "lblBorrowActiveBorrowingsAmount";
-            this.lblBorrowActiveBorrowingsAmount.Size = new System.Drawing.Size(92, 32);
+            this.lblBorrowActiveBorrowingsAmount.Size = new System.Drawing.Size(43, 32);
             this.lblBorrowActiveBorrowingsAmount.TabIndex = 3;
             this.lblBorrowActiveBorrowingsAmount.Text = "₹0";
             this.lblBorrowActiveBorrowingsAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -633,9 +632,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // pnlPaidAmount
             // 
-            this.pnlPaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPaidAmount.BackColor = System.Drawing.Color.White;
             this.pnlPaidAmount.Controls.Add(this.lblBorrowPaidAmount);
             this.pnlPaidAmount.Controls.Add(this.lblBorrowPaidAmountText);
@@ -657,7 +656,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblBorrowPaidAmount.Location = new System.Drawing.Point(93, 48);
             this.lblBorrowPaidAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowPaidAmount.Name = "lblBorrowPaidAmount";
-            this.lblBorrowPaidAmount.Size = new System.Drawing.Size(92, 32);
+            this.lblBorrowPaidAmount.Size = new System.Drawing.Size(43, 32);
             this.lblBorrowPaidAmount.TabIndex = 3;
             this.lblBorrowPaidAmount.Text = "₹0";
             this.lblBorrowPaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -692,9 +691,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // pnlBorrowTotalBorrowed
             // 
-            this.pnlBorrowTotalBorrowed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBorrowTotalBorrowed.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBorrowTotalBorrowed.BackColor = System.Drawing.Color.White;
             this.pnlBorrowTotalBorrowed.Controls.Add(this.lblBorrowTotalBorrowedAmount);
             this.pnlBorrowTotalBorrowed.Controls.Add(this.lblBorrowTotalBorrowedText);
@@ -715,7 +714,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.lblBorrowTotalBorrowedAmount.Location = new System.Drawing.Point(93, 48);
             this.lblBorrowTotalBorrowedAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowTotalBorrowedAmount.Name = "lblBorrowTotalBorrowedAmount";
-            this.lblBorrowTotalBorrowedAmount.Size = new System.Drawing.Size(106, 32);
+            this.lblBorrowTotalBorrowedAmount.Size = new System.Drawing.Size(43, 32);
             this.lblBorrowTotalBorrowedAmount.TabIndex = 3;
             this.lblBorrowTotalBorrowedAmount.Text = "₹0";
             this.lblBorrowTotalBorrowedAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -780,8 +779,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvBorrowDataTable.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvBorrowDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -796,14 +794,10 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvBorrowDataTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvBorrowDataTable.RowHeadersVisible = false;
             this.dgvBorrowDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.dgvBorrowDataTable.RowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBorrowDataTable.RowTemplate.Height = 30;
             this.dgvBorrowDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvBorrowDataTable.Size = new System.Drawing.Size(1131, 473);
@@ -921,9 +915,9 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             // 
             // tableLayoutPanelMainData
             // 
-            this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanelMainData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanelMainData.ColumnCount = 1;
             this.tableLayoutPanelMainData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMainData.Controls.Add(this.panel2, 0, 2);

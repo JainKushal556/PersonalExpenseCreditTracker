@@ -29,7 +29,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -198,9 +197,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalTransaction
             // 
-            this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalTransaction.BackColor = System.Drawing.Color.White;
             this.panelTotalTransaction.Controls.Add(this.labelTotalTransactionNumber);
             this.panelTotalTransaction.Controls.Add(this.lblTotalTransaction);
@@ -221,7 +220,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.labelTotalTransactionNumber.Location = new System.Drawing.Point(93, 48);
             this.labelTotalTransactionNumber.Margin = new System.Windows.Forms.Padding(0);
             this.labelTotalTransactionNumber.Name = "labelTotalTransactionNumber";
-            this.labelTotalTransactionNumber.Size = new System.Drawing.Size(43, 32);
+            this.labelTotalTransactionNumber.Size = new System.Drawing.Size(29, 32);
             this.labelTotalTransactionNumber.TabIndex = 4;
             this.labelTotalTransactionNumber.Text = "0";
             this.labelTotalTransactionNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -255,9 +254,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalDue
             // 
-            this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalDue.BackColor = System.Drawing.Color.White;
             this.panelTotalDue.Controls.Add(this.lblTotalDueAmount);
             this.panelTotalDue.Controls.Add(this.lblTotalDue);
@@ -278,7 +277,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.lblTotalDueAmount.Location = new System.Drawing.Point(93, 48);
             this.lblTotalDueAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblTotalDueAmount.Name = "lblTotalDueAmount";
-            this.lblTotalDueAmount.Size = new System.Drawing.Size(92, 32);
+            this.lblTotalDueAmount.Size = new System.Drawing.Size(43, 32);
             this.lblTotalDueAmount.TabIndex = 3;
             this.lblTotalDueAmount.Text = "₹0";
             this.lblTotalDueAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -312,9 +311,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalRepaid
             // 
-            this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalRepaid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalRepaid.BackColor = System.Drawing.Color.White;
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaidAmount);
             this.panelTotalRepaid.Controls.Add(this.lblTotalRepaid);
@@ -336,7 +335,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.lblTotalRepaidAmount.Location = new System.Drawing.Point(93, 48);
             this.lblTotalRepaidAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblTotalRepaidAmount.Name = "lblTotalRepaidAmount";
-            this.lblTotalRepaidAmount.Size = new System.Drawing.Size(92, 32);
+            this.lblTotalRepaidAmount.Size = new System.Drawing.Size(43, 32);
             this.lblTotalRepaidAmount.TabIndex = 3;
             this.lblTotalRepaidAmount.Text = "₹0";
             this.lblTotalRepaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -370,9 +369,9 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panelTotalLent
             // 
-            this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTotalLent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTotalLent.BackColor = System.Drawing.Color.White;
             this.panelTotalLent.Controls.Add(this.lblTotalLentAmount);
             this.panelTotalLent.Controls.Add(this.lblTotalLent);
@@ -393,7 +392,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.lblTotalLentAmount.Location = new System.Drawing.Point(93, 48);
             this.lblTotalLentAmount.Margin = new System.Windows.Forms.Padding(0);
             this.lblTotalLentAmount.Name = "lblTotalLentAmount";
-            this.lblTotalLentAmount.Size = new System.Drawing.Size(106, 32);
+            this.lblTotalLentAmount.Size = new System.Drawing.Size(43, 32);
             this.lblTotalLentAmount.TabIndex = 3;
             this.lblTotalLentAmount.Text = "₹0";
             this.lblTotalLentAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -462,8 +461,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             // 
             // panel5
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.panel5.Controls.Add(this.lblEntries);
             this.panel5.Controls.Add(this.lblTotalPageNumber);
             this.panel5.Controls.Add(this.lblof);
@@ -739,6 +738,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFilter.ForeColor = System.Drawing.Color.White;
             this.btnFilter.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter1;
+            this.btnFilter.Location = new System.Drawing.Point(0, 0);
+            this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(40, 40);
             this.btnFilter.TabIndex = 6;
             this.btnFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -776,8 +777,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+           
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLentDataTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvLentDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -791,8 +791,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.dgvLentDataTable.RowHeadersVisible = false;
             this.dgvLentDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            
             this.dgvLentDataTable.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvLentDataTable.RowTemplate.Height = 30;
             this.dgvLentDataTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
