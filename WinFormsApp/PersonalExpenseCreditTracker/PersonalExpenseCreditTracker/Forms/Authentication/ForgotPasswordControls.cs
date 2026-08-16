@@ -20,7 +20,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         private bool _PasswordMatch;
         bool isPasswordVisible2 = true;
         bool isPasswordVisible3 = true;
-
+        private readonly string defaultInfoMessage = "Use a strong password with at least 8 characters including\nuppercase, lowercase, number and special character.";
 
         public ForgotPasswordControls()
         {
@@ -59,6 +59,10 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
             picEye2.Image = Properties.Resources.open_eye__2_;
             picEye3.Image = Properties.Resources.open_eye__2_;
+
+            txtRegisteredEmail.TextChanged += txtRegisteredEmail_TextChanged;
+            txtRegisteredPhoneNumber.TextChanged += txtRegisteredPhoneNumber_TextChanged;
+            txtConfirmPassword.TextChanged += txtConfirmPassword_TextChanged;
         }
 
         // Radius Corner of These Panels
@@ -85,8 +89,37 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             DeleteObject(hrgn);
         }
 
+        private void ShowDatabaseError(string message)
+        {
+            pnlForgotPasswordAbout.Height = 52;
+            pnlForgotPasswordAbout.BackColor = Color.FromArgb(254, 242, 242);
+            pictureBox7.Location = new Point(14, 12);
+            pictureBox7.Size = new Size(28, 28);
+            label7.Location = new Point(50, 16);
+            label7.Text = message;
+            label7.ForeColor = Color.FromArgb(220, 38, 38);
+            label7.BringToFront();
+            SetRadius(pnlForgotPasswordAbout, 14);
+        }
+      
+        private void ResetInfoBox()
+        {
+            if (label7.Text != defaultInfoMessage)
+            {
+                pnlForgotPasswordAbout.Height = 84;
+                pnlForgotPasswordAbout.BackColor = Color.FromArgb(241, 243, 255);
+                pictureBox7.Location = new Point(14, 24);
+                pictureBox7.Size = new Size(32, 32);
+                label7.Location = new Point(50, 18); 
+                label7.Text = defaultInfoMessage;
+                label7.ForeColor = Color.Black;
+                label7.BringToFront();
+                SetRadius(pnlForgotPasswordAbout, 20);
+            }
+        }
         private void txtNewPassword_TextChanged(object sender, EventArgs e)
         {
+            ResetInfoBox();
             if (txtNewPassword.Text != "Enter New Password" && !string.IsNullOrWhiteSpace(txtNewPassword.Text))
             {
                 ErrorHelper.HideErrorForControl(txtNewPassword);
@@ -153,6 +186,8 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                     pnlVeryStrong.BackColor = Color.Green;
                     break;
             }
+
+            CheckPasswordMatch();
         }
 
         private void picEye2_Click(object sender, EventArgs e)
@@ -298,30 +333,111 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             }
         }
 
+        //private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (txtConfirmPassword.Text != "Confirm New Password" && !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
+        //    {
+        //        ErrorHelper.HideErrorForControl(txtConfirmPassword);
+        //    }
+        //    if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Confirm New Password")
+        //    {
+        //        lblPasswordMatch.Text = "";
+        //    }
+        //    else if (_PasswordMatch)
+        //    {
+        //        if (txtNewPassword.Text != txtConfirmPassword.Text)
+        //        {
+        //            lblPasswordMatch.Text = "* Password dosen't match";
+        //            lblPasswordMatch.ForeColor = Color.Red;
+        //        }
+        //        else
+        //        {
+        //            lblPasswordMatch.Text = "* Password match";
+        //            lblPasswordMatch.ForeColor = Color.Green;
+        //        }
+        //    }
+
+        //    CheckPasswordMatch();
+        //}
+
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
         {
-            if (txtConfirmPassword.Text != "Confirm New Password" && !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
+            CheckPasswordMatch();
+            ResetInfoBox();
+        }
+
+
+        private void CheckPasswordMatch()
+        {
+            string newPass = txtNewPassword.Text;
+            string confirmPass = txtConfirmPassword.Text;
+
+            Control targetControl = txtConfirmPassword;
+            if (txtConfirmPassword.Parent != null && txtConfirmPassword.Parent.Height < 50 && !(txtConfirmPassword.Parent is Form))
             {
-                ErrorHelper.HideErrorForControl(txtConfirmPassword);
+                targetControl = txtConfirmPassword.Parent;
             }
-            if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Confirm New Password")
+
+            Control parent = targetControl.Parent;
+            if (parent == null) return;
+
+            string labelName = "lblErr_" + txtConfirmPassword.Name;
+            Label matchLabel = parent.Controls.Find(labelName, false).FirstOrDefault() as Label;
+
+            // 1. If confirm password field is empty or placeholder
+            // Keep "Confirm password is required" error visible; only hide previous match status
+            if (string.IsNullOrWhiteSpace(confirmPass) || confirmPass == "Confirm New Password")
             {
-                lblPasswordMatch.Text = "";
-            }
-            else if (_PasswordMatch)
-            {
-                if (txtNewPassword.Text != txtConfirmPassword.Text)
+                if (matchLabel != null && (matchLabel.Text == "* Password match" || matchLabel.Text == "* Password doesn't match" || matchLabel.Text == "* Password doesn't match."))
                 {
-                    lblPasswordMatch.Text = "* Password dosen't match";
-                    lblPasswordMatch.ForeColor = Color.Red;
+                    matchLabel.Visible = false;
                 }
-                else
+                return;
+            }
+
+            // 2. Hide previous error as soon as user starts typing
+            if (matchLabel != null && matchLabel.Text != "* Password match")
+            {
+                matchLabel.Visible = false;
+            }
+
+            // 3. If new password field is empty or placeholder, do not check match yet
+            if (string.IsNullOrWhiteSpace(newPass) || newPass == "Enter New Password")
+            {
+                return;
+            }
+
+            // 4. If both passwords match, automatically display "* Password match" in green
+            if (newPass == confirmPass)
+            {
+                if (matchLabel == null)
                 {
-                    lblPasswordMatch.Text = "* Password match";
-                    lblPasswordMatch.ForeColor = Color.Green;
+                    matchLabel = new Label();
+                    matchLabel.Name = labelName;
+                    matchLabel.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular);
+                    matchLabel.AutoSize = true;
+                    parent.Controls.Add(matchLabel);
+                }
+
+                matchLabel.Location = new Point(targetControl.Left, targetControl.Bottom + 2);
+                matchLabel.BringToFront();
+                matchLabel.Text = "* Password match";
+                matchLabel.ForeColor = Color.Green;
+                matchLabel.Visible = true;
+            }
+            else
+            {
+                // 5. If passwords do not match while typing, hide the green match message
+                if (matchLabel != null && matchLabel.Text == "* Password match")
+                {
+                    matchLabel.Visible = false;
                 }
             }
         }
+
+
+
+
 
         private void btnForgotPasswordClose_Click(object sender, EventArgs e)
         {
@@ -333,13 +449,86 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             this.Close();
         }
 
+        //private void btnForgotPasswordUpdatePassword_Click(object sender, EventArgs e)
+        //{
+        //    AuthUI authUI = new AuthUI();
+        //    string ErroeMsg;
+
+        //    authUI.email = (txtRegisteredEmail.Text == "Enter Registered Email") ? "" : txtRegisteredEmail.Text;
+        //    authUI.phoneNumber = (txtRegisteredPhoneNumber.Text == "Enter Registered Phone Number") ? "" : txtRegisteredPhoneNumber.Text;
+        //    authUI.newPassword = (txtNewPassword.Text == "Enter New Password") ? "" : txtNewPassword.Text;
+        //    authUI.confirmPassword = (txtConfirmPassword.Text == "Confirm New Password") ? "" : txtConfirmPassword.Text;
+
+        //    CommonValidator.ValidationResult result = authUI.ForgotPasswordDataIntoAuthUI();
+
+        //    switch (result)
+        //    {
+        //        case CommonValidator.ValidationResult.Success:
+        //            MessageBox.Show("Password Reset Successfully");
+        //            this.DialogResult = DialogResult.OK;
+        //            this.Close();
+        //            break;
+
+        //        case CommonValidator.ValidationResult.EmailInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtRegisteredEmail);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.PhoneNumberEmpty:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtRegisteredPhoneNumber);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.PhoneInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtRegisteredPhoneNumber);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.NewPasswordEmpty:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtNewPassword);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
+        //            //lblPasswordMatch.Text = "";
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtConfirmPassword);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.NotMatchPassword:
+        //            MessageBox.Show("Password Doesn't Match");
+
+        //            //ErrorHelper.HideErrorForControl(txtConfirmPassword);
+        //            //lblPasswordMatch.Text = "* Password doesn't match.";
+        //            //lblPasswordMatch.ForeColor = Color.Red;
+        //            //txtConfirmPassword.Focus();
+        //            break;
+
+        //        case CommonValidator.ValidationResult.WeakPassword:
+        //            MessageBox.Show("Password is weak please enter strong hard password.");
+        //            break;
+
+        //        case CommonValidator.ValidationResult.MediumPassword:
+        //            MessageBox.Show("Password is medium please enter strong hard password.");
+        //            break;
+
+        //        case CommonValidator.ValidationResult.StrongPassword:
+        //            MessageBox.Show("Password is strong but not hard, please enter strong hard password.");
+        //            break;
+
+        //        case CommonValidator.ValidationResult.StoreProcedureError:
+        //            ErroeMsg = authUI.GetErrorMsgForForgotPassword();
+        //            MessageBox.Show(ErroeMsg);
+        //            break;
+        //    }
+            
+        //}
+
         private void btnForgotPasswordUpdatePassword_Click(object sender, EventArgs e)
         {
-            AuthUI authUI = new AuthUI();
-            string ErroeMsg;
+            // 1. Clear all existing validation error messages
+            ErrorHelper.ClearAllErrors(panel4);
 
-            authUI.email = (txtRegisteredEmail.Text == "Enter Registered Email") ? "" : txtRegisteredEmail.Text;
-            authUI.phoneNumber = (txtRegisteredPhoneNumber.Text == "Enter Registered Phone Number") ? "" : txtRegisteredPhoneNumber.Text;
+            AuthUI authUI = new AuthUI();
+            string errorMsg;
+
+            authUI.email = (txtRegisteredEmail.Text == "Enter Registered Email") ? "" : txtRegisteredEmail.Text.Trim();
+            authUI.phoneNumber = (txtRegisteredPhoneNumber.Text == "Enter Registered Phone Number") ? "" : txtRegisteredPhoneNumber.Text.Trim();
             authUI.newPassword = (txtNewPassword.Text == "Enter New Password") ? "" : txtNewPassword.Text;
             authUI.confirmPassword = (txtConfirmPassword.Text == "Confirm New Password") ? "" : txtConfirmPassword.Text;
 
@@ -348,7 +537,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Password Reset Successfully");
+                    MessageBox.Show("Password updated successfully! Please login with your new password.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
@@ -358,9 +547,6 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                     break;
 
                 case CommonValidator.ValidationResult.PhoneNumberEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegisteredPhoneNumber);
-                    break;
-
                 case CommonValidator.ValidationResult.PhoneInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtRegisteredPhoneNumber);
                     break;
@@ -370,38 +556,27 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                     break;
 
                 case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
-                    //lblPasswordMatch.Text = "";
+                case CommonValidator.ValidationResult.NotMatchPassword:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtConfirmPassword);
                     break;
 
-                case CommonValidator.ValidationResult.NotMatchPassword:
-                    MessageBox.Show("Password Doesn't Match");
-
-                    //ErrorHelper.HideErrorForControl(txtConfirmPassword);
-                    //lblPasswordMatch.Text = "* Password doesn't match.";
-                    //lblPasswordMatch.ForeColor = Color.Red;
-                    //txtConfirmPassword.Focus();
-                    break;
-
                 case CommonValidator.ValidationResult.WeakPassword:
-                    MessageBox.Show("Password is weak please enter strong hard password.");
-                    break;
-
                 case CommonValidator.ValidationResult.MediumPassword:
-                    MessageBox.Show("Password is medium please enter strong hard password.");
-                    break;
-
                 case CommonValidator.ValidationResult.StrongPassword:
-                    MessageBox.Show("Password is strong but not hard, please enter strong hard password.");
+                    ErrorHelper.ShowErrorBelowControl(txtNewPassword, "* Password must be very strong.");
+                    txtNewPassword.Focus();
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    ErroeMsg = authUI.GetErrorMsgForForgotPassword();
-                    MessageBox.Show(ErroeMsg);
+                    errorMsg = authUI.GetErrorMsgForForgotPassword();
+                    // Display error in the bottom info box in red instead of a popup
+                    ShowDatabaseError(string.IsNullOrWhiteSpace(errorMsg) ? "Invalid email or phone number. Please try again." : errorMsg);
+                    txtRegisteredEmail.Focus();
                     break;
+
             }
-            
         }
+
 
         private void btnForgotPasswordClose_MouseEnter(object sender, EventArgs e)
         {
@@ -412,5 +587,28 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             btnForgotPasswordClose.BackColor = Color.White;
         }
+
+        private void txtRegisteredEmail_TextChanged(object sender, EventArgs e)
+        {
+            ResetInfoBox(); 
+            if (txtRegisteredEmail.Text != "Enter Registered Email" && !string.IsNullOrWhiteSpace(txtRegisteredEmail.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtRegisteredEmail);
+            }
+        }
+
+
+        private void txtRegisteredPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+            ResetInfoBox();
+            if (txtRegisteredPhoneNumber.Text != "Enter Registered Phone Number" && !string.IsNullOrWhiteSpace(txtRegisteredPhoneNumber.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtRegisteredPhoneNumber);
+            }
+        }
+
+
+
+
     }
 }

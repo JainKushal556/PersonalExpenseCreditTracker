@@ -21,6 +21,10 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         internal protected int UserId { get; set; }
 
+        private Panel pnlLoginErrorAlert;
+        private Label lblLoginErrorText;
+        private PictureBox picLoginErrorIcon;
+
         public LoginControls()
         {
             InitializeComponent();
@@ -66,6 +70,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         
         private void LoginControls_Load(object sender, EventArgs e)
         {
+            
             SetRadius(pnlLoginDataInput, 20);
             SetRadius(btnLogin, 17);
 
@@ -77,15 +82,41 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             txtLoginEmail.ForeColor = Color.Gray;
             txtLoginPassword.ForeColor = Color.Gray;
             this.ActiveControl = pnlLoginDataInput;
+
+            txtLoginEmail.TextChanged += txtLoginEmail_TextChanged;
+            txtLoginPassword.TextChanged += txtLoginPassword_TextChanged;
         }
+     
+        private void ResetLoginForm()
+        {
+            
+            txtLoginEmail.Text = "Enter Email Address";
+            txtLoginEmail.ForeColor = Color.Gray;
+
+        
+            txtLoginPassword.Text = "Enter Password";
+            txtLoginPassword.ForeColor = Color.Gray;
+            txtLoginPassword.UseSystemPasswordChar = false;
+            isPasswordVisible = true;
+            picEye.Image = Properties.Resources.open_eye__2_;
+
+            ErrorHelper.ClearAllErrors(pnlLoginDataInput);
+            HideLoginError();
+
+            this.ActiveControl = pnlLoginDataInput;
+        }
+
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            ErrorHelper.ClearAllErrors(pnlLoginDataInput);
+            HideLoginError(); 
+
             AuthUI authUI = new AuthUI();
             AuthBLL authBLL = new AuthBLL();
-            string ErroeMsg;
+            string errorMsg;
 
-            authUI.email = (txtLoginEmail.Text == "Enter Email Address") ? "" : txtLoginEmail.Text;
+            authUI.email = (txtLoginEmail.Text == "Enter Email Address") ? "" : txtLoginEmail.Text.Trim();
             authUI.password = (txtLoginPassword.Text == "Enter Password") ? "" : txtLoginPassword.Text;
 
             CommonValidator.ValidationResult result = authUI.LoginDataIntoAuthUI();
@@ -107,15 +138,19 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                     break;
 
                 case CommonValidator.ValidationResult.NewPasswordEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLoginPassword);
+                    ErrorHelper.ShowErrorBelowControl(txtLoginPassword, "* Password is required.");
+                    txtLoginPassword.Focus();
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    ErroeMsg = authUI.GetErrorMsgForLogin();
-                    MessageBox.Show(ErroeMsg);
+                    errorMsg = authUI.GetErrorMsgForLogin();
+                    ShowLoginError(string.IsNullOrWhiteSpace(errorMsg) ? "Invalid email or password. Please try again." : errorMsg);
+                    txtLoginPassword.Focus();
                     break;
+
             }
         }
+
 
         private void picEye_Click(object sender, EventArgs e)
         {
@@ -171,18 +206,99 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void lblForgotPassword_Click(object sender, EventArgs e)
         {
+            ResetLoginForm(); 
             ForgotPasswordControls forgotPasswordControls = new ForgotPasswordControls();
             forgotPasswordControls.ShowDialog();
+            ResetLoginForm(); 
         }
+
 
         private void lblCreateAccount_Click(object sender, EventArgs e)
         {
+            ResetLoginForm(); 
             this.Hide();
 
             RegistrationControls registrationControls = new RegistrationControls();
             registrationControls.ShowDialog();
 
+            ResetLoginForm(); 
             this.Show();
         }
+
+
+        private void txtLoginEmail_TextChanged(object sender, EventArgs e)
+        {
+            HideLoginError(); 
+            if (txtLoginEmail.Text != "Enter Email Address" && !string.IsNullOrWhiteSpace(txtLoginEmail.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtLoginEmail);
+            }
+        }
+
+
+        private void txtLoginPassword_TextChanged(object sender, EventArgs e)
+        {
+            HideLoginError(); 
+            if (txtLoginPassword.Text != "Enter Password" && !string.IsNullOrWhiteSpace(txtLoginPassword.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtLoginPassword);
+            }
+        }
+
+
+
+        // Login বাটনের উপরে আইকনসহ সুন্দর এরর বক্স তৈরি ও প্রদর্শনের মেথড
+        private void ShowLoginError(string message)
+        {
+            if (pnlLoginErrorAlert == null)
+            {
+               
+                pnlLoginErrorAlert = new Panel();
+                pnlLoginErrorAlert.Name = "pnlLoginErrorAlert";
+                pnlLoginErrorAlert.Size = new Size(btnLogin.Width, 38);
+                pnlLoginErrorAlert.Location = new Point(btnLogin.Left, btnLogin.Top - 46); 
+                pnlLoginErrorAlert.BackColor = Color.FromArgb(254, 242, 242);
+
+             
+                picLoginErrorIcon = new PictureBox();
+                picLoginErrorIcon.Size = new Size(18, 18);
+                picLoginErrorIcon.Location = new Point(10, 10);
+                picLoginErrorIcon.SizeMode = PictureBoxSizeMode.Zoom;
+                picLoginErrorIcon.Image = Properties.Resources.info__3_; 
+
+                // ৩. এরর মেসেজ লেবেল
+                lblLoginErrorText = new Label();
+                lblLoginErrorText.Font = new Font("Segoe UI Semibold", 8.75F, FontStyle.Bold);
+                lblLoginErrorText.ForeColor = Color.FromArgb(220, 38, 38); 
+                lblLoginErrorText.AutoSize = false;
+                lblLoginErrorText.TextAlign = ContentAlignment.MiddleLeft;
+                lblLoginErrorText.Location = new Point(34, 0);
+                lblLoginErrorText.Size = new Size(pnlLoginErrorAlert.Width - 38, 38);
+
+                pnlLoginErrorAlert.Controls.Add(picLoginErrorIcon);
+                pnlLoginErrorAlert.Controls.Add(lblLoginErrorText);
+                pnlLoginDataInput.Controls.Add(pnlLoginErrorAlert);
+
+
+                SetRadius(pnlLoginErrorAlert, 10); 
+            }
+
+            lblLoginErrorText.Text = message;
+            pnlLoginErrorAlert.Visible = true;
+            pnlLoginErrorAlert.BringToFront();
+        }
+
+        private void HideLoginError()
+        {
+            if (pnlLoginErrorAlert != null)
+            {
+                pnlLoginErrorAlert.Visible = false;
+            }
+        }
+
+
+
+
+
     }
 }

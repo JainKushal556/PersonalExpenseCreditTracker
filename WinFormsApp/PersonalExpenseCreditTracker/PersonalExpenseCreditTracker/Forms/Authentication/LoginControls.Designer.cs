@@ -433,6 +433,7 @@
             this.txtLoginPassword.Name = "txtLoginPassword";
             this.txtLoginPassword.Size = new System.Drawing.Size(275, 25);
             this.txtLoginPassword.TabIndex = 1;
+            this.txtLoginPassword.TextChanged += new System.EventHandler(this.txtLoginPassword_TextChanged);
             this.txtLoginPassword.Enter += new System.EventHandler(this.txtLoginPassword_Enter);
             this.txtLoginPassword.Leave += new System.EventHandler(this.txtLoginPassword_Leave);
             // 
@@ -478,6 +479,7 @@
             this.txtLoginEmail.Name = "txtLoginEmail";
             this.txtLoginEmail.Size = new System.Drawing.Size(305, 25);
             this.txtLoginEmail.TabIndex = 1;
+            this.txtLoginEmail.TextChanged += new System.EventHandler(this.txtLoginEmail_TextChanged);
             this.txtLoginEmail.Enter += new System.EventHandler(this.txtLoginEmail_Enter);
             this.txtLoginEmail.Leave += new System.EventHandler(this.txtLoginEmail_Leave);
             // 
