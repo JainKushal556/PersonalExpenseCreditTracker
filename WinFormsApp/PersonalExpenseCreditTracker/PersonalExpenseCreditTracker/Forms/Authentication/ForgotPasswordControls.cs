@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using PersonalExpenseCreditTracker.Common;
+using BLLayer.Authentication;
+using BLLayer.Common;
 
 
 namespace PersonalExpenseCreditTracker.Forms.Authentication
@@ -18,9 +21,6 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         bool isPasswordVisible2 = true;
         bool isPasswordVisible3 = true;
 
-        //##########################################
-        string txtCurrentPassword = "Abcd123@";
-        //##########################################
 
         public ForgotPasswordControls()
         {
@@ -42,10 +42,10 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void ForgotPasswordControls_Load(object sender, EventArgs e)
         {
-            txtRegisteredEmail.Text = "Enter registered email";
-            txtRegisteredPhoneNumber.Text = "Enter registered phone number";
-            txtNewPassword.Text = "Enter new password";
-            txtConfirmPassword.Text = "Confirm new password";
+            txtRegisteredEmail.Text = "Enter Registered Email";
+            txtRegisteredPhoneNumber.Text = "Enter Registered Phone Number";
+            txtNewPassword.Text = "Enter New Password";
+            txtConfirmPassword.Text = "Confirm New Password";
 
             pnlWeak.BackColor = Color.FromArgb(234, 235, 239);
             pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
@@ -85,33 +85,15 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             DeleteObject(hrgn);
         }
 
-        private int CheckPasswordStrengthLevel(string password)
-        {
-            int score = 0;
-
-
-
-            if (password.Length >= 8)
-                score++;
-
-            if (Regex.IsMatch(password, "[A-Z]"))
-                score++;
-
-            if (Regex.IsMatch(password, "[a-z]"))
-                score++;
-
-            if (Regex.IsMatch(password, "[0-9]"))
-                score++;
-
-            if (Regex.IsMatch(password, "[^a-zA-Z0-9]"))
-                score++;
-
-            return score;
-        }
-
         private void txtNewPassword_TextChanged(object sender, EventArgs e)
         {
-            if (txtNewPassword.Text == "" || txtNewPassword.Text == "Enter new password")
+            if (txtNewPassword.Text != "Enter New Password" && !string.IsNullOrWhiteSpace(txtNewPassword.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtNewPassword);
+            }
+            AuthBLL authBll = new AuthBLL();
+
+            if (txtNewPassword.Text == "" || txtNewPassword.Text == "Enter New Password")
             {
                 lblPasswordStrengthLevel.Text = "";
 
@@ -123,59 +105,54 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 return;
             }
 
-            int score = CheckPasswordStrengthLevel(txtNewPassword.Text);
+            AuthBLL.PasswordStrengthLevel strength = authBll.GetPasswordStrength(txtNewPassword.Text);
 
-            if (score <= 2)
+            switch (strength)
             {
-                lblPasswordStrengthLevel.Text = "Weak";
-                lblPasswordStrengthLevel.ForeColor = Color.Red;
-                pnlWeak.BackColor = Color.Red;
-                pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
-                pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
-                pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
-            }
-            else if (score == 3)
-            {
-                lblPasswordStrengthLevel.Text = "Medium";
-                lblPasswordStrengthLevel.ForeColor = Color.Orange;
-                pnlWeak.BackColor = Color.Orange;
-                pnlMedium.BackColor = Color.Orange;
-                pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
-                pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
-            }
-            else if (score == 4)
-            {
-                lblPasswordStrengthLevel.Text = "Strong";
-                lblPasswordStrengthLevel.ForeColor = Color.YellowGreen;
-                pnlWeak.BackColor = Color.YellowGreen;
-                pnlMedium.BackColor = Color.YellowGreen;
-                pnlStrong.BackColor = Color.YellowGreen;
-                pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
-            }
-            else
-            {
-                lblPasswordStrengthLevel.Text = "Very Strong";
-                lblPasswordStrengthLevel.ForeColor = Color.Green;
-                pnlWeak.BackColor = Color.Green;
-                pnlMedium.BackColor = Color.Green;
-                pnlStrong.BackColor = Color.Green;
-                pnlVeryStrong.BackColor = Color.Green;
-            }
+                case AuthBLL.PasswordStrengthLevel.Weak:
 
-            //##########################################################
-            
+                    lblPasswordStrengthLevel.Text = "Weak";
+                    lblPasswordStrengthLevel.ForeColor = Color.Red;
 
-            if (txtCurrentPassword == txtNewPassword.Text)
-            {
-                lblPasswordMatch.Text = "Your current password and new password are same..";
-                lblPasswordMatch.ForeColor = Color.Red;
-            }
-            else
-            {
-                lblPasswordMatch.Text = "";
-            }
-            //##########################################################
+                    pnlWeak.BackColor = Color.Red;
+                    pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
+                    pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    break;
 
+                case AuthBLL.PasswordStrengthLevel.Medium:
+
+                    lblPasswordStrengthLevel.Text = "Medium";
+                    lblPasswordStrengthLevel.ForeColor = Color.Orange;
+
+                    pnlWeak.BackColor = Color.Orange;
+                    pnlMedium.BackColor = Color.Orange;
+                    pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    break;
+
+                case AuthBLL.PasswordStrengthLevel.Strong:
+
+                    lblPasswordStrengthLevel.Text = "Strong";
+                    lblPasswordStrengthLevel.ForeColor = Color.YellowGreen;
+
+                    pnlWeak.BackColor = Color.YellowGreen;
+                    pnlMedium.BackColor = Color.YellowGreen;
+                    pnlStrong.BackColor = Color.YellowGreen;
+                    pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
+                    break;
+
+                case AuthBLL.PasswordStrengthLevel.VeryStrong:
+
+                    lblPasswordStrengthLevel.Text = "Very Strong";
+                    lblPasswordStrengthLevel.ForeColor = Color.Green;
+
+                    pnlWeak.BackColor = Color.Green;
+                    pnlMedium.BackColor = Color.Green;
+                    pnlStrong.BackColor = Color.Green;
+                    pnlVeryStrong.BackColor = Color.Green;
+                    break;
+            }
         }
 
         private void picEye2_Click(object sender, EventArgs e)
@@ -210,10 +187,6 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             }
         }
 
-        private void ForgotPasswordControls_Resize(object sender, EventArgs e)
-        {
-            SetRadius(this, 20);
-        }
         private void pnlForgotPasswordAbout_Resize(object sender, EventArgs e)
         {
             SetRadius(pnlForgotPasswordAbout, 20);
@@ -238,6 +211,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             SetRadius(pnlVeryStrong, 10);
         }
+
         private void btnForgotPasswordUpdatePassword_Resize(object sender, EventArgs e)
         {
             SetRadius(btnForgotPasswordUpdatePassword, 20);
@@ -250,7 +224,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void txtRegisteredEmail_Enter(object sender, EventArgs e)
         {
-            if (txtRegisteredEmail.Text == "Enter registered email")
+            if (txtRegisteredEmail.Text == "Enter Registered Email")
             {
                 txtRegisteredEmail.Text = "";
                 txtRegisteredEmail.ForeColor = Color.FromArgb(0, 0, 0);
@@ -261,7 +235,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             if (txtRegisteredEmail.Text == "")
             {
-                txtRegisteredEmail.Text = "Enter registered email";
+                txtRegisteredEmail.Text = "Enter Registered Email";
                 txtRegisteredEmail.ForeColor = Color.FromArgb(191, 192, 199);
             }
 
@@ -269,7 +243,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void txtRegisteredPhoneNumber_Enter(object sender, EventArgs e)
         {
-            if (txtRegisteredPhoneNumber.Text == "Enter registered phone number")
+            if (txtRegisteredPhoneNumber.Text == "Enter Registered Phone Number")
             {
                 txtRegisteredPhoneNumber.Text = "";
                 txtRegisteredPhoneNumber.ForeColor = Color.FromArgb(0, 0, 0);
@@ -280,14 +254,14 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             if (txtRegisteredPhoneNumber.Text == "")
             {
-                txtRegisteredPhoneNumber.Text = "Enter registered phone number";
+                txtRegisteredPhoneNumber.Text = "Enter Registered Phone Number";
                 txtRegisteredPhoneNumber.ForeColor = Color.FromArgb(191, 192, 199);
             }
         }
 
         private void txtNewPassword_Enter(object sender, EventArgs e)
         {
-            if (txtNewPassword.Text == "Enter new password")
+            if (txtNewPassword.Text == "Enter New Password")
             {
                 txtNewPassword.Text = "";
                 txtNewPassword.ForeColor = Color.FromArgb(0, 0, 0);
@@ -299,7 +273,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             if (txtNewPassword.Text == "")
             {
-                txtNewPassword.Text = "Enter new password";
+                txtNewPassword.Text = "Enter New Password";
                 txtNewPassword.ForeColor = Color.FromArgb(191, 192, 199);
                 _PasswordMatch = false;
             }
@@ -308,7 +282,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void txtConfirmPassword_Enter(object sender, EventArgs e)
         {
-            if (txtConfirmPassword.Text == "Confirm new password")
+            if (txtConfirmPassword.Text == "Confirm New Password")
             {
                 txtConfirmPassword.Text = "";
                 txtConfirmPassword.ForeColor = Color.FromArgb(0, 0, 0);
@@ -319,31 +293,31 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             if (txtConfirmPassword.Text == "")
             {
-                txtConfirmPassword.Text = "Confirm new password";
+                txtConfirmPassword.Text = "Confirm New Password";
                 txtConfirmPassword.ForeColor = Color.FromArgb(191, 192, 199);
             }
         }
 
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
         {
-            if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Enter new password")
+            if (txtConfirmPassword.Text != "Confirm New Password" && !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtConfirmPassword);
+            }
+            if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Confirm New Password")
             {
                 lblPasswordMatch.Text = "";
-            }
-            else if (txtCurrentPassword == txtConfirmPassword.Text)
-            {
-                lblPasswordMatch.Text = "Your current password and new password are same..";
             }
             else if (_PasswordMatch)
             {
                 if (txtNewPassword.Text != txtConfirmPassword.Text)
                 {
-                    lblPasswordMatch.Text = "Password dosen't match";
+                    lblPasswordMatch.Text = "* Password dosen't match";
                     lblPasswordMatch.ForeColor = Color.Red;
                 }
                 else
                 {
-                    lblPasswordMatch.Text = "Password match";
+                    lblPasswordMatch.Text = "* Password match";
                     lblPasswordMatch.ForeColor = Color.Green;
                 }
             }
@@ -361,25 +335,71 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void btnForgotPasswordUpdatePassword_Click(object sender, EventArgs e)
         {
-            //##########################################################
+            AuthUI authUI = new AuthUI();
+            string ErroeMsg;
 
-            if (txtCurrentPassword == txtNewPassword.Text)
+            authUI.email = (txtRegisteredEmail.Text == "Enter Registered Email") ? "" : txtRegisteredEmail.Text;
+            authUI.phoneNumber = (txtRegisteredPhoneNumber.Text == "Enter Registered Phone Number") ? "" : txtRegisteredPhoneNumber.Text;
+            authUI.newPassword = (txtNewPassword.Text == "Enter New Password") ? "" : txtNewPassword.Text;
+            authUI.confirmPassword = (txtConfirmPassword.Text == "Confirm New Password") ? "" : txtConfirmPassword.Text;
+
+            CommonValidator.ValidationResult result = authUI.ForgotPasswordDataIntoAuthUI();
+
+            switch (result)
             {
-                MessageBox.Show("Your current password and new password are same..");
+                case CommonValidator.ValidationResult.Success:
+                    MessageBox.Show("Password Reset Successfully");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    break;
+
+                case CommonValidator.ValidationResult.EmailInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegisteredEmail);
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneNumberEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegisteredPhoneNumber);
+                    break;
+
+                case CommonValidator.ValidationResult.PhoneInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtRegisteredPhoneNumber);
+                    break;
+
+                case CommonValidator.ValidationResult.NewPasswordEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtNewPassword);
+                    break;
+
+                case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
+                    //lblPasswordMatch.Text = "";
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtConfirmPassword);
+                    break;
+
+                case CommonValidator.ValidationResult.NotMatchPassword:
+                    MessageBox.Show("Password Doesn't Match");
+
+                    //ErrorHelper.HideErrorForControl(txtConfirmPassword);
+                    //lblPasswordMatch.Text = "* Password doesn't match.";
+                    //lblPasswordMatch.ForeColor = Color.Red;
+                    //txtConfirmPassword.Focus();
+                    break;
+
+                case CommonValidator.ValidationResult.WeakPassword:
+                    MessageBox.Show("Password is weak please enter strong hard password.");
+                    break;
+
+                case CommonValidator.ValidationResult.MediumPassword:
+                    MessageBox.Show("Password is medium please enter strong hard password.");
+                    break;
+
+                case CommonValidator.ValidationResult.StrongPassword:
+                    MessageBox.Show("Password is strong but not hard, please enter strong hard password.");
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    ErroeMsg = authUI.GetErrorMsgForForgotPassword();
+                    MessageBox.Show(ErroeMsg);
+                    break;
             }
-            else if (txtConfirmPassword.Text == "Confirm new password" || txtNewPassword.Text == "Enter new password")
-            {
-                MessageBox.Show("Please fill all fields");
-            }
-            else if (txtNewPassword.Text != txtConfirmPassword.Text)
-            {
-                MessageBox.Show("Password doesn't match");
-            }
-            else
-            {
-                MessageBox.Show("Password Reset Successfully");
-            }
-            //##########################################################
             
         }
 

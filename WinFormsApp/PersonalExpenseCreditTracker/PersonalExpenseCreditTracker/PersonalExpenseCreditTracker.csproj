@@ -632,6 +632,8 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\telephone %285%29.png" />
+    <None Include="Resources\telephone %284%29.png" />
     <None Include="Resources\update %284%29.png" />
     <None Include="Resources\update %283%29.png" />
     <None Include="Resources\update %282%29.png" />

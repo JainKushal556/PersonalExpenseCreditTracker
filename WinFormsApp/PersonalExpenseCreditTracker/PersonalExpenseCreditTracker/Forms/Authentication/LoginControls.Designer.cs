@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -55,7 +56,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblForgotPassword = new System.Windows.Forms.Label();
-            this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.picEye = new System.Windows.Forms.PictureBox();
             this.txtLoginPassword = new System.Windows.Forms.TextBox();
@@ -68,6 +68,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -80,6 +81,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -310,7 +312,6 @@
             this.pnlLoginDataInput.Controls.Add(this.panel5);
             this.pnlLoginDataInput.Controls.Add(this.btnLogin);
             this.pnlLoginDataInput.Controls.Add(this.lblForgotPassword);
-            this.pnlLoginDataInput.Controls.Add(this.checkBoxRememberMe);
             this.pnlLoginDataInput.Controls.Add(this.panel4);
             this.pnlLoginDataInput.Controls.Add(this.lblPassword);
             this.pnlLoginDataInput.Controls.Add(this.panel3);
@@ -335,6 +336,7 @@
             this.lblCreateAccount.Size = new System.Drawing.Size(110, 20);
             this.lblCreateAccount.TabIndex = 13;
             this.lblCreateAccount.Text = "Create Account";
+            this.lblCreateAccount.Click += new System.EventHandler(this.lblCreateAccount_Click);
             // 
             // lblNotAccount
             // 
@@ -399,17 +401,6 @@
             this.lblForgotPassword.TabIndex = 7;
             this.lblForgotPassword.Text = "Forgot Password?";
             this.lblForgotPassword.Click += new System.EventHandler(this.lblForgotPassword_Click);
-            // 
-            // checkBoxRememberMe
-            // 
-            this.checkBoxRememberMe.AutoSize = true;
-            this.checkBoxRememberMe.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxRememberMe.Location = new System.Drawing.Point(29, 352);
-            this.checkBoxRememberMe.Name = "checkBoxRememberMe";
-            this.checkBoxRememberMe.Size = new System.Drawing.Size(129, 24);
-            this.checkBoxRememberMe.TabIndex = 6;
-            this.checkBoxRememberMe.Text = "Remember Me";
-            this.checkBoxRememberMe.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
@@ -542,6 +533,10 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // LoginControls
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -570,6 +565,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -610,12 +606,12 @@
         private System.Windows.Forms.PictureBox picEye;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblForgotPassword;
-        private System.Windows.Forms.CheckBox checkBoxRememberMe;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblCreateAccount;
         private System.Windows.Forms.Label lblNotAccount;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
 
     }
 }

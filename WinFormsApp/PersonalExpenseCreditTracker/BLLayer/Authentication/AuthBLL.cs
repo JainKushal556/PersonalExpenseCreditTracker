@@ -4,149 +4,206 @@ using System.Linq;
 using System.Text;
 using DALayer.Authentication;
 using System.Text.RegularExpressions;
+//using DALayer.Authentication;
+using BLLayer.Common;
+using System.Data;
+
 namespace BLLayer.Authentication
 {
     public class AuthBLL
     {
-        public string userId { get; set; }
+        public int userId { get; set; }
         public string userName { get; set; }
         public string email { get; set; }
         public string phoneNumber { get; set; }
         public string password { get; set; }
+        public string confirmPassword { get; set; }
         public string oldPassword { get; set; }
         public string newPassword {get;set;}
 
-        AuthDAL authDAL = new AuthDAL();
+        private AuthDAL authDAL = new AuthDAL();
 
-        private bool ValidUserName()
+        public enum PasswordStrengthLevel
         {
-            if (string.IsNullOrWhiteSpace(userName))
-            {
-                return false;
-            }
-            if (userName.Length > 50)
-            {
-                return false;
-            }
-            return Regex.IsMatch(userName, @"^[a-zA-Z0-9]+$");
-
-        }
-        private bool ValidEmail()
-        {
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                return false;
-            }
-            if (email.Length > 100)
-            {
-                return false;
-            }
-
-            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            Weak,
+            Medium,
+            Strong,
+            VeryStrong
         }
 
-        private bool ValidPhoneNumber()
-        {
-            if (string.IsNullOrWhiteSpace(phoneNumber))
-            {
-                return false;
-            }
+        CommonValidator.ValidationResult result;
 
-            return Regex.IsMatch(phoneNumber, @"^\d{10}$");
+
+        public int GetUserIdFromDB()
+        {
+            return authDAL.GetUserIdFromDB();
         }
 
-        private bool ValidPassword()
+        public CommonValidator.ValidationResult RegistrationFormDataIntoAuthBLL()
         {
+            // User Name Validation
+            result = CommonValidator.ValidationPersonName(userName);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+            // Email Validation
+            result = CommonValidator.ValidateEmail(email);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+            // Phone Number Validation
+            result = CommonValidator.ValidatePhoneNumber(phoneNumber);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+            // Password Validation
+            result = ValidatePassword(newPassword, confirmPassword);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+            if (PasswordStrengthLevel.Weak == GetPasswordStrength(newPassword))
+                return CommonValidator.ValidationResult.WeakPassword;
+
+            if (PasswordStrengthLevel.Medium == GetPasswordStrength(newPassword))
+                return CommonValidator.ValidationResult.MediumPassword;
+
+            if (PasswordStrengthLevel.Strong == GetPasswordStrength(newPassword))
+                return CommonValidator.ValidationResult.StrongPassword;
+            
+
+            authDAL.userName = userName;
+            authDAL.newPassword = newPassword;
+            authDAL.email = email;
+            authDAL.phoneNumber = phoneNumber;
+
+
+            if (authDAL.RegistrationFormDataIntoAuthDAL())
+                return CommonValidator.ValidationResult.Success;
+            else
+                return CommonValidator.ValidationResult.StoreProcedureError;
+        }
+
+        public CommonValidator.ValidationResult LoginDataIntoAuthBLL()
+        {
+            // Email Validation
+            result = CommonValidator.ValidateEmail(email);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+            // Password Validation
             if (string.IsNullOrWhiteSpace(password))
-            {
-                return false;
-            }
-            if (password.Length < 6)
-            {
-                return false;
-            }
-            return Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$");
+                return CommonValidator.ValidationResult.NewPasswordEmpty;
+
+            authDAL.password = password;
+            authDAL.email = email;
+
+            if (authDAL.LoginDataIntoAuthDAL())
+                return CommonValidator.ValidationResult.Success;
+            else
+                return CommonValidator.ValidationResult.StoreProcedureError;
         }
 
-        private bool ValidOldPassword()
+        public CommonValidator.ValidationResult ForgotPasswordDataIntoAuthBLL()
         {
-            if(string.IsNullOrWhiteSpace(oldPassword))
-            {
-                return false;
-            }
-            return true;
+            // Email Validation
+            result = CommonValidator.ValidateEmail(email);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+            // Phone Number Validation
+            result = CommonValidator.ValidatePhoneNumber(phoneNumber);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+            // Password Validation
+            result = ValidatePassword(newPassword, confirmPassword);
+            if (result != CommonValidator.ValidationResult.Success)
+                return result;
+
+            if (PasswordStrengthLevel.Weak == GetPasswordStrength(newPassword))
+                return CommonValidator.ValidationResult.WeakPassword;
+
+            if (PasswordStrengthLevel.Medium == GetPasswordStrength(newPassword))
+                return CommonValidator.ValidationResult.MediumPassword;
+
+            if (PasswordStrengthLevel.Strong == GetPasswordStrength(newPassword))
+                return CommonValidator.ValidationResult.StrongPassword;
+
+
+            authDAL.newPassword = newPassword;
+            authDAL.email = email;
+            authDAL.phoneNumber = phoneNumber;
+
+
+            if (authDAL.ForgotPasswordDataIntoAuthDAL())
+                return CommonValidator.ValidationResult.Success;
+            else
+                return CommonValidator.ValidationResult.StoreProcedureError;
         }
 
-        private bool ValidNewPassword()
+        // Validation Password
+        public static CommonValidator.ValidationResult ValidatePassword(string NewPassword, string ConfirmPassword)
         {
-            if(string.IsNullOrWhiteSpace(newPassword))
+            if (string.IsNullOrWhiteSpace(NewPassword))
             {
-                return false;
+                return CommonValidator.ValidationResult.NewPasswordEmpty;
             }
-            if(newPassword.Length<6)
+            else if (string.IsNullOrWhiteSpace(ConfirmPassword))
             {
-                return false;
+                return CommonValidator.ValidationResult.ConfirmPasswordEmpty;
             }
-            if(newPassword==oldPassword)
+            else if (NewPassword != ConfirmPassword)
             {
-                return false;
+                return CommonValidator.ValidationResult.NotMatchPassword;
             }
-            return true;
-        }
-        //Register Page
-        public bool InsertDataIntoAuthBll()
-        {
-            if (ValidUserName())
+            else
             {
-                if (ValidEmail())
-                {
-                    if (ValidPhoneNumber())
-                    {
-                        if (ValidPassword())
-                        {
-                            return true;
-                        }
-                    }
-                }
+                return CommonValidator.ValidationResult.Success;
             }
-            return false;
         }
 
-        //Login Page
-        public bool LoginDataIntoAuthBll()
+        public PasswordStrengthLevel GetPasswordStrength(string password)
         {
-            if (ValidEmail())
-            {
-                if (ValidPassword())
-                {
-                    return true;
-                }
-            }
-            return false;
+            int score = 0;
+
+            if (password.Length >= 8)
+                score++;
+
+            if (Regex.IsMatch(password, "[A-Z]"))
+                score++;
+
+            if (Regex.IsMatch(password, "[a-z]"))
+                score++;
+
+            if (Regex.IsMatch(password, "[0-9]"))
+                score++;
+
+            if (Regex.IsMatch(password, "[^a-zA-Z0-9]"))
+                score++;
+
+            if (score <= 2)
+                return PasswordStrengthLevel.Weak;
+            else if (score == 3)
+                return PasswordStrengthLevel.Medium;
+            else if (score == 4)
+                return PasswordStrengthLevel.Strong;
+            else
+                return PasswordStrengthLevel.VeryStrong;
         }
 
-        //Forget Password
-        public bool ForgetPasswordIntoAuthBll()
+        public string GetError()
         {
-            if (ValidEmail())
-            {
-                return true;
-            }
-            return false;
+            return authDAL.GetErrorMsgForRegistrationForm();
         }
 
-        //Change Password
-        public bool ChangePasswordIntoAuthBll()
+        public string GetErrorForLogin()
         {
-            if (ValidOldPassword())
-            {
-                if (ValidNewPassword())
-                {
-                    return true;
-                }
-            }
-            return false;
+            return authDAL.GetErrorMsgForLogin();
         }
 
+        public string GetErrorMsgForForgotPassword()
+        {
+            return authDAL.GetErrorMsgForForgotPassword();
+        }
     }
 }

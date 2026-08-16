@@ -91,9 +91,9 @@
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.Image = global::PersonalExpenseCreditTracker.Properties.Resources.logout_white_24x24;
-            this.btnLogout.Location = new System.Drawing.Point(191, 13);
+            this.btnLogout.Location = new System.Drawing.Point(191, 11);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(158, 40);
+            this.btnLogout.Size = new System.Drawing.Size(158, 41);
             this.btnLogout.TabIndex = 1;
             this.btnLogout.Text = "Yes,Logout";
             this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
