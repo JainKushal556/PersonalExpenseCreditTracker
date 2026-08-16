@@ -17,6 +17,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 {
     public partial class DashboardControl : Form
     {
+
+     
+        private static HashSet<string> readNotifications = new HashSet<string>();
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
@@ -28,6 +32,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
         public DashboardControl()
         {
+
             InitializeComponent();
             cmbSecondHeader.TabStop = false;
             cmbExpenseFilter.TabStop = false;
@@ -1057,7 +1062,8 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                     {
                         int usedPercentage = (int)Math.Round((totalExpenseAmount / totalCreditAmount) * 100m);
 
-                        if (usedPercentage >= 80)
+                        // ১. Budget Alert (যদি ৫০% বা তার বেশি খরচ হয়)
+                        if (usedPercentage >= 50)
                         {
                             notifList.Add(new NotificationItem
                             {
@@ -1070,7 +1076,21 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                                 TargetModule = "Expense"
                             });
                         }
+
+                        // 👉 ২. Credit Expense Ratio
+                        notifList.Add(new NotificationItem
+                        {
+                            Title = "Credit Expense Ratio",
+                            Description = "Expense is " + usedPercentage + "% (₹" + totalExpenseAmount.ToString("#,##0") + ") of total credit (₹" + totalCreditAmount.ToString("#,##0") + ").",
+                            TimeText = usedPercentage + "% Spent",
+                        
+                            ThemeColor = usedPercentage > 80 ? Color.FromArgb(239, 68, 68) : (usedPercentage > 50 ? Color.FromArgb(249, 115, 22) : Color.FromArgb(16, 185, 129)),
+                            BgColor = usedPercentage > 80 ? Color.FromArgb(254, 242, 242) : (usedPercentage > 50 ? Color.FromArgb(255, 247, 237) : Color.FromArgb(236, 253, 245)),
+                            IconSymbol = "💳",
+                            TargetModule = "Expense"
+                        });
                     }
+
 
                     
                     DataTable dtBorrow = CommonUiFunction.RetrieveDataForGridView("spGetUpcomingBorrowReminders", userID);
@@ -1080,33 +1100,104 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                     FindOverdueAndDeadlineReminder(dtBorrow, notifList, "Borrow", false);
                     FindOverdueAndDeadlineReminder(dtLent, notifList, "Lent", false);
                     FindOverdueAndDeadlineReminder(dtTask, notifList, "Task", true);
+
+
                 }
                 catch { }
 
-               
+                notifList.RemoveAll(x => readNotifications.Contains(x.Title + "_" + x.Description));
                 this.BeginInvoke((MethodInvoker)delegate
                 {
                     flpNotifications.SuspendLayout();
                     try
                     {
-                        flpNotifications.Controls.Clear();
-
-                        int cardWidth = 360;
-                        foreach (var item in notifList)
+                    
+                        if (pnl == pnlNotification)
                         {
-                            Panel card = CreateNotificationCardItem(item, cardWidth);
-                            flpNotifications.Controls.Add(card);
+                            if (panel11 != null)
+                            {
+                                panel11.BringToFront();
+                                if (btnClose != null)
+                                {
+                                    btnClose.Location = new Point(panel11.Width - 40, 5);
+                                    btnClose.BringToFront();
+                                }
+                            }
+
+
+                            flpNotifications.Padding = new Padding(6, 42, 6, 30);
+                        }
+                        else
+                        {
+
+                            flpNotifications.Padding = new Padding(6, 4, 6, 20);
                         }
 
-              
+
+                        flpNotifications.Controls.Clear();
+
+                        int cardWidth = 340;
+
+                        if (notifList.Count == 0)
+                        {
+                            Panel emptyPanel = new Panel
+                            {
+                                Size = new Size(cardWidth, 60),
+                                BackColor = Color.White
+                            };
+
+                            Label lblEmpty = new Label
+                            {
+                                Text = "🔔  No new notifications",
+                                Font = new Font("Segoe UI", 9.5F, FontStyle.Regular),
+                                ForeColor = Color.FromArgb(100, 116, 139),
+                                TextAlign = ContentAlignment.MiddleCenter,
+                                Dock = DockStyle.Fill
+                            };
+
+                            emptyPanel.Controls.Add(lblEmpty);
+                            flpNotifications.Controls.Add(emptyPanel);
+                        }
+                        else
+                        {
+        
+                            foreach (var item in notifList)
+                            {
+                                Panel card = CreateNotificationCardItem(item, cardWidth);
+                                flpNotifications.Controls.Add(card);
+                            }
+
+                            Panel bottomSpacer = new Panel
+                            {
+                                Size = new Size(cardWidth, 45),
+                                BackColor = Color.Transparent
+                            };
+                            flpNotifications.Controls.Add(bottomSpacer);
+                        }
+
+
+                        int headerHeight = 44;
+                        int cardHeight = 69;
+                        int totalHeight = headerHeight + (notifList.Count * cardHeight) + 10;
+
+                        if (notifList.Count == 0)
+                        {
+                            totalHeight = 115;
+                        }
+
+                        int maxHeight = 480;
+                        if (pnl.Parent != null)
+                        {
+                            maxHeight = pnl.Parent.ClientSize.Height - 80;
+                        }
+
+                        pnl.Height = Math.Min(totalHeight, maxHeight);
+
                         MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
                         if (mainForm != null)
                         {
                             mainForm.UpdateNotificationBadge(notifList.Count);
                         }
-
-                        if (panel12 != null) panel12.BringToFront();
-                        if (flpNotifications != null) flpNotifications.SendToBack();
 
                     }
                     finally
@@ -1114,36 +1205,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                         flpNotifications.ResumeLayout(true);
                     }
                 });
+
+                   
             });
         }
-
-        //public static string GetRelativeDayText(DateTime targetDate)
-        //{
-        //    DateTime today = DateTime.Today;
-        //    TimeSpan diff = targetDate.Date - today;
-
-        //    switch (diff.Days)
-        //    {
-        //        case 0:
-        //            return "Today";
-
-        //        case 1:
-        //            return "Tomorrow";
-
-        //        case -1:
-        //            return "Yesterday";
-
-        //        default:
-        //            int day = diff.Days * -2;
-        //            if (diff.Days > 1)
-        //            {
-                        
-        //                return day + "days left";
-        //            }
-
-        //            return day + "days left";
-        //    }
-        //}
 
         private static string GetDaysLeft(DateTime deadline)
         {
@@ -1282,32 +1347,32 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
         private Panel CreateNotificationCardItem(NotificationItem item, int width)
         {
+           
             Panel card = new Panel
             {
-                Size = new Size(width, 70),
-                Margin = new Padding(0, 4, 0, 4),
+                Size = new Size(width, 66),
+                Margin = new Padding(0, 0, 0, 3), 
                 BackColor = Color.White
             };
 
-            // Left vertical accent bar
+   
             Panel pnlLeftAccent = new Panel
             {
-                Size = new Size(3, 62),
+                Size = new Size(3, 58),
                 Location = new Point(0, 4),
                 BackColor = item.ThemeColor
             };
             card.Controls.Add(pnlLeftAccent);
 
-            // Icon Circle
             Label lblIconCircle = new Label
             {
                 Text = item.IconSymbol,
-                Font = new Font("Segoe UI", 11F, FontStyle.Regular),
+                Font = new Font("Segoe UI", 10F, FontStyle.Regular),
                 ForeColor = item.ThemeColor,
                 BackColor = item.BgColor,
                 TextAlign = ContentAlignment.MiddleCenter,
-                Size = new Size(38, 38),
-                Location = new Point(12, 16)
+                Size = new Size(34, 34),
+                Location = new Point(10, 15)
             };
             try
             {
@@ -1318,50 +1383,49 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             catch { }
             card.Controls.Add(lblIconCircle);
 
-            // Title
+          
             Label lblTitle = new Label
             {
                 Text = item.Title,
                 Font = new Font("Segoe UI", 9.5F, FontStyle.Bold),
                 ForeColor = Color.FromArgb(30, 41, 59),
                 AutoSize = true,
-                Location = new Point(58, 12)
+                Location = new Point(52, 10)
             };
             card.Controls.Add(lblTitle);
 
-            // Time / Timestamp (Right-aligned)
+          
             Label lblTime = new Label
             {
                 Text = item.TimeText,
                 Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
                 ForeColor = item.ThemeColor,
                 AutoSize = true,
-                Location = new Point(width - 90, 13),
+                Location = new Point(width - 92, 10),
                 Anchor = AnchorStyles.Top | AnchorStyles.Right
             };
             card.Controls.Add(lblTime);
 
-            // Description
+          
             Label lblDesc = new Label
             {
                 Text = item.Description,
                 Font = new Font("Segoe UI", 8.5F, FontStyle.Regular),
                 ForeColor = Color.FromArgb(100, 116, 139),
-                Size = new Size(width - 70, 32),
-                Location = new Point(58, 33)
+                Size = new Size(width - 65, 30),
+                Location = new Point(52, 32)
             };
             card.Controls.Add(lblDesc);
 
-            // Thin Bottom Divider Line
+          
             Panel pnlLine = new Panel
             {
                 Height = 1,
                 Dock = DockStyle.Bottom,
-                BackColor = Color.FromArgb(241, 245, 249)
+                BackColor = Color.FromArgb(245, 247, 250)
             };
             card.Controls.Add(pnlLine);
 
-            // Make entire card interactive & clickable
             card.Cursor = Cursors.Hand;
             lblIconCircle.Cursor = Cursors.Hand;
             lblTitle.Cursor = Cursors.Hand;
@@ -1369,7 +1433,6 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             lblDesc.Cursor = Cursors.Hand;
             pnlLeftAccent.Cursor = Cursors.Hand;
 
-            // Hover effect
             EventHandler onHover = (s, e) => card.BackColor = Color.FromArgb(248, 250, 252);
             EventHandler onLeave = (s, e) => card.BackColor = Color.White;
 
@@ -1385,8 +1448,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             lblTime.MouseLeave += onLeave;
             lblDesc.MouseLeave += onLeave;
 
-            // Click handler for card and all subcontrols
-            EventHandler onClick = (s, e) => OnNotificationCardClick(item);
+            EventHandler onClick = (s, e) => OnNotificationCardClick(item, card);
             card.Click += onClick;
             lblIconCircle.Click += onClick;
             lblTitle.Click += onClick;
@@ -1397,15 +1459,30 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             return card;
         }
 
-        private void OnNotificationCardClick(NotificationItem item)
+
+
+        private void OnNotificationCardClick(NotificationItem item, Panel card)
         {
             if (item == null) return;
-
+        
+            readNotifications.Add(item.Title + "_" + item.Description);
             MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
-            if (mainForm == null) return;
+            if (mainForm != null)
+            {
+          
+                mainForm.DecrementNotificationBadge();
+            }
+        
+            if (card != null && card.Parent != null)
+            {
+                card.Parent.Controls.Remove(card);
+            }
 
+            if (pnlNotification != null)
+            {
+                pnlNotification.Visible = false;
+            }
             string target = item.TargetModule ?? "";
-
             if (target == "Borrow" || item.Title.Contains("Borrow"))
             {
                 var method = mainForm.GetType().GetMethod("pnlBorrow_Click", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -1432,7 +1509,6 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                 if (method != null) method.Invoke(mainForm, new object[] { null, null });
             }
         }
-
 
         private class NotificationItem
         {
