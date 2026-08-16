@@ -527,6 +527,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void ShowCurrentPage()
         {
+            if (AllExpenseData == null) return;
+
             DataTable pageTable = AllExpenseData.Clone();
 
             btnCurrentPage.Text = currentPage.ToString();
@@ -553,11 +555,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private int GetRowsPerPage()
         {
             Rectangle display = dgvExpenseDataTable.DisplayRectangle;
-
             int rowHeight = dgvExpenseDataTable.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight) - 1;
+            return Math.Max(1, (display.Height / rowHeight) - 1);
         }
+
 
 
         private void ExpenseControl_Resize(object sender, EventArgs e)

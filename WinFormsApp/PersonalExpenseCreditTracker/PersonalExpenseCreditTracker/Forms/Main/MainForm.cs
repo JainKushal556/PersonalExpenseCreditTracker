@@ -31,7 +31,7 @@ namespace PersonalExpenseCreditTracker
         private Panel lastOpenedPage = null;
 
         //private Panel activeSettingSubMenu = null;
-        private Panel previousSettingSubMenu = null; // <-- এই লাইনটি যোগ করুন
+        private Panel previousSettingSubMenu = null;
 
 
         // Sidebar Smooth Scroll er Target Position
@@ -1981,16 +1981,22 @@ namespace PersonalExpenseCreditTracker
 
         private void Logout_FormClosed(object sender, FormClosedEventArgs e)
         {
-           
+            if (activeSettingSubMenu != null)
+            {
+                activeSettingSubMenu.BackColor = Color.Transparent;
+                activeSettingSubMenu = null;
+            }
+
             if (previousSettingSubMenu != null)
             {
                 SetActiveSettingSubMenu(previousSettingSubMenu);
             }
             else
             {
-                SetActiveSettingSubMenu(pnlSettingExpenseCategories);
+                SetActiveMenu(pnlSettings, true);
             }
         }
+
 
 
         private void pnlLogout_MouseEnter(object sender, EventArgs e)
@@ -2030,15 +2036,24 @@ namespace PersonalExpenseCreditTracker
 
         private void ChangePassword_FormClosed(object sender, FormClosedEventArgs e)
         {
+           
+            if (activeSettingSubMenu != null)
+            {
+                activeSettingSubMenu.BackColor = Color.Transparent;
+                activeSettingSubMenu = null;
+            }
+
+           
             if (previousSettingSubMenu != null)
             {
                 SetActiveSettingSubMenu(previousSettingSubMenu);
             }
             else
             {
-                SetActiveSettingSubMenu(pnlSettingExpenseCategories);
+                SetActiveMenu(pnlSettings, true); 
             }
         }
+
 
 
         private void pnlSettingChangesPassword_MouseEnter(object sender, EventArgs e)

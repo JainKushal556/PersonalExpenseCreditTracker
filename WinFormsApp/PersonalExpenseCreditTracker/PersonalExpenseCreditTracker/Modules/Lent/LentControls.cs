@@ -522,13 +522,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private int GetRowsPerPage()
         {
             Rectangle display = dgvLentDataTable.DisplayRectangle;
-
             int rowHeight = dgvLentDataTable.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight) - 1;
-
-           
+            return Math.Max(1, (display.Height / rowHeight) - 1);
         }
+
 
 
         private void DrawHeader(DataGridViewCellPaintingEventArgs e, Image icon, string text)
@@ -1322,8 +1320,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             AllLentData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+            currentPage = 1;
             ShowCurrentPage();
         }
+
 
         private void cmbPerson_Click(object sender, EventArgs e)
         {
