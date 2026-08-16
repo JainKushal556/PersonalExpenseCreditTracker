@@ -31,7 +31,7 @@ namespace PersonalExpenseCreditTracker
         private Panel lastOpenedPage = null;
 
         //private Panel activeSettingSubMenu = null;
-        private Panel previousSettingSubMenu = null; // <-- এই লাইনটি যোগ করুন
+        private Panel previousSettingSubMenu = null;
 
 
         // Sidebar Smooth Scroll er Target Position
@@ -260,6 +260,13 @@ namespace PersonalExpenseCreditTracker
             flowSidebar.Width = pnlSideBar.ClientSize.Width;
 
             RefreshSidebarScroll();
+
+            // 👉 এই ৩ লাইন যোগ করুন:
+            if (dashboardControl != null && dashboardControl.pnlNotification != null && dashboardControl.pnlNotification.Parent == this.pnlContainer)
+            {
+                dashboardControl.pnlNotification.Location = new Point(pnlContainer.Width - dashboardControl.pnlNotification.Width, pnlTop.Height);
+                dashboardControl.pnlNotification.Height = pnlContainer.Height - pnlTop.Height;
+            }
         }
 
         // Sidebar er Content Height onijai Scroll Position Update kore
@@ -417,6 +424,11 @@ namespace PersonalExpenseCreditTracker
 
         private void ShowPage(Panel page)
         {
+
+            if (dashboardControl != null && dashboardControl.pnlNotification != null)
+            {
+                dashboardControl.pnlNotification.Visible = false;
+            }
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
             pnlCreditPage.Visible = false;
@@ -1199,9 +1211,29 @@ namespace PersonalExpenseCreditTracker
                 {
                     byte[] imgBytes = (byte[])row["ProfilePhoto"];
 
-                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    // ১. বাইট খালি কিনা চেক করা
+                    if (imgBytes != null && imgBytes.Length > 0)
                     {
-                        picUserProfile.Image = Image.FromStream(ms);
+                        try
+                        {
+                            using (MemoryStream ms = new MemoryStream(imgBytes))
+                            {
+                                using (Image tempImg = Image.FromStream(ms))
+                                {
+                                    // ২. মেমোরি স্ট্রিম লিক ও ক্র্যাশ ছাড়া সেফলি Bitmap তৈরি
+                                    picUserProfile.Image = new Bitmap(tempImg);
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            // ছবি যদি কোনো কারণে করাপ্ট/নষ্ট থাকে, তবে ডিফল্ট ছবি বসবে
+                            picUserProfile.Image = Properties.Resources.user;
+                        }
+                    }
+                    else
+                    {
+                        picUserProfile.Image = Properties.Resources.user;
                     }
                 }
                 else
@@ -1209,6 +1241,7 @@ namespace PersonalExpenseCreditTracker
                     // Default Image
                     picUserProfile.Image = Properties.Resources.user;
                 }
+
             }
             else
             {
@@ -1948,16 +1981,22 @@ namespace PersonalExpenseCreditTracker
 
         private void Logout_FormClosed(object sender, FormClosedEventArgs e)
         {
-           
+            if (activeSettingSubMenu != null)
+            {
+                activeSettingSubMenu.BackColor = Color.Transparent;
+                activeSettingSubMenu = null;
+            }
+
             if (previousSettingSubMenu != null)
             {
                 SetActiveSettingSubMenu(previousSettingSubMenu);
             }
             else
             {
-                SetActiveSettingSubMenu(pnlSettingExpenseCategories);
+                SetActiveMenu(pnlSettings, true);
             }
         }
+
 
 
         private void pnlLogout_MouseEnter(object sender, EventArgs e)
@@ -1997,15 +2036,24 @@ namespace PersonalExpenseCreditTracker
 
         private void ChangePassword_FormClosed(object sender, FormClosedEventArgs e)
         {
+           
+            if (activeSettingSubMenu != null)
+            {
+                activeSettingSubMenu.BackColor = Color.Transparent;
+                activeSettingSubMenu = null;
+            }
+
+           
             if (previousSettingSubMenu != null)
             {
                 SetActiveSettingSubMenu(previousSettingSubMenu);
             }
             else
             {
-                SetActiveSettingSubMenu(pnlSettingExpenseCategories);
+                SetActiveMenu(pnlSettings, true); 
             }
         }
+
 
 
         private void pnlSettingChangesPassword_MouseEnter(object sender, EventArgs e)
@@ -2075,19 +2123,81 @@ namespace PersonalExpenseCreditTracker
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            
+            if (dashboardControl == null || dashboardControl.IsDisposed)
             {
-                if (dashboardControl != null && !dashboardControl.IsDisposed)
-                {
-                    dashboardControl.pnlNotification.Visible = true;
-                    dashboardControl.pnlNotification.BringToFront();
+                dashboardControl = new DashboardControl();
+                dashboardControl.TopLevel = false;
+                dashboardControl.FormBorderStyle = FormBorderStyle.None;
+                dashboardControl.Dock = DockStyle.Fill;
+            }
 
-                    
-                    if (dashboardControl.flowLayoutPanel5.Controls.Count == 0)
+
+            Panel notifPanel = dashboardControl.pnlNotification;
+
+            if (notifPanel != null)
+            {
+               
+                if (notifPanel.Parent != this.pnlContainer)
+                {
+                    if (notifPanel.Parent != null)
                     {
-                        dashboardControl.LoadNotifications(Session.LogedInUser.GetUserId(), dashboardControl.pnlNotification, dashboardControl.flowLayoutPanel5);
+                        notifPanel.Parent.Controls.Remove(notifPanel);
+                    }
+
+                  
+                    this.pnlContainer.Controls.Add(notifPanel);
+
+                    notifPanel.Dock = DockStyle.None;
+                    notifPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                    notifPanel.Location = new Point(pnlContainer.Width - notifPanel.Width, pnlTop.Height);
+                }
+
+               
+                notifPanel.Visible = !notifPanel.Visible;
+
+                if (notifPanel.Visible)
+                {
+                    notifPanel.BringToFront();
+
+                   
+                    dashboardControl.LoadNotifications(
+                        Session.LogedInUser.GetUserId(),
+                        notifPanel,
+                        dashboardControl.flowLayoutPanel5
+                    );
+                }
+            }
+        }
+
+        // 👉 নোটিফিকেশন কার্ডে ক্লিক করলে কাউন্ট ১ করে কমানোর মেথড:
+        public void DecrementNotificationBadge()
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke((MethodInvoker)delegate { DecrementNotificationBadge(); });
+                return;
+            }
+
+            if (lblHeaderBadge != null && lblHeaderBadge.Visible)
+            {
+                int count = 0;
+                if (int.TryParse(lblHeaderBadge.Text, out count))
+                {
+                    count--;
+                    if (count > 0)
+                    {
+                        lblHeaderBadge.Text = count > 99 ? "99+" : count.ToString();
+                    }
+                    else
+                    {
+                        lblHeaderBadge.Visible = false; // ০ হয়ে গেলে তখন হাইড হবে
                     }
                 }
             }
+        }
+
 
         private Label lblHeaderBadge;
 

@@ -29,7 +29,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreditControl));
             this.pnlCreditContent = new System.Windows.Forms.Panel();
             this.tblTable = new System.Windows.Forms.TableLayoutPanel();
             this.pnlTableHeader = new System.Windows.Forms.Panel();
@@ -39,7 +39,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlButtonControls = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.dgvCreditDataTable = new System.Windows.Forms.DataGridView();
@@ -228,7 +228,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.loupe__1_;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(4, 5);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
@@ -246,49 +246,55 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 8;
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // pnlButtonControls
             // 
-            this.pnlButtonControls.Controls.Add(this.button1);
+            this.pnlButtonControls.Controls.Add(this.btnExport);
             this.pnlButtonControls.Controls.Add(this.btnRefresh);
             this.pnlButtonControls.Controls.Add(this.btnFilter);
             this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonControls.Location = new System.Drawing.Point(1076, 0);
+            this.pnlButtonControls.Location = new System.Drawing.Point(1067, 0);
             this.pnlButtonControls.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlButtonControls.Name = "pnlButtonControls";
             this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 0, 11, 0);
-            this.pnlButtonControls.Size = new System.Drawing.Size(147, 44);
+            this.pnlButtonControls.Size = new System.Drawing.Size(156, 44);
             this.pnlButtonControls.TabIndex = 0;
             // 
-            // button1
+            // btnExport
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
-            this.button1.Location = new System.Drawing.Point(96, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 44);
-            this.button1.TabIndex = 7;
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnExport.BackColor = System.Drawing.Color.Transparent;
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.Image")));
+            this.btnExport.Location = new System.Drawing.Point(105, 0);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(40, 44);
+            this.btnExport.TabIndex = 7;
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnRefresh
             // 
             this.btnRefresh.AutoSize = true;
             this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
             this.btnRefresh.Image = global::PersonalExpenseCreditTracker.Properties.Resources.sync1;
-            this.btnRefresh.Location = new System.Drawing.Point(48, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(53, 2);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(40, 40);
@@ -303,10 +309,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnFilter.BackColor = System.Drawing.Color.Transparent;
             this.btnFilter.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnFilter.FlatAppearance.BorderSize = 0;
+            this.btnFilter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnFilter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFilter.ForeColor = System.Drawing.Color.White;
-            this.btnFilter.Image = global::PersonalExpenseCreditTracker.Properties.Resources.filter1;
+            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
             this.btnFilter.Location = new System.Drawing.Point(0, 0);
             this.btnFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFilter.Name = "btnFilter";
@@ -340,9 +348,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.dgvCreditDataTable.Name = "dgvCreditDataTable";
             this.dgvCreditDataTable.ReadOnly = true;
             this.dgvCreditDataTable.RowHeadersVisible = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.dgvCreditDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCreditDataTable.RowTemplate.Height = 24;
             this.dgvCreditDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCreditDataTable.Size = new System.Drawing.Size(1223, 525);
@@ -511,7 +516,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // btnLastPage
             // 
-            this.btnLastPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.right;
+            this.btnLastPage.Image = ((System.Drawing.Image)(resources.GetObject("btnLastPage.Image")));
             this.btnLastPage.Location = new System.Drawing.Point(197, 6);
             this.btnLastPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLastPage.Name = "btnLastPage";
@@ -522,7 +527,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // btnNextpage
             // 
-            this.btnNextpage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.next;
+            this.btnNextpage.Image = ((System.Drawing.Image)(resources.GetObject("btnNextpage.Image")));
             this.btnNextpage.Location = new System.Drawing.Point(152, 6);
             this.btnNextpage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNextpage.Name = "btnNextpage";
@@ -544,7 +549,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // btnPreviousPage
             // 
-            this.btnPreviousPage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.preview;
+            this.btnPreviousPage.Image = ((System.Drawing.Image)(resources.GetObject("btnPreviousPage.Image")));
             this.btnPreviousPage.Location = new System.Drawing.Point(59, 6);
             this.btnPreviousPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPreviousPage.Name = "btnPreviousPage";
@@ -556,7 +561,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // btnFirstpage
             // 
             this.btnFirstpage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFirstpage.Image = global::PersonalExpenseCreditTracker.Properties.Resources.left;
+            this.btnFirstpage.Image = ((System.Drawing.Image)(resources.GetObject("btnFirstpage.Image")));
             this.btnFirstpage.Location = new System.Drawing.Point(13, 6);
             this.btnFirstpage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFirstpage.Name = "btnFirstpage";
@@ -1258,7 +1263,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.Button btncategoryClose;
         private System.Windows.Forms.Button btnFilter;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Panel pnlDateFilter;
         private System.Windows.Forms.Panel pnlDateHeader;
         private System.Windows.Forms.Button btnDateClose;
