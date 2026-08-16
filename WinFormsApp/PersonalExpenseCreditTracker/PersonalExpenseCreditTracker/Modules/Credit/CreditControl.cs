@@ -455,6 +455,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         }
         private void ShowCurrentPage()
         {
+            if (AllCreditData == null) return;
+
             DataTable pageTable = AllCreditData.Clone();
             btnCurrentPage.Text = currentPage.ToString();
             int startIndex = (currentPage - 1) * pageSize;
@@ -479,11 +481,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private int GetRowsPerPage()
         {
             Rectangle display = dgvCreditDataTable.DisplayRectangle;
-
             int rowHeight = dgvCreditDataTable.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight) - 1;
+            return Math.Max(1, (display.Height / rowHeight) - 1);
         }
+
 
        
         private void CreditControl_Resize(object sender, EventArgs e)
@@ -878,8 +880,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             AllCreditData = Common.CommonUiFunction.SearchDataInExpenseOrCredit(masterData, txtSearch);
+            ApplyCreditSort();
+            currentPage = 1;
             ShowCurrentPage();
         }
+
 
         private void pnlCategory_Paint(object sender, PaintEventArgs e)
         {

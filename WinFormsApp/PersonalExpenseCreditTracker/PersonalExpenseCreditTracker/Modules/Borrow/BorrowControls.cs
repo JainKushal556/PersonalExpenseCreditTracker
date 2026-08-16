@@ -554,11 +554,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private int GetRowsPerPage()
         {
             Rectangle display = dgvBorrowDataTable.DisplayRectangle;
-
             int rowHeight = dgvBorrowDataTable.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight) - 1;
+            return Math.Max(1, (display.Height / rowHeight) - 1);
         }
+
 
         //Page control button
         private void btnFirstpage_Click(object sender, EventArgs e)
@@ -1192,11 +1192,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.Refresh();
         }
 
-         private void txtSearch_TextChanged(object sender, EventArgs e)
-         {
-             AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
-             ShowCurrentPage();
-         }
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+            currentPage = 1;
+            ShowCurrentPage();
+        }
+
 
          private void cmbPayment_Click(object sender, EventArgs e)
          {

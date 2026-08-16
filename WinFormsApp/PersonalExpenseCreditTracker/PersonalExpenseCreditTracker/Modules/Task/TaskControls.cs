@@ -805,10 +805,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private int GetRowsPerPage()
         {
             Rectangle display = dataGridViewTask.DisplayRectangle;
-
             int rowHeight = dataGridViewTask.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight) - 1;
+            return Math.Max(1, (display.Height / rowHeight) - 1);
         }
 
         private void btnFirstpage_Click(object sender, EventArgs e)
