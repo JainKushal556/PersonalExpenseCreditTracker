@@ -300,19 +300,41 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                 }
 
                 // Profile Photo
+                // Profile Photo
                 if (dt.Columns.Contains("ProfilePhoto") && row["ProfilePhoto"] != DBNull.Value)
                 {
                     byte[] imgBytes = (byte[])row["ProfilePhoto"];
 
-                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    // ১. বাইট খালি বা নাল কিনা চেক
+                    if (imgBytes != null && imgBytes.Length > 0)
                     {
-                        picProfileUserPhoto.Image = Image.FromStream(ms);
+                        try
+                        {
+                            using (MemoryStream ms = new MemoryStream(imgBytes))
+                            {
+                                using (Image tempImg = Image.FromStream(ms))
+                                {
+                                    // ২. সেফলি Bitmap তৈরি (যাতে স্ট্রিম লিক বা ক্র্যাশ না করে)
+                                    picProfileUserPhoto.Image = new Bitmap(tempImg);
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            // ছবি করাপ্ট থাকলে ডিফল্ট ছবি লোড হবে
+                            picProfileUserPhoto.Image = Properties.Resources.people__3_1;
+                        }
+                    }
+                    else
+                    {
+                        picProfileUserPhoto.Image = Properties.Resources.people__3_1;
                     }
                 }
                 else
                 {
                     picProfileUserPhoto.Image = Properties.Resources.people__3_1;
                 }
+
             }
             else
             {

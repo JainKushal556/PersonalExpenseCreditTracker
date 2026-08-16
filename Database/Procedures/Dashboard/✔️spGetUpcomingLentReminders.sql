@@ -1,85 +1,122 @@
-CREATE PROC spGetUpcomingLentReminders
+CREATE OR ALTER PROCEDURE spGetUpcomingLentReminders 
+(
     @UserID INT
+)
 AS
 BEGIN
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
-	DECLARE @StatusID INT;
-    BEGIN TRY
 
-        IF NOT EXISTS
+    -------------------------------------------------
+    -- User Validation
+    -------------------------------------------------
+
+    IF @UserID IS NULL OR @UserID <= 0
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'User does not exist or inactive' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Data Check
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLent
+        WHERE UserID = @UserID
+        AND RemainingAmount > 0
+        AND
         (
-            SELECT 1
-            FROM tblUsers
-            WHERE UserID = @UserID
-			AND Active = 1
+           DeadlineAt < @Today
+           OR DATEDIFF(DAY, @Today, CAST(DeadlineAt AS DATE)) BETWEEN 0 AND 7
         )
-        BEGIN
-            SELECT 'UserID Does Not Exist' AS Message;
-            RETURN;
-        END
+    )
+    BEGIN
+        SELECT 'No lent records found' AS Message;
+        RETURN;
+    END
 
+    -------------------------------------------------
+    -- Reminder Query
+    -------------------------------------------------
 
-		SELECT TOP 1 @StatusID = StatusID FROM tblLentBorrowStatus
-				WHERE StatusName = 'Pending';
+    SELECT
+        L.LentID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        L.Amount,
+        L.ReturnedAmount,
+        L.RemainingAmount,
+        L.LentAt,
+        L.DeadlineAt,
+        L.Description,
 
-		IF @StatusID IS NULL
-		BEGIN
-			SELECT 'Pending Status Not Found' AS Message;
-			RETURN;
-		END
+        DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) AS DaysRemaining,
 
-        IF NOT EXISTS
-		(
-			SELECT 1
-			FROM tblLent
-			WHERE UserID = @UserID
-			AND StatusID = @StatusID
-			AND DATEDIFF
-			(
-				DAY,
-				@Today,
-				CAST(DeadlineAt AS DATE)
-			) IN (7,3,1)
-		)
-		BEGIN
-			SELECT 'No Upcoming Pending Lent Found' AS Message;
-			RETURN;
-		END
+        CASE
 
-        SELECT L.LentID,
-			Prsn.PersonName,
-			L.Amount,
-			L.ReturnedAmount,
-			L.RemainingAmount,
-			Pay.PaymentName,
-			S.StatusName,
-			L.LentAt,
-			L.DeadlineAt,
-			DATEDIFF(
-					 DAY, 
-					 @Today, 
-					 CAST(L.DeadlineAt AS DATE)
-					) AS RemainingDays,
-			L.Description
-		FROM tblLent L
-		LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
-		LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
-		LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
-		WHERE L.UserID = @UserID
-		AND L.DeadlineAt >= @Today
-		AND L.StatusID = @StatusID
-		AND DATEDIFF
-		(
-			DAY,
-			@Today,
-			CAST(L.DeadlineAt AS DATE)
-		) IN (7,3,1)
-		ORDER BY L.DeadlineAt ASC
+            -------------------------------------------------
+            -- OVERDUE
+            -------------------------------------------------
+            WHEN L.DeadlineAt < @Today THEN
+                'Overdue collection. Please collect the payment as soon as possible.'
 
-    END TRY
+            -------------------------------------------------
+            -- DUE TODAY
+            -------------------------------------------------
+            WHEN DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) = 0 THEN
+                'This collection is due today.'
 
-    BEGIN CATCH
-        SELECT ERROR_MESSAGE() AS Message;
-    END CATCH
+            -------------------------------------------------
+            -- BEFORE DEADLINE REMINDERS
+            -------------------------------------------------
+            WHEN DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) = 1 THEN
+                'Reminder: collection is due tomorrow.'
+
+            WHEN DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) = 3 THEN
+                'Reminder: collection is due in 3 days.'
+
+            WHEN DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) = 7 THEN
+                'Reminder: collection is due in 7 days.'
+
+            ELSE
+                'Upcoming collection.'
+        END AS ReminderMessage
+
+    FROM tblLent L
+
+    LEFT JOIN tblPersons P
+        ON L.PersonID = P.PersonID
+
+    LEFT JOIN tblPaymentType PT
+        ON L.PaymentID = PT.PaymentID
+
+    LEFT JOIN tblLentBorrowStatus S
+        ON L.StatusID = S.StatusID
+
+    WHERE L.UserID = @UserID
+      AND L.RemainingAmount > 0
+      AND
+      (
+            L.DeadlineAt < @Today
+            OR DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) BETWEEN 0 AND 7
+      )
+
+    ORDER BY L.DeadlineAt ASC;
 
 END
+GO

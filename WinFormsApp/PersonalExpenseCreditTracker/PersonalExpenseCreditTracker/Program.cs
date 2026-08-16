@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using PersonalExpenseCreditTracker.Forms.Authentication;
+using BLLayer.Authentication;
 
 namespace PersonalExpenseCreditTracker
 {
@@ -13,8 +15,22 @@ namespace PersonalExpenseCreditTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
-            //Application.Run(new PersonalExpenseCreditTracker.Forms.Authentication.ForgotPasswordControls  ());
+
+            AuthBLL authBll = new AuthBLL();
+            int activeUserId = authBll.GetUserIdFromDB();
+
+            //If user already login
+            if (activeUserId > 0)
+            {
+                Session.LogedInUser.SetUserId(activeUserId);
+                Application.Run(new MainForm());
+            }
+            else  // If User Not login
+            {
+                LoginControls loginForm = new LoginControls();
+
+                Application.Run(new LoginControls());
+            }
         }
     }
 }

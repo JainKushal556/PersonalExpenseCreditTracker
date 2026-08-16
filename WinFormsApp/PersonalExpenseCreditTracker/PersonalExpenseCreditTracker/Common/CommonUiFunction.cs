@@ -276,8 +276,8 @@ namespace PersonalExpenseCreditTracker.Common
 
             string search = txtBox.Text.Trim();
 
-           
-            if (string.IsNullOrWhiteSpace(search) || search == "Search...")
+
+            if (string.IsNullOrWhiteSpace(search) || search == "Search..." || search == "Search records...")
             {
                 masterTable.DefaultView.RowFilter = "";
                 return masterTable.DefaultView.ToTable();
@@ -326,12 +326,107 @@ namespace PersonalExpenseCreditTracker.Common
             if (filters.Count == 0)
                 return masterTable.Clone();
 
-            masterTable.DefaultView.RowFilter =
-                string.Join(" OR ", filters.ToArray());
+            try
+            {
+                masterTable.DefaultView.RowFilter = string.Join(" OR ", filters.ToArray());
+            }
+            catch
+            {
+                masterTable.DefaultView.RowFilter = "";
+            }
 
             return masterTable.DefaultView.ToTable();
+
         }
 
+        public static DataTable SearchDataInExpenseOrCredit(DataTable masterTable, TextBox txtBox)
+        {
+            if (masterTable == null)
+                return null;
+            string search = txtBox.Text.Trim();
+            if (string.IsNullOrWhiteSpace(search) || search == "Search..." || search == "Search records...")
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+            search = search.Replace("'", "''");
+
+            List<string> filters = new List<string>();
+
+            if (masterTable.Columns.Contains("Amount"))
+            {
+                filters.Add(
+                    string.Format(
+                        "Convert(Amount, 'System.String') LIKE '%{0}%'",
+                        search
+                    )
+                );
+            }
+
+            string dateColumn = null;
+
+            if (masterTable.Columns.Contains("ExpenseAt"))
+                dateColumn = "ExpenseAt";
+            else if (masterTable.Columns.Contains("CreditAt"))
+                dateColumn = "CreditAt";
+
+            if (!string.IsNullOrEmpty(dateColumn))
+            {
+                filters.Add(
+                    string.Format(
+                        "Convert({0}, 'System.String') LIKE '%{1}%'",
+                        dateColumn,
+                        search
+                    )
+                );
+            }
+
+            if (masterTable.Columns.Contains("CategoryName"))
+            {
+                filters.Add(
+                    string.Format(
+                        "CategoryName LIKE '%{0}%'",
+                        search
+                    )
+                );
+            }
+
+            if (masterTable.Columns.Contains("SubCategoryName"))
+            {
+                filters.Add(
+                    string.Format(
+                        "SubCategoryName LIKE '%{0}%'",
+                        search
+                    )
+                );
+            }
+
+            if (masterTable.Columns.Contains("PaymentName"))
+            {
+                filters.Add(
+                    string.Format(
+                        "PaymentName LIKE '%{0}%'",
+                        search
+                    )
+                );
+            }
+            if (filters.Count == 0)
+            {
+                masterTable.DefaultView.RowFilter = "";
+                return masterTable.DefaultView.ToTable();
+            }
+            try
+            {
+                masterTable.DefaultView.RowFilter = string.Join(" OR ", filters.ToArray());
+            }
+            catch
+            {
+                masterTable.DefaultView.RowFilter = "";
+            }
+
+            return masterTable.DefaultView.ToTable();
+
+        }
         //public static DataTable SearchDataInLentOrBorrow(DataTable masterTable, TextBox txtBox)
         //{
         //    string search = txtBox.Text.Trim().Replace("'", "''");
@@ -356,37 +451,37 @@ namespace PersonalExpenseCreditTracker.Common
         //    return filteredTable;
         //}
 
-        public static DataTable SearchDataInExpenseOrCredit(DataTable masterTable, TextBox txtBox)
-        {
-            string search = txtBox.Text.Trim().Replace("'", "''");
+        //public static DataTable SearchDataInExpenseOrCredit(DataTable masterTable, TextBox txtBox)
+        //{
+        //    string search = txtBox.Text.Trim().Replace("'", "''");
 
-            if (masterTable == null) return null;
-            if (string.IsNullOrWhiteSpace(search))
-            {
-                masterTable.DefaultView.RowFilter = "";
-                return masterTable.DefaultView.ToTable();
-            }
-            if (masterTable.Columns.Contains("ExpenseAt"))
-                dateColumn = "ExpenseAt";
-            else
-                dateColumn = "CreditAt";
+        //    if (masterTable == null) return null;
+        //    if (string.IsNullOrWhiteSpace(search))
+        //    {
+        //        masterTable.DefaultView.RowFilter = "";
+        //        return masterTable.DefaultView.ToTable();
+        //    }
+        //    if (masterTable.Columns.Contains("ExpenseAt"))
+        //        dateColumn = "ExpenseAt";
+        //    else
+        //        dateColumn = "CreditAt";
 
             
 
-            masterTable.DefaultView.RowFilter = string.Format(
-              "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
-              "Convert({1}, 'System.String') LIKE '%{0}%' OR " +
-              "CategoryName LIKE '%{0}%' OR " +
-              "PaymentName LIKE '%{0}%' OR " +
-              "SubCategoryName LIKE '%{0}%'",
-               search, dateColumn);
+        //    masterTable.DefaultView.RowFilter = string.Format(
+        //      "Convert(Amount, 'System.String') LIKE '%{0}%' OR " +
+        //      "Convert({1}, 'System.String') LIKE '%{0}%' OR " +
+        //      "CategoryName LIKE '%{0}%' OR " +
+        //      "PaymentName LIKE '%{0}%' OR " +
+        //      "SubCategoryName LIKE '%{0}%'",
+        //       search, dateColumn);
 
          
-            DataTable filteredTable = masterTable.DefaultView.ToTable();
+        //    DataTable filteredTable = masterTable.DefaultView.ToTable();
 
             
-            return filteredTable;
-        }
+        //    return filteredTable;
+        //}
 
         public static void HighlightSearch(DataGridView dgv, TextBox txtBox)
         {
@@ -403,8 +498,10 @@ namespace PersonalExpenseCreditTracker.Common
             }
 
             // Search empty হলে কিছু করবে না
-            if (string.IsNullOrWhiteSpace(search))
+            // Search empty বা placeholder হলে কিছু করবে না
+            if (string.IsNullOrWhiteSpace(search) || search == "Search..." || search == "Search records..." || search == "Search by name or phone number ...")
                 return;
+
 
             // Match হওয়া cell highlight
             foreach (DataGridViewRow row in dgv.Rows)
@@ -430,24 +527,46 @@ namespace PersonalExpenseCreditTracker.Common
         }
         public static DataTable SearchDataInNote(DataTable masterTable, TextBox txtBox)
         {
-            string search = txtBox.Text.Trim().Replace("'", "''");
+            if (masterTable == null)
+                return null;
 
-            if (masterTable == null) return null;
-            if (string.IsNullOrWhiteSpace(search))
+            string search = txtBox.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(search) || search == "Search..." || search == "Search records...")
             {
                 masterTable.DefaultView.RowFilter = "";
                 return masterTable.DefaultView.ToTable();
             }
 
-            masterTable.DefaultView.RowFilter = string.Format(
-                "NoteTitle LIKE '%{0}%' OR " +
-                "NotePriorityName LIKE '%{0}%' OR " +
-                "Convert(CreatedAt, 'System.String') LIKE '%{0}%'",
-                search);
+            search = search.Replace("'", "''");
 
-            DataTable filteredTable = masterTable.DefaultView.ToTable();
-            return filteredTable;
+            List<string> filters = new List<string>();
+
+            if (masterTable.Columns.Contains("NoteTitle"))
+                filters.Add("NoteTitle LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("NotePriorityName"))
+                filters.Add("NotePriorityName LIKE '%" + search + "%'");
+
+            if (masterTable.Columns.Contains("CreatedAt"))
+                filters.Add("Convert(CreatedAt, 'System.String') LIKE '%" + search + "%'");
+
+            if (filters.Count == 0)
+                return masterTable.Clone();
+
+            try
+            {
+                masterTable.DefaultView.RowFilter = string.Join(" OR ", filters.ToArray());
+            }
+            catch
+            {
+                masterTable.DefaultView.RowFilter = "";
+            }
+
+            return masterTable.DefaultView.ToTable();
+
         }
+
 
 
         public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
@@ -457,7 +576,7 @@ namespace PersonalExpenseCreditTracker.Common
 
             string search = txtBox.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(search) || search == "Search...")
+            if (string.IsNullOrWhiteSpace(search) || search == "Search..." || search == "Search records...")
             {
                 masterTable.DefaultView.RowFilter = "";
                 return masterTable.DefaultView.ToTable();
@@ -491,9 +610,17 @@ namespace PersonalExpenseCreditTracker.Common
             if (filters.Count == 0)
                 return masterTable.Clone();
 
-            masterTable.DefaultView.RowFilter =string.Join(" OR ", filters.ToArray());
+            try
+            {
+                masterTable.DefaultView.RowFilter = string.Join(" OR ", filters.ToArray());
+            }
+            catch
+            {
+                masterTable.DefaultView.RowFilter = "";
+            }
 
             return masterTable.DefaultView.ToTable();
+
         }
         //public static DataTable SearchDataInTask(DataTable masterTable, TextBox txtBox)
         //{
@@ -519,23 +646,34 @@ namespace PersonalExpenseCreditTracker.Common
 
         public static DataTable SearchDataInPersons(DataTable masterTable, TextBox txtBox)
         {
-            string search = txtBox.Text.Trim().Replace("'", "''");
-
             if (masterTable == null) return null;
-            if (string.IsNullOrWhiteSpace(search))
+
+            string search = txtBox.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(search) || search == "Search by name or phone number ...")
             {
                 masterTable.DefaultView.RowFilter = "";
                 return masterTable.DefaultView.ToTable();
             }
 
-            masterTable.DefaultView.RowFilter = string.Format(
-                "PersonName LIKE '%{0}%' OR " +
-                "PhoneNumber LIKE '%{0}%'",
-                search);
+            search = search.Replace("'", "''");
+
+            try
+            {
+                masterTable.DefaultView.RowFilter = string.Format(
+                    "PersonName LIKE '%{0}%' OR " +
+                    "PhoneNumber LIKE '%{0}%'",
+                    search);
+            }
+            catch
+            {
+                masterTable.DefaultView.RowFilter = "";
+            }
 
             DataTable filteredTable = masterTable.DefaultView.ToTable();
             return filteredTable;
         }
+
 
 
         public static void SetComboBoxHeightAndOwnerDraw(ComboBox comboBox)

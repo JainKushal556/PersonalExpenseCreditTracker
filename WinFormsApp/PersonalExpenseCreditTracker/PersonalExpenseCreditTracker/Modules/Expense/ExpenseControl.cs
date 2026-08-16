@@ -52,6 +52,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         {
             InitializeComponent();
             StyleExpenseGrid();
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(btnFilter, "Filter Expense");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Expense");
+            toolTip.SetToolTip(txtSearch, "Search by Category, Sub-Category,Amount,Date or Payment Type");
+
             ApplyRoundCorners();
             //dgvExpenseDataTable.CellPainting += dgvExpenseDataTable_CellPainting;
             dgvExpenseDataTable.ColumnHeaderMouseClick +=dgvExpenseDataTable_ColumnHeaderMouseClick;
@@ -71,6 +78,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void ExpenseControl_Load(object sender, EventArgs e)
         {
+            txtSearch.Text = "Search records...";
+            txtSearch.ForeColor = Color.Gray;
             txtMinAmount.Text = "Enter Amount";
             txtMinAmount.ForeColor = Color.Gray;
             txtMaxAmount.Text = "Enter Amount";
@@ -139,14 +148,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             dgvExpenseDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvExpenseDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            //Column Background Color
-            colDate.DefaultCellStyle.BackColor = Color.White;
-            colDescription.DefaultCellStyle.BackColor = Color.White;
-            colCategory.DefaultCellStyle.BackColor = Color.White;
-            colSubCategory.DefaultCellStyle.BackColor = Color.White;
-            colAmount.DefaultCellStyle.BackColor = Color.White;
-            colPaymentMethod.DefaultCellStyle.BackColor = Color.White;
-
             //Column FontStyle
             colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
             colDescription.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -157,16 +158,42 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
             //Row Style
             dgvExpenseDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            dgvExpenseDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvExpenseDataTable.DefaultCellStyle.ForeColor = Color.Black;
-            //dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 248, 248);
-            //dgvExpenseDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(229, 238, 255);
-            dgvExpenseDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvExpenseDataTable.RowTemplate.Height = 40;
             dgvExpenseDataTable.RowHeadersVisible = false;
             dgvExpenseDataTable.MultiSelect = false;
             dgvExpenseDataTable.ReadOnly = true;
             dgvExpenseDataTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Zigzag
+
+            //Color selectedRowColor = Color.FromArgb(174, 205, 247);
+            // Normal Row
+            dgvExpenseDataTable.DefaultCellStyle.BackColor = Color.White;
+            dgvExpenseDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Alternating Row
+            dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
+
+            dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Selection
+            dgvExpenseDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247);
+
+            dgvExpenseDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247);
+
+            dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            //// Force every column to use the same selection color
+            //foreach (DataGridViewColumn column in dgvExpenseDataTable.Columns)
+            //{
+            //    column.DefaultCellStyle.SelectionBackColor =
+            //        selectedRowColor;
+
+            //    column.DefaultCellStyle.SelectionForeColor =
+            //        Color.Black;
+            //}
 
             //Border style
             dgvExpenseDataTable.BorderStyle = BorderStyle.None;
@@ -500,6 +527,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void ShowCurrentPage()
         {
+            if (AllExpenseData == null) return;
+
             DataTable pageTable = AllExpenseData.Clone();
 
             btnCurrentPage.Text = currentPage.ToString();
@@ -526,11 +555,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private int GetRowsPerPage()
         {
             Rectangle display = dgvExpenseDataTable.DisplayRectangle;
-
             int rowHeight = dgvExpenseDataTable.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight) - 1;
+            return Math.Max(1, (display.Height / rowHeight) - 1);
         }
+
 
 
         private void ExpenseControl_Resize(object sender, EventArgs e)
@@ -635,10 +664,14 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             HideAllFilterPanels();
             HidePopupPanels();
 
+            txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
+
             // Clear validation
             errorProvider1.Clear();
             ErrorHelper.HideErrorForControl(pnlFromDate);
             ErrorHelper.HideErrorForControl(pnlToDate);
+
 
             ignoreEvents = false;
 
@@ -1750,6 +1783,24 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private void pnlTableHeader_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search records...")
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search records...";
+                txtSearch.ForeColor = Color.Gray;
+            }
         }
        
     }

@@ -201,7 +201,7 @@ BEGIN
                 AND A.Password = @NewPassword
         )
         BEGIN
-            SELECT 'New Password Cannot Be Same As Old Password' AS Message;
+            SELECT 'New Password Same As Old Password' AS Message;
         END
 
         ELSE
@@ -227,6 +227,24 @@ BEGIN
         SELECT 'Invalid Email Or Phone Number' AS Message;
     END  
   
+END;
+
+GO
+
+
+-- ==========================================================
+
+-- SP: ✔️spGetActiveUserId.sql
+
+-- ==========================================================
+
+CREATE OR ALTER PROCEDURE spGetActiveUserId
+AS
+BEGIN
+
+    SELECT UserID 
+    FROM tblUserAuthentication 
+    WHERE Active = 1;
 END;
 
 GO
@@ -338,52 +356,64 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROCEDURE spLoginUser    
- 
-    @Email VARCHAR(100),    
-    @Password VARCHAR(MAX)    
+CREATE OR ALTER PROCEDURE spLoginUser
+(
+    @Email VARCHAR(100),
+    @Password VARCHAR(MAX)
+)
+AS
+BEGIN
 
-AS    
-BEGIN    
-      
-    DECLARE @UserID INT;  
-  
-    IF EXISTS    
-    (    
-        SELECT 1    
-        FROM tblUserContact C    
-        INNER JOIN tblUserAuthentication A    
-            ON C.UserID = A.UserID    
-        WHERE     
-            C.Email = @Email    
-            AND A.Password = @Password    
-    )    
-    BEGIN    
-    
-        SELECT @UserID = C.UserID  
-        FROM tblUserContact C  
-        INNER JOIN tblUserAuthentication A    
-            ON C.UserID = A.UserID  
-        WHERE     
-            C.Email = @Email    
-            AND A.Password = @Password;  
-  
-      
-        UPDATE tblUserAuthentication  
-        SET Active = 1  
-        WHERE UserID = @UserID;  
-  
-        SELECT 
-            'Login Successful' AS Message,
-            @UserID AS UserID;  
-  
-    END    
-      
-    ELSE    
-    BEGIN    
-        SELECT 'Invalid Email Or Password' AS Message;    
-    END    
-  
+    SET @Email = LTRIM(RTRIM(@Email));
+    SET @Password = LTRIM(RTRIM(@Password));
+
+    DECLARE @UserID INT;
+
+    SELECT @UserID = C.UserID
+	FROM tblUserContact C
+	INNER JOIN tblUserAuthentication A
+		ON C.UserID = A.UserID
+	WHERE C.Email = @Email
+	AND A.Password COLLATE SQL_Latin1_General_CP1_CS_AS = @Password;
+
+    IF @UserID IS NULL
+    BEGIN
+        SELECT 'Invalid Email Or Password' AS Message;
+        RETURN;
+    END
+
+    IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE Active = 1
+              AND UserID <> @UserID
+    )
+    BEGIN
+        SELECT 'Another User Is Already Logged In' AS Message;
+        RETURN;
+    END
+
+	IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE Active = 1
+              AND UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Your are Already Logged In' AS Message;
+        RETURN;
+    END
+
+    UPDATE tblUserAuthentication
+    SET Active = 1
+    WHERE UserID = @UserID;
+
+    SELECT
+        'Login Successful' AS Message,
+        @UserID AS UserID;
+
 END;
 
 GO
@@ -5724,69 +5754,130 @@ GO
 -- ==========================================================
 
 CREATE OR ALTER PROCEDURE spGetUpcomingTaskReminders
-
+(
     @UserID INT
-
+)
 AS
 BEGIN
 
-
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
+    DECLARE @OverdueStatusID INT;
+    DECLARE @PendingStatusID INT;
 
-    BEGIN TRY
+    -------------------------------------------------
+    -- User Validation
+    -------------------------------------------------
 
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblUsers
-            WHERE UserID = @UserID
-        )
-        BEGIN
-            SELECT 'UserID Does Not Exist' AS Message;
-            RETURN;
-        END
+    IF @UserID IS NULL OR @UserID <= 0
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
 
-        IF NOT EXISTS
-        (
-            SELECT 1
-            FROM tblTask
-            WHERE UserID = @UserID
-            AND Deadline >= @Today
-            AND TaskStatusID = 1
-        )
-        BEGIN
-            SELECT 'No Pending Upcoming Tasks Found' AS Message;
-            RETURN;
-        END
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUsers
+        WHERE UserID = @UserID
+    )
+    BEGIN
+        SELECT 'User does not exist' AS Message;
+        RETURN;
+    END
 
-        SELECT
-            tblTask.TaskID,
-            tblTask.TaskTitle,
-            tblTask.Deadline,
-            tblTaskStatus.TaskStatusName,
-            tblTaskPriorities.PriorityName,
-            DATEDIFF(DAY, @Today, tblTask.Deadline) AS RemainingDays,
-            tblTask.CreatedAt
+    -------------------------------------------------
+    -- Fetch Status IDs
+    -------------------------------------------------
+    SELECT @OverdueStatusID = TaskStatusID
+    FROM tblTaskStatus
+    WHERE TaskStatusName = 'Overdue';
 
+    SELECT @PendingStatusID = TaskStatusID
+    FROM tblTaskStatus
+    WHERE TaskStatusName = 'Pending';
+
+    -------------------------------------------------
+    -- Data Check
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
         FROM tblTask
+        WHERE UserID = @UserID
+          AND TaskStatusID IN (@PendingStatusID, @OverdueStatusID)
+          AND
+          (
+                Deadline < @Today
+                OR DATEDIFF(DAY, @Today, CAST(Deadline AS DATE)) BETWEEN 0 AND 7
+          )
+    )
+    BEGIN
+        SELECT 'No task reminders found' AS Message;
+        RETURN;
+    END
 
-        INNER JOIN tblTaskStatus
-            ON tblTask.TaskStatusID = tblTaskStatus.TaskStatusID
+    -------------------------------------------------
+    -- Reminder Query
+    -------------------------------------------------
 
-        INNER JOIN tblTaskPriorities
-            ON tblTask.PriorityID = tblTaskPriorities.PriorityID
+    SELECT
+        T.TaskID,
+        T.TaskTitle,
+        T.Deadline,
+        TS.TaskStatusName,
+        TP.PriorityName,
+        T.CreatedAt,
 
-        WHERE tblTask.UserID = @UserID
-        AND tblTask.Deadline >= @Today
-        AND tblTask.TaskStatusID = 1
+        DATEDIFF(DAY, @Today, CAST(T.Deadline AS DATE)) AS RemainingDays,
 
-        ORDER BY tblTask.Deadline ASC;
+        CASE
 
-    END TRY
+            -------------------------------------------------
+            -- OVERDUE
+            -------------------------------------------------
+            WHEN T.Deadline < @Today THEN
+                'Task deadline has passed. Please complete it as soon as possible.'
 
-    BEGIN CATCH
-        SELECT ERROR_MESSAGE() AS Message;
-    END CATCH
+            -------------------------------------------------
+            -- DUE TODAY
+            -------------------------------------------------
+            WHEN DATEDIFF(DAY, @Today, CAST(T.Deadline AS DATE)) = 0 THEN
+                'This task is due today.'
+
+            -------------------------------------------------
+            -- BEFORE DEADLINE REMINDERS
+            -------------------------------------------------
+            WHEN DATEDIFF(DAY, @Today, CAST(T.Deadline AS DATE)) = 1 THEN
+                'Reminder: task is due tomorrow.'
+
+            WHEN DATEDIFF(DAY, @Today, CAST(T.Deadline AS DATE)) = 3 THEN
+                'Reminder: task is due in 3 days.'
+
+            WHEN DATEDIFF(DAY, @Today, CAST(T.Deadline AS DATE)) = 7 THEN
+                'Reminder: task is due in 7 days.'
+
+            ELSE
+                'Upcoming task.'
+        END AS ReminderMessage
+
+    FROM tblTask T
+
+    INNER JOIN tblTaskStatus TS
+        ON T.TaskStatusID = TS.TaskStatusID
+
+    INNER JOIN tblTaskPriorities TP
+        ON T.PriorityID = TP.PriorityID
+
+    WHERE T.UserID = @UserID
+      AND T.TaskStatusID IN (@PendingStatusID, @OverdueStatusID)
+      AND
+      (
+            T.Deadline < @Today
+            OR DATEDIFF(DAY, @Today, CAST(T.Deadline AS DATE)) BETWEEN 0 AND 7
+      )
+
+    ORDER BY T.Deadline ASC;
 
 END
 
@@ -6211,89 +6302,125 @@ GO
 
 -- ==========================================================
 
-CREATE OR ALTER PROC spGetUpcomingLentReminders
+CREATE OR ALTER PROCEDURE spGetUpcomingLentReminders
+(
     @UserID INT
+)
 AS
 BEGIN
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
-	DECLARE @StatusID INT;
-    BEGIN TRY
 
-        IF NOT EXISTS
+    -------------------------------------------------
+    -- User Validation
+    -------------------------------------------------
+
+    IF @UserID IS NULL OR @UserID <= 0
+    BEGIN
+        SELECT 'Invalid UserID' AS Message;
+        RETURN;
+    END
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE UserID = @UserID
+          AND Active = 1
+    )
+    BEGIN
+        SELECT 'User does not exist or inactive' AS Message;
+        RETURN;
+    END
+
+    -------------------------------------------------
+    -- Data Check
+    -------------------------------------------------
+
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM tblLent
+        WHERE UserID = @UserID
+        AND RemainingAmount > 0
+        AND
         (
-            SELECT 1
-            FROM tblUserAuthentication
-            WHERE UserID = @UserID
-			AND Active = 1
+           DeadlineAt < @Today
+           OR DATEDIFF(DAY, @Today, CAST(DeadlineAt AS DATE)) BETWEEN 0 AND 7
         )
-        BEGIN
-            SELECT 'UserID Does Not Exist' AS Message;
-            RETURN;
-        END
+    )
+    BEGIN
+        SELECT 'No lent records found' AS Message;
+        RETURN;
+    END
 
+    -------------------------------------------------
+    -- Reminder Query
+    -------------------------------------------------
 
-		SELECT TOP 1 @StatusID = StatusID FROM tblLentBorrowStatus
-				WHERE StatusName = 'Pending';
+    SELECT
+        L.LentID,
+        P.PersonName,
+        PT.PaymentName,
+        S.StatusName,
+        L.Amount,
+        L.ReturnedAmount,
+        L.RemainingAmount,
+        L.LentAt,
+        L.DeadlineAt,
+        L.Description,
 
-		IF @StatusID IS NULL
-		BEGIN
-			SELECT 'Pending Status Not Found' AS Message;
-			RETURN;
-		END
+        DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) AS DaysRemaining,
 
-        IF NOT EXISTS
-		(
-			SELECT 1
-			FROM tblLent
-			WHERE UserID = @UserID
-			AND StatusID = @StatusID
-			AND DATEDIFF
-			(
-				DAY,
-				@Today,
-				CAST(DeadlineAt AS DATE)
-			) IN (7,3,1)
-		)
-		BEGIN
-			SELECT 'No Upcoming Pending Lent Found' AS Message;
-			RETURN;
-		END
+        CASE
 
-        SELECT L.LentID,
-			Prsn.PersonName,
-			L.Amount,
-			L.ReturnedAmount,
-			L.RemainingAmount,
-			Pay.PaymentName,
-			S.StatusName,
-			L.LentAt,
-			L.DeadlineAt,
-			DATEDIFF(
-					 DAY, 
-					 @Today, 
-					 CAST(L.DeadlineAt AS DATE)
-					) AS RemainingDays,
-			L.Description
-		FROM tblLent L
-		LEFT JOIN tblLentBorrowStatus S ON L.StatusID = S.StatusID
-		LEFT JOIN tblPersons Prsn ON L.PersonID = Prsn.PersonID
-		LEFT JOIN tblPaymenttype Pay ON L.PaymentID = Pay.PaymentID
-		WHERE L.UserID = @UserID
-		AND L.DeadlineAt >= @Today
-		AND L.StatusID = @StatusID
-		AND DATEDIFF
-		(
-			DAY,
-			@Today,
-			CAST(L.DeadlineAt AS DATE)
-		) IN (7,3,1)
-		ORDER BY L.DeadlineAt ASC
+            -------------------------------------------------
+            -- OVERDUE
+            -------------------------------------------------
+            WHEN L.DeadlineAt < @Today THEN
+                'Overdue collection. Please collect the payment as soon as possible.'
 
-    END TRY
+            -------------------------------------------------
+            -- DUE TODAY
+            -------------------------------------------------
+            WHEN DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) = 0 THEN
+                'This collection is due today.'
 
-    BEGIN CATCH
-        SELECT ERROR_MESSAGE() AS Message;
-    END CATCH
+            -------------------------------------------------
+            -- BEFORE DEADLINE REMINDERS
+            -------------------------------------------------
+            WHEN DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) = 1 THEN
+                'Reminder: collection is due tomorrow.'
+
+            WHEN DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) = 3 THEN
+                'Reminder: collection is due in 3 days.'
+
+            WHEN DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) = 7 THEN
+                'Reminder: collection is due in 7 days.'
+
+            ELSE
+                'Upcoming collection.'
+        END AS ReminderMessage
+
+    FROM tblLent L
+
+    LEFT JOIN tblPersons P
+        ON L.PersonID = P.PersonID
+
+    LEFT JOIN tblPaymentType PT
+        ON L.PaymentID = PT.PaymentID
+
+    LEFT JOIN tblLentBorrowStatus S
+        ON L.StatusID = S.StatusID
+
+    WHERE L.UserID = @UserID
+      AND L.RemainingAmount > 0
+      AND
+      (
+            L.DeadlineAt < @Today
+            OR DATEDIFF(DAY, @Today, CAST(L.DeadlineAt AS DATE)) BETWEEN 0 AND 7
+      )
+
+    ORDER BY L.DeadlineAt ASC;
 
 END
 GO
@@ -6961,7 +7088,7 @@ BEGIN
         AND
         (
            DeadlineAt < @Today
-           OR DATEDIFF(DAY,@Today,CAST(DeadlineAt AS DATE)) IN (0,1,3,7)
+           OR DATEDIFF(DAY, @Today, CAST(DeadlineAt AS DATE)) BETWEEN 0 AND 7
         )
     )
     BEGIN
@@ -7033,7 +7160,7 @@ BEGIN
       AND b.RemainingAmount > 0
       AND (
             b.DeadlineAt < @Today
-            OR DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) IN (7, 3, 1, 0)
+            OR DATEDIFF(DAY, @Today, CAST(b.DeadlineAt AS DATE)) BETWEEN 0 AND 7
           )
 
     ORDER BY b.DeadlineAt ASC;
@@ -7542,41 +7669,43 @@ BEGIN
     SET NOCOUNT OFF;
 
     DECLARE @Today DATE = CAST(GETDATE() AS DATE);
-    DECLARE @OverdueStatusID INT;
+    DECLARE @LentBorrowOverdueID INT;
+    DECLARE @TaskOverdueID INT;
 
-    -------------------------------------------------
-    -- Get Overdue Status ID
-    -------------------------------------------------
-
-    SELECT @OverdueStatusID = StatusID
+    -- 1. Get Overdue Status ID for Lent & Borrow
+    SELECT @LentBorrowOverdueID = StatusID
     FROM tblLentBorrowStatus
     WHERE StatusName = 'Overdue';
 
-	-------------------------------------------------
-    -- Check OverdueStatusID is NULL
-    -------------------------------------------------
+    -- 2. Get Overdue Status ID for Tasks
+    SELECT @TaskOverdueID = TaskStatusID
+    FROM tblTaskStatus
+    WHERE TaskStatusName = 'Overdue';
 
-	IF @OverdueStatusID IS NULL
-	BEGIN
-		SELECT 'Overdue Status Not Found!' AS Message;
-		RETURN
-	END
-    -------------------------------------------------
-    -- Update Overdue Records
-    -------------------------------------------------
+    -- 3. Update Lent & Borrow Overdue Records
+    IF @LentBorrowOverdueID IS NOT NULL
+    BEGIN
+        UPDATE tblLent
+        SET StatusID = @LentBorrowOverdueID
+        WHERE RemainingAmount > 0
+          AND CAST(DeadlineAt AS DATE) < @Today
+          AND StatusID <> @LentBorrowOverdueID;
 
-    UPDATE tblLent
-    SET StatusID = @OverdueStatusID
-    WHERE RemainingAmount > 0
-      AND CAST(DeadlineAt AS DATE) < @Today
-      AND StatusID <> @OverdueStatusID;
+        UPDATE tblBorrow
+        SET StatusID = @LentBorrowOverdueID
+        WHERE RemainingAmount > 0
+          AND CAST(DeadlineAt AS DATE) < @Today
+          AND StatusID <> @LentBorrowOverdueID;
+    END
 
-    UPDATE tblBorrow
-    SET StatusID = @OverdueStatusID
-    WHERE RemainingAmount > 0
-      AND CAST(DeadlineAt AS DATE) < @Today
-      AND StatusID <> @OverdueStatusID;
-
+    -- 4. Update Task Overdue Records
+    IF @TaskOverdueID IS NOT NULL
+    BEGIN
+        UPDATE tblTask
+        SET TaskStatusID = @TaskOverdueID
+        WHERE CAST(Deadline AS DATE) < @Today
+          AND TaskStatusID <> @TaskOverdueID;
+    END
 END
  
 

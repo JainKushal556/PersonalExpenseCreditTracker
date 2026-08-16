@@ -44,6 +44,14 @@ EXEC spForgetPassword
 GO
 
 -- ==========================================================
+-- SP: spGetActiveUserId
+-- From File: ✔️spGetActiveUserId.sql
+-- ==========================================================
+EXEC spGetActiveUserId
+
+GO
+
+-- ==========================================================
 -- SP: spLoginUser
 -- From File: ✔️spLoginUser.sql
 -- ==========================================================

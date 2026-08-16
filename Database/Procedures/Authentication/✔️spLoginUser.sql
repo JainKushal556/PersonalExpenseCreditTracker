@@ -1,4 +1,4 @@
-CREATE PROCEDURE spLoginUser
+CREATE OR ALTER PROCEDURE spLoginUser
 (
     @Email VARCHAR(100),
     @Password VARCHAR(MAX)
@@ -12,11 +12,11 @@ BEGIN
     DECLARE @UserID INT;
 
     SELECT @UserID = C.UserID
-    FROM tblUserContact C
-    INNER JOIN tblUserAuthentication A
-        ON C.UserID = A.UserID
-    WHERE C.Email = @Email
-          AND A.Password = @Password;
+	FROM tblUserContact C
+	INNER JOIN tblUserAuthentication A
+		ON C.UserID = A.UserID
+	WHERE C.Email = @Email
+	AND A.Password COLLATE SQL_Latin1_General_CP1_CS_AS = @Password;
 
     IF @UserID IS NULL
     BEGIN
@@ -36,6 +36,18 @@ BEGIN
         RETURN;
     END
 
+	IF EXISTS
+    (
+        SELECT 1
+        FROM tblUserAuthentication
+        WHERE Active = 1
+              AND UserID = @UserID
+    )
+    BEGIN
+        SELECT 'Your are Already Logged In' AS Message;
+        RETURN;
+    END
+
     UPDATE tblUserAuthentication
     SET Active = 1
     WHERE UserID = @UserID;
@@ -46,4 +58,3 @@ BEGIN
 
 END;
 GO
-

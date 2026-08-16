@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlRegisteredEmailText = new System.Windows.Forms.Panel();
             this.txtRegisteredEmail = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -67,6 +68,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.pnlMainBody = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlRegisteredEmailText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
@@ -85,6 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picEye3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.pnlMainBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlRegisteredEmailText
@@ -97,18 +100,19 @@
             this.pnlRegisteredEmailText.Controls.Add(this.pictureBox2);
             this.pnlRegisteredEmailText.Location = new System.Drawing.Point(22, 53);
             this.pnlRegisteredEmailText.Name = "pnlRegisteredEmailText";
-            this.pnlRegisteredEmailText.Size = new System.Drawing.Size(712, 56);
-            this.pnlRegisteredEmailText.TabIndex = 1;
+            this.pnlRegisteredEmailText.Size = new System.Drawing.Size(548, 50);
+            this.pnlRegisteredEmailText.TabIndex = 0;
             // 
             // txtRegisteredEmail
             // 
             this.txtRegisteredEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRegisteredEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRegisteredEmail.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRegisteredEmail.Location = new System.Drawing.Point(74, 12);
+            this.txtRegisteredEmail.Location = new System.Drawing.Point(74, 9);
             this.txtRegisteredEmail.Name = "txtRegisteredEmail";
-            this.txtRegisteredEmail.Size = new System.Drawing.Size(633, 29);
-            this.txtRegisteredEmail.TabIndex = 1;
+            this.txtRegisteredEmail.Size = new System.Drawing.Size(469, 29);
+            this.txtRegisteredEmail.TabIndex = 0;
+            this.txtRegisteredEmail.TextChanged += new System.EventHandler(this.txtRegisteredEmail_TextChanged);
             this.txtRegisteredEmail.Enter += new System.EventHandler(this.txtRegisteredEmail_Enter);
             this.txtRegisteredEmail.Leave += new System.EventHandler(this.txtRegisteredEmail_Leave);
             // 
@@ -120,13 +124,14 @@
             this.pictureBox2.Location = new System.Drawing.Point(-1, -1);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(67, 56);
+            this.pictureBox2.Size = new System.Drawing.Size(67, 50);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.btnForgotPasswordClose);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.lblForgotPasswordText);
@@ -135,8 +140,8 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(15);
-            this.panel2.Size = new System.Drawing.Size(752, 119);
-            this.panel2.TabIndex = 0;
+            this.panel2.Size = new System.Drawing.Size(588, 119);
+            this.panel2.TabIndex = 2    ;
             // 
             // btnForgotPasswordClose
             // 
@@ -147,10 +152,10 @@
             this.btnForgotPasswordClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.btnForgotPasswordClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnForgotPasswordClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
-            this.btnForgotPasswordClose.Location = new System.Drawing.Point(689, 33);
+            this.btnForgotPasswordClose.Location = new System.Drawing.Point(528, 20);
             this.btnForgotPasswordClose.Name = "btnForgotPasswordClose";
-            this.btnForgotPasswordClose.Size = new System.Drawing.Size(45, 43);
-            this.btnForgotPasswordClose.TabIndex = 3;
+            this.btnForgotPasswordClose.Size = new System.Drawing.Size(39, 35);
+            this.btnForgotPasswordClose.TabIndex = 2;
             this.btnForgotPasswordClose.UseVisualStyleBackColor = true;
             this.btnForgotPasswordClose.Click += new System.EventHandler(this.btnForgotPasswordClose_Click);
             this.btnForgotPasswordClose.MouseEnter += new System.EventHandler(this.btnForgotPasswordClose_MouseEnter);
@@ -193,7 +198,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 253);
+            this.label4.Location = new System.Drawing.Point(18, 227);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 23);
             this.label4.TabIndex = 2;
@@ -204,10 +209,10 @@
             this.txtNewPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNewPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewPassword.Location = new System.Drawing.Point(74, 12);
+            this.txtNewPassword.Location = new System.Drawing.Point(74, 9);
             this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.Size = new System.Drawing.Size(568, 29);
-            this.txtNewPassword.TabIndex = 1;
+            this.txtNewPassword.Size = new System.Drawing.Size(404, 29);
+            this.txtNewPassword.TabIndex = 0;
             this.txtNewPassword.TextChanged += new System.EventHandler(this.txtNewPassword_TextChanged);
             this.txtNewPassword.Enter += new System.EventHandler(this.txtNewPassword_Enter);
             this.txtNewPassword.Leave += new System.EventHandler(this.txtNewPassword_Leave);
@@ -217,23 +222,25 @@
             this.txtConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmPassword.Location = new System.Drawing.Point(74, 12);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(74, 9);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.Size = new System.Drawing.Size(568, 29);
-            this.txtConfirmPassword.TabIndex = 1;
+            this.txtConfirmPassword.Size = new System.Drawing.Size(404, 29);
+            this.txtConfirmPassword.TabIndex = 0;
             this.txtConfirmPassword.TextChanged += new System.EventHandler(this.txtConfirmPassword_TextChanged);
             this.txtConfirmPassword.Enter += new System.EventHandler(this.txtConfirmPassword_Enter);
             this.txtConfirmPassword.Leave += new System.EventHandler(this.txtConfirmPassword_Leave);
             // 
             // btnForgotPasswordCancel
             // 
-            this.btnForgotPasswordCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnForgotPasswordCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnForgotPasswordCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
             this.btnForgotPasswordCancel.FlatAppearance.BorderSize = 0;
             this.btnForgotPasswordCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnForgotPasswordCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnForgotPasswordCancel.Location = new System.Drawing.Point(18, 17);
+            this.btnForgotPasswordCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnForgotPasswordCancel.ForeColor = System.Drawing.Color.White;
+            this.btnForgotPasswordCancel.Location = new System.Drawing.Point(16, 13);
             this.btnForgotPasswordCancel.Name = "btnForgotPasswordCancel";
-            this.btnForgotPasswordCancel.Size = new System.Drawing.Size(274, 53);
+            this.btnForgotPasswordCancel.Size = new System.Drawing.Size(223, 53);
             this.btnForgotPasswordCancel.TabIndex = 1;
             this.btnForgotPasswordCancel.Text = "Cancel";
             this.btnForgotPasswordCancel.UseVisualStyleBackColor = false;
@@ -261,14 +268,15 @@
             this.pnlNewPassword.Controls.Add(this.picEye2);
             this.pnlNewPassword.Controls.Add(this.txtNewPassword);
             this.pnlNewPassword.Controls.Add(this.pictureBox3);
-            this.pnlNewPassword.Location = new System.Drawing.Point(22, 291);
+            this.pnlNewPassword.Location = new System.Drawing.Point(22, 263);
             this.pnlNewPassword.Name = "pnlNewPassword";
-            this.pnlNewPassword.Size = new System.Drawing.Size(712, 56);
-            this.pnlNewPassword.TabIndex = 3;
+            this.pnlNewPassword.Size = new System.Drawing.Size(548, 50);
+            this.pnlNewPassword.TabIndex = 2;
             // 
             // picEye2
             // 
-            this.picEye2.Location = new System.Drawing.Point(648, 11);
+            this.picEye2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picEye2.Location = new System.Drawing.Point(498, 8);
             this.picEye2.Name = "picEye2";
             this.picEye2.Size = new System.Drawing.Size(34, 33);
             this.picEye2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -284,32 +292,34 @@
             this.pictureBox3.Location = new System.Drawing.Point(-1, -1);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(67, 56);
+            this.pictureBox3.Size = new System.Drawing.Size(67, 50);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
             this.panel3.Controls.Add(this.btnForgotPasswordCancel);
             this.panel3.Controls.Add(this.btnForgotPasswordUpdatePassword);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 782);
+            this.panel3.Location = new System.Drawing.Point(0, 730);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(752, 95);
+            this.panel3.Size = new System.Drawing.Size(588, 83);
             this.panel3.TabIndex = 1;
             // 
             // btnForgotPasswordUpdatePassword
             // 
+            this.btnForgotPasswordUpdatePassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnForgotPasswordUpdatePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(87)))), ((int)(((byte)(243)))));
             this.btnForgotPasswordUpdatePassword.FlatAppearance.BorderSize = 0;
             this.btnForgotPasswordUpdatePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnForgotPasswordUpdatePassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnForgotPasswordUpdatePassword.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnForgotPasswordUpdatePassword.ForeColor = System.Drawing.Color.White;
             this.btnForgotPasswordUpdatePassword.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__3_;
-            this.btnForgotPasswordUpdatePassword.Location = new System.Drawing.Point(417, 17);
+            this.btnForgotPasswordUpdatePassword.Location = new System.Drawing.Point(347, 13);
             this.btnForgotPasswordUpdatePassword.Name = "btnForgotPasswordUpdatePassword";
-            this.btnForgotPasswordUpdatePassword.Size = new System.Drawing.Size(317, 53);
+            this.btnForgotPasswordUpdatePassword.Size = new System.Drawing.Size(223, 53);
             this.btnForgotPasswordUpdatePassword.TabIndex = 0;
             this.btnForgotPasswordUpdatePassword.Text = "Reset Pasword";
             this.btnForgotPasswordUpdatePassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -322,7 +332,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(74, 19);
+            this.label7.Location = new System.Drawing.Point(64, 19);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(451, 46);
             this.label7.TabIndex = 1;
@@ -336,14 +346,14 @@
             this.pnlForgotPasswordAbout.Controls.Add(this.pictureBox7);
             this.pnlForgotPasswordAbout.Location = new System.Drawing.Point(0, 80);
             this.pnlForgotPasswordAbout.Name = "pnlForgotPasswordAbout";
-            this.pnlForgotPasswordAbout.Size = new System.Drawing.Size(712, 83);
+            this.pnlForgotPasswordAbout.Size = new System.Drawing.Size(550, 83);
             this.pnlForgotPasswordAbout.TabIndex = 6;
             this.pnlForgotPasswordAbout.Resize += new System.EventHandler(this.pnlForgotPasswordAbout_Resize);
             // 
             // pictureBox7
             // 
             this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.info__3_;
-            this.pictureBox7.Location = new System.Drawing.Point(17, 20);
+            this.pictureBox7.Location = new System.Drawing.Point(14, 20);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(47, 44);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -353,13 +363,14 @@
             // lblPasswordMatch
             // 
             this.lblPasswordMatch.AutoSize = true;
-            this.lblPasswordMatch.Location = new System.Drawing.Point(23, 472);
+            this.lblPasswordMatch.Location = new System.Drawing.Point(23, 434);
             this.lblPasswordMatch.Name = "lblPasswordMatch";
             this.lblPasswordMatch.Size = new System.Drawing.Size(0, 17);
             this.lblPasswordMatch.TabIndex = 7;
             // 
             // panel4
             // 
+            this.panel4.BackColor = System.Drawing.Color.Transparent;
             this.panel4.Controls.Add(this.pnlRegisteredPhoneNumber);
             this.panel4.Controls.Add(this.lblRegisteredPhoneNumber);
             this.panel4.Controls.Add(this.lblPasswordMatch);
@@ -374,8 +385,8 @@
             this.panel4.Location = new System.Drawing.Point(0, 119);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(15);
-            this.panel4.Size = new System.Drawing.Size(752, 663);
-            this.panel4.TabIndex = 2;
+            this.panel4.Size = new System.Drawing.Size(588, 611);
+            this.panel4.TabIndex = 1;
             // 
             // pnlRegisteredPhoneNumber
             // 
@@ -385,20 +396,21 @@
             this.pnlRegisteredPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRegisteredPhoneNumber.Controls.Add(this.txtRegisteredPhoneNumber);
             this.pnlRegisteredPhoneNumber.Controls.Add(this.pictureBox5);
-            this.pnlRegisteredPhoneNumber.Location = new System.Drawing.Point(22, 172);
+            this.pnlRegisteredPhoneNumber.Location = new System.Drawing.Point(22, 158);
             this.pnlRegisteredPhoneNumber.Name = "pnlRegisteredPhoneNumber";
-            this.pnlRegisteredPhoneNumber.Size = new System.Drawing.Size(712, 56);
-            this.pnlRegisteredPhoneNumber.TabIndex = 9;
+            this.pnlRegisteredPhoneNumber.Size = new System.Drawing.Size(548, 50);
+            this.pnlRegisteredPhoneNumber.TabIndex = 1;
             // 
             // txtRegisteredPhoneNumber
             // 
             this.txtRegisteredPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRegisteredPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRegisteredPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRegisteredPhoneNumber.Location = new System.Drawing.Point(74, 12);
+            this.txtRegisteredPhoneNumber.Location = new System.Drawing.Point(74, 9);
             this.txtRegisteredPhoneNumber.Name = "txtRegisteredPhoneNumber";
-            this.txtRegisteredPhoneNumber.Size = new System.Drawing.Size(633, 29);
-            this.txtRegisteredPhoneNumber.TabIndex = 1;
+            this.txtRegisteredPhoneNumber.Size = new System.Drawing.Size(469, 29);
+            this.txtRegisteredPhoneNumber.TabIndex = 0;
+            this.txtRegisteredPhoneNumber.TextChanged += new System.EventHandler(this.txtRegisteredPhoneNumber_TextChanged);
             this.txtRegisteredPhoneNumber.Enter += new System.EventHandler(this.txtRegisteredPhoneNumber_Enter);
             this.txtRegisteredPhoneNumber.Leave += new System.EventHandler(this.txtRegisteredPhoneNumber_Leave);
             // 
@@ -410,7 +422,7 @@
             this.pictureBox5.Location = new System.Drawing.Point(-1, -1);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(67, 56);
+            this.pictureBox5.Size = new System.Drawing.Size(67, 50);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 0;
             this.pictureBox5.TabStop = false;
@@ -421,7 +433,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRegisteredPhoneNumber.AutoSize = true;
             this.lblRegisteredPhoneNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegisteredPhoneNumber.Location = new System.Drawing.Point(18, 134);
+            this.lblRegisteredPhoneNumber.Location = new System.Drawing.Point(18, 123);
             this.lblRegisteredPhoneNumber.Name = "lblRegisteredPhoneNumber";
             this.lblRegisteredPhoneNumber.Size = new System.Drawing.Size(213, 23);
             this.lblRegisteredPhoneNumber.TabIndex = 8;
@@ -429,6 +441,8 @@
             // 
             // pnlPasswordStrength
             // 
+            this.pnlPasswordStrength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPasswordStrength.Controls.Add(this.pnlForgotPasswordAbout);
             this.pnlPasswordStrength.Controls.Add(this.pnlVeryStrong);
             this.pnlPasswordStrength.Controls.Add(this.pnlStrong);
@@ -436,9 +450,9 @@
             this.pnlPasswordStrength.Controls.Add(this.pnlWeak);
             this.pnlPasswordStrength.Controls.Add(this.lblPasswordStrengthLevel);
             this.pnlPasswordStrength.Controls.Add(this.label6);
-            this.pnlPasswordStrength.Location = new System.Drawing.Point(22, 494);
+            this.pnlPasswordStrength.Location = new System.Drawing.Point(22, 445);
             this.pnlPasswordStrength.Name = "pnlPasswordStrength";
-            this.pnlPasswordStrength.Size = new System.Drawing.Size(712, 163);
+            this.pnlPasswordStrength.Size = new System.Drawing.Size(548, 163);
             this.pnlPasswordStrength.TabIndex = 6;
             // 
             // pnlVeryStrong
@@ -479,9 +493,8 @@
             this.lblPasswordStrengthLevel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPasswordStrengthLevel.Location = new System.Drawing.Point(173, 8);
             this.lblPasswordStrengthLevel.Name = "lblPasswordStrengthLevel";
-            this.lblPasswordStrengthLevel.Size = new System.Drawing.Size(53, 23);
+            this.lblPasswordStrengthLevel.Size = new System.Drawing.Size(0, 23);
             this.lblPasswordStrengthLevel.TabIndex = 1;
-            this.lblPasswordStrengthLevel.Text = "Weak";
             // 
             // label6
             // 
@@ -502,14 +515,15 @@
             this.pnlConfirmPassword.Controls.Add(this.picEye3);
             this.pnlConfirmPassword.Controls.Add(this.txtConfirmPassword);
             this.pnlConfirmPassword.Controls.Add(this.pictureBox4);
-            this.pnlConfirmPassword.Location = new System.Drawing.Point(22, 410);
+            this.pnlConfirmPassword.Location = new System.Drawing.Point(22, 368);
             this.pnlConfirmPassword.Name = "pnlConfirmPassword";
-            this.pnlConfirmPassword.Size = new System.Drawing.Size(712, 56);
-            this.pnlConfirmPassword.TabIndex = 5;
+            this.pnlConfirmPassword.Size = new System.Drawing.Size(548, 50);
+            this.pnlConfirmPassword.TabIndex = 3;
             // 
             // picEye3
             // 
-            this.picEye3.Location = new System.Drawing.Point(648, 11);
+            this.picEye3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picEye3.Location = new System.Drawing.Point(498, 8);
             this.picEye3.Name = "picEye3";
             this.picEye3.Size = new System.Drawing.Size(34, 33);
             this.picEye3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -525,7 +539,7 @@
             this.pictureBox4.Location = new System.Drawing.Point(-1, -1);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(67, 56);
+            this.pictureBox4.Size = new System.Drawing.Size(67, 50);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 0;
             this.pictureBox4.TabStop = false;
@@ -536,7 +550,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 372);
+            this.label5.Location = new System.Drawing.Point(18, 333);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 23);
             this.label5.TabIndex = 4;
@@ -544,30 +558,34 @@
             // 
             // pnlMainBody
             // 
-            this.pnlMainBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.pnlMainBody.BackColor = System.Drawing.Color.Transparent;
+            this.pnlMainBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMainBody.Controls.Add(this.panel4);
             this.pnlMainBody.Controls.Add(this.panel3);
             this.pnlMainBody.Controls.Add(this.panel2);
             this.pnlMainBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMainBody.Location = new System.Drawing.Point(0, 0);
             this.pnlMainBody.Name = "pnlMainBody";
-            this.pnlMainBody.Size = new System.Drawing.Size(752, 877);
+            this.pnlMainBody.Size = new System.Drawing.Size(590, 815);
             this.pnlMainBody.TabIndex = 1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // ForgotPasswordControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 877);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
+            this.ClientSize = new System.Drawing.Size(590, 815);
             this.Controls.Add(this.pnlMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximumSize = new System.Drawing.Size(752, 877);
-            this.MinimumSize = new System.Drawing.Size(752, 877);
             this.Name = "ForgotPasswordControls";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ForgetPasswordControls";
             this.Load += new System.EventHandler(this.ForgotPasswordControls_Load);
-            this.Resize += new System.EventHandler(this.ForgotPasswordControls_Resize);
             this.pnlRegisteredEmailText.ResumeLayout(false);
             this.pnlRegisteredEmailText.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -594,6 +612,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picEye3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.pnlMainBody.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -639,5 +658,6 @@
         private System.Windows.Forms.TextBox txtRegisteredPhoneNumber;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label lblRegisteredPhoneNumber;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

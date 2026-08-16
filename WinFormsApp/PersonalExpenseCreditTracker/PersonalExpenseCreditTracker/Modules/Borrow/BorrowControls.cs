@@ -48,6 +48,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             toolTip.SetToolTip(btnFilter, "Filter Borrow");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Borrow");
+            toolTip.SetToolTip(txtSearch, "Search by Person Name,Amount,Date,Payment Type or Status");
 
             dgvBorrowDataTable.AutoGenerateColumns = false;
             dgvBorrowDataTable.CellDoubleClick += dgvBorrowDataTable_CellDoubleClick;
@@ -142,7 +143,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private void BorrowControls_Load(object sender, EventArgs e)
         {
             ignoreEvents = true;
-            txtSearch.Text = "Search...";
+            txtSearch.Text = "Search records...";
             txtSearch.ForeColor = Color.Gray;
             txtMinAmount.Text = "Enter Amount";
             txtMinAmount.ForeColor = Color.Gray;
@@ -329,6 +330,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.AllowUserToOrderColumns = false;
             dgvBorrowDataTable.AutoGenerateColumns = false;
             dgvBorrowDataTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBorrowDataTable.AllowUserToResizeColumns = true;
 
             //Column HeaderStyle
             dgvBorrowDataTable.EnableHeadersVisualStyles = false;
@@ -339,17 +341,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 255);
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvBorrowDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            ////Column Background Color
-            //colDate.DefaultCellStyle.BackColor = Color.White;
-            //colPersonName.DefaultCellStyle.BackColor = Color.White;
-            //colPaymentType.DefaultCellStyle.BackColor = Color.White;
-            //colStatus.DefaultCellStyle.BackColor = Color.White;
-            //colAmount.DefaultCellStyle.BackColor = Color.White;
-            //colPaidAmount.DefaultCellStyle.BackColor = Color.White;
-            //colRemainingAmount.DefaultCellStyle.BackColor = Color.White;
-            //colDeadline.DefaultCellStyle.BackColor = Color.White;
-            //colDescription.DefaultCellStyle.BackColor = Color.White;
 
             //Column FontStyle
             colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -563,11 +554,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private int GetRowsPerPage()
         {
             Rectangle display = dgvBorrowDataTable.DisplayRectangle;
-
             int rowHeight = dgvBorrowDataTable.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight) - 1;
+            return Math.Max(1, (display.Height / rowHeight) - 1);
         }
+
 
         //Page control button
         private void btnFirstpage_Click(object sender, EventArgs e)
@@ -1201,11 +1192,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.Refresh();
         }
 
-         private void txtSearch_TextChanged(object sender, EventArgs e)
-         {
-             AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
-             ShowCurrentPage();
-         }
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            AllBorrowData = Common.CommonUiFunction.SearchDataInLentOrBorrow(masterData, txtSearch);
+            currentPage = 1;
+            ShowCurrentPage();
+        }
+
 
          private void cmbPayment_Click(object sender, EventArgs e)
          {
@@ -1817,7 +1810,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
          private void txtSearch_Enter(object sender, EventArgs e)
          {
-             if (txtSearch.Text == "Search...")
+             if (txtSearch.Text == "Search records...")
              {
                  txtSearch.Text = "";
                  txtSearch.ForeColor = Color.Black;
@@ -1828,7 +1821,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
          {
              if (string.IsNullOrWhiteSpace(txtSearch.Text))
              {
-                 txtSearch.Text = "Search...";
+                 txtSearch.Text = "Search records...";
                  txtSearch.ForeColor = Color.Gray;
              }
          }

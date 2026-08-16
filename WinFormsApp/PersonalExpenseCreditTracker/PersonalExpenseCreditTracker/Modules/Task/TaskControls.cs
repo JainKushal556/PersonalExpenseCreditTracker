@@ -69,6 +69,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             toolTip.SetToolTip(btnFilter, "Filter Tasks");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Tasks");
+            toolTip.SetToolTip(txtSearch,"Search by Task Title,Priority,Status or Date");
         }
 
         private void TaskControls_Load(object sender, EventArgs e)
@@ -79,7 +80,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbPriority);
             CommonUiFunction.SetComboBoxHeightAndOwnerDraw(cmbStatus);
 
-            txtSearch.Text = "Search...";
+            txtSearch.Text = "Search records...";
             txtSearch.ForeColor = Color.Gray;
             cmbPriority.ForeColor = Color.Gray;
             cmbStatus.ForeColor = Color.Gray;
@@ -433,6 +434,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             dataGridViewTask.AllowUserToOrderColumns = false;
             dataGridViewTask.AutoGenerateColumns = false;
             dataGridViewTask.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewTask.AllowUserToResizeColumns = true;
 
             //Column HeaderStyle
             dataGridViewTask.EnableHeadersVisualStyles = false;
@@ -510,7 +512,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             // Cell Alignment
             colDate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             colStatus.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            colTask.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colTask.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            colTask.DefaultCellStyle.Padding = new Padding(30,0,0,0);
             colDeadline.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             colAction.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             colPriority.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -802,10 +805,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private int GetRowsPerPage()
         {
             Rectangle display = dataGridViewTask.DisplayRectangle;
-
             int rowHeight = dataGridViewTask.RowTemplate.Height;
 
-            return Math.Max(1, display.Height / rowHeight) - 1;
+            return Math.Max(1, (display.Height / rowHeight) - 1);
         }
 
         private void btnFirstpage_Click(object sender, EventArgs e)
@@ -1645,7 +1647,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void txtSearch_Enter(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Search...")
+            if (txtSearch.Text == "Search records...")
             {
                 txtSearch.Text = "";
                 txtSearch.ForeColor = Color.Black;
@@ -1656,7 +1658,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         {
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
             {
-                txtSearch.Text = "Search...";
+                txtSearch.Text = "Search records...";
                 txtSearch.ForeColor = Color.Gray;
             }
         }
