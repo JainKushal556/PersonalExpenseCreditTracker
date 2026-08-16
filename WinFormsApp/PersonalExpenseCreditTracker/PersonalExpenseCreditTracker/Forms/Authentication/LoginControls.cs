@@ -96,7 +96,10 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                     UserId = authBLL.GetUserIdFromDB();
                     Session.LogedInUser.SetUserId(UserId);
 
-                    this.Close(); 
+                    this.Hide();
+                    MainForm mainForm = new MainForm();
+                    mainForm.ShowDialog();
+                    this.Close();
                     break;
 
                 case CommonValidator.ValidationResult.EmailInvalid:

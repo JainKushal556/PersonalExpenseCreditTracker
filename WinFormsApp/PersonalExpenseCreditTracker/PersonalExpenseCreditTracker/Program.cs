@@ -29,10 +29,7 @@ namespace PersonalExpenseCreditTracker
             {
                 LoginControls loginForm = new LoginControls();
 
-                if (loginForm.ShowDialog() == DialogResult.OK)
-                {
-                    Application.Run(new MainForm());
-                }
+                Application.Run(new LoginControls());
             }
         }
     }
