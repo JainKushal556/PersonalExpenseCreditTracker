@@ -1,4 +1,4 @@
-CREATE PROCEDURE spForgetPassword  
+CREATE OR ALTER PROCEDURE spForgetPassword
     @Email VARCHAR(100),  
     @PhoneNumber VARCHAR(15),  
     @NewPassword VARCHAR(MAX)  
@@ -27,7 +27,7 @@ BEGIN
                 AND A.Password = @NewPassword
         )
         BEGIN
-            SELECT 'New Password Cannot Be Same As Old Password' AS Message;
+            SELECT 'New Password Same As Old Password' AS Message;
         END
 
         ELSE
@@ -54,3 +54,4 @@ BEGIN
     END  
   
 END;
+GO
