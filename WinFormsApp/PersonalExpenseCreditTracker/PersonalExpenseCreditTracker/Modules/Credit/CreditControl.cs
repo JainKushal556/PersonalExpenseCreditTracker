@@ -50,6 +50,13 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             InitializeComponent();
             StyleCreditGrid();
+            ToolTip toolTip = new ToolTip();
+
+            toolTip.SetToolTip(btnFilter, "Filter Credit");
+            toolTip.SetToolTip(btnRefresh, "Refresh List");
+            toolTip.SetToolTip(btnExport, "Export Credit");
+            toolTip.SetToolTip(txtSearch, "Search by Category, Sub-Category,Amount,Date or Payment Type");
+
             ApplyRoundCorners();
             this.Resize += CreditControl_Resize;
             txtSearch.TextChanged += txtSearch_TextChanged;
@@ -67,6 +74,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void CreditControl_Load(object sender, EventArgs e)
         {
+            txtSearch.Text = "Search records...";
+            txtSearch.ForeColor = Color.Gray;
             txtMinAmount.Text = "Enter Amount";
             txtMinAmount.ForeColor = Color.Gray;
             txtMaxAmount.Text = "Enter Amount";
@@ -134,16 +143,6 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             dgvCreditDataTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(80, 60, 180);
             dgvCreditDataTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            //Column Background Color
-            colDate.DefaultCellStyle.BackColor = Color.White;
-            
-            colDescription.DefaultCellStyle.BackColor = Color.White;
-            colCategory.DefaultCellStyle.BackColor = Color.White;
-            colSubCategory.DefaultCellStyle.BackColor = Color.White;
-            colAmount.DefaultCellStyle.BackColor = Color.White;
-            colPaymentMethod.DefaultCellStyle.BackColor = Color.White;
-
-
             //Column FontStyle
             colDate.DefaultCellStyle.Font = new Font("Segoe UI", 10);
 
@@ -155,14 +154,42 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
             //Row Style
             dgvCreditDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
-            dgvCreditDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvCreditDataTable.DefaultCellStyle.ForeColor = Color.Black;
-            dgvCreditDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvCreditDataTable.RowTemplate.Height = 40;
             dgvCreditDataTable.RowHeadersVisible = false;
             dgvCreditDataTable.MultiSelect = false;
             dgvCreditDataTable.ReadOnly = true;
             dgvCreditDataTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Zigzag
+
+            Color selectedRowColor = Color.FromArgb(174, 205, 247);
+            // Normal Row
+            dgvCreditDataTable.DefaultCellStyle.BackColor = Color.White;
+            dgvCreditDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Alternating Row
+            dgvCreditDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
+
+            dgvCreditDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+
+            // Selection
+            dgvCreditDataTable.DefaultCellStyle.SelectionBackColor = selectedRowColor;
+
+            dgvCreditDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dgvCreditDataTable.AlternatingRowsDefaultCellStyle.SelectionBackColor = selectedRowColor;
+
+            dgvCreditDataTable.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Force every column to use the same selection color
+            foreach (DataGridViewColumn column in dgvCreditDataTable.Columns)
+            {
+                column.DefaultCellStyle.SelectionBackColor =
+                    selectedRowColor;
+
+                column.DefaultCellStyle.SelectionForeColor =
+                    Color.Black;
+            }
 
             //Border style
             dgvCreditDataTable.BorderStyle = BorderStyle.None;
@@ -1457,6 +1484,9 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             HideAllFilterPanels();
             HidePopupPanels();
 
+            txtSearch.Clear();
+            txtSearch_Leave(txtSearch, EventArgs.Empty);
+
             // Clear validation
             errorProvider1.Clear();
             ErrorHelper.HideErrorForControl(pnlFromDate);
@@ -1656,6 +1686,23 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
         }
 
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search records...")
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = "Search records...";
+                txtSearch.ForeColor = Color.Gray;
+            }
+        }
 
         
 
