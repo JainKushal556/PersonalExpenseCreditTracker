@@ -72,22 +72,23 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             picEye1.Image = Properties.Resources.open_eye__2_;
             picEye2.Image = Properties.Resources.open_eye__2_;
 
-            txtFullName.Text = "Enter your full name";
-            txtRegistrationEmail.Text = "Enter your email address";
-            txtRegistrationCreatePassword.Text = "Create a password";
-            txtRegistrationConfirmPassword.Text = "Confirm password";
+            txtFullName.Text = "Enter Your Full Name";
+            txtRegistrationEmail.Text = "Enter Your Email Address";
+            txtRegistrationPhoneNumber.Text = "Enter Your Phone Number";
+            txtRegistrationCreatePassword.Text = "Create a Password";
+            txtRegistrationConfirmPassword.Text = "Confirm Password";
 
             txtFullName.ForeColor = Color.Gray;
             txtRegistrationEmail.ForeColor = Color.Gray;
+            txtRegistrationPhoneNumber.ForeColor = Color.Gray;
             txtRegistrationCreatePassword.ForeColor = Color.Gray;
             txtRegistrationConfirmPassword.ForeColor = Color.Gray;
 
-            //lblPasswordRestriction.Text = "At least 8 characters including uppercase, lowercase, number and special character";
         }
         
         private void txtRegistrationEmail_Enter(object sender, EventArgs e)
         {
-            if (txtRegistrationEmail.Text == "Enter your email address")
+            if (txtRegistrationEmail.Text == "Enter Your Email Address")
             {
                 txtRegistrationEmail.Text = "";
                 txtRegistrationEmail.ForeColor = Color.Black;
@@ -98,14 +99,14 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             if (txtRegistrationEmail.Text == "")
             {
-                txtRegistrationEmail.Text = "Enter your email address";
+                txtRegistrationEmail.Text = "Enter Your Email Address";
                 txtRegistrationEmail.ForeColor = Color.Gray;
             }
         }
 
         private void txtFullName_Enter(object sender, EventArgs e)
         {
-            if (txtFullName.Text == "Enter your full name")
+            if (txtFullName.Text == "Enter Your Full Name")
             {
                 txtFullName.Text = "";
                 txtFullName.ForeColor = Color.Black;
@@ -116,14 +117,40 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             if (txtFullName.Text == "")
             {
-                txtFullName.Text = "Enter your full name";
+                txtFullName.Text = "Enter Your Full Name";
                 txtFullName.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtRegistrationPhoneNumber_Enter(object sender, EventArgs e)
+        {
+            if (txtRegistrationPhoneNumber.Text == "Enter Your Phone Number")
+            {
+                txtRegistrationPhoneNumber.Text = "";
+                txtRegistrationPhoneNumber.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtRegistrationPhoneNumber_Leave(object sender, EventArgs e)
+        {
+            if (txtRegistrationPhoneNumber.Text == "")
+            {
+                txtRegistrationPhoneNumber.Text = "Enter Your Phone Number";
+                txtRegistrationPhoneNumber.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtRegistrationPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (txtRegistrationPhoneNumber.Text != "Enter Your Phone Number" && !string.IsNullOrWhiteSpace(txtRegistrationPhoneNumber.Text))
+            {
+                ErrorHelper.HideErrorForControl(txtRegistrationPhoneNumber);
             }
         }
 
         private void txtRegistrationCreatePassword_Enter(object sender, EventArgs e)
         {
-            if (txtRegistrationCreatePassword.Text == "Create a password")
+            if (txtRegistrationCreatePassword.Text == "Create a Password")
             {
                 txtRegistrationCreatePassword.Text = "";
                 txtRegistrationCreatePassword.ForeColor = Color.Black;
@@ -134,14 +161,14 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             if (txtRegistrationCreatePassword.Text == "")
             {
-                txtRegistrationCreatePassword.Text = "Create a password";
+                txtRegistrationCreatePassword.Text = "Create a Password";
                 txtRegistrationCreatePassword.ForeColor = Color.Gray;
             }
         }
 
         private void txtRegistrationConfirmPassword_Enter(object sender, EventArgs e)
         {
-            if (txtRegistrationConfirmPassword.Text == "Confirm password")
+            if (txtRegistrationConfirmPassword.Text == "Confirm Password")
             {
                 txtRegistrationConfirmPassword.Text = "";
                 txtRegistrationConfirmPassword.ForeColor = Color.Black;
@@ -152,43 +179,21 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             if (txtRegistrationConfirmPassword.Text == "")
             {
-                txtRegistrationConfirmPassword.Text = "Confirm password";
+                txtRegistrationConfirmPassword.Text = "Confirm Password";
                 txtRegistrationConfirmPassword.ForeColor = Color.Gray;
             }
         }
 
-        private int CheckPasswordStrengthLevel(string password)
-        {
-            int score = 0;
-
-            if (password.Length >= 8)
-                score++;
-
-            if (Regex.IsMatch(password, "[A-Z]"))
-                score++;
-
-            if (Regex.IsMatch(password, "[a-z]"))
-                score++;
-
-            if (Regex.IsMatch(password, "[0-9]"))
-                score++;
-
-            if (Regex.IsMatch(password, "[^a-zA-Z0-9]"))
-                score++;
-
-            return score;
-        }
-
         private void txtNewPassword_TextChanged(object sender, EventArgs e)
         {
-            if (txtRegistrationCreatePassword.Text != "Create a password" && !string.IsNullOrWhiteSpace(txtRegistrationCreatePassword.Text))
+            if (txtRegistrationCreatePassword.Text != "Create a Password" && !string.IsNullOrWhiteSpace(txtRegistrationCreatePassword.Text))
             {
                 ErrorHelper.HideErrorForControl(txtRegistrationCreatePassword);
             }
 
             AuthBLL authBll = new AuthBLL();
 
-            if (txtRegistrationCreatePassword.Text == "" || txtRegistrationCreatePassword.Text == "Create a password")
+            if (txtRegistrationCreatePassword.Text == "" || txtRegistrationCreatePassword.Text == "Create a Password")
             {
                 lblPasswordStrengthLevel.Text = "";
 
@@ -259,7 +264,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             //    lblPasswordMatch.Text = "";
             //}
 
-            //if (txtRegistrationCreatePassword.Text == "" || txtRegistrationCreatePassword.Text == "Create a password")
+            //if (txtRegistrationCreatePassword.Text == "" || txtRegistrationCreatePassword.Text == "Create a Password")
             //{
             //    pnlWeak.BackColor = Color.FromArgb(234, 235, 239);
             //    pnlMedium.BackColor = Color.FromArgb(234, 235, 239);
@@ -351,19 +356,17 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             AuthUI authUI = new AuthUI();
             string ErroeMsg;
 
-            authUI.userName = (txtFullName.Text == "Enter your full name") ? "" : txtFullName.Text;
-            authUI.email = (txtRegistrationEmail.Text == "Enter your email address") ? "" : txtRegistrationEmail.Text;
-            authUI.phoneNumber = txtRegistrationPhoneNumber.Text;
-            authUI.newPassword = (txtRegistrationCreatePassword.Text == "Create a password") ? "" : txtRegistrationCreatePassword.Text;
-            authUI.confirmPassword = (txtRegistrationConfirmPassword.Text == "Confirm password") ? "" : txtRegistrationConfirmPassword.Text;
+            authUI.userName = (txtFullName.Text == "Enter Your Full Name") ? "" : txtFullName.Text;
+            authUI.email = (txtRegistrationEmail.Text == "Enter Your Email Address") ? "" : txtRegistrationEmail.Text;
+            authUI.phoneNumber = (txtRegistrationPhoneNumber.Text == "Enter Your Phone Number") ? "" : txtRegistrationPhoneNumber.Text;
+            authUI.newPassword = (txtRegistrationCreatePassword.Text == "Create a Password") ? "" : txtRegistrationCreatePassword.Text;
+            authUI.confirmPassword = (txtRegistrationConfirmPassword.Text == "Confirm Password") ? "" : txtRegistrationConfirmPassword.Text;
 
             CommonValidator.ValidationResult result = authUI.RegistrationFormDataIntoAuthUI();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Registration Successfully");
-                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
@@ -428,8 +431,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             }
         }
 
-        private void txtRegistrationConfirmPassword_TextChanged(object sender, EventArgs e)
+        private void lblLogin_Click(object sender, EventArgs e)
         {
+            this.Close();
         }
     }
 }

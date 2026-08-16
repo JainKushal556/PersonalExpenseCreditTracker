@@ -8,12 +8,19 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using PersonalExpenseCreditTracker.Forms.Main;
+using PersonalExpenseCreditTracker.Common;
+using BLLayer.Authentication;
+using BLLayer.Common;
+using PersonalExpenseCreditTracker.Forms.Main;
 
 namespace PersonalExpenseCreditTracker.Forms.Authentication
 {
     public partial class LoginControls : Form
     {
         bool isPasswordVisible = true;
+
+        internal protected int UserId { get; set; }
+
         public LoginControls()
         {
             InitializeComponent();
@@ -74,10 +81,37 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtLoginEmail.Text == "Enter Email Address" || txtLoginPassword.Text == "Enter Password")
-                MessageBox.Show("Please fill all fields");
+            AuthUI authUI = new AuthUI();
+            AuthBLL authBLL = new AuthBLL();
+            string ErroeMsg;
 
-            this.Close();
+            authUI.email = (txtLoginEmail.Text == "Enter Email Address") ? "" : txtLoginEmail.Text;
+            authUI.password = (txtLoginPassword.Text == "Enter Password") ? "" : txtLoginPassword.Text;
+
+            CommonValidator.ValidationResult result = authUI.LoginDataIntoAuthUI();
+
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.Success:
+                    UserId = authBLL.GetUserIdFromDB();
+                    Session.LogedInUser.SetUserId(UserId);
+
+                    this.Close(); 
+                    break;
+
+                case CommonValidator.ValidationResult.EmailInvalid:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLoginEmail);
+                    break;
+
+                case CommonValidator.ValidationResult.NewPasswordEmpty:
+                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLoginPassword);
+                    break;
+
+                case CommonValidator.ValidationResult.StoreProcedureError:
+                    ErroeMsg = authUI.GetErrorMsgForLogin();
+                    MessageBox.Show(ErroeMsg);
+                    break;
+            }
         }
 
         private void picEye_Click(object sender, EventArgs e)
@@ -134,7 +168,18 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void lblForgotPassword_Click(object sender, EventArgs e)
         {
-            this.Close();
+            ForgotPasswordControls forgotPasswordControls = new ForgotPasswordControls();
+            forgotPasswordControls.ShowDialog();
+        }
+
+        private void lblCreateAccount_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            RegistrationControls registrationControls = new RegistrationControls();
+            registrationControls.ShowDialog();
+
+            this.Show();
         }
     }
 }

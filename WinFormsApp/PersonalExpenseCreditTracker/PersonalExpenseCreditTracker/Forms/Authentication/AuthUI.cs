@@ -19,7 +19,6 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         AuthBLL authBll = new AuthBLL();
 
-
         public CommonValidator.ValidationResult RegistrationFormDataIntoAuthUI()
         {
             authBll.userName = userName;
@@ -31,7 +30,15 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             return authBll.RegistrationFormDataIntoAuthBLL();
         }
 
-        public string GetErrorMsg()
+        public CommonValidator.ValidationResult LoginDataIntoAuthUI()
+        {
+            authBll.email = email;
+            authBll.password = password;
+
+            return authBll.LoginDataIntoAuthBLL();
+        }
+
+        public CommonValidator.ValidationResult ForgotPasswordDataIntoAuthUI()
         {
             authBll.userName = userName;
             authBll.email = email;
@@ -39,13 +46,40 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             authBll.newPassword = newPassword;
             authBll.confirmPassword = confirmPassword;
 
-            return authBll.GetError();
+            return authBll.ForgotPasswordDataIntoAuthBLL();
         }
 
 
+        public string GetErrorMsg()
+        {
+            authBll.userName = userName;
+            authBll.email = email;
+            authBll.phoneNumber = phoneNumber;
+            authBll.newPassword = newPassword;
 
 
+            return authBll.GetError();
+        }
 
+        public string GetErrorMsgForLogin()
+        {
+            authBll.userName = userName;
+            authBll.email = email;
+            authBll.phoneNumber = phoneNumber;
+            authBll.password = password;
+
+            return authBll.GetErrorForLogin();
+        }
+
+
+        public string GetErrorMsgForForgotPassword()
+        {
+            authBll.email = email;
+            authBll.phoneNumber = phoneNumber;
+            authBll.newPassword = newPassword;
+
+            return authBll.GetErrorMsgForForgotPassword();
+        }
 
 
 

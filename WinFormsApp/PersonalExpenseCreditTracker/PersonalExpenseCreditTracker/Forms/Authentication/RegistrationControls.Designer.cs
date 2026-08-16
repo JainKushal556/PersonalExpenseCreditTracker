@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,6 +52,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlRegistrationDataInput = new System.Windows.Forms.Panel();
+            this.lblPhoneNumber = new System.Windows.Forms.Label();
+            this.pnlPhoneNumber = new System.Windows.Forms.Panel();
+            this.txtRegistrationPhoneNumber = new System.Windows.Forms.TextBox();
+            this.picPhoneNumber = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -73,7 +77,7 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.lblNewPassword = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.lblCreateAccount = new System.Windows.Forms.Label();
+            this.lblLogin = new System.Windows.Forms.Label();
             this.lblNotAccount = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
@@ -86,15 +90,16 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtRegistrationPhoneNumber = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlRegistrationDataInput.SuspendLayout();
+            this.pnlPhoneNumber.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPhoneNumber)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.pnlConfirmPassword.SuspendLayout();
@@ -107,7 +112,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,6 +120,7 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(254)))));
+            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.label19);
@@ -123,7 +129,6 @@
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.pictureBox4);
-            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
@@ -136,13 +141,24 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.pnlRegistrationDataInput);
             this.panel1.Controls.Add(this.pictureBox3);
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.pictureBox11);
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(48, 34);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1495, 872);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(253)))));
+            this.label10.Location = new System.Drawing.Point(181, 145);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(203, 50);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Better Life";
             // 
             // label16
             // 
@@ -231,17 +247,6 @@
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 16;
             this.pictureBox4.TabStop = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(253)))));
-            this.label10.Location = new System.Drawing.Point(181, 145);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(203, 50);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Better Life";
             // 
             // label9
             // 
@@ -370,7 +375,8 @@
             // pnlRegistrationDataInput
             // 
             this.pnlRegistrationDataInput.BackColor = System.Drawing.Color.White;
-            this.pnlRegistrationDataInput.Controls.Add(this.txtRegistrationPhoneNumber);
+            this.pnlRegistrationDataInput.Controls.Add(this.lblPhoneNumber);
+            this.pnlRegistrationDataInput.Controls.Add(this.pnlPhoneNumber);
             this.pnlRegistrationDataInput.Controls.Add(this.panel4);
             this.pnlRegistrationDataInput.Controls.Add(this.label23);
             this.pnlRegistrationDataInput.Controls.Add(this.pnlVeryStrong);
@@ -384,7 +390,7 @@
             this.pnlRegistrationDataInput.Controls.Add(this.pnlNewPassword);
             this.pnlRegistrationDataInput.Controls.Add(this.lblNewPassword);
             this.pnlRegistrationDataInput.Controls.Add(this.pictureBox8);
-            this.pnlRegistrationDataInput.Controls.Add(this.lblCreateAccount);
+            this.pnlRegistrationDataInput.Controls.Add(this.lblLogin);
             this.pnlRegistrationDataInput.Controls.Add(this.lblNotAccount);
             this.pnlRegistrationDataInput.Controls.Add(this.panel6);
             this.pnlRegistrationDataInput.Controls.Add(this.label17);
@@ -401,6 +407,52 @@
             this.pnlRegistrationDataInput.Size = new System.Drawing.Size(586, 800);
             this.pnlRegistrationDataInput.TabIndex = 10;
             // 
+            // lblPhoneNumber
+            // 
+            this.lblPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPhoneNumber.AutoSize = true;
+            this.lblPhoneNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhoneNumber.Location = new System.Drawing.Point(25, 327);
+            this.lblPhoneNumber.Name = "lblPhoneNumber";
+            this.lblPhoneNumber.Size = new System.Drawing.Size(142, 25);
+            this.lblPhoneNumber.TabIndex = 46;
+            this.lblPhoneNumber.Text = "Phone Number";
+            // 
+            // pnlPhoneNumber
+            // 
+            this.pnlPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPhoneNumber.Controls.Add(this.txtRegistrationPhoneNumber);
+            this.pnlPhoneNumber.Controls.Add(this.picPhoneNumber);
+            this.pnlPhoneNumber.Location = new System.Drawing.Point(29, 352);
+            this.pnlPhoneNumber.Name = "pnlPhoneNumber";
+            this.pnlPhoneNumber.Size = new System.Drawing.Size(525, 45);
+            this.pnlPhoneNumber.TabIndex = 45;
+            // 
+            // txtRegistrationPhoneNumber
+            // 
+            this.txtRegistrationPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtRegistrationPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRegistrationPhoneNumber.Location = new System.Drawing.Point(39, 9);
+            this.txtRegistrationPhoneNumber.Name = "txtRegistrationPhoneNumber";
+            this.txtRegistrationPhoneNumber.Size = new System.Drawing.Size(470, 25);
+            this.txtRegistrationPhoneNumber.TabIndex = 2;
+            this.txtRegistrationPhoneNumber.TextChanged += new System.EventHandler(this.txtRegistrationPhoneNumber_TextChanged);
+            this.txtRegistrationPhoneNumber.Enter += new System.EventHandler(this.txtRegistrationPhoneNumber_Enter);
+            this.txtRegistrationPhoneNumber.Leave += new System.EventHandler(this.txtRegistrationPhoneNumber_Leave);
+            // 
+            // picPhoneNumber
+            // 
+            this.picPhoneNumber.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone__4_;
+            this.picPhoneNumber.Location = new System.Drawing.Point(4, 3);
+            this.picPhoneNumber.Name = "picPhoneNumber";
+            this.picPhoneNumber.Size = new System.Drawing.Size(30, 36);
+            this.picPhoneNumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPhoneNumber.TabIndex = 0;
+            this.picPhoneNumber.TabStop = false;
+            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -408,16 +460,16 @@
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.txtFullName);
             this.panel4.Controls.Add(this.pictureBox10);
-            this.panel4.Location = new System.Drawing.Point(29, 211);
+            this.panel4.Location = new System.Drawing.Point(29, 180);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(525, 50);
+            this.panel4.Size = new System.Drawing.Size(525, 45);
             this.panel4.TabIndex = 27;
             // 
             // txtFullName
             // 
             this.txtFullName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtFullName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFullName.Location = new System.Drawing.Point(39, 11);
+            this.txtFullName.Location = new System.Drawing.Point(39, 9);
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.Size = new System.Drawing.Size(477, 25);
             this.txtFullName.TabIndex = 0;
@@ -427,9 +479,9 @@
             // pictureBox10
             // 
             this.pictureBox10.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user__8_;
-            this.pictureBox10.Location = new System.Drawing.Point(6, 8);
+            this.pictureBox10.Location = new System.Drawing.Point(6, 6);
             this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(26, 34);
+            this.pictureBox10.Size = new System.Drawing.Size(26, 30);
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox10.TabIndex = 0;
             this.pictureBox10.TabStop = false;
@@ -440,7 +492,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(25, 180);
+            this.label23.Location = new System.Drawing.Point(25, 155);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(100, 25);
             this.label23.TabIndex = 26;
@@ -448,37 +500,37 @@
             // 
             // pnlVeryStrong
             // 
-            this.pnlVeryStrong.Location = new System.Drawing.Point(379, 619);
+            this.pnlVeryStrong.Location = new System.Drawing.Point(379, 614);
             this.pnlVeryStrong.Name = "pnlVeryStrong";
-            this.pnlVeryStrong.Size = new System.Drawing.Size(107, 14);
+            this.pnlVeryStrong.Size = new System.Drawing.Size(107, 12);
             this.pnlVeryStrong.TabIndex = 25;
             // 
             // pnlStrong
             // 
-            this.pnlStrong.Location = new System.Drawing.Point(264, 619);
+            this.pnlStrong.Location = new System.Drawing.Point(264, 614);
             this.pnlStrong.Name = "pnlStrong";
-            this.pnlStrong.Size = new System.Drawing.Size(107, 14);
+            this.pnlStrong.Size = new System.Drawing.Size(107, 12);
             this.pnlStrong.TabIndex = 24;
             // 
             // pnlMedium
             // 
-            this.pnlMedium.Location = new System.Drawing.Point(149, 619);
+            this.pnlMedium.Location = new System.Drawing.Point(149, 614);
             this.pnlMedium.Name = "pnlMedium";
-            this.pnlMedium.Size = new System.Drawing.Size(107, 14);
+            this.pnlMedium.Size = new System.Drawing.Size(107, 12);
             this.pnlMedium.TabIndex = 23;
             // 
             // pnlWeak
             // 
-            this.pnlWeak.Location = new System.Drawing.Point(34, 619);
+            this.pnlWeak.Location = new System.Drawing.Point(34, 614);
             this.pnlWeak.Name = "pnlWeak";
-            this.pnlWeak.Size = new System.Drawing.Size(107, 14);
+            this.pnlWeak.Size = new System.Drawing.Size(107, 12);
             this.pnlWeak.TabIndex = 22;
             // 
             // lblPasswordStrengthLevel
             // 
             this.lblPasswordStrengthLevel.AutoSize = true;
             this.lblPasswordStrengthLevel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPasswordStrengthLevel.Location = new System.Drawing.Point(203, 585);
+            this.lblPasswordStrengthLevel.Location = new System.Drawing.Point(203, 589);
             this.lblPasswordStrengthLevel.Name = "lblPasswordStrengthLevel";
             this.lblPasswordStrengthLevel.Size = new System.Drawing.Size(53, 23);
             this.lblPasswordStrengthLevel.TabIndex = 21;
@@ -488,7 +540,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(30, 585);
+            this.label22.Location = new System.Drawing.Point(30, 589);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(162, 23);
             this.label22.TabIndex = 20;
@@ -503,9 +555,9 @@
             this.pnlConfirmPassword.Controls.Add(this.pictureBox6);
             this.pnlConfirmPassword.Controls.Add(this.picEye2);
             this.pnlConfirmPassword.Controls.Add(this.txtRegistrationConfirmPassword);
-            this.pnlConfirmPassword.Location = new System.Drawing.Point(29, 518);
+            this.pnlConfirmPassword.Location = new System.Drawing.Point(29, 524);
             this.pnlConfirmPassword.Name = "pnlConfirmPassword";
-            this.pnlConfirmPassword.Size = new System.Drawing.Size(525, 50);
+            this.pnlConfirmPassword.Size = new System.Drawing.Size(525, 45);
             this.pnlConfirmPassword.TabIndex = 18;
             // 
             // pictureBox6
@@ -515,16 +567,16 @@
             this.pictureBox6.Location = new System.Drawing.Point(6, 6);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(26, 34);
+            this.pictureBox6.Size = new System.Drawing.Size(26, 30);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox6.TabIndex = 4;
             this.pictureBox6.TabStop = false;
             // 
             // picEye2
             // 
-            this.picEye2.Location = new System.Drawing.Point(484, 9);
+            this.picEye2.Location = new System.Drawing.Point(484, 7);
             this.picEye2.Name = "picEye2";
-            this.picEye2.Size = new System.Drawing.Size(32, 31);
+            this.picEye2.Size = new System.Drawing.Size(32, 28);
             this.picEye2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picEye2.TabIndex = 3;
             this.picEye2.TabStop = false;
@@ -535,11 +587,10 @@
             this.txtRegistrationConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRegistrationConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRegistrationConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtRegistrationConfirmPassword.Location = new System.Drawing.Point(39, 11);
+            this.txtRegistrationConfirmPassword.Location = new System.Drawing.Point(39, 9);
             this.txtRegistrationConfirmPassword.Name = "txtRegistrationConfirmPassword";
             this.txtRegistrationConfirmPassword.Size = new System.Drawing.Size(439, 25);
             this.txtRegistrationConfirmPassword.TabIndex = 3;
-            this.txtRegistrationConfirmPassword.TextChanged += new System.EventHandler(this.txtRegistrationConfirmPassword_TextChanged);
             this.txtRegistrationConfirmPassword.Enter += new System.EventHandler(this.txtRegistrationConfirmPassword_Enter);
             this.txtRegistrationConfirmPassword.Leave += new System.EventHandler(this.txtRegistrationConfirmPassword_Leave);
             // 
@@ -549,7 +600,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblConfirmPassword.AutoSize = true;
             this.lblConfirmPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfirmPassword.Location = new System.Drawing.Point(25, 486);
+            this.lblConfirmPassword.Location = new System.Drawing.Point(25, 499);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
             this.lblConfirmPassword.Size = new System.Drawing.Size(149, 23);
             this.lblConfirmPassword.TabIndex = 17;
@@ -564,16 +615,16 @@
             this.pnlNewPassword.Controls.Add(this.picEye1);
             this.pnlNewPassword.Controls.Add(this.txtRegistrationCreatePassword);
             this.pnlNewPassword.Controls.Add(this.pictureBox9);
-            this.pnlNewPassword.Location = new System.Drawing.Point(29, 414);
+            this.pnlNewPassword.Location = new System.Drawing.Point(29, 438);
             this.pnlNewPassword.Name = "pnlNewPassword";
-            this.pnlNewPassword.Size = new System.Drawing.Size(525, 50);
+            this.pnlNewPassword.Size = new System.Drawing.Size(525, 45);
             this.pnlNewPassword.TabIndex = 16;
             // 
             // picEye1
             // 
-            this.picEye1.Location = new System.Drawing.Point(483, 9);
+            this.picEye1.Location = new System.Drawing.Point(483, 7);
             this.picEye1.Name = "picEye1";
-            this.picEye1.Size = new System.Drawing.Size(32, 31);
+            this.picEye1.Size = new System.Drawing.Size(32, 28);
             this.picEye1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picEye1.TabIndex = 3;
             this.picEye1.TabStop = false;
@@ -584,7 +635,7 @@
             this.txtRegistrationCreatePassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRegistrationCreatePassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRegistrationCreatePassword.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtRegistrationCreatePassword.Location = new System.Drawing.Point(39, 11);
+            this.txtRegistrationCreatePassword.Location = new System.Drawing.Point(39, 9);
             this.txtRegistrationCreatePassword.Name = "txtRegistrationCreatePassword";
             this.txtRegistrationCreatePassword.Size = new System.Drawing.Size(439, 25);
             this.txtRegistrationCreatePassword.TabIndex = 2;
@@ -599,7 +650,7 @@
             this.pictureBox9.Location = new System.Drawing.Point(6, 6);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(26, 34);
+            this.pictureBox9.Size = new System.Drawing.Size(26, 30);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox9.TabIndex = 0;
             this.pictureBox9.TabStop = false;
@@ -610,7 +661,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNewPassword.AutoSize = true;
             this.lblNewPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewPassword.Location = new System.Drawing.Point(25, 381);
+            this.lblNewPassword.Location = new System.Drawing.Point(25, 413);
             this.lblNewPassword.Name = "lblNewPassword";
             this.lblNewPassword.Size = new System.Drawing.Size(82, 23);
             this.lblNewPassword.TabIndex = 15;
@@ -619,30 +670,31 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user__5_;
-            this.pictureBox8.Location = new System.Drawing.Point(242, 23);
+            this.pictureBox8.Location = new System.Drawing.Point(242, 18);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(78, 67);
+            this.pictureBox8.Size = new System.Drawing.Size(78, 60);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox8.TabIndex = 14;
             this.pictureBox8.TabStop = false;
             // 
-            // lblCreateAccount
+            // lblLogin
             // 
-            this.lblCreateAccount.AutoSize = true;
-            this.lblCreateAccount.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblCreateAccount.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreateAccount.ForeColor = System.Drawing.Color.Blue;
-            this.lblCreateAccount.Location = new System.Drawing.Point(365, 753);
-            this.lblCreateAccount.Name = "lblCreateAccount";
-            this.lblCreateAccount.Size = new System.Drawing.Size(49, 21);
-            this.lblCreateAccount.TabIndex = 13;
-            this.lblCreateAccount.Text = "Login";
+            this.lblLogin.AutoSize = true;
+            this.lblLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblLogin.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLogin.ForeColor = System.Drawing.Color.Blue;
+            this.lblLogin.Location = new System.Drawing.Point(367, 740);
+            this.lblLogin.Name = "lblLogin";
+            this.lblLogin.Size = new System.Drawing.Size(49, 21);
+            this.lblLogin.TabIndex = 13;
+            this.lblLogin.Text = "Login";
+            this.lblLogin.Click += new System.EventHandler(this.lblLogin_Click);
             // 
             // lblNotAccount
             // 
             this.lblNotAccount.AutoSize = true;
             this.lblNotAccount.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotAccount.Location = new System.Drawing.Point(161, 753);
+            this.lblNotAccount.Location = new System.Drawing.Point(163, 740);
             this.lblNotAccount.Name = "lblNotAccount";
             this.lblNotAccount.Size = new System.Drawing.Size(186, 21);
             this.lblNotAccount.TabIndex = 12;
@@ -651,7 +703,7 @@
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(323, 726);
+            this.panel6.Location = new System.Drawing.Point(325, 720);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(230, 1);
             this.panel6.TabIndex = 11;
@@ -660,7 +712,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(277, 718);
+            this.label17.Location = new System.Drawing.Point(279, 712);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(29, 20);
             this.label17.TabIndex = 10;
@@ -669,7 +721,7 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(29, 726);
+            this.panel5.Location = new System.Drawing.Point(31, 720);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(230, 1);
             this.panel5.TabIndex = 9;
@@ -683,9 +735,9 @@
             this.btnCreateAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateAccount.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateAccount.ForeColor = System.Drawing.Color.White;
-            this.btnCreateAccount.Location = new System.Drawing.Point(29, 654);
+            this.btnCreateAccount.Location = new System.Drawing.Point(31, 649);
             this.btnCreateAccount.Name = "btnCreateAccount";
-            this.btnCreateAccount.Size = new System.Drawing.Size(525, 49);
+            this.btnCreateAccount.Size = new System.Drawing.Size(525, 48);
             this.btnCreateAccount.TabIndex = 8;
             this.btnCreateAccount.Text = "Create Account";
             this.btnCreateAccount.UseVisualStyleBackColor = false;
@@ -698,16 +750,16 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.txtRegistrationEmail);
             this.panel3.Controls.Add(this.pictureBox5);
-            this.panel3.Location = new System.Drawing.Point(29, 310);
+            this.panel3.Location = new System.Drawing.Point(29, 266);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(525, 50);
+            this.panel3.Size = new System.Drawing.Size(525, 45);
             this.panel3.TabIndex = 44;
             // 
             // txtRegistrationEmail
             // 
             this.txtRegistrationEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRegistrationEmail.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRegistrationEmail.Location = new System.Drawing.Point(39, 11);
+            this.txtRegistrationEmail.Location = new System.Drawing.Point(39, 9);
             this.txtRegistrationEmail.Name = "txtRegistrationEmail";
             this.txtRegistrationEmail.Size = new System.Drawing.Size(470, 25);
             this.txtRegistrationEmail.TabIndex = 1;
@@ -717,9 +769,9 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail__6_;
-            this.pictureBox5.Location = new System.Drawing.Point(6, 7);
+            this.pictureBox5.Location = new System.Drawing.Point(6, 6);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(26, 34);
+            this.pictureBox5.Size = new System.Drawing.Size(26, 30);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 0;
             this.pictureBox5.TabStop = false;
@@ -730,7 +782,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(25, 279);
+            this.lblEmail.Location = new System.Drawing.Point(25, 241);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(59, 25);
             this.lblEmail.TabIndex = 22;
@@ -740,7 +792,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label15.Location = new System.Drawing.Point(152, 143);
+            this.label15.Location = new System.Drawing.Point(152, 125);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(271, 23);
             this.label15.TabIndex = 1;
@@ -750,7 +802,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(102, 96);
+            this.label14.Location = new System.Drawing.Point(102, 80);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(365, 50);
             this.label14.TabIndex = 0;
@@ -763,29 +815,22 @@
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(235, 92);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 15;
+            this.pictureBox3.TabIndex = 27;
             this.pictureBox3.TabStop = false;
             // 
-            // pictureBox1
+            // pictureBox11
             // 
-            this.pictureBox1.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gemini_Generated_Image_bup5imbup5imbup5;
-            this.pictureBox1.Location = new System.Drawing.Point(200, 39);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(703, 800);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox11.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gemini_Generated_Image_bup5imbup5imbup5;
+            this.pictureBox11.Location = new System.Drawing.Point(200, 39);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(703, 800);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox11.TabIndex = 26;
+            this.pictureBox11.TabStop = false;
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // txtRegistrationPhoneNumber
-            // 
-            this.txtRegistrationPhoneNumber.Location = new System.Drawing.Point(29, 25);
-            this.txtRegistrationPhoneNumber.Name = "txtRegistrationPhoneNumber";
-            this.txtRegistrationPhoneNumber.Size = new System.Drawing.Size(203, 30);
-            this.txtRegistrationPhoneNumber.TabIndex = 45;
             // 
             // RegistrationControls
             // 
@@ -808,6 +853,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.pnlRegistrationDataInput.ResumeLayout(false);
             this.pnlRegistrationDataInput.PerformLayout();
+            this.pnlPhoneNumber.ResumeLayout(false);
+            this.pnlPhoneNumber.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPhoneNumber)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
@@ -824,7 +872,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -844,7 +892,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel pnlRegistrationDataInput;
-        private System.Windows.Forms.Label lblCreateAccount;
+        private System.Windows.Forms.Label lblLogin;
         private System.Windows.Forms.Label lblNotAccount;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label17;
@@ -856,8 +904,6 @@
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
@@ -891,7 +937,12 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Panel pnlPhoneNumber;
+        private System.Windows.Forms.PictureBox picPhoneNumber;
+        private System.Windows.Forms.Label lblPhoneNumber;
         private System.Windows.Forms.TextBox txtRegistrationPhoneNumber;
+        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.PictureBox pictureBox3;
 
     }
 }
