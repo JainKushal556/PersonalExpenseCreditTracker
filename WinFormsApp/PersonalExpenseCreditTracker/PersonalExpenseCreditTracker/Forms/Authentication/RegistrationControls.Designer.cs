@@ -429,7 +429,7 @@
             this.pnlPhoneNumber.Location = new System.Drawing.Point(29, 352);
             this.pnlPhoneNumber.Name = "pnlPhoneNumber";
             this.pnlPhoneNumber.Size = new System.Drawing.Size(525, 45);
-            this.pnlPhoneNumber.TabIndex = 45;
+            this.pnlPhoneNumber.TabIndex = 2;
             // 
             // txtRegistrationPhoneNumber
             // 
@@ -438,7 +438,7 @@
             this.txtRegistrationPhoneNumber.Location = new System.Drawing.Point(39, 9);
             this.txtRegistrationPhoneNumber.Name = "txtRegistrationPhoneNumber";
             this.txtRegistrationPhoneNumber.Size = new System.Drawing.Size(470, 25);
-            this.txtRegistrationPhoneNumber.TabIndex = 2;
+            this.txtRegistrationPhoneNumber.TabIndex = 0;
             this.txtRegistrationPhoneNumber.TextChanged += new System.EventHandler(this.txtRegistrationPhoneNumber_TextChanged);
             this.txtRegistrationPhoneNumber.Enter += new System.EventHandler(this.txtRegistrationPhoneNumber_Enter);
             this.txtRegistrationPhoneNumber.Leave += new System.EventHandler(this.txtRegistrationPhoneNumber_Leave);
@@ -463,7 +463,7 @@
             this.panel4.Location = new System.Drawing.Point(29, 180);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(525, 45);
-            this.panel4.TabIndex = 27;
+            this.panel4.TabIndex = 0;
             // 
             // txtFullName
             // 
@@ -473,6 +473,7 @@
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.Size = new System.Drawing.Size(477, 25);
             this.txtFullName.TabIndex = 0;
+            this.txtFullName.TextChanged += new System.EventHandler(this.txtFullName_TextChanged);
             this.txtFullName.Enter += new System.EventHandler(this.txtFullName_Enter);
             this.txtFullName.Leave += new System.EventHandler(this.txtFullName_Leave);
             // 
@@ -558,7 +559,7 @@
             this.pnlConfirmPassword.Location = new System.Drawing.Point(29, 524);
             this.pnlConfirmPassword.Name = "pnlConfirmPassword";
             this.pnlConfirmPassword.Size = new System.Drawing.Size(525, 45);
-            this.pnlConfirmPassword.TabIndex = 18;
+            this.pnlConfirmPassword.TabIndex = 4;
             // 
             // pictureBox6
             // 
@@ -590,7 +591,8 @@
             this.txtRegistrationConfirmPassword.Location = new System.Drawing.Point(39, 9);
             this.txtRegistrationConfirmPassword.Name = "txtRegistrationConfirmPassword";
             this.txtRegistrationConfirmPassword.Size = new System.Drawing.Size(439, 25);
-            this.txtRegistrationConfirmPassword.TabIndex = 3;
+            this.txtRegistrationConfirmPassword.TabIndex = 0;
+            this.txtRegistrationConfirmPassword.TextChanged += new System.EventHandler(this.txtRegistrationConfirmPassword_TextChanged);
             this.txtRegistrationConfirmPassword.Enter += new System.EventHandler(this.txtRegistrationConfirmPassword_Enter);
             this.txtRegistrationConfirmPassword.Leave += new System.EventHandler(this.txtRegistrationConfirmPassword_Leave);
             // 
@@ -618,7 +620,7 @@
             this.pnlNewPassword.Location = new System.Drawing.Point(29, 438);
             this.pnlNewPassword.Name = "pnlNewPassword";
             this.pnlNewPassword.Size = new System.Drawing.Size(525, 45);
-            this.pnlNewPassword.TabIndex = 16;
+            this.pnlNewPassword.TabIndex = 3;
             // 
             // picEye1
             // 
@@ -638,7 +640,7 @@
             this.txtRegistrationCreatePassword.Location = new System.Drawing.Point(39, 9);
             this.txtRegistrationCreatePassword.Name = "txtRegistrationCreatePassword";
             this.txtRegistrationCreatePassword.Size = new System.Drawing.Size(439, 25);
-            this.txtRegistrationCreatePassword.TabIndex = 2;
+            this.txtRegistrationCreatePassword.TabIndex = 0;
             this.txtRegistrationCreatePassword.TextChanged += new System.EventHandler(this.txtNewPassword_TextChanged);
             this.txtRegistrationCreatePassword.Enter += new System.EventHandler(this.txtRegistrationCreatePassword_Enter);
             this.txtRegistrationCreatePassword.Leave += new System.EventHandler(this.txtRegistrationCreatePassword_Leave);
@@ -738,7 +740,7 @@
             this.btnCreateAccount.Location = new System.Drawing.Point(31, 649);
             this.btnCreateAccount.Name = "btnCreateAccount";
             this.btnCreateAccount.Size = new System.Drawing.Size(525, 48);
-            this.btnCreateAccount.TabIndex = 8;
+            this.btnCreateAccount.TabIndex = 5;
             this.btnCreateAccount.Text = "Create Account";
             this.btnCreateAccount.UseVisualStyleBackColor = false;
             this.btnCreateAccount.Click += new System.EventHandler(this.btnCreateAccount_Click);
@@ -753,7 +755,7 @@
             this.panel3.Location = new System.Drawing.Point(29, 266);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(525, 45);
-            this.panel3.TabIndex = 44;
+            this.panel3.TabIndex = 1;
             // 
             // txtRegistrationEmail
             // 
@@ -762,7 +764,8 @@
             this.txtRegistrationEmail.Location = new System.Drawing.Point(39, 9);
             this.txtRegistrationEmail.Name = "txtRegistrationEmail";
             this.txtRegistrationEmail.Size = new System.Drawing.Size(470, 25);
-            this.txtRegistrationEmail.TabIndex = 1;
+            this.txtRegistrationEmail.TabIndex = 0;
+            this.txtRegistrationEmail.TextChanged += new System.EventHandler(this.txtRegistrationEmail_TextChanged);
             this.txtRegistrationEmail.Enter += new System.EventHandler(this.txtRegistrationEmail_Enter);
             this.txtRegistrationEmail.Leave += new System.EventHandler(this.txtRegistrationEmail_Leave);
             // 

@@ -1963,21 +1963,19 @@ namespace PersonalExpenseCreditTracker
 
         private void pnlLogout_Click(object sender, EventArgs e)
         {
-            
             previousSettingSubMenu = activeSettingSubMenu;
-
             SetActiveSettingSubMenu(pnlLogout);
-            pnlTop.Visible = false;
+
+         
 
             PersonLogOutControls personLogOutControls = new PersonLogOutControls();
-
             personLogOutControls.FormClosed += Logout_FormClosed;
-
-            personLogOutControls.Show();
+            personLogOutControls.ShowDialog();
 
             RefreshSidebarScroll();
             ExpandSidebar();
         }
+
 
         private void Logout_FormClosed(object sender, FormClosedEventArgs e)
         {

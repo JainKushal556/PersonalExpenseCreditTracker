@@ -305,6 +305,11 @@ namespace PersonalExpenseCreditTracker.Common
             errLabel.BringToFront();
             errLabel.Text = message;
             errLabel.Visible = true;
+
+            errLabel.ForeColor = Color.Red;
+
+            errLabel.Text = message;
+            errLabel.Visible = true;
         }
 
  
