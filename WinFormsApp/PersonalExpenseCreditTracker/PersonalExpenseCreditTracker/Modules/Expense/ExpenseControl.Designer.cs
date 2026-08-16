@@ -249,6 +249,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.txtSearch.Size = new System.Drawing.Size(347, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // pnlButtonControls
             // 
@@ -256,11 +258,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.pnlButtonControls.Controls.Add(this.btnExport);
             this.pnlButtonControls.Controls.Add(this.btnRefresh);
             this.pnlButtonControls.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonControls.Location = new System.Drawing.Point(1076, 0);
+            this.pnlButtonControls.Location = new System.Drawing.Point(1067, 0);
             this.pnlButtonControls.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlButtonControls.Name = "pnlButtonControls";
             this.pnlButtonControls.Padding = new System.Windows.Forms.Padding(0, 0, 11, 0);
-            this.pnlButtonControls.Size = new System.Drawing.Size(147, 44);
+            this.pnlButtonControls.Size = new System.Drawing.Size(156, 44);
             this.pnlButtonControls.TabIndex = 0;
             // 
             // btnFilter
@@ -268,6 +270,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.btnFilter.BackColor = System.Drawing.Color.Transparent;
             this.btnFilter.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnFilter.FlatAppearance.BorderSize = 0;
+            this.btnFilter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnFilter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFilter.ForeColor = System.Drawing.Color.White;
@@ -287,11 +291,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.btnExport.BackColor = System.Drawing.Color.Transparent;
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.ForeColor = System.Drawing.Color.White;
             this.btnExport.Image = global::PersonalExpenseCreditTracker.Properties.Resources.file_export__1_;
-            this.btnExport.Location = new System.Drawing.Point(96, 0);
+            this.btnExport.Location = new System.Drawing.Point(105, 0);
             this.btnExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(40, 44);
@@ -307,6 +313,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
@@ -314,7 +322,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.btnRefresh.Location = new System.Drawing.Point(0, 0);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(136, 44);
+            this.btnRefresh.Size = new System.Drawing.Size(145, 44);
             this.btnRefresh.TabIndex = 3;
             this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -345,8 +353,6 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.dgvExpenseDataTable.ReadOnly = true;
             this.dgvExpenseDataTable.RowHeadersVisible = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.dgvExpenseDataTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvExpenseDataTable.RowTemplate.Height = 24;
             this.dgvExpenseDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
