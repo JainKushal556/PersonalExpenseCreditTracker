@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -242,7 +242,7 @@ namespace BLLayer.Common
             }
 
 
-            return ValidationResult.MaximumAmountInvalid;
+            return ValidationResult.AmountRangeInvalid;
         }
 
         //Status Validation

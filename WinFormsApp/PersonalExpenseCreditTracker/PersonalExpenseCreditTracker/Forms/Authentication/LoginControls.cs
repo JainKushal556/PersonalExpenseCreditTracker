@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +11,6 @@ using PersonalExpenseCreditTracker.Forms.Main;
 using PersonalExpenseCreditTracker.Common;
 using BLLayer.Authentication;
 using BLLayer.Common;
-using PersonalExpenseCreditTracker.Forms.Main;
 
 namespace PersonalExpenseCreditTracker.Forms.Authentication
 {
