@@ -14,6 +14,7 @@ using System.Runtime.InteropServices;
 using BLLayer.Lent;
 using BLLayer.Common;
 using Excel = Microsoft.Office.Interop.Excel;
+using PersonalExpenseCreditTracker.Helpers;
 
 namespace PersonalExpenseCreditTracker.Modules.Lent
 {
@@ -1561,20 +1562,22 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 if (saveDialog.ShowDialog() != DialogResult.OK)
                     return;
 
+                var progress = new ExportProgressHelper();
+                progress.Show(this, "Exporting Lent Data...");
+
                 try
                 {
+                    progress.SetProgress(10);
+
                     ExportLentToExcel(
                         AllLentData,
                         saveDialog.FileName);
 
-                    MessageBox.Show(
-                        "Lent data exported successfully.",
-                        "Export Successful",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    progress.SetProgress(100);
                 }
                 catch (Exception ex)
                 {
+                    progress.Close();
                     MessageBox.Show(
                         "Export failed.\n\n" + ex.Message,
                         "Export Error",

@@ -14,6 +14,7 @@ using System.Configuration;
 using PersonalExpenseCreditTracker.Common;
 using BLLayer.Common;
 using Excel = Microsoft.Office.Interop.Excel;
+using PersonalExpenseCreditTracker.Helpers;
 namespace PersonalExpenseCreditTracker.Modules.Task
 
 {
@@ -1479,20 +1480,22 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 if (saveDialog.ShowDialog() != DialogResult.OK)
                     return;
 
+                var progress = new ExportProgressHelper();
+                progress.Show(this, "Exporting Task Data...");
+
                 try
                 {
+                    progress.SetProgress(10);
+
                     ExportTaskToExcel(
                         AllTaskData,
                         saveDialog.FileName);
 
-                    MessageBox.Show(
-                        "Task data exported successfully.",
-                        "Export Successful",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    progress.SetProgress(100);
                 }
                 catch (Exception ex)
                 {
+                    progress.Close();
                     MessageBox.Show(
                         "Export failed.\n\n" + ex.Message,
                         "Export Error",

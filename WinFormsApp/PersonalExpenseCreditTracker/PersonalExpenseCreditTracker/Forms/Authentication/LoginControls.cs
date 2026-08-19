@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +11,7 @@ using PersonalExpenseCreditTracker.Forms.Main;
 using PersonalExpenseCreditTracker.Common;
 using BLLayer.Authentication;
 using BLLayer.Common;
-using PersonalExpenseCreditTracker.Forms.Main;
+
 
 namespace PersonalExpenseCreditTracker.Forms.Authentication
 {
@@ -107,47 +107,106 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         }
 
 
+        private Panel pnlCenterLoading = null;
+        private Label lblLoadingText = null;
+
+        private void ShowCenterLoading(bool isShow, string message = "Logging in, please wait...")
+        {
+            if (isShow)
+            {
+                if (pnlCenterLoading == null)
+                {
+                    pnlCenterLoading = new Panel
+                    {
+                        Size = new Size(280, 80),
+                        BackColor = Color.FromArgb(15, 23, 42),
+                        BorderStyle = BorderStyle.None
+                    };
+
+                    lblLoadingText = new Label
+                    {
+                        Text = "⏳  " + message,
+                        ForeColor = Color.White,
+                        Font = new Font("Segoe UI", 10.5F, FontStyle.Bold),
+                        Dock = DockStyle.Fill,
+                        TextAlign = ContentAlignment.MiddleCenter
+                    };
+
+                    pnlCenterLoading.Controls.Add(lblLoadingText);
+                    this.Controls.Add(pnlCenterLoading);
+                }
+
+                lblLoadingText.Text = "⏳  " + message;
+                pnlCenterLoading.Location = new Point(
+                    (this.ClientSize.Width - pnlCenterLoading.Width) / 2,
+                    (this.ClientSize.Height - pnlCenterLoading.Height) / 2
+                );
+
+                SetRadius(pnlCenterLoading, 16);
+                pnlCenterLoading.BringToFront();
+                pnlCenterLoading.Visible = true;
+                this.Cursor = Cursors.WaitCursor;
+                Application.DoEvents();
+            }
+            else
+            {
+                if (pnlCenterLoading != null)
+                {
+                    pnlCenterLoading.Visible = false;
+                }
+                this.Cursor = Cursors.Default;
+            }
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             ErrorHelper.ClearAllErrors(pnlLoginDataInput);
-            HideLoginError(); 
+            HideLoginError();
 
-            AuthUI authUI = new AuthUI();
-            AuthBLL authBLL = new AuthBLL();
-            string errorMsg;
+            ShowCenterLoading(true, "Logging in, please wait...");
 
-            authUI.email = (txtLoginEmail.Text == "Enter Email Address") ? "" : txtLoginEmail.Text.Trim();
-            authUI.password = (txtLoginPassword.Text == "Enter Password") ? "" : txtLoginPassword.Text;
-
-            CommonValidator.ValidationResult result = authUI.LoginDataIntoAuthUI();
-
-            switch (result)
+            try
             {
-                case CommonValidator.ValidationResult.Success:
-                    UserId = authBLL.GetUserIdFromDB();
-                    Session.LogedInUser.SetUserId(UserId);
+                AuthUI authUI = new AuthUI();
+                AuthBLL authBLL = new AuthBLL();
+                string errorMsg;
 
-                    this.Hide();
-                    MainForm mainForm = new MainForm();
-                    mainForm.ShowDialog();
-                    this.Close();
-                    break;
+                authUI.email = (txtLoginEmail.Text == "Enter Email Address") ? "" : txtLoginEmail.Text.Trim();
+                authUI.password = (txtLoginPassword.Text == "Enter Password") ? "" : txtLoginPassword.Text;
 
-                case CommonValidator.ValidationResult.EmailInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtLoginEmail);
-                    break;
+                CommonValidator.ValidationResult result = authUI.LoginDataIntoAuthUI();
 
-                case CommonValidator.ValidationResult.NewPasswordEmpty:
-                    ErrorHelper.ShowErrorBelowControl(txtLoginPassword, "* Password is required.");
-                    txtLoginPassword.Focus();
-                    break;
+                switch (result)
+                {
+                    case CommonValidator.ValidationResult.Success:
+                        UserId = authBLL.GetUserIdFromDB();
+                        Session.LogedInUser.SetUserId(UserId);
 
-                case CommonValidator.ValidationResult.StoreProcedureError:
-                    errorMsg = authUI.GetErrorMsgForLogin();
-                    ShowLoginError(string.IsNullOrWhiteSpace(errorMsg) ? "Invalid email or password. Please try again." : errorMsg);
-                    txtLoginPassword.Focus();
-                    break;
+                        MainForm mainForm = new MainForm();
+                        this.Hide();
+                        mainForm.ShowDialog();
+                        this.Close();
+                        break;
 
+                    case CommonValidator.ValidationResult.EmailInvalid:
+                        ErrorHelper.ShowValidationError(result, errorProvider1, txtLoginEmail);
+                        break;
+
+                    case CommonValidator.ValidationResult.NewPasswordEmpty:
+                        ErrorHelper.ShowErrorBelowControl(txtLoginPassword, "* Password is required.");
+                        txtLoginPassword.Focus();
+                        break;
+
+                    case CommonValidator.ValidationResult.StoreProcedureError:
+                        errorMsg = authUI.GetErrorMsgForLogin();
+                        ShowLoginError(string.IsNullOrWhiteSpace(errorMsg) ? "Invalid email or password. Please try again." : errorMsg);
+                        txtLoginPassword.Focus();
+                        break;
+                }
+            }
+            finally
+            {
+                ShowCenterLoading(false);
             }
         }
 
