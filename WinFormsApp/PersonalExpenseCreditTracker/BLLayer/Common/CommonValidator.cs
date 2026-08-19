@@ -116,36 +116,48 @@ namespace BLLayer.Common
             return ValidationResult.PersonInvalid;
         }
 
-        //PersonName Validation
+        // Person Name Validation
         public static ValidationResult ValidationPersonName(string personName)
         {
             if (string.IsNullOrWhiteSpace(personName))
+            {
                 return ValidationResult.PersonNameEmpty;
+            }
 
-            if (!Regex.IsMatch(personName, @"^[A-Za-z]+(?:[ '-][A-Za-z]+)*$"))
-                return ValidationResult.PersonNameInvalid;
-            
             personName = personName.Trim();
 
             if (personName.Length < 3)
+            {
                 return ValidationResult.PersonNameInvalid;
+            }
+
+            if (!Regex.IsMatch(personName, @"^[A-Za-z]+(?:[ '-][A-Za-z]+)*$"))
+            {
+                return ValidationResult.PersonNameInvalid;
+            }
 
             return ValidationResult.Success;
         }
 
-        //CategoryName Validation
+        // Category Name Validation
         public static ValidationResult ValidationCategoryName(string CategoryName)
         {
             if (string.IsNullOrWhiteSpace(CategoryName))
+            {
                 return ValidationResult.CategoryNameEmpty;
-
-            if (!Regex.IsMatch(CategoryName, @"^[A-Za-z]+(?:[ &'/-][A-Za-z]+)*$"))
-                return ValidationResult.InvalidCategoryName;
+            }
 
             CategoryName = CategoryName.Trim();
 
             if (CategoryName.Length < 3)
+            {
                 return ValidationResult.InvalidCategoryName;
+            }
+
+            if (!Regex.IsMatch(CategoryName, @"^[A-Za-z]+(?:[ &'/-][A-Za-z]+)*$"))
+            {
+                return ValidationResult.InvalidCategoryName;
+            }
 
             return ValidationResult.Success;
         }
@@ -211,36 +223,42 @@ namespace BLLayer.Common
             return ValidationResult.MinimumAmountInvalid;
         }
 
-        //Validate MaximumAmount
+        // Validate Maximum Amount
         public static ValidationResult ValidateMaximumAmount(string maxAmount)
         {
-            decimal value;
-
-            if (!string.IsNullOrWhiteSpace(maxAmount))
+            if (string.IsNullOrWhiteSpace(maxAmount))
             {
-                if (decimal.TryParse(maxAmount, out value))
-                {
-                    if (value >= 0)
-                    {
-                        if (value <= 999999999)
-                        {
-                            return ValidationResult.Success;
-                        }
-                    }
-                }
+                return ValidationResult.MaximumAmountInvalid;
             }
 
-            return ValidationResult.MaximumAmountInvalid;
+            decimal value;
+
+            if (!decimal.TryParse(maxAmount.Trim(), out value))
+            {
+                return ValidationResult.MaximumAmountInvalid;
+            }
+
+            if (value < 0)
+            {
+                return ValidationResult.MaximumAmountInvalid;
+            }
+
+            if (value > 999999999)
+            {
+                return ValidationResult.MaximumAmountInvalid;
+            }
+
+            return ValidationResult.Success;
         }
 
         //Validate AmountRange
+        // Validate Amount Range
         public static ValidationResult ValidateAmountRange(decimal minAmount, decimal maxAmount)
         {
             if (minAmount <= maxAmount)
             {
                 return ValidationResult.Success;
             }
-
 
             return ValidationResult.AmountRangeInvalid;
         }
@@ -309,25 +327,35 @@ namespace BLLayer.Common
             return ValidationResult.Success;
         }
 
-        //Email Validation
+        // Email Validation
         public static ValidationResult ValidateEmail(string email)
         {
-            if (!string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(email))
             {
-                email = email.Trim();
-
-                if (email.Length <= 100)
-                {
-                    string pattern = @"^[A-Za-z0-9]+([._%+-][A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$";
-
-                    if (Regex.IsMatch(email, pattern))
-                    {
-                        return ValidationResult.Success;
-                    }
-                }
+                return ValidationResult.EmailInvalid;
             }
 
-            return ValidationResult.EmailInvalid;
+            email = email.Trim();
+
+            // Uppercase letters are not allowed
+            if (email != email.ToLower())
+            {
+                return ValidationResult.EmailInvalid;
+            }
+
+            if (email.Length > 100)
+            {
+                return ValidationResult.EmailInvalid;
+            }
+
+            string pattern = @"^[a-z0-9]+([._%+-][a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)+$";
+
+            if (!Regex.IsMatch(email, pattern))
+            {
+                return ValidationResult.EmailInvalid;
+            }
+
+            return ValidationResult.Success;
         }
         // Phone Number Validation
         public static ValidationResult ValidatePhoneNumber(string phoneNumber)
@@ -337,20 +365,19 @@ namespace BLLayer.Common
                 return ValidationResult.PhoneNumberEmpty;
             }
 
-            if (!string.IsNullOrWhiteSpace(phoneNumber))
-            {
-                phoneNumber = phoneNumber.Trim();
+            phoneNumber = phoneNumber.Trim();
 
-                if (phoneNumber.Length == 10)
-                {
-                    if (Regex.IsMatch(phoneNumber, @"^[6-9][0-9]{9}$"))
-                    {
-                        return ValidationResult.Success;
-                    }
-                }
+            if (phoneNumber.Length != 10)
+            {
+                return ValidationResult.PhoneInvalid;
             }
 
-            return ValidationResult.PhoneInvalid;
+            if (!Regex.IsMatch(phoneNumber, @"^[6-9][0-9]{9}$"))
+            {
+                return ValidationResult.PhoneInvalid;
+            }
+
+            return ValidationResult.Success;
         }
 
         // Date Range Validation
@@ -422,15 +449,19 @@ namespace BLLayer.Common
             return ValidationResult.PriorityInvalid;
         }
 
-        //profile
-
+        // Photo Validation
         public static ValidationResult ValidatePhotoData(byte[] photoData)
         {
-            if (photoData == null)
+            if (photoData == null || photoData.Length == 0)
+            {
                 return ValidationResult.PhotoInvalid;
+            }
 
+            // Maximum file size: 2 MB
             if (photoData.Length > 2 * 1024 * 1024)
+            {
                 return ValidationResult.PhotoInvalid;
+            }
 
             return ValidationResult.Success;
         }
@@ -450,21 +481,48 @@ namespace BLLayer.Common
 
             return ValidationResult.Success;
         }
+        // Address Validation
         public static ValidationResult ValidateAddress(string address)
         {
             if (string.IsNullOrWhiteSpace(address))
+            {
                 return ValidationResult.AddressInvalid;
+            }
 
-            if (address.Trim().Length > 200)
+            address = address.Trim();
+
+            if (address.Length < 5 || address.Length > 200)
+            {
                 return ValidationResult.AddressInvalid;
+            }
 
             return ValidationResult.Success;
         }
-       
+
+        // Date of Birth Validation
         public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth)
         {
-            if (dateOfBirth == DateTime.MinValue || dateOfBirth > DateTime.Today)
+            if (dateOfBirth == DateTime.MinValue)
+            {
                 return ValidationResult.DateOfBirthInvalid;
+            }
+
+            if (dateOfBirth > DateTime.Today)
+            {
+                return ValidationResult.DateOfBirthInvalid;
+            }
+
+            int age = DateTime.Today.Year - dateOfBirth.Year;
+
+            if (dateOfBirth.Date > DateTime.Today.AddYears(-age))
+            {
+                age--;
+            }
+
+            if (age < 5 || age > 100)
+            {
+                return ValidationResult.DateOfBirthInvalid;
+            }
 
             return ValidationResult.Success;
         }

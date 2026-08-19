@@ -675,7 +675,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private System.Windows.Forms.Panel pnlCoralColor;
         private System.Windows.Forms.Panel pnlMintColor;
         private System.Windows.Forms.Panel pnlIndigoColor;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblPriorityError;
     }
 }
