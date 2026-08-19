@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -300,14 +300,9 @@ namespace PersonalExpenseCreditTracker.Common
                 parent.Controls.Add(errLabel);
             }
 
-       
             errLabel.Location = new Point(targetControl.Left, targetControl.Bottom + 2);
             errLabel.BringToFront();
-            errLabel.Text = message;
-            errLabel.Visible = true;
-
             errLabel.ForeColor = Color.Red;
-
             errLabel.Text = message;
             errLabel.Visible = true;
         }

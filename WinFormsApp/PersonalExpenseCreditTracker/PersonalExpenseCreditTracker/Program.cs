@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using PersonalExpenseCreditTracker.Forms.Authentication;
 using BLLayer.Authentication;
@@ -27,8 +27,6 @@ namespace PersonalExpenseCreditTracker
             }
             else  // If User Not login
             {
-                LoginControls loginForm = new LoginControls();
-
                 Application.Run(new LoginControls());
             }
         }
