@@ -14,6 +14,7 @@ using PersonalExpenseCreditTracker.Common;
 using BLLayer.Common;
 using BLLayer.Borrow;
 using Excel = Microsoft.Office.Interop.Excel;
+using PersonalExpenseCreditTracker.Helpers;
 //using PersonalExpenseCreditTracker.Modules.Borrow.PayBorrowAmountControls;
 
 
@@ -1636,20 +1637,22 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                  if (saveDialog.ShowDialog() != DialogResult.OK)
                      return;
 
+                 var progress = new ExportProgressHelper();
+                 progress.Show(this, "Exporting Borrow Data...");
+
                  try
                  {
+                     progress.SetProgress(10);
+
                      ExportBorrowToExcel(
                          AllBorrowData,
                          saveDialog.FileName);
 
-                     MessageBox.Show(
-                         "Borrow data exported successfully.",
-                         "Export Successful",
-                         MessageBoxButtons.OK,
-                         MessageBoxIcon.Information);
+                     progress.SetProgress(100);
                  }
                  catch (Exception ex)
                  {
+                     progress.Close();
                      MessageBox.Show(
                          "Export failed.\n\n" + ex.Message,
                          "Export Error",

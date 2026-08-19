@@ -15,6 +15,7 @@ using PersonalExpenseCreditTracker.Common;
 using BLLayer.Credit;
 using BLLayer.Common;
 using Excel = Microsoft.Office.Interop.Excel;
+using PersonalExpenseCreditTracker.Helpers;
 
 namespace PersonalExpenseCreditTracker.Modules.Credit
 {
@@ -1527,20 +1528,22 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                 if (saveDialog.ShowDialog() != DialogResult.OK)
                     return;
 
+                var progress = new ExportProgressHelper();
+                progress.Show(this, "Exporting Credit Data...");
+
                 try
                 {
+                    progress.SetProgress(10);
+
                     ExportCreditToExcel(
                         AllCreditData,
                         saveDialog.FileName);
 
-                    MessageBox.Show(
-                        "Credit data exported successfully.",
-                        "Export Successful",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    progress.SetProgress(100);
                 }
                 catch (Exception ex)
                 {
+                    progress.Close();
                     MessageBox.Show(
                         "Export failed.\n\n" + ex.Message,
                         "Export Error",

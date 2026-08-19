@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 using BLLayer.Common;
 using PersonalExpenseCreditTracker.Forms.Main;
 using Excel = Microsoft.Office.Interop.Excel;
+using PersonalExpenseCreditTracker.Helpers;
 
 namespace PersonalExpenseCreditTracker.Modules.Note
 {
@@ -1452,20 +1453,22 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 if (saveDialog.ShowDialog() != DialogResult.OK)
                     return;
 
+                var progress = new ExportProgressHelper();
+                progress.Show(this, "Exporting Note Data...");
+
                 try
                 {
+                    progress.SetProgress(10);
+
                     ExportNoteToExcel(
                         AllNoteData,
                         saveDialog.FileName);
 
-                    MessageBox.Show(
-                        "Note data exported successfully.",
-                        "Export Successful",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    progress.SetProgress(100);
                 }
                 catch (Exception ex)
                 {
+                    progress.Close();
                     MessageBox.Show(
                         "Export failed.\n\n" + ex.Message,
                         "Export Error",

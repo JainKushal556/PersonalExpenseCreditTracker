@@ -56,45 +56,13 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             pnlNotification.Visible = false;
             ApplyRoundCorners();
 
-            int userID = LogedInUser.GetUserId();
-            LoadDashboardSummary(userID);
-
-            lblNotification.Text = "🔔  Notifications";
-            lblTitle.Text = "🔔  Notifications";
-            LoadNotifications(userID, pnlExtra,flpNotifications);
-
-
-
-            // Income Overview ComboBox 
-            if (cmbSecondHeader.Items.Contains("This Year"))
-            {
-                cmbSecondHeader.SelectedItem = "This Year"; 
-            }
-            cmbSecondHeader.SelectedIndexChanged -= cmbSecondHeader_SelectedIndexChanged;
-            cmbSecondHeader.SelectedIndexChanged += cmbSecondHeader_SelectedIndexChanged;
-
-            // ২. Income Overview 
-            LoadIncomeOverviewChart(userID, "This Year"); 
-
-            chartExpenseCategory.Series[0].Points.Clear();
-            chartExpenseCategory.Series[0].Points.AddXY("Food & Dining", 8690);
-            chartExpenseCategory.Series[0].Points.AddXY("Shopping", 6210);
-            chartExpenseCategory.Series[0].Points.AddXY("Transport", 3730);
-            chartExpenseCategory.Series[0].Points.AddXY("Bills & Utilities", 3730);
-            chartExpenseCategory.Series[0].Points.AddXY("Entertainment", 2490);
-            chartExpenseCategory.Series[0].ChartType = SeriesChartType.Doughnut;
-            chartExpenseCategory.Series[0]["DoughnutRadius"] = "60";
-            chartExpenseCategory.Series[0].IsValueShownAsLabel = true;
-            chartExpenseCategory.Series[0].Label = "#PERCENT{P0}";
-            chartExpenseCategory.Legends[0].Enabled = false;
-
+            // 1. Setup Dropdown Defaults & Events
             if (cmbSecondHeader.Items.Contains("This Year"))
             {
                 cmbSecondHeader.SelectedItem = "This Year";
             }
             cmbSecondHeader.SelectedIndexChanged -= cmbSecondHeader_SelectedIndexChanged;
             cmbSecondHeader.SelectedIndexChanged += cmbSecondHeader_SelectedIndexChanged;
-            LoadIncomeOverviewChart(userID, "This Year");
 
             if (cmbExpenseFilter.Items.Contains("This Year"))
             {
@@ -102,10 +70,17 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             }
             cmbExpenseFilter.SelectedIndexChanged -= cmbExpenseFilter_SelectedIndexChanged;
             cmbExpenseFilter.SelectedIndexChanged += cmbExpenseFilter_SelectedIndexChanged;
-            LoadExpenseCategoryChart(userID, "This Year");
-            this.BeginInvoke((MethodInvoker)(() => CenterDonutLabel()));
 
-            //lblViewAll.Click += lblViewAll_Click;
+            // 2. Load Dashboard Summary, Charts & Totals once
+            int userID = LogedInUser.GetUserId();
+            LoadDashboardSummary(userID);
+
+            // 3. Load Notifications
+            lblNotification.Text = "🔔  Notifications";
+            lblTitle.Text = "🔔  Notifications";
+            LoadNotifications(userID, pnlExtra, flpNotifications);
+
+            this.BeginInvoke((MethodInvoker)(() => CenterDonutLabel()));
         }
 
 

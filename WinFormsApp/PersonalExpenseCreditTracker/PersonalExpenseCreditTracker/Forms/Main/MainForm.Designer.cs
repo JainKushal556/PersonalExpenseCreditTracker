@@ -1803,7 +1803,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlPersonAddPage
             // 
-            this.pnlPersonAddPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.pnlPersonAddPage.BackColor = System.Drawing.Color.Transparent;
             this.pnlPersonAddPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPersonAddPage.Location = new System.Drawing.Point(0, 78);
             this.pnlPersonAddPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1813,7 +1813,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlCreditCategoryPage
             // 
-            this.pnlCreditCategoryPage.BackColor = System.Drawing.Color.Olive;
+            this.pnlCreditCategoryPage.BackColor = System.Drawing.Color.Transparent;
             this.pnlCreditCategoryPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCreditCategoryPage.Location = new System.Drawing.Point(0, 78);
             this.pnlCreditCategoryPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1823,7 +1823,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlExpenseCategory
             // 
-            this.pnlExpenseCategory.BackColor = System.Drawing.Color.Teal;
+            this.pnlExpenseCategory.BackColor = System.Drawing.Color.Transparent;
             this.pnlExpenseCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlExpenseCategory.Location = new System.Drawing.Point(0, 78);
             this.pnlExpenseCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1833,7 +1833,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlOverview
             // 
-            this.pnlOverview.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.pnlOverview.BackColor = System.Drawing.Color.Transparent;
             this.pnlOverview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOverview.Location = new System.Drawing.Point(0, 78);
             this.pnlOverview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1843,7 +1843,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlExpensePage
             // 
-            this.pnlExpensePage.BackColor = System.Drawing.Color.DimGray;
+            this.pnlExpensePage.BackColor = System.Drawing.Color.Transparent;
             this.pnlExpensePage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlExpensePage.Location = new System.Drawing.Point(0, 78);
             this.pnlExpensePage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1853,7 +1853,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlCreditPage
             // 
-            this.pnlCreditPage.BackColor = System.Drawing.Color.LightGreen;
+            this.pnlCreditPage.BackColor = System.Drawing.Color.Transparent;
             this.pnlCreditPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCreditPage.Location = new System.Drawing.Point(0, 78);
             this.pnlCreditPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1863,7 +1863,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlLentPage
             // 
-            this.pnlLentPage.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlLentPage.BackColor = System.Drawing.Color.Transparent;
             this.pnlLentPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLentPage.Location = new System.Drawing.Point(0, 78);
             this.pnlLentPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1873,7 +1873,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlBorrowPage
             // 
-            this.pnlBorrowPage.BackColor = System.Drawing.SystemColors.Highlight;
+            this.pnlBorrowPage.BackColor = System.Drawing.Color.Transparent;
             this.pnlBorrowPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBorrowPage.Location = new System.Drawing.Point(0, 78);
             this.pnlBorrowPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1883,7 +1883,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlTaskPage
             // 
-            this.pnlTaskPage.BackColor = System.Drawing.Color.Coral;
+            this.pnlTaskPage.BackColor = System.Drawing.Color.Transparent;
             this.pnlTaskPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTaskPage.Location = new System.Drawing.Point(0, 78);
             this.pnlTaskPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1893,7 +1893,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // pnlNotesPage
             // 
-            this.pnlNotesPage.BackColor = System.Drawing.Color.SeaGreen;
+            this.pnlNotesPage.BackColor = System.Drawing.Color.Transparent;
             this.pnlNotesPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlNotesPage.Location = new System.Drawing.Point(0, 78);
             this.pnlNotesPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1904,7 +1904,7 @@ namespace PersonalExpenseCreditTracker
             // pnlSettingPage
             // 
             this.pnlSettingPage.AutoSize = true;
-            this.pnlSettingPage.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.pnlSettingPage.BackColor = System.Drawing.Color.Transparent;
             this.pnlSettingPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSettingPage.Location = new System.Drawing.Point(0, 78);
             this.pnlSettingPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2042,7 +2042,7 @@ namespace PersonalExpenseCreditTracker
             // 
             this.pnlProfilePage.AutoSize = true;
             this.pnlProfilePage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlProfilePage.BackColor = System.Drawing.Color.Pink;
+            this.pnlProfilePage.BackColor = System.Drawing.Color.Transparent;
             this.pnlProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProfilePage.Location = new System.Drawing.Point(400, 0);
             this.pnlProfilePage.Margin = new System.Windows.Forms.Padding(0, 20, 11, 20);
