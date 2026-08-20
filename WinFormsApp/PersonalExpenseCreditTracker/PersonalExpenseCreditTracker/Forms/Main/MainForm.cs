@@ -1629,7 +1629,7 @@ namespace PersonalExpenseCreditTracker
 
             AddExpenseControls expenseDetailsControl = new AddExpenseControls();
             expenseDetailsControl.FormClosed += Expense_FormClosed;
-            expenseDetailsControl.Show();
+            expenseDetailsControl.ShowDialog();
         }
         private void Expense_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1702,7 +1702,7 @@ namespace PersonalExpenseCreditTracker
 
             creditDetailsControl.FormClosed += Credit_FormClosed;
 
-            creditDetailsControl.Show();
+            creditDetailsControl.ShowDialog();
         }
         private void Credit_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1774,7 +1774,7 @@ namespace PersonalExpenseCreditTracker
 
             addLentControls.FormClosed += Lent_FormClosed;
 
-            addLentControls.Show();
+            addLentControls.ShowDialog();
         }
         private void Lent_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1847,7 +1847,7 @@ namespace PersonalExpenseCreditTracker
 
             addBorrowControls.FormClosed += Borrow_FormClosed;
 
-            addBorrowControls.Show();
+            addBorrowControls.ShowDialog();
         }
         private void Borrow_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1920,7 +1920,7 @@ namespace PersonalExpenseCreditTracker
 
             addTaskControl.FormClosed += Task_FormClosed;
 
-            addTaskControl.Show();
+            addTaskControl.ShowDialog();
         }
 
         private void Task_FormClosed(object sender, FormClosedEventArgs e)
@@ -1999,7 +1999,7 @@ namespace PersonalExpenseCreditTracker
 
             noteAddDetailsControl.FormClosed += Note_FormClosed;
 
-            noteAddDetailsControl.Show();
+            noteAddDetailsControl.ShowDialog();
         }
         private void Note_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -2207,7 +2207,7 @@ namespace PersonalExpenseCreditTracker
 
             ChangePasswordControls changePasswordControls = new ChangePasswordControls();
             changePasswordControls.FormClosed += ChangePassword_FormClosed; 
-            changePasswordControls.Show();
+            changePasswordControls.ShowDialog();
             RefreshSidebarScroll();
             ExpandSidebar();
         }

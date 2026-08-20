@@ -315,8 +315,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                 editPerson.PersonName = dataGridViewAddPerson.Rows[e.RowIndex].Cells["colName"].Value.ToString();
                 editPerson.PhoneNumber = dataGridViewAddPerson.Rows[e.RowIndex].Cells["colPhoneNumber"].Value.ToString();
                 editPerson.Address = dataGridViewAddPerson.Rows[e.RowIndex].Cells["colAddress"].Value.ToString();
-
-                editPerson.Show();          // Opens the form
+                editPerson.ShowDialog();          // Opens the form
 
                 LoadData();
             }

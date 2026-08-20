@@ -13,8 +13,8 @@ namespace PersonalExpenseCreditTracker.Helpers
     /// </summary>
     public class ExportProgressHelper
     {
-        private Panel pnlOverlay;
         private Panel pnlCard;
+        private EventHandler parentResizeHandler;
         private Label lblTitle;
         private Label lblPercent;
         private Panel pnlProgressTrack;
@@ -25,6 +25,31 @@ namespace PersonalExpenseCreditTracker.Helpers
         private int targetProgress = 0;
         private Control parentControl;
         private Action onComplete;
+        private BlockInputMessageFilter messageFilter;
+
+        private class BlockInputMessageFilter : IMessageFilter
+        {
+            private Control allowedControl;
+            public BlockInputMessageFilter(Control allowed) { this.allowedControl = allowed; }
+            public bool PreFilterMessage(ref Message m)
+            {
+                if ((m.Msg >= 0x0200 && m.Msg <= 0x020E) || (m.Msg >= 0x0100 && m.Msg <= 0x0109))
+                {
+                    Control target = Control.FromHandle(m.HWnd);
+                    if (target != null)
+                    {
+                        Control current = target;
+                        while (current != null)
+                        {
+                            if (current == allowedControl) return false;
+                            current = current.Parent;
+                        }
+                    }
+                    return true; 
+                }
+                return false;
+            }
+        }
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
@@ -57,13 +82,6 @@ namespace PersonalExpenseCreditTracker.Helpers
             onComplete = completeCallback;
             currentProgress = 0;
             targetProgress = 0;
-
-            // ======== ১. ফুল ব্যাকড্রপ ওভারলে (ShowCenterLoading এর মতো Solid Color) ========
-            pnlOverlay = new Panel
-            {
-                BackColor = Color.FromArgb(241, 245, 249),
-                Dock = DockStyle.Fill
-            };
 
             // ======== ২. সেন্টার কার্ড (Professional White Card) ========
             pnlCard = new Panel
@@ -131,14 +149,18 @@ namespace PersonalExpenseCreditTracker.Helpers
             pnlCard.Controls.Add(lblPercent);
             pnlCard.Controls.Add(pnlProgressTrack);
             pnlCard.Controls.Add(btnOk);
-            pnlOverlay.Controls.Add(pnlCard);
 
             // ---- রিসাইজ হলে কার্ড সবসময় সেন্টারে ----
-            pnlOverlay.Resize += (s, e) => CenterCard();
+            parentResizeHandler = (s, e) => CenterCard();
+            parent.Resize += parentResizeHandler;
 
-            parent.Controls.Add(pnlOverlay);
-            pnlOverlay.BringToFront();
+            parent.Controls.Add(pnlCard);
+            pnlCard.BringToFront();
             CenterCard();
+            
+            if (messageFilter != null) Application.RemoveMessageFilter(messageFilter);
+            messageFilter = new BlockInputMessageFilter(pnlCard);
+            Application.AddMessageFilter(messageFilter);
             
             // Set radius for elements (No radius for the main card as we used BorderStyle.FixedSingle for a crisp desktop look)
             SetRadius(pnlProgressTrack, 5);
@@ -150,11 +172,11 @@ namespace PersonalExpenseCreditTracker.Helpers
 
         private void CenterCard()
         {
-            if (pnlCard != null && pnlOverlay != null)
+            if (pnlCard != null && parentControl != null)
             {
                 pnlCard.Location = new Point(
-                    (pnlOverlay.Width - pnlCard.Width) / 2,
-                    (pnlOverlay.Height - pnlCard.Height) / 2
+                    (parentControl.Width - pnlCard.Width) / 2,
+                    (parentControl.Height - pnlCard.Height) / 2
                 );
             }
         }
@@ -248,6 +270,12 @@ namespace PersonalExpenseCreditTracker.Helpers
         /// </summary>
         public void Close()
         {
+            if (messageFilter != null)
+            {
+                Application.RemoveMessageFilter(messageFilter);
+                messageFilter = null;
+            }
+
             if (tmrProgress != null)
             {
                 tmrProgress.Stop();
@@ -255,11 +283,16 @@ namespace PersonalExpenseCreditTracker.Helpers
                 tmrProgress = null;
             }
 
-            if (pnlOverlay != null && parentControl != null)
+            if (pnlCard != null && parentControl != null)
             {
-                parentControl.Controls.Remove(pnlOverlay);
-                pnlOverlay.Dispose();
-                pnlOverlay = null;
+                if (parentResizeHandler != null)
+                {
+                    parentControl.Resize -= parentResizeHandler;
+                    parentResizeHandler = null;
+                }
+                parentControl.Controls.Remove(pnlCard);
+                pnlCard.Dispose();
+                pnlCard = null;
             }
 
             parentControl = null;
