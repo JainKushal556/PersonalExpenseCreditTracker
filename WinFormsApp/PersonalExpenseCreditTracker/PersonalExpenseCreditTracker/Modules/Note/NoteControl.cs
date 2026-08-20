@@ -376,8 +376,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
                 NoteViewDetailsControl view =
                     new NoteViewDetailsControl(this);
-
-                view.Show();
+                view.ShowDialog();
             };
 
             SetRadius(card, 20);
@@ -667,7 +666,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private void viewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NoteViewDetailsControl noteViewDetailsControl = new NoteViewDetailsControl(this);
-            noteViewDetailsControl.Show();
+            noteViewDetailsControl.ShowDialog();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -677,7 +676,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             {
                 LoadNoteData(userID); 
             };
-            noteEditDetailsControl.Show();
+            noteEditDetailsControl.ShowDialog();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

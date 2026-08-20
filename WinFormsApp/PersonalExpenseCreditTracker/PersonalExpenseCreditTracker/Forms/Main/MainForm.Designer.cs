@@ -1678,9 +1678,8 @@ namespace PersonalExpenseCreditTracker
             this.lblEmail.Location = new System.Drawing.Point(83, 37);
             this.lblEmail.Margin = new System.Windows.Forms.Padding(0, 0, 0, 4);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(136, 23);
+            this.lblEmail.Size = new System.Drawing.Size(0, 23);
             this.lblEmail.TabIndex = 2;
-            this.lblEmail.Text = "sujit@gmail.com";
             this.lblEmail.Click += new System.EventHandler(this.pnlUserProfile_Click);
             this.lblEmail.MouseEnter += new System.EventHandler(this.pnlUserProfile_MouseEnter);
             this.lblEmail.MouseLeave += new System.EventHandler(this.pnlUserProfile_MouseLeave);
@@ -1708,9 +1707,8 @@ namespace PersonalExpenseCreditTracker
             this.lblUserName.Location = new System.Drawing.Point(81, 11);
             this.lblUserName.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(87, 28);
+            this.lblUserName.Size = new System.Drawing.Size(0, 28);
             this.lblUserName.TabIndex = 1;
-            this.lblUserName.Text = "Sujit Kar";
             this.lblUserName.Click += new System.EventHandler(this.pnlUserProfile_Click);
             this.lblUserName.MouseEnter += new System.EventHandler(this.pnlUserProfile_MouseEnter);
             this.lblUserName.MouseLeave += new System.EventHandler(this.pnlUserProfile_MouseLeave);

@@ -104,6 +104,11 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             seriesIncome.BorderWidth = 3;
             seriesIncome.Color = Color.FromArgb(16, 185, 129);
             seriesIncome.IsVisibleInLegend = false;
+            
+            // Clean up the data labels
+            seriesIncome.Font = new Font("Segoe UI", 8F);
+            seriesIncome.SmartLabelStyle.Enabled = true;
+            seriesIncome.SmartLabelStyle.CalloutLineColor = Color.Transparent;
 
             // =========================
             // 3. GET CREDIT DATA
@@ -182,6 +187,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
                         seriesIncome.Points[pIdx].MarkerColor =
                             Color.FromArgb(16, 185, 129);
+
+                        seriesIncome.Points[pIdx].IsValueShownAsLabel = true;
+                        seriesIncome.Points[pIdx].LabelFormat = "₹ #,##0";
+                        seriesIncome.Points[pIdx].LabelForeColor = Color.DimGray;
                     }
                 }
             }
@@ -254,6 +263,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
                         seriesIncome.Points[pIdx].MarkerColor =
                             Color.FromArgb(16, 185, 129);
+
+                        seriesIncome.Points[pIdx].IsValueShownAsLabel = true;
+                        seriesIncome.Points[pIdx].LabelFormat = "₹ #,##0";
+                        seriesIncome.Points[pIdx].LabelForeColor = Color.DimGray;
                     }
                 }
             }
@@ -329,6 +342,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
                         seriesIncome.Points[pIdx].MarkerColor =
                             Color.FromArgb(16, 185, 129);
+
+                        seriesIncome.Points[pIdx].IsValueShownAsLabel = true;
+                        seriesIncome.Points[pIdx].LabelFormat = "₹ #,##0";
+                        seriesIncome.Points[pIdx].LabelForeColor = Color.DimGray;
                     }
                 }
             }
