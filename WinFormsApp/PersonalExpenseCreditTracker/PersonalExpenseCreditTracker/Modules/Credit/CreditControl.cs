@@ -166,12 +166,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             Color selectedRowColor = Color.FromArgb(174, 205, 247);
             // Normal Row
             dgvCreditDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvCreditDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //dgvCreditDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
 
             // Alternating Row
             dgvCreditDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
 
-            dgvCreditDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //dgvCreditDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
 
             // Selection
             dgvCreditDataTable.DefaultCellStyle.SelectionBackColor = selectedRowColor;

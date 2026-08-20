@@ -157,6 +157,14 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             colAmount.DefaultCellStyle.Font = new Font("Segoe UI", 10);
             colPaymentMethod.DefaultCellStyle.Font = new Font("Segoe UI", 10);
 
+            //Column FontStyle
+            colDate.DefaultCellStyle.BackColor = Color.White;
+            colDescription.DefaultCellStyle.BackColor = Color.White;
+            colCategory.DefaultCellStyle.BackColor = Color.White;
+            colSubCategory.DefaultCellStyle.BackColor = Color.White;
+            colAmount.DefaultCellStyle.BackColor = Color.White;
+            colPaymentMethod.DefaultCellStyle.BackColor = Color.White;
+
             //Row Style
             dgvExpenseDataTable.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
             dgvExpenseDataTable.RowTemplate.Height = 40;
@@ -165,36 +173,20 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             dgvExpenseDataTable.ReadOnly = true;
             dgvExpenseDataTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            // Zigzag
-
-            //Color selectedRowColor = Color.FromArgb(174, 205, 247);
             // Normal Row
+            //Normal Row
             dgvExpenseDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvExpenseDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
-
-            // Alternating Row
+           
+            //  Alternating Row (Zigzag - Soft Slate Tint)
             dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
+            
 
-            dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
-
-            // Selection
-            dgvExpenseDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247);
-
+            //  Selection Color (একই সিলেকশন কালার)
+            dgvExpenseDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247); // Royal Blue
             dgvExpenseDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
 
             dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247);
-
             dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
-
-            //// Force every column to use the same selection color
-            //foreach (DataGridViewColumn column in dgvExpenseDataTable.Columns)
-            //{
-            //    column.DefaultCellStyle.SelectionBackColor =
-            //        selectedRowColor;
-
-            //    column.DefaultCellStyle.SelectionForeColor =
-            //        Color.Black;
-            //}
 
             //Border style
             dgvExpenseDataTable.BorderStyle = BorderStyle.None;

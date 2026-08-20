@@ -346,7 +346,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.colDescription});
             this.dgvExpenseDataTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvExpenseDataTable.EnableHeadersVisualStyles = false;
-            this.dgvExpenseDataTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(236)))), ((int)(((byte)(242)))));
+            this.dgvExpenseDataTable.GridColor = System.Drawing.Color.Gainsboro;
             this.dgvExpenseDataTable.Location = new System.Drawing.Point(11, 57);
             this.dgvExpenseDataTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvExpenseDataTable.Name = "dgvExpenseDataTable";

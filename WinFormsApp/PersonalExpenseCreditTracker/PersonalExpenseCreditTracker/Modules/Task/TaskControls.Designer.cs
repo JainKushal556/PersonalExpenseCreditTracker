@@ -601,6 +601,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.tblCardContant.Size = new System.Drawing.Size(1153, 110);
             this.tblCardContant.TabIndex = 2;
             this.tblCardContant.Click += new System.EventHandler(this.tblCardContant_Click);
+            this.tblCardContant.Paint += new System.Windows.Forms.PaintEventHandler(this.tblCardContant_Paint);
             // 
             // pnlTotalTask
             // 

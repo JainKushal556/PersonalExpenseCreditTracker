@@ -367,12 +367,12 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             Color selectedRowColor = Color.FromArgb(174, 205, 247);
             // Normal Row
             dgvBorrowDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvBorrowDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //dgvBorrowDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
 
             // Alternating Row
             dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.BackColor =  Color.FromArgb(244, 247, 250);
 
-            dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //dgvBorrowDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
 
             // Selection
             dgvBorrowDataTable.DefaultCellStyle.SelectionBackColor = selectedRowColor;
@@ -641,7 +641,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     break;
 
                 case "colPersonName":
-                    DrawHeader(e, Properties.Resources.PersonIcon, "PersonName");
+                    DrawHeader(e, Properties.Resources.PersonIcon, "Person Name");
                     break;
                 case "colDescription":
                     DrawHeader(e, Properties.Resources.note, "Description");
@@ -650,16 +650,16 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     DrawHeader(e, Properties.Resources.money, "Amount");
                     break;
                 case "colPaymentType":
-                    DrawHeader(e, Properties.Resources.credit_card1, "PaymentType");
+                    DrawHeader(e, Properties.Resources.credit_card1, "Payment Type");
                     break;
                 case "colPaidAmount":
-                    DrawHeader(e, Properties.Resources.money, "PaidAmount");
+                    DrawHeader(e, Properties.Resources.money, "Paid Amount");
                     break;
                 case "colRemainingAmount":
-                    DrawHeader(e, Properties.Resources.money, "RemainingAmount");
+                    DrawHeader(e, Properties.Resources.money, "Remaining Amount");
                     break;
                 case "colDeadline":
-                    DrawHeader(e, Properties.Resources.deadline, "DeadlineAt");
+                    DrawHeader(e, Properties.Resources.deadline, "Deadline");
                     break;
                 case "colStatus":
                     DrawHeader(e, Properties.Resources.loading, "Status");
@@ -1827,6 +1827,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                  txtSearch.Text = "Search records...";
                  txtSearch.ForeColor = Color.Gray;
              }
+         }
+
+         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+         {
+
          }
 
     }

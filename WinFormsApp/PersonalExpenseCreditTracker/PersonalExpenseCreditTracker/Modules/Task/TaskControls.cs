@@ -475,10 +475,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             //Normal Row
             dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
-            dataGridViewTask.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //dataGridViewTask.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
             //  Alternating Row (Zigzag - Soft Slate Tint)
             dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
-            dataGridViewTask.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //dataGridViewTask.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
 
             //  Selection Color (একই সিলেকশন কালার)
             dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247); // Royal Blue
@@ -486,24 +486,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
             dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247);
             dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
-
-
-            ////// Zigzag
-            ////Normal Row
-            //dataGridViewTask.DefaultCellStyle.BackColor = Color.White;
-            //dataGridViewTask.DefaultCellStyle.ForeColor = Color.Black;
-
-            //// Alternating Row Style 
-            //dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 253, 244);
-            //dataGridViewTask.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
-
-            //// Selected Row Style 
-            //dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(5, 150, 105);
-            //dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.White;
-
-            //dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(5, 150, 105);
-            //dataGridViewTask.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.White;
-
 
             //Border style
             dataGridViewTask.BorderStyle = BorderStyle.None;
@@ -1664,6 +1646,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 txtSearch.Text = "Search records...";
                 txtSearch.ForeColor = Color.Gray;
             }
+        }
+
+        private void tblCardContant_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
     }

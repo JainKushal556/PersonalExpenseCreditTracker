@@ -346,11 +346,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             Color selectedRowColor = Color.FromArgb(174, 205, 247);
             // Normal Row
             dgvLentDataTable.DefaultCellStyle.BackColor = Color.White;
-            dgvLentDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //dgvLentDataTable.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
 
             // Alternating Row
             dgvLentDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
-            dgvLentDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            //dgvLentDataTable.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
 
             // Selection
             dgvLentDataTable.DefaultCellStyle.SelectionBackColor = selectedRowColor;
@@ -571,7 +571,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
 
                 case "colPersonName":
-                    DrawHeader(e, Properties.Resources.PersonIcon, "PersonName");
+                    DrawHeader(e, Properties.Resources.PersonIcon, "Person Name");
                     break;
                 case "colDescription":
                     DrawHeader(e, Properties.Resources.note, "Description");
@@ -580,16 +580,16 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     DrawHeader(e, Properties.Resources.money, "Amount");
                     break;
                 case "colPaymentType":
-                    DrawHeader(e, Properties.Resources.credit_card1, "PaymentType");
+                    DrawHeader(e, Properties.Resources.credit_card1, "Payment Type");
                     break;
                 case "colReturnedAmount":
-                    DrawHeader(e, Properties.Resources.money, "ReturnedAmount");
+                    DrawHeader(e, Properties.Resources.money, "Returned Amount");
                     break;
                 case "colRemainingAmount":
-                    DrawHeader(e, Properties.Resources.money, "RemainingAmount");
+                    DrawHeader(e, Properties.Resources.money, "Remaining Amount");
                     break;
                 case "colDeadline":
-                    DrawHeader(e, Properties.Resources.deadline, "DeadlineAt");
+                    DrawHeader(e, Properties.Resources.deadline, "Deadline");
                     break;
                 case "colStatus":
                     DrawHeader(e, Properties.Resources.loading, "Status");
