@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE spInsertNewExpenseCategoryByUserID    
+CREATE or ALTER   PROCEDURE spInsertNewExpenseCategoryByUserID    
 (    
     @UserID INT,    
     @ActiveStatus INT,    
@@ -24,8 +24,10 @@ BEGIN
             RETURN;    
         END;    
     
+    
         -- Trim Category Name    
         SET @CategoryName = LTRIM(RTRIM(@CategoryName));    
+    
     
         -- Validate Category Name    
         IF @CategoryName IS NULL    
@@ -34,6 +36,7 @@ BEGIN
             SELECT 'Category Name cannot be empty' AS Message;    
             RETURN;    
         END;    
+    
     
         -- Validate Active Status    
         IF @ActiveStatus = 1    
@@ -52,50 +55,27 @@ BEGIN
             RETURN;    
         END;    
     
+    
         -- Transaction Starts    
         BEGIN TRANSACTION;    
-
-        -- Check Duplicate Category for Default 
-        IF EXISTS  
-        (  
-            SELECT 1  
-            FROM tblExpenseCategory  
-            WHERE CategoryName = @CategoryName  
-              AND IsDefault = 1  
-        )  
-        BEGIN  
-            ROLLBACK TRANSACTION;  
-            SELECT 'Category Already Exists' AS Message;  
-            RETURN;  
-        END;  
-
-        -- Check Duplicate Category for User
-        IF EXISTS  
-        (  
-            SELECT 1  
-            FROM tblExpenseCategory  
-            WHERE CategoryName = @CategoryName  
-              AND UserID = @UserID  
-        )  
-        BEGIN  
-            ROLLBACK TRANSACTION;  
-
-            IF EXISTS  
-            (  
-                SELECT 1  
-                FROM tblExpenseCategory  
-                WHERE CategoryName = @CategoryName  
-                  AND UserID = @UserID  
-                  AND IsActive = 0  
-            )  
-            BEGIN  
-                SELECT 'Category Already Exists But It Is Inactive. Please Active It' AS Message;  
-                RETURN;  
-            END;  
-
-            SELECT 'Category Already Exists' AS Message;  
-            RETURN;  
-        END;  
+    
+    
+        -- Check Duplicate Category    
+        IF EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseCategory    
+            WHERE CategoryName = @CategoryName    
+              AND UserID = @UserID    
+              AND IsActive = 1    
+        )    
+        BEGIN    
+            ROLLBACK TRANSACTION;    
+    
+            SELECT 'Category Already Exists for this user' AS Message;    
+            RETURN;    
+        END;    
+    
     
         -- Insert Category    
         INSERT INTO tblExpenseCategory    
@@ -112,21 +92,26 @@ BEGIN
             @IsDefault,    
             @IsActive    
         );    
-
+    
+    
         -- Commit Transaction    
         COMMIT TRANSACTION;    
-
+    
+    
         SELECT 'Expense Category Inserted Successfully' AS Message;    
     
     END TRY    
     
     BEGIN CATCH    
-
+    
+        -- Rollback if transaction is active    
         IF @@TRANCOUNT > 0    
         BEGIN    
             ROLLBACK TRANSACTION;    
         END;    
-
+    
+    
+        -- Return Error Information    
         SELECT    
             'Error occurred while inserting Expense Category' AS Message,    
             ERROR_MESSAGE() AS ErrorMessage,    
@@ -135,5 +120,5 @@ BEGIN
     
     END CATCH    
     
-END;  
+END;
 GO

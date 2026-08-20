@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE spUpdateExpenseCategoryByUserID    
+CREATE OR ALTER  PROCEDURE spUpdateExpenseCategoryByUserID    
 (    
     @UserID INT,    
     @CategoryID INT,    
@@ -7,11 +7,9 @@ CREATE OR ALTER PROCEDURE spUpdateExpenseCategoryByUserID
 )    
 AS    
 BEGIN    
+    
     DECLARE @IsDefault INT;    
     DECLARE @IsActive INT;    
-    DECLARE @ExistingCategoryName VARCHAR(100);    
-    DECLARE @ExistingIsDefault BIT;    
-    DECLARE @ExistingUserID INT;    
     
     BEGIN TRY    
     
@@ -28,22 +26,38 @@ BEGIN
             RETURN;    
         END;    
     
-        -- Validate CategoryID and Fetch Existing Data    
-        SELECT 
-            @ExistingCategoryName = CategoryName,    
-            @ExistingIsDefault = IsDefault,    
-            @ExistingUserID = UserID    
-        FROM tblExpenseCategory    
-        WHERE CategoryID = @CategoryID;    
     
-        IF @ExistingCategoryName IS NULL    
+        -- Validate CategoryID    
+        IF NOT EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseCategory    
+            WHERE CategoryID = @CategoryID    
+        )    
         BEGIN    
             SELECT 'Invalid CategoryID' AS Message;    
             RETURN;    
         END;    
     
+    
+        -- Check Category Ownership and Default Status    
+        IF NOT EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseCategory    
+            WHERE CategoryID = @CategoryID    
+              AND UserID = @UserID    
+              AND IsDefault = 0    
+        )    
+        BEGIN    
+            SELECT 'Cannot update default categories or categories owned by other users' AS Message;    
+            RETURN;    
+        END;    
+    
+    
         -- Trim Category Name    
         SET @CategoryName = LTRIM(RTRIM(@CategoryName));    
+    
     
         -- Validate Category Name    
         IF @CategoryName IS NULL    
@@ -53,13 +67,6 @@ BEGIN
             RETURN;    
         END;    
     
-        -- Cannot change name of default categories or categories owned by other users
-        IF (@ExistingIsDefault = 1 OR (@ExistingUserID IS NOT NULL AND @ExistingUserID <> @UserID))    
-           AND @CategoryName <> @ExistingCategoryName    
-        BEGIN    
-            SELECT 'Cannot update default categories or categories owned by other users' AS Message;    
-            RETURN;    
-        END;    
     
         -- Validate Active Status    
         IF @ActiveStatus = 1    
@@ -78,81 +85,64 @@ BEGIN
             RETURN;    
         END;    
     
+    
         -- Start Transaction    
         BEGIN TRANSACTION;    
     
-        -- Check Duplicate Category Name if name is changed    
-        IF @CategoryName <> @ExistingCategoryName    
+    
+        -- Check Duplicate Category Name    
+        IF EXISTS    
+        (    
+            SELECT 1    
+            FROM tblExpenseCategory    
+            WHERE CategoryName = @CategoryName    
+              AND CategoryID <> @CategoryID    
+              AND UserID = @UserID    
+              AND IsActive = 1    
+        )    
         BEGIN    
-            -- Check Duplicate Category for Default 
-            IF EXISTS  
-            (  
-                SELECT 1  
-                FROM tblExpenseCategory  
-                WHERE CategoryName = @CategoryName  
-                  AND IsDefault = 1  
-            )  
-            BEGIN  
-                ROLLBACK TRANSACTION;  
-                SELECT 'Category Already Exists' AS Message;  
-                RETURN;  
-            END;  
-
-            -- Check Duplicate Category for User (excluding current CategoryID)
-            IF EXISTS  
-            (  
-                SELECT 1  
-                FROM tblExpenseCategory  
-                WHERE CategoryName = @CategoryName  
-                  AND CategoryID <> @CategoryID  
-                  AND UserID = @UserID  
-            )  
-            BEGIN  
-                ROLLBACK TRANSACTION;  
-
-                IF EXISTS  
-                (  
-                    SELECT 1  
-                    FROM tblExpenseCategory  
-                    WHERE CategoryName = @CategoryName  
-                      AND CategoryID <> @CategoryID  
-                      AND UserID = @UserID  
-                      AND IsActive = 0  
-                )  
-                BEGIN  
-                    SELECT 'Category Already Exists But It Is Inactive. Please Active It' AS Message;  
-                    RETURN;  
-                END;  
-
-                SELECT 'Category Already Exists' AS Message;  
-                RETURN;  
-            END;  
+            ROLLBACK TRANSACTION;    
+    
+            SELECT 'Category Name Already Exists for this user' AS Message;    
+            RETURN;    
         END;    
+    
     
         -- Update Category    
         UPDATE tblExpenseCategory    
-        SET CategoryName = @CategoryName,    
+        SET    
+            CategoryName = @CategoryName,    
             IsActive = @IsActive    
-        WHERE CategoryID = @CategoryID;    
+        WHERE CategoryID = @CategoryID    
+          AND UserID = @UserID    
+          AND IsDefault = 0;    
+    
     
         -- Commit Transaction    
         COMMIT TRANSACTION;    
+    
     
         SELECT 'Expense Category Updated Successfully' AS Message;    
     
     END TRY    
     
     BEGIN CATCH    
+    
+        -- Rollback Transaction if Active    
         IF @@TRANCOUNT > 0    
         BEGIN    
             ROLLBACK TRANSACTION;    
         END;    
-
+    
+    
+        -- Return Error Details    
         SELECT    
             'Error occurred while updating Expense Category' AS Message,    
             ERROR_MESSAGE() AS ErrorMessage,    
             ERROR_NUMBER() AS ErrorNumber,    
             ERROR_LINE() AS ErrorLine;    
+    
     END CATCH    
-END;  
+    
+END;
 GO

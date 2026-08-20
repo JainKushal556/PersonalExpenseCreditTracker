@@ -24,8 +24,10 @@ BEGIN
             RETURN;  
         END;  
   
+  
         -- Trim Category Name  
         SET @CategoryName = LTRIM(RTRIM(@CategoryName));  
+  
   
         -- Validate Category Name  
         IF @CategoryName IS NULL  
@@ -34,6 +36,7 @@ BEGIN
             SELECT 'Category Name cannot be empty' AS Message;  
             RETURN;  
         END;  
+  
   
         -- Validate Active Status  
         IF @ActiveStatus = 1  
@@ -52,51 +55,28 @@ BEGIN
             RETURN;  
         END;  
   
+  
         -- Transaction Starts  
         BEGIN TRANSACTION;  
   
-        -- Check Duplicate Category for Default 
+  
+        -- Check Duplicate Category  
         IF EXISTS  
         (  
             SELECT 1  
-            FROM tblCreditCategory  
-            WHERE CategoryName = @CategoryName  
-              AND IsDefault = 1  
+   FROM tblCreditCategory  
+   WHERE CategoryName = @CategoryName  
+   AND UserID = @UserID  
+   AND IsActive = 1  
         )  
         BEGIN  
             ROLLBACK TRANSACTION;  
-            SELECT 'Category Already Exists' AS Message;  
+  
+            SELECT 'Category Already Exists for this user' AS Message;  
             RETURN;  
         END;  
-
-        -- Check Duplicate Category for User
-        IF EXISTS  
-        (  
-            SELECT 1  
-            FROM tblCreditCategory  
-            WHERE CategoryName = @CategoryName  
-              AND UserID = @UserID  
-        )  
-        BEGIN  
-            ROLLBACK TRANSACTION;  
-
-            IF EXISTS  
-            (  
-                SELECT 1  
-                FROM tblCreditCategory  
-                WHERE CategoryName = @CategoryName  
-                  AND UserID = @UserID  
-                  AND IsActive = 0  
-            )  
-            BEGIN  
-                SELECT 'Category Already Exists But It Is Inactive. Please Active It' AS Message;  
-                RETURN;  
-            END;  
-
-            SELECT 'Category Already Exists' AS Message;  
-            RETURN;  
-        END;  
-
+  
+  
         -- Insert Category  
         INSERT INTO tblCreditCategory  
         (  
@@ -112,28 +92,33 @@ BEGIN
             @IsDefault,  
             @IsActive  
         );  
-
+  
+  
         -- Commit Transaction  
         COMMIT TRANSACTION;  
-
+  
+  
         SELECT 'Credit Category Inserted Successfully' AS Message;  
   
     END TRY  
   
     BEGIN CATCH  
-
+  
+        -- Rollback if transaction is active  
         IF @@TRANCOUNT > 0  
         BEGIN  
             ROLLBACK TRANSACTION;  
         END;  
-
+  
+  
+        -- Return Error Information  
         SELECT  
-            'Error occurred while inserting Credit Category' AS Message,  
+            'Error occurred while inserting Expense Category' AS Message,  
             ERROR_MESSAGE() AS ErrorMessage,  
             ERROR_NUMBER() AS ErrorNumber,  
             ERROR_LINE() AS ErrorLine;  
   
     END CATCH  
   
-END;  
+END;
 GO
