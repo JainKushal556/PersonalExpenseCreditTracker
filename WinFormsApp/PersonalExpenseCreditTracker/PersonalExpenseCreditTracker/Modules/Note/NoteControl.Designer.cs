@@ -860,7 +860,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             // 
             this.pnlDateFilter.BackColor = System.Drawing.Color.Transparent;
             this.pnlDateFilter.Controls.Add(this.pnlDateHeader);
-            this.pnlDateFilter.Location = new System.Drawing.Point(173, 290);
+            this.pnlDateFilter.Location = new System.Drawing.Point(450, 200);
             this.pnlDateFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDateFilter.Name = "pnlDateFilter";
             this.pnlDateFilter.Size = new System.Drawing.Size(599, 48);
