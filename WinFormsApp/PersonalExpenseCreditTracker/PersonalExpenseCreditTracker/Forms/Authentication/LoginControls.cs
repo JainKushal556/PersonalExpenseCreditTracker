@@ -12,7 +12,6 @@ using PersonalExpenseCreditTracker.Common;
 using BLLayer.Authentication;
 using BLLayer.Common;
 
-
 namespace PersonalExpenseCreditTracker.Forms.Authentication
 {
     public partial class LoginControls : Form
