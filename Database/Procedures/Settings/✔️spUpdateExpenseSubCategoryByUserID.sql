@@ -1,4 +1,4 @@
-CREATE  OR ALTER   PROCEDURE spUpdateExpenseSubCategoryByUserID    
+CREATE OR ALTER PROCEDURE spUpdateExpenseSubCategoryByUserID    
 (    
     @UserID INT,    
     @SubCategoryID INT,    
@@ -7,81 +7,156 @@ CREATE  OR ALTER   PROCEDURE spUpdateExpenseSubCategoryByUserID
 )    
 AS    
 BEGIN    
-        
-    SET NOCOUNT OFF    
-        
-        
-    IF NOT EXISTS    
-    (    
-        SELECT 1    
-        FROM tblUserAuthentication UserAuthentication    
-        WHERE UserAuthentication.UserID = @UserID    
-        AND UserAuthentication.Active = 1    
-    )    
-    BEGIN    
-        SELECT 'Invalid or Inactive User' AS MESSAGE    
-        RETURN    
-    END    
+    DECLARE @IsDefault INT;    
+    DECLARE @IsActive INT;    
+    DECLARE @CategoryID INT;  
+    DECLARE @ExistingSubCategoryName VARCHAR(100);    
+    DECLARE @ExistingIsDefault BIT;    
+    DECLARE @ExistingUserID INT;    
     
-        
-    IF NOT EXISTS    
-    (    
-        SELECT 1    
+    BEGIN TRY    
+    
+        -- Validate User    
+        IF NOT EXISTS    
+        (    
+            SELECT 1    
+            FROM tblUserAuthentication AS UserAuthentication    
+            WHERE UserAuthentication.UserID = @UserID    
+              AND UserAuthentication.Active = 1    
+        )    
+        BEGIN    
+            SELECT 'Invalid or Inactive User' AS Message;    
+            RETURN;    
+        END;    
+    
+        -- Validate SubCategoryID and Fetch Existing Data    
+        SELECT 
+            @CategoryID = CategoryID,    
+            @ExistingSubCategoryName = SubCategoryName,    
+            @ExistingIsDefault = IsDefault,    
+            @ExistingUserID = UserID    
         FROM tblExpenseSubCategory     
-        WHERE SubCategoryID = @SubCategoryID    
-    )    
-    BEGIN    
-        SELECT 'Invalid SubCategoryID' AS MESSAGE    
-        RETURN     
-    END    
-        
-        
-    IF NOT EXISTS    
-    (    
-        SELECT 1    
-        FROM tblExpenseSubCategory    
-        WHERE SubCategoryID = @SubCategoryID    
-        AND UserID = @UserID    
-        AND IsDefault = 0    
-    )    
-    BEGIN    
-        SELECT 'Cannot update default sub categories or subcategories owned by other users' AS MESSAGE    
-        RETURN    
-    END    
+        WHERE SubCategoryID = @SubCategoryID;  
+
+        IF @ExistingSubCategoryName IS NULL    
+        BEGIN    
+            SELECT 'Invalid SubCategoryID' AS Message;    
+            RETURN;    
+        END;    
     
-        
-    SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName))    
+        -- Trim SubCategory Name    
+        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));    
     
-    IF @SubCategoryName IS NULL    
-    OR @SubCategoryName = ''    
-    BEGIN    
-        SELECT 'SubCategory Name Cannot Be Empty' AS MESSAGE    
-        RETURN    
-    END    
+        IF @SubCategoryName IS NULL    
+           OR @SubCategoryName = ''    
+        BEGIN    
+            SELECT 'SubCategory Name Cannot Be Empty' AS Message;    
+            RETURN;    
+        END;    
     
-        
-    IF EXISTS    
-    (    
-        SELECT 1    
-        FROM tblExpenseSubCategory    
-        WHERE SubCategoryName = @SubCategoryName    
-        AND SubCategoryID != @SubCategoryID    
-        AND UserID = @UserID    
-        AND IsActive = 1    
-    )    
-    BEGIN    
-        SELECT 'SubCategory Name Already Exists for this user' AS MESSAGE    
-        RETURN    
-    END    
+        -- Cannot change name of default subcategories or subcategories owned by other users
+        IF (@ExistingIsDefault = 1 OR (@ExistingUserID IS NOT NULL AND @ExistingUserID <> @UserID))    
+           AND @SubCategoryName <> @ExistingSubCategoryName    
+        BEGIN    
+            SELECT 'Cannot update default sub categories or subcategories owned by other users' AS Message;    
+            RETURN;    
+        END;    
     
-        
-    UPDATE tblExpenseSubCategory    
-    SET SubCategoryName = @SubCategoryName    
-    WHERE SubCategoryID = @SubCategoryID    
-    AND UserID = @UserID    
-    AND IsDefault = 0    
+        -- Validate Active Status    
+        IF @ActiveStatus = 1    
+        BEGIN    
+            SET @IsActive = 1;    
+            SET @IsDefault = 0;    
+        END    
+        ELSE IF @ActiveStatus = 0    
+        BEGIN    
+            SET @IsActive = 0;    
+            SET @IsDefault = 0;    
+        END    
+        ELSE    
+        BEGIN    
+            SELECT 'Please Select Valid Input' AS Message;    
+            RETURN;    
+        END;    
     
-    SELECT 'Expense SubCategory Updated Successfully' AS MESSAGE    
+        -- Start Transaction    
+        BEGIN TRANSACTION;    
     
-END
+        -- Check Duplicate SubCategory Name if name is changed    
+        IF @SubCategoryName <> @ExistingSubCategoryName    
+        BEGIN    
+            -- Check Duplicate SubCategory for Default under this CategoryID
+            IF EXISTS  
+            (  
+                SELECT 1  
+                FROM tblExpenseSubCategory  
+                WHERE SubCategoryName = @SubCategoryName  
+                  AND CategoryID = @CategoryID  
+                  AND IsDefault = 1  
+            )  
+            BEGIN  
+                ROLLBACK TRANSACTION;  
+                SELECT 'Sub Category Already Exists' AS Message;  
+                RETURN;  
+            END;  
+
+            -- Check Duplicate SubCategory for User under this CategoryID (excluding current SubCategoryID)
+            IF EXISTS  
+            (  
+                SELECT 1  
+                FROM tblExpenseSubCategory  
+                WHERE SubCategoryName = @SubCategoryName  
+                  AND SubCategoryID <> @SubCategoryID  
+                  AND CategoryID = @CategoryID  
+                  AND UserID = @UserID  
+            )  
+            BEGIN  
+                ROLLBACK TRANSACTION;  
+
+                IF EXISTS  
+                (  
+                    SELECT 1  
+                    FROM tblExpenseSubCategory  
+                    WHERE SubCategoryName = @SubCategoryName  
+                      AND SubCategoryID <> @SubCategoryID  
+                      AND CategoryID = @CategoryID  
+                      AND UserID = @UserID  
+                      AND IsActive = 0  
+                )  
+                BEGIN  
+                    SELECT 'Sub Category Already Exists But It Is Inactive. Please Active It' AS Message;  
+                    RETURN;  
+                END;  
+
+                SELECT 'Sub Category Already Exists' AS Message;  
+                RETURN;  
+            END;  
+        END;    
+    
+        -- Update SubCategory    
+        UPDATE tblExpenseSubCategory    
+        SET SubCategoryName = @SubCategoryName,    
+            IsActive = @IsActive    
+        WHERE SubCategoryID = @SubCategoryID;    
+    
+        -- Commit Transaction    
+        COMMIT TRANSACTION;    
+    
+        SELECT 'Expense Sub Category Updated Successfully' AS Message;    
+    
+    END TRY    
+    
+    BEGIN CATCH    
+        IF @@TRANCOUNT > 0    
+        BEGIN    
+            ROLLBACK TRANSACTION;    
+        END;    
+
+        SELECT    
+            'Error occurred while updating Expense Sub Category' AS Message,    
+            ERROR_MESSAGE() AS ErrorMessage,    
+            ERROR_NUMBER() AS ErrorNumber,    
+            ERROR_LINE() AS ErrorLine;    
+    END CATCH    
+END;  
 GO

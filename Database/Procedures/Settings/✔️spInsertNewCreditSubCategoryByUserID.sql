@@ -1,9 +1,9 @@
-CREATE or ALTER  PROCEDURE spInsertNewCreditSubCategoryByUserID  
+CREATE OR ALTER PROCEDURE spInsertNewCreditSubCategoryByUserID
 (  
-   @UserID INT,  
-   @CategoryID INT,  
-   @ActiveStatus INT,  
-   @SubCategoryName VARCHAR(MAX)  
+    @UserID INT,  
+    @CategoryID INT,  
+    @ActiveStatus INT,  
+    @SubCategoryName VARCHAR(MAX)  
 )  
 AS  
 BEGIN  
@@ -24,20 +24,29 @@ BEGIN
             SELECT 'Invalid or Inactive User' AS Message;  
             RETURN;  
         END;  
-  
-  
-        -- Trim Category Name  
-        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));  
-  
-  
-        -- Validate Category Name  
-        IF @SubCategoryName IS NULL  
-           OR @SubCategoryName = ''  
+
+        -- Validate CategoryID  
+        IF NOT EXISTS  
+        (  
+            SELECT 1  
+            FROM tblCreditCategory  
+            WHERE CategoryID = @CategoryID  
+        )  
         BEGIN  
-            SELECT 'Category Name cannot be empty' AS Message;  
+            SELECT 'Invalid CategoryID' AS Message;  
             RETURN;  
         END;  
   
+        -- Trim SubCategory Name  
+        SET @SubCategoryName = LTRIM(RTRIM(@SubCategoryName));  
+  
+        -- Validate SubCategory Name  
+        IF @SubCategoryName IS NULL  
+           OR @SubCategoryName = ''  
+        BEGIN  
+            SELECT 'Sub Category Name cannot be empty' AS Message;  
+            RETURN;  
+        END;  
   
         -- Validate Active Status  
         IF @ActiveStatus = 1  
@@ -56,72 +65,90 @@ BEGIN
             RETURN;  
         END;  
   
-  
         -- Transaction Starts  
         BEGIN TRANSACTION;  
   
-  
-        -- Check Duplicate Category  
+        -- Check Duplicate SubCategory for Default under this CategoryID
         IF EXISTS  
         (  
             SELECT 1  
             FROM tblCreditSubCategory  
             WHERE SubCategoryName = @SubCategoryName  
-              AND UserID = @UserID  
-              AND IsActive = 1  
+              AND CategoryID = @CategoryID  
+              AND IsDefault = 1  
         )  
         BEGIN  
             ROLLBACK TRANSACTION;  
-  
-            SELECT 'Category Already Exists for this user' AS Message;  
+            SELECT 'Sub Category Already Exists' AS Message;  
+            RETURN;  
+        END;  
+
+        -- Check Duplicate SubCategory for User under this CategoryID  
+        IF EXISTS  
+        (  
+            SELECT 1  
+            FROM tblCreditSubCategory  
+            WHERE SubCategoryName = @SubCategoryName  
+              AND CategoryID = @CategoryID  
+              AND UserID = @UserID  
+        )  
+        BEGIN  
+            ROLLBACK TRANSACTION;  
+
+            IF EXISTS  
+            (  
+                SELECT 1  
+                FROM tblCreditSubCategory  
+                WHERE SubCategoryName = @SubCategoryName  
+                  AND CategoryID = @CategoryID  
+                  AND UserID = @UserID  
+                  AND IsActive = 0  
+            )  
+            BEGIN  
+                SELECT 'Sub Category Already Exists But It Is Inactive. Please Active It' AS Message;  
+                RETURN;  
+            END;  
+
+            SELECT 'Sub Category Already Exists' AS Message;  
             RETURN;  
         END;  
   
-  
-        -- Insert Category  
-         INSERT INTO tblCreditSubCategory  
-   (  
-       CategoryID,   
-    UserID,   
-    SubCategoryName,   
-    IsDefault,   
-    IsActive  
-   )  
-   VALUES  
-   (  
-       @CategoryID,   
-    @UserID,   
-    @SubCategoryName,   
-    @IsDefault,   
-    @IsActive  
-   )  
-  
+        -- Insert SubCategory  
+        INSERT INTO tblCreditSubCategory  
+        (  
+            CategoryID,   
+            UserID,   
+            SubCategoryName,   
+            IsDefault,   
+            IsActive  
+        )  
+        VALUES  
+        (  
+            @CategoryID,   
+            @UserID,   
+            @SubCategoryName,   
+            @IsDefault,   
+            @IsActive  
+        );  
   
         -- Commit Transaction  
         COMMIT TRANSACTION;  
-  
   
         SELECT 'Credit Sub Category Inserted Successfully' AS Message;  
   
     END TRY  
   
     BEGIN CATCH  
-  
-        -- Rollback if transaction is active  
         IF @@TRANCOUNT > 0  
         BEGIN  
             ROLLBACK TRANSACTION;  
         END;  
   
-  
-        -- Return Error Information  
         SELECT  
-            'Error occurred while inserting Expense Category' AS Message,  
+            'Error occurred while inserting Credit Sub Category' AS Message,  
             ERROR_MESSAGE() AS ErrorMessage,  
             ERROR_NUMBER() AS ErrorNumber,  
             ERROR_LINE() AS ErrorLine;  
-  
     END CATCH  
-  
-END;
+END;  
 GO
