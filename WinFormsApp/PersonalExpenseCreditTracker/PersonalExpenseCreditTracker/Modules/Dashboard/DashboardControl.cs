@@ -205,8 +205,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                         today.Year,
                         today.Month);
 
-                var daysData =
-                    new Dictionary<int, decimal>();
+                var daysData = new Dictionary<int, decimal>();
 
                 for (int d = 1; d <= daysInMonth; d++)
                 {
@@ -409,12 +408,12 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             }
             else if (filter == "This Month")
             {
-                // 01, 02, 03... আজ পর্যন্ত
+                // 01, 02, 03... Up to today
                 area.AxisX.Interval = 1;
             }
             else if (filter == "Last Month")
             {
-                // প্রতি 5 দিন পর
+                // Every 5 days
                 area.AxisX.Interval = 5;
             }
 
@@ -470,26 +469,26 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
         {
             Color[] distinctPalette = new Color[]
     {
-        Color.FromArgb(239, 68, 68),   // 1. Red (লাল)
-        Color.FromArgb(255, 149, 0),   // 2. Orange (কমলা)
-        Color.FromArgb(0, 114, 245),   // 3. Blue (নীল)
-        Color.FromArgb(16, 185, 129),  // 4. Emerald Green (সবুজ)
-        Color.FromArgb(139, 92, 246),  // 5. Purple (পার্পল)
-        Color.FromArgb(236, 72, 153),  // 6. Pink (গোলাপী)
-        Color.FromArgb(14, 165, 233),  // 7. Sky Blue (আকাশি)
-        Color.FromArgb(234, 179, 8),   // 8. Golden Yellow (হলুদ)
-        Color.FromArgb(20, 184, 166),  // 9. Teal (টিয়া সবুজ)
-        Color.FromArgb(244, 63, 94),   // 10. Rose Red (গোলাপী লাল)
-        Color.FromArgb(132, 204, 22),  // 11. Lime Green (লেবু সবুজ)
-        Color.FromArgb(168, 85, 247),  // 12. Magenta (ম্যাজেন্টা)
-        Color.FromArgb(217, 119, 6),   // 13. Amber (আম্বার)
-        Color.FromArgb(79, 70, 229),   // 14. Deep Indigo (গাঢ় নীল)
-        Color.FromArgb(6, 182, 212),   // 15. Cyan (সায়ান)
-        Color.FromArgb(162, 28, 175),  // 16. Deep Purple (গাঢ় পার্পল)
-        Color.FromArgb(225, 29, 72),   // 17. Crimson (ক্রিমসন)
-        Color.FromArgb(5, 150, 105),   // 18. Forest Green (গাঢ় সবুজ)
-        Color.FromArgb(107, 114, 128), // 19. Slate Gray (স্লেট ধূসর)
-        Color.FromArgb(30, 41, 59)     // 20. Navy Blue (নেভি ব্লু)
+        Color.FromArgb(239, 68, 68),   // 1. Red
+        Color.FromArgb(255, 149, 0),   // 2. Orange
+        Color.FromArgb(0, 114, 245),   // 3. Blue
+        Color.FromArgb(16, 185, 129),  // 4. Emerald Green
+        Color.FromArgb(139, 92, 246),  // 5. Purple
+        Color.FromArgb(236, 72, 153),  // 6. Pink
+        Color.FromArgb(14, 165, 233),  // 7. Sky Blue
+        Color.FromArgb(234, 179, 8),   // 8. Golden Yellow
+        Color.FromArgb(20, 184, 166),  // 9. Teal
+        Color.FromArgb(244, 63, 94),   // 10. Rose Red
+        Color.FromArgb(132, 204, 22),  // 11. Lime Green
+        Color.FromArgb(168, 85, 247),  // 12. Magenta
+        Color.FromArgb(217, 119, 6),   // 13. Amber
+        Color.FromArgb(79, 70, 229),   // 14. Deep Indigo
+        Color.FromArgb(6, 182, 212),   // 15. Cyan
+        Color.FromArgb(162, 28, 175),  // 16. Deep Purple
+        Color.FromArgb(225, 29, 72),   // 17. Crimson
+        Color.FromArgb(5, 150, 105),   // 18. Forest Green
+        Color.FromArgb(107, 114, 128), // 19. Slate Gray
+        Color.FromArgb(30, 41, 59)     // 20. Navy Blue
     };
             return distinctPalette[index % distinctPalette.Length];
         }
@@ -638,8 +637,17 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                     ctrl.LblName.Text = item.CategoryName;
                     ctrl.LblAmt.Text = " ₹" + item.TotalAmount.ToString("#,##0");
 
-                    int pct = totalExpense > 0 ? (int)Math.Round((item.TotalAmount / totalExpense) * 100) : 0;
-                    ctrl.LblPct.Text = pct + "%";
+                    double exactPct = totalExpense > 0 ? (double)(item.TotalAmount / totalExpense) * 100.0 : 0;
+                    string pctText = "0%";
+                    if (exactPct >= 1.0)
+                    {
+                        pctText = Math.Round(exactPct).ToString() + "%";
+                    }
+                    else if (exactPct > 0)
+                    {
+                        pctText = exactPct.ToString("0.0") + "%";
+                    }
+                    ctrl.LblPct.Text = pctText;
                 }
                 else
                 {
@@ -711,24 +719,29 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                 chartExpenseCategory.Series[0].Label = "";
                 chartExpenseCategory.Series[0].Font = new Font("Segoe UI", 9F, FontStyle.Bold);
                 chartExpenseCategory.Series[0].LabelForeColor = Color.White;
+                bool addedAny = false;
                 for (int i = 0; i < categoryList.Count; i++)
                 {
                     var item = categoryList[i];
-                    int pIdx = chartExpenseCategory.Series[0].Points.AddXY(item.CategoryName, item.TotalAmount);
-                    var point = chartExpenseCategory.Series[0].Points[pIdx];
-                    point.Color = GetCategoryColor(item.CategoryName, i);
                     double pct = ((double)item.TotalAmount / (double)totalExpense) * 100.0;
-                    int displayPercent = (int)Math.Round(pct);
-                
-                    if (displayPercent >= 1)
+                    if (pct >= 1.0)
                     {
-                        point.Label = displayPercent.ToString() + "%";
+                        string pctText = Math.Round(pct).ToString() + "%";
+                        
+                        int pIdx = chartExpenseCategory.Series[0].Points.AddXY(item.CategoryName, item.TotalAmount);
+                        var point = chartExpenseCategory.Series[0].Points[pIdx];
+                        point.Color = GetCategoryColor(item.CategoryName, i);
+                        point.Label = pctText;
+                        point.ToolTip = string.Format("{0}: ₹{1:#,##0} ({2})", item.CategoryName, item.TotalAmount, pctText);
+                        addedAny = true;
                     }
-                    else
-                    {
-                        point.Label = " "; 
-                    }
-                    point.ToolTip = string.Format("{0}: ₹{1:#,##0} ({2:0.0}%)", item.CategoryName, item.TotalAmount, pct);
+                }
+
+                if (!addedAny)
+                {
+                    int pIdx = chartExpenseCategory.Series[0].Points.AddXY("Other", 1);
+                    chartExpenseCategory.Series[0].Points[pIdx].Color = Color.FromArgb(226, 232, 240);
+                    chartExpenseCategory.Series[0].Points[pIdx].Label = "";
                 }
                 if (label3 != null)
                 {
@@ -1053,14 +1066,15 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                     if (totalCreditAmount > 0)
                     {
                         int usedPercentage = (int)Math.Round((totalExpenseAmount / totalCreditAmount) * 100m);
+                        string displayPercentageText = usedPercentage > 100 ? ">100%" : usedPercentage + "%";
 
-                        // ১. Budget Alert (যদি ৫০% বা তার বেশি খরচ হয়)
+                        // 1. Budget Alert (if 50% or more is spent)
                         if (usedPercentage >= 50)
                         {
                             notifList.Add(new NotificationItem
                             {
                                 Title = "Budget Alert",
-                                Description = "You've used " + usedPercentage + "% of your monthly income/budget.",
+                                Description = "You've used " + displayPercentageText + " of your monthly income/budget.",
                                 TimeText = "This Month",
                                 ThemeColor = Color.FromArgb(168, 85, 247),
                                 BgColor = Color.FromArgb(250, 245, 255),
@@ -1069,12 +1083,12 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                             });
                         }
 
-                        // 👉 ২. Credit Expense Ratio
+                        // 👉 2. Credit Expense Ratio
                         notifList.Add(new NotificationItem
                         {
                             Title = "Credit Expense Ratio",
-                            Description = "Expense is " + usedPercentage + "% (₹" + totalExpenseAmount.ToString("#,##0") + ") of total credit (₹" + totalCreditAmount.ToString("#,##0") + ").",
-                            TimeText = usedPercentage + "% Spent",
+                            Description = "Expense is " + displayPercentageText + " (₹" + totalExpenseAmount.ToString("#,##0") + ") of total credit (₹" + totalCreditAmount.ToString("#,##0") + ").",
+                            TimeText = displayPercentageText + " Spent",
                         
                             ThemeColor = usedPercentage > 80 ? Color.FromArgb(239, 68, 68) : (usedPercentage > 50 ? Color.FromArgb(249, 115, 22) : Color.FromArgb(16, 185, 129)),
                             BgColor = usedPercentage > 80 ? Color.FromArgb(254, 242, 242) : (usedPercentage > 50 ? Color.FromArgb(255, 247, 237) : Color.FromArgb(236, 253, 245)),
@@ -1128,7 +1142,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
                         flpNotifications.Controls.Clear();
 
-                        int cardWidth = 340;
+                        int cardWidth = 355;
 
                         if (notifList.Count == 0)
                         {

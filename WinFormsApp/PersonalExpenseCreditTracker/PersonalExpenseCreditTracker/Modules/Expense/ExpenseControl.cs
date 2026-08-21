@@ -181,7 +181,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             dgvExpenseDataTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
             
 
-            //  Selection Color (একই সিলেকশন কালার)
+            // Same selection color
             dgvExpenseDataTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247); // Royal Blue
             dgvExpenseDataTable.DefaultCellStyle.SelectionForeColor = Color.Black;
 

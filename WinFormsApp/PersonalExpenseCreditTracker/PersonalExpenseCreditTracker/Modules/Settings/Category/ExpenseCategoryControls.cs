@@ -48,6 +48,22 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
             int totalInactive = categoryList.Count(c => !c.IsActive) + subCategoryList.Count(s => !s.IsActive);
             lblInactiveNumber.Text = totalInactive.ToString();
+
+            tsmiEdit.Image = Properties.Resources.pen;
+            tsmiAddSubCategory.Image = Properties.Resources.plus__2_;
+
+          
+            cmsCategoryAction.AutoSize = false;
+            cmsCategoryAction.Size = new Size(170, 65);
+            cmsCategoryAction.ImageScalingSize = new Size(24, 24); 
+
+          
+            foreach (ToolStripItem item in cmsCategoryAction.Items)
+            {
+                item.AutoSize = false;
+                item.Size = new Size(170, 30); 
+            }
+
         }
 
         private void CreateColumns()

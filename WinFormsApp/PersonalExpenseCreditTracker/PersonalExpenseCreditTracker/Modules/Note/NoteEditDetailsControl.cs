@@ -55,7 +55,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
             if (noteControl != null)
             {
-                // ১. Title সেট করা ও কাউন্টার আপডেট
+                // 1. Set title and update counter
                 if (!string.IsNullOrWhiteSpace(noteControl.SelectedNoteTitle))
                 {
                     txtNoteTitle.Text = noteControl.SelectedNoteTitle;
@@ -69,7 +69,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     lblTitleCount.Text = "0/100";
                 }
 
-                // ২. Description সেট করা ও কাউন্টার আপডেট
+                // 2. Set description and update counter
                 if (!string.IsNullOrWhiteSpace(noteControl.SelectedDescription))
                 {
                     rtxtDescription.Text = noteControl.SelectedDescription;
@@ -83,7 +83,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     lblDescriptionCount.Text = "0/1000";
                 }
 
-                // ৩. Previous Priority
+                // 3. Previous Priority
                 selectedPriorityName = noteControl.SelectedPriority;
                 if (noteControl.SelectedPriority == "Low")
                 {
@@ -98,7 +98,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     rbHigh.Checked = true;
                 }
 
-                // ৪. Previous Color
+                // 4. Previous Color
                 selectedColorName = noteControl.SelectedColorName;
                 LoadNoteColors();
                 LoadSelectedColor();
@@ -222,7 +222,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             }
             if (txtNoteTitle.Text != "Enter title" && !string.IsNullOrWhiteSpace(txtNoteTitle.Text))
             {
-                txtNoteTitle.ForeColor = Color.Black; // 👈 টাইপ করার সাথে সাথে কালো হবে
+                txtNoteTitle.ForeColor = Color.Black; // 👈 Turns black when typing
                 ErrorHelper.HideErrorForControl(txtNoteTitle);
             }
         }
@@ -240,7 +240,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             }
             if (rtxtDescription.Text != "Enter description" && !string.IsNullOrWhiteSpace(rtxtDescription.Text))
             {
-                rtxtDescription.ForeColor = Color.Black; // 👈 টাইপ করার সাথে সাথে কালো হবে
+                rtxtDescription.ForeColor = Color.Black; // 👈 Turns black when typing
                 ErrorHelper.HideErrorForControl(pnlDescription);
             }
         }
