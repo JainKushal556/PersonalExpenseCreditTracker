@@ -1234,6 +1234,8 @@ namespace PersonalExpenseCreditTracker
             this.picNotesArrow.TabIndex = 2;
             this.picNotesArrow.TabStop = false;
             this.picNotesArrow.Click += new System.EventHandler(this.pnlNotes_Click);
+            this.picNotesArrow.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
+            this.picNotesArrow.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
             // 
             // lblNotes
             // 
@@ -1246,6 +1248,8 @@ namespace PersonalExpenseCreditTracker
             this.lblNotes.TabIndex = 1;
             this.lblNotes.Text = "Notes";
             this.lblNotes.Click += new System.EventHandler(this.pnlNotes_Click);
+            this.lblNotes.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
+            this.lblNotes.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
             // 
             // picNotes
             // 
@@ -1258,6 +1262,8 @@ namespace PersonalExpenseCreditTracker
             this.picNotes.TabIndex = 0;
             this.picNotes.TabStop = false;
             this.picNotes.Click += new System.EventHandler(this.pnlNotes_Click);
+            this.picNotes.MouseEnter += new System.EventHandler(this.pnlNotes_MouseEnter);
+            this.picNotes.MouseLeave += new System.EventHandler(this.pnlNotes_MouseLeave);
             // 
             // pnlNotesDropDown
             // 

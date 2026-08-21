@@ -315,7 +315,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 }
             }
 
-            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            // Close dropdown if open
             cmb.DroppedDown = false;
         }
 
@@ -383,7 +383,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 borrowUi.deadlineAt = DateTime.MinValue;
             }
 
-            CommonValidator.ValidationResult result = borrowUi.InsertDataIntoLentUi(); // অথবা borrowUi.InsertDataIntoBorrowUi()
+            CommonValidator.ValidationResult result = borrowUi.InsertDataIntoBorrowUi();
 
             switch (result)
             {
@@ -481,13 +481,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             if (personId == -99)
             {
-                this.Hide();
-
+                this.Opacity = 0;
                 using (var addPersonForm = new PersonalExpenseCreditTracker.Modules.Settings.Person.AddPersonControls())
                 {
-                    DialogResult result = addPersonForm.ShowDialog();
-
-                    this.Show();
+                    DialogResult result = addPersonForm.ShowDialog(this);
+                    this.Opacity = 1;
 
                     CommonUiFunction.LoadInComboBox(
                         "spGetAllPersons",

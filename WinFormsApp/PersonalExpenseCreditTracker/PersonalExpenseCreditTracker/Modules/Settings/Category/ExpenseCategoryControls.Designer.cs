@@ -35,6 +35,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblActiveNumber = new System.Windows.Forms.Label();
             this.lblActive = new System.Windows.Forms.Label();
             this.pnlInactive = new System.Windows.Forms.Panel();
+            this.lblInactiveNumber = new System.Windows.Forms.Label();
             this.lblInactive = new System.Windows.Forms.Label();
             this.pnlTotalSubCategory = new System.Windows.Forms.Panel();
             this.lblTotalSubCategoryNumber = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.cmsCategoryAction = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddSubCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblInactiveNumber = new System.Windows.Forms.Label();
             this.pnlMain.SuspendLayout();
             this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
@@ -231,6 +231,16 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlInactive.Size = new System.Drawing.Size(248, 34);
             this.pnlInactive.TabIndex = 2;
             // 
+            // lblInactiveNumber
+            // 
+            this.lblInactiveNumber.AutoSize = true;
+            this.lblInactiveNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInactiveNumber.ForeColor = System.Drawing.Color.Red;
+            this.lblInactiveNumber.Location = new System.Drawing.Point(80, 10);
+            this.lblInactiveNumber.Name = "lblInactiveNumber";
+            this.lblInactiveNumber.Size = new System.Drawing.Size(0, 23);
+            this.lblInactiveNumber.TabIndex = 1;
+            // 
             // lblInactive
             // 
             this.lblInactive.AutoSize = true;
@@ -347,31 +357,23 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.tsmiEdit,
             this.tsmiAddSubCategory});
             this.cmsCategoryAction.Name = "cmsCategoryAction";
-            this.cmsCategoryAction.Size = new System.Drawing.Size(196, 52);
+            this.cmsCategoryAction.Size = new System.Drawing.Size(229, 64);
             // 
             // tsmiEdit
             // 
+            this.tsmiEdit.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tsmiEdit.Name = "tsmiEdit";
-            this.tsmiEdit.Size = new System.Drawing.Size(195, 24);
+            this.tsmiEdit.Size = new System.Drawing.Size(228, 30);
             this.tsmiEdit.Text = "Edit";
             this.tsmiEdit.Click += new System.EventHandler(this.tsmiEdit_Click);
             // 
             // tsmiAddSubCategory
             // 
+            this.tsmiAddSubCategory.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tsmiAddSubCategory.Name = "tsmiAddSubCategory";
-            this.tsmiAddSubCategory.Size = new System.Drawing.Size(195, 24);
+            this.tsmiAddSubCategory.Size = new System.Drawing.Size(228, 30);
             this.tsmiAddSubCategory.Text = "Add SubCategory";
             this.tsmiAddSubCategory.Click += new System.EventHandler(this.tsmiAddSubCategory_Click);
-            // 
-            // lblInactiveNumber
-            // 
-            this.lblInactiveNumber.AutoSize = true;
-            this.lblInactiveNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInactiveNumber.ForeColor = System.Drawing.Color.Red;
-            this.lblInactiveNumber.Location = new System.Drawing.Point(80, 10);
-            this.lblInactiveNumber.Name = "lblInactiveNumber";
-            this.lblInactiveNumber.Size = new System.Drawing.Size(0, 23);
-            this.lblInactiveNumber.TabIndex = 1;
             // 
             // ExpenseCategoryControls
             // 

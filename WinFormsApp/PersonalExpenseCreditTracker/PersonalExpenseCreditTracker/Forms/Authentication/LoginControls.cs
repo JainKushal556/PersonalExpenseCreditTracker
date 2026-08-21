@@ -305,7 +305,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
 
 
-        // Login বাটনের উপরে আইকনসহ সুন্দর এরর বক্স তৈরি ও প্রদর্শনের মেথড
+        // Method to create and show a beautiful error box with an icon above the Login button
         private void ShowLoginError(string message)
         {
             if (pnlLoginErrorAlert == null)
@@ -324,7 +324,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 picLoginErrorIcon.SizeMode = PictureBoxSizeMode.Zoom;
                 picLoginErrorIcon.Image = Properties.Resources.info__3_; 
 
-                // ৩. এরর মেসেজ লেবেল
+                // 3. Error message label
                 lblLoginErrorText = new Label();
                 lblLoginErrorText.Font = new Font("Segoe UI Semibold", 8.75F, FontStyle.Bold);
                 lblLoginErrorText.ForeColor = Color.FromArgb(220, 38, 38); 

@@ -128,8 +128,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     MessageBox.Show("Sub Category added successfully.");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
-                    ExpenseCategoryControls expenseCategoryControls = new ExpenseCategoryControls();
-                    expenseCategoryControls.LoadSubCategories();
+                    CreditCategoryControls creditCategoryControls = new CreditCategoryControls();
+                    creditCategoryControls.LoadSubCategories();
                     break;
 
                 case CommonValidator.ValidationResult.CategoryInvalid:
@@ -145,7 +145,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    ErrorMsg = categoryUI.GetErrorMsg("spInsertNewCreditSubCategoryByUserID", "@CategoryID", "@ActiveStatus", "@SubCategoryName");
+                    ErrorMsg = categoryUI.GetErrorMsgforSub("spInsertNewCreditSubCategoryByUserID", "@CategoryID", "@ActiveStatus", "@SubCategoryName");
                     if (!string.IsNullOrWhiteSpace(ErrorMsg))
                         MessageBox.Show(ErrorMsg);
                     

@@ -331,6 +331,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             txtAddPersonInputFullName.ForeColor = Color.Gray;
             txtAddPersonInputPhoneNumber.ForeColor = Color.Gray;
             txtAddPersonInputAddress.ForeColor = Color.Gray;
+
+            errorProvider1.Clear();
+            ErrorHelper.ClearAllErrors(this);
         }
 
         private void btnAddPersonInputSavePerson_Click(object sender, EventArgs e)

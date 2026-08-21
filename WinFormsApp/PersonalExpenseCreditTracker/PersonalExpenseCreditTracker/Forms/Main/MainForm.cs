@@ -256,7 +256,7 @@ namespace PersonalExpenseCreditTracker
 
             RefreshSidebarScroll();
 
-            // 👉 এই ৩ লাইন যোগ করুন:
+            // 👉 Add these 3 lines:
             if (dashboardControl != null && dashboardControl.pnlNotification != null && dashboardControl.pnlNotification.Parent == this.pnlContainer)
             {
                 dashboardControl.pnlNotification.Location = new Point(pnlContainer.Width - dashboardControl.pnlNotification.Width, pnlTop.Height);
@@ -501,7 +501,7 @@ namespace PersonalExpenseCreditTracker
             {
                 if (pnlLoadingOverlay == null)
                 {
-                    // ১. পুরো কন্টেন্ট এরিয়া সুন্দরভাবে ঢেকে রাখার জন্য ফুল ব্যাকড্রপ প্যানেল
+                    // 1. Full backdrop panel to properly cover the content area
                     pnlLoadingOverlay = new Panel
                     {
                         BackColor = Color.FromArgb(241, 245, 249),
@@ -519,7 +519,7 @@ namespace PersonalExpenseCreditTracker
                         pnlLoadingOverlay.Dock = DockStyle.Fill;
                     }
 
-                    // ২. মাঝখানের ডার্ক রাউন্ডেড লোডিং কার্ড
+                    // 2. Dark rounded loading card in the center
                     pnlCenterLoading = new Panel
                     {
                         Size = new Size(320, 85),
@@ -539,7 +539,7 @@ namespace PersonalExpenseCreditTracker
                     pnlCenterLoading.Controls.Add(lblLoadingText);
                     pnlLoadingOverlay.Controls.Add(pnlCenterLoading);
 
-                    // রিসাইজ হলে যাতে কার্ড সবসময় নিখুঁত সেন্টারে থাকে
+                    // Keep card perfectly centered on resize
                     pnlLoadingOverlay.Resize += (s, e) =>
                     {
                         if (pnlCenterLoading != null)
@@ -1016,7 +1016,7 @@ namespace PersonalExpenseCreditTracker
                 ShowCenterLoading(false);
             }
 
-            // ১. আগের মেনুর ব্লু হাইলাইট ক্লিয়ার করবে
+            // 1. Clear previous blue highlight
             SetActiveMenu(pnlBorrow, false);
 
             bool wasOpen = borrowOpen;
@@ -1105,7 +1105,7 @@ namespace PersonalExpenseCreditTracker
                 ShowCenterLoading(false);
             }
 
-            // ১. আগের মেনুর ব্লু হাইলাইট ক্লিয়ার করবে
+            // 1. Clear previous blue highlight
             SetActiveMenu(pnlTasks, false);
 
             bool wasOpen = taskOpen;
@@ -1355,17 +1355,17 @@ namespace PersonalExpenseCreditTracker
 
         private void MakeCircularPictureBox(PictureBox pictureBox)
         {
-            // ১. ছবির ফ্রেমটি যেন নিখুঁত বর্গক্ষেত্র (Square) হয়
+            // 1. Ensure the image frame is a perfect square
             int diameter = Math.Min(pictureBox.Width, pictureBox.Height);
             pictureBox.Width = diameter;
             pictureBox.Height = diameter;
 
-            // ২. এবার গোল মাস্ক তৈরি করা
+            // 2. Create a circular mask
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(0, 0, diameter - 1, diameter - 1);
             pictureBox.Region = new Region(path);
 
-            // ৩. ছবি বিকৃত হওয়া এড়াতে Zoom ব্যবহার করা
+            // 3. Use Zoom to avoid image distortion
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
@@ -1391,7 +1391,7 @@ namespace PersonalExpenseCreditTracker
                 {
                     byte[] imgBytes = (byte[])row["ProfilePhoto"];
 
-                    // ১. বাইট খালি কিনা চেক করা
+                    // 1. Check if bytes are empty
                     if (imgBytes != null && imgBytes.Length > 0)
                     {
                         try
@@ -1400,14 +1400,14 @@ namespace PersonalExpenseCreditTracker
                             {
                                 using (Image tempImg = Image.FromStream(ms))
                                 {
-                                    // ২. মেমোরি স্ট্রিম লিক ও ক্র্যাশ ছাড়া সেফলি Bitmap তৈরি
+                                    // 2. Safely create Bitmap without memory stream leak or crash
                                     picUserProfile.Image = new Bitmap(tempImg);
                                 }
                             }
                         }
                         catch
                         {
-                            // ছবি যদি কোনো কারণে করাপ্ট/নষ্ট থাকে, তবে ডিফল্ট ছবি বসবে
+                            // Show default image if the image is corrupted
                             picUserProfile.Image = Properties.Resources.user;
                         }
                     }
@@ -1439,7 +1439,7 @@ namespace PersonalExpenseCreditTracker
         }
         //Side Bar all work
         // Sidebar Expand / Collapse Animation
-        // Timer choler সময় Sidebar slowly slowly choto ba bora kora
+        // Slowly resize sidebar while timer is running
 
         private void tmSidebar_Tick(object sender, EventArgs e)
         {
@@ -1629,7 +1629,7 @@ namespace PersonalExpenseCreditTracker
 
             AddExpenseControls expenseDetailsControl = new AddExpenseControls();
             expenseDetailsControl.FormClosed += Expense_FormClosed;
-            expenseDetailsControl.ShowDialog();
+            expenseDetailsControl.ShowDialog(this);
         }
         private void Expense_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1702,7 +1702,7 @@ namespace PersonalExpenseCreditTracker
 
             creditDetailsControl.FormClosed += Credit_FormClosed;
 
-            creditDetailsControl.ShowDialog();
+            creditDetailsControl.ShowDialog(this);
         }
         private void Credit_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1774,7 +1774,7 @@ namespace PersonalExpenseCreditTracker
 
             addLentControls.FormClosed += Lent_FormClosed;
 
-            addLentControls.ShowDialog();
+            addLentControls.ShowDialog(this);
         }
         private void Lent_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1847,7 +1847,7 @@ namespace PersonalExpenseCreditTracker
 
             addBorrowControls.FormClosed += Borrow_FormClosed;
 
-            addBorrowControls.ShowDialog();
+            addBorrowControls.ShowDialog(this);
         }
         private void Borrow_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -2349,7 +2349,7 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-        // 👉 নোটিফিকেশন কার্ডে ক্লিক করলে কাউন্ট ১ করে কমানোর মেথড:
+        // 👉 Method to decrease count by 1 when notification card is clicked:
         public void DecrementNotificationBadge()
         {
             if (this.InvokeRequired)
@@ -2370,7 +2370,7 @@ namespace PersonalExpenseCreditTracker
                     }
                     else
                     {
-                        lblHeaderBadge.Visible = false; // ০ হয়ে গেলে তখন হাইড হবে
+                        lblHeaderBadge.Visible = false; // Hide when it becomes 0
                     }
                 }
             }

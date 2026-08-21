@@ -305,7 +305,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                 {
                     byte[] imgBytes = (byte[])row["ProfilePhoto"];
 
-                    // ১. বাইট খালি বা নাল কিনা চেক
+                    // 1. Check if bytes are empty or null
                     if (imgBytes != null && imgBytes.Length > 0)
                     {
                         try
@@ -314,14 +314,14 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                             {
                                 using (Image tempImg = Image.FromStream(ms))
                                 {
-                                    // ২. সেফলি Bitmap তৈরি (যাতে স্ট্রিম লিক বা ক্র্যাশ না করে)
+                                    // 2. Safely create Bitmap (to avoid stream leak or crash)
                                     picProfileUserPhoto.Image = new Bitmap(tempImg);
                                 }
                             }
                         }
                         catch
                         {
-                            // ছবি করাপ্ট থাকলে ডিফল্ট ছবি লোড হবে
+                            // Load default image if corrupted
                             picProfileUserPhoto.Image = Properties.Resources.people__3_1;
                         }
                     }

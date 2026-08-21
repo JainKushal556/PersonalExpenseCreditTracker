@@ -56,7 +56,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             cmbAddCreditPaymentType.ForeColor = Color.Gray;
 
            // CommonUiFunction.LoadInComboBox("spGetAllCreditCategory", "Select Category", "+ Add New Category", cmbAddCreditCategory);
-            Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", "+ Add New Cetegory", cmbAddCreditCategory);
+            Common.CommonUiFunction.LoadInComboBox("spGetCreditCategoriesByUserID", Session.LogedInUser.GetUserId(), "Select Category", "+ Add New Category", cmbAddCreditCategory);
             CommonUiFunction.LoadInComboBox("spGetAllPaymentTypes", "Select Payment Type", cmbAddCreditPaymentType);
             cmbAddCreditPaymentType.MouseClick += (s, ev) => { cmbAddCreditPaymentType.DroppedDown = true; };
 
@@ -222,7 +222,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             if (ignoreEvents) return;
 
-            ignoreEvents = true; // Selection চলাকালীন সব ইভেন্ট ব্লক
+            ignoreEvents = true; // Block all events during selection
 
             ErrorHelper.HideErrorForControl(cmbAddCreditCategory);
             cmbAddCreditCategory.AutoCompleteMode = AutoCompleteMode.Append;
@@ -244,11 +244,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
             if (categoryId == -99)
             {
-                this.Hide();
+                this.Opacity = 0;
                 using (var addCategoryForm = new PersonalExpenseCreditTracker.Modules.Settings.Category.CreditAddCategoryControls())
                 {
-                    DialogResult result = addCategoryForm.ShowDialog();
-                    this.Show();
+                    DialogResult result = addCategoryForm.ShowDialog(this);
+                    this.Opacity = 1;
 
                     int newSelectedCategoryId = 0;
 
@@ -319,7 +319,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             }
             else if (categoryId > 0)
             {
-                // Category সিলেক্ট হলে তার অধীনে SubCategory গুলো লোড হবে
+                // Load SubCategories when Category is selected
                 CommonUiFunction.LoadInComboBox(
                     "spGetCreditSubCategoryByCategoryID",
                     "Select Sub Category",
@@ -438,9 +438,21 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             creditUi.userId = Session.LogedInUser.GetUserId();
             creditUi.creditId = -1;
 
-            creditUi.categoryId = Convert.ToInt32(cmbAddCreditCategory.SelectedValue);
-            creditUi.subCategoryId = Convert.ToInt32(cmbAddCreditSubCategory.SelectedValue);
-            creditUi.paymentId = Convert.ToInt32(cmbAddCreditPaymentType.SelectedValue);
+            // Safe conversion — null or invalid value returns 0 instead of crashing
+            int catId = 0, subCatId = 0, payId = 0;
+
+            if (cmbAddCreditCategory.SelectedValue != null)
+                int.TryParse(cmbAddCreditCategory.SelectedValue.ToString(), out catId);
+
+            if (cmbAddCreditSubCategory.SelectedValue != null)
+                int.TryParse(cmbAddCreditSubCategory.SelectedValue.ToString(), out subCatId);
+
+            if (cmbAddCreditPaymentType.SelectedValue != null)
+                int.TryParse(cmbAddCreditPaymentType.SelectedValue.ToString(), out payId);
+
+            creditUi.categoryId    = catId;
+            creditUi.subCategoryId = subCatId;
+            creditUi.paymentId     = payId;
 
             creditUi.amount = (txtAddCreditAmount.Text == "Enter Amount" || txtAddCreditAmount.Text == "Select Amount") ? "" : txtAddCreditAmount.Text;
             creditUi.description = (txtAddCreditDescription.Text == "Enter Description" || txtAddCreditDescription.Text == "Enter description") ? "" : txtAddCreditDescription.Text;
@@ -523,12 +535,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
                 string currentCategoryName = cmbAddCreditCategory.Text;
 
-                this.Hide();
-
+                this.Opacity = 0;
                 using (CreditAddSubCategoryControls addSubCatForm = new CreditAddSubCategoryControls(currentCategoryId, currentCategoryName))
                 {
-                    DialogResult result = addSubCatForm.ShowDialog();
-                    this.Show();
+                    DialogResult result = addSubCatForm.ShowDialog(this);
+                    this.Opacity = 1;
 
                     ignoreEvents = true;
 

@@ -103,37 +103,37 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         }
 
 
-        // Enter কি প্রেস করলে সাজেশন সিলেক্ট করার জন্য
+        // Select suggestion on Enter key press
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Enter)
             {
-                // Payment Type ComboBox এ ফোকাস থাকলে
+                // If Payment Type ComboBox has focus
                 if (cmbPaymentType.Focused)
                 {
                     SelectComboBoxSuggestion(cmbPaymentType);
-                    return true; // Enter এর কাজ শেষ, ফর্ম সাবমিট বা শব্দ হবে না
+                    return true; // Enter action complete, no form submit or beep
                 }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        // টেক্সট অনুযায়ী আইটেম খুঁজে বের করে সিলেক্ট করার হেল্পার মেথড
+        // Helper method to find and select item by text
         private void SelectComboBoxSuggestion(ComboBox cmb)
         {
             if (!string.IsNullOrWhiteSpace(cmb.Text))
             {
-                // ১. পুরো নামের সাথে মিল খুঁজবে
+                // 1. Exact match with name
                 int index = cmb.FindStringExact(cmb.Text);
 
-                // ২. না পেলে শুরুর অক্ষরের মিল খুঁজবে
+                // 2. If not found, match with starting characters
                 if (index == -1)
                 {
                     index = cmb.FindString(cmb.Text);
                 }
 
-                // ৩. আইটেম পেলে তা সিলেক্ট করবে
+                // 3. Select item if found
                 if (index != -1)
                 {
                     cmb.SelectedIndex = index;
@@ -141,7 +141,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 }
             }
 
-            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            // Close dropdown if open
             cmb.DroppedDown = false;
         }
 

@@ -165,7 +165,7 @@ namespace PersonalExpenseCreditTracker.Common
         {
             DataTable dataTable = RetrieveListForComboBox(spName);
 
-            // 🟢 এখানে যোগ করবেন:
+            // 🟢 Add here:
             if (dataTable == null || dataTable.Columns.Count < 2)
             {
                 dataTable = new DataTable();
@@ -487,7 +487,7 @@ namespace PersonalExpenseCreditTracker.Common
         {
             string search = txtBox.Text.Trim();
 
-            // সব cell reset (Revert to column default styles)
+            // Reset all cells (Revert to column default styles)
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 foreach (DataGridViewCell cell in row.Cells)
@@ -497,13 +497,13 @@ namespace PersonalExpenseCreditTracker.Common
                 }
             }
 
-            // Search empty হলে কিছু করবে না
-            // Search empty বা placeholder হলে কিছু করবে না
+            // Do nothing if search is empty
+            // Do nothing if search or placeholder is empty
             if (string.IsNullOrWhiteSpace(search) || search == "Search..." || search == "Search records..." || search == "Search by name or phone number ...")
                 return;
 
 
-            // Match হওয়া cell highlight
+            // Highlight matched cell
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 foreach (DataGridViewCell cell in row.Cells)

@@ -120,9 +120,35 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             cmsFilter.Opening += cmsFilter_Opening;
             RegisterMouseDown(this);
 
-            
+            cmsNote.RenderMode = ToolStripRenderMode.ManagerRenderMode; // Default renderer
+            cmsNote.ShowImageMargin = true; // Enable left icon margin
+            cmsNote.ShowCheckMargin = false;
+            cmsNote.ImageScalingSize = new Size(10, 10);
+
+            viewToolStripMenuItem.AutoSize = false;
+            viewToolStripMenuItem.Height = 30;
+
+            editToolStripMenuItem.AutoSize = false;
+            editToolStripMenuItem.Height = 30;
+
+            deleteToolStripMenuItem.AutoSize = false;
+            deleteToolStripMenuItem.Height = 30;
+
+            cmsNote.Opening += cmsNote_Opening;
+
+
+
 
         }
+
+        private void cmsNote_Opening(object sender, CancelEventArgs e)
+        {
+            viewToolStripMenuItem.Width = cmsNote.Width;
+            editToolStripMenuItem.Width = cmsNote.Width;
+            deleteToolStripMenuItem.Width = cmsNote.Width;
+        }
+
+
 
         private void cmsFilter_Opening(object sender, CancelEventArgs e)
         {
@@ -361,7 +387,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             card.Controls.Add(description);
             card.Controls.Add(footer);
 
-            card.MouseDoubleClick += delegate(object sender, MouseEventArgs e)
+            MouseEventHandler onNoteDoubleClick = delegate(object sender, MouseEventArgs e)
             {
                 SelectedNoteID = Convert.ToInt32(row["NoteID"]);
                 SelectedNoteTitle = row["NoteTitle"].ToString();
@@ -369,15 +395,19 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                 SelectedPriority = row["NotePriorityName"].ToString();
                 SelectedColorName = row["ColorName"].ToString();
                 SelectedColorHexCode = row["ColorHexCode"].ToString();
-
                 SelectedCreatedAt = row["CreatedAt"] != DBNull.Value
                     ? Convert.ToDateTime(row["CreatedAt"]).ToString("dd MMM yyyy")
                     : "";
-
-                NoteViewDetailsControl view =
-                    new NoteViewDetailsControl(this);
+                NoteViewDetailsControl view = new NoteViewDetailsControl(this);
                 view.ShowDialog();
             };
+            // Now this event is connected to the card and all its controls
+            card.MouseDoubleClick += onNoteDoubleClick;
+            title.MouseDoubleClick += onNoteDoubleClick;
+            description.MouseDoubleClick += onNoteDoubleClick;
+            footer.MouseDoubleClick += onNoteDoubleClick;
+            date.MouseDoubleClick += onNoteDoubleClick;
+            priority.MouseDoubleClick += onNoteDoubleClick;
 
             SetRadius(card, 20);
 
@@ -681,7 +711,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // ১. ইউজারকে কনফার্মেশন মেসেজ দেখানো
+            // 1. Show confirmation message to user
             DialogResult dialogResult = MessageBox.Show(
                 "Are you sure you want to delete this note: \"" + SelectedNoteTitle + "\"?",
                 "Delete Note",
@@ -690,18 +720,18 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
             if (dialogResult == DialogResult.Yes)
             {
-                // ২. UI অবজেক্টে আইডি পাঠানো
+                // 2. Pass ID to UI object
                 NoteUI noteUi = new NoteUI();
                 noteUi.userId = userID;
                 noteUi.noteId = SelectedNoteID;
 
-                // ৩. ডিলিট মেথড কল করা
+                // 3. Call delete method
                 CommonValidator.ValidationResult result = noteUi.DeleteNoteIntoNoteUi();
 
                 if (result == CommonValidator.ValidationResult.Success)
                 {
                     MessageBox.Show("Note deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadNoteData(userID); // ✅ সাথে সাথে নোট গ্রিড রিফ্রেশ হবে
+                    LoadNoteData(userID); // ✅ Immediately refresh note grid
                 }
                 else
                 {
@@ -1271,16 +1301,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         }
 
 
-        private void cmsNote_Opening(object sender, CancelEventArgs e)
-        {
-            viewToolStripMenuItem.AutoSize = false;
-            editToolStripMenuItem.AutoSize = false;
-            deleteToolStripMenuItem.AutoSize = false;
-
-            viewToolStripMenuItem.Width = cmsNote.Width;
-            editToolStripMenuItem.Width = cmsNote.Width;
-            deleteToolStripMenuItem.Width = cmsNote.Width;
-        }
 
         private void btnNoteMore_MouseHover(object sender, EventArgs e)
         {
