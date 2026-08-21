@@ -29,6 +29,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             InitializeComponent();
             StylePersonGrid();
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(txtAddPersonSearchBar, "Search by Person Name or Phone Number.");
             typeof(DataGridView).InvokeMember(
                  "DoubleBuffered",
                  System.Reflection.BindingFlags.NonPublic |
