@@ -43,17 +43,18 @@
             // 
             // pnlContent
             // 
-            this.pnlContent.BackColor = System.Drawing.Color.White;
+            this.pnlContent.BackColor = System.Drawing.Color.Transparent;
             this.pnlContent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlContent.Controls.Add(this.buttonClose);
             this.pnlContent.Controls.Add(this.panel1);
             this.pnlContent.Controls.Add(this.lblSubTitle);
             this.pnlContent.Controls.Add(this.lblTitle);
             this.pnlContent.Controls.Add(this.picLogOut);
-            this.pnlContent.Location = new System.Drawing.Point(3, 4);
+            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContent.Location = new System.Drawing.Point(0, 0);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlContent.Size = new System.Drawing.Size(384, 261);
+            this.pnlContent.Size = new System.Drawing.Size(387, 265);
             this.pnlContent.TabIndex = 0;
             // 
             // buttonClose
@@ -75,10 +76,10 @@
             this.panel1.Controls.Add(this.btnLogout);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(10, 187);
+            this.panel1.Location = new System.Drawing.Point(10, 191);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10);
-            this.panel1.Size = new System.Drawing.Size(362, 62);
+            this.panel1.Size = new System.Drawing.Size(365, 62);
             this.panel1.TabIndex = 4;
             // 
             // btnLogout
@@ -121,22 +122,22 @@
             // lblSubTitle
             // 
             this.lblSubTitle.AutoSize = true;
-            this.lblSubTitle.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubTitle.ForeColor = System.Drawing.Color.Black;
-            this.lblSubTitle.Location = new System.Drawing.Point(94, 131);
+            this.lblSubTitle.Location = new System.Drawing.Point(92, 131);
             this.lblSubTitle.Name = "lblSubTitle";
-            this.lblSubTitle.Size = new System.Drawing.Size(209, 38);
+            this.lblSubTitle.Size = new System.Drawing.Size(221, 40);
             this.lblSubTitle.TabIndex = 3;
             this.lblSubTitle.Text = "Are you sure you want to logout\r\n          from your account?";
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.Black;
-            this.lblTitle.Location = new System.Drawing.Point(153, 107);
+            this.lblTitle.Location = new System.Drawing.Point(151, 104);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(70, 23);
+            this.lblTitle.Size = new System.Drawing.Size(79, 25);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "LogOut";
             // 
@@ -154,7 +155,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
             this.ClientSize = new System.Drawing.Size(387, 265);
             this.Controls.Add(this.pnlContent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

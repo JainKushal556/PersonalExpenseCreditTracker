@@ -213,7 +213,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         private void picEye_Click(object sender, EventArgs e)
         {
             isPasswordVisible = !isPasswordVisible;
-            
+
             if (txtLoginPassword.Text != "Enter Password")
             txtLoginPassword.UseSystemPasswordChar = !isPasswordVisible;
 
@@ -251,12 +251,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             if (txtLoginPassword.Text == "Enter Password")
             {
                 txtLoginPassword.Text = "";
+                txtLoginPassword.UseSystemPasswordChar = !isPasswordVisible;
                 txtLoginPassword.ForeColor = Color.Black;
             }
-
-            if (txtLoginPassword.Text != "Enter Password")
-                txtLoginPassword.UseSystemPasswordChar = !isPasswordVisible;
-            
         }
 
         private void txtLoginPassword_Leave(object sender, EventArgs e)
@@ -264,12 +261,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             if (txtLoginPassword.Text == "")
             {
                 txtLoginPassword.Text = "Enter Password";
+                txtLoginPassword.UseSystemPasswordChar = false;
                 txtLoginPassword.ForeColor = Color.Gray;
             }
-
-            if (txtLoginPassword.Text != "")
-                txtLoginPassword.UseSystemPasswordChar = false;
-            
         }
 
         private void lblForgotPassword_Click(object sender, EventArgs e)
@@ -288,9 +282,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
             RegistrationControls registrationControls = new RegistrationControls();
             registrationControls.ShowDialog();
-
-            ResetLoginForm(); 
             this.Show();
+            ResetLoginForm(); 
+            
         }
 
 
@@ -363,10 +357,5 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 pnlLoginErrorAlert.Visible = false;
             }
         }
-
-
-
-
-
     }
 }
