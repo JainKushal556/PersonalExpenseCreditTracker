@@ -296,7 +296,7 @@
             // 
             // btnUpdateNote
             // 
-            this.btnUpdateNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnUpdateNote.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnUpdateNote.FlatAppearance.BorderSize = 0;
             this.btnUpdateNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
             this.btnUpdateNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));

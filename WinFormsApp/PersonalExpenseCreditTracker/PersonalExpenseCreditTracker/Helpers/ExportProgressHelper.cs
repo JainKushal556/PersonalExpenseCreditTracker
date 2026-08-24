@@ -7,9 +7,9 @@ using System.Windows.Forms;
 namespace PersonalExpenseCreditTracker.Helpers
 {
     /// <summary>
-    /// সব মডিউলে Excel Export এ ব্যবহারযোগ্য প্রগ্রেস বার ওভারলে হেল্পার।
-    /// Export শুরু হলে ফুল‑স্ক্রিন ব্যাকড্রপ + প্রগ্রেস বার দেখায়,
-    /// ১০০% হলে OK বাটন দেখায়, OK ক্লিক করলে ওভারলে সরে যায়।
+    /// Progress bar overlay helper usable for Excel Export in all modules.
+    /// Shows full-screen backdrop + progress bar when Export starts,
+    /// Shows OK button at 100%, removes overlay on click.
     /// </summary>
     public class ExportProgressHelper
     {
@@ -71,11 +71,11 @@ namespace PersonalExpenseCreditTracker.Helpers
         }
 
         /// <summary>
-        /// Export প্রগ্রেস ওভারলে শুরু করে।
+        /// Starts Export progress overlay.
         /// </summary>
-        /// <param name="parent">যে Form বা Control এর উপর ওভারলে দেখাবে</param>
-        /// <param name="title">যেমন "Exporting Expense Data..."</param>
-        /// <param name="completeCallback">OK বাটনে ক্লিক করলে এটি কল হবে (nullable)</param>
+        /// <param name="parent">Form or Control to show overlay on</param>
+        /// <param name="title">E.g. "Exporting Expense Data..."</param>
+        /// <param name="completeCallback">Called when OK is clicked (nullable)</param>
         public void Show(Control parent, string title = "Exporting File...", Action completeCallback = null)
         {
             parentControl = parent;
@@ -83,7 +83,7 @@ namespace PersonalExpenseCreditTracker.Helpers
             currentProgress = 0;
             targetProgress = 0;
 
-            // ======== ২. সেন্টার কার্ড (Professional White Card) ========
+            // ======== 2. Center Card (Professional White Card) ========
             pnlCard = new Panel
             {
                 Size = new Size(450, 180),
@@ -150,7 +150,7 @@ namespace PersonalExpenseCreditTracker.Helpers
             pnlCard.Controls.Add(pnlProgressTrack);
             pnlCard.Controls.Add(btnOk);
 
-            // ---- রিসাইজ হলে কার্ড সবসময় সেন্টারে ----
+            // ---- Always center card on resize ----
             parentResizeHandler = (s, e) => CenterCard();
             parent.Resize += parentResizeHandler;
 
@@ -182,9 +182,9 @@ namespace PersonalExpenseCreditTracker.Helpers
         }
 
         /// <summary>
-        /// প্রগ্রেস স্মুথভাবে একটু একটু করে বাড়ায় (০-১০০)।
-        /// এক্সপোর্ট শুরু হওয়ার আগে কল করুন SetProgress(10),
-        /// ডেটা লেখা শেষে SetProgress(90), সেভ শেষে SetProgress(100)।
+        /// Smoothly increases progress (0-100).
+        /// Call SetProgress(10) before export starts,
+        /// SetProgress(90) after data write, SetProgress(100) after save.
         /// </summary>
         public void SetProgress(int percent)
         {
@@ -266,7 +266,7 @@ namespace PersonalExpenseCreditTracker.Helpers
         }
 
         /// <summary>
-        /// ওভারলে বন্ধ করে এবং সব রিসোর্স পরিষ্কার করে।
+        /// Closes overlay and clears all resources.
         /// </summary>
         public void Close()
         {

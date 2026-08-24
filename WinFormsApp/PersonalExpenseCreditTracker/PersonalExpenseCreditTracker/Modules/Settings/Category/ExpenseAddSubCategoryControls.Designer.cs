@@ -335,7 +335,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save;
+            this.btnSave.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnSave.Location = new System.Drawing.Point(266, 463);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(188, 41);

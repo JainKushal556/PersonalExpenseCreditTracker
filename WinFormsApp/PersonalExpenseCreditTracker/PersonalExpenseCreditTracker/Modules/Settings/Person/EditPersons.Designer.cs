@@ -110,7 +110,7 @@
             this.btnUpdatePersonDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdatePersonDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdatePersonDetails.ForeColor = System.Drawing.Color.White;
-            this.btnUpdatePersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnUpdatePersonDetails.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update;
             this.btnUpdatePersonDetails.Location = new System.Drawing.Point(451, 352);
             this.btnUpdatePersonDetails.Name = "btnUpdatePersonDetails";
             this.btnUpdatePersonDetails.Size = new System.Drawing.Size(253, 41);

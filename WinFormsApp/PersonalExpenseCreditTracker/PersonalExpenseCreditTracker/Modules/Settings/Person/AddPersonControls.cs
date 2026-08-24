@@ -85,25 +85,26 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             DataTable dataTable = CommonUiFunction.RetrieveDataForGridView("spGetAllPersons", Session.LogedInUser.GetUserId());
 
-            if (dataTable != null)
+            if (dataTable == null || dataTable.Columns.Contains("Message") || dataTable.Rows.Count == 0)
             {
-                masterData = dataTable.Copy();
-
-                // Newest person first
-                if (dataTable.Columns.Contains("PersonID"))
-                {
-                    dataTable.DefaultView.Sort = "PersonID DESC";
-                    dataTable = dataTable.DefaultView.ToTable();
-                }
-
-                BindingSource bindingSource1 = new BindingSource();
-                bindingSource1.DataSource = dataTable;
-                dataGridViewAddPerson.DataSource = bindingSource1;
+                dataGridViewAddPerson.DataSource = null;
+                lblDataGridViewTotalPersonsNumber.Text = "0";
+                masterData = new DataTable();
+                return;
             }
-            else
+
+            masterData = dataTable.Copy();
+
+            // Newest person first
+            if (dataTable.Columns.Contains("PersonID"))
             {
-                MessageBox.Show("No Data Found");
+                dataTable.DefaultView.Sort = "PersonID DESC";
+                dataTable = dataTable.DefaultView.ToTable();
             }
+
+            BindingSource bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = dataTable;
+            dataGridViewAddPerson.DataSource = bindingSource1;
         }
 
         // All Border Cornar Radius
@@ -283,6 +284,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         private void dataGridViewAddPerson_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            if (dataGridViewAddPerson.Rows.Count == 0)
+            {
+                lblDataGridViewTotalPersonsNumber.Text = "0";
+                return;
+            }
+
             // SL Number
             for (int i = 0; i < dataGridViewAddPerson.Rows.Count; i++)
             {
@@ -296,12 +303,13 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             if (dataGridViewAddPerson.Rows.Count > 0)
             {
                 dataGridViewAddPerson.ClearSelection();
-                dataGridViewAddPerson.CurrentCell =
-                    dataGridViewAddPerson.Rows[0].Cells["colName"];
+                if (dataGridViewAddPerson.Columns.Contains("colName"))
+                {
+                    dataGridViewAddPerson.CurrentCell =
+                        dataGridViewAddPerson.Rows[0].Cells["colName"];
+                }
                 dataGridViewAddPerson.Rows[0].Selected = true;
             }
-
-            
         }
 
         private void dataGridViewAddPerson_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -331,6 +339,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             txtAddPersonInputFullName.ForeColor = Color.Gray;
             txtAddPersonInputPhoneNumber.ForeColor = Color.Gray;
             txtAddPersonInputAddress.ForeColor = Color.Gray;
+
+            errorProvider1.Clear();
+            ErrorHelper.ClearAllErrors(this);
         }
 
         private void btnAddPersonInputSavePerson_Click(object sender, EventArgs e)
@@ -395,6 +406,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             colAddress.DataPropertyName = "Address";
 
             //Column Style
+            dataGridViewAddPerson.AllowUserToAddRows = false;
             dataGridViewAddPerson.AllowUserToOrderColumns = false;
             dataGridViewAddPerson.AutoGenerateColumns = false;
             dataGridViewAddPerson.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -546,12 +558,17 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
         {
             if (txtAddPersonSearchBar.Text == "Search by name or phone number ...") return;
             DataTable filtered = Common.CommonUiFunction.SearchDataInPersons(masterData, txtAddPersonSearchBar);
-            if (filtered != null)
+            if (filtered != null && !filtered.Columns.Contains("Message") && filtered.Rows.Count > 0)
             {
                 BindingSource bs = new BindingSource();
                 bs.DataSource = filtered;
                 dataGridViewAddPerson.DataSource = bs;
                 Common.CommonUiFunction.HighlightSearch(dataGridViewAddPerson, txtAddPersonSearchBar);
+            }
+            else
+            {
+                dataGridViewAddPerson.DataSource = null;
+                lblDataGridViewTotalPersonsNumber.Text = "0";
             }
         }
         private void txtAddPersonInputFullName_TextChanged(object sender, EventArgs e)

@@ -480,7 +480,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             dataGridViewTask.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(244, 247, 250);
             //dataGridViewTask.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
 
-            //  Selection Color (একই সিলেকশন কালার)
+            // Same selection color
             dataGridViewTask.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 205, 247); // Royal Blue
             dataGridViewTask.DefaultCellStyle.SelectionForeColor = Color.Black;
 
@@ -525,8 +525,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
                 cmsTaskAction.Show(
                     dataGridViewTask,
-                    rect.Left,
-                    rect.Bottom);
+                    new Point(rect.Right, rect.Bottom),
+                    ToolStripDropDownDirection.BelowLeft);
             }
         }
 
@@ -754,11 +754,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 return;
             }
 
-            // ১. Total Task
+            // 1. Total Task
             int totalTasks = AllTaskData.Rows.Count;
             lblTotalTaskCount.Text = totalTasks.ToString();
 
-            // ২. Complete Task ("Complete" এবং "Completed" দুটি বানানের জন্যই সেফ-চেক)
+            // 2. Complete Task (safe-check for both "Complete" and "Completed")
             int completedTasks = AllTaskData.AsEnumerable()
                 .Count(row =>
                 {
@@ -768,7 +768,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 });
             lblTaskCompleteCount.Text = completedTasks.ToString();
 
-            // ৩. Pending Task ("Pending" এবং "In Progress")
+            // 3. Pending Task ("Pending" and "In Progress")
             int pendingTasks = AllTaskData.AsEnumerable()
                 .Count(row =>
                 {
@@ -778,7 +778,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 });
             lblTaskPandingCount.Text = pendingTasks.ToString();
 
-            // ৪. Due Today
+            // 4. Due Today
             DateTime today = DateTime.Today;
             int dueTodayTasks = AllTaskData.AsEnumerable()
                 .Count(row => row["Deadline"] != DBNull.Value &&
@@ -1649,6 +1649,11 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         }
 
         private void tblCardContant_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void picTaskCompleteIcone_Click(object sender, EventArgs e)
         {
 
         }

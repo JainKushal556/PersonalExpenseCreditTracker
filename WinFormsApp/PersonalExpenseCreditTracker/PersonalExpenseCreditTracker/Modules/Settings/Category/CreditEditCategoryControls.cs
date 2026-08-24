@@ -195,6 +195,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             SetRadius(btnCancel, 5);
             SetRadius(btnUpdateCategory, 5);
             rdobtnActive.Checked = true;
+
+
         }
 
         private void txtCategoryName_TextChanged(object sender, EventArgs e)

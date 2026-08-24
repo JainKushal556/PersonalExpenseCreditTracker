@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +25,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private BorrowBLL borrowBLL = new BorrowBLL();
 
         // Pass the data from the UI layer to the Business Logic Layer
-        public CommonValidator.ValidationResult InsertDataIntoLentUi()
+        public CommonValidator.ValidationResult InsertDataIntoBorrowUi()
         {
             borrowBLL.userId = userId;
             borrowBLL.borrowId = borrowId;

@@ -141,12 +141,12 @@
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(15);
             this.panel2.Size = new System.Drawing.Size(588, 119);
-            this.panel2.TabIndex = 2    ;
+            this.panel2.TabIndex = 2;
             // 
             // btnForgotPasswordClose
             // 
             this.btnForgotPasswordClose.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnForgotPasswordClose.BackColor = System.Drawing.Color.White;
+            this.btnForgotPasswordClose.BackColor = System.Drawing.Color.Transparent;
             this.btnForgotPasswordClose.FlatAppearance.BorderSize = 0;
             this.btnForgotPasswordClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.btnForgotPasswordClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
@@ -156,7 +156,7 @@
             this.btnForgotPasswordClose.Name = "btnForgotPasswordClose";
             this.btnForgotPasswordClose.Size = new System.Drawing.Size(39, 35);
             this.btnForgotPasswordClose.TabIndex = 2;
-            this.btnForgotPasswordClose.UseVisualStyleBackColor = true;
+            this.btnForgotPasswordClose.UseVisualStyleBackColor = false;
             this.btnForgotPasswordClose.Click += new System.EventHandler(this.btnForgotPasswordClose_Click);
             this.btnForgotPasswordClose.MouseEnter += new System.EventHandler(this.btnForgotPasswordClose_MouseEnter);
             this.btnForgotPasswordClose.MouseLeave += new System.EventHandler(this.btnForgotPasswordClose_MouseLeave);

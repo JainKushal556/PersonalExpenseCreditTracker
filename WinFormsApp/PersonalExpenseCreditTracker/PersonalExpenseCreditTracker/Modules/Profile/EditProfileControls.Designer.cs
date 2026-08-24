@@ -127,7 +127,7 @@
             // pnlEditProfileMainBody
             // 
             this.pnlEditProfileMainBody.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnlEditProfileMainBody.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlEditProfileMainBody.BackColor = System.Drawing.Color.Transparent;
             this.pnlEditProfileMainBody.Controls.Add(this.btnUpdateProfile);
             this.pnlEditProfileMainBody.Controls.Add(this.btnCancelEditProfile);
             this.pnlEditProfileMainBody.Controls.Add(this.tableLayoutPanel1);
@@ -145,7 +145,7 @@
             this.btnUpdateProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateProfile.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnUpdateProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update;
             this.btnUpdateProfile.Location = new System.Drawing.Point(312, 657);
             this.btnUpdateProfile.Name = "btnUpdateProfile";
             this.btnUpdateProfile.Size = new System.Drawing.Size(299, 59);
@@ -595,6 +595,10 @@
             // 
             this.btnCloseEditProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCloseEditProfile.FlatAppearance.BorderSize = 0;
+            this.btnCloseEditProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnCloseEditProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnCloseEditProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCloseEditProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close__2_;
             this.btnCloseEditProfile.Location = new System.Drawing.Point(311, 16);
             this.btnCloseEditProfile.Name = "btnCloseEditProfile";
@@ -773,7 +777,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
             this.ClientSize = new System.Drawing.Size(640, 739);
             this.Controls.Add(this.pnlEditProfileMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

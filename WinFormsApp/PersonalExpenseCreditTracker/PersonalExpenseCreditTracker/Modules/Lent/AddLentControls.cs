@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -286,6 +286,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnLentAddCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -310,6 +311,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Lent added successfully!");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
@@ -344,18 +346,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         }
 
 
-        // Enter কি প্রেস করলে সাজেশন সিলেক্ট করার জন্য
+        // Select suggestion on Enter key press
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Enter)
             {
-                // Select Person ComboBox এ ফোকাস থাকলে
+                // If Select Person ComboBox has focus
                 if (comboBoxLentSelectPerson.Focused)
                 {
                     SelectComboBoxSuggestion(comboBoxLentSelectPerson);
-                    return true; // Enter এর কাজ শেষ, ফর্ম সাবমিট বা শব্দ হবে না
+                    return true; // Enter action complete, no form submit or beep
                 }
-                // Payment Type ComboBox এ ফোকাস থাকলে
+                // If Payment Type ComboBox has focus
                 else if (comboBoxLentPaymentType.Focused)
                 {
                     SelectComboBoxSuggestion(comboBoxLentPaymentType);
@@ -366,21 +368,21 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        // টেক্সট অনুযায়ী আইটেম খুঁজে বের করে সিলেক্ট করার হেল্পার মেথড
+        // Helper method to find and select item by text
         private void SelectComboBoxSuggestion(ComboBox cmb)
         {
             if (!string.IsNullOrWhiteSpace(cmb.Text))
             {
-                // ১. পুরো নামের সাথে মিল খুঁজবে
+                // 1. Exact match with name
                 int index = cmb.FindStringExact(cmb.Text);
 
-                // ২. না পেলে শুরুর অক্ষরের মিল খুঁজবে
+                // 2. If not found, match with starting characters
                 if (index == -1)
                 {
                     index = cmb.FindString(cmb.Text);
                 }
 
-                // ৩. আইটেম পেলে তা সিলেক্ট করবে
+                // 3. Select item if found
                 if (index != -1)
                 {
                     cmb.SelectedIndex = index;
@@ -388,7 +390,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 }
             }
 
-            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            // Close dropdown if open
             cmb.DroppedDown = false;
         }
 
@@ -419,11 +421,11 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             if (personId == -99)
             {
-                this.Hide();
+                this.Opacity = 0;
                 using (var addPersonForm = new PersonalExpenseCreditTracker.Modules.Settings.Person.AddPersonControls())
                 {
-                    DialogResult result = addPersonForm.ShowDialog();
-                    this.Show();
+                    DialogResult result = addPersonForm.ShowDialog(this);
+                    this.Opacity = 1;
 
                   
                     CommonUiFunction.LoadInComboBox("spGetAllPersons", Session.LogedInUser.GetUserId(), "Select Person", "+ Add New Person", comboBoxLentSelectPerson);
@@ -470,6 +472,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnAddLentClose_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 

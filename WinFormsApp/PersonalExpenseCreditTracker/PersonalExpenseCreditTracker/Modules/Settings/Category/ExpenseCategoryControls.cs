@@ -19,6 +19,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         private  string ConnectionString =ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private int UserID = Session.LogedInUser.GetUserId();
         private List<int> expandedCategories = new List<int>();
+        private int selectedSubCategoryID = 0;
         public ExpenseCategoryControls()
         {
             InitializeComponent();
@@ -48,6 +49,18 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
             int totalInactive = categoryList.Count(c => !c.IsActive) + subCategoryList.Count(s => !s.IsActive);
             lblInactiveNumber.Text = totalInactive.ToString();
+
+            tsmiEdit.Image = Properties.Resources.pen;
+            tsmiAddSubCategory.Image = Properties.Resources.plus__2_;
+
+            cmsCategoryAction.ImageScalingSize = new Size(20, 20); 
+            cmsCategoryAction.AutoSize = true;
+
+            foreach (ToolStripItem item in cmsCategoryAction.Items)
+            {
+                item.AutoSize = true;
+            }
+
         }
 
         private void CreateColumns()
@@ -119,8 +132,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             dgvCategory.ColumnHeadersDefaultCellStyle.Font =new Font("Segoe UI", 10, FontStyle.Bold);
             
             dgvCategory.DefaultCellStyle.Font =new Font("Segoe UI", 10);
-            dgvCategory.DefaultCellStyle.SelectionBackColor = Color.FromArgb(224, 231, 255);
-            dgvCategory.DefaultCellStyle.SelectionForeColor = Color.FromArgb(15, 23, 42);
+            dgvCategory.DefaultCellStyle.SelectionBackColor = Color.White;
+            dgvCategory.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvCategory.RowTemplate.Height = 40;
             //dgvCategory.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250);
 
@@ -142,6 +155,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             dgvCategory.Columns["Action"].DefaultCellStyle.ForeColor =Color.RoyalBlue;
             dgvCategory.Columns["Action"].DefaultCellStyle.Font =new Font("Segoe UI", 9, FontStyle.Bold);
 
+            // Enable double buffering to eliminate grid flickering
+            System.Reflection.PropertyInfo pi = typeof(DataGridView).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            if (pi != null)
+            {
+                pi.SetValue(dgvCategory, true, null);
+            }
         }
 
 
@@ -149,49 +168,84 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-            if (dgvCategory.Columns[e.ColumnIndex].Name == "Expand")
-            {
-                DataGridViewRow categoryRow = dgvCategory.Rows[e.RowIndex];
-
-               
-                if (categoryRow.Cells["Type"].Value == null || categoryRow.Cells["Type"].Value.ToString() != "Category")
-                    return;
-
-                string currentExpand = categoryRow.Cells["Expand"].Value != null ? categoryRow.Cells["Expand"].Value.ToString() : "";
-                bool isExpanded = (currentExpand == "↓");
-
-                
-                categoryRow.Cells["Expand"].Value = isExpanded ? "→" : "↓";
-
-               
-                dgvCategory.CurrentCell = null;
-
-               
-                for (int i = e.RowIndex + 1; i < dgvCategory.Rows.Count; i++)
-                {
-                    DataGridViewRow nextRow = dgvCategory.Rows[i];
-
-                    string rowType = nextRow.Cells["Type"].Value != null ? nextRow.Cells["Type"].Value.ToString() : "";
-                    if (rowType == "Category")
-                        break; 
-
-                    nextRow.Visible = !isExpanded;
-                }
-
-                return;
-            }
-
+            // Skip Action column (it opens context menu)
             if (dgvCategory.Columns[e.ColumnIndex].Name == "Action")
             {
                 Rectangle r = dgvCategory.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-                DataGridViewRow row = dgvCategory.Rows[e.RowIndex];
-                bool isCategory = row.Cells["Type"].Value != null && row.Cells["Type"].Value.ToString() == "Category";
+                DataGridViewRow actionRow = dgvCategory.Rows[e.RowIndex];
+                bool isCategory = actionRow.Cells["Type"].Value != null && actionRow.Cells["Type"].Value.ToString() == "Category";
 
                 tsmiAddSubCategory.Visible = isCategory;
-                cmsCategoryAction.Tag = row;
-                cmsCategoryAction.Show(dgvCategory, r.Left, r.Bottom);
+                cmsCategoryAction.Tag = actionRow;
 
+                // Rebuild items so size fits only visible items
+                cmsCategoryAction.Items.Clear();
+                tsmiEdit.AutoSize = true;
+                cmsCategoryAction.Items.Add(tsmiEdit);
+                if (isCategory)
+                {
+                    tsmiAddSubCategory.AutoSize = true;
+                    cmsCategoryAction.Items.Add(tsmiAddSubCategory);
+                }
+
+                cmsCategoryAction.AutoSize = true;
+                cmsCategoryAction.Show(dgvCategory, new Point(r.Right, r.Bottom), ToolStripDropDownDirection.BelowLeft);
                 return;
+            }
+
+            DataGridViewRow clickedRow = dgvCategory.Rows[e.RowIndex];
+            string type = clickedRow.Cells["Type"].Value != null ? clickedRow.Cells["Type"].Value.ToString() : "";
+
+            if (type == "Category")
+            {
+                int catId = Convert.ToInt32(clickedRow.Tag);
+                bool isExpanded = expandedCategories.Contains(catId);
+
+                // Accordion: collapse all, then expand clicked one
+                expandedCategories.Clear();
+                if (!isExpanded)
+                {
+                    expandedCategories.Add(catId);
+                    // Highlight the first subcategory by default when category expands
+                    var firstSub = subCategoryList.FirstOrDefault(s => s.CategoryID == catId);
+                    selectedSubCategoryID = firstSub != null ? firstSub.SubCategoryID : 0;
+                }
+                else
+                {
+                    selectedSubCategoryID = 0;
+                }
+
+                FillGrid();
+            }
+            else if (type == "Sub Category")
+            {
+                int subId = Convert.ToInt32(clickedRow.Tag);
+                if (selectedSubCategoryID == subId) return;
+
+                selectedSubCategoryID = subId;
+
+                // Update row colors in-place without reloading the entire grid
+                foreach (DataGridViewRow row in dgvCategory.Rows)
+                {
+                    string rType = row.Cells["Type"].Value != null ? row.Cells["Type"].Value.ToString() : "";
+                    if (rType == "Sub Category")
+                    {
+                        int rSubId = Convert.ToInt32(row.Tag);
+                        if (rSubId == selectedSubCategoryID)
+                        {
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(237, 242, 255);
+                            row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(237, 242, 255);
+                            row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        }
+                        else
+                        {
+                            row.DefaultCellStyle.BackColor = Color.White;
+                            row.DefaultCellStyle.SelectionBackColor = Color.White;
+                            row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        }
+                    }
+                }
+                dgvCategory.ClearSelection();
             }
         }
 
@@ -307,6 +361,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                 dgvCategory.Rows[row].Cells["Status"].Value = cat.IsActive ? "Active" : "Inactive";
                 dgvCategory.Rows[row].Cells["Action"].Value = "⋮";
 
+                // Category row remains white (no blue highlight)
+                dgvCategory.Rows[row].DefaultCellStyle.BackColor = Color.White;
+                dgvCategory.Rows[row].DefaultCellStyle.SelectionBackColor = Color.White;
+                dgvCategory.Rows[row].DefaultCellStyle.SelectionForeColor = Color.Black;
+                if (expanded)
+                {
+                    dgvCategory.Rows[row].DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                }
+
                 foreach (ExpenseSubCategory sub in subCategoryList)
                 {
                     if (sub.CategoryID == cat.CategoryID)
@@ -318,15 +381,28 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                         dgvCategory.Rows[subRow].Cells["Type"].Value = "Sub Category";
                         dgvCategory.Rows[subRow].Cells["Status"].Value = sub.IsActive ? "Active" : "Inactive";
                         dgvCategory.Rows[subRow].Cells["Action"].Value = "⋮";
-                        dgvCategory.Rows[subRow].DefaultCellStyle.BackColor = Color.FromArgb(248, 250, 255);
+                        bool isSubSelected = (sub.SubCategoryID == selectedSubCategoryID);
+                        if (isSubSelected)
+                        {
+                            dgvCategory.Rows[subRow].DefaultCellStyle.BackColor = Color.FromArgb(237, 242, 255);
+                            dgvCategory.Rows[subRow].DefaultCellStyle.SelectionBackColor = Color.FromArgb(237, 242, 255);
+                            dgvCategory.Rows[subRow].DefaultCellStyle.SelectionForeColor = Color.Black;
+                        }
+                        else
+                        {
+                            dgvCategory.Rows[subRow].DefaultCellStyle.BackColor = Color.White;
+                            dgvCategory.Rows[subRow].DefaultCellStyle.SelectionBackColor = Color.White;
+                            dgvCategory.Rows[subRow].DefaultCellStyle.SelectionForeColor = Color.Black;
+                        }
 
-                       
                         dgvCategory.Rows[subRow].Visible = expanded;
                     }
                 }
 
                 
             }
+
+            dgvCategory.ClearSelection();
 
             if (scrollIndex >= 0 && scrollIndex < dgvCategory.Rows.Count)
             {
@@ -380,6 +456,27 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             {
                 LoadCategories();
                 LoadSubCategories();
+                FillGrid();
+            }
+        }
+
+        public void ResetCategoryView()
+        {
+            if (cmsCategoryAction != null && cmsCategoryAction.Visible)
+            {
+                cmsCategoryAction.Close();
+            }
+
+            bool needsRefresh = (expandedCategories != null && expandedCategories.Count > 0) || selectedSubCategoryID != 0;
+
+            if (expandedCategories != null)
+            {
+                expandedCategories.Clear();
+            }
+            selectedSubCategoryID = 0;
+
+            if (needsRefresh)
+            {
                 FillGrid();
             }
         }

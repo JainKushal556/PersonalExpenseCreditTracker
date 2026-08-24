@@ -222,11 +222,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void txtCurrentPassword_Enter(object sender, EventArgs e)
         {
+            
             if (txtCurrentPassword.Text == "Enter Current Password")
             {
                 txtCurrentPassword.Text = "";
                 txtCurrentPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
+
+            if (txtCurrentPassword.Text != "Enter Current Password")
+                txtCurrentPassword.UseSystemPasswordChar = !isPasswordVisible1;
         }
 
         private void txtCurrentPassword_Leave(object sender, EventArgs e)
@@ -236,16 +240,24 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                 txtCurrentPassword.Text = "Enter Current Password";
                 txtCurrentPassword.ForeColor = Color.FromArgb(191, 192, 199);
             }
+
+            if (txtCurrentPassword.Text != "")
+                txtCurrentPassword.UseSystemPasswordChar = false;
         }
 
         private void txtNewPassword_Enter(object sender, EventArgs e)
         {
+            
             if (txtNewPassword.Text == "Enter New Password")
             {
                 txtNewPassword.Text = "";
                 txtNewPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
             _PasswordMatch = true;
+            
+            if (txtNewPassword.Text != "Enter New Password")
+                txtNewPassword.UseSystemPasswordChar = !isPasswordVisible2;
+            
         }
 
         private void txtNewPassword_Leave(object sender, EventArgs e)
@@ -256,17 +268,23 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                 txtNewPassword.ForeColor = Color.FromArgb(191, 192, 199);
                 _PasswordMatch = false;
             }
-            
+
+            if (txtNewPassword.Text != "")
+                txtNewPassword.UseSystemPasswordChar = false;
         }
 
         private void txtConfirmPassword_Enter(object sender, EventArgs e)
         {
+            
+            
             if (txtConfirmPassword.Text == "Confirm New Password")
             {
                 txtConfirmPassword.Text = "";
                 txtConfirmPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
-            
+
+            if (txtConfirmPassword.Text != "Confirm New Password")
+                txtConfirmPassword.UseSystemPasswordChar = !isPasswordVisible3;
         }
 
         private void txtConfirmPassword_Leave(object sender, EventArgs e)
@@ -276,6 +294,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                 txtConfirmPassword.Text = "Confirm New Password";
                 txtConfirmPassword.ForeColor = Color.FromArgb(191, 192, 199);
             }
+
+            if (txtConfirmPassword.Text != "")
+                txtConfirmPassword.UseSystemPasswordChar = false;
         }
 
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
@@ -314,6 +335,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible1 = !isPasswordVisible1;
 
+            if (txtCurrentPassword.Text != "Enter Current Password")
             txtCurrentPassword.UseSystemPasswordChar = !isPasswordVisible1;
 
             if (isPasswordVisible1)
@@ -330,6 +352,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible2 = !isPasswordVisible2;
 
+            if (txtNewPassword.Text != "Enter New Password")
             txtNewPassword.UseSystemPasswordChar = !isPasswordVisible2;
 
             if (isPasswordVisible2)
@@ -346,6 +369,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible3 = !isPasswordVisible3;
 
+            if (txtConfirmPassword.Text != "Confirm New Password")
             txtConfirmPassword.UseSystemPasswordChar = !isPasswordVisible3;
 
             if (isPasswordVisible3)

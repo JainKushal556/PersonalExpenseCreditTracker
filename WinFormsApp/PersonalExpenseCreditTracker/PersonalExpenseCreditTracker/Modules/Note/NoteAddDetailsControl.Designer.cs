@@ -155,14 +155,14 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.btnSaveNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveNote.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveNote.ForeColor = System.Drawing.Color.White;
-            this.btnSaveNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.floppy_disk__3_;
+            this.btnSaveNote.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnSaveNote.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSaveNote.Location = new System.Drawing.Point(299, 519);
             this.btnSaveNote.Name = "btnSaveNote";
             this.btnSaveNote.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSaveNote.Size = new System.Drawing.Size(162, 41);
             this.btnSaveNote.TabIndex = 4;
-            this.btnSaveNote.Text = " Save Note";
+            this.btnSaveNote.Text = "Add Note";
             this.btnSaveNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveNote.UseVisualStyleBackColor = false;
             this.btnSaveNote.Click += new System.EventHandler(this.btnSaveNote_Click);

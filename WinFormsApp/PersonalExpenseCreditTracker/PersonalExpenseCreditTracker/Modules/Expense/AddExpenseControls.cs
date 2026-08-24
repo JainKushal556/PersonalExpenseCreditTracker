@@ -141,11 +141,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void btnCloseEditPersonDetails_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -162,9 +164,21 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             expenseUi.userId = Session.LogedInUser.GetUserId();
             expenseUi.expenseId = -1;
 
-            expenseUi.categoryId = Convert.ToInt32(cmbAddExpenseCategory.SelectedValue);
-            expenseUi.subCategoryId = Convert.ToInt32(cmbAddExpenseSubCategory.SelectedValue);
-            expenseUi.paymentId = Convert.ToInt32(cmbAddExpensePaymentType.SelectedValue);
+            // Safe conversion — null or invalid value returns 0 instead of crashing
+            int catId = 0, subCatId = 0, payId = 0;
+
+            if (cmbAddExpenseCategory.SelectedValue != null)
+                int.TryParse(cmbAddExpenseCategory.SelectedValue.ToString(), out catId);
+
+            if (cmbAddExpenseSubCategory.SelectedValue != null)
+                int.TryParse(cmbAddExpenseSubCategory.SelectedValue.ToString(), out subCatId);
+
+            if (cmbAddExpensePaymentType.SelectedValue != null)
+                int.TryParse(cmbAddExpensePaymentType.SelectedValue.ToString(), out payId);
+
+            expenseUi.categoryId    = catId;
+            expenseUi.subCategoryId = subCatId;
+            expenseUi.paymentId     = payId;
 
 
             // If the placeholder text is still present, pass an empty string
@@ -178,6 +192,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Expense added successfully!");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
@@ -214,24 +229,24 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         }
 
-        // Enter কি প্রেস করলে সাজেশন সিলেক্ট করার জন্য
+        // Select suggestion on Enter key press
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Enter)
             {
-                // Category ComboBox এ ফোকাস থাকলে
+                // If Category ComboBox has focus
                 if (cmbAddExpenseCategory.Focused)
                 {
                     SelectComboBoxSuggestion(cmbAddExpenseCategory);
-                    return true; // Enter এর কাজ শেষ, ফর্ম সাবমিট বা শব্দ হবে না
+                    return true; // Enter action complete, no form submit or beep
                 }
-                // Sub Category ComboBox এ ফোকাস থাকলে
+                // If Sub Category ComboBox has focus
                 else if (cmbAddExpenseSubCategory.Focused)
                 {
                     SelectComboBoxSuggestion(cmbAddExpenseSubCategory);
                     return true;
                 }
-                // Payment Type ComboBox এ ফোকাস থাকলে
+                // If Payment Type ComboBox has focus
                 else if (cmbAddExpensePaymentType.Focused)
                 {
                     SelectComboBoxSuggestion(cmbAddExpensePaymentType);
@@ -242,21 +257,21 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        // টেক্সট অনুযায়ী আইটেম খুঁজে বের করে সিলেক্ট করার হেল্পার মেথড
+        // Helper method to find and select item by text
         private void SelectComboBoxSuggestion(ComboBox cmb)
         {
             if (!string.IsNullOrWhiteSpace(cmb.Text))
             {
-                // ১. পুরো নামের সাথে মিল খুঁজবে
+                // 1. Exact match with name
                 int index = cmb.FindStringExact(cmb.Text);
 
-                // ২. না পেলে শুরুর অক্ষরের মিল খুঁজবে
+                // 2. If not found, match with starting characters
                 if (index == -1)
                 {
                     index = cmb.FindString(cmb.Text);
                 }
 
-                // ৩. আইটেম পেলে তা সিলেক্ট করবে
+                // 3. Select item if found
                 if (index != -1)
                 {
                     cmb.SelectedIndex = index;
@@ -264,7 +279,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                 }
             }
 
-            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            // Close dropdown if open
             cmb.DroppedDown = false;
         }
 
@@ -426,12 +441,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
                 string currentCategoryName = cmbAddExpenseCategory.Text;
 
-                this.Hide();
-
+                this.Opacity = 0;
                 using (ExpenseAddSubCategoryControls addSubCatForm = new ExpenseAddSubCategoryControls(currentCategoryId, currentCategoryName))
                 {
-                    DialogResult result = addSubCatForm.ShowDialog();
-                    this.Show();
+                    DialogResult result = addSubCatForm.ShowDialog(this);
+                    this.Opacity = 1;
 
                     ignoreEvents = true;
 
@@ -504,11 +518,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
             if (categoryId == -99)
             {
-                this.Hide();
+                this.Opacity = 0;
                 using (var addCategoryForm = new PersonalExpenseCreditTracker.Modules.Settings.Category.ExpenseAddCategoryControls())
                 {
-                    DialogResult result = addCategoryForm.ShowDialog();
-                    this.Show();
+                    DialogResult result = addCategoryForm.ShowDialog(this);
+                    this.Opacity = 1;
 
                     int newSelectedCategoryId = 0;
 

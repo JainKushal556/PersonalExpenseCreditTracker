@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -32,8 +32,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.lblTotalCategory = new System.Windows.Forms.Label();
             this.picTotalCategory = new System.Windows.Forms.PictureBox();
             this.pnlActive = new System.Windows.Forms.Panel();
+            this.lblActiveNumber = new System.Windows.Forms.Label();
             this.lblActive = new System.Windows.Forms.Label();
             this.pnlInactive = new System.Windows.Forms.Panel();
+            this.lblInactiveNumber = new System.Windows.Forms.Label();
             this.lblInactive = new System.Windows.Forms.Label();
             this.pnlTotalSubCategory = new System.Windows.Forms.Panel();
             this.lblTotalSubCategoryNumber = new System.Windows.Forms.Label();
@@ -47,8 +49,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.cmsCategoryAction = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddSubCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblActiveNumber = new System.Windows.Forms.Label();
-            this.lblInactiveNumber = new System.Windows.Forms.Label();
             this.pnlMain.SuspendLayout();
             this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
@@ -198,6 +198,16 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlActive.Size = new System.Drawing.Size(246, 34);
             this.pnlActive.TabIndex = 1;
             // 
+            // lblActiveNumber
+            // 
+            this.lblActiveNumber.AutoSize = true;
+            this.lblActiveNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActiveNumber.ForeColor = System.Drawing.Color.LimeGreen;
+            this.lblActiveNumber.Location = new System.Drawing.Point(68, 10);
+            this.lblActiveNumber.Name = "lblActiveNumber";
+            this.lblActiveNumber.Size = new System.Drawing.Size(0, 23);
+            this.lblActiveNumber.TabIndex = 3;
+            // 
             // lblActive
             // 
             this.lblActive.AutoSize = true;
@@ -220,6 +230,16 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.pnlInactive.Padding = new System.Windows.Forms.Padding(10);
             this.pnlInactive.Size = new System.Drawing.Size(248, 34);
             this.pnlInactive.TabIndex = 2;
+            // 
+            // lblInactiveNumber
+            // 
+            this.lblInactiveNumber.AutoSize = true;
+            this.lblInactiveNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInactiveNumber.ForeColor = System.Drawing.Color.Red;
+            this.lblInactiveNumber.Location = new System.Drawing.Point(80, 10);
+            this.lblInactiveNumber.Name = "lblInactiveNumber";
+            this.lblInactiveNumber.Size = new System.Drawing.Size(0, 23);
+            this.lblInactiveNumber.TabIndex = 2;
             // 
             // lblInactive
             // 
@@ -336,41 +356,21 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.tsmiEdit,
             this.tsmiAddSubCategory});
             this.cmsCategoryAction.Name = "cmsCategoryAction";
-            this.cmsCategoryAction.Size = new System.Drawing.Size(196, 52);
+            this.cmsCategoryAction.AutoSize = true;
             // 
             // tsmiEdit
             // 
+            this.tsmiEdit.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tsmiEdit.Name = "tsmiEdit";
-            this.tsmiEdit.Size = new System.Drawing.Size(195, 24);
             this.tsmiEdit.Text = "Edit";
             this.tsmiEdit.Click += new System.EventHandler(this.tsmiEdit_Click);
             // 
             // tsmiAddSubCategory
             // 
+            this.tsmiAddSubCategory.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tsmiAddSubCategory.Name = "tsmiAddSubCategory";
-            this.tsmiAddSubCategory.Size = new System.Drawing.Size(195, 24);
             this.tsmiAddSubCategory.Text = "Add SubCategory";
             this.tsmiAddSubCategory.Click += new System.EventHandler(this.tsmiAddSubCategory_Click);
-            // 
-            // lblActiveNumber
-            // 
-            this.lblActiveNumber.AutoSize = true;
-            this.lblActiveNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblActiveNumber.ForeColor = System.Drawing.Color.LimeGreen;
-            this.lblActiveNumber.Location = new System.Drawing.Point(68, 10);
-            this.lblActiveNumber.Name = "lblActiveNumber";
-            this.lblActiveNumber.Size = new System.Drawing.Size(0, 23);
-            this.lblActiveNumber.TabIndex = 3;
-            // 
-            // lblInactiveNumber
-            // 
-            this.lblInactiveNumber.AutoSize = true;
-            this.lblInactiveNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInactiveNumber.ForeColor = System.Drawing.Color.Red;
-            this.lblInactiveNumber.Location = new System.Drawing.Point(80, 10);
-            this.lblInactiveNumber.Name = "lblInactiveNumber";
-            this.lblInactiveNumber.Size = new System.Drawing.Size(0, 23);
-            this.lblInactiveNumber.TabIndex = 2;
             // 
             // CreditCategoryControls
             // 

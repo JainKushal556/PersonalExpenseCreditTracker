@@ -59,6 +59,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             pnlProfileStatus.Resize += pnlProfileStatus_Resize;
 
             imageCropControls.MakePictureCircular(picProfileUserPhoto);
+            btnProfileEditButton.Paint += btnProfileEditButton_Paint;
             LoadUserProfileData();
 
             
@@ -184,11 +185,90 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
 
 
+        private Timer blinkTimer;
+        private bool blinkState = false;
+        private bool isBlinkingActive = false;
+
+        private void InitializeBlinkTimer()
+        {
+            if (blinkTimer == null)
+            {
+                blinkTimer = new Timer();
+                blinkTimer.Interval = 500;
+                blinkTimer.Tick += BlinkTimer_Tick;
+            }
+        }
+
+        private void BlinkTimer_Tick(object sender, EventArgs e)
+        {
+            blinkState = !blinkState;
+            btnProfileEditButton.Invalidate();
+        }
+
+        private GraphicsPath GetRoundedPath(Rectangle rect, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            int diameter = radius * 2;
+            Rectangle arc = new Rectangle(rect.X, rect.Y, diameter, diameter);
+
+            path.AddArc(arc, 180, 90);
+
+            arc.X = rect.Right - diameter;
+            path.AddArc(arc, 270, 90);
+
+            arc.Y = rect.Bottom - diameter;
+            path.AddArc(arc, 0, 90);
+
+            arc.X = rect.Left;
+            path.AddArc(arc, 90, 90);
+
+            path.CloseFigure();
+            return path;
+        }
+
+        private void btnProfileEditButton_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            if (isBlinkingActive)
+            {
+                // Vibrant Royal Blue pulsing border
+                Color borderColor = blinkState ? Color.FromArgb(37, 99, 235) : Color.FromArgb(191, 219, 254);
+                float penWidth = blinkState ? 2.5f : 1.2f;
+
+                Rectangle rect = new Rectangle(1, 1, btnProfileEditButton.Width - 3, btnProfileEditButton.Height - 3);
+                using (GraphicsPath path = GetRoundedPath(rect, 8))
+                using (Pen pen = new Pen(borderColor, penWidth))
+                {
+                    e.Graphics.DrawPath(pen, path);
+                }
+            }
+        }
+
+        private void StartBlinking()
+        {
+            isBlinkingActive = true;
+            InitializeBlinkTimer();
+            if (!blinkTimer.Enabled)
+                blinkTimer.Start();
+        }
+
+        private void StopBlinking()
+        {
+            isBlinkingActive = false;
+            if (blinkTimer != null && blinkTimer.Enabled)
+            {
+                blinkTimer.Stop();
+            }
+            btnProfileEditButton.Invalidate();
+        }
+
         private void btnProfileEditButton_Click(object sender, EventArgs e)
         {
+            StopBlinking();
             EditProfileControls edit = new EditProfileControls(this);
             edit.ShowDialog();
-            
+            LoadUserProfileData();
         }
 
         public void LoadUserProfileData()
@@ -305,7 +385,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                 {
                     byte[] imgBytes = (byte[])row["ProfilePhoto"];
 
-                    // ১. বাইট খালি বা নাল কিনা চেক
+                    // 1. Check if bytes are empty or null
                     if (imgBytes != null && imgBytes.Length > 0)
                     {
                         try
@@ -314,14 +394,14 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                             {
                                 using (Image tempImg = Image.FromStream(ms))
                                 {
-                                    // ২. সেফলি Bitmap তৈরি (যাতে স্ট্রিম লিক বা ক্র্যাশ না করে)
+                                    // 2. Safely create Bitmap (to avoid stream leak or crash)
                                     picProfileUserPhoto.Image = new Bitmap(tempImg);
                                 }
                             }
                         }
                         catch
                         {
-                            // ছবি করাপ্ট থাকলে ডিফল্ট ছবি লোড হবে
+                            // Load default image if corrupted
                             picProfileUserPhoto.Image = Properties.Resources.people__3_1;
                         }
                     }
@@ -339,6 +419,23 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             else
             {
                 picProfileUserPhoto.Image = Properties.Resources.people__3_1;
+            }
+
+            // Check if any profile information is incomplete (DOB, Gender, Address, Phone, Email)
+            bool isProfileIncomplete =
+                string.IsNullOrWhiteSpace(lblProfileInfoPersonDathOfBirth.Text) ||
+                string.IsNullOrWhiteSpace(lblProfileInfoPersonGender.Text) ||
+                string.IsNullOrWhiteSpace(lblProfileInfoPersonAddress.Text) ||
+                string.IsNullOrWhiteSpace(lblProfileInfoPersonPhoneNumber.Text) ||
+                string.IsNullOrWhiteSpace(lblProfileInfoPersonEmail.Text);
+
+            if (isProfileIncomplete)
+            {
+                StartBlinking();
+            }
+            else
+            {
+                StopBlinking();
             }
         }
 

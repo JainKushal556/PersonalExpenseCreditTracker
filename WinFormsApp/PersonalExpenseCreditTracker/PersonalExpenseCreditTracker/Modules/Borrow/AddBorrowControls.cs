@@ -315,7 +315,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 }
             }
 
-            // ড্রপডাউন খোলা থাকলে বন্ধ করবে
+            // Close dropdown if open
             cmb.DroppedDown = false;
         }
 
@@ -355,6 +355,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnBorrowAddCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -383,12 +384,13 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                 borrowUi.deadlineAt = DateTime.MinValue;
             }
 
-            CommonValidator.ValidationResult result = borrowUi.InsertDataIntoLentUi(); // অথবা borrowUi.InsertDataIntoBorrowUi()
+            CommonValidator.ValidationResult result = borrowUi.InsertDataIntoBorrowUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Borrow added successfully!");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
@@ -431,6 +433,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnAddBorrowClose_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -481,13 +484,11 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
             if (personId == -99)
             {
-                this.Hide();
-
+                this.Opacity = 0;
                 using (var addPersonForm = new PersonalExpenseCreditTracker.Modules.Settings.Person.AddPersonControls())
                 {
-                    DialogResult result = addPersonForm.ShowDialog();
-
-                    this.Show();
+                    DialogResult result = addPersonForm.ShowDialog(this);
+                    this.Opacity = 1;
 
                     CommonUiFunction.LoadInComboBox(
                         "spGetAllPersons",
