@@ -161,6 +161,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtRegistrationCreatePassword.Text = "";
                 txtRegistrationCreatePassword.ForeColor = Color.Black;
             }
+
+            if (txtRegistrationCreatePassword.Text != "Create a Password")
+                txtRegistrationCreatePassword.UseSystemPasswordChar = !isPasswordVisible1;
         }
 
         private void txtRegistrationCreatePassword_Leave(object sender, EventArgs e)
@@ -179,6 +182,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtRegistrationConfirmPassword.Text = "";
                 txtRegistrationConfirmPassword.ForeColor = Color.Black;
             }
+
+            if (txtRegistrationConfirmPassword.Text != "Confirm Password")
+                txtRegistrationConfirmPassword.UseSystemPasswordChar = !isPasswordVisible2;
         }
 
         private void txtRegistrationConfirmPassword_Leave(object sender, EventArgs e)
@@ -269,6 +275,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             isPasswordVisible1 = !isPasswordVisible1;
 
+            if (txtRegistrationCreatePassword.Text != "Create a Password")
             txtRegistrationCreatePassword.UseSystemPasswordChar = !isPasswordVisible1;
 
             if (isPasswordVisible1)
@@ -285,6 +292,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             isPasswordVisible2 = !isPasswordVisible2;
 
+            if (txtRegistrationConfirmPassword.Text != "Confirm Password")
             txtRegistrationConfirmPassword.UseSystemPasswordChar = !isPasswordVisible2;
 
             if (isPasswordVisible2)

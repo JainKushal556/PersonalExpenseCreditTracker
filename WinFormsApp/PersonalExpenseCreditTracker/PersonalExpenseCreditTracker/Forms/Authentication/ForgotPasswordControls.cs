@@ -194,6 +194,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             isPasswordVisible2 = !isPasswordVisible2;
 
+            if (txtNewPassword.Text != "Enter New Password")
             txtNewPassword.UseSystemPasswordChar = !isPasswordVisible2;
 
             if (isPasswordVisible2)
@@ -210,6 +211,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         {
             isPasswordVisible3 = !isPasswordVisible3;
 
+            if (txtConfirmPassword.Text != "Confirm New Password")
             txtConfirmPassword.UseSystemPasswordChar = !isPasswordVisible3;
 
             if (isPasswordVisible3)
@@ -302,6 +304,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtNewPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
             _PasswordMatch = true;
+
+            if (txtNewPassword.Text != "Enter New Password")
+                txtNewPassword.UseSystemPasswordChar = !isPasswordVisible2;
         }
 
         private void txtNewPassword_Leave(object sender, EventArgs e)
@@ -322,6 +327,8 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtConfirmPassword.Text = "";
                 txtConfirmPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
+            if (txtConfirmPassword.Text != "Confirm New Password")
+                txtConfirmPassword.UseSystemPasswordChar = !isPasswordVisible3;
         }
 
         private void txtConfirmPassword_Leave(object sender, EventArgs e)
@@ -332,33 +339,6 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtConfirmPassword.ForeColor = Color.FromArgb(191, 192, 199);
             }
         }
-
-        //private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (txtConfirmPassword.Text != "Confirm New Password" && !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
-        //    {
-        //        ErrorHelper.HideErrorForControl(txtConfirmPassword);
-        //    }
-        //    if (txtConfirmPassword.Text == "" || txtConfirmPassword.Text == "Confirm New Password")
-        //    {
-        //        lblPasswordMatch.Text = "";
-        //    }
-        //    else if (_PasswordMatch)
-        //    {
-        //        if (txtNewPassword.Text != txtConfirmPassword.Text)
-        //        {
-        //            lblPasswordMatch.Text = "* Password dosen't match";
-        //            lblPasswordMatch.ForeColor = Color.Red;
-        //        }
-        //        else
-        //        {
-        //            lblPasswordMatch.Text = "* Password match";
-        //            lblPasswordMatch.ForeColor = Color.Green;
-        //        }
-        //    }
-
-        //    CheckPasswordMatch();
-        //}
 
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
         {

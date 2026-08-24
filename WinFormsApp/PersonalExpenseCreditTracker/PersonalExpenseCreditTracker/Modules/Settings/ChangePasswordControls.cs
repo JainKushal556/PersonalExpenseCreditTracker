@@ -227,6 +227,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                 txtCurrentPassword.Text = "";
                 txtCurrentPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
+
+            if (txtCurrentPassword.Text != "Enter Current Password")
+                txtCurrentPassword.UseSystemPasswordChar = !isPasswordVisible1;
         }
 
         private void txtCurrentPassword_Leave(object sender, EventArgs e)
@@ -246,6 +249,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                 txtNewPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
             _PasswordMatch = true;
+
+            if (txtNewPassword.Text != "Enter New Password")
+                txtNewPassword.UseSystemPasswordChar = !isPasswordVisible2;
         }
 
         private void txtNewPassword_Leave(object sender, EventArgs e)
@@ -266,7 +272,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                 txtConfirmPassword.Text = "";
                 txtConfirmPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
-            
+
+            if (txtConfirmPassword.Text != "Confirm New Password")
+                txtConfirmPassword.UseSystemPasswordChar = !isPasswordVisible3;
         }
 
         private void txtConfirmPassword_Leave(object sender, EventArgs e)
@@ -314,6 +322,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible1 = !isPasswordVisible1;
 
+            if (txtCurrentPassword.Text != "Enter Current Password")
             txtCurrentPassword.UseSystemPasswordChar = !isPasswordVisible1;
 
             if (isPasswordVisible1)
@@ -330,6 +339,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible2 = !isPasswordVisible2;
 
+            if (txtNewPassword.Text != "Enter New Password")
             txtNewPassword.UseSystemPasswordChar = !isPasswordVisible2;
 
             if (isPasswordVisible2)
@@ -346,6 +356,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible3 = !isPasswordVisible3;
 
+            if (txtConfirmPassword.Text != "Confirm New Password")
             txtConfirmPassword.UseSystemPasswordChar = !isPasswordVisible3;
 
             if (isPasswordVisible3)
