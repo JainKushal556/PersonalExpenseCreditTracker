@@ -247,7 +247,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             // 
             // pnlFooter
             // 
-            this.pnlFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.pnlFooter.BackColor = System.Drawing.Color.Transparent;
             this.pnlFooter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFooter.Controls.Add(this.pnlControl);
             this.pnlFooter.Controls.Add(this.pnlNoteFooter);
@@ -337,8 +337,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.pnlNoteFooter.Controls.Add(this.lblto);
             this.pnlNoteFooter.Controls.Add(this.lblNoteStartingPageNumber);
             this.pnlNoteFooter.Controls.Add(this.lblShowing);
-            this.pnlNoteFooter.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlNoteFooter.Location = new System.Drawing.Point(0, 0);
+            this.pnlNoteFooter.Location = new System.Drawing.Point(4, -2);
             this.pnlNoteFooter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlNoteFooter.Name = "pnlNoteFooter";
             this.pnlNoteFooter.Size = new System.Drawing.Size(348, 50);

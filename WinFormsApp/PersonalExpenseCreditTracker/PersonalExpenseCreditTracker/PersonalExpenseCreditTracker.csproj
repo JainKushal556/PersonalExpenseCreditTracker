@@ -632,6 +632,8 @@
     <None Include="Resources\repaid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\telephone %286%29.png" />
+    <None Include="Resources\user %287%291.png" />
     <None Include="Resources\plus %282%29.png" />
     <None Include="Resources\telephone %285%29.png" />
     <None Include="Resources\telephone %284%29.png" />
@@ -760,6 +762,11 @@
     <None Include="Resources\Image.png" />
     <None Include="Resources\Gemini_Generated_Image_bup5imbup5imbup5.png" />
     <None Include="Resources\edit.png" />
+    <None Include="Resources\expenses1.png" />
+    <None Include="Resources\expenses %281%29.png" />
+    <None Include="Resources\expenses %282%29.png" />
+    <None Include="Resources\credit-card %281%29.png" />
+    <None Include="Resources\borrowing %281%29.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>
