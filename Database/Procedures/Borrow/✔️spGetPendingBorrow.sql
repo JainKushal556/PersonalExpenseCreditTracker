@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE spGetPendingBorrow
+CREATE PROCEDURE spGetPendingBorrow
 (
     @UserID INT,
     @PersonID INT = NULL,
@@ -8,8 +8,6 @@ AS
 BEGIN
 
     SET NOCOUNT OFF;
-
-    DECLARE @PaymentID INT;
 
     -------------------------------------------------
     -- User Validation
@@ -104,10 +102,11 @@ BEGIN
       AND (@PersonID IS NULL OR b.PersonID = @PersonID)
 
       -- filter by PaymentID if provided
-      AND (@PaymentName IS NULL OR b.PaymentID = @PaymentID)
+      AND (@PaymentID IS NULL OR b.PaymentID = @PaymentID)
 
       AND s.StatusName IN ('Pending', 'Partially Paid', 'Overdue')
 
     ORDER BY b.DeadlineAt ASC;
 
 END;
+GO

@@ -1,5 +1,4 @@
-
-ALTER PROCEDURE spUpdateUserName  
+CREATE PROCEDURE spUpdateUserName  
     @UserID INT,  
     @Name VARCHAR(100)  
 AS  
@@ -66,7 +65,7 @@ BEGIN
   
 
         UPDATE tblUserProfile  
-        SET Name = @Name  
+        SET FullName = @Name  
         WHERE UserID = @UserID;  
   
 
@@ -88,6 +87,4 @@ BEGIN
     END CATCH  
   
 END;
-
-
-
+GO
