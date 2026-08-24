@@ -355,6 +355,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnBorrowAddCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -389,6 +390,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Borrow added successfully!");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
@@ -431,6 +433,7 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
 
         private void btnAddBorrowClose_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 

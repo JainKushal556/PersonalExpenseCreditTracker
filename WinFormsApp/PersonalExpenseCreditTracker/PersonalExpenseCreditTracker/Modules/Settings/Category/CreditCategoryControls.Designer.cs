@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -356,13 +356,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             this.tsmiEdit,
             this.tsmiAddSubCategory});
             this.cmsCategoryAction.Name = "cmsCategoryAction";
-            this.cmsCategoryAction.Size = new System.Drawing.Size(229, 64);
+            this.cmsCategoryAction.AutoSize = true;
             // 
             // tsmiEdit
             // 
             this.tsmiEdit.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tsmiEdit.Name = "tsmiEdit";
-            this.tsmiEdit.Size = new System.Drawing.Size(228, 30);
             this.tsmiEdit.Text = "Edit";
             this.tsmiEdit.Click += new System.EventHandler(this.tsmiEdit_Click);
             // 
@@ -370,7 +369,6 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             // 
             this.tsmiAddSubCategory.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tsmiAddSubCategory.Name = "tsmiAddSubCategory";
-            this.tsmiAddSubCategory.Size = new System.Drawing.Size(228, 30);
             this.tsmiAddSubCategory.Text = "Add SubCategory";
             this.tsmiAddSubCategory.Click += new System.EventHandler(this.tsmiAddSubCategory_Click);
             // 

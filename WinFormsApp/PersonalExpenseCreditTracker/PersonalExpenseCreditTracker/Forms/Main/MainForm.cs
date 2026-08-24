@@ -407,6 +407,16 @@ namespace PersonalExpenseCreditTracker
                 activeSettingSubMenu = null;
             }
 
+            if (expenseCategoryControls != null && !expenseCategoryControls.IsDisposed)
+            {
+                expenseCategoryControls.ResetCategoryView();
+            }
+
+            if (creditCategoryControls != null && !creditCategoryControls.IsDisposed)
+            {
+                creditCategoryControls.ResetCategoryView();
+            }
+
             flowSidebar.SuspendLayout();
             flowSidebar.ResumeLayout();
             flowSidebar.PerformLayout();
@@ -419,10 +429,19 @@ namespace PersonalExpenseCreditTracker
 
         private void ShowPage(Panel page)
         {
-
             if (dashboardControl != null && dashboardControl.pnlNotification != null)
             {
                 dashboardControl.pnlNotification.Visible = false;
+            }
+
+            if (page != pnlExpenseCategory && expenseCategoryControls != null && !expenseCategoryControls.IsDisposed)
+            {
+                expenseCategoryControls.ResetCategoryView();
+            }
+
+            if (page != pnlCreditCategoryPage && creditCategoryControls != null && !creditCategoryControls.IsDisposed)
+            {
+                creditCategoryControls.ResetCategoryView();
             }
             pnlOverview.Visible = false;
             pnlExpensePage.Visible = false;
@@ -600,6 +619,11 @@ namespace PersonalExpenseCreditTracker
                 panel.BackColor = Color.FromArgb(59, 130, 246);
                 ChangeMenuIcon(panel, true);
             }
+            else
+            {
+                panel.BackColor = Color.FromArgb(15, 23, 42);
+                ChangeMenuIcon(panel, false);
+            }
         }
 
         // Active Menu Onujai Icon Change kore
@@ -634,7 +658,6 @@ namespace PersonalExpenseCreditTracker
             //else if (panel == pnlUserProfile)
                 //picUserProfile.Image = active ? Properties.Resources.user : Properties.Resources.user;
         }
-        //pnlDashboard all Function
         private void pnlDashboard_Click(object sender, EventArgs e)
         {
             UpdateHeader(
@@ -645,7 +668,9 @@ namespace PersonalExpenseCreditTracker
             CloseAllDropDown();
             RefreshSidebarScroll();
             ExpandSidebar();
+            pnlTop.Visible = true;
 
+            ShowPage(pnlOverview);
             ShowCenterLoading(true, "Loading Dashboard...");
             try
             {
@@ -664,16 +689,11 @@ namespace PersonalExpenseCreditTracker
                 }
 
                 dashboardControl.LoadDashboardSummary(Session.LogedInUser.GetUserId());
-
-                ShowPage(pnlOverview);
             }
             finally
             {
                 ShowCenterLoading(false);
             }
-
-            pnlTop.Visible = true;
-            ExpandSidebar();
         }
 
         private void pnlDashboard_MouseEnter(object sender, EventArgs e)
@@ -721,6 +741,36 @@ namespace PersonalExpenseCreditTracker
                    "Expense",
                    "Track and manage your expenses");
 
+            SetActiveMenu(pnlExpense, false);
+
+            bool wasOpen = expenseOpen;
+
+            CloseAllDropDown();
+
+            if (!wasOpen)
+            {
+                pnlExpenseDropDown.Visible = true;
+                picExpenseArrow.Image = Properties.Resources.arrowhead_up;
+                pnlTop.Visible = true;
+                expenseOpen = true;
+
+                SetActiveExpenseSubMenu(pnlAllExpense);
+            }
+            else
+            {
+                pnlExpenseDropDown.Visible = false;
+                picExpenseArrow.Image = Properties.Resources.down;
+                expenseOpen = false;
+
+                SetActiveMenu(pnlExpense, true);
+            }
+
+            RefreshSidebarScroll();
+            ExpandSidebar();
+            dateOpen = false;
+            amountOpen = false;
+
+            ShowPage(pnlExpensePage);
             ShowCenterLoading(true, "Loading Expenses...");
             try
             {
@@ -737,48 +787,11 @@ namespace PersonalExpenseCreditTracker
 
                     expenseControl.Show();
                 }
-                else if (expenseControl != null && !expenseControl.IsDisposed)
-                {
-                    expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
-                }
-
-                ShowPage(pnlExpensePage);
             }
             finally
             {
                 ShowCenterLoading(false);
             }
-
-            SetActiveMenu(pnlExpense, false);
-
-            bool wasOpen = expenseOpen;
-
-            CloseAllDropDown();
-
-            if (!wasOpen)
-            {
-              
-                pnlExpenseDropDown.Visible = true;
-                picExpenseArrow.Image = Properties.Resources.arrowhead_up;
-                pnlTop.Visible = true;
-                expenseOpen = true;
-
-                SetActiveExpenseSubMenu(pnlAllExpense);
-            }
-            else
-            {
-              
-                pnlExpenseDropDown.Visible = false;
-                picExpenseArrow.Image = Properties.Resources.down;
-                expenseOpen = false;
-
-                SetActiveMenu(pnlExpense, true);
-            }
-
-            RefreshSidebarScroll();
-            ExpandSidebar();
-            dateOpen = false;
-            amountOpen = false;
         }
 
 
@@ -815,33 +828,6 @@ namespace PersonalExpenseCreditTracker
              "Credit",
              "Track and manage your credit transactions");
 
-            ShowCenterLoading(true, "Loading Credit Data...");
-            try
-            {
-                if (creditControl == null || creditControl.IsDisposed)
-                {
-                    creditControl = new CreditControl();
-
-                    creditControl.TopLevel = false;
-                    creditControl.FormBorderStyle = FormBorderStyle.None;
-                    creditControl.Dock = DockStyle.Fill;
-
-                    pnlCreditPage.Controls.Clear();
-                    pnlCreditPage.Controls.Add(creditControl);
-
-                    creditControl.Show();
-                }
-                else if(creditControl != null && !creditControl.IsDisposed)
-                {
-                    creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
-                }
-                ShowPage(pnlCreditPage);
-            }
-            finally
-            {
-                ShowCenterLoading(false);
-            }
-
             SetActiveMenu(pnlCredit, false);
 
             bool wasOpen = creditOpen;
@@ -876,6 +862,29 @@ namespace PersonalExpenseCreditTracker
             creditCategoryOpen = false;
 
             pnlCreditFilterContant.Visible = true;
+
+            ShowPage(pnlCreditPage);
+            ShowCenterLoading(true, "Loading Credit Data...");
+            try
+            {
+                if (creditControl == null || creditControl.IsDisposed)
+                {
+                    creditControl = new CreditControl();
+
+                    creditControl.TopLevel = false;
+                    creditControl.FormBorderStyle = FormBorderStyle.None;
+                    creditControl.Dock = DockStyle.Fill;
+
+                    pnlCreditPage.Controls.Clear();
+                    pnlCreditPage.Controls.Add(creditControl);
+
+                    creditControl.Show();
+                }
+            }
+            finally
+            {
+                ShowCenterLoading(false);
+            }
         }
 
 
@@ -905,30 +914,6 @@ namespace PersonalExpenseCreditTracker
             UpdateHeader(
              "Lent",
              "Track and manage your lent transactions");
-
-            ShowCenterLoading(true, "Loading Lent Data...");
-            try
-            {
-                if (lentControl == null || lentControl.IsDisposed)
-                {
-                    lentControl = new LentControls();
-
-                    lentControl.TopLevel = false;
-                    lentControl.FormBorderStyle = FormBorderStyle.None;
-                    lentControl.Dock = DockStyle.Fill;
-
-                    pnlLentPage.Controls.Clear();
-                    pnlLentPage.Controls.Add(lentControl);
-
-                    lentControl.Show();
-                }
-
-                ShowPage(pnlLentPage);
-            }
-            finally
-            {
-                ShowCenterLoading(false);
-            }
 
             bool wasOpen = lentOpen;
 
@@ -963,6 +948,29 @@ namespace PersonalExpenseCreditTracker
             lentPersonOpen = false;
             lentStatusOpen = false;
             lentPaymentOpen = false;
+
+            ShowPage(pnlLentPage);
+            ShowCenterLoading(true, "Loading Lent Data...");
+            try
+            {
+                if (lentControl == null || lentControl.IsDisposed)
+                {
+                    lentControl = new LentControls();
+
+                    lentControl.TopLevel = false;
+                    lentControl.FormBorderStyle = FormBorderStyle.None;
+                    lentControl.Dock = DockStyle.Fill;
+
+                    pnlLentPage.Controls.Clear();
+                    pnlLentPage.Controls.Add(lentControl);
+
+                    lentControl.Show();
+                }
+            }
+            finally
+            {
+                ShowCenterLoading(false);
+            }
         }
 
 
@@ -991,30 +999,6 @@ namespace PersonalExpenseCreditTracker
             UpdateHeader(
              "Borrow",
                 "Track and manage money you have borrowed from others");
-
-            ShowCenterLoading(true, "Loading Borrow Data...");
-            try
-            {
-                if (borrowControls == null || borrowControls.IsDisposed)
-                {
-                    borrowControls = new BorrowControls();
-
-                    borrowControls.TopLevel = false;
-                    borrowControls.FormBorderStyle = FormBorderStyle.None;
-                    borrowControls.Dock = DockStyle.Fill;
-
-                    pnlBorrowPage.Controls.Clear();
-                    pnlBorrowPage.Controls.Add(borrowControls);
-
-                    borrowControls.Show();
-                }
-
-                ShowPage(pnlBorrowPage);
-            }
-            finally
-            {
-                ShowCenterLoading(false);
-            }
 
             // 1. Clear previous blue highlight
             SetActiveMenu(pnlBorrow, false);
@@ -1051,6 +1035,29 @@ namespace PersonalExpenseCreditTracker
             borrowPersonOpen = false;
             borrowStatusOpen = false;
             borrowPaymentOpen = false;
+
+            ShowPage(pnlBorrowPage);
+            ShowCenterLoading(true, "Loading Borrow Data...");
+            try
+            {
+                if (borrowControls == null || borrowControls.IsDisposed)
+                {
+                    borrowControls = new BorrowControls();
+
+                    borrowControls.TopLevel = false;
+                    borrowControls.FormBorderStyle = FormBorderStyle.None;
+                    borrowControls.Dock = DockStyle.Fill;
+
+                    pnlBorrowPage.Controls.Clear();
+                    pnlBorrowPage.Controls.Add(borrowControls);
+
+                    borrowControls.Show();
+                }
+            }
+            finally
+            {
+                ShowCenterLoading(false);
+            }
         }
 
 
@@ -1073,37 +1080,11 @@ namespace PersonalExpenseCreditTracker
             }
         }
 
-
         private void pnlTasks_Click(object sender, EventArgs e)
         {
             UpdateHeader(
-                 "Tasks",
-                 "Organize and track your tasks efficiently");
-
-            ShowCenterLoading(true, "Loading Tasks...");
-            try
-            {
-                if (taskControl == null || taskControl.IsDisposed)
-                {
-                    taskControl = new TaskControls();
-
-                    taskControl.TopLevel = false;
-                    taskControl.FormBorderStyle = FormBorderStyle.None;
-                    taskControl.Dock = DockStyle.Fill;
-
-                    pnlTaskPage.Controls.Clear();
-
-                    pnlTaskPage.Controls.Add(taskControl);
-
-                    taskControl.Show();
-                }
-
-                ShowPage(pnlTaskPage);
-            }
-            finally
-            {
-                ShowCenterLoading(false);
-            }
+                  "Tasks",
+                  "Organize and track your tasks efficiently");
 
             // 1. Clear previous blue highlight
             SetActiveMenu(pnlTasks, false);
@@ -1140,6 +1121,30 @@ namespace PersonalExpenseCreditTracker
             taskPriorityOpen = false;
 
             pnlTaskFilterContant.Visible = true;
+
+            ShowPage(pnlTaskPage);
+            ShowCenterLoading(true, "Loading Tasks...");
+            try
+            {
+                if (taskControl == null || taskControl.IsDisposed)
+                {
+                    taskControl = new TaskControls();
+
+                    taskControl.TopLevel = false;
+                    taskControl.FormBorderStyle = FormBorderStyle.None;
+                    taskControl.Dock = DockStyle.Fill;
+
+                    pnlTaskPage.Controls.Clear();
+
+                    pnlTaskPage.Controls.Add(taskControl);
+
+                    taskControl.Show();
+                }
+            }
+            finally
+            {
+                ShowCenterLoading(false);
+            }
         }
 
 
@@ -1169,35 +1174,6 @@ namespace PersonalExpenseCreditTracker
             UpdateHeader(
                 "Notes",
                 "Capture your thoughts and keep everything organized");
-
-            ShowCenterLoading(true, "Loading Notes...");
-            try
-            {
-                if (noteControl == null || noteControl.IsDisposed)
-                {
-                    noteControl = new NoteControl();
-
-                    noteControl.TopLevel = false;
-                    noteControl.FormBorderStyle = FormBorderStyle.None;
-                    noteControl.Dock = DockStyle.Fill;
-
-                    pnlNotesPage.Controls.Clear();
-                    pnlNotesPage.Controls.Add(noteControl);
-
-                    noteControl.Show();
-                }
-
-                if (noteControl != null && !noteControl.IsDisposed)
-                {
-                    noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
-                }
-
-                ShowPage(pnlNotesPage);
-            }
-            finally
-            {
-                ShowCenterLoading(false);
-            }
 
             SetActiveMenu(pnlNotes, false);
 
@@ -1233,6 +1209,34 @@ namespace PersonalExpenseCreditTracker
             notePriorityOpen = false;
 
             pnlNoteFilterContant.Visible = true;
+
+            ShowPage(pnlNotesPage);
+            ShowCenterLoading(true, "Loading Notes...");
+            try
+            {
+                if (noteControl == null || noteControl.IsDisposed)
+                {
+                    noteControl = new NoteControl();
+
+                    noteControl.TopLevel = false;
+                    noteControl.FormBorderStyle = FormBorderStyle.None;
+                    noteControl.Dock = DockStyle.Fill;
+
+                    pnlNotesPage.Controls.Clear();
+                    pnlNotesPage.Controls.Add(noteControl);
+
+                    noteControl.Show();
+                }
+
+                if (noteControl != null && !noteControl.IsDisposed)
+                {
+                    noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+                }
+            }
+            finally
+            {
+                ShowCenterLoading(false);
+            }
         }
 
         //Setting Function
@@ -1320,6 +1324,7 @@ namespace PersonalExpenseCreditTracker
 
             CloseAllDropDown();
 
+            ShowPage(pnlProfilePage);
             ShowCenterLoading(true, "Loading Profile...");
             try
             {
@@ -1342,8 +1347,6 @@ namespace PersonalExpenseCreditTracker
                 {
                     profileControl.LoadUserProfileData();
                 }
-
-                ShowPage(pnlProfilePage);
             }
             finally
             {
@@ -1634,9 +1637,15 @@ namespace PersonalExpenseCreditTracker
         private void Expense_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetActiveExpenseSubMenu(pnlAllExpense);
-            if (expenseControl != null && !expenseControl.IsDisposed)
+
+            Form form = sender as Form;
+            if (form != null && form.DialogResult == DialogResult.OK)
             {
-                expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
+                if (expenseControl != null && !expenseControl.IsDisposed)
+                {
+                    expenseControl.LoadExpenseData(Session.LogedInUser.GetUserId());
+                }
+                RefreshDashboardAndNotifications();
             }
         }
 
@@ -1708,11 +1717,15 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveCreditSubMenu(pnlAllCredit);
 
-            if (creditControl != null && !creditControl.IsDisposed)
+            Form form = sender as Form;
+            if (form != null && form.DialogResult == DialogResult.OK)
             {
-                creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                if (creditControl != null && !creditControl.IsDisposed)
+                {
+                    creditControl.LoadCreditData(Session.LogedInUser.GetUserId());
+                }
+                RefreshDashboardAndNotifications();
             }
-
         }
 
         private void pnlAddCredit_MouseEnter(object sender, EventArgs e)
@@ -1780,12 +1793,17 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveLentSubMenu(pnlAllLent);
 
-            if (lentControl != null && !lentControl.IsDisposed)
+            Form form = sender as Form;
+            if (form != null && form.DialogResult == DialogResult.OK)
             {
-                lentControl.LoadLentData(Session.LogedInUser.GetUserId());
-            }
+                if (lentControl != null && !lentControl.IsDisposed)
+                {
+                    lentControl.LoadLentData(Session.LogedInUser.GetUserId());
+                }
 
-            ShowPage(pnlLentPage);
+                ShowPage(pnlLentPage);
+                RefreshDashboardAndNotifications();
+            }
         }
         private void pnlAddLent_MouseEnter(object sender, EventArgs e)
         {
@@ -1852,13 +1870,18 @@ namespace PersonalExpenseCreditTracker
         private void Borrow_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetActiveBorrowSubMenu(pnlAllBorrow);
-            if (borrowControls != null && !borrowControls.IsDisposed)
+
+            Form form = sender as Form;
+            if (form != null && form.DialogResult == DialogResult.OK)
             {
-                borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                if (borrowControls != null && !borrowControls.IsDisposed)
+                {
+                    borrowControls.LoadBorrowData(Session.LogedInUser.GetUserId());
+                }
+
+                ShowPage(pnlBorrowPage);
+                RefreshDashboardAndNotifications();
             }
-
-            ShowPage(pnlBorrowPage);
-
         }
 
         private void pnlAddBorrow_MouseEnter(object sender, EventArgs e)
@@ -1927,9 +1950,13 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveTaskSubMenu(pnlAllTask);
 
-            if (taskControl != null && !taskControl.IsDisposed)
+            Form form = sender as Form;
+            if (form != null && form.DialogResult == DialogResult.OK)
             {
-                taskControl.LoadTaskData(Session.LogedInUser.GetUserId());
+                if (taskControl != null && !taskControl.IsDisposed)
+                {
+                    taskControl.LoadTaskData(Session.LogedInUser.GetUserId());
+                }
             }
         }
 
@@ -2005,9 +2032,13 @@ namespace PersonalExpenseCreditTracker
         {
             SetActiveNoteSubMenu(pnlAllNote);
 
-            if (noteControl != null && !noteControl.IsDisposed)
+            Form form = sender as Form;
+            if (form != null && form.DialogResult == DialogResult.OK)
             {
-                noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+                if (noteControl != null && !noteControl.IsDisposed)
+                {
+                    noteControl.LoadNoteData(Session.LogedInUser.GetUserId());
+                }
             }
         }
 
@@ -2346,6 +2377,20 @@ namespace PersonalExpenseCreditTracker
                         dashboardControl.flowLayoutPanel5
                     );
                 }
+            }
+        }
+
+        public void RefreshDashboardAndNotifications()
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke((MethodInvoker)delegate { RefreshDashboardAndNotifications(); });
+                return;
+            }
+
+            if (dashboardControl != null && !dashboardControl.IsDisposed)
+            {
+                dashboardControl.LoadDashboardSummary(Session.LogedInUser.GetUserId());
             }
         }
 

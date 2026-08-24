@@ -158,8 +158,8 @@ namespace PersonalExpenseCreditTracker
             this.panel5 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.pnlDate = new System.Windows.Forms.Panel();
-            this.picCalendar = new System.Windows.Forms.PictureBox();
             this.lblDateTime = new System.Windows.Forms.Label();
+            this.picCalendar = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlProfilePage = new System.Windows.Forms.Panel();
@@ -1985,13 +1985,26 @@ namespace PersonalExpenseCreditTracker
             this.pnlDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlDate.Controls.Add(this.picCalendar);
             this.pnlDate.Controls.Add(this.lblDateTime);
+            this.pnlDate.Controls.Add(this.picCalendar);
             this.pnlDate.Location = new System.Drawing.Point(0, 2);
             this.pnlDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDate.Name = "pnlDate";
             this.pnlDate.Size = new System.Drawing.Size(303, 43);
             this.pnlDate.TabIndex = 0;
+            // 
+            // lblDateTime
+            // 
+            this.lblDateTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDateTime.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+            this.lblDateTime.Location = new System.Drawing.Point(46, 0);
+            this.lblDateTime.Margin = new System.Windows.Forms.Padding(0);
+            this.lblDateTime.Name = "lblDateTime";
+            this.lblDateTime.Size = new System.Drawing.Size(255, 41);
+            this.lblDateTime.TabIndex = 1;
+            this.lblDateTime.Text = "May 1, 2023 – May 31, 2024";
+            this.lblDateTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picCalendar
             // 
@@ -2005,19 +2018,6 @@ namespace PersonalExpenseCreditTracker
             this.picCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picCalendar.TabIndex = 0;
             this.picCalendar.TabStop = false;
-            // 
-            // lblDateTime
-            // 
-            this.lblDateTime.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
-            this.lblDateTime.Location = new System.Drawing.Point(45, -4);
-            this.lblDateTime.Margin = new System.Windows.Forms.Padding(0);
-            this.lblDateTime.Name = "lblDateTime";
-            this.lblDateTime.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.lblDateTime.Size = new System.Drawing.Size(246, 46);
-            this.lblDateTime.TabIndex = 1;
-            this.lblDateTime.Text = "May 1, 2023 – May 31, 2024";
-            this.lblDateTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel3
             // 

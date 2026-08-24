@@ -996,6 +996,15 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                 expenseFilter = cmbExpenseFilter.SelectedItem.ToString();
             }
             LoadExpenseCategoryChart(userID, expenseFilter);
+
+            // Automatically reload Notifications (Budget Alert, Credit Ratio, etc.)
+            lblNotification.Text = "🔔  Notifications";
+            lblTitle.Text = "🔔  Notifications";
+            LoadNotifications(userID, pnlExtra, flpNotifications);
+            if (pnlNotification != null && flowLayoutPanel5 != null)
+            {
+                LoadNotifications(userID, pnlNotification, flowLayoutPanel5);
+            }
         }
 
         private void cmbSecondHeader_SelectedIndexChanged(object sender, EventArgs e)

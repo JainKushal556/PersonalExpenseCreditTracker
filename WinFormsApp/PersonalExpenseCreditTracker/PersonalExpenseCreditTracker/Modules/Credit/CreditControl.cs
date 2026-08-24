@@ -232,6 +232,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             currentPage = 1;
             ShowCurrentPage();
             UpdateCreditSummaryCards();
+
+            MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+            if (mainForm != null)
+            {
+                mainForm.RefreshDashboardAndNotifications();
+            }
         }
 
         public Boolean LoadFilteredCreditData(string spName, string paramName,int paramValue,int filterId)

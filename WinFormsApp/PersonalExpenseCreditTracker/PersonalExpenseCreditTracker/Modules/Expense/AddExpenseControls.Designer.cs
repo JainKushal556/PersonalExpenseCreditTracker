@@ -303,12 +303,12 @@
             this.btnSaveExpense.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSaveExpense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveExpense.ForeColor = System.Drawing.Color.White;
-            this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnSaveExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnSaveExpense.Location = new System.Drawing.Point(351, 525);
             this.btnSaveExpense.Name = "btnSaveExpense";
-            this.btnSaveExpense.Size = new System.Drawing.Size(194, 41);
+            this.btnSaveExpense.Size = new System.Drawing.Size(189, 41);
             this.btnSaveExpense.TabIndex = 7;
-            this.btnSaveExpense.Text = "  Add  Expense";
+            this.btnSaveExpense.Text = "Add  Expense";
             this.btnSaveExpense.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveExpense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveExpense.UseVisualStyleBackColor = false;
