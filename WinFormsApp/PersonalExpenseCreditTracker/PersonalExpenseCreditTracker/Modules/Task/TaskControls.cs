@@ -525,8 +525,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
                 cmsTaskAction.Show(
                     dataGridViewTask,
-                    rect.Left,
-                    rect.Bottom);
+                    new Point(rect.Right, rect.Bottom),
+                    ToolStripDropDownDirection.BelowLeft);
             }
         }
 

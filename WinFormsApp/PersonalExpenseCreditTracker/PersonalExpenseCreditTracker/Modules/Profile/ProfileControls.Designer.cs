@@ -629,6 +629,7 @@
             // 
             // btnProfileEditButton
             // 
+            this.btnProfileEditButton.ForeColor = System.Drawing.Color.Transparent;
             this.btnProfileEditButton.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pen__1_;
             this.btnProfileEditButton.Location = new System.Drawing.Point(12, 19);
             this.btnProfileEditButton.Name = "btnProfileEditButton";

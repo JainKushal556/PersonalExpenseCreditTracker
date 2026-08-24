@@ -162,7 +162,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             this.btnSaveNote.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSaveNote.Size = new System.Drawing.Size(162, 41);
             this.btnSaveNote.TabIndex = 4;
-            this.btnSaveNote.Text = " Save Note";
+            this.btnSaveNote.Text = "Add Note";
             this.btnSaveNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveNote.UseVisualStyleBackColor = false;
             this.btnSaveNote.Click += new System.EventHandler(this.btnSaveNote_Click);

@@ -286,6 +286,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnLentAddCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -310,6 +311,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Lent added successfully!");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
@@ -470,6 +472,7 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private void btnAddLentClose_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 

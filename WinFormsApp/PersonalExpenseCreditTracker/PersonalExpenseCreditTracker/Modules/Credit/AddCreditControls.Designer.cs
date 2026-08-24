@@ -303,7 +303,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnSaveCredit.Name = "btnSaveCredit";
             this.btnSaveCredit.Size = new System.Drawing.Size(194, 41);
             this.btnSaveCredit.TabIndex = 7;
-            this.btnSaveCredit.Text = "  Add Credit";
+            this.btnSaveCredit.Text = "Add Credit";
             this.btnSaveCredit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveCredit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveCredit.UseVisualStyleBackColor = false;

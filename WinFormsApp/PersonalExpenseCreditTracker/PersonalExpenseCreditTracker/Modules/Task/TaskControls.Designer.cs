@@ -648,35 +648,31 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.tsmiDeleteTask,
             this.tsmiCancel});
             this.cmsTaskAction.Name = "cmsTaskAction";
-            this.cmsTaskAction.Size = new System.Drawing.Size(188, 129);
+            this.cmsTaskAction.AutoSize = true;
             this.cmsTaskAction.Opening += new System.ComponentModel.CancelEventHandler(this.cmsTaskAction_Opening);
             // 
             // tsmiEdit
             // 
             this.tsmiEdit.Name = "tsmiEdit";
             this.tsmiEdit.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.tsmiEdit.Size = new System.Drawing.Size(187, 41);
             this.tsmiEdit.Text = "Edit Task";
             this.tsmiEdit.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // tsmiUpdateStatus
             // 
             this.tsmiUpdateStatus.Name = "tsmiUpdateStatus";
-            this.tsmiUpdateStatus.Size = new System.Drawing.Size(187, 28);
             this.tsmiUpdateStatus.Text = "Update Status";
             this.tsmiUpdateStatus.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // tsmiDeleteTask
             // 
             this.tsmiDeleteTask.Name = "tsmiDeleteTask";
-            this.tsmiDeleteTask.Size = new System.Drawing.Size(187, 28);
             this.tsmiDeleteTask.Text = "Delete Task";
             this.tsmiDeleteTask.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // tsmiCancel
             // 
             this.tsmiCancel.Name = "tsmiCancel";
-            this.tsmiCancel.Size = new System.Drawing.Size(187, 28);
             this.tsmiCancel.Text = "Cancel";
             this.tsmiCancel.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 

@@ -141,11 +141,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void btnCloseEditPersonDetails_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -190,6 +192,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             {
                 case CommonValidator.ValidationResult.Success:
                     MessageBox.Show("Expense added successfully!");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
