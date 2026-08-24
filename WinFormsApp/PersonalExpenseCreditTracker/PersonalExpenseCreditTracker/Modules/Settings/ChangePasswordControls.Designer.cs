@@ -245,9 +245,9 @@
             // picEye3
             // 
             this.picEye3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picEye3.Location = new System.Drawing.Point(498, 11);
+            this.picEye3.Location = new System.Drawing.Point(503, 9);
             this.picEye3.Name = "picEye3";
-            this.picEye3.Size = new System.Drawing.Size(34, 33);
+            this.picEye3.Size = new System.Drawing.Size(31, 30);
             this.picEye3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picEye3.TabIndex = 3;
             this.picEye3.TabStop = false;
@@ -308,9 +308,9 @@
             // picEye2
             // 
             this.picEye2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picEye2.Location = new System.Drawing.Point(498, 11);
+            this.picEye2.Location = new System.Drawing.Point(503, 9);
             this.picEye2.Name = "picEye2";
-            this.picEye2.Size = new System.Drawing.Size(34, 33);
+            this.picEye2.Size = new System.Drawing.Size(31, 30);
             this.picEye2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picEye2.TabIndex = 3;
             this.picEye2.TabStop = false;
@@ -371,9 +371,9 @@
             // picEye1
             // 
             this.picEye1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picEye1.Location = new System.Drawing.Point(498, 11);
+            this.picEye1.Location = new System.Drawing.Point(503, 9);
             this.picEye1.Name = "picEye1";
-            this.picEye1.Size = new System.Drawing.Size(34, 33);
+            this.picEye1.Size = new System.Drawing.Size(31, 30);
             this.picEye1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picEye1.TabIndex = 2;
             this.picEye1.TabStop = false;

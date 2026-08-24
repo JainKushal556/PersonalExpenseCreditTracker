@@ -314,7 +314,7 @@
             // 
             // btnUpdateTask
             // 
-            this.btnUpdateTask.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnUpdateTask.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnUpdateTask.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdateTask.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnUpdateTask.FlatAppearance.BorderSize = 0;

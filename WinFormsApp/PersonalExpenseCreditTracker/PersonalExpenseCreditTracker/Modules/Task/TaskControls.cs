@@ -1653,5 +1653,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         }
 
+        private void picTaskCompleteIcone_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -614,7 +614,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.lblExpenseAmount.AutoSize = true;
             this.lblExpenseAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExpenseAmount.ForeColor = System.Drawing.Color.Black;
-            this.lblExpenseAmount.Location = new System.Drawing.Point(85, 42);
+            this.lblExpenseAmount.Location = new System.Drawing.Point(93, 45);
             this.lblExpenseAmount.Name = "lblExpenseAmount";
             this.lblExpenseAmount.Size = new System.Drawing.Size(43, 32);
             this.lblExpenseAmount.TabIndex = 2;
@@ -622,11 +622,11 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // 
             // picExpense
             // 
-            this.picExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.spending;
-            this.picExpense.Location = new System.Drawing.Point(20, 22);
+            this.picExpense.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Dashboard_Total_Expenses;
+            this.picExpense.Location = new System.Drawing.Point(19, 14);
             this.picExpense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picExpense.Name = "picExpense";
-            this.picExpense.Size = new System.Drawing.Size(48, 48);
+            this.picExpense.Size = new System.Drawing.Size(70, 60);
             this.picExpense.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picExpense.TabIndex = 0;
             this.picExpense.TabStop = false;
@@ -636,7 +636,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.lblTotalExpense.AutoSize = true;
             this.lblTotalExpense.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalExpense.ForeColor = System.Drawing.Color.Black;
-            this.lblTotalExpense.Location = new System.Drawing.Point(85, 12);
+            this.lblTotalExpense.Location = new System.Drawing.Point(93, 15);
             this.lblTotalExpense.Name = "lblTotalExpense";
             this.lblTotalExpense.Size = new System.Drawing.Size(118, 23);
             this.lblTotalExpense.TabIndex = 1;
@@ -662,7 +662,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.lblTransactionAmount.AutoSize = true;
             this.lblTransactionAmount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTransactionAmount.ForeColor = System.Drawing.Color.Black;
-            this.lblTransactionAmount.Location = new System.Drawing.Point(85, 42);
+            this.lblTransactionAmount.Location = new System.Drawing.Point(93, 45);
             this.lblTransactionAmount.Name = "lblTransactionAmount";
             this.lblTransactionAmount.Size = new System.Drawing.Size(43, 32);
             this.lblTransactionAmount.TabIndex = 2;
@@ -673,7 +673,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             this.lblTransction.AutoSize = true;
             this.lblTransction.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTransction.ForeColor = System.Drawing.Color.Black;
-            this.lblTransction.Location = new System.Drawing.Point(85, 12);
+            this.lblTransction.Location = new System.Drawing.Point(93, 15);
             this.lblTransction.Name = "lblTransction";
             this.lblTransction.Size = new System.Drawing.Size(152, 23);
             this.lblTransction.TabIndex = 1;
@@ -682,10 +682,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             // picTransaction
             // 
             this.picTransaction.Image = global::PersonalExpenseCreditTracker.Properties.Resources.transaction;
-            this.picTransaction.Location = new System.Drawing.Point(20, 22);
+            this.picTransaction.Location = new System.Drawing.Point(19, 14);
             this.picTransaction.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picTransaction.Name = "picTransaction";
-            this.picTransaction.Size = new System.Drawing.Size(48, 48);
+            this.picTransaction.Size = new System.Drawing.Size(70, 60);
             this.picTransaction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picTransaction.TabIndex = 0;
             this.picTransaction.TabStop = false;
