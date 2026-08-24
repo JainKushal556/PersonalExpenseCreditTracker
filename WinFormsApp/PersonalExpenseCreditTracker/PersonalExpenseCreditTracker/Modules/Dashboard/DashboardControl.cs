@@ -1539,6 +1539,11 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             pnlNotification.Visible = false;
         }
 
+        private void picCardCredit_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
 

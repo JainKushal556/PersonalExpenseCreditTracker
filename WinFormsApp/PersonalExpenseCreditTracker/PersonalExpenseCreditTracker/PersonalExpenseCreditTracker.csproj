@@ -469,59 +469,66 @@
     <None Include="Resources\edit %282%291.png" />
     <None Include="Resources\spending.png" />
     <None Include="Resources\transaction.png" />
-    <None Include="Resources\refresh.png" />
-    <None Include="Resources\share.png" />
     <None Include="Resources\right.png" />
     <None Include="Resources\right %281%29.png" />
     <None Include="Resources\left %281%29.png" />
     <None Include="Resources\left.png" />
     <None Include="Resources\close.png" />
     <None Include="Resources\refresh %281%29.png" />
-    <None Include="Resources\diskette.png" />
-    <None Include="Resources\tag.png" />
-    <None Include="Resources\up-and-down-arrows.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\wallet .png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\home.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\house-regular %281%29.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\home2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\home3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Home4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Home5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Home6.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\home7.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\home_white.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\wallet-filled-money-tool.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\wallet-filled-money-tool1.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\down.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\credit-card.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\market.png" />
@@ -529,13 +536,12 @@
     <None Include="Resources\shop.png" />
     <None Include="Resources\description.png" />
     <None Include="Resources\calendar %281%29.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <!-- Common Shell Resources -->
   <ItemGroup>
     <None Include="Resources\credit-card-white.png" />
-    <None Include="Resources\handshake.png" />
-    <None Include="Resources\payment_3948571.png" />
-    <None Include="Resources\payment-lent.png" />
     <None Include="Resources\payment-lent1.png" />
     <None Include="Resources\payment-white.png" />
     <None Include="Resources\borrowing.png" />
@@ -543,69 +549,69 @@
     <None Include="Resources\task.png" />
     <None Include="Resources\task -white.png" />
     <None Include="Resources\pencil.png" />
-    <None Include="Resources\pencil-white.png" />
     <None Include="Resources\pencil %282%29.png" />
-    <None Include="Resources\settings.png" />
     <None Include="Resources\cogwheel.png" />
     <None Include="Resources\cogwheel %281%29.png" />
     <None Include="Resources\user.png" />
     <None Include="Resources\arrowhead-up.png" />
     <None Include="Resources\calendar.png" />
     <None Include="Resources\bell.png" />
-    <None Include="Resources\moon.png" />
-    <None Include="Resources\night-mode.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\spending-money.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\expenses.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\credit-card %282%29.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\money-bag.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\inspiration.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\borrow.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\salary.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <!-- Lent Resources -->
   <ItemGroup>
-    <None Include="Resources\Total Lent.png" />
     <None Include="Resources\man.png" />
     <None Include="Resources\Gave Money.png" />
-    <None Include="Resources\Payment Due.png" />
-    <None Include="Resources\Payment Transaction.png" />
     <None Include="Resources\Total Due.png" />
     <None Include="Resources\money-transfer %281%29.png" />
-    <None Include="Resources\file-export.png" />
     <None Include="Resources\file-export %281%29.png" />
     <None Include="Resources\file-export %282%29.png" />
-    <None Include="Resources\fast-forward-double-right-arrows-symbol.png" />
     <None Include="Resources\fast-forward-double-right-arrows-symbol %281%29.png" />
     <None Include="Resources\next.png" />
     <None Include="Resources\next %281%29.png" />
     <None Include="Resources\next-page.png" />
     <None Include="Resources\next %281%291.png" />
     <None Include="Resources\next-page %281%29.png" />
-    <None Include="Resources\save.png" />
     <None Include="Resources\save %281%29.png" />
     <None Include="Resources\rupee.png" />
     <None Include="Resources\rupee %281%29.png" />
     <None Include="Resources\menu.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\creditcard.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\colourcard.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLLayer\BLLayer.csproj">
@@ -614,24 +620,35 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\list.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\menu1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\49001bca-2af4-4908-b1f5-551d2534db661.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ChatGPT Image Jul 12, 2026, 01_40_51 AM.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ChatGPT Image Jul 12, 2026, 01_07_09 AM.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\repaid.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Task Due Today.png" />
+    <None Include="Resources\Pending tasks.png" />
+    <None Include="Resources\Total Task.png" />
+    <None Include="Resources\Total Note.png" />
+    <None Include="Resources\Total Lent Repaid.png" />
     <None Include="Resources\telephone %286%29.png" />
     <None Include="Resources\user %287%291.png" />
     <None Include="Resources\plus %282%29.png" />
@@ -640,18 +657,12 @@
     <None Include="Resources\update %284%29.png" />
     <None Include="Resources\update %283%29.png" />
     <None Include="Resources\update %282%29.png" />
-    <None Include="Resources\search.png" />
     <None Include="Resources\sync1.png" />
-    <None Include="Resources\refresh-page-option.png" />
     <None Include="Resources\PersonIcon %282%29.png" />
     <None Include="Resources\SL.png" />
     <None Include="Resources\phone.png" />
-    <None Include="Resources\Registration Page.jpg" />
-    <None Include="Resources\Registration Page Image1.png" />
-    <None Include="Resources\Registration Page Image.png" />
     <None Include="Resources\user %288%29.png" />
     <None Include="Resources\Untitled design %283%29.png" />
-    <None Include="Resources\Registration image.png" />
     <None Include="Resources\pie-charts.png" />
     <None Include="Resources\shield.png" />
     <None Include="Resources\Untitled design %282%29.png" />
@@ -668,23 +679,14 @@
     <None Include="Resources\refresh %284%29.png" />
     <None Include="Resources\refresh %283%29.png" />
     <None Include="Resources\refresh %282%29.png" />
-    <None Include="Resources\sync.png" />
     <None Include="Resources\user %287%29.png" />
-    <None Include="Resources\filter.png" />
     <None Include="Resources\filter %281%29.png" />
     <None Include="Resources\filter %282%29.png" />
-    <None Include="Resources\pricing.png" />
-    <None Include="Resources\project.png" />
     <None Include="Resources\clipboard %281%29.png" />
-    <None Include="Resources\plus.png" />
     <None Include="Resources\plus %281%29.png" />
     <None Include="Resources\delete.png" />
-    <None Include="Resources\avatar-design.png" />
-    <None Include="Resources\pending.png" />
-    <None Include="Resources\secure-payment.png" />
     <None Include="Resources\logout.png" />
     <None Include="Resources\reset-password1.png" />
-    <None Include="Resources\note.png" />
     <None Include="Resources\note1.png" />
     <None Include="Resources\star.png" />
     <None Include="Resources\NoteCalender.png" />
@@ -713,7 +715,6 @@
     <None Include="Resources\padlock %282%29.png" />
     <None Include="Resources\padlock %283%29.png" />
     <None Include="Resources\padlock %281%29.png" />
-    <None Include="Resources\lock.png" />
     <None Include="Resources\lock %281%29.png" />
     <None Include="Resources\padlock %284%29.png" />
     <None Include="Resources\open-eye.png" />
@@ -723,71 +724,69 @@
     <None Include="Resources\deadline.png" />
     <None Include="Resources\loading.png" />
     <None Include="Resources\clipboardModern.png" />
-    <None Include="Resources\approved.png" />
     <None Include="Resources\hourglass.png" />
     <None Include="Resources\due-diligence.png" />
     <None Include="Resources\delete %281%29.png" />
     <None Include="Resources\bin.png" />
     <None Include="Resources\info %281%29.png" />
     <None Include="Resources\info %283%29.png" />
-    <None Include="Resources\idea.png" />
-    <None Include="Resources\add-contact.png" />
-    <None Include="Resources\loupe.png" />
     <None Include="Resources\loupe %281%29.png" />
     <None Include="Resources\Action.png" />
     <None Include="Resources\mail %283%29.png" />
     <None Include="Resources\address-location.png" />
-    <None Include="Resources\Export.png" />
     <None Include="Resources\filter1.png" />
-    <None Include="Resources\magnifying-glass.png" />
-    <None Include="Resources\floppy-disk.png" />
     <None Include="Resources\floppy-disk %281%29.png" />
     <None Include="Resources\floppy-disk %282%29.png" />
     <None Include="Resources\floppy-disk %283%29.png" />
     <None Include="Resources\floppy-disk %284%29.png" />
-    <None Include="Resources\gemini-svg.jpg" />
     <None Include="Resources\mail %284%29.png" />
     <None Include="Resources\mail %285%29.png" />
-    <None Include="Resources\Login Page Image.png" />
-    <None Include="Resources\dashboard_500x350_high_quality.png" />
-    <None Include="Resources\Gemini_Generated_Image_5b0wb05b0wb05b0w.png" />
-    <None Include="Resources\Login Page Image1.png" />
-    <None Include="Resources\column.png" />
     <None Include="Resources\column %281%29.png" />
     <None Include="Resources\mail %285%291.png" />
     <None Include="Resources\mail %286%29.png" />
     <None Include="Resources\padlock %285%29.png" />
-    <None Include="Resources\line.png" />
     <None Include="Resources\line1.png" />
-    <None Include="Resources\Image.png" />
     <None Include="Resources\Gemini_Generated_Image_bup5imbup5imbup5.png" />
-    <None Include="Resources\edit.png" />
-    <None Include="Resources\expenses1.png" />
     <None Include="Resources\expenses %281%29.png" />
     <None Include="Resources\expenses %282%29.png" />
     <None Include="Resources\credit-card %281%29.png" />
     <None Include="Resources\borrowing %281%29.png" />
+    <None Include="Resources\Dashboard Total Expenses.png" />
+    <None Include="Resources\Dashboard Total Credit.png" />
+    <None Include="Resources\Dashboard Total Borrow.png" />
+    <None Include="Resources\Note Priority.png" />
+    <None Include="Resources\Note This Month.png" />
+    <None Include="Resources\Completed Task.png" />
     <Content Include="Resources\pen %281%29.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\info.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\log-out.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\grid.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\categorization.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logout_white_36x36.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout_white_24x24.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh (1).png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
