@@ -298,6 +298,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void txtNewPassword_Enter(object sender, EventArgs e)
         {
+            
             if (txtNewPassword.Text == "Enter New Password")
             {
                 txtNewPassword.Text = "";
@@ -318,15 +319,19 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 _PasswordMatch = false;
             }
 
+            if (txtNewPassword.Text != "")
+                txtNewPassword.UseSystemPasswordChar = false;
         }
 
         private void txtConfirmPassword_Enter(object sender, EventArgs e)
         {
+            
             if (txtConfirmPassword.Text == "Confirm New Password")
             {
                 txtConfirmPassword.Text = "";
                 txtConfirmPassword.ForeColor = Color.FromArgb(0, 0, 0);
             }
+
             if (txtConfirmPassword.Text != "Confirm New Password")
                 txtConfirmPassword.UseSystemPasswordChar = !isPasswordVisible3;
         }
@@ -338,6 +343,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtConfirmPassword.Text = "Confirm New Password";
                 txtConfirmPassword.ForeColor = Color.FromArgb(191, 192, 199);
             }
+
+            if (txtConfirmPassword.Text != "")
+                txtConfirmPassword.UseSystemPasswordChar = false;
         }
 
         private void txtConfirmPassword_TextChanged(object sender, EventArgs e)

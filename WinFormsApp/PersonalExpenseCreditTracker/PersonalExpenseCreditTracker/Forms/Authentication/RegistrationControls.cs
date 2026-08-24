@@ -156,6 +156,8 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void txtRegistrationCreatePassword_Enter(object sender, EventArgs e)
         {
+            
+            
             if (txtRegistrationCreatePassword.Text == "Create a Password")
             {
                 txtRegistrationCreatePassword.Text = "";
@@ -173,10 +175,15 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtRegistrationCreatePassword.Text = "Create a Password";
                 txtRegistrationCreatePassword.ForeColor = Color.Gray;
             }
+
+            if (txtRegistrationCreatePassword.Text != "")
+                txtRegistrationCreatePassword.UseSystemPasswordChar = false;
         }
 
         private void txtRegistrationConfirmPassword_Enter(object sender, EventArgs e)
         {
+            
+            
             if (txtRegistrationConfirmPassword.Text == "Confirm Password")
             {
                 txtRegistrationConfirmPassword.Text = "";
@@ -194,6 +201,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtRegistrationConfirmPassword.Text = "Confirm Password";
                 txtRegistrationConfirmPassword.ForeColor = Color.Gray;
             }
+
+            if (txtRegistrationConfirmPassword.Text != "")
+                txtRegistrationConfirmPassword.UseSystemPasswordChar = false;
         }
 
         private void txtNewPassword_TextChanged(object sender, EventArgs e)

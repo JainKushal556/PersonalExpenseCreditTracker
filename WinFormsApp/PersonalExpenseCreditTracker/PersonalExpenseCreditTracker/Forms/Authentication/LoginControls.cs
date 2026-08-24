@@ -247,6 +247,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void txtLoginPassword_Enter(object sender, EventArgs e)
         {
+            
             if (txtLoginPassword.Text == "Enter Password")
             {
                 txtLoginPassword.Text = "";
@@ -255,6 +256,7 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
             if (txtLoginPassword.Text != "Enter Password")
                 txtLoginPassword.UseSystemPasswordChar = !isPasswordVisible;
+            
         }
 
         private void txtLoginPassword_Leave(object sender, EventArgs e)
@@ -264,6 +266,10 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
                 txtLoginPassword.Text = "Enter Password";
                 txtLoginPassword.ForeColor = Color.Gray;
             }
+
+            if (txtLoginPassword.Text != "")
+                txtLoginPassword.UseSystemPasswordChar = false;
+            
         }
 
         private void lblForgotPassword_Click(object sender, EventArgs e)
