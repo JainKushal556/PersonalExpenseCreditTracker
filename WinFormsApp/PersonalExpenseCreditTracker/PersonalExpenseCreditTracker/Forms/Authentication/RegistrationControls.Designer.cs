@@ -501,28 +501,28 @@
             // 
             // pnlVeryStrong
             // 
-            this.pnlVeryStrong.Location = new System.Drawing.Point(379, 614);
+            this.pnlVeryStrong.Location = new System.Drawing.Point(379, 618);
             this.pnlVeryStrong.Name = "pnlVeryStrong";
             this.pnlVeryStrong.Size = new System.Drawing.Size(107, 12);
             this.pnlVeryStrong.TabIndex = 25;
             // 
             // pnlStrong
             // 
-            this.pnlStrong.Location = new System.Drawing.Point(264, 614);
+            this.pnlStrong.Location = new System.Drawing.Point(264, 618);
             this.pnlStrong.Name = "pnlStrong";
             this.pnlStrong.Size = new System.Drawing.Size(107, 12);
             this.pnlStrong.TabIndex = 24;
             // 
             // pnlMedium
             // 
-            this.pnlMedium.Location = new System.Drawing.Point(149, 614);
+            this.pnlMedium.Location = new System.Drawing.Point(149, 618);
             this.pnlMedium.Name = "pnlMedium";
             this.pnlMedium.Size = new System.Drawing.Size(107, 12);
             this.pnlMedium.TabIndex = 23;
             // 
             // pnlWeak
             // 
-            this.pnlWeak.Location = new System.Drawing.Point(34, 614);
+            this.pnlWeak.Location = new System.Drawing.Point(34, 618);
             this.pnlWeak.Name = "pnlWeak";
             this.pnlWeak.Size = new System.Drawing.Size(107, 12);
             this.pnlWeak.TabIndex = 22;
