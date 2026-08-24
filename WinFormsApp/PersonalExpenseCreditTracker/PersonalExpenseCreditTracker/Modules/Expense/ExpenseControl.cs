@@ -295,6 +295,12 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             currentPage = 1;
             ShowCurrentPage();
             UpdateExpenseSummaryCards();
+
+            MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+            if (mainForm != null)
+            {
+                mainForm.RefreshDashboardAndNotifications();
+            }
         }
 
 

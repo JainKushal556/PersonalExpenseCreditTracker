@@ -298,12 +298,12 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             this.btnSaveCredit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(78)))), ((int)(((byte)(216)))));
             this.btnSaveCredit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveCredit.ForeColor = System.Drawing.Color.White;
-            this.btnSaveCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.save__1_;
+            this.btnSaveCredit.Image = global::PersonalExpenseCreditTracker.Properties.Resources.add__2_;
             this.btnSaveCredit.Location = new System.Drawing.Point(351, 526);
             this.btnSaveCredit.Name = "btnSaveCredit";
             this.btnSaveCredit.Size = new System.Drawing.Size(194, 41);
             this.btnSaveCredit.TabIndex = 7;
-            this.btnSaveCredit.Text = "  Add Credit";
+            this.btnSaveCredit.Text = "Add Credit";
             this.btnSaveCredit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveCredit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveCredit.UseVisualStyleBackColor = false;
@@ -350,8 +350,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(19, 512);
             this.panel2.Name = "panel2";
@@ -360,8 +360,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(19, 51);
             this.panel1.Name = "panel1";
