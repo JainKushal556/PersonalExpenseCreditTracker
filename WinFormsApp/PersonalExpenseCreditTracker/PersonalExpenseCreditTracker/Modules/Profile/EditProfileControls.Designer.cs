@@ -126,15 +126,16 @@
             // 
             // pnlEditProfileMainBody
             // 
-            this.pnlEditProfileMainBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlEditProfileMainBody.BackColor = System.Drawing.Color.Transparent;
+            this.pnlEditProfileMainBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlEditProfileMainBody.Controls.Add(this.btnUpdateProfile);
             this.pnlEditProfileMainBody.Controls.Add(this.btnCancelEditProfile);
             this.pnlEditProfileMainBody.Controls.Add(this.tableLayoutPanel1);
-            this.pnlEditProfileMainBody.Location = new System.Drawing.Point(0, 1);
+            this.pnlEditProfileMainBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEditProfileMainBody.Location = new System.Drawing.Point(0, 0);
             this.pnlEditProfileMainBody.Name = "pnlEditProfileMainBody";
             this.pnlEditProfileMainBody.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlEditProfileMainBody.Size = new System.Drawing.Size(638, 736);
+            this.pnlEditProfileMainBody.Size = new System.Drawing.Size(640, 680);
             this.pnlEditProfileMainBody.TabIndex = 0;
             this.pnlEditProfileMainBody.Click += new System.EventHandler(this.pnlEditProfileMainBody_Click);
             // 
@@ -146,9 +147,9 @@
             this.btnUpdateProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateProfile.ForeColor = System.Drawing.Color.White;
             this.btnUpdateProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.update;
-            this.btnUpdateProfile.Location = new System.Drawing.Point(312, 657);
+            this.btnUpdateProfile.Location = new System.Drawing.Point(385, 618);
             this.btnUpdateProfile.Name = "btnUpdateProfile";
-            this.btnUpdateProfile.Size = new System.Drawing.Size(299, 59);
+            this.btnUpdateProfile.Size = new System.Drawing.Size(231, 44);
             this.btnUpdateProfile.TabIndex = 1;
             this.btnUpdateProfile.Text = "Update Profile";
             this.btnUpdateProfile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -158,13 +159,14 @@
             // 
             // btnCancelEditProfile
             // 
-            this.btnCancelEditProfile.BackColor = System.Drawing.Color.White;
+            this.btnCancelEditProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(82)))), ((int)(((byte)(91)))));
             this.btnCancelEditProfile.FlatAppearance.BorderSize = 0;
             this.btnCancelEditProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelEditProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelEditProfile.Location = new System.Drawing.Point(32, 657);
+            this.btnCancelEditProfile.ForeColor = System.Drawing.Color.White;
+            this.btnCancelEditProfile.Location = new System.Drawing.Point(174, 618);
             this.btnCancelEditProfile.Name = "btnCancelEditProfile";
-            this.btnCancelEditProfile.Size = new System.Drawing.Size(210, 59);
+            this.btnCancelEditProfile.Size = new System.Drawing.Size(167, 44);
             this.btnCancelEditProfile.TabIndex = 1;
             this.btnCancelEditProfile.Text = "Cancel";
             this.btnCancelEditProfile.UseVisualStyleBackColor = false;
@@ -172,7 +174,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
@@ -190,7 +192,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel13, 1, 5);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(14, 13);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(14, 9);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -200,16 +202,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 642);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 629);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel15
             // 
             this.panel15.Controls.Add(this.pnlEditProfileAddress);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel15.Location = new System.Drawing.Point(247, 483);
+            this.panel15.Location = new System.Drawing.Point(247, 471);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(360, 156);
+            this.panel15.Size = new System.Drawing.Size(360, 155);
             this.panel15.TabIndex = 13;
             // 
             // pnlEditProfileAddress
@@ -226,7 +228,7 @@
             // 
             this.txtEditProfileAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtEditProfileAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEditProfileAddress.Location = new System.Drawing.Point(2, 0);
+            this.txtEditProfileAddress.Location = new System.Drawing.Point(2, 1);
             this.txtEditProfileAddress.Multiline = true;
             this.txtEditProfileAddress.Name = "txtEditProfileAddress";
             this.txtEditProfileAddress.Size = new System.Drawing.Size(354, 103);
@@ -241,9 +243,9 @@
             this.panel14.Controls.Add(this.panel40);
             this.panel14.Controls.Add(this.pictureBox7);
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(3, 483);
+            this.panel14.Location = new System.Drawing.Point(3, 471);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(238, 156);
+            this.panel14.Size = new System.Drawing.Size(238, 155);
             this.panel14.TabIndex = 12;
             // 
             // panel40
@@ -253,7 +255,7 @@
             this.panel40.Controls.Add(this.lblProfileAddress);
             this.panel40.Location = new System.Drawing.Point(65, 7);
             this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(117, 62);
+            this.panel40.Size = new System.Drawing.Size(117, 61);
             this.panel40.TabIndex = 8;
             // 
             // lblProfileAddress
@@ -261,7 +263,7 @@
             this.lblProfileAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProfileAddress.AutoSize = true;
             this.lblProfileAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfileAddress.Location = new System.Drawing.Point(8, 10);
+            this.lblProfileAddress.Location = new System.Drawing.Point(8, 9);
             this.lblProfileAddress.Name = "lblProfileAddress";
             this.lblProfileAddress.Size = new System.Drawing.Size(85, 28);
             this.lblProfileAddress.TabIndex = 1;
@@ -272,7 +274,7 @@
             this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox7.Image = global::PersonalExpenseCreditTracker.Properties.Resources.pin;
-            this.pictureBox7.Location = new System.Drawing.Point(8, 10);
+            this.pictureBox7.Location = new System.Drawing.Point(8, 9);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(42, 40);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -284,9 +286,9 @@
             this.panel11.Controls.Add(this.panel35);
             this.panel11.Controls.Add(this.pictureBox6);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(3, 403);
+            this.panel11.Location = new System.Drawing.Point(3, 393);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(238, 74);
+            this.panel11.Size = new System.Drawing.Size(238, 72);
             this.panel11.TabIndex = 10;
             // 
             // panel35
@@ -296,7 +298,7 @@
             this.panel35.Controls.Add(this.lblProfileGender);
             this.panel35.Location = new System.Drawing.Point(65, 2);
             this.panel35.Name = "panel35";
-            this.panel35.Size = new System.Drawing.Size(117, 61);
+            this.panel35.Size = new System.Drawing.Size(117, 59);
             this.panel35.TabIndex = 8;
             // 
             // lblProfileGender
@@ -304,7 +306,7 @@
             this.lblProfileGender.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProfileGender.AutoSize = true;
             this.lblProfileGender.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfileGender.Location = new System.Drawing.Point(8, 10);
+            this.lblProfileGender.Location = new System.Drawing.Point(8, 9);
             this.lblProfileGender.Name = "lblProfileGender";
             this.lblProfileGender.Size = new System.Drawing.Size(79, 28);
             this.lblProfileGender.TabIndex = 1;
@@ -315,7 +317,7 @@
             this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox6.Image = global::PersonalExpenseCreditTracker.Properties.Resources.Gender;
-            this.pictureBox6.Location = new System.Drawing.Point(8, 4);
+            this.pictureBox6.Location = new System.Drawing.Point(8, 3);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(42, 40);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -326,9 +328,9 @@
             // 
             this.panel10.Controls.Add(this.pnlEditProfilePhoneNumber);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(247, 323);
+            this.panel10.Location = new System.Drawing.Point(247, 315);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(360, 74);
+            this.panel10.Size = new System.Drawing.Size(360, 72);
             this.panel10.TabIndex = 9;
             // 
             // pnlEditProfilePhoneNumber
@@ -337,7 +339,7 @@
             this.pnlEditProfilePhoneNumber.BackColor = System.Drawing.Color.White;
             this.pnlEditProfilePhoneNumber.Controls.Add(this.txtEditProfilePhoneNumber);
             this.pnlEditProfilePhoneNumber.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pnlEditProfilePhoneNumber.Location = new System.Drawing.Point(1, 4);
+            this.pnlEditProfilePhoneNumber.Location = new System.Drawing.Point(1, 3);
             this.pnlEditProfilePhoneNumber.Name = "pnlEditProfilePhoneNumber";
             this.pnlEditProfilePhoneNumber.Size = new System.Drawing.Size(357, 45);
             this.pnlEditProfilePhoneNumber.TabIndex = 1;
@@ -362,9 +364,9 @@
             this.panel9.Controls.Add(this.panel30);
             this.panel9.Controls.Add(this.pictureBox5);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(3, 323);
+            this.panel9.Location = new System.Drawing.Point(3, 315);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(238, 74);
+            this.panel9.Size = new System.Drawing.Size(238, 72);
             this.panel9.TabIndex = 8;
             // 
             // panel30
@@ -374,7 +376,7 @@
             this.panel30.Controls.Add(this.lblProfilePhoneNumber);
             this.panel30.Location = new System.Drawing.Point(65, 2);
             this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(163, 61);
+            this.panel30.Size = new System.Drawing.Size(163, 59);
             this.panel30.TabIndex = 8;
             // 
             // lblProfilePhoneNumber
@@ -382,7 +384,7 @@
             this.lblProfilePhoneNumber.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProfilePhoneNumber.AutoSize = true;
             this.lblProfilePhoneNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfilePhoneNumber.Location = new System.Drawing.Point(8, 10);
+            this.lblProfilePhoneNumber.Location = new System.Drawing.Point(8, 9);
             this.lblProfilePhoneNumber.Name = "lblProfilePhoneNumber";
             this.lblProfilePhoneNumber.Size = new System.Drawing.Size(152, 28);
             this.lblProfilePhoneNumber.TabIndex = 1;
@@ -393,7 +395,7 @@
             this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox5.Image = global::PersonalExpenseCreditTracker.Properties.Resources.telephone1;
-            this.pictureBox5.Location = new System.Drawing.Point(8, 6);
+            this.pictureBox5.Location = new System.Drawing.Point(8, 5);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(42, 40);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -404,9 +406,9 @@
             // 
             this.panel8.Controls.Add(this.pnlEditProfileEmailAddress);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(247, 243);
+            this.panel8.Location = new System.Drawing.Point(247, 237);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(360, 74);
+            this.panel8.Size = new System.Drawing.Size(360, 72);
             this.panel8.TabIndex = 7;
             // 
             // pnlEditProfileEmailAddress
@@ -415,7 +417,7 @@
             this.pnlEditProfileEmailAddress.BackColor = System.Drawing.Color.White;
             this.pnlEditProfileEmailAddress.Controls.Add(this.txtEditProfileEmailAddress);
             this.pnlEditProfileEmailAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pnlEditProfileEmailAddress.Location = new System.Drawing.Point(1, 4);
+            this.pnlEditProfileEmailAddress.Location = new System.Drawing.Point(1, 3);
             this.pnlEditProfileEmailAddress.Name = "pnlEditProfileEmailAddress";
             this.pnlEditProfileEmailAddress.Size = new System.Drawing.Size(357, 45);
             this.pnlEditProfileEmailAddress.TabIndex = 1;
@@ -441,9 +443,9 @@
             this.panel7.Controls.Add(this.panel38);
             this.panel7.Controls.Add(this.pictureBox4);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(3, 243);
+            this.panel7.Location = new System.Drawing.Point(3, 237);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(238, 74);
+            this.panel7.Size = new System.Drawing.Size(238, 72);
             this.panel7.TabIndex = 6;
             // 
             // panel38
@@ -453,7 +455,7 @@
             this.panel38.Controls.Add(this.lblProfileEmailAddress);
             this.panel38.Location = new System.Drawing.Point(65, 3);
             this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(155, 61);
+            this.panel38.Size = new System.Drawing.Size(155, 59);
             this.panel38.TabIndex = 8;
             // 
             // lblProfileEmailAddress
@@ -461,7 +463,7 @@
             this.lblProfileEmailAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProfileEmailAddress.AutoSize = true;
             this.lblProfileEmailAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfileEmailAddress.Location = new System.Drawing.Point(8, 10);
+            this.lblProfileEmailAddress.Location = new System.Drawing.Point(8, 9);
             this.lblProfileEmailAddress.Name = "lblProfileEmailAddress";
             this.lblProfileEmailAddress.Size = new System.Drawing.Size(139, 28);
             this.lblProfileEmailAddress.TabIndex = 1;
@@ -472,7 +474,7 @@
             this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox4.Image = global::PersonalExpenseCreditTracker.Properties.Resources.mail1;
-            this.pictureBox4.Location = new System.Drawing.Point(8, 6);
+            this.pictureBox4.Location = new System.Drawing.Point(8, 5);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(42, 40);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -483,9 +485,9 @@
             // 
             this.panel6.Controls.Add(this.pnlEditProfileDathOfBirth);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(247, 163);
+            this.panel6.Location = new System.Drawing.Point(247, 159);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(360, 74);
+            this.panel6.Size = new System.Drawing.Size(360, 72);
             this.panel6.TabIndex = 5;
             // 
             // pnlEditProfileDathOfBirth
@@ -496,7 +498,7 @@
             this.pnlEditProfileDathOfBirth.Controls.Add(this.btnProfileCalendar);
             this.pnlEditProfileDathOfBirth.Controls.Add(this.txtEditProfileDathOfBirth);
             this.pnlEditProfileDathOfBirth.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pnlEditProfileDathOfBirth.Location = new System.Drawing.Point(1, 4);
+            this.pnlEditProfileDathOfBirth.Location = new System.Drawing.Point(1, 3);
             this.pnlEditProfileDathOfBirth.Name = "pnlEditProfileDathOfBirth";
             this.pnlEditProfileDathOfBirth.Size = new System.Drawing.Size(357, 45);
             this.pnlEditProfileDathOfBirth.TabIndex = 1;
@@ -551,9 +553,9 @@
             // 
             this.panel5.Controls.Add(this.pnlEditProfileFullName);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(247, 83);
+            this.panel5.Location = new System.Drawing.Point(247, 81);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(360, 74);
+            this.panel5.Size = new System.Drawing.Size(360, 72);
             this.panel5.TabIndex = 4;
             // 
             // pnlEditProfileFullName
@@ -562,7 +564,7 @@
             this.pnlEditProfileFullName.BackColor = System.Drawing.Color.White;
             this.pnlEditProfileFullName.Controls.Add(this.txtEditProfileFullName);
             this.pnlEditProfileFullName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pnlEditProfileFullName.Location = new System.Drawing.Point(1, 4);
+            this.pnlEditProfileFullName.Location = new System.Drawing.Point(1, 3);
             this.pnlEditProfileFullName.Name = "pnlEditProfileFullName";
             this.pnlEditProfileFullName.Size = new System.Drawing.Size(357, 45);
             this.pnlEditProfileFullName.TabIndex = 0;
@@ -588,7 +590,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(247, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(360, 74);
+            this.panel4.Size = new System.Drawing.Size(360, 72);
             this.panel4.TabIndex = 3;
             // 
             // btnCloseEditProfile
@@ -597,12 +599,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCloseEditProfile.FlatAppearance.BorderSize = 0;
             this.btnCloseEditProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.btnCloseEditProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnCloseEditProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnCloseEditProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCloseEditProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close__2_;
-            this.btnCloseEditProfile.Location = new System.Drawing.Point(311, 16);
+            this.btnCloseEditProfile.Location = new System.Drawing.Point(318, 15);
             this.btnCloseEditProfile.Name = "btnCloseEditProfile";
-            this.btnCloseEditProfile.Size = new System.Drawing.Size(38, 33);
+            this.btnCloseEditProfile.Size = new System.Drawing.Size(38, 31);
             this.btnCloseEditProfile.TabIndex = 0;
             this.btnCloseEditProfile.TabStop = false;
             this.btnCloseEditProfile.UseVisualStyleBackColor = true;
@@ -614,7 +616,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(238, 74);
+            this.panel1.Size = new System.Drawing.Size(238, 72);
             this.panel1.TabIndex = 0;
             // 
             // panel16
@@ -624,7 +626,7 @@
             this.panel16.Controls.Add(this.lblEditProfile);
             this.panel16.Location = new System.Drawing.Point(5, 3);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(151, 68);
+            this.panel16.Size = new System.Drawing.Size(151, 66);
             this.panel16.TabIndex = 9;
             // 
             // lblEditProfile
@@ -632,7 +634,7 @@
             this.lblEditProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEditProfile.AutoSize = true;
             this.lblEditProfile.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditProfile.Location = new System.Drawing.Point(6, 18);
+            this.lblEditProfile.Location = new System.Drawing.Point(6, 17);
             this.lblEditProfile.Name = "lblEditProfile";
             this.lblEditProfile.Size = new System.Drawing.Size(133, 32);
             this.lblEditProfile.TabIndex = 1;
@@ -643,9 +645,9 @@
             this.panel2.Controls.Add(this.panel12);
             this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 83);
+            this.panel2.Location = new System.Drawing.Point(3, 81);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(238, 74);
+            this.panel2.Size = new System.Drawing.Size(238, 72);
             this.panel2.TabIndex = 1;
             // 
             // panel12
@@ -655,7 +657,7 @@
             this.panel12.Controls.Add(this.lblProfileFullName);
             this.panel12.Location = new System.Drawing.Point(65, 2);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(151, 61);
+            this.panel12.Size = new System.Drawing.Size(151, 59);
             this.panel12.TabIndex = 8;
             // 
             // lblProfileFullName
@@ -663,7 +665,7 @@
             this.lblProfileFullName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProfileFullName.AutoSize = true;
             this.lblProfileFullName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfileFullName.Location = new System.Drawing.Point(8, 10);
+            this.lblProfileFullName.Location = new System.Drawing.Point(8, 9);
             this.lblProfileFullName.Name = "lblProfileFullName";
             this.lblProfileFullName.Size = new System.Drawing.Size(104, 28);
             this.lblProfileFullName.TabIndex = 1;
@@ -674,7 +676,7 @@
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox2.Image = global::PersonalExpenseCreditTracker.Properties.Resources.people__3_;
-            this.pictureBox2.Location = new System.Drawing.Point(8, 4);
+            this.pictureBox2.Location = new System.Drawing.Point(8, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(42, 40);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -686,9 +688,9 @@
             this.panel3.Controls.Add(this.panel17);
             this.panel3.Controls.Add(this.pictureBox3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 163);
+            this.panel3.Location = new System.Drawing.Point(3, 159);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(238, 74);
+            this.panel3.Size = new System.Drawing.Size(238, 72);
             this.panel3.TabIndex = 2;
             // 
             // panel17
@@ -698,7 +700,7 @@
             this.panel17.Controls.Add(this.lblProfileDathOfBirth);
             this.panel17.Location = new System.Drawing.Point(65, 2);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(151, 61);
+            this.panel17.Size = new System.Drawing.Size(151, 59);
             this.panel17.TabIndex = 8;
             // 
             // lblProfileDathOfBirth
@@ -706,7 +708,7 @@
             this.lblProfileDathOfBirth.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProfileDathOfBirth.AutoSize = true;
             this.lblProfileDathOfBirth.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfileDathOfBirth.Location = new System.Drawing.Point(8, 10);
+            this.lblProfileDathOfBirth.Location = new System.Drawing.Point(8, 9);
             this.lblProfileDathOfBirth.Name = "lblProfileDathOfBirth";
             this.lblProfileDathOfBirth.Size = new System.Drawing.Size(132, 28);
             this.lblProfileDathOfBirth.TabIndex = 1;
@@ -717,7 +719,7 @@
             this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox3.Image = global::PersonalExpenseCreditTracker.Properties.Resources.time_and_date1;
-            this.pictureBox3.Location = new System.Drawing.Point(8, 5);
+            this.pictureBox3.Location = new System.Drawing.Point(8, 4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(42, 40);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -728,9 +730,9 @@
             // 
             this.panel13.Controls.Add(this.pnlEditProfileGender);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel13.Location = new System.Drawing.Point(247, 403);
+            this.panel13.Location = new System.Drawing.Point(247, 393);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(360, 74);
+            this.panel13.Size = new System.Drawing.Size(360, 72);
             this.panel13.TabIndex = 11;
             // 
             // pnlEditProfileGender
@@ -739,7 +741,7 @@
             this.pnlEditProfileGender.BackColor = System.Drawing.Color.White;
             this.pnlEditProfileGender.Controls.Add(this.cmbEditProfileGender);
             this.pnlEditProfileGender.Controls.Add(this.txtEditProfileGender);
-            this.pnlEditProfileGender.Location = new System.Drawing.Point(1, 4);
+            this.pnlEditProfileGender.Location = new System.Drawing.Point(1, 3);
             this.pnlEditProfileGender.Name = "pnlEditProfileGender";
             this.pnlEditProfileGender.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.pnlEditProfileGender.Size = new System.Drawing.Size(357, 45);
@@ -778,11 +780,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(640, 739);
+            this.ClientSize = new System.Drawing.Size(640, 680);
             this.Controls.Add(this.pnlEditProfileMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditProfileControls";
-            this.Padding = new System.Windows.Forms.Padding(15);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditProfileControls";
             this.Load += new System.EventHandler(this.EditProfileControls_Load);
