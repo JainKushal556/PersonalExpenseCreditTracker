@@ -45,13 +45,6 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             CommonUiFunction.LoadInComboBox("spGetGender", "Select Gender", cmbEditProfileGender);
             GetUserProfileDetails();
             monthCalendarProfile.MaxDate = DateTime.Today; 
-            SetRadius(pnlEditProfileMainBody, 20);
-            SetRadius(btnCancelEditProfile, 20);
-            SetRadius(btnUpdateProfile, 25);
-
-            pnlEditProfileMainBody.Resize += pnlEditProfileMainBody_Resize;
-            btnCancelEditProfile.Resize += btnCancelEditProfile_Resize;
-            btnUpdateProfile.Resize += btnUpdateProfile_Resize;
 
             this.ActiveControl = pnlEditProfileMainBody;
 
@@ -82,19 +75,6 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
             DeleteObject(hrgn);
         }
-        private void pnlEditProfileMainBody_Resize(object sender, EventArgs e)
-        {
-            SetRadius(pnlEditProfileMainBody, 20);
-        }
-        private void btnCancelEditProfile_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnCancelEditProfile, 20);
-        }
-        private void btnUpdateProfile_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnUpdateProfile, 25);
-        }
-        //
 
         // All Panle Border Show
         private void pnlEditProfileFullName_Leave(object sender, EventArgs e)
