@@ -402,23 +402,23 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                         catch
                         {
                             // Load default image if corrupted
-                            picProfileUserPhoto.Image = Properties.Resources.people__3_1;
+                            picProfileUserPhoto.Image = Properties.Resources.user__2_;
                         }
                     }
                     else
                     {
-                        picProfileUserPhoto.Image = Properties.Resources.people__3_1;
+                        picProfileUserPhoto.Image = Properties.Resources.user__2_;
                     }
                 }
                 else
                 {
-                    picProfileUserPhoto.Image = Properties.Resources.people__3_1;
+                    picProfileUserPhoto.Image = Properties.Resources.user__2_;
                 }
 
             }
             else
             {
-                picProfileUserPhoto.Image = Properties.Resources.people__3_1;
+                picProfileUserPhoto.Image = Properties.Resources.user__2_;
             }
 
             // Check if any profile information is incomplete (DOB, Gender, Address, Phone, Email)
