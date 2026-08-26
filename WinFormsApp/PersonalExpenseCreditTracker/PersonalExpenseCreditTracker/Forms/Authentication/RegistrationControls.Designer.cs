@@ -843,8 +843,8 @@
             this.ClientSize = new System.Drawing.Size(1569, 918);
             this.Controls.Add(this.panel1);
             this.Name = "RegistrationControls";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RegistratationControls";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.RegistrationControls_Load);
             this.panel1.ResumeLayout(false);

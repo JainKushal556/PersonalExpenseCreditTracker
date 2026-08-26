@@ -148,8 +148,8 @@
             this.btnForgotPasswordClose.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnForgotPasswordClose.BackColor = System.Drawing.Color.Transparent;
             this.btnForgotPasswordClose.FlatAppearance.BorderSize = 0;
-            this.btnForgotPasswordClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.btnForgotPasswordClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnForgotPasswordClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnForgotPasswordClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnForgotPasswordClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnForgotPasswordClose.Image = global::PersonalExpenseCreditTracker.Properties.Resources.close;
             this.btnForgotPasswordClose.Location = new System.Drawing.Point(528, 20);
