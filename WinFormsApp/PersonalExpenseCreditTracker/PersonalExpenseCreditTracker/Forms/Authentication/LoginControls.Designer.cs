@@ -546,8 +546,8 @@
             this.ClientSize = new System.Drawing.Size(1331, 812);
             this.Controls.Add(this.panel1);
             this.Name = "LoginControls";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "LoginControls";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.LoginControls_Load);
             this.panel1.ResumeLayout(false);

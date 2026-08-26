@@ -32,14 +32,15 @@ CREATE OR ALTER PROCEDURE spChangePassword
 
 AS  
 BEGIN  
-  
+    
+    SET @OldPassword = LTRIM(RTRIM(@OldPassword));
+    SET @NewPassword = LTRIM(RTRIM(@NewPassword));
 
-    IF @NewPassword IS NULL OR LTRIM(RTRIM(@NewPassword)) = ''
+    IF @NewPassword IS NULL OR @NewPassword = ''
     BEGIN
         SELECT 'New Password Cannot Be Empty' AS Message;
         RETURN;
     END
-
 
     IF NOT EXISTS
     (
@@ -54,19 +55,29 @@ BEGIN
         RETURN;
     END
 
- 
+    -- Old Password Match Check
     IF EXISTS  
     (  
         SELECT 1  
         FROM tblUserAuthentication  
         WHERE  
             UserID = @UserID  
-            AND Password = @OldPassword  
+            AND (
+                Password = @OldPassword  
+                OR Password = LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @OldPassword), 2))
+            )
     )  
     BEGIN  
 
-     
-        IF @OldPassword = @NewPassword
+        -- Check if New Password Hash is identical to Current Password Hash
+        IF EXISTS
+        (
+            SELECT 1
+            FROM tblUserAuthentication
+            WHERE
+                UserID = @UserID
+                AND Password = LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @NewPassword), 2))
+        )
         BEGIN
             SELECT 'New Password Cannot Be Same As Old Password' AS Message;
         END
@@ -74,8 +85,9 @@ BEGIN
         ELSE
         BEGIN
   
+            -- Update New Password Hash into DB
             UPDATE tblUserAuthentication  
-            SET Password = @NewPassword  
+            SET Password = LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @NewPassword), 2))  
             WHERE UserID = @UserID;  
   
             SELECT 'Password Changed Successfully' AS Message;
@@ -103,6 +115,10 @@ CREATE OR ALTER PROCEDURE spForgetPassword
 AS  
 BEGIN  
   
+    SET @Email = LTRIM(RTRIM(@Email));
+    SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
+    SET @NewPassword = LTRIM(RTRIM(@NewPassword));
+
     IF EXISTS  
     (  
         SELECT 1  
@@ -113,6 +129,7 @@ BEGIN
     )  
     BEGIN  
 
+        -- Check if New Password Hash is identical to stored Password Hash
         IF EXISTS
         (
             SELECT 1
@@ -122,7 +139,7 @@ BEGIN
             WHERE
                 C.Email = @Email
                 AND C.PhoneNumber = @PhoneNumber
-                AND A.Password = @NewPassword
+                AND A.Password = LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @NewPassword), 2))
         )
         BEGIN
             SELECT 'New Password Same As Old Password' AS Message;
@@ -131,8 +148,9 @@ BEGIN
         ELSE
         BEGIN
   
+            -- Update Password with SHA2_256 Hash
             UPDATE A  
-            SET A.Password = @NewPassword  
+            SET A.Password = LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @NewPassword), 2))  
             FROM tblUserAuthentication A  
             INNER JOIN tblUserContact C  
                 ON A.UserID = C.UserID  
@@ -266,7 +284,7 @@ BEGIN
 	INNER JOIN tblUserAuthentication A
 		ON C.UserID = A.UserID
 	WHERE C.Email = @Email
-	AND A.Password COLLATE SQL_Latin1_General_CP1_CS_AS = @Password;
+	  AND A.Password COLLATE SQL_Latin1_General_CP1_CS_AS = LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @Password), 2));
 
     IF @UserID IS NULL
     BEGIN
@@ -344,26 +362,21 @@ GO
 -- Procedure: spRegisterUser
 -- =============================================
 CREATE OR ALTER PROCEDURE spRegisterUser    
-
     @UserName VARCHAR(100),    
     @Email VARCHAR(100),    
     @PhoneNumber VARCHAR(15),    
     @Password VARCHAR(100)    
-
 AS    
 BEGIN    
-
     SET XACT_ABORT ON;
-
     DECLARE @UserID INT;    
-
 
     SET @UserName = LTRIM(RTRIM(@UserName));
     SET @Email = LTRIM(RTRIM(@Email));
     SET @PhoneNumber = LTRIM(RTRIM(@PhoneNumber));
     SET @Password = LTRIM(RTRIM(@Password));
 
-	--empty and null checked
+    -- Empty & Null Validation
     IF @UserName IS NULL OR @UserName = ''
     BEGIN
         SELECT 'User Name Cannot Be Empty' AS Message;
@@ -388,99 +401,54 @@ BEGIN
         RETURN;
     END
 
-
-    -- Duplicate check
-    IF EXISTS
-    (
-        SELECT 1
-        FROM tblUserContact
-        WHERE Email = @Email
-    )
+    -- Duplicate Validation
+    IF EXISTS (SELECT 1 FROM tblUserContact WHERE Email = @Email)
     BEGIN
         SELECT 'Email Already Exists' AS Message;
         RETURN;
     END
 
-
-    IF EXISTS
-    (
-        SELECT 1
-        FROM tblUserContact
-        WHERE PhoneNumber = @PhoneNumber
-    )
+    IF EXISTS (SELECT 1 FROM tblUserContact WHERE PhoneNumber = @PhoneNumber)
     BEGIN
         SELECT 'Phone Number Already Exists' AS Message;
         RETURN;
     END
 
-
     BEGIN TRY
-
         BEGIN TRANSACTION;
-
 
         INSERT INTO tblUsers (UserName)
         VALUES (@UserName);
 
         SET @UserID = SCOPE_IDENTITY();
 
-        INSERT INTO tblUserProfile
-        (
-            UserID,
-            FullName
-        )
-        VALUES
-        (
-            @UserID,
-            @UserName
-        );
+        INSERT INTO tblUserProfile (UserID, FullName)
+        VALUES (@UserID, @UserName);
 
+        INSERT INTO tblUserContact (UserID, Email, PhoneNumber)
+        VALUES (@UserID, @Email, @PhoneNumber);
 
-        INSERT INTO tblUserContact
-        (
-            UserID,
-            Email,
-            PhoneNumber
-        )
-        VALUES
-        (
+        -- Hashed Password Insert (SHA2_256)
+        INSERT INTO tblUserAuthentication (UserID, Password, Active)
+        VALUES (
             @UserID,
-            @Email,
-            @PhoneNumber
-        );
-
-        INSERT INTO tblUserAuthentication
-        (
-            UserID,
-            Password,
-            Active
-        )
-        VALUES
-        (
-            @UserID,
-            @Password,
+            LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @Password), 2)),
             0
         );
 
-
         COMMIT TRANSACTION;
 
-
         SELECT 
-            @UserID AS UserID,
-            'User Inserted Successfully' AS Message;
+            'User Inserted Successfully' AS Message,
+            @UserID AS UserID;
 
     END TRY  
-
     BEGIN CATCH 
         IF @@TRANCOUNT > 0
             ROLLBACK TRANSACTION;
 
-
         SELECT ERROR_MESSAGE() AS Message;
-
     END CATCH  
-
 END;
 GO
 
@@ -5517,7 +5485,7 @@ BEGIN
   
 
         UPDATE tblUserProfile  
-        SET Name = @Name  
+        SET FullName = @Name  
         WHERE UserID = @UserID;  
   
 
