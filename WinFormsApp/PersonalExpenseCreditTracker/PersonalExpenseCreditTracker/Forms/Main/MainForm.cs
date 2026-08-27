@@ -1411,18 +1411,18 @@ namespace PersonalExpenseCreditTracker
                         catch
                         {
                             // Show default image if the image is corrupted
-                            picUserProfile.Image = Properties.Resources.user;
+                            picUserProfile.Image = Properties.Resources.user__2_;
                         }
                     }
                     else
                     {
-                        picUserProfile.Image = Properties.Resources.user;
+                        picUserProfile.Image = Properties.Resources.user__2_;
                     }
                 }
                 else
                 {
                     // Default Image
-                    picUserProfile.Image = Properties.Resources.user;
+                    picUserProfile.Image = Properties.Resources.user__2_;
                 }
 
             }

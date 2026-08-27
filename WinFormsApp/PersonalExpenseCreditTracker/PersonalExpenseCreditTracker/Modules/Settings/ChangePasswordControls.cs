@@ -11,13 +11,15 @@ using System.Text.RegularExpressions;
 using BLLayer.Settings;
 using BLLayer.Common;
 using PersonalExpenseCreditTracker.Common;
+using PersonalExpenseCreditTracker.Forms.Authentication;
 
 namespace PersonalExpenseCreditTracker.Modules.Settings
 {
     public partial class ChangePasswordControls : Form
     {
         private bool _PasswordMatch;
-        bool isPasswordVisible1 = false;
+        string CurrentPassword;
+        bool isPasswordVisible1 = true;
         bool isPasswordVisible2 = true;
         bool isPasswordVisible3 = true;
 
@@ -83,13 +85,14 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
             if (dataTable.Rows.Count > 0)
             {
-                txtCurrentPassword.Text = dataTable.Rows[0]["Password"].ToString();
+                CurrentPassword = dataTable.Rows[0]["Password"].ToString();
             }
 
+            txtCurrentPassword.Text = "Enter Current Password";
             txtNewPassword.Text = "Enter New Password";
             txtConfirmPassword.Text = "Confirm New Password";
 
-            txtCurrentPassword.ForeColor = Color.FromArgb(0, 0, 0);
+            txtCurrentPassword.ForeColor = Color.FromArgb(191, 192, 199);
             txtNewPassword.ForeColor = Color.FromArgb(191, 192, 199);
             txtConfirmPassword.ForeColor = Color.FromArgb(191, 192, 199);
 
@@ -100,12 +103,12 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
             pnlStrong.BackColor = Color.FromArgb(234, 235, 239);
             pnlVeryStrong.BackColor = Color.FromArgb(234, 235, 239);
 
-            txtCurrentPassword.UseSystemPasswordChar = true;
+            txtCurrentPassword.UseSystemPasswordChar = false;
             txtNewPassword.UseSystemPasswordChar = false;
             txtConfirmPassword.UseSystemPasswordChar = false;
             _PasswordMatch = false;
 
-            picEye1.Image = Properties.Resources.eye;
+            picEye1.Image = Properties.Resources.open_eye__2_;
             picEye2.Image = Properties.Resources.open_eye__2_;
             picEye3.Image = Properties.Resources.open_eye__2_;
         }
@@ -179,7 +182,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                     break;
             }
 
-            if (txtCurrentPassword.Text == txtNewPassword.Text)
+            if (CurrentPassword == txtNewPassword.Text)
             {
                 lblPasswordMatch.Text = "Your current password and new password are same..";
                 lblPasswordMatch.ForeColor = Color.Red;
@@ -295,7 +298,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                 lblPasswordMatch.Text = "";
             
             }
-            else if (txtCurrentPassword.Text == txtNewPassword.Text)
+            else if (CurrentPassword == txtNewPassword.Text)
             {
                 lblPasswordMatch.Text = "Your current password and new password are same..";
 
@@ -455,5 +458,21 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
             }
         }
 
+        private void lblForgotPassword_Click(object sender, EventArgs e)
+        {
+            this.Opacity = 0;
+            using (ForgotPasswordControls forgotPasswordControls = new ForgotPasswordControls())
+            {
+                DialogResult dr = forgotPasswordControls.ShowDialog(this.Owner ?? this);
+
+                if (dr == DialogResult.OK)
+                {
+                    this.Close();
+                    return;
+                }
+            }
+            
+            this.Opacity = 1; 
+        }
     }
 }
