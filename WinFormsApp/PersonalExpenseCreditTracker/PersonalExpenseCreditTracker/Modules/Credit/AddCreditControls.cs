@@ -433,14 +433,10 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void btnSaveCredit_Click(object sender, EventArgs e)
         {
+
             errorProvider1.Clear();
 
-            CreditUI creditUi = new CreditUI();
 
-            creditUi.userId = Session.LogedInUser.GetUserId();
-            creditUi.creditId = -1;
-
-            // Safe conversion — null or invalid value returns 0 instead of crashing
             int catId = 0, subCatId = 0, payId = 0;
 
             if (cmbAddCreditCategory.SelectedValue != null)
@@ -452,19 +448,45 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             if (cmbAddCreditPaymentType.SelectedValue != null)
                 int.TryParse(cmbAddCreditPaymentType.SelectedValue.ToString(), out payId);
 
-            creditUi.categoryId    = catId;
-            creditUi.subCategoryId = subCatId;
-            creditUi.paymentId     = payId;
+            string amount = (txtAddCreditAmount.Text == "Select Amount") ? "" : txtAddCreditAmount.Text;
+            string description = (txtAddCreditDescription.Text == "Enter Description") ? "" : txtAddCreditDescription.Text;
 
-            creditUi.amount = (txtAddCreditAmount.Text == "Enter Amount" || txtAddCreditAmount.Text == "Select Amount") ? "" : txtAddCreditAmount.Text;
-            creditUi.description = (txtAddCreditDescription.Text == "Enter Description" || txtAddCreditDescription.Text == "Enter description") ? "" : txtAddCreditDescription.Text;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateCategory(catId), errorProvider1, cmbAddCreditCategory)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateSubCategory(subCatId), errorProvider1, cmbAddCreditSubCategory)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateAmount(amount), errorProvider1, txtAddCreditAmount)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePayment(payId), errorProvider1, cmbAddCreditPaymentType)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDescription(description), errorProvider1, txtAddCreditDescription)) return;
+
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this credit?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
+
+            CreditUI creditUi = new CreditUI();
+
+            creditUi.userId = Session.LogedInUser.GetUserId();
+            creditUi.creditId = -1;
+            creditUi.categoryId = catId;
+            creditUi.subCategoryId = subCatId;
+            creditUi.paymentId = payId;
+            creditUi.amount = amount;
+            creditUi.description = description;
 
             CommonValidator.ValidationResult result = creditUi.InsertDataIntoCreditUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Credit added successfully!");
+                    //MessageBox.Show("Expense added successfully!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;

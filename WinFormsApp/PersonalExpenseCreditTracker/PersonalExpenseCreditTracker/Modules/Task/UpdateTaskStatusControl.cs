@@ -94,22 +94,31 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            
-            // Clear all previous validation errors
             errorProvider1.Clear();
+            int statusId = Convert.ToInt32(cmbStatus.SelectedValue);
+            if (!ErrorHelper.Validate(CommonValidator.ValidateStatus(statusId), errorProvider1, cmbStatus)) return;
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to update the task status?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-            // Create a new object to store the user's input
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
             TaskUI taskUi = new TaskUI();
-
             taskUi.taskId = taskControl.SelectedTaskID;
-            taskUi.statusId = Convert.ToInt32(cmbStatus.SelectedValue);
+            taskUi.statusId = statusId;
 
             CommonValidator.ValidationResult result = taskUi.UpdateStatusIntoTaskUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Task status updated successfully!");
                     this.Close();
                     break;
 
@@ -126,8 +135,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                     break;
             }
         }
-
-        
 
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {

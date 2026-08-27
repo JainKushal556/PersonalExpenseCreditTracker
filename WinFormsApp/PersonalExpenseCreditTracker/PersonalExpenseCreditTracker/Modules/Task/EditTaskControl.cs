@@ -205,12 +205,9 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtDeadline.ForeColor = Color.Black;
             monthCalendar1.Visible = false;
         }
-
         private void btnUpdateTask_Click(object sender, EventArgs e)
         {
-
             errorProvider1.Clear();
-
 
             TaskUI taskUi = new TaskUI();
             taskUi.taskId = taskControl.SelectedTaskID;
@@ -257,14 +254,30 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 taskUi.deadline = DateTime.MinValue;
             }
 
+            if (!ErrorHelper.Validate(CommonValidator.ValidateTaskTitle(taskUi.taskTitle), errorProvider1, txtTaskTitle)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePriority(priorityId), errorProvider1, cmbPriority)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateStatus(statusId), errorProvider1, cmbStatus)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDeadline(taskUi.deadline), errorProvider1, txtDeadline)) return;
+
+           
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to update this task?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
 
             CommonValidator.ValidationResult result = taskUi.UpdateDataIntoTaskUi();
-
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Task updated successfully!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
@@ -290,7 +303,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                     break;
             }
         }
-
 
         private void btnClose_MouseEnter(object sender, EventArgs e)
         {

@@ -153,18 +153,18 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         {
             this.Close();
         }
+
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
             panelProfileCalenderShow.Visible = false;
 
-            ProfileUI profileUi = new ProfileUI();
+            
+            string fullName = txtEditProfileFullName.Text.Trim();
+            string email = txtEditProfileEmailAddress.Text.Trim();
+            string phoneNumber = txtEditProfilePhoneNumber.Text.Trim();
+            string address = txtEditProfileAddress.Text.Trim();
+            int genderId = Convert.ToInt32(cmbEditProfileGender.SelectedValue);
 
-            profileUi.userId = Session.LogedInUser.GetUserId();
-            profileUi.genderId = Convert.ToInt32(cmbEditProfileGender.SelectedValue);
-            profileUi.fullName = txtEditProfileFullName.Text.Trim();
-            profileUi.email = txtEditProfileEmailAddress.Text.Trim();
-            profileUi.phoneNumber = txtEditProfilePhoneNumber.Text.Trim();
-            profileUi.address = txtEditProfileAddress.Text.Trim();
             DateTime dob = DateTime.MinValue;
             if (!string.IsNullOrWhiteSpace(txtEditProfileDathOfBirth.Text))
             {
@@ -175,6 +175,38 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                 }
             }
 
+            if (!ErrorHelper.Validate(CommonValidator.ValidateFullName(fullName), errorProvider1, txtEditProfileFullName)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateEmail(email), errorProvider1, txtEditProfileEmailAddress)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePhoneNumber(phoneNumber), errorProvider1, txtEditProfilePhoneNumber)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDateOfBirth(dob), errorProvider1, txtEditProfileDathOfBirth)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateGender(genderId), errorProvider1, cmbEditProfileGender)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateAddress(address), errorProvider1, txtEditProfileAddress)) return;
+           
+            
+
+            
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to update your profile?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
+            
+            ProfileUI profileUi = new ProfileUI();
+
+            profileUi.userId = Session.LogedInUser.GetUserId();
+            profileUi.genderId = genderId;
+            profileUi.fullName = fullName;
+            profileUi.email = email;
+            profileUi.phoneNumber = phoneNumber;
+            profileUi.address = address;
             profileUi.dateOfBirth = dob;
 
             CommonValidator.ValidationResult result = profileUi.UpdateUserProfileIntoProfUi();
@@ -182,7 +214,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Profile updated successfully!");
+                    //MessageBox.Show("Profile updated successfully!");
                     if (profileControls != null)
                     {
                         profileControls.LoadUserProfileData();
@@ -226,6 +258,80 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                     break;
             }
         }
+
+        //private void btnUpdateProfile_Click(object sender, EventArgs e)
+        //{
+        //    panelProfileCalenderShow.Visible = false;
+
+        //    ProfileUI profileUi = new ProfileUI();
+
+        //    profileUi.userId = Session.LogedInUser.GetUserId();
+        //    profileUi.genderId = Convert.ToInt32(cmbEditProfileGender.SelectedValue);
+        //    profileUi.fullName = txtEditProfileFullName.Text.Trim();
+        //    profileUi.email = txtEditProfileEmailAddress.Text.Trim();
+        //    profileUi.phoneNumber = txtEditProfilePhoneNumber.Text.Trim();
+        //    profileUi.address = txtEditProfileAddress.Text.Trim();
+        //    DateTime dob = DateTime.MinValue;
+        //    if (!string.IsNullOrWhiteSpace(txtEditProfileDathOfBirth.Text))
+        //    {
+        //        string[] formats = new string[] { "dd-MM-yyyy", "d-M-yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy", "dd MMM yyyy", "d MMM yyyy", "dd MMMM yyyy" };
+        //        if (!DateTime.TryParseExact(txtEditProfileDathOfBirth.Text.Trim(), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dob))
+        //        {
+        //            DateTime.TryParse(txtEditProfileDathOfBirth.Text.Trim(), out dob);
+        //        }
+        //    }
+
+        //    profileUi.dateOfBirth = dob;
+
+        //    CommonValidator.ValidationResult result = profileUi.UpdateUserProfileIntoProfUi();
+
+        //    switch (result)
+        //    {
+        //        case CommonValidator.ValidationResult.Success:
+        //            MessageBox.Show("Profile updated successfully!");
+        //            if (profileControls != null)
+        //            {
+        //                profileControls.LoadUserProfileData();
+        //            }
+
+        //            MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+        //            if (mainForm != null)
+        //            {
+        //                mainForm.LoadSidebarUserProfile();
+        //            }
+
+        //            this.Close();
+        //            break;
+
+        //        case CommonValidator.ValidationResult.FullNameInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfileFullName);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.EmailInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfileEmailAddress);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.PhoneInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfilePhoneNumber);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.DateOfBirthInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfileDathOfBirth);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.GenderInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, cmbEditProfileGender);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.AddressInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtEditProfileAddress);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.StoreProcedureError:
+        //            MessageBox.Show("Profile updated unsuccessfully!");
+        //            break;
+        //    }
+        //}
         private void btnCloseEditProfile_Click(object sender, EventArgs e)
         {
             this.Close();

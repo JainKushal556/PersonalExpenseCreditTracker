@@ -70,27 +70,17 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             lblPaidAmountText.Text = paidAmount;
             selectedStatus = status;
         }
-
-
         private void btnAddSave_Click(object sender, EventArgs e)
         {
             pnlCalenderShow.Visible = false;
             errorProvider1.Clear();
 
             BorrowUI borrowUi = new BorrowUI();
-            // Assign values from the form controls to the object
             borrowUi.userId = Session.LogedInUser.GetUserId();
             borrowUi.borrowId = this.selectedBorrowId;
             borrowUi.paymentId = Convert.ToInt32(cmbPaymentType.SelectedValue);
-
-            //  If the placeholder text is still present, pass an empty string
             borrowUi.returnAmount = (txtAmount.Text == "Select Amount") ? "" : txtAmount.Text;
             borrowUi.description = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
-
-            // If no deadline is selected, assign DateTime.MinValue
-            //    // Otherwise, assign the selected date from the calendar
-            //borrowUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar.SelectionStart;
-
 
             DateTime returnDate = DateTime.MinValue;
             if (!string.IsNullOrWhiteSpace(txtReturnDate.Text))
@@ -108,10 +98,20 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Borrow paid successfully!");
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    DialogResult confirmResult = MessageBox.Show(
+                        "Are you sure you want to pay this borrow?",
+                        "Confirm Pay",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (confirmResult != DialogResult.Yes)
+                    {
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                        return;
+                    }
                     break;
+
                 case CommonValidator.ValidationResult.AmountEmpty:
                 case CommonValidator.ValidationResult.AmountInvalid:
                 case CommonValidator.ValidationResult.AmountTooLarge:
@@ -137,6 +137,8 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     break;
             }
         }
+
+
 
         private void PayBorrowAmountControls_Load(object sender, EventArgs e)
         {

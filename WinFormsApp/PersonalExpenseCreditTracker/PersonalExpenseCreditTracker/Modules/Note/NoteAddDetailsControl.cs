@@ -132,72 +132,84 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         {
             this.Close();
         }
-
         private void btnSaveNote_Click(object sender, EventArgs e)
         {
-
             // Clear all previous validation errors
             errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlDescription);
 
+            // Extract values (excluding placeholders)
+            string noteTitle = (txtNoteTitle.Text == "Enter title") ? "" : txtNoteTitle.Text.Trim();
+            string description = (rtxtDescription.Text == "Enter description") ? "" : rtxtDescription.Text;
+
+            if (!ErrorHelper.Validate(CommonValidator.ValidateNoteTitle(noteTitle), errorProvider1, txtNoteTitle)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDescription(description), errorProvider1, pnlDescription)) return; 
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePriority(selectedPriorityId), errorProvider1, lblPriorityError)) return;
+           
+          
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this note?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
+            
             NoteUI noteUi = new NoteUI();
-
-            // Assign values from the form controls to the object
             noteUi.userId = Session.LogedInUser.GetUserId();
             noteUi.noteId = -1;
-
-            // If the placeholder text is still present, pass an empty string
-            noteUi.noteTitle = (txtNoteTitle.Text == "Enter title") ? "" : txtNoteTitle.Text.Trim();
-            noteUi.description = (rtxtDescription.Text == "Enter description") ? "" : rtxtDescription.Text;
+            noteUi.noteTitle = noteTitle;
+            noteUi.description = description;
             noteUi.priorityId = selectedPriorityId;
             noteUi.colorId = selectedColorId;
 
-
             CommonValidator.ValidationResult result = noteUi.InsertDataIntoNoteUi();
 
-            // Perform action based on the validation result
             switch (result)
             {
-                // Data is valid and inserted successfully
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Note added successfully!");
-                    
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
-
                     break;
+
                 case CommonValidator.ValidationResult.NoteTitleInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtNoteTitle);
                     break;
+
                 case CommonValidator.ValidationResult.NoteTitleAlreadyExists:
                     ErrorHelper.ShowErrorBelowControl(txtNoteTitle, "* Note with this title already exists.");
                     break;
 
                 case CommonValidator.ValidationResult.DescriptionInvalid:
-                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description is required.");
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlDescription);
                     break;
 
                 case CommonValidator.ValidationResult.DescriptionTooShort:
-                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description must contain at least 5 characters.");
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlDescription);
                     break;
 
                 case CommonValidator.ValidationResult.DescriptionTooLong:
-                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description cannot exceed 150 characters.");
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlDescription);
                     break;
-
 
                 case CommonValidator.ValidationResult.PriorityInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, lblPriorityError);
                     break;
-                //case CommonValidator.ValidationResult.ColorInvalid:
-                //    ErrorHelper.ShowValidationError( result, errorProvider1,lblNoteColor);
-                //    break;
-                  case CommonValidator.ValidationResult.StoreProcedureError:
-
+                case CommonValidator.ValidationResult.ColorInvalid:
+                    ErrorHelper.ShowValidationError( result, errorProvider1,lblNoteColor);
+                    break;
+                case CommonValidator.ValidationResult.StoreProcedureError:
                     MessageBox.Show("Note added unsuccessfully!");
                     break;
-
             }
         }
-        
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
