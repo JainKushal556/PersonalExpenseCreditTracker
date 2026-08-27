@@ -81,13 +81,40 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             DeleteObject(hrgn);
         }
 
+
         private void btnUpdateCategory_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
+
+            string categoryName = txtCategoryName.Text.Trim();
+
+            CommonValidator.ValidationResult valResult = CommonValidator.ValidationCategoryName(categoryName);
+            if (valResult != CommonValidator.ValidationResult.Success)
+            {
+                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtCategoryName);
+                return; 
+            }
+
+            DialogResult confirmResult = MessageBox.Show(
+                isSubCategory1
+                    ? "Are you sure you want to update this sub category?"
+                    : "Are you sure you want to update this category?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
             CategoryUI categoryUI = new CategoryUI();
 
             categoryUI.UserId = Session.LogedInUser.GetUserId();
             categoryUI.CategoryID = SelectedCategoryId;
-            categoryUI.CategoryName = txtCategoryName.Text.Trim();
+            categoryUI.CategoryName = categoryName;
 
             categoryUI.IsActive = Convert.ToInt32(rdobtnActive.Checked);
             categoryUI.Inactive = Convert.ToInt32(rdobtnInactive.Checked);
@@ -96,38 +123,31 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             string ErrorMsg;
             if (isSubCategory1)
             {
-                
                 result = categoryUI.UpdateExpenseSubCategoryDataIntoCategoryUI();
-                
             }
             else
             {
-                
                 result = categoryUI.UpdateExpenseCategoryDataIntoCategoryUI();
-                
             }
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
+                    //MessageBox.Show(
+                    //    isSubCategory1
+                    //        ? "Sub Category updated successfully."
+                    //        : "Category updated successfully.",
+                    //    "Success",
+                    //    MessageBoxButtons.OK,
+                    //    MessageBoxIcon.Information
+                    //);
 
-                    MessageBox.Show(
-                        isSubCategory1
-                            ? "Sub Category updated successfully."
-                            : "Category updated successfully."
-                        );
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
                 case CommonValidator.ValidationResult.CategoryInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
-                    break;
-
                 case CommonValidator.ValidationResult.CategoryNameEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
-                    break;
-
                 case CommonValidator.ValidationResult.InvalidCategoryName:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
                     break;
@@ -136,20 +156,98 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     if (isSubCategory1)
                     {
                         ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseSubCategoryByUserID", "@SubCategoryID", "@ActiveStatus", "@SubCategoryName");
-
-
                     }
                     else
                     {
                         ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseCategoryByUserID", "@CategoryID", "@ActiveStatus", "@CategoryName");
-
-
                     }
+
                     if (!string.IsNullOrWhiteSpace(ErrorMsg))
-                        MessageBox.Show(ErrorMsg);
+                        MessageBox.Show(ErrorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     break;
             }
         }
+
+        //private void btnUpdateCategory_Click(object sender, EventArgs e)
+        //{
+            
+        //    DialogResult confirmResult = MessageBox.Show(
+        //        isSubCategory1
+        //            ? "Are you sure you want to update this sub category?"
+        //            : "Are you sure you want to update this category?",
+        //        "Confirm Update",
+        //        MessageBoxButtons.YesNo,
+        //        MessageBoxIcon.Question);
+
+           
+        //    if (confirmResult != DialogResult.Yes)
+        //    {
+        //        this.DialogResult = DialogResult.Cancel;
+        //        this.Close();
+        //        return;
+        //    }
+
+        //    CategoryUI categoryUI = new CategoryUI();
+
+        //    categoryUI.UserId = Session.LogedInUser.GetUserId();
+        //    categoryUI.CategoryID = SelectedCategoryId;
+        //    categoryUI.CategoryName = txtCategoryName.Text.Trim();
+
+        //    categoryUI.IsActive = Convert.ToInt32(rdobtnActive.Checked);
+        //    categoryUI.Inactive = Convert.ToInt32(rdobtnInactive.Checked);
+
+        //    CommonValidator.ValidationResult result;
+        //    string ErrorMsg;
+        //    if (isSubCategory1)
+        //    {
+        //        result = categoryUI.UpdateExpenseSubCategoryDataIntoCategoryUI();
+        //    }
+        //    else
+        //    {
+        //        result = categoryUI.UpdateExpenseCategoryDataIntoCategoryUI();
+        //    }
+
+        //    switch (result)
+        //    {
+        //        case CommonValidator.ValidationResult.Success:
+
+        //            MessageBox.Show(
+        //                isSubCategory1
+        //                    ? "Sub Category updated successfully."
+        //                    : "Category updated successfully."
+        //                );
+        //            this.DialogResult = DialogResult.OK;
+        //            this.Close();
+        //            break;
+
+        //        case CommonValidator.ValidationResult.CategoryInvalid:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.CategoryNameEmpty:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.InvalidCategoryName:
+        //            ErrorHelper.ShowValidationError(result, errorProvider1, txtCategoryName);
+        //            break;
+
+        //        case CommonValidator.ValidationResult.StoreProcedureError:
+        //            if (isSubCategory1)
+        //            {
+        //                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseSubCategoryByUserID", "@SubCategoryID", "@ActiveStatus", "@SubCategoryName");
+        //            }
+        //            else
+        //            {
+        //                ErrorMsg = categoryUI.GetErrorMsg("spUpdateExpenseCategoryByUserID", "@CategoryID", "@ActiveStatus", "@CategoryName");
+        //            }
+        //            if (!string.IsNullOrWhiteSpace(ErrorMsg))
+        //                MessageBox.Show(ErrorMsg);
+        //            break;
+        //    }
+        //}
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

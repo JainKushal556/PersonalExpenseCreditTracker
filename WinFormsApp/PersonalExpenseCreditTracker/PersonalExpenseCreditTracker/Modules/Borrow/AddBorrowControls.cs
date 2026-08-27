@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -358,38 +358,56 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-
-
-
         private void btnBorrowAddSave_Click(object sender, EventArgs e)
         {
             pnlBorrowAddCalenderShow.Visible = false;
             errorProvider1.Clear();
 
-            BorrowUI borrowUi = new BorrowUI();
-            borrowUi.userId = Session.LogedInUser.GetUserId();
-            borrowUi.personId = Convert.ToInt32(cmbBorrowSelectPerson.SelectedValue);
-            borrowUi.paymentId = Convert.ToInt32(cmbBorrowPaymentType.SelectedValue);
-
-            borrowUi.amount = (txtBorrowAddAmount.Text == "Select Amount" || txtBorrowAddAmount.Text == "Enter Amount") ? "" : txtBorrowAddAmount.Text;
-            borrowUi.description = (txtBorrowAddDescription.Text == "Enter description" || txtBorrowAddDescription.Text == "Enter Description") ? "" : txtBorrowAddDescription.Text;
+            int personId = Convert.ToInt32(cmbBorrowSelectPerson.SelectedValue);
+            int paymentId = Convert.ToInt32(cmbBorrowPaymentType.SelectedValue);
+            string amount = (txtBorrowAddAmount.Text == "Select Amount" || txtBorrowAddAmount.Text == "Enter Amount") ? "" : txtBorrowAddAmount.Text;
+            string description = (txtBorrowAddDescription.Text == "Enter description" || txtBorrowAddDescription.Text == "Enter Description") ? "" : txtBorrowAddDescription.Text;
 
             DateTime parsedDate;
+            DateTime deadline = DateTime.MinValue;
             if (txtBorrowAddDeadlineDatePicker.Text != "DD-MM-YYYY" && DateTime.TryParseExact(txtBorrowAddDeadlineDatePicker.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out parsedDate))
             {
-                borrowUi.deadlineAt = parsedDate;
+                deadline = parsedDate;
             }
-            else
+
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePerson(personId), errorProvider1, cmbBorrowSelectPerson)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePayment(paymentId), errorProvider1, cmbBorrowPaymentType)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateAmount(amount), errorProvider1, txtBorrowAddAmount)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDeadline(deadline), errorProvider1, txtBorrowAddDeadlineDatePicker)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDescription(description), errorProvider1, txtBorrowAddDescription)) return;
+
+            
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this borrow?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
             {
-                borrowUi.deadlineAt = DateTime.MinValue;
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
             }
+
+            BorrowUI borrowUi = new BorrowUI();
+            borrowUi.userId = Session.LogedInUser.GetUserId();
+            borrowUi.personId = personId;
+            borrowUi.paymentId = paymentId;
+            borrowUi.amount = amount;
+            borrowUi.description = description;
+            borrowUi.deadlineAt = deadline;
 
             CommonValidator.ValidationResult result = borrowUi.InsertDataIntoBorrowUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Borrow added successfully!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
@@ -423,7 +441,6 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     break;
             }
         }
-
 
 
         private void pnlAddBorrowMainBody_Click(object sender, EventArgs e)

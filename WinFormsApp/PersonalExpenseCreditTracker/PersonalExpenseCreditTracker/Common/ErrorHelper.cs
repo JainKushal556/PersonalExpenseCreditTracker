@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -358,5 +358,88 @@ namespace PersonalExpenseCreditTracker.Common
                     break;
             }
         }
+
+       
+
+        public static bool Validate(CommonValidator.ValidationResult result, ErrorProvider errorProvider, ComboBox control)
+        {
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                ShowValidationError(result, errorProvider, control);
+                return false;
+            }
+            HideErrorForControl(control);
+            return true;
+        }
+
+        public static bool Validate(CommonValidator.ValidationResult result, ErrorProvider errorProvider, TextBox control)
+        {
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                ShowValidationError(result, errorProvider, control);
+                return false;
+            }
+            HideErrorForControl(control);
+            return true; 
+        }
+        public static bool Validate(CommonValidator.ValidationResult result, ErrorProvider errorProvider, RichTextBox control)
+        {
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                ShowValidationError(result, errorProvider, control);
+                return false;
+            }
+            HideErrorForControl(control);
+            return true;
+        }
+
+        public static bool Validate(CommonValidator.ValidationResult result, ErrorProvider errorProvider, Label control)
+        {
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                ShowValidationError(result, errorProvider, control);
+                return false;
+            }
+            HideErrorForControl(control);
+            return true;
+        }
+       
+        public static void ShowValidationError(CommonValidator.ValidationResult result, ErrorProvider errorProvider, Panel panel)
+        {
+            string message = "";
+            switch (result)
+            {
+                case CommonValidator.ValidationResult.DescriptionInvalid:
+                    message = "* Description is required.";
+                    break;
+
+                case CommonValidator.ValidationResult.DescriptionTooShort:
+                    message = "* Description must contain at least 5 characters.";
+                    break;
+
+                case CommonValidator.ValidationResult.DescriptionTooLong:
+                    message = "* Description cannot exceed 150 characters.";
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ShowErrorBelowControl(panel, message);
+                panel.Focus();
+            }
+        }
+
+       
+        public static bool Validate(CommonValidator.ValidationResult result, ErrorProvider errorProvider, Panel control)
+        {
+            if (result != CommonValidator.ValidationResult.Success)
+            {
+                ShowValidationError(result, errorProvider, control);
+                return false;
+            }
+            HideErrorForControl(control);
+            return true;
+        }
+
     }
 }

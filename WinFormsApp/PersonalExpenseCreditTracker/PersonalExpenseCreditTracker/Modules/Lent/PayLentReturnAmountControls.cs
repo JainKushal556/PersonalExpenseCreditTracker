@@ -330,9 +330,18 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Lent returned successfully!");
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    DialogResult confirmResult = MessageBox.Show(
+                        "Are you sure you want to return this lent?",
+                        "Confirm Return",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                     if (confirmResult != DialogResult.Yes)
+                    {
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                        return;
+                    }
                     break;
 
                 case CommonValidator.ValidationResult.AmountEmpty:
@@ -361,6 +370,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                     break;
             }
         }
+
+
 
         private void txtReturnDate_Click(object sender, EventArgs e)
         {
