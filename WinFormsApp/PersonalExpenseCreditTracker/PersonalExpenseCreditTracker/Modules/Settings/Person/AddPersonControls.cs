@@ -353,19 +353,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             string personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text.Trim();
             string address = (txtAddPersonInputAddress.Text == "Enter Address") ? "" : txtAddPersonInputAddress.Text.Trim();
 
-            CommonValidator.ValidationResult valResult = CommonValidator.ValidationPersonName(personName);
-            if (valResult != CommonValidator.ValidationResult.Success)
-            {
-                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtAddPersonInputFullName);
-                return;
-            }
 
-            valResult = CommonValidator.ValidatePhoneNumber(personNumber);
-            if (valResult != CommonValidator.ValidationResult.Success)
-            {
-                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtAddPersonInputPhoneNumber);
-                return; 
-            }
+            if (!ErrorHelper.Validate(CommonValidator.ValidationPersonName(personName), errorProvider1, txtAddPersonInputFullName)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePhoneNumber(personNumber), errorProvider1, txtAddPersonInputPhoneNumber)) return;
+
             DialogResult confirmResult = MessageBox.Show(
                 "Are you sure you want to save this person details?",
                 "Confirm Save",

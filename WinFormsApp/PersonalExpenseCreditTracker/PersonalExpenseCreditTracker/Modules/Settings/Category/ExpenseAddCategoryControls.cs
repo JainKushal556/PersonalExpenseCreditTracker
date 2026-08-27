@@ -96,15 +96,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             string categoryName = (txtCategory.Text == "Enter Category Name") ? "" : txtCategory.Text.Trim();
 
-            CommonValidator.ValidationResult valResult = CommonValidator.ValidationCategoryName(categoryName);
-            if (valResult != CommonValidator.ValidationResult.Success)
-            {
-                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtCategory);
-                return;
-            }
+            if (!ErrorHelper.Validate(CommonValidator.ValidationCategoryName(categoryName), errorProvider1, txtCategory)) return;
 
             DialogResult confirmResult = MessageBox.Show(
-                "Are you sure you want to add this credit category?",
+                "Are you sure you want to add this expense category?",
                 "Confirm Add",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -127,7 +122,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
             string ErrorMsg;
 
-            CommonValidator.ValidationResult result = categoryUI.AddCreditCategoryDataIntoCategoryUI();
+            CommonValidator.ValidationResult result = categoryUI.AddExpenseCategoryDataIntoCategoryUI();
 
             switch (result)
             {

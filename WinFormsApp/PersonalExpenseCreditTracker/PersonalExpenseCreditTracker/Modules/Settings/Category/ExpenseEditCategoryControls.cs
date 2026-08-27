@@ -87,13 +87,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
             errorProvider1.Clear();
 
             string categoryName = txtCategoryName.Text.Trim();
-
-            CommonValidator.ValidationResult valResult = CommonValidator.ValidationCategoryName(categoryName);
-            if (valResult != CommonValidator.ValidationResult.Success)
-            {
-                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtCategoryName);
-                return; 
-            }
+            if (!ErrorHelper.Validate(CommonValidator.ValidationCategoryName(categoryName), errorProvider1, txtCategoryName)) return;
 
             DialogResult confirmResult = MessageBox.Show(
                 isSubCategory1
