@@ -140,21 +140,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             string personNumber = (txtEditPersonDetailsPhoneNumber.Text == "Enter Phone Number") ? "" : txtEditPersonDetailsPhoneNumber.Text.Trim();
             string address = (txtEditPersonDetailsAddress.Text == "Enter Address") ? "" : txtEditPersonDetailsAddress.Text.Trim();
  
-            CommonValidator.ValidationResult valResult = CommonValidator.ValidationPersonName(personName);
-            if (valResult != CommonValidator.ValidationResult.Success)
-            {
-                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtEditPersonDetailsFullName);
-                return; 
-            }
-
-          
-            valResult = CommonValidator.ValidatePhoneNumber(personNumber);
-            if (valResult != CommonValidator.ValidationResult.Success)
-            {
-                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtEditPersonDetailsPhoneNumber);
-                return;
-            }
-
+            if (!ErrorHelper.Validate(CommonValidator.ValidationPersonName(personName), errorProvider1, txtEditPersonDetailsFullName)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePhoneNumber(personNumber), errorProvider1, txtEditPersonDetailsPhoneNumber)) return;
           
             DialogResult confirmResult = MessageBox.Show(
                 "Are you sure you want to update this person details?",

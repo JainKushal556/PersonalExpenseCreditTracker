@@ -101,22 +101,8 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         {
             string subCategoryName = (txtSubCategory.Text == "Enter Sub Category Name") ? "" : txtSubCategory.Text.Trim();
 
-
-            CommonValidator.ValidationResult valResult = CommonValidator.ValidateCategory(SelectedCategoryId);
-            if (valResult != CommonValidator.ValidationResult.Success)
-            {
-                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtSubCategory);
-                return;
-            }
-
-
-            valResult = CommonValidator.ValidationCategoryName(subCategoryName);
-            if (valResult != CommonValidator.ValidationResult.Success)
-            {
-                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtSubCategory);
-                return;
-            }
-
+            if (!ErrorHelper.Validate(CommonValidator.ValidateCategory(SelectedCategoryId), errorProvider1, txtSubCategory)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidationCategoryName(subCategoryName), errorProvider1, txtSubCategory)) return;
 
             DialogResult confirmResult = MessageBox.Show(
                 "Are you sure you want to add this sub category?",
