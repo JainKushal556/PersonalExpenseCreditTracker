@@ -133,27 +133,57 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
 
         private void btnUpdatePersonDetails_Click(object sender, EventArgs e)
         {
-            //addPersonSControls.txtAddPersonInputFullName.Text = txtEditPersonDetailsFullName.Text;
-            //addPersonSControls.txtAddPersonInputPhoneNumber.Text = txtEditPersonDetailsPhoneNumber.Text;
-            //addPersonSControls.txtAddPersonInputAddress.Text = txtEditPersonDetailsAddress.Text;
-
-            //Clear All Previous Validation
+            
             errorProvider1.Clear();
+          
+            string personName = (txtEditPersonDetailsFullName.Text == "Enter Full Name") ? "" : txtEditPersonDetailsFullName.Text.Trim();
+            string personNumber = (txtEditPersonDetailsPhoneNumber.Text == "Enter Phone Number") ? "" : txtEditPersonDetailsPhoneNumber.Text.Trim();
+            string address = (txtEditPersonDetailsAddress.Text == "Enter Address") ? "" : txtEditPersonDetailsAddress.Text.Trim();
+ 
+            CommonValidator.ValidationResult valResult = CommonValidator.ValidationPersonName(personName);
+            if (valResult != CommonValidator.ValidationResult.Success)
+            {
+                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtEditPersonDetailsFullName);
+                return; 
+            }
 
+          
+            valResult = CommonValidator.ValidatePhoneNumber(personNumber);
+            if (valResult != CommonValidator.ValidationResult.Success)
+            {
+                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtEditPersonDetailsPhoneNumber);
+                return;
+            }
+
+          
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to update this person details?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close(); 
+                return;
+            }
+
+            
             PersonUI personUI = new PersonUI();
 
             personUI.userId = Session.LogedInUser.GetUserId();
             personUI.personId = personID;
-            personUI.personName = (txtEditPersonDetailsFullName.Text == "Enter Full Name") ? "" : txtEditPersonDetailsFullName.Text;
-            personUI.personNumber = (txtEditPersonDetailsPhoneNumber.Text == "Enter Phone Number") ? "" : txtEditPersonDetailsPhoneNumber.Text;
-            personUI.address = (txtEditPersonDetailsAddress.Text == "Enter Address") ? "" : txtEditPersonDetailsAddress.Text;
+            personUI.personName = personName;
+            personUI.personNumber = personNumber;
+            personUI.address = address;
 
             CommonValidator.ValidationResult result = personUI.UpdateDataIntoPersonUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Person Details Updated Successfully");
+                    //MessageBox.Show("Person Details Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (addPersonSControls != null)
                     {
                         addPersonSControls.LoadData();
@@ -162,51 +192,26 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
                     break;
 
                 case CommonValidator.ValidationResult.PersonInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsFullName);
-                    break;
-
                 case CommonValidator.ValidationResult.PersonNameEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsFullName);
-                    break;
-
                 case CommonValidator.ValidationResult.PersonNameInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsFullName);
                     break;
 
                 case CommonValidator.ValidationResult.PhoneNumberEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsPhoneNumber);
-                    break;
-
                 case CommonValidator.ValidationResult.PhoneInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsPhoneNumber);
-                    break;
-
                 case CommonValidator.ValidationResult.PhoneNumberAlreadyExists:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtEditPersonDetailsPhoneNumber);
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    MessageBox.Show("Person Not Updated");
+                    MessageBox.Show("Person Not Updated", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                     break;
             }
-            
         }
 
-        //private void btnCloseEditPersonDetails_MouseHover(object sender, EventArgs e)
-        //{
-        //    btnCloseEditPersonDetails.BackColor = Color.FromArgb(255, 0, 0);
-        //}
 
-        //private void btnCloseEditPersonDetails_MouseLeave(object sender, EventArgs e)
-        //{
-        //    btnCloseEditPersonDetails.BackColor = Color.FromArgb(255, 255, 255);
-        //}
 
-        //private void btnCloseEditPersonDetails_MouseEnter(object sender, EventArgs e)
-        //{
-        //    btnCloseEditPersonDetails.BackColor = Color.FromArgb(255, 0, 0);
-        //}
 
         private void pnlEditPersonDetailsMainBody_Paint(object sender, PaintEventArgs e)
         {

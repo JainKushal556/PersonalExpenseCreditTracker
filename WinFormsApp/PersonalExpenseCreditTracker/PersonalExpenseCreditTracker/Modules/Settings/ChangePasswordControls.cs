@@ -368,45 +368,73 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
 
         private void btnChangePasswordUpdatePassword_Click(object sender, EventArgs e)
         {
-            SettingsUi settingsUi = new SettingsUi();
+            errorProvider1.Clear();
+            lblPasswordMatch.Text = "";
 
+            string currentPassword = (txtCurrentPassword.Text == "Enter Current Password") ? "" : txtCurrentPassword.Text;
+            string newPassword = (txtNewPassword.Text == "Enter New Password") ? "" : txtNewPassword.Text;
+            string confirmPassword = (txtConfirmPassword.Text == "Confirm New Password") ? "" : txtConfirmPassword.Text;
+
+           
+            CommonValidator.ValidationResult valResult = CommonValidator.ValidatePassword(currentPassword, newPassword, confirmPassword);
+
+            if (valResult != CommonValidator.ValidationResult.Success)
+            {
+                switch (valResult)
+                {
+                    case CommonValidator.ValidationResult.CurrentPasswordEmpty:
+                        ErrorHelper.ShowValidationError(valResult, errorProvider1, txtCurrentPassword);
+                        break;
+
+                    case CommonValidator.ValidationResult.NewPasswordEmpty:
+                        ErrorHelper.ShowValidationError(valResult, errorProvider1, txtNewPassword);
+                        break;
+
+                    case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
+                        ErrorHelper.ShowValidationError(valResult, errorProvider1, txtConfirmPassword);
+                        break;
+
+                    case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
+                        ErrorHelper.ShowValidationError(valResult, errorProvider1, txtNewPassword);
+                        break;
+
+                    case CommonValidator.ValidationResult.NotMatchPassword:
+                        ErrorHelper.HideErrorForControl(txtConfirmPassword);
+                        lblPasswordMatch.Text = "* Password doesn't match.";
+                        lblPasswordMatch.ForeColor = Color.Red;
+                        txtConfirmPassword.Focus();
+                        break;
+                }
+                return;
+            }
+
+           
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to change your password?",
+                "Confirm Password Change",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close(); 
+                return;
+            }
+
+            SettingsUi settingsUi = new SettingsUi();
             settingsUi.UserId = Session.LogedInUser.GetUserId();
-            settingsUi.CurrentPassword = (txtCurrentPassword.Text == "Enter Current Password") ? "" : txtCurrentPassword.Text;
-            settingsUi.NewPassword = (txtNewPassword.Text == "Enter New Password") ? "" : txtNewPassword.Text;
-            settingsUi.ConfirmPassword = (txtConfirmPassword.Text == "Confirm New Password") ? "" : txtConfirmPassword.Text;
+            settingsUi.CurrentPassword = currentPassword;
+            settingsUi.NewPassword = newPassword;
+            settingsUi.ConfirmPassword = confirmPassword;
 
             CommonValidator.ValidationResult result = settingsUi.ChangePasswordDataIntoSettingsUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Password Changed Successfully");
+                    //MessageBox.Show("Password Changed Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
-                    break;
-
-                case CommonValidator.ValidationResult.CurrentPasswordEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCurrentPassword);
-                    break;
-
-                case CommonValidator.ValidationResult.NewPasswordEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtNewPassword);
-                    break;
-
-                case CommonValidator.ValidationResult.ConfirmPasswordEmpty:
-                    lblPasswordMatch.Text = ""; 
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtConfirmPassword);
-                    break;
-
-                case CommonValidator.ValidationResult.CurrentAndNewPasswordSame:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtNewPassword);
-                    break;
-
-
-                case CommonValidator.ValidationResult.NotMatchPassword:
-                    ErrorHelper.HideErrorForControl(txtConfirmPassword);
-                    lblPasswordMatch.Text = "* Password doesn't match.";
-                    lblPasswordMatch.ForeColor = Color.Red;
-                    txtConfirmPassword.Focus();
                     break;
 
                 case CommonValidator.ValidationResult.WeakPassword:
@@ -422,11 +450,10 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    MessageBox.Show("Password Not Updated.");
+                    MessageBox.Show("Password Not Updated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }
-
 
     }
 }

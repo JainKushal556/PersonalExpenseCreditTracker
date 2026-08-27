@@ -344,58 +344,78 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             ErrorHelper.ClearAllErrors(this);
         }
 
+
         private void btnAddPersonInputSavePerson_Click(object sender, EventArgs e)
         {
-            //Clear All Previous Validation
             errorProvider1.Clear();
 
-            PersonUI personUI = new PersonUI();
+            string personName = (txtAddPersonInputFullName.Text == "Enter Full Name") ? "" : txtAddPersonInputFullName.Text.Trim();
+            string personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text.Trim();
+            string address = (txtAddPersonInputAddress.Text == "Enter Address") ? "" : txtAddPersonInputAddress.Text.Trim();
 
+            CommonValidator.ValidationResult valResult = CommonValidator.ValidationPersonName(personName);
+            if (valResult != CommonValidator.ValidationResult.Success)
+            {
+                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtAddPersonInputFullName);
+                return;
+            }
+
+            valResult = CommonValidator.ValidatePhoneNumber(personNumber);
+            if (valResult != CommonValidator.ValidationResult.Success)
+            {
+                ErrorHelper.ShowValidationError(valResult, errorProvider1, txtAddPersonInputPhoneNumber);
+                return; 
+            }
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to save this person details?",
+                "Confirm Save",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                return; 
+            }
+
+            
+            PersonUI personUI = new PersonUI();
             personUI.userId = Session.LogedInUser.GetUserId();
             personUI.personId = -1;
-            personUI.personName = (txtAddPersonInputFullName.Text == "Enter Full Name")? "" : txtAddPersonInputFullName.Text;
-            personUI.personNumber = (txtAddPersonInputPhoneNumber.Text == "Enter Phone Number") ? "" : txtAddPersonInputPhoneNumber.Text;
-            personUI.address = (txtAddPersonInputAddress.Text == "Enter Address") ? "" : txtAddPersonInputAddress.Text;
+            personUI.personName = personName;
+            personUI.personNumber = personNumber;
+            personUI.address = address;
 
             CommonValidator.ValidationResult result = personUI.InsertDataIntoPersonUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Person Details Save Successfully");
-                    //LoadData();
-                     LastAddedPersonName = txtAddPersonInputFullName.Text.Trim();
+                    //MessageBox.Show("Person Details Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LastAddedPersonName = personName;
                     this.DialogResult = DialogResult.OK;
-    
-                     LoadData();
-                     
+
+                    LoadData();
+
                     break;
 
                 case CommonValidator.ValidationResult.PersonNameEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputFullName);
-                    break;
-
                 case CommonValidator.ValidationResult.PersonNameInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputFullName);
                     break;
 
                 case CommonValidator.ValidationResult.PhoneNumberEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputPhoneNumber);
-                    break;
-
                 case CommonValidator.ValidationResult.PhoneInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputPhoneNumber);
-                    break;
-
                 case CommonValidator.ValidationResult.PhoneNumberAlreadyExists:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtAddPersonInputPhoneNumber);
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    MessageBox.Show("Person Not Saved");
+                    MessageBox.Show("Person Not Saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }
+
+
 
         private void StylePersonGrid()
         {
