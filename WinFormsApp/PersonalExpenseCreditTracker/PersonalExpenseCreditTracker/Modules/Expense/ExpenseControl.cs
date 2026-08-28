@@ -847,7 +847,7 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
          //   tsmiSubCategory.Height = 30;
 
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiCategory.Image = Properties.Resources.shop;
           //  tsmiSubCategory.Image = Properties.Resources.folder;
             tsmiAmount.Image = Properties.Resources.money;
