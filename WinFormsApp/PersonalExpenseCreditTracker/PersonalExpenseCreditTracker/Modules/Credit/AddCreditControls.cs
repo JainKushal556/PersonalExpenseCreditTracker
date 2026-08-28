@@ -260,7 +260,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
                             "spGetCreditCategoriesByUserID",
                             Session.LogedInUser.GetUserId(),
                             "Select Category",
-                            "+ Add New Cetegory",
+                            "+ Add New Category",
                             cmbAddCreditCategory);
 
                         if (!string.IsNullOrEmpty(addCategoryForm.AddedCategoryName))
