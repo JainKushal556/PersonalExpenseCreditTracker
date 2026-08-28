@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.pnlMainBody = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lblForgotPassword = new System.Windows.Forms.Label();
             this.lblPasswordMatch = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.pnlChangePasswordAbout = new System.Windows.Forms.Panel();
@@ -66,7 +67,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblForgotPassword = new System.Windows.Forms.Label();
             this.pnlMainBody.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -97,7 +97,7 @@
             this.pnlMainBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMainBody.Location = new System.Drawing.Point(0, 0);
             this.pnlMainBody.Name = "pnlMainBody";
-            this.pnlMainBody.Size = new System.Drawing.Size(589, 730);
+            this.pnlMainBody.Size = new System.Drawing.Size(589, 704);
             this.pnlMainBody.TabIndex = 0;
             // 
             // panel4
@@ -119,6 +119,19 @@
             this.panel4.Padding = new System.Windows.Forms.Padding(15);
             this.panel4.Size = new System.Drawing.Size(587, 524);
             this.panel4.TabIndex = 2;
+            // 
+            // lblForgotPassword
+            // 
+            this.lblForgotPassword.AutoSize = true;
+            this.lblForgotPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblForgotPassword.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblForgotPassword.ForeColor = System.Drawing.Color.Blue;
+            this.lblForgotPassword.Location = new System.Drawing.Point(441, 106);
+            this.lblForgotPassword.Name = "lblForgotPassword";
+            this.lblForgotPassword.Size = new System.Drawing.Size(125, 20);
+            this.lblForgotPassword.TabIndex = 8;
+            this.lblForgotPassword.Text = "Forgot Password?";
+            this.lblForgotPassword.Click += new System.EventHandler(this.lblForgotPassword_Click);
             // 
             // lblPasswordMatch
             // 
@@ -424,9 +437,9 @@
             this.panel3.Controls.Add(this.btnChangePasswordCancel);
             this.panel3.Controls.Add(this.btnChangePasswordUpdatePassword);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 628);
+            this.panel3.Location = new System.Drawing.Point(0, 623);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(587, 100);
+            this.panel3.Size = new System.Drawing.Size(587, 79);
             this.panel3.TabIndex = 1;
             // 
             // btnChangePasswordCancel
@@ -439,7 +452,7 @@
             this.btnChangePasswordCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangePasswordCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePasswordCancel.ForeColor = System.Drawing.Color.White;
-            this.btnChangePasswordCancel.Location = new System.Drawing.Point(18, 17);
+            this.btnChangePasswordCancel.Location = new System.Drawing.Point(18, 11);
             this.btnChangePasswordCancel.Name = "btnChangePasswordCancel";
             this.btnChangePasswordCancel.Size = new System.Drawing.Size(196, 53);
             this.btnChangePasswordCancel.TabIndex = 1;
@@ -455,7 +468,7 @@
             this.btnChangePasswordUpdatePassword.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePasswordUpdatePassword.ForeColor = System.Drawing.Color.White;
             this.btnChangePasswordUpdatePassword.Image = global::PersonalExpenseCreditTracker.Properties.Resources.padlock__3_;
-            this.btnChangePasswordUpdatePassword.Location = new System.Drawing.Point(346, 17);
+            this.btnChangePasswordUpdatePassword.Location = new System.Drawing.Point(346, 11);
             this.btnChangePasswordUpdatePassword.Name = "btnChangePasswordUpdatePassword";
             this.btnChangePasswordUpdatePassword.Size = new System.Drawing.Size(223, 53);
             this.btnChangePasswordUpdatePassword.TabIndex = 0;
@@ -530,25 +543,12 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // lblForgotPassword
-            // 
-            this.lblForgotPassword.AutoSize = true;
-            this.lblForgotPassword.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblForgotPassword.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblForgotPassword.ForeColor = System.Drawing.Color.Blue;
-            this.lblForgotPassword.Location = new System.Drawing.Point(445, 109);
-            this.lblForgotPassword.Name = "lblForgotPassword";
-            this.lblForgotPassword.Size = new System.Drawing.Size(125, 20);
-            this.lblForgotPassword.TabIndex = 8;
-            this.lblForgotPassword.Text = "Forgot Password?";
-            this.lblForgotPassword.Click += new System.EventHandler(this.lblForgotPassword_Click);
-            // 
             // ChangePasswordControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(249)))));
-            this.ClientSize = new System.Drawing.Size(589, 730);
+            this.ClientSize = new System.Drawing.Size(589, 704);
             this.Controls.Add(this.pnlMainBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ChangePasswordControls";

@@ -63,6 +63,9 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             txtRegisteredEmail.TextChanged += txtRegisteredEmail_TextChanged;
             txtRegisteredPhoneNumber.TextChanged += txtRegisteredPhoneNumber_TextChanged;
             txtConfirmPassword.TextChanged += txtConfirmPassword_TextChanged;
+
+            SetRadius(btnForgotPasswordCancel, 5);
+            SetRadius(btnForgotPasswordUpdatePassword, 5);
         }
 
         // Radius Corner of These Panels
@@ -247,16 +250,6 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         private void pnlVeryStrong_Resize(object sender, EventArgs e)
         {
             SetRadius(pnlVeryStrong, 10);
-        }
-
-        private void btnForgotPasswordUpdatePassword_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnForgotPasswordUpdatePassword, 20);
-        }
-
-        private void btnForgotPasswordCancel_Resize(object sender, EventArgs e)
-        {
-            SetRadius(btnForgotPasswordCancel, 20);
         }
 
         private void txtRegisteredEmail_Enter(object sender, EventArgs e)
