@@ -106,39 +106,47 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            string categoryName = (txtCategory.Text == "Enter Category Name") ? "" : txtCategory.Text.Trim();
+            if (!ErrorHelper.Validate(CommonValidator.ValidationCategoryName(categoryName), errorProvider1, txtCategory)) return;
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this credit category?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
             CategoryUI categoryUI = new CategoryUI();
 
             AddedCategoryName = txtCategory.Text.Trim();
 
             categoryUI.UserId = Session.LogedInUser.GetUserId();
-            categoryUI.CategoryName = (txtCategory.Text == "Enter Category Name") ? "" : txtCategory.Text.Trim();
+            categoryUI.CategoryName = categoryName;
 
             categoryUI.IsActive = Convert.ToInt32(rdActive.Checked);
             categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
             string ErrorMsg;
 
-
-            
             CommonValidator.ValidationResult result = categoryUI.AddCreditCategoryDataIntoCategoryUI();
-            
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Inserted successfully.");
+                    //MessageBox.Show("Category added successfully.");
                     if (creditCategoryControls != null)
                     {
                         creditCategoryControls.LoadCategories();
                     }
                     this.DialogResult = DialogResult.OK;
                     this.Close();
-
                     break;
 
                 case CommonValidator.ValidationResult.CategoryNameEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategory);
-                    break;
-
                 case CommonValidator.ValidationResult.InvalidCategoryName:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtCategory);
                     break;
@@ -152,6 +160,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     break;
             }
         }
+
 
         private void rbInactive_CheckedChanged(object sender, EventArgs e)
         {

@@ -91,53 +91,66 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                 txtCategory.ForeColor = Color.Gray;
             }
         }
-       
+
         private void btnSave_Click(object sender, EventArgs e)
         {
+            string categoryName = (txtCategory.Text == "Enter Category Name") ? "" : txtCategory.Text.Trim();
+
+            if (!ErrorHelper.Validate(CommonValidator.ValidationCategoryName(categoryName), errorProvider1, txtCategory)) return;
+
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this expense category?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
             CategoryUI categoryUI = new CategoryUI();
 
             AddedCategoryName = txtCategory.Text.Trim();
 
             categoryUI.UserId = Session.LogedInUser.GetUserId();
-            categoryUI.CategoryName = (txtCategory.Text == "Enter Category Name") ? "" : txtCategory.Text.Trim();
+            categoryUI.CategoryName = categoryName;
 
             categoryUI.IsActive = Convert.ToInt32(rdActive.Checked);
             categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
             string ErrorMsg;
 
-           
             CommonValidator.ValidationResult result = categoryUI.AddExpenseCategoryDataIntoCategoryUI();
-            
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Expense Category added successfully.");
+                    //MessageBox.Show("Category added successfully.");
                     if (expenseCategoryControls != null)
                     {
                         expenseCategoryControls.LoadCategories();
                     }
-
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
                 case CommonValidator.ValidationResult.CategoryNameEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtCategory);
-                    break;
-
                 case CommonValidator.ValidationResult.InvalidCategoryName:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtCategory);
                     break;
-                
+
                 case CommonValidator.ValidationResult.StoreProcedureError:
                     ErrorMsg = categoryUI.GetErrorMsg("spInsertNewExpenseCategoryByUserID", "@ActiveStatus", "@CategoryName");
                     if (!string.IsNullOrWhiteSpace(ErrorMsg))
                         MessageBox.Show(ErrorMsg);
+
                     this.Close();
                     break;
             }
         }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;

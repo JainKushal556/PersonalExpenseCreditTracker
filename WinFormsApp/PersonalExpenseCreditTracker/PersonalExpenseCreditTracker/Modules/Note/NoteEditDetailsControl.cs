@@ -151,27 +151,48 @@ namespace PersonalExpenseCreditTracker.Modules.Note
 
         private void btnUpdateNote_Click(object sender, EventArgs e)
         {
-           
             errorProvider1.Clear();
+            ErrorHelper.HideErrorForControl(pnlDescription);
 
-          
+            // Extract values (excluding placeholders)
+            string noteTitle = (txtNoteTitle.Text == "Enter title") ? "" : txtNoteTitle.Text.Trim();
+            string description = (rtxtDescription.Text == "Enter description") ? "" : rtxtDescription.Text.Trim();
+
+            
+            if (!ErrorHelper.Validate(CommonValidator.ValidateNoteTitle(noteTitle), errorProvider1, txtNoteTitle)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDescription(description), errorProvider1, pnlDescription)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePriority(selectedPriorityId), errorProvider1, lblPriority)) return;
+
+           
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to update this note?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
+           
             NoteUI noteUi = new NoteUI();
             noteUi.userId = Session.LogedInUser.GetUserId();
             noteUi.noteId = noteControl.SelectedNoteID;
-
-            noteUi.noteTitle = (txtNoteTitle.Text == "Enter title") ? "" : txtNoteTitle.Text.Trim();
-            noteUi.description = (rtxtDescription.Text == "Enter description") ? "" : rtxtDescription.Text.Trim();
-
+            noteUi.noteTitle = noteTitle;
+            noteUi.description = description;
             noteUi.priorityId = selectedPriorityId;
             noteUi.colorId = selectedColorId;
-
 
             CommonValidator.ValidationResult result = noteUi.UpdateDataIntoNoteUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Note updated successfully!");
+                    //MessageBox.Show("Note updated successfully!");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
 
@@ -180,15 +201,15 @@ namespace PersonalExpenseCreditTracker.Modules.Note
                     break;
 
                 case CommonValidator.ValidationResult.DescriptionInvalid:
-                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description is required.");
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlDescription);
                     break;
 
                 case CommonValidator.ValidationResult.DescriptionTooShort:
-                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description must contain at least 5 characters.");
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlDescription);
                     break;
 
                 case CommonValidator.ValidationResult.DescriptionTooLong:
-                    ErrorHelper.ShowErrorBelowControl(pnlDescription, "* Description cannot exceed 1000 characters.");
+                    ErrorHelper.ShowValidationError(result, errorProvider1, pnlDescription);
                     break;
 
                 case CommonValidator.ValidationResult.PriorityInvalid:

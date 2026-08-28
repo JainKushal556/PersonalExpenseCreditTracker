@@ -153,18 +153,10 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
 
         private void btnSaveExpense_Click(object sender, EventArgs e)
         {
-            // Clear all previous validation errors
-           // ErrorHelper.ClearCustomErrors(this);
+           
             errorProvider1.Clear();
 
-            // Create a new object to store the user's input
-            ExpenseUI expenseUi = new ExpenseUI();
-
-            // Assign values from the form controls to the object
-            expenseUi.userId = Session.LogedInUser.GetUserId();
-            expenseUi.expenseId = -1;
-
-            // Safe conversion — null or invalid value returns 0 instead of crashing
+            
             int catId = 0, subCatId = 0, payId = 0;
 
             if (cmbAddExpenseCategory.SelectedValue != null)
@@ -176,22 +168,45 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
             if (cmbAddExpensePaymentType.SelectedValue != null)
                 int.TryParse(cmbAddExpensePaymentType.SelectedValue.ToString(), out payId);
 
-            expenseUi.categoryId    = catId;
+            string amount = (txtAddExpenseAmount.Text == "Select Amount") ? "" : txtAddExpenseAmount.Text;
+            string description = (txtAddExpenseDescription.Text == "Enter Description") ? "" : txtAddExpenseDescription.Text;
+
+            if (!ErrorHelper.Validate(CommonValidator.ValidateCategory(catId), errorProvider1, cmbAddExpenseCategory)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateSubCategory(subCatId), errorProvider1, cmbAddExpenseSubCategory)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateAmount(amount), errorProvider1, txtAddExpenseAmount)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePayment(payId), errorProvider1, cmbAddExpensePaymentType)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDescription(description), errorProvider1, txtAddExpenseDescription)) return;
+
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this expense?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
+            
+            ExpenseUI expenseUi = new ExpenseUI();
+
+            expenseUi.userId = Session.LogedInUser.GetUserId();
+            expenseUi.expenseId = -1;
+            expenseUi.categoryId = catId;
             expenseUi.subCategoryId = subCatId;
-            expenseUi.paymentId     = payId;
-
-
-            // If the placeholder text is still present, pass an empty string
-            expenseUi.amount = (txtAddExpenseAmount.Text == "Select Amount") ? "" : txtAddExpenseAmount.Text;
-            expenseUi.description = (txtAddExpenseDescription.Text == "Enter Description") ? "" : txtAddExpenseDescription.Text;
+            expenseUi.paymentId = payId;
+            expenseUi.amount = amount;
+            expenseUi.description = description;
 
             CommonValidator.ValidationResult result = expenseUi.InsertDataIntoExpenseUi();
 
-            // Perform action based on the validation result
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Expense added successfully!");
+                    //MessageBox.Show("Expense added successfully!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
@@ -224,12 +239,8 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
                     MessageBox.Show("Expense added unsuccessfully!");
                     break;
             }
-
-
-
         }
 
-        // Select suggestion on Enter key press
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Enter)

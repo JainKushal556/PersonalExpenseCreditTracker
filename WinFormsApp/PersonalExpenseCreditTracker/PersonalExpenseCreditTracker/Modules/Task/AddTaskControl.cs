@@ -155,15 +155,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnAddTask_Click(object sender, EventArgs e)
         {
-
             errorProvider1.Clear();
 
-
-            TaskUI taskUi = new TaskUI();
-
-            taskUi.userId = Session.LogedInUser.GetUserId(); // Logged-in User ID
-            taskUi.taskTitle = (txtTaskTitle.Text == "Enter task title") ? "" : txtTaskTitle.Text;
-
+           
+            string taskTitle = (txtTaskTitle.Text == "Enter task title") ? "" : txtTaskTitle.Text;
 
             int priorityId = 0;
             DataRowView drv = cmbPriority.SelectedValue as DataRowView;
@@ -175,28 +170,52 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             {
                 int.TryParse(cmbPriority.SelectedValue.ToString(), out priorityId);
             }
-            taskUi.priorityId = priorityId;
+
+            DateTime deadline = DateTime.MinValue;
             DateTime parsedDate;
             if (txtDeadline.Text != "DD-MM-YYYY" &&
                 DateTime.TryParseExact(txtDeadline.Text, "dd-MM-yyyy",
                     System.Globalization.CultureInfo.InvariantCulture,
                     System.Globalization.DateTimeStyles.None, out parsedDate))
             {
-                taskUi.deadline = parsedDate;
+                deadline = parsedDate;
             }
             else
             {
-                taskUi.deadline = (txtDeadline.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar1.SelectionStart;
+                deadline = (txtDeadline.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendar1.SelectionStart;
             }
 
+            
+            if (!ErrorHelper.Validate(CommonValidator.ValidateTaskTitle(taskTitle), errorProvider1, txtTaskTitle)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePriority(priorityId), errorProvider1, cmbPriority)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDeadline(deadline), errorProvider1, txtDeadline)) return;
+
+            
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this task?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
+            
+            TaskUI taskUi = new TaskUI();
+            taskUi.userId = Session.LogedInUser.GetUserId();
+            taskUi.taskTitle = taskTitle;
+            taskUi.priorityId = priorityId;
+            taskUi.deadline = deadline;
 
             CommonValidator.ValidationResult result = taskUi.InsertDataIntoTaskUi();
-
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Task added successfully!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
@@ -204,6 +223,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 case CommonValidator.ValidationResult.TaskTitleAlreadyExists:
                     ErrorHelper.ShowErrorBelowControl(txtTaskTitle, "* Task with this title already exists.");
                     break;
+
                 case CommonValidator.ValidationResult.TaskTitleInvalid:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtTaskTitle);
                     break;

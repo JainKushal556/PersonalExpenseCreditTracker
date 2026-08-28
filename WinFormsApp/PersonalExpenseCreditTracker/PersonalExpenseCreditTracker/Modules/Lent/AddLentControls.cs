@@ -289,28 +289,56 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-
         private void btnLentAddSave_Click(object sender, EventArgs e)
         {
+            panelLentAddCalenderShow.Visible = false;
             errorProvider1.Clear();
 
-            LentUi lentUi = new LentUi();
+            int personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
+            int paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
+            string amount = (txtLentAddAmount.Text == "Select Amount" || txtLentAddAmount.Text == "Enter Amount") ? "" : txtLentAddAmount.Text;
+            string description = (textBoxLentAddDescription.Text == "Enter description" || textBoxLentAddDescription.Text == "Enter Description") ? "" : textBoxLentAddDescription.Text;
 
+            DateTime deadline = DateTime.MinValue;
+            if (txtLentAddDeadlineDatePicker.Text != "DD-MM-YYYY")
+            {
+                deadline = monthCalendarAddLent.SelectionStart;
+            }
+
+
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePerson(personId), errorProvider1, comboBoxLentSelectPerson)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidatePayment(paymentId), errorProvider1, comboBoxLentPaymentType)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateAmount(amount), errorProvider1, txtLentAddAmount)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDeadline(deadline), errorProvider1, txtLentAddDeadlineDatePicker)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidateDescription(description), errorProvider1, textBoxLentAddDescription)) return;
+
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this lent?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
+            LentUi lentUi = new LentUi();
             lentUi.userId = Session.LogedInUser.GetUserId();
             lentUi.lentId = -1;
-            lentUi.personId = Convert.ToInt32(comboBoxLentSelectPerson.SelectedValue);
-            lentUi.paymentId = Convert.ToInt32(comboBoxLentPaymentType.SelectedValue);
-
-            lentUi.amount = (txtLentAddAmount.Text == "Select Amount" || txtLentAddAmount.Text == "Enter Amount") ? "" : txtLentAddAmount.Text;
-            lentUi.description = (textBoxLentAddDescription.Text == "Enter description" || textBoxLentAddDescription.Text == "Enter Description") ? "" : textBoxLentAddDescription.Text;
-            lentUi.deadlineAt = (txtLentAddDeadlineDatePicker.Text == "DD-MM-YYYY") ? DateTime.MinValue : monthCalendarAddLent.SelectionStart;
+            lentUi.personId = personId;
+            lentUi.paymentId = paymentId;
+            lentUi.amount = amount;
+            lentUi.description = description;
+            lentUi.deadlineAt = deadline;
 
             CommonValidator.ValidationResult result = lentUi.InsertDataIntoLentUi();
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Lent added successfully!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     break;
@@ -345,8 +373,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             }
         }
 
-
-        // Select suggestion on Enter key press
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Enter)

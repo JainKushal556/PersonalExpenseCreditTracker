@@ -99,27 +99,44 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
         //Save Button
         private void btnSave_Click(object sender, EventArgs e)
         {
+            string subCategoryName = (txtSubCategory.Text == "Enter Sub Category Name") ? "" : txtSubCategory.Text.Trim();
+
+            if (!ErrorHelper.Validate(CommonValidator.ValidateCategory(SelectedCategoryId), errorProvider1, txtSubCategory)) return;
+            if (!ErrorHelper.Validate(CommonValidator.ValidationCategoryName(subCategoryName), errorProvider1, txtSubCategory)) return;
+
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to add this sub category?",
+                "Confirm Add",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return;
+            }
+
+
             CategoryUI categoryUI = new CategoryUI();
 
-            AddedSubCategoryName = txtSubCategory.Text.Trim();
+            AddedSubCategoryName = subCategoryName;
 
             categoryUI.UserId = Session.LogedInUser.GetUserId();
             categoryUI.CategoryID = SelectedCategoryId;
             categoryUI.CategoryName = SelectedCategoryName;
-            categoryUI.SubCategory = (txtSubCategory.Text == "Enter Sub Category Name") ? "" : txtSubCategory.Text.Trim();
+            categoryUI.SubCategory = subCategoryName;
 
             categoryUI.IsActive = Convert.ToInt32(rdActive.Checked);
             categoryUI.Inactive = Convert.ToInt32(rdInactive.Checked);
             string ErrorMsg;
 
-
             CommonValidator.ValidationResult result = categoryUI.AddExpenseSubCategoryDataIntoCategoryUI();
-            
 
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    MessageBox.Show("Sub Category added successfully.");
+                    //MessageBox.Show("SubCategory added successfully.");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     ExpenseCategoryControls expenseCategoryControls = new ExpenseCategoryControls();
@@ -127,26 +144,20 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Category
                     break;
 
                 case CommonValidator.ValidationResult.CategoryInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
-                    break;
-
                 case CommonValidator.ValidationResult.CategoryNameEmpty:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
-                    break;
-
                 case CommonValidator.ValidationResult.InvalidCategoryName:
                     ErrorHelper.ShowValidationError(result, errorProvider1, txtSubCategory);
                     break;
 
                 case CommonValidator.ValidationResult.StoreProcedureError:
-                    ErrorMsg = categoryUI.GetErrorMsgforSub("spInsertNewExpenseSubCategoryByUserID", "@CategoryID", "@ActiveStatus", "@SubCategoryName");
+                    ErrorMsg = categoryUI.GetErrorMsgforSub("spInsertNewaExpenseSubCategoryByUserID", "@CategoryID", "@ActiveStatus", "@SubCategoryName");
                     if (!string.IsNullOrWhiteSpace(ErrorMsg))
                         MessageBox.Show(ErrorMsg);
-
-                    this.Close();
                     break;
             }
         }
+
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
