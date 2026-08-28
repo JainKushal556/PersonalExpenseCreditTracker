@@ -51,9 +51,9 @@ IF NOT EXISTS (SELECT 1 FROM tblTaskStatus WHERE TaskStatusName = 'Complete')   
 GO
 
 -- Note Priorities
-IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Low')    INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Normal');
-IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Medium') INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Important');
-IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'High')    INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Urgent');
+IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Low')    INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Low');
+IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'Medium') INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('Medium');
+IF NOT EXISTS (SELECT 1 FROM tblNotePriorities WHERE NotePriorityName = 'High')    INSERT INTO tblNotePriorities (NotePriorityName) VALUES ('High');
 GO
 
 -- Note Colors
