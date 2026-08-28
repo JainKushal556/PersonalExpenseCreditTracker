@@ -696,20 +696,27 @@ namespace PersonalExpenseCreditTracker.Common
                 textColor = Color.Gray;
             }
 
-            Brush textBrush = new SolidBrush(textColor);
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
-            {
-                textBrush = SystemBrushes.HighlightText;
-            }
+            bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
             string text = combo.GetItemText(combo.Items[e.Index]);
-            
+
             using (StringFormat sf = new StringFormat())
             {
                 sf.LineAlignment = StringAlignment.Center;
                 sf.Alignment = StringAlignment.Near;
                 Rectangle rect = new Rectangle(e.Bounds.X + 2, e.Bounds.Y, e.Bounds.Width - 2, e.Bounds.Height);
-                e.Graphics.DrawString(text, combo.Font, textBrush, rect, sf);
+
+                if (isSelected)
+                {
+                    e.Graphics.DrawString(text, combo.Font, SystemBrushes.HighlightText, rect, sf);
+                }
+                else
+                {
+                    using (Brush textBrush = new SolidBrush(textColor))
+                    {
+                        e.Graphics.DrawString(text, combo.Font, textBrush, rect, sf);
+                    }
+                }
             }
 
             e.DrawFocusRectangle();
