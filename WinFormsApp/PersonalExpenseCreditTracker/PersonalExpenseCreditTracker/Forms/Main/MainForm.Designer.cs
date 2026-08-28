@@ -1692,7 +1692,7 @@ namespace PersonalExpenseCreditTracker
             // 
             // picUserProfile
             // 
-            this.picUserProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user;
+            this.picUserProfile.Image = global::PersonalExpenseCreditTracker.Properties.Resources.user__2_;
             this.picUserProfile.Location = new System.Drawing.Point(29, 18);
             this.picUserProfile.Margin = new System.Windows.Forms.Padding(29, 16, 11, 10);
             this.picUserProfile.Name = "picUserProfile";

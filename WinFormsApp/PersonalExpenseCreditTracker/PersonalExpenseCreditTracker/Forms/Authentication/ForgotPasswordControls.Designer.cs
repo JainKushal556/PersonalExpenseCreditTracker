@@ -245,7 +245,6 @@
             this.btnForgotPasswordCancel.Text = "Cancel";
             this.btnForgotPasswordCancel.UseVisualStyleBackColor = false;
             this.btnForgotPasswordCancel.Click += new System.EventHandler(this.btnForgotPasswordCancel_Click);
-            this.btnForgotPasswordCancel.Resize += new System.EventHandler(this.btnForgotPasswordCancel_Resize);
             // 
             // lblRegisteredEmail
             // 
@@ -326,7 +325,6 @@
             this.btnForgotPasswordUpdatePassword.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnForgotPasswordUpdatePassword.UseVisualStyleBackColor = false;
             this.btnForgotPasswordUpdatePassword.Click += new System.EventHandler(this.btnForgotPasswordUpdatePassword_Click);
-            this.btnForgotPasswordUpdatePassword.Resize += new System.EventHandler(this.btnForgotPasswordUpdatePassword_Resize);
             // 
             // label7
             // 
