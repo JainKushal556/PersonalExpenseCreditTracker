@@ -75,15 +75,52 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
             pnlCalenderShow.Visible = false;
             errorProvider1.Clear();
 
+            // Step 1: প্রথমে field ভ্যালিডেশন করো
+            string amountText = (txtAmount.Text == "Select Amount" || txtAmount.Text == "Enter Return Amount") ? "" : txtAmount.Text;
+            string descriptionText = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
+
+            if (string.IsNullOrWhiteSpace(amountText))
+            {
+                ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountEmpty, errorProvider1, txtAmount);
+                return;
+            }
+
+            decimal parsedAmount;
+            if (!decimal.TryParse(amountText, out parsedAmount) || parsedAmount <= 0)
+            {
+                ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountInvalid, errorProvider1, txtAmount);
+                return;
+            }
+
+            if (cmbPaymentType.SelectedIndex <= 0)
+            {
+                ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.PaymentInvalid, errorProvider1, cmbPaymentType);
+                return;
+            }
+
+            // Step 2: ভ্যালিডেশন পাস হলে confirmation দেখাও (এখনো DB তে কিছু save হয়নি)
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to pay this borrow?",
+                "Confirm Pay",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                // "No" — কিছু save হবে না, form খোলা থাকবে
+                return;
+            }
+
+            // Step 3: "Yes" হলে BLL call করো যা ভ্যালিডেশন সহ DB তে save করবে
             BorrowUI borrowUi = new BorrowUI();
             borrowUi.userId = Session.LogedInUser.GetUserId();
             borrowUi.borrowId = this.selectedBorrowId;
             borrowUi.paymentId = Convert.ToInt32(cmbPaymentType.SelectedValue);
-            borrowUi.returnAmount = (txtAmount.Text == "Select Amount") ? "" : txtAmount.Text;
-            borrowUi.description = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
+            borrowUi.returnAmount = amountText;
+            borrowUi.description = descriptionText;
 
             DateTime returnDate = DateTime.MinValue;
-            if (!string.IsNullOrWhiteSpace(txtReturnDate.Text))
+            if (!string.IsNullOrWhiteSpace(txtReturnDate.Text) && txtReturnDate.Text != "DD-MM-YYYY")
             {
                 string[] formats = new string[] { "dd-MM-yyyy", "d-M-yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy", "dd MMM yyyy", "d MMM yyyy", "dd MMMM yyyy" };
                 if (!DateTime.TryParseExact(txtReturnDate.Text.Trim(), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out returnDate))
@@ -91,46 +128,41 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
                     DateTime.TryParse(txtReturnDate.Text.Trim(), out returnDate);
                 }
             }
-
             borrowUi.returnDate = returnDate;
 
             CommonValidator.ValidationResult result = borrowUi.InsertPayBorrowIntoBorrowUi();
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    DialogResult confirmResult = MessageBox.Show(
-                        "Are you sure you want to pay this borrow?",
-                        "Confirm Pay",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question);
-
-                    if (confirmResult != DialogResult.Yes)
-                    {
-                        this.DialogResult = DialogResult.Cancel;
-                        this.Close();
-                        return;
-                    }
+                    this.Close();
                     break;
 
                 case CommonValidator.ValidationResult.AmountEmpty:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountEmpty, errorProvider1, txtAmount);
+                    break;
                 case CommonValidator.ValidationResult.AmountInvalid:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountInvalid, errorProvider1, txtAmount);
+                    break;
                 case CommonValidator.ValidationResult.AmountTooLarge:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtAmount);
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountTooLarge, errorProvider1, txtAmount);
                     break;
                 case CommonValidator.ValidationResult.PaymentInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbPaymentType);
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.PaymentInvalid, errorProvider1, cmbPaymentType);
                     break;
-
-
                 case CommonValidator.ValidationResult.DeadlineInvalid:
-                case CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnDate);
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.DeadlineInvalid, errorProvider1, txtReturnDate);
                     break;
-
+                case CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier, errorProvider1, txtReturnDate);
+                    break;
                 case CommonValidator.ValidationResult.DescriptionInvalid:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.DescriptionInvalid, errorProvider1, txtDescription);
+                    break;
                 case CommonValidator.ValidationResult.DescriptionTooShort:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.DescriptionTooShort, errorProvider1, txtDescription);
+                    break;
                 case CommonValidator.ValidationResult.DescriptionTooLong:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtDescription);
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.DescriptionTooLong, errorProvider1, txtDescription);
                     break;
                 case CommonValidator.ValidationResult.StoreProcedureError:
                     MessageBox.Show("Borrow payment failed!");

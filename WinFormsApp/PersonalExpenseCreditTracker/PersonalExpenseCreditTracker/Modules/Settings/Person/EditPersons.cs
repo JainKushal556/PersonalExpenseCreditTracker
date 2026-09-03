@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -170,7 +170,7 @@ namespace PersonalExpenseCreditTracker.Modules.Settings.Person
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    //MessageBox.Show("Person Details Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Person Details Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (addPersonSControls != null)
                     {
                         addPersonSControls.LoadData();

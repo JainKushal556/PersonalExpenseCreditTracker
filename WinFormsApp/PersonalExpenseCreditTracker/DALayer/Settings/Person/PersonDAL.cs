@@ -102,9 +102,8 @@ namespace DALayer.Settings.Person
                     sqlCommand.Parameters.AddWithValue("@PhoneNumber", this.personNumber);
                     sqlCommand.Parameters.AddWithValue("@Address", this.address);
                     sqlConnection.Open();
-                    object result = sqlCommand.ExecuteScalar();
-                    string msg = result != null ? result.ToString() : "";
-                    return msg == "Person Details Updated Successfully";
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+                    return rowsAffected > 0;
                 }
             }
             catch (Exception ex)
