@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -70,8 +70,8 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             this.StartPosition = FormStartPosition.CenterScreen;
 
             SetRadius(pnlBody, 15);
-            SetRadius(btnCancel, 5);
-            SetRadius(btnUpdateTask, 5);
+            SetRadius(btnCancel,     6);
+            SetRadius(btnUpdateTask, 6);
 
             txtTaskTitle.Text = taskControl.SelectedTaskTitle;
             txtTaskTitle.ForeColor = Color.Black;
@@ -130,8 +130,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
                 }
             }
 
-            btnCancel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnCancel.Width, btnCancel.Height, 6, 6));
-            btnUpdateTask.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnUpdateTask.Width, btnUpdateTask.Height, 6, 6));
+            // Regions already applied by SetRadius() above — no duplicate needed
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

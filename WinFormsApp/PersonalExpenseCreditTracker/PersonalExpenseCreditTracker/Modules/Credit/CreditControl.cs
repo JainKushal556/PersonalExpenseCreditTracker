@@ -29,6 +29,21 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             int nBottomRect,
             int nWidthEllipse,
             int nHeightEllipse);
+
+        [DllImport("Gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        private void SetRoundRegion(Control control, int radius)
+        {
+            if (control == null || control.Width <= 0 || control.Height <= 0) return;
+            IntPtr hrgn = CreateRoundRectRgn(0, 0, control.Width + 1, control.Height + 1, radius, radius);
+            Region newRegion = Region.FromHrgn(hrgn);
+            DeleteObject(hrgn);
+            Region old = control.Region;
+            control.Region = newRegion;
+            if (old != null) old.Dispose();
+        }
+
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllCreditData = new DataTable();
         private DataTable masterData = new DataTable();
@@ -574,13 +589,8 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void ApplyRoundCorners()
         {
-            pnlTotalCredit.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTotalCredit.Width, pnlTotalCredit.Height, 15, 15));
-
-            pnlTransactionCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTransactionCard.Width, pnlTransactionCard.Height, 15, 15));
-
-
+            SetRoundRegion(pnlTotalCredit,    15);
+            SetRoundRegion(pnlTransactionCard, 15);
         }
 
         private void ResetCategoryAndSubCategoryFilters()

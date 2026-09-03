@@ -31,6 +31,20 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             int nHeightEllipse
         );
 
+        [DllImport("Gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        private void SetRoundRegion(Control control, int radius)
+        {
+            if (control == null || control.Width <= 0 || control.Height <= 0) return;
+            IntPtr hrgn = CreateRoundRectRgn(0, 0, control.Width + 1, control.Height + 1, radius, radius);
+            Region newRegion = Region.FromHrgn(hrgn);
+            DeleteObject(hrgn);
+            Region old = control.Region;
+            control.Region = newRegion;
+            if (old != null) old.Dispose();
+        }
+
         private string ConnectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
         private DataTable AllTaskData = new DataTable();
         private DataTable masterData = new DataTable();
@@ -287,17 +301,10 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         }
         private void SetPanelRadius()
         {
-            pnlTotalTask.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTotalTask.Width, pnlTotalTask.Height, 10, 10));
-
-            pnlTaskComplete.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTaskComplete.Width, pnlTaskComplete.Height, 10, 10));
-
-            pnlTaskPanding.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlTaskPanding.Width, pnlTaskPanding.Height, 10, 10));
-
-            pnlDueToday.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlDueToday.Width, pnlDueToday.Height, 10, 10));
+            SetRoundRegion(pnlTotalTask,    10);
+            SetRoundRegion(pnlTaskComplete, 10);
+            SetRoundRegion(pnlTaskPanding,  10);
+            SetRoundRegion(pnlDueToday,     10);
         }
 
 

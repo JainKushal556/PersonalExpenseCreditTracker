@@ -53,6 +53,20 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             int nWidthEllipse,
             int nHeightEllipse);
 
+        [DllImport("Gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        private void SetRoundRegion(Control control, int radius)
+        {
+            if (control == null || control.Width <= 0 || control.Height <= 0) return;
+            IntPtr hrgn = CreateRoundRectRgn(0, 0, control.Width + 1, control.Height + 1, radius, radius);
+            Region newRegion = Region.FromHrgn(hrgn);
+            DeleteObject(hrgn);
+            Region old = control.Region;
+            control.Region = newRegion;
+            if (old != null) old.Dispose();
+        }
+
 
         public LentControls()
         {
@@ -105,42 +119,10 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         }
         private void ApplyRoundCorners()
         {
-            panelTotalLent.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelTotalLent.Width,
-                    panelTotalLent.Height,
-                    10,
-                    10));
-
-            panelTotalRepaid.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelTotalRepaid.Width,
-                    panelTotalRepaid.Height,
-                    15,
-                    15));
-
-            panelTotalDue.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelTotalDue.Width,
-                    panelTotalDue.Height,
-                    15,
-                    15));
-
-            panelTotalTransaction.Region = Region.FromHrgn(
-                CreateRoundRectRgn(
-                    0,
-                    0,
-                    panelTotalTransaction.Width,
-                    panelTotalTransaction.Height,
-                    15,
-                    15));
-
+            SetRoundRegion(panelTotalLent,        10);
+            SetRoundRegion(panelTotalRepaid,      15);
+            SetRoundRegion(panelTotalDue,         15);
+            SetRoundRegion(panelTotalTransaction, 15);
         }
         private void LentControls_Load(object sender, EventArgs e)
         {
