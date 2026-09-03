@@ -30,6 +30,10 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             int nWidthEllipse,
             int nHeightEllipse);
 
+        [DllImport("Gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+
         public DashboardControl()
         {
 
@@ -87,6 +91,12 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
         private void LoadIncomeOverviewChart(int userID, string filter = "This Year")
         {
+            DataTable dtCredit = CommonUiFunction.RetrieveDataForGridView("spGetAllCreditsByID", userID);
+            LoadIncomeOverviewChartCore(dtCredit, filter);
+        }
+
+        private void LoadIncomeOverviewChartCore(DataTable dtCredit, string filter)
+        {
             // =========================
             // 1. CLEAR CHART
             // =========================
@@ -113,10 +123,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
             // =========================
             // 3. GET CREDIT DATA
             // =========================
-            DataTable dtCredit =
-                CommonUiFunction.RetrieveDataForGridView(
-                    "spGetAllCreditsByID",
-                    userID);
+            // dtCredit is passed in — no DB fetch needed here
 
             DateTime today = DateTime.Today;
 
@@ -661,14 +668,20 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
 
         private void LoadExpenseCategoryChart(int userID, string filter = "This Year")
         {
+            DataTable dtExpense = CommonUiFunction.RetrieveDataForGridView("spGetAllExpensesByID", userID);
+            LoadExpenseCategoryChartCore(dtExpense, filter);
+        }
+
+        private void LoadExpenseCategoryChartCore(DataTable dtExpense, string filter)
+        {
             chartExpenseCategory.Series[0].Points.Clear();
             chartExpenseCategory.Series[0].ChartType = SeriesChartType.Doughnut;
             chartExpenseCategory.Series[0]["DoughnutRadius"] = "58";
-            chartExpenseCategory.Series[0]["PieDrawingStyle"] = "Default"; 
+            chartExpenseCategory.Series[0]["PieDrawingStyle"] = "Default";
             chartExpenseCategory.Series[0].BorderColor = Color.White;
             chartExpenseCategory.Series[0].BorderWidth = 2;
             chartExpenseCategory.Legends[0].Enabled = false;
-            DataTable dtExpense = CommonUiFunction.RetrieveDataForGridView("spGetAllExpensesByID", userID);
+            // dtExpense is passed in — no DB fetch needed here
             DateTime today = DateTime.Today;
             IEnumerable<DataRow> filteredRows = Enumerable.Empty<DataRow>();
             if (dtExpense != null && dtExpense.Rows.Count > 0 && !dtExpense.Columns.Contains("Message"))
@@ -791,19 +804,27 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
         }
 
 
+        // Helper: safely set a rounded Region and release the GDI handle
+        private void SetRoundRegion(Control control, int radius)
+        {
+            if (control == null || control.Width <= 0 || control.Height <= 0)
+                return;
+
+            IntPtr hrgn = CreateRoundRectRgn(0, 0, control.Width + 1, control.Height + 1, radius, radius);
+            Region newRegion = Region.FromHrgn(hrgn);
+            DeleteObject(hrgn);   // release the GDI handle immediately after Region.FromHrgn
+
+            Region old = control.Region;
+            control.Region = newRegion;
+            if (old != null) old.Dispose(); // dispose the old region to free GDI resources
+        }
+
         private void ApplyRoundCorners()
         {
-            pnlExpenseCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlExpenseCard.Width, pnlExpenseCard.Height, 15, 15));
-
-            pnlCreditCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlCreditCard.Width, pnlCreditCard.Height, 15, 15));
-
-            pnlCardBorrowCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlCardBorrowCard.Width, pnlCardBorrowCard.Height, 15, 15));
-
-            pnlCardLentCard.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, pnlCardLentCard.Width, pnlCardLentCard.Height, 15, 15));
+            SetRoundRegion(pnlExpenseCard,    15);
+            SetRoundRegion(pnlCreditCard,     15);
+            SetRoundRegion(pnlCardBorrowCard, 15);
+            SetRoundRegion(pnlCardLentCard,   15);
         }
 
         private void pnlExpenseCard_Resize(object sender, EventArgs e)
@@ -905,67 +926,115 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
         }
 
 
+        // =====================================================
+        // Helper: Filter DataTable rows by date column & period
+        // =====================================================
+        private IEnumerable<DataRow> FilterByPeriod(DataTable dt, string dateColumn, string filter)
+        {
+            if (dt == null || dt.Rows.Count == 0 || dt.Columns.Contains("Message") || !dt.Columns.Contains(dateColumn))
+                return Enumerable.Empty<DataRow>();
+
+            DateTime today = DateTime.Today;
+            return dt.AsEnumerable().Where(r =>
+            {
+                if (r[dateColumn] == DBNull.Value) return false;
+                DateTime d = Convert.ToDateTime(r[dateColumn]);
+                if (filter == "This Month")
+                    return d.Year == today.Year && d.Month == today.Month;
+                else if (filter == "Last Month")
+                {
+                    DateTime last = today.AddMonths(-1);
+                    return d.Year == last.Year && d.Month == last.Month;
+                }
+                else // This Year (default)
+                    return d.Year == today.Year;
+            });
+        }
+
+        // =====================================================
+        // Load top-4 card totals filtered by the chosen period
+        // =====================================================
+        private void LoadCardTotals(int userID, string filter)
+        {
+            // --- Total Expense ---
+            DataTable dtExpense = CommonUiFunction.RetrieveDataForGridView("spGetAllExpensesByID", userID);
+            decimal totalExpense = FilterByPeriod(dtExpense, "ExpenseAt", filter)
+                .Where(r => r["Amount"] != DBNull.Value)
+                .Sum(r => Convert.ToDecimal(r["Amount"]));
+            lblExpenseAmount.Text = "₹ " + totalExpense.ToString("#,##0");
+            lblExpenseValue.Text  = "₹ " + totalExpense.ToString("#,##0");
+
+            // --- Total Credit (Income) ---
+            DataTable dtCredit = CommonUiFunction.RetrieveDataForGridView("spGetAllCreditsByID", userID);
+            decimal totalCredit = FilterByPeriod(dtCredit, "CreditAt", filter)
+                .Where(r => r["Amount"] != DBNull.Value)
+                .Sum(r => Convert.ToDecimal(r["Amount"]));
+            lblCreditAmount.Text = "₹ " + totalCredit.ToString("#,##0");
+            lblIncomeValue.Text  = "₹ " + totalCredit.ToString("#,##0");
+
+            // --- Total Borrow ---
+            DataTable dtBorrow = CommonUiFunction.RetrieveDataForGridView("spGetAllBorrow", userID);
+            decimal totalBorrow = FilterByPeriod(dtBorrow, "BorrowAt", filter)
+                .Where(r => r["Amount"] != DBNull.Value)
+                .Sum(r => Convert.ToDecimal(r["Amount"]));
+            lblBorrowAmount.Text = "₹ " + totalBorrow.ToString("#,##0");
+            lblBorrowValue.Text  = "₹ " + totalBorrow.ToString("#,##0");
+
+            // --- Total Lent ---
+            DataTable dtLent = CommonUiFunction.RetrieveDataForGridView("spGetAllLent", userID);
+            decimal totalLent = FilterByPeriod(dtLent, "LentAt", filter)
+                .Where(r => r["Amount"] != DBNull.Value)
+                .Sum(r => Convert.ToDecimal(r["Amount"]));
+            lblLentAmount.Text = "₹ " + totalLent.ToString("#,##0");
+            lblLentValue.Text  = "₹ " + totalLent.ToString("#,##0");
+
+            // --- Net Balance (Income - Expense) ---
+            decimal netBalance = totalCredit - totalExpense;
+            if (netBalance < 0)
+            {
+                lblNetBalanceValue.Text = "-₹ " + Math.Abs(netBalance).ToString("#,##0");
+                lblNetBalanceValue.ForeColor = Color.Red;
+            }
+            else if (netBalance > 0)
+            {
+                lblNetBalanceValue.Text = "₹ " + netBalance.ToString("#,##0");
+                lblNetBalanceValue.ForeColor = Color.Green;
+            }
+            else
+            {
+                lblNetBalanceValue.Text = "₹ 0";
+                lblNetBalanceValue.ForeColor = Color.Black;
+            }
+        }
+
         public void LoadDashboardSummary(int userID)
         {
-            //Total Expense 
-            DataTable dtExpense = CommonUiFunction.RetrieveDataForGridView("spGetAllExpensesByID", userID);
+            string filter = "This Year";
+            if (cmbExpenseFilter != null && cmbExpenseFilter.SelectedItem != null)
+                filter = cmbExpenseFilter.SelectedItem.ToString();
 
-            decimal totalExpense = 0;
-            if (dtExpense != null && dtExpense.Rows.Count > 0 && !dtExpense.Columns.Contains("Message"))
-            {
-                totalExpense = dtExpense.AsEnumerable().Sum(r => Convert.ToDecimal(r["Amount"]));
-            }
+            // ── Fetch each DataTable exactly ONCE ────────────────────────────
+            DataTable dtExpense = CommonUiFunction.RetrieveDataForGridView("spGetAllExpensesByID", userID);
+            DataTable dtCredit  = CommonUiFunction.RetrieveDataForGridView("spGetAllCreditsByID",  userID);
+            DataTable dtBorrow  = CommonUiFunction.RetrieveDataForGridView("spGetAllBorrow",        userID);
+            DataTable dtLent    = CommonUiFunction.RetrieveDataForGridView("spGetAllLent",          userID);
+
+            // ── Card totals (filtered by period) ────────────────────────────
+            decimal totalExpense = FilterByPeriod(dtExpense, "ExpenseAt", filter).Where(r => r["Amount"] != DBNull.Value).Sum(r => Convert.ToDecimal(r["Amount"]));
+            decimal totalCredit  = FilterByPeriod(dtCredit,  "CreditAt",  filter).Where(r => r["Amount"] != DBNull.Value).Sum(r => Convert.ToDecimal(r["Amount"]));
+            decimal totalBorrow  = FilterByPeriod(dtBorrow,  "BorrowAt",  filter).Where(r => r["Amount"] != DBNull.Value).Sum(r => Convert.ToDecimal(r["Amount"]));
+            decimal totalLent    = FilterByPeriod(dtLent,    "LentAt",    filter).Where(r => r["Amount"] != DBNull.Value).Sum(r => Convert.ToDecimal(r["Amount"]));
 
             lblExpenseAmount.Text = "₹ " + totalExpense.ToString("#,##0");
-           lblExpenseValue.Text = "₹ " + totalExpense.ToString("#,##0");
+            lblExpenseValue.Text  = "₹ " + totalExpense.ToString("#,##0");
+            lblCreditAmount.Text  = "₹ " + totalCredit.ToString("#,##0");
+            lblIncomeValue.Text   = "₹ " + totalCredit.ToString("#,##0");
+            lblBorrowAmount.Text  = "₹ " + totalBorrow.ToString("#,##0");
+            lblBorrowValue.Text   = "₹ " + totalBorrow.ToString("#,##0");
+            lblLentAmount.Text    = "₹ " + totalLent.ToString("#,##0");
+            lblLentValue.Text     = "₹ " + totalLent.ToString("#,##0");
 
-           //Total Credit (Income)
-           DataTable dtCredit = CommonUiFunction.RetrieveDataForGridView("spGetAllCreditsByID", userID);
-           decimal totalCredit = 0;
-           decimal amt = 0;
-
-           if (dtCredit != null &&
-               dtCredit.Rows.Count > 0 &&
-               !dtCredit.Columns.Contains("Message") &&
-               dtCredit.Columns.Contains("Amount"))
-           {
-               foreach (DataRow r in dtCredit.Rows)
-               {
-                   if (r["Amount"] != DBNull.Value &&
-                       decimal.TryParse(r["Amount"].ToString(), out amt))
-                   {
-                       totalCredit += amt;
-                   }
-               }
-           }
-
-           lblCreditAmount.Text = "₹ " + totalCredit.ToString("#,##0");
-           lblIncomeValue.Text = "₹ " + totalCredit.ToString("#,##0");
-
-
-            // Total Borrow 
-            DataTable dtBorrow = CommonUiFunction.RetrieveDataForGridView("spGetAllBorrow", userID);
-            decimal totalBorrow = 0;
-            if (dtBorrow != null && dtBorrow.Rows.Count > 0 && !dtBorrow.Columns.Contains("Message"))
-            {
-                totalBorrow = dtBorrow.AsEnumerable().Sum(r => Convert.ToDecimal(r["Amount"]));
-            }
-           lblBorrowAmount.Text = "₹ " + totalBorrow.ToString("#,##0");
-            lblBorrowValue.Text = "₹ " + totalBorrow.ToString("#,##0");
-
-            // Total Lent 
-            DataTable dtLent = CommonUiFunction.RetrieveDataForGridView("spGetAllLent", userID);
-            decimal totalLent = 0;
-            if (dtLent != null && dtLent.Rows.Count > 0 && !dtLent.Columns.Contains("Message"))
-            {
-                totalLent = dtLent.AsEnumerable().Sum(r => Convert.ToDecimal(r["Amount"]));
-            }
-           lblLentAmount.Text = "₹ " + totalLent.ToString("#,##0");
-            lblLentValue.Text = "₹ " + totalLent.ToString("#,##0");
-
-            //Net Balance (Income - Expense)
             decimal netBalance = totalCredit - totalExpense;
-
             if (netBalance < 0)
             {
                 lblNetBalanceValue.Text = "-₹ " + Math.Abs(netBalance).ToString("#,##0");
@@ -982,87 +1051,78 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                 lblNetBalanceValue.ForeColor = Color.Black;
             }
 
-            string currentFilter = "This Year";
-            if (cmbSecondHeader != null && cmbSecondHeader.SelectedItem != null)
-            {
-                currentFilter = cmbSecondHeader.SelectedItem.ToString();
-            }
-            LoadIncomeOverviewChart(userID, currentFilter);
+            // ── Charts: reuse the already-fetched DataTables (no extra DB calls) ──
+            LoadIncomeOverviewChartCore(dtCredit, filter);
+            LoadExpenseCategoryChartCore(dtExpense, filter);
 
-
-            string expenseFilter = "This Year";
-            if (cmbExpenseFilter != null && cmbExpenseFilter.SelectedItem != null)
-            {
-                expenseFilter = cmbExpenseFilter.SelectedItem.ToString();
-            }
-            LoadExpenseCategoryChart(userID, expenseFilter);
-
-            // Automatically reload Notifications (Budget Alert, Credit Ratio, etc.)
+            // ── Notifications ───────────────────────────────────────────────
             lblNotification.Text = "🔔  Notifications";
             lblTitle.Text = "🔔  Notifications";
             LoadNotifications(userID, pnlExtra, flpNotifications);
             if (pnlNotification != null && flowLayoutPanel5 != null)
-            {
                 LoadNotifications(userID, pnlNotification, flowLayoutPanel5);
-            }
         }
+
+        // Guard flag to prevent recursive combo sync
+        private bool _isSyncingCombos = false;
 
         private void cmbSecondHeader_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Triggered by programmatic sync — skip to avoid double loading
+            if (_isSyncingCombos) return;
+
             int userID = LogedInUser.GetUserId();
-            string filter = "This Year";
 
-           
-            switch (cmbSecondHeader.SelectedIndex)
+            // Sync expense combo without triggering its handler
+            _isSyncingCombos = true;
+            try
             {
-                case 0:
-                    filter = "This Month";
-                    break;
-                case 1:
-                    filter = "Last Month";
-                    break;
-                case 2:
-                    filter = "This Year";
-                    break;
+                if (cmbExpenseFilter.SelectedIndex != cmbSecondHeader.SelectedIndex)
+                    cmbExpenseFilter.SelectedIndex = cmbSecondHeader.SelectedIndex;
             }
+            finally { _isSyncingCombos = false; }
 
-          
-            LoadIncomeOverviewChart(userID, filter);
-            //this.BeginInvoke((MethodInvoker)(() => this.ActiveControl = null;));
+            // Reload everything via LoadDashboardSummary: 4 DB calls, no redundancy
+            LoadDashboardSummary(userID);
         }
 
         private void cmbExpenseFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Triggered by programmatic sync — skip to avoid double loading
+            if (_isSyncingCombos) return;
+
             int userID = LogedInUser.GetUserId();
-            string filter = "This Year";
 
-            switch (cmbExpenseFilter.SelectedIndex)
+            // Sync income combo without triggering its handler
+            _isSyncingCombos = true;
+            try
             {
-                case 0:
-                    filter = "This Month";
-                    break;
-                case 1:
-                    filter = "Last Month";
-                    break;
-                case 2:
-                    filter = "This Year";
-                    break;
+                if (cmbSecondHeader.SelectedIndex != cmbExpenseFilter.SelectedIndex)
+                    cmbSecondHeader.SelectedIndex = cmbExpenseFilter.SelectedIndex;
             }
+            finally { _isSyncingCombos = false; }
 
-            LoadExpenseCategoryChart(userID, filter);
-            //this.BeginInvoke((MethodInvoker)(() => this.ActiveControl = null;));
+            // Reload everything via LoadDashboardSummary: 4 DB calls, no redundancy
+            LoadDashboardSummary(userID);
         }
+
+        private int _notificationSequence = 0;
 
         internal protected void LoadNotifications(int userID, Panel pnl, FlowLayoutPanel flpNotifications)
         {
             if (pnl == null || flpNotifications == null) return;
 
-            
+            int currentSeq = System.Threading.Interlocked.Increment(ref _notificationSequence);
+            flpNotifications.Tag = currentSeq;
+
             string cleanExpense = lblExpenseAmount.Text.Replace("₹", "").Replace(",", "").Trim();
             string cleanCredit = lblCreditAmount.Text.Replace("₹", "").Replace(",", "").Trim();
 
             System.Threading.ThreadPool.QueueUserWorkItem(state =>
             {
+                if (flpNotifications.Tag != null && (int)flpNotifications.Tag != currentSeq)
+                    return;
+
                 List<NotificationItem> notifList = new List<NotificationItem>();
                 try
                 {
@@ -1120,9 +1180,15 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                 }
                 catch { }
 
+                if (flpNotifications.Tag != null && (int)flpNotifications.Tag != currentSeq)
+                    return;
+
                 notifList.RemoveAll(x => readNotifications.Contains(x.Title + "_" + x.Description));
                 this.BeginInvoke((MethodInvoker)delegate
                 {
+                    if (this.IsDisposed || (flpNotifications.Tag != null && (int)flpNotifications.Tag != currentSeq))
+                        return;
+
                     flpNotifications.SuspendLayout();
                     try
                     {
