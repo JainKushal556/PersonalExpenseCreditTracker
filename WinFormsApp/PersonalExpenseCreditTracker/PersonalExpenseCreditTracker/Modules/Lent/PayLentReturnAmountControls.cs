@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -302,21 +302,52 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
             pnlCalenderShow.Visible = false;
             errorProvider1.Clear();
 
-            LentUi lentUi = new LentUi();
+            // Step 1: প্রথমে field ভ্যালিডেশন করো
+            string returnAmountText = (txtReturnAmount.Text == "Enter Return Amount" || txtReturnAmount.Text == "Select Amount") ? "" : txtReturnAmount.Text;
+            string descriptionText = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
 
+            if (string.IsNullOrWhiteSpace(returnAmountText))
+            {
+                ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountEmpty, errorProvider1, txtReturnAmount);
+                return;
+            }
+
+            decimal parsedAmount;
+            if (!decimal.TryParse(returnAmountText, out parsedAmount) || parsedAmount <= 0)
+            {
+                ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountInvalid, errorProvider1, txtReturnAmount);
+                return;
+            }
+
+            if (cmbPaymentType.SelectedIndex <= 0)
+            {
+                ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.PaymentInvalid, errorProvider1, cmbPaymentType);
+                return;
+            }
+
+            // Step 2: Validation পাস হলে confirmation দেখাও (এখনো DB তে কিছু save হয়নি)
+            DialogResult confirmResult = MessageBox.Show(
+                "Are you sure you want to return this lent?",
+                "Confirm Return",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                // "No" — কিছু save হবে না, form খোলা থাকবে
+                return;
+            }
+
+            // Step 3: "Yes" হলে BLL call করো যা DB তে save করবে
+            LentUi lentUi = new LentUi();
             lentUi.userId = Session.LogedInUser.GetUserId();
             lentUi.lentId = this.selectedLentId;
             lentUi.paymentId = Convert.ToInt32(cmbPaymentType.SelectedValue);
-
-            lentUi.returnAmount = (txtReturnAmount.Text == "Enter Return Amount" || txtReturnAmount.Text == "Select Amount") ? "" : txtReturnAmount.Text;
-            lentUi.description = (txtDescription.Text == "Enter Description") ? "" : txtDescription.Text;
-
-            //lentUi.returnDate = (txtReturnDate.Text == "DD-MM-YYYY")
-            //    ? DateTime.MinValue
-            //    : monthCalendar.SelectionStart;
+            lentUi.returnAmount = returnAmountText;
+            lentUi.description = descriptionText;
 
             DateTime returnDate = DateTime.MinValue;
-            if (!string.IsNullOrWhiteSpace(txtReturnDate.Text))
+            if (!string.IsNullOrWhiteSpace(txtReturnDate.Text) && txtReturnDate.Text != "DD-MM-YYYY")
             {
                 string[] formats = new string[] { "dd-MM-yyyy", "d-M-yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy", "dd MMM yyyy", "d MMM yyyy", "dd MMMM yyyy" };
                 if (!DateTime.TryParseExact(txtReturnDate.Text.Trim(), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out returnDate))
@@ -325,46 +356,41 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
                 }
             }
             lentUi.returnDate = returnDate;
-            CommonValidator.ValidationResult result = lentUi.InsertReturnLentIntoLentUi();
 
+            CommonValidator.ValidationResult result = lentUi.InsertReturnLentIntoLentUi();
             switch (result)
             {
                 case CommonValidator.ValidationResult.Success:
-                    DialogResult confirmResult = MessageBox.Show(
-                        "Are you sure you want to return this lent?",
-                        "Confirm Return",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question);
-
-                     if (confirmResult != DialogResult.Yes)
-                    {
-                        this.DialogResult = DialogResult.Cancel;
-                        this.Close();
-                        return;
-                    }
+                    this.Close();
                     break;
 
                 case CommonValidator.ValidationResult.AmountEmpty:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountEmpty, errorProvider1, txtReturnAmount);
+                    break;
                 case CommonValidator.ValidationResult.AmountInvalid:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountInvalid, errorProvider1, txtReturnAmount);
+                    break;
                 case CommonValidator.ValidationResult.AmountTooLarge:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnAmount);
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.AmountTooLarge, errorProvider1, txtReturnAmount);
                     break;
-
                 case CommonValidator.ValidationResult.PaymentInvalid:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, cmbPaymentType);
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.PaymentInvalid, errorProvider1, cmbPaymentType);
                     break;
-
                 case CommonValidator.ValidationResult.DeadlineInvalid:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.DeadlineInvalid, errorProvider1, txtReturnDate);
+                    break;
                 case CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtReturnDate);
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.ReturnAmountDeadlineMustBeTodayOrEarlier, errorProvider1, txtReturnDate);
                     break;
-
                 case CommonValidator.ValidationResult.DescriptionInvalid:
-                case CommonValidator.ValidationResult.DescriptionTooShort:
-                case CommonValidator.ValidationResult.DescriptionTooLong:
-                    ErrorHelper.ShowValidationError(result, errorProvider1, txtDescription);
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.DescriptionInvalid, errorProvider1, txtDescription);
                     break;
-
+                case CommonValidator.ValidationResult.DescriptionTooShort:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.DescriptionTooShort, errorProvider1, txtDescription);
+                    break;
+                case CommonValidator.ValidationResult.DescriptionTooLong:
+                    ErrorHelper.ShowValidationError(CommonValidator.ValidationResult.DescriptionTooLong, errorProvider1, txtDescription);
+                    break;
                 case CommonValidator.ValidationResult.StoreProcedureError:
                     MessageBox.Show("Lent return failed!");
                     break;

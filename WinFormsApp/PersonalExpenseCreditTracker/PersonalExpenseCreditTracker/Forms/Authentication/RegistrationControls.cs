@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -77,6 +77,23 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
             txtRegistrationPhoneNumber.Text = "Enter Your Phone Number";
             txtRegistrationCreatePassword.Text = "Create a Password";
             txtRegistrationConfirmPassword.Text = "Confirm Password";
+
+            // Tab order fix: parent panel গুলোর TabStop বন্ধ করো
+            // যাতে Tab চাপলে সরাসরি TextBox-এ focus যায়
+            panel4.TabStop = false;
+            panel3.TabStop = false;
+            pnlPhoneNumber.TabStop = false;
+            pnlNewPassword.TabStop = false;
+            pnlConfirmPassword.TabStop = false;
+
+            // প্রতিটা TextBox-এ sequential TabIndex সেট করো
+            // Tab order: FullName → Email → Phone → Password → ConfirmPassword → CreateAccount
+            txtFullName.TabIndex = 1;
+            txtRegistrationEmail.TabIndex = 2;
+            txtRegistrationPhoneNumber.TabIndex = 3;
+            txtRegistrationCreatePassword.TabIndex = 4;
+            txtRegistrationConfirmPassword.TabIndex = 5;
+            btnCreateAccount.TabIndex = 6;
 
             txtFullName.ForeColor = Color.Gray;
             txtRegistrationEmail.ForeColor = Color.Gray;

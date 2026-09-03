@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -140,12 +140,31 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
         {
             ImageCropControls crop = new ImageCropControls(this);
 
+            // Crop form খোলার আগেই আসল image backup করো
+            Image originalImage = picProfileUserPhoto.Image != null
+                ? new Bitmap(picProfileUserPhoto.Image)
+                : null;
+
             if (crop.SetImageInImgBoxCrop())
             {
                 if (crop.ShowDialog() == DialogResult.OK)
                 {
                     if (picProfileUserPhoto.Image != null)
                     {
+                        DialogResult confirm = MessageBox.Show(
+                            "Do you want to update this profile photo?",
+                            "Update Profile Photo",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
+
+                        if (confirm == DialogResult.No)
+                        {
+                            // "No" চাপলে crop হওয়ার আগের original image restore করো
+                            picProfileUserPhoto.Image = originalImage;
+                            picProfileUserPhoto.Invalidate();
+                            return;
+                        }
+
                         ProfileUI profileUi = new ProfileUI();
                         profileUi.userId = Session.LogedInUser.GetUserId();
 
@@ -166,7 +185,7 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                                 MainForm mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
                                 if (mainForm != null)
                                 {
-                                    mainForm.LoadSidebarUserProfile(); 
+                                    mainForm.LoadSidebarUserProfile();
                                 }
                                 break;
 

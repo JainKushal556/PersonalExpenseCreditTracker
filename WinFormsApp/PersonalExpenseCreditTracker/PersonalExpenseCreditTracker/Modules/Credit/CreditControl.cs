@@ -681,7 +681,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
             tsmiAmount.AutoSize = false;
             tsmiAmount.Height = 30;
 
-            tsmiDate.Image = Properties.Resources.calendar;
+            tsmiDate.Image = Properties.Resources.calendar__1_;
             tsmiCategory.Image = Properties.Resources.shop;
             tsmiAmount.Image = Properties.Resources.money;
 

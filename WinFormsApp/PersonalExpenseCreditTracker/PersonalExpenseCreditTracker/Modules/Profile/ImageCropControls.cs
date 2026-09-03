@@ -49,6 +49,50 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
             ImgBoxCrop.SelectionMode = Cyotek.Windows.Forms.ImageBoxSelectionMode.Rectangle;
             ImgBoxCrop.LimitSelectionToImage = true;
+
+            // Real-time preview: selection image
+            ImgBoxCrop.SelectionRegionChanged += (s, ev) => UpdatePreview();
+            MakePictureCircular(picProfileUserPhoto);
+        }
+
+        // Real-time crop preview - selection
+        private void UpdatePreview()
+        {
+            RectangleF selection = ImgBoxCrop.SelectionRegion;
+
+            if (selection.Width <= 0 || selection.Height <= 0 || ImgBoxCrop.Image == null)
+                return;
+
+            Rectangle cropRect = Rectangle.Round(selection);
+
+            
+            cropRect.Intersect(new Rectangle(0, 0, ImgBoxCrop.Image.Width, ImgBoxCrop.Image.Height));
+
+            if (cropRect.Width <= 0 || cropRect.Height <= 0)
+                return;
+
+            try
+            {
+                Bitmap preview = new Bitmap(cropRect.Width, cropRect.Height);
+                using (Graphics g = Graphics.FromImage(preview))
+                {
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    g.DrawImage(
+                        ImgBoxCrop.Image,
+                        new Rectangle(0, 0, cropRect.Width, cropRect.Height),
+                        cropRect,
+                        GraphicsUnit.Pixel);
+                }
+
+                
+                Image old = picProfileUserPhoto.Image;
+                picProfileUserPhoto.Image = preview;
+
+                if (old != null && old != Properties.Resources.user__2_)
+                    old.Dispose();
+            }
+            catch {}
         }
 
         // Radius Corner of These Panels
@@ -137,10 +181,21 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
 
             Rectangle cropRect = Rectangle.Round(selection);
 
+            // cropRect যেন image boundary-র মধ্যে থাকে
+            cropRect.Intersect(new Rectangle(0, 0, ImgBoxCrop.Image.Width, ImgBoxCrop.Image.Height));
+
+            if (cropRect.Width <= 0 || cropRect.Height <= 0)
+            {
+                MessageBox.Show("Invalid crop area. Please select again.");
+                return;
+            }
+
             Bitmap bmp = new Bitmap(cropRect.Width, cropRect.Height);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.DrawImage(
                     ImgBoxCrop.Image,
                     new Rectangle(0, 0, bmp.Width, bmp.Height),
@@ -148,12 +203,15 @@ namespace PersonalExpenseCreditTracker.Modules.Profile
                     GraphicsUnit.Pixel);
             }
 
+            
             profileControls.picProfileUserPhoto.Image = bmp;
+            
+            picProfileUserPhoto.Image = new Bitmap(bmp);
+
             ImgBoxCrop.SelectionRegion = RectangleF.Empty;
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-        
         }
 
         private void btnCropImageCancel_Click(object sender, EventArgs e)
