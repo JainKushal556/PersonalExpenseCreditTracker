@@ -64,7 +64,7 @@ function Invoke-SqlScript {
     $scriptContent = Get-Content $FilePath -Raw
     $blocks = $scriptContent -split "(?mi)^\s*GO\s*$"
 
-    $successCount = 0
+    $successCount = 1
     $failCount = 0
 
     foreach ($block in $blocks) {
