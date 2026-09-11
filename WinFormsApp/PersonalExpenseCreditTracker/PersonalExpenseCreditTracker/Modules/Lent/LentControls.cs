@@ -36,6 +36,8 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
         private bool ignoreEvents = false;
 
+        private ToolTip toolTip = new ToolTip();
+
         private static readonly string[] DateFormats = new string[]
         {
             "dd-MM-yyyy", "d-M-yyyy",
@@ -74,7 +76,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
 
             StyleLentGrid();
 
-            ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(btnFilter, "Filter Lent");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Lent");
@@ -209,12 +210,13 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
             DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(spName, userID, paramName, filterId);
-            if (dataTable.Columns.Contains("Message"))
+            if (dataTable == null || dataTable.Columns.Contains("Message"))
             {
-                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
-                                "Information",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                if (dataTable != null)
+                    MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                    "Information",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
                 return false;
             }
             AllLentData = dataTable;

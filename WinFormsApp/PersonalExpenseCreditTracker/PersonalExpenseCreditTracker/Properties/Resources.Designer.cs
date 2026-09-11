@@ -223,16 +223,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap clipboardModern {
-            get {
-                object obj = ResourceManager.GetObject("clipboardModern", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap close {
             get {
                 object obj = ResourceManager.GetObject("close", resourceCulture);
@@ -413,16 +403,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap due_diligence {
-            get {
-                object obj = ResourceManager.GetObject("due-diligence", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap edit__2_ {
             get {
                 object obj = ResourceManager.GetObject("edit (2)", resourceCulture);
@@ -536,16 +516,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap home7 {
             get {
                 object obj = ResourceManager.GetObject("home7", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap hourglass {
-            get {
-                object obj = ResourceManager.GetObject("hourglass", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -803,26 +773,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap note2 {
-            get {
-                object obj = ResourceManager.GetObject("note2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NoteCalender {
-            get {
-                object obj = ResourceManager.GetObject("NoteCalender", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap open_eye {
             get {
                 object obj = ResourceManager.GetObject("open-eye", resourceCulture);
@@ -956,16 +906,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap people__3_ {
             get {
                 object obj = ResourceManager.GetObject("people (3)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap people__3_1 {
-            get {
-                object obj = ResourceManager.GetObject("people (3)1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1133,16 +1073,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap salary {
-            get {
-                object obj = ResourceManager.GetObject("salary", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap save__1_ {
             get {
                 object obj = ResourceManager.GetObject("save (1)", resourceCulture);
@@ -1176,36 +1106,6 @@ namespace PersonalExpenseCreditTracker.Properties {
         internal static System.Drawing.Bitmap SL {
             get {
                 object obj = ResourceManager.GetObject("SL", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap spending {
-            get {
-                object obj = ResourceManager.GetObject("spending", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap star {
-            get {
-                object obj = ResourceManager.GetObject("star", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap successful {
-            get {
-                object obj = ResourceManager.GetObject("successful", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

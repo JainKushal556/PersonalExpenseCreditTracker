@@ -69,7 +69,22 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
         
         private void LoginControls_Load(object sender, EventArgs e)
         {
-            
+            this.Text = "Personal Expense Manager";
+
+            try
+            {
+                string iconPath = System.IO.Path.Combine(
+                    System.IO.Path.GetDirectoryName(Application.ExecutablePath),
+                    "..", "..", "app.ico");
+                iconPath = System.IO.Path.GetFullPath(iconPath);
+                if (System.IO.File.Exists(iconPath))
+                {
+                    this.Icon = new System.Drawing.Icon(iconPath);
+                    this.ShowIcon = true;
+                }
+            }
+            catch { }
+
             SetRadius(pnlLoginDataInput, 20);
             SetRadius(btnLogin, 17);
 

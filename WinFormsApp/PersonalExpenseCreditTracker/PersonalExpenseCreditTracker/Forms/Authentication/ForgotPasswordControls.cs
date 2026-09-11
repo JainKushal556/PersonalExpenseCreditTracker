@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,6 +42,22 @@ namespace PersonalExpenseCreditTracker.Forms.Authentication
 
         private void ForgotPasswordControls_Load(object sender, EventArgs e)
         {
+            this.Text = "Personal Expense Manager";
+
+            try
+            {
+                string iconPath = System.IO.Path.Combine(
+                    System.IO.Path.GetDirectoryName(Application.ExecutablePath),
+                    "..", "..", "app.ico");
+                iconPath = System.IO.Path.GetFullPath(iconPath);
+                if (System.IO.File.Exists(iconPath))
+                {
+                    this.Icon = new System.Drawing.Icon(iconPath);
+                    this.ShowIcon = true;
+                }
+            }
+            catch { }
+
             txtRegisteredEmail.Text = "Enter Registered Email";
             txtRegisteredPhoneNumber.Text = "Enter Registered Phone Number";
             txtNewPassword.Text = "Enter New Password";

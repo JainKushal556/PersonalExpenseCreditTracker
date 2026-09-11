@@ -62,11 +62,11 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         private bool validToDate { get; set; }
         private static readonly string[] DateFormats = { "dd-MM-yyyy", "d-M-yyyy", "dd/MM/yyyy", "d/M/yyyy", "yyyy-MM-dd" };
         private ErrorProvider errorProvider1 = new ErrorProvider();
+        private ToolTip toolTip = new ToolTip();
         public CreditControl() 
         {
             InitializeComponent();
             StyleCreditGrid();
-            ToolTip toolTip = new ToolTip();
 
             toolTip.SetToolTip(btnFilter, "Filter Credit");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
@@ -259,12 +259,13 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
         {
             int userID = PersonalExpenseCreditTracker.Session.LogedInUser.GetUserId();
             DataTable dataTable = CommonUiFunction.RetrieveFilteredDataByStatus(spName, userID, paramName, filterId);
-            if (dataTable.Columns.Contains("Message"))
+            if (dataTable == null || dataTable.Columns.Contains("Message"))
             {
-                MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
-                                "Information",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                if (dataTable != null)
+                    MessageBox.Show(dataTable.Rows[0]["Message"].ToString(),
+                                    "Information",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
                 return false;
             }
             AllCreditData = dataTable;
@@ -545,6 +546,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void btnNextpage_Click(object sender, EventArgs e)
         {
+            if (AllCreditData == null || AllCreditData.Rows.Count == 0) return;
             int totalPages = (int)Math.Ceiling((double)AllCreditData.Rows.Count / pageSize);
 
             if (currentPage < totalPages)
@@ -556,6 +558,7 @@ namespace PersonalExpenseCreditTracker.Modules.Credit
 
         private void btnLastPage_Click(object sender, EventArgs e)
         {
+            if (AllCreditData == null || AllCreditData.Rows.Count == 0) return;
             int totalPages = (int)Math.Ceiling((double)AllCreditData.Rows.Count / pageSize);
             if (currentPage != totalPages)
             {

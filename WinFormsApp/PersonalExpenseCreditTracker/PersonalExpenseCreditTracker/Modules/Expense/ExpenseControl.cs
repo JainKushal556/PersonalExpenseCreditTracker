@@ -49,12 +49,13 @@ namespace PersonalExpenseCreditTracker.Modules.Expense
         private System.Windows.Forms.SortOrder currentSortOrder =
             System.Windows.Forms.SortOrder.Descending;
 
+        private ToolTip toolTip = new ToolTip();
+
         public ExpenseControl()
         {
             InitializeComponent();
             StyleExpenseGrid();
 
-            ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(btnFilter, "Filter Expense");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Expense");
