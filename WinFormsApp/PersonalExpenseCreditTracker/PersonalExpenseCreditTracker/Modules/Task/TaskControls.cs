@@ -60,6 +60,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
         private System.Windows.Forms.SortOrder currentSortOrder = System.Windows.Forms.SortOrder.Descending;
 
         private ErrorProvider errorProvider1 = new ErrorProvider();
+        private ToolTip toolTip = new ToolTip();
         private bool ignoreEvents { get; set; }
         private DateTime fromDate { get; set; }
         private DateTime toDate { get; set; }
@@ -80,7 +81,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             StyleTaskGrid();
             this.Resize += TaskControls_Resize;
 
-            ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(btnFilter, "Filter Tasks");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Tasks");
@@ -122,7 +122,6 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             txtToDate.ReadOnly = true;
             monthCalendarToDate.MaxDate = DateTime.Today;
             monthCalendarFromDate.MaxDate = DateTime.Today;
-            this.Resize += TaskControls_Resize;
             dataGridViewTask.EnableHeadersVisualStyles = false;
             dataGridViewTask.CellPainting += dataGridViewTask_CellPainting;
             dataGridViewTask.CellFormatting += dataGridViewTask_CellFormatting;
@@ -133,12 +132,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
             dataGridViewTask.Columns["colPriority"].HeaderCell.Style.Padding = new Padding(20, 0, 0, 0);
 
             dataGridViewTask.Columns["colStatus"].HeaderCell.Style.Padding = new Padding(20, 0, 0, 0);
-
             dataGridViewTask.Columns["colDeadline"].HeaderCell.Style.Padding = new Padding(17, 0, 0, 0);
-            RegisterMouseDown(this);
-
-
-
         }
         //Applies  styling to the Task Context Menu.
         public void LoadTaskData(int userID)
@@ -820,6 +814,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnNextpage_Click(object sender, EventArgs e)
         {
+            if (AllTaskData == null || AllTaskData.Rows.Count == 0) return;
             int totalPages = (int)Math.Ceiling((double)AllTaskData.Rows.Count / pageSize);
 
             if (currentPage < totalPages)
@@ -831,6 +826,7 @@ namespace PersonalExpenseCreditTracker.Modules.Task
 
         private void btnLastPage_Click(object sender, EventArgs e)
         {
+            if (AllTaskData == null || AllTaskData.Rows.Count == 0) return;
             int totalPages = (int)Math.Ceiling((double)AllTaskData.Rows.Count / pageSize);
             if (currentPage != totalPages)
             {

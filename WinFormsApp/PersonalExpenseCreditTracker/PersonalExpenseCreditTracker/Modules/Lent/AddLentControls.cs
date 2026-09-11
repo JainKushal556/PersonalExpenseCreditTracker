@@ -15,7 +15,6 @@ namespace PersonalExpenseCreditTracker.Modules.Lent
         public AddLentControls()
         {
             InitializeComponent();
-            LoadFormData();
         }
 
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]

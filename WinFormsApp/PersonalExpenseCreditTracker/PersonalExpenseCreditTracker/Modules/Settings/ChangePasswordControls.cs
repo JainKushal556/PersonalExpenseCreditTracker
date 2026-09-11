@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,9 +19,9 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
     {
         private bool _PasswordMatch;
         string CurrentPassword;
-        bool isPasswordVisible1 = true;
-        bool isPasswordVisible2 = true;
-        bool isPasswordVisible3 = true;
+        bool isPasswordVisible1 = false;
+        bool isPasswordVisible2 = false;
+        bool isPasswordVisible3 = false;
 
         public ChangePasswordControls()
         {
@@ -322,16 +322,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible1 = !isPasswordVisible1;
 
-            if (txtCurrentPassword.Text != "Enter Current Password")
             txtCurrentPassword.UseSystemPasswordChar = !isPasswordVisible1;
 
             if (isPasswordVisible1)
             {
-                picEye1.Image = Properties.Resources.open_eye__2_;
+                picEye1.Image = Properties.Resources.eye;
             }
             else
             {
-                picEye1.Image = Properties.Resources.eye;
+                picEye1.Image = Properties.Resources.open_eye__2_;
             }
         }
 
@@ -339,16 +338,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible2 = !isPasswordVisible2;
 
-            if (txtNewPassword.Text != "Enter New Password")
             txtNewPassword.UseSystemPasswordChar = !isPasswordVisible2;
 
             if (isPasswordVisible2)
             {
-                picEye2.Image = Properties.Resources.open_eye__2_;
+                picEye2.Image = Properties.Resources.eye;
             }
             else
             {
-                picEye2.Image = Properties.Resources.eye;
+                picEye2.Image = Properties.Resources.open_eye__2_;
             }
         }
 
@@ -356,16 +354,15 @@ namespace PersonalExpenseCreditTracker.Modules.Settings
         {
             isPasswordVisible3 = !isPasswordVisible3;
 
-            if (txtConfirmPassword.Text != "Confirm New Password")
             txtConfirmPassword.UseSystemPasswordChar = !isPasswordVisible3;
 
             if (isPasswordVisible3)
             {
-                picEye3.Image = Properties.Resources.open_eye__2_;
+                picEye3.Image = Properties.Resources.eye;
             }
             else
             {
-                picEye3.Image = Properties.Resources.eye;
+                picEye3.Image = Properties.Resources.open_eye__2_;
             }
         }
 

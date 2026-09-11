@@ -48,6 +48,7 @@ namespace PersonalExpenseCreditTracker.Modules.Note
         private int pageSize ;
 
         private ErrorProvider errorProvider1 = new ErrorProvider();
+        private ToolTip toolTip = new ToolTip();
         private bool ignoreEvents { get; set; }
         private DateTime fromDate { get; set; }
         private DateTime toDate { get; set; }
@@ -71,7 +72,6 @@ namespace PersonalExpenseCreditTracker.Modules.Note
             InitializeComponent();
             Resize += NoteControl_Resize;
 
-            ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(btnFilter, "Filter Notes");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Notes");

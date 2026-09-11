@@ -29,6 +29,7 @@ namespace PersonalExpenseCreditTracker
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnlMainSideBarSection = new System.Windows.Forms.Panel();
             this.pnlSideBar = new System.Windows.Forms.Panel();
             this.pnlScrollBar = new System.Windows.Forms.Panel();
@@ -2085,8 +2086,11 @@ namespace PersonalExpenseCreditTracker
             this.Controls.Add(this.pnlProfilePage);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.pnlMainSideBarSection);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.Text = "Personal Expense Manager";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.pnlMainSideBarSection.ResumeLayout(false);

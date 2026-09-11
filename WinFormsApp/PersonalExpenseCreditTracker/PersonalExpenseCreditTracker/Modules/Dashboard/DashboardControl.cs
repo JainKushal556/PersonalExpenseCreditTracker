@@ -1351,7 +1351,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                 {
                     foreach (DataRow r in dt.Rows)
                     {
-                        if (!dt.Columns.Contains("StatusName") || r["StatusName"] == DBNull.Value || r["StatusName"].ToString() != "Pending" || r["StatusName"].ToString() != "Pending")
+                        if (!dt.Columns.Contains("StatusName") || r["StatusName"] == DBNull.Value || r["StatusName"].ToString() != "Pending")
                         {
                             continue;
                         }
@@ -1402,7 +1402,7 @@ namespace PersonalExpenseCreditTracker.Modules.Dashboard
                 {
                     foreach (DataRow r in dt.Rows)
                     {
-                        if (!dt.Columns.Contains("TaskStatusName") || r["TaskStatusName"] == DBNull.Value || r["TaskStatusName"].ToString() != "Pending" || r["TaskStatusName"].ToString() != "Pending")
+                        if (!dt.Columns.Contains("TaskStatusName") || r["TaskStatusName"] == DBNull.Value || r["TaskStatusName"].ToString() != "Pending")
                         {
                             continue;
                         }

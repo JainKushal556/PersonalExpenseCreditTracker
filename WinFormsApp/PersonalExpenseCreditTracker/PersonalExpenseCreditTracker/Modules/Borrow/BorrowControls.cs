@@ -40,12 +40,12 @@ namespace PersonalExpenseCreditTracker.Modules.Borrow
         private bool validFromDate { get; set; }
         private bool validToDate { get; set; }
         private static readonly string[] DateFormats = { "dd-MM-yyyy", "d-M-yyyy", "dd/MM/yyyy", "d/M/yyyy", "yyyy-MM-dd" };
+        private ToolTip toolTip = new ToolTip();
         public BorrowControls()
         {
             InitializeComponent();
             StyleBorrowGrid();
 
-            ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(btnFilter, "Filter Borrow");
             toolTip.SetToolTip(btnRefresh, "Refresh List");
             toolTip.SetToolTip(btnExport, "Export Borrow");
